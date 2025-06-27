@@ -7,60 +7,75 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Clock, Brain, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
-// Sample quiz data - in real app this would come from Supabase
-const sampleQuestions = [
-  {
-    id: 1,
-    question: "What is the capital of France?",
-    options: ["London", "Berlin", "Paris", "Madrid"],
-    correctIndex: 2
-  },
-  {
-    id: 2,
-    question: "Which planet is known as the Red Planet?",
-    options: ["Venus", "Mars", "Jupiter", "Saturn"],
-    correctIndex: 1
-  },
-  {
-    id: 3,
-    question: "What is 15 + 27?",
-    options: ["40", "41", "42", "43"],
-    correctIndex: 2
-  },
-  // Add more questions to reach 25...
-  {
-    id: 4,
-    question: "Who painted the Mona Lisa?",
-    options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Michelangelo"],
-    correctIndex: 2
-  },
-  {
-    id: 5,
-    question: "What is the largest ocean on Earth?",
-    options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
-    correctIndex: 3
-  }
-];
+interface Question {
+  id: number;
+  question: string;
+  option_a: string;
+  option_b: string;
+  option_c: string;
+  option_d: string;
+  correct_index: number;
+}
 
 const Quiz = () => {
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [answers, setAnswers] = useState<number[]>([]);
   const [timeLeft, setTimeLeft] = useState(600); // 10 minutes
   const [isCompleted, setIsCompleted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const { toast } = useToast();
 
+  // Fetch questions on component mount
+  useEffect(() => {
+    fetchQuestions();
+  }, []);
+
+  const fetchQuestions = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('questions')
+        .select('*')
+        .limit(25);
+
+      if (error) throw error;
+      
+      if (data && data.length > 0) {
+        setQuestions(data);
+      } else {
+        toast({
+          title: "No questions available",
+          description: "Please contact an administrator to add questions.",
+          variant: "destructive",
+        });
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.error('Error fetching questions:', error);
+      toast({
+        title: "Error",
+        description: "Failed to load questions. Please try again.",
+        variant: "destructive",
+      });
+      navigate("/dashboard");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // Timer effect
   useEffect(() => {
-    if (timeLeft > 0 && !isCompleted) {
+    if (timeLeft > 0 && !isCompleted && !isLoading) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearTimeout(timer);
     } else if (timeLeft === 0) {
       handleQuizComplete();
     }
-  }, [timeLeft, isCompleted]);
+  }, [timeLeft, isCompleted, isLoading]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -79,24 +94,46 @@ const Quiz = () => {
     setAnswers(newAnswers);
     setSelectedAnswer(null);
 
-    if (currentQuestion < sampleQuestions.length - 1) {
+    if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      handleQuizComplete();
+      handleQuizComplete(newAnswers);
     }
   };
 
-  const handleQuizComplete = () => {
+  const handleQuizComplete = async (finalAnswers = answers) => {
     setIsCompleted(true);
     
     // Calculate score
-    const correctAnswers = answers.filter((answer, index) => 
-      answer === sampleQuestions[index]?.correctIndex
+    const correctAnswers = finalAnswers.filter((answer, index) => 
+      answer === questions[index]?.correct_index
     ).length;
     
-    const baseScore = correctAnswers * 4 - (sampleQuestions.length - correctAnswers) * 1;
+    const baseScore = correctAnswers * 4 - (questions.length - correctAnswers) * 1;
     const timeBonus = Math.ceil((600 - (600 - timeLeft)) / 6);
     const totalScore = Math.max(0, baseScore + timeBonus);
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (user) {
+        const { error } = await supabase
+          .from('attempts')
+          .insert({
+            user_id: user.id,
+            quiz_id: 1, // Default quiz ID for now
+            score: totalScore,
+            seconds_used: 600 - timeLeft,
+            answers: finalAnswers
+          });
+
+        if (error) {
+          console.error('Error saving attempt:', error);
+        }
+      }
+    } catch (error) {
+      console.error('Error saving quiz attempt:', error);
+    }
 
     toast({
       title: "Quiz completed!",
@@ -104,22 +141,34 @@ const Quiz = () => {
     });
 
     // Navigate to results page with score
-    navigate(`/result/123`, { 
+    navigate(`/result/latest`, { 
       state: { 
         score: totalScore, 
         correct: correctAnswers, 
-        total: sampleQuestions.length,
+        total: questions.length,
         timeUsed: 600 - timeLeft
       } 
     });
   };
 
-  const progress = ((currentQuestion + 1) / sampleQuestions.length) * 100;
-  const currentQ = sampleQuestions[currentQuestion];
-
-  if (!currentQ) {
-    return <div>Loading...</div>;
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+        <div className="text-center">
+          <Brain className="w-12 h-12 text-blue-600 mx-auto mb-4 animate-pulse" />
+          <p className="text-gray-600">Loading quiz questions...</p>
+        </div>
+      </div>
+    );
   }
+
+  if (questions.length === 0) {
+    return null; // Will redirect in useEffect
+  }
+
+  const progress = ((currentQuestion + 1) / questions.length) * 100;
+  const currentQ = questions[currentQuestion];
+  const options = [currentQ.option_a, currentQ.option_b, currentQ.option_c, currentQ.option_d];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -133,7 +182,7 @@ const Quiz = () => {
                 <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
               </div>
               <Badge variant="secondary" className="bg-blue-100 text-blue-700">
-                Question {currentQuestion + 1} of {sampleQuestions.length}
+                Question {currentQuestion + 1} of {questions.length}
               </Badge>
             </div>
             
@@ -162,7 +211,7 @@ const Quiz = () => {
             </CardHeader>
             
             <CardContent className="space-y-4">
-              {currentQ.options.map((option, index) => (
+              {options.map((option, index) => (
                 <Button
                   key={index}
                   variant={selectedAnswer === index ? "default" : "outline"}
@@ -197,7 +246,7 @@ const Quiz = () => {
                   disabled={selectedAnswer === null}
                   className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  {currentQuestion === sampleQuestions.length - 1 ? "Finish Quiz" : "Next Question"}
+                  {currentQuestion === questions.length - 1 ? "Finish Quiz" : "Next Question"}
                 </Button>
               </div>
             </CardContent>

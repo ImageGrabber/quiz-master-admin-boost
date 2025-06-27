@@ -5,24 +5,105 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Trophy, Medal, Award, Crown, Home, Brain, Play } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
-// Sample leaderboard data - in real app this would come from Supabase
-const sampleLeaderboard = [
-  { id: 1, name: "Alex Johnson", score: 95, attempts: 3, avgScore: 89, rank: 1 },
-  { id: 2, name: "Sarah Chen", score: 92, attempts: 5, avgScore: 85, rank: 2 },
-  { id: 3, name: "Mike Rodriguez", score: 88, attempts: 2, avgScore: 86, rank: 3 },
-  { id: 4, name: "Emily Davis", score: 84, attempts: 4, avgScore: 78, rank: 4 },
-  { id: 5, name: "David Kim", score: 82, attempts: 6, avgScore: 75, rank: 5 },
-  { id: 6, name: "Lisa Wang", score: 79, attempts: 3, avgScore: 74, rank: 6 },
-  { id: 7, name: "Tom Wilson", score: 76, attempts: 2, avgScore: 73, rank: 7 },
-  { id: 8, name: "Anna Brown", score: 74, attempts: 1, avgScore: 74, rank: 8 },
-  { id: 9, name: "Chris Lee", score: 71, attempts: 4, avgScore: 69, rank: 9 },
-  { id: 10, name: "Jess Taylor", score: 68, attempts: 2, avgScore: 65, rank: 10 }
-];
+interface LeaderboardEntry {
+  id: string;
+  name: string;
+  score: number;
+  attempts: number;
+  avgScore: number;
+  rank: number;
+}
 
 const Leaderboard = () => {
   const navigate = useNavigate();
   const [selectedPeriod, setSelectedPeriod] = useState("all");
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetchLeaderboard();
+  }, [selectedPeriod]);
+
+  const fetchLeaderboard = async () => {
+    try {
+      setIsLoading(true);
+      
+      let query = supabase
+        .from('attempts')
+        .select(`
+          user_id,
+          score,
+          created_at,
+          profiles!inner(full_name, email)
+        `);
+
+      // Apply date filter based on selected period
+      if (selectedPeriod === "week") {
+        const weekAgo = new Date();
+        weekAgo.setDate(weekAgo.getDate() - 7);
+        query = query.gte('created_at', weekAgo.toISOString());
+      } else if (selectedPeriod === "month") {
+        const monthAgo = new Date();
+        monthAgo.setMonth(monthAgo.getMonth() - 1);
+        query = query.gte('created_at', monthAgo.toISOString());
+      }
+
+      const { data, error } = await query;
+
+      if (error) throw error;
+
+      // Process the data to create leaderboard
+      const userStats = new Map();
+      
+      data?.forEach((attempt: any) => {
+        const userId = attempt.user_id;
+        const userName = attempt.profiles?.full_name || attempt.profiles?.email || 'Anonymous';
+        
+        if (userStats.has(userId)) {
+          const existing = userStats.get(userId);
+          userStats.set(userId, {
+            ...existing,
+            maxScore: Math.max(existing.maxScore, attempt.score),
+            totalScore: existing.totalScore + attempt.score,
+            attempts: existing.attempts + 1
+          });
+        } else {
+          userStats.set(userId, {
+            id: userId,
+            name: userName,
+            maxScore: attempt.score,
+            totalScore: attempt.score,
+            attempts: 1
+          });
+        }
+      });
+
+      // Convert to array and calculate averages
+      const leaderboardData = Array.from(userStats.values())
+        .map((user: any) => ({
+          id: user.id,
+          name: user.name,
+          score: user.maxScore,
+          attempts: user.attempts,
+          avgScore: Math.round(user.totalScore / user.attempts),
+          rank: 0
+        }))
+        .sort((a, b) => b.score - a.score)
+        .map((user, index) => ({
+          ...user,
+          rank: index + 1
+        }));
+
+      setLeaderboard(leaderboardData);
+    } catch (error) {
+      console.error('Error fetching leaderboard:', error);
+      setLeaderboard([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const getRankIcon = (rank: number) => {
     switch (rank) {
@@ -49,6 +130,17 @@ const Leaderboard = () => {
         return "bg-blue-100 text-blue-700";
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+        <div className="text-center">
+          <Trophy className="w-12 h-12 text-blue-600 mx-auto mb-4 animate-pulse" />
+          <p className="text-gray-600">Loading leaderboard...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -106,73 +198,91 @@ const Leaderboard = () => {
             </div>
           </div>
 
-          {/* Top 3 Podium */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            {sampleLeaderboard.slice(0, 3).map((player, index) => (
-              <Card key={player.id} className={`shadow-xl border-0 transition-all duration-300 hover:scale-105 ${
-                index === 0 ? "md:order-2 bg-gradient-to-br from-yellow-50 to-yellow-100" :
-                index === 1 ? "md:order-1 bg-gradient-to-br from-gray-50 to-gray-100" :
-                "md:order-3 bg-gradient-to-br from-amber-50 to-amber-100"
-              }`}>
-                <CardHeader className="text-center pb-2">
-                  <div className="flex justify-center mb-4">
-                    {getRankIcon(player.rank)}
-                  </div>
-                  <Badge className={`${getRankBadgeColor(player.rank)} mb-2`}>
-                    #{player.rank}
-                  </Badge>
-                  <CardTitle className="text-lg font-bold text-gray-900">
-                    {player.name}
-                  </CardTitle>
+          {leaderboard.length === 0 ? (
+            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+              <CardContent className="py-12 text-center">
+                <Trophy className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold text-gray-600 mb-2">No scores yet</h3>
+                <p className="text-gray-500 mb-6">Be the first to take a quiz and appear on the leaderboard!</p>
+                <Button onClick={() => navigate("/quiz")} className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                  <Play className="w-4 h-4 mr-2" />
+                  Take First Quiz
+                </Button>
+              </CardContent>
+            </Card>
+          ) : (
+            <>
+              {/* Top 3 Podium */}
+              {leaderboard.length >= 3 && (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  {leaderboard.slice(0, 3).map((player, index) => (
+                    <Card key={player.id} className={`shadow-xl border-0 transition-all duration-300 hover:scale-105 ${
+                      index === 0 ? "md:order-2 bg-gradient-to-br from-yellow-50 to-yellow-100" :
+                      index === 1 ? "md:order-1 bg-gradient-to-br from-gray-50 to-gray-100" :
+                      "md:order-3 bg-gradient-to-br from-amber-50 to-amber-100"
+                    }`}>
+                      <CardHeader className="text-center pb-2">
+                        <div className="flex justify-center mb-4">
+                          {getRankIcon(player.rank)}
+                        </div>
+                        <Badge className={`${getRankBadgeColor(player.rank)} mb-2`}>
+                          #{player.rank}
+                        </Badge>
+                        <CardTitle className="text-lg font-bold text-gray-900">
+                          {player.name}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="text-center">
+                        <div className="text-3xl font-bold text-gray-900 mb-2">
+                          {player.score}
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          Avg: {player.avgScore} ({player.attempts} attempts)
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+
+              {/* Full Leaderboard */}
+              <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
+                <CardHeader>
+                  <CardTitle className="text-xl font-bold text-gray-900">Full Rankings</CardTitle>
                 </CardHeader>
-                <CardContent className="text-center">
-                  <div className="text-3xl font-bold text-gray-900 mb-2">
-                    {player.score}
-                  </div>
-                  <div className="text-sm text-gray-600">
-                    Avg: {player.avgScore} ({player.attempts} attempts)
+                <CardContent>
+                  <div className="space-y-2">
+                    {leaderboard.map((player) => (
+                      <div
+                        key={player.id}
+                        className={`flex items-center justify-between p-4 rounded-lg transition-all duration-200 hover:bg-blue-50 ${
+                          player.rank <= 3 ? "bg-gradient-to-r from-blue-50 to-purple-50" : "bg-white"
+                        }`}
+                      >
+                        <div className="flex items-center space-x-4">
+                          <Badge className={getRankBadgeColor(player.rank)}>
+                            #{player.rank}
+                          </Badge>
+                          
+                          <div>
+                            <div className="font-semibold text-gray-900">{player.name}</div>
+                            <div className="text-sm text-gray-600">
+                              {player.attempts} attempts • Avg: {player.avgScore}
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="text-right">
+                          <div className="text-xl font-bold text-gray-900">{player.score}</div>
+                          <div className="text-sm text-gray-500">points</div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
-            ))}
-          </div>
-
-          {/* Full Leaderboard */}
-          <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-xl font-bold text-gray-900">Full Rankings</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                {sampleLeaderboard.map((player) => (
-                  <div
-                    key={player.id}
-                    className={`flex items-center justify-between p-4 rounded-lg transition-all duration-200 hover:bg-blue-50 ${
-                      player.rank <= 3 ? "bg-gradient-to-r from-blue-50 to-purple-50" : "bg-white"
-                    }`}
-                  >
-                    <div className="flex items-center space-x-4">
-                      <Badge className={getRankBadgeColor(player.rank)}>
-                        #{player.rank}
-                      </Badge>
-                      
-                      <div>
-                        <div className="font-semibold text-gray-900">{player.name}</div>
-                        <div className="text-sm text-gray-600">
-                          {player.attempts} attempts • Avg: {player.avgScore}
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="text-right">
-                      <div className="text-xl font-bold text-gray-900">{player.score}</div>
-                      <div className="text-sm text-gray-500">points</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+            </>
+          )}
 
           {/* Call to Action */}
           <div className="text-center mt-8">

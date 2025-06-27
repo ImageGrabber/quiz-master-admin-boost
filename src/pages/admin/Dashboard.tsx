@@ -1,20 +1,112 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Users, FileText, TrendingUp, Trophy, Plus, Upload, Eye, Brain } from "lucide-react";
 import AdminLayout from "@/components/AdminLayout";
+import { supabase } from "@/integrations/supabase/client";
+
+interface AdminStats {
+  totalUsers: number;
+  totalAttempts: number;
+  averageScore: number;
+  highestScore: number;
+}
+
+interface RecentActivity {
+  user: string;
+  action: string;
+  score?: number;
+  time: string;
+}
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [stats, setStats] = useState<AdminStats>({
+    totalUsers: 0,
+    totalAttempts: 0,
+    averageScore: 0,
+    highestScore: 0
+  });
+  const [recentActivity, setRecentActivity] = useState<RecentActivity[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Sample admin stats - in real app this would come from Supabase
-  const stats = [
+  useEffect(() => {
+    fetchAdminData();
+  }, []);
+
+  const fetchAdminData = async () => {
+    try {
+      // Fetch total users
+      const { count: userCount } = await supabase
+        .from('profiles')
+        .select('*', { count: 'exact', head: true });
+
+      // Fetch attempts data
+      const { data: attempts, error: attemptsError } = await supabase
+        .from('attempts')
+        .select(`
+          *,
+          profiles!inner(full_name, email)
+        `)
+        .order('created_at', { ascending: false });
+
+      if (attemptsError) throw attemptsError;
+
+      // Calculate stats
+      const totalAttempts = attempts?.length || 0;
+      const scores = attempts?.map(a => a.score) || [];
+      const averageScore = scores.length > 0 
+        ? Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length)
+        : 0;
+      const highestScore = scores.length > 0 ? Math.max(...scores) : 0;
+
+      setStats({
+        totalUsers: userCount || 0,
+        totalAttempts,
+        averageScore,
+        highestScore
+      });
+
+      // Format recent activity
+      const activity = attempts?.slice(0, 5).map(attempt => {
+        const timeAgo = new Date(attempt.created_at);
+        const now = new Date();
+        const diffMinutes = Math.floor((now.getTime() - timeAgo.getTime()) / (1000 * 60));
+        
+        let timeString;
+        if (diffMinutes < 1) {
+          timeString = "Just now";
+        } else if (diffMinutes < 60) {
+          timeString = `${diffMinutes} minutes ago`;
+        } else if (diffMinutes < 1440) {
+          timeString = `${Math.floor(diffMinutes / 60)} hours ago`;
+        } else {
+          timeString = `${Math.floor(diffMinutes / 1440)} days ago`;
+        }
+
+        return {
+          user: attempt.profiles?.full_name || attempt.profiles?.email || 'Anonymous User',
+          action: "Completed quiz",
+          score: attempt.score,
+          time: timeString
+        };
+      }) || [];
+
+      setRecentActivity(activity);
+    } catch (error) {
+      console.error('Error fetching admin data:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const statsCards = [
     {
       title: "Total Users",
-      value: "1,247",
+      value: stats.totalUsers.toLocaleString(),
       change: "+12%",
       changeType: "positive",
       icon: Users,
@@ -22,15 +114,15 @@ const Dashboard = () => {
     },
     {
       title: "Total Attempts",
-      value: "3,891",
+      value: stats.totalAttempts.toLocaleString(),
       change: "+23%",
       changeType: "positive", 
       icon: FileText,
-      description: "Quiz attempts this month"
+      description: "Quiz attempts"
     },
     {
       title: "Average Score",
-      value: "76.8",
+      value: stats.averageScore.toString(),
       change: "+2.1",
       changeType: "positive",
       icon: TrendingUp,
@@ -38,21 +130,26 @@ const Dashboard = () => {
     },
     {
       title: "Highest Score",
-      value: "98",
-      change: "New record!",
+      value: stats.highestScore.toString(),
+      change: "Record!",
       changeType: "neutral",
       icon: Trophy,
-      description: "Personal best achieved"
+      description: "Best score achieved"
     }
   ];
 
-  const recentActivity = [
-    { user: "Alex Johnson", action: "Achieved new high score", score: 98, time: "2 minutes ago" },
-    { user: "Sarah Chen", action: "Completed quiz", score: 85, time: "5 minutes ago" },
-    { user: "Mike Rodriguez", action: "Started quiz", score: null, time: "8 minutes ago" },
-    { user: "Emily Davis", action: "Completed quiz", score: 92, time: "12 minutes ago" },
-    { user: "David Kim", action: "Registered", score: null, time: "15 minutes ago" }
-  ];
+  if (isLoading) {
+    return (
+      <AdminLayout>
+        <div className="flex items-center justify-center min-h-[400px]">
+          <div className="text-center">
+            <Brain className="w-12 h-12 text-blue-600 mx-auto mb-4 animate-pulse" />
+            <p className="text-gray-600">Loading dashboard data...</p>
+          </div>
+        </div>
+      </AdminLayout>
+    );
+  }
 
   return (
     <AdminLayout>
@@ -86,7 +183,7 @@ const Dashboard = () => {
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {stats.map((stat, index) => (
+          {statsCards.map((stat, index) => (
             <Card key={index} className="shadow-lg border-0 bg-white hover:shadow-xl transition-all duration-300">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium text-gray-600">
@@ -125,20 +222,27 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {recentActivity.map((activity, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <div>
-                      <div className="font-medium text-gray-900">{activity.user}</div>
-                      <div className="text-sm text-gray-600">{activity.action}</div>
-                      <div className="text-xs text-gray-500">{activity.time}</div>
+                {recentActivity.length > 0 ? (
+                  recentActivity.map((activity, index) => (
+                    <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <div>
+                        <div className="font-medium text-gray-900">{activity.user}</div>
+                        <div className="text-sm text-gray-600">{activity.action}</div>
+                        <div className="text-xs text-gray-500">{activity.time}</div>
+                      </div>
+                      {activity.score && (
+                        <Badge className="bg-blue-100 text-blue-700">
+                          {activity.score} pts
+                        </Badge>
+                      )}
                     </div>
-                    {activity.score && (
-                      <Badge className="bg-blue-100 text-blue-700">
-                        {activity.score} pts
-                      </Badge>
-                    )}
+                  ))
+                ) : (
+                  <div className="text-center py-8 text-gray-500">
+                    <FileText className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                    <p>No recent activity</p>
                   </div>
-                ))}
+                )}
               </div>
             </CardContent>
           </Card>
