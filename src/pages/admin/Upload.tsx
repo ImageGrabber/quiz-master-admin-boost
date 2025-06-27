@@ -1,12 +1,14 @@
+
 import { useState, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Upload as UploadIcon, FileText, CheckCircle, AlertCircle, X, Download } from "lucide-react";
+import { UploadIcon, FileText, CheckCircle, AlertCircle, X, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import AdminLayout from "@/components/AdminLayout";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ParsedQuestion {
   question: string;
@@ -135,10 +137,35 @@ const Upload = () => {
     setUploadProgress(0);
 
     try {
-      // Simulate upload progress - in real app this would call Supabase
-      for (let i = 0; i <= 100; i += 10) {
-        setUploadProgress(i);
-        await new Promise(resolve => setTimeout(resolve, 100));
+      // Upload questions to Supabase
+      const questionsToInsert = validQuestions.map(q => ({
+        question: q.question,
+        option_a: q.optionA,
+        option_b: q.optionB,
+        option_c: q.optionC,
+        option_d: q.optionD,
+        correct_index: q.correctIndex
+      }));
+
+      const batchSize = 10;
+      const batches = [];
+      for (let i = 0; i < questionsToInsert.length; i += batchSize) {
+        batches.push(questionsToInsert.slice(i, i + batchSize));
+      }
+
+      for (let i = 0; i < batches.length; i++) {
+        const { error } = await supabase
+          .from('questions')
+          .insert(batches[i]);
+
+        if (error) throw error;
+
+        // Update progress
+        const progress = Math.round(((i + 1) / batches.length) * 100);
+        setUploadProgress(progress);
+        
+        // Small delay to show progress
+        await new Promise(resolve => setTimeout(resolve, 200));
       }
 
       toast({
@@ -150,10 +177,11 @@ const Upload = () => {
       setFile(null);
       setParsedData([]);
       setUploadProgress(0);
-    } catch (error) {
+    } catch (error: any) {
+      console.error('Upload error:', error);
       toast({
         title: "Upload failed",
-        description: "Something went wrong. Please try again.",
+        description: error.message || "Something went wrong. Please try again.",
         variant: "destructive",
       });
     } finally {

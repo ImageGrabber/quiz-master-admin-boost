@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Brain, Mail, Lock, User, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -34,19 +35,30 @@ const Register = () => {
     setIsLoading(true);
 
     try {
-      // Simulate registration - in real app this would connect to Supabase
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      toast({
-        title: "Registration successful!",
-        description: "Welcome to QuizMaster! You can now start taking quizzes.",
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.name,
+          }
+        }
       });
-      
-      navigate("/quiz");
-    } catch (error) {
+
+      if (error) throw error;
+
+      if (data.user) {
+        toast({
+          title: "Registration successful!",
+          description: "Welcome to QuizMaster! You can now start taking quizzes.",
+        });
+        
+        navigate("/dashboard");
+      }
+    } catch (error: any) {
       toast({
         title: "Registration failed",
-        description: "Something went wrong. Please try again.",
+        description: error.message || "Something went wrong. Please try again.",
         variant: "destructive",
       });
     } finally {

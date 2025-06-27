@@ -9,13 +9,164 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      attempts: {
+        Row: {
+          answers: Json | null
+          created_at: string | null
+          id: string
+          quiz_id: number | null
+          score: number
+          seconds_used: number
+          user_id: string | null
+        }
+        Insert: {
+          answers?: Json | null
+          created_at?: string | null
+          id?: string
+          quiz_id?: number | null
+          score: number
+          seconds_used: number
+          user_id?: string | null
+        }
+        Update: {
+          answers?: Json | null
+          created_at?: string | null
+          id?: string
+          quiz_id?: number | null
+          score?: number
+          seconds_used?: number
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attempts_quiz_id_fkey"
+            columns: ["quiz_id"]
+            isOneToOne: false
+            referencedRelation: "quizzes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          email: string | null
+          full_name: string | null
+          id: string
+          role: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id: string
+          role?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          role?: string | null
+        }
+        Relationships: []
+      }
+      questions: {
+        Row: {
+          correct_index: number
+          created_at: string | null
+          id: number
+          option_a: string
+          option_b: string
+          option_c: string
+          option_d: string
+          question: string
+        }
+        Insert: {
+          correct_index: number
+          created_at?: string | null
+          id?: number
+          option_a: string
+          option_b: string
+          option_c: string
+          option_d: string
+          question: string
+        }
+        Update: {
+          correct_index?: number
+          created_at?: string | null
+          id?: number
+          option_a?: string
+          option_b?: string
+          option_c?: string
+          option_d?: string
+          question?: string
+        }
+        Relationships: []
+      }
+      quiz_questions: {
+        Row: {
+          order_index: number
+          question_id: number
+          quiz_id: number
+        }
+        Insert: {
+          order_index: number
+          question_id: number
+          quiz_id: number
+        }
+        Update: {
+          order_index?: number
+          question_id?: number
+          quiz_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_questions_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "quiz_questions_quiz_id_fkey"
+            columns: ["quiz_id"]
+            isOneToOne: false
+            referencedRelation: "quizzes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quizzes: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          id: number
+          title: string
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          id?: number
+          title: string
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          id?: number
+          title?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

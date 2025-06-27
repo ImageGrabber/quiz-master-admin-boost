@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Brain, Mail, Lock, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -20,19 +21,36 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      // Simulate login - in real app this would connect to Supabase
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      toast({
-        title: "Login successful!",
-        description: "Welcome back to QuizMaster.",
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
-      
-      navigate("/quiz");
-    } catch (error) {
+
+      if (error) throw error;
+
+      if (data.user) {
+        // Check user role to determine redirect
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('id', data.user.id)
+          .single();
+
+        toast({
+          title: "Login successful!",
+          description: "Welcome back to QuizMaster.",
+        });
+
+        if (profile?.role === 'admin') {
+          navigate("/admin");
+        } else {
+          navigate("/dashboard");
+        }
+      }
+    } catch (error: any) {
       toast({
         title: "Login failed",
-        description: "Please check your credentials and try again.",
+        description: error.message || "Please check your credentials and try again.",
         variant: "destructive",
       });
     } finally {
