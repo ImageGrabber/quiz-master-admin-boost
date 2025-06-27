@@ -1,11 +1,10 @@
-
 import { useState, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Upload, FileText, CheckCircle, AlertCircle, X, Download } from "lucide-react";
+import { Upload as UploadIcon, FileText, CheckCircle, AlertCircle, X, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import AdminLayout from "@/components/AdminLayout";
 
@@ -204,7 +203,7 @@ const Upload = () => {
         <Card className="shadow-lg border-0 bg-white">
           <CardHeader>
             <CardTitle className="flex items-center space-x-2">
-              <Upload className="w-5 h-5 text-blue-600" />
+              <UploadIcon className="w-5 h-5 text-blue-600" />
               <span>Upload CSV File</span>
             </CardTitle>
           </CardHeader>
@@ -294,7 +293,7 @@ const Upload = () => {
                   </span>
                   <span className="text-sm text-gray-500">{uploadProgress}%</span>
                 </div>
-                <Progress value={uploadProgress} className="h-2" />
+                <Progress value={uploadProgress} />
               </div>
             </CardContent>
           </Card>
