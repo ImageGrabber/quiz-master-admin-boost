@@ -234,31 +234,31 @@ function FaqSection() {
   const faqs = [
     {
       q: "How do I join a Bible quiz event?",
-      a: "Simply sign up for a free account, then join any scheduled quiz event from your dashboard."
+      a: "Simply sign up for a free account, then join any scheduled quiz event from your dashboard. You can participate in the Bible Quiz Competition 2024, Bible Quiz Competition 2025, and our Online Bible Quiz Competition 2025 from anywhere."
     },
     {
       q: "Are there prizes for top scorers?",
-      a: "Yes! Weekly and monthly top scorers win prizes, certificates, and recognition on the leaderboard."
+      a: "Yes! Weekly and monthly top scorers win prizes, certificates, and recognition on the leaderboard in every Bible competition."
     },
     {
       q: "Can I retake quizzes or practice?",
-      a: "Absolutely. You can practice as many times as you like and retake quizzes to improve your score."
+      a: "Absolutely. You can practice as many times as you like and retake quizzes to improve your score for the Bible Quiz Competition 2024 and 2025."
     },
     {
       q: "Is the Bible Quiz suitable for all ages?",
-      a: "Yes, our quizzes are designed for all ages, from kids to adults, with questions for every level."
+      a: "Yes, our quizzes are designed for all ages, from kids to adults, with questions for every level. Join the Bible competition 2025 with your family or group!"
     },
     {
       q: "How is my score calculated?",
-      a: "You earn points for correct answers, speed, and bonus rounds. Wrong answers may deduct points."
+      a: "You earn points for correct answers, speed, and bonus rounds. Wrong answers may deduct points. This applies to all our Bible quiz competitions."
     },
     {
       q: "Can I create my own quiz for my group?",
-      a: "Yes! You can create custom quizzes for your church, family, or youth group."
+      a: "Yes! You can create custom quizzes for your church, family, or youth group and even host your own Bible competition."
     },
     {
       q: "Do I need to pay to participate?",
-      a: "Most quizzes are free to join. Some special events may require a small entry fee for prizes."
+      a: "Most quizzes are free to join. Some special events, like the Online Bible Quiz Competition 2025, may require a small entry fee for prizes."
     }
   ];
   const [open, setOpen] = useState(null);
@@ -306,6 +306,18 @@ function FaqSection() {
 const Index = () => {
   const navigate = useNavigate();
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
+  // Calculate days until next Saturday
+  const [nextQuizLabel, setNextQuizLabel] = useState("");
+  useEffect(() => {
+    const today = new Date();
+    const dayOfWeek = today.getDay(); // 0=Sun, 6=Sat
+    let daysUntilSaturday = (6 - dayOfWeek + 7) % 7;
+    let label = "";
+    if (daysUntilSaturday === 0) label = "(today)";
+    else if (daysUntilSaturday === 1) label = "(tomorrow)";
+    else label = `(in ${daysUntilSaturday} days)`;
+    setNextQuizLabel(label);
+  }, []);
 
   useEffect(() => {
     async function checkAuthAndRedirect() {
@@ -386,11 +398,15 @@ const Index = () => {
               <Brain className="w-7 h-7 text-black" />
               <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
             </div>
-            <div className="flex items-center space-x-2">
+            <nav className="flex items-center space-x-2">
+              <a href="#features" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Features</a>
+              <a href="#testimonials" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Testimonials</a>
+              <a href="#categories" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Categories</a>
+              <a href="#faq" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">FAQ</a>
               <Button variant="ghost" onClick={() => navigate("/leaderboard")}> <Trophy className="w-4 h-4 mr-1 inline" /> Leaderboard </Button>
               <Button variant="ghost" onClick={() => navigate("/auth/register")}>Sign Up</Button>
               <Button onClick={() => navigate("/auth/login")}>Sign In</Button>
-            </div>
+            </nav>
           </div>
         </header>
 
@@ -423,13 +439,15 @@ const Index = () => {
             <div className="max-w-4xl mx-auto">
               <div className="flex justify-center mb-4">
                 <span className="inline-flex items-center px-4 py-1 mt-20 mb-4 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold text-sm shadow">
-                  <Calendar className="w-4 h-4 mr-2" /> Next Quiz: Saturday, 8 AM – 8 PM
+                  <Calendar className="w-4 h-4 mr-2" />
+                  Next Quiz: Saturday, 8 AM – 8 PM <span className="ml-2 text-blue-100 font-normal">{nextQuizLabel}</span>
                 </span>
               </div>
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10 leading-tight  mb-4">
-                Join the Bible Quiz Competition 2024 & 2025<br />
-                <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent text-5xl md:text-6xl   mt-4">Online Bible Quiz Competition</span>
+                Join the <span className="text-blue-700">Bible Quiz Competition 2024</span> & 2025<br />
+                <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent text-5xl md:text-6xl   mt-4">Online Bible Quiz Competition 2025</span>
               </h1>
+              <p className="text-base text-blue-900 font-semibold mb-4">Participate in the bible quiz competition 2024, online bible quiz competition 2025, bible quiz competition 2025, and bible competition 2025. Test your knowledge, compete globally, and win amazing prizes!</p>
               <p className="text-xl text-gray-700 mb-6 max-w-4xl mx-auto leading-relaxed">
                 Join our weekly Bible Quiz every <span className="font-semibold text-blue-700">Saturday, 8 AM – 8 PM</span>! Participate in the Bible Quiz Competition 2024 and get ready for the Online Bible Quiz Competition 2025. Compete with believers from around the world, answer 25 challenging questions, and win exciting prizes. Climb the leaderboard and become a Bible Quiz Champion!
               </p>
@@ -465,7 +483,7 @@ const Index = () => {
        
 
         {/* How It Works */}
-        <section className="py-24 mb-0 mt-[-50px] bg-gradient-to-br from-white via-blue-50 to-purple-50 overflow-hidden">
+        <section id="features" className="py-24 mb-0 mt-[-50px] bg-gradient-to-br from-white via-blue-50 to-purple-50 overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <span className="uppercase tracking-widest text-sm font-semibold text-blue-500">How it works</span>
@@ -494,7 +512,7 @@ const Index = () => {
         </section>
 
               {/* Testimonials */}
-        <section className="py-20 px-2 bg-gradient-to-br from-blue-50 via-purple-100 to-white text-gray-900 relative">
+        <section id="testimonials" className="py-20 px-2 bg-gradient-to-br from-blue-50 via-purple-100 to-white text-gray-900 relative">
           <div className="max-w-7xl mx-auto">
             <h3 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
               Join <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-extrabold">5,000+ believers</span> who trust us
@@ -530,7 +548,7 @@ const Index = () => {
           </div>
         </section>
         {/* Quiz Categories */}
-        <section className="py-4 bg-white mt-24 mb-24">
+        <section id="categories" className="py-4 bg-white mt-24 mb-24">
           <div className="container mx-auto px-4">
             <h3 className="text-3xl font-bold text-center mb-4">Quiz Categories</h3>
             <p className="text-lg text-gray-600 text-center mb-10 max-w-2xl mx-auto">Choose from a variety of Bible quiz categories. Each category is designed to challenge your knowledge and help you grow in your understanding of the Scriptures.</p>
@@ -648,7 +666,9 @@ const Index = () => {
           </div>
         </section>
 
-        <FaqSection />
+        <div id="faq">
+          <FaqSection />
+        </div>
         {/* Footer */}
         <footer className="bg-[#181c3a] text-gray-200 pt-16 pb-8 mt-8">
           <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row md:justify-between md:items-start gap-12">
