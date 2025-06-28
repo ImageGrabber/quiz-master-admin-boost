@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -78,14 +77,10 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       }`}>
         {/* Sidebar Header */}
         <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200">
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <Brain className="w-4 h-4 text-white" />
-            </div>
-            <div>
-              <h1 className="text-lg font-semibold text-gray-900">QuizMaster</h1>
-              <Badge className="bg-blue-100 text-blue-700 text-xs">Admin</Badge>
-            </div>
+          <div className="flex items-center space-x-2">
+            <Brain className="w-6 h-6 text-blue-600" />
+            <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
+            <Badge className="bg-blue-100 text-blue-700 text-xs">Admin</Badge>
           </div>
           
           <Button
@@ -150,19 +145,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       <div className="lg:ml-64">
         {/* Top Header */}
         <header className="bg-white shadow-sm border-b border-gray-200 h-16 flex items-center justify-between px-6">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setSidebarOpen(true)}
-            className="lg:hidden"
-          >
-            <Menu className="w-5 h-5" />
-          </Button>
-          
+          <div className="flex items-center space-x-2">
+            <Brain className="w-6 h-6 text-blue-600" />
+            <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
+          </div>
           <div className="flex items-center space-x-4">
-            <div className="text-sm text-gray-600">
-              Welcome back, Admin
-            </div>
+            <div className="text-sm text-gray-600">Welcome back, Admin</div>
           </div>
         </header>
 

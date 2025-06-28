@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -122,33 +121,18 @@ const Dashboard = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
-          <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
-              <Brain className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                Welcome back, {profile?.full_name || 'User'}!
-              </h1>
-              <p className="text-gray-600">Ready for your next quiz challenge?</p>
-            </div>
+          <div className="flex items-center space-x-2">
+            <Brain className="w-6 h-6 text-blue-600" />
+            <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
           </div>
-          
           <div className="flex space-x-3">
-            <Button
-              variant="outline"
-              onClick={() => navigate("/leaderboard")}
-              className="flex items-center space-x-2"
-            >
-              <Trophy className="w-4 h-4" />
-              <span>Leaderboard</span>
+            <Button variant="ghost" onClick={() => navigate("/")} className="text-gray-600 hover:text-gray-900">
+              Home
             </Button>
-            
-            <Button
-              variant="outline"
-              onClick={handleLogout}
-              className="flex items-center space-x-2"
-            >
+            <Button onClick={() => navigate("/leaderboard")} className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+              Leaderboard
+            </Button>
+            <Button variant="outline" onClick={handleLogout} className="flex items-center space-x-2">
               <LogOut className="w-4 h-4" />
               <span>Logout</span>
             </Button>

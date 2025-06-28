@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -61,17 +60,21 @@ const Result = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-blue-100">
+      <header className="bg-white/80 backdrop-blur-sm border-b border-blue-100 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Brain className="w-6 h-6 text-blue-600" />
               <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
             </div>
-            <Button variant="ghost" onClick={() => navigate("/")} className="text-gray-600 hover:text-gray-900">
-              <Home className="w-4 h-4 mr-2" />
-              Home
-            </Button>
+            <div className="flex items-center space-x-4">
+              <Button variant="ghost" onClick={() => navigate("/")} className="text-gray-600 hover:text-gray-900">
+                Home
+              </Button>
+              <Button onClick={() => navigate("/leaderboard")} className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                Leaderboard
+              </Button>
+            </div>
           </div>
         </div>
       </header>
