@@ -15,6 +15,7 @@ import AdminDashboard from "./pages/admin/Dashboard";
 import AdminAttempts from "./pages/admin/Attempts";
 import AdminUpload from "./pages/admin/Upload";
 import AdminQuizzes from "./pages/admin/Quizzes";
+import AdminUsers from "./pages/admin/Users";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/admin/attempts" element={<AdminAttempts />} />
           <Route path="/admin/upload" element={<AdminUpload />} />
           <Route path="/admin/quizzes" element={<AdminQuizzes />} />
+          <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

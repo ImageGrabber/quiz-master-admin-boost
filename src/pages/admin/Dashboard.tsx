@@ -154,6 +154,10 @@ const Dashboard = () => {
 
       console.log('Recent activity:', activity);
       setRecentActivity(activity);
+
+      // Calculate user growth percentage (dummy logic for now, replace with real previous count if available)
+      const previousUserCount = stats.totalUsers > 1 ? stats.totalUsers - 1 : stats.totalUsers; // Replace with real previous period count if you have it
+      const userGrowth = previousUserCount > 0 ? Math.round(((stats.totalUsers - previousUserCount) / previousUserCount) * 100) : 0;
     } catch (error) {
       console.error('Error fetching admin data:', error);
     } finally {
@@ -161,14 +165,19 @@ const Dashboard = () => {
     }
   };
 
+  // Calculate user growth percentage (dummy logic for now, replace with real previous count if available)
+  const previousUserCount = stats.totalUsers > 1 ? stats.totalUsers - 1 : stats.totalUsers; // Replace with real previous period count if you have it
+  const userGrowth = previousUserCount > 0 ? Math.round(((stats.totalUsers - previousUserCount) / previousUserCount) * 100) : 0;
+
   const statsCards = [
     {
       title: "Total Users",
       value: stats.totalUsers.toLocaleString(),
-      change: "+12%",
-      changeType: "positive",
+      change: `${userGrowth > 0 ? "+" : ""}${userGrowth}%`,
+      changeType: userGrowth > 0 ? "positive" : userGrowth < 0 ? "negative" : "neutral",
       icon: Users,
-      description: "Active quiz takers"
+      description: "Active quiz takers",
+      onClick: () => navigate("/admin/users"),
     },
     {
       title: "Total Attempts",
@@ -242,7 +251,11 @@ const Dashboard = () => {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {statsCards.map((stat, index) => (
-            <Card key={index} className="shadow-lg border-0 bg-white hover:shadow-xl transition-all duration-300">
+            <Card
+              key={index}
+              className="shadow-lg border-0 bg-white hover:shadow-xl transition-all duration-300 cursor-pointer"
+              onClick={stat.onClick}
+            >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium text-gray-600">
                   {stat.title}
@@ -255,8 +268,8 @@ const Dashboard = () => {
                 <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
                 <div className="flex items-center mt-2">
                   <Badge 
-                    variant={stat.changeType === "positive" ? "default" : "secondary"}
-                    className={stat.changeType === "positive" ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-700"}
+                    variant={stat.changeType === "positive" ? "default" : stat.changeType === "negative" ? "destructive" : "secondary"}
+                    className={stat.changeType === "positive" ? "bg-green-100 text-green-700" : stat.changeType === "negative" ? "bg-red-100 text-red-700" : "bg-gray-100 text-gray-700"}
                   >
                     {stat.change}
                   </Badge>
