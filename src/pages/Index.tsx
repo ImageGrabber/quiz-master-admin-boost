@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, User, Calendar, HelpCircle, TrendingUp, MessageCircle, CheckCircle, Globe, Home, Settings } from "lucide-react";
+import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, User, Calendar, HelpCircle, TrendingUp, MessageCircle, CheckCircle, Globe, Home, Settings, Medal, Crown } from "lucide-react";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import type { MoveDirection } from "tsparticles-engine";
 import { Helmet } from 'react-helmet';
+import { supabase } from "@/integrations/supabase/client";
 
 const features = [
   {
@@ -66,10 +67,14 @@ const howItWorks = [
 ];
 
 const categories = [
-  { name: "Old Testament", icon: BookOpen, color: "from-orange-400 to-yellow-400", description: "Explore questions from Genesis to Malachi, covering the stories, laws, and prophecies of the Old Testament." },
-  { name: "New Testament", icon: BookOpen, color: "from-blue-400 to-indigo-400", description: "Test your knowledge of the Gospels, Acts, Epistles, and Revelation in the New Testament." },
-  { name: "Bible Characters", icon: Users, color: "from-green-400 to-emerald-400", description: "Identify and learn about key figures, heroes, and heroines throughout the Bible." },
-  { name: "Events", icon: Calendar, color: "from-purple-400 to-pink-400", description: "Recall major events, miracles, and turning points in biblical history." }
+  { name: "Old Testament", icon: BookOpen, border: "border-orange-200", iconBg: "bg-orange-400", shadow: "shadow-orange-100", description: "Stories & laws" },
+  { name: "New Testament", icon: BookOpen, border: "border-blue-200", iconBg: "bg-blue-400", shadow: "shadow-blue-100", description: "Gospels & letters" },
+  { name: "Bible Characters", icon: Users, border: "border-green-200", iconBg: "bg-green-400", shadow: "shadow-green-100", description: "People of the Bible" },
+  { name: "Events", icon: Calendar, border: "border-purple-200", iconBg: "bg-purple-400", shadow: "shadow-purple-100", description: "Major events" },
+  { name: "Parables", icon: MessageCircle, border: "border-yellow-200", iconBg: "bg-yellow-400", shadow: "shadow-yellow-100", description: "Jesus' parables" },
+  { name: "Miracles", icon: Star, border: "border-pink-200", iconBg: "bg-pink-400", shadow: "shadow-pink-100", description: "Wonders & signs" },
+  { name: "Geography", icon: Globe, border: "border-teal-200", iconBg: "bg-teal-400", shadow: "shadow-teal-100", description: "Places & lands" },
+  { name: "Prophecies", icon: Award, border: "border-indigo-200", iconBg: "bg-indigo-400", shadow: "shadow-indigo-100", description: "Biblical prophecies" }
 ];
 
 const leaderboard = [
@@ -113,6 +118,102 @@ const stats = [
   { label: "Countries", value: "45", icon: Globe },
   { label: "Prizes Awarded", value: "$15,000+", icon: Award }
 ];
+
+function StickyLeaderboardPanel() {
+  const [leaders, setLeaders] = useState([]);
+  const [open, setOpen] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchLeaders() {
+      let query = supabase
+        .from('attempts')
+        .select(`user_id, score, created_at, profiles!inner(full_name, email)`);
+      const { data, error } = await query;
+      if (error) return;
+      const userStats = new Map();
+      data?.forEach((attempt) => {
+        const userId = attempt.user_id;
+        const userName = attempt.profiles?.full_name || attempt.profiles?.email || 'Anonymous';
+        if (userStats.has(userId)) {
+          const existing = userStats.get(userId);
+          userStats.set(userId, {
+            ...existing,
+            maxScore: Math.max(existing.maxScore, attempt.score),
+            totalScore: existing.totalScore + attempt.score,
+            attempts: existing.attempts + 1
+          });
+        } else {
+          userStats.set(userId, {
+            id: userId,
+            name: userName,
+            maxScore: attempt.score,
+            totalScore: attempt.score,
+            attempts: 1
+          });
+        }
+      });
+      const leaderboardData = Array.from(userStats.values())
+        .map((user) => ({
+          id: user.id,
+          name: user.name,
+          score: user.maxScore,
+          attempts: user.attempts,
+        }))
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 10);
+      setLeaders(leaderboardData);
+    }
+    fetchLeaders();
+  }, []);
+
+  const getRankIcon = (rank) => {
+    switch (rank) {
+      case 0: return <Crown className="w-5 h-5 text-yellow-500" />;
+      case 1: return <Trophy className="w-5 h-5 text-gray-400" />;
+      case 2: return <Medal className="w-5 h-5 text-amber-600" />;
+      default: return <Award className="w-5 h-5 text-blue-500" />;
+    }
+  };
+
+  return (
+    <div className={`hidden md:flex flex-col fixed top-1/2 right-0 z-50 transform -translate-y-1/2 transition-all duration-300 ${open ? 'w-80' : 'w-14'}`}>
+      <div className={`h-[420px] ${open ? 'bg-white/80 p-4 border-l border-blue-100 shadow-xl' : 'bg-white/60 p-1 border-l border-blue-100 shadow'} rounded-l-2xl backdrop-blur-md flex flex-col items-stretch relative`}>
+        <button
+          onClick={() => setOpen(!open)}
+          className={`absolute ${open ? 'top-4 left-[-25px]' : 'top-1/2 left-[-25px] -translate-y-1/2'} bg-blue-600 text-white rounded-l-lg px-2 py-1 shadow-lg focus:outline-none`}
+        >
+          {open ? <span>&#10095;</span> : <span>&#10094;</span>}
+        </button>
+        {open ? (
+          <>
+            <div className="flex items-center gap-2 mb-4">
+              <Trophy className="w-6 h-6 text-blue-600" />
+              <span className="font-bold text-blue-700">Leaderboard</span>
+            </div>
+            <ul className="flex-1 overflow-y-auto">
+              {leaders.map((user, i) => (
+                <li key={user.id} className="flex items-center justify-between py-2 border-b last:border-b-0 border-blue-50">
+                  <div className="flex items-center gap-2">
+                    {getRankIcon(i)}
+                    <span className="font-semibold text-gray-800">{user.name}</span>
+                  </div>
+                  <span className="text-blue-700 font-bold">{user.score}</span>
+                </li>
+              ))}
+            </ul>
+            <button onClick={() => navigate('/leaderboard')} className="mt-4 w-full py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:from-blue-700 hover:to-purple-700 transition-all">View Full Leaderboard</button>
+          </>
+        ) : (
+          <div className="flex flex-col items-center justify-center h-full">
+            <Trophy className="w-6 h-6 text-blue-600 mb-10" />
+            <span className="text-sm text-blue-600 font-bold rotate-90 whitespace-nowrap">Leaderboard</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 const Index = () => {
   const navigate = useNavigate();
@@ -286,41 +387,25 @@ const Index = () => {
         </section>
 
         {/* Quiz Categories */}
-        <section className="py-16 bg-white">
+        <section className="py-4 bg-white">
           <div className="container mx-auto px-4">
             <h3 className="text-3xl font-bold text-center mb-4">Quiz Categories</h3>
             <p className="text-lg text-gray-600 text-center mb-10 max-w-2xl mx-auto">Choose from a variety of Bible quiz categories. Each category is designed to challenge your knowledge and help you grow in your understanding of the Scriptures.</p>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
               {categories.map((cat, i) => (
-                <div key={i} className={`rounded-2xl shadow p-8 flex flex-col items-center bg-gradient-to-br ${cat.color} bg-opacity-70 backdrop-blur-md`}>
-                  <cat.icon className="w-12 h-12 text-white mb-4" />
-                  <div className="text-lg font-bold text-white mb-2">{cat.name}</div>
-                  <div className="text-white/90 text-center text-base">{cat.description}</div>
+                <div key={i} className={`rounded-2xl border ${cat.border} ${cat.shadow} bg-white/40 backdrop-blur-md p-8 flex flex-col items-center transition-all duration-200 hover:scale-105 hover:shadow-lg`}> 
+                  <div className={`w-12 h-12 flex items-center justify-center rounded-xl mb-4 ${cat.iconBg} bg-opacity-90 shadow-md`}>
+                    <cat.icon className="w-7 h-7 text-white" />
+                  </div>
+                  <div className="text-lg font-bold text-gray-900 mb-2">{cat.name}</div>
+                  <div className="text-gray-700 text-center text-base">{cat.description}</div>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Leaderboard Preview */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <h3 className="text-3xl font-bold text-center mb-10">Leaderboard Preview</h3>
-            <div className="max-w-xl mx-auto bg-white/60 backdrop-blur-md rounded-2xl shadow p-8">
-              <div className="flex flex-col gap-4">
-                {leaderboard.map((user, i) => (
-                  <div key={i} className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 flex items-center justify-center text-white font-bold text-lg">{user.avatar}</div>
-                      <span className="font-semibold text-gray-800">{user.name}</span>
-                    </div>
-                    <span className="text-xl font-bold text-blue-700">{user.score}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+        
 
         {/* Testimonials */}
         <section className="py-16 bg-gradient-to-r from-blue-50 to-purple-50/60">
@@ -406,6 +491,7 @@ const Index = () => {
           </div>
         </footer>
       </div>
+      <StickyLeaderboardPanel />
     </>
   );
 };
