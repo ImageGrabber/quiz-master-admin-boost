@@ -141,43 +141,74 @@ function StickyLeaderboardPanel() {
 
   useEffect(() => {
     async function fetchLeaders() {
-      let query = supabase
-        .from('attempts')
-        .select(`user_id, score, created_at, profiles!inner(full_name, email)`);
-      const { data, error } = await query;
-      if (error) return;
-      const userStats = new Map();
-      data?.forEach((attempt) => {
-        const userId = attempt.user_id;
-        const userName = attempt.profiles?.full_name || attempt.profiles?.email || 'Anonymous';
-        if (userStats.has(userId)) {
-          const existing = userStats.get(userId);
-          userStats.set(userId, {
-            ...existing,
-            maxScore: Math.max(existing.maxScore, attempt.score),
-            totalScore: existing.totalScore + attempt.score,
-            attempts: existing.attempts + 1
-          });
-        } else {
-          userStats.set(userId, {
-            id: userId,
-            name: userName,
-            maxScore: attempt.score,
-            totalScore: attempt.score,
-            attempts: 1
-          });
+      try {
+        const { data, error } = await supabase
+          .from('attempts')
+          .select('user_id, score, created_at')
+          .order('score', { ascending: false });
+
+        if (error) {
+          console.error('Error fetching homepage leaders:', error);
+          return;
         }
-      });
-      const leaderboardData = Array.from(userStats.values())
-        .map((user) => ({
-          id: user.id,
-          name: user.name,
-          score: user.maxScore,
-          attempts: user.attempts,
-        }))
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 10);
-      setLeaders(leaderboardData);
+
+        const userStats = new Map();
+        data?.forEach((attempt) => {
+          const userId = attempt.user_id;
+          if (userStats.has(userId)) {
+            const existing = userStats.get(userId);
+            userStats.set(userId, {
+              ...existing,
+              maxScore: Math.max(existing.maxScore, attempt.score),
+              totalScore: existing.totalScore + attempt.score,
+              attempts: existing.attempts + 1
+            });
+          } else {
+            userStats.set(userId, {
+              id: userId,
+              name: 'Loading...', // Will be updated with real name
+              maxScore: attempt.score,
+              totalScore: attempt.score,
+              attempts: 1
+            });
+          }
+        });
+
+        // Get user names from profiles table
+        const userIds = Array.from(userStats.keys());
+        if (userIds.length > 0) {
+          const { data: profiles, error: profilesError } = await supabase
+            .from('profiles')
+            .select('id, full_name, email')
+            .in('id', userIds);
+
+          if (!profilesError && profiles) {
+            const profileMap = new Map();
+            profiles.forEach(profile => {
+              profileMap.set(profile.id, profile);
+            });
+
+            // Update user stats with real names
+            userStats.forEach((user, userId) => {
+              const profile = profileMap.get(userId);
+              user.name = profile?.full_name || profile?.email || 'Anonymous User';
+            });
+          }
+        }
+        
+        const leaderboardData = Array.from(userStats.values())
+          .map((user) => ({
+            id: user.id,
+            name: user.name,
+            score: user.maxScore,
+            attempts: user.attempts,
+          }))
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 10);
+        setLeaders(leaderboardData);
+      } catch (error) {
+        console.error('Unexpected error in fetchLeaders:', error);
+      }
     }
     fetchLeaders();
   }, []);

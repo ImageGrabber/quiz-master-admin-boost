@@ -140,3 +140,22 @@ INSERT INTO public.quiz_questions (quiz_id, question_id, order_index) VALUES
 (1, 3, 3),
 (1, 4, 4),
 (1, 5, 5);
+
+-- Create a function to fetch recent attempts for the admin dashboard
+CREATE OR REPLACE FUNCTION public.get_admin_attempts()
+RETURNS TABLE (
+  id uuid,
+  user_id uuid,
+  quiz_id integer,
+  score integer,
+  seconds_used integer,
+  created_at timestamp with time zone
+) AS $$
+BEGIN
+  RETURN QUERY
+    SELECT id, user_id, quiz_id, score, seconds_used, created_at
+    FROM public.attempts
+    ORDER BY created_at DESC
+    LIMIT 10;
+END;
+$$ LANGUAGE plpgsql STABLE;

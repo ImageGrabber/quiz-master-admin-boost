@@ -57,29 +57,65 @@ const Dashboard = () => {
 
   const fetchAdminData = async () => {
     try {
-      // Fetch total users
-      const { count: userCount } = await supabase
+      console.log('Fetching admin data...');
+      
+      // Fetch total users with explicit columns
+      const { data: userData, error: userError } = await supabase
         .from('profiles')
-        .select('*', { count: 'exact', head: true });
+        .select('id, full_name, email');
+      const userCount = Array.isArray(userData) ? userData.length : 0;
+      if (userError) {
+        console.error('User fetch error:', userError);
+      }
+      console.log('User count:', userCount, 'User data:', userData);
 
-      // Fetch attempts data
-      const { data: attempts, error: attemptsError } = await supabase
-        .from('attempts')
-        .select(`
-          *,
-          profiles!inner(full_name, email)
-        `)
-        .order('created_at', { ascending: false });
+      // Fetch attempts using the new RPC function
+      // @ts-expect-error: custom RPC function
+      const { data: attemptsRaw, error: attemptsError } = await supabase.rpc('get_admin_attempts');
+      if (attemptsError) {
+        console.error('Attempts error:', attemptsError);
+        if (attemptsError.code) {
+          console.error('Attempts error code:', attemptsError.code);
+        }
+        throw attemptsError;
+      }
+      // Ensure attempts is an array
+      const attempts = Array.isArray(attemptsRaw) ? attemptsRaw : [];
+      console.log('Attempts data:', attempts);
 
-      if (attemptsError) throw attemptsError;
+      // Get user profiles for the attempts
+      const userIds = attempts.map(a => a.user_id).filter(Boolean) || [];
+      let profileMap = new Map();
+      
+      if (userIds.length > 0) {
+        const { data: profiles, error: profilesError } = await supabase
+          .from('profiles')
+          .select('id, full_name, email')
+          .in('id', userIds);
+        if (profilesError) {
+          console.error('Profiles error:', profilesError);
+        } else {
+          console.log('Profiles data:', profiles);
+          profiles?.forEach(profile => {
+            profileMap.set(profile.id, profile);
+          });
+        }
+      }
 
       // Calculate stats
-      const totalAttempts = attempts?.length || 0;
-      const scores = attempts?.map(a => a.score) || [];
+      const totalAttempts = attempts.length || 0;
+      const scores = attempts.map(a => a.score) || [];
       const averageScore = scores.length > 0 
         ? Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length)
         : 0;
       const highestScore = scores.length > 0 ? Math.max(...scores) : 0;
+
+      console.log('Calculated stats:', {
+        totalUsers: userCount || 0,
+        totalAttempts,
+        averageScore,
+        highestScore
+      });
 
       setStats({
         totalUsers: userCount || 0,
@@ -89,7 +125,7 @@ const Dashboard = () => {
       });
 
       // Format recent activity
-      const activity = attempts?.slice(0, 5).map(attempt => {
+      const activity = attempts.slice(0, 5).map(attempt => {
         const timeAgo = new Date(attempt.created_at);
         const now = new Date();
         const diffMinutes = Math.floor((now.getTime() - timeAgo.getTime()) / (1000 * 60));
@@ -105,14 +141,18 @@ const Dashboard = () => {
           timeString = `${Math.floor(diffMinutes / 1440)} days ago`;
         }
 
+        const profile = profileMap.get(attempt.user_id);
+        const userName = profile?.full_name || profile?.email || 'Anonymous User';
+
         return {
-          user: attempt.profiles?.full_name || attempt.profiles?.email || 'Anonymous User',
+          user: userName,
           action: "Completed quiz",
           score: attempt.score,
           time: timeString
         };
-      }) || [];
+      });
 
+      console.log('Recent activity:', activity);
       setRecentActivity(activity);
     } catch (error) {
       console.error('Error fetching admin data:', error);

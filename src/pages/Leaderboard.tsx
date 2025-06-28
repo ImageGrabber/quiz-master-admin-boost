@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -30,14 +29,10 @@ const Leaderboard = () => {
     try {
       setIsLoading(true);
       
+      // Simple query to get attempts data
       let query = supabase
         .from('attempts')
-        .select(`
-          user_id,
-          score,
-          created_at,
-          profiles!inner(full_name, email)
-        `);
+        .select('user_id, score, created_at');
 
       // Apply date filter based on selected period
       if (selectedPeriod === "week") {
@@ -52,14 +47,19 @@ const Leaderboard = () => {
 
       const { data, error } = await query;
 
-      if (error) throw error;
+      if (error) {
+        console.error('Leaderboard query error:', error);
+        setLeaderboard([]);
+        return;
+      }
+
+      console.log('Leaderboard data:', data); // Debug log
 
       // Process the data to create leaderboard
       const userStats = new Map();
       
       data?.forEach((attempt: any) => {
         const userId = attempt.user_id;
-        const userName = attempt.profiles?.full_name || attempt.profiles?.email || 'Anonymous';
         
         if (userStats.has(userId)) {
           const existing = userStats.get(userId);
@@ -72,13 +72,35 @@ const Leaderboard = () => {
         } else {
           userStats.set(userId, {
             id: userId,
-            name: userName,
+            name: 'Loading...', // Will be updated with real name
             maxScore: attempt.score,
             totalScore: attempt.score,
             attempts: 1
           });
         }
       });
+
+      // Get user names from profiles table
+      const userIds = Array.from(userStats.keys());
+      if (userIds.length > 0) {
+        const { data: profiles, error: profilesError } = await supabase
+          .from('profiles')
+          .select('id, full_name, email')
+          .in('id', userIds);
+
+        if (!profilesError && profiles) {
+          const profileMap = new Map();
+          profiles.forEach(profile => {
+            profileMap.set(profile.id, profile);
+          });
+
+          // Update user stats with real names
+          userStats.forEach((user, userId) => {
+            const profile = profileMap.get(userId);
+            user.name = profile?.full_name || profile?.email || 'Anonymous User';
+          });
+        }
+      }
 
       // Convert to array and calculate averages
       const leaderboardData = Array.from(userStats.values())
@@ -96,6 +118,7 @@ const Leaderboard = () => {
           rank: index + 1
         }));
 
+      console.log('Processed leaderboard data:', leaderboardData); // Debug log
       setLeaderboard(leaderboardData);
     } catch (error) {
       console.error('Error fetching leaderboard:', error);
@@ -157,7 +180,7 @@ const Leaderboard = () => {
                 <Home className="w-4 h-4 mr-2" />
                 Home
               </Button>
-              <Button onClick={() => navigate("/quiz")} className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+              <Button onClick={() => navigate("/quiz-selection")} className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
                 <Play className="w-4 h-4 mr-2" />
                 Take Quiz
               </Button>
@@ -204,7 +227,7 @@ const Leaderboard = () => {
                 <Trophy className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-gray-600 mb-2">No scores yet</h3>
                 <p className="text-gray-500 mb-6">Be the first to take a quiz and appear on the leaderboard!</p>
-                <Button onClick={() => navigate("/quiz")} className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                <Button onClick={() => navigate("/quiz-selection")} className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
                   <Play className="w-4 h-4 mr-2" />
                   Take First Quiz
                 </Button>
@@ -291,7 +314,7 @@ const Leaderboard = () => {
                 <h3 className="text-2xl font-bold mb-4">Ready to Climb the Ranks?</h3>
                 <p className="text-blue-100 mb-6">Take a quiz now and see if you can make it to the top!</p>
                 <Button
-                  onClick={() => navigate("/quiz")}
+                  onClick={() => navigate("/quiz-selection")}
                   className="bg-white text-blue-600 hover:bg-gray-100 font-semibold px-8 py-3 shadow-lg hover:shadow-xl transition-all duration-300"
                 >
                   <Play className="w-4 h-4 mr-2" />
