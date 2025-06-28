@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Brain, Trophy, Clock, Target, LogOut, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import Header from "@/components/Header";
+import DashboardLayout from "@/components/DashboardLayout";
 
 interface UserProfile {
   id: string;
@@ -117,31 +119,11 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="flex justify-between items-center mb-8">
-          <div className="flex items-center space-x-2">
-            <Brain className="w-6 h-6 text-blue-600" />
-            <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
-          </div>
-          <div className="flex space-x-3">
-            <Button variant="ghost" onClick={() => navigate("/")} className="text-gray-600 hover:text-gray-900">
-              Home
-            </Button>
-            <Button onClick={() => navigate("/leaderboard")} className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-              Leaderboard
-            </Button>
-            <Button variant="outline" onClick={handleLogout} className="flex items-center space-x-2">
-              <LogOut className="w-4 h-4" />
-              <span>Logout</span>
-            </Button>
-          </div>
-        </div>
-
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="shadow-lg border-0 bg-white">
+    <DashboardLayout>
+      {/* Stats Grid */}
+      <div className="w-full overflow-x-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 min-w-0">
+          <Card className="shadow-lg border-0 bg-white min-w-0">
             <CardContent className="pt-6">
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -155,7 +137,7 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="shadow-lg border-0 bg-white">
+          <Card className="shadow-lg border-0 bg-white min-w-0">
             <CardContent className="pt-6">
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
@@ -169,7 +151,7 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="shadow-lg border-0 bg-white">
+          <Card className="shadow-lg border-0 bg-white min-w-0">
             <CardContent className="pt-6">
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
@@ -183,7 +165,7 @@ const Dashboard = () => {
             </CardContent>
           </Card>
 
-          <Card className="shadow-lg border-0 bg-white">
+          <Card className="shadow-lg border-0 bg-white min-w-0">
             <CardContent className="pt-6">
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
@@ -197,85 +179,85 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         </div>
-
-        {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Quick Actions */}
-          <Card className="shadow-lg border-0 bg-white">
-            <CardHeader>
-              <CardTitle>Quick Actions</CardTitle>
-              <CardDescription>Start your quiz journey</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <Button
-                  onClick={() => navigate("/quiz")}
-                  className="w-full justify-start h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
-                >
-                  <Brain className="w-4 h-4 mr-3" />
-                  Start New Quiz
-                </Button>
-                
-                <Button
-                  variant="outline"
-                  className="w-full justify-start h-12"
-                  onClick={() => navigate("/leaderboard")}
-                >
-                  <Trophy className="w-4 h-4 mr-3" />
-                  View Leaderboard
-                </Button>
-                
-                <Button
-                  variant="outline"
-                  className="w-full justify-start h-12"
-                  onClick={() => navigate("/result/latest")}
-                >
-                  <Target className="w-4 h-4 mr-3" />
-                  View Latest Results
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Recent Attempts */}
-          <Card className="shadow-lg border-0 bg-white">
-            <CardHeader>
-              <CardTitle>Recent Attempts</CardTitle>
-              <CardDescription>Your latest quiz performances</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {recentAttempts.length > 0 ? (
-                  recentAttempts.map((attempt, index) => (
-                    <div key={attempt.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <div>
-                        <div className="font-medium text-gray-900">Quiz #{index + 1}</div>
-                        <div className="text-sm text-gray-600">
-                          {formatTime(attempt.seconds_used)} • {new Date(attempt.created_at).toLocaleDateString()}
-                        </div>
-                      </div>
-                      <Badge 
-                        className={attempt.score >= 80 ? "bg-green-100 text-green-700" : 
-                               attempt.score >= 60 ? "bg-yellow-100 text-yellow-700" : 
-                               "bg-red-100 text-red-700"}
-                      >
-                        {attempt.score} pts
-                      </Badge>
-                    </div>
-                  ))
-                ) : (
-                  <div className="text-center py-8 text-gray-500">
-                    <Brain className="w-8 h-8 mx-auto mb-2 opacity-50" />
-                    <p>No quiz attempts yet</p>
-                    <p className="text-sm">Start your first quiz to see your progress!</p>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
       </div>
-    </div>
+
+      {/* Quick Actions & Recent Attempts */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Quick Actions */}
+        <Card className="shadow-lg border-0 bg-white">
+          <CardHeader>
+            <CardTitle>Quick Actions</CardTitle>
+            <CardDescription>Start your quiz journey</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <Button
+                onClick={() => navigate("/quiz")}
+                className="w-full justify-start h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+              >
+                <Brain className="w-4 h-4 mr-3" />
+                Start New Quiz
+              </Button>
+              
+              <Button
+                variant="outline"
+                className="w-full justify-start h-12"
+                onClick={() => navigate("/leaderboard")}
+              >
+                <Trophy className="w-4 h-4 mr-3" />
+                View Leaderboard
+              </Button>
+              
+              <Button
+                variant="outline"
+                className="w-full justify-start h-12"
+                onClick={() => navigate("/result/latest")}
+              >
+                <Target className="w-4 h-4 mr-3" />
+                View Latest Results
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Recent Attempts */}
+        <Card className="shadow-lg border-0 bg-white">
+          <CardHeader>
+            <CardTitle>Recent Attempts</CardTitle>
+            <CardDescription>Your latest quiz performances</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {recentAttempts.length > 0 ? (
+                recentAttempts.map((attempt, index) => (
+                  <div key={attempt.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div>
+                      <div className="font-medium text-gray-900">Quiz #{index + 1}</div>
+                      <div className="text-sm text-gray-600">
+                        {formatTime(attempt.seconds_used)} • {new Date(attempt.created_at).toLocaleDateString()}
+                      </div>
+                    </div>
+                    <Badge 
+                      className={attempt.score >= 80 ? "bg-green-100 text-green-700" : 
+                             attempt.score >= 60 ? "bg-yellow-100 text-yellow-700" : 
+                             "bg-red-100 text-red-700"}
+                    >
+                      {attempt.score} pts
+                    </Badge>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center py-8 text-gray-500">
+                  <Brain className="w-8 h-8 mx-auto mb-2 opacity-50" />
+                  <p>No quiz attempts yet</p>
+                  <p className="text-sm">Start your first quiz to see your progress!</p>
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </DashboardLayout>
   );
 };
 
