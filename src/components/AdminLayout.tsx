@@ -14,6 +14,7 @@ import {
   X,
   Home
 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -56,8 +57,8 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     setSidebarOpen(false);
   };
 
-  const handleLogout = () => {
-    // In real app this would handle Supabase logout
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     navigate("/");
   };
 

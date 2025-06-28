@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -32,6 +31,25 @@ const Dashboard = () => {
   });
   const [recentActivity, setRecentActivity] = useState<RecentActivity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function checkAdminAuth() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        navigate('/auth/login');
+        return;
+      }
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', user.id)
+        .single();
+      if (profile?.role !== 'admin') {
+        navigate('/auth/login');
+      }
+    }
+    checkAdminAuth();
+  }, [navigate]);
 
   useEffect(() => {
     fetchAdminData();

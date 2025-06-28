@@ -219,6 +219,25 @@ const Index = () => {
   const navigate = useNavigate();
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
 
+  useEffect(() => {
+    async function checkAuthAndRedirect() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('id', user.id)
+          .single();
+        if (profile?.role === 'admin') {
+          navigate('/admin');
+        } else {
+          navigate('/dashboard');
+        }
+      }
+    }
+    checkAuthAndRedirect();
+  }, [navigate]);
+
   // Particle options for dots and confetti
   const particlesOptions = {
     fullScreen: false,
