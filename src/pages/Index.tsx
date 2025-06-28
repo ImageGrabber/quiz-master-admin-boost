@@ -160,7 +160,7 @@ const Index = () => {
         <meta name="twitter:title" content="Bible Quiz Competition 2024 & 2025 | Online Bible Quiz Events" />
         <meta name="twitter:description" content="Join the biggest Bible Quiz Competition 2024 and Online Bible Quiz Competition 2025. Compete online, win prizes, and test your biblical knowledge!" />
       </Helmet>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <div className="min-h-screen bg-white">
         {/* Header */}
         <header className="bg-white/70 backdrop-blur-md border-b border-blue-100 sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -178,6 +178,29 @@ const Index = () => {
 
         {/* Hero Section */}
         <section className="relative w-full px-4 py-10 text-center overflow-hidden">
+          {/* Background Lines Pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0" style={{
+              backgroundImage: `
+                linear-gradient(90deg,rgb(17, 78, 177) 1px, transparent 1px),
+                linear-gradient(180deg,rgb(19, 78, 173) 1px, transparent 1px)
+              `,
+              backgroundSize: '50px 50px',
+              transform: 'perspective(1000px) rotateX(60deg) rotateY(0deg)',
+              transformOrigin: 'center center',
+              animation: 'moveRoad 2s linear infinite'
+            }}></div>
+          </div>
+          <style>{`
+            @keyframes moveRoad {
+              0% {
+                background-position: 0 0;
+              }
+              100% {
+                background-position: 0 50px;
+              }
+            }
+          `}</style>
           <div className="relative z-10">
             <div className="max-w-4xl mx-auto">
               <div className="flex justify-center mb-4">
@@ -196,12 +219,12 @@ const Index = () => {
                 <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/login")}> <Play className="w-5 h-5 mr-2" /> Start Quiz Now <ArrowRight className="w-5 h-5 ml-2" /> </Button>
                 <Button variant="outline" size="lg" className="px-8 py-6 text-lg font-medium border-2 border-blue-200 hover:border-blue-300 rounded-xl bg-white/60 backdrop-blur-md" onClick={() => navigate("/leaderboard")}> <Trophy className="w-5 h-5 mr-2" /> View Leaderboard</Button>
               </div>
+              
             </div>
+            
           </div>
-        </section>
-
-        {/* Statistics */}
-        <section className="py-0">
+           {/* Statistics */}
+        <section className="mb-40 mt-5">
           <div className="container mx-auto px-4 mb-10">
             <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
               <div className="flex items-center gap-1"><Users className="w-4 h-4 text-blue-500" /> 1,250+ participants</div>
@@ -219,6 +242,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+        </section>
+
+       
 
         {/* How It Works */}
         <section className="py-16">
