@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Brain, Trophy, Clock, Target, LogOut, User } from "lucide-react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Brain, Trophy, Clock, Target, LogOut, User, Filter } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
@@ -23,6 +24,11 @@ interface AttemptStats {
   totalTimeSpent: number;
 }
 
+interface Quiz {
+  id: number;
+  title: string;
+}
+
 const Dashboard = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [stats, setStats] = useState<AttemptStats>({
@@ -32,13 +38,36 @@ const Dashboard = () => {
     totalTimeSpent: 0
   });
   const [recentAttempts, setRecentAttempts] = useState<any[]>([]);
+  const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+  const [selectedQuizId, setSelectedQuizId] = useState<string>("all");
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
     fetchUserData();
+    fetchQuizzes();
   }, []);
+
+  useEffect(() => {
+    if (profile) {
+      fetchUserStats();
+    }
+  }, [profile, selectedQuizId]);
+
+  const fetchQuizzes = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('quizzes')
+        .select('id, title')
+        .order('title');
+
+      if (error) throw error;
+      setQuizzes(data || []);
+    } catch (error) {
+      console.error('Error fetching quizzes:', error);
+    }
+  };
 
   const fetchUserData = async () => {
     try {
@@ -57,13 +86,31 @@ const Dashboard = () => {
         .single();
 
       setProfile(profileData);
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      toast({
+        title: "Error",
+        description: "Failed to load user data.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-      // Fetch user attempts and calculate stats
-      const { data: attempts } = await supabase
+  const fetchUserStats = async () => {
+    try {
+      let query = supabase
         .from('attempts')
         .select('*')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false });
+        .eq('user_id', profile!.id);
+
+      // Filter by specific quiz if selected
+      if (selectedQuizId !== "all") {
+        query = query.eq('quiz_id', parseInt(selectedQuizId));
+      }
+
+      const { data: attempts } = await query.order('created_at', { ascending: false });
 
       if (attempts) {
         const totalAttempts = attempts.length;
@@ -85,14 +132,7 @@ const Dashboard = () => {
         setRecentAttempts(attempts.slice(0, 5));
       }
     } catch (error) {
-      console.error('Error fetching user data:', error);
-      toast({
-        title: "Error",
-        description: "Failed to load dashboard data.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
+      console.error('Error fetching user stats:', error);
     }
   };
 
@@ -120,6 +160,29 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout>
+      {/* Quiz Filter */}
+      <div className="mb-6">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <Filter className="w-5 h-5 text-gray-600" />
+            <span className="text-sm font-medium text-gray-700">Filter by Quiz:</span>
+            <Select value={selectedQuizId} onValueChange={setSelectedQuizId}>
+              <SelectTrigger className="w-64">
+                <SelectValue placeholder="Select a quiz" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Quizzes</SelectItem>
+                {quizzes.map((quiz) => (
+                  <SelectItem key={quiz.id} value={quiz.id.toString()}>
+                    {quiz.title}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+      </div>
+
       {/* Stats Grid */}
       <div className="w-full overflow-x-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 min-w-0">
@@ -192,11 +255,11 @@ const Dashboard = () => {
           <CardContent>
             <div className="space-y-4">
               <Button
-                onClick={() => navigate("/quiz")}
+                onClick={() => navigate("/quiz-selection")}
                 className="w-full justify-start h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
               >
                 <Brain className="w-4 h-4 mr-3" />
-                Start New Quiz
+                Choose Quiz
               </Button>
               
               <Button

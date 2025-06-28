@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,6 +7,7 @@ import Index from "./pages/Index";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Dashboard from "./pages/Dashboard";
+import QuizSelection from "./pages/QuizSelection";
 import Quiz from "./pages/Quiz";
 import Result from "./pages/Result";
 import Leaderboard from "./pages/Leaderboard";
@@ -30,7 +30,8 @@ const App = () => (
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/quiz" element={<Quiz />} />
+          <Route path="/quiz-selection" element={<QuizSelection />} />
+          <Route path="/quiz/:quizId" element={<Quiz />} />
           <Route path="/result/:id" element={<Result />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/admin" element={<AdminDashboard />} />

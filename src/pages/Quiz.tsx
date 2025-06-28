@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -19,6 +19,7 @@ interface Question {
 }
 
 const Quiz = () => {
+  const { quizId } = useParams<{ quizId: string }>();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -31,27 +32,51 @@ const Quiz = () => {
 
   // Fetch questions on component mount
   useEffect(() => {
-    fetchQuestions();
-  }, []);
+    if (quizId) {
+      fetchQuestions();
+    }
+  }, [quizId]);
 
   const fetchQuestions = async () => {
     try {
-      const { data, error } = await supabase
+      // First get the questions for this specific quiz
+      const { data: quizQuestions, error: quizError } = await supabase
+        .from('quiz_questions')
+        .select('question_id, order_index')
+        .eq('quiz_id', parseInt(quizId!))
+        .order('order_index');
+
+      if (quizError) throw quizError;
+
+      if (!quizQuestions || quizQuestions.length === 0) {
+        toast({
+          title: "No questions found",
+          description: "This quiz doesn't have any questions assigned.",
+          variant: "destructive",
+        });
+        navigate("/quiz-selection");
+        return;
+      }
+
+      // Get the actual question details
+      const questionIds = quizQuestions.map(qq => qq.question_id);
+      const { data: questionsData, error: questionsError } = await supabase
         .from('questions')
         .select('*')
-        .limit(25);
+        .in('id', questionIds)
+        .order('id');
 
-      if (error) throw error;
+      if (questionsError) throw questionsError;
       
-      if (data && data.length > 0) {
-        setQuestions(data);
+      if (questionsData && questionsData.length > 0) {
+        setQuestions(questionsData);
       } else {
         toast({
           title: "No questions available",
-          description: "Please contact an administrator to add questions.",
+          description: "Please contact an administrator to add questions to this quiz.",
           variant: "destructive",
         });
-        navigate("/dashboard");
+        navigate("/quiz-selection");
       }
     } catch (error) {
       console.error('Error fetching questions:', error);
@@ -60,7 +85,7 @@ const Quiz = () => {
         description: "Failed to load questions. Please try again.",
         variant: "destructive",
       });
-      navigate("/dashboard");
+      navigate("/quiz-selection");
     } finally {
       setIsLoading(false);
     }
@@ -120,7 +145,7 @@ const Quiz = () => {
           .from('attempts')
           .insert({
             user_id: user.id,
-            quiz_id: 1, // Default quiz ID for now
+            quiz_id: parseInt(quizId!),
             score: totalScore,
             seconds_used: 600 - timeLeft,
             answers: finalAnswers
