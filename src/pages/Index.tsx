@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, User, Calendar, HelpCircle, TrendingUp, MessageCircle, CheckCircle, Globe, Home, Settings, Medal, Crown } from "lucide-react";
+import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, User, Calendar, HelpCircle, TrendingUp, MessageCircle, CheckCircle, Globe, Home, Settings, Medal, Crown, Bolt, ArrowLeft, Book } from "lucide-react";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import type { MoveDirection } from "tsparticles-engine";
@@ -83,21 +83,36 @@ const leaderboard = [
   { name: "Emily R.", score: 92, avatar: "ER" }
 ];
 
-const testimonials = [
+const bibleTestimonials = [
   {
-    name: "Sarah Johnson",
-    content: "The quiz platform is fun and challenging! I love seeing my progress on the leaderboard.",
-    avatar: "SJ"
+    name: "Pastor Grace Williams",
+    role: "Youth Pastor",
+    content: "The Bible Quiz helped our youth group learn and have fun together. Highly recommended!"
   },
   {
-    name: "Michael Chen",
-    content: "Great for Bible study groups. The transparent design is beautiful!",
-    avatar: "MC"
+    name: "Samuel Lee",
+    role: "College Student",
+    content: "I love competing in the weekly Bible quizzes. The questions are challenging and fun!"
   },
   {
-    name: "Emily Rodriguez",
-    content: "I learned so much and the UI is so modern and easy to use.",
-    avatar: "ER"
+    name: "Anita Joseph",
+    role: "Sunday School Teacher",
+    content: "A wonderful way to test and grow my Bible knowledge. The leaderboard keeps me motivated!"
+  },
+  {
+    name: "David Mathew",
+    role: "Church Volunteer",
+    content: "The quiz platform is easy to use and brings our community together every week."
+  },
+  {
+    name: "Rachel Thomas",
+    role: "Parent",
+    content: "My kids love the Bible quizzes! It's a fun way for them to learn scripture."
+  },
+  {
+    name: "Elder John Abraham",
+    role: "Bible Study Leader",
+    content: "The variety of questions and instant results make this the best Bible quiz app I've used."
   }
 ];
 
@@ -212,6 +227,79 @@ function StickyLeaderboardPanel() {
         )}
       </div>
     </div>
+  );
+}
+
+function FaqSection() {
+  const faqs = [
+    {
+      q: "How do I join a Bible quiz event?",
+      a: "Simply sign up for a free account, then join any scheduled quiz event from your dashboard."
+    },
+    {
+      q: "Are there prizes for top scorers?",
+      a: "Yes! Weekly and monthly top scorers win prizes, certificates, and recognition on the leaderboard."
+    },
+    {
+      q: "Can I retake quizzes or practice?",
+      a: "Absolutely. You can practice as many times as you like and retake quizzes to improve your score."
+    },
+    {
+      q: "Is the Bible Quiz suitable for all ages?",
+      a: "Yes, our quizzes are designed for all ages, from kids to adults, with questions for every level."
+    },
+    {
+      q: "How is my score calculated?",
+      a: "You earn points for correct answers, speed, and bonus rounds. Wrong answers may deduct points."
+    },
+    {
+      q: "Can I create my own quiz for my group?",
+      a: "Yes! You can create custom quizzes for your church, family, or youth group."
+    },
+    {
+      q: "Do I need to pay to participate?",
+      a: "Most quizzes are free to join. Some special events may require a small entry fee for prizes."
+    }
+  ];
+  const [open, setOpen] = useState(null);
+  return (
+    <section className="py-24 bg-white">
+      <div className="max-w-2xl mx-auto px-4">
+        <div className="flex flex-col items-center mb-10">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm font-semibold">
+              <CheckCircle className="w-5 h-5 mr-1" /> You're in good hands
+            </span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-center text-gray-900 mb-4">Frequently Asked Questions</h2>
+          <p className="text-lg text-gray-700 text-center max-w-xl mb-2">
+            Everything you need to know about QuizMaster. Can't find your answer?{' '}
+            <a href="mailto:support@quizmaster.com" className="text-blue-600 underline">Contact our support team.</a>
+          </p>
+        </div>
+        <div className="space-y-4">
+          {faqs.map((faq, i) => (
+            <div key={i} className="rounded-2xl border-2 border-purple-200 bg-white p-0 overflow-hidden transition-all">
+              <button
+                className="w-full flex items-center justify-between px-6 py-5 text-lg font-semibold text-gray-900 focus:outline-none"
+                onClick={() => setOpen(open === i ? null : i)}
+                aria-expanded={open === i}
+                aria-controls={`faq-panel-${i}`}
+              >
+                <span>{faq.q}</span>
+                <span className={`ml-4 transition-transform ${open === i ? 'rotate-45 text-blue-600' : 'text-gray-400'}`}>+</span>
+              </button>
+              <div
+                id={`faq-panel-${i}`}
+                className={`px-6 pb-5 text-gray-700 text-base transition-all duration-300 ${open === i ? 'block' : 'hidden'}`}
+              >
+                {faq.a}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -377,7 +465,7 @@ const Index = () => {
        
 
         {/* How It Works */}
-        <section className="py-24 mb-24 mt-10 bg-gradient-to-br from-white via-blue-50 to-purple-50 overflow-hidden">
+        <section className="py-24 mb-0 mt-[-50px] bg-gradient-to-br from-white via-blue-50 to-purple-50 overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <span className="uppercase tracking-widest text-sm font-semibold text-blue-500">How it works</span>
@@ -405,8 +493,44 @@ const Index = () => {
           </div>
         </section>
 
+              {/* Testimonials */}
+        <section className="py-20 px-2 bg-gradient-to-br from-blue-50 via-purple-100 to-white text-gray-900 relative">
+          <div className="max-w-7xl mx-auto">
+            <h3 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
+              Join <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent font-extrabold">5,000+ believers</span> who trust us
+            </h3>
+            {/* Carousel */}
+            <div className="max-w-7xl mx-auto">
+              <TestimonialsCarousel />
+            </div>
+            {/* Features Row */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mt-10">
+              <div className="flex flex-col items-center">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center mb-4">
+                  <Bolt className="w-8 h-8 text-white" />
+                </div>
+                <div className="font-bold text-lg mb-1 text-gray-900">Instant Results</div>
+                <div className="text-gray-800 text-center">See your score and correct answers immediately after each quiz.</div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-green-400 to-blue-400 flex items-center justify-center mb-4">
+                  <CheckCircle className="w-8 h-8 text-white" />
+                </div>
+                <div className="font-bold text-lg mb-1 text-gray-900">Variety of Categories</div>
+                <div className="text-gray-800 text-center">Quizzes on Old Testament, New Testament, Parables, Miracles, and more.</div>
+              </div>
+              <div className="flex flex-col items-center">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500 to-purple-500 flex items-center justify-center mb-4">
+                  <Users className="w-8 h-8 text-white" />
+                </div>
+                <div className="font-bold text-lg mb-1 text-gray-900">Compete & Connect</div>
+                <div className="text-gray-800 text-center">Join friends, family, and believers worldwide in friendly competition.</div>
+              </div>
+            </div>
+          </div>
+        </section>
         {/* Quiz Categories */}
-        <section className="py-4 bg-white">
+        <section className="py-4 bg-white mt-24 mb-24">
           <div className="container mx-auto px-4">
             <h3 className="text-3xl font-bold text-center mb-4">Quiz Categories</h3>
             <p className="text-lg text-gray-600 text-center mb-10 max-w-2xl mx-auto">Choose from a variety of Bible quiz categories. Each category is designed to challenge your knowledge and help you grow in your understanding of the Scriptures.</p>
@@ -426,87 +550,141 @@ const Index = () => {
 
         
 
-        {/* Testimonials */}
-        <section className="py-16 bg-gradient-to-r from-blue-50 to-purple-50/60">
-          <div className="container mx-auto px-4">
-            <h3 className="text-3xl font-bold text-center mb-10">What Our Users Say</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {testimonials.map((t, i) => (
-                <div key={i} className="bg-white/60 backdrop-blur-md rounded-2xl shadow p-6 flex flex-col items-center">
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 flex items-center justify-center text-white font-bold text-2xl mb-4">{t.avatar}</div>
-                  <div className="italic text-gray-700 mb-2">"{t.content}"</div>
-                  <div className="font-semibold text-blue-700">{t.name}</div>
+        
+
+     
+
+      
+
+       
+
+        {/* Bible Quiz Features Section */}
+        <section className="py-24 bg-gradient-to-br from-blue-50 via-purple-100 to-white">
+          <div className="max-w-7xl mx-auto px-4 flex flex-col gap-24">
+            {/* Card 1: Icon right, text left */}
+            <div className="flex flex-col lg:flex-row items-center gap-12">
+              {/* Text */}
+              <div className="flex-1 max-w-xl">
+                <span className="inline-block mb-4 px-4 py-1 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white text-xs font-semibold shadow">Bible Quiz Platform</span>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Everything you need to master the Bible Quiz</h2>
+                <p className="text-lg text-gray-800 mb-6">From fun practice quizzes to live competitions and detailed analytics, QuizMaster is your all-in-one platform for Bible knowledge and friendly competition.</p>
+                <ul className="space-y-2 text-base text-gray-900">
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> 1,000+ Bible questions across all categories</li>
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> Weekly live quiz events with prizes</li>
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> Instant feedback and detailed answer explanations</li>
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> Leaderboards and progress tracking</li>
+                </ul>
+              </div>
+              {/* Icon */}
+              <div className="flex-1 flex justify-center">
+                <div className="rounded-full bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-500 shadow-2xl border-4 border-blue-400/30 p-10 flex items-center justify-center">
+                  <BookOpen className="w-24 h-24 text-white drop-shadow-xl" />
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-        </section>
-
-        {/* Upcoming Events */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <h3 className="text-3xl font-bold text-center mb-10">Upcoming Events</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-              {events.map((e, i) => (
-                <div key={i} className="bg-white/60 backdrop-blur-md rounded-2xl shadow p-6 flex flex-col items-center">
-                  <Calendar className="w-8 h-8 text-purple-500 mb-2" />
-                  <div className="font-semibold text-lg mb-1">{e.title}</div>
-                  <div className="text-blue-700 mb-1">{e.date}</div>
-                  <div className="text-gray-600 text-center">{e.description}</div>
+            {/* Card 2: Icon left, text right */}
+            <div className="flex flex-col lg:flex-row-reverse items-center gap-12">
+              {/* Text */}
+              <div className="flex-1 max-w-xl">
+                <span className="inline-block mb-4 px-4 py-1 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 text-white text-xs font-semibold shadow">Live Events & Analytics</span>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Compete, Learn, and Grow Every Week</h2>
+                <p className="text-lg text-gray-800 mb-6">Join weekly live Bible quiz events, climb the leaderboard, and get instant feedback to help you grow in your knowledge and faith.</p>
+                <ul className="space-y-2 text-base text-gray-900">
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> Real-time scoring and global leaderboards</li>
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> Compete with friends, family, and churches worldwide</li>
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> Detailed analytics and progress reports</li>
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> Earn badges, certificates, and prizes</li>
+                </ul>
+              </div>
+              {/* Icon */}
+              <div className="flex-1 flex justify-center">
+                <div className="rounded-full bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-500 shadow-2xl border-4 border-pink-400/30 p-10 flex items-center justify-center">
+                  <Trophy className="w-24 h-24 text-white drop-shadow-xl" />
                 </div>
-              ))}
+              </div>
+            </div>
+            {/* Card 3: Icon right, text left */}
+            <div className="flex flex-col lg:flex-row items-center gap-12">
+              {/* Text */}
+              <div className="flex-1 max-w-xl">
+                <span className="inline-block mb-4 px-4 py-1 rounded-full bg-gradient-to-r from-green-500 to-blue-600 text-white text-xs font-semibold shadow">Family & Group Play</span>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Fun for All Ages and Groups</h2>
+                <p className="text-lg text-gray-800 mb-6">Host Bible quiz nights for your family, youth group, or church. Enjoy friendly competition and grow together in faith and knowledge.</p>
+                <ul className="space-y-2 text-base text-gray-900">
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> Team and solo play modes</li>
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> Customizable quiz sessions</li>
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> Share results and challenge friends</li>
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> Perfect for all ages and group sizes</li>
+                </ul>
+              </div>
+              {/* Icon */}
+              <div className="flex-1 flex justify-center">
+                <div className="rounded-full bg-gradient-to-br from-green-400 via-blue-500 to-indigo-500 shadow-2xl border-4 border-green-400/30 p-10 flex items-center justify-center">
+                  <Users className="w-24 h-24 text-white drop-shadow-xl" />
+                </div>
+              </div>
+            </div>
+            {/* Card 4: Icon left, text right */}
+            <div className="flex flex-col lg:flex-row-reverse items-center gap-12">
+              {/* Text */}
+              <div className="flex-1 max-w-xl">
+                <span className="inline-block mb-4 px-4 py-1 rounded-full bg-gradient-to-r from-yellow-400 to-pink-500 text-white text-xs font-semibold shadow">Scripture Mastery</span>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Deepen Your Knowledge of the Bible</h2>
+                <p className="text-lg text-gray-800 mb-6">Track your progress, review detailed explanations, and master scripture with every quiz you take.</p>
+                <ul className="space-y-2 text-base text-gray-900">
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> In-depth answer explanations</li>
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> Progress tracking and achievements</li>
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> Scripture references for every question</li>
+                  <li className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-green-500" /> Designed for lifelong learning</li>
+                </ul>
+              </div>
+              {/* Icon */}
+              <div className="flex-1 flex justify-center">
+                <div className="rounded-full bg-gradient-to-br from-yellow-400 via-pink-500 to-purple-500 shadow-2xl border-4 border-yellow-400/30 p-10 flex items-center justify-center">
+                  <Book className="w-24 h-24 text-white drop-shadow-xl" />
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Upcoming Bible Quiz Competitions 2024 & 2025 */}
-        <section className="py-6">
-          <div className="container mx-auto px-4 max-w-3xl">
-            <h2 className="text-2xl font-bold mb-2 text-center">Upcoming Bible Quiz Competitions 2024 & 2025</h2>
-            <p className="text-gray-700 text-center mb-4">Stay tuned for our special Bible Quiz Competition 2024 and Online Bible Quiz Competition 2025. Register now to secure your spot and get updates about the biggest online Bible quiz events!</p>
-            <ul className="list-disc list-inside text-left text-gray-700">
-              <li><strong>Bible Quiz Competition 2024:</strong> Major event with prizes and global participation.</li>
-              <li><strong>Online Bible Quiz Competition 2025:</strong> Compete from anywhere in the world, test your knowledge, and win rewards.</li>
-              <li><strong>Bible Quiz Competition 2025:</strong> Details coming soon. Subscribe for updates!</li>
-            </ul>
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section className="py-6">
-          <div className="container mx-auto px-4 max-w-3xl">
-            <h2 className="text-2xl font-bold mb-4 text-center">Frequently Asked Questions</h2>
-            <div className="space-y-4">
-              <div>
-                <h3 className="font-semibold">How do I join the Bible Quiz Competition 2024?</h3>
-                <p>Register online for the Bible Quiz Competition 2024 using our sign-up form. The event is open to all ages and will be held online.</p>
-              </div>
-              <div>
-                <h3 className="font-semibold">Is there an online Bible quiz competition in 2025?</h3>
-                <p>Yes! Our Online Bible Quiz Competition 2025 is scheduled for next year. Stay tuned for updates and registration details.</p>
-              </div>
-              <div>
-                <h3 className="font-semibold">What are the prizes for the Bible Quiz Competition 2024 and 2025?</h3>
-                <p>Winners of the Bible Quiz Competition 2024 and Online Bible Quiz Competition 2025 will receive exciting prizes, certificates, and global recognition.</p>
-              </div>
-              <div>
-                <h3 className="font-semibold">Can I participate in both the 2024 and 2025 Bible quiz competitions?</h3>
-                <p>Absolutely! You can register and participate in both the Bible Quiz Competition 2024 and the Online Bible Quiz Competition 2025.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
+        <FaqSection />
         {/* Footer */}
-        <footer className="bg-white/70 backdrop-blur-md border-t border-blue-100 py-8 mt-8">
-          <div className="container mx-auto px-4 text-center">
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Brain className="w-4 h-4 text-white" />
+        <footer className="bg-[#181c3a] text-gray-200 pt-16 pb-8 mt-8">
+          <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row md:justify-between md:items-start gap-12">
+            {/* Left: Logo and description */}
+            <div className="flex-1 min-w-[220px] flex flex-col items-start mb-8 md:mb-0">
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-2">
+                  <Brain className="w-6 h-6 text-white" />
+                </div>
+                <span className="text-xl font-bold text-white">QuizMaster</span>
               </div>
-              <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
+              <p className="mb-4 text-gray-300 max-w-xs">Empower your faith with fun, challenging Bible quizzes for all ages. Compete, learn, and grow in your knowledge of Scripture!</p>
+              <p className="text-gray-400 text-sm">Need help? Email <a href="mailto:support@quizmaster.com" className="underline">support@quizmaster.com</a></p>
             </div>
-            <p className="text-gray-600">© 2024 QuizMaster. Challenge your knowledge.</p>
+            {/* Center/Right: Links */}
+            <div className="flex flex-1 flex-col sm:flex-row justify-end gap-12">
+              <div>
+                <h4 className="font-bold text-white mb-3">Company</h4>
+                <ul className="space-y-2">
+                  <li><a href="#about" className="hover:underline text-gray-300">About</a></li>
+                  <li><a href="#features" className="hover:underline text-gray-300">Features</a></li>
+                  <li><a href="#leaderboard" className="hover:underline text-gray-300">Leaderboard</a></li>
+                  <li><a href="#faq" className="hover:underline text-gray-300">FAQ</a></li>
+                </ul>
+              </div>
+              <div>
+                <h4 className="font-bold text-white mb-3">Legal</h4>
+                <ul className="space-y-2">
+                  <li><a href="#privacy" className="hover:underline text-gray-300">Privacy</a></li>
+                  <li><a href="#terms" className="hover:underline text-gray-300">Terms</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="max-w-7xl mx-auto px-4 mt-12 border-t border-blue-900 pt-6 text-center text-white text-sm">
+            © 2024 QuizMaster. All rights reserved.
           </div>
         </footer>
       </div>
@@ -514,5 +692,58 @@ const Index = () => {
     </>
   );
 };
+
+function TestimonialsCarousel() {
+  const [current, setCurrent] = useState(0);
+  const testimonials = bibleTestimonials;
+  // Responsive: 1 on mobile, 2 on md, 3 on lg+
+  let visible = 1;
+  if (typeof window !== 'undefined') {
+    if (window.innerWidth >= 1024) visible = 3;
+    else if (window.innerWidth >= 768) visible = 2;
+  }
+  // Clamp current
+  const max = testimonials.length - visible;
+  const goLeft = () => setCurrent((c) => Math.max(0, c - 1));
+  const goRight = () => setCurrent((c) => Math.min(max, c + 1));
+  // Show only visible testimonials
+  const shown = testimonials.slice(current, current + visible);
+  return (
+    <div className="relative w-full flex items-center justify-center gap-8">
+      <button
+        className="bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full p-2 transition disabled:opacity-30"
+        onClick={goLeft}
+        disabled={current === 0}
+        aria-label="Previous testimonials"
+        style={{ minWidth: 40, minHeight: 40 }}
+      >
+        <ArrowLeft className="w-6 h-6" />
+      </button>
+      <div className="flex gap-8 justify-center flex-1">
+        {shown.map((t, i) => (
+          <div key={i} className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-lg p-8 flex flex-col items-center border border-gray-200 min-w-[280px] max-w-[350px] w-full">
+            <div className="flex mb-2">
+              {[...Array(5)].map((_, j) => (
+                <Star key={j} className="w-5 h-5 text-yellow-400" fill="#facc15" />
+              ))}
+            </div>
+            <div className="text-lg text-gray-900 text-center mb-4">"{t.content}"</div>
+            <div className="font-bold text-gray-900">{t.name}</div>
+            <div className="text-sm text-gray-700">{t.role}</div>
+          </div>
+        ))}
+      </div>
+      <button
+        className="bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-full p-2 transition disabled:opacity-30"
+        onClick={goRight}
+        disabled={current >= max}
+        aria-label="Next testimonials"
+        style={{ minWidth: 40, minHeight: 40 }}
+      >
+        <ArrowRight className="w-6 h-6" />
+      </button>
+    </div>
+  );
+}
 
 export default Index;
