@@ -36,30 +36,40 @@ const howItWorks = [
   {
     icon: BookOpen,
     title: "Sign Up or Log In",
-    description: "Create your account or log in to get started."
+    description: "Create your free account or log in to access all quiz features, track your progress, and compete for prizes."
+  },
+  {
+    icon: Settings,
+    title: "Explore Categories",
+    description: "Browse a wide range of Bible quiz categories, including Old Testament, New Testament, Characters, and Events. Choose your favorite to get started."
+  },
+  {
+    icon: Calendar,
+    title: "Join a Live Event",
+    description: "Participate in scheduled live competitions or take quizzes at your own pace. Weekly and monthly events offer special rewards and leaderboards."
   },
   {
     icon: Play,
-    title: "Start a Quiz",
-    description: "Choose a category and begin your quiz journey."
+    title: "Answer Questions",
+    description: "Each quiz consists of 25 multiple-choice questions. Read carefully, answer quickly, and earn more points for correct and fast responses."
   },
   {
-    icon: Star,
-    title: "Answer Questions",
-    description: "Test your knowledge and earn points for correct answers."
+    icon: TrendingUp,
+    title: "Track Your Progress",
+    description: "See instant results, review your answers, and monitor your ranking on the leaderboard. Analyze your strengths and areas for improvement."
   },
   {
     icon: Trophy,
-    title: "Climb the Leaderboard",
-    description: "See how you rank against other participants."
+    title: "Win Prizes & Recognition",
+    description: "Top scorers win exciting prizes, certificates, and global recognition. Come back every week to improve your score and win more!"
   }
 ];
 
 const categories = [
-  { name: "Old Testament", icon: BookOpen, color: "from-orange-400 to-yellow-400" },
-  { name: "New Testament", icon: BookOpen, color: "from-blue-400 to-indigo-400" },
-  { name: "Bible Characters", icon: Users, color: "from-green-400 to-emerald-400" },
-  { name: "Events", icon: Calendar, color: "from-purple-400 to-pink-400" }
+  { name: "Old Testament", icon: BookOpen, color: "from-orange-400 to-yellow-400", description: "Explore questions from Genesis to Malachi, covering the stories, laws, and prophecies of the Old Testament." },
+  { name: "New Testament", icon: BookOpen, color: "from-blue-400 to-indigo-400", description: "Test your knowledge of the Gospels, Acts, Epistles, and Revelation in the New Testament." },
+  { name: "Bible Characters", icon: Users, color: "from-green-400 to-emerald-400", description: "Identify and learn about key figures, heroes, and heroines throughout the Bible." },
+  { name: "Events", icon: Calendar, color: "from-purple-400 to-pink-400", description: "Recall major events, miracles, and turning points in biblical history." }
 ];
 
 const leaderboard = [
@@ -247,30 +257,45 @@ const Index = () => {
        
 
         {/* How It Works */}
-        <section className="py-16">
+        <section className="py-24 mb-24 mt-10 bg-gradient-to-br from-white via-blue-50 to-purple-50 overflow-hidden">
           <div className="container mx-auto px-4">
-            <h3 className="text-3xl font-bold text-center mb-10">How It Works</h3>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="uppercase tracking-widest text-sm font-semibold text-blue-500">How it works</span>
+              <h2 className="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-500 bg-clip-text text-transparent leading-[1.25] py-2">
+                So Easy, So Fun, Bible Quiz Magic ✨
+              </h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">Follow these simple steps to join, compete, and win in the Bible Quiz Competition. Whether you're a first-timer or a returning champion, it's easy to get started!</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {howItWorks.map((step, i) => (
-                <div key={i} className="bg-white/60 backdrop-blur-md rounded-2xl shadow p-6 flex flex-col items-center">
-                  <step.icon className="w-10 h-10 text-purple-500 mb-4" />
-                  <div className="text-lg font-semibold mb-2">{step.title}</div>
-                  <div className="text-gray-600 text-center">{step.description}</div>
+                <div key={i} className="relative bg-white/80 border border-blue-100 rounded-2xl shadow-lg p-8 flex flex-col items-center">
+                  <div className="w-14 h-14 flex items-center justify-center rounded-xl mb-4" style={{ background: 'linear-gradient(135deg, #a78bfa 0%, #6366f1 100%)' }}>
+                    <step.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <div className="text-xl font-bold text-gray-900 mb-2 text-center">{step.title}</div>
+                  <div className="text-gray-600 text-center text-base">{step.description}</div>
                 </div>
               ))}
+            </div>
+            <div className="flex justify-center mt-12">
+              <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold text-lg shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300">
+                Ready to join the quiz?
+              </button>
             </div>
           </div>
         </section>
 
         {/* Quiz Categories */}
-        <section className="py-16 bg-gradient-to-r from-blue-50 to-purple-50/60">
+        <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <h3 className="text-3xl font-bold text-center mb-10">Quiz Categories</h3>
+            <h3 className="text-3xl font-bold text-center mb-4">Quiz Categories</h3>
+            <p className="text-lg text-gray-600 text-center mb-10 max-w-2xl mx-auto">Choose from a variety of Bible quiz categories. Each category is designed to challenge your knowledge and help you grow in your understanding of the Scriptures.</p>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
               {categories.map((cat, i) => (
-                <div key={i} className={`rounded-2xl shadow p-6 flex flex-col items-center bg-gradient-to-br ${cat.color} bg-opacity-60 backdrop-blur-md`}>
-                  <cat.icon className="w-10 h-10 text-white mb-4" />
-                  <div className="text-lg font-semibold text-white mb-2">{cat.name}</div>
+                <div key={i} className={`rounded-2xl shadow p-8 flex flex-col items-center bg-gradient-to-br ${cat.color} bg-opacity-70 backdrop-blur-md`}>
+                  <cat.icon className="w-12 h-12 text-white mb-4" />
+                  <div className="text-lg font-bold text-white mb-2">{cat.name}</div>
+                  <div className="text-white/90 text-center text-base">{cat.description}</div>
                 </div>
               ))}
             </div>
