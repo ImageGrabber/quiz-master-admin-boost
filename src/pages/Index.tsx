@@ -182,8 +182,8 @@ const Index = () => {
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{
               backgroundImage: `
-                linear-gradient(90deg,rgb(17, 78, 177) 1px, transparent 1px),
-                linear-gradient(180deg,rgb(19, 78, 173) 1px, transparent 1px)
+                linear-gradient(90deg,rgb(38, 100, 199) 1px, transparent 1px),
+                linear-gradient(180deg,rgb(40, 96, 185) 1px, transparent 1px)
               `,
               backgroundSize: '50px 50px',
               transform: 'perspective(1000px) rotateX(60deg) rotateY(0deg)',
@@ -217,7 +217,7 @@ const Index = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/login")}> <Play className="w-5 h-5 mr-2" /> Start Quiz Now <ArrowRight className="w-5 h-5 ml-2" /> </Button>
-                <Button variant="outline" size="lg" className="px-8 py-6 text-lg font-medium border-2 border-blue-200 hover:border-blue-300 rounded-xl bg-white/60 backdrop-blur-md" onClick={() => navigate("/leaderboard")}> <Trophy className="w-5 h-5 mr-2" /> View Leaderboard</Button>
+                <Button variant="outline" size="lg" className="px-8 py-6 text-lg font-medium border-2 border-grey-200 hover:border-blue-300 rounded-xl bg-white/60 backdrop-blur-md" onClick={() => navigate("/leaderboard")}> <Trophy className="w-5 h-5 mr-2" /> View Leaderboard</Button>
               </div>
               
             </div>
@@ -231,10 +231,10 @@ const Index = () => {
               <div className="flex items-center gap-1"><Award className="w-4 h-4 text-purple-500" /> $15,000+ prizes awarded</div>
               <div className="flex items-center gap-1"><Star className="w-4 h-4 text-yellow-500" /> Weekly winners & special rewards</div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 max-w-4xl mx-auto mt-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 max-w-4xl mx-auto mt-20">
               {stats.map((stat, i) => (
                 <div key={i} className="rounded-2xl shadow-none p-2 flex flex-col items-center bg-transparent">
-                  <stat.icon className="w-8 h-8 text-blue-500 mb-2" />
+                  <stat.icon className="w-6 h-6 text-gray-500 mb-2" />
                   <div className="text-2xl font-bold text-blue-700">{stat.value}</div>
                   <div className="text-gray-600">{stat.label}</div>
                 </div>
