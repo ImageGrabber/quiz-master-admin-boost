@@ -14,7 +14,8 @@ import {
   X,
   Home,
   HelpCircle,
-  Activity
+  Activity,
+  Trophy
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -45,6 +46,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       href: "/admin/activity",
       icon: Activity,
       current: location.pathname === "/admin/activity"
+    },
+    {
+      name: "Competitions",
+      href: "/admin/competitions",
+      icon: Trophy,
+      current: location.pathname === "/admin/competitions"
     },
     {
       name: "Manage Quizzes",
