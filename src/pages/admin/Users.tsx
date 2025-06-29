@@ -62,7 +62,11 @@ const Users = () => {
                   </TableHeader>
                   <TableBody>
                     {users.map((user) => (
-                      <TableRow key={user.id} className="hover:bg-gray-50">
+                      <TableRow
+                        key={user.id}
+                        className="hover:bg-blue-50 cursor-pointer"
+                        onClick={() => window.location.href = `/admin/users/${user.id}`}
+                      >
                         <TableCell className="font-mono text-xs">{user.id}</TableCell>
                         <TableCell>{user.full_name}</TableCell>
                         <TableCell>{user.email}</TableCell>

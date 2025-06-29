@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Brain, CheckCircle } from "lucide-react";
+import { Clock, Brain, CheckCircle, AlertTriangle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -27,6 +27,7 @@ const Quiz = () => {
   const [timeLeft, setTimeLeft] = useState(600); // 10 minutes
   const [isCompleted, setIsCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [showTimeWarning, setShowTimeWarning] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -91,15 +92,41 @@ const Quiz = () => {
     }
   };
 
-  // Timer effect
+  // Timer effect with enhanced warnings
   useEffect(() => {
     if (timeLeft > 0 && !isCompleted && !isLoading) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+      
+      // Show time warnings
+      if (timeLeft === 180) { // 3 minutes left
+        toast({
+          title: "⚠️ Time Warning",
+          description: "You have 3 minutes remaining!",
+          variant: "destructive",
+        });
+        setShowTimeWarning(true);
+        setTimeout(() => setShowTimeWarning(false), 5000);
+      } else if (timeLeft === 60) { // 1 minute left
+        toast({
+          title: "🚨 Final Warning",
+          description: "Only 1 minute remaining! Hurry up!",
+          variant: "destructive",
+        });
+        setShowTimeWarning(true);
+        setTimeout(() => setShowTimeWarning(false), 5000);
+      } else if (timeLeft === 30) { // 30 seconds left
+        toast({
+          title: "⏰ Almost Time's Up!",
+          description: "Only 30 seconds left!",
+          variant: "destructive",
+        });
+      }
+      
       return () => clearTimeout(timer);
     } else if (timeLeft === 0) {
       handleQuizComplete();
     }
-  }, [timeLeft, isCompleted, isLoading]);
+  }, [timeLeft, isCompleted, isLoading, toast]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -196,6 +223,16 @@ const Quiz = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      {/* Floating Time Warning */}
+      {showTimeWarning && (
+        <div className="fixed top-20 right-4 z-50 animate-bounce">
+          <div className="bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center space-x-2">
+            <AlertTriangle className="w-5 h-5" />
+            <span className="font-bold">TIME RUNNING OUT!</span>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm border-b border-blue-100 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
@@ -204,6 +241,8 @@ const Quiz = () => {
               <Brain className="w-6 h-6 text-blue-600" />
               <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
             </div>
+            
+            {/* Timer Display */}
             <div className="flex items-center space-x-4">
               <Button variant="ghost" onClick={() => navigate("/")} className="text-gray-600 hover:text-gray-900">
                 Home
@@ -213,8 +252,15 @@ const Quiz = () => {
               </Button>
             </div>
           </div>
-          <div className="mt-4">
-            <Progress value={progress} className="h-2" />
+          
+          {/* Progress and Timer Bar */}
+          <div className="mt-4 space-y-2">
+            <div className="flex items-center justify-between text-sm text-gray-600">
+              <span>Question {currentQuestion + 1} of {questions.length}</span>
+            </div>
+            <div className="flex space-x-2">
+              <Progress value={progress} className="flex-1 h-2" />
+            </div>
           </div>
         </div>
       </header>
@@ -222,6 +268,50 @@ const Quiz = () => {
       {/* Quiz Content */}
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-3xl mx-auto">
+          {/* Time Status Card */}
+          <div className="mb-6">
+            <Card className={`border-0 shadow-lg transition-all duration-300 ${
+              timeLeft <= 60 
+                ? 'bg-red-50 border-red-200' 
+                : timeLeft <= 180 
+                  ? 'bg-orange-50 border-orange-200'
+                  : 'bg-blue-50 border-blue-200'
+            }`}>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <Clock className={`w-6 h-6 ${
+                      timeLeft <= 60 ? 'text-red-600' : timeLeft <= 180 ? 'text-orange-600' : 'text-blue-600'
+                    }`} />
+                    <div>
+                      <p className="font-semibold text-gray-900">
+                        {timeLeft <= 60 ? 'Final Countdown!' : timeLeft <= 180 ? 'Time is Running Out!' : 'Quiz Timer'}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        {timeLeft <= 60 
+                          ? 'Complete your quiz quickly!' 
+                          : timeLeft <= 180 
+                            ? 'You have less than 3 minutes remaining'
+                            : 'You have plenty of time to think carefully'
+                        }
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className={`font-mono text-2xl font-bold ${
+                      timeLeft <= 60 ? 'text-red-600' : timeLeft <= 180 ? 'text-orange-600' : 'text-blue-600'
+                    }`}>
+                      {formatTime(timeLeft)}
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      {Math.ceil((timeLeft / 600) * 100)}% remaining
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
           <Card className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-2xl font-bold text-gray-900 leading-relaxed">

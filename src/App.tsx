@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import QuizSelection from "./pages/QuizSelection";
 import Quiz from "./pages/Quiz";
@@ -16,6 +18,7 @@ import AdminAttempts from "./pages/admin/Attempts";
 import AdminUpload from "./pages/admin/Upload";
 import AdminQuizzes from "./pages/admin/Quizzes";
 import AdminUsers from "./pages/admin/Users";
+import AdminUserSettings from "./pages/admin/UserSettings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +33,8 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
+          <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+          <Route path="/auth/reset-password" element={<ResetPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/quiz-selection" element={<QuizSelection />} />
           <Route path="/quiz/:quizId" element={<Quiz />} />
@@ -40,6 +45,7 @@ const App = () => (
           <Route path="/admin/upload" element={<AdminUpload />} />
           <Route path="/admin/quizzes" element={<AdminQuizzes />} />
           <Route path="/admin/users" element={<AdminUsers />} />
+          <Route path="/admin/users/:id" element={<AdminUserSettings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
