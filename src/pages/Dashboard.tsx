@@ -102,7 +102,10 @@ const Dashboard = () => {
     try {
       let query = supabase
         .from('attempts')
-        .select('*')
+        .select(`
+          *,
+          quizzes!inner(title)
+        `)
         .eq('user_id', profile!.id);
 
       // Filter by specific quiz if selected
@@ -295,7 +298,7 @@ const Dashboard = () => {
                 recentAttempts.map((attempt, index) => (
                   <div key={attempt.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                     <div>
-                      <div className="font-medium text-gray-900">Quiz #{index + 1}</div>
+                      <div className="font-medium text-gray-900">{attempt.quizzes.title}</div>
                       <div className="text-sm text-gray-600">
                         {formatTime(attempt.seconds_used)} • {new Date(attempt.created_at).toLocaleDateString()}
                       </div>

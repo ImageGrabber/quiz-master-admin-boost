@@ -12,7 +12,9 @@ import {
   LogOut,
   Menu,
   X,
-  Home
+  Home,
+  HelpCircle,
+  Activity
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -39,10 +41,22 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       current: location.pathname === "/admin/attempts"
     },
     {
+      name: "Recent Activity",
+      href: "/admin/activity",
+      icon: Activity,
+      current: location.pathname === "/admin/activity"
+    },
+    {
       name: "Manage Quizzes",
       href: "/admin/quizzes",
       icon: Users,
       current: location.pathname === "/admin/quizzes"
+    },
+    {
+      name: "Questions",
+      href: "/admin/questions",
+      icon: HelpCircle,
+      current: location.pathname === "/admin/questions"
     },
     {
       name: "Upload Questions",

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Search, Filter, Download, Eye, Calendar } from "lucide-react";
+import { Search, Filter, Download, Eye, Calendar, FileText } from "lucide-react";
 import AdminLayout from "@/components/AdminLayout";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -42,26 +41,46 @@ const Attempts = () => {
 
   const fetchAttempts = async () => {
     try {
-      const { data, error } = await supabase
+      // First, get all attempts
+      const { data: attemptsData, error: attemptsError } = await supabase
         .from('attempts')
-        .select(`
-          *,
-          profiles!inner(full_name, email)
-        `)
+        .select('*')
         .order('created_at', { ascending: false });
 
-      if (error) throw error;
+      if (attemptsError) throw attemptsError;
 
-      const formattedAttempts = data?.map(attempt => ({
-        id: attempt.id,
-        user: attempt.profiles?.full_name || 'Anonymous User',
-        email: attempt.profiles?.email || 'No email',
-        score: attempt.score,
-        secondsUsed: attempt.seconds_used,
-        createdAt: attempt.created_at,
-        answers: attempt.answers,
-        profile: attempt.profiles
-      })) || [];
+      // Get unique user IDs from attempts
+      const userIds = [...new Set(attemptsData?.map(attempt => attempt.user_id).filter(Boolean))];
+
+      // Fetch profiles for these users
+      const { data: profilesData, error: profilesError } = await supabase
+        .from('profiles')
+        .select('id, full_name, email')
+        .in('id', userIds);
+
+      if (profilesError) {
+        console.error('Error fetching profiles:', profilesError);
+      }
+
+      // Create a map of user_id to profile data
+      const profilesMap = new Map();
+      profilesData?.forEach(profile => {
+        profilesMap.set(profile.id, profile);
+      });
+
+      const formattedAttempts = attemptsData?.map(attempt => {
+        const profile = profilesMap.get(attempt.user_id);
+        return {
+          id: attempt.id,
+          user: profile?.full_name || `User ${attempt.user_id?.slice(0, 8) || 'Unknown'}`,
+          email: profile?.email || 'No email',
+          score: attempt.score,
+          secondsUsed: attempt.seconds_used || 0,
+          createdAt: attempt.created_at,
+          answers: attempt.answers,
+          profile: profile
+        };
+      }) || [];
 
       setAttempts(formattedAttempts);
     } catch (error) {
