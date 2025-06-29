@@ -9,6 +9,7 @@ import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import Dashboard from "./pages/Dashboard";
+import MyQuizzes from "./pages/MyQuizzes";
 import QuizSelection from "./pages/QuizSelection";
 import Quiz from "./pages/Quiz";
 import Result from "./pages/Result";
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/auth/forgot-password" element={<ForgotPassword />} />
           <Route path="/auth/reset-password" element={<ResetPassword />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard/quizzes" element={<MyQuizzes />} />
           <Route path="/quiz-selection" element={<QuizSelection />} />
           <Route path="/quiz/:quizId" element={<Quiz />} />
           <Route path="/result/:id" element={<Result />} />
