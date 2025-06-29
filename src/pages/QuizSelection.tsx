@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Brain, Clock, Target, Trophy, ArrowRight, Play } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import DashboardLayout from "@/components/DashboardLayout";
 
 interface Quiz {
   id: number;
@@ -85,41 +86,19 @@ const QuizSelection = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
-        <div className="text-center">
-          <Brain className="w-12 h-12 text-blue-600 mx-auto mb-4 animate-pulse" />
-          <p className="text-gray-600">Loading available quizzes...</p>
+      <DashboardLayout>
+        <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center">
+          <div className="text-center">
+            <Brain className="w-12 h-12 text-blue-600 mx-auto mb-4 animate-pulse" />
+            <p className="text-gray-600">Loading available quizzes...</p>
+          </div>
         </div>
-      </div>
+      </DashboardLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-blue-100 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Brain className="w-6 h-6 text-blue-600" />
-              <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" onClick={() => navigate("/")} className="text-gray-600 hover:text-gray-900">
-                Home
-              </Button>
-              <Button variant="ghost" onClick={() => navigate("/dashboard")} className="text-gray-600 hover:text-gray-900">
-                Dashboard
-              </Button>
-              <Button onClick={() => navigate("/leaderboard")} className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-                Leaderboard
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content */}
+    <DashboardLayout>
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
           {/* Header Section */}
@@ -213,7 +192,7 @@ const QuizSelection = () => {
           )}
         </div>
       </main>
-    </div>
+    </DashboardLayout>
   );
 };
 

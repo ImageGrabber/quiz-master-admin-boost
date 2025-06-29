@@ -32,6 +32,8 @@ const Quizzes = () => {
     description: "",
     questionSelection: "random" // "random" or "manual"
   });
+  const [deleteQuizId, setDeleteQuizId] = useState<number | null>(null);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -154,6 +156,66 @@ const Quizzes = () => {
         variant: "destructive",
       });
     }
+  };
+
+  const handleDeleteQuiz = async (quizId: number) => {
+    try {
+      // First, delete all quiz questions associated with this quiz
+      const { error: quizQuestionsError } = await supabase
+        .from('quiz_questions')
+        .delete()
+        .eq('quiz_id', quizId);
+
+      if (quizQuestionsError) {
+        console.error('Error deleting quiz questions:', quizQuestionsError);
+        throw quizQuestionsError;
+      }
+
+      // Then, delete all attempts for this quiz
+      const { error: attemptsError } = await supabase
+        .from('attempts')
+        .delete()
+        .eq('quiz_id', quizId);
+
+      if (attemptsError) {
+        console.error('Error deleting attempts:', attemptsError);
+        throw attemptsError;
+      }
+
+      // Finally, delete the quiz itself
+      const { error: quizError } = await supabase
+        .from('quizzes')
+        .delete()
+        .eq('id', quizId);
+
+      if (quizError) {
+        console.error('Error deleting quiz:', quizError);
+        throw quizError;
+      }
+
+      toast({
+        title: "Quiz deleted successfully!",
+        description: "The quiz and all associated data have been removed.",
+      });
+
+      // Refresh the quiz list
+      fetchQuizzes();
+    } catch (error) {
+      console.error('Error deleting quiz:', error);
+      toast({
+        title: "Deletion failed",
+        description: "Failed to delete the quiz. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsDeleteDialogOpen(false);
+      setDeleteQuizId(null);
+    }
+  };
+
+  const openDeleteDialog = (quizId: number) => {
+    setDeleteQuizId(quizId);
+    setIsDeleteDialogOpen(true);
   };
 
   const formatDate = (dateString: string) => {
@@ -373,7 +435,12 @@ const Quizzes = () => {
                           <Button variant="ghost" size="sm">
                             <Edit className="w-4 h-4" />
                           </Button>
-                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="text-red-600 hover:text-red-700"
+                            onClick={() => openDeleteDialog(quiz.id)}
+                          >
                             <Trash2 className="w-4 h-4" />
                           </Button>
                         </div>
@@ -386,6 +453,35 @@ const Quizzes = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <DialogContent className="sm:max-w-[400px]">
+          <DialogHeader>
+            <DialogTitle>Delete Quiz</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this quiz? This action cannot be undone and will remove:
+              <ul className="list-disc list-inside mt-2 space-y-1">
+                <li>All quiz questions</li>
+                <li>All user attempts</li>
+                <li>All associated data</li>
+              </ul>
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="flex justify-end space-x-2">
+            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button 
+              variant="destructive" 
+              onClick={() => deleteQuizId && handleDeleteQuiz(deleteQuizId)}
+            >
+              Delete Quiz
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </AdminLayout>
   );
 };
