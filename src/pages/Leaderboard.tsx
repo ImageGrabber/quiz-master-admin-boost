@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Medal, Award, Crown, Home, Brain, Play } from "lucide-react";
+import { Trophy, Medal, Award, Crown, Brain, Play } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import DashboardLayout from "@/components/DashboardLayout";
+import AdminLayout from "@/components/AdminLayout";
 
 interface LeaderboardEntry {
   id: string;
@@ -20,10 +22,29 @@ const Leaderboard = () => {
   const [selectedPeriod, setSelectedPeriod] = useState("all");
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [userRole, setUserRole] = useState<string | null>(null);
 
   useEffect(() => {
+    checkUserRole();
     fetchLeaderboard();
   }, [selectedPeriod]);
+
+  const checkUserRole = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('id', user.id)
+          .single();
+        setUserRole(profile?.role || 'user');
+      }
+    } catch (error) {
+      console.error('Error checking user role:', error);
+      setUserRole('user');
+    }
+  };
 
   const fetchLeaderboard = async () => {
     try {
@@ -154,179 +175,114 @@ const Leaderboard = () => {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
-        <div className="text-center">
-          <Trophy className="w-12 h-12 text-blue-600 mx-auto mb-4 animate-pulse" />
-          <p className="text-gray-600">Loading leaderboard...</p>
+  const LeaderboardContent = () => (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="text-center mb-8">
+        <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+          <Trophy className="w-8 h-8 text-white" />
+        </div>
+        
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">Leaderboard</h1>
+        <p className="text-lg text-gray-600 mb-8">See how you rank against other quiz masters</p>
+        
+        {/* Period Filter */}
+        <div className="flex justify-center space-x-4 mb-8">
+          <Button
+            variant={selectedPeriod === "week" ? "default" : "outline"}
+            onClick={() => setSelectedPeriod("week")}
+            className={selectedPeriod === "week" ? "bg-gradient-to-r from-blue-600 to-purple-600" : ""}
+          >
+            This Week
+          </Button>
+          <Button
+            variant={selectedPeriod === "month" ? "default" : "outline"}
+            onClick={() => setSelectedPeriod("month")}
+            className={selectedPeriod === "month" ? "bg-gradient-to-r from-blue-600 to-purple-600" : ""}
+          >
+            This Month
+          </Button>
+          <Button
+            variant={selectedPeriod === "all" ? "default" : "outline"}
+            onClick={() => setSelectedPeriod("all")}
+            className={selectedPeriod === "all" ? "bg-gradient-to-r from-blue-600 to-purple-600" : ""}
+          >
+            All Time
+          </Button>
         </div>
       </div>
-    );
-  }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-blue-100 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Brain className="w-6 h-6 text-blue-600" />
-              <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
+      {/* Leaderboard Table */}
+      <Card className="shadow-lg border-0 bg-white">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-gray-900">Top Performers</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {isLoading ? (
+            <div className="text-center py-8">
+              <Trophy className="w-12 h-12 text-blue-600 mx-auto mb-4 animate-pulse" />
+              <p className="text-gray-600">Loading leaderboard...</p>
             </div>
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" onClick={() => navigate("/")} className="text-gray-600 hover:text-gray-900">
-                <Home className="w-4 h-4 mr-2" />
-                Home
-              </Button>
-              <Button onClick={() => navigate("/quiz-selection")} className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-                <Play className="w-4 h-4 mr-2" />
-                Take Quiz
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Leaderboard Content */}
-      <main className="container mx-auto px-4 py-8">
-        <div className="max-w-4xl mx-auto">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Trophy className="w-8 h-8 text-white" />
-            </div>
-            
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Leaderboard
-            </h1>
-            
-            <p className="text-xl text-gray-600 mb-6">
-              See how you rank against other quiz masters
-            </p>
-
-            {/* Period Filter */}
-            <div className="flex justify-center space-x-2 mb-8">
-              {["all", "week", "month"].map((period) => (
-                <Button
-                  key={period}
-                  variant={selectedPeriod === period ? "default" : "outline"}
-                  onClick={() => setSelectedPeriod(period)}
-                  className={selectedPeriod === period ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : ""}
+          ) : leaderboard.length > 0 ? (
+            <div className="space-y-4">
+              {leaderboard.map((entry, index) => (
+                <div
+                  key={entry.id}
+                  className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
                 >
-                  {period === "all" ? "All Time" : period === "week" ? "This Week" : "This Month"}
-                </Button>
+                  <div className="flex items-center space-x-4">
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-sm">
+                      {getRankIcon(entry.rank)}
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-900">{entry.name}</div>
+                      <div className="text-sm text-gray-600">
+                        {entry.attempts} {entry.attempts === 1 ? 'attempt' : 'attempts'} • Avg: {entry.avgScore} pts
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <Badge className={getRankBadgeColor(entry.rank)}>
+                      #{entry.rank}
+                    </Badge>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-gray-900">{entry.score}</div>
+                      <div className="text-sm text-gray-600">points</div>
+                    </div>
+                  </div>
+                </div>
               ))}
             </div>
-          </div>
-
-          {leaderboard.length === 0 ? (
-            <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-              <CardContent className="py-12 text-center">
-                <Trophy className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-gray-600 mb-2">No scores yet</h3>
-                <p className="text-gray-500 mb-6">Be the first to take a quiz and appear on the leaderboard!</p>
-                <Button onClick={() => navigate("/quiz-selection")} className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-                  <Play className="w-4 h-4 mr-2" />
-                  Take First Quiz
-                </Button>
-              </CardContent>
-            </Card>
           ) : (
-            <>
-              {/* Top 3 Podium */}
-              {leaderboard.length >= 3 && (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                  {leaderboard.slice(0, 3).map((player, index) => (
-                    <Card key={player.id} className={`shadow-xl border-0 transition-all duration-300 hover:scale-105 ${
-                      index === 0 ? "md:order-2 bg-gradient-to-br from-yellow-50 to-yellow-100" :
-                      index === 1 ? "md:order-1 bg-gradient-to-br from-gray-50 to-gray-100" :
-                      "md:order-3 bg-gradient-to-br from-amber-50 to-amber-100"
-                    }`}>
-                      <CardHeader className="text-center pb-2">
-                        <div className="flex justify-center mb-4">
-                          {getRankIcon(player.rank)}
-                        </div>
-                        <Badge className={`${getRankBadgeColor(player.rank)} mb-2`}>
-                          #{player.rank}
-                        </Badge>
-                        <CardTitle className="text-lg font-bold text-gray-900">
-                          {player.name}
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="text-center">
-                        <div className="text-3xl font-bold text-gray-900 mb-2">
-                          {player.score}
-                        </div>
-                        <div className="text-sm text-gray-600">
-                          Avg: {player.avgScore} ({player.attempts} attempts)
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              )}
-
-              {/* Full Leaderboard */}
-              <Card className="shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="text-xl font-bold text-gray-900">Full Rankings</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2">
-                    {leaderboard.map((player) => (
-                      <div
-                        key={player.id}
-                        className={`flex items-center justify-between p-4 rounded-lg transition-all duration-200 hover:bg-blue-50 ${
-                          player.rank <= 3 ? "bg-gradient-to-r from-blue-50 to-purple-50" : "bg-white"
-                        }`}
-                      >
-                        <div className="flex items-center space-x-4">
-                          <Badge className={getRankBadgeColor(player.rank)}>
-                            #{player.rank}
-                          </Badge>
-                          
-                          <div>
-                            <div className="font-semibold text-gray-900">{player.name}</div>
-                            <div className="text-sm text-gray-600">
-                              {player.attempts} attempts • Avg: {player.avgScore}
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="text-right">
-                          <div className="text-xl font-bold text-gray-900">{player.score}</div>
-                          <div className="text-sm text-gray-500">points</div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </>
+            <div className="text-center py-8">
+              <Trophy className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+              <p className="text-gray-600">No leaderboard data available</p>
+            </div>
           )}
+        </CardContent>
+      </Card>
 
-          {/* Call to Action */}
-          <div className="text-center mt-8">
-            <Card className="bg-gradient-to-r from-blue-600 to-purple-600 text-white border-0 shadow-2xl">
-              <CardContent className="py-8">
-                <h3 className="text-2xl font-bold mb-4">Ready to Climb the Ranks?</h3>
-                <p className="text-blue-100 mb-6">Take a quiz now and see if you can make it to the top!</p>
-                <Button
-                  onClick={() => navigate("/quiz-selection")}
-                  className="bg-white text-blue-600 hover:bg-gray-100 font-semibold px-8 py-3 shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  <Play className="w-4 h-4 mr-2" />
-                  Start Quiz
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
+      {/* Quick Action */}
+      {userRole === 'user' && (
+        <div className="text-center">
+          <Button
+            onClick={() => navigate("/quiz-selection")}
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+          >
+            <Play className="w-4 h-4 mr-2" />
+            Take Quiz & Compete
+          </Button>
         </div>
-      </main>
+      )}
     </div>
   );
+
+  // Use appropriate layout based on user role
+  if (userRole === 'admin') {
+    return <AdminLayout><LeaderboardContent /></AdminLayout>;
+  } else {
+    return <DashboardLayout><LeaderboardContent /></DashboardLayout>;
+  }
 };
 
 export default Leaderboard;
