@@ -287,3 +287,52 @@ export const Constants = {
     Enums: {},
   },
 } as const
+
+export interface Competition {
+  id: string;
+  title: string;
+  description: string | null;
+  entry_fee: number;
+  prize_pool: number;
+  max_participants: number | null;
+  start_date: string;
+  end_date: string;
+  quiz_id: string;
+  status: 'upcoming' | 'active' | 'completed' | 'cancelled';
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CompetitionEntry {
+  id: string;
+  competition_id: string;
+  user_id: string;
+  stripe_payment_intent_id: string | null;
+  payment_status: 'pending' | 'completed' | 'failed' | 'refunded';
+  entry_date: string;
+}
+
+export interface CompetitionResult {
+  id: string;
+  competition_id: string;
+  user_id: string;
+  score: number;
+  time_taken: number | null;
+  rank: number | null;
+  prize_amount: number | null;
+  created_at: string;
+}
+
+export interface CompetitionWithDetails extends Competition {
+  quiz: Tables<'quizzes'>;
+  entries_count: number;
+  results_count: number;
+}
+
+export interface CompetitionEntryWithUser extends CompetitionEntry {
+  user: Tables<'profiles'>;
+}
+
+export interface CompetitionResultWithUser extends CompetitionResult {
+  user: Tables<'profiles'>;
+}

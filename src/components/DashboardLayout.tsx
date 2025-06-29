@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Brain, LayoutDashboard, Trophy, User, Settings, LogOut, List, Menu, X } from "lucide-react";
+import { Brain, LayoutDashboard, Trophy, User, Settings, LogOut, List, Menu, X, Award } from "lucide-react";
 import Header from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -12,6 +12,7 @@ interface DashboardLayoutProps {
 const navItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "My Quizzes", href: "/dashboard/quizzes", icon: List },
+  { name: "Competitions", href: "/competitions", icon: Award },
   { name: "Leaderboard", href: "/leaderboard", icon: Trophy },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
