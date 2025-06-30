@@ -39,13 +39,14 @@ export default function CompetitionQuiz() {
   const [competition, setCompetition] = useState<CompetitionQuiz | null>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<number[]>([]);
-  const [timeLeft, setTimeLeft] = useState(0);
+  const [answers, setAnswers] = useState<(number | undefined)[]>([]);
+  const [timeLeft, setTimeLeft] = useState(30 * 60);
+  const [timeUsed, setTimeUsed] = useState(0);
   const [isStarted, setIsStarted] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [score, setScore] = useState(0);
-  const [timeUsed, setTimeUsed] = useState(0);
 
   useEffect(() => {
     if (competitionId) {
@@ -91,20 +92,43 @@ export default function CompetitionQuiz() {
       if (competitionError) throw competitionError;
 
       // Check if user has paid entry
-      const { data: entryData, error: entryError } = await supabase
+      const { data: entryData, error: entryError } = await (supabase as any)
         .from('competition_entries')
-        .select('payment_status')
+        .select('paid')
         .eq('competition_id', competitionId)
         .eq('user_id', user.id)
         .single();
 
-      if (entryError || entryData?.payment_status !== 'completed') {
+      if (entryError || !entryData?.paid) {
         toast({
           title: "Access Denied",
           description: "You must complete payment to access this competition",
           variant: "destructive",
         });
         navigate('/competitions');
+        return;
+      }
+
+      // Check if user has already attempted this competition
+      const { data: existingResult, error: resultCheckError } = await (supabase as any)
+        .from('competition_results')
+        .select('id, score, time_taken')
+        .eq('competition_id', competitionId)
+        .eq('user_id', user.id)
+        .single();
+
+      // If there's an error that's not "no rows found", log it
+      if (resultCheckError && resultCheckError.code !== 'PGRST116') {
+        console.error('Error checking existing result:', resultCheckError);
+      }
+
+      if (existingResult) {
+        toast({
+          title: "Already Attempted",
+          description: `You have already completed this competition with a score of ${existingResult.score}%`,
+          variant: "destructive",
+        });
+        navigate(`/competition-leaderboard/${competitionId}`);
         return;
       }
 
@@ -178,8 +202,9 @@ export default function CompetitionQuiz() {
   };
 
   const handleFinish = async () => {
-    if (isFinished) return;
+    if (isFinished || isSubmitting) return;
     setIsFinished(true);
+    setIsSubmitting(true);
 
     // Calculate score
     let correctAnswers = 0;
@@ -197,7 +222,7 @@ export default function CompetitionQuiz() {
       if (!user || !competitionId) return;
 
       // Save competition result
-      const { error: resultError } = await supabase
+      const { error: resultError } = await (supabase as any)
         .from('competition_results')
         .insert({
           competition_id: competitionId,
@@ -208,15 +233,39 @@ export default function CompetitionQuiz() {
 
       if (resultError) {
         console.error('Error saving result:', resultError);
+        
+        // Check if it's a duplicate key error
+        if (resultError.code === '23505') {
+          toast({
+            title: "Already Submitted",
+            description: "You have already submitted a result for this competition",
+            variant: "destructive",
+          });
+          navigate(`/competition-leaderboard/${competitionId}`);
+          return;
+        }
+        
+        toast({
+          title: "Error",
+          description: "Failed to save your result. Please try again.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Quiz Completed!",
+          description: `Your score: ${finalScore}%`,
+        });
       }
-
-      toast({
-        title: "Quiz Completed!",
-        description: `Your score: ${finalScore}%`,
-      });
 
     } catch (error) {
       console.error('Error finishing quiz:', error);
+      toast({
+        title: "Error",
+        description: "Failed to complete the quiz. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -308,7 +357,7 @@ export default function CompetitionQuiz() {
               <Button onClick={() => navigate('/competitions')}>
                 Back to Competitions
               </Button>
-              <Button onClick={() => navigate('/leaderboard')}>
+              <Button onClick={() => navigate(`/competition-leaderboard/${competitionId}`)}>
                 View Leaderboard
               </Button>
             </div>

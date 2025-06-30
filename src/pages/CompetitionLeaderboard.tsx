@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -41,6 +41,8 @@ export default function CompetitionLeaderboard() {
   const [competition, setCompetition] = useState<Competition | null>(null);
   const [results, setResults] = useState<CompetitionResult[]>([]);
   const [loading, setLoading] = useState(true);
+  const [userHasAttempted, setUserHasAttempted] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (competitionId) {
@@ -50,8 +52,10 @@ export default function CompetitionLeaderboard() {
 
   const fetchCompetitionLeaderboard = async () => {
     try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
       // Fetch competition details
-      const { data: competitionData, error: competitionError } = await supabase
+      const { data: competitionData, error: competitionError } = await (supabase as any)
         .from('competitions')
         .select(`
           *,
@@ -63,24 +67,35 @@ export default function CompetitionLeaderboard() {
       if (competitionError) throw competitionError;
       setCompetition(competitionData);
 
+      // Check if current user has attempted this competition
+      if (user) {
+        const { data: userResult } = await (supabase as any)
+          .from('competition_results')
+          .select('id')
+          .eq('competition_id', competitionId)
+          .eq('user_id', user.id)
+          .single();
+        
+        setUserHasAttempted(!!userResult);
+      }
+
       // Fetch results with user details
-      const { data: resultsData, error: resultsError } = await supabase
+      const { data: resultsData, error: resultsError } = await (supabase as any)
         .from('competition_results')
-        .select(`
-          *,
-          user:profiles(full_name, email)
-        `)
+        .select('*')
         .eq('competition_id', competitionId)
         .order('score', { ascending: false })
         .order('time_taken', { ascending: true });
 
-      if (resultsError) throw resultsError;
+      console.log('resultsData', resultsData);
+
+      if (resultsError && resultsError.code !== 'PGRST116') throw resultsError; // PGRST116 is "no rows returned"
 
       // Calculate ranks and prize amounts
-      const rankedResults = resultsData.map((result, index) => ({
+      const rankedResults = (resultsData || []).map((result: any, index: number) => ({
         ...result,
         rank: index + 1,
-        prize_amount: calculatePrizeAmount(index + 1, competitionData.prize_pool, resultsData.length)
+        prize_amount: calculatePrizeAmount(index + 1, competitionData.prize_pool, resultsData?.length || 0)
       }));
 
       setResults(rankedResults);
@@ -245,6 +260,14 @@ export default function CompetitionLeaderboard() {
               <Trophy className="w-12 h-12 text-gray-400 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">No Results Yet</h3>
               <p className="text-gray-600">Competition results will appear here once participants complete the quiz.</p>
+              {!userHasAttempted && (
+                <Button 
+                  className="mt-4"
+                  onClick={() => navigate(`/competition-quiz/${competitionId}`)}
+                >
+                  Start Quiz
+                </Button>
+              )}
             </div>
           ) : (
             <div className="space-y-3">
@@ -258,8 +281,7 @@ export default function CompetitionLeaderboard() {
                       {getRankIcon(result.rank)}
                     </div>
                     <div>
-                      <div className="font-semibold">{result.user.full_name || 'Anonymous'}</div>
-                      <div className="text-sm text-gray-600">{result.user.email}</div>
+                      <div className="font-semibold">{result.user_id || 'Anonymous'}</div>
                     </div>
                   </div>
                   

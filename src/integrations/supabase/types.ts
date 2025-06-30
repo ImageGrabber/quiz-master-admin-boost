@@ -310,6 +310,7 @@ export interface CompetitionEntry {
   stripe_payment_intent_id: string | null;
   payment_status: 'pending' | 'completed' | 'failed' | 'refunded';
   entry_date: string;
+  paid: boolean;
 }
 
 export interface CompetitionResult {
