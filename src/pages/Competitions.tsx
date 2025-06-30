@@ -61,6 +61,13 @@ export default function Competitions() {
     }
   }, [paymentSuccess, sessionId, navigate]);
 
+  // Add a manual refresh button and force fetch on dialog close
+  useEffect(() => {
+    if (!isJoinDialogOpen) {
+      fetchCompetitions();
+    }
+  }, [isJoinDialogOpen]);
+
   const fetchCompetitions = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -81,6 +88,7 @@ export default function Competitions() {
       if (error) throw error;
       // Map competitions to include user_has_entered and user_payment_status
       const competitionsWithDetails = (data || []).map((competition: any) => {
+        console.log('competition_entries for', competition.title, competition.competition_entries);
         const userEntry = (competition.competition_entries || []).find((entry: any) => entry.user_id === user.id);
         return {
           ...competition,
@@ -208,9 +216,12 @@ export default function Competitions() {
             Payment was canceled. You have not been charged.
           </div>
         )}
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold">Competitions</h1>
-          <p className="text-gray-600">Join paid competitions and win prizes</p>
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold">Competitions</h1>
+            <p className="text-gray-600">Join paid competitions and win prizes</p>
+          </div>
+          <Button variant="outline" onClick={fetchCompetitions}>Refresh</Button>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -341,6 +352,15 @@ export default function Competitions() {
                         </div>
                       </DialogContent>
                     </Dialog>
+                  )}
+                  {competition.user_has_entered && competition.user_payment_status === 'completed' && (
+                    <Button 
+                      variant="outline"
+                      className="w-full mt-2"
+                      onClick={() => navigate(`/competition-leaderboard/${competition.id}`)}
+                    >
+                      View Leaderboard
+                    </Button>
                   )}
                 </div>
               </CardContent>
