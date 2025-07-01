@@ -9,6 +9,7 @@ import { loadFull } from "tsparticles";
 import type { MoveDirection } from "tsparticles-engine";
 import { Helmet } from 'react-helmet';
 import { supabase } from "@/integrations/supabase/client";
+import ExodusQuiz from "./pages/bible-questions-and-answers-hub/Exodus";
 
 const features = [
   {

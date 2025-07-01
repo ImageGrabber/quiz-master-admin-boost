@@ -33,6 +33,27 @@ import RLSTest from "./pages/RLSTest";
 import BibleQA from "./pages/BibleQA";
 import PublicLeaderboard from "./pages/PublicLeaderboard";
 import GenesisQuiz from "./pages/bible-questions-and-answers-hub/Genesis";
+import ExodusQuiz from "./pages/bible-questions-and-answers-hub/Exodus";
+import LeviticusQuiz from "./pages/bible-questions-and-answers-hub/Leviticus";
+import NumbersQuiz from "./pages/bible-questions-and-answers-hub/Numbers";
+import DeuteronomyQuiz from "./pages/bible-questions-and-answers-hub/Deuteronomy";
+import JoshuaQuiz from "./pages/bible-questions-and-answers-hub/Joshua";
+import JudgesQuiz from "./pages/bible-questions-and-answers-hub/Judges";
+import RuthQuiz from "./pages/bible-questions-and-answers-hub/Ruth";
+import FirstSamuelQuiz from "./pages/bible-questions-and-answers-hub/1-samuel";
+import SecondSamuelQuiz from "./pages/bible-questions-and-answers-hub/2-samuel";
+import FirstKingsQuiz from "./pages/bible-questions-and-answers-hub/1-kings";
+import SecondKingsQuiz from "./pages/bible-questions-and-answers-hub/2-kings";
+import FirstChroniclesQuiz from "./pages/bible-questions-and-answers-hub/1-chronicles";
+import SecondChroniclesQuiz from "./pages/bible-questions-and-answers-hub/2-chronicles";
+import EzraQuiz from "./pages/bible-questions-and-answers-hub/ezra";
+import NehemiahQuiz from "./pages/bible-questions-and-answers-hub/nehemiah";
+import EstherQuiz from "./pages/bible-questions-and-answers-hub/esther";
+import JobQuiz from "./pages/bible-questions-and-answers-hub/job";
+import PsalmsQuiz from "./pages/bible-questions-and-answers-hub/psalms";
+import ProverbsQuiz from "./pages/bible-questions-and-answers-hub/proverbs";
+import EcclesiastesQuiz from "./pages/bible-questions-and-answers-hub/ecclesiastes";
+import SongOfSolomonQuiz from "./pages/bible-questions-and-answers-hub/song-of-solomon";
 
 const queryClient = new QueryClient();
 
@@ -70,6 +91,27 @@ const App = () => (
           <Route path="/admin/users/:id" element={<ProtectedRoute requiredRole="admin"><AdminUserSettings /></ProtectedRoute>} />
           <Route path="/rls-test" element={<ProtectedRoute requiredRole="admin"><RLSTest /></ProtectedRoute>} />
           <Route path="/bible-questions-and-answers-hub/genesis" element={<GenesisQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/exodus" element={<ExodusQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/leviticus" element={<LeviticusQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/numbers" element={<NumbersQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/deuteronomy" element={<DeuteronomyQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/joshua" element={<JoshuaQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/judges" element={<JudgesQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/ruth" element={<RuthQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/1-samuel" element={<FirstSamuelQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/2-samuel" element={<SecondSamuelQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/1-kings" element={<FirstKingsQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/2-kings" element={<SecondKingsQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/1-chronicles" element={<FirstChroniclesQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/2-chronicles" element={<SecondChroniclesQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/ezra" element={<EzraQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/nehemiah" element={<NehemiahQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/esther" element={<EstherQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/job" element={<JobQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/psalms" element={<PsalmsQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/proverbs" element={<ProverbsQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/ecclesiastes" element={<EcclesiastesQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/song-of-solomon" element={<SongOfSolomonQuiz />} />
           <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
           <Route path="/bible-questions-and-answers-hub/:slug*" element={<BibleQA />} />
           <Route path="*" element={<NotFound />} />
