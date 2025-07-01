@@ -429,7 +429,7 @@ export default function Competitions() {
                         </div>
                         <div>
                           <h3 className="font-semibold">Participants</h3>
-                          <p>{competition.entries_count} / {competition.max_participants || '∞'}</p>
+                          <p>{competition.entries_count?.count ?? 0} / {competition.max_participants || '∞'}</p>
                         </div>
                       </div>
                     </DialogContent>
@@ -455,7 +455,7 @@ export default function Competitions() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="w-4 h-4 text-blue-600" />
-                  <span>{competition.entries_count} participants</span>
+                  <span>{competition.entries_count?.count ?? 0} participants</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-gray-600" />

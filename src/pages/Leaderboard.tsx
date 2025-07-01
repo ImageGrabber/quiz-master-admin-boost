@@ -184,7 +184,8 @@ const Leaderboard = () => {
         </div>
         
         <h1 className="text-4xl font-bold text-gray-900 mb-4">Leaderboard</h1>
-        <p className="text-lg text-gray-600 mb-8">See how you rank against other quiz masters</p>
+        <p className="text-lg text-gray-600 mb-2">See how you rank against other quiz masters</p>
+        <p className="text-sm text-blue-700 mb-8">Note: This leaderboard shows performance in weekly quizzes and is not related to competitions.</p>
         
         {/* Period Filter */}
         <div className="flex justify-center space-x-4 mb-8">
