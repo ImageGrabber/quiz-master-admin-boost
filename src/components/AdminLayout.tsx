@@ -15,7 +15,8 @@ import {
   Home,
   HelpCircle,
   Activity,
-  Trophy
+  Trophy,
+  Shield
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -88,8 +89,8 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       {/* Top Bar: Logo/name left, welcome right */}
       <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30 w-full h-16 flex items-center px-6 justify-between">
         <div className="flex items-center space-x-2">
-          <Brain className="w-6 h-6 text-blue-600" />
-          <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
+          <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
+          <span className="text-lg font-semibold text-gray-900 align-middle">BibleBattles</span>
           <Badge className="bg-blue-100 text-blue-700 text-xs">Admin</Badge>
           <Button
             variant="ghost"
@@ -122,8 +123,8 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           {/* Sidebar Header */}
           <div className="flex items-center justify-between px-6 border-b border-gray-200 h-16 lg:hidden">
             <div className="flex items-center space-x-2">
-              <Brain className="w-6 h-6 text-blue-600" />
-              <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
+              <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
+              <span className="text-lg font-semibold text-gray-900 align-middle">BibleBattles</span>
               <Badge className="bg-blue-100 text-blue-700 text-xs">Admin</Badge>
             </div>
             <Button
@@ -148,6 +149,16 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
                 {item.name}
               </Button>
             ))}
+            {/* RLS Policy Tester link for admins */}
+            <Button
+              key="RLS Policy Tester"
+              variant={location.pathname === "/rls-test" ? "default" : "ghost"}
+              className={`w-full justify-start h-10 ${location.pathname === "/rls-test" ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : "text-gray-700 hover:bg-gray-100"}`}
+              onClick={() => handleNavigation("/rls-test")}
+            >
+              <Shield className="w-4 h-4 mr-3" />
+              RLS Policy Tester
+            </Button>
             <div className="pt-4 mt-4 border-t border-gray-200">
               <Button
                 variant="ghost"

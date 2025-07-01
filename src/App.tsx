@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
@@ -28,6 +29,7 @@ import AdminCompetitions from "./pages/admin/Competitions";
 import AdminUsers from "./pages/admin/Users";
 import AdminUserSettings from "./pages/admin/UserSettings";
 import NotFound from "./pages/NotFound";
+import RLSTest from "./pages/RLSTest";
 
 const queryClient = new QueryClient();
 
@@ -43,25 +45,26 @@ const App = () => (
           <Route path="/auth/register" element={<Register />} />
           <Route path="/auth/forgot-password" element={<ForgotPassword />} />
           <Route path="/auth/reset-password" element={<ResetPassword />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/dashboard/quizzes" element={<MyQuizzes />} />
-          <Route path="/dashboard/settings" element={<Settings />} />
-          <Route path="/quiz-selection" element={<QuizSelection />} />
-          <Route path="/quiz/:quizId" element={<Quiz />} />
-          <Route path="/result/:id" element={<Result />} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/dashboard/quizzes" element={<ProtectedRoute><MyQuizzes /></ProtectedRoute>} />
+          <Route path="/dashboard/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route path="/quiz-selection" element={<ProtectedRoute><QuizSelection /></ProtectedRoute>} />
+          <Route path="/quiz/:quizId" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
+          <Route path="/result/:id" element={<ProtectedRoute><Result /></ProtectedRoute>} />
           <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/competitions" element={<Competitions />} />
-          <Route path="/competition-quiz/:competitionId" element={<CompetitionQuiz />} />
-          <Route path="/competition-leaderboard/:competitionId" element={<CompetitionLeaderboard />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/attempts" element={<AdminAttempts />} />
-          <Route path="/admin/upload" element={<AdminUpload />} />
-          <Route path="/admin/quizzes" element={<AdminQuizzes />} />
-          <Route path="/admin/questions" element={<AdminQuestions />} />
-          <Route path="/admin/activity" element={<AdminActivity />} />
-          <Route path="/admin/competitions" element={<AdminCompetitions />} />
-          <Route path="/admin/users" element={<AdminUsers />} />
-          <Route path="/admin/users/:id" element={<AdminUserSettings />} />
+          <Route path="/competitions" element={<ProtectedRoute><Competitions /></ProtectedRoute>} />
+          <Route path="/competition-quiz/:competitionId" element={<ProtectedRoute><CompetitionQuiz /></ProtectedRoute>} />
+          <Route path="/competition-leaderboard/:competitionId" element={<ProtectedRoute><CompetitionLeaderboard /></ProtectedRoute>} />
+          <Route path="/admin" element={<ProtectedRoute requiredRole="admin"><AdminDashboard /></ProtectedRoute>} />
+          <Route path="/admin/attempts" element={<ProtectedRoute requiredRole="admin"><AdminAttempts /></ProtectedRoute>} />
+          <Route path="/admin/upload" element={<ProtectedRoute requiredRole="admin"><AdminUpload /></ProtectedRoute>} />
+          <Route path="/admin/quizzes" element={<ProtectedRoute requiredRole="admin"><AdminQuizzes /></ProtectedRoute>} />
+          <Route path="/admin/questions" element={<ProtectedRoute requiredRole="admin"><AdminQuestions /></ProtectedRoute>} />
+          <Route path="/admin/activity" element={<ProtectedRoute requiredRole="admin"><AdminActivity /></ProtectedRoute>} />
+          <Route path="/admin/competitions" element={<ProtectedRoute requiredRole="admin"><AdminCompetitions /></ProtectedRoute>} />
+          <Route path="/admin/users" element={<ProtectedRoute requiredRole="admin"><AdminUsers /></ProtectedRoute>} />
+          <Route path="/admin/users/:id" element={<ProtectedRoute requiredRole="admin"><AdminUserSettings /></ProtectedRoute>} />
+          <Route path="/rls-test" element={<ProtectedRoute requiredRole="admin"><RLSTest /></ProtectedRoute>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -35,6 +35,9 @@ const Quizzes = () => {
   const [deleteQuizId, setDeleteQuizId] = useState<number | null>(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const { toast } = useToast();
+  const [editQuiz, setEditQuiz] = useState<Quiz | null>(null);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [editForm, setEditForm] = useState({ title: '', description: '' });
 
   useEffect(() => {
     fetchQuizzes();
@@ -239,6 +242,45 @@ const Quizzes = () => {
     }
   };
 
+  const openEditDialog = (quiz: Quiz) => {
+    setEditQuiz(quiz);
+    setEditForm({ title: quiz.title, description: quiz.description });
+    setIsEditDialogOpen(true);
+  };
+
+  const handleEditQuiz = async () => {
+    if (!editQuiz) return;
+    if (!editForm.title.trim()) {
+      toast({
+        title: "Title required",
+        description: "Please enter a quiz title.",
+        variant: "destructive",
+      });
+      return;
+    }
+    try {
+      const { error } = await supabase
+        .from('quizzes')
+        .update({ title: editForm.title, description: editForm.description })
+        .eq('id', editQuiz.id);
+      if (error) throw error;
+      toast({
+        title: "Quiz updated!",
+        description: `"${editForm.title}" has been updated.`,
+      });
+      setIsEditDialogOpen(false);
+      setEditQuiz(null);
+      fetchQuizzes();
+    } catch (error) {
+      console.error('Error updating quiz:', error);
+      toast({
+        title: "Update failed",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <AdminLayout>
       <div className="space-y-6">
@@ -432,7 +474,7 @@ const Quizzes = () => {
                           <Button variant="ghost" size="sm">
                             <Eye className="w-4 h-4" />
                           </Button>
-                          <Button variant="ghost" size="sm">
+                          <Button variant="ghost" size="sm" onClick={() => openEditDialog(quiz)}>
                             <Edit className="w-4 h-4" />
                           </Button>
                           <Button 
@@ -478,6 +520,47 @@ const Quizzes = () => {
               onClick={() => deleteQuizId && handleDeleteQuiz(deleteQuizId)}
             >
               Delete Quiz
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit Quiz Dialog */}
+      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <DialogTitle>Edit Quiz</DialogTitle>
+            <DialogDescription>
+              Update the quiz title and description.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="edit-title">Quiz Title</Label>
+              <Input
+                id="edit-title"
+                placeholder="Enter quiz title..."
+                value={editForm.title}
+                onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="edit-description">Description (Optional)</Label>
+              <Textarea
+                id="edit-description"
+                placeholder="Describe what this quiz covers..."
+                value={editForm.description}
+                onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
+                rows={3}
+              />
+            </div>
+          </div>
+          <div className="flex justify-end space-x-2">
+            <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleEditQuiz} className="bg-blue-600 hover:bg-blue-700">
+              Save Changes
             </Button>
           </div>
         </DialogContent>

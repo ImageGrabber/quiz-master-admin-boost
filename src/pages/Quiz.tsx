@@ -238,8 +238,8 @@ const Quiz = () => {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Brain className="w-6 h-6 text-blue-600" />
-              <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
+              <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
+              <span className="text-lg font-semibold text-gray-900 align-middle">BibleBattles</span>
             </div>
             
             {/* Timer Display */}

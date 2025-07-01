@@ -427,10 +427,12 @@ export default function Competitions() {
                             <p>{format(new Date(competition.end_date), 'PPP')}</p>
                           </div>
                         </div>
-                        <div>
-                          <h3 className="font-semibold">Participants</h3>
-                          <p>{competition.entries_count?.count ?? 0} / {competition.max_participants || '∞'}</p>
-                        </div>
+                        {competition.entries_count?.count > 0 && (
+                          <div>
+                            <h3 className="font-semibold">Participants</h3>
+                            <p>{competition.entries_count?.count} / {competition.max_participants || '∞'}</p>
+                          </div>
+                        )}
                       </div>
                     </DialogContent>
                   </Dialog>
@@ -453,10 +455,12 @@ export default function Competitions() {
                   <Trophy className="w-4 h-4 text-yellow-600" />
                   <span>${competition.prize_pool} prize</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-blue-600" />
-                  <span>{competition.entries_count?.count ?? 0} participants</span>
-                </div>
+                {competition.entries_count?.count > 0 && (
+                  <div className="flex items-center gap-2">
+                    <Users className="w-4 h-4 text-blue-600" />
+                    <span>{competition.entries_count?.count} participants</span>
+                  </div>
+                )}
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-gray-600" />
                   <span>{format(new Date(competition.start_date), 'MMM dd')}</span>
