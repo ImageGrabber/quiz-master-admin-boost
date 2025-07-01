@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -426,15 +426,16 @@ const Index = () => {
         <header className="bg-white/70 backdrop-blur-md border-b border-blue-100 sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}> 
-              <Brain className="w-7 h-7 text-black" />
-              <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
+              <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
+              <span className="text-lg font-semibold text-gray-900">BibleBattles</span>
             </div>
             <nav className="flex items-center space-x-2">
               <a href="#features" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Features</a>
               <a href="#testimonials" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Testimonials</a>
               <a href="#categories" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Categories</a>
+              <a href="/bible-questions-and-answers-hub" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Bible Q&amp;A</a>
+              <a href="/public-leaderboard" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Leaderboard</a>
               <a href="#faq" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">FAQ</a>
-              <Button variant="ghost" onClick={() => navigate("/leaderboard")}> <Trophy className="w-4 h-4 mr-1 inline" /> Leaderboard </Button>
               <Button variant="ghost" onClick={() => navigate("/auth/register")}>Sign Up</Button>
               <Button onClick={() => navigate("/auth/login")}>Sign In</Button>
             </nav>
@@ -697,11 +698,33 @@ const Index = () => {
           </div>
         </section>
 
+       
+
         <div id="faq">
           <FaqSection />
         </div>
+         {/* Bible Q&A Section */}
+         <section className="py-16 bg-gradient-to-br from-blue-50 via-purple-100">
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Bible Q&amp;A Hub</h2>
+            <p className="text-lg text-gray-700 mb-6">
+              Explore questions and answers for every book, character, and theme in the Bible. Test your knowledge or prepare for your next quiz competition!
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 mb-6">
+              <span className="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold">Genesis Quiz</span>
+              <span className="inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">Matthew Quiz</span>
+              <span className="inline-block bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-semibold">Moses Quiz</span>
+              <span className="inline-block bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-semibold">Faith Quiz</span>
+            </div>
+            <Link to="/bible-questions-and-answers-hub">
+              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300">
+                Explore Bible Q&amp;A
+              </button>
+            </Link>
+          </div>
+        </section>
         {/* Footer */}
-        <footer className="bg-[#181c3a] text-gray-200 pt-16 pb-8 mt-8">
+        <footer className="bg-[#181c3a] text-gray-200 pt-16 pb-8 mt-0">
           <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row md:justify-between md:items-start gap-12">
             {/* Left: Logo and description */}
             <div className="flex-1 min-w-[220px] flex flex-col items-start mb-8 md:mb-0">
@@ -721,7 +744,7 @@ const Index = () => {
                 <ul className="space-y-2">
                   <li><a href="#about" className="hover:underline text-gray-300">About</a></li>
                   <li><a href="#features" className="hover:underline text-gray-300">Features</a></li>
-                  <li><a href="#leaderboard" className="hover:underline text-gray-300">Leaderboard</a></li>
+                  <li><a href="/public-leaderboard" className="hover:underline text-gray-300">Leaderboard</a></li>
                   <li><a href="#faq" className="hover:underline text-gray-300">FAQ</a></li>
                 </ul>
               </div>

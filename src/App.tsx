@@ -30,6 +30,8 @@ import AdminUsers from "./pages/admin/Users";
 import AdminUserSettings from "./pages/admin/UserSettings";
 import NotFound from "./pages/NotFound";
 import RLSTest from "./pages/RLSTest";
+import BibleQA from "./pages/BibleQA";
+import PublicLeaderboard from "./pages/PublicLeaderboard";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +54,7 @@ const App = () => (
           <Route path="/quiz/:quizId" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
           <Route path="/result/:id" element={<ProtectedRoute><Result /></ProtectedRoute>} />
           <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route path="/public-leaderboard" element={<PublicLeaderboard />} />
           <Route path="/competitions" element={<ProtectedRoute><Competitions /></ProtectedRoute>} />
           <Route path="/competition-quiz/:competitionId" element={<ProtectedRoute><CompetitionQuiz /></ProtectedRoute>} />
           <Route path="/competition-leaderboard/:competitionId" element={<ProtectedRoute><CompetitionLeaderboard /></ProtectedRoute>} />
@@ -65,6 +68,8 @@ const App = () => (
           <Route path="/admin/users" element={<ProtectedRoute requiredRole="admin"><AdminUsers /></ProtectedRoute>} />
           <Route path="/admin/users/:id" element={<ProtectedRoute requiredRole="admin"><AdminUserSettings /></ProtectedRoute>} />
           <Route path="/rls-test" element={<ProtectedRoute requiredRole="admin"><RLSTest /></ProtectedRoute>} />
+          <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
+          <Route path="/bible-questions-and-answers-hub/:slug*" element={<BibleQA />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
