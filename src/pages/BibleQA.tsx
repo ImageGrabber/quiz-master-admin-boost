@@ -279,27 +279,37 @@ export default function BibleQA() {
         </Card>
       </main>
 
-      {/* Footer */}
+            {/* Footer */}
       <footer className="bg-[#181c3a] text-gray-200 pt-16 pb-8 mt-0">
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row md:justify-between md:items-start gap-12">
           {/* Left: Logo and description */}
-          <div className="flex flex-col items-start mb-8 md:mb-0">
-            <div className="flex items-center gap-2 mb-2">
-              <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
-              <span className="text-lg font-semibold text-white">BibleBattles</span>
+          <div className="flex-1 min-w-[220px] flex flex-col items-start mb-8 md:mb-0">
+            <div className="flex items-center mb-4">
+              <img src="/sword.png" alt="BibleBattles Logo" className="w-10 h-10 mr-2" />
+              <span className="text-xl font-bold text-white">BibleBattles</span>
             </div>
-            <p className="text-gray-400 max-w-xs text-sm">
-              BibleBattles is your home for fun, challenging, and educational Bible quizzes. Test your knowledge, compete with friends, and grow in faith!
-            </p>
+            <p className="mb-4 text-gray-300 max-w-xs">Empower your faith with fun, challenging Bible quizzes for all ages. Compete, learn, and grow in your knowledge of Scripture!</p>
+            <p className="text-gray-400 text-sm">Need help? Email <a href="mailto:info@biblequizcompeition.com" className="underline">info@biblequizcompeition.com</a></p>
           </div>
-                     {/* Right: Links */}
-           <div className="flex flex-col gap-2 md:items-end">
-             <a href="/" className="hover:underline">Home</a>
-             <a href="/bible-questions-and-answers-hub" className="hover:underline">Bible Q&amp;A</a>
-             <a href="/public-leaderboard" className="hover:underline">Leaderboard</a>
-             <a href="/auth/login" className="hover:underline">Sign In</a>
-             <a href="/auth/register" className="hover:underline">Sign Up</a>
-           </div>
+          {/* Center/Right: Links */}
+          <div className="flex flex-1 flex-col sm:flex-row justify-end gap-12">
+            <div>
+              <h4 className="font-bold text-white mb-3">Company</h4>
+              <ul className="space-y-2">
+                <li><a href="/" className="hover:underline text-gray-300">Home</a></li>
+                <li><a href="/bible-questions-and-answers-hub" className="hover:underline text-gray-300">Bible Q&amp;A</a></li>
+                <li><a href="/public-leaderboard" className="hover:underline text-gray-300">Leaderboard</a></li>
+                <li><a href="/auth/login" className="hover:underline text-gray-300">Sign In</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-white mb-3">Legal</h4>
+              <ul className="space-y-2">
+                <li><a href="#privacy" className="hover:underline text-gray-300">Privacy</a></li>
+                <li><a href="#terms" className="hover:underline text-gray-300">Terms</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div className="max-w-7xl mx-auto px-4 mt-12 border-t border-blue-900 pt-6 text-center text-white text-sm">
           © 2024 BibleBattles. All rights reserved.

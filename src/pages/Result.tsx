@@ -65,7 +65,7 @@ const Result = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <Brain className="w-6 h-6 text-blue-600" />
-              <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
+                              <span className="text-lg font-semibold text-gray-900">BibleBattles</span>
             </div>
             <div className="flex items-center space-x-4">
               <Button variant="ghost" onClick={() => navigate("/")} className="text-gray-600 hover:text-gray-900">

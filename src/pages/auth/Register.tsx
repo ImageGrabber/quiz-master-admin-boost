@@ -50,7 +50,7 @@ const Register = () => {
       if (data.user) {
         toast({
           title: "Registration successful!",
-          description: "Welcome to QuizMaster! You can now start taking quizzes.",
+                      description: "Welcome to BibleBattles! You can now start taking quizzes.",
         });
         
         navigate("/dashboard");
@@ -90,7 +90,7 @@ const Register = () => {
             </div>
             <div>
               <CardTitle className="text-2xl font-bold text-gray-900">
-                Join QuizMaster
+                Join BibleBattles
               </CardTitle>
               <CardDescription className="text-gray-600 mt-2">
                 Create your account to start your quiz journey
