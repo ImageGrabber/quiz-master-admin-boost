@@ -257,7 +257,7 @@ const Dashboard = () => {
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-            <p className="text-gray-600 mt-2">Overview of your QuizMaster platform</p>
+            <p className="text-gray-600 mt-2">Overview of your BibleBattles platform</p>
           </div>
           
           <div className="flex space-x-3">

@@ -32,6 +32,7 @@ import NotFound from "./pages/NotFound";
 import RLSTest from "./pages/RLSTest";
 import BibleQA from "./pages/BibleQA";
 import PublicLeaderboard from "./pages/PublicLeaderboard";
+import GenesisQuiz from "./pages/bible-questions-and-answers-hub/Genesis";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +69,7 @@ const App = () => (
           <Route path="/admin/users" element={<ProtectedRoute requiredRole="admin"><AdminUsers /></ProtectedRoute>} />
           <Route path="/admin/users/:id" element={<ProtectedRoute requiredRole="admin"><AdminUserSettings /></ProtectedRoute>} />
           <Route path="/rls-test" element={<ProtectedRoute requiredRole="admin"><RLSTest /></ProtectedRoute>} />
+          <Route path="/bible-questions-and-answers-hub/genesis" element={<GenesisQuiz />} />
           <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
           <Route path="/bible-questions-and-answers-hub/:slug*" element={<BibleQA />} />
           <Route path="*" element={<NotFound />} />

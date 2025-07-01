@@ -37,7 +37,7 @@ const Login = () => {
 
         toast({
           title: "Login successful!",
-          description: "Welcome back to QuizMaster.",
+          description: "Welcome back to BibleBattles.",
         });
 
         if (profile?.role === 'admin') {
