@@ -15,10 +15,10 @@ interface CompetitionResult {
   rank: number;
   prize_amount: number | null;
   created_at: string;
-  user: {
-    full_name: string;
-    email: string;
-  };
+  user?: {
+    full_name: string | null;
+    email: string | null;
+  } | null;
 }
 
 interface Competition {
@@ -79,15 +79,22 @@ export default function CompetitionLeaderboard() {
         setUserHasAttempted(!!userResult);
       }
 
-      // Fetch results with user details
+      // Fetch results WITH user profile join
       const { data: resultsData, error: resultsError } = await (supabase as any)
         .from('competition_results')
-        .select('*')
+        .select(`*, user:profiles!user_id (full_name, email)`)
         .eq('competition_id', competitionId)
         .order('score', { ascending: false })
         .order('time_taken', { ascending: true });
+      
+      // Debug: log the raw resultsData
+      console.log('DEBUG: resultsData', resultsData);
 
-      console.log('resultsData', resultsData);
+      if (resultsData && Array.isArray(resultsData)) {
+        resultsData.forEach((result, idx) => {
+          console.log(`DEBUG: result[${idx}].user`, result.user);
+        });
+      }
 
       if (resultsError && resultsError.code !== 'PGRST116') throw resultsError; // PGRST116 is "no rows returned"
 
@@ -108,17 +115,11 @@ export default function CompetitionLeaderboard() {
 
   const calculatePrizeAmount = (rank: number, prizePool: number, totalParticipants: number): number => {
     if (totalParticipants === 0) return 0;
-    
-    // Simple prize distribution: 50% to 1st, 30% to 2nd, 20% to 3rd
     switch (rank) {
-      case 1:
-        return Math.round(prizePool * 0.5 * 100) / 100;
-      case 2:
-        return Math.round(prizePool * 0.3 * 100) / 100;
-      case 3:
-        return Math.round(prizePool * 0.2 * 100) / 100;
-      default:
-        return 0;
+      case 1: return Math.round(prizePool * 0.5 * 100) / 100;
+      case 2: return Math.round(prizePool * 0.3 * 100) / 100;
+      case 3: return Math.round(prizePool * 0.2 * 100) / 100;
+      default: return 0;
     }
   };
 
@@ -130,98 +131,78 @@ export default function CompetitionLeaderboard() {
 
   const getRankIcon = (rank: number) => {
     switch (rank) {
-      case 1:
-        return <Trophy className="w-6 h-6 text-yellow-500" />;
-      case 2:
-        return <Medal className="w-6 h-6 text-gray-400" />;
-      case 3:
-        return <Medal className="w-6 h-6 text-amber-600" />;
-      default:
-        return <span className="w-6 h-6 text-center font-bold text-gray-600">{rank}</span>;
+      case 1: return <Trophy className="w-6 h-6 text-yellow-500" />;
+      case 2: return <Medal className="w-6 h-6 text-gray-400" />;
+      case 3: return <Medal className="w-6 h-6 text-amber-600" />;
+      default: return <span className="w-6 h-6 text-center font-bold text-gray-600">{rank}</span>;
     }
   };
 
   const getRankColor = (rank: number) => {
     switch (rank) {
-      case 1:
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 2:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
-      case 3:
-        return 'bg-amber-100 text-amber-800 border-amber-200';
-      default:
-        return 'bg-white text-gray-800 border-gray-200';
+      case 1: return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+      case 2: return 'bg-gray-100 text-gray-800 border-gray-200';
+      case 3: return 'bg-amber-100 text-amber-800 border-amber-200';
+      default: return 'bg-white text-gray-800 border-gray-200';
     }
   };
 
   if (loading) {
     return (
-      <div className="p-6">
-        <div className="flex items-center justify-center h-64">
-          <div className="text-lg">Loading leaderboard...</div>
-        </div>
+      <div className="p-6 flex items-center justify-center h-64">
+        <div className="text-lg">Loading leaderboard...</div>
       </div>
     );
   }
 
   if (!competition) {
     return (
-      <div className="p-6">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-red-600">Competition Not Found</h1>
-          <Button onClick={() => window.history.back()} className="mt-4">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Go Back
-          </Button>
-        </div>
+      <div className="p-6 text-center">
+        <h1 className="text-2xl font-bold text-red-600">Competition Not Found</h1>
+        <Button onClick={() => window.history.back()} className="mt-4">
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Go Back
+        </Button>
       </div>
     );
   }
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      {/* Header */}
-      <div className="mb-6">
-        <Button 
-          variant="outline" 
-          onClick={() => window.history.back()}
-          className="mb-4"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Competitions
-        </Button>
-        
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold flex items-center gap-2">
-              <Trophy className="w-8 h-8 text-yellow-600" />
-              {competition.title} Leaderboard
-            </h1>
-            <p className="text-gray-600 mt-2">{competition.description}</p>
-          </div>
-          <div className="text-right">
-            <div className="text-2xl font-bold text-green-600">${competition.prize_pool}</div>
-            <div className="text-sm text-gray-600">Prize Pool</div>
-          </div>
-        </div>
+      <Button variant="outline" onClick={() => window.history.back()} className="mb-4">
+        <ArrowLeft className="w-4 h-4 mr-2" />
+        Back to Competitions
+      </Button>
 
-        <div className="flex gap-4 mt-4 text-sm text-gray-600">
-          <div className="flex items-center gap-1">
-            <Clock className="w-4 h-4" />
-            <span>Started: {format(new Date(competition.start_date), 'MMM dd, yyyy')}</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Award className="w-4 h-4" />
-            <span>Ended: {format(new Date(competition.end_date), 'MMM dd, yyyy')}</span>
-          </div>
-          <Badge className={competition.status === 'completed' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}>
-            {competition.status}
-          </Badge>
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-3xl font-bold flex items-center gap-2">
+            <Trophy className="w-8 h-8 text-yellow-600" />
+            {competition.title} Leaderboard
+          </h1>
+          <p className="text-gray-600 mt-2">{competition.description}</p>
+        </div>
+        <div className="text-right">
+          <div className="text-2xl font-bold text-green-600">${competition.prize_pool}</div>
+          <div className="text-sm text-gray-600">Prize Pool</div>
         </div>
       </div>
 
-      {/* Prize Distribution Info */}
-      <Card className="mb-6">
+      <div className="flex gap-4 mt-4 text-sm text-gray-600">
+        <div className="flex items-center gap-1">
+          <Clock className="w-4 h-4" />
+          <span>Started: {format(new Date(competition.start_date), 'MMM dd, yyyy')}</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <Award className="w-4 h-4" />
+          <span>Ended: {format(new Date(competition.end_date), 'MMM dd, yyyy')}</span>
+        </div>
+        <Badge className={competition.status === 'completed' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'}>
+          {competition.status}
+        </Badge>
+      </div>
+
+      <Card className="my-6">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Award className="w-5 h-5 text-yellow-600" />
@@ -230,26 +211,17 @@ export default function CompetitionLeaderboard() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-3 gap-4">
-            <div className="text-center p-4 bg-yellow-50 rounded-lg">
-              <div className="text-2xl font-bold text-yellow-600">1st</div>
-              <div className="text-lg font-semibold">${Math.round(competition.prize_pool * 0.5 * 100) / 100}</div>
-              <div className="text-sm text-gray-600">50% of pool</div>
-            </div>
-            <div className="text-center p-4 bg-gray-50 rounded-lg">
-              <div className="text-2xl font-bold text-gray-600">2nd</div>
-              <div className="text-lg font-semibold">${Math.round(competition.prize_pool * 0.3 * 100) / 100}</div>
-              <div className="text-sm text-gray-600">30% of pool</div>
-            </div>
-            <div className="text-center p-4 bg-amber-50 rounded-lg">
-              <div className="text-2xl font-bold text-amber-600">3rd</div>
-              <div className="text-lg font-semibold">${Math.round(competition.prize_pool * 0.2 * 100) / 100}</div>
-              <div className="text-sm text-gray-600">20% of pool</div>
-            </div>
+            {[0.5, 0.3, 0.2].map((portion, i) => (
+              <div key={i} className={`text-center p-4 rounded-lg ${i === 0 ? 'bg-yellow-50' : i === 1 ? 'bg-gray-50' : 'bg-amber-50'}`}>
+                <div className={`text-2xl font-bold ${i === 0 ? 'text-yellow-600' : i === 1 ? 'text-gray-600' : 'text-amber-600'}`}>{i + 1}st</div>
+                <div className="text-lg font-semibold">${Math.round(competition.prize_pool * portion * 100) / 100}</div>
+                <div className="text-sm text-gray-600">{portion * 100}% of pool</div>
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>
 
-      {/* Leaderboard */}
       <Card>
         <CardHeader>
           <CardTitle>Final Rankings</CardTitle>
@@ -261,10 +233,7 @@ export default function CompetitionLeaderboard() {
               <h3 className="text-lg font-semibold text-gray-900 mb-2">No Results Yet</h3>
               <p className="text-gray-600">Competition results will appear here once participants complete the quiz.</p>
               {!userHasAttempted && (
-                <Button 
-                  className="mt-4"
-                  onClick={() => navigate(`/competition-quiz/${competitionId}`)}
-                >
+                <Button className="mt-4" onClick={() => navigate(`/competition-quiz/${competitionId}`)}>
                   Start Quiz
                 </Button>
               )}
@@ -277,14 +246,9 @@ export default function CompetitionLeaderboard() {
                   className={`flex items-center justify-between p-4 rounded-lg border ${getRankColor(result.rank)}`}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="flex items-center justify-center w-8 h-8">
-                      {getRankIcon(result.rank)}
-                    </div>
-                    <div>
-                      <div className="font-semibold">{result.user_id || 'Anonymous'}</div>
-                    </div>
+                    <div className="flex items-center justify-center w-8 h-8">{getRankIcon(result.rank)}</div>
+                    <div className="font-semibold">{result.user?.full_name || result.user_id || 'Anonymous'}</div>
                   </div>
-                  
                   <div className="flex items-center gap-6">
                     <div className="text-center">
                       <div className="text-2xl font-bold text-blue-600">{result.score}%</div>
@@ -308,7 +272,6 @@ export default function CompetitionLeaderboard() {
         </CardContent>
       </Card>
 
-      {/* Competition Stats */}
       <div className="mt-6 grid grid-cols-3 gap-4">
         <Card>
           <CardContent className="p-4 text-center">
@@ -335,4 +298,4 @@ export default function CompetitionLeaderboard() {
       </div>
     </div>
   );
-} 
+}
