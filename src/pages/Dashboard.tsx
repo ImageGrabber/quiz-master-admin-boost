@@ -41,6 +41,7 @@ const Dashboard = () => {
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
   const [selectedQuizId, setSelectedQuizId] = useState<string>("all");
   const [isLoading, setIsLoading] = useState(true);
+  const [hideMembership, setHideMembership] = useState<boolean>(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -54,6 +55,21 @@ const Dashboard = () => {
       fetchUserStats();
     }
   }, [profile, selectedQuizId]);
+
+  // Fetch the hideMembershipSection flag from Supabase
+  useEffect(() => {
+    const fetchFlag = async () => {
+      const { data } = await supabase
+        .from('feature_flags')
+        .select('value')
+        .eq('key', 'hide_membership_section')
+        .single();
+      if (data && typeof data.value === 'boolean') {
+        setHideMembership(data.value);
+      }
+    };
+    fetchFlag();
+  }, []);
 
   const fetchQuizzes = async () => {
     try {
@@ -325,37 +341,39 @@ const Dashboard = () => {
       </div>
 
       {/* Membership Tiers Section */}
-      <Card className="mb-8 mt-8 shadow-lg">
-        <CardHeader>
-          <CardTitle>Membership Tiers</CardTitle>
-          <p className="text-sm text-gray-500 mt-1">Choose the plan that fits your quiz journey.</p>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-4 border rounded-lg">
-              <h3 className="text-xl font-bold mb-2">Free Plan</h3>
-              <ul className="list-disc ml-5 text-gray-700 space-y-1">
-                <li>1 quiz per day</li>
-                <li>Basic profile and stats</li>
-                <li>Access to standard quizzes</li>
-                <li>Participate in weekly leaderboard</li>
-                <li>Community support</li>
-              </ul>
+      {!hideMembership && (
+        <Card className="mb-8 mt-8 shadow-lg">
+          <CardHeader>
+            <CardTitle>Membership Tiers</CardTitle>
+            <p className="text-sm text-gray-500 mt-1">Choose the plan that fits your quiz journey.</p>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="p-4 border rounded-lg">
+                <h3 className="text-xl font-bold mb-2">Free Plan</h3>
+                <ul className="list-disc ml-5 text-gray-700 space-y-1">
+                  <li>1 quiz per day</li>
+                  <li>Basic profile and stats</li>
+                  <li>Access to standard quizzes</li>
+                  <li>Participate in weekly leaderboard</li>
+                  <li>Community support</li>
+                </ul>
+              </div>
+              <div className="relative p-4 border rounded-lg bg-gradient-to-br from-purple-200 to-purple-100 text-gray-900">
+                <span className="absolute top-4 right-4 px-3 py-1 rounded-full bg-purple-600 text-white text-xs font-bold shadow">Pro</span>
+                <h3 className="text-xl font-bold mb-2 flex items-center">Pro Plan <span className="ml-3 text-base font-semibold text-purple-700">$6/month</span></h3>
+                <ul className="list-disc ml-5 text-gray-700 space-y-1">
+                  <li>Unlimited quizzes</li>
+                  <li>Bonus content (verse memory, themed quizzes)</li>
+                  <li>Detailed reports on strengths/weaknesses</li>
+                  <li>Access to past attempts and analytics</li>
+                </ul>
+                <Button className="mt-4" variant="default">Upgrade Now</Button>
+              </div>
             </div>
-            <div className="relative p-4 border rounded-lg bg-gradient-to-br from-purple-200 to-purple-100 text-gray-900">
-              <span className="absolute top-4 right-4 px-3 py-1 rounded-full bg-purple-600 text-white text-xs font-bold shadow">Pro</span>
-              <h3 className="text-xl font-bold mb-2 flex items-center">Pro Plan <span className="ml-3 text-base font-semibold text-purple-700">$6/month</span></h3>
-              <ul className="list-disc ml-5 text-gray-700 space-y-1">
-                <li>Unlimited quizzes</li>
-                <li>Bonus content (verse memory, themed quizzes)</li>
-                <li>Detailed reports on strengths/weaknesses</li>
-                <li>Access to past attempts and analytics</li>
-              </ul>
-              <Button className="mt-4" variant="default">Upgrade Now</Button>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      )}
     </DashboardLayout>
   );
 };

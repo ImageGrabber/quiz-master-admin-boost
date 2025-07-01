@@ -51,8 +51,8 @@ const Header = () => {
     <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30 w-full">
       <div className="max-w-6xl mx-auto px-2 flex justify-between items-center py-4">
         <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}> 
-          <Brain className="w-7 h-7 text-black" />
-          <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
+          <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
+          <span className="text-lg font-semibold text-gray-900 align-middle">BibleBattles</span>
         </div>
         <div className="flex items-center space-x-2">
           {showHome && (

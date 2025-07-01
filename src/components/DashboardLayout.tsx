@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Brain, LayoutDashboard, Trophy, User, Settings, LogOut, List, Menu, X, Award } from "lucide-react";
+import { Brain, LayoutDashboard, Trophy, User, Settings, LogOut, List, Menu, X, Award, Shield } from "lucide-react";
 import Header from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -21,6 +21,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [userName, setUserName] = useState<string>("");
+  const [userRole, setUserRole] = useState<string>("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -29,10 +30,11 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       if (user) {
         const { data: profile } = await supabase
           .from('profiles')
-          .select('full_name')
+          .select('full_name, role')
           .eq('id', user.id)
           .single();
         setUserName(profile?.full_name || "User");
+        setUserRole(profile?.role || "");
       }
     }
     fetchUserName();
@@ -48,8 +50,8 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       {/* Top Bar: Logo/name left, welcome right */}
       <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30 w-full h-16 flex items-center px-6 justify-between">
         <div className="flex items-center space-x-2">
-          <Brain className="w-6 h-6 text-blue-600" />
-          <span className="text-lg font-semibold text-gray-900">QuizMaster</span>
+          <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
+          <span className="text-lg font-semibold text-gray-900 align-middle">BibleBattles</span>
           <Button
             variant="ghost"
             size="sm"
@@ -93,6 +95,21 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 {item.name}
               </Button>
             ))}
+            {/* Admin-only: RLS Policy Tester */}
+            {userRole === "admin" && (
+              <Button
+                key="RLS Policy Tester"
+                variant={location.pathname === "/rls-test" ? "default" : "ghost"}
+                className={`w-full justify-start h-10 ${location.pathname === "/rls-test" ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : "text-gray-700 hover:bg-gray-100"}`}
+                onClick={() => {
+                  navigate("/rls-test");
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                <Shield className="w-4 h-4 mr-3" />
+                RLS Policy Tester
+              </Button>
+            )}
             <div className="pt-4 mt-4 border-t border-gray-200">
               <Button
                 variant="ghost"
