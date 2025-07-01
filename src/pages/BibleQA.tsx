@@ -115,7 +115,7 @@ export default function BibleQA() {
                 <h3 className="font-semibold mb-2">Wisdom Literature:</h3>
                 <ul className="list-disc ml-6 mb-4">
                   {bibleBooks.oldTestament.Wisdom.map(book => (
-                    <li key={book}><Link to={`/bible-questions-and-answers-hub/${book.toLowerCase()}`} className="text-blue-700 hover:underline">{book} Quiz</Link></li>
+                    <li key={book}><Link to={`/bible-questions-and-answers-hub/${book.toLowerCase().replace(/ /g, '-')}`} className="text-blue-700 hover:underline">{book} Quiz</Link></li>
                   ))}
                 </ul>
               </div>
