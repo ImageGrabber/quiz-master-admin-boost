@@ -158,6 +158,39 @@ export type Database = {
         }
         Relationships: []
       }
+      devotional_streaks: {
+        Row: {
+          id: string;
+          user_id: string;
+          current_streak: number;
+          longest_streak: number;
+          last_read_date: string | null;
+          total_days_read: number;
+          created_at: string | null;
+          updated_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          current_streak?: number;
+          longest_streak?: number;
+          last_read_date?: string | null;
+          total_days_read?: number;
+          created_at?: string | null;
+          updated_at?: string | null;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          current_streak?: number;
+          longest_streak?: number;
+          last_read_date?: string | null;
+          total_days_read?: number;
+          created_at?: string | null;
+          updated_at?: string | null;
+        };
+        Relationships: [];
+      }
     }
     Views: {
       [_ in never]: never
@@ -166,6 +199,21 @@ export type Database = {
       is_admin: {
         Args: Record<PropertyKey, never>
         Returns: boolean
+      }
+      record_devotional_read: {
+        Args: {
+          p_user_id: string;
+          p_devotional_date: string;
+          p_devotional_title: string;
+          p_devotional_verse: string;
+          p_time_spent_seconds?: number;
+        };
+        Returns: {
+          current_streak: number;
+          longest_streak: number;
+          total_days_read: number;
+          message: string;
+        };
       }
     }
     Enums: {

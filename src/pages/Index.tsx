@@ -431,13 +431,9 @@ const Index = () => {
               <span className="text-lg font-semibold text-gray-900">BibleBattles</span>
             </div>
             <nav className="flex items-center space-x-2">
-              <a href="#features" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Features</a>
-              <a href="#testimonials" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Testimonials</a>
-              <a href="#categories" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Categories</a>
               <a href="/bible-questions-and-answers-hub" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Bible Q&amp;A</a>
               <a href="/bible-study" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Bible Study</a>
               <a href="/public-leaderboard" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Leaderboard</a>
-              <a href="#faq" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">FAQ</a>
               <Button variant="ghost" onClick={() => navigate("/auth/register")}>Sign Up</Button>
               <Button onClick={() => navigate("/auth/login")}>Sign In</Button>
             </nav>
@@ -732,7 +728,7 @@ const Index = () => {
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Deepen Your Faith with Bible Study</h2>
               <p className="text-lg text-gray-700 mb-6 max-w-3xl mx-auto">
-                Go beyond quizzes with our comprehensive Bible study resources. Daily devotionals, structured study plans, and guided spiritual growth for every believer.
+                Access daily devotionals, structured study plans, and guided spiritual growth. Create an account to save your progress and unlock all features.
               </p>
             </div>
             
@@ -745,18 +741,18 @@ const Index = () => {
                   </div>
                   <CardTitle className="text-xl">Daily Devotionals</CardTitle>
                   <CardDescription>
-                    Start each day with inspiring scripture, reflection, and prayer
+                    Fresh scripture, reflection, and prayer every day
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2 text-sm text-gray-600">
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-green-500" />
-                      Fresh content every day
+                      New content daily
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-green-500" />
-                      Scripture-based reflections
+                      Scripture-based insights
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-green-500" />
@@ -774,18 +770,18 @@ const Index = () => {
                   </div>
                   <CardTitle className="text-xl">Study Plans</CardTitle>
                   <CardDescription>
-                    Structured 30-day and 90-day journeys for spiritual growth
+                    30-day and 90-day guided journeys
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2 text-sm text-gray-600">
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-green-500" />
-                      30-Day Bible Foundations
+                      Bible Foundations (30 days)
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-green-500" />
-                      90-Day Discipleship Journey
+                      Discipleship Journey (90 days)
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-green-500" />
@@ -795,30 +791,30 @@ const Index = () => {
                 </CardContent>
               </Card>
 
-              {/* No Login Required */}
+              {/* Account Benefits */}
               <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
                 <CardHeader>
                   <div className="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center mb-4">
                     <Users className="w-6 h-6 text-purple-600" />
                   </div>
-                  <CardTitle className="text-xl">Free Access</CardTitle>
+                  <CardTitle className="text-xl">Create Account</CardTitle>
                   <CardDescription>
-                    Start studying immediately - no account required
+                    Unlock personalized features and save progress
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2 text-sm text-gray-600">
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-green-500" />
-                      No registration needed
+                      Save study progress
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-green-500" />
-                      Available to everyone
+                      Personalized dashboard
                     </li>
                     <li className="flex items-center gap-2">
                       <CheckCircle className="w-4 h-4 text-green-500" />
-                      Create account to save progress
+                      Track achievements
                     </li>
                   </ul>
                 </CardContent>
@@ -826,12 +822,19 @@ const Index = () => {
             </div>
 
             <div className="text-center">
-              <Link to="/bible-study">
-                <Button size="lg" className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/register")}>
                   <BookOpen className="w-5 h-5 mr-2" />
-                  Start Bible Study
+                  Create Account & Start Studying
                 </Button>
-              </Link>
+                <Button size="lg" variant="outline" className="px-8 py-4 rounded-xl font-semibold text-lg border-2 border-gray-300 hover:border-blue-400 transition-all duration-300" onClick={() => navigate("/auth/login")}>
+                  <User className="w-5 h-5 mr-2" />
+                  Sign In
+                </Button>
+              </div>
+              <p className="text-sm text-gray-600 mt-4">
+                Free to join • No credit card required • Start studying immediately
+              </p>
             </div>
           </div>
         </section>

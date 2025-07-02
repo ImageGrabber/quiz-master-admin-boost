@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Clock, Brain, CheckCircle, AlertTriangle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import Header from "@/components/Header";
 
 interface Question {
   id: number;
@@ -223,6 +224,7 @@ const Quiz = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <Header />
       {/* Floating Time Warning */}
       {showTimeWarning && (
         <div className="fixed top-20 right-4 z-50 animate-bounce">

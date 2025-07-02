@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Brain, Trophy, Clock, Target, LogOut, User, Filter } from "lucide-react";
+import { Brain, Trophy, Clock, Target, LogOut, User, Filter, BookOpen, Calendar, Heart, CheckCircle, Play, Star, Lightbulb, TrendingUp, Flame } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { Competition } from "@/integrations/supabase/types";
 import Header from "@/components/Header";
 import DashboardLayout from "@/components/DashboardLayout";
 
@@ -29,6 +31,17 @@ interface Quiz {
   title: string;
 }
 
+interface CompetitionWithDetails extends Competition {
+  quiz: {
+    id: number;
+    title: string;
+    description: string | null;
+  };
+  entries_count: number;
+  user_has_entered: boolean;
+  user_payment_status?: 'pending' | 'completed' | 'failed' | 'refunded';
+}
+
 const Dashboard = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [stats, setStats] = useState<AttemptStats>({
@@ -39,15 +52,19 @@ const Dashboard = () => {
   });
   const [recentAttempts, setRecentAttempts] = useState<any[]>([]);
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+  const [competitions, setCompetitions] = useState<CompetitionWithDetails[]>([]);
   const [selectedQuizId, setSelectedQuizId] = useState<string>("all");
   const [isLoading, setIsLoading] = useState(true);
-  const [hideMembership, setHideMembership] = useState<boolean>(false);
+  const [hideMembership, setHideMembership] = useState<boolean>(true);
+  const [streakData, setStreakData] = useState<any>(null);
+  const [isRecordingRead, setIsRecordingRead] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
   useEffect(() => {
     fetchUserData();
     fetchQuizzes();
+    fetchCompetitions();
   }, []);
 
   useEffect(() => {
@@ -56,19 +73,18 @@ const Dashboard = () => {
     }
   }, [profile, selectedQuizId]);
 
-  // Fetch the hideMembershipSection flag from Supabase
   useEffect(() => {
-    const fetchFlag = async () => {
-      const { data } = await supabase
-        .from('feature_flags')
-        .select('value')
-        .eq('key', 'hide_membership_section')
+    const fetchStreak = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      const { data: streak } = await supabase
+        .from('devotional_streaks')
+        .select('*')
+        .eq('user_id', user.id)
         .single();
-      if (data && typeof data.value === 'boolean') {
-        setHideMembership(data.value);
-      }
+      setStreakData(streak);
     };
-    fetchFlag();
+    fetchStreak();
   }, []);
 
   const fetchQuizzes = async () => {
@@ -155,6 +171,49 @@ const Dashboard = () => {
     }
   };
 
+  const fetchCompetitions = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        setCompetitions([]);
+        return;
+      }
+
+      const { data, error } = await (supabase as any)
+        .from('competitions')
+        .select(`
+          *,
+          quiz:quizzes(id, title, description),
+          entries_count:competition_entries(count),
+          competition_entries(user_id, paid)
+        `)
+        .order('start_date', { ascending: true })
+        .limit(3);
+
+      if (error) throw error;
+
+      // Map competitions to include user_has_entered and user_payment_status
+      const competitionsWithDetails = (data || []).map((competition: any) => {
+        const userEntry = (competition.competition_entries || []).find((entry: any) => entry.user_id === user.id);
+        return {
+          ...competition,
+          entries_count: competition.entries_count?.[0]?.count || 0,
+          user_has_entered: !!userEntry,
+          user_payment_status: userEntry ? (userEntry.paid ? 'completed' : 'pending') : undefined,
+        };
+      });
+
+      setCompetitions(competitionsWithDetails);
+    } catch (error: any) {
+      console.error('Error fetching competitions:', error);
+      toast({
+        title: "Error",
+        description: `Failed to fetch competitions: ${error?.message || error}`,
+        variant: "destructive",
+      });
+    }
+  };
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate("/");
@@ -164,6 +223,35 @@ const Dashboard = () => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     return `${minutes}m ${remainingSeconds}s`;
+  };
+
+  const recordDevotionalRead = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user || isRecordingRead) return;
+    setIsRecordingRead(true);
+    try {
+      const today = new Date();
+      const devotionalDate = today.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      const { data, error } = await supabase.rpc('record_devotional_read', {
+        p_user_id: user.id,
+        p_devotional_date: devotionalDate,
+        p_devotional_title: 'Daily Devotional',
+        p_devotional_verse: '',
+        p_time_spent_seconds: 300
+      });
+      if (error) throw error;
+      setStreakData({
+        current_streak: data.current_streak,
+        longest_streak: data.longest_streak,
+        total_days_read: data.total_days_read,
+        last_read_date: new Date().toISOString().split('T')[0]
+      });
+      toast({ title: "Devotional Recorded!", description: data.message });
+    } catch (error) {
+      toast({ title: "Error", description: "Failed to record devotional read.", variant: "destructive" });
+    } finally {
+      setIsRecordingRead(false);
+    }
   };
 
   if (isLoading) {
@@ -263,6 +351,37 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* Devotional Streak */}
+      <div className="w-full mb-6">
+        <Card className="shadow-lg border-0 bg-gradient-to-r from-orange-50 to-red-50">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Flame className="w-5 h-5 text-orange-500" />
+              Devotional Streak
+            </CardTitle>
+            <CardDescription>Keep your daily devotional habit going!</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div className="flex items-center space-x-6">
+                <div className="flex items-center space-x-2">
+                  <Flame className="w-5 h-5 text-orange-500" />
+                  <span className="font-semibold text-orange-700">Current Streak: {(streakData?.current_streak || 0)} days</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Trophy className="w-5 h-5 text-yellow-500" />
+                  <span className="font-semibold text-yellow-700">Longest: {(streakData?.longest_streak || 0)} days</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <BookOpen className="w-5 h-5 text-blue-500" />
+                  <span className="font-semibold text-blue-700">Total days read: {(streakData?.total_days_read || 0)}</span>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
       {/* Quick Actions & Recent Attempts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Quick Actions */}
@@ -339,6 +458,77 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Featured Competitions Section */}
+      <Card className="mt-8 shadow-lg border-0 bg-gradient-to-br from-green-50 to-blue-50">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Trophy className="w-5 h-5 text-yellow-600" />
+            Featured Competitions
+          </CardTitle>
+          <CardDescription>Join exciting tournaments and compete with others</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {competitions.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {competitions.map((competition) => (
+                <div 
+                  key={competition.id} 
+                  className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer" 
+                  onClick={() => navigate("/competitions")}
+                >
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="font-semibold text-gray-900">{competition.title}</h3>
+                    <Badge 
+                      variant="secondary" 
+                      className={`text-xs ${
+                        competition.status === 'active' ? 'bg-green-100 text-green-800' :
+                        competition.status === 'upcoming' ? 'bg-blue-100 text-blue-800' :
+                        competition.status === 'completed' ? 'bg-gray-100 text-gray-800' :
+                        'bg-red-100 text-red-800'
+                      }`}
+                    >
+                      {competition.status.charAt(0).toUpperCase() + competition.status.slice(1)}
+                    </Badge>
+                  </div>
+                  <p className="text-sm text-gray-600 mb-3">
+                    {competition.description || `${competition.quiz?.title || 'Bible Quiz'} - Test your knowledge and compete for prizes!`}
+                  </p>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs text-gray-500">
+                      Prize Pool: ${competition.prize_pool}
+                    </span>
+                    <span className="text-xs text-gray-500">
+                      {competition.entries_count} participants
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-gray-500">
+                      {new Date(competition.start_date).toLocaleDateString()} - {new Date(competition.end_date).toLocaleDateString()}
+                    </span>
+                    <Button 
+                      size="sm" 
+                      variant={competition.user_has_entered ? "outline" : "default"}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate("/competitions");
+                      }}
+                    >
+                      {competition.user_has_entered ? "Joined" : "Join Now"}
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-8 text-gray-500">
+              <Trophy className="w-12 h-12 mx-auto mb-4 opacity-50" />
+              <p className="text-lg font-medium mb-2">No competitions available</p>
+              <p className="text-sm">Check back later for new tournaments and challenges!</p>
+            </div>
+          )}
+        </CardContent>
+      </Card>
 
       {/* Membership Tiers Section */}
       {!hideMembership && (

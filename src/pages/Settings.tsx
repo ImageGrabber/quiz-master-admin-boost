@@ -23,6 +23,15 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import DashboardLayout from "@/components/DashboardLayout";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose
+} from "@/components/ui/dialog";
 
 interface UserProfile {
   id: string;
@@ -62,6 +71,10 @@ const Settings = () => {
     const stored = localStorage.getItem('leaderboardUpdates');
     return stored ? JSON.parse(stored) : false;
   });
+
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogTitle, setDialogTitle] = useState("");
+  const [dialogMessage, setDialogMessage] = useState("");
 
   useEffect(() => {
     fetchUserProfile();
@@ -135,20 +148,16 @@ const Settings = () => {
 
   const handleChangePassword = async () => {
     if (newPassword !== confirmPassword) {
-      toast({
-        title: "Passwords Don't Match",
-        description: "New password and confirm password must be the same.",
-        variant: "destructive",
-      });
+      setDialogTitle("Passwords Don't Match");
+      setDialogMessage("New password and confirm password must be the same.");
+      setDialogOpen(true);
       return;
     }
 
     if (newPassword.length < 6) {
-      toast({
-        title: "Password Too Short",
-        description: "Password must be at least 6 characters long.",
-        variant: "destructive",
-      });
+      setDialogTitle("Password Too Short");
+      setDialogMessage("Password must be at least 6 characters long.");
+      setDialogOpen(true);
       return;
     }
 
@@ -160,21 +169,18 @@ const Settings = () => {
 
       if (error) throw error;
 
-      toast({
-        title: "Password Changed",
-        description: "Your password has been successfully updated.",
-      });
+      setDialogTitle("Password Changed");
+      setDialogMessage("Your password has been successfully updated.");
+      setDialogOpen(true);
 
       // Clear password fields
       setNewPassword("");
       setConfirmPassword("");
     } catch (error: any) {
       console.error('Error changing password:', error);
-      toast({
-        title: "Password Change Failed",
-        description: error.message || "Failed to change password. Please try again.",
-        variant: "destructive",
-      });
+      setDialogTitle("Password Change Failed");
+      setDialogMessage(error.message || "Failed to change password. Please try again.");
+      setDialogOpen(true);
     } finally {
       setIsChangingPassword(false);
     }
@@ -197,11 +203,9 @@ const Settings = () => {
         break;
     }
 
-    // Show success message
-    toast({
-      title: "Preference Updated",
-      description: `Notification preference updated successfully.`,
-    });
+    setDialogTitle("Preference Updated");
+    setDialogMessage(`Notification preference updated successfully.`);
+    setDialogOpen(true);
   };
 
   const sendTestEmail = async () => {
@@ -230,11 +234,9 @@ const Settings = () => {
       const result = await response.json();
 
       if (result.success) {
-        toast({
-          title: "Test Email Processed",
-          description: `Email test completed for ${profile?.email}. Check the server logs for the email content.`,
-        });
-        
+        setDialogTitle("Test Email Processed");
+        setDialogMessage(`Email test completed for ${profile?.email}. Check the server logs for the email content.`);
+        setDialogOpen(true);
         // Log the result for debugging
         console.log('Email function result:', result);
       } else {
@@ -243,18 +245,14 @@ const Settings = () => {
 
     } catch (error) {
       console.error('Error sending test email:', error);
-      
       // Fallback to demo mode if Edge Function is not available
       const enabledPrefs = [];
       if (emailNotifications) enabledPrefs.push('Email Notifications');
       if (quizReminders) enabledPrefs.push('Quiz Reminders');
       if (leaderboardUpdates) enabledPrefs.push('Leaderboard Updates');
-
-      toast({
-        title: "Demo Mode Active",
-        description: `Edge Function not available. In production, this would send a real email to ${profile?.email} with preferences: ${enabledPrefs.join(', ') || 'No notifications enabled'}`,
-        variant: "destructive",
-      });
+      setDialogTitle("Demo Mode Active");
+      setDialogMessage(`Edge Function not available. In production, this would send a real email to ${profile?.email} with preferences: ${enabledPrefs.join(', ') || 'No notifications enabled'}`);
+      setDialogOpen(true);
     }
   };
 
@@ -262,12 +260,9 @@ const Settings = () => {
     if (!confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
       return;
     }
-
-    toast({
-      title: "Account Deletion",
-      description: "Account deletion is not available in demo mode.",
-      variant: "destructive",
-    });
+    setDialogTitle("Account Deletion");
+    setDialogMessage("Account deletion is not available in demo mode.");
+    setDialogOpen(true);
   };
 
   if (isLoading) {
@@ -285,6 +280,20 @@ const Settings = () => {
 
   return (
     <DashboardLayout>
+      {/* Dialog for all notifications */}
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{dialogTitle}</DialogTitle>
+            <DialogDescription>{dialogMessage}</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button onClick={() => setDialogOpen(false)}>Close</Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <div className="space-y-6">
         {/* Header */}
         <div>

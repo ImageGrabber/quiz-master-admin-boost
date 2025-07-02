@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Brain, Trophy, Clock, Target, Play, TrendingUp, Calendar, Award } from "lucide-react";
+import { Brain, Trophy, Clock, Target, Play, TrendingUp, Calendar, Award, AlertTriangle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import DashboardLayout from "@/components/DashboardLayout";
@@ -33,9 +33,12 @@ const MyQuizzes = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [dailyLimitReached, setDailyLimitReached] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
 
   useEffect(() => {
     fetchUserQuizzes();
+    checkWeeklyLimit();
   }, []);
 
   const fetchUserQuizzes = async () => {
@@ -109,6 +112,43 @@ const MyQuizzes = () => {
     }
   };
 
+  const checkWeeklyLimit = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      // Fetch user profile
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', user.id)
+        .single();
+      const role = profile?.role || 'free';
+      setUserRole(role);
+      if (role === 'free') {
+        // Check if user has already taken a quiz this week (Sunday to Sunday)
+        const now = new Date();
+        const startOfWeek = new Date(now);
+        startOfWeek.setHours(0, 0, 0, 0);
+        startOfWeek.setDate(now.getDate() - now.getDay()); // Sunday
+        const endOfWeek = new Date(startOfWeek);
+        endOfWeek.setDate(startOfWeek.getDate() + 7);
+        const { data: attempts } = await supabase
+          .from('attempts')
+          .select('id, created_at')
+          .eq('user_id', user.id)
+          .gte('created_at', startOfWeek.toISOString())
+          .lt('created_at', endOfWeek.toISOString());
+        if (attempts && attempts.length > 0) {
+          setDailyLimitReached(true);
+        } else {
+          setDailyLimitReached(false);
+        }
+      }
+    } catch (err) {
+      // ignore
+    }
+  };
+
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
@@ -151,6 +191,15 @@ const MyQuizzes = () => {
   return (
     <DashboardLayout>
       <div className="space-y-6">
+        {/* Weekly Limit Banner */}
+        {userRole === 'free' && dailyLimitReached && (
+          <div className="flex items-center bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-md mb-2">
+            <AlertTriangle className="w-5 h-5 mr-2 text-yellow-600" />
+            <span>
+              You have reached your weekly quiz limit for the Free plan. You can take another quiz next week (starting Sunday), or <b>upgrade to Pro</b> for unlimited quizzes!
+            </span>
+          </div>
+        )}
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
@@ -160,6 +209,7 @@ const MyQuizzes = () => {
           <Button
             onClick={() => navigate("/quiz-selection")}
             className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+            disabled={userRole === 'free' && dailyLimitReached}
           >
             <Play className="w-4 h-4 mr-2" />
             Take New Quiz
