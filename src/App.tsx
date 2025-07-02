@@ -75,6 +75,7 @@ import MatthewQuiz from "./pages/bible-questions-and-answers-hub/matthew";
 import MarkQuiz from "./pages/bible-questions-and-answers-hub/mark";
 import LukeQuiz from "./pages/bible-questions-and-answers-hub/luke";
 import JohnQuiz from "./pages/bible-questions-and-answers-hub/john";
+import ActsQuiz from "./pages/bible-questions-and-answers-hub/acts";
 
 const queryClient = new QueryClient();
 
@@ -154,6 +155,7 @@ const App = () => (
           <Route path="/bible-questions-and-answers-hub/mark" element={<MarkQuiz />} />
           <Route path="/bible-questions-and-answers-hub/luke" element={<LukeQuiz />} />
           <Route path="/bible-questions-and-answers-hub/john" element={<JohnQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/acts" element={<ActsQuiz />} />
           <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
           <Route path="/bible-questions-and-answers-hub/:slug*" element={<BibleQA />} />
           <Route path="*" element={<NotFound />} />
