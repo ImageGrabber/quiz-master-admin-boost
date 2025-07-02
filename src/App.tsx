@@ -31,6 +31,7 @@ import AdminUserSettings from "./pages/admin/UserSettings";
 import NotFound from "./pages/NotFound";
 import RLSTest from "./pages/RLSTest";
 import BibleQA from "./pages/BibleQA";
+import BibleStudy from "./pages/BibleStudy";
 import PublicLeaderboard from "./pages/PublicLeaderboard";
 import GenesisQuiz from "./pages/bible-questions-and-answers-hub/Genesis";
 import ExodusQuiz from "./pages/bible-questions-and-answers-hub/Exodus";
@@ -200,6 +201,7 @@ const App = () => (
           <Route path="/bible-questions-and-answers-hub/3-john" element={<ThirdJohnQuiz />} />
           <Route path="/bible-questions-and-answers-hub/jude" element={<JudeQuiz />} />
           <Route path="/bible-questions-and-answers-hub/revelation" element={<RevelationQuiz />} />
+          <Route path="/bible-study" element={<BibleStudy />} />
           <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
           <Route path="/bible-questions-and-answers-hub/:slug*" element={<BibleQA />} />
           <Route path="*" element={<NotFound />} />
