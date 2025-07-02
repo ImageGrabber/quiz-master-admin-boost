@@ -84,6 +84,20 @@ import EphesiansQuiz from "./pages/bible-questions-and-answers-hub/ephesians";
 import PhilippiansQuiz from "./pages/bible-questions-and-answers-hub/philippians";
 import ColossiansQuiz from "./pages/bible-questions-and-answers-hub/colossians";
 import FirstThessaloniansQuiz from "./pages/bible-questions-and-answers-hub/1-thessalonians";
+import SecondThessaloniansQuiz from "./pages/bible-questions-and-answers-hub/2-thessalonians";
+import FirstTimothyQuiz from "./pages/bible-questions-and-answers-hub/1-timothy";
+import SecondTimothyQuiz from "./pages/bible-questions-and-answers-hub/2-timothy";
+import TitusQuiz from "./pages/bible-questions-and-answers-hub/titus";
+import PhilemonQuiz from "./pages/bible-questions-and-answers-hub/philemon";
+import HebrewsQuiz from "./pages/bible-questions-and-answers-hub/hebrews";
+import JamesQuiz from "./pages/bible-questions-and-answers-hub/james";
+import FirstPeterQuiz from "./pages/bible-questions-and-answers-hub/1-peter";
+import SecondPeterQuiz from "./pages/bible-questions-and-answers-hub/2-peter";
+import FirstJohnQuiz from "./pages/bible-questions-and-answers-hub/1-john";
+import SecondJohnQuiz from "./pages/bible-questions-and-answers-hub/2-john";
+import ThirdJohnQuiz from "./pages/bible-questions-and-answers-hub/3-john";
+import JudeQuiz from "./pages/bible-questions-and-answers-hub/jude";
+import RevelationQuiz from "./pages/bible-questions-and-answers-hub/revelation";
 
 const queryClient = new QueryClient();
 
@@ -172,6 +186,20 @@ const App = () => (
           <Route path="/bible-questions-and-answers-hub/philippians" element={<PhilippiansQuiz />} />
           <Route path="/bible-questions-and-answers-hub/colossians" element={<ColossiansQuiz />} />
           <Route path="/bible-questions-and-answers-hub/1-thessalonians" element={<FirstThessaloniansQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/2-thessalonians" element={<SecondThessaloniansQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/1-timothy" element={<FirstTimothyQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/2-timothy" element={<SecondTimothyQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/titus" element={<TitusQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/philemon" element={<PhilemonQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/hebrews" element={<HebrewsQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/james" element={<JamesQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/1-peter" element={<FirstPeterQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/2-peter" element={<SecondPeterQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/1-john" element={<FirstJohnQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/2-john" element={<SecondJohnQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/3-john" element={<ThirdJohnQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/jude" element={<JudeQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/revelation" element={<RevelationQuiz />} />
           <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
           <Route path="/bible-questions-and-answers-hub/:slug*" element={<BibleQA />} />
           <Route path="*" element={<NotFound />} />

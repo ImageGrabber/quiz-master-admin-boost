@@ -47,7 +47,8 @@ const categories = [
   { name: "Minor Prophets", description: "Minor prophetic books", count: 12, icon: Zap, color: "bg-orange-100 text-orange-700" },
   { name: "Gospels", description: "The life of Jesus", count: 4, icon: Crown, color: "bg-red-100 text-red-700" },
   { name: "Pauline Epistles", description: "Paul's letters", count: 13, icon: Users, color: "bg-indigo-100 text-indigo-700" },
-  { name: "General Epistles", description: "Other letters", count: 8, icon: Star, color: "bg-pink-100 text-pink-700" }
+  { name: "General Epistles", description: "Other letters", count: 8, icon: Star, color: "bg-pink-100 text-pink-700" },
+  { name: "Apocalyptic", description: "End times and prophecy", count: 1, icon: Shield, color: "bg-red-100 text-red-700" }
 ];
 
 const quickStats = [
