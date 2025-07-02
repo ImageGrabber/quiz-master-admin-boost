@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Brain, LayoutDashboard, Trophy, User, Settings, LogOut, List, Menu, X, Award, Shield } from "lucide-react";
+import { Brain, LayoutDashboard, Trophy, User, Settings, LogOut, List, Menu, X, Award, Shield, BookOpen } from "lucide-react";
 import Header from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -12,6 +12,7 @@ interface DashboardLayoutProps {
 const navItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "My Quizzes", href: "/dashboard/quizzes", icon: List },
+  { name: "Bible Study", href: "/dashboard/bible-study", icon: BookOpen },
   { name: "Competitions", href: "/competitions", icon: Award },
   { name: "Leaderboard", href: "/leaderboard", icon: Trophy },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
@@ -65,7 +66,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           Welcome back, {userName}
         </div>
       </header>
-      <div className="flex w-full min-h-[calc(100vh-4rem)]">
+      <div className="flex w-full h-screen">
         {/* Sidebar */}
         {/* Mobile Sidebar Overlay */}
         {isMobileMenuOpen && (
@@ -78,7 +79,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         <aside className={`
           ${isMobileMenuOpen ? 'fixed inset-y-0 left-0 z-50 flex' : 'hidden'}
           md:static md:flex md:flex-col
-          w-64 h-full md:h-screen bg-white border-r border-gray-200 shadow-lg transition-transform duration-300 ease-in-out
+          w-64 h-screen bg-white border-r border-gray-200 shadow-lg transition-transform duration-300 ease-in-out
         `}>
           <nav className="flex-1 px-4 py-6 space-y-2">
             {navItems.map((item) => (

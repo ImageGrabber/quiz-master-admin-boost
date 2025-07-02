@@ -7,6 +7,15 @@ import { Brain, Clock, Target, Trophy, ArrowRight, Play } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import DashboardLayout from "@/components/DashboardLayout";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose
+} from "@/components/ui/dialog";
 
 interface Quiz {
   id: number;
@@ -23,6 +32,9 @@ const QuizSelection = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogTitle, setDialogTitle] = useState("");
+  const [dialogMessage, setDialogMessage] = useState("");
 
   useEffect(() => {
     fetchQuizzes();
@@ -67,8 +79,76 @@ const QuizSelection = () => {
     }
   };
 
-  const handleStartQuiz = (quizId: number) => {
-    navigate(`/quiz/${quizId}`);
+  const handleStartQuiz = async (quizId: number) => {
+    try {
+      // Get current user
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        setDialogTitle("Not logged in");
+        setDialogMessage("Please log in to take a quiz.");
+        setDialogOpen(true);
+        navigate("/auth/login");
+        return;
+      }
+
+      // Check if user has ever attempted this quiz
+      const { data: everAttempts, error: everError } = await supabase
+        .from('attempts')
+        .select('id, created_at')
+        .eq('user_id', user.id)
+        .eq('quiz_id', quizId);
+
+      if (everError) {
+        setDialogTitle("Error");
+        setDialogMessage("Could not check your quiz attempt history. Please try again.");
+        setDialogOpen(true);
+        return;
+      }
+
+      if (everAttempts && everAttempts.length > 0) {
+        setDialogTitle("Already Attempted");
+        setDialogMessage("You have already attempted this quiz. Only one attempt per quiz is allowed.");
+        setDialogOpen(true);
+        return;
+      }
+
+      // Check if user has attempted this quiz this week (Sunday to Sunday)
+      const now = new Date();
+      const startOfWeek = new Date(now);
+      startOfWeek.setHours(0, 0, 0, 0);
+      startOfWeek.setDate(now.getDate() - now.getDay()); // Sunday
+      const endOfWeek = new Date(startOfWeek);
+      endOfWeek.setDate(startOfWeek.getDate() + 7);
+
+      const { data: weekAttempts, error: weekError } = await supabase
+        .from('attempts')
+        .select('id, created_at')
+        .eq('user_id', user.id)
+        .eq('quiz_id', quizId)
+        .gte('created_at', startOfWeek.toISOString())
+        .lt('created_at', endOfWeek.toISOString());
+
+      if (weekError) {
+        setDialogTitle("Error");
+        setDialogMessage("Could not check your weekly quiz attempt. Please try again.");
+        setDialogOpen(true);
+        return;
+      }
+
+      if (weekAttempts && weekAttempts.length > 0) {
+        setDialogTitle("Weekly Limit Reached");
+        setDialogMessage("You have already attempted this quiz this week. Only one attempt per quiz per week is allowed (Sunday to Sunday).");
+        setDialogOpen(true);
+        return;
+      }
+
+      // Allow navigation if not blocked
+      navigate(`/quiz/${quizId}`);
+    } catch (err) {
+      setDialogTitle("Error");
+      setDialogMessage("Something went wrong. Please try again.");
+      setDialogOpen(true);
+    }
   };
 
   const getDifficultyColor = (difficulty: string) => {
@@ -99,6 +179,20 @@ const QuizSelection = () => {
 
   return (
     <DashboardLayout>
+      {/* Dialog for quiz attempt restrictions */}
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{dialogTitle}</DialogTitle>
+            <DialogDescription>{dialogMessage}</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button onClick={() => setDialogOpen(false)}>Close</Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-6xl mx-auto">
           {/* Header Section */}
