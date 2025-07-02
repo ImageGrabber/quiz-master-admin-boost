@@ -76,6 +76,14 @@ import MarkQuiz from "./pages/bible-questions-and-answers-hub/mark";
 import LukeQuiz from "./pages/bible-questions-and-answers-hub/luke";
 import JohnQuiz from "./pages/bible-questions-and-answers-hub/john";
 import ActsQuiz from "./pages/bible-questions-and-answers-hub/acts";
+import RomansQuiz from "./pages/bible-questions-and-answers-hub/romans";
+import FirstCorinthiansQuiz from "./pages/bible-questions-and-answers-hub/1-corinthians";
+import SecondCorinthiansQuiz from "./pages/bible-questions-and-answers-hub/2-corinthians";
+import GalatiansQuiz from "./pages/bible-questions-and-answers-hub/galatians";
+import EphesiansQuiz from "./pages/bible-questions-and-answers-hub/ephesians";
+import PhilippiansQuiz from "./pages/bible-questions-and-answers-hub/philippians";
+import ColossiansQuiz from "./pages/bible-questions-and-answers-hub/colossians";
+import FirstThessaloniansQuiz from "./pages/bible-questions-and-answers-hub/1-thessalonians";
 
 const queryClient = new QueryClient();
 
@@ -156,6 +164,14 @@ const App = () => (
           <Route path="/bible-questions-and-answers-hub/luke" element={<LukeQuiz />} />
           <Route path="/bible-questions-and-answers-hub/john" element={<JohnQuiz />} />
           <Route path="/bible-questions-and-answers-hub/acts" element={<ActsQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/romans" element={<RomansQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/1-corinthians" element={<FirstCorinthiansQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/2-corinthians" element={<SecondCorinthiansQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/galatians" element={<GalatiansQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/ephesians" element={<EphesiansQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/philippians" element={<PhilippiansQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/colossians" element={<ColossiansQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/1-thessalonians" element={<FirstThessaloniansQuiz />} />
           <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
           <Route path="/bible-questions-and-answers-hub/:slug*" element={<BibleQA />} />
           <Route path="*" element={<NotFound />} />
