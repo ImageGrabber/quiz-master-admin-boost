@@ -54,6 +54,27 @@ import PsalmsQuiz from "./pages/bible-questions-and-answers-hub/psalms";
 import ProverbsQuiz from "./pages/bible-questions-and-answers-hub/proverbs";
 import EcclesiastesQuiz from "./pages/bible-questions-and-answers-hub/ecclesiastes";
 import SongOfSolomonQuiz from "./pages/bible-questions-and-answers-hub/song-of-solomon";
+import IsaiahQuiz from "./pages/bible-questions-and-answers-hub/isaiah";
+import JeremiahQuiz from "./pages/bible-questions-and-answers-hub/jeremiah";
+import LamentationsQuiz from "./pages/bible-questions-and-answers-hub/lamentations";
+import EzekielQuiz from "./pages/bible-questions-and-answers-hub/ezekiel";
+import DanielQuiz from "./pages/bible-questions-and-answers-hub/daniel";
+import HoseaQuiz from "./pages/bible-questions-and-answers-hub/hosea";
+import JoelQuiz from "./pages/bible-questions-and-answers-hub/joel";
+import AmosQuiz from "./pages/bible-questions-and-answers-hub/amos";
+import ObadiahQuiz from "./pages/bible-questions-and-answers-hub/obadiah";
+import JonahQuiz from "./pages/bible-questions-and-answers-hub/jonah";
+import MicahQuiz from "./pages/bible-questions-and-answers-hub/micah";
+import NahumQuiz from "./pages/bible-questions-and-answers-hub/nahum";
+import HabakkukQuiz from "./pages/bible-questions-and-answers-hub/habakkuk";
+import ZephaniahQuiz from "./pages/bible-questions-and-answers-hub/zephaniah";
+import HaggaiQuiz from "./pages/bible-questions-and-answers-hub/haggai";
+import ZechariahQuiz from "./pages/bible-questions-and-answers-hub/zechariah";
+import MalachiQuiz from "./pages/bible-questions-and-answers-hub/malachi";
+import MatthewQuiz from "./pages/bible-questions-and-answers-hub/matthew";
+import MarkQuiz from "./pages/bible-questions-and-answers-hub/mark";
+import LukeQuiz from "./pages/bible-questions-and-answers-hub/luke";
+import JohnQuiz from "./pages/bible-questions-and-answers-hub/john";
 
 const queryClient = new QueryClient();
 
@@ -112,6 +133,27 @@ const App = () => (
           <Route path="/bible-questions-and-answers-hub/proverbs" element={<ProverbsQuiz />} />
           <Route path="/bible-questions-and-answers-hub/ecclesiastes" element={<EcclesiastesQuiz />} />
           <Route path="/bible-questions-and-answers-hub/song-of-solomon" element={<SongOfSolomonQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/isaiah" element={<IsaiahQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/jeremiah" element={<JeremiahQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/lamentations" element={<LamentationsQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/ezekiel" element={<EzekielQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/daniel" element={<DanielQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/hosea" element={<HoseaQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/joel" element={<JoelQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/amos" element={<AmosQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/obadiah" element={<ObadiahQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/jonah" element={<JonahQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/micah" element={<MicahQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/nahum" element={<NahumQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/habakkuk" element={<HabakkukQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/zephaniah" element={<ZephaniahQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/haggai" element={<HaggaiQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/zechariah" element={<ZechariahQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/malachi" element={<MalachiQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/matthew" element={<MatthewQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/mark" element={<MarkQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/luke" element={<LukeQuiz />} />
+          <Route path="/bible-questions-and-answers-hub/john" element={<JohnQuiz />} />
           <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
           <Route path="/bible-questions-and-answers-hub/:slug*" element={<BibleQA />} />
           <Route path="*" element={<NotFound />} />
