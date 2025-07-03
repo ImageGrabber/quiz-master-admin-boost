@@ -16,6 +16,7 @@ const navItems = [
   { name: "Bible Study", href: "/dashboard/bible-study", icon: BookOpen },
   { name: "Competitions", href: "/competitions", icon: Award },
   { name: "Leaderboard", href: "/leaderboard", icon: Trophy },
+  { name: "Recent Attempts", href: "/dashboard/recent-attempts", icon: User },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
@@ -35,6 +36,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           .select('full_name, plan')
           .eq('id', user.id)
           .single();
+        console.log('Fetched profile:', profile);
         setUserName(profile && 'full_name' in profile ? String(profile.full_name) : "User");
         setUserPlan(profile && 'plan' in profile ? String(profile.plan) : "");
       }

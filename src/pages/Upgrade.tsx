@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -66,7 +66,37 @@ const testimonials = [
 const Upgrade = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [userPlan, setUserPlan] = useState<string>("");
+  const [checkingPlan, setCheckingPlan] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchUserPlan() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        setUserPlan("");
+        setCheckingPlan(false);
+        return;
+      }
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('plan')
+        .eq('id', user.id)
+        .single();
+      setUserPlan(profile && 'plan' in profile ? String(profile.plan) : "");
+      setCheckingPlan(false);
+    }
+    fetchUserPlan();
+  }, []);
+
+  useEffect(() => {
+    if (!checkingPlan && userPlan === "pro") {
+      // Option 1: Redirect
+      navigate("/dashboard", { replace: true });
+      // Option 2: Show message instead of redirect (uncomment below and comment out navigate above)
+      // setError("You are already a Pro user!");
+    }
+  }, [userPlan, checkingPlan, navigate]);
 
   const handlePayment = async () => {
     setLoading(true);
@@ -94,6 +124,33 @@ const Upgrade = () => {
       setLoading(false);
     }
   };
+
+  if (checkingPlan) {
+    return (
+      <DashboardLayout>
+        <div className="min-h-screen flex items-center justify-center">
+          <span className="text-gray-600 text-lg">Checking your plan...</span>
+        </div>
+      </DashboardLayout>
+    );
+  }
+
+  if (userPlan === "pro") {
+    // Option 2: Show message instead of redirect
+    // return (
+    //   <DashboardLayout>
+    //     <div className="min-h-screen flex items-center justify-center">
+    //       <div className="bg-white p-8 rounded shadow text-center">
+    //         <CheckCircle className="w-12 h-12 text-purple-500 mx-auto mb-4" />
+    //         <h2 className="text-2xl font-bold mb-2">You're already a Pro user!</h2>
+    //         <p className="text-gray-700 mb-4">Thank you for supporting BibleBattles. Enjoy all your Pro features!</p>
+    //         <Button onClick={() => navigate('/dashboard')}>Go to Dashboard</Button>
+    //       </div>
+    //     </div>
+    //   </DashboardLayout>
+    // );
+    return null; // If redirecting, render nothing
+  }
 
   return (
     <DashboardLayout>

@@ -103,6 +103,7 @@ import DashboardBibleStudy from "./pages/DashboardBibleStudy";
 import Upgrade from "./pages/Upgrade";
 import PageViews from "./pages/admin/PageViews";
 import { usePageView } from "@/hooks/usePageView";
+import RecentAttempts from "./pages/dashboard/recent-attempts";
 
 const queryClient = new QueryClient();
 
@@ -129,6 +130,7 @@ const App = () => {
             <Route path="/dashboard/quizzes" element={<ProtectedRoute><MyQuizzes /></ProtectedRoute>} />
             <Route path="/dashboard/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
             <Route path="/dashboard/upgrade" element={<ProtectedRoute><Upgrade /></ProtectedRoute>} />
+            <Route path="/dashboard/recent-attempts" element={<ProtectedRoute><RecentAttempts /></ProtectedRoute>} />
             <Route path="/quiz-selection" element={<ProtectedRoute><QuizSelection /></ProtectedRoute>} />
             <Route path="/quiz/:quizId" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
             <Route path="/result/:id" element={<ProtectedRoute><Result /></ProtectedRoute>} />
