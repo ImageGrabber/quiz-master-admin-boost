@@ -221,7 +221,16 @@ const Dashboard = () => {
       changeType: "neutral",
       icon: Trophy,
       description: "Best score achieved"
-    }
+    },
+    {
+      title: "Page Views",
+      value: "",
+      change: "",
+      changeType: "neutral",
+      icon: Eye,
+      description: "View counts for all pages",
+      onClick: () => navigate("/admin/page-views"),
+    },
   ];
 
   // Update flag in Supabase
