@@ -334,6 +334,7 @@ const Settings = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email"
+                      disabled
                     />
                   </div>
                 </div>
@@ -474,13 +475,11 @@ const Settings = () => {
             </Card>
 
             {/* Danger Zone */}
-            <Card className="shadow-lg border-0 bg-white border-red-200">
+            {/*
+            <Card className="shadow-lg border-0 bg-white">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2 text-red-600">
-                  <AlertTriangle className="w-5 h-5" />
-                  <span>Danger Zone</span>
-                </CardTitle>
-                <CardDescription className="text-red-600">
+                <CardTitle className="text-red-600">Danger Zone</CardTitle>
+                <CardDescription>
                   Irreversible and destructive actions
                 </CardDescription>
               </CardHeader>
@@ -488,16 +487,12 @@ const Settings = () => {
                 <Button
                   variant="destructive"
                   onClick={handleDeleteAccount}
-                  className="w-full"
                 >
-                  <Trash2 className="w-4 h-4 mr-2" />
                   Delete Account
                 </Button>
-                <p className="text-xs text-red-600 mt-2">
-                  This will permanently delete your account and all associated data.
-                </p>
               </CardContent>
             </Card>
+            */}
           </div>
         </div>
       </div>

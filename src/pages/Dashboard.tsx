@@ -280,39 +280,33 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout>
-      {/* Upgrade Button for Free Users */}
-      {profile?.plan === "free" && (
-        <div className="flex justify-end mb-4">
+      {/* Upgrade to Pro + Quiz Filter in one line */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+        <div className="flex items-center space-x-3">
+          <Filter className="w-5 h-5 text-gray-600" />
+          <span className="text-sm font-medium text-gray-700">Filter by Quiz:</span>
+          <Select value={selectedQuizId} onValueChange={setSelectedQuizId}>
+            <SelectTrigger className="w-64">
+              <SelectValue placeholder="Select a quiz" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Quizzes</SelectItem>
+              {quizzes.map((quiz) => (
+                <SelectItem key={quiz.id} value={quiz.id.toString()}>
+                  {quiz.title}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+        {profile?.plan === "free" && (
           <button
             onClick={handleUpgrade}
-            className="ml-2 px-4 py-2 rounded bg-purple-600 text-white font-semibold shadow hover:bg-purple-700 transition"
+            className="ml-2 px-4 py-2 rounded bg-purple-600 text-white font-semibold shadow hover:bg-purple-700 transition whitespace-nowrap"
           >
             Upgrade to Pro
           </button>
-        </div>
-      )}
-
-      {/* Quiz Filter */}
-      <div className="mb-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <Filter className="w-5 h-5 text-gray-600" />
-            <span className="text-sm font-medium text-gray-700">Filter by Quiz:</span>
-            <Select value={selectedQuizId} onValueChange={setSelectedQuizId}>
-              <SelectTrigger className="w-64">
-                <SelectValue placeholder="Select a quiz" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Quizzes</SelectItem>
-                {quizzes.map((quiz) => (
-                  <SelectItem key={quiz.id} value={quiz.id.toString()}>
-                    {quiz.title}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Stats Grid */}
@@ -402,15 +396,40 @@ const Dashboard = () => {
                   <span className="font-semibold text-blue-700">Total days read: {(streakData?.total_days_read || 0)}</span>
                 </div>
               </div>
+              {/* Devotional Read Button */}
+              <div className="flex items-center mt-4 md:mt-0">
+                {(() => {
+                  const today = new Date().toISOString().split('T')[0];
+                  const lastRead = streakData?.last_read_date;
+                  if (lastRead === today) {
+                    return (
+                      <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-500">
+                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                    );
+                  } else {
+                    return (
+                      <Button
+                        onClick={() => navigate('/dashboard/bible-study')}
+                        className="bg-orange-500 hover:bg-orange-600 text-white font-semibold"
+                      >
+                        Read Now
+                      </Button>
+                    );
+                  }
+                })()}
+              </div>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Quick Actions & Recent Attempts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Quick Actions & Featured Competitions */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
         {/* Quick Actions */}
-        <Card className="shadow-lg border-0 bg-white">
+        <Card className="shadow-lg border-0 bg-white h-full">
           <CardHeader>
             <CardTitle>Quick Actions</CardTitle>
             <CardDescription>Start your quiz journey</CardDescription>
@@ -424,7 +443,6 @@ const Dashboard = () => {
                 <Brain className="w-4 h-4 mr-3" />
                 Choose Quiz
               </Button>
-              
               <Button
                 variant="outline"
                 className="w-full justify-start h-12"
@@ -433,7 +451,6 @@ const Dashboard = () => {
                 <Trophy className="w-4 h-4 mr-3" />
                 View Leaderboard
               </Button>
-              
               <Button
                 variant="outline"
                 className="w-full justify-start h-12"
@@ -445,115 +462,95 @@ const Dashboard = () => {
             </div>
           </CardContent>
         </Card>
-
-        {/* Recent Attempts */}
-        <Card className="shadow-lg border-0 bg-white">
-          <CardHeader>
-            <CardTitle>Recent Attempts</CardTitle>
-            <CardDescription>Your latest quiz performances</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {recentAttempts.length > 0 ? (
-                recentAttempts.map((attempt, index) => (
-                  <div key={attempt.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <div>
-                      <div className="font-medium text-gray-900">{attempt.quizzes.title}</div>
-                      <div className="text-sm text-gray-600">
-                        {formatTime(attempt.seconds_used)} • {new Date(attempt.created_at).toLocaleDateString()}
+        {/* Featured Competitions Section */}
+        {profile?.plan === "pro" ? (
+          <Card className="shadow-lg border-0 bg-white h-full">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Trophy className="w-5 h-5 text-yellow-600" />
+                Featured Competitions
+              </CardTitle>
+              <CardDescription>Join exciting tournaments and compete with others</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {competitions.length > 0 ? (
+                <div className="grid grid-cols-1 gap-4">
+                  {competitions.map((competition) => (
+                    <div 
+                      key={competition.id} 
+                      className="bg-gray-50 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer" 
+                      onClick={() => navigate("/competitions")}
+                    >
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="font-semibold text-gray-900">{competition.title}</h3>
+                        <Badge 
+                          variant="secondary" 
+                          className={`text-xs ${
+                            competition.status === 'active' ? 'bg-green-100 text-green-800' :
+                            competition.status === 'upcoming' ? 'bg-blue-100 text-blue-800' :
+                            competition.status === 'completed' ? 'bg-gray-100 text-gray-800' :
+                            'bg-red-100 text-red-800'
+                          }`}
+                        >
+                          {competition.status.charAt(0).toUpperCase() + competition.status.slice(1)}
+                        </Badge>
+                      </div>
+                      <p className="text-sm text-gray-600 mb-3">
+                        {competition.description || `${competition.quiz?.title || 'Bible Quiz'} - Test your knowledge and compete for prizes!`}
+                      </p>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs text-gray-500">
+                          Prize Pool: ${competition.prize_pool}
+                        </span>
+                        <span className="text-xs text-gray-500">
+                          {competition.entries_count} participants
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-gray-500">
+                          {new Date(competition.start_date).toLocaleDateString()} - {new Date(competition.end_date).toLocaleDateString()}
+                        </span>
+                        <Button 
+                          size="sm" 
+                          variant={competition.user_has_entered ? "outline" : "default"}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate("/competitions");
+                          }}
+                        >
+                          {competition.user_has_entered ? "Joined" : "Join Now"}
+                        </Button>
                       </div>
                     </div>
-                    <Badge 
-                      className={attempt.score >= 80 ? "bg-green-100 text-green-700" : 
-                             attempt.score >= 60 ? "bg-yellow-100 text-yellow-700" : 
-                             "bg-red-100 text-red-700"}
-                    >
-                      {attempt.score} pts
-                    </Badge>
-                  </div>
-                ))
+                  ))}
+                </div>
               ) : (
                 <div className="text-center py-8 text-gray-500">
-                  <Brain className="w-8 h-8 mx-auto mb-2 opacity-50" />
-                  <p>No quiz attempts yet</p>
-                  <p className="text-sm">Start your first quiz to see your progress!</p>
+                  <Trophy className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                  <p className="text-lg font-medium mb-2">No competitions available</p>
+                  <p className="text-sm">Check back later for new tournaments and challenges!</p>
                 </div>
               )}
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        ) : (
+          <Card className="mt-8 shadow-lg border-0 bg-gradient-to-br from-gray-50 to-gray-100">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Trophy className="w-5 h-5 text-gray-400" />
+                Featured Competitions
+              </CardTitle>
+              <CardDescription>Competitions are available for Pro members only.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col items-center justify-center py-8">
+                <p className="text-lg font-medium mb-4 text-gray-600">Not a Pro member yet</p>
+                <Button onClick={handleUpgrade} className="bg-purple-600 hover:bg-purple-700 text-white font-semibold">Upgrade to Pro</Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </div>
-
-      {/* Featured Competitions Section */}
-      <Card className="mt-8 shadow-lg border-0 bg-gradient-to-br from-green-50 to-blue-50">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Trophy className="w-5 h-5 text-yellow-600" />
-            Featured Competitions
-          </CardTitle>
-          <CardDescription>Join exciting tournaments and compete with others</CardDescription>
-        </CardHeader>
-        <CardContent>
-          {competitions.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {competitions.map((competition) => (
-                <div 
-                  key={competition.id} 
-                  className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer" 
-                  onClick={() => navigate("/competitions")}
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-semibold text-gray-900">{competition.title}</h3>
-                    <Badge 
-                      variant="secondary" 
-                      className={`text-xs ${
-                        competition.status === 'active' ? 'bg-green-100 text-green-800' :
-                        competition.status === 'upcoming' ? 'bg-blue-100 text-blue-800' :
-                        competition.status === 'completed' ? 'bg-gray-100 text-gray-800' :
-                        'bg-red-100 text-red-800'
-                      }`}
-                    >
-                      {competition.status.charAt(0).toUpperCase() + competition.status.slice(1)}
-                    </Badge>
-                  </div>
-                  <p className="text-sm text-gray-600 mb-3">
-                    {competition.description || `${competition.quiz?.title || 'Bible Quiz'} - Test your knowledge and compete for prizes!`}
-                  </p>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs text-gray-500">
-                      Prize Pool: ${competition.prize_pool}
-                    </span>
-                    <span className="text-xs text-gray-500">
-                      {competition.entries_count} participants
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-gray-500">
-                      {new Date(competition.start_date).toLocaleDateString()} - {new Date(competition.end_date).toLocaleDateString()}
-                    </span>
-                    <Button 
-                      size="sm" 
-                      variant={competition.user_has_entered ? "outline" : "default"}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigate("/competitions");
-                      }}
-                    >
-                      {competition.user_has_entered ? "Joined" : "Join Now"}
-                    </Button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-8 text-gray-500">
-              <Trophy className="w-12 h-12 mx-auto mb-4 opacity-50" />
-              <p className="text-lg font-medium mb-2">No competitions available</p>
-              <p className="text-sm">Check back later for new tournaments and challenges!</p>
-            </div>
-          )}
-        </CardContent>
-      </Card>
 
       {/* Membership Tiers Section */}
       {!hideMembership && (
