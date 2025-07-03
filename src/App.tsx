@@ -100,117 +100,130 @@ import ThirdJohnQuiz from "./pages/bible-questions-and-answers-hub/3-john";
 import JudeQuiz from "./pages/bible-questions-and-answers-hub/jude";
 import RevelationQuiz from "./pages/bible-questions-and-answers-hub/revelation";
 import DashboardBibleStudy from "./pages/DashboardBibleStudy";
+import Upgrade from "./pages/Upgrade";
+import PageViews from "./pages/admin/PageViews";
+import { usePageView } from "@/hooks/usePageView";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/auth/login" element={<Login />} />
-          <Route path="/auth/register" element={<Register />} />
-          <Route path="/auth/forgot-password" element={<ForgotPassword />} />
-          <Route path="/auth/reset-password" element={<ResetPassword />} />
-          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/dashboard/quizzes" element={<ProtectedRoute><MyQuizzes /></ProtectedRoute>} />
-          <Route path="/dashboard/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-          <Route path="/quiz-selection" element={<ProtectedRoute><QuizSelection /></ProtectedRoute>} />
-          <Route path="/quiz/:quizId" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
-          <Route path="/result/:id" element={<ProtectedRoute><Result /></ProtectedRoute>} />
-          <Route path="/leaderboard" element={<Leaderboard />} />
-          <Route path="/public-leaderboard" element={<PublicLeaderboard />} />
-          <Route path="/competitions" element={<ProtectedRoute><Competitions /></ProtectedRoute>} />
-          <Route path="/competition-quiz/:competitionId" element={<ProtectedRoute><CompetitionQuiz /></ProtectedRoute>} />
-          <Route path="/competition-leaderboard/:competitionId" element={<ProtectedRoute><CompetitionLeaderboard /></ProtectedRoute>} />
-          <Route path="/admin" element={<ProtectedRoute requiredRole="admin"><AdminDashboard /></ProtectedRoute>} />
-          <Route path="/admin/attempts" element={<ProtectedRoute requiredRole="admin"><AdminAttempts /></ProtectedRoute>} />
-          <Route path="/admin/upload" element={<ProtectedRoute requiredRole="admin"><AdminUpload /></ProtectedRoute>} />
-          <Route path="/admin/quizzes" element={<ProtectedRoute requiredRole="admin"><AdminQuizzes /></ProtectedRoute>} />
-          <Route path="/admin/questions" element={<ProtectedRoute requiredRole="admin"><AdminQuestions /></ProtectedRoute>} />
-          <Route path="/admin/activity" element={<ProtectedRoute requiredRole="admin"><AdminActivity /></ProtectedRoute>} />
-          <Route path="/admin/competitions" element={<ProtectedRoute requiredRole="admin"><AdminCompetitions /></ProtectedRoute>} />
-          <Route path="/admin/users" element={<ProtectedRoute requiredRole="admin"><AdminUsers /></ProtectedRoute>} />
-          <Route path="/admin/users/:id" element={<ProtectedRoute requiredRole="admin"><AdminUserSettings /></ProtectedRoute>} />
-          <Route path="/rls-test" element={<ProtectedRoute requiredRole="admin"><RLSTest /></ProtectedRoute>} />
-          <Route path="/bible-questions-and-answers-hub/genesis" element={<GenesisQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/exodus" element={<ExodusQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/leviticus" element={<LeviticusQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/numbers" element={<NumbersQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/deuteronomy" element={<DeuteronomyQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/joshua" element={<JoshuaQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/judges" element={<JudgesQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/ruth" element={<RuthQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/1-samuel" element={<FirstSamuelQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/2-samuel" element={<SecondSamuelQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/1-kings" element={<FirstKingsQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/2-kings" element={<SecondKingsQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/1-chronicles" element={<FirstChroniclesQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/2-chronicles" element={<SecondChroniclesQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/ezra" element={<EzraQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/nehemiah" element={<NehemiahQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/esther" element={<EstherQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/job" element={<JobQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/psalms" element={<PsalmsQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/proverbs" element={<ProverbsQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/ecclesiastes" element={<EcclesiastesQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/song-of-solomon" element={<SongOfSolomonQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/isaiah" element={<IsaiahQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/jeremiah" element={<JeremiahQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/lamentations" element={<LamentationsQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/ezekiel" element={<EzekielQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/daniel" element={<DanielQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/hosea" element={<HoseaQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/joel" element={<JoelQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/amos" element={<AmosQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/obadiah" element={<ObadiahQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/jonah" element={<JonahQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/micah" element={<MicahQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/nahum" element={<NahumQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/habakkuk" element={<HabakkukQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/zephaniah" element={<ZephaniahQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/haggai" element={<HaggaiQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/zechariah" element={<ZechariahQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/malachi" element={<MalachiQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/matthew" element={<MatthewQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/mark" element={<MarkQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/luke" element={<LukeQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/john" element={<JohnQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/acts" element={<ActsQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/romans" element={<RomansQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/1-corinthians" element={<FirstCorinthiansQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/2-corinthians" element={<SecondCorinthiansQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/galatians" element={<GalatiansQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/ephesians" element={<EphesiansQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/philippians" element={<PhilippiansQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/colossians" element={<ColossiansQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/1-thessalonians" element={<FirstThessaloniansQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/2-thessalonians" element={<SecondThessaloniansQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/1-timothy" element={<FirstTimothyQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/2-timothy" element={<SecondTimothyQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/titus" element={<TitusQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/philemon" element={<PhilemonQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/hebrews" element={<HebrewsQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/james" element={<JamesQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/1-peter" element={<FirstPeterQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/2-peter" element={<SecondPeterQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/1-john" element={<FirstJohnQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/2-john" element={<SecondJohnQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/3-john" element={<ThirdJohnQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/jude" element={<JudeQuiz />} />
-          <Route path="/bible-questions-and-answers-hub/revelation" element={<RevelationQuiz />} />
-          <Route path="/bible-study" element={<BibleStudy />} />
-          <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
-          <Route path="/bible-questions-and-answers-hub/:slug*" element={<BibleQA />} />
-          <Route path="/dashboard/bible-study" element={<ProtectedRoute><DashboardBibleStudy /></ProtectedRoute>} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+function PageViewTracker() {
+  usePageView();
+  return null;
+}
+
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <PageViewTracker />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/auth/login" element={<Login />} />
+            <Route path="/auth/register" element={<Register />} />
+            <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+            <Route path="/auth/reset-password" element={<ResetPassword />} />
+            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/dashboard/quizzes" element={<ProtectedRoute><MyQuizzes /></ProtectedRoute>} />
+            <Route path="/dashboard/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+            <Route path="/dashboard/upgrade" element={<ProtectedRoute><Upgrade /></ProtectedRoute>} />
+            <Route path="/quiz-selection" element={<ProtectedRoute><QuizSelection /></ProtectedRoute>} />
+            <Route path="/quiz/:quizId" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
+            <Route path="/result/:id" element={<ProtectedRoute><Result /></ProtectedRoute>} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/public-leaderboard" element={<PublicLeaderboard />} />
+            <Route path="/competitions" element={<ProtectedRoute><Competitions /></ProtectedRoute>} />
+            <Route path="/competition-quiz/:competitionId" element={<ProtectedRoute><CompetitionQuiz /></ProtectedRoute>} />
+            <Route path="/competition-leaderboard/:competitionId" element={<ProtectedRoute><CompetitionLeaderboard /></ProtectedRoute>} />
+            <Route path="/admin" element={<ProtectedRoute requiredRole="admin"><AdminDashboard /></ProtectedRoute>} />
+            <Route path="/admin/attempts" element={<ProtectedRoute requiredRole="admin"><AdminAttempts /></ProtectedRoute>} />
+            <Route path="/admin/upload" element={<ProtectedRoute requiredRole="admin"><AdminUpload /></ProtectedRoute>} />
+            <Route path="/admin/quizzes" element={<ProtectedRoute requiredRole="admin"><AdminQuizzes /></ProtectedRoute>} />
+            <Route path="/admin/questions" element={<ProtectedRoute requiredRole="admin"><AdminQuestions /></ProtectedRoute>} />
+            <Route path="/admin/activity" element={<ProtectedRoute requiredRole="admin"><AdminActivity /></ProtectedRoute>} />
+            <Route path="/admin/competitions" element={<ProtectedRoute requiredRole="admin"><AdminCompetitions /></ProtectedRoute>} />
+            <Route path="/admin/users" element={<ProtectedRoute requiredRole="admin"><AdminUsers /></ProtectedRoute>} />
+            <Route path="/admin/users/:id" element={<ProtectedRoute requiredRole="admin"><AdminUserSettings /></ProtectedRoute>} />
+            <Route path="/admin/page-views" element={<ProtectedRoute requiredRole="admin"><PageViews /></ProtectedRoute>} />
+            <Route path="/rls-test" element={<ProtectedRoute requiredRole="admin"><RLSTest /></ProtectedRoute>} />
+            <Route path="/bible-questions-and-answers-hub/genesis" element={<GenesisQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/exodus" element={<ExodusQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/leviticus" element={<LeviticusQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/numbers" element={<NumbersQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/deuteronomy" element={<DeuteronomyQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/joshua" element={<JoshuaQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/judges" element={<JudgesQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/ruth" element={<RuthQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/1-samuel" element={<FirstSamuelQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/2-samuel" element={<SecondSamuelQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/1-kings" element={<FirstKingsQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/2-kings" element={<SecondKingsQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/1-chronicles" element={<FirstChroniclesQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/2-chronicles" element={<SecondChroniclesQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/ezra" element={<EzraQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/nehemiah" element={<NehemiahQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/esther" element={<EstherQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/job" element={<JobQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/psalms" element={<PsalmsQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/proverbs" element={<ProverbsQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/ecclesiastes" element={<EcclesiastesQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/song-of-solomon" element={<SongOfSolomonQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/isaiah" element={<IsaiahQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/jeremiah" element={<JeremiahQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/lamentations" element={<LamentationsQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/ezekiel" element={<EzekielQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/daniel" element={<DanielQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/hosea" element={<HoseaQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/joel" element={<JoelQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/amos" element={<AmosQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/obadiah" element={<ObadiahQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/jonah" element={<JonahQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/micah" element={<MicahQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/nahum" element={<NahumQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/habakkuk" element={<HabakkukQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/zephaniah" element={<ZephaniahQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/haggai" element={<HaggaiQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/zechariah" element={<ZechariahQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/malachi" element={<MalachiQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/matthew" element={<MatthewQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/mark" element={<MarkQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/luke" element={<LukeQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/john" element={<JohnQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/acts" element={<ActsQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/romans" element={<RomansQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/1-corinthians" element={<FirstCorinthiansQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/2-corinthians" element={<SecondCorinthiansQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/galatians" element={<GalatiansQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/ephesians" element={<EphesiansQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/philippians" element={<PhilippiansQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/colossians" element={<ColossiansQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/1-thessalonians" element={<FirstThessaloniansQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/2-thessalonians" element={<SecondThessaloniansQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/1-timothy" element={<FirstTimothyQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/2-timothy" element={<SecondTimothyQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/titus" element={<TitusQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/philemon" element={<PhilemonQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/hebrews" element={<HebrewsQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/james" element={<JamesQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/1-peter" element={<FirstPeterQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/2-peter" element={<SecondPeterQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/1-john" element={<FirstJohnQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/2-john" element={<SecondJohnQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/3-john" element={<ThirdJohnQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/jude" element={<JudeQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/revelation" element={<RevelationQuiz />} />
+            <Route path="/bible-study" element={<BibleStudy />} />
+            <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/:slug*" element={<BibleQA />} />
+            <Route path="/dashboard/bible-study" element={<ProtectedRoute><DashboardBibleStudy /></ProtectedRoute>} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

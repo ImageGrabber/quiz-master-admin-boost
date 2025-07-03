@@ -8,6 +8,15 @@ import { Clock, Brain, CheckCircle, AlertTriangle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose
+} from "@/components/ui/dialog";
 
 interface Question {
   id: number;
@@ -31,6 +40,9 @@ const Quiz = () => {
   const [showTimeWarning, setShowTimeWarning] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogTitle, setDialogTitle] = useState("");
+  const [dialogMessage, setDialogMessage] = useState("");
 
   // Fetch questions on component mount
   useEffect(() => {
@@ -51,11 +63,9 @@ const Quiz = () => {
       if (quizError) throw quizError;
 
       if (!quizQuestions || quizQuestions.length === 0) {
-        toast({
-          title: "No questions found",
-          description: "This quiz doesn't have any questions assigned.",
-          variant: "destructive",
-        });
+        setDialogTitle("No questions found");
+        setDialogMessage("This quiz doesn't have any questions assigned.");
+        setDialogOpen(true);
         navigate("/quiz-selection");
         return;
       }
@@ -73,20 +83,16 @@ const Quiz = () => {
       if (questionsData && questionsData.length > 0) {
         setQuestions(questionsData);
       } else {
-        toast({
-          title: "No questions available",
-          description: "Please contact an administrator to add questions to this quiz.",
-          variant: "destructive",
-        });
+        setDialogTitle("No questions available");
+        setDialogMessage("Please contact an administrator to add questions to this quiz.");
+        setDialogOpen(true);
         navigate("/quiz-selection");
       }
     } catch (error) {
       console.error('Error fetching questions:', error);
-      toast({
-        title: "Error",
-        description: "Failed to load questions. Please try again.",
-        variant: "destructive",
-      });
+      setDialogTitle("Error");
+      setDialogMessage("Failed to load questions. Please try again.");
+      setDialogOpen(true);
       navigate("/quiz-selection");
     } finally {
       setIsLoading(false);
@@ -100,34 +106,28 @@ const Quiz = () => {
       
       // Show time warnings
       if (timeLeft === 180) { // 3 minutes left
-        toast({
-          title: "⚠️ Time Warning",
-          description: "You have 3 minutes remaining!",
-          variant: "destructive",
-        });
+        setDialogTitle("⚠️ Time Warning");
+        setDialogMessage("You have 3 minutes remaining!");
+        setDialogOpen(true);
         setShowTimeWarning(true);
         setTimeout(() => setShowTimeWarning(false), 5000);
       } else if (timeLeft === 60) { // 1 minute left
-        toast({
-          title: "🚨 Final Warning",
-          description: "Only 1 minute remaining! Hurry up!",
-          variant: "destructive",
-        });
+        setDialogTitle("🚨 Final Warning");
+        setDialogMessage("Only 1 minute remaining! Hurry up!");
+        setDialogOpen(true);
         setShowTimeWarning(true);
         setTimeout(() => setShowTimeWarning(false), 5000);
       } else if (timeLeft === 30) { // 30 seconds left
-        toast({
-          title: "⏰ Almost Time's Up!",
-          description: "Only 30 seconds left!",
-          variant: "destructive",
-        });
+        setDialogTitle("⏰ Almost Time's Up!");
+        setDialogMessage("Only 30 seconds left!");
+        setDialogOpen(true);
       }
       
       return () => clearTimeout(timer);
     } else if (timeLeft === 0) {
       handleQuizComplete();
     }
-  }, [timeLeft, isCompleted, isLoading, toast]);
+  }, [timeLeft, isCompleted, isLoading]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -181,16 +181,21 @@ const Quiz = () => {
 
         if (error) {
           console.error('Error saving attempt:', error);
+          setDialogTitle("Error");
+          setDialogMessage("Failed to save your attempt. Please try again.");
+          setDialogOpen(true);
         }
       }
     } catch (error) {
       console.error('Error saving quiz attempt:', error);
+      setDialogTitle("Error");
+      setDialogMessage("Failed to save your attempt. Please try again.");
+      setDialogOpen(true);
     }
 
-    toast({
-      title: "Quiz completed!",
-      description: `You scored ${totalScore} points with ${correctAnswers} correct answers.`,
-    });
+    setDialogTitle("Quiz completed!");
+    setDialogMessage(`You scored ${totalScore} points with ${correctAnswers} correct answers.`);
+    setDialogOpen(true);
 
     // Navigate to results page with score
     navigate(`/result/latest`, { 
@@ -225,6 +230,20 @@ const Quiz = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       <Header />
+      {/* Dialog for all notifications */}
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{dialogTitle}</DialogTitle>
+            <DialogDescription>{dialogMessage}</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button onClick={() => setDialogOpen(false)}>Close</Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       {/* Floating Time Warning */}
       {showTimeWarning && (
         <div className="fixed top-20 right-4 z-50 animate-bounce">

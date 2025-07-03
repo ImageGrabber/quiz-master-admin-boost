@@ -1,9 +1,10 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Brain, LayoutDashboard, Trophy, User, Settings, LogOut, List, Menu, X, Award, Shield, BookOpen } from "lucide-react";
+import { Brain, LayoutDashboard, Trophy, User, Settings, LogOut, List, Menu, X, Award, Shield, BookOpen, Star } from "lucide-react";
 import Header from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
+import { Badge } from "@/components/ui/badge";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -22,7 +23,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [userName, setUserName] = useState<string>("");
-  const [userRole, setUserRole] = useState<string>("");
+  const [userPlan, setUserPlan] = useState<string>("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -31,11 +32,11 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       if (user) {
         const { data: profile } = await supabase
           .from('profiles')
-          .select('full_name, role')
+          .select('full_name, plan')
           .eq('id', user.id)
           .single();
-        setUserName(profile?.full_name || "User");
-        setUserRole(profile?.role || "");
+        setUserName(profile && 'full_name' in profile ? String(profile.full_name) : "User");
+        setUserPlan(profile && 'plan' in profile ? String(profile.plan) : "");
       }
     }
     fetchUserName();
@@ -64,6 +65,12 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         </div>
         <div className="flex-1 text-right text-gray-700 text-sm font-medium">
           Welcome back, {userName}
+          {userPlan === "pro" && (
+            <Badge className="ml-2 bg-purple-600 text-white">Pro</Badge>
+          )}
+          {userPlan === "free" && (
+            <Badge className="ml-2 bg-green-600 text-white">Free</Badge>
+          )}
         </div>
       </header>
       <div className="flex w-full h-screen">
@@ -96,19 +103,18 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 {item.name}
               </Button>
             ))}
-            {/* Admin-only: RLS Policy Tester */}
-            {userRole === "admin" && (
+            {userPlan === "free" && (
               <Button
-                key="RLS Policy Tester"
-                variant={location.pathname === "/rls-test" ? "default" : "ghost"}
-                className={`w-full justify-start h-10 ${location.pathname === "/rls-test" ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : "text-gray-700 hover:bg-gray-100"}`}
+                key="Upgrade"
+                variant={location.pathname === "/dashboard/upgrade" ? "default" : "ghost"}
+                className={`w-full justify-start h-10 ${location.pathname === "/dashboard/upgrade" ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white" : "text-gray-700 hover:bg-gray-100"}`}
                 onClick={() => {
-                  navigate("/rls-test");
+                  navigate("/dashboard/upgrade");
                   setIsMobileMenuOpen(false);
                 }}
               >
-                <Shield className="w-4 h-4 mr-3" />
-                RLS Policy Tester
+                <Star className="w-4 h-4 mr-3 text-yellow-500" />
+                Upgrade
               </Button>
             )}
             <div className="pt-4 mt-4 border-t border-gray-200">

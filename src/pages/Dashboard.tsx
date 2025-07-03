@@ -17,6 +17,7 @@ interface UserProfile {
   email: string;
   full_name: string;
   role: string;
+  plan?: string;
 }
 
 interface AttemptStats {
@@ -117,7 +118,14 @@ const Dashboard = () => {
         .eq('id', user.id)
         .single();
 
-      setProfile(profileData);
+      // Ensure 'plan' property is always present and type-safe
+      setProfile(profileData ? {
+        id: profileData.id,
+        email: profileData.email,
+        full_name: profileData.full_name,
+        role: profileData.role,
+        plan: typeof (profileData as any).plan === 'string' ? (profileData as any).plan : undefined
+      } : null);
     } catch (error) {
       console.error('Error fetching user data:', error);
       toast({
@@ -254,6 +262,11 @@ const Dashboard = () => {
     }
   };
 
+  // Add a function to handle upgrade navigation
+  const handleUpgrade = () => {
+    navigate("/dashboard/upgrade");
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
@@ -267,6 +280,18 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout>
+      {/* Upgrade Button for Free Users */}
+      {profile?.plan === "free" && (
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={handleUpgrade}
+            className="ml-2 px-4 py-2 rounded bg-purple-600 text-white font-semibold shadow hover:bg-purple-700 transition"
+          >
+            Upgrade to Pro
+          </button>
+        </div>
+      )}
+
       {/* Quiz Filter */}
       <div className="mb-6">
         <div className="flex items-center justify-between">

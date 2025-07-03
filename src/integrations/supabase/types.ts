@@ -191,6 +191,24 @@ export type Database = {
         };
         Relationships: [];
       }
+      page_views: {
+        Row: {
+          id: string;
+          page: string;
+          viewed_at: string;
+        };
+        Insert: {
+          id?: string;
+          page: string;
+          viewed_at?: string;
+        };
+        Update: {
+          id?: string;
+          page?: string;
+          viewed_at?: string;
+        };
+        Relationships: [];
+      };
     }
     Views: {
       [_ in never]: never
