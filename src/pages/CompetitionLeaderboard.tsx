@@ -267,7 +267,7 @@ export default function CompetitionLeaderboard() {
                   <div className="w-1/6 text-center">Prize</div>
                   <div className="w-1/6 text-center">Score</div>
                 </div>
-                {results.map((result) => {
+                {results.slice(0, 3).map((result) => {
                   const customMetric = calculateCustomMetric(result);
                   return (
                     <div
