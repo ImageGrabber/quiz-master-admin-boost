@@ -52,9 +52,19 @@ const Login = () => {
         setDialogTitle("Login successful!");
         setDialogMessage("Welcome back to Bible Quiz Competition.");
         setDialogOpen(true);
+        // Fetch the user's profile to check their role
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('id', data.user.id)
+          .single();
         setTimeout(() => {
           setDialogOpen(false);
-          navigate("/dashboard");
+          if (profile?.role === 'admin') {
+            navigate("/admin");
+          } else {
+            navigate("/dashboard");
+          }
         }, 1500);
       }
     } catch (error: any) {

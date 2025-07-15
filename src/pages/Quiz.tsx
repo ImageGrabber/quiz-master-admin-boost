@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -53,6 +53,8 @@ const Quiz = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogTitle, setDialogTitle] = useState("");
   const [dialogMessage, setDialogMessage] = useState("");
+  const location = useLocation();
+  const [attemptId, setAttemptId] = useState<string | null>(null);
 
   // Fetch questions on component mount
   useEffect(() => {
@@ -77,6 +79,58 @@ const Quiz = () => {
     };
     checkExistingAttempt();
   }, [quizId]);
+
+  // On quiz start, create an in-progress attempt
+  useEffect(() => {
+    const createAttempt = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user || !quizId) return;
+      // Check for existing in-progress attempt
+      const { data: existing, error: existingError } = await supabase
+        .from('attempts')
+        .select('id, score, completed')
+        .eq('user_id', user.id)
+        .eq('quiz_id', parseInt(quizId))
+        .order('created_at', { ascending: false })
+        .limit(1);
+      if (existing && existing.length > 0 && !existing[0].completed) {
+        setAttemptId(existing[0].id);
+        return;
+      }
+      // Create new attempt
+      const { data, error } = await supabase
+        .from('attempts')
+        .insert({
+          user_id: user.id,
+          quiz_id: parseInt(quizId),
+          score: 0,
+          seconds_used: 0,
+          answers: [],
+          completed: false
+        })
+        .select('id')
+        .single();
+      if (data && data.id) setAttemptId(data.id);
+    };
+    createAttempt();
+  }, [quizId]);
+
+  // On beforeunload, mark as failed if not completed
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (!isCompleted && attemptId) {
+        supabase
+          .from('attempts')
+          .update({ completed: true, score: 0 })
+          .eq('id', attemptId);
+        e.preventDefault();
+        e.returnValue = '';
+        return '';
+      }
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [isCompleted, attemptId]);
 
   const fetchQuestions = async () => {
     try {
@@ -160,6 +214,68 @@ const Quiz = () => {
     }
   }, [timeLeft, isCompleted, isLoading]);
 
+  // Block browser/tab close
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (!isCompleted) {
+        e.preventDefault();
+        e.returnValue = '';
+        return '';
+      }
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [isCompleted]);
+
+  // On quiz complete, update attempt with real score
+  const handleQuizComplete = async (finalAnswers = answers) => {
+    setIsCompleted(true);
+    
+    // Calculate score
+    const correctAnswers = finalAnswers.filter((answer, index) => 
+      answer === questions[index]?.correct_index
+    ).length;
+    
+    const baseScore = correctAnswers * 4 - (questions.length - correctAnswers) * 1;
+    const timeBonus = Math.ceil((600 - (600 - timeLeft)) / 6);
+    const totalScore = Math.max(0, baseScore + timeBonus);
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (user && attemptId) {
+        await supabase
+          .from('attempts')
+          .update({
+            score: totalScore,
+            seconds_used: 600 - timeLeft,
+            answers: finalAnswers,
+            completed: true
+          })
+          .eq('id', attemptId);
+      }
+    } catch (error) {
+      console.error('Error saving quiz attempt:', error);
+      setDialogTitle("Error");
+      setDialogMessage("Failed to save your attempt. Please try again.");
+      setDialogOpen(true);
+    }
+
+    setDialogTitle("Quiz completed!");
+    setDialogMessage(`You scored ${totalScore} points with ${correctAnswers} correct answers.`);
+    setDialogOpen(true);
+
+    // Navigate to results page with score
+    navigate(`/result/latest`, { 
+      state: { 
+        score: totalScore, 
+        correct: correctAnswers, 
+        total: questions.length,
+        timeUsed: 600 - timeLeft
+      } 
+    });
+  };
+
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -184,61 +300,6 @@ const Quiz = () => {
     }
   };
 
-  const handleQuizComplete = async (finalAnswers = answers) => {
-    setIsCompleted(true);
-    
-    // Calculate score
-    const correctAnswers = finalAnswers.filter((answer, index) => 
-      answer === questions[index]?.correct_index
-    ).length;
-    
-    const baseScore = correctAnswers * 4 - (questions.length - correctAnswers) * 1;
-    const timeBonus = Math.ceil((600 - (600 - timeLeft)) / 6);
-    const totalScore = Math.max(0, baseScore + timeBonus);
-
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      if (user) {
-        const { error } = await supabase
-          .from('attempts')
-          .insert({
-            user_id: user.id,
-            quiz_id: parseInt(quizId!),
-            score: totalScore,
-            seconds_used: 600 - timeLeft,
-            answers: finalAnswers
-          });
-
-        if (error) {
-          console.error('Error saving attempt:', error);
-          setDialogTitle("Error");
-          setDialogMessage("Failed to save your attempt. Please try again.");
-          setDialogOpen(true);
-        }
-      }
-    } catch (error) {
-      console.error('Error saving quiz attempt:', error);
-      setDialogTitle("Error");
-      setDialogMessage("Failed to save your attempt. Please try again.");
-      setDialogOpen(true);
-    }
-
-    setDialogTitle("Quiz completed!");
-    setDialogMessage(`You scored ${totalScore} points with ${correctAnswers} correct answers.`);
-    setDialogOpen(true);
-
-    // Navigate to results page with score
-    navigate(`/result/latest`, { 
-      state: { 
-        score: totalScore, 
-        correct: correctAnswers, 
-        total: questions.length,
-        timeUsed: 600 - timeLeft
-      } 
-    });
-  };
-
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
@@ -260,7 +321,6 @@ const Quiz = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <Header />
       {/* Dialog for all notifications */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
@@ -284,40 +344,7 @@ const Quiz = () => {
           </div>
         </div>
       )}
-
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-blue-100 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
-              <span className="text-lg font-semibold text-gray-900 align-middle">BibleBattles</span>
-            </div>
-            
-            {/* Timer Display */}
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" onClick={() => navigate("/")} className="text-gray-600 hover:text-gray-900">
-                Home
-              </Button>
-              <Button onClick={() => navigate("/leaderboard")} className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-                Leaderboard
-              </Button>
-            </div>
-          </div>
-          
-          {/* Progress and Timer Bar */}
-          <div className="mt-4 space-y-2">
-            <div className="flex items-center justify-between text-sm text-gray-600">
-              <span>Question {currentQuestion + 1} of {questions.length}</span>
-            </div>
-            <div className="flex space-x-2">
-              <Progress value={progress} className="flex-1 h-2" />
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* Quiz Content */}
+      {/* Quiz Content (no header) */}
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-3xl mx-auto">
           {/* Time Status Card */}
@@ -363,14 +390,12 @@ const Quiz = () => {
               </CardContent>
             </Card>
           </div>
-
           <Card className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-2xl font-bold text-gray-900 leading-relaxed">
                 {currentQ.question}
               </CardTitle>
             </CardHeader>
-            
             <CardContent className="space-y-4">
               {options.map((option, index) => (
                 <Button
@@ -396,12 +421,10 @@ const Quiz = () => {
                   </div>
                 </Button>
               ))}
-              
               <div className="pt-6 flex justify-between items-center">
                 <div className="text-sm text-gray-500">
                   Select an answer to continue
                 </div>
-                
                 <Button
                   onClick={handleNextQuestion}
                   disabled={selectedAnswer === null}

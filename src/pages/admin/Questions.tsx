@@ -4,11 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { HelpCircle, Search, Filter, Eye, Edit, Trash2, Plus, BookOpen } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import AdminLayout from "@/components/AdminLayout";
 import { supabase } from "@/integrations/supabase/client";
+import { Select } from "@/components/ui/select";
 
 interface Question {
   id: number;
@@ -24,6 +25,11 @@ interface Question {
   usage_count: number;
 }
 
+interface Quiz {
+  id: number;
+  title: string;
+}
+
 const Questions = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [filteredQuestions, setFilteredQuestions] = useState<Question[]>([]);
@@ -36,10 +42,22 @@ const Questions = () => {
   const [deleteQuestionId, setDeleteQuestionId] = useState<number | null>(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const { toast } = useToast();
+  const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+  const [selectedQuizId, setSelectedQuizId] = useState<number | null>(null);
+  const [errorDialogOpen, setErrorDialogOpen] = useState(false);
+  const [errorDialogMessage, setErrorDialogMessage] = useState("");
 
   useEffect(() => {
-    fetchQuestions();
+    fetchQuizzes();
   }, []);
+
+  useEffect(() => {
+    if (selectedQuizId) {
+      fetchQuestionsForQuiz(selectedQuizId);
+    } else {
+      fetchQuestions();
+    }
+  }, [selectedQuizId]);
 
   useEffect(() => {
     filterQuestions();
@@ -82,6 +100,61 @@ const Questions = () => {
         description: "Failed to load questions.",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchQuizzes = async () => {
+    const { data, error } = await supabase
+      .from('quizzes')
+      .select('id, title')
+      .order('title');
+    if (!error && data) setQuizzes(data);
+  };
+
+  const fetchQuestionsForQuiz = async (quizId: number) => {
+    setIsLoading(true);
+    try {
+      // Get question IDs for this quiz
+      const { data: quizQuestions, error: qqError } = await supabase
+        .from('quiz_questions')
+        .select('question_id, order_index')
+        .eq('quiz_id', quizId)
+        .order('order_index');
+      if (qqError) throw qqError;
+      const questionIds = quizQuestions.map(q => q.question_id);
+      if (questionIds.length === 0) {
+        setQuestions([]);
+        setIsLoading(false);
+        return;
+      }
+      // Fetch questions by IDs
+      const { data: questionsData, error: questionsError } = await supabase
+        .from('questions')
+        .select('*')
+        .in('id', questionIds);
+      if (questionsError) throw questionsError;
+      // Add usage count
+      const questionsWithUsage = await Promise.all(
+        (questionsData || []).map(async (question) => {
+          const { count } = await supabase
+            .from('quiz_questions')
+            .select('*', { count: 'exact', head: true })
+            .eq('question_id', question.id);
+          return {
+            ...question,
+            category: 'Bible',
+            difficulty: 'Medium',
+            usage_count: count || 0
+          };
+        })
+      );
+      setQuestions(questionsWithUsage);
+    } catch (error: any) {
+      toast({ title: 'Error', description: 'Failed to load questions.', variant: 'destructive' });
+      setErrorDialogMessage(error?.message || 'Failed to load questions.');
+      setErrorDialogOpen(true);
     } finally {
       setIsLoading(false);
     }
@@ -141,7 +214,11 @@ const Questions = () => {
       });
 
       // Refresh the questions list
-      fetchQuestions();
+      if (selectedQuizId) {
+        fetchQuestionsForQuiz(selectedQuizId);
+      } else {
+        fetchQuestions();
+      }
     } catch (error) {
       console.error('Error deleting question:', error);
       toast({
@@ -229,19 +306,32 @@ const Questions = () => {
   return (
     <AdminLayout>
       <div className="space-y-6">
+        {/* Quiz Selector */}
+        <div className="flex items-center gap-4 mb-4">
+          <label className="font-semibold text-lg">Select Quiz:</label>
+          <select
+            value={selectedQuizId ?? ''}
+            onChange={e => setSelectedQuizId(Number(e.target.value) || null)}
+            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">-- Choose a quiz --</option>
+            {quizzes.map(q => (
+              <option key={q.id} value={q.id}>{q.title}</option>
+            ))}
+          </select>
+        </div>
+        {/* Always show the rest of the UI */}
         {/* Header */}
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Question Management</h1>
             <p className="text-gray-600 mt-2">View and manage all questions in the database</p>
           </div>
-          
           <Button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center space-x-2">
             <Plus className="w-4 h-4" />
             <span>Add Question</span>
           </Button>
         </div>
-
         {/* Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <Card className="shadow-lg border-0 bg-white">
@@ -257,7 +347,6 @@ const Questions = () => {
               </div>
             </CardContent>
           </Card>
-
           <Card className="shadow-lg border-0 bg-white">
             <CardContent className="pt-6">
               <div className="flex items-center space-x-3">
@@ -273,7 +362,6 @@ const Questions = () => {
               </div>
             </CardContent>
           </Card>
-
           <Card className="shadow-lg border-0 bg-white">
             <CardContent className="pt-6">
               <div className="flex items-center space-x-3">
@@ -289,7 +377,6 @@ const Questions = () => {
               </div>
             </CardContent>
           </Card>
-
           <Card className="shadow-lg border-0 bg-white">
             <CardContent className="pt-6">
               <div className="flex items-center space-x-3">
@@ -306,7 +393,6 @@ const Questions = () => {
             </CardContent>
           </Card>
         </div>
-
         {/* Filters */}
         <Card className="shadow-lg border-0 bg-white">
           <CardContent className="pt-6">
@@ -322,7 +408,6 @@ const Questions = () => {
                   />
                 </div>
               </div>
-              
               <div className="flex gap-4">
                 <select
                   value={selectedCategory}
@@ -335,7 +420,6 @@ const Questions = () => {
                     </option>
                   ))}
                 </select>
-                
                 <select
                   value={selectedDifficulty}
                   onChange={(e) => setSelectedDifficulty(e.target.value)}
@@ -351,7 +435,6 @@ const Questions = () => {
             </div>
           </CardContent>
         </Card>
-
         {/* Questions Table */}
         <Card className="shadow-lg border-0 bg-white">
           <CardHeader>
@@ -425,7 +508,6 @@ const Questions = () => {
                   ))}
                 </TableBody>
               </Table>
-              
               {filteredQuestions.length === 0 && (
                 <div className="text-center py-8">
                   <HelpCircle className="w-16 h-16 text-gray-300 mx-auto mb-4" />
@@ -436,6 +518,7 @@ const Questions = () => {
             </div>
           </CardContent>
         </Card>
+        {/* View Question Dialog, Delete Dialog, Error Dialog (unchanged) */}
       </div>
 
       {/* View Question Dialog */}
@@ -521,6 +604,19 @@ const Questions = () => {
               Delete Question
             </Button>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Error Dialog */}
+      <Dialog open={errorDialogOpen} onOpenChange={setErrorDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Error Loading Questions</DialogTitle>
+            <DialogDescription>{errorDialogMessage}</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button onClick={() => setErrorDialogOpen(false)}>Close</Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </AdminLayout>
