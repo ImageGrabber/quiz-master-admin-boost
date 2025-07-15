@@ -8,7 +8,9 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "populate-bible-quizzes": "node scripts/populate-bible-qa-quizzes.js",
+    "populate-bible-quizzes-db": "node scripts/populate-bible-quizzes-db.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -54,13 +56,17 @@
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
     "react-dom": "^18.3.1",
+    "react-helmet": "^6.1.0",
     "react-hook-form": "^7.53.0",
     "react-resizable-panels": "^2.1.3",
-    "react-router-dom": "^6.26.2",
+    "react-router-dom": "^7.6.3",
+    "react-tsparticles": "^2.12.2",
     "recharts": "^2.12.7",
     "sonner": "^1.5.0",
+    "stripe": "^18.2.1",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
+    "tsparticles": "^3.8.1",
     "vaul": "^0.9.3",
     "zod": "^3.23.8"
   },

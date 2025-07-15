@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -32,36 +31,110 @@ const Dashboard = () => {
   });
   const [recentActivity, setRecentActivity] = useState<RecentActivity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [hideMembership, setHideMembership] = useState<boolean>(false);
+  const [loadingFlag, setLoadingFlag] = useState(true);
+
+  useEffect(() => {
+    async function checkAdminAuth() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        navigate('/auth/login');
+        return;
+      }
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', user.id)
+        .single();
+      if (profile?.role !== 'admin') {
+        navigate('/auth/login');
+      }
+    }
+    checkAdminAuth();
+  }, [navigate]);
 
   useEffect(() => {
     fetchAdminData();
   }, []);
 
+  // Fetch flag from Supabase on mount
+  useEffect(() => {
+    const fetchFlag = async () => {
+      setLoadingFlag(true);
+      const { data, error } = await supabase
+        .from('feature_flags')
+        .select('value')
+        .eq('key', 'hide_membership_section')
+        .single();
+      if (data && typeof data.value === 'boolean') {
+        setHideMembership(data.value);
+      }
+      setLoadingFlag(false);
+    };
+    fetchFlag();
+  }, []);
+
   const fetchAdminData = async () => {
     try {
-      // Fetch total users
-      const { count: userCount } = await supabase
+      console.log('Fetching admin data...');
+      
+      // Fetch total users with explicit columns
+      const { data: userData, error: userError } = await supabase
         .from('profiles')
-        .select('*', { count: 'exact', head: true });
+        .select('id, full_name, email');
+      const userCount = Array.isArray(userData) ? userData.length : 0;
+      if (userError) {
+        console.error('User fetch error:', userError);
+      }
+      console.log('User count:', userCount, 'User data:', userData);
 
-      // Fetch attempts data
-      const { data: attempts, error: attemptsError } = await supabase
-        .from('attempts')
-        .select(`
-          *,
-          profiles!inner(full_name, email)
-        `)
-        .order('created_at', { ascending: false });
+      // Fetch attempts using the new RPC function
+      // @ts-expect-error: custom RPC function
+      const { data: attemptsRaw, error: attemptsError } = await supabase.rpc('get_admin_attempts');
+      if (attemptsError) {
+        console.error('Attempts error:', attemptsError);
+        if (attemptsError.code) {
+          console.error('Attempts error code:', attemptsError.code);
+        }
+        throw attemptsError;
+      }
+      // Ensure attempts is an array
+      const attempts = Array.isArray(attemptsRaw) ? attemptsRaw : [];
+      console.log('Attempts data:', attempts);
 
-      if (attemptsError) throw attemptsError;
+      // Get user profiles for the attempts
+      const userIds = attempts.map(a => a.user_id).filter(Boolean) || [];
+      let profileMap = new Map();
+      
+      if (userIds.length > 0) {
+        const { data: profiles, error: profilesError } = await supabase
+          .from('profiles')
+          .select('id, full_name, email')
+          .in('id', userIds);
+        if (profilesError) {
+          console.error('Profiles error:', profilesError);
+        } else {
+          console.log('Profiles data:', profiles);
+          profiles?.forEach(profile => {
+            profileMap.set(profile.id, profile);
+          });
+        }
+      }
 
       // Calculate stats
-      const totalAttempts = attempts?.length || 0;
-      const scores = attempts?.map(a => a.score) || [];
+      const totalAttempts = attempts.length || 0;
+      const scores = attempts.map(a => a.score) || [];
       const averageScore = scores.length > 0 
         ? Math.round(scores.reduce((sum, score) => sum + score, 0) / scores.length)
         : 0;
       const highestScore = scores.length > 0 ? Math.max(...scores) : 0;
+
+      console.log('Calculated stats:', {
+        totalUsers: userCount || 0,
+        totalAttempts,
+        averageScore,
+        highestScore
+      });
 
       setStats({
         totalUsers: userCount || 0,
@@ -71,7 +144,7 @@ const Dashboard = () => {
       });
 
       // Format recent activity
-      const activity = attempts?.slice(0, 5).map(attempt => {
+      const activity = attempts.slice(0, 5).map(attempt => {
         const timeAgo = new Date(attempt.created_at);
         const now = new Date();
         const diffMinutes = Math.floor((now.getTime() - timeAgo.getTime()) / (1000 * 60));
@@ -87,15 +160,23 @@ const Dashboard = () => {
           timeString = `${Math.floor(diffMinutes / 1440)} days ago`;
         }
 
+        const profile = profileMap.get(attempt.user_id);
+        const userName = profile?.full_name || profile?.email || 'Anonymous User';
+
         return {
-          user: attempt.profiles?.full_name || attempt.profiles?.email || 'Anonymous User',
+          user: userName,
           action: "Completed quiz",
           score: attempt.score,
           time: timeString
         };
-      }) || [];
+      });
 
+      console.log('Recent activity:', activity);
       setRecentActivity(activity);
+
+      // Calculate user growth percentage (dummy logic for now, replace with real previous count if available)
+      const previousUserCount = stats.totalUsers > 1 ? stats.totalUsers - 1 : stats.totalUsers; // Replace with real previous period count if you have it
+      const userGrowth = previousUserCount > 0 ? Math.round(((stats.totalUsers - previousUserCount) / previousUserCount) * 100) : 0;
     } catch (error) {
       console.error('Error fetching admin data:', error);
     } finally {
@@ -103,14 +184,19 @@ const Dashboard = () => {
     }
   };
 
+  // Calculate user growth percentage (dummy logic for now, replace with real previous count if available)
+  const previousUserCount = stats.totalUsers > 1 ? stats.totalUsers - 1 : stats.totalUsers; // Replace with real previous period count if you have it
+  const userGrowth = previousUserCount > 0 ? Math.round(((stats.totalUsers - previousUserCount) / previousUserCount) * 100) : 0;
+
   const statsCards = [
     {
       title: "Total Users",
       value: stats.totalUsers.toLocaleString(),
-      change: "+12%",
-      changeType: "positive",
+      change: `${userGrowth > 0 ? "+" : ""}${userGrowth}%`,
+      changeType: userGrowth > 0 ? "positive" : userGrowth < 0 ? "negative" : "neutral",
       icon: Users,
-      description: "Active quiz takers"
+      description: "Active quiz takers",
+      onClick: () => navigate("/admin/users"),
     },
     {
       title: "Total Attempts",
@@ -135,8 +221,30 @@ const Dashboard = () => {
       changeType: "neutral",
       icon: Trophy,
       description: "Best score achieved"
-    }
+    },
+    {
+      title: "Page Views",
+      value: "",
+      change: "",
+      changeType: "neutral",
+      icon: Eye,
+      description: "View counts for all pages",
+      onClick: () => navigate("/admin/page-views"),
+    },
   ];
+
+  // Update flag in Supabase
+  const handleToggleMembership = async () => {
+    setLoadingFlag(true);
+    const { error } = await supabase
+      .from('feature_flags')
+      .update({ value: !hideMembership })
+      .eq('key', 'hide_membership_section');
+    if (!error) {
+      setHideMembership((prev) => !prev);
+    }
+    setLoadingFlag(false);
+  };
 
   if (isLoading) {
     return (
@@ -158,7 +266,7 @@ const Dashboard = () => {
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-            <p className="text-gray-600 mt-2">Overview of your QuizMaster platform</p>
+            <p className="text-gray-600 mt-2">Overview of your BibleBattles platform</p>
           </div>
           
           <div className="flex space-x-3">
@@ -181,10 +289,28 @@ const Dashboard = () => {
           </div>
         </div>
 
+        <div className="flex items-center gap-4 mb-6">
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={hideMembership}
+              onChange={handleToggleMembership}
+              className="form-checkbox h-5 w-5 text-blue-600"
+              disabled={loadingFlag}
+            />
+            <span className="text-sm font-medium text-gray-700">Hide Membership Section on User Dashboard</span>
+            {loadingFlag && <span className="ml-2 text-xs text-gray-400">Saving...</span>}
+          </label>
+        </div>
+
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {statsCards.map((stat, index) => (
-            <Card key={index} className="shadow-lg border-0 bg-white hover:shadow-xl transition-all duration-300">
+            <Card
+              key={index}
+              className="shadow-lg border-0 bg-white hover:shadow-xl transition-all duration-300 cursor-pointer"
+              onClick={stat.onClick}
+            >
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium text-gray-600">
                   {stat.title}
@@ -197,8 +323,8 @@ const Dashboard = () => {
                 <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
                 <div className="flex items-center mt-2">
                   <Badge 
-                    variant={stat.changeType === "positive" ? "default" : "secondary"}
-                    className={stat.changeType === "positive" ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-700"}
+                    variant={stat.changeType === "positive" ? "default" : stat.changeType === "negative" ? "destructive" : "secondary"}
+                    className={stat.changeType === "positive" ? "bg-green-100 text-green-700" : stat.changeType === "negative" ? "bg-red-100 text-red-700" : "bg-gray-100 text-gray-700"}
                   >
                     {stat.change}
                   </Badge>
