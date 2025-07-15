@@ -239,7 +239,7 @@ function StickyLeaderboardPanel() {
               <span className="font-bold text-blue-700">Leaderboard</span>
             </div>
             <ul className="flex-1 overflow-y-auto">
-              {leaders.map((user, i) => (
+              {leaders.slice(0, 3).map((user, i) => (
                 <li key={user.id} className="flex items-center justify-between py-2 border-b last:border-b-0 border-blue-50">
                   <div className="flex items-center gap-2">
                     {getRankIcon(i)}
