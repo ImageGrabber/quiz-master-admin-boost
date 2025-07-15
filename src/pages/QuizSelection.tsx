@@ -339,7 +339,7 @@ const QuizSelection = () => {
 
           {/* Bible Book Quizzes */}
           <div className="mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Bible Book Quizzes</h2>
+           
             {/*
             Pentateuch Section
             <div className="mb-8">
