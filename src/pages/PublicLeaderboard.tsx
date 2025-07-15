@@ -216,15 +216,12 @@ export default function PublicLeaderboard() {
       <header className="bg-white/70 backdrop-blur-md border-b border-blue-100 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}> 
-            <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
-            <span className="text-lg font-semibold text-gray-900">BibleBattles</span>
+            <img src="/sword.png" alt="Bible Quiz Competition Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
+            <span className="text-lg font-semibold text-gray-900">Bible Quiz Competition</span>
           </div>
           <nav className="flex items-center space-x-2">
-            <a href="/" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Home</a>
-            <a href="/bible-questions-and-answers-hub" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Bible Q&amp;A</a>
-            <a href="/public-leaderboard" className="text-blue-700 font-semibold px-3 py-2 rounded transition">Leaderboard</a>
-            <Button variant="ghost" onClick={() => navigate("/auth/register")}>Sign Up</Button>
-            <Button onClick={() => navigate("/auth/login")}>Sign In</Button>
+            <button className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" onClick={() => navigate("/auth/login")}>Sign In</button>
+            <Button variant="ghost" className="bg-black text-white font-semibold px-4 py-2 rounded" onClick={() => navigate("/auth/register")}>Sign Up</Button>
           </nav>
         </div>
       </header>
@@ -385,8 +382,8 @@ export default function PublicLeaderboard() {
           {/* Left: Logo and description */}
           <div className="flex-1 min-w-[220px] flex flex-col items-start mb-8 md:mb-0">
             <div className="flex items-center mb-4">
-              <img src="/sword.png" alt="BibleBattles Logo" className="w-10 h-10 mr-2" />
-              <span className="text-xl font-bold text-white">BibleBattles</span>
+              <img src="/sword.png" alt="Bible Quiz Competition Logo" className="w-10 h-10 mr-2" />
+              <span className="text-xl font-bold text-white">Bible Quiz Competition</span>
             </div>
             <p className="mb-4 text-gray-300 max-w-xs">Empower your faith with fun, challenging Bible quizzes for all ages. Compete, learn, and grow in your knowledge of Scripture!</p>
             <p className="text-gray-400 text-sm">Need help? Email <a href="mailto:info@biblequizcompetition.com" className="underline">info@biblequizcompetition.com</a></p>
@@ -412,7 +409,7 @@ export default function PublicLeaderboard() {
           </div>
         </div>
         <div className="max-w-7xl mx-auto px-4 mt-12 border-t border-blue-900 pt-6 text-center text-white text-sm">
-          © 2024 BibleBattles. All rights reserved.
+          © 2024 Bible Quiz Competition. All rights reserved.
         </div>
       </footer>
     </div>
