@@ -423,7 +423,6 @@ const Index = () => {
               <span className="text-lg font-semibold text-gray-900">Bible Quiz Competition</span>
             </div>
             <nav className="flex items-center space-x-2">
-              <a href="/public-leaderboard" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Leaderboard</a>
               <button className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" onClick={() => navigate("/auth/login")}>Sign In</button>
               <Button variant="ghost" className="bg-black text-white font-semibold px-4 py-2 rounded" onClick={() => navigate("/auth/register")}>Sign Up</Button>
             </nav>

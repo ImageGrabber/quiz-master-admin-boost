@@ -58,9 +58,6 @@ const Header = () => {
           {showHome && (
             <Button variant="ghost" onClick={() => navigate("/")}>Home</Button>
           )}
-          {showLeaderboard && (
-            <Button variant="ghost" onClick={() => navigate("/leaderboard")}> <Trophy className="w-4 h-4 mr-1 inline" /> Leaderboard </Button>
-          )}
           {showSignUp && (
             <Button variant="ghost" onClick={() => navigate("/auth/register")}>Sign Up</Button>
           )}
