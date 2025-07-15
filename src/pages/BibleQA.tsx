@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
-import { Trophy, Search, BookOpen, Users, Target, TrendingUp, Star, Clock, Zap, BookMarked, Heart, Award, Lightbulb, Globe, Shield, Crown } from "lucide-react";
+import { Trophy, Search, BookOpen, Users, Target, TrendingUp, Star, Clock, Zap, BookMarked, Heart, Award, Lightbulb, Globe, Shield, Crown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const bibleBooks = {
   oldTestament: {
@@ -64,6 +65,7 @@ export default function BibleQA() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [isSearching, setIsSearching] = useState(false);
+  const [isCategoryDialogOpen, setIsCategoryDialogOpen] = useState(false);
 
   // Get all books for search
   const allBooks = [
@@ -95,7 +97,7 @@ export default function BibleQA() {
 
   const handleCategoryClick = (categoryName: string) => {
     setSelectedCategory(categoryName);
-    setIsSearching(true);
+    setIsCategoryDialogOpen(true);
   };
 
   const getBooksByCategory = (categoryName: string) => {
@@ -125,7 +127,6 @@ export default function BibleQA() {
           </div>
           <nav className="flex items-center space-x-2">
             <a href="/" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Home</a>
-            <a href="/bible-questions-and-answers-hub" className="text-blue-700 font-semibold px-3 py-2 rounded transition">Bible Q&amp;A</a>
             <a href="/public-leaderboard" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Leaderboard</a>
             <Button variant="ghost" onClick={() => navigate("/auth/register")}>Sign Up</Button>
             <Button onClick={() => navigate("/auth/login")}>Sign In</Button>
@@ -231,42 +232,73 @@ export default function BibleQA() {
         <section className="mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Browse by Category</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {categories.map((category) => (
-              <Card 
-                key={category.name} 
-                className="shadow-lg border-0 hover:shadow-xl transition-all duration-300 cursor-pointer group"
-                onClick={() => handleCategoryClick(category.name)}
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <div className={`w-10 h-10 rounded-lg ${category.color} flex items-center justify-center`}>
-                      <category.icon className="w-5 h-5" />
+            {categories.map((category) => {
+              const isClickable = category.name === "Pentateuch" || category.name === "Historical Books";
+              return (
+                <Card 
+                  key={category.name} 
+                  className={`shadow-lg border-0 transition-all duration-300 group ${
+                    isClickable 
+                      ? "hover:shadow-xl cursor-pointer" 
+                      : "cursor-not-allowed opacity-60"
+                  }`}
+                  onClick={isClickable ? () => handleCategoryClick(category.name) : undefined}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-center space-x-3 mb-3">
+                      <div className={`w-10 h-10 rounded-lg ${category.color} flex items-center justify-center`}>
+                        <category.icon className="w-5 h-5" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <h3 className={`font-semibold text-gray-900 transition-colors ${
+                            isClickable ? "group-hover:text-blue-600" : ""
+                          }`}>{category.name}</h3>
+                          {!isClickable && (
+                            <span className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs px-2 py-1 rounded-full font-semibold">
+                              PRO
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-sm text-gray-500">{category.count} quizzes</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">{category.name}</h3>
-                      <p className="text-sm text-gray-500">{category.count} quizzes</p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-gray-600">{category.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+                    <p className="text-sm text-gray-600">{category.description}</p>
+                    {!isClickable && (
+                      <p className="text-xs text-gray-400 mt-2 italic">Upgrade to Pro to unlock</p>
+                    )}
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </section>
 
-        {/* Category Results */}
-        {selectedCategory && (
-          <section className="mb-12">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">{selectedCategory}</h2>
-              <Button variant="outline" onClick={() => setSelectedCategory("")}>Clear</Button>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {/* Category Dialog */}
+        <Dialog open={isCategoryDialogOpen} onOpenChange={setIsCategoryDialogOpen}>
+          <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+            <DialogHeader>
+              <div className="flex items-center justify-between">
+                <DialogTitle className="text-2xl font-bold text-gray-900">{selectedCategory}</DialogTitle>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={() => setIsCategoryDialogOpen(false)}
+                  className="h-8 w-8 p-0"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+            </DialogHeader>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
               {getBooksByCategory(selectedCategory).map((book) => (
                 <Card 
                   key={book} 
                   className="shadow-lg border-0 hover:shadow-xl transition-all duration-300 cursor-pointer group"
-                  onClick={() => handleSearch(book)}
+                  onClick={() => {
+                    handleSearch(book);
+                    setIsCategoryDialogOpen(false);
+                  }}
                 >
                   <CardContent className="p-4 text-center">
                     <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mx-auto mb-3">
@@ -278,8 +310,8 @@ export default function BibleQA() {
                 </Card>
               ))}
             </div>
-          </section>
-        )}
+          </DialogContent>
+        </Dialog>
 
         {/* Recent Searches */}
         {recentSearches.length > 0 && (

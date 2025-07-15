@@ -92,12 +92,27 @@ const MyQuizzes = () => {
         stats.last_attempt = attempt.created_at;
       });
 
-      // Calculate average scores
-      quizMap.forEach((stats) => {
-        const totalScore = attempts?.filter(a => a.quiz_id === stats.quiz_id)
-          .reduce((sum, a) => sum + a.score, 0) || 0;
-        stats.average_score = Math.round(totalScore / stats.attempts);
-      });
+      // Fetch global averages for all quizzes in quizMap
+      const quizIds = Array.from(quizMap.keys());
+      if (quizIds.length > 0) {
+        const { data: globalAverages, error: avgError } = await supabase
+          .from('attempts')
+          .select('quiz_id, score')
+          .in('quiz_id', quizIds);
+        if (!avgError && globalAverages) {
+          // Group by quiz_id and calculate average
+          const avgMap = new Map<number, number>();
+          quizIds.forEach(qid => {
+            const scores = globalAverages.filter(a => a.quiz_id === qid).map(a => a.score);
+            const avg = scores.length > 0 ? Math.round(scores.reduce((sum, s) => sum + s, 0) / scores.length) : 0;
+            avgMap.set(qid, avg);
+          });
+          // Set global average on each quiz
+          quizMap.forEach((stats, qid) => {
+            stats.average_score = avgMap.get(qid) || 0;
+          });
+        }
+      }
 
       setQuizStats(Array.from(quizMap.values()));
     } catch (error) {

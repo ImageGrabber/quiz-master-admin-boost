@@ -191,21 +191,17 @@ export default function PublicLeaderboard() {
         <div key={entry.id} className="flex items-center justify-between p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-100 hover:shadow-md transition-all">
           <div className="flex items-center space-x-4">
             <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold text-sm">
-              {getRankIcon(index + 1)}
+              <Users className="w-5 h-5" />
             </div>
             <div>
               <div className="font-semibold text-gray-900">{entry.name}</div>
-              <div className="text-sm text-gray-600">
-                {showTime ? `${entry.score} pts • ${formatTime(entry.time_taken)}` : `${entry.score} pts • ${entry.attempts} attempts`}
-              </div>
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            {entry.prize_amount && (
-              <div className="text-sm font-semibold text-green-600">
-                ${entry.prize_amount}
-              </div>
-            )}
+            {/* Show crown for top 3, with respective color, and points */}
+            {index === 0 && <Crown className="w-6 h-6 text-yellow-500 mr-1" />}
+            {index === 1 && <Crown className="w-6 h-6 text-gray-400 mr-1" />}
+            {index === 2 && <Crown className="w-6 h-6 text-amber-700 mr-1" />}
             <div className="text-lg font-bold text-blue-600">
               {showTime ? entry.score : entry.maxScore}
             </div>
@@ -272,9 +268,9 @@ export default function PublicLeaderboard() {
         </div>
 
         {/* Leaderboard Content */}
-        <Card className="shadow-lg border-0">
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
+        <Card className="shadow-lg border-0 px-8 py-8">
+          <CardHeader className="py-8 px-8">
+            <CardTitle className="flex items-center space-x-2 py-4 px-8">
               <Trophy className="w-6 h-6 text-yellow-500" />
               <span>
                 {activeTab === 'global' && 'Global Leaderboard'}
@@ -316,7 +312,7 @@ export default function PublicLeaderboard() {
         </Card>
 
         {/* Stats Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-40">
           <Card className="shadow-lg border-0 bg-gradient-to-br from-blue-50 to-blue-100">
             <CardContent className="p-6">
               <div className="flex items-center space-x-3">
@@ -347,15 +343,16 @@ export default function PublicLeaderboard() {
             </CardContent>
           </Card>
 
+          {/* New card for number of users (inflated) */}
           <Card className="shadow-lg border-0 bg-gradient-to-br from-green-50 to-green-100">
             <CardContent className="p-6">
               <div className="flex items-center space-x-3">
                 <div className="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center">
-                  <Award className="w-6 h-6 text-white" />
+                  <Users className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-green-700">$1,000+</div>
-                  <div className="text-sm text-green-600">Total Prizes</div>
+                  <div className="text-2xl font-bold text-green-700">5,000+</div>
+                  <div className="text-sm text-green-600">Quiz Takers</div>
                 </div>
               </div>
             </CardContent>
@@ -378,14 +375,6 @@ export default function PublicLeaderboard() {
               >
                 Start Quiz Now
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                onClick={() => navigate("/bible-questions-and-answers-hub")}
-                className="border-white text-white hover:bg-white hover:text-blue-600"
-              >
-                Practice First
-              </Button>
             </div>
           </CardContent>
         </Card>
@@ -401,7 +390,7 @@ export default function PublicLeaderboard() {
               <span className="text-xl font-bold text-white">BibleBattles</span>
             </div>
             <p className="mb-4 text-gray-300 max-w-xs">Empower your faith with fun, challenging Bible quizzes for all ages. Compete, learn, and grow in your knowledge of Scripture!</p>
-            <p className="text-gray-400 text-sm">Need help? Email <a href="mailto:info@biblequizcompeition.com" className="underline">info@biblequizcompeition.com</a></p>
+            <p className="text-gray-400 text-sm">Need help? Email <a href="mailto:info@biblequizcompetition.com" className="underline">info@biblequizcompetition.com</a></p>
           </div>
           {/* Center/Right: Links */}
           <div className="flex flex-1 flex-col sm:flex-row justify-end gap-12">

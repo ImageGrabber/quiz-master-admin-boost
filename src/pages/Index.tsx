@@ -273,20 +273,12 @@ function FaqSection() {
       a: "Yes! Weekly and monthly top scorers win prizes, certificates, and recognition on the leaderboard in every Bible competition."
     },
     {
-      q: "Can I retake quizzes or practice?",
-      a: "Absolutely. You can practice as many times as you like and retake quizzes to improve your score for the Bible Quiz Competition 2024 and 2025."
-    },
-    {
       q: "Is the Bible Quiz suitable for all ages?",
       a: "Yes, our quizzes are designed for all ages, from kids to adults, with questions for every level. Join the Bible competition 2025 with your family or group!"
     },
     {
       q: "How is my score calculated?",
       a: "You earn points for correct answers, speed, and bonus rounds. Wrong answers may deduct points. This applies to all our Bible quiz competitions."
-    },
-    {
-      q: "Can I create my own quiz for my group?",
-      a: "Yes! You can create custom quizzes for your church, family, or youth group and even host your own Bible competition."
     },
     {
       q: "Do I need to pay to participate?",
@@ -306,7 +298,7 @@ function FaqSection() {
           <h2 className="text-4xl md:text-5xl font-extrabold text-center text-gray-900 mb-4">Frequently Asked Questions</h2>
           <p className="text-lg text-gray-700 text-center max-w-xl mb-2">
             Everything you need to know about QuizMaster. Can't find your answer?{' '}
-            <a href="mailto:support@quizmaster.com" className="text-blue-600 underline">Contact our support team.</a>
+            <a href="mailto:info@biblequizcompetition.com" className="text-blue-600 underline">Contact our support team.</a>
           </p>
         </div>
         <div className="space-y-4">
@@ -427,15 +419,13 @@ const Index = () => {
         <header className="bg-white/70 backdrop-blur-md border-b border-blue-100 sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}> 
-              <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
-              <span className="text-lg font-semibold text-gray-900">BibleBattles</span>
+              <img src="/sword.png" alt="Bible Quiz Competition Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
+              <span className="text-lg font-semibold text-gray-900">Bible Quiz Competition</span>
             </div>
             <nav className="flex items-center space-x-2">
-              <a href="/bible-questions-and-answers-hub" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Bible Q&amp;A</a>
-              <a href="/bible-study" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Bible Study</a>
               <a href="/public-leaderboard" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Leaderboard</a>
-              <Button variant="ghost" onClick={() => navigate("/auth/register")}>Sign Up</Button>
-              <Button onClick={() => navigate("/auth/login")}>Sign In</Button>
+              <button className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" onClick={() => navigate("/auth/login")}>Sign In</button>
+              <Button variant="ghost" className="bg-black text-white font-semibold px-4 py-2 rounded" onClick={() => navigate("/auth/register")}>Sign Up</Button>
             </nav>
           </div>
         </header>
@@ -470,34 +460,32 @@ const Index = () => {
               <div className="flex justify-center mb-4">
                 <span className="inline-flex items-center px-4 py-1 mt-20 mb-4 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold text-sm shadow">
                   <Calendar className="w-4 h-4 mr-2" />
-                  Next Quiz: Saturday, 8 AM – 8 PM <span className="ml-2 text-blue-100 font-normal">{nextQuizLabel}</span>
+                  Next Quiz: Saturday, 8 AM – 8 PM <span className="ml-2 text-white font-normal">{nextQuizLabel}</span>
                 </span>
               </div>
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10 leading-tight  mb-4">
-                Join the <span className="text-blue-700">Bible Quiz Competition 2024</span> & 2025<br />
-                <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent text-5xl md:text-6xl   mt-4">Online Bible Quiz Competition 2025</span>
+                Join the <span className="text-blue-700">Bible Quiz Challenge!</span>
               </h1>
-              <p className="text-base text-blue-900 font-semibold mb-4">Participate in the bible quiz competition 2024, online bible quiz competition 2025, bible quiz competition 2025, and bible competition 2025. Test your knowledge, compete globally, and win amazing prizes!</p>
               <p className="text-xl text-gray-700 mb-6 max-w-4xl mx-auto leading-relaxed">
-                Join our weekly Bible Quiz every <span className="font-semibold text-blue-700">Saturday, 8 AM – 8 PM</span>! Participate in the Bible Quiz Competition 2024 and get ready for the Online Bible Quiz Competition 2025. Compete with believers from around the world, answer 25 challenging questions, and win exciting prizes. Climb the leaderboard and become a Bible Quiz Champion!
+                Test your knowledge, compete with others, and win prizes every Saturday.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/login")}> <Play className="w-5 h-5 mr-2" /> Start Quiz Now <ArrowRight className="w-5 h-5 ml-2" /> </Button>
-                <Button variant="outline" size="lg" className="px-8 py-6 text-lg font-medium border-2 border-grey-200 hover:border-blue-300 rounded-xl bg-white/60 backdrop-blur-md" onClick={() => navigate("/leaderboard")}> <Trophy className="w-5 h-5 mr-2" /> View Leaderboard</Button>
+                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold rounded shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/login")}> <Play className="w-5 h-5 mr-2" /> Start Quiz Now <ArrowRight className="w-5 h-5 ml-2" /> </Button>
+                <Button variant="outline" size="lg" className="px-8 py-6 text-lg font-medium border-2 border-grey-200 hover:border-transparent rounded bg-white/60 backdrop-blur-md hover:text-white hover:bg-black" onClick={() => navigate("/public-leaderboard")}> <Trophy className="w-5 h-5 mr-2" /> View Leaderboard</Button>
               </div>
               
             </div>
             
           </div>
            {/* Statistics */}
-        <section className="mb-40 mt-5">
+        <section className="mb-40 mt-32">
           <div className="container mx-auto px-4 mb-10">
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-600">
+            <div className="flex flex-wrap justify-center gap-2 text-sm text-gray-600">
               <div className="flex items-center gap-1"><Users className="w-4 h-4 text-blue-500" /> 1,250+ participants</div>
               <div className="flex items-center gap-1"><Award className="w-4 h-4 text-purple-500" /> $15,000+ prizes awarded</div>
               <div className="flex items-center gap-1"><Star className="w-4 h-4 text-yellow-500" /> Weekly winners & special rewards</div>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 max-w-4xl mx-auto mt-20">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 max-w-4xl mx-auto mt-10">
               {stats.map((stat, i) => (
                 <div key={i} className="rounded-2xl shadow-none p-2 flex flex-col items-center bg-transparent">
                   <stat.icon className="w-6 h-6 text-gray-500 mb-2" />
@@ -701,143 +689,120 @@ const Index = () => {
         <div id="faq">
           <FaqSection />
         </div>
-         {/* Bible Q&A Section */}
-         <section className="py-16 bg-gradient-to-br from-blue-50 via-purple-100">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Bible Q&amp;A Hub</h2>
-            <p className="text-lg text-gray-700 mb-6">
-              Explore questions and answers for every book, character, and theme in the Bible. Test your knowledge or prepare for your next quiz competition!
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 mb-6">
-              <span className="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-semibold">Genesis Quiz</span>
-              <span className="inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">Matthew Quiz</span>
-              <span className="inline-block bg-yellow-100 text-yellow-700 px-4 py-2 rounded-full text-sm font-semibold">Moses Quiz</span>
-              <span className="inline-block bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-semibold">Faith Quiz</span>
-            </div>
-            <Link to="/bible-questions-and-answers-hub">
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300">
-                Explore Bible Q&amp;A
-              </button>
-            </Link>
-          </div>
-        </section>
-
-        {/* Bible Study Section */}
-        <section className="py-16 bg-gradient-to-br from-green-50 via-blue-100 to-purple-50">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Deepen Your Faith with Bible Study</h2>
-              <p className="text-lg text-gray-700 mb-6 max-w-3xl mx-auto">
-                Access daily devotionals, structured study plans, and guided spiritual growth. Create an account to save your progress and unlock all features.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-              {/* Daily Devotionals */}
-              <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mb-4">
-                    <Calendar className="w-6 h-6 text-blue-600" />
-                  </div>
-                  <CardTitle className="text-xl">Daily Devotionals</CardTitle>
-                  <CardDescription>
-                    Fresh scripture, reflection, and prayer every day
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm text-gray-600">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      New content daily
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      Scripture-based insights
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      Practical applications
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-
-              {/* Study Plans */}
-              <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center mb-4">
-                    <BookOpen className="w-6 h-6 text-green-600" />
-                  </div>
-                  <CardTitle className="text-xl">Study Plans</CardTitle>
-                  <CardDescription>
-                    30-day and 90-day guided journeys
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm text-gray-600">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      Bible Foundations (30 days)
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      Discipleship Journey (90 days)
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      Progress tracking
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-
-              {/* Account Benefits */}
-              <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
-                <CardHeader>
-                  <div className="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center mb-4">
-                    <Users className="w-6 h-6 text-purple-600" />
-                  </div>
-                  <CardTitle className="text-xl">Create Account</CardTitle>
-                  <CardDescription>
-                    Unlock personalized features and save progress
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm text-gray-600">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      Save study progress
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      Personalized dashboard
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4 text-green-500" />
-                      Track achievements
-                    </li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="text-center">
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg" className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/register")}>
-                  <BookOpen className="w-5 h-5 mr-2" />
-                  Create Account & Start Studying
-                </Button>
-                <Button size="lg" variant="outline" className="px-8 py-4 rounded-xl font-semibold text-lg border-2 border-gray-300 hover:border-blue-400 transition-all duration-300" onClick={() => navigate("/auth/login")}>
-                  <User className="w-5 h-5 mr-2" />
-                  Sign In
-                </Button>
+         {/* Bible Study Section */}
+         {false && (
+          <section className="py-16 bg-gradient-to-br from-green-50 via-blue-100 to-purple-50">
+            <div className="max-w-6xl mx-auto px-4">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Deepen Your Faith with Bible Study</h2>
+                <p className="text-lg text-gray-700 mb-6 max-w-3xl mx-auto">
+                  Access daily devotionals, structured study plans, and guided spiritual growth. Create an account to save your progress and unlock all features.
+                </p>
               </div>
-              <p className="text-sm text-gray-600 mt-4">
-                Free to join • No credit card required • Start studying immediately
-              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                {/* Daily Devotionals */}
+                <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mb-4">
+                      <Calendar className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <CardTitle className="text-xl">Daily Devotionals</CardTitle>
+                    <CardDescription>
+                      Fresh scripture, reflection, and prayer every day
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        New content daily
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        Scripture-based insights
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        Practical applications
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+                {/* Study Plans */}
+                <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center mb-4">
+                      <BookOpen className="w-6 h-6 text-green-600" />
+                    </div>
+                    <CardTitle className="text-xl">Study Plans</CardTitle>
+                    <CardDescription>
+                      30-day and 90-day guided journeys
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        Bible Foundations (30 days)
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        Discipleship Journey (90 days)
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        Progress tracking
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+                {/* Account Benefits */}
+                <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-lg bg-purple-100 flex items-center justify-center mb-4">
+                      <Users className="w-6 h-6 text-purple-600" />
+                    </div>
+                    <CardTitle className="text-xl">Create Account</CardTitle>
+                    <CardDescription>
+                      Unlock personalized features and save progress
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm text-gray-600">
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        Save study progress
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        Personalized dashboard
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-green-500" />
+                        Track achievements
+                      </li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+              <div className="text-center">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button size="lg" className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/register")}> 
+                    <BookOpen className="w-5 h-5 mr-2" />
+                    Create Account & Start Studying
+                  </Button>
+                  <Button size="lg" variant="outline" className="px-8 py-4 rounded-xl font-semibold text-lg border-2 border-gray-300 hover:border-blue-400 transition-all duration-300" onClick={() => navigate("/auth/login")}>
+                    <User className="w-5 h-5 mr-2" />
+                    Sign In
+                  </Button>
+                </div>
+                <p className="text-sm text-gray-600 mt-4">
+                  Free to join • No credit card required • Start studying immediately
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
         {/* Footer */}
         <footer className="bg-[#181c3a] text-gray-200 pt-16 pb-8 mt-0">
           <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row md:justify-between md:items-start gap-12">
@@ -847,10 +812,10 @@ const Index = () => {
                 <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-2">
                   <Brain className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-xl font-bold text-white">QuizMaster</span>
+                <span className="text-xl font-bold text-white">Bible Quiz Competition</span>
               </div>
               <p className="mb-4 text-gray-300 max-w-xs">Empower your faith with fun, challenging Bible quizzes for all ages. Compete, learn, and grow in your knowledge of Scripture!</p>
-              <p className="text-gray-400 text-sm">Need help? Email <a href="mailto:support@quizmaster.com" className="underline">support@quizmaster.com</a></p>
+              <p className="text-gray-400 text-sm">Need help? Email <a href="mailto:info@biblequizcompetition.com" className="underline">info@biblequizcompetition.com</a></p>
             </div>
             {/* Center/Right: Links */}
             <div className="flex flex-1 flex-col sm:flex-row justify-end gap-12">

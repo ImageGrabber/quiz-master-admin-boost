@@ -131,6 +131,7 @@ const App = () => {
             <Route path="/dashboard/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
             <Route path="/dashboard/upgrade" element={<ProtectedRoute><Upgrade /></ProtectedRoute>} />
             <Route path="/dashboard/recent-attempts" element={<ProtectedRoute><RecentAttempts /></ProtectedRoute>} />
+            <Route path="/dashboard/bible-study" element={<ProtectedRoute><DashboardBibleStudy /></ProtectedRoute>} />
             <Route path="/quiz-selection" element={<ProtectedRoute><QuizSelection /></ProtectedRoute>} />
             <Route path="/quiz/:quizId" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
             <Route path="/result/:id" element={<ProtectedRoute><Result /></ProtectedRoute>} />
@@ -216,10 +217,6 @@ const App = () => {
             <Route path="/bible-questions-and-answers-hub/3-john" element={<ThirdJohnQuiz />} />
             <Route path="/bible-questions-and-answers-hub/jude" element={<JudeQuiz />} />
             <Route path="/bible-questions-and-answers-hub/revelation" element={<RevelationQuiz />} />
-            <Route path="/bible-study" element={<BibleStudy />} />
-            <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/:slug*" element={<BibleQA />} />
-            <Route path="/dashboard/bible-study" element={<ProtectedRoute><DashboardBibleStudy /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
