@@ -345,10 +345,10 @@ const DashboardBibleStudy = () => {
 
       {/* Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-2"> {/* Only two tabs now */}
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="devotionals">Daily Devotional</TabsTrigger>
-          <TabsTrigger value="plans">Study Plans</TabsTrigger>
+          {/* <TabsTrigger value="plans">Study Plans</TabsTrigger> */}
         </TabsList>
 
         {/* Overview Tab */}
@@ -383,8 +383,8 @@ const DashboardBibleStudy = () => {
                 </div>
               </CardContent>
             </Card>
-
-            {/* Study Progress Summary */}
+            {/* Hide Study Progress summary card */}
+            {/*
             <Card className="shadow-lg">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -423,6 +423,7 @@ const DashboardBibleStudy = () => {
                 </div>
               </CardContent>
             </Card>
+            */}
           </div>
         </TabsContent>
 
@@ -513,8 +514,8 @@ const DashboardBibleStudy = () => {
           </Card>
         </TabsContent>
 
-        {/* Study Plans Tab */}
-        <TabsContent value="plans" className="space-y-6">
+        {/* Hide Study Plans Tab Content */}
+        {/* <TabsContent value="plans" className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {studyPlans.map((plan) => (
               <Card key={plan.id} className="shadow-lg hover:shadow-xl transition-all duration-300">
@@ -565,7 +566,7 @@ const DashboardBibleStudy = () => {
               </Card>
             ))}
           </div>
-        </TabsContent>
+        </TabsContent> */}
       </Tabs>
     </DashboardLayout>
   );

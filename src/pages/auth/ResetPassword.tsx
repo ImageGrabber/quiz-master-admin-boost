@@ -3,9 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Brain, Lock, ArrowLeft, CheckCircle, Eye, EyeOff } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { Lock, CheckCircle, Eye, EyeOff } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 const ResetPassword = () => {
@@ -16,206 +14,165 @@ const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
-  const { toast } = useToast();
 
   useEffect(() => {
     // Check if user has a valid session (came from reset link)
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
-        toast({
-          title: "Invalid reset link",
-          description: "Please request a new password reset link.",
-          variant: "destructive",
-        });
+        alert("Invalid reset link. Please request a new password reset link.");
         navigate("/auth/forgot-password");
       }
     };
-    
     checkSession();
-  }, [navigate, toast]);
+  }, [navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (password !== confirmPassword) {
-      toast({
-        title: "Passwords don't match",
-        description: "Please make sure both passwords are the same.",
-        variant: "destructive",
-      });
+      alert("Passwords don't match. Please make sure both passwords are the same.");
       return;
     }
-
     if (password.length < 6) {
-      toast({
-        title: "Password too short",
-        description: "Password must be at least 6 characters long.",
-        variant: "destructive",
-      });
+      alert("Password must be at least 6 characters long.");
       return;
     }
-
     setIsLoading(true);
-
     try {
-      const { error } = await supabase.auth.updateUser({
-        password: password
-      });
-
+      const { error } = await supabase.auth.updateUser({ password });
       if (error) throw error;
-
       setIsSuccess(true);
-      toast({
-        title: "Password updated!",
-        description: "Your password has been successfully reset.",
-      });
     } catch (error: any) {
-      toast({
-        title: "Failed to update password",
-        description: error.message || "Please try again.",
-        variant: "destructive",
-      });
+      alert(error.message || "Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
 
+  // Right panel with unique 'Password Tips' card and others
+  const RightPanel = () => (
+    <div className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 flex flex-col justify-center items-center p-8 min-h-screen">
+      <div className="flex flex-col gap-6 w-full max-w-xs">
+        <div className="bg-white/10 rounded-xl p-8 -ml-16 md:-ml-32 shadow-lg">
+          <span className="text-white text-lg font-semibold mb-2">Password Tips</span>
+          <ul className="list-disc list-inside text-purple-100 text-sm mt-2 space-y-1">
+            <li>Use at least 6 characters</li>
+            <li>Include numbers and letters</li>
+            <li>Avoid common words</li>
+            <li>Keep your password private</li>
+          </ul>
+        </div>
+        <div className="bg-white/10 rounded-xl p-8 md:-mr-32 -mr-16 shadow-lg">
+          <span className="text-white text-lg font-semibold mb-2">Upcoming Event</span>
+          <div className="flex items-center gap-2 mb-2">
+            <svg className="w-6 h-6 text-yellow-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+            <span className="text-yellow-100 font-semibold">Next Quiz: Saturday, 8 AM – 8 PM</span>
+          </div>
+          <span className="text-purple-100 text-xs">Don't miss our weekly live event!</span>
+        </div>
+        <div className="bg-white/10 rounded-xl p-8 -ml-16 md:-ml-32 shadow-lg">
+          <span className="text-white text-lg font-semibold mb-2">Why Register?</span>
+          <ul className="list-disc list-inside text-purple-100 text-sm mt-2 space-y-1">
+            <li>Track your quiz progress</li>
+            <li>Earn badges & win prizes</li>
+            <li>Access exclusive events</li>
+            <li>Join a vibrant community</li>
+          </ul>
+        </div>
+      </div>
+      <div className="mt-10 text-center text-white text-lg font-semibold">
+        Compete, Learn, and Win!<br />
+        <span className="text-purple-100 text-base font-normal">Join thousands of members testing their Bible knowledge every week.</span>
+      </div>
+    </div>
+  );
+
   if (isSuccess) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4">
-        <div className="w-full max-w-md">
-          <Card className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
-            <CardHeader className="text-center space-y-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl flex items-center justify-center mx-auto">
-                <CheckCircle className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <CardTitle className="text-2xl font-bold text-gray-900">
-                  Password Reset Successfully!
-                </CardTitle>
-                <CardDescription className="text-gray-600 mt-2">
-                  Your password has been updated. You can now sign in with your new password.
-                </CardDescription>
-              </div>
-            </CardHeader>
-
-            <CardContent className="text-center space-y-4">
-              <Button
-                onClick={() => navigate("/auth/login")}
-                className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                Sign In
-              </Button>
-            </CardContent>
-          </Card>
+      <div className="min-h-screen flex flex-col md:flex-row">
+        <div className="flex-1 flex flex-col justify-center items-center bg-white p-8 min-h-screen">
+          <div className="w-full max-w-md text-center">
+            <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-6" />
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">Password Reset Successfully!</h2>
+            <p className="text-gray-700 mb-6">Your password has been updated. You can now sign in with your new password.</p>
+            <Button className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-full shadow-lg transition-all duration-300 mt-2" onClick={() => navigate('/auth/login')}>Sign In</Button>
+          </div>
         </div>
+        <RightPanel />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <Button
-          variant="ghost"
-          onClick={() => navigate("/auth/login")}
-          className="mb-6 text-gray-600 hover:text-gray-900"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Login
-        </Button>
-
-        <Card className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
-          <CardHeader className="text-center space-y-4">
-            <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center mx-auto">
-              <Brain className="w-8 h-8 text-white" />
+    <div className="min-h-screen flex flex-col md:flex-row">
+      <div className="flex-1 flex flex-col justify-center items-center bg-white p-8 min-h-screen">
+        <div className="w-full max-w-md">
+          <h1 className="text-3xl font-bold text-gray-900 mb-3">Reset Your Password</h1>
+          <p className="text-gray-600 mb-10 text-lg">Enter your new password below.</p>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <Label htmlFor="password" className="block text-gray-700 font-semibold mb-2 text-base">New Password<span className="text-purple-600">*</span></Label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter your new password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="pl-12 pr-10 h-12 border-gray-200 rounded-full bg-gray-50 focus:bg-white focus:border-purple-500 focus:ring-2 focus:ring-purple-100 transition placeholder-gray-400"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
             </div>
             <div>
-              <CardTitle className="text-2xl font-bold text-gray-900">
-                Reset Your Password
-              </CardTitle>
-              <CardDescription className="text-gray-600 mt-2">
-                Enter your new password below
-              </CardDescription>
-            </div>
-          </CardHeader>
-
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-gray-700 font-medium">
-                  New Password
-                </Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
-                  <Input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Enter your new password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 pr-10 h-12 border-gray-200 focus:border-blue-500 focus:ring-blue-500"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
-                  >
-                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="confirmPassword" className="text-gray-700 font-medium">
-                  Confirm New Password
-                </Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
-                  <Input
-                    id="confirmPassword"
-                    type={showConfirmPassword ? "text" : "password"}
-                    placeholder="Confirm your new password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="pl-10 pr-10 h-12 border-gray-200 focus:border-blue-500 focus:ring-blue-500"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
-                  >
-                    {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                </div>
-              </div>
-
-              <Button
-                type="submit"
-                className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                disabled={isLoading}
-              >
-                {isLoading ? "Updating..." : "Update Password"}
-              </Button>
-            </form>
-
-            <div className="mt-6 text-center">
-              <p className="text-gray-600">
-                Remember your password?{" "}
-                <Link
-                  to="/auth/login"
-                  className="text-blue-600 hover:text-blue-700 font-semibold hover:underline"
+              <Label htmlFor="confirmPassword" className="block text-gray-700 font-semibold mb-2 text-base">Confirm New Password<span className="text-purple-600">*</span></Label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                <Input
+                  id="confirmPassword"
+                  type={showConfirmPassword ? "text" : "password"}
+                  placeholder="Confirm your new password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="pl-12 pr-10 h-12 border-gray-200 rounded-full bg-gray-50 focus:bg-white focus:border-purple-500 focus:ring-2 focus:ring-purple-100 transition placeholder-gray-400"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
                 >
-                  Sign in here
-                </Link>
-              </p>
+                  {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
             </div>
-          </CardContent>
-        </Card>
+            <Button
+              type="submit"
+              className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-full shadow-lg transition-all duration-300 mt-2"
+              disabled={isLoading}
+            >
+              {isLoading ? "Updating..." : "Update Password"}
+            </Button>
+          </form>
+          <div className="mt-8 text-center">
+            <p className="text-gray-600">
+              Remember your password?{' '}
+              <Link to="/auth/login" className="text-purple-600 hover:text-purple-700 hover:underline font-semibold">
+                Sign in here
+              </Link>
+            </p>
+          </div>
+        </div>
       </div>
+      <RightPanel />
     </div>
   );
 };

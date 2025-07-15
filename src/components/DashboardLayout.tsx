@@ -13,7 +13,6 @@ interface DashboardLayoutProps {
 const navItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "My Quizzes", href: "/dashboard/quizzes", icon: List },
-  { name: "Bible Study", href: "/dashboard/bible-study", icon: BookOpen },
   { name: "Competitions", href: "/competitions", icon: Award },
   { name: "Leaderboard", href: "/leaderboard", icon: Trophy },
   { name: "Recent Attempts", href: "/dashboard/recent-attempts", icon: User },
@@ -26,6 +25,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [userName, setUserName] = useState<string>("");
   const [userPlan, setUserPlan] = useState<string>("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const showUpgrade = false; // Set to true to show the Upgrade tab in the sidebar
 
   useEffect(() => {
     async function fetchUserName() {
@@ -55,7 +55,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30 w-full h-16 flex items-center px-6 justify-between">
         <div className="flex items-center space-x-2">
           <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
-          <span className="text-lg font-semibold text-gray-900 align-middle">BibleBattles</span>
+          <span className="text-lg font-semibold text-gray-900 align-middle">Bible Quiz Competition</span>
           <Button
             variant="ghost"
             size="sm"
@@ -92,20 +92,24 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         `}>
           <nav className="flex-1 px-4 py-6 space-y-2">
             {navItems.map((item) => (
-              <Button
-                key={item.name}
-                variant={location.pathname === item.href ? "default" : "ghost"}
-                className={`w-full justify-start h-10 ${location.pathname === item.href ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : "text-gray-700 hover:bg-gray-100"}`}
-                onClick={() => {
-                  navigate(item.href);
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                <item.icon className="w-4 h-4 mr-3" />
-                {item.name}
-              </Button>
+              // Hide the Competitions tab from the sidebar
+              item.name === "Competitions" ? null : (
+                <Button
+                  key={item.name}
+                  variant={location.pathname === item.href ? "default" : "ghost"}
+                  className={`w-full justify-start h-10 ${location.pathname === item.href ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : "text-gray-700 hover:bg-gray-100"}`}
+                  onClick={() => {
+                    navigate(item.href);
+                    setIsMobileMenuOpen(false);
+                  }}
+                >
+                  <item.icon className="w-4 h-4 mr-3" />
+                  {item.name}
+                </Button>
+              )
             ))}
-            {userPlan === "free" && (
+            {/* Hide Upgrade tab unless showUpgrade is true */}
+            {showUpgrade && userPlan === "free" && (
               <Button
                 key="Upgrade"
                 variant={location.pathname === "/dashboard/upgrade" ? "default" : "ghost"}

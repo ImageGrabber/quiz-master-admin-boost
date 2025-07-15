@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -60,6 +60,7 @@ const Dashboard = () => {
   const [streakData, setStreakData] = useState<any>(null);
   const [isRecordingRead, setIsRecordingRead] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
 
   useEffect(() => {
@@ -299,14 +300,15 @@ const Dashboard = () => {
             </SelectContent>
           </Select>
         </div>
-        {profile?.plan === "free" && (
+        {/* Upgrade to Pro button hidden */}
+        {/* {profile?.plan === "free" && (
           <button
             onClick={handleUpgrade}
             className="ml-2 px-4 py-2 rounded bg-purple-600 text-white font-semibold shadow hover:bg-purple-700 transition whitespace-nowrap"
           >
             Upgrade to Pro
           </button>
-        )}
+        )} */}
       </div>
 
       {/* Stats Grid */}
@@ -370,64 +372,8 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Devotional Streak */}
-      <div className="w-full mb-6">
-        <Card className="shadow-lg border-0 bg-gradient-to-r from-orange-50 to-red-50">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Flame className="w-5 h-5 text-orange-500" />
-              Devotional Streak
-            </CardTitle>
-            <CardDescription>Keep your daily devotional habit going!</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div className="flex items-center space-x-6">
-                <div className="flex items-center space-x-2">
-                  <Flame className="w-5 h-5 text-orange-500" />
-                  <span className="font-semibold text-orange-700">Current Streak: {(streakData?.current_streak || 0)} days</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Trophy className="w-5 h-5 text-yellow-500" />
-                  <span className="font-semibold text-yellow-700">Longest: {(streakData?.longest_streak || 0)} days</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <BookOpen className="w-5 h-5 text-blue-500" />
-                  <span className="font-semibold text-blue-700">Total days read: {(streakData?.total_days_read || 0)}</span>
-                </div>
-              </div>
-              {/* Devotional Read Button */}
-              <div className="flex items-center mt-4 md:mt-0">
-                {(() => {
-                  const today = new Date().toISOString().split('T')[0];
-                  const lastRead = streakData?.last_read_date;
-                  if (lastRead === today) {
-                    return (
-                      <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-500">
-                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </span>
-                    );
-                  } else {
-                    return (
-                      <Button
-                        onClick={() => navigate('/dashboard/bible-study')}
-                        className="bg-orange-500 hover:bg-orange-600 text-white font-semibold"
-                      >
-                        Read Now
-                      </Button>
-                    );
-                  }
-                })()}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Quick Actions & Featured Competitions */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+      {/* Devotional Streak & Quick Actions side by side */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         {/* Quick Actions */}
         <Card className="shadow-lg border-0 bg-white h-full">
           <CardHeader>
@@ -438,7 +384,7 @@ const Dashboard = () => {
             <div className="space-y-4">
               <Button
                 onClick={() => navigate("/quiz-selection")}
-                className="w-full justify-start h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+                className={`w-full justify-start h-12 ${location.pathname === "/quiz-selection" ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : "bg-white text-gray-900 border border-gray-200"}`}
               >
                 <Brain className="w-4 h-4 mr-3" />
                 Choose Quiz
@@ -462,98 +408,69 @@ const Dashboard = () => {
             </div>
           </CardContent>
         </Card>
-        {/* Featured Competitions Section */}
-        {profile?.plan === "pro" ? (
-          <Card className="shadow-lg border-0 bg-white h-full">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-yellow-600" />
-                Featured Competitions
-              </CardTitle>
-              <CardDescription>Join exciting tournaments and compete with others</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {competitions.length > 0 ? (
-                <div className="grid grid-cols-1 gap-4">
-                  {competitions.map((competition) => (
-                    <div 
-                      key={competition.id} 
-                      className="bg-gray-50 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer" 
-                      onClick={() => navigate("/competitions")}
-                    >
-                      <div className="flex items-center justify-between mb-3">
-                        <h3 className="font-semibold text-gray-900">{competition.title}</h3>
-                        <Badge 
-                          variant="secondary" 
-                          className={`text-xs ${
-                            competition.status === 'active' ? 'bg-green-100 text-green-800' :
-                            competition.status === 'upcoming' ? 'bg-blue-100 text-blue-800' :
-                            competition.status === 'completed' ? 'bg-gray-100 text-gray-800' :
-                            'bg-red-100 text-red-800'
-                          }`}
-                        >
-                          {competition.status.charAt(0).toUpperCase() + competition.status.slice(1)}
-                        </Badge>
-                      </div>
-                      <p className="text-sm text-gray-600 mb-3">
-                        {competition.description || `${competition.quiz?.title || 'Bible Quiz'} - Test your knowledge and compete for prizes!`}
-                      </p>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs text-gray-500">
-                          Prize Pool: ${competition.prize_pool}
-                        </span>
-                        <span className="text-xs text-gray-500">
-                          {competition.entries_count} participants
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs text-gray-500">
-                          {new Date(competition.start_date).toLocaleDateString()} - {new Date(competition.end_date).toLocaleDateString()}
-                        </span>
-                        <Button 
-                          size="sm" 
-                          variant={competition.user_has_entered ? "outline" : "default"}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            navigate("/competitions");
-                          }}
-                        >
-                          {competition.user_has_entered ? "Joined" : "Join Now"}
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
+        {/* Devotional Streak */}
+        <Card className="shadow-lg border-0 bg-gradient-to-r from-orange-50 to-red-50 h-full flex flex-col justify-between">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Flame className="w-5 h-5 text-orange-500" />
+              Devotional Streak
+            </CardTitle>
+            <CardDescription>Keep your daily devotional habit going!</CardDescription>
+          </CardHeader>
+          <CardContent className="flex-1 flex flex-col justify-between">
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div className="flex items-center space-x-6">
+                  <div className="flex items-center space-x-2">
+                    <Flame className="w-5 h-5 text-orange-500" />
+                    <span className="font-semibold text-orange-700">Current Streak: {(streakData?.current_streak || 0)} days</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Trophy className="w-5 h-5 text-yellow-500" />
+                    <span className="font-semibold text-yellow-700">Longest: {(streakData?.longest_streak || 0)} days</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <BookOpen className="w-5 h-5 text-blue-500" />
+                    <span className="font-semibold text-blue-700">Total days read: {(streakData?.total_days_read || 0)}</span>
+                  </div>
                 </div>
-              ) : (
-                <div className="text-center py-8 text-gray-500">
-                  <Trophy className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                  <p className="text-lg font-medium mb-2">No competitions available</p>
-                  <p className="text-sm">Check back later for new tournaments and challenges!</p>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        ) : (
-          <Card className="mt-8 shadow-lg border-0 bg-gradient-to-br from-gray-50 to-gray-100">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-gray-400" />
-                Featured Competitions
-              </CardTitle>
-              <CardDescription>Competitions are available for Pro members only.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-col items-center justify-center py-8">
-                <p className="text-lg font-medium mb-4 text-gray-600">Not a Pro member yet</p>
-                <Button onClick={handleUpgrade} className="bg-purple-600 hover:bg-purple-700 text-white font-semibold">Upgrade to Pro</Button>
               </div>
-            </CardContent>
-          </Card>
-        )}
+            </div>
+            {/* Devotional Read Button always at the bottom */}
+            <div className="flex mt-6 md:justify-end justify-center">
+              {(() => {
+                const today = new Date().toISOString().split('T')[0];
+                const lastRead = streakData?.last_read_date;
+                if (lastRead === today) {
+                  return (
+                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-500">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </span>
+                  );
+                } else {
+                  return (
+                    <Button
+                      onClick={() => navigate('/dashboard/bible-study')}
+                      className="bg-orange-500 hover:bg-orange-600 text-white font-semibold w-full md:w-auto"
+                    >
+                      Read Now
+                    </Button>
+                  );
+                }
+              })()}
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
-      {/* Membership Tiers Section */}
-      {!hideMembership && (
+      {/* Quick Actions & Featured Competitions */}
+      {/* This section is now replaced by the above grid */}
+      {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch"> ... </div> */}
+
+      {/* Membership Tiers Section hidden */}
+      {/* {!hideMembership && (
         <Card className="mb-8 mt-8 shadow-lg">
           <CardHeader>
             <CardTitle>Membership Tiers</CardTitle>
@@ -585,7 +502,7 @@ const Dashboard = () => {
             </div>
           </CardContent>
         </Card>
-      )}
+      )} */}
     </DashboardLayout>
   );
 };

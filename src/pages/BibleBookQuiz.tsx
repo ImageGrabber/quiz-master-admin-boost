@@ -19,116 +19,31 @@ import {
 } from "@/components/ui/dialog";
 
 interface Question {
-  id: number;
-  question: string;
-  option_a: string;
-  option_b: string;
-  option_c: string;
-  option_d: string;
-  correct_index: number;
-}
-
-interface BibleQuestion {
   chapter: number;
   question: string;
   options: string[];
   answer: number;
 }
 
-// Vite dynamic import for all Bible book quiz modules
-const bibleBookModules = import.meta.glob('./bible-questions-and-answers-hub/*.tsx');
+interface BibleBookQuizProps {
+  title: string;
+  questions: Question[];
+  bookName: string;
+}
 
-const Quiz = () => {
-  const { quizId } = useParams<{ quizId: string }>();
-  const [questions, setQuestions] = useState<Question[]>([]);
+const BibleBookQuiz = ({ title, questions, bookName }: BibleBookQuizProps) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [answers, setAnswers] = useState<number[]>([]);
   const [timeLeft, setTimeLeft] = useState(600); // 10 minutes
   const [isCompleted, setIsCompleted] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [showTimeWarning, setShowTimeWarning] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogTitle, setDialogTitle] = useState("");
   const [dialogMessage, setDialogMessage] = useState("");
-
-  // Fetch questions on component mount
-  useEffect(() => {
-    if (quizId) {
-      fetchQuestions();
-    }
-  }, [quizId]);
-
-  useEffect(() => {
-    const checkExistingAttempt = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user || !quizId) return;
-      const { data: attempts, error } = await supabase
-        .from('attempts')
-        .select('id')
-        .eq('user_id', user.id)
-        .eq('quiz_id', parseInt(quizId));
-      if (error) return; // fail silently, let quiz load
-      if (attempts && attempts.length > 0) {
-        navigate('/result/latest', { replace: true });
-      }
-    };
-    checkExistingAttempt();
-  }, [quizId]);
-
-  const fetchQuestions = async () => {
-    try {
-      await loadDatabaseQuestions();
-    } catch (error) {
-      console.error('Error fetching questions:', error);
-      setDialogTitle("Error");
-      setDialogMessage("Failed to load questions. Please try again.");
-      setDialogOpen(true);
-      navigate("/quiz-selection");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const loadDatabaseQuestions = async () => {
-    // First get the questions for this specific quiz
-    const { data: quizQuestions, error: quizError } = await supabase
-      .from('quiz_questions')
-      .select('question_id, order_index')
-      .eq('quiz_id', parseInt(quizId!))
-      .order('order_index');
-
-    if (quizError) throw quizError;
-
-    if (!quizQuestions || quizQuestions.length === 0) {
-      setDialogTitle("No questions found");
-      setDialogMessage("This quiz doesn't have any questions assigned.");
-      setDialogOpen(true);
-      navigate("/quiz-selection");
-      return;
-    }
-
-    // Get the actual question details
-    const questionIds = quizQuestions.map(qq => qq.question_id);
-    const { data: questionsData, error: questionsError } = await supabase
-      .from('questions')
-      .select('*')
-      .in('id', questionIds)
-      .order('id');
-
-    if (questionsError) throw questionsError;
-    
-    if (questionsData && questionsData.length > 0) {
-      setQuestions(questionsData);
-    } else {
-      setDialogTitle("No questions available");
-      setDialogMessage("Please contact an administrator to add questions to this quiz.");
-      setDialogOpen(true);
-      navigate("/quiz-selection");
-    }
-  };
 
   // Timer effect with enhanced warnings
   useEffect(() => {
@@ -189,7 +104,7 @@ const Quiz = () => {
     
     // Calculate score
     const correctAnswers = finalAnswers.filter((answer, index) => 
-      answer === questions[index]?.correct_index
+      answer === questions[index]?.answer
     ).length;
     
     const baseScore = correctAnswers * 4 - (questions.length - correctAnswers) * 1;
@@ -200,11 +115,34 @@ const Quiz = () => {
       const { data: { user } } = await supabase.auth.getUser();
       
       if (user) {
+        // First, check if a quiz exists for this Bible book, if not create one
+        let { data: quiz } = await supabase
+          .from('quizzes')
+          .select('id')
+          .eq('title', `${bookName} Quiz`)
+          .single();
+
+        if (!quiz) {
+          // Create a new quiz for this Bible book
+          const { data: newQuiz, error: quizError } = await supabase
+            .from('quizzes')
+            .insert({
+              title: `${bookName} Quiz`,
+              description: `Test your knowledge of the Book of ${bookName}`
+            })
+            .select()
+            .single();
+
+          if (quizError) throw quizError;
+          quiz = newQuiz;
+        }
+
+        // Save the attempt
         const { error } = await supabase
           .from('attempts')
           .insert({
             user_id: user.id,
-            quiz_id: parseInt(quizId!),
+            quiz_id: quiz.id,
             score: totalScore,
             seconds_used: 600 - timeLeft,
             answers: finalAnswers
@@ -239,24 +177,19 @@ const Quiz = () => {
     });
   };
 
-  if (isLoading) {
+  if (questions.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
         <div className="text-center">
-          <Brain className="w-12 h-12 text-blue-600 mx-auto mb-4 animate-pulse" />
-          <p className="text-gray-600">Loading quiz questions...</p>
+          <Brain className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+          <p className="text-gray-600">No questions available for this quiz.</p>
         </div>
       </div>
     );
   }
 
-  if (questions.length === 0) {
-    return null; // Will redirect in useEffect
-  }
-
   const progress = ((currentQuestion + 1) / questions.length) * 100;
   const currentQ = questions[currentQuestion];
-  const options = [currentQ.option_a, currentQ.option_b, currentQ.option_c, currentQ.option_d];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -366,13 +299,18 @@ const Quiz = () => {
 
           <Card className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
             <CardHeader>
+              <div className="flex items-center justify-between mb-2">
+                <Badge className="bg-blue-100 text-blue-700">
+                  Chapter {currentQ.chapter}
+                </Badge>
+              </div>
               <CardTitle className="text-2xl font-bold text-gray-900 leading-relaxed">
                 {currentQ.question}
               </CardTitle>
             </CardHeader>
             
             <CardContent className="space-y-4">
-              {options.map((option, index) => (
+              {currentQ.options.map((option, index) => (
                 <Button
                   key={index}
                   variant={selectedAnswer === index ? "default" : "outline"}
@@ -418,4 +356,4 @@ const Quiz = () => {
   );
 };
 
-export default Quiz;
+export default BibleBookQuiz; 
