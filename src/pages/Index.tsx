@@ -3,13 +3,12 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, User, Calendar, HelpCircle, TrendingUp, MessageCircle, CheckCircle, Globe, Home, Settings, Medal, Crown, Bolt, ArrowLeft, Book } from "lucide-react";
+import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, User, Calendar, HelpCircle, TrendingUp, MessageCircle, CheckCircle, Globe, Home, Settings, Medal, Crown, Bolt, ArrowLeft, Book, Menu } from "lucide-react";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import type { MoveDirection } from "tsparticles-engine";
 import { Helmet } from 'react-helmet';
 import { supabase } from "@/integrations/supabase/client";
-import ExodusQuiz from "./pages/bible-questions-and-answers-hub/Exodus";
 
 const features = [
   {
@@ -330,6 +329,7 @@ function FaqSection() {
 const Index = () => {
   const navigate = useNavigate();
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   // Calculate days until next Saturday
   const [nextQuizLabel, setNextQuizLabel] = useState("");
   useEffect(() => {
@@ -417,15 +417,31 @@ const Index = () => {
       <div className="min-h-screen bg-white">
         {/* Header */}
         <header className="bg-white/70 backdrop-blur-md border-b border-blue-100 sticky top-0 z-50">
-          <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="container mx-auto px-4 py-4 flex flex-row justify-between items-center relative">
             <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}> 
               <img src="/sword.png" alt="Bible Quiz Competition Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
               <span className="text-lg font-semibold text-gray-900">Bible Quiz Competition</span>
             </div>
-            <nav className="flex items-center space-x-2">
+            {/* Hamburger for mobile */}
+            <button
+              className="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="Open navigation menu"
+              onClick={() => setMobileMenuOpen((open) => !open)}
+            >
+              <Menu className="w-7 h-7 text-gray-900" />
+            </button>
+            {/* Nav links for desktop */}
+            <nav className="hidden md:flex items-center space-x-2">
               <button className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" onClick={() => navigate("/auth/login")}>Sign In</button>
               <Button variant="ghost" className="bg-black text-white font-semibold px-4 py-2 rounded" onClick={() => navigate("/auth/register")}>Sign Up</Button>
             </nav>
+            {/* Mobile dropdown menu */}
+            {mobileMenuOpen && (
+              <div className="md:hidden absolute top-full right-4 mt-2 w-48 bg-white rounded-lg shadow-lg border border-blue-100 z-50 flex flex-col items-stretch">
+                <button className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50 rounded-t-lg" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
+                <button className="bg-black text-white font-semibold px-4 py-3 text-left hover:bg-gray-900 rounded-b-lg" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</button>
+              </div>
+            )}
           </div>
         </header>
 
@@ -497,7 +513,86 @@ const Index = () => {
         </section>
         </section>
 
-       
+        {/* Get Started CTA Section */}
+        <section className="py-10 md:py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 relative overflow-hidden px-2 sm:px-4">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0" style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              backgroundSize: '60px 60px'
+            }}></div>
+          </div>
+          
+          <div className="container mx-auto px-2 sm:px-4 relative z-10">
+            <div className="text-center max-w-4xl mx-auto">
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+                Ready to Test Your Bible Knowledge?
+              </h2>
+              <p className="text-base sm:text-xl text-blue-100 mb-6 sm:mb-8 max-w-2xl mx-auto">
+                Join thousands of participants competing for prizes every Saturday. 
+                <span className="font-semibold text-yellow-300"> Don't miss this week's competition!</span>
+              </p>
+              {/* Urgency Stats */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10 max-w-md sm:max-w-2xl mx-auto">
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
+                  <div className="text-2xl sm:text-3xl font-bold text-yellow-300 mb-1 sm:mb-2">48</div>
+                  <div className="text-white text-xs sm:text-sm">Hours Left to Join</div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
+                  <div className="text-2xl sm:text-3xl font-bold text-yellow-300 mb-1 sm:mb-2">1,250+</div>
+                  <div className="text-white text-xs sm:text-sm">Already Competing</div>
+                </div>
+              </div>
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-6 sm:mb-8 w-full max-w-md mx-auto">
+                <Button 
+                  size="lg" 
+                  className="w-full sm:w-auto bg-yellow-400 hover:bg-yellow-300 text-black font-bold px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-xl rounded-xl shadow-2xl hover:shadow-yellow-400/25 transition-all duration-300 transform hover:scale-105" 
+                  onClick={() => navigate("/auth/register")}
+                >
+                  <Play className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
+                  JOIN NOW - IT'S FREE!
+                  <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3" />
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="w-full sm:w-auto border-2 border-white bg-white text-black hover:bg-gray-100 font-semibold px-6 sm:px-8 py-4 sm:py-6 text-lg rounded-xl transition-all duration-300" 
+                  onClick={() => navigate("/auth/login")}
+                >
+                  <User className="w-5 h-5 mr-2" />
+                  Sign In
+                </Button>
+              </div>
+              {/* Trust Indicators */}
+              <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-6 text-white/80 text-xs sm:text-sm mb-4 sm:mb-0">
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-400" />
+                  No Credit Card Required
+                </div>
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-400" />
+                  Instant Access
+                </div>
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-400" />
+                  Free to Join
+                </div>
+                <div className="flex items-center gap-1 sm:gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-400" />
+                  Win Real Prizes
+                </div>
+              </div>
+              {/* Final Message */}
+              <div className="mt-6 sm:mt-8 p-3 sm:p-4 bg-green-500/20 border border-green-400/30 rounded-xl">
+                <p className="text-green-100 font-semibold text-xs sm:text-base">
+                  🎯 <span className="text-yellow-300">JOIN ANYTIME!</span> Registration is always open. 
+                  Start competing today and improve your Bible knowledge with every quiz!
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* How It Works */}
         <section id="features" className="py-24 mb-0 mt-[-50px] bg-gradient-to-br from-white via-blue-50 to-purple-50 overflow-hidden">
