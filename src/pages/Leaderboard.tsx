@@ -226,7 +226,7 @@ const Leaderboard = () => {
             </div>
           ) : leaderboard.length > 0 ? (
             <div className="space-y-4">
-              {leaderboard.map((entry, index) => (
+              {leaderboard.slice(0, 3).map((entry, index) => (
                 <div
                   key={entry.id}
                   className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"

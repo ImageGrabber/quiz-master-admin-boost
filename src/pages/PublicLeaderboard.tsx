@@ -102,8 +102,7 @@ export default function PublicLeaderboard() {
 
       const globalData = Array.from(userStats.values())
         .sort((a, b) => b.maxScore - a.maxScore)
-        .slice(0, 20);
-
+        .slice(0, 3);
       setGlobalLeaders(globalData);
 
       // Fetch weekly and monthly data (simplified for now)
@@ -114,11 +113,11 @@ export default function PublicLeaderboard() {
 
       const weeklyData = globalData.filter(user => 
         new Date(user.lastAttempt) >= oneWeekAgo
-      ).slice(0, 10);
+      ).slice(0, 3);
 
       const monthlyData = globalData.filter(user => 
         new Date(user.lastAttempt) >= oneMonthAgo
-      ).slice(0, 10);
+      ).slice(0, 3);
 
       setWeeklyLeaders(weeklyData);
       setMonthlyLeaders(monthlyData);

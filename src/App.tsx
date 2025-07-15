@@ -33,73 +33,7 @@ import RLSTest from "./pages/RLSTest";
 import BibleQA from "./pages/BibleQA";
 import BibleStudy from "./pages/BibleStudy";
 import PublicLeaderboard from "./pages/PublicLeaderboard";
-import GenesisQuiz from "./pages/bible-questions-and-answers-hub/Genesis";
-import ExodusQuiz from "./pages/bible-questions-and-answers-hub/Exodus";
-import LeviticusQuiz from "./pages/bible-questions-and-answers-hub/Leviticus";
-import NumbersQuiz from "./pages/bible-questions-and-answers-hub/Numbers";
-import DeuteronomyQuiz from "./pages/bible-questions-and-answers-hub/Deuteronomy";
-import JoshuaQuiz from "./pages/bible-questions-and-answers-hub/Joshua";
-import JudgesQuiz from "./pages/bible-questions-and-answers-hub/Judges";
-import RuthQuiz from "./pages/bible-questions-and-answers-hub/Ruth";
-import FirstSamuelQuiz from "./pages/bible-questions-and-answers-hub/1-samuel";
-import SecondSamuelQuiz from "./pages/bible-questions-and-answers-hub/2-samuel";
-import FirstKingsQuiz from "./pages/bible-questions-and-answers-hub/1-kings";
-import SecondKingsQuiz from "./pages/bible-questions-and-answers-hub/2-kings";
-import FirstChroniclesQuiz from "./pages/bible-questions-and-answers-hub/1-chronicles";
-import SecondChroniclesQuiz from "./pages/bible-questions-and-answers-hub/2-chronicles";
-import EzraQuiz from "./pages/bible-questions-and-answers-hub/ezra";
-import NehemiahQuiz from "./pages/bible-questions-and-answers-hub/nehemiah";
-import EstherQuiz from "./pages/bible-questions-and-answers-hub/esther";
-import JobQuiz from "./pages/bible-questions-and-answers-hub/job";
-import PsalmsQuiz from "./pages/bible-questions-and-answers-hub/psalms";
-import ProverbsQuiz from "./pages/bible-questions-and-answers-hub/proverbs";
-import EcclesiastesQuiz from "./pages/bible-questions-and-answers-hub/ecclesiastes";
-import SongOfSolomonQuiz from "./pages/bible-questions-and-answers-hub/song-of-solomon";
-import IsaiahQuiz from "./pages/bible-questions-and-answers-hub/isaiah";
-import JeremiahQuiz from "./pages/bible-questions-and-answers-hub/jeremiah";
-import LamentationsQuiz from "./pages/bible-questions-and-answers-hub/lamentations";
-import EzekielQuiz from "./pages/bible-questions-and-answers-hub/ezekiel";
-import DanielQuiz from "./pages/bible-questions-and-answers-hub/daniel";
-import HoseaQuiz from "./pages/bible-questions-and-answers-hub/hosea";
-import JoelQuiz from "./pages/bible-questions-and-answers-hub/joel";
-import AmosQuiz from "./pages/bible-questions-and-answers-hub/amos";
-import ObadiahQuiz from "./pages/bible-questions-and-answers-hub/obadiah";
-import JonahQuiz from "./pages/bible-questions-and-answers-hub/jonah";
-import MicahQuiz from "./pages/bible-questions-and-answers-hub/micah";
-import NahumQuiz from "./pages/bible-questions-and-answers-hub/nahum";
-import HabakkukQuiz from "./pages/bible-questions-and-answers-hub/habakkuk";
-import ZephaniahQuiz from "./pages/bible-questions-and-answers-hub/zephaniah";
-import HaggaiQuiz from "./pages/bible-questions-and-answers-hub/haggai";
-import ZechariahQuiz from "./pages/bible-questions-and-answers-hub/zechariah";
-import MalachiQuiz from "./pages/bible-questions-and-answers-hub/malachi";
-import MatthewQuiz from "./pages/bible-questions-and-answers-hub/matthew";
-import MarkQuiz from "./pages/bible-questions-and-answers-hub/mark";
-import LukeQuiz from "./pages/bible-questions-and-answers-hub/luke";
-import JohnQuiz from "./pages/bible-questions-and-answers-hub/john";
-import ActsQuiz from "./pages/bible-questions-and-answers-hub/acts";
-import RomansQuiz from "./pages/bible-questions-and-answers-hub/romans";
-import FirstCorinthiansQuiz from "./pages/bible-questions-and-answers-hub/1-corinthians";
-import SecondCorinthiansQuiz from "./pages/bible-questions-and-answers-hub/2-corinthians";
-import GalatiansQuiz from "./pages/bible-questions-and-answers-hub/galatians";
-import EphesiansQuiz from "./pages/bible-questions-and-answers-hub/ephesians";
-import PhilippiansQuiz from "./pages/bible-questions-and-answers-hub/philippians";
-import ColossiansQuiz from "./pages/bible-questions-and-answers-hub/colossians";
-import FirstThessaloniansQuiz from "./pages/bible-questions-and-answers-hub/1-thessalonians";
-import SecondThessaloniansQuiz from "./pages/bible-questions-and-answers-hub/2-thessalonians";
-import FirstTimothyQuiz from "./pages/bible-questions-and-answers-hub/1-timothy";
-import SecondTimothyQuiz from "./pages/bible-questions-and-answers-hub/2-timothy";
-import TitusQuiz from "./pages/bible-questions-and-answers-hub/titus";
-import PhilemonQuiz from "./pages/bible-questions-and-answers-hub/philemon";
-import HebrewsQuiz from "./pages/bible-questions-and-answers-hub/hebrews";
-import JamesQuiz from "./pages/bible-questions-and-answers-hub/james";
-import FirstPeterQuiz from "./pages/bible-questions-and-answers-hub/1-peter";
-import SecondPeterQuiz from "./pages/bible-questions-and-answers-hub/2-peter";
-import FirstJohnQuiz from "./pages/bible-questions-and-answers-hub/1-john";
-import SecondJohnQuiz from "./pages/bible-questions-and-answers-hub/2-john";
-import ThirdJohnQuiz from "./pages/bible-questions-and-answers-hub/3-john";
-import JudeQuiz from "./pages/bible-questions-and-answers-hub/jude";
-import RevelationQuiz from "./pages/bible-questions-and-answers-hub/revelation";
-import DashboardBibleStudy from "./pages/DashboardBibleStudy";
+// Removed static imports of Bible book quiz files for code-splitting
 import Upgrade from "./pages/Upgrade";
 import PageViews from "./pages/admin/PageViews";
 import { usePageView } from "@/hooks/usePageView";
@@ -131,7 +65,7 @@ const App = () => {
             <Route path="/dashboard/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
             <Route path="/dashboard/upgrade" element={<ProtectedRoute><Upgrade /></ProtectedRoute>} />
             <Route path="/dashboard/recent-attempts" element={<ProtectedRoute><RecentAttempts /></ProtectedRoute>} />
-            <Route path="/dashboard/bible-study" element={<ProtectedRoute><DashboardBibleStudy /></ProtectedRoute>} />
+            <Route path="/dashboard/bible-study" element={<ProtectedRoute><BibleStudy /></ProtectedRoute>} />
             <Route path="/quiz-selection" element={<ProtectedRoute><QuizSelection /></ProtectedRoute>} />
             <Route path="/quiz/:quizId" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
             <Route path="/result/:id" element={<ProtectedRoute><Result /></ProtectedRoute>} />
@@ -151,72 +85,72 @@ const App = () => {
             <Route path="/admin/users/:id" element={<ProtectedRoute requiredRole="admin"><AdminUserSettings /></ProtectedRoute>} />
             <Route path="/admin/page-views" element={<ProtectedRoute requiredRole="admin"><PageViews /></ProtectedRoute>} />
             <Route path="/rls-test" element={<ProtectedRoute requiredRole="admin"><RLSTest /></ProtectedRoute>} />
-            <Route path="/bible-questions-and-answers-hub/genesis" element={<GenesisQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/exodus" element={<ExodusQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/leviticus" element={<LeviticusQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/numbers" element={<NumbersQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/deuteronomy" element={<DeuteronomyQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/joshua" element={<JoshuaQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/judges" element={<JudgesQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/ruth" element={<RuthQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/1-samuel" element={<FirstSamuelQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/2-samuel" element={<SecondSamuelQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/1-kings" element={<FirstKingsQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/2-kings" element={<SecondKingsQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/1-chronicles" element={<FirstChroniclesQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/2-chronicles" element={<SecondChroniclesQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/ezra" element={<EzraQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/nehemiah" element={<NehemiahQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/esther" element={<EstherQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/job" element={<JobQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/psalms" element={<PsalmsQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/proverbs" element={<ProverbsQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/ecclesiastes" element={<EcclesiastesQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/song-of-solomon" element={<SongOfSolomonQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/isaiah" element={<IsaiahQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/jeremiah" element={<JeremiahQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/lamentations" element={<LamentationsQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/ezekiel" element={<EzekielQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/daniel" element={<DanielQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/hosea" element={<HoseaQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/joel" element={<JoelQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/amos" element={<AmosQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/obadiah" element={<ObadiahQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/jonah" element={<JonahQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/micah" element={<MicahQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/nahum" element={<NahumQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/habakkuk" element={<HabakkukQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/zephaniah" element={<ZephaniahQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/haggai" element={<HaggaiQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/zechariah" element={<ZechariahQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/malachi" element={<MalachiQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/matthew" element={<MatthewQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/mark" element={<MarkQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/luke" element={<LukeQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/john" element={<JohnQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/acts" element={<ActsQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/romans" element={<RomansQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/1-corinthians" element={<FirstCorinthiansQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/2-corinthians" element={<SecondCorinthiansQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/galatians" element={<GalatiansQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/ephesians" element={<EphesiansQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/philippians" element={<PhilippiansQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/colossians" element={<ColossiansQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/1-thessalonians" element={<FirstThessaloniansQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/2-thessalonians" element={<SecondThessaloniansQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/1-timothy" element={<FirstTimothyQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/2-timothy" element={<SecondTimothyQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/titus" element={<TitusQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/philemon" element={<PhilemonQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/hebrews" element={<HebrewsQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/james" element={<JamesQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/1-peter" element={<FirstPeterQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/2-peter" element={<SecondPeterQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/1-john" element={<FirstJohnQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/2-john" element={<SecondJohnQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/3-john" element={<ThirdJohnQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/jude" element={<JudeQuiz />} />
-            <Route path="/bible-questions-and-answers-hub/revelation" element={<RevelationQuiz />} />
+            <Route path="/bible-questions-and-answers-hub/genesis" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/exodus" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/leviticus" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/numbers" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/deuteronomy" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/joshua" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/judges" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/ruth" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/1-samuel" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/2-samuel" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/1-kings" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/2-kings" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/1-chronicles" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/2-chronicles" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/ezra" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/nehemiah" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/esther" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/job" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/psalms" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/proverbs" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/ecclesiastes" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/song-of-solomon" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/isaiah" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/jeremiah" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/lamentations" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/ezekiel" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/daniel" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/hosea" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/joel" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/amos" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/obadiah" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/jonah" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/micah" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/nahum" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/habakkuk" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/zephaniah" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/haggai" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/zechariah" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/malachi" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/matthew" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/mark" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/luke" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/john" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/acts" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/romans" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/1-corinthians" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/2-corinthians" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/galatians" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/ephesians" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/philippians" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/colossians" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/1-thessalonians" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/2-thessalonians" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/1-timothy" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/2-timothy" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/titus" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/philemon" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/hebrews" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/james" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/1-peter" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/2-peter" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/1-john" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/2-john" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/3-john" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/jude" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/revelation" element={<BibleQA />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
