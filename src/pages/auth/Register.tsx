@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Mail, Lock, User } from "lucide-react";
+import { Mail, Lock, User, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
@@ -17,6 +17,7 @@ const Register = () => {
     confirmPassword: ""
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
   const [showVerifyDialog, setShowVerifyDialog] = useState(false);
@@ -44,8 +45,12 @@ const Register = () => {
       });
       if (error) throw error;
       if (data.user) {
-        setShowVerifyDialog(true);
-        // Do not navigate automatically
+        setIsSuccess(true);
+        // Show success preloader for 2 seconds
+        setTimeout(() => {
+          setIsSuccess(false);
+          setShowVerifyDialog(true);
+        }, 2000);
       }
     } catch (error: any) {
       toast({
@@ -105,9 +110,24 @@ const Register = () => {
       <div className="min-h-screen flex flex-col md:flex-row">
         {/* Left: Registration Form */}
         <div className="flex-1 flex flex-col justify-center items-center bg-white p-8 min-h-screen">
-          <div className="w-full max-w-md">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Create your account</h1>
-            <p className="text-gray-600 mb-8 text-lg">Sign up to access quizzes, track your progress, and compete for prizes.</p>
+                  <div className="w-full max-w-md">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+            <div className="flex items-start">
+              <div className="flex-shrink-0">
+                <svg className="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="ml-3">
+                <h3 className="text-sm font-medium text-blue-800">Important Notice</h3>
+                <div className="mt-1 text-sm text-blue-700">
+                  <p>We've created a new and efficient platform! Even if you've registered before, you'll need to register again and verify your email to access the improved features.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Create your account</h1>
+          <p className="text-gray-600 mb-8 text-lg">Sign up to access quizzes, track your progress, and compete for prizes.</p>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <Label htmlFor="name" className="text-gray-700 font-medium text-base">Full Name<span className="text-purple-600">*</span></Label>
@@ -190,6 +210,25 @@ const Register = () => {
         {/* Right: Themed Panel */}
         <RightPanel />
       </div>
+      
+      {/* Success Preloader */}
+      {isSuccess && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl p-8 flex flex-col items-center shadow-2xl">
+            <div className="relative w-16 h-16 mb-4">
+              {/* Spinning circle */}
+              <div className="w-16 h-16 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin"></div>
+              {/* Checkmark that appears after animation */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <CheckCircle className="w-12 h-12 text-green-500 opacity-0 animate-pulse" style={{ animationDelay: '1s', animationFillMode: 'forwards' }} />
+              </div>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">Registration Successful!</h3>
+            <p className="text-gray-600 text-center">Your account has been created successfully</p>
+          </div>
+        </div>
+      )}
+      
       {/* Verification Dialog */}
       <Dialog open={showVerifyDialog} onOpenChange={setShowVerifyDialog}>
         <DialogContent>
