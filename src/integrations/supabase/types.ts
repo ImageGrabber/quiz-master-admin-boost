@@ -158,6 +158,57 @@ export type Database = {
         }
         Relationships: []
       }
+      devotional_streaks: {
+        Row: {
+          id: string;
+          user_id: string;
+          current_streak: number;
+          longest_streak: number;
+          last_read_date: string | null;
+          total_days_read: number;
+          created_at: string | null;
+          updated_at: string | null;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          current_streak?: number;
+          longest_streak?: number;
+          last_read_date?: string | null;
+          total_days_read?: number;
+          created_at?: string | null;
+          updated_at?: string | null;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          current_streak?: number;
+          longest_streak?: number;
+          last_read_date?: string | null;
+          total_days_read?: number;
+          created_at?: string | null;
+          updated_at?: string | null;
+        };
+        Relationships: [];
+      }
+      page_views: {
+        Row: {
+          id: string;
+          page: string;
+          viewed_at: string;
+        };
+        Insert: {
+          id?: string;
+          page: string;
+          viewed_at?: string;
+        };
+        Update: {
+          id?: string;
+          page?: string;
+          viewed_at?: string;
+        };
+        Relationships: [];
+      };
     }
     Views: {
       [_ in never]: never
@@ -166,6 +217,21 @@ export type Database = {
       is_admin: {
         Args: Record<PropertyKey, never>
         Returns: boolean
+      }
+      record_devotional_read: {
+        Args: {
+          p_user_id: string;
+          p_devotional_date: string;
+          p_devotional_title: string;
+          p_devotional_verse: string;
+          p_time_spent_seconds?: number;
+        };
+        Returns: {
+          current_streak: number;
+          longest_streak: number;
+          total_days_read: number;
+          message: string;
+        };
       }
     }
     Enums: {
@@ -287,3 +353,53 @@ export const Constants = {
     Enums: {},
   },
 } as const
+
+export interface Competition {
+  id: string;
+  title: string;
+  description: string | null;
+  entry_fee: number;
+  prize_pool: number;
+  max_participants: number | null;
+  start_date: string;
+  end_date: string;
+  quiz_id: string;
+  status: 'upcoming' | 'active' | 'completed' | 'cancelled';
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CompetitionEntry {
+  id: string;
+  competition_id: string;
+  user_id: string;
+  stripe_payment_intent_id: string | null;
+  payment_status: 'pending' | 'completed' | 'failed' | 'refunded';
+  entry_date: string;
+  paid: boolean;
+}
+
+export interface CompetitionResult {
+  id: string;
+  competition_id: string;
+  user_id: string;
+  score: number;
+  time_taken: number | null;
+  rank: number | null;
+  prize_amount: number | null;
+  created_at: string;
+}
+
+export interface CompetitionWithDetails extends Competition {
+  quiz: Tables<'quizzes'>;
+  entries_count: number;
+  results_count: number;
+}
+
+export interface CompetitionEntryWithUser extends CompetitionEntry {
+  user: Tables<'profiles'>;
+}
+
+export interface CompetitionResultWithUser extends CompetitionResult {
+  user: Tables<'profiles'>;
+}

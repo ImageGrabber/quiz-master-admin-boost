@@ -1,4 +1,3 @@
-
 -- Create profiles table with role support
 CREATE TABLE public.profiles (
   id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
@@ -129,3 +128,34 @@ INSERT INTO public.questions (question, option_a, option_b, option_c, option_d, 
 ('What is 2 + 2?', '3', '4', '5', '6', 1),
 ('Who painted the Mona Lisa?', 'Van Gogh', 'Picasso', 'Da Vinci', 'Monet', 2),
 ('What is the largest ocean?', 'Atlantic', 'Indian', 'Arctic', 'Pacific', 3);
+
+-- Insert a default quiz
+INSERT INTO public.quizzes (id, title, description) VALUES
+(1, 'General Knowledge Quiz', 'Test your knowledge with these general questions');
+
+-- Link questions to the default quiz
+INSERT INTO public.quiz_questions (quiz_id, question_id, order_index) VALUES
+(1, 1, 1),
+(1, 2, 2),
+(1, 3, 3),
+(1, 4, 4),
+(1, 5, 5);
+
+-- Create a function to fetch recent attempts for the admin dashboard
+CREATE OR REPLACE FUNCTION public.get_admin_attempts()
+RETURNS TABLE (
+  id uuid,
+  user_id uuid,
+  quiz_id integer,
+  score integer,
+  seconds_used integer,
+  created_at timestamp with time zone
+) AS $$
+BEGIN
+  RETURN QUERY
+    SELECT id, user_id, quiz_id, score, seconds_used, created_at
+    FROM public.attempts
+    ORDER BY created_at DESC
+    LIMIT 10;
+END;
+$$ LANGUAGE plpgsql STABLE;

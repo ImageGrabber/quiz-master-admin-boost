@@ -1,5 +1,4 @@
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,49 +10,93 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Plus, Edit, Trash2, Eye, Calendar, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import AdminLayout from "@/components/AdminLayout";
+import { supabase } from "@/integrations/supabase/client";
 
-// Sample quiz data - in real app this would come from Supabase
-const sampleQuizzes = [
-  {
-    id: 1,
-    title: "General Knowledge",
-    description: "Test your knowledge across various topics",
-    questionCount: 25,
-    attempts: 142,
-    avgScore: 76.8,
-    createdAt: "2024-01-10T10:00:00Z",
-    status: "active"
-  },
-  {
-    id: 2,
-    title: "Science & Technology",
-    description: "Questions about science, tech, and innovation",
-    questionCount: 25,
-    attempts: 89,
-    avgScore: 72.3,
-    createdAt: "2024-01-12T14:30:00Z",
-    status: "active"
-  },
-  {
-    id: 3,
-    title: "History Quiz",
-    description: "Journey through historical events and figures",
-    questionCount: 25,
-    attempts: 67,
-    avgScore: 68.9,
-    createdAt: "2024-01-15T09:15:00Z",
-    status: "draft"
-  }
-];
+interface Quiz {
+  id: number;
+  title: string;
+  description: string;
+  question_count: number;
+  attempts: number;
+  avg_score: number;
+  created_at: string;
+  status: string;
+}
 
 const Quizzes = () => {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [newQuiz, setNewQuiz] = useState({
     title: "",
     description: "",
     questionSelection: "random" // "random" or "manual"
   });
+  const [deleteQuizId, setDeleteQuizId] = useState<number | null>(null);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const { toast } = useToast();
+  const [editQuiz, setEditQuiz] = useState<Quiz | null>(null);
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [editForm, setEditForm] = useState({ title: '', description: '' });
+
+  useEffect(() => {
+    fetchQuizzes();
+  }, []);
+
+  const fetchQuizzes = async () => {
+    try {
+      setIsLoading(true);
+      
+      // Fetch quizzes with their stats
+      const { data: quizzesData, error: quizzesError } = await supabase
+        .from('quizzes')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (quizzesError) throw quizzesError;
+
+      // Get stats for each quiz
+      const quizzesWithStats = await Promise.all(
+        (quizzesData || []).map(async (quiz) => {
+          // Get question count
+          const { count: questionCount } = await supabase
+            .from('quiz_questions')
+            .select('*', { count: 'exact', head: true })
+            .eq('quiz_id', quiz.id);
+
+          // Get attempt stats
+          const { data: attempts, error: attemptsError } = await supabase
+            .from('attempts')
+            .select('score')
+            .eq('quiz_id', quiz.id);
+
+          const attemptsCount = attempts?.length || 0;
+          const avgScore = attempts && attempts.length > 0
+            ? Math.round(attempts.reduce((sum, a) => sum + a.score, 0) / attempts.length)
+            : 0;
+
+          return {
+            ...quiz,
+            question_count: questionCount || 0,
+            attempts: attemptsCount,
+            avg_score: avgScore,
+            status: 'active' // Default status
+          };
+        })
+      );
+
+      setQuizzes(quizzesWithStats);
+    } catch (error) {
+      console.error('Error fetching quizzes:', error);
+      toast({
+        title: "Error",
+        description: "Failed to load quizzes.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleCreateQuiz = async () => {
     if (!newQuiz.title.trim()) {
@@ -66,9 +109,38 @@ const Quizzes = () => {
     }
 
     try {
-      // Simulate quiz creation - in real app this would call Supabase
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      // Create the quiz
+      const { data: quiz, error: quizError } = await supabase
+        .from('quizzes')
+        .insert({
+          title: newQuiz.title,
+          description: newQuiz.description
+        })
+        .select()
+        .single();
+
+      if (quizError) throw quizError;
+
+      // If random selection, link some questions to the quiz
+      if (newQuiz.questionSelection === "random") {
+        const { data: questions } = await supabase
+          .from('questions')
+          .select('id')
+          .limit(25);
+
+        if (questions && questions.length > 0) {
+          const quizQuestions = questions.map((q, index) => ({
+            quiz_id: quiz.id,
+            question_id: q.id,
+            order_index: index + 1
+          }));
+
+          await supabase
+            .from('quiz_questions')
+            .insert(quizQuestions);
+        }
+      }
+
       toast({
         title: "Quiz created successfully!",
         description: `"${newQuiz.title}" has been added to your quiz collection.`,
@@ -76,13 +148,77 @@ const Quizzes = () => {
 
       setIsCreateDialogOpen(false);
       setNewQuiz({ title: "", description: "", questionSelection: "random" });
+      
+      // Refresh the quiz list
+      fetchQuizzes();
     } catch (error) {
+      console.error('Error creating quiz:', error);
       toast({
         title: "Creation failed",
         description: "Something went wrong. Please try again.",
         variant: "destructive",
       });
     }
+  };
+
+  const handleDeleteQuiz = async (quizId: number) => {
+    try {
+      // First, delete all quiz questions associated with this quiz
+      const { error: quizQuestionsError } = await supabase
+        .from('quiz_questions')
+        .delete()
+        .eq('quiz_id', quizId);
+
+      if (quizQuestionsError) {
+        console.error('Error deleting quiz questions:', quizQuestionsError);
+        throw quizQuestionsError;
+      }
+
+      // Then, delete all attempts for this quiz
+      const { error: attemptsError } = await supabase
+        .from('attempts')
+        .delete()
+        .eq('quiz_id', quizId);
+
+      if (attemptsError) {
+        console.error('Error deleting attempts:', attemptsError);
+        throw attemptsError;
+      }
+
+      // Finally, delete the quiz itself
+      const { error: quizError } = await supabase
+        .from('quizzes')
+        .delete()
+        .eq('id', quizId);
+
+      if (quizError) {
+        console.error('Error deleting quiz:', quizError);
+        throw quizError;
+      }
+
+      toast({
+        title: "Quiz deleted successfully!",
+        description: "The quiz and all associated data have been removed.",
+      });
+
+      // Refresh the quiz list
+      fetchQuizzes();
+    } catch (error) {
+      console.error('Error deleting quiz:', error);
+      toast({
+        title: "Deletion failed",
+        description: "Failed to delete the quiz. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsDeleteDialogOpen(false);
+      setDeleteQuizId(null);
+    }
+  };
+
+  const openDeleteDialog = (quizId: number) => {
+    setDeleteQuizId(quizId);
+    setIsDeleteDialogOpen(true);
   };
 
   const formatDate = (dateString: string) => {
@@ -103,6 +239,45 @@ const Quizzes = () => {
         return <Badge className="bg-gray-100 text-gray-700">Archived</Badge>;
       default:
         return <Badge variant="secondary">{status}</Badge>;
+    }
+  };
+
+  const openEditDialog = (quiz: Quiz) => {
+    setEditQuiz(quiz);
+    setEditForm({ title: quiz.title, description: quiz.description });
+    setIsEditDialogOpen(true);
+  };
+
+  const handleEditQuiz = async () => {
+    if (!editQuiz) return;
+    if (!editForm.title.trim()) {
+      toast({
+        title: "Title required",
+        description: "Please enter a quiz title.",
+        variant: "destructive",
+      });
+      return;
+    }
+    try {
+      const { error } = await supabase
+        .from('quizzes')
+        .update({ title: editForm.title, description: editForm.description })
+        .eq('id', editQuiz.id);
+      if (error) throw error;
+      toast({
+        title: "Quiz updated!",
+        description: `"${editForm.title}" has been updated.`,
+      });
+      setIsEditDialogOpen(false);
+      setEditQuiz(null);
+      fetchQuizzes();
+    } catch (error) {
+      console.error('Error updating quiz:', error);
+      toast({
+        title: "Update failed",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -209,7 +384,7 @@ const Quizzes = () => {
                   <Eye className="w-4 h-4 text-blue-600" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-gray-900">{sampleQuizzes.length}</div>
+                  <div className="text-2xl font-bold text-gray-900">{quizzes.length}</div>
                   <div className="text-sm text-gray-600">Total Quizzes</div>
                 </div>
               </div>
@@ -224,7 +399,7 @@ const Quizzes = () => {
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-gray-900">
-                    {sampleQuizzes.reduce((sum, quiz) => sum + quiz.attempts, 0)}
+                    {quizzes.reduce((sum, quiz) => sum + quiz.attempts, 0)}
                   </div>
                   <div className="text-sm text-gray-600">Total Attempts</div>
                 </div>
@@ -240,7 +415,7 @@ const Quizzes = () => {
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-gray-900">
-                    {sampleQuizzes.filter(q => q.status === "active").length}
+                    {quizzes.filter(q => q.status === "active").length}
                   </div>
                   <div className="text-sm text-gray-600">Active Quizzes</div>
                 </div>
@@ -269,7 +444,7 @@ const Quizzes = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {sampleQuizzes.map((quiz) => (
+                  {quizzes.map((quiz) => (
                     <TableRow key={quiz.id} className="hover:bg-gray-50">
                       <TableCell>
                         <div>
@@ -280,29 +455,34 @@ const Quizzes = () => {
                         </div>
                       </TableCell>
                       <TableCell>
-                        <Badge variant="secondary">{quiz.questionCount}</Badge>
+                        <Badge variant="secondary">{quiz.question_count}</Badge>
                       </TableCell>
                       <TableCell>
                         <div className="font-medium">{quiz.attempts}</div>
                       </TableCell>
                       <TableCell>
-                        <div className="font-medium">{quiz.avgScore}</div>
+                        <div className="font-medium">{quiz.avg_score}</div>
                       </TableCell>
                       <TableCell>
                         {getStatusBadge(quiz.status)}
                       </TableCell>
                       <TableCell>
-                        <div className="text-sm">{formatDate(quiz.createdAt)}</div>
+                        <div className="text-sm">{formatDate(quiz.created_at)}</div>
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center space-x-2">
                           <Button variant="ghost" size="sm">
                             <Eye className="w-4 h-4" />
                           </Button>
-                          <Button variant="ghost" size="sm">
+                          <Button variant="ghost" size="sm" onClick={() => openEditDialog(quiz)}>
                             <Edit className="w-4 h-4" />
                           </Button>
-                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            className="text-red-600 hover:text-red-700"
+                            onClick={() => openDeleteDialog(quiz.id)}
+                          >
                             <Trash2 className="w-4 h-4" />
                           </Button>
                         </div>
@@ -315,6 +495,76 @@ const Quizzes = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <DialogContent className="sm:max-w-[400px]">
+          <DialogHeader>
+            <DialogTitle>Delete Quiz</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this quiz? This action cannot be undone and will remove:
+              <ul className="list-disc list-inside mt-2 space-y-1">
+                <li>All quiz questions</li>
+                <li>All user attempts</li>
+                <li>All associated data</li>
+              </ul>
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="flex justify-end space-x-2">
+            <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button 
+              variant="destructive" 
+              onClick={() => deleteQuizId && handleDeleteQuiz(deleteQuizId)}
+            >
+              Delete Quiz
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit Quiz Dialog */}
+      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <DialogTitle>Edit Quiz</DialogTitle>
+            <DialogDescription>
+              Update the quiz title and description.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="edit-title">Quiz Title</Label>
+              <Input
+                id="edit-title"
+                placeholder="Enter quiz title..."
+                value={editForm.title}
+                onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="edit-description">Description (Optional)</Label>
+              <Textarea
+                id="edit-description"
+                placeholder="Describe what this quiz covers..."
+                value={editForm.description}
+                onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
+                rows={3}
+              />
+            </div>
+          </div>
+          <div className="flex justify-end space-x-2">
+            <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleEditQuiz} className="bg-blue-600 hover:bg-blue-700">
+              Save Changes
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </AdminLayout>
   );
 };
