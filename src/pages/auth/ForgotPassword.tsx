@@ -79,7 +79,9 @@ const ForgotPassword = () => {
             <Button className="w-full h-12 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-full shadow-lg transition-all duration-300 mt-2" onClick={() => navigate('/auth/login')}>Back to Login</Button>
           </div>
         </div>
-        <RightPanel />
+        <div className="hidden md:flex flex-1">
+          <RightPanel />
+        </div>
       </div>
     );
   }
@@ -124,7 +126,9 @@ const ForgotPassword = () => {
           </div>
         </div>
       </div>
-      <RightPanel />
+      <div className="hidden md:flex flex-1">
+        <RightPanel />
+      </div>
     </div>
   );
 };
