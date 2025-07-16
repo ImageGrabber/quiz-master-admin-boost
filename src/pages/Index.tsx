@@ -248,7 +248,7 @@ function StickyLeaderboardPanel() {
                 </li>
               ))}
             </ul>
-            <button onClick={() => navigate('/leaderboard')} className="mt-4 w-full py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:from-blue-700 hover:to-purple-700 transition-all">View Full Leaderboard</button>
+            <button onClick={() => navigate('/public-leaderboard')} className="mt-4 w-full py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:from-blue-700 hover:to-purple-700 transition-all">View Full Leaderboard</button>
           </>
         ) : (
           <div className="flex flex-col items-center justify-center h-full">
