@@ -208,7 +208,9 @@ const Register = () => {
           </div>
         </div>
         {/* Right: Themed Panel */}
-        <RightPanel />
+        <div className="hidden md:flex flex-1">
+          <RightPanel />
+        </div>
       </div>
       
       {/* Success Preloader */}
