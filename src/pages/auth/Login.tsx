@@ -200,7 +200,9 @@ const Login = () => {
         </div>
       </div>
       {/* Right: Green Panel */}
-      <RightPanel />
+      <div className="hidden md:flex flex-1">
+        <RightPanel />
+      </div>
       
       {/* Success Preloader */}
       {isSuccess && (
