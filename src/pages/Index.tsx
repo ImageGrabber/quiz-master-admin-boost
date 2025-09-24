@@ -482,7 +482,7 @@ const Index = () => {
                 Join the <span className="text-blue-700">Bible Quiz Challenge!</span>
               </h1>
               <p className="text-xl text-gray-700 mb-6 max-w-4xl mx-auto leading-relaxed">
-                Test your knowledge, compete with others, and win prizes every Saturday.
+                Test your knowledge, compete with others, and climb the leaderboard every Saturday.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold rounded shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/login")}> <Play className="w-5 h-5 mr-2" /> Start Quiz Now <ArrowRight className="w-5 h-5 ml-2" /> </Button>
@@ -514,33 +514,26 @@ const Index = () => {
         </section>
 
         {/* Get Started CTA Section */}
-        <section className="py-10 md:py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 relative overflow-hidden px-2 sm:px-4">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-              backgroundSize: '60px 60px'
-            }}></div>
-          </div>
+        <section className="py-10 md:py-20 bg-gradient-to-br from-blue-50 via-purple-100 to-white relative overflow-hidden px-2 sm:px-4">
           
           <div className="container mx-auto px-2 sm:px-4 relative z-10">
             <div className="text-center max-w-4xl mx-auto">
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
                 Ready to Test Your Bible Knowledge?
               </h2>
-              <p className="text-base sm:text-xl text-blue-100 mb-6 sm:mb-8 max-w-2xl mx-auto">
-                Join thousands of participants competing for prizes every Saturday. 
-                <span className="font-semibold text-yellow-300"> Don't miss this week's competition!</span>
+              <p className="text-base sm:text-xl text-gray-700 mb-6 sm:mb-8 max-w-2xl mx-auto">
+                Join thousands of participants—compete with others and test your biblical knowledge every Saturday.
+                <span className="font-semibold text-yellow-600"> Don't miss this week's competition!</span>
               </p>
               {/* Urgency Stats */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10 max-w-md sm:max-w-2xl mx-auto">
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
-                  <div className="text-2xl sm:text-3xl font-bold text-yellow-300 mb-1 sm:mb-2">48</div>
-                  <div className="text-white text-xs sm:text-sm">Hours Left to Join</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-blue-700 mb-1 sm:mb-2">500+</div>
+                  <div className="text-gray-700 text-xs sm:text-sm">Questions Available</div>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
-                  <div className="text-2xl sm:text-3xl font-bold text-yellow-300 mb-1 sm:mb-2">1,250+</div>
-                  <div className="text-white text-xs sm:text-sm">Already Competing</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-blue-700 mb-1 sm:mb-2">1,250+</div>
+                  <div className="text-gray-700 text-xs sm:text-sm">Already Competing</div>
                 </div>
               </div>
               {/* CTA Buttons */}
@@ -565,7 +558,7 @@ const Index = () => {
                 </Button>
               </div>
               {/* Trust Indicators */}
-              <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-6 text-white/80 text-xs sm:text-sm mb-4 sm:mb-0">
+              <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-6 text-gray-700 text-xs sm:text-sm mb-4 sm:mb-0">
                 <div className="flex items-center gap-1 sm:gap-2">
                   <CheckCircle className="w-4 h-4 text-green-400" />
                   No Credit Card Required
@@ -585,8 +578,8 @@ const Index = () => {
               </div>
               {/* Final Message */}
               <div className="mt-6 sm:mt-8 p-3 sm:p-4 bg-green-500/20 border border-green-400/30 rounded-xl">
-                <p className="text-green-100 font-semibold text-xs sm:text-base">
-                  🎯 <span className="text-yellow-300">JOIN ANYTIME!</span> Registration is always open. 
+                <p className="text-green-800 font-semibold text-xs sm:text-base">
+                  🎯 <span className="text-yellow-600">JOIN ANYTIME!</span> Registration is always open. 
                   Start competing today and improve your Bible knowledge with every quiz!
                 </p>
               </div>
