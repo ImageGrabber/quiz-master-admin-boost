@@ -17,6 +17,7 @@ import {
   DialogFooter,
   DialogClose
 } from "@/components/ui/dialog";
+import { sendQuizCompletionEmailWithFallback, QuizCompletionEmailData } from "@/lib/emailService";
 
 interface Question {
   id: number;
@@ -239,6 +240,7 @@ const Quiz = () => {
     const baseScore = correctAnswers * 4 - (questions.length - correctAnswers) * 1;
     const timeBonus = Math.ceil((600 - (600 - timeLeft)) / 6);
     const totalScore = Math.max(0, baseScore + timeBonus);
+    const accuracy = Math.round((correctAnswers / questions.length) * 100);
 
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -253,6 +255,44 @@ const Quiz = () => {
             completed: true
           })
           .eq('id', attemptId);
+
+        // Get quiz title for email
+        const { data: quiz } = await supabase
+          .from('quizzes')
+          .select('title')
+          .eq('id', parseInt(quizId || '0'))
+          .single();
+
+        // Get user profile for email
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('email, full_name')
+          .eq('id', user.id)
+          .single();
+
+        // Send completion email
+        if (quiz && profile?.email) {
+          const emailData: QuizCompletionEmailData = {
+            email: profile.email,
+            userName: profile.full_name || 'Quiz Taker',
+            quizTitle: quiz.title,
+            score: totalScore,
+            correctAnswers: correctAnswers,
+            totalQuestions: questions.length,
+            timeUsed: 600 - timeLeft,
+            accuracy: accuracy
+          };
+
+          sendQuizCompletionEmailWithFallback(
+            emailData,
+            () => {
+              console.log('Quiz completion email sent successfully');
+            },
+            (error) => {
+              console.error('Failed to send quiz completion email:', error);
+            }
+          );
+        }
       }
     } catch (error) {
       console.error('Error saving quiz attempt:', error);

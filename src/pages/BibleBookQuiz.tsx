@@ -17,6 +17,7 @@ import {
   DialogFooter,
   DialogClose
 } from "@/components/ui/dialog";
+import { sendQuizCompletionEmailWithFallback, QuizCompletionEmailData } from "@/lib/emailService";
 
 interface Question {
   chapter: number;
@@ -110,6 +111,7 @@ const BibleBookQuiz = ({ title, questions, bookName }: BibleBookQuizProps) => {
     const baseScore = correctAnswers * 4 - (questions.length - correctAnswers) * 1;
     const timeBonus = Math.ceil((600 - (600 - timeLeft)) / 6);
     const totalScore = Math.max(0, baseScore + timeBonus);
+    const accuracy = Math.round((correctAnswers / questions.length) * 100);
 
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -118,7 +120,7 @@ const BibleBookQuiz = ({ title, questions, bookName }: BibleBookQuizProps) => {
         // First, check if a quiz exists for this Bible book, if not create one
         let { data: quiz } = await supabase
           .from('quizzes')
-          .select('id')
+          .select('id, title')
           .eq('title', `${bookName} Quiz`)
           .single();
 
@@ -153,6 +155,37 @@ const BibleBookQuiz = ({ title, questions, bookName }: BibleBookQuizProps) => {
           setDialogTitle("Error");
           setDialogMessage("Failed to save your attempt. Please try again.");
           setDialogOpen(true);
+        } else {
+          // Get user profile for email
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('email, full_name')
+            .eq('id', user.id)
+            .single();
+
+          // Send completion email
+          if (profile?.email) {
+            const emailData: QuizCompletionEmailData = {
+              email: profile.email,
+              userName: profile.full_name || 'Quiz Taker',
+              quizTitle: quiz.title,
+              score: totalScore,
+              correctAnswers: correctAnswers,
+              totalQuestions: questions.length,
+              timeUsed: 600 - timeLeft,
+              accuracy: accuracy
+            };
+
+            sendQuizCompletionEmailWithFallback(
+              emailData,
+              () => {
+                console.log('Bible book quiz completion email sent successfully');
+              },
+              (error) => {
+                console.error('Failed to send Bible book quiz completion email:', error);
+              }
+            );
+          }
         }
       }
     } catch (error) {
