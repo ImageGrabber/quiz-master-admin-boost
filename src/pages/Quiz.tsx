@@ -256,12 +256,22 @@ const Quiz = () => {
           })
           .eq('id', attemptId);
 
-        // Get quiz title for email
+        // Get quiz title (used for badges metadata and email)
         const { data: quiz } = await supabase
           .from('quizzes')
           .select('title')
           .eq('id', parseInt(quizId || '0'))
           .single();
+
+        // Award badges for quiz completion (include quiz title)
+        const { evaluateBadgesOnQuizComplete, ensureSeedBadges } = await import("@/lib/badgeService");
+        await ensureSeedBadges();
+        await evaluateBadgesOnQuizComplete({
+          userId: user.id,
+          score: totalScore,
+          timeUsedSeconds: 600 - timeLeft,
+          quizTitle: quiz?.title
+        });
 
         // Get user profile for email
         const { data: profile } = await supabase

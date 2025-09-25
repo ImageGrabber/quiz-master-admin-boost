@@ -407,9 +407,6 @@ const QuizSelection = () => {
           <div className="max-w-6xl mx-auto">
             {/* Modern Header Section */}
             <div className="text-center mb-12">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mb-6 shadow-lg">
-                <Brain className="w-8 h-8 text-white" />
-              </div>
               <h1 className="text-5xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent mb-6">
                 Choose Your Quiz
               </h1>

@@ -16,7 +16,8 @@ import {
   HelpCircle,
   Activity,
   Trophy,
-  Shield
+  Shield,
+  Mail
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -35,6 +36,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       href: "/admin",
       icon: LayoutDashboard,
       current: location.pathname === "/admin"
+    },
+    {
+      name: "Users & Email",
+      href: "/admin/users",
+      icon: Users,
+      current: location.pathname === "/admin/users" || location.pathname.startsWith("/admin/users/")
     },
     {
       name: "Quiz Attempts",
@@ -57,7 +64,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
     {
       name: "Manage Quizzes",
       href: "/admin/quizzes",
-      icon: Users,
+      icon: Brain,
       current: location.pathname === "/admin/quizzes"
     },
     {
