@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card'
 import { Progress } from '../components/ui/progress';
 import { toast } from '../hooks/use-toast';
 import { Clock, CheckCircle, XCircle, ArrowRight, Trophy } from 'lucide-react';
+import { sendQuizCompletionEmailWithFallback, QuizCompletionEmailData } from '../lib/emailService';
 
 interface Question {
   id: number;
@@ -255,6 +256,37 @@ export default function CompetitionQuiz() {
           title: "Quiz Completed!",
           description: `Your score: ${finalScore}%`,
         });
+
+        // Get user profile and competition details for email
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('email, full_name')
+          .eq('id', user.id)
+          .single();
+
+        // Send competition completion email
+        if (profile?.email) {
+          const emailData: QuizCompletionEmailData = {
+            email: profile.email,
+            userName: profile.full_name || 'Competition Participant',
+            quizTitle: `${competition?.title || 'Competition'} Quiz`,
+            score: finalScore,
+            correctAnswers: correctAnswers,
+            totalQuestions: questions.length,
+            timeUsed: timeUsed,
+            accuracy: finalScore
+          };
+
+          sendQuizCompletionEmailWithFallback(
+            emailData,
+            () => {
+              console.log('Competition quiz completion email sent successfully');
+            },
+            (error) => {
+              console.error('Failed to send competition quiz completion email:', error);
+            }
+          );
+        }
       }
 
     } catch (error) {
