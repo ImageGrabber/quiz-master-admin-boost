@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Plus, Edit, Trash2, Eye, Calendar, Users } from "lucide-react";
+import { Plus, Edit, Trash2, Eye, Calendar, Users, HelpCircle, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import AdminLayout from "@/components/AdminLayout";
 import { supabase } from "@/integrations/supabase/client";
@@ -21,6 +21,17 @@ interface Quiz {
   avg_score: number;
   created_at: string;
   status: string;
+}
+
+interface Question {
+  id: number;
+  question: string;
+  option_a: string;
+  option_b: string;
+  option_c: string;
+  option_d: string;
+  correct_index: number;
+  order_index: number;
 }
 
 const Quizzes = () => {
@@ -38,6 +49,20 @@ const Quizzes = () => {
   const [editQuiz, setEditQuiz] = useState<Quiz | null>(null);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [editForm, setEditForm] = useState({ title: '', description: '' });
+  const [quizQuestions, setQuizQuestions] = useState<Question[]>([]);
+  const [allQuestions, setAllQuestions] = useState<Question[]>([]);
+  const [isLoadingQuestions, setIsLoadingQuestions] = useState(false);
+  const [newQuestion, setNewQuestion] = useState({
+    question: "",
+    option_a: "",
+    option_b: "",
+    option_c: "",
+    option_d: "",
+    correct_index: 0
+  });
+  const [isAddQuestionDialogOpen, setIsAddQuestionDialogOpen] = useState(false);
+  const [addQuestionMode, setAddQuestionMode] = useState<'create' | 'existing'>('create');
+  const [selectedExistingQuestion, setSelectedExistingQuestion] = useState<number | null>(null);
 
   useEffect(() => {
     fetchQuizzes();
@@ -242,10 +267,226 @@ const Quizzes = () => {
     }
   };
 
-  const openEditDialog = (quiz: Quiz) => {
+  const openEditDialog = async (quiz: Quiz) => {
     setEditQuiz(quiz);
     setEditForm({ title: quiz.title, description: quiz.description });
     setIsEditDialogOpen(true);
+    await fetchQuizQuestions(quiz.id);
+    await fetchAllQuestions();
+  };
+
+  const fetchQuizQuestions = async (quizId: number) => {
+    setIsLoadingQuestions(true);
+    try {
+      const { data, error } = await supabase
+        .from('quiz_questions')
+        .select(`
+          order_index,
+          questions (
+            id,
+            question,
+            option_a,
+            option_b,
+            option_c,
+            option_d,
+            correct_index
+          )
+        `)
+        .eq('quiz_id', quizId)
+        .order('order_index');
+
+      if (error) throw error;
+
+      const questions = data?.map(item => ({
+        ...item.questions,
+        order_index: item.order_index
+      })) || [];
+
+      setQuizQuestions(questions);
+    } catch (error) {
+      console.error('Error fetching quiz questions:', error);
+      toast({
+        title: "Error",
+        description: "Failed to load quiz questions.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoadingQuestions(false);
+    }
+  };
+
+  const fetchAllQuestions = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('questions')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setAllQuestions(data || []);
+    } catch (error) {
+      console.error('Error fetching all questions:', error);
+    }
+  };
+
+  const addQuestionToQuiz = async () => {
+    if (!editQuiz) return;
+
+    if (addQuestionMode === 'create') {
+      if (!newQuestion.question.trim()) {
+        toast({
+          title: "Missing information",
+          description: "Please fill in the question and all options.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      try {
+        // Insert new question
+        const { data: questionData, error: questionError } = await supabase
+          .from('questions')
+          .insert({
+            question: newQuestion.question,
+            option_a: newQuestion.option_a,
+            option_b: newQuestion.option_b,
+            option_c: newQuestion.option_c,
+            option_d: newQuestion.option_d,
+            correct_index: newQuestion.correct_index
+          })
+          .select()
+          .single();
+
+        if (questionError) throw questionError;
+
+        // Add to quiz with next order index
+        const nextOrderIndex = quizQuestions.length + 1;
+        const { error: linkError } = await supabase
+          .from('quiz_questions')
+          .insert({
+            quiz_id: editQuiz.id,
+            question_id: questionData.id,
+            order_index: nextOrderIndex
+          });
+
+        if (linkError) throw linkError;
+
+        toast({
+          title: "Question added!",
+          description: "The new question has been added to the quiz.",
+        });
+
+        setIsAddQuestionDialogOpen(false);
+        setNewQuestion({
+          question: "",
+          option_a: "",
+          option_b: "",
+          option_c: "",
+          option_d: "",
+          correct_index: 0
+        });
+
+        // Refresh questions
+        await fetchQuizQuestions(editQuiz.id);
+        await fetchAllQuestions();
+      } catch (error) {
+        console.error('Error adding question:', error);
+        toast({
+          title: "Failed to add question",
+          description: "Something went wrong. Please try again.",
+          variant: "destructive",
+        });
+      }
+    } else {
+      // Add existing question to quiz
+      if (!selectedExistingQuestion) {
+        toast({
+          title: "No question selected",
+          description: "Please select a question to add.",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      try {
+        // Check if question is already in this quiz
+        const { data: existingLink } = await supabase
+          .from('quiz_questions')
+          .select('*')
+          .eq('quiz_id', editQuiz.id)
+          .eq('question_id', selectedExistingQuestion)
+          .single();
+
+        if (existingLink) {
+          toast({
+            title: "Question already in quiz",
+            description: "This question is already part of this quiz.",
+            variant: "destructive",
+          });
+          return;
+        }
+
+        // Add to quiz with next order index
+        const nextOrderIndex = quizQuestions.length + 1;
+        const { error: linkError } = await supabase
+          .from('quiz_questions')
+          .insert({
+            quiz_id: editQuiz.id,
+            question_id: selectedExistingQuestion,
+            order_index: nextOrderIndex
+          });
+
+        if (linkError) throw linkError;
+
+        toast({
+          title: "Question added!",
+          description: "The existing question has been added to the quiz.",
+        });
+
+        setIsAddQuestionDialogOpen(false);
+        setSelectedExistingQuestion(null);
+
+        // Refresh questions
+        await fetchQuizQuestions(editQuiz.id);
+        await fetchAllQuestions();
+      } catch (error) {
+        console.error('Error adding existing question:', error);
+        toast({
+          title: "Failed to add question",
+          description: "Something went wrong. Please try again.",
+          variant: "destructive",
+        });
+      }
+    }
+  };
+
+  const removeQuestionFromQuiz = async (questionId: number) => {
+    if (!editQuiz) return;
+
+    try {
+      const { error } = await supabase
+        .from('quiz_questions')
+        .delete()
+        .eq('quiz_id', editQuiz.id)
+        .eq('question_id', questionId);
+
+      if (error) throw error;
+
+      toast({
+        title: "Question removed!",
+        description: "The question has been removed from the quiz.",
+      });
+
+      // Refresh questions
+      await fetchQuizQuestions(editQuiz.id);
+    } catch (error) {
+      console.error('Error removing question:', error);
+      toast({
+        title: "Failed to remove question",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleEditQuiz = async () => {
@@ -527,40 +768,238 @@ const Quizzes = () => {
 
       {/* Edit Quiz Dialog */}
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent className="sm:max-w-[500px]">
+        <DialogContent className="sm:max-w-[800px] max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Edit Quiz</DialogTitle>
+            <DialogTitle>Edit Quiz: {editQuiz?.title}</DialogTitle>
             <DialogDescription>
-              Update the quiz title and description.
+              Update the quiz details and manage its questions.
             </DialogDescription>
           </DialogHeader>
-          <div className="space-y-4 py-4">
-            <div className="space-y-2">
-              <Label htmlFor="edit-title">Quiz Title</Label>
-              <Input
-                id="edit-title"
-                placeholder="Enter quiz title..."
-                value={editForm.title}
-                onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
-              />
+          
+          <div className="space-y-6 py-4">
+            {/* Quiz Details */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Quiz Information</h3>
+              <div className="space-y-2">
+                <Label htmlFor="edit-title">Quiz Title</Label>
+                <Input
+                  id="edit-title"
+                  placeholder="Enter quiz title..."
+                  value={editForm.title}
+                  onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="edit-description">Description (Optional)</Label>
+                <Textarea
+                  id="edit-description"
+                  placeholder="Describe what this quiz covers..."
+                  value={editForm.description}
+                  onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
+                  rows={3}
+                />
+              </div>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="edit-description">Description (Optional)</Label>
-              <Textarea
-                id="edit-description"
-                placeholder="Describe what this quiz covers..."
-                value={editForm.description}
-                onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
-                rows={3}
-              />
+
+            {/* Questions Management */}
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <h3 className="text-lg font-semibold">Quiz Questions ({quizQuestions.length})</h3>
+                <Button 
+                  onClick={() => setIsAddQuestionDialogOpen(true)}
+                  className="bg-green-600 hover:bg-green-700"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add Question
+                </Button>
+              </div>
+
+              {isLoadingQuestions ? (
+                <div className="text-center py-4">
+                  <div className="text-gray-500">Loading questions...</div>
+                </div>
+              ) : quizQuestions.length === 0 ? (
+                <div className="text-center py-8 bg-gray-50 rounded-lg">
+                  <HelpCircle className="w-12 h-12 text-gray-300 mx-auto mb-2" />
+                  <p className="text-gray-500">No questions in this quiz yet.</p>
+                  <p className="text-sm text-gray-400">Click "Add Question" to get started.</p>
+                </div>
+              ) : (
+                <div className="space-y-2 max-h-60 overflow-y-auto">
+                  {quizQuestions.map((question, index) => (
+                    <div key={question.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                      <div className="flex-1">
+                        <div className="font-medium text-sm">{index + 1}. {question.question}</div>
+                        <div className="text-xs text-gray-500 mt-1">
+                          Correct: {String.fromCharCode(65 + question.correct_index)} - {
+                            [question.option_a, question.option_b, question.option_c, question.option_d][question.correct_index]
+                          }
+                        </div>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeQuestionFromQuiz(question.id)}
+                        className="text-red-600 hover:text-red-700"
+                      >
+                        <X className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
+
           <div className="flex justify-end space-x-2">
             <Button variant="outline" onClick={() => setIsEditDialogOpen(false)}>
               Cancel
             </Button>
             <Button onClick={handleEditQuiz} className="bg-blue-600 hover:bg-blue-700">
               Save Changes
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add Question Dialog */}
+      <Dialog open={isAddQuestionDialogOpen} onOpenChange={setIsAddQuestionDialogOpen}>
+        <DialogContent className="sm:max-w-[700px]">
+          <DialogHeader>
+            <DialogTitle>Add Question to Quiz</DialogTitle>
+            <DialogDescription>
+              Choose to create a new question or select from existing questions.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 py-4">
+            {/* Mode Selection */}
+            <div className="flex space-x-4">
+              <Button
+                variant={addQuestionMode === 'create' ? 'default' : 'outline'}
+                onClick={() => setAddQuestionMode('create')}
+                className="flex-1"
+              >
+                Create New Question
+              </Button>
+              <Button
+                variant={addQuestionMode === 'existing' ? 'default' : 'outline'}
+                onClick={() => setAddQuestionMode('existing')}
+                className="flex-1"
+              >
+                Select Existing Question
+              </Button>
+            </div>
+
+            {addQuestionMode === 'create' ? (
+              /* Create New Question Form */
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="new-question">Question</Label>
+                  <Input
+                    id="new-question"
+                    placeholder="Enter the question text"
+                    value={newQuestion.question}
+                    onChange={(e) => setNewQuestion({ ...newQuestion, question: e.target.value })}
+                  />
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="option-a">Option A</Label>
+                    <Input
+                      id="option-a"
+                      value={newQuestion.option_a}
+                      onChange={(e) => setNewQuestion({ ...newQuestion, option_a: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="option-b">Option B</Label>
+                    <Input
+                      id="option-b"
+                      value={newQuestion.option_b}
+                      onChange={(e) => setNewQuestion({ ...newQuestion, option_b: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="option-c">Option C</Label>
+                    <Input
+                      id="option-c"
+                      value={newQuestion.option_c}
+                      onChange={(e) => setNewQuestion({ ...newQuestion, option_c: e.target.value })}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="option-d">Option D</Label>
+                    <Input
+                      id="option-d"
+                      value={newQuestion.option_d}
+                      onChange={(e) => setNewQuestion({ ...newQuestion, option_d: e.target.value })}
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <Label htmlFor="correct-answer">Correct Answer</Label>
+                  <select
+                    id="correct-answer"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    value={newQuestion.correct_index}
+                    onChange={(e) => setNewQuestion({ ...newQuestion, correct_index: Number(e.target.value) })}
+                  >
+                    <option value={0}>A</option>
+                    <option value={1}>B</option>
+                    <option value={2}>C</option>
+                    <option value={3}>D</option>
+                  </select>
+                </div>
+              </div>
+            ) : (
+              /* Select Existing Question */
+              <div className="space-y-4">
+                <div>
+                  <Label>Select Question</Label>
+                  <div className="max-h-60 overflow-y-auto border border-gray-300 rounded-md">
+                    {allQuestions.length === 0 ? (
+                      <div className="p-4 text-center text-gray-500">
+                        No questions available. Create some questions first.
+                      </div>
+                    ) : (
+                      <div className="space-y-1">
+                        {allQuestions.map((question) => (
+                          <div
+                            key={question.id}
+                            className={`p-3 cursor-pointer hover:bg-gray-50 border-b border-gray-100 ${
+                              selectedExistingQuestion === question.id ? 'bg-blue-50 border-blue-200' : ''
+                            }`}
+                            onClick={() => setSelectedExistingQuestion(question.id)}
+                          >
+                            <div className="font-medium text-sm">{question.question}</div>
+                            <div className="text-xs text-gray-500 mt-1">
+                              Correct: {String.fromCharCode(65 + question.correct_index)} - {
+                                [question.option_a, question.option_b, question.option_c, question.option_d][question.correct_index]
+                              }
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          
+          <div className="flex justify-end space-x-2">
+            <Button variant="outline" onClick={() => {
+              setIsAddQuestionDialogOpen(false);
+              setAddQuestionMode('create');
+              setSelectedExistingQuestion(null);
+            }}>
+              Cancel
+            </Button>
+            <Button onClick={addQuestionToQuiz} className="bg-green-600 hover:bg-green-700">
+              {addQuestionMode === 'create' ? 'Create & Add Question' : 'Add Selected Question'}
             </Button>
           </div>
         </DialogContent>

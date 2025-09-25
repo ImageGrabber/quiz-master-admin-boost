@@ -47,6 +47,20 @@ const Questions = () => {
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
   const [errorDialogMessage, setErrorDialogMessage] = useState("");
 
+  // Add Question dialog state
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [newQuestion, setNewQuestion] = useState({
+    question: "",
+    option_a: "",
+    option_b: "",
+    option_c: "",
+    option_d: "",
+    correct_index: 0,
+    category: "General",
+    difficulty: "Medium"
+  });
+  const [saving, setSaving] = useState(false);
+
   useEffect(() => {
     fetchQuizzes();
   }, []);
@@ -327,7 +341,10 @@ const Questions = () => {
             <h1 className="text-3xl font-bold text-gray-900">Question Management</h1>
             <p className="text-gray-600 mt-2">View and manage all questions in the database</p>
           </div>
-          <Button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center space-x-2">
+          <Button 
+            className="bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center space-x-2"
+            onClick={() => setIsAddDialogOpen(true)}
+          >
             <Plus className="w-4 h-4" />
             <span>Add Question</span>
           </Button>
@@ -520,6 +537,139 @@ const Questions = () => {
         </Card>
         {/* View Question Dialog, Delete Dialog, Error Dialog (unchanged) */}
       </div>
+
+      {/* Add Question Dialog */}
+      <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+        <DialogContent className="sm:max-w-[700px]">
+          <DialogHeader>
+            <DialogTitle>Add New Question</DialogTitle>
+            <DialogDescription>Fill in the question and options, then save.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Question</label>
+              <Input
+                value={newQuestion.question}
+                onChange={(e) => setNewQuestion({ ...newQuestion, question: e.target.value })}
+                placeholder="Enter the question text"
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Option A</label>
+                <Input value={newQuestion.option_a} onChange={(e) => setNewQuestion({ ...newQuestion, option_a: e.target.value })} />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Option B</label>
+                <Input value={newQuestion.option_b} onChange={(e) => setNewQuestion({ ...newQuestion, option_b: e.target.value })} />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Option C</label>
+                <Input value={newQuestion.option_c} onChange={(e) => setNewQuestion({ ...newQuestion, option_c: e.target.value })} />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Option D</label>
+                <Input value={newQuestion.option_d} onChange={(e) => setNewQuestion({ ...newQuestion, option_d: e.target.value })} />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Correct Option</label>
+                <select
+                  className="px-3 py-2 border border-gray-300 rounded-md w-full"
+                  value={newQuestion.correct_index}
+                  onChange={(e) => setNewQuestion({ ...newQuestion, correct_index: Number(e.target.value) })}
+                >
+                  <option value={0}>A</option>
+                  <option value={1}>B</option>
+                  <option value={2}>C</option>
+                  <option value={3}>D</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <Input value={newQuestion.category} onChange={(e) => setNewQuestion({ ...newQuestion, category: e.target.value })} />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Difficulty</label>
+                <select
+                  className="px-3 py-2 border border-gray-300 rounded-md w-full"
+                  value={newQuestion.difficulty}
+                  onChange={(e) => setNewQuestion({ ...newQuestion, difficulty: e.target.value })}
+                >
+                  <option>Easy</option>
+                  <option>Medium</option>
+                  <option>Hard</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsAddDialogOpen(false)}>Cancel</Button>
+            <Button onClick={async () => {
+              try {
+                setSaving(true);
+                if (!newQuestion.question || !newQuestion.option_a || !newQuestion.option_b || !newQuestion.option_c || !newQuestion.option_d) {
+                  toast({ title: 'Missing fields', description: 'Please fill all options and the question.', variant: 'destructive' });
+                  setSaving(false);
+                  return;
+                }
+                const { data: insertData, error: insertError } = await supabase
+                  .from('questions')
+                  .insert({
+                    question: newQuestion.question,
+                    option_a: newQuestion.option_a,
+                    option_b: newQuestion.option_b,
+                    option_c: newQuestion.option_c,
+                    option_d: newQuestion.option_d,
+                    correct_index: newQuestion.correct_index,
+                  })
+                  .select('*')
+                  .single();
+                if (insertError) throw insertError;
+
+                // If a quiz is selected, append to that quiz's questions with next order_index
+                if (selectedQuizId && insertData?.id) {
+                  const { count } = await supabase
+                    .from('quiz_questions')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('quiz_id', selectedQuizId);
+                  const nextIndex = (count || 0) + 1;
+                  const { error: linkError } = await supabase
+                    .from('quiz_questions')
+                    .insert({ quiz_id: selectedQuizId, question_id: insertData.id, order_index: nextIndex });
+                  if (linkError) throw linkError;
+                }
+
+                toast({ title: 'Question added', description: 'Your question has been saved.' });
+                setIsAddDialogOpen(false);
+                setNewQuestion({
+                  question: "",
+                  option_a: "",
+                  option_b: "",
+                  option_c: "",
+                  option_d: "",
+                  correct_index: 0,
+                  category: "General",
+                  difficulty: "Medium"
+                });
+                if (selectedQuizId) {
+                  fetchQuestionsForQuiz(selectedQuizId);
+                } else {
+                  fetchQuestions();
+                }
+              } catch (err: any) {
+                console.error('Failed to add question', err);
+                toast({ title: 'Add failed', description: err?.message || 'Unable to add question.', variant: 'destructive' });
+              } finally {
+                setSaving(false);
+              }
+            }} disabled={saving}>
+              {saving ? 'Saving...' : 'Save Question'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* View Question Dialog */}
       <Dialog open={isViewDialogOpen} onOpenChange={setIsViewDialogOpen}>
