@@ -1,5 +1,5 @@
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -20,6 +20,11 @@ interface ParsedQuestion {
   error?: string;
 }
 
+interface Quiz {
+  id: number;
+  title: string;
+}
+
 const Upload = () => {
   const [dragActive, setDragActive] = useState(false);
   const [file, setFile] = useState<File | null>(null);
@@ -27,6 +32,20 @@ const Upload = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const { toast } = useToast();
+  const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+  const [selectedQuizId, setSelectedQuizId] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetchQuizzes();
+  }, []);
+
+  const fetchQuizzes = async () => {
+    const { data, error } = await supabase
+      .from('quizzes')
+      .select('id, title')
+      .order('title');
+    if (!error && data) setQuizzes(data);
+  };
 
   const handleDrag = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -133,6 +152,15 @@ const Upload = () => {
       return;
     }
 
+    if (!selectedQuizId) {
+      toast({
+        title: "No quiz selected",
+        description: "Please select a quiz to add questions to.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsUploading(true);
     setUploadProgress(0);
 
@@ -153,12 +181,19 @@ const Upload = () => {
         batches.push(questionsToInsert.slice(i, i + batchSize));
       }
 
+      const insertedQuestionIds: number[] = [];
       for (let i = 0; i < batches.length; i++) {
-        const { error } = await supabase
+        const { data: insertedData, error } = await supabase
           .from('questions')
-          .insert(batches[i]);
+          .insert(batches[i])
+          .select('id');
 
         if (error) throw error;
+
+        // Collect inserted question IDs
+        if (insertedData) {
+          insertedQuestionIds.push(...insertedData.map(q => q.id));
+        }
 
         // Update progress
         const progress = Math.round(((i + 1) / batches.length) * 100);
@@ -166,6 +201,29 @@ const Upload = () => {
         
         // Small delay to show progress
         await new Promise(resolve => setTimeout(resolve, 200));
+      }
+
+      // Link questions to the selected quiz
+      if (insertedQuestionIds.length > 0) {
+        // Get current max order_index for this quiz
+        const { count } = await supabase
+          .from('quiz_questions')
+          .select('*', { count: 'exact', head: true })
+          .eq('quiz_id', selectedQuizId);
+        const startIndex = (count || 0) + 1;
+
+        // Insert quiz-question relationships
+        const quizQuestionLinks = insertedQuestionIds.map((questionId, index) => ({
+          quiz_id: selectedQuizId,
+          question_id: questionId,
+          order_index: startIndex + index
+        }));
+
+        const { error: linkError } = await supabase
+          .from('quiz_questions')
+          .insert(quizQuestionLinks);
+
+        if (linkError) throw linkError;
       }
 
       toast({
@@ -214,7 +272,7 @@ const Upload = () => {
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Bulk Upload Questions</h1>
-            <p className="text-gray-600 mt-2">Upload questions in CSV format to expand your quiz database</p>
+            <p className="text-gray-600 mt-2">Upload questions in CSV format and link them to a specific quiz</p>
           </div>
           
           <Button
@@ -226,6 +284,29 @@ const Upload = () => {
             <span>Download Template</span>
           </Button>
         </div>
+
+        {/* Quiz Selector */}
+        <Card className="shadow-lg border-0 bg-white">
+          <CardHeader>
+            <CardTitle>Select Quiz</CardTitle>
+            <p className="text-gray-600">Choose which quiz to add the uploaded questions to</p>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center gap-4">
+              <label className="font-semibold text-lg">Quiz:</label>
+              <select
+                value={selectedQuizId ?? ''}
+                onChange={e => setSelectedQuizId(Number(e.target.value) || null)}
+                className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[200px]"
+              >
+                <option value="">-- Choose a quiz --</option>
+                {quizzes.map(q => (
+                  <option key={q.id} value={q.id}>{q.title}</option>
+                ))}
+              </select>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Upload Area */}
         <Card className="shadow-lg border-0 bg-white">
@@ -396,7 +477,7 @@ const Upload = () => {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {parsedData.slice(0, 10).map((question, index) => (
+                      {parsedData.map((question, index) => (
                         <TableRow key={index} className={question.error ? "bg-red-50" : "hover:bg-gray-50"}>
                           <TableCell className="max-w-xs truncate">
                             {question.question}
@@ -427,12 +508,6 @@ const Upload = () => {
                     </TableBody>
                   </Table>
                 </div>
-                
-                {parsedData.length > 10 && (
-                  <div className="mt-4 text-center text-gray-500">
-                    Showing first 10 of {parsedData.length} questions
-                  </div>
-                )}
               </CardContent>
             </Card>
 
