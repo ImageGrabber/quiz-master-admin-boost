@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Trophy, Medal, Crown, Star, Users, TrendingUp, Award, Calendar, Clock, Target } from "lucide-react";
+import { Trophy, Medal, Crown, Star, Users, TrendingUp, Award, Calendar, Clock, Target, Bolt } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 interface LeaderboardEntry {
@@ -32,6 +32,7 @@ export default function PublicLeaderboard() {
   const [competitionLeaders, setCompetitionLeaders] = useState<CompetitionEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('global');
+  const [userBadgesMap, setUserBadgesMap] = useState<Record<string, any[]>>({});
 
   useEffect(() => {
     fetchLeaderboardData();
@@ -104,6 +105,21 @@ export default function PublicLeaderboard() {
         .sort((a, b) => b.maxScore - a.maxScore)
         .slice(0, 3);
       setGlobalLeaders(globalData);
+
+      // Fetch badges for these users
+      if (globalData.length > 0) {
+        const ids = globalData.map((u: any) => u.id);
+        const { data: userBadges } = await supabase
+          .from('user_badges')
+          .select('user_id, badges:badge_id (slug, icon), metadata')
+          .in('user_id', ids);
+        const map: Record<string, any[]> = {};
+        (userBadges || []).forEach((row: any) => {
+          map[row.user_id] = map[row.user_id] || [];
+          map[row.user_id].push({ slug: row.badges?.slug, icon: row.badges?.icon, metadata: row.metadata });
+        });
+        setUserBadgesMap(map);
+      }
 
       // Fetch weekly and monthly data (simplified for now)
       const oneWeekAgo = new Date();
@@ -194,6 +210,17 @@ export default function PublicLeaderboard() {
             </div>
             <div>
               <div className="font-semibold text-gray-900">{entry.name}</div>
+              <div className="flex gap-1 mt-1">
+                {(userBadgesMap[entry.id] || []).map((b, i) => (
+                  <span key={i} className="inline-flex items-center px-2 py-0.5 rounded-full bg-gray-100 text-xs text-gray-700">
+                    {b.icon === 'Bolt' && <Bolt className="w-3 h-3 text-blue-600 mr-1" />}
+                    {b.icon === 'Crown' && <Crown className="w-3 h-3 text-yellow-500 mr-1" />}
+                    {b.icon === 'Star' && <Star className="w-3 h-3 text-amber-500 mr-1" />}
+                    {b.icon === 'Award' && <Award className="w-3 h-3 text-purple-600 mr-1" />}
+                    <span>{b.slug?.replace('-', ' ')}</span>
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
           <div className="flex items-center space-x-2">

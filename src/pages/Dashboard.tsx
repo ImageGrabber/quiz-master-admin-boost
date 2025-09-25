@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Brain, Trophy, Clock, Target, LogOut, User, Filter, BookOpen, Calendar, Heart, CheckCircle, Play, Star, Lightbulb, TrendingUp, Flame } from "lucide-react";
+import { Brain, Trophy, Clock, Target, LogOut, User, Filter, BookOpen, Calendar, Heart, CheckCircle, Play, Star, Lightbulb, TrendingUp, Flame, Award, Crown, Bolt } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Competition } from "@/integrations/supabase/types";
@@ -58,6 +59,7 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [hideMembership, setHideMembership] = useState<boolean>(true);
   const [streakData, setStreakData] = useState<any>(null);
+  const [userBadges, setUserBadges] = useState<any[]>([]);
   const [isRecordingRead, setIsRecordingRead] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -72,8 +74,122 @@ const Dashboard = () => {
   useEffect(() => {
     if (profile) {
       fetchUserStats();
+      fetchUserBadges();
     }
   }, [profile, selectedQuizId]);
+  const fetchUserBadges = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+      // Step 1: fetch user_badges for this user
+      const { data: userBadgeRows, error: ubError } = await supabase
+        .from('user_badges')
+        .select('id, badge_id, awarded_at, metadata')
+        .eq('user_id', user.id)
+        .order('awarded_at', { ascending: false });
+      if (ubError) return;
+
+      if (!userBadgeRows || userBadgeRows.length === 0) {
+        // Backfill historical badges if none exist
+        const { ensureSeedBadges, evaluateBadgesForUserHistory } = await import("@/lib/badgeService");
+        await ensureSeedBadges();
+        await evaluateBadgesForUserHistory(user.id);
+        const { data: refetchedUB } = await supabase
+          .from('user_badges')
+          .select('id, badge_id, awarded_at, metadata')
+          .eq('user_id', user.id)
+          .order('awarded_at', { ascending: false });
+        if (!refetchedUB || refetchedUB.length === 0) {
+          setUserBadges([]);
+          return;
+        }
+        // Fetch badges for refetched rows
+        const badgeIds = Array.from(new Set(refetchedUB.map((r: any) => r.badge_id)));
+        const { data: badgeDefs } = await supabase
+          .from('badges')
+          .select('id, slug, name, description, icon')
+          .in('id', badgeIds);
+        const byId = new Map((badgeDefs || []).map((b: any) => [b.id, b]));
+        let merged = refetchedUB.map((r: any) => ({ id: r.id, awarded_at: r.awarded_at, badges: byId.get(r.badge_id), metadata: r.metadata }));
+        merged = await enrichMissingQuizTitles(user.id, merged);
+        setUserBadges(merged);
+        return;
+      }
+
+      // Step 2: fetch badge definitions and merge
+      const badgeIds = Array.from(new Set(userBadgeRows.map((r: any) => r.badge_id)));
+      const { data: badgeDefs } = await supabase
+        .from('badges')
+        .select('id, slug, name, description, icon')
+        .in('id', badgeIds);
+      const byId = new Map((badgeDefs || []).map((b: any) => [b.id, b]));
+      let merged = userBadgeRows.map((r: any) => ({ id: r.id, awarded_at: r.awarded_at, badges: byId.get(r.badge_id), metadata: r.metadata }));
+      merged = await enrichMissingQuizTitles(user.id, merged);
+      setUserBadges(merged);
+    } catch (e) {
+      console.error('Error fetching badges', e);
+    }
+  };
+
+  const enrichMissingQuizTitles = async (userId: string, rows: any[]) => {
+    const needsQuiz = rows.filter((r) => (r.badges?.slug === 'fast-finisher' || r.badges?.slug === 'score-100') && (!r.metadata || !r.metadata.quizTitle));
+    if (needsQuiz.length === 0) return rows;
+    // Fetch attempts once
+    const { data: attempts } = await supabase
+      .from('attempts')
+      .select('quiz_id, score, seconds_used')
+      .eq('user_id', userId);
+    const quizzesNeeded: number[] = [];
+    let fastestQuizId: number | undefined;
+    let perfectQuizId: number | undefined;
+    if (attempts && attempts.length > 0) {
+      const fastest = attempts.reduce((best: any, a: any) => (a.seconds_used || 999999) < (best?.seconds_used || 999999) ? a : best, null);
+      fastestQuizId = fastest?.quiz_id;
+      const best = attempts.reduce((prev: any, a: any) => (a.score || 0) > (prev?.score || 0) ? a : prev, null);
+      perfectQuizId = best?.quiz_id;
+      if (fastestQuizId) quizzesNeeded.push(fastestQuizId);
+      if (perfectQuizId) quizzesNeeded.push(perfectQuizId);
+    }
+    if (quizzesNeeded.length === 0) return rows;
+    const uniqueIds = Array.from(new Set(quizzesNeeded));
+    const { data: quizDefs } = await supabase
+      .from('quizzes')
+      .select('id, title')
+      .in('id', uniqueIds);
+    const titleById = new Map((quizDefs || []).map((q: any) => [q.id, q.title]));
+
+    // Update rows locally and persist metadata
+    for (const r of rows) {
+      if (r.badges?.slug === 'fast-finisher' && (!r.metadata || !r.metadata.quizTitle) && fastestQuizId) {
+        const quizTitle = titleById.get(fastestQuizId);
+        if (quizTitle) {
+          const newMeta = { ...(r.metadata || {}), quizTitle };
+          await supabase.from('user_badges').update({ metadata: newMeta }).eq('id', r.id);
+          r.metadata = newMeta;
+        }
+      }
+      if (r.badges?.slug === 'score-100' && (!r.metadata || !r.metadata.quizTitle) && perfectQuizId) {
+        const quizTitle = titleById.get(perfectQuizId);
+        if (quizTitle) {
+          const newMeta = { ...(r.metadata || {}), quizTitle };
+          await supabase.from('user_badges').update({ metadata: newMeta }).eq('id', r.id);
+          r.metadata = newMeta;
+        }
+      }
+    }
+    return rows;
+  };
+
+  const renderBadgeIcon = (icon: string) => {
+    switch (icon) {
+      case 'Crown': return <Crown className="w-5 h-5 text-yellow-500" />;
+      case 'Flame': return <Flame className="w-5 h-5 text-orange-500" />;
+      case 'Star': return <Star className="w-5 h-5 text-amber-500" />;
+      case 'Bolt': return <Bolt className="w-5 h-5 text-blue-600" />;
+      default: return <Award className="w-5 h-5 text-purple-600" />;
+    }
+  };
+
 
   useEffect(() => {
     const fetchStreak = async () => {
@@ -406,6 +522,64 @@ const Dashboard = () => {
                 View Latest Results
               </Button>
             </div>
+          </CardContent>
+        </Card>
+        {/* Badges */}
+        <Card className="shadow-lg border-0 bg-white h-full">
+          <CardHeader>
+            <CardTitle>Badges</CardTitle>
+            <CardDescription>Your achievements</CardDescription>
+          </CardHeader>
+          <CardContent>
+            {userBadges.length === 0 ? (
+              <div className="text-gray-600">No badges yet. Complete quizzes to earn badges!</div>
+            ) : (
+              <TooltipProvider>
+                <div className="grid grid-cols-2 gap-4">
+                  {userBadges.map((ub, i) => (
+                    <Tooltip key={i}>
+                      <TooltipTrigger asChild>
+                        <div className="p-4 rounded-2xl border border-gray-100 bg-white/60 backdrop-blur-sm hover:shadow-md transition cursor-default">
+                          <div className="flex items-center gap-3 mb-1">
+                            <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center">
+                              {renderBadgeIcon(ub.badges?.icon || '')}
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="truncate font-semibold text-gray-900">{ub.badges?.name}</div>
+                              <div className="text-xs text-gray-600">{new Date(ub.awarded_at).toLocaleDateString()}</div>
+                            </div>
+                          </div>
+                          <div className="text-xs text-gray-700 mt-1">
+                            {ub.badges?.description}
+                            {ub.metadata?.quizTitle && (
+                              <span className="block text-[11px] text-gray-600 mt-1">Quiz: {ub.metadata.quizTitle}</span>
+                            )}
+                          </div>
+                          {(ub.metadata?.score || ub.metadata?.timeUsedSeconds) && (
+                            <div className="flex flex-wrap gap-2 mt-2">
+                              {ub.metadata?.score !== undefined && (
+                                <span className="text-[10px] px-2 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100">Score: {ub.metadata.score}</span>
+                              )}
+                              {ub.metadata?.timeUsedSeconds !== undefined && (
+                                <span className="text-[10px] px-2 py-1 rounded-full bg-green-50 text-green-700 border border-green-100">Time: {Math.floor(ub.metadata.timeUsedSeconds / 60)}m {ub.metadata.timeUsedSeconds % 60}s</span>
+                              )}
+                              {ub.metadata?.totalAttempts !== undefined && (
+                                <span className="text-[10px] px-2 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-100">Attempts: {ub.metadata.totalAttempts}</span>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent className="max-w-xs">
+                        <div className="text-xs text-gray-900">
+                          {ub.badges?.description || 'Badge earned'}
+                        </div>
+                      </TooltipContent>
+                    </Tooltip>
+                  ))}
+                </div>
+              </TooltipProvider>
+            )}
           </CardContent>
         </Card>
         {/* Devotional Streak */}

@@ -257,6 +257,19 @@ export default function CompetitionQuiz() {
           description: `Your score: ${finalScore}%`,
         });
 
+        // Award badges
+        const { ensureSeedBadges, awardBadgeIfNotHas } = await import("@/lib/badgeService");
+        await ensureSeedBadges();
+        await awardBadgeIfNotHas(user.id, "first-quiz");
+        // Attempt to capture competition/quiz title in metadata
+        const quizTitle = competition?.title ? `${competition.title} Quiz` : undefined;
+        if (finalScore >= 100) {
+          await awardBadgeIfNotHas(user.id, "score-100", { score: finalScore, quizTitle });
+        }
+        if (timeUsed <= 180) {
+          await awardBadgeIfNotHas(user.id, "fast-finisher", { timeUsedSeconds: timeUsed, quizTitle });
+        }
+
         // Get user profile and competition details for email
         const { data: profile } = await supabase
           .from('profiles')
