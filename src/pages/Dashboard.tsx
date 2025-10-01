@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Brain, Trophy, Clock, Target, LogOut, User, Filter, BookOpen, Calendar, Heart, CheckCircle, Play, Star, Lightbulb, TrendingUp, Flame, Award, Crown, Bolt } from "lucide-react";
+import { Brain, Trophy, Clock, Target, LogOut, User, Filter, BookOpen, Calendar, Heart, CheckCircle, Play, Star, Lightbulb, TrendingUp, Flame, Award, Crown, Bolt, Sun, Moon, Book, Share } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -182,11 +182,27 @@ const Dashboard = () => {
 
   const renderBadgeIcon = (icon: string) => {
     switch (icon) {
-      case 'Crown': return <Crown className="w-5 h-5 text-yellow-500" />;
-      case 'Flame': return <Flame className="w-5 h-5 text-orange-500" />;
-      case 'Star': return <Star className="w-5 h-5 text-amber-500" />;
-      case 'Bolt': return <Bolt className="w-5 h-5 text-blue-600" />;
-      default: return <Award className="w-5 h-5 text-purple-600" />;
+      case 'Crown': return <Crown className="w-6 h-6 text-yellow-600" />;
+      case 'Flame': return <Flame className="w-6 h-6 text-orange-600" />;
+      case 'Star': return <Star className="w-6 h-6 text-yellow-500" />;
+      case 'Bolt': return <Bolt className="w-6 h-6 text-blue-600" />;
+      case 'Sun': return <Sun className="w-6 h-6 text-amber-500" />;
+      case 'Moon': return <Moon className="w-6 h-6 text-indigo-500" />;
+      case 'Book': return <Book className="w-6 h-6 text-emerald-600" />;
+      case 'Share': return <Share className="w-6 h-6 text-purple-600" />;
+      case 'Calendar': return <Calendar className="w-6 h-6 text-blue-600" />;
+      case 'Trophy': return <Trophy className="w-6 h-6 text-yellow-600" />;
+      default: return <Award className="w-6 h-6 text-purple-600" />;
+    }
+  };
+
+  const getBadgeRingClass = (icon: string) => {
+    switch (icon) {
+      case 'Crown': return 'from-yellow-300 via-amber-500 to-yellow-600';
+      case 'Flame': return 'from-orange-300 via-red-500 to-orange-600';
+      case 'Star': return 'from-amber-300 via-yellow-500 to-pink-400';
+      case 'Bolt': return 'from-blue-300 via-cyan-400 to-indigo-500';
+      default: return 'from-purple-300 via-fuchsia-500 to-indigo-600';
     }
   };
 
@@ -539,20 +555,37 @@ const Dashboard = () => {
                   {userBadges.map((ub, i) => (
                     <Tooltip key={i}>
                       <TooltipTrigger asChild>
-                        <div className="p-4 rounded-2xl border border-gray-100 bg-white/60 backdrop-blur-sm hover:shadow-md transition cursor-default">
+                        <div className="p-4 rounded-2xl border border-gray-100 bg-white/60 backdrop-blur-sm hover:shadow-lg transition cursor-default">
                           <div className="flex items-center gap-3 mb-1">
-                            <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center">
-                              {renderBadgeIcon(ub.badges?.icon || '')}
+                            <div className={`w-12 h-12 rounded-full bg-white flex items-center justify-center ring-2 ring-transparent`} style={{ boxShadow: `0 0 0 4px rgba(255,255,255,0.8)` }}>
+                              <div className={`w-12 h-12 rounded-full p-2 bg-gradient-to-br ${getBadgeRingClass(ub.badges?.icon || '')}` }>
+                                <div className="w-full h-full rounded-full bg-white/90 flex items-center justify-center">
+                                  {renderBadgeIcon(ub.badges?.icon || '')}
+                                </div>
+                              </div>
                             </div>
                             <div className="flex-1 min-w-0">
                               <div className="truncate font-semibold text-gray-900">{ub.badges?.name}</div>
                               <div className="text-xs text-gray-600">{new Date(ub.awarded_at).toLocaleDateString()}</div>
                             </div>
                           </div>
-                          <div className="text-xs text-gray-700 mt-1">
+                          <div className="text-sm text-gray-800 mt-1">
                             {ub.badges?.description}
                             {ub.metadata?.quizTitle && (
-                              <span className="block text-[11px] text-gray-600 mt-1">Quiz: {ub.metadata.quizTitle}</span>
+                              <span className="block text-xs text-gray-700 mt-1">Quiz: {ub.metadata.quizTitle}</span>
+                            )}
+                            {ub.badges?.slug === 'first-quiz' && ub.metadata?.firstQuizTitle && (
+                              <span className="block text-xs text-gray-700 mt-1">First quiz: {ub.metadata.firstQuizTitle}</span>
+                            )}
+                            {ub.badges?.slug === 'five-quizzes' && Array.isArray(ub.metadata?.quizzes) && (
+                              <div className="mt-2">
+                                <div className="text-xs font-semibold text-gray-900 mb-1">Your first 5 quizzes:</div>
+                                <ul className="list-disc list-inside text-xs text-gray-700 space-y-0.5">
+                                  {ub.metadata.quizzes.map((t: string, i: number) => (
+                                    <li key={i}>{t}</li>
+                                  ))}
+                                </ul>
+                              </div>
                             )}
                           </div>
                           {(ub.metadata?.score || ub.metadata?.timeUsedSeconds) && (
