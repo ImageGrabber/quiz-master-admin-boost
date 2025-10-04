@@ -228,8 +228,8 @@ export default function BibleQA() {
           </div>
         </section>
 
-        {/* Categories Grid */}
-        <section className="mb-12">
+        {/* Categories Grid - COMMENTED OUT */}
+        {/* <section className="mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Browse by Category</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {categories.map((category) => {
@@ -272,7 +272,7 @@ export default function BibleQA() {
               );
             })}
           </div>
-        </section>
+        </section> */}
 
         {/* Category Dialog */}
         <Dialog open={isCategoryDialogOpen} onOpenChange={setIsCategoryDialogOpen}>

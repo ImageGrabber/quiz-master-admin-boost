@@ -131,7 +131,7 @@ const stats = [
   { label: "Participants", value: "1,250+", icon: Users },
   { label: "Questions", value: "500+", icon: BookOpen },
   { label: "Countries", value: "45", icon: Globe },
-  { label: "Prizes Awarded", value: "$15,000+", icon: Award }
+  { label: "Weekly Quizzes", value: "52+", icon: Calendar }
 ];
 
 function StickyLeaderboardPanel() {
@@ -204,7 +204,10 @@ function StickyLeaderboardPanel() {
             attempts: user.attempts,
           }))
           .sort((a, b) => b.score - a.score)
-          .slice(0, 5);
+          .filter((user, index, self) => 
+            index === self.findIndex(u => u.id === user.id)
+          )
+          .slice(0, 3);
         setLeaders(leaderboardData);
       } catch (error) {
         console.error('Unexpected error in fetchLeaders:', error);
@@ -224,7 +227,7 @@ function StickyLeaderboardPanel() {
 
   return (
     <div className={`hidden md:flex flex-col fixed top-1/2 right-0 z-50 transform -translate-y-1/2 transition-all duration-300 ${open ? 'w-80' : 'w-14'}`}>
-      <div className={`h-[420px] ${open ? 'bg-white/80 p-4 border-l border-blue-100 shadow-xl' : 'bg-white/60 p-1 border-l border-blue-100 shadow'} rounded-l-2xl backdrop-blur-md flex flex-col items-stretch relative`}>
+      <div className={`h-[300px] ${open ? 'bg-white/80 p-4 border-l border-blue-100 shadow-xl' : 'bg-white/60 p-1 border-l border-blue-100 shadow'} rounded-l-2xl backdrop-blur-md flex flex-col items-stretch relative`}>
         <button
           onClick={() => setOpen(!open)}
           className={`absolute ${open ? 'top-4 left-[-25px]' : 'top-1/2 left-[-25px] -translate-y-1/2'} bg-blue-600 text-white rounded-l-lg px-2 py-1 shadow-lg focus:outline-none`}
@@ -238,7 +241,7 @@ function StickyLeaderboardPanel() {
               <span className="font-bold text-blue-700">Leaderboard</span>
             </div>
             <ul className="flex-1 overflow-y-auto">
-              {leaders.slice(0, 5).map((user, i) => (
+              {leaders.slice(0, 3).map((user, i) => (
                 <li key={user.id} className="flex items-center justify-between py-2 border-b last:border-b-0 border-blue-50">
                   <div className="flex items-center gap-2">
                     {getRankIcon(i)}
@@ -432,13 +435,15 @@ const Index = () => {
             </button>
             {/* Nav links for desktop */}
             <nav className="hidden md:flex items-center space-x-2">
+              <button className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" onClick={() => navigate("/bible-questions-and-answers-hub/genesis")}>Bible Q&A Hub</button>
               <button className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" onClick={() => navigate("/auth/login")}>Sign In</button>
               <Button variant="ghost" className="bg-black text-white font-semibold px-4 py-2 rounded" onClick={() => navigate("/auth/register")}>Sign Up</Button>
             </nav>
             {/* Mobile dropdown menu */}
             {mobileMenuOpen && (
               <div className="md:hidden absolute top-full right-4 mt-2 w-48 bg-white rounded-lg shadow-lg border border-blue-100 z-50 flex flex-col items-stretch">
-                <button className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50 rounded-t-lg" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
+                <button className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50 rounded-t-lg" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub/genesis"); }}>Bible Q&A Hub</button>
+                <button className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
                 <button className="bg-black text-white font-semibold px-4 py-3 text-left hover:bg-gray-900 rounded-b-lg" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</button>
               </div>
             )}
@@ -497,7 +502,7 @@ const Index = () => {
           <div className="container mx-auto px-4 mb-10">
             <div className="flex flex-wrap justify-center gap-2 text-sm text-gray-600">
               <div className="flex items-center gap-1"><Users className="w-4 h-4 text-blue-500" /> 1,250+ participants</div>
-              <div className="flex items-center gap-1"><Award className="w-4 h-4 text-purple-500" /> $15,000+ prizes awarded</div>
+              <div className="flex items-center gap-1"><Calendar className="w-4 h-4 text-green-500" /> 52+ weekly quizzes</div>
               <div className="flex items-center gap-1"><Star className="w-4 h-4 text-yellow-500" /> Weekly winners & special rewards</div>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2 max-w-4xl mx-auto mt-10">
