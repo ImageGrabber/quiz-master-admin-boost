@@ -32,12 +32,12 @@ const bibleBooks = {
 };
 
 const featuredQuizzes = [
-  { title: "Genesis Quiz", description: "The beginning of everything", difficulty: "Beginner", questions: 25, icon: BookOpen, color: "bg-blue-500", link: "/bible-questions-and-answers-hub/genesis" },
-  { title: "Matthew Quiz", description: "The Gospel of the King", difficulty: "Intermediate", questions: 25, icon: Crown, color: "bg-purple-500", link: "/bible-questions-and-answers-hub/matthew" },
-  { title: "Psalms Quiz", description: "Songs of the heart", difficulty: "Beginner", questions: 25, icon: Heart, color: "bg-green-500", link: "/bible-questions-and-answers-hub/psalms" },
-  { title: "Acts Quiz", description: "The birth of the Church", difficulty: "Intermediate", questions: 25, icon: Globe, color: "bg-orange-500", link: "/bible-questions-and-answers-hub/acts" },
-  { title: "Revelation Quiz", description: "The end times", difficulty: "Advanced", questions: 25, icon: Shield, color: "bg-red-500", link: "/bible-questions-and-answers-hub/revelation" },
-  { title: "Proverbs Quiz", description: "Wisdom for daily living", difficulty: "Beginner", questions: 25, icon: Lightbulb, color: "bg-yellow-500", link: "/bible-questions-and-answers-hub/proverbs" }
+  { title: "Genesis Quiz", description: "The beginning of everything", difficulty: "Beginner", questions: 10, icon: BookOpen, color: "bg-blue-500", link: "/public-quiz/genesis" },
+  { title: "Matthew Quiz", description: "The Gospel of the King", difficulty: "Intermediate", questions: 10, icon: Crown, color: "bg-purple-500", link: "/public-quiz/matthew" },
+  { title: "Psalms Quiz", description: "Songs of the heart", difficulty: "Beginner", questions: 10, icon: Heart, color: "bg-green-500", link: "/public-quiz/psalms" },
+  { title: "Acts Quiz", description: "The birth of the Church", difficulty: "Intermediate", questions: 10, icon: Globe, color: "bg-orange-500", link: "/public-quiz/acts" },
+  { title: "Revelation Quiz", description: "The end times", difficulty: "Advanced", questions: 10, icon: Shield, color: "bg-red-500", link: "/public-quiz/revelation" },
+  { title: "Proverbs Quiz", description: "Wisdom for daily living", difficulty: "Beginner", questions: 10, icon: Lightbulb, color: "bg-yellow-500", link: "/public-quiz/proverbs" }
 ];
 
 const categories = [

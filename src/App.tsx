@@ -34,6 +34,12 @@ import RLSTest from "./pages/RLSTest";
 import BibleQA from "./pages/BibleQA";
 import BibleStudy from "./pages/BibleStudy";
 import PublicLeaderboard from "./pages/PublicLeaderboard";
+import GenesisPublicQuiz from "./pages/public-quizzes/GenesisPublicQuiz";
+import MatthewPublicQuiz from "./pages/public-quizzes/MatthewPublicQuiz";
+import PsalmsPublicQuiz from "./pages/public-quizzes/PsalmsPublicQuiz";
+import ActsPublicQuiz from "./pages/public-quizzes/ActsPublicQuiz";
+import RevelationPublicQuiz from "./pages/public-quizzes/RevelationPublicQuiz";
+import ProverbsPublicQuiz from "./pages/public-quizzes/ProverbsPublicQuiz";
 // Removed static imports of Bible book quiz files for code-splitting
 import Upgrade from "./pages/Upgrade";
 import PageViews from "./pages/admin/PageViews";
@@ -72,6 +78,12 @@ const App = () => {
             <Route path="/result/:id" element={<ProtectedRoute><Result /></ProtectedRoute>} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/public-leaderboard" element={<PublicLeaderboard />} />
+            <Route path="/public-quiz/genesis" element={<GenesisPublicQuiz />} />
+            <Route path="/public-quiz/matthew" element={<MatthewPublicQuiz />} />
+            <Route path="/public-quiz/psalms" element={<PsalmsPublicQuiz />} />
+            <Route path="/public-quiz/acts" element={<ActsPublicQuiz />} />
+            <Route path="/public-quiz/revelation" element={<RevelationPublicQuiz />} />
+            <Route path="/public-quiz/proverbs" element={<ProverbsPublicQuiz />} />
             <Route path="/competitions" element={<ProtectedRoute><Competitions /></ProtectedRoute>} />
             <Route path="/competition-quiz/:competitionId" element={<ProtectedRoute><CompetitionQuiz /></ProtectedRoute>} />
             <Route path="/competition-leaderboard/:competitionId" element={<ProtectedRoute><CompetitionLeaderboard /></ProtectedRoute>} />
