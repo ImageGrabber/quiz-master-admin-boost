@@ -312,6 +312,7 @@ export type Database = {
           started_at: string | null;
           ended_at: string | null;
           created_at: string;
+          show_participant_feedback?: boolean;
         };
         Insert: {
           id?: string;
@@ -327,6 +328,7 @@ export type Database = {
           started_at?: string | null;
           ended_at?: string | null;
           created_at?: string;
+          show_participant_feedback?: boolean;
         };
         Update: {
           id?: string;
@@ -342,6 +344,7 @@ export type Database = {
           started_at?: string | null;
           ended_at?: string | null;
           created_at?: string;
+          show_participant_feedback?: boolean;
         };
         Relationships: [
           {

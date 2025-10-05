@@ -35,6 +35,8 @@ const CreateGuestQuiz = () => {
   ]);
   const [isSaving, setIsSaving] = useState(false);
   const [savedQuizId, setSavedQuizId] = useState<string | null>(null);
+  const [showParticipantFeedback, setShowParticipantFeedback] = useState(false);
+  const [timeLimitSeconds, setTimeLimitSeconds] = useState<number>(30);
 
   const addQuestion = () => {
     const newQuestion: Question = { id: Date.now().toString(), question: '', option_a: '', option_b: '', option_c: '', option_d: '', correct_index: 0 };
@@ -108,7 +110,7 @@ const CreateGuestQuiz = () => {
   };
 
   const startLiveSession = () => {
-    if (savedQuizId) navigate(`/live-quiz/host/${savedQuizId}`);
+    if (savedQuizId) navigate(`/live-quiz/host/${savedQuizId}?feedback=${showParticipantFeedback ? '1' : '0'}&time=${timeLimitSeconds}`);
   };
 
   return (
@@ -123,7 +125,7 @@ const CreateGuestQuiz = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-4 mb-8">
-            <Button variant="outline" size="sm" onClick={() => navigate('/')}>
+            <Button variant="outline" size="sm" onClick={() => navigate('/')}> 
               <ArrowLeft className="w-4 h-4 mr-2" /> Back
             </Button>
             <div>
@@ -152,6 +154,31 @@ const CreateGuestQuiz = () => {
                   <div className="space-y-4">
                     <div className="text-sm text-emerald-800 bg-emerald-50 p-3 rounded-md border border-emerald-100">
                       <strong>Guest Mode enabled:</strong> Participants can join your live session with just a display name. Accounts are not required.
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <input
+                        id="showFeedback"
+                        type="checkbox"
+                        className="mt-1"
+                        checked={showParticipantFeedback}
+                        onChange={(e) => setShowParticipantFeedback(e.target.checked)}
+                      />
+                      <Label htmlFor="showFeedback" className="font-normal">
+                        Show “Correct/Incorrect” feedback to participants after they answer
+                        <div className="text-xs text-gray-500">Uncheck for silent mode events.</div>
+                      </Label>
+                    </div>
+                    <div>
+                      <Label htmlFor="timeLimit">Time per question (seconds)</Label>
+                      <Input
+                        id="timeLimit"
+                        type="number"
+                        min={5}
+                        max={300}
+                        value={timeLimitSeconds}
+                        onChange={(e) => setTimeLimitSeconds(Math.max(5, Math.min(300, Number(e.target.value) || 0)))}
+                        className="mt-1 max-w-[200px]"
+                      />
                     </div>
                   </div>
                 </CardContent>
