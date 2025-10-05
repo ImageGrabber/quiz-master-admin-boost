@@ -17,6 +17,25 @@ const HostingGuide = () => {
         <link rel="canonical" href="/host-live-bible-quizzes-with-confidence" />
         <meta property="og:title" content="Host Live Bible Quizzes with Confidence" />
         <meta property="og:description" content="Create, share, and run engaging live Bible quizzes with this complete hosting guide." />
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'HowTo',
+          name: 'Host Live Bible Quizzes with Confidence',
+          description: 'Step‑by‑step guide to creating a quiz, starting a live session, sharing a join code, controlling the flow, and viewing results.',
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': '/host-live-bible-quizzes-with-confidence'
+          },
+          step: [
+            { '@type': 'HowToStep', name: 'Create a Quiz', text: 'Add questions A–D, choose correct answers, set visibility and participant feedback.' },
+            { '@type': 'HowToStep', name: 'Start a Live Session', text: 'Click Host Live to create a session and share the 8‑character join code or link. Pick a time limit per question.' },
+            { '@type': 'HowToStep', name: 'Participants Join', text: 'Attendees enter the code on the Join page. Use guest names or require login.' },
+            { '@type': 'HowToStep', name: 'Control the Flow', text: 'Timer auto‑advances questions; optionally show/hide feedback. Final question can auto‑finish and compute results.' },
+            { '@type': 'HowToStep', name: 'Review Results', text: 'Top scores highlighted; participants can see completion and results when shared.' }
+          ],
+          totalTime: 'PT5M',
+          estimatedCost: { '@type': 'MonetaryAmount', currency: 'USD', value: 0 }
+        })}</script>
       </Helmet>
       <Header />
 
