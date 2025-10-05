@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -245,8 +246,59 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
   const currentQ = questions[currentQuestion];
   const progress = ((currentQuestion + 1) / questions.length) * 100;
 
+  const generateStructuredData = () => {
+    return {
+      "@context": "https://schema.org",
+      "@type": "Quiz",
+      "name": title,
+      "description": `Test your knowledge of ${bookName} with this interactive Bible quiz. ${questions.length} questions to challenge your understanding.`,
+      "numberOfQuestions": questions.length,
+      "timeRequired": "PT10M",
+      "educationalLevel": "Beginner to Advanced",
+      "learningResourceType": "Quiz",
+      "about": {
+        "@type": "Thing",
+        "name": bookName
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "Bible Quiz Competition",
+        "url": "https://biblequizcompetition.com"
+      }
+    };
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
+      <Helmet>
+        <title>{title} - Free Bible Quiz | Bible Quiz Competition</title>
+        <meta name="description" content={`Test your knowledge of ${bookName} with this free interactive Bible quiz. ${questions.length} questions to challenge your understanding of the Bible. No registration required!`} />
+        <meta name="keywords" content={`${bookName} quiz, Bible quiz, ${bookName} questions, Bible study, Christian quiz, free Bible quiz, ${bookName} test, Bible knowledge`} />
+        <meta name="author" content="Bible Quiz Competition" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={`https://biblequizcompetition.com/public-quiz/${bookName.toLowerCase()}`} />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`${title} - Free Bible Quiz`} />
+        <meta property="og:description" content={`Test your knowledge of ${bookName} with this free interactive Bible quiz. ${questions.length} questions to challenge your understanding.`} />
+        <meta property="og:url" content={`https://biblequizcompetition.com/public-quiz/${bookName.toLowerCase()}`} />
+        <meta property="og:site_name" content="Bible Quiz Competition" />
+        <meta property="og:image" content="https://biblequizcompetition.com/og-image-bible-quiz.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${title} - Free Bible Quiz`} />
+        <meta name="twitter:description" content={`Test your knowledge of ${bookName} with this free interactive Bible quiz. ${questions.length} questions to challenge your understanding.`} />
+        <meta name="twitter:image" content="https://biblequizcompetition.com/og-image-bible-quiz.jpg" />
+        
+        {/* Structured Data */}
+        <script type="application/ld+json">
+          {JSON.stringify(generateStructuredData())}
+        </script>
+      </Helmet>
       <Header />
       <div className="container mx-auto px-4 py-8">
         <Card className="max-w-4xl mx-auto shadow-2xl border-0">
@@ -270,6 +322,22 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
           </CardHeader>
           
           <CardContent className="p-8">
+            {/* SEO-friendly content section */}
+            <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">{title}</h1>
+              <p className="text-gray-700 mb-2">
+                Test your knowledge of {bookName} with this comprehensive Bible quiz. 
+                This interactive quiz contains {questions.length} carefully crafted questions 
+                covering key events, characters, and teachings from the book of {bookName}.
+              </p>
+              <div className="flex flex-wrap gap-2 text-sm text-blue-600">
+                <span className="bg-blue-100 px-2 py-1 rounded">Free Bible Quiz</span>
+                <span className="bg-blue-100 px-2 py-1 rounded">{questions.length} Questions</span>
+                <span className="bg-blue-100 px-2 py-1 rounded">10 Minutes</span>
+                <span className="bg-blue-100 px-2 py-1 rounded">No Registration Required</span>
+              </div>
+            </div>
+            
             <div className="mb-8">
               <h2 className="text-xl font-semibold text-gray-900 mb-6">{currentQ.question}</h2>
               <div className="space-y-3">
@@ -304,6 +372,42 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
             </div>
           </CardContent>
         </Card>
+        
+        {/* SEO-friendly footer content */}
+        <div className="mt-8 max-w-4xl mx-auto">
+          <Card className="shadow-lg border-0">
+            <CardContent className="p-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-4">About This {bookName} Quiz</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-2">What You'll Learn</h4>
+                  <ul className="text-sm text-gray-600 space-y-1">
+                    <li>• Key events and stories from {bookName}</li>
+                    <li>• Important characters and their roles</li>
+                    <li>• Biblical teachings and principles</li>
+                    <li>• Historical context and significance</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-800 mb-2">Quiz Features</h4>
+                  <ul className="text-sm text-gray-600 space-y-1">
+                    <li>• {questions.length} carefully selected questions</li>
+                    <li>• 10-minute time limit</li>
+                    <li>• Instant feedback and explanations</li>
+                    <li>• No registration required</li>
+                  </ul>
+                </div>
+              </div>
+              <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                <p className="text-sm text-gray-700">
+                  <strong>Perfect for:</strong> Bible study groups, Sunday school classes, personal study, 
+                  and anyone wanting to test their knowledge of {bookName}. This quiz is designed to 
+                  challenge both beginners and advanced Bible students.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
 
       {/* Time Warning Dialog */}

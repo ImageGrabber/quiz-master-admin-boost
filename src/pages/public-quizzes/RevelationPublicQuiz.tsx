@@ -1,83 +1,114 @@
 import PublicQuiz from "../PublicQuiz";
 
-const questions = [
+// Revelation Quiz Questions - 10 questions about the book of Revelation
+const revelationQuestions = [
   {
-    id: 1,
-    question: "Who wrote the book of Revelation?",
-    options: ["Peter", "Paul", "John", "Luke"],
-    answer: 2,
-    explanation: "Revelation 1:1 - The revelation from Jesus Christ, which God gave him to show his servants what must soon take place. He made it known by sending his angel to his servant John."
+    question: "What is the main theme of Revelation?",
+    options: [
+      "Church organization",
+      "The end times, Christ's return, and the final victory",
+      "Financial giving",
+      "Personal success"
+    ],
+    answer: 1
   },
   {
-    id: 2,
-    question: "Where was John when he received the revelation?",
-    options: ["Jerusalem", "Rome", "Patmos", "Ephesus"],
-    answer: 2,
-    explanation: "Revelation 1:9 - I, John, your brother and companion in the suffering and kingdom and patient endurance that are ours in Jesus, was on the island of Patmos because of the word of God and the testimony of Jesus."
+    question: "What does Revelation 1:3 say about those who read this prophecy?",
+    options: [
+      "Blessed is the one who reads aloud the words of this prophecy",
+      "Cursed",
+      "Punished",
+      "Ignored"
+    ],
+    answer: 0
   },
   {
-    id: 3,
-    question: "How many churches did Jesus address in Revelation?",
-    options: ["Five", "Six", "Seven", "Eight"],
-    answer: 2,
-    explanation: "Revelation 1:11 - 'Write on a scroll what you see and send it to the seven churches: to Ephesus, Smyrna, Pergamum, Thyatira, Sardis, Philadelphia and Laodicea.'"
+    question: "What does Revelation 1:8 say the Lord God is?",
+    options: [
+      "The Alpha and the Omega, who is, and who was, and who is to come, the Almighty",
+      "Just a man",
+      "An angel",
+      "A prophet"
+    ],
+    answer: 0
   },
   {
-    id: 4,
-    question: "What color was the horse of the first horseman of the apocalypse?",
-    options: ["White", "Red", "Black", "Pale"],
-    answer: 0,
-    explanation: "Revelation 6:2 - I looked, and there before me was a white horse! Its rider held a bow, and he was given a crown, and he rode out as a conqueror bent on conquest."
+    question: "What does Revelation 3:20 say Jesus is doing?",
+    options: [
+      "I stand at the door and knock. If anyone hears my voice and opens the door, I will come in",
+      "Waiting outside",
+      "Ignoring us",
+      "Abandoning us"
+    ],
+    answer: 0
   },
   {
-    id: 5,
-    question: "How many seals are there in Revelation?",
-    options: ["Five", "Six", "Seven", "Eight"],
-    answer: 2,
-    explanation: "Revelation 6:1-17 - There are seven seals that are opened, each revealing different events."
+    question: "What does Revelation 4:8 say the four living creatures never stop saying?",
+    options: [
+      "Holy, holy, holy is the Lord God Almighty",
+      "Nothing",
+      "Praise to themselves",
+      "Praise to others"
+    ],
+    answer: 0
   },
   {
-    id: 6,
-    question: "What is the number of the beast?",
-    options: ["616", "666", "777", "888"],
-    answer: 1,
-    explanation: "Revelation 13:18 - This calls for wisdom. Let the person who has insight calculate the number of the beast, for it is the number of a man. That number is 666."
+    question: "What does Revelation 5:5 say the Lion of the tribe of Judah has done?",
+    options: [
+      "Has triumphed",
+      "Has failed",
+      "Has given up",
+      "Has lost"
+    ],
+    answer: 0
   },
   {
-    id: 7,
-    question: "How many trumpets are blown in Revelation?",
-    options: ["Five", "Six", "Seven", "Eight"],
-    answer: 2,
-    explanation: "Revelation 8:2 - And I saw the seven angels who stand before God, and seven trumpets were given to them."
+    question: "What does Revelation 7:9 say John saw?",
+    options: [
+      "A great multitude that no one could count, from every nation, tribe, people and language",
+      "Only a few people",
+      "Only one nation",
+      "Only one language"
+    ],
+    answer: 0
   },
   {
-    id: 8,
-    question: "What is the name of the city that comes down from heaven?",
-    options: ["New Jerusalem", "New Zion", "New Salem", "New Bethlehem"],
-    answer: 0,
-    explanation: "Revelation 21:2 - I saw the Holy City, the new Jerusalem, coming down out of heaven from God, prepared as a bride beautifully dressed for her husband."
+    question: "What does Revelation 11:15 say the kingdom of the world has become?",
+    options: [
+      "The kingdom of our Lord and of his Messiah",
+      "Nothing",
+      "The same",
+      "Worse"
+    ],
+    answer: 0
   },
   {
-    id: 9,
-    question: "What flows from the throne of God in the new heaven and earth?",
-    options: ["Water", "Light", "The river of life", "Manna"],
-    answer: 2,
-    explanation: "Revelation 22:1 - Then the angel showed me the river of the water of life, as clear as crystal, flowing from the throne of God and of the Lamb."
+    question: "What does Revelation 19:11 say John saw?",
+    options: [
+      "Heaven standing open and there before me was a white horse, whose rider is called Faithful and True",
+      "Nothing",
+      "A black horse",
+      "A red horse"
+    ],
+    answer: 0
   },
   {
-    id: 10,
-    question: "What is the last word of the Bible?",
-    options: ["Amen", "Grace", "Peace", "Love"],
-    answer: 0,
-    explanation: "Revelation 22:21 - The grace of the Lord Jesus be with God's people. Amen."
+    question: "What does Revelation 21:4 say God will wipe away?",
+    options: [
+      "Every tear from their eyes. There will be no more death or mourning or crying or pain",
+      "Nothing",
+      "Only some tears",
+      "Only some pain"
+    ],
+    answer: 0
   }
 ];
 
 export default function RevelationPublicQuiz() {
   return (
     <PublicQuiz 
-      title="Revelation Quiz - The End Times"
-      questions={questions}
+      title="Revelation Quiz"
+      questions={revelationQuestions}
       bookName="Revelation"
     />
   );
