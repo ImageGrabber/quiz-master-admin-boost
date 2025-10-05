@@ -36,6 +36,8 @@ import BibleQA from "./pages/BibleQA";
 import BibleStudy from "./pages/BibleStudy";
 import PaulineEpistles from "./pages/bible-questions-and-answers-hub/pauline-epistles";
 import PublicLeaderboard from "./pages/PublicLeaderboard";
+import Articles from "./pages/Articles";
+import ArticleDetail from "./pages/ArticleDetail";
 import GenesisPublicQuiz from "./pages/public-quizzes/GenesisPublicQuiz";
 import ExodusPublicQuiz from "./pages/public-quizzes/ExodusPublicQuiz";
 import LeviticusPublicQuiz from "./pages/public-quizzes/LeviticusPublicQuiz";
@@ -135,6 +137,8 @@ const App = () => {
             <Route path="/result/:id" element={<ProtectedRoute><Result /></ProtectedRoute>} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/public-leaderboard" element={<PublicLeaderboard />} />
+            <Route path="/articles" element={<Articles />} />
+            <Route path="/articles/:id" element={<ArticleDetail />} />
             <Route path="/public-quiz/genesis" element={<GenesisPublicQuiz />} />
             <Route path="/public-quiz/exodus" element={<ExodusPublicQuiz />} />
             <Route path="/public-quiz/leviticus" element={<LeviticusPublicQuiz />} />
