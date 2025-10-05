@@ -487,6 +487,7 @@ const Index = () => {
             <nav className="hidden md:flex items-center space-x-2">
               <button className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" onClick={() => navigate("/bible-questions-and-answers-hub/genesis")}>Bible Q&A Hub</button>
               <button className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" onClick={() => navigate("/articles")}>Articles</button>
+              <button className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" onClick={() => navigate("/host-live-bible-quizzes-with-confidence")}>Hosting Guide</button>
               <button className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" onClick={() => navigate("/auth/login")}>Sign In</button>
               <Button variant="ghost" className="bg-black text-white font-semibold px-4 py-2 rounded" onClick={() => navigate("/auth/register")}>Sign Up</Button>
             </nav>
@@ -495,6 +496,7 @@ const Index = () => {
               <div className="md:hidden absolute top-full right-4 mt-2 w-48 bg-white rounded-lg shadow-lg border border-blue-100 z-50 flex flex-col items-stretch">
                 <button className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50 rounded-t-lg" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub/genesis"); }}>Bible Q&A Hub</button>
                 <button className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
+                <button className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50" onClick={() => { setMobileMenuOpen(false); navigate("/host-live-bible-quizzes-with-confidence"); }}>Hosting Guide</button>
                 <button className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
                 <button className="bg-black text-white font-semibold px-4 py-3 text-left hover:bg-gray-900 rounded-b-lg" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</button>
               </div>
@@ -552,7 +554,7 @@ const Index = () => {
               {/* Guest complete dialog is handled globally below */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold rounded shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/login")}> <Play className="w-5 h-5 mr-2" /> Start Quiz Now <ArrowRight className="w-5 h-5 ml-2" /> </Button>
-                <Button variant="outline" size="lg" className="px-8 py-6 text-lg font-medium border-2 border-grey-200 hover:border-transparent rounded bg-white/60 backdrop-blur-md hover:text-white hover:bg-black" onClick={() => navigate("/public-leaderboard")}> <Trophy className="w-5 h-5 mr-2" /> View Leaderboard</Button>
+                <Button variant="outline" size="lg" className="px-8 py-6 text-lg font-medium border-2 border-grey-200 hover:border-transparent rounded bg-white/60 backdrop-blur-md hover:text-white hover:bg-black" onClick={() => navigate("/live-quiz")}> <Play className="w-5 h-5 mr-2" /> Host a Live Quiz</Button>
               </div>
               
             </div>

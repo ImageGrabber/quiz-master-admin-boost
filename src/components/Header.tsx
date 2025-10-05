@@ -78,6 +78,12 @@ const Header = () => {
           >
             Articles
           </button>
+          <button 
+            className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" 
+            onClick={() => navigate("/host-live-bible-quizzes-with-confidence")}
+          >
+            Hosting Guide
+          </button>
           {showSignIn && (
             <button 
               className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" 
@@ -138,6 +144,12 @@ const Header = () => {
               onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}
             >
               Articles
+            </button>
+            <button 
+              className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50" 
+              onClick={() => { setMobileMenuOpen(false); navigate("/host-live-bible-quizzes-with-confidence"); }}
+            >
+              Hosting Guide
             </button>
             {showSignIn && (
               <button 
