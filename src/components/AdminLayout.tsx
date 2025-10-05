@@ -78,6 +78,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       href: "/admin/upload",
       icon: Upload,
       current: location.pathname === "/admin/upload"
+    },
+    {
+      name: "Realtime Health Check",
+      href: "/live-quiz/health-check",
+      icon: Activity,
+      current: location.pathname === "/live-quiz/health-check"
     }
   ];
 

@@ -9,8 +9,6 @@ import {
   Play, 
   Edit, 
   Trash2, 
-  Copy, 
-  Share2, 
   Eye,
   Users,
   Clock,
@@ -123,22 +121,6 @@ const MyQuizzes = () => {
     }
   };
 
-  const copyShareLink = (shareCode: string) => {
-    const link = `${window.location.origin}/live-quiz/join/${shareCode}`;
-    navigator.clipboard.writeText(link);
-    toast({
-      title: "Link Copied!",
-      description: "Share this link with friends to join your quiz",
-    });
-  };
-
-  const copyShareCode = (shareCode: string) => {
-    navigator.clipboard.writeText(shareCode);
-    toast({
-      title: "Code Copied!",
-      description: "Share this code with friends to join your quiz",
-    });
-  };
 
   const filteredQuizzes = quizzes.filter(quiz => {
     const matchesSearch = quiz.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -271,21 +253,6 @@ const MyQuizzes = () => {
                       </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-medium">Share Code:</span>
-                        <code className="bg-gray-100 px-2 py-1 rounded text-xs font-mono">
-                          {quiz.share_code}
-                        </code>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => copyShareCode(quiz.share_code)}
-                        >
-                          <Copy className="w-3 h-3" />
-                        </Button>
-                      </div>
-                    </div>
 
                     <div className="flex gap-2">
                       <Button
@@ -297,9 +264,11 @@ const MyQuizzes = () => {
                       </Button>
                       <Button
                         variant="outline"
-                        onClick={() => copyShareLink(quiz.share_code)}
+                        onClick={() => navigate(`/quiz-results/${quiz.id}`)}
+                        className="flex-1"
                       >
-                        <Share2 className="w-4 h-4" />
+                        <Eye className="w-4 h-4 mr-2" />
+                        Results
                       </Button>
                     </div>
 

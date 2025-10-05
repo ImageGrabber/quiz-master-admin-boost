@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, User, Calendar, HelpCircle, TrendingUp, MessageCircle, CheckCircle, Globe, Home, Settings, Medal, Crown, Bolt, ArrowLeft, Book, Menu } from "lucide-react";
@@ -81,6 +82,17 @@ const leaderboard = [
   { name: "Sarah J.", score: 98, avatar: "SJ" },
   { name: "Michael C.", score: 95, avatar: "MC" },
   { name: "Emily R.", score: 92, avatar: "ER" }
+];
+
+// Lightweight daily Bible verses (rotates locally without external API)
+const dailyVerses = [
+  { ref: "John 3:16", text: "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life." },
+  { ref: "Psalm 119:105", text: "Your word is a lamp to my feet and a light to my path." },
+  { ref: "Proverbs 3:5-6", text: "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight." },
+  { ref: "Philippians 4:6-7", text: "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God... will guard your hearts and your minds in Christ Jesus." },
+  { ref: "Isaiah 40:31", text: "But those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint." },
+  { ref: "Romans 8:28", text: "And we know that in all things God works for the good of those who love him, who have been called according to his purpose." },
+  { ref: "Joshua 1:9", text: "Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go." },
 ];
 
 const bibleTestimonials = [
@@ -333,8 +345,10 @@ const Index = () => {
   const navigate = useNavigate();
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [createDialogOpen, setCreateDialogOpen] = useState(false);
   // Calculate days until next Saturday
   const [nextQuizLabel, setNextQuizLabel] = useState("");
+  const [verse, setVerse] = useState<{ref: string; text: string} | null>(null);
   useEffect(() => {
     const today = new Date();
     const dayOfWeek = today.getDay(); // 0=Sun, 6=Sat
@@ -344,6 +358,17 @@ const Index = () => {
     else if (daysUntilSaturday === 1) label = "(tomorrow)";
     else label = `(in ${daysUntilSaturday} days)`;
     setNextQuizLabel(label);
+  }, []);
+
+  // Pick a daily verse deterministically based on today's date
+  useEffect(() => {
+    const today = new Date();
+    const start = new Date(today.getFullYear(), 0, 0);
+    const diff = today.getTime() - start.getTime();
+    const oneDay = 1000 * 60 * 60 * 24;
+    const dayOfYear = Math.floor(diff / oneDay);
+    const idx = dayOfYear % dailyVerses.length;
+    setVerse(dailyVerses[idx]);
   }, []);
 
   useEffect(() => {
@@ -491,6 +516,14 @@ const Index = () => {
               <p className="text-xl text-gray-700 mb-6 max-w-4xl mx-auto leading-relaxed">
                 Test your knowledge, compete with others, and climb the leaderboard every Saturday.
               </p>
+              {verse && (
+                <div className="max-w-3xl mx-auto mb-8">
+                  <div className="rounded-2xl bg-white/70 backdrop-blur border border-blue-100 shadow p-4 md:p-5">
+                    <div className="text-gray-800 text-base md:text-lg leading-relaxed">“{verse.text}”</div>
+                    <div className="mt-2 text-sm font-semibold text-blue-700">— {verse.ref}</div>
+                  </div>
+                </div>
+              )}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold rounded shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/login")}> <Play className="w-5 h-5 mr-2" /> Start Quiz Now <ArrowRight className="w-5 h-5 ml-2" /> </Button>
                 <Button variant="outline" size="lg" className="px-8 py-6 text-lg font-medium border-2 border-grey-200 hover:border-transparent rounded bg-white/60 backdrop-blur-md hover:text-white hover:bg-black" onClick={() => navigate("/public-leaderboard")}> <Trophy className="w-5 h-5 mr-2" /> View Leaderboard</Button>
@@ -500,7 +533,7 @@ const Index = () => {
             
           </div>
            {/* Statistics */}
-        <section className="mb-40 mt-32">
+        <section className="mb-24 mt-10">
           <div className="container mx-auto px-4 mb-10">
             <div className="flex flex-wrap justify-center gap-2 text-sm text-gray-600">
               <div className="flex items-center gap-1"><Users className="w-4 h-4 text-blue-500" /> 1,250+ participants</div>
@@ -520,79 +553,110 @@ const Index = () => {
         </section>
         </section>
 
-        {/* Get Started CTA Section */}
+        {/* Get Started CTA Section - split left/right */}
         <section className="py-10 md:py-20 bg-gradient-to-br from-blue-50 via-purple-100 to-white relative overflow-hidden px-2 sm:px-4">
-          
           <div className="container mx-auto px-2 sm:px-4 relative z-10">
-            <div className="text-center max-w-4xl mx-auto">
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
-                Ready to Test Your Bible Knowledge?
-              </h2>
-              <p className="text-base sm:text-xl text-gray-700 mb-6 sm:mb-8 max-w-2xl mx-auto">
-                Join thousands of participants—compete with others and test your biblical knowledge every Saturday.
-                <span className="font-semibold text-yellow-600"> Don't miss this week's competition!</span>
-              </p>
-              {/* Urgency Stats */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10 max-w-md sm:max-w-2xl mx-auto">
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
-                  <div className="text-2xl sm:text-3xl font-bold text-blue-700 mb-1 sm:mb-2">500+</div>
-                  <div className="text-gray-700 text-xs sm:text-sm">Questions Available</div>
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-8 sm:mb-12 text-center leading-tight">
+              Ready to Test Your Bible Knowledge?
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 max-w-6xl mx-auto">
+              {/* Left: Participate CTA */}
+              <div className="bg-white/70 backdrop-blur rounded-3xl border border-white/60 p-6 sm:p-8 shadow-xl">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-emerald-600 to-green-600 text-white shadow">For participants</span>
                 </div>
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-white/20">
-                  <div className="text-2xl sm:text-3xl font-bold text-blue-700 mb-1 sm:mb-2">1,250+</div>
-                  <div className="text-gray-700 text-xs sm:text-sm">Already Competing</div>
-                </div>
-              </div>
-              {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-6 sm:mb-8 w-full max-w-md mx-auto">
-                <Button 
-                  size="lg" 
-                  className="w-full sm:w-auto bg-yellow-400 hover:bg-yellow-300 text-black font-bold px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-xl rounded-xl shadow-2xl hover:shadow-yellow-400/25 transition-all duration-300 transform hover:scale-105" 
-                  onClick={() => navigate("/auth/register")}
-                >
-                  <Play className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
-                  JOIN NOW - IT'S FREE!
-                  <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3" />
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="lg" 
-                  className="w-full sm:w-auto border-2 border-white bg-white text-black hover:bg-gray-100 font-semibold px-6 sm:px-8 py-4 sm:py-6 text-lg rounded-xl transition-all duration-300" 
-                  onClick={() => navigate("/auth/login")}
-                >
-                  <User className="w-5 h-5 mr-2" />
-                  Sign In
-                </Button>
-              </div>
-              {/* Trust Indicators */}
-              <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-6 text-gray-700 text-xs sm:text-sm mb-4 sm:mb-0">
-                <div className="flex items-center gap-1 sm:gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                  No Credit Card Required
-                </div>
-                <div className="flex items-center gap-1 sm:gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                  Instant Access
-                </div>
-                <div className="flex items-center gap-1 sm:gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                  Free to Join
-                </div>
-                <div className="flex items-center gap-1 sm:gap-2">
-                  <CheckCircle className="w-4 h-4 text-green-400" />
-                  Win Real Prizes
-                </div>
-              </div>
-              {/* Final Message */}
-              <div className="mt-6 sm:mt-8 p-3 sm:p-4 bg-green-500/20 border border-green-400/30 rounded-xl">
-                <p className="text-green-800 font-semibold text-xs sm:text-base">
-                  🎯 <span className="text-yellow-600">JOIN ANYTIME!</span> Registration is always open. 
-                  Start competing today and improve your Bible knowledge with every quiz!
+                <p className="text-lg sm:text-xl text-gray-800 mb-6 leading-relaxed">
+                  Join thousands of participants—compete with others and test your biblical knowledge every Saturday.
+                  <span className="font-bold text-yellow-600"> Don’t miss this week’s competition!</span>
                 </p>
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="bg-white rounded-2xl p-5 border border-blue-100 shadow-sm">
+                    <div className="text-3xl font-extrabold text-blue-700 tracking-tight">500+</div>
+                    <div className="text-gray-700 text-sm mt-1">Questions Available</div>
+                  </div>
+                  <div className="bg-white rounded-2xl p-5 border border-blue-100 shadow-sm">
+                    <div className="text-3xl font-extrabold text-blue-700 tracking-tight">1,250+</div>
+                    <div className="text-gray-700 text-sm mt-1">Already Competing</div>
+                  </div>
+                </div>
+                <div className="relative">
+                  <Button 
+                    size="lg" 
+                    className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-extrabold px-6 sm:px-10 py-5 sm:py-6 text-lg sm:text-xl rounded-lg shadow-[0_10px_30px_rgba(16,185,129,0.35)] transition-all duration-300 transform hover:scale-[1.02]" 
+                    onClick={() => navigate("/auth/register")}
+                  >
+                    <Play className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
+                    JOIN NOW - IT'S FREE!
+                    <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 ml-2 sm:ml-3" />
+                  </Button>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-gray-800 text-sm mt-6">
+                  <div className="flex items-center gap-2 bg-white rounded-xl px-3 py-2 border border-green-100"><CheckCircle className="w-4 h-4 text-green-500" /> No Credit Card Required</div>
+                  <div className="flex items-center gap-2 bg-white rounded-xl px-3 py-2 border border-green-100"><CheckCircle className="w-4 h-4 text-green-500" /> Instant Access</div>
+                  <div className="flex items-center gap-2 bg-white rounded-xl px-3 py-2 border border-green-100"><CheckCircle className="w-4 h-4 text-green-500" /> Free to Join</div>
+                  <div className="flex items-center gap-2 bg-white rounded-xl px-3 py-2 border border-green-100"><CheckCircle className="w-4 h-4 text-green-500" /> Win Real Prizes</div>
+                </div>
+              </div>
+
+              {/* Right: Create quizzes info */}
+              <div className="bg-white/70 backdrop-blur rounded-3xl border border-white/60 p-6 sm:p-8 shadow-xl">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow">For creators</span>
+                </div>
+                <h3 className="text-2xl font-extrabold text-gray-900 mb-2 tracking-tight">Create and Host Live Quizzes</h3>
+                <p className="text-gray-800 mb-5 leading-relaxed">Build your own Bible quizzes, host live sessions, and share an 8‑character join code with participants.</p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                  <div className="flex items-start gap-2 bg-white rounded-xl p-3 border border-gray-100"><CheckCircle className="w-4 h-4 text-green-500 mt-0.5" /> <span className="text-gray-800 text-base md:text-lg">Add questions (A–D) and mark the correct answer</span></div>
+                  <div className="flex items-start gap-2 bg-white rounded-xl p-3 border border-gray-100"><CheckCircle className="w-4 h-4 text-green-500 mt-0.5" /> <span className="text-gray-800 text-base md:text-lg">Choose public or private visibility</span></div>
+                  <div className="flex items-start gap-2 bg-white rounded-xl p-3 border border-gray-100"><CheckCircle className="w-4 h-4 text-green-500 mt-0.5" /> <span className="text-gray-800 text-base md:text-lg">Require login or allow guest names</span></div>
+                  <div className="flex items-start gap-2 bg-white rounded-xl p-3 border border-gray-100"><CheckCircle className="w-4 h-4 text-green-500 mt-0.5" /> <span className="text-gray-800 text-base md:text-lg">Automatic scoring and top results</span></div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <Button className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 font-semibold" onClick={() => setCreateDialogOpen(true)}>
+                    Create Quiz
+                  </Button>
+                  <Button variant="outline" className="w-full sm:w-auto" onClick={() => navigate('/live-quiz')}>
+                    Live Quiz Hub
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </section>
+
+        {/* Create Quiz Mode Dialog */}
+        <Dialog open={createDialogOpen} onOpenChange={setCreateDialogOpen}>
+          <DialogContent className="sm:max-w-xl">
+            <DialogHeader>
+              <DialogTitle className="text-2xl">Choose participation mode</DialogTitle>
+              <DialogDescription className="text-base">
+                Decide how participants will join your live quiz. You can change this later in quiz settings.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+              <div className="rounded-xl border p-5 bg-white hover:shadow-md transition cursor-pointer" onClick={() => { setCreateDialogOpen(false); navigate('/create-quiz?requiresLogin=1'); }}>
+                <div className="text-base font-semibold text-indigo-700 mb-2">Require login</div>
+                <ul className="text-base text-gray-700 list-disc pl-4 space-y-1">
+                  <li>Verified identities, reduced impersonation</li>
+                  <li>Badges and history saved to accounts</li>
+                  <li>Best for classes and recurring groups</li>
+                </ul>
+                <Button size="sm" className="mt-3 w-full bg-indigo-600 hover:bg-indigo-700">Use login</Button>
+              </div>
+              <div className="rounded-xl border p-5 bg-white hover:shadow-md transition cursor-pointer" onClick={() => { setCreateDialogOpen(false); navigate('/create-quiz/guest'); }}>
+                <div className="text-base font-semibold text-emerald-700 mb-2">No login (guest names)</div>
+                <ul className="text-base text-gray-700 list-disc pl-4 space-y-1">
+                  <li>Fast join with display name only</li>
+                  <li>No account required</li>
+                  <li>Great for public events and quick sessions</li>
+                </ul>
+                <Button size="sm" variant="outline" className="mt-3 w-full">Use guest mode</Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
 
         {/* How It Works */}
         <section id="features" className="py-24 mb-0 mt-[-50px] bg-gradient-to-br from-white via-blue-50 to-purple-50 overflow-hidden">

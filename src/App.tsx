@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import ChatWidget from "@/components/ChatWidget";
 import { Analytics } from "@vercel/analytics/next"
 import Index from "./pages/Index";
 import Login from "./pages/auth/Login";
@@ -14,7 +15,12 @@ import ResetPassword from "./pages/auth/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import MyQuizzes from "./pages/MyQuizzes";
 import CreateQuiz from "./pages/CreateQuiz";
+import CreateGuestQuiz from "./pages/guest/CreateGuestQuiz";
+import EditQuiz from "./pages/EditQuiz";
+import QuizResults from "./pages/QuizResults";
+import Help from "./pages/Help";
 import LiveQuizHost from "./pages/LiveQuizHost";
+import LiveQuizIntro from "./pages/LiveQuizIntro";
 import LiveQuizParticipant from "./pages/LiveQuizParticipant";
 import LiveQuizHealthCheck from "./pages/LiveQuizHealthCheck";
 import Settings from "./pages/Settings";
@@ -124,6 +130,7 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
           <PageViewTracker />
+          <ChatWidget />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth/login" element={<Login />} />
@@ -133,9 +140,14 @@ const App = () => {
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/dashboard/quizzes" element={<ProtectedRoute><MyQuizzes /></ProtectedRoute>} />
             <Route path="/create-quiz" element={<ProtectedRoute><CreateQuiz /></ProtectedRoute>} />
+            <Route path="/create-quiz/guest" element={<CreateGuestQuiz />} />
+            <Route path="/edit-quiz/:quizId" element={<ProtectedRoute><EditQuiz /></ProtectedRoute>} />
+            <Route path="/quiz-results/:quizId" element={<ProtectedRoute><QuizResults /></ProtectedRoute>} />
+            <Route path="/help" element={<Help />} />
+            <Route path="/live-quiz" element={<ProtectedRoute><LiveQuizIntro /></ProtectedRoute>} />
             <Route path="/live-quiz/host/:quizId" element={<ProtectedRoute><LiveQuizHost /></ProtectedRoute>} />
             <Route path="/live-quiz/join/:sessionCode" element={<LiveQuizParticipant />} />
-            <Route path="/live-quiz/health-check" element={<LiveQuizHealthCheck />} />
+            <Route path="/live-quiz/health-check" element={<ProtectedRoute requiredRole="admin"><LiveQuizHealthCheck /></ProtectedRoute>} />
             <Route path="/dashboard/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
             <Route path="/dashboard/upgrade" element={<ProtectedRoute><Upgrade /></ProtectedRoute>} />
             <Route path="/dashboard/recent-attempts" element={<ProtectedRoute><RecentAttempts /></ProtectedRoute>} />

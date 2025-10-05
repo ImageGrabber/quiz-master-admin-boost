@@ -540,10 +540,10 @@ const Dashboard = () => {
               <Button
                 variant="outline"
                 className="w-full justify-start h-12"
-                onClick={() => navigate("/create-quiz")}
+                onClick={() => navigate("/live-quiz")}
               >
                 <Share className="w-4 h-4 mr-3" />
-                Create Live Quiz
+                Live Quiz
               </Button>
               <Button
                 variant="outline"
