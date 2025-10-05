@@ -209,6 +209,305 @@ export type Database = {
         };
         Relationships: [];
       };
+      user_created_quizzes: {
+        Row: {
+          id: string;
+          creator_id: string;
+          title: string;
+          description: string | null;
+          is_public: boolean;
+          share_code: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          creator_id: string;
+          title: string;
+          description?: string | null;
+          is_public?: boolean;
+          share_code?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          creator_id?: string;
+          title?: string;
+          description?: string | null;
+          is_public?: boolean;
+          share_code?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "user_created_quizzes_creator_id_fkey";
+            columns: ["creator_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      user_quiz_questions: {
+        Row: {
+          id: string;
+          quiz_id: string;
+          question: string;
+          option_a: string;
+          option_b: string;
+          option_c: string;
+          option_d: string;
+          correct_index: number;
+          order_index: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          quiz_id: string;
+          question: string;
+          option_a: string;
+          option_b: string;
+          option_c: string;
+          option_d: string;
+          correct_index: number;
+          order_index: number;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          quiz_id?: string;
+          question?: string;
+          option_a?: string;
+          option_b?: string;
+          option_c?: string;
+          option_d?: string;
+          correct_index?: number;
+          order_index?: number;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "user_quiz_questions_quiz_id_fkey";
+            columns: ["quiz_id"];
+            isOneToOne: false;
+            referencedRelation: "user_created_quizzes";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      live_quiz_sessions: {
+        Row: {
+          id: string;
+          quiz_id: string;
+          host_id: string;
+          session_code: string;
+          title: string;
+          status: string;
+          max_participants: number;
+          time_limit: number;
+          current_question: number;
+          total_questions: number;
+          started_at: string | null;
+          ended_at: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          quiz_id: string;
+          host_id: string;
+          session_code?: string;
+          title: string;
+          status?: string;
+          max_participants?: number;
+          time_limit?: number;
+          current_question?: number;
+          total_questions: number;
+          started_at?: string | null;
+          ended_at?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          quiz_id?: string;
+          host_id?: string;
+          session_code?: string;
+          title?: string;
+          status?: string;
+          max_participants?: number;
+          time_limit?: number;
+          current_question?: number;
+          total_questions?: number;
+          started_at?: string | null;
+          ended_at?: string | null;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "live_quiz_sessions_quiz_id_fkey";
+            columns: ["quiz_id"];
+            isOneToOne: false;
+            referencedRelation: "user_created_quizzes";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "live_quiz_sessions_host_id_fkey";
+            columns: ["host_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      live_quiz_participants: {
+        Row: {
+          id: string;
+          session_id: string;
+          user_id: string;
+          display_name: string;
+          joined_at: string;
+          is_ready: boolean;
+        };
+        Insert: {
+          id?: string;
+          session_id: string;
+          user_id: string;
+          display_name: string;
+          joined_at?: string;
+          is_ready?: boolean;
+        };
+        Update: {
+          id?: string;
+          session_id?: string;
+          user_id?: string;
+          display_name?: string;
+          joined_at?: string;
+          is_ready?: boolean;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "live_quiz_participants_session_id_fkey";
+            columns: ["session_id"];
+            isOneToOne: false;
+            referencedRelation: "live_quiz_sessions";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "live_quiz_participants_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      live_quiz_answers: {
+        Row: {
+          id: string;
+          session_id: string;
+          participant_id: string;
+          question_id: string;
+          answer_index: number;
+          is_correct: boolean;
+          answered_at: string;
+          response_time: number | null;
+        };
+        Insert: {
+          id?: string;
+          session_id: string;
+          participant_id: string;
+          question_id: string;
+          answer_index: number;
+          is_correct: boolean;
+          answered_at?: string;
+          response_time?: number | null;
+        };
+        Update: {
+          id?: string;
+          session_id?: string;
+          participant_id?: string;
+          question_id?: string;
+          answer_index?: number;
+          is_correct?: boolean;
+          answered_at?: string;
+          response_time?: number | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "live_quiz_answers_session_id_fkey";
+            columns: ["session_id"];
+            isOneToOne: false;
+            referencedRelation: "live_quiz_sessions";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "live_quiz_answers_participant_id_fkey";
+            columns: ["participant_id"];
+            isOneToOne: false;
+            referencedRelation: "live_quiz_participants";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "live_quiz_answers_question_id_fkey";
+            columns: ["question_id"];
+            isOneToOne: false;
+            referencedRelation: "user_quiz_questions";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      live_quiz_results: {
+        Row: {
+          id: string;
+          session_id: string;
+          participant_id: string;
+          total_score: number;
+          correct_answers: number;
+          total_questions: number;
+          average_response_time: number | null;
+          rank: number | null;
+          completed_at: string;
+        };
+        Insert: {
+          id?: string;
+          session_id: string;
+          participant_id: string;
+          total_score: number;
+          correct_answers: number;
+          total_questions: number;
+          average_response_time?: number | null;
+          rank?: number | null;
+          completed_at?: string;
+        };
+        Update: {
+          id?: string;
+          session_id?: string;
+          participant_id?: string;
+          total_score?: number;
+          correct_answers?: number;
+          total_questions?: number;
+          average_response_time?: number | null;
+          rank?: number | null;
+          completed_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "live_quiz_results_session_id_fkey";
+            columns: ["session_id"];
+            isOneToOne: false;
+            referencedRelation: "live_quiz_sessions";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "live_quiz_results_participant_id_fkey";
+            columns: ["participant_id"];
+            isOneToOne: false;
+            referencedRelation: "live_quiz_participants";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
     }
     Views: {
       [_ in never]: never

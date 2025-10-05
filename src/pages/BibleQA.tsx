@@ -181,8 +181,19 @@ export default function BibleQA() {
   );
 
   const handleSearch = (book: string) => {
-    const link = `/bible-questions-and-answers-hub/${book.toLowerCase().replace(/ /g, '-')}`;
-    navigate(link);
+    // Find the corresponding quiz from featuredQuizzes
+    const quiz = featuredQuizzes.find(q => 
+      q.title.toLowerCase().includes(book.toLowerCase()) ||
+      book.toLowerCase().includes(q.title.toLowerCase().replace(' quiz', ''))
+    );
+    
+    if (quiz) {
+      navigate(quiz.link);
+    } else {
+      // Fallback to the old behavior if no quiz found
+      const link = `/bible-questions-and-answers-hub/${book.toLowerCase().replace(/ /g, '-')}`;
+      navigate(link);
+    }
     
     // Add to recent searches
     if (!recentSearches.includes(book)) {
@@ -267,16 +278,31 @@ export default function BibleQA() {
             {searchQuery && (
               <div className="mt-4 bg-white rounded-xl shadow-xl border border-gray-200 max-h-64 overflow-y-auto">
                 {filteredBooks.length > 0 ? (
-                  filteredBooks.map((book) => (
-                    <div
-                      key={book}
-                      onClick={() => handleSearch(book)}
-                      className="px-4 py-3 hover:bg-blue-50 cursor-pointer border-b border-gray-100 last:border-b-0 flex items-center justify-between"
-                    >
-                      <span className="font-medium text-gray-800">{book}</span>
-                      <span className="text-sm text-blue-600">Take Quiz →</span>
-                    </div>
-                  ))
+                  filteredBooks.map((book) => {
+                    // Find the corresponding quiz for this book
+                    const quiz = featuredQuizzes.find(q => 
+                      q.title.toLowerCase().includes(book.toLowerCase()) ||
+                      book.toLowerCase().includes(q.title.toLowerCase().replace(' quiz', ''))
+                    );
+                    
+                    return (
+                      <div
+                        key={book}
+                        onClick={() => handleSearch(book)}
+                        className="px-4 py-3 hover:bg-blue-50 cursor-pointer border-b border-gray-100 last:border-b-0 flex items-center justify-between"
+                      >
+                        <div className="flex items-center space-x-3">
+                          <span className="font-medium text-gray-800">{book}</span>
+                          {quiz && (
+                            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                              {quiz.difficulty}
+                            </span>
+                          )}
+                        </div>
+                        <span className="text-sm text-blue-600 font-medium">Take Quiz →</span>
+                      </div>
+                    );
+                  })
                 ) : (
                   <div className="px-4 py-3 text-gray-500">No books found matching "{searchQuery}"</div>
                 )}

@@ -13,6 +13,10 @@ import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import MyQuizzes from "./pages/MyQuizzes";
+import CreateQuiz from "./pages/CreateQuiz";
+import LiveQuizHost from "./pages/LiveQuizHost";
+import LiveQuizParticipant from "./pages/LiveQuizParticipant";
+import LiveQuizHealthCheck from "./pages/LiveQuizHealthCheck";
 import Settings from "./pages/Settings";
 import QuizSelection from "./pages/QuizSelection";
 import Quiz from "./pages/Quiz";
@@ -128,6 +132,10 @@ const App = () => {
             <Route path="/auth/reset-password" element={<ResetPassword />} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/dashboard/quizzes" element={<ProtectedRoute><MyQuizzes /></ProtectedRoute>} />
+            <Route path="/create-quiz" element={<ProtectedRoute><CreateQuiz /></ProtectedRoute>} />
+            <Route path="/live-quiz/host/:quizId" element={<ProtectedRoute><LiveQuizHost /></ProtectedRoute>} />
+            <Route path="/live-quiz/join/:sessionCode" element={<LiveQuizParticipant />} />
+            <Route path="/live-quiz/health-check" element={<LiveQuizHealthCheck />} />
             <Route path="/dashboard/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
             <Route path="/dashboard/upgrade" element={<ProtectedRoute><Upgrade /></ProtectedRoute>} />
             <Route path="/dashboard/recent-attempts" element={<ProtectedRoute><RecentAttempts /></ProtectedRoute>} />
