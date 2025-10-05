@@ -21,6 +21,7 @@ import QuizResults from "./pages/QuizResults";
 import Help from "./pages/Help";
 import LiveQuizHost from "./pages/LiveQuizHost";
 import LiveQuizIntro from "./pages/LiveQuizIntro";
+import HostingGuide from "./pages/HostingGuide";
 import LiveQuizParticipant from "./pages/LiveQuizParticipant";
 import LiveQuizHealthCheck from "./pages/LiveQuizHealthCheck";
 import Settings from "./pages/Settings";
@@ -145,6 +146,10 @@ const App = () => {
             <Route path="/quiz-results/:quizId" element={<ProtectedRoute><QuizResults /></ProtectedRoute>} />
             <Route path="/help" element={<Help />} />
             <Route path="/live-quiz" element={<ProtectedRoute><LiveQuizIntro /></ProtectedRoute>} />
+            {/* SEO-friendly slug for hosting guide */}
+            <Route path="/host-live-bible-quizzes-with-confidence" element={<HostingGuide />} />
+            {/* Backward-compatible old path */}
+            <Route path="/hosting-guide" element={<HostingGuide />} />
             <Route path="/live-quiz/host/:quizId" element={<LiveQuizHost />} />
             <Route path="/live-quiz/join/:sessionCode" element={<LiveQuizParticipant />} />
             <Route path="/live-quiz/health-check" element={<ProtectedRoute requiredRole="admin"><LiveQuizHealthCheck /></ProtectedRoute>} />
