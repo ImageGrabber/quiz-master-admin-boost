@@ -217,12 +217,22 @@ export default function BibleQA() {
       <header className="bg-white/70 backdrop-blur-md border-b border-blue-100 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}> 
-            <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
-            <span className="text-lg font-semibold text-gray-900">BibleBattles</span>
+            <img src="/sword.png" alt="Bible Quiz Competition Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
+            <span className="text-lg font-semibold text-gray-900">Bible Quiz Competition</span>
           </div>
           <nav className="flex items-center space-x-2">
-            <a href="/" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Home</a>
-            <a href="/public-leaderboard" className="text-gray-700 hover:text-blue-700 font-medium px-3 py-2 rounded transition">Leaderboard</a>
+            <button 
+              className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" 
+              onClick={() => navigate("/bible-questions-and-answers-hub/genesis")}
+            >
+              Bible Q&A Hub
+            </button>
+            <button 
+              className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" 
+              onClick={() => navigate("/articles")}
+            >
+              Articles
+            </button>
             <Button variant="ghost" onClick={() => navigate("/auth/register")}>Sign Up</Button>
             <Button onClick={() => navigate("/auth/login")}>Sign In</Button>
           </nav>
