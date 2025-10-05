@@ -16,7 +16,6 @@ import {
   ArrowRight,
   Crown
 } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import Header from '@/components/Header';
 import { Helmet } from 'react-helmet-async';
@@ -59,7 +58,6 @@ interface Result {
 const LiveQuizParticipant = () => {
   const { sessionCode } = useParams<{ sessionCode: string }>();
   const navigate = useNavigate();
-  const { toast } = useToast();
   
   const [session, setSession] = useState<Session | null>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -70,12 +68,13 @@ const LiveQuizParticipant = () => {
   const [displayName, setDisplayName] = useState('');
   const [isReady, setIsReady] = useState(false);
   const [hasJoined, setHasJoined] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(30);
+  const [timeLeft, setTimeLeft] = useState(10);
   const [showResults, setShowResults] = useState(false);
   const [results, setResults] = useState<Result | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [questionStartTime, setQuestionStartTime] = useState<number>(0);
+  const [awaitingResults, setAwaitingResults] = useState(false);
 
   // Load session data
   useEffect(() => {
@@ -101,11 +100,13 @@ const LiveQuizParticipant = () => {
           
           if (updatedSession.status === 'active' && updatedSession.current_question !== currentQuestion?.order_index) {
             console.log('Session became active, loading question:', updatedSession.current_question);
+            setAwaitingResults(false);
             loadCurrentQuestion(updatedSession.current_question);
           }
           
           if (updatedSession.status === 'finished') {
             console.log('Session finished, loading results');
+            setAwaitingResults(false);
             loadResults();
           }
         })
@@ -129,6 +130,24 @@ const LiveQuizParticipant = () => {
       };
     }
   }, [session?.id]);
+
+  // Local countdown for current question
+  useEffect(() => {
+    if (session?.status === 'active' && currentQuestion && !showResults) {
+      const interval = setInterval(() => {
+        setTimeLeft((prev) => {
+          if (prev <= 1 && selectedAnswer == null) {
+            // Auto-submit a guaranteed incorrect answer within [0..3] to represent timeout
+            const wrongIndex = ((currentQuestion.correct_index + 1) % 4);
+            submitAnswer(wrongIndex, true);
+            return 0;
+          }
+          return prev > 0 ? prev - 1 : 0;
+        });
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [session?.status, currentQuestion?.id, showResults, selectedAnswer]);
 
   const loadSessionData = async () => {
     try {
@@ -247,7 +266,8 @@ const LiveQuizParticipant = () => {
     if (questions.length > 0 && questionIndex < questions.length) {
       setCurrentQuestion(questions[questionIndex]);
       setSelectedAnswer(null);
-      setTimeLeft(30);
+      setTimeLeft(10);
+      setQuestionStartTime(Date.now());
     } else {
       console.log('Cannot load question - questions not loaded or index out of bounds');
       // If questions aren't loaded yet, try to load them
@@ -264,7 +284,8 @@ const LiveQuizParticipant = () => {
           if (questionIndex < questionsData.length) {
             setCurrentQuestion(questionsData[questionIndex]);
             setSelectedAnswer(null);
-            setTimeLeft(30);
+            setTimeLeft(10);
+            setQuestionStartTime(Date.now());
           }
         }
       }
@@ -344,6 +365,8 @@ const LiveQuizParticipant = () => {
 
   const joinSession = async () => {
     if (!displayName.trim() || !session?.id) return;
+    // Block joining if session already started or finished
+    if (session.status !== 'waiting') return;
 
     try {
       // Check if session requires login
@@ -423,7 +446,7 @@ const LiveQuizParticipant = () => {
     }
   };
 
-  const submitAnswer = async (answerIndex: number) => {
+  const submitAnswer = async (answerIndex: number, silent = false) => {
     if (!participantId || !currentQuestion || isSubmitting) return;
 
     setIsSubmitting(true);
@@ -443,20 +466,20 @@ const LiveQuizParticipant = () => {
 
       if (error) throw error;
 
-      setSelectedAnswer(answerIndex);
-
-      toast({
-        title: "Answer Submitted!",
-        description: answerIndex === currentQuestion.correct_index ? "Correct!" : "Incorrect",
-      });
+      const isLastQuestion = !!session && session.current_question >= session.total_questions - 1;
+      if (!silent && !isLastQuestion) {
+        setSelectedAnswer(answerIndex);
+      } else {
+        // On last question or silent submit: go straight to awaiting results and keep UI neutral
+        setSelectedAnswer(null);
+        if (isLastQuestion) {
+          setAwaitingResults(true);
+        }
+      }
 
     } catch (error) {
       console.error('Error submitting answer:', error);
-      toast({
-        title: "Error",
-        description: "Failed to submit answer. Please try again.",
-        variant: "destructive",
-      });
+      // no toasts on participant page
     } finally {
       setIsSubmitting(false);
     }
@@ -514,8 +537,8 @@ const LiveQuizParticipant = () => {
             </div>
           </div>
 
-          {/* Join Form */}
-          {!hasJoined && (
+          {/* Join Form - only when session is waiting */}
+          {!hasJoined && session.status === 'waiting' && (
             <Card className="max-w-md mx-auto">
               <CardHeader>
                 <CardTitle>Join Quiz Session</CardTitle>
@@ -539,6 +562,18 @@ const LiveQuizParticipant = () => {
                   <Play className="w-4 h-4 mr-2" />
                   Join Session
                 </Button>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* If session already started or finished, show info instead of join */}
+          {!hasJoined && session.status !== 'waiting' && (
+            <Card className="max-w-md mx-auto">
+              <CardHeader>
+                <CardTitle>Quiz In Progress</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-gray-700">This session has already started or finished. New participants cannot join now.</p>
               </CardContent>
             </Card>
           )}
@@ -599,7 +634,7 @@ const LiveQuizParticipant = () => {
           )}
 
           {/* Active Quiz */}
-          {hasJoined && session.status === 'active' && currentQuestion && (
+          {hasJoined && session.status === 'active' && currentQuestion && !awaitingResults && (
             <div className="space-y-6">
               {/* Question Progress */}
               <Card>
@@ -613,12 +648,7 @@ const LiveQuizParticipant = () => {
                       <div className="text-sm text-gray-500">Time Remaining</div>
                     </div>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div 
-                      className="bg-blue-600 h-2 rounded-full transition-all duration-1000"
-                      style={{ width: `${(timeLeft / 30) * 100}%` }}
-                    ></div>
-                  </div>
+                  {/* Removed visual countdown slider per requirements */}
                 </CardContent>
               </Card>
 
@@ -645,6 +675,7 @@ const LiveQuizParticipant = () => {
                     ))}
                   </div>
 
+                  {/* Hide correct/incorrect banner when auto-submitting; still shows on manual submit */}
                   {selectedAnswer !== null && (
                     <div className="text-center">
                       <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg ${
@@ -669,16 +700,14 @@ const LiveQuizParticipant = () => {
           )}
 
           {/* Quiz Finished - Waiting for Results */}
-          {hasJoined && session.status === 'finished' && !showResults && (
+          {(awaitingResults || (hasJoined && session.status === 'finished' && !showResults)) && (
             <div className="space-y-6">
               <Card className="border-green-200 bg-green-50">
                 <CardContent className="pt-6">
                   <div className="text-center space-y-4">
                     <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
                     <h2 className="text-2xl font-bold text-gray-900">Quiz Finished!</h2>
-                    <p className="text-gray-600">
-                      Thank you for participating! The quiz has ended and results are being calculated.
-                    </p>
+                    <p className="text-gray-600">Thank you for participating! {awaitingResults ? 'Awaiting results from host...' : 'The quiz has ended and results are being calculated.'}</p>
                     <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
                       <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-green-600"></div>
                       <span>Calculating results...</span>

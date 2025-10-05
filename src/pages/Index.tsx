@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -344,6 +344,8 @@ function FaqSection() {
 const Index = () => {
   const navigate = useNavigate();
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
+  const location = useLocation();
+  const [showGuestComplete, setShowGuestComplete] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   // Calculate days until next Saturday
@@ -359,6 +361,17 @@ const Index = () => {
     else label = `(in ${daysUntilSaturday} days)`;
     setNextQuizLabel(label);
   }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get('guestCompleted') === '1') {
+      setShowGuestComplete(true);
+      // clean URL
+      const url = new URL(window.location.href);
+      url.searchParams.delete('guestCompleted');
+      window.history.replaceState({}, '', url.toString());
+    }
+  }, [location.search]);
 
   // Pick a daily verse deterministically based on today's date
   useEffect(() => {
@@ -443,6 +456,18 @@ const Index = () => {
         <meta name="twitter:description" content="Join the biggest Bible Quiz Competition 2024 and Online Bible Quiz Competition 2025. Compete online, win prizes, and test your biblical knowledge!" />
       </Helmet>
       <div className="min-h-screen bg-white">
+        {/* Guest completion dialog */}
+        <Dialog open={showGuestComplete} onOpenChange={setShowGuestComplete}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Guest mode quiz completed</DialogTitle>
+              <DialogDescription>Your guest-mode session has ended successfully.</DialogDescription>
+            </DialogHeader>
+            <div className="flex justify-end">
+              <Button onClick={() => setShowGuestComplete(false)}>OK</Button>
+            </div>
+          </DialogContent>
+        </Dialog>
         {/* Header */}
         <header className="bg-white/70 backdrop-blur-md border-b border-blue-100 sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4 flex flex-row justify-between items-center relative">
@@ -524,6 +549,7 @@ const Index = () => {
                   </div>
                 </div>
               )}
+              {/* Guest complete dialog is handled globally below */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold rounded shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/login")}> <Play className="w-5 h-5 mr-2" /> Start Quiz Now <ArrowRight className="w-5 h-5 ml-2" /> </Button>
                 <Button variant="outline" size="lg" className="px-8 py-6 text-lg font-medium border-2 border-grey-200 hover:border-transparent rounded bg-white/60 backdrop-blur-md hover:text-white hover:bg-black" onClick={() => navigate("/public-leaderboard")}> <Trophy className="w-5 h-5 mr-2" /> View Leaderboard</Button>

@@ -145,7 +145,7 @@ const App = () => {
             <Route path="/quiz-results/:quizId" element={<ProtectedRoute><QuizResults /></ProtectedRoute>} />
             <Route path="/help" element={<Help />} />
             <Route path="/live-quiz" element={<ProtectedRoute><LiveQuizIntro /></ProtectedRoute>} />
-            <Route path="/live-quiz/host/:quizId" element={<ProtectedRoute><LiveQuizHost /></ProtectedRoute>} />
+            <Route path="/live-quiz/host/:quizId" element={<LiveQuizHost />} />
             <Route path="/live-quiz/join/:sessionCode" element={<LiveQuizParticipant />} />
             <Route path="/live-quiz/health-check" element={<ProtectedRoute requiredRole="admin"><LiveQuizHealthCheck /></ProtectedRoute>} />
             <Route path="/dashboard/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
