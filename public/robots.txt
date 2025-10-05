@@ -1,14 +1,13 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+Allow: /public-quiz/
+Allow: /public-leaderboard
+Allow: /bible-questions-and-answers-hub/
+
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /auth/
+Disallow: /quiz/
+Disallow: /result/
+
+Sitemap: https://biblequizcompetition.com/sitemap.xml

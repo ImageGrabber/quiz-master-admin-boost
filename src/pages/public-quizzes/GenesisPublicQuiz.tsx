@@ -76,7 +76,7 @@ const questions = [
 export default function GenesisPublicQuiz() {
   return (
     <PublicQuiz 
-      title="Genesis Quiz - The Beginning"
+      title="Genesis Quiz - The Beginning of Everything"
       questions={questions}
       bookName="Genesis"
     />

@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import { Analytics } from "@vercel/analytics/next"
 import Index from "./pages/Index";
@@ -33,13 +34,68 @@ import NotFound from "./pages/NotFound";
 import RLSTest from "./pages/RLSTest";
 import BibleQA from "./pages/BibleQA";
 import BibleStudy from "./pages/BibleStudy";
+import PaulineEpistles from "./pages/bible-questions-and-answers-hub/pauline-epistles";
 import PublicLeaderboard from "./pages/PublicLeaderboard";
 import GenesisPublicQuiz from "./pages/public-quizzes/GenesisPublicQuiz";
-import MatthewPublicQuiz from "./pages/public-quizzes/MatthewPublicQuiz";
+import ExodusPublicQuiz from "./pages/public-quizzes/ExodusPublicQuiz";
+import LeviticusPublicQuiz from "./pages/public-quizzes/LeviticusPublicQuiz";
+import NumbersPublicQuiz from "./pages/public-quizzes/NumbersPublicQuiz";
+import DeuteronomyPublicQuiz from "./pages/public-quizzes/DeuteronomyPublicQuiz";
 import PsalmsPublicQuiz from "./pages/public-quizzes/PsalmsPublicQuiz";
-import ActsPublicQuiz from "./pages/public-quizzes/ActsPublicQuiz";
-import RevelationPublicQuiz from "./pages/public-quizzes/RevelationPublicQuiz";
 import ProverbsPublicQuiz from "./pages/public-quizzes/ProverbsPublicQuiz";
+import IsaiahPublicQuiz from "./pages/public-quizzes/IsaiahPublicQuiz";
+import DanielPublicQuiz from "./pages/public-quizzes/DanielPublicQuiz";
+import JobPublicQuiz from "./pages/public-quizzes/JobPublicQuiz";
+import JoshuaPublicQuiz from "./pages/public-quizzes/JoshuaPublicQuiz";
+import JudgesPublicQuiz from "./pages/public-quizzes/JudgesPublicQuiz";
+import RuthPublicQuiz from "./pages/public-quizzes/RuthPublicQuiz";
+import FirstSamuelPublicQuiz from "./pages/public-quizzes/1SamuelPublicQuiz";
+import SecondSamuelPublicQuiz from "./pages/public-quizzes/2SamuelPublicQuiz";
+import FirstKingsPublicQuiz from "./pages/public-quizzes/1KingsPublicQuiz";
+import SecondKingsPublicQuiz from "./pages/public-quizzes/2KingsPublicQuiz";
+import FirstChroniclesPublicQuiz from "./pages/public-quizzes/1ChroniclesPublicQuiz";
+import SecondChroniclesPublicQuiz from "./pages/public-quizzes/2ChroniclesPublicQuiz";
+import EzraPublicQuiz from "./pages/public-quizzes/EzraPublicQuiz";
+import NehemiahPublicQuiz from "./pages/public-quizzes/NehemiahPublicQuiz";
+import EstherPublicQuiz from "./pages/public-quizzes/EstherPublicQuiz";
+import HoseaPublicQuiz from "./pages/public-quizzes/HoseaPublicQuiz";
+import JoelPublicQuiz from "./pages/public-quizzes/JoelPublicQuiz";
+import AmosPublicQuiz from "./pages/public-quizzes/AmosPublicQuiz";
+import ObadiahPublicQuiz from "./pages/public-quizzes/ObadiahPublicQuiz";
+import JonahPublicQuiz from "./pages/public-quizzes/JonahPublicQuiz";
+import MicahPublicQuiz from "./pages/public-quizzes/MicahPublicQuiz";
+import NahumPublicQuiz from "./pages/public-quizzes/NahumPublicQuiz";
+import HabakkukPublicQuiz from "./pages/public-quizzes/HabakkukPublicQuiz";
+import ZephaniahPublicQuiz from "./pages/public-quizzes/ZephaniahPublicQuiz";
+import HaggaiPublicQuiz from "./pages/public-quizzes/HaggaiPublicQuiz";
+import ZechariahPublicQuiz from "./pages/public-quizzes/ZechariahPublicQuiz";
+import MalachiPublicQuiz from "./pages/public-quizzes/MalachiPublicQuiz";
+import MatthewPublicQuiz from "./pages/public-quizzes/MatthewPublicQuiz";
+import MarkPublicQuiz from "./pages/public-quizzes/MarkPublicQuiz";
+import LukePublicQuiz from "./pages/public-quizzes/LukePublicQuiz";
+import JohnPublicQuiz from "./pages/public-quizzes/JohnPublicQuiz";
+import RomansPublicQuiz from "./pages/public-quizzes/RomansPublicQuiz";
+import CorinthiansPublicQuiz from "./pages/public-quizzes/1CorinthiansPublicQuiz";
+import Corinthians2PublicQuiz from "./pages/public-quizzes/2CorinthiansPublicQuiz";
+import GalatiansPublicQuiz from "./pages/public-quizzes/GalatiansPublicQuiz";
+import EphesiansPublicQuiz from "./pages/public-quizzes/EphesiansPublicQuiz";
+import PhilippiansPublicQuiz from "./pages/public-quizzes/PhilippiansPublicQuiz";
+import ColossiansPublicQuiz from "./pages/public-quizzes/ColossiansPublicQuiz";
+import Thessalonians1PublicQuiz from "./pages/public-quizzes/1ThessaloniansPublicQuiz";
+import Thessalonians2PublicQuiz from "./pages/public-quizzes/2ThessaloniansPublicQuiz";
+import Timothy1PublicQuiz from "./pages/public-quizzes/1TimothyPublicQuiz";
+import Timothy2PublicQuiz from "./pages/public-quizzes/2TimothyPublicQuiz";
+import TitusPublicQuiz from "./pages/public-quizzes/TitusPublicQuiz";
+import PhilemonPublicQuiz from "./pages/public-quizzes/PhilemonPublicQuiz";
+import HebrewsPublicQuiz from "./pages/public-quizzes/HebrewsPublicQuiz";
+import JamesPublicQuiz from "./pages/public-quizzes/JamesPublicQuiz";
+import Peter1PublicQuiz from "./pages/public-quizzes/1PeterPublicQuiz";
+import Peter2PublicQuiz from "./pages/public-quizzes/2PeterPublicQuiz";
+import John1PublicQuiz from "./pages/public-quizzes/1JohnPublicQuiz";
+import John2PublicQuiz from "./pages/public-quizzes/2JohnPublicQuiz";
+import John3PublicQuiz from "./pages/public-quizzes/3JohnPublicQuiz";
+import JudePublicQuiz from "./pages/public-quizzes/JudePublicQuiz";
+import RevelationPublicQuiz from "./pages/public-quizzes/RevelationPublicQuiz";
 // Removed static imports of Bible book quiz files for code-splitting
 import Upgrade from "./pages/Upgrade";
 import PageViews from "./pages/admin/PageViews";
@@ -55,11 +111,12 @@ function PageViewTracker() {
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
           <PageViewTracker />
           <Routes>
             <Route path="/" element={<Index />} />
@@ -79,11 +136,65 @@ const App = () => {
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/public-leaderboard" element={<PublicLeaderboard />} />
             <Route path="/public-quiz/genesis" element={<GenesisPublicQuiz />} />
-            <Route path="/public-quiz/matthew" element={<MatthewPublicQuiz />} />
+            <Route path="/public-quiz/exodus" element={<ExodusPublicQuiz />} />
+            <Route path="/public-quiz/leviticus" element={<LeviticusPublicQuiz />} />
+            <Route path="/public-quiz/numbers" element={<NumbersPublicQuiz />} />
+            <Route path="/public-quiz/deuteronomy" element={<DeuteronomyPublicQuiz />} />
             <Route path="/public-quiz/psalms" element={<PsalmsPublicQuiz />} />
-            <Route path="/public-quiz/acts" element={<ActsPublicQuiz />} />
-            <Route path="/public-quiz/revelation" element={<RevelationPublicQuiz />} />
             <Route path="/public-quiz/proverbs" element={<ProverbsPublicQuiz />} />
+            <Route path="/public-quiz/isaiah" element={<IsaiahPublicQuiz />} />
+            <Route path="/public-quiz/daniel" element={<DanielPublicQuiz />} />
+            <Route path="/public-quiz/job" element={<JobPublicQuiz />} />
+            <Route path="/public-quiz/joshua" element={<JoshuaPublicQuiz />} />
+            <Route path="/public-quiz/judges" element={<JudgesPublicQuiz />} />
+            <Route path="/public-quiz/ruth" element={<RuthPublicQuiz />} />
+            <Route path="/public-quiz/1-samuel" element={<FirstSamuelPublicQuiz />} />
+            <Route path="/public-quiz/2-samuel" element={<SecondSamuelPublicQuiz />} />
+            <Route path="/public-quiz/1-kings" element={<FirstKingsPublicQuiz />} />
+            <Route path="/public-quiz/2-kings" element={<SecondKingsPublicQuiz />} />
+            <Route path="/public-quiz/1-chronicles" element={<FirstChroniclesPublicQuiz />} />
+            <Route path="/public-quiz/2-chronicles" element={<SecondChroniclesPublicQuiz />} />
+            <Route path="/public-quiz/ezra" element={<EzraPublicQuiz />} />
+            <Route path="/public-quiz/nehemiah" element={<NehemiahPublicQuiz />} />
+            <Route path="/public-quiz/esther" element={<EstherPublicQuiz />} />
+            <Route path="/public-quiz/hosea" element={<HoseaPublicQuiz />} />
+            <Route path="/public-quiz/joel" element={<JoelPublicQuiz />} />
+            <Route path="/public-quiz/amos" element={<AmosPublicQuiz />} />
+            <Route path="/public-quiz/obadiah" element={<ObadiahPublicQuiz />} />
+            <Route path="/public-quiz/jonah" element={<JonahPublicQuiz />} />
+            <Route path="/public-quiz/micah" element={<MicahPublicQuiz />} />
+            <Route path="/public-quiz/nahum" element={<NahumPublicQuiz />} />
+            <Route path="/public-quiz/habakkuk" element={<HabakkukPublicQuiz />} />
+            <Route path="/public-quiz/zephaniah" element={<ZephaniahPublicQuiz />} />
+            <Route path="/public-quiz/haggai" element={<HaggaiPublicQuiz />} />
+            <Route path="/public-quiz/zechariah" element={<ZechariahPublicQuiz />} />
+            <Route path="/public-quiz/malachi" element={<MalachiPublicQuiz />} />
+            <Route path="/public-quiz/matthew" element={<MatthewPublicQuiz />} />
+            <Route path="/public-quiz/mark" element={<MarkPublicQuiz />} />
+            <Route path="/public-quiz/luke" element={<LukePublicQuiz />} />
+            <Route path="/public-quiz/john" element={<JohnPublicQuiz />} />
+            <Route path="/public-quiz/romans" element={<RomansPublicQuiz />} />
+            <Route path="/public-quiz/1-corinthians" element={<CorinthiansPublicQuiz />} />
+            <Route path="/public-quiz/2-corinthians" element={<Corinthians2PublicQuiz />} />
+            <Route path="/public-quiz/galatians" element={<GalatiansPublicQuiz />} />
+            <Route path="/public-quiz/ephesians" element={<EphesiansPublicQuiz />} />
+            <Route path="/public-quiz/philippians" element={<PhilippiansPublicQuiz />} />
+            <Route path="/public-quiz/colossians" element={<ColossiansPublicQuiz />} />
+            <Route path="/public-quiz/1-thessalonians" element={<Thessalonians1PublicQuiz />} />
+            <Route path="/public-quiz/2-thessalonians" element={<Thessalonians2PublicQuiz />} />
+            <Route path="/public-quiz/1-timothy" element={<Timothy1PublicQuiz />} />
+            <Route path="/public-quiz/2-timothy" element={<Timothy2PublicQuiz />} />
+            <Route path="/public-quiz/titus" element={<TitusPublicQuiz />} />
+            <Route path="/public-quiz/philemon" element={<PhilemonPublicQuiz />} />
+            <Route path="/public-quiz/hebrews" element={<HebrewsPublicQuiz />} />
+            <Route path="/public-quiz/james" element={<JamesPublicQuiz />} />
+            <Route path="/public-quiz/1-peter" element={<Peter1PublicQuiz />} />
+            <Route path="/public-quiz/2-peter" element={<Peter2PublicQuiz />} />
+            <Route path="/public-quiz/1-john" element={<John1PublicQuiz />} />
+            <Route path="/public-quiz/2-john" element={<John2PublicQuiz />} />
+            <Route path="/public-quiz/3-john" element={<John3PublicQuiz />} />
+            <Route path="/public-quiz/jude" element={<JudePublicQuiz />} />
+            <Route path="/public-quiz/revelation" element={<RevelationPublicQuiz />} />
             <Route path="/competitions" element={<ProtectedRoute><Competitions /></ProtectedRoute>} />
             <Route path="/competition-quiz/:competitionId" element={<ProtectedRoute><CompetitionQuiz /></ProtectedRoute>} />
             <Route path="/competition-leaderboard/:competitionId" element={<ProtectedRoute><CompetitionLeaderboard /></ProtectedRoute>} />
@@ -142,6 +253,7 @@ const App = () => {
             <Route path="/bible-questions-and-answers-hub/luke" element={<BibleQA />} />
             <Route path="/bible-questions-and-answers-hub/john" element={<BibleQA />} />
             <Route path="/bible-questions-and-answers-hub/acts" element={<BibleQA />} />
+            <Route path="/bible-questions-and-answers-hub/pauline-epistles" element={<PaulineEpistles />} />
             <Route path="/bible-questions-and-answers-hub/romans" element={<BibleQA />} />
             <Route path="/bible-questions-and-answers-hub/1-corinthians" element={<BibleQA />} />
             <Route path="/bible-questions-and-answers-hub/2-corinthians" element={<BibleQA />} />
@@ -169,6 +281,7 @@ const App = () => {
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
+    </HelmetProvider>
   );
 };
 
