@@ -13,7 +13,6 @@ import {
   Save, 
   Eye, 
   Share2, 
-  Copy,
   Check,
   ArrowLeft,
   BookOpen,
@@ -55,7 +54,6 @@ const CreateQuiz = () => {
   ]);
   const [isSaving, setIsSaving] = useState(false);
   const [savedQuizId, setSavedQuizId] = useState<string | null>(null);
-  const [shareCode, setShareCode] = useState('');
 
   const addQuestion = () => {
     const newQuestion: Question = {
@@ -164,7 +162,6 @@ const CreateQuiz = () => {
       if (questionsError) throw questionsError;
 
       setSavedQuizId(quizData.id);
-      setShareCode(quizData.share_code);
 
       toast({
         title: "Quiz Created Successfully!",
@@ -183,13 +180,6 @@ const CreateQuiz = () => {
     }
   };
 
-  const copyShareCode = () => {
-    navigator.clipboard.writeText(`${window.location.origin}/live-quiz/join/${shareCode}`);
-    toast({
-      title: "Link Copied!",
-      description: "Share this link with your friends to join the quiz",
-    });
-  };
 
   const startLiveSession = () => {
     if (savedQuizId) {
@@ -389,14 +379,6 @@ const CreateQuiz = () => {
                   </p>
                   
                   <div className="space-y-4">
-                    <div className="flex items-center gap-2">
-                      <Badge variant="secondary">Share Code: {shareCode}</Badge>
-                      <Button variant="outline" size="sm" onClick={copyShareCode}>
-                        <Copy className="w-4 h-4 mr-2" />
-                        Copy Link
-                      </Button>
-                    </div>
-                    
                     <div className="flex gap-4">
                       <Button onClick={startLiveSession} size="lg">
                         <Users className="w-4 h-4 mr-2" />

@@ -49,8 +49,8 @@ interface Session {
 }
 
 interface Result {
-  rank: number;
-  total_score: number;
+  rank?: number;
+  score: number;
   correct_answers: number;
   total_questions: number;
   average_response_time: number;
@@ -75,6 +75,7 @@ const LiveQuizParticipant = () => {
   const [results, setResults] = useState<Result | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [questionStartTime, setQuestionStartTime] = useState<number>(0);
 
   // Load session data
   useEffect(() => {
@@ -240,6 +241,9 @@ const LiveQuizParticipant = () => {
   const loadCurrentQuestion = async (questionIndex: number) => {
     console.log('Loading current question:', questionIndex, 'Questions length:', questions.length);
     
+    // Set question start time when question loads
+    setQuestionStartTime(Date.now());
+    
     if (questions.length > 0 && questionIndex < questions.length) {
       setCurrentQuestion(questions[questionIndex]);
       setSelectedAnswer(null);
@@ -288,18 +292,53 @@ const LiveQuizParticipant = () => {
     if (!session?.id || !participantId) return;
 
     try {
-      const { data, error } = await supabase
+      console.log('Loading results for session:', session.id, 'participant:', participantId);
+      
+      // First, get the participant's result
+      const { data: participantResult, error: participantError } = await supabase
         .from('live_quiz_results')
         .select('*')
         .eq('session_id', session.id)
         .eq('participant_id', participantId)
         .single();
 
-      if (error) throw error;
-      setResults(data);
+      if (participantError) {
+        console.error('Error loading participant results:', participantError);
+        // Try to load results with a delay if they're not ready yet
+        setTimeout(() => loadResults(), 2000);
+        return;
+      }
+
+      // Get all results for this session to calculate rank
+      const { data: allResults, error: allResultsError } = await supabase
+        .from('live_quiz_results')
+        .select('*')
+        .eq('session_id', session.id)
+        .order('score', { ascending: false });
+
+      if (allResultsError) {
+        console.error('Error loading all results:', allResultsError);
+        setResults(participantResult);
+        setShowResults(true);
+        return;
+      }
+
+      // Calculate rank based on score (higher score = better rank)
+      const rank = allResults.findIndex(result => result.participant_id === participantId) + 1;
+      
+      const resultsWithRank = {
+        ...participantResult,
+        rank: rank
+      };
+      
+      console.log('Results loaded with rank:', resultsWithRank);
+      console.log('All results for comparison:', allResults);
+      setResults(resultsWithRank);
       setShowResults(true);
     } catch (error) {
       console.error('Error loading results:', error);
+      // Set showResults to true even if results fail to load
+      setShowResults(true);
     }
   };
 
@@ -388,7 +427,7 @@ const LiveQuizParticipant = () => {
     if (!participantId || !currentQuestion || isSubmitting) return;
 
     setIsSubmitting(true);
-    const startTime = Date.now();
+    const responseTime = Date.now() - questionStartTime;
 
     try {
       const { error } = await supabase
@@ -399,7 +438,7 @@ const LiveQuizParticipant = () => {
           question_id: currentQuestion.id,
           answer_index: answerIndex,
           is_correct: answerIndex === currentQuestion.correct_index,
-          response_time: Date.now() - startTime
+          response_time: responseTime
         });
 
       if (error) throw error;
@@ -629,6 +668,63 @@ const LiveQuizParticipant = () => {
             </div>
           )}
 
+          {/* Quiz Finished - Waiting for Results */}
+          {hasJoined && session.status === 'finished' && !showResults && (
+            <div className="space-y-6">
+              <Card className="border-green-200 bg-green-50">
+                <CardContent className="pt-6">
+                  <div className="text-center space-y-4">
+                    <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
+                    <h2 className="text-2xl font-bold text-gray-900">Quiz Finished!</h2>
+                    <p className="text-gray-600">
+                      Thank you for participating! The quiz has ended and results are being calculated.
+                    </p>
+                    <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-green-600"></div>
+                      <span>Calculating results...</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <div className="text-center">
+                <Button onClick={() => navigate('/')} size="lg">
+                  <ArrowRight className="w-4 h-4 mr-2" />
+                  Back to Home
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {/* Quiz Finished - No Results Available */}
+          {hasJoined && session.status === 'finished' && showResults && !results && (
+            <div className="space-y-6">
+              <Card className="border-blue-200 bg-blue-50">
+                <CardContent className="pt-6">
+                  <div className="text-center space-y-4">
+                    <Trophy className="w-16 h-16 text-blue-500 mx-auto" />
+                    <h2 className="text-2xl font-bold text-gray-900">Quiz Completed!</h2>
+                    <p className="text-gray-600">
+                      Great job! You've completed the quiz. Results will be shared by the host.
+                    </p>
+                    <div className="bg-blue-100 border border-blue-200 rounded-lg p-4">
+                      <p className="text-sm text-blue-800">
+                        <strong>Thank you for participating!</strong> The quiz host will share the final results and leaderboard.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <div className="text-center">
+                <Button onClick={() => navigate('/')} size="lg">
+                  <ArrowRight className="w-4 h-4 mr-2" />
+                  Back to Home
+                </Button>
+              </div>
+            </div>
+          )}
+
           {/* Results */}
           {hasJoined && session.status === 'finished' && showResults && results && (
             <div className="space-y-6">
@@ -639,13 +735,19 @@ const LiveQuizParticipant = () => {
                     <h2 className="text-2xl font-bold text-gray-900">Quiz Completed!</h2>
                     <div className="space-y-2">
                       <div className="text-3xl font-bold text-blue-600">
-                        Rank #{results.rank}
+                        Rank #{results.rank || '?'}
                       </div>
                       <div className="text-lg text-gray-600">
                         {results.correct_answers} / {results.total_questions} correct
                       </div>
+                      <div className="text-lg font-semibold text-green-600">
+                        Score: {results.score.toFixed(1)} points
+                      </div>
                       <div className="text-sm text-gray-500">
                         Average response time: {Math.round(results.average_response_time / 1000)}s
+                      </div>
+                      <div className="text-xs text-gray-400">
+                        Faster answers earn more points!
                       </div>
                     </div>
                   </div>

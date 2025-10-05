@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Brain, LayoutDashboard, Trophy, User, Settings, LogOut, List, Menu, X, Award, Shield, BookOpen, Star } from "lucide-react";
+import { Brain, LayoutDashboard, Trophy, User, Settings, LogOut, List, Menu, X, Award, Shield, BookOpen, Star, HelpCircle } from "lucide-react";
 import Header from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
@@ -17,6 +17,7 @@ const navItems = [
   { name: "Leaderboard", href: "/leaderboard", icon: Trophy },
   { name: "Recent Attempts", href: "/dashboard/recent-attempts", icon: User },
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
+  { name: "Help", href: "/help", icon: HelpCircle },
 ];
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {

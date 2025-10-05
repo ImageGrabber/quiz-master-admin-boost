@@ -352,12 +352,14 @@ const LiveQuizHost = () => {
         console.log('Results calculation response:', { resultsData, resultsError });
 
         if (resultsError) {
-          console.warn('Results calculation failed (this is optional):', resultsError);
+          console.warn('Results calculation failed, trying manual calculation:', resultsError);
+          await calculateResultsManually();
         } else {
           console.log('Results calculated successfully:', resultsData);
         }
       } catch (resultsError) {
-        console.warn('Results calculation failed (this is optional):', resultsError);
+        console.warn('Results calculation failed, trying manual calculation:', resultsError);
+        await calculateResultsManually();
       }
 
       setSessionStatus('finished');
@@ -369,6 +371,28 @@ const LiveQuizHost = () => {
         title: "Quiz Finished!",
         description: "The quiz has been completed successfully",
       });
+
+      // If this was a guest-mode quiz (no login required), delete the quiz after finishing
+      try {
+        if (quiz && (quiz as any).requires_login === false) {
+          const { error: deleteError } = await supabase
+            .from('user_created_quizzes')
+            .delete()
+            .eq('id', quiz.id);
+          if (deleteError) {
+            console.warn('Guest quiz delete failed (non-blocking):', deleteError);
+          } else {
+            toast({
+              title: "Guest Session Closed",
+              description: "This guest-mode quiz was removed after completion.",
+            });
+            // Navigate host back to dashboard
+            navigate('/dashboard');
+          }
+        }
+      } catch (cleanupError) {
+        console.warn('Guest quiz cleanup error:', cleanupError);
+      }
 
     } catch (error) {
       console.error('Error finishing quiz:', error);
@@ -386,6 +410,80 @@ const LiveQuizHost = () => {
       title: "Code Copied!",
       description: "Share this code with participants to join",
     });
+  };
+
+  const calculateResultsManually = async () => {
+    if (!sessionId) return;
+
+    try {
+      console.log('Calculating results manually for session:', sessionId);
+      
+      // Get all participants
+      const { data: participants, error: participantsError } = await supabase
+        .from('live_quiz_participants')
+        .select('*')
+        .eq('session_id', sessionId);
+
+      if (participantsError) throw participantsError;
+
+      // Calculate results for each participant
+      for (const participant of participants) {
+        // Get all answers for this participant
+        const { data: answers, error: answersError } = await supabase
+          .from('live_quiz_answers')
+          .select(`
+            *,
+            user_quiz_questions!inner(correct_index)
+          `)
+          .eq('participant_id', participant.id);
+
+        if (answersError) {
+          console.error('Error getting answers for participant:', participant.id, answersError);
+          continue;
+        }
+
+        let correctAnswers = 0;
+        let totalScore = 0;
+        let totalResponseTime = 0;
+
+        for (const answer of answers) {
+          const isCorrect = answer.answer_index === answer.user_quiz_questions.correct_index;
+          if (isCorrect) {
+            correctAnswers++;
+            // Base score: 10 points
+            const baseScore = 10;
+            // Time bonus: faster answers get more points (0-10 bonus)
+            const timeBonus = Math.max(0, (30000 - answer.response_time) / 30000 * 10);
+            totalScore += baseScore + timeBonus;
+          }
+          totalResponseTime += answer.response_time;
+        }
+
+        const averageResponseTime = answers.length > 0 ? totalResponseTime / answers.length : 0;
+
+        // Insert or update result
+        const { error: insertError } = await supabase
+          .from('live_quiz_results')
+          .upsert({
+            session_id: sessionId,
+            participant_id: participant.id,
+            participant_name: participant.display_name,
+            score: totalScore,
+            correct_answers: correctAnswers,
+            total_questions: answers.length,
+            average_response_time: averageResponseTime,
+            completed_at: new Date().toISOString()
+          });
+
+        if (insertError) {
+          console.error('Error inserting result for participant:', participant.id, insertError);
+        }
+      }
+
+      console.log('Manual results calculation completed');
+    } catch (error) {
+      console.error('Error in manual results calculation:', error);
+    }
   };
 
   const loadResults = async () => {
