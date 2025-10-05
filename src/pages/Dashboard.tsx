@@ -537,6 +537,22 @@ const Dashboard = () => {
                 <Target className="w-4 h-4 mr-3" />
                 View Latest Results
               </Button>
+              <Button
+                variant="outline"
+                className="w-full justify-start h-12"
+                onClick={() => navigate("/create-quiz")}
+              >
+                <Share className="w-4 h-4 mr-3" />
+                Create Live Quiz
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full justify-start h-12"
+                onClick={() => navigate("/dashboard/quizzes")}
+              >
+                <Book className="w-4 h-4 mr-3" />
+                My Quizzes
+              </Button>
             </div>
           </CardContent>
         </Card>
