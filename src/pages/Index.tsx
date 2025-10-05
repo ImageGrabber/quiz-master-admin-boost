@@ -608,7 +608,7 @@ const Index = () => {
                 <div className="relative">
                   <Button 
                     size="lg" 
-                    className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-extrabold px-6 sm:px-10 py-5 sm:py-6 text-lg sm:text-xl rounded-lg shadow-[0_10px_30px_rgba(16,185,129,0.35)] transition-all duration-300 transform hover:scale-[1.02]" 
+                    className="w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-extrabold px-6 sm:px-10 py-5 sm:py-6 text-lg sm:text-xl rounded-md shadow-[0_10px_30px_rgba(16,185,129,0.35)] transition-all duration-300 transform hover:scale-[1.02]" 
                     onClick={() => navigate("/auth/register")}
                   >
                     <Play className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
@@ -639,12 +639,9 @@ const Index = () => {
                   <div className="flex items-start gap-2 bg-white rounded-xl p-3 border border-gray-100"><CheckCircle className="w-4 h-4 text-green-500 mt-0.5" /> <span className="text-gray-800 text-base md:text-lg">Automatic scoring and top results</span></div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                  <Button className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 font-semibold" onClick={() => setCreateDialogOpen(true)}>
+                <div className="flex flex-col gap-3 sm:gap-4">
+                  <Button size="lg" className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 font-extrabold px-6 py-5 text-lg rounded-md shadow-[0_10px_30px_rgba(79,70,229,0.35)]" onClick={() => setCreateDialogOpen(true)}>
                     Create Quiz
-                  </Button>
-                  <Button variant="outline" className="w-full sm:w-auto" onClick={() => navigate('/live-quiz')}>
-                    Live Quiz Hub
                   </Button>
                 </div>
               </div>

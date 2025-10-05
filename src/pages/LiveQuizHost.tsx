@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -54,6 +54,7 @@ interface Quiz {
 
 const LiveQuizHost = () => {
   const { quizId } = useParams<{ quizId: string }>();
+  const location = useLocation();
   const navigate = useNavigate();
   const { toast } = useToast();
   
@@ -73,6 +74,7 @@ const LiveQuizHost = () => {
   const [showLeaveDialog, setShowLeaveDialog] = useState(false);
   const allowLeaveRef = useRef(false);
   const resultsShownRef = useRef(false);
+  const [showEndDialog, setShowEndDialog] = useState(false);
   const notReadyCount = participants.reduce((count, participant) => count + (participant.is_ready ? 0 : 1), 0);
 
   // Load quiz data
@@ -200,8 +202,14 @@ const LiveQuizHost = () => {
       if (questionsError) throw questionsError;
       setQuestions(questionsData);
 
+      // Read feedback preference from URL (?feedback=1)
+      const params = new URLSearchParams(location.search);
+      const feedbackPref = params.get('feedback') === '1';
+      const timeParam = parseInt(params.get('time') || '0', 10);
+      const timeLimit = Number.isFinite(timeParam) && timeParam > 0 ? timeParam : 30;
+
       // Create or get existing session with the correct total question count
-      await createOrGetSession(quizData, questionsData.length);
+      await createOrGetSession(quizData, questionsData.length, feedbackPref, timeLimit);
 
     } catch (error) {
       console.error('Error loading quiz:', error);
@@ -254,7 +262,7 @@ const LiveQuizHost = () => {
     return timestampCode.slice(-8).padStart(8, '0');
   };
 
-  const createOrGetSession = async (quizData: Quiz, totalQuestions: number) => {
+  const createOrGetSession = async (quizData: Quiz, totalQuestions: number, showFeedback: boolean, timeLimit: number) => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
 
@@ -290,8 +298,9 @@ const LiveQuizHost = () => {
           session_code: sessionCode,
           title: quizData.title,
           total_questions: totalQuestions,
-          time_limit: 30,
-          requires_login: quizData.requires_login
+          time_limit: timeLimit,
+          requires_login: quizData.requires_login,
+          show_participant_feedback: showFeedback
         })
         .select()
         .single();
@@ -711,15 +720,12 @@ const LiveQuizHost = () => {
                   {sessionStatus === 'active' && (
                     <div className="space-y-4">
                       <div className="flex gap-2">
-                        <Button onClick={nextQuestion} disabled={currentQuestion >= questions.length - 1}>
-                          Next Question
-                        </Button>
                         <Button variant="outline" onClick={showResults}>
                           <Eye className="w-4 h-4 mr-2" />
                           Show Results
                         </Button>
                         {resultsVisible && (
-                          <Button variant="destructive" onClick={finishQuiz}>
+                          <Button variant="destructive" onClick={() => setShowEndDialog(true)}>
                             <Square className="w-4 h-4 mr-2" />
                             End Quiz
                           </Button>
@@ -772,7 +778,7 @@ const LiveQuizHost = () => {
                       )}
                       {sessionStatus !== 'finished' && (
                         <div className="mt-6 flex justify-center">
-                          <Button variant="destructive" onClick={finishQuiz}>
+                          <Button variant="destructive" onClick={() => setShowEndDialog(true)}>
                             <Square className="w-4 h-4 mr-2" /> End Quiz
                           </Button>
                         </div>
@@ -781,6 +787,21 @@ const LiveQuizHost = () => {
                   )}
                 </CardContent>
               </Card>
+              {/* End Quiz Confirmation Dialog */}
+              <Dialog open={showEndDialog} onOpenChange={setShowEndDialog}>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>End Quiz?</DialogTitle>
+                    <DialogDescription>
+                      This will mark the quiz as finished for all participants.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex justify-end gap-2">
+                    <Button variant="outline" onClick={() => setShowEndDialog(false)}>Cancel</Button>
+                    <Button variant="destructive" onClick={() => { setShowEndDialog(false); finishQuiz(); }}>End Quiz</Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
 
               {/* Current Question */}
               {sessionStatus === 'active' && questions[currentQuestion] && (

@@ -41,7 +41,8 @@ const Quizzes = () => {
   const [newQuiz, setNewQuiz] = useState({
     title: "",
     description: "",
-    questionSelection: "random" // "random" or "manual"
+    questionSelection: "random", // "random" or "manual"
+    showParticipantFeedback: false,
   });
   const [deleteQuizId, setDeleteQuizId] = useState<number | null>(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
@@ -172,7 +173,7 @@ const Quizzes = () => {
       });
 
       setIsCreateDialogOpen(false);
-      setNewQuiz({ title: "", description: "", questionSelection: "random" });
+      setNewQuiz({ title: "", description: "", questionSelection: "random", showParticipantFeedback: false });
       
       // Refresh the quiz list
       fetchQuizzes();
@@ -602,6 +603,22 @@ const Quizzes = () => {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="space-y-2 pt-1">
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    id="showParticipantFeedback"
+                    checked={newQuiz.showParticipantFeedback}
+                    onChange={(e) => setNewQuiz({ ...newQuiz, showParticipantFeedback: e.target.checked })}
+                    className="text-blue-600"
+                  />
+                  <Label htmlFor="showParticipantFeedback" className="font-normal">
+                    Show “Correct/Incorrect” feedback to participants after answering
+                  </Label>
+                </div>
+                <p className="text-xs text-gray-500 ml-6">Disable for silent mode events.</p>
               </div>
               
               <div className="flex justify-end space-x-2">

@@ -45,6 +45,7 @@ interface Session {
   current_question: number;
   total_questions: number;
   time_limit: number;
+  show_participant_feedback?: boolean;
 }
 
 interface Result {
@@ -675,8 +676,8 @@ const LiveQuizParticipant = () => {
                     ))}
                   </div>
 
-                  {/* Hide correct/incorrect banner when auto-submitting; still shows on manual submit */}
-                  {selectedAnswer !== null && (
+                  {/* Show manual feedback only if host enabled it */}
+                  {selectedAnswer !== null && session.show_participant_feedback && (
                     <div className="text-center">
                       <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg ${
                         selectedAnswer === currentQuestion.correct_index 

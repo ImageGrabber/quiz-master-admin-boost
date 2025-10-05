@@ -61,6 +61,7 @@ const Dashboard = () => {
   const [streakData, setStreakData] = useState<any>(null);
   const [userBadges, setUserBadges] = useState<any[]>([]);
   const [isRecordingRead, setIsRecordingRead] = useState(false);
+  const [joinCode, setJoinCode] = useState<string>("");
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
@@ -413,13 +414,13 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout>
-      {/* Upgrade to Pro + Quiz Filter in one line */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+      {/* Header filter */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 bg-white/60 backdrop-blur rounded-2xl p-3 border border-white/50 shadow-sm">
         <div className="flex items-center space-x-3">
           <Filter className="w-5 h-5 text-gray-600" />
           <span className="text-sm font-medium text-gray-700">Filter by Quiz:</span>
           <Select value={selectedQuizId} onValueChange={setSelectedQuizId}>
-            <SelectTrigger className="w-64">
+            <SelectTrigger className="w-64 rounded-xl">
               <SelectValue placeholder="Select a quiz" />
             </SelectTrigger>
             <SelectContent>
@@ -446,56 +447,56 @@ const Dashboard = () => {
       {/* Stats Grid */}
       <div className="w-full overflow-x-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 min-w-0">
-          <Card className="shadow-lg border-0 bg-white min-w-0">
+          <Card className="shadow-xl border-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-white min-w-0 rounded-2xl hover:shadow-2xl transition">
             <CardContent className="pt-6">
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow">
                   <Target className="w-4 h-4 text-blue-600" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-gray-900">{stats.totalAttempts}</div>
+                  <div className="text-3xl font-extrabold text-gray-900">{stats.totalAttempts}</div>
                   <div className="text-sm text-gray-600">Total Attempts</div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="shadow-lg border-0 bg-white min-w-0">
+          <Card className="shadow-xl border-0 bg-gradient-to-br from-green-50 via-emerald-50 to-white min-w-0 rounded-2xl hover:shadow-2xl transition">
             <CardContent className="pt-6">
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow">
                   <Trophy className="w-4 h-4 text-green-600" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-gray-900">{stats.bestScore}</div>
+                  <div className="text-3xl font-extrabold text-gray-900">{stats.bestScore}</div>
                   <div className="text-sm text-gray-600">Best Score</div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="shadow-lg border-0 bg-white min-w-0">
+          <Card className="shadow-xl border-0 bg-gradient-to-br from-amber-50 via-yellow-50 to-white min-w-0 rounded-2xl hover:shadow-2xl transition">
             <CardContent className="pt-6">
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow">
                   <Target className="w-4 h-4 text-yellow-600" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-gray-900">{stats.averageScore}</div>
+                  <div className="text-3xl font-extrabold text-gray-900">{stats.averageScore}</div>
                   <div className="text-sm text-gray-600">Average Score</div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="shadow-lg border-0 bg-white min-w-0">
+          <Card className="shadow-xl border-0 bg-gradient-to-br from-purple-50 via-fuchsia-50 to-white min-w-0 rounded-2xl hover:shadow-2xl transition">
             <CardContent className="pt-6">
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow">
                   <Clock className="w-4 h-4 text-purple-600" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-gray-900">{formatTime(stats.totalTimeSpent)}</div>
+                  <div className="text-3xl font-extrabold text-gray-900">{formatTime(stats.totalTimeSpent)}</div>
                   <div className="text-sm text-gray-600">Time Spent</div>
                 </div>
               </div>
@@ -504,188 +505,181 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Devotional Streak & Quick Actions side by side */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        {/* Quick Actions */}
-        <Card className="shadow-lg border-0 bg-white h-full">
+      {/* Live Quiz - Full width primary card, with quick actions moved aside */}
+      <div className="grid grid-cols-1 gap-6 mb-6">
+        {/* Normal Quizzes Section */}
+        <Card className="shadow-lg border-0 bg-white">
           <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
-            <CardDescription>Start your quiz journey</CardDescription>
+            <CardTitle className="flex items-center gap-2">
+              <Brain className="w-5 h-5 text-blue-600" />
+              Take a Quiz
+            </CardTitle>
+            <CardDescription>Practice or compete in standard quizzes anytime</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <Button
-                onClick={() => navigate("/quiz-selection")}
-                className={`w-full justify-start h-12 ${location.pathname === "/quiz-selection" ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : "bg-white text-gray-900 border border-gray-200"}`}
-              >
-                <Brain className="w-4 h-4 mr-3" />
-                Choose Quiz
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <Button className="h-12" onClick={() => navigate('/quiz-selection')}>
+                <Play className="w-4 h-4 mr-2" /> Browse Quizzes
               </Button>
-              <Button
-                variant="outline"
-                className="w-full justify-start h-12"
-                onClick={() => navigate("/leaderboard")}
-              >
-                <Trophy className="w-4 h-4 mr-3" />
-                View Leaderboard
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full justify-start h-12"
-                onClick={() => navigate("/result/latest")}
-              >
-                <Target className="w-4 h-4 mr-3" />
-                View Latest Results
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full justify-start h-12"
-                onClick={() => navigate("/live-quiz")}
-              >
-                <Share className="w-4 h-4 mr-3" />
-                Live Quiz
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full justify-start h-12"
-                onClick={() => navigate("/dashboard/quizzes")}
-              >
-                <Book className="w-4 h-4 mr-3" />
-                My Quizzes
+              <Button variant="outline" className="h-12" onClick={() => navigate('/leaderboard')}>
+                <Trophy className="w-4 h-4 mr-2" /> View Leaderboard
               </Button>
             </div>
           </CardContent>
         </Card>
-        {/* Badges */}
-        <Card className="shadow-lg border-0 bg-white h-full">
-          <CardHeader>
-            <CardTitle>Badges</CardTitle>
-            <CardDescription>Your achievements</CardDescription>
-          </CardHeader>
-          <CardContent>
-            {userBadges.length === 0 ? (
-              <div className="text-gray-600">No badges yet. Complete quizzes to earn badges!</div>
-            ) : (
-              <TooltipProvider>
-                <div className="grid grid-cols-2 gap-4">
-                  {userBadges.map((ub, i) => (
-                    <Tooltip key={i}>
-                      <TooltipTrigger asChild>
-                        <div className="p-4 rounded-2xl border border-gray-100 bg-white/60 backdrop-blur-sm hover:shadow-lg transition cursor-default">
-                          <div className="flex items-center gap-3 mb-1">
-                            <div className={`w-12 h-12 rounded-full bg-white flex items-center justify-center ring-2 ring-transparent`} style={{ boxShadow: `0 0 0 4px rgba(255,255,255,0.8)` }}>
-                              <div className={`w-12 h-12 rounded-full p-2 bg-gradient-to-br ${getBadgeRingClass(ub.badges?.icon || '')}` }>
-                                <div className="w-full h-full rounded-full bg-white/90 flex items-center justify-center">
-                                  {renderBadgeIcon(ub.badges?.icon || '')}
-                                </div>
-                              </div>
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="truncate font-semibold text-gray-900">{ub.badges?.name}</div>
-                              <div className="text-xs text-gray-600">{new Date(ub.awarded_at).toLocaleDateString()}</div>
-                            </div>
-                          </div>
-                          <div className="text-sm text-gray-800 mt-1">
-                            {ub.badges?.description}
-                            {ub.metadata?.quizTitle && (
-                              <span className="block text-xs text-gray-700 mt-1">Quiz: {ub.metadata.quizTitle}</span>
-                            )}
-                            {ub.badges?.slug === 'first-quiz' && ub.metadata?.firstQuizTitle && (
-                              <span className="block text-xs text-gray-700 mt-1">First quiz: {ub.metadata.firstQuizTitle}</span>
-                            )}
-                            {ub.badges?.slug === 'five-quizzes' && Array.isArray(ub.metadata?.quizzes) && (
-                              <div className="mt-2">
-                                <div className="text-xs font-semibold text-gray-900 mb-1">Your first 5 quizzes:</div>
-                                <ul className="list-disc list-inside text-xs text-gray-700 space-y-0.5">
-                                  {ub.metadata.quizzes.map((t: string, i: number) => (
-                                    <li key={i}>{t}</li>
-                                  ))}
-                                </ul>
-                              </div>
-                            )}
-                          </div>
-                          {(ub.metadata?.score || ub.metadata?.timeUsedSeconds) && (
-                            <div className="flex flex-wrap gap-2 mt-2">
-                              {ub.metadata?.score !== undefined && (
-                                <span className="text-[10px] px-2 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100">Score: {ub.metadata.score}</span>
-                              )}
-                              {ub.metadata?.timeUsedSeconds !== undefined && (
-                                <span className="text-[10px] px-2 py-1 rounded-full bg-green-50 text-green-700 border border-green-100">Time: {Math.floor(ub.metadata.timeUsedSeconds / 60)}m {ub.metadata.timeUsedSeconds % 60}s</span>
-                              )}
-                              {ub.metadata?.totalAttempts !== undefined && (
-                                <span className="text-[10px] px-2 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-100">Attempts: {ub.metadata.totalAttempts}</span>
-                              )}
-                            </div>
-                          )}
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent className="max-w-xs">
-                        <div className="text-xs text-gray-900">
-                          {ub.badges?.description || 'Badge earned'}
-                        </div>
-                      </TooltipContent>
-                    </Tooltip>
-                  ))}
-                </div>
-              </TooltipProvider>
-            )}
-          </CardContent>
-        </Card>
-        {/* Devotional Streak */}
-        <Card className="shadow-lg border-0 bg-gradient-to-r from-orange-50 to-red-50 h-full flex flex-col justify-between">
+
+        <Card className="shadow-xl border-0 bg-white/70 backdrop-blur rounded-2xl">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Flame className="w-5 h-5 text-orange-500" />
-              Devotional Streak
+              <Share className="w-5 h-5 text-purple-600" />
+              Live Quiz
             </CardTitle>
-            <CardDescription>Keep your daily devotional habit going!</CardDescription>
+            <CardDescription>Join an ongoing live quiz or learn how it works</CardDescription>
           </CardHeader>
-          <CardContent className="flex-1 flex flex-col justify-between">
-            <div className="flex flex-col gap-4">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div className="flex items-center space-x-6">
-                  <div className="flex items-center space-x-2">
-                    <Flame className="w-5 h-5 text-orange-500" />
-                    <span className="font-semibold text-orange-700">Current Streak: {(streakData?.current_streak || 0)} days</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Trophy className="w-5 h-5 text-yellow-500" />
-                    <span className="font-semibold text-yellow-700">Longest: {(streakData?.longest_streak || 0)} days</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <BookOpen className="w-5 h-5 text-blue-500" />
-                    <span className="font-semibold text-blue-700">Total days read: {(streakData?.total_days_read || 0)}</span>
-                  </div>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Join by Code */}
+              <div className="p-4 rounded-xl border bg-white/80">
+                <div className="text-sm text-gray-700 mb-2">Enter session code</div>
+                <div className="flex gap-2">
+                  <input
+                    value={joinCode}
+                    onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
+                    placeholder="8‑char code"
+                    className="flex-1 px-3 py-3 border rounded-xl font-mono tracking-widest uppercase"
+                    maxLength={8}
+                  />
+                  <Button onClick={() => joinCode.trim().length >= 6 && navigate(`/live-quiz/join/${joinCode.trim()}`)}>
+                    Join
+                  </Button>
+                </div>
+                <div className="text-xs text-gray-500 mt-2">Ask the host for the 8‑character code</div>
+              </div>
+              {/* Learn / Host */}
+              <div className="p-4 rounded-xl border bg-gradient-to-r from-indigo-50 to-purple-50">
+                <div className="text-sm text-gray-700 mb-2">Want to host?</div>
+                <div className="flex gap-2">
+                  <Button className="flex-1" variant="outline" onClick={() => navigate('/live-quiz')}>
+                    Live Quiz Hub
+                  </Button>
+                  <Button className="flex-1" onClick={() => navigate('/dashboard/quizzes')}>
+                    Create Quiz
+                  </Button>
                 </div>
               </div>
             </div>
-            {/* Devotional Read Button always at the bottom */}
-            <div className="flex mt-6 md:justify-end justify-center">
-              {(() => {
-                const today = new Date().toISOString().split('T')[0];
-                const lastRead = streakData?.last_read_date;
-                if (lastRead === today) {
-                  return (
-                    <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-green-500">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </span>
-                  );
-                } else {
-                  return (
-                    <Button
-                      onClick={() => navigate('/dashboard/bible-study')}
-                      className="bg-orange-500 hover:bg-orange-600 text-white font-semibold w-full md:w-auto"
-                    >
-                      Read Now
-                    </Button>
-                  );
-                }
-              })()}
-            </div>
           </CardContent>
         </Card>
+
+        {/* Recent Attempts + Badges side by side */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Recent Attempts */}
+          <Card className="shadow-xl border-0 bg-white/70 backdrop-blur h-full rounded-2xl">
+            <CardHeader>
+              <CardTitle>Recent Attempts</CardTitle>
+              <CardDescription>Your latest quiz activity</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {recentAttempts.length === 0 ? (
+                <div className="text-gray-600">No attempts yet. Take your first quiz!</div>
+              ) : (
+                <div className="space-y-3">
+                  {recentAttempts.slice(0, 5).map((a: any, idx: number) => (
+                    <div key={idx} className="flex items-center justify-between p-4 rounded-xl border bg-white/80 hover:bg-white transition">
+                      <div className="min-w-0">
+                        <div className="font-semibold text-gray-900 truncate">{a.quizzes?.title || 'Quiz'}</div>
+                        <div className="text-xs text-gray-600">{new Date(a.created_at).toLocaleString()}</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-bold text-blue-700">{a.score}%</div>
+                        <div className="text-xs text-gray-500">{Math.round((a.seconds_used || 0) / 60)}m</div>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="text-right">
+                    <Button variant="outline" size="sm" onClick={() => navigate('/dashboard/recent-attempts')}>View All</Button>
+                  </div>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Badges */}
+          <Card className="shadow-xl border-0 bg-white/70 backdrop-blur h-full rounded-2xl">
+            <CardHeader>
+              <CardTitle>Badges</CardTitle>
+              <CardDescription>Your achievements</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {userBadges.length === 0 ? (
+                <div className="text-gray-600">No badges yet. Complete quizzes to earn badges!</div>
+              ) : (
+                <TooltipProvider>
+                  <div className="grid grid-cols-2 gap-4">
+                    {userBadges.map((ub, i) => (
+                      <Tooltip key={i}>
+                        <TooltipTrigger asChild>
+                          <div className="p-4 rounded-2xl border border-gray-100 bg-white/60 backdrop-blur-sm hover:shadow-lg transition cursor-default">
+                            <div className="flex items-center gap-3 mb-1">
+                              <div className={`w-12 h-12 rounded-full bg-white flex items-center justify-center ring-2 ring-transparent`} style={{ boxShadow: `0 0 0 4px rgba(255,255,255,0.8)` }}>
+                                <div className={`w-12 h-12 rounded-full p-2 bg-gradient-to-br ${getBadgeRingClass(ub.badges?.icon || '')}` }>
+                                  <div className="w-full h-full rounded-full bg-white/90 flex items-center justify-center">
+                                    {renderBadgeIcon(ub.badges?.icon || '')}
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="truncate font-semibold text-gray-900">{ub.badges?.name}</div>
+                                <div className="text-xs text-gray-600">{new Date(ub.awarded_at).toLocaleDateString()}</div>
+                              </div>
+                            </div>
+                            <div className="text-sm text-gray-800 mt-1">
+                              {ub.badges?.description}
+                              {ub.metadata?.quizTitle && (
+                                <span className="block text-xs text-gray-700 mt-1">Quiz: {ub.metadata.quizTitle}</span>
+                              )}
+                              {ub.badges?.slug === 'first-quiz' && ub.metadata?.firstQuizTitle && (
+                                <span className="block text-xs text-gray-700 mt-1">First quiz: {ub.metadata.firstQuizTitle}</span>
+                              )}
+                              {ub.badges?.slug === 'five-quizzes' && Array.isArray(ub.metadata?.quizzes) && (
+                                <div className="mt-2">
+                                  <div className="text-xs font-semibold text-gray-900 mb-1">Your first 5 quizzes:</div>
+                                  <ul className="list-disc list-inside text-xs text-gray-700 space-y-0.5">
+                                    {ub.metadata.quizzes.map((t: string, i: number) => (
+                                      <li key={i}>{t}</li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+                            </div>
+                            {(ub.metadata?.score || ub.metadata?.timeUsedSeconds) && (
+                              <div className="flex flex-wrap gap-2 mt-2">
+                                {ub.metadata?.score !== undefined && (
+                                  <span className="text-[10px] px-2 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100">Score: {ub.metadata.score}</span>
+                                )}
+                                {ub.metadata?.timeUsedSeconds !== undefined && (
+                                  <span className="text-[10px] px-2 py-1 rounded-full bg-green-50 text-green-700 border border-green-100">Time: {Math.floor(ub.metadata.timeUsedSeconds / 60)}m {ub.metadata.timeUsedSeconds % 60}s</span>
+                                )}
+                                {ub.metadata?.totalAttempts !== undefined && (
+                                  <span className="text-[10px] px-2 py-1 rounded-full bg-purple-50 text-purple-700 border border-purple-100">Attempts: {ub.metadata.totalAttempts}</span>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        </TooltipTrigger>
+                        <TooltipContent className="max-w-xs">
+                          <div className="text-xs text-gray-900">
+                            {ub.badges?.description || 'Badge earned'}
+                          </div>
+                        </TooltipContent>
+                      </Tooltip>
+                    ))}
+                  </div>
+                </TooltipProvider>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
 
       {/* Quick Actions & Featured Competitions */}
