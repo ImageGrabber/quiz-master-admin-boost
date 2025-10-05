@@ -445,15 +445,11 @@ const Index = () => {
   return (
     <>
       <Helmet>
-        <title>Bible Quiz Competition 2024 & 2025 | Online Bible Quiz Events</title>
-        <meta name="description" content="Join the biggest Bible Quiz Competition 2024 and Online Bible Quiz Competition 2025. Compete online, win prizes, and test your biblical knowledge!" />
-        <meta property="og:title" content="Bible Quiz Competition 2024 & 2025 | Online Bible Quiz Events" />
-        <meta property="og:description" content="Join the biggest Bible Quiz Competition 2024 and Online Bible Quiz Competition 2025. Compete online, win prizes, and test your biblical knowledge!" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourdomain.com/bible-quiz-competition-2024-2025" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Bible Quiz Competition 2024 & 2025 | Online Bible Quiz Events" />
-        <meta name="twitter:description" content="Join the biggest Bible Quiz Competition 2024 and Online Bible Quiz Competition 2025. Compete online, win prizes, and test your biblical knowledge!" />
+        <title>Bible Quiz Competition | Weekly Online Bible Quiz Events</title>
+        <meta name="description" content="Test your knowledge with weekly Bible quizzes, host live sessions, and climb the leaderboard. Free and fun for all ages." />
+        <link rel="canonical" href="/" />
+        <meta property="og:title" content="Bible Quiz Competition | Weekly Online Bible Quiz Events" />
+        <meta property="og:description" content="Test your knowledge with weekly Bible quizzes, host live sessions, and climb the leaderboard." />
       </Helmet>
       <div className="min-h-screen bg-white">
         {/* Guest completion dialog */}
@@ -554,7 +550,7 @@ const Index = () => {
               {/* Guest complete dialog is handled globally below */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold rounded shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/login")}> <Play className="w-5 h-5 mr-2" /> Start Quiz Now <ArrowRight className="w-5 h-5 ml-2" /> </Button>
-                <Button variant="outline" size="lg" className="px-8 py-6 text-lg font-medium border-2 border-grey-200 hover:border-transparent rounded bg-white/60 backdrop-blur-md hover:text-white hover:bg-black" onClick={() => navigate("/live-quiz")}> <Play className="w-5 h-5 mr-2" /> Host a Live Quiz</Button>
+                <Button variant="outline" size="lg" className="px-8 py-6 text-lg font-medium border-2 border-grey-200 hover:border-transparent rounded bg-white/60 backdrop-blur-md hover:text-white hover:bg-black" onClick={() => { window.location.href = 'https://www.biblequizcompetition.com/host-live-bible-quizzes-with-confidence'; }}> <Play className="w-5 h-5 mr-2" /> Host a Live Quiz</Button>
               </div>
               
             </div>

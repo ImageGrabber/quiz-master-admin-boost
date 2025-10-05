@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Sitemap: https://biblequizcompetition.com/sitemap.xml
+User-agent: *
+Allow: /
 Allow: /public-quiz/
 Allow: /public-leaderboard
 Allow: /bible-questions-and-answers-hub/
