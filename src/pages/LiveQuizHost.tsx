@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -47,6 +48,8 @@ interface Quiz {
   title: string;
   description: string;
   share_code: string;
+  requires_login?: boolean;
+  creator_id?: string | null;
 }
 
 const LiveQuizHost = () => {
@@ -61,10 +64,16 @@ const LiveQuizHost = () => {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [sessionStatus, setSessionStatus] = useState<'waiting' | 'active' | 'finished'>('waiting');
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(30);
+  const [timeLeft, setTimeLeft] = useState(10);
   const [showAnswers, setShowAnswers] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [results, setResults] = useState<any[]>([]);
+  const [resultsVisible, setResultsVisible] = useState(false);
+  const deletedRef = useRef(false);
+  const [showLeaveDialog, setShowLeaveDialog] = useState(false);
+  const allowLeaveRef = useRef(false);
+  const resultsShownRef = useRef(false);
+  const notReadyCount = participants.reduce((count, participant) => count + (participant.is_ready ? 0 : 1), 0);
 
   // Load quiz data
   useEffect(() => {
@@ -72,6 +81,50 @@ const LiveQuizHost = () => {
       loadQuizData();
     }
   }, [quizId]);
+
+  // Intercept back/close; confirm and cleanup guest-mode
+  useEffect(() => {
+    const beforeUnload = (e: BeforeUnloadEvent) => {
+      if (quiz && (quiz as any).requires_login === false && !deletedRef.current && !allowLeaveRef.current) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    };
+    window.addEventListener('beforeunload', beforeUnload);
+
+    const handlePopState = () => {
+      if (quiz && (quiz as any).requires_login === false && !deletedRef.current && !allowLeaveRef.current) {
+        setShowLeaveDialog(true);
+        window.history.pushState(null, '', window.location.href);
+      }
+    };
+    window.history.pushState(null, '', window.location.href);
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('beforeunload', beforeUnload);
+      window.removeEventListener('popstate', handlePopState);
+      if (quiz && (quiz as any).requires_login === false && !deletedRef.current && !allowLeaveRef.current) {
+        supabase.from('user_created_quizzes').delete().eq('id', quiz.id).then(() => {});
+      }
+    };
+  }, [quiz]);
+
+  const confirmLeaveSession = async () => {
+    allowLeaveRef.current = true;
+    setShowLeaveDialog(false);
+    try {
+      if (quiz && (quiz as any).requires_login === false && !deletedRef.current) {
+        await supabase.from('user_created_quizzes').delete().eq('id', quiz.id);
+        deletedRef.current = true;
+      }
+    } catch {}
+    navigate('/');
+  };
+
+  const cancelLeaveSession = () => {
+    setShowLeaveDialog(false);
+  };
 
   // Set up real-time subscriptions
   useEffect(() => {
@@ -96,20 +149,42 @@ const LiveQuizHost = () => {
     }
   }, [sessionId]);
 
+  // Host-side countdown for display and control
+  useEffect(() => {
+    if (sessionStatus === 'active') {
+      // reset the resultsShown gate whenever we enter active status or question index changes
+      resultsShownRef.current = false;
+      const interval = setInterval(() => {
+        setTimeLeft((prev) => {
+          if (prev <= 1) {
+            // Auto-advance when timer hits zero
+            if (currentQuestion >= questions.length - 1) {
+              // Last question -> show results once (do not auto-finish)
+              if (!resultsShownRef.current && !resultsVisible) {
+                resultsShownRef.current = true;
+                showResults();
+              }
+            } else {
+              nextQuestion();
+            }
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [sessionStatus, currentQuestion]);
+
   const loadQuizData = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        navigate('/auth/login');
-        return;
-      }
 
-      // Load quiz details
+      // Load quiz details (do not require creator match in guest mode)
       const { data: quizData, error: quizError } = await supabase
         .from('user_created_quizzes')
-        .select('*, requires_login')
+        .select('*, requires_login, creator_id')
         .eq('id', quizId)
-        .eq('creator_id', user.id)
         .single();
 
       if (quizError) throw quizError;
@@ -125,8 +200,8 @@ const LiveQuizHost = () => {
       if (questionsError) throw questionsError;
       setQuestions(questionsData);
 
-      // Create or get existing session
-      await createOrGetSession(quizData);
+      // Create or get existing session with the correct total question count
+      await createOrGetSession(quizData, questionsData.length);
 
     } catch (error) {
       console.error('Error loading quiz:', error);
@@ -179,17 +254,16 @@ const LiveQuizHost = () => {
     return timestampCode.slice(-8).padStart(8, '0');
   };
 
-  const createOrGetSession = async (quizData: Quiz) => {
+  const createOrGetSession = async (quizData: Quiz, totalQuestions: number) => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
 
       // Check for existing active session
       const { data: existingSession } = await supabase
         .from('live_quiz_sessions')
         .select('*')
         .eq('quiz_id', quizId)
-        .eq('host_id', user.id)
+        .eq('host_id', quizData.requires_login ? user?.id : null)
         .in('status', ['waiting', 'active'])
         .single();
 
@@ -212,10 +286,10 @@ const LiveQuizHost = () => {
         .from('live_quiz_sessions')
         .insert({
           quiz_id: quizId,
-          host_id: user.id,
+          host_id: quizData.requires_login ? user?.id : null,
           session_code: sessionCode,
           title: quizData.title,
-          total_questions: questions.length,
+          total_questions: totalQuestions,
           time_limit: 30,
           requires_login: quizData.requires_login
         })
@@ -277,7 +351,7 @@ const LiveQuizHost = () => {
 
       setSessionStatus('active');
       setCurrentQuestion(0);
-      setTimeLeft(30);
+      setTimeLeft(10);
 
       toast({
         title: "Quiz Started!",
@@ -312,11 +386,28 @@ const LiveQuizHost = () => {
       if (error) throw error;
 
       setCurrentQuestion(nextQ);
-      setTimeLeft(30);
+      setTimeLeft(10);
       setShowAnswers(false);
 
     } catch (error) {
       console.error('Error moving to next question:', error);
+    }
+  };
+
+  const showResults = async () => {
+    if (!sessionId) return;
+    try {
+      // Try to calculate via RPC (non-destructive)
+      const { error: rpcError } = await supabase.rpc('calculate_quiz_results', { session_uuid: sessionId });
+      if (rpcError) {
+        await calculateResultsManually();
+      }
+      await loadResults();
+      setResultsVisible(true);
+      toast({ title: 'Results Ready', description: 'Review the results before ending the quiz.' });
+    } catch (e) {
+      await loadResults();
+      setResultsVisible(true);
     }
   };
 
@@ -382,12 +473,9 @@ const LiveQuizHost = () => {
           if (deleteError) {
             console.warn('Guest quiz delete failed (non-blocking):', deleteError);
           } else {
-            toast({
-              title: "Guest Session Closed",
-              description: "This guest-mode quiz was removed after completion.",
-            });
-            // Navigate host back to dashboard
-            navigate('/dashboard');
+            deletedRef.current = true;
+            // Navigate to homepage with completion flag to show dialog
+            navigate('/?guestCompleted=1');
           }
         }
       } catch (cleanupError) {
@@ -418,6 +506,14 @@ const LiveQuizHost = () => {
     try {
       console.log('Calculating results manually for session:', sessionId);
       
+      // Get session to determine total questions
+      const { data: sessionRow } = await supabase
+        .from('live_quiz_sessions')
+        .select('total_questions')
+        .eq('id', sessionId)
+        .single();
+      const totalQuestionsForSession = sessionRow?.total_questions ?? questions.length;
+
       // Get all participants
       const { data: participants, error: participantsError } = await supabase
         .from('live_quiz_participants')
@@ -444,22 +540,19 @@ const LiveQuizHost = () => {
 
         let correctAnswers = 0;
         let totalScore = 0;
-        let totalResponseTime = 0;
+        let totalResponseTimeMs = 0;
 
         for (const answer of answers) {
           const isCorrect = answer.answer_index === answer.user_quiz_questions.correct_index;
           if (isCorrect) {
             correctAnswers++;
-            // Base score: 10 points
-            const baseScore = 10;
-            // Time bonus: faster answers get more points (0-10 bonus)
-            const timeBonus = Math.max(0, (30000 - answer.response_time) / 30000 * 10);
-            totalScore += baseScore + timeBonus;
           }
-          totalResponseTime += answer.response_time;
+          totalResponseTimeMs += answer.response_time || 0;
         }
 
-        const averageResponseTime = answers.length > 0 ? totalResponseTime / answers.length : 0;
+        const averageResponseTimeSeconds = answers.length > 0 ? (totalResponseTimeMs / answers.length) / 1000 : 0;
+        // Percentage score based on total questions in session
+        const scorePercent = totalQuestionsForSession > 0 ? (correctAnswers / totalQuestionsForSession) * 100 : 0;
 
         // Insert or update result
         const { error: insertError } = await supabase
@@ -468,10 +561,10 @@ const LiveQuizHost = () => {
             session_id: sessionId,
             participant_id: participant.id,
             participant_name: participant.display_name,
-            score: totalScore,
+            score: scorePercent,
             correct_answers: correctAnswers,
-            total_questions: answers.length,
-            average_response_time: averageResponseTime,
+            total_questions: totalQuestionsForSession,
+            average_response_time: averageResponseTimeSeconds,
             completed_at: new Date().toISOString()
           });
 
@@ -530,6 +623,7 @@ const LiveQuizHost = () => {
           <p className="text-gray-600">Loading quiz session...</p>
         </div>
       </div>
+    
     );
   }
 
@@ -610,10 +704,6 @@ const LiveQuizHost = () => {
                           <Play className="w-4 h-4 mr-2" />
                           Start Quiz
                         </Button>
-                        <Button variant="outline" onClick={() => setShowAnswers(!showAnswers)}>
-                          {showAnswers ? <EyeOff className="w-4 h-4 mr-2" /> : <Eye className="w-4 h-4 mr-2" />}
-                          {showAnswers ? 'Hide' : 'Show'} Answers
-                        </Button>
                       </div>
                     </div>
                   )}
@@ -624,18 +714,24 @@ const LiveQuizHost = () => {
                         <Button onClick={nextQuestion} disabled={currentQuestion >= questions.length - 1}>
                           Next Question
                         </Button>
-                        <Button variant="outline" onClick={finishQuiz}>
-                          <Square className="w-4 h-4 mr-2" />
-                          End Quiz
+                        <Button variant="outline" onClick={showResults}>
+                          <Eye className="w-4 h-4 mr-2" />
+                          Show Results
                         </Button>
+                        {resultsVisible && (
+                          <Button variant="destructive" onClick={finishQuiz}>
+                            <Square className="w-4 h-4 mr-2" />
+                            End Quiz
+                          </Button>
+                        )}
                       </div>
                     </div>
                   )}
 
-                  {sessionStatus === 'finished' && (
+                  {(sessionStatus === 'finished' || resultsVisible) && (
                     <div className="text-center py-4">
                       <Trophy className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Quiz Completed!</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">Results</h3>
                       <p className="text-gray-600 mb-4">Results have been calculated and shared with participants.</p>
                       
                       {results.length > 0 && (
@@ -672,6 +768,13 @@ const LiveQuizHost = () => {
                               </div>
                             ))}
                           </div>
+                        </div>
+                      )}
+                      {sessionStatus !== 'finished' && (
+                        <div className="mt-6 flex justify-center">
+                          <Button variant="destructive" onClick={finishQuiz}>
+                            <Square className="w-4 h-4 mr-2" /> End Quiz
+                          </Button>
                         </div>
                       )}
                     </div>
@@ -750,7 +853,7 @@ const LiveQuizHost = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Users className="w-5 h-5" />
-                    Participants ({participants.length})
+                    Participants (Total: {participants.length}, Not Ready: {notReadyCount})
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
