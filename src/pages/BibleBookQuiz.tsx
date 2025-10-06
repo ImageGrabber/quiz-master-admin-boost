@@ -24,6 +24,7 @@ interface Question {
   question: string;
   options: string[];
   answer: number;
+  explanation?: string; // optional explanation or verse reference
 }
 
 interface BibleBookQuizProps {
@@ -251,37 +252,16 @@ const BibleBookQuiz = ({ title, questions, bookName }: BibleBookQuizProps) => {
         </div>
       )}
 
-      {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-blue-100 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
-              <span className="text-lg font-semibold text-gray-900 align-middle">BibleBattles</span>
-            </div>
-            
-            {/* Timer Display */}
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" onClick={() => navigate("/")} className="text-gray-600 hover:text-gray-900">
-                Home
-              </Button>
-              <Button onClick={() => navigate("/leaderboard")} className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-                Leaderboard
-              </Button>
-            </div>
+      {/* Minimal progress bar (no extra header branding) */}
+      <div className="bg-white/70 border-b border-blue-100 sticky top-0 z-40">
+        <div className="container mx-auto px-4 py-3">
+          <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
+            <span>Question {currentQuestion + 1} of {questions.length}</span>
+            <span className="font-mono">{formatTime(timeLeft)}</span>
           </div>
-          
-          {/* Progress and Timer Bar */}
-          <div className="mt-4 space-y-2">
-            <div className="flex items-center justify-between text-sm text-gray-600">
-              <span>Question {currentQuestion + 1} of {questions.length}</span>
-            </div>
-            <div className="flex space-x-2">
-              <Progress value={progress} className="flex-1 h-2" />
-            </div>
-          </div>
+          <Progress value={progress} className="h-2" />
         </div>
-      </header>
+      </div>
 
       {/* Quiz Content */}
       <main className="container mx-auto px-4 py-8">
@@ -368,6 +348,12 @@ const BibleBookQuiz = ({ title, questions, bookName }: BibleBookQuizProps) => {
                 </Button>
               ))}
               
+              {selectedAnswer !== null && (
+                <div className="rounded-lg bg-blue-50 border border-blue-200 p-4 text-sm text-gray-800">
+                  {currentQ.explanation ? currentQ.explanation : "Explanation coming soon."}
+                </div>
+              )}
+
               <div className="pt-6 flex justify-between items-center">
                 <div className="text-sm text-gray-500">
                   Select an answer to continue

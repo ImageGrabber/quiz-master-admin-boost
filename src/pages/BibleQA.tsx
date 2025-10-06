@@ -234,7 +234,7 @@ export default function BibleQA() {
           <nav className="flex items-center space-x-2">
             <button 
               className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" 
-              onClick={() => navigate("/bible-questions-and-answers-hub/genesis")}
+              onClick={() => navigate("/bible-questions-and-answers-hub")}
             >
               Bible Q&A Hub
             </button>

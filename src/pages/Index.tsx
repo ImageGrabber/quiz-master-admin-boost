@@ -481,7 +481,7 @@ const Index = () => {
             </button>
             {/* Nav links for desktop */}
             <nav className="hidden md:flex items-center space-x-2">
-              <button className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" onClick={() => navigate("/bible-questions-and-answers-hub/genesis")}>Bible Q&A Hub</button>
+              <button className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" onClick={() => navigate("/bible-questions-and-answers-hub")}>Bible Q&A Hub</button>
               <button className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" onClick={() => navigate("/articles")}>Articles</button>
               <button className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" onClick={() => navigate("/host-live-bible-quizzes-with-confidence")}>Hosting Guide</button>
               <button className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" onClick={() => navigate("/auth/login")}>Sign In</button>
@@ -490,7 +490,7 @@ const Index = () => {
             {/* Mobile dropdown menu */}
             {mobileMenuOpen && (
               <div className="md:hidden absolute top-full right-4 mt-2 w-48 bg-white rounded-lg shadow-lg border border-blue-100 z-50 flex flex-col items-stretch">
-                <button className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50 rounded-t-lg" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub/genesis"); }}>Bible Q&A Hub</button>
+                <button className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50 rounded-t-lg" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A Hub</button>
                 <button className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
                 <button className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50" onClick={() => { setMobileMenuOpen(false); navigate("/host-live-bible-quizzes-with-confidence"); }}>Hosting Guide</button>
                 <button className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
