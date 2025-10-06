@@ -68,7 +68,7 @@ const Header = () => {
           )}
           <button 
             className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" 
-            onClick={() => navigate("/bible-questions-and-answers-hub/genesis")}
+            onClick={() => navigate("/bible-questions-and-answers-hub")}
           >
             Bible Q&A Hub
           </button>
@@ -135,7 +135,7 @@ const Header = () => {
             )}
             <button 
               className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50" 
-              onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub/genesis"); }}
+              onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}
             >
               Bible Q&A Hub
             </button>
