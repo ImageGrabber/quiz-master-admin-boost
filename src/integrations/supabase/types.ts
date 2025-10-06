@@ -195,16 +195,19 @@ export type Database = {
         Row: {
           id: string;
           page: string;
+          ip_address: string | null;
           viewed_at: string;
         };
         Insert: {
           id?: string;
           page: string;
+          ip_address?: string | null;
           viewed_at?: string;
         };
         Update: {
           id?: string;
           page?: string;
+          ip_address?: string | null;
           viewed_at?: string;
         };
         Relationships: [];
