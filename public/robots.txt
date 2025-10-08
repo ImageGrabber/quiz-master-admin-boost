@@ -1,16 +1,33 @@
 User-agent: *
 Allow: /
-Sitemap: https://biblequizcompetition.com/sitemap.xml
-User-agent: *
-Allow: /
 Allow: /public-quiz/
 Allow: /public-leaderboard
 Allow: /bible-questions-and-answers-hub/
+Allow: /articles/
+Allow: /host-live-bible-quizzes-with-confidence
 
+# Disallow private areas
 Disallow: /admin/
 Disallow: /dashboard/
 Disallow: /auth/
 Disallow: /quiz/
 Disallow: /result/
+Disallow: /live-quiz/
+Disallow: /competition-quiz/
+Disallow: /competition-leaderboard/
 
+# Allow important crawlers
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Sitemap location
 Sitemap: https://biblequizcompetition.com/sitemap.xml
