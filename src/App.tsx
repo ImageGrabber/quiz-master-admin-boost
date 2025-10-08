@@ -190,6 +190,11 @@ import GenesisChapter1Full from "./pages/bible-questions-and-answers-hub/genesis
 import GenesisChapter2Full from "./pages/bible-questions-and-answers-hub/genesis/chapter-2-full";
 import GenesisChapter3Full from "./pages/bible-questions-and-answers-hub/genesis/chapter-3-full";
 import GenesisChapter4Full from "./pages/bible-questions-and-answers-hub/genesis/chapter-4-full";
+import GenesisChapter5Full from "./pages/bible-questions-and-answers-hub/genesis/chapter-5-full";
+import GenesisChapter6Full from "./pages/bible-questions-and-answers-hub/genesis/chapter-6-full";
+import GenesisChapter7Full from "./pages/bible-questions-and-answers-hub/genesis/chapter-7-full";
+import GenesisChapter8Full from "./pages/bible-questions-and-answers-hub/genesis/chapter-8-full";
+import GenesisChapter9Full from "./pages/bible-questions-and-answers-hub/genesis/chapter-9-full";
 import GenesisChapter9 from "./pages/bible-questions-and-answers-hub/genesis/chapter-9";
 import GenesisChapter10 from "./pages/bible-questions-and-answers-hub/genesis/chapter-10";
 import GenesisChapter11 from "./pages/bible-questions-and-answers-hub/genesis/chapter-11";
@@ -419,6 +424,11 @@ const App = () => {
             <Route path="/bible-questions-and-answers-hub/genesis/chapter-2-full" element={<GenesisChapter2Full />} />
             <Route path="/bible-questions-and-answers-hub/genesis/chapter-3-full" element={<GenesisChapter3Full />} />
             <Route path="/bible-questions-and-answers-hub/genesis/chapter-4-full" element={<GenesisChapter4Full />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/chapter-5-full" element={<GenesisChapter5Full />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/chapter-6-full" element={<GenesisChapter6Full />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/chapter-7-full" element={<GenesisChapter7Full />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/chapter-8-full" element={<GenesisChapter8Full />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/chapter-9-full" element={<GenesisChapter9Full />} />
             <Route path="/bible-questions-and-answers-hub/genesis/chapter-9" element={<GenesisChapter9 />} />
             <Route path="/bible-questions-and-answers-hub/genesis/chapter-10" element={<GenesisChapter10 />} />
             <Route path="/bible-questions-and-answers-hub/genesis/chapter-11" element={<GenesisChapter11 />} />

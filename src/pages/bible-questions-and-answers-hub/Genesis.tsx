@@ -163,6 +163,19 @@ export default function GenesisHub() {
 28 When Lamech had lived 182 years, he fathered a son 29 and called his name Noah, saying, "Out of the ground that the Lord has cursed, this one shall bring us relief[d] from our work and from the painful toil of our hands." 30 Lamech lived after he fathered Noah 595 years and had other sons and daughters. 31 Thus all the days of Lamech were 777 years, and he died.
 
 32 After Noah was 500 years old, Noah fathered Shem, Ham, and Japheth.`;
+
+  // Full text content for Genesis Chapter 6
+  const chapter6FullText = `Increasing Corruption on Earth
+
+6 When man began to multiply on the face of the land and daughters were born to them, 2 the sons of God saw that the daughters of man were attractive. And they took as their wives any they chose. 3 Then the Lord said, "My Spirit shall not abide in[a] man forever, for he is flesh: his days shall be 120 years." 4 The Nephilim[b] were on the earth in those days, and also afterward, when the sons of God came in to the daughters of man and they bore children to them. These were the mighty men who were of old, the men of renown.
+
+5 The Lord saw that the wickedness of man was great in the earth, and that every intention of the thoughts of his heart was only evil continually. 6 And the Lord regretted that he had made man on the earth, and it grieved him to his heart. 7 So the Lord said, "I will blot out man whom I have created from the face of the land, man and animals and creeping things and birds of the heavens, for I am sorry that I have made them." 8 But Noah found favor in the eyes of the Lord.
+
+Noah and the Flood
+
+9 These are the generations of Noah. Noah was a righteous man, blameless in his generation. Noah walked with God. 10 And Noah had three sons, Shem, Ham, and Japheth.
+
+11 Now the earth was corrupt in God's sight, and the earth was filled with violence. 12 And God saw the earth, and behold, it was corrupt, for all flesh had corrupted their way on the earth. 13 And God said to Noah, "I have determined to make an end of all flesh,[c] for the earth is filled with violence through them. Behold, I will destroy them with the earth. 14 Make yourself an ark of gopher wood.[d] Make rooms in the ark, and cover it inside and out with pitch. 15 This is how you are to make it: the length of the ark 300 cubits,[e] its breadth 50 cubits, and its height 30 cubits. 16 Make a roof[f] for the ark, and finish it to a cubit above, and set the door of the ark in its side. Make it with lower, second, and third decks. 17 For behold, I will bring a flood of waters upon the earth to destroy all flesh in which is the breath of life under heaven. Everything that is on the earth shall die. 18 But I will establish my covenant with you, and you shall come into the ark, you, your sons, your wife, and your sons' wives with you. 19 And of every living thing of all flesh, you shall bring two of every sort into the ark to keep them alive with you. They shall be male and female. 20 Of the birds according to their kinds, and of the animals according to their kinds, of every creeping thing of the ground, according to its kind, two of every sort shall come in to you to keep them alive. 21 Also take with you every sort of food that is eaten, and store it up. It shall serve as food for you and for them." 22 Noah did this; he did all that God commanded him.`;
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
       <Header />
@@ -194,6 +207,7 @@ export default function GenesisHub() {
               <a href="#chapters-17-20" className="px-3 py-2 rounded-lg bg-teal-600 text-white text-sm font-semibold shadow" style={{display: 'none'}}>Ch 17-20</a>
               <a href="#types" className="px-3 py-2 rounded-lg bg-rose-600 text-white text-sm font-semibold shadow">Types</a>
               <a href="#genesis-chapter-5-text" className="px-3 py-2 rounded-lg bg-amber-600 text-white text-sm font-semibold shadow">Ch 5 Text</a>
+              <a href="#genesis-chapter-6-text" className="px-3 py-2 rounded-lg bg-purple-600 text-white text-sm font-semibold shadow">Ch 6 Text</a>
             </div>
           </div>
         </div>
@@ -658,6 +672,27 @@ export default function GenesisHub() {
               <div className="prose prose-lg max-w-none">
                 <pre className="whitespace-pre-wrap font-serif text-gray-800 leading-relaxed text-sm">
                   {chapter5FullText}
+                </pre>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Genesis Chapter 6 Full Text */}
+        <section id="genesis-chapter-6-text" className="mt-12 scroll-mt-24">
+          <div className="flex items-center gap-2 mb-4">
+            <BookOpen className="w-5 h-5 text-purple-600" />
+            <h2 className="text-2xl font-semibold text-gray-900">Genesis Chapter 6 - Full Text</h2>
+          </div>
+          <Card className="bg-white shadow-lg">
+            <CardHeader>
+              <CardTitle className="text-xl text-purple-700">Increasing Corruption on Earth & Noah and the Flood</CardTitle>
+              <CardDescription>Complete text of Genesis Chapter 6</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="prose prose-lg max-w-none">
+                <pre className="whitespace-pre-wrap font-serif text-gray-800 leading-relaxed text-sm">
+                  {chapter6FullText}
                 </pre>
               </div>
             </CardContent>
