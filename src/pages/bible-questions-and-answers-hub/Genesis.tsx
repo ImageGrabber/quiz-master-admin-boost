@@ -117,6 +117,7 @@ export default function GenesisHub() {
     ],
   };
 
+
   // Detailed bullet points for chapters 17–20
   const chapterPoints17to20: Record<number, string[]> = {
     17: [
@@ -581,6 +582,7 @@ export default function GenesisHub() {
             })}
           </div>
         </section>
+
 
         {/* Types section */}
         <section id="types" className="mt-12 scroll-mt-24">
