@@ -327,6 +327,39 @@ export default function BibleQA() {
 
       {/* Main Content */}
       <main className="w-full max-w-7xl mx-auto px-4 py-10">
+        {/* Book Hubs (e.g., Genesis) */}
+        <section className="mb-12">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-3xl font-bold text-gray-900">Book Study Hubs</h2>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Genesis Hub Card */}
+            <Card className="shadow-lg border-0 hover:shadow-xl transition-all duration-300 cursor-pointer group" onClick={() => navigate('/bible-questions-and-answers-hub/genesis')}>
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <div className="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center">
+                    <BookOpen className="w-6 h-6 text-white" />
+                  </div>
+                </div>
+                <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">Genesis Hub</CardTitle>
+                <CardDescription className="text-gray-600">Questions, answers, and quizzes for the Book of Genesis</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button className="w-full" variant="outline">
+                  Open Genesis Hub
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Placeholder slots for upcoming hubs */}
+            <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 bg-white/50 flex items-center justify-center">
+              <span className="text-gray-500">More book hubs coming soon</span>
+            </div>
+            <div className="hidden lg:flex border-2 border-dashed border-gray-200 rounded-xl p-6 bg-white/50 items-center justify-center">
+              <span className="text-gray-500">Space reserved for future hubs</span>
+            </div>
+          </div>
+        </section>
         {/* Featured Quizzes */}
         <section className="mb-12">
           <div className="flex items-center justify-between mb-6">

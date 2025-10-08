@@ -162,6 +162,14 @@ import GenesisCh11Beginner from "./pages/bible-questions-and-answers-hub/genesis
 import GenesisCh11Advanced from "./pages/bible-questions-and-answers-hub/genesis/ch11-advanced";
 import GenesisCh12Beginner from "./pages/bible-questions-and-answers-hub/genesis/ch12-beginner";
 import GenesisCh12Advanced from "./pages/bible-questions-and-answers-hub/genesis/ch12-advanced";
+import GenesisCh13Beginner from "./pages/bible-questions-and-answers-hub/genesis/ch13-beginner";
+import GenesisCh13Advanced from "./pages/bible-questions-and-answers-hub/genesis/ch13-advanced";
+import GenesisCh14Beginner from "./pages/bible-questions-and-answers-hub/genesis/ch14-beginner";
+import GenesisCh14Advanced from "./pages/bible-questions-and-answers-hub/genesis/ch14-advanced";
+import GenesisCh15Beginner from "./pages/bible-questions-and-answers-hub/genesis/ch15-beginner";
+import GenesisCh15Advanced from "./pages/bible-questions-and-answers-hub/genesis/ch15-advanced";
+import GenesisCh16Beginner from "./pages/bible-questions-and-answers-hub/genesis/ch16-beginner";
+import GenesisCh16Advanced from "./pages/bible-questions-and-answers-hub/genesis/ch16-advanced";
 import GenesisCh6Beginner from "./pages/bible-questions-and-answers-hub/genesis/ch6-beginner";
 import GenesisCh6Advanced from "./pages/bible-questions-and-answers-hub/genesis/ch6-advanced";
 import GenesisCh7Beginner from "./pages/bible-questions-and-answers-hub/genesis/ch7-beginner";
@@ -350,6 +358,14 @@ const App = () => {
             <Route path="/bible-questions-and-answers-hub/genesis/ch11-advanced" element={<GenesisCh11Advanced />} />
             <Route path="/bible-questions-and-answers-hub/genesis/ch12-beginner" element={<GenesisCh12Beginner />} />
             <Route path="/bible-questions-and-answers-hub/genesis/ch12-advanced" element={<GenesisCh12Advanced />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch13-beginner" element={<GenesisCh13Beginner />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch13-advanced" element={<GenesisCh13Advanced />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch14-beginner" element={<GenesisCh14Beginner />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch14-advanced" element={<GenesisCh14Advanced />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch15-beginner" element={<GenesisCh15Beginner />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch15-advanced" element={<GenesisCh15Advanced />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch16-beginner" element={<GenesisCh16Beginner />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch16-advanced" element={<GenesisCh16Advanced />} />
             <Route path="/bible-questions-and-answers-hub/exodus" element={<BibleQA />} />
             <Route path="/bible-questions-and-answers-hub/leviticus" element={<BibleQA />} />
             <Route path="/bible-questions-and-answers-hub/numbers" element={<BibleQA />} />
