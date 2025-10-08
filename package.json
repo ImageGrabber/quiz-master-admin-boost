@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/vercel-build.js",
+    "build": "node scripts/simple-seo-build.js",
     "build:dev": "vite build --mode development",
     "build:seo": "npm run generate-sitemap && vite build && npm run postbuild && npm run generate-static",
     "postbuild": "react-snap",
@@ -94,7 +94,6 @@
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1",
-    "vite-plugin-prerender": "^1.4.3"
+    "vite": "^5.4.1"
   }
 }
