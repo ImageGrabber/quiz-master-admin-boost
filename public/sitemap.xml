@@ -286,6 +286,76 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- Genesis Chapter Detail Pages -->
+  <url>
+    <loc>https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-1</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-2</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-3</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-4</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-5</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-6</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-7</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-8</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Genesis Full Chapter Pages -->
+  <url>
+    <loc>https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-1-full</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-2-full</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-3-full</loc>
+    <lastmod>2025-01-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Pentateuch (Genesis to Deuteronomy) - High Priority -->
   <url>
     <loc>https://biblequizcompetition.com/public-quiz/genesis</loc>
