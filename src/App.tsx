@@ -200,6 +200,8 @@ import GenesisChapter11Full from "./pages/bible-questions-and-answers-hub/genesi
 import GenesisChapter12Full from "./pages/bible-questions-and-answers-hub/genesis/chapter-12-full";
 import GenesisChapter13Full from "./pages/bible-questions-and-answers-hub/genesis/chapter-13-full";
 import GenesisChapter14Full from "./pages/bible-questions-and-answers-hub/genesis/chapter-14-full";
+import GenesisChapter15Full from "./pages/bible-questions-and-answers-hub/genesis/chapter-15-full";
+import GenesisChapter16Full from "./pages/bible-questions-and-answers-hub/genesis/chapter-16-full";
 import GenesisChapter9 from "./pages/bible-questions-and-answers-hub/genesis/chapter-9";
 import GenesisChapter10 from "./pages/bible-questions-and-answers-hub/genesis/chapter-10";
 import GenesisChapter11 from "./pages/bible-questions-and-answers-hub/genesis/chapter-11";
@@ -439,6 +441,8 @@ const App = () => {
             <Route path="/bible-questions-and-answers-hub/genesis/chapter-12-full" element={<GenesisChapter12Full />} />
             <Route path="/bible-questions-and-answers-hub/genesis/chapter-13-full" element={<GenesisChapter13Full />} />
             <Route path="/bible-questions-and-answers-hub/genesis/chapter-14-full" element={<GenesisChapter14Full />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/chapter-15-full" element={<GenesisChapter15Full />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/chapter-16-full" element={<GenesisChapter16Full />} />
             <Route path="/bible-questions-and-answers-hub/genesis/chapter-9" element={<GenesisChapter9 />} />
             <Route path="/bible-questions-and-answers-hub/genesis/chapter-10" element={<GenesisChapter10 />} />
             <Route path="/bible-questions-and-answers-hub/genesis/chapter-11" element={<GenesisChapter11 />} />
