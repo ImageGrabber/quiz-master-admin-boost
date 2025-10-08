@@ -5,48 +5,66 @@ import { BookOpen, ChevronRight, Home, ArrowLeft } from "lucide-react";
 import { Helmet } from 'react-helmet-async';
 import Header from "@/components/Header";
 
-export default function GenesisChapter5() {
+export default function GenesisChapter15() {
   const navigate = useNavigate();
 
   const chapterDetails = {
-    title: "Genesis Chapter 5",
-    subtitle: "Genealogy",
-    description: "The genealogy from Adam to Noah, showing the long lifespans and the line of Seth.",
+    title: "Genesis Chapter 15",
+    subtitle: "God's Covenant",
+    description: "God's covenant with Abram, the promise of descendants as numerous as the stars, and the covenant ceremony.",
     keyPoints: [
-      "Genealogy of Adam through Seth",
-      "Long lifespans; refrain 'and he died'",
-      "Enoch walks with God; Methuselah & Lamech; Noah named"
+      "God's promise to Abram; descendants as stars",
+      "Abram's faith counted as righteousness",
+      "Covenant ceremony; smoking fire pot and torch"
     ],
     detailedContent: [
       {
-        title: "Adam's Descendants",
-        description: "This is the book of the generations of Adam. When God created man, he made him in the likeness of God.",
-        verses: "Genesis 5:1-2",
-        verseText: "This is the book of the generations of Adam. When God created man, he made him in the likeness of God. Male and female he created them, and he blessed them and named them Man when they were created."
+        title: "God's Promise",
+        description: "The word of the Lord came to Abram in a vision, saying, 'Fear not, Abram, I am your shield; your reward shall be very great.'",
+        verses: "Genesis 15:1",
+        verseText: "After these things the word of the LORD came to Abram in a vision: 'Fear not, Abram, I am your shield; your reward shall be very great.'"
       },
       {
-        title: "Long Lifespans",
-        description: "The genealogy shows extraordinarily long lifespans, with Methuselah living 969 years, the longest recorded lifespan.",
-        verses: "Genesis 5:27",
-        verseText: "Thus all the days of Methuselah were 969 years, and he died."
+        title: "Abram's Concern",
+        description: "Abram said, 'O Lord GOD, what will you give me, for I continue childless, and the heir of my house is Eliezer of Damascus?'",
+        verses: "Genesis 15:2-3",
+        verseText: "But Abram said, 'O Lord GOD, what will you give me, for I continue childless, and the heir of my house is Eliezer of Damascus?' And Abram said, 'Behold, you have given me no offspring, and a member of my household will be my heir.'"
       },
       {
-        title: "Enoch's Translation",
-        description: "Enoch walked with God for 300 years and was not, for God took him, making him the only person in the genealogy who did not die.",
-        verses: "Genesis 5:24",
-        verseText: "Enoch walked with God, and he was not, for God took him."
+        title: "The Promise of Offspring",
+        description: "The Lord brought Abram outside and said, 'Look toward heaven, and number the stars, if you are able to number them.' Then he said, 'So shall your offspring be.'",
+        verses: "Genesis 15:4-5",
+        verseText: "And behold, the word of the LORD came to him: 'This man shall not be your heir; your very own son shall be your heir.' And he brought him outside and said, 'Look toward heaven, and number the stars, if you are able to number them.' Then he said to him, 'So shall your offspring be.'"
       },
       {
-        title: "The Refrain",
-        description: "Each entry ends with 'and he died,' except for Enoch, emphasizing the reality of death after the fall.",
-        verses: "Genesis 5:5, 8, 11, 14, 17, 20, 27, 31",
-        verseText: "And all the days that Adam lived were 930 years, and he died. And all the days of Seth were 912 years, and he died. And all the days of Enosh were 905 years, and he died. And all the days of Kenan were 910 years, and he died. And all the days of Mahalalel were 895 years, and he died. And all the days of Jared were 962 years, and he died. Thus all the days of Methuselah were 969 years, and he died. And all the days of Lamech were 777 years, and he died."
+        title: "Abram's Faith",
+        description: "Abram believed the Lord, and he counted it to him as righteousness.",
+        verses: "Genesis 15:6",
+        verseText: "And he believed the LORD, and he counted it to him as righteousness."
       },
       {
-        title: "Noah's Birth",
-        description: "Lamech named his son Noah, saying, 'Out of the ground that the Lord has cursed, this one shall bring us relief from our work.'",
-        verses: "Genesis 5:29",
-        verseText: "And he called his name Noah, saying, 'Out of the ground that the LORD has cursed, this one shall bring us relief from our work and from the painful toil of our hands.'"
+        title: "The Land Promise",
+        description: "The Lord said to Abram, 'I am the Lord who brought you out from Ur of the Chaldeans to give you this land to possess.'",
+        verses: "Genesis 15:7",
+        verseText: "And he said to him, 'I am the LORD who brought you out from Ur of the Chaldeans to give you this land to possess.'"
+      },
+      {
+        title: "The Covenant Ceremony",
+        description: "The Lord told Abram to bring a heifer, a female goat, a ram, a turtledove, and a young pigeon for a covenant ceremony.",
+        verses: "Genesis 15:9-10",
+        verseText: "He said to him, 'Bring me a heifer three years old, a female goat three years old, a ram three years old, a turtledove, and a young pigeon.' And he brought him all these, cut them in half, and laid each half over against the other. But he did not cut the birds in half."
+      },
+      {
+        title: "The Vision",
+        description: "As the sun was going down, a deep sleep fell on Abram, and behold, dreadful and great darkness fell upon him.",
+        verses: "Genesis 15:12",
+        verseText: "As the sun was going down, a deep sleep fell on Abram. And behold, dreadful and great darkness fell upon him."
+      },
+      {
+        title: "The Covenant Confirmed",
+        description: "When the sun had gone down and it was dark, behold, a smoking fire pot and a flaming torch passed between these pieces.",
+        verses: "Genesis 15:17",
+        verseText: "When the sun had gone down and it was dark, behold, a smoking fire pot and a flaming torch passed between these pieces."
       }
     ]
   };
@@ -54,21 +72,21 @@ export default function GenesisChapter5() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
       <Helmet>
-        <title>Genesis Chapter 5 - Genealogy | Bible Quiz Study Guide</title>
-        <meta name="description" content="Study Genesis Chapter 5 with detailed explanations about the genealogy from Adam to Noah. Learn about the long lifespans and the line of Seth." />
-        <meta name="keywords" content="Genesis Chapter 5, Genealogy, Bible study, Adam to Noah, Seth line, long lifespans, Bible quiz, Genesis study guide, Enoch translation" />
-        <meta property="og:title" content="Genesis Chapter 5 - Genealogy | Bible Quiz Study Guide" />
-        <meta property="og:description" content="Study Genesis Chapter 5 with detailed explanations about the genealogy from Adam to Noah. Learn about the long lifespans and the line of Seth." />
+        <title>Genesis Chapter 15 - God's Covenant | Bible Quiz Study Guide</title>
+        <meta name="description" content="Study Genesis Chapter 15 with detailed explanations about God's covenant with Abram, the promise of descendants, and the covenant ceremony." />
+        <meta name="keywords" content="Genesis Chapter 15, God's covenant, Bible study, Abram's faith, descendants promise, covenant ceremony, Bible quiz, Genesis study guide, righteousness" />
+        <meta property="og:title" content="Genesis Chapter 15 - God's Covenant | Bible Quiz Study Guide" />
+        <meta property="og:description" content="Study Genesis Chapter 15 with detailed explanations about God's covenant with Abram, the promise of descendants, and the covenant ceremony." />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-5" />
+        <meta property="og:url" content="https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-15" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Genesis Chapter 5 - Genealogy | Bible Quiz Study Guide" />
-        <meta name="twitter:description" content="Study Genesis Chapter 5 with detailed explanations about the genealogy from Adam to Noah. Learn about the long lifespans and the line of Seth." />
+        <meta name="twitter:title" content="Genesis Chapter 15 - God's Covenant | Bible Quiz Study Guide" />
+        <meta name="twitter:description" content="Study Genesis Chapter 15 with detailed explanations about God's covenant with Abram, the promise of descendants, and the covenant ceremony." />
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'Article',
-          headline: 'Genesis Chapter 5 - Genealogy',
-          description: 'Study Genesis Chapter 5 with detailed explanations about the genealogy from Adam to Noah. Learn about the long lifespans and the line of Seth.',
+          headline: 'Genesis Chapter 15 - God\'s Covenant',
+          description: 'Study Genesis Chapter 15 with detailed explanations about God\'s covenant with Abram, the promise of descendants, and the covenant ceremony.',
           author: {
             '@type': 'Organization',
             name: 'Bible Quiz Competition'
@@ -85,7 +103,7 @@ export default function GenesisChapter5() {
           dateModified: new Date().toISOString().split('T')[0],
           mainEntityOfPage: {
             '@type': 'WebPage',
-            '@id': 'https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-5'
+            '@id': 'https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-15'
           }
         })}</script>
       </Helmet>
@@ -114,7 +132,7 @@ export default function GenesisChapter5() {
                 Take Quiz
               </Button>
               <Button 
-                onClick={() => navigate("/bible-questions-and-answers-hub/genesis/chapter-5-full")}
+                onClick={() => navigate("/bible-questions-and-answers-hub/genesis/chapter-15-full")}
                 variant="outline"
                 className="border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg font-semibold shadow-lg"
               >
@@ -141,7 +159,7 @@ export default function GenesisChapter5() {
             Genesis
           </Button>
           <ChevronRight className="w-4 h-4 mx-1 text-gray-400" />
-          <span className="font-medium text-gray-900">Chapter 5</span>
+          <span className="font-medium text-gray-900">Chapter 15</span>
         </div>
 
         {/* Back Button */}
@@ -170,7 +188,7 @@ export default function GenesisChapter5() {
         </Card>
 
         {/* Detailed Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {chapterDetails.detailedContent.map((content, idx) => (
             <Card key={idx} className="hover:shadow-lg transition-shadow">
               <CardHeader>
@@ -188,27 +206,27 @@ export default function GenesisChapter5() {
         </div>
 
         {/* Quiz Section */}
-        <Card className="mb-8">
+        <Card id="quiz-section" className="mb-8">
           <CardHeader>
             <CardTitle className="text-xl">Take a Quiz</CardTitle>
-            <CardDescription>Test your knowledge of Genesis Chapter 5</CardDescription>
+            <CardDescription>Test your knowledge of Genesis Chapter 15</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/ch5-beginner")}>
+              <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/ch15-beginner")}>
                 <CardHeader>
                   <CardTitle className="text-lg text-green-600">Beginner Quiz</CardTitle>
-                  <CardDescription>10 basic questions about Genesis Chapter 5</CardDescription>
+                  <CardDescription>10 basic questions about Genesis Chapter 15</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Button className="w-full">Start Beginner Quiz</Button>
                 </CardContent>
               </Card>
               
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/ch5-advanced")}>
+              <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/ch15-advanced")}>
                 <CardHeader>
                   <CardTitle className="text-lg text-red-600">Advanced Quiz</CardTitle>
-                  <CardDescription>10 challenging questions about Genesis Chapter 5</CardDescription>
+                  <CardDescription>10 challenging questions about Genesis Chapter 15</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Button className="w-full">Start Advanced Quiz</Button>
