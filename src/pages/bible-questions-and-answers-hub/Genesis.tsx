@@ -44,12 +44,12 @@ export default function GenesisHub() {
     ],
     4: [
       "Cain and Abel offerings; murder and mark",
-      "City of Enoch; Lamech’s poem",
+      "City of Enoch; Lamech's poem",
       "Birth of Seth; people begin to call on the Lord",
     ],
     5: [
       "Genealogy of Adam through Seth",
-      "Long lifespans; refrain ‘and he died’",
+      "Long lifespans; refrain 'and he died'",
       "Enoch walks with God; Methuselah & Lamech; Noah named",
     ],
     6: [
@@ -66,6 +66,30 @@ export default function GenesisHub() {
       "Waters recede; ark rests; raven and dove sent out",
       "Altar built; pleasing aroma",
       "Covenant promise: never again a worldwide flood",
+    ],
+  };
+
+  // Detailed bullet points for chapters 13–16
+  const chapterPoints13to16: Record<number, string[]> = {
+    13: [
+      "Abram and Lot separate; Lot chooses Jordan plain",
+      "Abram settles at Hebron; builds altar",
+      "God renews promises to Abram",
+    ],
+    14: [
+      "War of the kings; Lot taken captive",
+      "Abram rescues Lot with 318 men",
+      "Melchizedek blesses Abram; tithe given",
+    ],
+    15: [
+      "God's covenant with Abram; stars promise",
+      "Abram's faith counted as righteousness",
+      "Covenant ceremony; future slavery foretold",
+    ],
+    16: [
+      "Sarai gives Hagar to Abram; Ishmael born",
+      "Hagar flees; angel meets her at spring",
+      "Promise of Ishmael's descendants",
     ],
   };
   return (
@@ -94,6 +118,7 @@ export default function GenesisHub() {
               <a href="#difficulty" className="px-3 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold shadow">Difficulty</a>
               <a href="#ranges" className="px-3 py-2 rounded-lg bg-purple-600 text-white text-sm font-semibold shadow">Ranges</a>
               <a href="#chapters" className="px-3 py-2 rounded-lg bg-emerald-600 text-white text-sm font-semibold shadow">Chapters</a>
+              <a href="#chapters-13-16" className="px-3 py-2 rounded-lg bg-orange-600 text-white text-sm font-semibold shadow">Ch 13-16</a>
               <a href="#types" className="px-3 py-2 rounded-lg bg-rose-600 text-white text-sm font-semibold shadow">Types</a>
             </div>
           </div>
@@ -344,13 +369,13 @@ export default function GenesisHub() {
                 <CardContent>
                   <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-2">
                     {ch === 9 && (<>
-                      <li>God’s covenant with Noah</li>
+                      <li>God's covenant with Noah</li>
                       <li>Rainbow sign; no eating blood</li>
-                      <li>Noah’s sons and Canaan</li>
+                      <li>Noah's sons and Canaan</li>
                     </>)}
                     {ch === 10 && (<>
                       <li>Table of Nations</li>
-                      <li>Nimrod’s kingdom beginnings</li>
+                      <li>Nimrod's kingdom beginnings</li>
                       <li>Peoples spread after the flood</li>
                     </>)}
                     {ch === 11 && (<>
@@ -364,6 +389,37 @@ export default function GenesisHub() {
                       <li>Sojourn in Egypt</li>
                     </>)}
                   </ul>
+                </CardContent>
+                <CardContent className="mt-auto">
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm" className="flex-1" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/ch${ch}-beginner`)}>Beginner</Button>
+                    <Button size="sm" className="flex-1" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/ch${ch}-advanced`)}>Advanced</Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Per-Chapter quick access (13–16) */}
+        <section id="chapters-13-16" className="mt-10 scroll-mt-24">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-xl font-semibold text-gray-900">By Chapter (13–16)</h3>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            {[13,14,15,16].map((ch) => (
+              <Card key={ch} className="p-3 flex flex-col h-full">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg">Chapter {ch}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {chapterPoints13to16[ch] && (
+                    <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-2">
+                      {chapterPoints13to16[ch].map((point, idx) => (
+                        <li key={idx}>{point}</li>
+                      ))}
+                    </ul>
+                  )}
                 </CardContent>
                 <CardContent className="mt-auto">
                   <div className="flex gap-2">
