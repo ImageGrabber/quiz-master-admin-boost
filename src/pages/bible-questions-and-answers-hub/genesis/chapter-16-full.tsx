@@ -215,3 +215,4 @@ export default function GenesisChapter16Full() {
     </div>
   );
 }
+
