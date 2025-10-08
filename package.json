@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/simple-seo-build.js",
+    "build": "node scripts/robust-seo-build.js",
     "build:dev": "vite build --mode development",
-    "build:seo": "npm run generate-sitemap && vite build && npm run postbuild && npm run generate-static",
-    "postbuild": "react-snap",
+    "build:seo": "npm run generate-sitemap && vite build && npm run postbuild || npm run generate-static",
+    "postbuild": "react-snap || echo 'react-snap failed, continuing with static generation'",
     "generate-static": "node scripts/generate-static-pages.js",
     "generate-sitemap": "node scripts/generate-sitemap.js",
     "lint": "eslint .",
