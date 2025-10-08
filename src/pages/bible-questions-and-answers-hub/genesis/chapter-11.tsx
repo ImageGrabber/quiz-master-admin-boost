@@ -5,48 +5,36 @@ import { BookOpen, ChevronRight, Home, ArrowLeft } from "lucide-react";
 import { Helmet } from 'react-helmet-async';
 import Header from "@/components/Header";
 
-export default function GenesisChapter5() {
+export default function GenesisChapter11() {
   const navigate = useNavigate();
 
   const chapterDetails = {
-    title: "Genesis Chapter 5",
-    subtitle: "Genealogy",
-    description: "The genealogy from Adam to Noah, showing the long lifespans and the line of Seth.",
+    title: "Genesis Chapter 11",
+    subtitle: "Tower of Babel",
+    description: "The account of the Tower of Babel, the confusion of languages, and the genealogy from Shem to Abram.",
     keyPoints: [
-      "Genealogy of Adam through Seth",
-      "Long lifespans; refrain 'and he died'",
-      "Enoch walks with God; Methuselah & Lamech; Noah named"
+      "Tower of Babel; language confusion",
+      "Shem's genealogy to Terah",
+      "Terah's family; Abram, Nahor, Haran"
     ],
     detailedContent: [
       {
-        title: "Adam's Descendants",
-        description: "This is the book of the generations of Adam. When God created man, he made him in the likeness of God.",
-        verses: "Genesis 5:1-2",
-        verseText: "This is the book of the generations of Adam. When God created man, he made him in the likeness of God. Male and female he created them, and he blessed them and named them Man when they were created."
+        title: "The Tower of Babel",
+        description: "The people built a tower to make a name for themselves, but God confused their language and scattered them.",
+        verses: "Genesis 11:1-9",
+        verseText: "Now the whole earth had one language and the same words. And as people migrated from the east, they found a plain in the land of Shinar and settled there. And they said to one another, 'Come, let us make bricks, and burn them thoroughly.' And they had brick for stone, and bitumen for mortar. Then they said, 'Come, let us build ourselves a city and a tower with its top in the heavens, and let us make a name for ourselves, lest we be dispersed over the face of the whole earth.' And the LORD came down to see the city and the tower, which the children of man had built. And the LORD said, 'Behold, they are one people, and they have all one language, and this is only the beginning of what they will do. And nothing that they propose to do will now be impossible for them. Come, let us go down and there confuse their language, so that they may not understand one another's speech.' So the LORD dispersed them from there over the face of all the earth, and they left off building the city. Therefore its name was called Babel, because there the LORD confused the language of all the earth. And from there the LORD dispersed them over the face of all the earth."
       },
       {
-        title: "Long Lifespans",
-        description: "The genealogy shows extraordinarily long lifespans, with Methuselah living 969 years, the longest recorded lifespan.",
-        verses: "Genesis 5:27",
-        verseText: "Thus all the days of Methuselah were 969 years, and he died."
+        title: "Shem's Genealogy",
+        description: "The genealogy from Shem to Terah, showing the line that would lead to Abram.",
+        verses: "Genesis 11:10-26",
+        verseText: "These are the generations of Shem. When Shem was 100 years old, he fathered Arpachshad two years after the flood. And Shem lived after he fathered Arpachshad 500 years and had other sons and daughters. When Arpachshad had lived 35 years, he fathered Shelah. And Arpachshad lived after he fathered Shelah 403 years and had other sons and daughters. When Shelah had lived 30 years, he fathered Eber. And Shelah lived after he fathered Eber 403 years and had other sons and daughters. When Eber had lived 34 years, he fathered Peleg. And Eber lived after he fathered Peleg 430 years and had other sons and daughters. When Peleg had lived 30 years, he fathered Reu. And Peleg lived after he fathered Reu 209 years and had other sons and daughters. When Reu had lived 32 years, he fathered Serug. And Reu lived after he fathered Serug 207 years and had other sons and daughters. When Serug had lived 30 years, he fathered Nahor. And Serug lived after he fathered Nahor 200 years and had other sons and daughters. When Nahor had lived 29 years, he fathered Terah. And Nahor lived after he fathered Terah 119 years and had other sons and daughters. When Terah had lived 70 years, he fathered Abram, Nahor, and Haran."
       },
       {
-        title: "Enoch's Translation",
-        description: "Enoch walked with God for 300 years and was not, for God took him, making him the only person in the genealogy who did not die.",
-        verses: "Genesis 5:24",
-        verseText: "Enoch walked with God, and he was not, for God took him."
-      },
-      {
-        title: "The Refrain",
-        description: "Each entry ends with 'and he died,' except for Enoch, emphasizing the reality of death after the fall.",
-        verses: "Genesis 5:5, 8, 11, 14, 17, 20, 27, 31",
-        verseText: "And all the days that Adam lived were 930 years, and he died. And all the days of Seth were 912 years, and he died. And all the days of Enosh were 905 years, and he died. And all the days of Kenan were 910 years, and he died. And all the days of Mahalalel were 895 years, and he died. And all the days of Jared were 962 years, and he died. Thus all the days of Methuselah were 969 years, and he died. And all the days of Lamech were 777 years, and he died."
-      },
-      {
-        title: "Noah's Birth",
-        description: "Lamech named his son Noah, saying, 'Out of the ground that the Lord has cursed, this one shall bring us relief from our work.'",
-        verses: "Genesis 5:29",
-        verseText: "And he called his name Noah, saying, 'Out of the ground that the LORD has cursed, this one shall bring us relief from our work and from the painful toil of our hands.'"
+        title: "Terah's Family",
+        description: "Terah's family and their journey from Ur to Haran, setting the stage for Abram's call.",
+        verses: "Genesis 11:27-32",
+        verseText: "Now these are the generations of Terah. Terah fathered Abram, Nahor, and Haran; and Haran fathered Lot. Haran died in the presence of his father Terah in the land of his kindred, in Ur of the Chaldeans. And Abram and Nahor took wives. The name of Abram's wife was Sarai, and the name of Nahor's wife, Milcah, the daughter of Haran the father of Milcah and Iscah. Now Sarai was barren; she had no child. Terah took Abram his son and Lot the son of Haran, his grandson, and Sarai his daughter-in-law, his son Abram's wife, and they went forth together from Ur of the Chaldeans to go into the land of Canaan, but when they came to Haran, they settled there. The days of Terah were 205 years, and Terah died in Haran."
       }
     ]
   };
@@ -54,21 +42,21 @@ export default function GenesisChapter5() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
       <Helmet>
-        <title>Genesis Chapter 5 - Genealogy | Bible Quiz Study Guide</title>
-        <meta name="description" content="Study Genesis Chapter 5 with detailed explanations about the genealogy from Adam to Noah. Learn about the long lifespans and the line of Seth." />
-        <meta name="keywords" content="Genesis Chapter 5, Genealogy, Bible study, Adam to Noah, Seth line, long lifespans, Bible quiz, Genesis study guide, Enoch translation" />
-        <meta property="og:title" content="Genesis Chapter 5 - Genealogy | Bible Quiz Study Guide" />
-        <meta property="og:description" content="Study Genesis Chapter 5 with detailed explanations about the genealogy from Adam to Noah. Learn about the long lifespans and the line of Seth." />
+        <title>Genesis Chapter 11 - Tower of Babel | Bible Quiz Study Guide</title>
+        <meta name="description" content="Study Genesis Chapter 11 with detailed explanations about the Tower of Babel, the confusion of languages, and the genealogy from Shem to Abram." />
+        <meta name="keywords" content="Genesis Chapter 11, Tower of Babel, Bible study, language confusion, Shem genealogy, Terah family, Bible quiz, Genesis study guide, Abram's ancestors" />
+        <meta property="og:title" content="Genesis Chapter 11 - Tower of Babel | Bible Quiz Study Guide" />
+        <meta property="og:description" content="Study Genesis Chapter 11 with detailed explanations about the Tower of Babel, the confusion of languages, and the genealogy from Shem to Abram." />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-5" />
+        <meta property="og:url" content="https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-11" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Genesis Chapter 5 - Genealogy | Bible Quiz Study Guide" />
-        <meta name="twitter:description" content="Study Genesis Chapter 5 with detailed explanations about the genealogy from Adam to Noah. Learn about the long lifespans and the line of Seth." />
+        <meta name="twitter:title" content="Genesis Chapter 11 - Tower of Babel | Bible Quiz Study Guide" />
+        <meta name="twitter:description" content="Study Genesis Chapter 11 with detailed explanations about the Tower of Babel, the confusion of languages, and the genealogy from Shem to Abram." />
         <script type="application/ld+json">{JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'Article',
-          headline: 'Genesis Chapter 5 - Genealogy',
-          description: 'Study Genesis Chapter 5 with detailed explanations about the genealogy from Adam to Noah. Learn about the long lifespans and the line of Seth.',
+          headline: 'Genesis Chapter 11 - Tower of Babel',
+          description: 'Study Genesis Chapter 11 with detailed explanations about the Tower of Babel, the confusion of languages, and the genealogy from Shem to Abram.',
           author: {
             '@type': 'Organization',
             name: 'Bible Quiz Competition'
@@ -85,7 +73,7 @@ export default function GenesisChapter5() {
           dateModified: new Date().toISOString().split('T')[0],
           mainEntityOfPage: {
             '@type': 'WebPage',
-            '@id': 'https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-5'
+            '@id': 'https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-11'
           }
         })}</script>
       </Helmet>
@@ -114,7 +102,7 @@ export default function GenesisChapter5() {
                 Take Quiz
               </Button>
               <Button 
-                onClick={() => navigate("/bible-questions-and-answers-hub/genesis/chapter-5-full")}
+                onClick={() => navigate("/bible-questions-and-answers-hub/genesis/chapter-11-full")}
                 variant="outline"
                 className="border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg font-semibold shadow-lg"
               >
@@ -141,7 +129,7 @@ export default function GenesisChapter5() {
             Genesis
           </Button>
           <ChevronRight className="w-4 h-4 mx-1 text-gray-400" />
-          <span className="font-medium text-gray-900">Chapter 5</span>
+          <span className="font-medium text-gray-900">Chapter 11</span>
         </div>
 
         {/* Back Button */}
@@ -170,7 +158,7 @@ export default function GenesisChapter5() {
         </Card>
 
         {/* Detailed Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {chapterDetails.detailedContent.map((content, idx) => (
             <Card key={idx} className="hover:shadow-lg transition-shadow">
               <CardHeader>
@@ -188,27 +176,27 @@ export default function GenesisChapter5() {
         </div>
 
         {/* Quiz Section */}
-        <Card className="mb-8">
+        <Card id="quiz-section" className="mb-8">
           <CardHeader>
             <CardTitle className="text-xl">Take a Quiz</CardTitle>
-            <CardDescription>Test your knowledge of Genesis Chapter 5</CardDescription>
+            <CardDescription>Test your knowledge of Genesis Chapter 11</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/ch5-beginner")}>
+              <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/ch11-beginner")}>
                 <CardHeader>
                   <CardTitle className="text-lg text-green-600">Beginner Quiz</CardTitle>
-                  <CardDescription>10 basic questions about Genesis Chapter 5</CardDescription>
+                  <CardDescription>10 basic questions about Genesis Chapter 11</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Button className="w-full">Start Beginner Quiz</Button>
                 </CardContent>
               </Card>
               
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/ch5-advanced")}>
+              <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/ch11-advanced")}>
                 <CardHeader>
                   <CardTitle className="text-lg text-red-600">Advanced Quiz</CardTitle>
-                  <CardDescription>10 challenging questions about Genesis Chapter 5</CardDescription>
+                  <CardDescription>10 challenging questions about Genesis Chapter 11</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Button className="w-full">Start Advanced Quiz</Button>

@@ -69,6 +69,30 @@ export default function GenesisHub() {
     ],
   };
 
+  // Detailed bullet points for chapters 9–12
+  const chapterPoints9to12: Record<number, string[]> = {
+    9: [
+      "Noah plants vineyard; gets drunk",
+      "Ham sees father's nakedness; cursed",
+      "Shem and Japheth blessed; Canaan cursed",
+    ],
+    10: [
+      "Table of Nations; Japheth's descendants",
+      "Ham's descendants; Canaan's sons",
+      "Shem's descendants; Eber's line",
+    ],
+    11: [
+      "Tower of Babel; language confusion",
+      "Shem's genealogy to Terah",
+      "Terah's family; Abram, Nahor, Haran",
+    ],
+    12: [
+      "God calls Abram; leaves Haran",
+      "Abram in Canaan; builds altars",
+      "Famine; goes to Egypt; Sarai taken",
+    ],
+  };
+
   // Detailed bullet points for chapters 13–16
   const chapterPoints13to16: Record<number, string[]> = {
     13: [
@@ -116,6 +140,29 @@ export default function GenesisHub() {
       "Abraham prays; Abimelech healed",
     ],
   };
+
+  // Full text content for Genesis Chapter 5
+  const chapter5FullText = `Adam's Descendants to Noah
+
+5 This is the book of the generations of Adam. When God created man, he made him in the likeness of God. 2 Male and female he created them, and he blessed them and named them Man[a] when they were created. 3 When Adam had lived 130 years, he fathered a son in his own likeness, after his image, and named him Seth. 4 The days of Adam after he fathered Seth were 800 years; and he had other sons and daughters. 5 Thus all the days that Adam lived were 930 years, and he died.
+
+6 When Seth had lived 105 years, he fathered Enosh. 7 Seth lived after he fathered Enosh 807 years and had other sons and daughters. 8 Thus all the days of Seth were 912 years, and he died.
+
+9 When Enosh had lived 90 years, he fathered Kenan. 10 Enosh lived after he fathered Kenan 815 years and had other sons and daughters. 11 Thus all the days of Enosh were 905 years, and he died.
+
+12 When Kenan had lived 70 years, he fathered Mahalalel. 13 Kenan lived after he fathered Mahalalel 840 years and had other sons and daughters. 14 Thus all the days of Kenan were 910 years, and he died.
+
+15 When Mahalalel had lived 65 years, he fathered Jared. 16 Mahalalel lived after he fathered Jared 830 years and had other sons and daughters. 17 Thus all the days of Mahalalel were 895 years, and he died.
+
+18 When Jared had lived 162 years, he fathered Enoch. 19 Jared lived after he fathered Enoch 800 years and had other sons and daughters. 20 Thus all the days of Jared were 962 years, and he died.
+
+21 When Enoch had lived 65 years, he fathered Methuselah. 22 Enoch walked with God[b] after he fathered Methuselah 300 years and had other sons and daughters. 23 Thus all the days of Enoch were 365 years. 24 Enoch walked with God, and he was not,[c] for God took him.
+
+25 When Methuselah had lived 187 years, he fathered Lamech. 26 Methuselah lived after he fathered Lamech 782 years and had other sons and daughters. 27 Thus all the days of Methuselah were 969 years, and he died.
+
+28 When Lamech had lived 182 years, he fathered a son 29 and called his name Noah, saying, "Out of the ground that the Lord has cursed, this one shall bring us relief[d] from our work and from the painful toil of our hands." 30 Lamech lived after he fathered Noah 595 years and had other sons and daughters. 31 Thus all the days of Lamech were 777 years, and he died.
+
+32 After Noah was 500 years old, Noah fathered Shem, Ham, and Japheth.`;
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
       <Header />
@@ -141,11 +188,12 @@ export default function GenesisHub() {
             <div className="flex gap-2 overflow-x-auto">
               <a href="#difficulty" className="px-3 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold shadow">Difficulty</a>
               <a href="#ranges" className="px-3 py-2 rounded-lg bg-purple-600 text-white text-sm font-semibold shadow">Ranges</a>
-              <a href="#chapters" className="px-3 py-2 rounded-lg bg-emerald-600 text-white text-sm font-semibold shadow">Chapters</a>
+              {/* <a href="#chapters" className="px-3 py-2 rounded-lg bg-emerald-600 text-white text-sm font-semibold shadow">Chapters</a> */}
               <a href="#genesis-chapter-wise" className="px-3 py-2 rounded-lg bg-indigo-600 text-white text-sm font-semibold shadow">Chapter Wise</a>
-              <a href="#chapters-13-16" className="px-3 py-2 rounded-lg bg-orange-600 text-white text-sm font-semibold shadow">Ch 13-16</a>
-              <a href="#chapters-17-20" className="px-3 py-2 rounded-lg bg-teal-600 text-white text-sm font-semibold shadow">Ch 17-20</a>
+              <a href="#chapters-13-16" className="px-3 py-2 rounded-lg bg-orange-600 text-white text-sm font-semibold shadow" style={{display: 'none'}}>Ch 13-16</a>
+              <a href="#chapters-17-20" className="px-3 py-2 rounded-lg bg-teal-600 text-white text-sm font-semibold shadow" style={{display: 'none'}}>Ch 17-20</a>
               <a href="#types" className="px-3 py-2 rounded-lg bg-rose-600 text-white text-sm font-semibold shadow">Types</a>
+              <a href="#genesis-chapter-5-text" className="px-3 py-2 rounded-lg bg-amber-600 text-white text-sm font-semibold shadow">Ch 5 Text</a>
             </div>
           </div>
         </div>
@@ -345,7 +393,7 @@ export default function GenesisHub() {
             </Card>
           </div>
           {/* Per-Chapter quick access (1–5) */}
-          <div id="chapters" className="mt-10 scroll-mt-24">
+          <div id="chapters" className="mt-10 scroll-mt-24" style={{display: 'none'}}>
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-xl font-semibold text-gray-900">By Chapter (1–8)</h3>
               <div className="flex items-center gap-2 text-sm">
@@ -382,7 +430,7 @@ export default function GenesisHub() {
         </section>
 
         {/* Per-Chapter quick access (9–12) */}
-        <section id="chapters-9-12" className="mt-10 scroll-mt-24">
+        <section id="chapters-9-12" className="mt-10 scroll-mt-24" style={{display: 'none'}}>
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-xl font-semibold text-gray-900">By Chapter (9–12)</h3>
           </div>
@@ -428,7 +476,7 @@ export default function GenesisHub() {
         </section>
 
         {/* Per-Chapter quick access (13–16) */}
-        <section id="chapters-13-16" className="mt-10 scroll-mt-24">
+        <section id="chapters-13-16" className="mt-10 scroll-mt-24" style={{display: 'none'}}>
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-xl font-semibold text-gray-900">By Chapter (13–16)</h3>
           </div>
@@ -459,7 +507,7 @@ export default function GenesisHub() {
         </section>
 
         {/* Per-Chapter quick access (17–20) */}
-        <section id="chapters-17-20" className="mt-10 scroll-mt-24">
+        <section id="chapters-17-20" className="mt-10 scroll-mt-24" style={{display: 'none'}}>
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-xl font-semibold text-gray-900">By Chapter (17–20)</h3>
           </div>
@@ -495,39 +543,65 @@ export default function GenesisHub() {
             <h3 className="text-xl font-semibold text-gray-900">Genesis Quiz Chapter Wise</h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {[1,2,3,4,5,6,7,8].map((ch) => (
-              <Card key={ch} className="p-4 flex flex-col h-full hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/chapter-${ch}`)}>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-lg text-blue-600">Chapter {ch}</CardTitle>
-                  <CardDescription className="text-sm text-gray-600">
-                    {ch === 1 && "Creation & Sabbath"}
-                    {ch === 2 && "Garden of Eden"}
-                    {ch === 3 && "The Fall"}
-                    {ch === 4 && "Cain & Abel"}
-                    {ch === 5 && "Genealogy"}
-                    {ch === 6 && "Noah & the Flood"}
-                    {ch === 7 && "The Flood"}
-                    {ch === 8 && "After the Flood"}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  {chapterPoints[ch] && (
-                    <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-3">
-                      {chapterPoints[ch].map((point, idx) => (
-                        <li key={idx}>{point}</li>
-                      ))}
-                    </ul>
-                  )}
-                </CardContent>
-                <CardContent className="mt-auto pt-3 border-t border-gray-100">
-                  <div className="text-center">
-                    <Button variant="outline" size="sm" className="w-full" onClick={(e) => { e.stopPropagation(); navigate(`/bible-questions-and-answers-hub/genesis/chapter-${ch}`); }}>
-                      View Chapter Details
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+            {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20].map((ch) => {
+              // Get the appropriate chapter points based on chapter number
+              let currentChapterPoints = null;
+              if (ch >= 1 && ch <= 8) {
+                currentChapterPoints = chapterPoints[ch];
+              } else if (ch >= 9 && ch <= 12) {
+                currentChapterPoints = chapterPoints9to12[ch];
+              } else if (ch >= 13 && ch <= 16) {
+                currentChapterPoints = chapterPoints13to16[ch];
+              } else if (ch >= 17 && ch <= 20) {
+                currentChapterPoints = chapterPoints17to20[ch];
+              }
+
+              return (
+                <Card key={ch} className="p-4 flex flex-col h-full hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/chapter-${ch}`)}>
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg text-blue-600">Chapter {ch}</CardTitle>
+                    <CardDescription className="text-sm text-gray-600">
+                      {ch === 1 && "Creation & Sabbath"}
+                      {ch === 2 && "Garden of Eden"}
+                      {ch === 3 && "The Fall"}
+                      {ch === 4 && "Cain & Abel"}
+                      {ch === 5 && "Genealogy"}
+                      {ch === 6 && "Noah & the Flood"}
+                      {ch === 7 && "The Flood"}
+                      {ch === 8 && "After the Flood"}
+                      {ch === 9 && "Noah's Drunkenness"}
+                      {ch === 10 && "Table of Nations"}
+                      {ch === 11 && "Tower of Babel"}
+                      {ch === 12 && "Abram's Call"}
+                      {ch === 13 && "Abram & Lot Separate"}
+                      {ch === 14 && "War of the Kings"}
+                      {ch === 15 && "God's Covenant"}
+                      {ch === 16 && "Hagar & Ishmael"}
+                      {ch === 17 && "Covenant of Circumcision"}
+                      {ch === 18 && "Three Visitors"}
+                      {ch === 19 && "Sodom's Destruction"}
+                      {ch === 20 && "Abraham in Gerar"}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex-1">
+                    {currentChapterPoints && (
+                      <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-3">
+                        {currentChapterPoints.map((point, idx) => (
+                          <li key={idx}>{point}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </CardContent>
+                  <CardContent className="mt-auto pt-3 border-t border-gray-100">
+                    <div className="text-center">
+                      <Button variant="outline" size="sm" className="w-full" onClick={(e) => { e.stopPropagation(); navigate(`/bible-questions-and-answers-hub/genesis/chapter-${ch}`); }}>
+                        View Chapter Details
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </section>
 
@@ -567,6 +641,27 @@ export default function GenesisHub() {
               <CardContent className="pt-0 text-sm text-gray-700">Strengthen associations—match names with events, places, and symbols found in Genesis.</CardContent>
             </Card>
           </div>
+        </section>
+
+        {/* Genesis Chapter 5 Full Text */}
+        <section id="genesis-chapter-5-text" className="mt-12 scroll-mt-24">
+          <div className="flex items-center gap-2 mb-4">
+            <BookOpen className="w-5 h-5 text-indigo-600" />
+            <h2 className="text-2xl font-semibold text-gray-900">Genesis Chapter 5 - Full Text</h2>
+          </div>
+          <Card className="bg-white shadow-lg">
+            <CardHeader>
+              <CardTitle className="text-xl text-indigo-700">Adam's Descendants to Noah</CardTitle>
+              <CardDescription>Complete text of Genesis Chapter 5</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="prose prose-lg max-w-none">
+                <pre className="whitespace-pre-wrap font-serif text-gray-800 leading-relaxed text-sm">
+                  {chapter5FullText}
+                </pre>
+              </div>
+            </CardContent>
+          </Card>
         </section>
       </div>
 

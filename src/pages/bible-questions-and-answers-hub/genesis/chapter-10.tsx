@@ -2,56 +2,81 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { BookOpen, ChevronRight, Home, ArrowLeft } from "lucide-react";
+import { Helmet } from 'react-helmet-async';
 import Header from "@/components/Header";
 
-export default function GenesisChapter6() {
+export default function GenesisChapter10() {
   const navigate = useNavigate();
 
   const chapterDetails = {
-    title: "Genesis Chapter 6",
-    subtitle: "Noah & the Flood",
-    description: "The corruption of humanity, God's decision to send the flood, and Noah's preparation.",
+    title: "Genesis Chapter 10",
+    subtitle: "Table of Nations",
+    description: "The genealogy of Noah's sons and their descendants, showing the spread of nations after the flood.",
     keyPoints: [
-      "Human wickedness; violence fills the earth",
-      "Nephilim mentioned; God resolves to send the flood",
-      "Noah finds favor; ark instructions and dimensions"
+      "Table of Nations; Japheth's descendants",
+      "Ham's descendants; Canaan's sons",
+      "Shem's descendants; Eber's line"
     ],
     detailedContent: [
       {
-        title: "The Corruption",
-        description: "The Lord saw that the wickedness of man was great in the earth, and that every intention of the thoughts of his heart was only evil continually.",
-        verses: "Genesis 6:5",
-        verseText: "The LORD saw that the wickedness of man was great in the earth, and that every intention of the thoughts of his heart was only evil continually."
+        title: "Japheth's Descendants",
+        description: "The sons of Japheth and their descendants, who settled in the northern regions and coastlands.",
+        verses: "Genesis 10:2-5",
+        verseText: "The sons of Japheth: Gomer, Magog, Madai, Javan, Tubal, Meshech, and Tiras. The sons of Gomer: Ashkenaz, Riphath, and Togarmah. The sons of Javan: Elishah, Tarshish, Kittim, and Dodanim. From these the coastland peoples spread in their lands, each with his own language, by their clans, in their nations."
       },
       {
-        title: "The Nephilim",
-        description: "The sons of God came in to the daughters of man, and they bore children to them. These were the mighty men who were of old, the men of renown.",
-        verses: "Genesis 6:4",
-        verseText: "The Nephilim were on the earth in those days, and also afterward, when the sons of God came in to the daughters of man and they bore children to them. These were the mighty men who were of old, the men of renown."
+        title: "Ham's Descendants",
+        description: "The sons of Ham and their descendants, including the Canaanites and other peoples who settled in various regions.",
+        verses: "Genesis 10:6-20",
+        verseText: "The sons of Ham: Cush, Egypt, Put, and Canaan. The sons of Cush: Seba, Havilah, Sabtah, Raamah, and Sabteca. The sons of Raamah: Sheba and Dedan. Cush fathered Nimrod; he was the first on earth to be a mighty man. He was a mighty hunter before the LORD. Therefore it is said, 'Like Nimrod a mighty hunter before the LORD.' The beginning of his kingdom was Babel, Erech, Accad, and Calneh, in the land of Shinar."
       },
       {
-        title: "God's Grief",
-        description: "The Lord regretted that he had made man on the earth, and it grieved him to his heart.",
-        verses: "Genesis 6:6",
-        verseText: "And the LORD regretted that he had made man on the earth, and it grieved him to his heart."
-      },
-      {
-        title: "Noah's Favor",
-        description: "But Noah found favor in the eyes of the Lord. Noah was a righteous man, blameless in his generation. Noah walked with God.",
-        verses: "Genesis 6:8-9",
-        verseText: "But Noah found favor in the eyes of the LORD. These are the generations of Noah. Noah was a righteous man, blameless in his generation. Noah walked with God."
-      },
-      {
-        title: "The Ark Instructions",
-        description: "God gave Noah detailed instructions to build an ark of gopher wood, with specific dimensions and rooms for the animals.",
-        verses: "Genesis 6:14-16",
-        verseText: "Make yourself an ark of gopher wood. Make rooms in the ark, and cover it inside and out with pitch. This is how you are to make it: the length of the ark 300 cubits, its breadth 50 cubits, and its height 30 cubits. Make a roof for the ark, and finish it to a cubit above, and set the door of the ark in its side. Make it with lower, second, and third decks."
+        title: "Shem's Descendants",
+        description: "The sons of Shem and their descendants, including Eber, from whom the Hebrews would descend.",
+        verses: "Genesis 10:21-32",
+        verseText: "To Shem also, the father of all the children of Eber, the elder brother of Japheth, children were born. The sons of Shem: Elam, Asshur, Arpachshad, Lud, and Aram. The sons of Aram: Uz, Hul, Gether, and Mash. Arpachshad fathered Shelah, and Shelah fathered Eber. To Eber were born two sons: the name of the one was Peleg, for in his days the earth was divided, and his brother's name was Joktan."
       }
     ]
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
+      <Helmet>
+        <title>Genesis Chapter 10 - Table of Nations | Bible Quiz Study Guide</title>
+        <meta name="description" content="Study Genesis Chapter 10 with detailed explanations about the Table of Nations, the descendants of Japheth, Ham, and Shem. Learn about the spread of nations after the flood." />
+        <meta name="keywords" content="Genesis Chapter 10, Table of Nations, Bible study, Japheth descendants, Ham descendants, Shem descendants, Bible quiz, Genesis study guide, Noah's sons" />
+        <meta property="og:title" content="Genesis Chapter 10 - Table of Nations | Bible Quiz Study Guide" />
+        <meta property="og:description" content="Study Genesis Chapter 10 with detailed explanations about the Table of Nations, the descendants of Japheth, Ham, and Shem. Learn about the spread of nations after the flood." />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-10" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Genesis Chapter 10 - Table of Nations | Bible Quiz Study Guide" />
+        <meta name="twitter:description" content="Study Genesis Chapter 10 with detailed explanations about the Table of Nations, the descendants of Japheth, Ham, and Shem. Learn about the spread of nations after the flood." />
+        <script type="application/ld+json">{JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: 'Genesis Chapter 10 - Table of Nations',
+          description: 'Study Genesis Chapter 10 with detailed explanations about the Table of Nations, the descendants of Japheth, Ham, and Shem. Learn about the spread of nations after the flood.',
+          author: {
+            '@type': 'Organization',
+            name: 'Bible Quiz Competition'
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: 'Bible Quiz Competition',
+            logo: {
+              '@type': 'ImageObject',
+              url: 'https://biblequizcompetition.com/sword.png'
+            }
+          },
+          datePublished: '2024-01-01',
+          dateModified: new Date().toISOString().split('T')[0],
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': 'https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-10'
+          }
+        })}</script>
+      </Helmet>
       <Header />
       
       {/* Hero Section */}
@@ -77,7 +102,7 @@ export default function GenesisChapter6() {
                 Take Quiz
               </Button>
               <Button 
-                onClick={() => navigate("/bible-questions-and-answers-hub/genesis/chapter-6-full")}
+                onClick={() => navigate("/bible-questions-and-answers-hub/genesis/chapter-10-full")}
                 variant="outline"
                 className="border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg font-semibold shadow-lg"
               >
@@ -104,7 +129,7 @@ export default function GenesisChapter6() {
             Genesis
           </Button>
           <ChevronRight className="w-4 h-4 mx-1 text-gray-400" />
-          <span className="font-medium text-gray-900">Chapter 6</span>
+          <span className="font-medium text-gray-900">Chapter 10</span>
         </div>
 
         {/* Back Button */}
@@ -133,7 +158,7 @@ export default function GenesisChapter6() {
         </Card>
 
         {/* Detailed Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {chapterDetails.detailedContent.map((content, idx) => (
             <Card key={idx} className="hover:shadow-lg transition-shadow">
               <CardHeader>
@@ -151,27 +176,27 @@ export default function GenesisChapter6() {
         </div>
 
         {/* Quiz Section */}
-        <Card className="mb-8">
+        <Card id="quiz-section" className="mb-8">
           <CardHeader>
             <CardTitle className="text-xl">Take a Quiz</CardTitle>
-            <CardDescription>Test your knowledge of Genesis Chapter 6</CardDescription>
+            <CardDescription>Test your knowledge of Genesis Chapter 10</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/ch6-beginner")}>
+              <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/ch10-beginner")}>
                 <CardHeader>
                   <CardTitle className="text-lg text-green-600">Beginner Quiz</CardTitle>
-                  <CardDescription>10 basic questions about Genesis Chapter 6</CardDescription>
+                  <CardDescription>10 basic questions about Genesis Chapter 10</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Button className="w-full">Start Beginner Quiz</Button>
                 </CardContent>
               </Card>
               
-              <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/ch6-advanced")}>
+              <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/ch10-advanced")}>
                 <CardHeader>
                   <CardTitle className="text-lg text-red-600">Advanced Quiz</CardTitle>
-                  <CardDescription>10 challenging questions about Genesis Chapter 6</CardDescription>
+                  <CardDescription>10 challenging questions about Genesis Chapter 10</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Button className="w-full">Start Advanced Quiz</Button>
