@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Clock, Brain, CheckCircle, AlertTriangle, Trophy, Home } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
+import SocialShare from "@/components/SocialShare";
 
 interface Question {
   id: number;
@@ -123,7 +124,7 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
         <Header />
         <div className="container mx-auto px-4 py-8">
-          <Card className="max-w-4xl mx-auto shadow-2xl border-0">
+          <Card className="max-w-6xl mx-auto shadow-2xl border-0">
             <CardHeader className="text-center bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-t-xl">
               <CardTitle className="text-3xl font-bold">Quiz Complete!</CardTitle>
             </CardHeader>
@@ -189,6 +190,21 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
                 })}
               </div>
 
+              {/* Social Share Section for Quiz Results */}
+              <div className="mb-8">
+                <SocialShare
+                  url={`https://biblequizcompetition.com/public-quiz/${bookName.toLowerCase()}`}
+                  title={`I scored ${score}% on the ${bookName} Bible Quiz!`}
+                  description={`I just took the ${bookName} Bible quiz and scored ${score}%! Test your knowledge too with this free interactive Bible quiz.`}
+                  variant="inline"
+                  showTitle={true}
+                  showDescription={true}
+                  showUrl={false}
+                  platforms={["facebook", "twitter", "linkedin", "whatsapp", "email"]}
+                  className="mb-6"
+                />
+              </div>
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   size="lg" 
@@ -227,7 +243,7 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
         <Header />
         <div className="container mx-auto px-4 py-8">
-          <Card className="max-w-2xl mx-auto shadow-2xl border-0">
+          <Card className="max-w-4xl mx-auto shadow-2xl border-0">
             <CardContent className="p-8 text-center">
               <AlertTriangle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
               <h2 className="text-2xl font-bold text-gray-900 mb-4">No Questions Available</h2>
@@ -301,7 +317,7 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
       </Helmet>
       <Header />
       <div className="container mx-auto px-4 py-8">
-        <Card className="max-w-4xl mx-auto shadow-2xl border-0">
+        <Card className="max-w-6xl mx-auto shadow-2xl border-0">
           <CardHeader className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-t-xl">
             <div className="flex items-center justify-between">
               <div>
@@ -336,6 +352,21 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
                 <span className="bg-blue-100 px-2 py-1 rounded">10 Minutes</span>
                 <span className="bg-blue-100 px-2 py-1 rounded">No Registration Required</span>
               </div>
+            </div>
+
+            {/* Social Share Section */}
+            <div className="mb-8">
+              <SocialShare
+                url={`https://biblequizcompetition.com/public-quiz/${bookName.toLowerCase()}`}
+                title={`${title} - Free Bible Quiz`}
+                description={`Test your knowledge of ${bookName} with this free interactive Bible quiz. ${questions.length} questions to challenge your understanding.`}
+                variant="card"
+                showTitle={true}
+                showDescription={true}
+                showUrl={false}
+                platforms={["facebook", "twitter", "linkedin", "whatsapp", "email"]}
+                className="mb-6"
+              />
             </div>
             
             <div className="mb-8">
@@ -374,7 +405,7 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
         </Card>
         
         {/* SEO-friendly footer content */}
-        <div className="mt-8 max-w-4xl mx-auto">
+        <div className="mt-8 max-w-6xl mx-auto">
           <Card className="shadow-lg border-0">
             <CardContent className="p-6">
               <h3 className="text-xl font-bold text-gray-900 mb-4">About This {bookName} Quiz</h3>
