@@ -92,6 +92,30 @@ export default function GenesisHub() {
       "Promise of Ishmael's descendants",
     ],
   };
+
+  // Detailed bullet points for chapters 17–20
+  const chapterPoints17to20: Record<number, string[]> = {
+    17: [
+      "Covenant of circumcision; Abram becomes Abraham",
+      "Sarai becomes Sarah; Isaac promised",
+      "Ishmael blessed; covenant established",
+    ],
+    18: [
+      "Three visitors at Mamre; Sarah laughs",
+      "Abraham intercedes for Sodom",
+      "Bargaining for righteous people",
+    ],
+    19: [
+      "Angels visit Lot; Sodom's destruction",
+      "Lot's wife becomes pillar of salt",
+      "Lot and daughters in Zoar",
+    ],
+    20: [
+      "Abraham in Gerar; Sarah taken",
+      "Abimelech's dream; God's warning",
+      "Abraham prays; Abimelech healed",
+    ],
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
       <Header />
@@ -118,7 +142,9 @@ export default function GenesisHub() {
               <a href="#difficulty" className="px-3 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold shadow">Difficulty</a>
               <a href="#ranges" className="px-3 py-2 rounded-lg bg-purple-600 text-white text-sm font-semibold shadow">Ranges</a>
               <a href="#chapters" className="px-3 py-2 rounded-lg bg-emerald-600 text-white text-sm font-semibold shadow">Chapters</a>
+              <a href="#genesis-chapter-wise" className="px-3 py-2 rounded-lg bg-indigo-600 text-white text-sm font-semibold shadow">Chapter Wise</a>
               <a href="#chapters-13-16" className="px-3 py-2 rounded-lg bg-orange-600 text-white text-sm font-semibold shadow">Ch 13-16</a>
+              <a href="#chapters-17-20" className="px-3 py-2 rounded-lg bg-teal-600 text-white text-sm font-semibold shadow">Ch 17-20</a>
               <a href="#types" className="px-3 py-2 rounded-lg bg-rose-600 text-white text-sm font-semibold shadow">Types</a>
             </div>
           </div>
@@ -425,6 +451,79 @@ export default function GenesisHub() {
                   <div className="flex gap-2">
                     <Button variant="outline" size="sm" className="flex-1" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/ch${ch}-beginner`)}>Beginner</Button>
                     <Button size="sm" className="flex-1" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/ch${ch}-advanced`)}>Advanced</Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Per-Chapter quick access (17–20) */}
+        <section id="chapters-17-20" className="mt-10 scroll-mt-24">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-xl font-semibold text-gray-900">By Chapter (17–20)</h3>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            {[17,18,19,20].map((ch) => (
+              <Card key={ch} className="p-3 flex flex-col h-full">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg">Chapter {ch}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {chapterPoints17to20[ch] && (
+                    <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-2">
+                      {chapterPoints17to20[ch].map((point, idx) => (
+                        <li key={idx}>{point}</li>
+                      ))}
+                    </ul>
+                  )}
+                </CardContent>
+                <CardContent className="mt-auto">
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm" className="flex-1" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/ch${ch}-beginner`)}>Beginner</Button>
+                    <Button size="sm" className="flex-1" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/ch${ch}-advanced`)}>Advanced</Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Genesis Quiz Chapter Wise */}
+        <section id="genesis-chapter-wise" className="mt-10 scroll-mt-24">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-xl font-semibold text-gray-900">Genesis Quiz Chapter Wise</h3>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            {[1,2,3,4,5,6,7,8].map((ch) => (
+              <Card key={ch} className="p-4 flex flex-col h-full hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/chapter-${ch}`)}>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-lg text-blue-600">Chapter {ch}</CardTitle>
+                  <CardDescription className="text-sm text-gray-600">
+                    {ch === 1 && "Creation & Sabbath"}
+                    {ch === 2 && "Garden of Eden"}
+                    {ch === 3 && "The Fall"}
+                    {ch === 4 && "Cain & Abel"}
+                    {ch === 5 && "Genealogy"}
+                    {ch === 6 && "Noah & the Flood"}
+                    {ch === 7 && "The Flood"}
+                    {ch === 8 && "After the Flood"}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="flex-1">
+                  {chapterPoints[ch] && (
+                    <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-3">
+                      {chapterPoints[ch].map((point, idx) => (
+                        <li key={idx}>{point}</li>
+                      ))}
+                    </ul>
+                  )}
+                </CardContent>
+                <CardContent className="mt-auto pt-3 border-t border-gray-100">
+                  <div className="text-center">
+                    <Button variant="outline" size="sm" className="w-full" onClick={(e) => { e.stopPropagation(); navigate(`/bible-questions-and-answers-hub/genesis/chapter-${ch}`); }}>
+                      View Chapter Details
+                    </Button>
                   </div>
                 </CardContent>
               </Card>

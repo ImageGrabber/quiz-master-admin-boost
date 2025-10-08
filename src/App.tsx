@@ -170,6 +170,22 @@ import GenesisCh15Beginner from "./pages/bible-questions-and-answers-hub/genesis
 import GenesisCh15Advanced from "./pages/bible-questions-and-answers-hub/genesis/ch15-advanced";
 import GenesisCh16Beginner from "./pages/bible-questions-and-answers-hub/genesis/ch16-beginner";
 import GenesisCh16Advanced from "./pages/bible-questions-and-answers-hub/genesis/ch16-advanced";
+import GenesisCh17Beginner from "./pages/bible-questions-and-answers-hub/genesis/ch17-beginner";
+import GenesisCh17Advanced from "./pages/bible-questions-and-answers-hub/genesis/ch17-advanced";
+import GenesisCh18Beginner from "./pages/bible-questions-and-answers-hub/genesis/ch18-beginner";
+import GenesisCh18Advanced from "./pages/bible-questions-and-answers-hub/genesis/ch18-advanced";
+import GenesisCh19Beginner from "./pages/bible-questions-and-answers-hub/genesis/ch19-beginner";
+import GenesisCh19Advanced from "./pages/bible-questions-and-answers-hub/genesis/ch19-advanced";
+import GenesisCh20Beginner from "./pages/bible-questions-and-answers-hub/genesis/ch20-beginner";
+import GenesisCh20Advanced from "./pages/bible-questions-and-answers-hub/genesis/ch20-advanced";
+import GenesisChapter1 from "./pages/bible-questions-and-answers-hub/genesis/chapter-1";
+import GenesisChapter2 from "./pages/bible-questions-and-answers-hub/genesis/chapter-2";
+import GenesisChapter3 from "./pages/bible-questions-and-answers-hub/genesis/chapter-3";
+import GenesisChapter4 from "./pages/bible-questions-and-answers-hub/genesis/chapter-4";
+import GenesisChapter5 from "./pages/bible-questions-and-answers-hub/genesis/chapter-5";
+import GenesisChapter6 from "./pages/bible-questions-and-answers-hub/genesis/chapter-6";
+import GenesisChapter7 from "./pages/bible-questions-and-answers-hub/genesis/chapter-7";
+import GenesisChapter8 from "./pages/bible-questions-and-answers-hub/genesis/chapter-8";
 import GenesisCh6Beginner from "./pages/bible-questions-and-answers-hub/genesis/ch6-beginner";
 import GenesisCh6Advanced from "./pages/bible-questions-and-answers-hub/genesis/ch6-advanced";
 import GenesisCh7Beginner from "./pages/bible-questions-and-answers-hub/genesis/ch7-beginner";
@@ -366,6 +382,23 @@ const App = () => {
             <Route path="/bible-questions-and-answers-hub/genesis/ch15-advanced" element={<GenesisCh15Advanced />} />
             <Route path="/bible-questions-and-answers-hub/genesis/ch16-beginner" element={<GenesisCh16Beginner />} />
             <Route path="/bible-questions-and-answers-hub/genesis/ch16-advanced" element={<GenesisCh16Advanced />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch17-beginner" element={<GenesisCh17Beginner />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch17-advanced" element={<GenesisCh17Advanced />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch18-beginner" element={<GenesisCh18Beginner />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch18-advanced" element={<GenesisCh18Advanced />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch19-beginner" element={<GenesisCh19Beginner />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch19-advanced" element={<GenesisCh19Advanced />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch20-beginner" element={<GenesisCh20Beginner />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/ch20-advanced" element={<GenesisCh20Advanced />} />
+            {/* Genesis Chapter Detail Pages */}
+            <Route path="/bible-questions-and-answers-hub/genesis/chapter-1" element={<GenesisChapter1 />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/chapter-2" element={<GenesisChapter2 />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/chapter-3" element={<GenesisChapter3 />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/chapter-4" element={<GenesisChapter4 />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/chapter-5" element={<GenesisChapter5 />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/chapter-6" element={<GenesisChapter6 />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/chapter-7" element={<GenesisChapter7 />} />
+            <Route path="/bible-questions-and-answers-hub/genesis/chapter-8" element={<GenesisChapter8 />} />
             <Route path="/bible-questions-and-answers-hub/exodus" element={<BibleQA />} />
             <Route path="/bible-questions-and-answers-hub/leviticus" element={<BibleQA />} />
             <Route path="/bible-questions-and-answers-hub/numbers" element={<BibleQA />} />
