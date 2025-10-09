@@ -95,42 +95,89 @@
           script.onload = function() {
             console.log('✅ OneSignal SDK loaded successfully from:', cdnSources[currentIndex]);
             
-            // Initialize OneSignal
-            window.OneSignal = window.OneSignal || [];
-            OneSignal.push(function() {
+            // Initialize OneSignal with proper error handling
+            try {
               console.log('🚀 OneSignal SDK ready, initializing...');
               
-              OneSignal.init({
-                appId: "ca7cdcf3-827e-4370-99ee-946690bf535a",
-                promptOptions: {
-                  slidedown: {
-                    enabled: true,
-                    autoPrompt: true,
-                    timeDelay: 0,
-                    pageViews: 1,
-                    actionMessage: "We'd like to show you notifications for the latest updates.",
-                    acceptButton: "Allow",
-                    cancelButton: "No Thanks"
-                  }
-                }
-              });
-              
-              console.log('✅ OneSignal initialized successfully');
-              
-              // Check permission and show prompt
-              OneSignal.getNotificationPermission().then(function(permission) {
-                console.log('🔔 Permission status:', permission);
-                
-                OneSignal.getUserId().then(function(userId) {
-                  console.log('👤 User ID:', userId);
+              // Wait a bit for OneSignal to be fully ready
+              setTimeout(function() {
+                try {
+                  OneSignal.init({
+                    appId: "ca7cdcf3-827e-4370-99ee-946690bf535a",
+                    promptOptions: {
+                      slidedown: {
+                        enabled: true,
+                        autoPrompt: true,
+                        timeDelay: 0,
+                        pageViews: 1,
+                        actionMessage: "We'd like to show you notifications for the latest updates.",
+                        acceptButton: "Allow",
+                        cancelButton: "No Thanks"
+                      }
+                    }
+                  });
                   
-                  if (!userId && permission === 'default') {
-                    console.log('📱 Showing prompt...');
-                    OneSignal.showNativePrompt();
-                  }
-                });
-              });
-            });
+                  console.log('✅ OneSignal initialized successfully');
+                  
+                  // Check permission and show prompt after initialization
+                  setTimeout(function() {
+                    OneSignal.getNotificationPermission().then(function(permission) {
+                      console.log('🔔 Permission status:', permission);
+                      
+                      OneSignal.getUserId().then(function(userId) {
+                        console.log('👤 User ID:', userId);
+                        
+                        if (!userId && permission === 'default') {
+                          console.log('📱 Showing prompt...');
+                          OneSignal.showNativePrompt().then(function() {
+                            console.log('✅ Native prompt shown');
+                          }).catch(function(error) {
+                            console.error('❌ Native prompt error:', error);
+                            // Try alternative methods
+                            if (window.Notification && window.Notification.permission === 'default') {
+                              console.log('🔄 Trying browser Notification API directly...');
+                              window.Notification.requestPermission().then(function(result) {
+                                console.log('🔔 Browser permission result:', result);
+                              });
+                            }
+                          });
+                        } else if (permission === 'granted') {
+                          console.log('✅ Notifications already granted');
+                        } else {
+                          console.log('ℹ️ Permission status:', permission);
+                        }
+                      });
+                    });
+                  }, 1000);
+                  
+                  // Also try to force prompt after a longer delay
+                  setTimeout(function() {
+                    if (window.Notification && window.Notification.permission === 'default') {
+                      console.log('🔄 Force showing browser permission prompt...');
+                      window.Notification.requestPermission().then(function(permission) {
+                        console.log('🔔 Force permission result:', permission);
+                        if (permission === 'granted') {
+                          // Show a test notification
+                          new Notification('Notifications Enabled!', {
+                            body: 'You will now receive notifications from this site.',
+                            icon: '/favicon.ico'
+                          });
+                        }
+                      });
+                    }
+                  }, 3000);
+                  
+                } catch (initError) {
+                  console.error('❌ OneSignal init error:', initError);
+                  // Fall back to native notifications
+                  setupNativeNotifications();
+                }
+              }, 500);
+              
+            } catch (error) {
+              console.error('❌ OneSignal setup error:', error);
+              setupNativeNotifications();
+            }
           };
           
           script.onerror = function() {
