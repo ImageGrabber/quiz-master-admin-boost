@@ -592,9 +592,9 @@ const Index = () => {
               )}
               {/* Guest complete dialog is handled globally below */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold rounded shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/login")}> <Play className="w-5 h-5 mr-2" /> Start Quiz Now <ArrowRight className="w-5 h-5 ml-2" /> </Button>
-                <Button variant="outline" size="lg" className="px-8 py-6 text-lg font-medium border-2 border-grey-200 hover:border-transparent rounded bg-white/60 backdrop-blur-md hover:text-white hover:bg-black" onClick={() => navigate('/host-live-bible-quizzes-with-confidence')}> <Play className="w-5 h-5 mr-2" /> Host a Live Quiz</Button>
-                <Button variant="outline" size="lg" className="px-8 py-6 text-lg font-medium border-2 border-blue-200 hover:border-transparent rounded bg-white/60 backdrop-blur-md hover:text-white hover:bg-blue-600" onClick={() => navigate('/bible-questions-and-answers-hub')}> <Book className="w-5 h-5 mr-2" /> Bible Q&A Hub</Button>
+                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold rounded shadow-lg hover:shadow-xl transition-all duration-300 border-0" onClick={() => navigate("/auth/login")}> <Play className="w-5 h-5 mr-2" /> Start Quiz Now <ArrowRight className="w-5 h-5 ml-2" /> </Button>
+                <Button size="lg" className="px-8 py-6 text-lg font-medium rounded bg-green-500 hover:bg-green-600 text-white transition-all duration-300 border-0" onClick={() => navigate('/host-live-bible-quizzes-with-confidence')}> <Play className="w-5 h-5 mr-2" /> Host a Live Quiz</Button>
+                <Button size="lg" className="px-8 py-6 text-lg font-medium rounded bg-orange-500 hover:bg-orange-600 text-white transition-all duration-300 border-0" onClick={() => navigate('/bible-questions-and-answers-hub')}> <Book className="w-5 h-5 mr-2" /> Bible Q&A Hub</Button>
               </div>
               
             </div>
