@@ -81,12 +81,6 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       current: location.pathname === "/admin/upload"
     },
     {
-      name: "Push Notifications",
-      href: "/admin/push-notifications",
-      icon: Bell,
-      current: location.pathname === "/admin/push-notifications"
-    },
-    {
       name: "Realtime Health Check",
       href: "/live-quiz/health-check",
       icon: Activity,
