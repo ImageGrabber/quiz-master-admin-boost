@@ -63,6 +63,21 @@
         await OneSignal.init({
           appId: "ca7cdcf3-827e-4370-99ee-946690bf535a",
         });
+        
+        // Debug: Log OneSignal status
+        console.log('OneSignal initialized:', OneSignal);
+        
+        // Check if user is already subscribed
+        OneSignal.getUserId().then(function(userId) {
+          console.log('OneSignal User ID:', userId);
+          if (!userId) {
+            console.log('User not subscribed, showing prompt...');
+            // Show the permission prompt
+            OneSignal.showNativePrompt();
+          } else {
+            console.log('User already subscribed');
+          }
+        });
       });
     </script>
   </head>
