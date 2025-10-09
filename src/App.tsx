@@ -7,6 +7,14 @@ import { HelmetProvider } from "react-helmet-async";
 import DefaultSEO from "@/components/DefaultSEO";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ChatWidget from "@/components/ChatWidget";
+import GlobalNotificationRequest from "@/components/GlobalNotificationRequest";
+import AutoNotificationRequest from "@/components/AutoNotificationRequest";
+import NotificationBanner from "@/components/NotificationBanner";
+import SimplePushNotificationSetup from "@/components/SimplePushNotificationSetup";
+import MobileNotificationBanner from "@/components/MobileNotificationBanner";
+import NotificationErrorBoundary from "@/components/NotificationErrorBoundary";
+import VapidTest from "@/components/VapidTest";
+import PushNotificationTest from "@/components/PushNotificationTest";
 import { Analytics } from "@vercel/analytics/next"
 import Index from "./pages/Index";
 import Login from "./pages/auth/Login";
@@ -42,12 +50,14 @@ import AdminActivity from "./pages/admin/Activity";
 import AdminCompetitions from "./pages/admin/Competitions";
 import AdminUsers from "./pages/admin/Users";
 import AdminUserSettings from "./pages/admin/UserSettings";
+import PushNotificationsAdmin from "./pages/admin/PushNotifications";
 import NotFound from "./pages/NotFound";
 import RLSTest from "./pages/RLSTest";
 import BibleQA from "./pages/BibleQA";
 import BibleStudy from "./pages/BibleStudy";
 import PaulineEpistles from "./pages/bible-questions-and-answers-hub/pauline-epistles";
 import PublicLeaderboard from "./pages/PublicLeaderboard";
+import Challenge from "./pages/Challenge";
 import Articles from "./pages/Articles";
 import ArticleDetail from "./pages/ArticleDetail";
 import GenesisPublicQuiz from "./pages/public-quizzes/GenesisPublicQuiz";
@@ -239,6 +249,15 @@ const App = () => {
           <BrowserRouter>
           <PageViewTracker />
           <ChatWidget />
+          <NotificationErrorBoundary>
+            <SimplePushNotificationSetup />
+          </NotificationErrorBoundary>
+              <NotificationErrorBoundary>
+                <MobileNotificationBanner />
+              </NotificationErrorBoundary>
+          {/* Temporarily disabled to fix blank screen */}
+          {/* <VapidTest /> */}
+          {/* <PushNotificationTest /> */}
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth/login" element={<Login />} />
@@ -260,6 +279,8 @@ const App = () => {
             <Route path="/live-quiz/host/:quizId" element={<LiveQuizHost />} />
             <Route path="/live-quiz/join/:sessionCode" element={<LiveQuizParticipant />} />
             <Route path="/live-quiz/health-check" element={<ProtectedRoute requiredRole="admin"><LiveQuizHealthCheck /></ProtectedRoute>} />
+            <Route path="/challenge" element={<ProtectedRoute><Challenge /></ProtectedRoute>} />
+            <Route path="/challenge/:challengeSessionId" element={<ProtectedRoute><Challenge /></ProtectedRoute>} />
             <Route path="/dashboard/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
             <Route path="/dashboard/upgrade" element={<ProtectedRoute><Upgrade /></ProtectedRoute>} />
             <Route path="/dashboard/recent-attempts" element={<ProtectedRoute><RecentAttempts /></ProtectedRoute>} />
@@ -343,6 +364,7 @@ const App = () => {
             <Route path="/admin/competitions" element={<ProtectedRoute requiredRole="admin"><AdminCompetitions /></ProtectedRoute>} />
             <Route path="/admin/users" element={<ProtectedRoute requiredRole="admin"><AdminUsers /></ProtectedRoute>} />
             <Route path="/admin/users/:id" element={<ProtectedRoute requiredRole="admin"><AdminUserSettings /></ProtectedRoute>} />
+            <Route path="/admin/push-notifications" element={<ProtectedRoute requiredRole="admin"><PushNotificationsAdmin /></ProtectedRoute>} />
             <Route path="/admin/page-views" element={<ProtectedRoute requiredRole="admin"><PageViews /></ProtectedRoute>} />
             <Route path="/rls-test" element={<ProtectedRoute requiredRole="admin"><RLSTest /></ProtectedRoute>} />
             <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />

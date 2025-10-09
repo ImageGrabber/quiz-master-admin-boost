@@ -325,14 +325,18 @@ const Dashboard = () => {
         .from('competitions')
         .select(`
           *,
-          quiz:quizzes(id, title, description),
           entries_count:competition_entries(count),
           competition_entries(user_id, paid)
         `)
         .order('start_date', { ascending: true })
         .limit(3);
 
-      if (error) throw error;
+      if (error) {
+        console.warn('Competitions query error (non-critical):', error);
+        // Don't throw error, just return empty array
+        setCompetitions([]);
+        return;
+      }
 
       // Map competitions to include user_has_entered and user_payment_status
       const competitionsWithDetails = (data || []).map((competition: any) => {
@@ -347,12 +351,9 @@ const Dashboard = () => {
 
       setCompetitions(competitionsWithDetails);
     } catch (error: any) {
-      console.error('Error fetching competitions:', error);
-      toast({
-        title: "Error",
-        description: `Failed to fetch competitions: ${error?.message || error}`,
-        variant: "destructive",
-      });
+      console.warn('Competitions fetch error (non-critical):', error);
+      // Silently handle the error without showing toast
+      setCompetitions([]);
     }
   };
 
@@ -565,6 +566,39 @@ const Dashboard = () => {
                   <Button className="flex-1" onClick={() => navigate('/dashboard/quizzes')}>
                     Create Quiz
                   </Button>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Challenge System */}
+        <Card className="shadow-xl border-0 bg-white/70 backdrop-blur rounded-2xl">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Trophy className="w-5 h-5 text-orange-600" />
+              Challenge Players
+            </CardTitle>
+            <CardDescription>Challenge other online players to quiz battles</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 rounded-xl border bg-gradient-to-r from-orange-50 to-red-50">
+                <div className="text-sm text-gray-700 mb-2">Ready for a challenge?</div>
+                <div className="flex gap-2">
+                  <Button className="flex-1" onClick={() => navigate('/challenge')}>
+                    <Trophy className="w-4 h-4 mr-2" />
+                    Challenge Center
+                  </Button>
+                </div>
+                <div className="text-xs text-gray-500 mt-2">Find online players and start quiz battles</div>
+              </div>
+              <div className="p-4 rounded-xl border bg-white/80">
+                <div className="text-sm text-gray-700 mb-2">Quick Stats</div>
+                <div className="text-xs text-gray-500">
+                  • Real-time player matching<br/>
+                  • Head-to-head quiz battles<br/>
+                  • Live scoring and rankings
                 </div>
               </div>
             </div>
