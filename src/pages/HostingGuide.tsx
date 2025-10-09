@@ -54,6 +54,7 @@ const HostingGuide = () => {
                 <p className="mt-2 text-white/90 max-w-2xl">Create a quiz, share an 8‑character code, and lead a smooth, engaging event. This guide covers everything from setup to results.</p>
                 <div className="mt-4 flex gap-2">
                   <Button className="bg-white text-indigo-700 hover:bg-white/90" onClick={() => navigate('/dashboard/quizzes')}>Create a Quiz</Button>
+                  <Button className="bg-white/20 text-white hover:bg-white/30 border border-white/30" onClick={() => document.getElementById('guest-mode-section')?.scrollIntoView({ behavior: 'smooth' })}>Guest Mode</Button>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3 text-sm">
@@ -73,8 +74,9 @@ const HostingGuide = () => {
 
           {/* Quick Actions Full-Width */}
           <div className="rounded-3xl bg-white/70 backdrop-blur border border-white/60 shadow p-6 md:p-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
               <Button size="lg" onClick={() => navigate('/dashboard/quizzes')} className="h-12 md:h-14 text-base md:text-lg bg-gradient-to-r from-indigo-600 to-purple-600 text-white">Create a Quiz</Button>
+              <Button size="lg" onClick={() => document.getElementById('guest-mode-section')?.scrollIntoView({ behavior: 'smooth' })} className="h-12 md:h-14 text-base md:text-lg bg-gradient-to-r from-green-600 to-emerald-600 text-white">Guest Mode Quiz</Button>
               <Button size="lg" onClick={() => navigate('/live-quiz')} variant="outline" className="h-12 md:h-14 text-base md:text-lg">Host Live Now</Button>
               <Button size="lg" onClick={() => navigate('/articles')} variant="outline" className="h-12 md:h-14 text-base md:text-lg">Read Best Practices</Button>
             </div>
@@ -204,6 +206,59 @@ const HostingGuide = () => {
               </CardContent>
             </Card>
           </div>
+
+          {/* Guest Mode Feature */}
+          <Card id="guest-mode-section" className="bg-white/70 backdrop-blur border border-white/60 shadow rounded-2xl">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-2xl">
+                <Users className="w-6 h-6 text-green-600" />
+                Guest Mode: No Login Required
+              </CardTitle>
+              <p className="text-gray-600">Perfect for public events, classrooms, and quick sessions where participants don't need accounts.</p>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="font-semibold text-lg mb-3 text-green-700">How Guest Mode Works</h3>
+                  <ul className="list-disc pl-5 space-y-2 text-gray-800">
+                    <li>Participants join with just their display name</li>
+                    <li>No account creation or login required</li>
+                    <li>Perfect for one-time events and public sessions</li>
+                    <li>Results are still tracked and scored automatically</li>
+                    <li>Host can see all participant names and scores</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-3 text-green-700">When to Use Guest Mode</h3>
+                  <ul className="list-disc pl-5 space-y-2 text-gray-800">
+                    <li>Church services and youth groups</li>
+                    <li>Classroom activities and workshops</li>
+                    <li>Public events and conferences</li>
+                    <li>Quick team building sessions</li>
+                    <li>One-time Bible study groups</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-green-800 mb-2">Quick Start with Guest Mode</h4>
+                    <p className="text-green-700 text-sm mb-3">Create a quiz in guest mode and start hosting immediately. Participants just need to enter the join code and their name.</p>
+                    <Button 
+                      onClick={() => navigate('/create-quiz/guest')} 
+                      className="bg-green-600 hover:bg-green-700 text-white"
+                    >
+                      Create Guest Mode Quiz
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
           {/* Playbooks (Expandable) & FAQ */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
