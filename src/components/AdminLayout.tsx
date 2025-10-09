@@ -17,7 +17,8 @@ import {
   Activity,
   Trophy,
   Shield,
-  Mail
+  Mail,
+  Bell
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -78,6 +79,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       href: "/admin/upload",
       icon: Upload,
       current: location.pathname === "/admin/upload"
+    },
+    {
+      name: "Push Notifications",
+      href: "/admin/push-notifications",
+      icon: Bell,
+      current: location.pathname === "/admin/push-notifications"
     },
     {
       name: "Realtime Health Check",
