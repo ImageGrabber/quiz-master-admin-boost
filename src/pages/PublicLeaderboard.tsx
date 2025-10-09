@@ -42,9 +42,19 @@ export default function PublicLeaderboard() {
     try {
       setLoading(true);
       
-      // Mock data with 150 globally diverse names from all continents
+      // Fetch real users from the database (SAME as leaderboard pages)
+      const { data: realUsers, error: realUsersError } = await supabase
+        .from('profiles')
+        .select('id, full_name, email')
+        .not('full_name', 'is', null)
+        .limit(20);
+
+      if (realUsersError) {
+        console.error('Error fetching real users:', realUsersError);
+      }
+
+      // Mock data with diverse names for additional entries (SAME as leaderboard pages)
       const mockNames = [
-        // North America (USA, Canada)
         "Sarah Johnson", "Michael Chen", "Emily Rodriguez", "David Kim", "Jessica Williams",
         "Christopher Brown", "Amanda Davis", "Matthew Wilson", "Ashley Martinez", "Daniel Anderson",
         "Samantha Taylor", "Ryan Garcia", "Nicole Miller", "Kevin Jones", "Rachel White",
@@ -55,118 +65,90 @@ export default function PublicLeaderboard() {
         "Connor Collins", "Alexis Stewart", "Noah Sanchez", "Paige Morris", "Lucas Rogers",
         "Jenna Reed", "Mason Cook", "Brooke Bailey", "Logan Murphy", "Chloe Rivera",
         "Hunter Cooper", "Madison Richardson", "Jackson Cox", "Abigail Howard", "Liam Ward",
-        // Canadian names
-        "Jean-Pierre Dubois", "Marie-Claire Tremblay", "Ahmed Hassan", "Fatima Al-Zahra", "James Wilson",
-        "Jennifer Brown", "Michael Brown", "David Lee", "Sarah Thompson", "Robert MacLeod",
-        // UK & Ireland
         "Oliver Thompson", "Charlotte Williams", "Harry Smith", "Amelia Jones", "George Brown",
         "Isabella Taylor", "William Davies", "Sophie Wilson", "James Murphy", "Emily O'Connor",
         "Jack Kelly", "Grace O'Brien", "Liam Murphy", "Emma Walsh", "Noah O'Sullivan",
-        // European names
         "Elena Petrov", "Dmitri Volkov", "Anna Schmidt", "Klaus Mueller", "Ingrid Bergman",
         "Alessandro Rossi", "Giulia Bianchi", "Marco Ferrari", "Sofia Romano", "Luca Conti",
         "Pierre Dubois", "Marie Martin", "Hans Weber", "Greta Mueller", "Lars Andersen",
-        "Olga Kowalski", "Pavel Novak", "Zofia Nowak", "Jan Kowalski", "Anna Kowalski",
-        "François Leroy", "Camille Rousseau", "Lars Johansson", "Astrid Lindgren", "Björn Eriksson",
-        // African names
         "Kwame Asante", "Aisha Okafor", "Tendai Moyo", "Fatou Diallo", "Kofi Mensah",
         "Zara Nkomo", "Amara Okonkwo", "Tunde Adebayo", "Nia Mbeki", "Jabari Kone",
-        "Zahara Mwangi", "Kwaku Boateng", "Adunni Adebayo", "Tariq Hassan", "Nomsa Dlamini",
-        // Middle Eastern names
         "Ahmed Al-Rashid", "Fatima Hassan", "Omar Khalil", "Layla Ibrahim", "Hassan Ali",
         "Yasmin Al-Zahra", "Tariq Al-Mahmoud", "Nour Al-Din", "Rania Khalil", "Karim Al-Hassan",
-        // Asian names (East & Southeast Asia)
         "Wei Zhang", "Yuki Tanaka", "Mei Lin", "Hiroshi Sato", "Chen Wei",
         "Takeshi Yamamoto", "Li Wei", "Kenji Nakamura", "Zhang Ming", "Sakura Suzuki",
-        "Hiroko Kimura", "Taro Watanabe", "Yuki Nakamura", "Tomohiro Sato", "Yusuke Tanaka",
-        "Hye-jin Kim", "Min-jun Park", "So-young Lee", "Jae-ho Choi", "Eun-ji Kim",
-        "Mei Chen", "Wei Liu", "Li Wang", "Ming Zhang", "Jing Li",
-        // Indian subcontinent
         "Priya Sharma", "Raj Patel", "Arjun Singh", "Vikram Kumar", "Ananya Reddy",
         "Deepika Singh", "Kavya Nair", "Priyanka Sharma", "Anjali Gupta", "Sunita Patel",
-        "Rahul Verma", "Kiran Desai", "Lakshmi Iyer", "Rajesh Kumar", "Maya Patel",
-        "Aarav Patel", "Kavya Sharma", "Rohan Singh", "Priya Gupta", "Arjun Kumar",
-        "Sneha Reddy", "Vikram Iyer", "Ananya Nair", "Rahul Verma", "Deepika Joshi",
-        // Hispanic/Latin American names
         "Carlos Rodriguez", "Isabella Lopez", "Diego Martinez", "Carmen Garcia", "Jose Silva",
-        "Sofia Martinez", "Maria Garcia", "Alejandro Ruiz", "Valentina Herrera", "Sebastian Torres",
-        "Camila Vargas", "Andres Morales", "Lucia Fernandez", "Gabriel Ramos", "Isabella Cruz",
-        // Australian/New Zealand names
-        "Jack Thompson", "Charlotte Smith", "Oliver Brown", "Amelia Wilson", "William Jones",
-        "Sophie Taylor", "Harry Davies", "Grace Murphy", "Liam Kelly", "Emma O'Connor",
-        "Noah Walsh", "Isabella O'Sullivan", "James Murphy", "Charlotte Kelly", "Oliver Walsh"
+        "Sofia Martinez", "Maria Garcia", "Alejandro Ruiz", "Valentina Herrera", "Sebastian Torres"
       ];
 
-      // Create mock leaderboard data with realistic scores
-      const mockLeaderboardData = mockNames.map((name, index) => ({
-        id: `mock-${index + 1}`,
-        name: name,
-        maxScore: Math.max(85, 100 - index * 2 + Math.floor(Math.random() * 10)),
-        totalScore: Math.max(200, 300 - index * 5 + Math.floor(Math.random() * 50)),
-        attempts: Math.max(1, Math.floor(Math.random() * 5) + 1),
-        averageScore: Math.max(80, 95 - index * 1.5 + Math.floor(Math.random() * 8)),
-        lastAttempt: new Date(Date.now() - Math.floor(Math.random() * 7 * 24 * 60 * 60 * 1000)).toISOString()
-      }));
+      // Create mixed leaderboard data (SAME logic as leaderboard pages)
+      const leaderboardData = [];
+      
+      // Add real users first (if any exist)
+      if (realUsers && realUsers.length > 0) {
+        realUsers.forEach((user, index) => {
+          leaderboardData.push({
+            id: user.id,
+            name: user.full_name || user.email || 'Anonymous',
+            rank: index + 1
+          });
+        });
+      }
 
-      // Realistic daily rotation: Mix of previous day's names + new names
-      // Use Toronto timezone (UTC-5 in winter, UTC-4 in summer)
+      // Always ensure we have at least 20 mock users for a populated leaderboard
+      const minMockUsers = 20;
+      const remainingSlots = Math.max(minMockUsers, 50 - leaderboardData.length);
+      const selectedMockNames = mockNames.slice(0, remainingSlots);
+      
+      selectedMockNames.forEach((name, index) => {
+        leaderboardData.push({
+          id: `mock-${index + 1}`,
+          name: name,
+          rank: leaderboardData.length + 1
+        });
+      });
+
+      // Create consistent daily rotation instead of random shuffling (SAME as leaderboard)
       const now = new Date();
-      const torontoTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Toronto"}));
-      const dayOfYear = Math.floor((torontoTime.getTime() - new Date(torontoTime.getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
+      const dayOfYear = Math.floor((now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
       
-      // Create a more realistic rotation that keeps some names from previous days
-      const baseOffset = Math.floor(dayOfYear / 3) * 30; // Change base every 3 days
-      const dailyOffset = dayOfYear % 20; // Small daily variation
+      // Use day-based seed for consistent daily rotation
+      const seed = dayOfYear;
+      const shuffledData = leaderboardData.sort((a, b) => {
+        // Create pseudo-random but consistent ordering based on day
+        const hashA = (a.id + seed).split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+        const hashB = (b.id + seed).split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+        return hashA - hashB;
+      });
       
-      // Select 50 names with overlap from previous days
-      const selectedNames = [];
-      
-      // Keep 20 names from previous day (top performers usually stay)
-      const previousDayStart = (dayOfYear - 1) % mockNames.length;
-      const previousDayNames = mockNames.slice(previousDayStart, previousDayStart + 20);
-      selectedNames.push(...previousDayNames);
-      
-      // Add 15 names from a few days ago (some consistency)
-      const fewDaysAgoStart = (dayOfYear - 3) % mockNames.length;
-      const fewDaysAgoNames = mockNames.slice(fewDaysAgoStart, fewDaysAgoStart + 15);
-      selectedNames.push(...fewDaysAgoNames);
-      
-      // Add 15 completely new names for freshness
-      const newNamesStart = (baseOffset + dailyOffset) % mockNames.length;
-      const newNames = mockNames.slice(newNamesStart, newNamesStart + 15);
-      selectedNames.push(...newNames);
-      
-      // Ensure we have exactly 50 unique names
-      const uniqueNames = [...new Set(selectedNames)].slice(0, 50);
-      const finalNames = uniqueNames.length === 50 ? uniqueNames : [
-        ...uniqueNames,
-        ...mockNames.filter(name => !uniqueNames.includes(name)).slice(0, 50 - uniqueNames.length)
-      ];
-      
-      const rotatedLeaderboardData = finalNames.map((name, index) => ({
-        id: `mock-${index + 1}`,
-        name: name,
-        maxScore: Math.max(85, 100 - index * 2 + Math.floor(Math.random() * 10)),
-        totalScore: Math.max(200, 300 - index * 5 + Math.floor(Math.random() * 50)),
-        attempts: Math.max(1, Math.floor(Math.random() * 5) + 1),
-        averageScore: Math.max(80, 95 - index * 1.5 + Math.floor(Math.random() * 8)),
-        lastAttempt: new Date(Date.now() - Math.floor(Math.random() * 7 * 24 * 60 * 60 * 1000)).toISOString()
+      // Reassign ranks after consistent shuffling
+      const finalLeaderboard = shuffledData.map((entry, index) => ({
+        ...entry,
+        rank: index + 1
       }));
 
-      // Always use rotated mock data for daily variation
-      setGlobalLeaders(rotatedLeaderboardData.slice(0, 50));
-      setWeeklyLeaders(rotatedLeaderboardData.slice(0, 10));
-      setMonthlyLeaders(rotatedLeaderboardData.slice(0, 15));
+      // Set leaderboard data using the SAME logic as leaderboard pages
+      setGlobalLeaders(finalLeaderboard.slice(0, 50));
+      setWeeklyLeaders(finalLeaderboard.slice(0, 10));
+      setMonthlyLeaders(finalLeaderboard.slice(0, 15));
 
-      // Mock competition data using rotated data
-      const mockCompetitionData = rotatedLeaderboardData.slice(0, 10).map((user, index) => ({
-        id: user.id,
-        name: user.name,
-        score: user.maxScore,
-        time_taken: Math.floor(Math.random() * 300) + 60, // 1-6 minutes
-            rank: index + 1,
-            prize_amount: index < 3 ? [100, 50, 25][index] : undefined
-          }));
+      // Mock competition data using consistent data
+      const mockCompetitionData = finalLeaderboard.slice(0, 10).map((user, index) => {
+        // Create consistent time based on name hash
+        const nameHash = user.name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+        const consistentTime = ((nameHash + seed) % 300) + 60; // 1-6 minutes
+        
+        return {
+          id: user.id,
+          name: user.name,
+          score: 95 - index * 2, // Simple score based on rank
+          time_taken: consistentTime,
+          rank: index + 1,
+          prize_amount: index < 3 ? [100, 50, 25][index] : undefined
+        };
+      });
       setCompetitionLeaders(mockCompetitionData);
 
     } catch (error) {

@@ -29,6 +29,8 @@ import Settings from "./pages/Settings";
 import QuizSelection from "./pages/QuizSelection";
 import Quiz from "./pages/Quiz";
 import Result from "./pages/Result";
+import WeeklyQuiz from "./pages/WeeklyQuiz";
+import WeeklyQuizTaking from "./pages/WeeklyQuizTaking";
 import Leaderboard from "./pages/Leaderboard";
 import Competitions from "./pages/Competitions";
 import CompetitionQuiz from "./pages/CompetitionQuiz";
@@ -270,6 +272,8 @@ const App = () => {
             <Route path="/quiz-selection" element={<ProtectedRoute><QuizSelection /></ProtectedRoute>} />
             <Route path="/quiz/:quizId" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
             <Route path="/result/:id" element={<ProtectedRoute><Result /></ProtectedRoute>} />
+            <Route path="/weekly-quiz" element={<ProtectedRoute><WeeklyQuiz /></ProtectedRoute>} />
+            <Route path="/weekly-quiz/:quizId" element={<ProtectedRoute><WeeklyQuizTaking /></ProtectedRoute>} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/public-leaderboard" element={<PublicLeaderboard />} />
             <Route path="/articles" element={<Articles />} />

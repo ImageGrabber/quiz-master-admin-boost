@@ -12,7 +12,7 @@ interface DashboardLayoutProps {
 
 const navItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Take a Quiz", href: "/quiz-selection", icon: Play },
+  { name: "Weekly Quiz", href: "/weekly-quiz", icon: Award },
   { name: "My Quizzes", href: "/dashboard/quizzes", icon: List },
   { name: "Competitions", href: "/competitions", icon: Award },
   { name: "Leaderboard", href: "/leaderboard", icon: Trophy },
