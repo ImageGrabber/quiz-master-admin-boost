@@ -11,11 +11,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useToast } from '@/hooks/use-toast';
 import { useChallenge } from '@/hooks/useChallenge';
-import { useBrowserNotifications } from '@/hooks/useBrowserNotifications';
 import { challengeService } from '@/lib/challengeService';
 import { supabase } from '@/integrations/supabase/client';
 import ChallengeNotification from './ChallengeNotification';
-import NotificationPermissionRequest from './NotificationPermissionRequest';
 import { Users, Trophy, Clock, MessageSquare, UserPlus, Gamepad2, Bell } from 'lucide-react';
 
 interface Quiz {
@@ -44,13 +42,7 @@ const ChallengeInterface: React.FC = () => {
     submitAnswer
   } = useChallenge();
 
-  const {
-    permission: notificationPermission,
-    isSupported: notificationsSupported,
-    sendChallengeNotification,
-    sendChallengeAcceptedNotification,
-    sendChallengeDeclinedNotification
-  } = useBrowserNotifications();
+  // Notification functionality removed - using OneSignal instead
 
   const [user, setUser] = useState<any>(null);
   const [quizzes, setQuizzes] = useState<Quiz[]>([]);
@@ -167,36 +159,7 @@ const ChallengeInterface: React.FC = () => {
         setIncomingChallenge(payload.new);
         setShowNotification(true);
         
-        // Send browser notification if permission is granted
-        if (notificationPermission === 'granted' && notificationsSupported) {
-          try {
-            // Get challenger info for the notification
-            const { data: challengerData } = await supabase
-              .from('profiles')
-              .select('display_name, full_name')
-              .eq('id', payload.new.challenger_id)
-              .single();
-            
-            const challengerName = challengerData?.display_name || challengerData?.full_name || 'Unknown Player';
-            
-            // Get quiz info for the notification
-            const { data: quizData } = await supabase
-              .from('user_created_quizzes')
-              .select('title')
-              .eq('id', payload.new.quiz_id)
-              .single();
-            
-            const quizTitle = quizData?.title || 'Quiz Challenge';
-            
-            await sendChallengeNotification(
-              challengerName,
-              quizTitle,
-              payload.new.message
-            );
-          } catch (error) {
-            console.error('Error sending browser notification:', error);
-          }
-        }
+        // Notification handled by OneSignal
       })
       .subscribe();
 
@@ -208,21 +171,7 @@ const ChallengeInterface: React.FC = () => {
         setIncomingChallenge(payload);
         setShowNotification(true);
         
-        // Send browser notification if permission is granted
-        if (notificationPermission === 'granted' && notificationsSupported) {
-          try {
-            const challengerName = payload.challenger?.display_name || payload.challenger?.full_name || 'Unknown Player';
-            const quizTitle = payload.quiz?.title || 'Quiz Challenge';
-            
-            await sendChallengeNotification(
-              challengerName,
-              quizTitle,
-              payload.message
-            );
-          } catch (error) {
-            console.error('Error sending browser notification:', error);
-          }
-        }
+        // Notification handled by OneSignal
       })
       .subscribe();
 
@@ -282,17 +231,7 @@ const ChallengeInterface: React.FC = () => {
       setShowNotification(false);
       setIncomingChallenge(null);
       
-      // Send browser notification to challenger
-      if (notificationPermission === 'granted' && notificationsSupported && incomingChallenge) {
-        try {
-          const challengerName = incomingChallenge.challenger?.display_name || 
-                                incomingChallenge.challenger?.full_name || 
-                                'Unknown Player';
-          await sendChallengeAcceptedNotification(challengerName);
-        } catch (error) {
-          console.error('Error sending challenge accepted notification:', error);
-        }
-      }
+      // Notification handled by OneSignal
       
       // Wait a moment for the challenge session to be created
       setTimeout(async () => {
@@ -323,17 +262,7 @@ const ChallengeInterface: React.FC = () => {
       setShowNotification(false);
       setIncomingChallenge(null);
       
-      // Send browser notification to challenger
-      if (notificationPermission === 'granted' && notificationsSupported && incomingChallenge) {
-        try {
-          const challengerName = incomingChallenge.challenger?.display_name || 
-                                incomingChallenge.challenger?.full_name || 
-                                'Unknown Player';
-          await sendChallengeDeclinedNotification(challengerName);
-        } catch (error) {
-          console.error('Error sending challenge declined notification:', error);
-        }
-      }
+      // Notification handled by OneSignal
     } catch (error) {
       console.error('Error declining challenge:', error);
     }
@@ -370,12 +299,7 @@ const ChallengeInterface: React.FC = () => {
         <p className="text-gray-600">Challenge other players to quiz battles!</p>
       </div>
 
-      {/* Notification Permission Request - Always show if not granted */}
-      {notificationsSupported && notificationPermission !== 'granted' && (
-        <div className="mb-6">
-          <NotificationPermissionRequest showAsCard={true} />
-        </div>
-      )}
+      {/* Notification handled by OneSignal */}
 
       <Tabs defaultValue="online" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
