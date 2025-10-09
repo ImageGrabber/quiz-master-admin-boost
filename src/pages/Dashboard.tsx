@@ -508,19 +508,19 @@ const Dashboard = () => {
 
       {/* Live Quiz - Full width primary card, with quick actions moved aside */}
       <div className="grid grid-cols-1 gap-6 mb-6">
-        {/* Normal Quizzes Section */}
+        {/* Weekly Bible Quiz Section */}
         <Card className="shadow-lg border-0 bg-white">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Brain className="w-5 h-5 text-blue-600" />
-              Take a Quiz
+              <Award className="w-5 h-5 text-green-600" />
+              Weekly Bible Quiz
             </CardTitle>
-            <CardDescription>Practice or compete in standard quizzes anytime</CardDescription>
+            <CardDescription>Test your knowledge with this week's special Bible challenge</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <Button className="h-12" onClick={() => navigate('/quiz-selection')}>
-                <Play className="w-4 h-4 mr-2" /> Browse Quizzes
+              <Button className="h-12" onClick={() => navigate('/weekly-quiz')}>
+                <Play className="w-4 h-4 mr-2" /> Start Weekly Quiz
               </Button>
               <Button variant="outline" className="h-12" onClick={() => navigate('/leaderboard')}>
                 <Trophy className="w-4 h-4 mr-2" /> View Leaderboard
