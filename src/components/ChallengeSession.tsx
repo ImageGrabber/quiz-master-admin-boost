@@ -7,7 +7,6 @@ import { Progress } from '@/components/ui/progress';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { useToast } from '@/hooks/use-toast';
 import { useChallenge } from '@/hooks/useChallenge';
-import { useBrowserNotifications } from '@/hooks/useBrowserNotifications';
 import { supabase } from '@/integrations/supabase/client';
 import { Clock, Trophy, Users, CheckCircle, XCircle, Brain } from 'lucide-react';
 
@@ -40,11 +39,7 @@ const ChallengeSession: React.FC<ChallengeSessionProps> = ({ challengeSessionId 
     submitAnswer
   } = useChallenge({ challengeSessionId });
 
-  const {
-    permission: notificationPermission,
-    isSupported: notificationsSupported,
-    sendQuizCompleteNotification
-  } = useBrowserNotifications();
+  // Notification functionality removed - using OneSignal instead
 
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
@@ -240,24 +235,7 @@ const ChallengeSession: React.FC<ChallengeSessionProps> = ({ challengeSessionId 
     await finishChallengeSession(currentChallengeSession.id);
     setShowResults(true);
     
-    // Send browser notification when challenge completes
-    if (notificationPermission === 'granted' && notificationsSupported) {
-      try {
-        // Get user's score from results
-        const userResult = challengeResults.find(result => 
-          challengeParticipants.find(p => p.id === result.participant_id)?.user_id === user?.id
-        );
-        
-        if (userResult) {
-          await sendQuizCompleteNotification(
-            userResult.correct_answers,
-            userResult.total_questions
-          );
-        }
-      } catch (error) {
-        console.error('Error sending quiz complete notification:', error);
-      }
-    }
+    // Notification handled by OneSignal
   };
 
   const formatTime = (seconds: number) => {
