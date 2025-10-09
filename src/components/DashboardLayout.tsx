@@ -13,10 +13,10 @@ interface DashboardLayoutProps {
 const navItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Weekly Quiz", href: "/weekly-quiz", icon: Award },
-  { name: "My Quizzes", href: "/dashboard/quizzes", icon: List },
+  { name: "My Live Quizzes", href: "/dashboard/quizzes", icon: List },
   { name: "Competitions", href: "/competitions", icon: Award },
   { name: "Leaderboard", href: "/leaderboard", icon: Trophy },
-  { name: "Recent Attempts", href: "/dashboard/recent-attempts", icon: User },
+  // { name: "Recent Attempts", href: "/dashboard/recent-attempts", icon: User }, // Hidden
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
   { name: "Help", href: "/help", icon: HelpCircle },
 ];

@@ -630,9 +630,9 @@ const Dashboard = () => {
                       </div>
                     </div>
                   ))}
-                  <div className="text-right">
+                  {/* <div className="text-right">
                     <Button variant="outline" size="sm" onClick={() => navigate('/dashboard/recent-attempts')}>View All</Button>
-                  </div>
+                  </div> */}
                 </div>
               )}
             </CardContent>
