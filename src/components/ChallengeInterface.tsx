@@ -75,7 +75,18 @@ const ChallengeInterface: React.FC = () => {
 
     const loadQuizzes = async () => {
       try {
-        // First try to load from user_created_quizzes
+        // Load challenge quizzes from the main quizzes table
+        const { data: challengeQuizzes, error: challengeError } = await supabase
+          .from('quizzes')
+          .select('id, title, description')
+          .eq('quiz_type', 'challenge')
+          .order('created_at', { ascending: false });
+
+        if (challengeError) {
+          console.error('Error loading challenge quizzes:', challengeError);
+        }
+
+        // Also try to load from user_created_quizzes as fallback
         const { data: userQuizzes, error: userQuizzesError } = await supabase
           .from('user_created_quizzes')
           .select('id, title, description, share_code')
@@ -86,32 +97,20 @@ const ChallengeInterface: React.FC = () => {
           console.error('Error loading user quizzes:', userQuizzesError);
         }
 
-        // If no user quizzes, try to load from main quizzes table
-        let mainQuizzes = [];
-        if (!userQuizzes || userQuizzes.length === 0) {
-          const { data: mainQuizzesData, error: mainQuizzesError } = await supabase
-            .from('quizzes')
-            .select('id, title, description')
-            .order('created_at', { ascending: false });
+        // Combine challenge quizzes with user quizzes
+        const challengeQuizzesFormatted = (challengeQuizzes || []).map(quiz => ({
+          id: quiz.id.toString(),
+          title: quiz.title,
+          description: quiz.description,
+          share_code: `CH${quiz.id}`
+        }));
 
-          if (mainQuizzesError) {
-            console.error('Error loading main quizzes:', mainQuizzesError);
-          } else {
-            mainQuizzes = (mainQuizzesData || []).map(quiz => ({
-              id: quiz.id.toString(),
-              title: quiz.title,
-              description: quiz.description,
-              share_code: `QZ${quiz.id}`
-            }));
-          }
-        }
-
-        const allQuizzes = [...(userQuizzes || []), ...mainQuizzes];
+        const allQuizzes = [...challengeQuizzesFormatted, ...(userQuizzes || [])];
         
         if (allQuizzes.length === 0) {
           toast({
-            title: "No Quizzes Available",
-            description: "No public quizzes found. Create some quizzes first or ask an admin to make quizzes public.",
+            title: "No Challenge Quizzes Available",
+            description: "No user-created quizzes available for challenges. Create custom quizzes first or ask an admin to make user quizzes public.",
             variant: "destructive",
           });
         }

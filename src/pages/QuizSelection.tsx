@@ -79,6 +79,8 @@ const QuizSelection = () => {
 
   const fetchQuizzes = async () => {
     try {
+      // Fetch all quizzes for the quiz selection page
+      // This will show the comprehensive Bible quizzes
       const { data, error } = await supabase
         .from('quizzes')
         .select('*')
