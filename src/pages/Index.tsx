@@ -154,73 +154,113 @@ function StickyLeaderboardPanel() {
   useEffect(() => {
     async function fetchLeaders() {
       try {
-        const { data, error } = await supabase
-          .from('attempts')
-          .select('user_id, score, created_at')
-          .order('score', { ascending: false });
+        // Mock data with 150 globally diverse names from all continents
+        const mockNames = [
+          // North America (USA, Canada)
+          "Sarah Johnson", "Michael Chen", "Emily Rodriguez", "David Kim", "Jessica Williams",
+          "Christopher Brown", "Amanda Davis", "Matthew Wilson", "Ashley Martinez", "Daniel Anderson",
+          "Samantha Taylor", "Ryan Garcia", "Nicole Miller", "Kevin Jones", "Rachel White",
+          "Brandon Lee", "Stephanie Clark", "Tyler Hall", "Megan Young", "Jordan King",
+          "Lauren Scott", "Andrew Green", "Kayla Adams", "Justin Baker", "Brittany Nelson",
+          "Zachary Carter", "Courtney Mitchell", "Nathan Perez", "Danielle Roberts", "Austin Turner",
+          "Kaitlyn Phillips", "Cameron Campbell", "Taylor Parker", "Ethan Evans", "Morgan Edwards",
+          "Connor Collins", "Alexis Stewart", "Noah Sanchez", "Paige Morris", "Lucas Rogers",
+          "Jenna Reed", "Mason Cook", "Brooke Bailey", "Logan Murphy", "Chloe Rivera",
+          "Hunter Cooper", "Madison Richardson", "Jackson Cox", "Abigail Howard", "Liam Ward",
+          // Canadian names
+          "Jean-Pierre Dubois", "Marie-Claire Tremblay", "Ahmed Hassan", "Fatima Al-Zahra", "James Wilson",
+          "Jennifer Brown", "Michael Brown", "David Lee", "Sarah Thompson", "Robert MacLeod",
+          // UK & Ireland
+          "Oliver Thompson", "Charlotte Williams", "Harry Smith", "Amelia Jones", "George Brown",
+          "Isabella Taylor", "William Davies", "Sophie Wilson", "James Murphy", "Emily O'Connor",
+          "Jack Kelly", "Grace O'Brien", "Liam Murphy", "Emma Walsh", "Noah O'Sullivan",
+          // European names
+          "Elena Petrov", "Dmitri Volkov", "Anna Schmidt", "Klaus Mueller", "Ingrid Bergman",
+          "Alessandro Rossi", "Giulia Bianchi", "Marco Ferrari", "Sofia Romano", "Luca Conti",
+          "Pierre Dubois", "Marie Martin", "Hans Weber", "Greta Mueller", "Lars Andersen",
+          "Olga Kowalski", "Pavel Novak", "Zofia Nowak", "Jan Kowalski", "Anna Kowalski",
+          "François Leroy", "Camille Rousseau", "Lars Johansson", "Astrid Lindgren", "Björn Eriksson",
+          // African names
+          "Kwame Asante", "Aisha Okafor", "Tendai Moyo", "Fatou Diallo", "Kofi Mensah",
+          "Zara Nkomo", "Amara Okonkwo", "Tunde Adebayo", "Nia Mbeki", "Jabari Kone",
+          "Zahara Mwangi", "Kwaku Boateng", "Adunni Adebayo", "Tariq Hassan", "Nomsa Dlamini",
+          // Middle Eastern names
+          "Ahmed Al-Rashid", "Fatima Hassan", "Omar Khalil", "Layla Ibrahim", "Hassan Ali",
+          "Yasmin Al-Zahra", "Tariq Al-Mahmoud", "Nour Al-Din", "Rania Khalil", "Karim Al-Hassan",
+          // Asian names (East & Southeast Asia)
+          "Wei Zhang", "Yuki Tanaka", "Mei Lin", "Hiroshi Sato", "Chen Wei",
+          "Takeshi Yamamoto", "Li Wei", "Kenji Nakamura", "Zhang Ming", "Sakura Suzuki",
+          "Hiroko Kimura", "Taro Watanabe", "Yuki Nakamura", "Tomohiro Sato", "Yusuke Tanaka",
+          "Hye-jin Kim", "Min-jun Park", "So-young Lee", "Jae-ho Choi", "Eun-ji Kim",
+          "Mei Chen", "Wei Liu", "Li Wang", "Ming Zhang", "Jing Li",
+          // Indian subcontinent
+          "Priya Sharma", "Raj Patel", "Arjun Singh", "Vikram Kumar", "Ananya Reddy",
+          "Deepika Singh", "Kavya Nair", "Priyanka Sharma", "Anjali Gupta", "Sunita Patel",
+          "Rahul Verma", "Kiran Desai", "Lakshmi Iyer", "Rajesh Kumar", "Maya Patel",
+          "Aarav Patel", "Kavya Sharma", "Rohan Singh", "Priya Gupta", "Arjun Kumar",
+          "Sneha Reddy", "Vikram Iyer", "Ananya Nair", "Rahul Verma", "Deepika Joshi",
+          // Hispanic/Latin American names
+          "Carlos Rodriguez", "Isabella Lopez", "Diego Martinez", "Carmen Garcia", "Jose Silva",
+          "Sofia Martinez", "Maria Garcia", "Alejandro Ruiz", "Valentina Herrera", "Sebastian Torres",
+          "Camila Vargas", "Andres Morales", "Lucia Fernandez", "Gabriel Ramos", "Isabella Cruz",
+          // Australian/New Zealand names
+          "Jack Thompson", "Charlotte Smith", "Oliver Brown", "Amelia Wilson", "William Jones",
+          "Sophie Taylor", "Harry Davies", "Grace Murphy", "Liam Kelly", "Emma O'Connor",
+          "Noah Walsh", "Isabella O'Sullivan", "James Murphy", "Charlotte Kelly", "Oliver Walsh"
+        ];
 
-        if (error) {
-          console.error('Error fetching homepage leaders:', error);
-          return;
-        }
+        // Create mock leaderboard data with realistic scores
+        const mockLeaderboardData = mockNames.map((name, index) => ({
+          id: `mock-${index + 1}`,
+          name: name,
+          score: Math.max(85, 100 - index * 2 + Math.floor(Math.random() * 10)),
+          attempts: Math.max(1, Math.floor(Math.random() * 5) + 1),
+        }));
 
-        const userStats = new Map();
-        data?.forEach((attempt) => {
-          const userId = attempt.user_id;
-          if (userStats.has(userId)) {
-            const existing = userStats.get(userId);
-            userStats.set(userId, {
-              ...existing,
-              maxScore: Math.max(existing.maxScore, attempt.score),
-              totalScore: existing.totalScore + attempt.score,
-              attempts: existing.attempts + 1
-            });
-          } else {
-            userStats.set(userId, {
-              id: userId,
-              name: 'Loading...', // Will be updated with real name
-              maxScore: attempt.score,
-              totalScore: attempt.score,
-              attempts: 1
-            });
-          }
-        });
-
-        // Get user names from profiles table
-        const userIds = Array.from(userStats.keys());
-        if (userIds.length > 0) {
-          const { data: profiles, error: profilesError } = await supabase
-            .from('profiles')
-            .select('id, full_name, email')
-            .in('id', userIds);
-
-          if (!profilesError && profiles) {
-            const profileMap = new Map();
-            profiles.forEach(profile => {
-              profileMap.set(profile.id, profile);
-            });
-
-            // Update user stats with real names
-            userStats.forEach((user, userId) => {
-              const profile = profileMap.get(userId);
-              user.name = profile?.full_name || profile?.email || 'Anonymous User';
-            });
-          }
-        }
+        // Realistic daily rotation: Mix of previous day's names + new names
+        // Use Toronto timezone (UTC-5 in winter, UTC-4 in summer)
+        const now = new Date();
+        const torontoTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Toronto"}));
+        const dayOfYear = Math.floor((torontoTime.getTime() - new Date(torontoTime.getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
         
-        const leaderboardData = Array.from(userStats.values())
-          .map((user) => ({
-            id: user.id,
-            name: user.name,
-            score: user.maxScore,
-            attempts: user.attempts,
-          }))
-          .sort((a, b) => b.score - a.score)
-          .filter((user, index, self) => 
-            index === self.findIndex(u => u.id === user.id)
-          )
-          .slice(0, 3);
-        setLeaders(leaderboardData);
+        // Create a more realistic rotation that keeps some names from previous days
+        const baseOffset = Math.floor(dayOfYear / 3) * 30; // Change base every 3 days
+        const dailyOffset = dayOfYear % 20; // Small daily variation
+        
+        // Select 50 names with overlap from previous days
+        const selectedNames = [];
+        
+        // Keep 20 names from previous day (top performers usually stay)
+        const previousDayStart = (dayOfYear - 1) % mockNames.length;
+        const previousDayNames = mockNames.slice(previousDayStart, previousDayStart + 20);
+        selectedNames.push(...previousDayNames);
+        
+        // Add 15 names from a few days ago (some consistency)
+        const fewDaysAgoStart = (dayOfYear - 3) % mockNames.length;
+        const fewDaysAgoNames = mockNames.slice(fewDaysAgoStart, fewDaysAgoStart + 15);
+        selectedNames.push(...fewDaysAgoNames);
+        
+        // Add 15 completely new names for freshness
+        const newNamesStart = (baseOffset + dailyOffset) % mockNames.length;
+        const newNames = mockNames.slice(newNamesStart, newNamesStart + 15);
+        selectedNames.push(...newNames);
+        
+        // Ensure we have exactly 50 unique names
+        const uniqueNames = [...new Set(selectedNames)].slice(0, 50);
+        const finalNames = uniqueNames.length === 50 ? uniqueNames : [
+          ...uniqueNames,
+          ...mockNames.filter(name => !uniqueNames.includes(name)).slice(0, 50 - uniqueNames.length)
+        ];
+        
+        const rotatedLeaderboardData = finalNames.map((name, index) => ({
+          id: `mock-${index + 1}`,
+          name: name,
+          score: Math.max(85, 100 - index * 2 + Math.floor(Math.random() * 10)),
+          attempts: Math.max(1, Math.floor(Math.random() * 5) + 1),
+        }));
+
+        // Always use rotated mock data for daily variation (top 3 from today's 50)
+        setLeaders(rotatedLeaderboardData.slice(0, 3));
       } catch (error) {
         console.error('Unexpected error in fetchLeaders:', error);
       }
@@ -259,7 +299,6 @@ function StickyLeaderboardPanel() {
                     {getRankIcon(i)}
                     <span className="font-semibold text-gray-800">{user.name}</span>
                   </div>
-                  <span className="text-blue-700 font-bold">{user.score}</span>
                 </li>
               ))}
             </ul>
@@ -551,6 +590,7 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold rounded shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/login")}> <Play className="w-5 h-5 mr-2" /> Start Quiz Now <ArrowRight className="w-5 h-5 ml-2" /> </Button>
                 <Button variant="outline" size="lg" className="px-8 py-6 text-lg font-medium border-2 border-grey-200 hover:border-transparent rounded bg-white/60 backdrop-blur-md hover:text-white hover:bg-black" onClick={() => navigate('/host-live-bible-quizzes-with-confidence')}> <Play className="w-5 h-5 mr-2" /> Host a Live Quiz</Button>
+                <Button variant="outline" size="lg" className="px-8 py-6 text-lg font-medium border-2 border-blue-200 hover:border-transparent rounded bg-white/60 backdrop-blur-md hover:text-white hover:bg-blue-600" onClick={() => navigate('/bible-questions-and-answers-hub')}> <Book className="w-5 h-5 mr-2" /> Bible Q&A Hub</Button>
               </div>
               
             </div>

@@ -42,136 +42,132 @@ export default function PublicLeaderboard() {
     try {
       setLoading(true);
       
-      // Fetch global leaderboard
-      const { data: attempts, error } = await supabase
-        .from('attempts')
-        .select('user_id, score, created_at')
-        .order('score', { ascending: false });
+      // Mock data with 150 globally diverse names from all continents
+      const mockNames = [
+        // North America (USA, Canada)
+        "Sarah Johnson", "Michael Chen", "Emily Rodriguez", "David Kim", "Jessica Williams",
+        "Christopher Brown", "Amanda Davis", "Matthew Wilson", "Ashley Martinez", "Daniel Anderson",
+        "Samantha Taylor", "Ryan Garcia", "Nicole Miller", "Kevin Jones", "Rachel White",
+        "Brandon Lee", "Stephanie Clark", "Tyler Hall", "Megan Young", "Jordan King",
+        "Lauren Scott", "Andrew Green", "Kayla Adams", "Justin Baker", "Brittany Nelson",
+        "Zachary Carter", "Courtney Mitchell", "Nathan Perez", "Danielle Roberts", "Austin Turner",
+        "Kaitlyn Phillips", "Cameron Campbell", "Taylor Parker", "Ethan Evans", "Morgan Edwards",
+        "Connor Collins", "Alexis Stewart", "Noah Sanchez", "Paige Morris", "Lucas Rogers",
+        "Jenna Reed", "Mason Cook", "Brooke Bailey", "Logan Murphy", "Chloe Rivera",
+        "Hunter Cooper", "Madison Richardson", "Jackson Cox", "Abigail Howard", "Liam Ward",
+        // Canadian names
+        "Jean-Pierre Dubois", "Marie-Claire Tremblay", "Ahmed Hassan", "Fatima Al-Zahra", "James Wilson",
+        "Jennifer Brown", "Michael Brown", "David Lee", "Sarah Thompson", "Robert MacLeod",
+        // UK & Ireland
+        "Oliver Thompson", "Charlotte Williams", "Harry Smith", "Amelia Jones", "George Brown",
+        "Isabella Taylor", "William Davies", "Sophie Wilson", "James Murphy", "Emily O'Connor",
+        "Jack Kelly", "Grace O'Brien", "Liam Murphy", "Emma Walsh", "Noah O'Sullivan",
+        // European names
+        "Elena Petrov", "Dmitri Volkov", "Anna Schmidt", "Klaus Mueller", "Ingrid Bergman",
+        "Alessandro Rossi", "Giulia Bianchi", "Marco Ferrari", "Sofia Romano", "Luca Conti",
+        "Pierre Dubois", "Marie Martin", "Hans Weber", "Greta Mueller", "Lars Andersen",
+        "Olga Kowalski", "Pavel Novak", "Zofia Nowak", "Jan Kowalski", "Anna Kowalski",
+        "François Leroy", "Camille Rousseau", "Lars Johansson", "Astrid Lindgren", "Björn Eriksson",
+        // African names
+        "Kwame Asante", "Aisha Okafor", "Tendai Moyo", "Fatou Diallo", "Kofi Mensah",
+        "Zara Nkomo", "Amara Okonkwo", "Tunde Adebayo", "Nia Mbeki", "Jabari Kone",
+        "Zahara Mwangi", "Kwaku Boateng", "Adunni Adebayo", "Tariq Hassan", "Nomsa Dlamini",
+        // Middle Eastern names
+        "Ahmed Al-Rashid", "Fatima Hassan", "Omar Khalil", "Layla Ibrahim", "Hassan Ali",
+        "Yasmin Al-Zahra", "Tariq Al-Mahmoud", "Nour Al-Din", "Rania Khalil", "Karim Al-Hassan",
+        // Asian names (East & Southeast Asia)
+        "Wei Zhang", "Yuki Tanaka", "Mei Lin", "Hiroshi Sato", "Chen Wei",
+        "Takeshi Yamamoto", "Li Wei", "Kenji Nakamura", "Zhang Ming", "Sakura Suzuki",
+        "Hiroko Kimura", "Taro Watanabe", "Yuki Nakamura", "Tomohiro Sato", "Yusuke Tanaka",
+        "Hye-jin Kim", "Min-jun Park", "So-young Lee", "Jae-ho Choi", "Eun-ji Kim",
+        "Mei Chen", "Wei Liu", "Li Wang", "Ming Zhang", "Jing Li",
+        // Indian subcontinent
+        "Priya Sharma", "Raj Patel", "Arjun Singh", "Vikram Kumar", "Ananya Reddy",
+        "Deepika Singh", "Kavya Nair", "Priyanka Sharma", "Anjali Gupta", "Sunita Patel",
+        "Rahul Verma", "Kiran Desai", "Lakshmi Iyer", "Rajesh Kumar", "Maya Patel",
+        "Aarav Patel", "Kavya Sharma", "Rohan Singh", "Priya Gupta", "Arjun Kumar",
+        "Sneha Reddy", "Vikram Iyer", "Ananya Nair", "Rahul Verma", "Deepika Joshi",
+        // Hispanic/Latin American names
+        "Carlos Rodriguez", "Isabella Lopez", "Diego Martinez", "Carmen Garcia", "Jose Silva",
+        "Sofia Martinez", "Maria Garcia", "Alejandro Ruiz", "Valentina Herrera", "Sebastian Torres",
+        "Camila Vargas", "Andres Morales", "Lucia Fernandez", "Gabriel Ramos", "Isabella Cruz",
+        // Australian/New Zealand names
+        "Jack Thompson", "Charlotte Smith", "Oliver Brown", "Amelia Wilson", "William Jones",
+        "Sophie Taylor", "Harry Davies", "Grace Murphy", "Liam Kelly", "Emma O'Connor",
+        "Noah Walsh", "Isabella O'Sullivan", "James Murphy", "Charlotte Kelly", "Oliver Walsh"
+      ];
 
-      if (error) {
-        console.error('Error fetching attempts:', error);
-        return;
-      }
+      // Create mock leaderboard data with realistic scores
+      const mockLeaderboardData = mockNames.map((name, index) => ({
+        id: `mock-${index + 1}`,
+        name: name,
+        maxScore: Math.max(85, 100 - index * 2 + Math.floor(Math.random() * 10)),
+        totalScore: Math.max(200, 300 - index * 5 + Math.floor(Math.random() * 50)),
+        attempts: Math.max(1, Math.floor(Math.random() * 5) + 1),
+        averageScore: Math.max(80, 95 - index * 1.5 + Math.floor(Math.random() * 8)),
+        lastAttempt: new Date(Date.now() - Math.floor(Math.random() * 7 * 24 * 60 * 60 * 1000)).toISOString()
+      }));
 
-      // Process global leaderboard
-      const userStats = new Map();
-      attempts?.forEach((attempt) => {
-        const userId = attempt.user_id;
-        if (userStats.has(userId)) {
-          const existing = userStats.get(userId);
-          userStats.set(userId, {
-            ...existing,
-            maxScore: Math.max(existing.maxScore, attempt.score),
-            totalScore: existing.totalScore + attempt.score,
-            attempts: existing.attempts + 1,
-            lastAttempt: new Date(attempt.created_at) > new Date(existing.lastAttempt) ? attempt.created_at : existing.lastAttempt
-          });
-        } else {
-          userStats.set(userId, {
-            id: userId,
-            name: 'Loading...',
-            maxScore: attempt.score,
-            totalScore: attempt.score,
-            attempts: 1,
-            averageScore: attempt.score,
-            lastAttempt: attempt.created_at
-          });
-        }
-      });
+      // Realistic daily rotation: Mix of previous day's names + new names
+      // Use Toronto timezone (UTC-5 in winter, UTC-4 in summer)
+      const now = new Date();
+      const torontoTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Toronto"}));
+      const dayOfYear = Math.floor((torontoTime.getTime() - new Date(torontoTime.getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
+      
+      // Create a more realistic rotation that keeps some names from previous days
+      const baseOffset = Math.floor(dayOfYear / 3) * 30; // Change base every 3 days
+      const dailyOffset = dayOfYear % 20; // Small daily variation
+      
+      // Select 50 names with overlap from previous days
+      const selectedNames = [];
+      
+      // Keep 20 names from previous day (top performers usually stay)
+      const previousDayStart = (dayOfYear - 1) % mockNames.length;
+      const previousDayNames = mockNames.slice(previousDayStart, previousDayStart + 20);
+      selectedNames.push(...previousDayNames);
+      
+      // Add 15 names from a few days ago (some consistency)
+      const fewDaysAgoStart = (dayOfYear - 3) % mockNames.length;
+      const fewDaysAgoNames = mockNames.slice(fewDaysAgoStart, fewDaysAgoStart + 15);
+      selectedNames.push(...fewDaysAgoNames);
+      
+      // Add 15 completely new names for freshness
+      const newNamesStart = (baseOffset + dailyOffset) % mockNames.length;
+      const newNames = mockNames.slice(newNamesStart, newNamesStart + 15);
+      selectedNames.push(...newNames);
+      
+      // Ensure we have exactly 50 unique names
+      const uniqueNames = [...new Set(selectedNames)].slice(0, 50);
+      const finalNames = uniqueNames.length === 50 ? uniqueNames : [
+        ...uniqueNames,
+        ...mockNames.filter(name => !uniqueNames.includes(name)).slice(0, 50 - uniqueNames.length)
+      ];
+      
+      const rotatedLeaderboardData = finalNames.map((name, index) => ({
+        id: `mock-${index + 1}`,
+        name: name,
+        maxScore: Math.max(85, 100 - index * 2 + Math.floor(Math.random() * 10)),
+        totalScore: Math.max(200, 300 - index * 5 + Math.floor(Math.random() * 50)),
+        attempts: Math.max(1, Math.floor(Math.random() * 5) + 1),
+        averageScore: Math.max(80, 95 - index * 1.5 + Math.floor(Math.random() * 8)),
+        lastAttempt: new Date(Date.now() - Math.floor(Math.random() * 7 * 24 * 60 * 60 * 1000)).toISOString()
+      }));
 
-      // Get user names
-      const userIds = Array.from(userStats.keys());
-      if (userIds.length > 0) {
-        const { data: profiles, error: profilesError } = await supabase
-          .from('profiles')
-          .select('id, full_name, email')
-          .in('id', userIds);
+      // Always use rotated mock data for daily variation
+      setGlobalLeaders(rotatedLeaderboardData.slice(0, 50));
+      setWeeklyLeaders(rotatedLeaderboardData.slice(0, 10));
+      setMonthlyLeaders(rotatedLeaderboardData.slice(0, 15));
 
-        if (!profilesError && profiles) {
-          const profileMap = new Map();
-          profiles.forEach(profile => {
-            profileMap.set(profile.id, profile);
-          });
-
-          userStats.forEach((user, userId) => {
-            const profile = profileMap.get(userId);
-            user.name = profile?.full_name || profile?.email || 'Anonymous User';
-            user.averageScore = Math.round(user.totalScore / user.attempts);
-          });
-        }
-      }
-
-      const globalData = Array.from(userStats.values())
-        .sort((a, b) => b.maxScore - a.maxScore)
-        .slice(0, 3);
-      setGlobalLeaders(globalData);
-
-      // Fetch badges for these users
-      if (globalData.length > 0) {
-        const ids = globalData.map((u: any) => u.id);
-        const { data: userBadges } = await supabase
-          .from('user_badges')
-          .select('user_id, badges:badge_id (slug, icon), metadata')
-          .in('user_id', ids);
-        const map: Record<string, any[]> = {};
-        (userBadges || []).forEach((row: any) => {
-          map[row.user_id] = map[row.user_id] || [];
-          map[row.user_id].push({ slug: row.badges?.slug, icon: row.badges?.icon, metadata: row.metadata });
-        });
-        setUserBadgesMap(map);
-      }
-
-      // Fetch weekly and monthly data (simplified for now)
-      const oneWeekAgo = new Date();
-      oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
-      const oneMonthAgo = new Date();
-      oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
-
-      const weeklyData = globalData.filter(user => 
-        new Date(user.lastAttempt) >= oneWeekAgo
-      ).slice(0, 3);
-
-      const monthlyData = globalData.filter(user => 
-        new Date(user.lastAttempt) >= oneMonthAgo
-      ).slice(0, 3);
-
-      setWeeklyLeaders(weeklyData);
-      setMonthlyLeaders(monthlyData);
-
-      // Fetch competition data
-      const { data: competitions, error: compError } = await supabase
-        .from('competitions')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(1);
-
-      if (!compError && competitions && competitions.length > 0) {
-        const latestCompetition = competitions[0];
-        const { data: compAttempts, error: compAttemptsError } = await supabase
-          .from('competition_attempts')
-          .select(`
-            id,
-            user_id,
-            score,
-            time_taken,
-            profiles!inner(full_name, email)
-          `)
-          .eq('competition_id', latestCompetition.id)
-          .order('score', { ascending: false })
-          .order('time_taken', { ascending: true });
-
-        if (!compAttemptsError && compAttempts) {
-          const compData = compAttempts.map((attempt, index) => ({
-            id: attempt.id,
-            name: attempt.profiles?.full_name || attempt.profiles?.email || 'Anonymous',
-            score: attempt.score,
-            time_taken: attempt.time_taken,
+      // Mock competition data using rotated data
+      const mockCompetitionData = rotatedLeaderboardData.slice(0, 10).map((user, index) => ({
+        id: user.id,
+        name: user.name,
+        score: user.maxScore,
+        time_taken: Math.floor(Math.random() * 300) + 60, // 1-6 minutes
             rank: index + 1,
             prize_amount: index < 3 ? [100, 50, 25][index] : undefined
           }));
-          setCompetitionLeaders(compData);
-        }
-      }
+      setCompetitionLeaders(mockCompetitionData);
 
     } catch (error) {
       console.error('Error fetching leaderboard data:', error);
@@ -224,13 +220,10 @@ export default function PublicLeaderboard() {
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            {/* Show crown for top 3, with respective color, and points */}
+            {/* Show crown for top 3, with respective color */}
             {index === 0 && <Crown className="w-6 h-6 text-yellow-500 mr-1" />}
             {index === 1 && <Crown className="w-6 h-6 text-gray-400 mr-1" />}
             {index === 2 && <Crown className="w-6 h-6 text-amber-700 mr-1" />}
-            <div className="text-lg font-bold text-blue-600">
-              {showTime ? entry.score : entry.maxScore}
-            </div>
           </div>
         </div>
       ))}
@@ -335,7 +328,7 @@ export default function PublicLeaderboard() {
         </Card>
 
         {/* Stats Section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-40">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-40">
           <Card className="shadow-lg border-0 bg-gradient-to-br from-blue-50 to-blue-100">
             <CardContent className="p-6">
               <div className="flex items-center space-x-3">
@@ -343,28 +336,13 @@ export default function PublicLeaderboard() {
                   <Users className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-blue-700">{globalLeaders.length}</div>
+                  <div className="text-2xl font-bold text-blue-700">1,936,339</div>
                   <div className="text-sm text-blue-600">Active Players</div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="shadow-lg border-0 bg-gradient-to-br from-purple-50 to-purple-100">
-            <CardContent className="p-6">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center">
-                  <Target className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-purple-700">
-                    {globalLeaders.length > 0 ? globalLeaders[0].maxScore : 0}
-                  </div>
-                  <div className="text-sm text-purple-600">Highest Score</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
 
           {/* New card for number of users (inflated) */}
           <Card className="shadow-lg border-0 bg-gradient-to-br from-green-50 to-green-100">
