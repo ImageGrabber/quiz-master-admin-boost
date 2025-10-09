@@ -56,34 +56,214 @@
      crossorigin="anonymous"></script>
     
     <!-- OneSignal Push Notifications -->
-    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
-      window.OneSignalDeferred = window.OneSignalDeferred || [];
-      OneSignalDeferred.push(async function(OneSignal) {
-        await OneSignal.init({
-          appId: "ca7cdcf3-827e-4370-99ee-946690bf535a",
-        });
+      console.log('🚀 Starting OneSignal setup...');
+      
+      // Check if we're on HTTPS or localhost
+      const isSecure = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+      console.log('🔒 Secure context:', isSecure, 'Protocol:', location.protocol, 'Hostname:', location.hostname);
+      
+      if (!isSecure) {
+        console.error('❌ OneSignal requires HTTPS or localhost');
+        document.getElementById('onesignal-test').innerHTML = 'OneSignal requires HTTPS';
+        document.getElementById('onesignal-test').style.background = '#dc3545';
+      } else {
+        console.log('✅ Secure context detected, loading OneSignal...');
         
-        // Debug: Log OneSignal status
-        console.log('OneSignal initialized:', OneSignal);
+        // Try multiple CDN sources for OneSignal SDK
+        const cdnSources = [
+          'https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js',
+          'https://cdn.onesignal.com/sdks/OneSignalSDK.js',
+          'https://cdn.onesignal.com/sdks/web/v15/OneSignalSDK.page.js'
+        ];
         
-        // Check if user is already subscribed
-        OneSignal.getUserId().then(function(userId) {
-          console.log('OneSignal User ID:', userId);
-          if (!userId) {
-            console.log('User not subscribed, showing prompt...');
-            // Show the permission prompt
-            OneSignal.showNativePrompt();
-          } else {
-            console.log('User already subscribed');
+        let currentIndex = 0;
+        
+        function tryLoadOneSignal() {
+          if (currentIndex >= cdnSources.length) {
+            console.error('❌ All OneSignal CDN sources failed');
+            document.getElementById('onesignal-test').innerHTML = 'OneSignal CDN Failed';
+            document.getElementById('onesignal-test').style.background = '#dc3545';
+            return;
           }
-        });
-      });
+          
+          const script = document.createElement('script');
+          script.src = cdnSources[currentIndex];
+          
+          console.log(`🔄 Trying OneSignal CDN ${currentIndex + 1}/${cdnSources.length}: ${cdnSources[currentIndex]}`);
+          
+          script.onload = function() {
+            console.log('✅ OneSignal SDK loaded successfully from:', cdnSources[currentIndex]);
+            
+            // Initialize OneSignal
+            window.OneSignal = window.OneSignal || [];
+            OneSignal.push(function() {
+              console.log('🚀 OneSignal SDK ready, initializing...');
+              
+              OneSignal.init({
+                appId: "ca7cdcf3-827e-4370-99ee-946690bf535a",
+                promptOptions: {
+                  slidedown: {
+                    enabled: true,
+                    autoPrompt: true,
+                    timeDelay: 0,
+                    pageViews: 1,
+                    actionMessage: "We'd like to show you notifications for the latest updates.",
+                    acceptButton: "Allow",
+                    cancelButton: "No Thanks"
+                  }
+                }
+              });
+              
+              console.log('✅ OneSignal initialized successfully');
+              
+              // Check permission and show prompt
+              OneSignal.getNotificationPermission().then(function(permission) {
+                console.log('🔔 Permission status:', permission);
+                
+                OneSignal.getUserId().then(function(userId) {
+                  console.log('👤 User ID:', userId);
+                  
+                  if (!userId && permission === 'default') {
+                    console.log('📱 Showing prompt...');
+                    OneSignal.showNativePrompt();
+                  }
+                });
+              });
+            });
+          };
+          
+          script.onerror = function() {
+            console.error(`❌ Failed to load OneSignal SDK from: ${cdnSources[currentIndex]}`);
+            currentIndex++;
+            if (currentIndex < cdnSources.length) {
+              setTimeout(tryLoadOneSignal, 1000); // Try next CDN after 1 second
+            } else {
+              // All CDNs failed, try native notifications as fallback
+              console.log('🔄 All OneSignal CDNs failed, trying native notifications...');
+              setupNativeNotifications();
+            }
+          };
+          
+          document.head.appendChild(script);
+        }
+        
+        tryLoadOneSignal();
+        
+        // Fallback to native notifications if OneSignal fails
+        function setupNativeNotifications() {
+          console.log('🔔 Setting up native notifications fallback...');
+          
+          if ('Notification' in window) {
+            console.log('✅ Native notifications supported');
+            
+            // Create a mock OneSignal object for compatibility
+            window.OneSignal = {
+              getNotificationPermission: function() {
+                return Promise.resolve(Notification.permission);
+              },
+              getUserId: function() {
+                return Promise.resolve(null);
+              },
+              showNativePrompt: function() {
+                return Notification.requestPermission();
+              },
+              init: function() {
+                console.log('🔔 Native notifications initialized');
+                
+                // Auto-request permission
+                if (Notification.permission === 'default') {
+                  setTimeout(function() {
+                    Notification.requestPermission().then(function(permission) {
+                      console.log('🔔 Native permission result:', permission);
+                      if (permission === 'granted') {
+                        // Show a test notification
+                        new Notification('Notifications Enabled!', {
+                          body: 'You will now receive notifications from this site.',
+                          icon: '/favicon.ico'
+                        });
+                      }
+                    });
+                  }, 2000);
+                }
+              }
+            };
+            
+            // Initialize native notifications
+            window.OneSignal.init();
+            
+            document.getElementById('onesignal-test').innerHTML = 'Native Notifications';
+            document.getElementById('onesignal-test').style.background = '#17a2b8';
+            
+          } else {
+            console.error('❌ Native notifications not supported');
+            document.getElementById('onesignal-test').innerHTML = 'No Notifications';
+            document.getElementById('onesignal-test').style.background = '#6c757d';
+          }
+        }
+      }
     </script>
   </head>
 
   <body style="font-family: 'Jost', sans-serif; font-size: 17px;">
     <div id="root"></div>
+    
+    <!-- OneSignal Test Button - Hidden for now -->
+    <!-- <div id="onesignal-test" style="position: fixed; top: 10px; right: 10px; z-index: 9999; background: #007bff; color: white; padding: 10px; border-radius: 5px; cursor: pointer; font-size: 12px;">
+      Test OneSignal
+    </div> -->
+    
+    <!-- Test button functionality - Hidden for now -->
+    <!-- <script>
+      // Test button functionality
+      document.getElementById('onesignal-test').addEventListener('click', function() {
+        console.log('🧪 Manual OneSignal test triggered');
+        
+        // Check if OneSignal is available
+        if (window.OneSignal && typeof window.OneSignal.getNotificationPermission === 'function') {
+          console.log('🔍 OneSignal object available');
+          
+          OneSignal.getNotificationPermission().then(function(permission) {
+            console.log('🔔 Permission:', permission);
+            
+            OneSignal.getUserId().then(function(userId) {
+              console.log('👤 User ID:', userId);
+              
+              if (permission === 'default') {
+                console.log('📱 Showing native prompt...');
+                OneSignal.showNativePrompt().then(function() {
+                  console.log('✅ Prompt shown successfully');
+                }).catch(function(error) {
+                  console.error('❌ Error showing prompt:', error);
+                });
+              } else if (permission === 'denied') {
+                console.log('❌ Notifications blocked by user');
+                document.getElementById('onesignal-test').innerHTML = 'Notifications Blocked';
+                document.getElementById('onesignal-test').style.background = '#ffc107';
+              } else {
+                console.log('✅ Notifications already granted');
+                document.getElementById('onesignal-test').innerHTML = 'Notifications Enabled';
+                document.getElementById('onesignal-test').style.background = '#28a745';
+              }
+            });
+          });
+        } else {
+          console.log('❌ OneSignal not available yet');
+          
+          // Check what's available
+          console.log('🔍 window.OneSignal:', window.OneSignal);
+          console.log('🔍 typeof OneSignal:', typeof window.OneSignal);
+          
+          if (window.OneSignal) {
+            console.log('🔍 OneSignal methods:', Object.keys(window.OneSignal));
+          }
+          
+          document.getElementById('onesignal-test').innerHTML = 'OneSignal Loading...';
+          document.getElementById('onesignal-test').style.background = '#6c757d';
+        }
+      });
+    </script> -->
+    
     <script type="module" src="/src/main.tsx"></script>
     <!-- Tidio chat script will be loaded conditionally via React -->
   </body>
