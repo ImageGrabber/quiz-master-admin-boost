@@ -322,30 +322,42 @@ function StickyLeaderboardPanel() {
 function FaqSection() {
   const faqs = [
     {
-      q: "How do I join a Bible quiz event?",
-      a: "Simply sign up for a free account, then join any scheduled quiz event from your dashboard. You can participate in the Bible Quiz Competition 2024, Bible Quiz Competition 2025, and our Online Bible Quiz Competition 2025 from anywhere."
+      q: "How do I join a Bible quiz?",
+      a: "Simply visit our homepage and click 'Today's Quiz' to start immediately, or sign up for a free account to access weekly quizzes, create your own quizzes, and track your progress on the leaderboard."
     },
     {
-      q: "Are there prizes for top scorers?",
-      a: "Yes! Weekly and monthly top scorers win prizes, certificates, and recognition on the leaderboard in every Bible competition."
+      q: "What types of quizzes are available?",
+      a: "We offer Today's Quiz (Romans), Weekly Bible Challenges, public quizzes for all 66 Bible books, and the ability to create and host your own live quizzes with an 8-character join code."
+    },
+    {
+      q: "How does the scoring system work?",
+      a: "You earn 4 points for each correct answer, lose 1 point for wrong answers, and receive time bonuses for quick responses. The faster you answer correctly, the more points you earn!"
+    },
+    {
+      q: "Can I create my own quizzes?",
+      a: "Yes! You can create custom Bible quizzes with your own questions, choose between requiring login or allowing guest participation, and host live sessions that others can join with a simple code."
     },
     {
       q: "Is the Bible Quiz suitable for all ages?",
-      a: "Yes, our quizzes are designed for all ages, from kids to adults, with questions for every level. Join the Bible competition 2025 with your family or group!"
+      a: "Absolutely! Our quizzes are designed for all ages, from children to adults, with questions covering every level of Bible knowledge. Perfect for families, youth groups, and church communities."
     },
     {
-      q: "How is my score calculated?",
-      a: "You earn points for correct answers, speed, and bonus rounds. Wrong answers may deduct points. This applies to all our Bible quiz competitions."
+      q: "What Bible topics are covered?",
+      a: "We have quizzes for all 66 books of the Bible, including Old Testament stories, New Testament teachings, Bible characters, parables, miracles, prophecies, and much more. Each quiz is carefully crafted to test and expand your knowledge."
     },
     {
-      q: "Do I need to pay to participate?",
-      a: "Most quizzes are free to join. Some special events, like the Online Bible Quiz Competition 2025, may require a small entry fee for prizes."
+      q: "How do I track my progress?",
+      a: "Create a free account to access your personal dashboard, view your quiz history, see your scores, and compete on the global leaderboard. You can also track your improvement over time."
+    },
+    {
+      q: "Can I participate without creating an account?",
+      a: "Yes! You can take Today's Quiz and many public quizzes as a guest. However, creating a free account gives you access to more features, progress tracking, and the ability to create your own quizzes."
     }
   ];
   const [open, setOpen] = useState(null);
   return (
     <section className="py-24 bg-white">
-      <div className="max-w-2xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto px-4">
         <div className="flex flex-col items-center mb-10">
           <div className="flex items-center gap-2 mb-2">
             <span className="inline-flex items-center px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm font-semibold">
@@ -358,7 +370,7 @@ function FaqSection() {
             <a href="mailto:info@biblequizcompetition.com" className="text-blue-600 underline">Contact our support team.</a>
           </p>
         </div>
-        <div className="space-y-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {faqs.map((faq, i) => (
             <div key={i} className="rounded-2xl border-2 border-purple-200 bg-white p-0 overflow-hidden transition-all">
               <button
@@ -600,10 +612,10 @@ const Index = () => {
               <div className="mt-20 mb-4"></div>
               
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10 leading-tight  mb-4">
-                Join the <span className="text-blue-700">Bible Quiz Challenge!</span>
+                Join the <span className="text-blue-700">Free Bible Quiz Challenge!</span>
               </h1>
               <p className="text-xl text-gray-700 mb-8 max-w-4xl mx-auto leading-relaxed">
-                Test your knowledge, compete with others, and climb the leaderboard every week.
+                Test your knowledge, compete with others, and climb the leaderboard every week. <span className="font-semibold text-green-600">100% Free</span> - No subscription required!
               </p>
               
               {/* Today's Quiz Button - Moved above verse and made bigger */}
