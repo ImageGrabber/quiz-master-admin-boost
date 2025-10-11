@@ -579,20 +579,29 @@ const Index = () => {
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10 leading-tight  mb-4">
                 Join the <span className="text-blue-700">Bible Quiz Challenge!</span>
               </h1>
-              <p className="text-xl text-gray-700 mb-6 max-w-4xl mx-auto leading-relaxed">
+              <p className="text-xl text-gray-700 mb-8 max-w-4xl mx-auto leading-relaxed">
                 Test your knowledge, compete with others, and climb the leaderboard every Saturday.
               </p>
+              
+              {/* Today's Quiz Button - Moved above verse and made bigger */}
+              <div className="flex justify-center mb-8">
+                <Button size="lg" className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-12 py-8 text-xl font-bold rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 border-0 transform hover:scale-105" onClick={() => navigate("/todays-quiz")}> 
+                  <Calendar className="w-6 h-6 mr-3" /> 
+                  Today's Quiz - Romans 
+                  <ArrowRight className="w-6 h-6 ml-3" /> 
+                </Button>
+              </div>
+              
               {verse && (
                 <div className="max-w-3xl mx-auto mb-8">
                   <div className="rounded-2xl bg-white/70 backdrop-blur border border-blue-100 shadow p-4 md:p-5">
-                    <div className="text-gray-800 text-base md:text-lg leading-relaxed">“{verse.text}”</div>
+                    <div className="text-gray-800 text-base md:text-lg leading-relaxed">"{verse.text}"</div>
                     <div className="mt-2 text-sm font-semibold text-blue-700">— {verse.ref}</div>
                   </div>
                 </div>
               )}
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button size="lg" className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-6 text-lg font-semibold rounded shadow-lg hover:shadow-xl transition-all duration-300 border-0" onClick={() => navigate("/todays-quiz")}> <Calendar className="w-5 h-5 mr-2" /> Today's Quiz <ArrowRight className="w-5 h-5 ml-2" /> </Button>
                 {/* <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold rounded shadow-lg hover:shadow-xl transition-all duration-300 border-0" onClick={() => navigate("/auth/login")}> <Play className="w-5 h-5 mr-2" /> Start Quiz Now <ArrowRight className="w-5 h-5 ml-2" /> </Button> */}
                 <Button size="lg" className="px-8 py-6 text-lg font-medium rounded bg-green-500 hover:bg-green-600 text-white transition-all duration-300 border-0" onClick={() => navigate('/host-live-bible-quizzes-with-confidence')}> <Play className="w-5 h-5 mr-2" /> Host a Live Quiz</Button>
                 <Button size="lg" className="px-8 py-6 text-lg font-medium rounded bg-orange-500 hover:bg-orange-600 text-white transition-all duration-300 border-0" onClick={() => navigate('/bible-questions-and-answers-hub')}> <Book className="w-5 h-5 mr-2" /> Bible Q&A Hub</Button>
