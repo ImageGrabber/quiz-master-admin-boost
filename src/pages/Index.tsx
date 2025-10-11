@@ -542,7 +542,7 @@ const Index = () => {
       <Helmet>
         <title>Bible Quiz Competition | Weekly Online Bible Quiz Events</title>
         <meta name="description" content="Test your knowledge with weekly Bible quizzes, host live sessions, and climb the leaderboard. Free and fun for all ages." />
-        <link rel="canonical" href="/" />
+        <link rel="canonical" href="https://biblequizcompetition.com/" />
         <meta property="og:title" content="Bible Quiz Competition | Weekly Online Bible Quiz Events" />
         <meta property="og:description" content="Test your knowledge with weekly Bible quizzes, host live sessions, and climb the leaderboard." />
       </Helmet>
