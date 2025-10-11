@@ -13,6 +13,7 @@ import {
   Menu,
   X,
   Home,
+  Calendar,
   HelpCircle,
   Activity,
   Trophy,
@@ -79,6 +80,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       href: "/admin/upload",
       icon: Upload,
       current: location.pathname === "/admin/upload"
+    },
+    {
+      name: "Weekly Quiz Attendance",
+      href: "/admin/weekly-attendance",
+      icon: Calendar,
+      current: location.pathname === "/admin/weekly-attendance"
     },
     {
       name: "Realtime Health Check",

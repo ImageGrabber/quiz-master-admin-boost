@@ -13,6 +13,7 @@ function generateSitemap() {
   const urls = [
     // Main pages
     { loc: '/', priority: '1.0', changefreq: 'weekly' },
+    { loc: '/todays-quiz', priority: '0.95', changefreq: 'daily' },
     { loc: '/articles', priority: '0.9', changefreq: 'weekly' },
     { loc: '/public-leaderboard', priority: '0.8', changefreq: 'daily' },
     { loc: '/host-live-bible-quizzes-with-confidence', priority: '0.9', changefreq: 'monthly' },
