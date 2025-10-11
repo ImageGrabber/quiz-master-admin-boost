@@ -6,6 +6,222 @@ export interface AdminEmailData {
   emailType?: 'custom' | 'announcement' | 'reminder' | 'congratulations';
 }
 
+// SMTP is now the only email provider
+
+// Helper function to create HTML content for emails
+const createEmailHTML = (data: AdminEmailData): string => {
+  const baseStyles = `
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+      line-height: 1.6; 
+      color: #374151; 
+      max-width: 600px; 
+      margin: 0 auto; 
+      padding: 20px;
+      background-color: #f9fafb;
+    }
+    .container { 
+      background: white; 
+      border-radius: 12px; 
+      padding: 32px; 
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e5e7eb;
+    }
+    .header { 
+      text-align: center; 
+      margin-bottom: 32px; 
+      padding-bottom: 24px;
+      border-bottom: 2px solid #f3f4f6;
+    }
+    .header h1 { 
+      color: #1f2937; 
+      font-size: 28px; 
+      margin: 0 0 8px 0;
+      font-weight: 700;
+    }
+    .header p { 
+      color: #6b7280; 
+      font-size: 16px; 
+      margin: 0;
+    }
+    .message-content {
+      background: #f8fafc;
+      padding: 24px;
+      border-radius: 12px;
+      border-left: 4px solid #3b82f6;
+      margin: 24px 0;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .footer { 
+      margin-top: 32px; 
+      padding-top: 24px; 
+      border-top: 1px solid #e5e7eb; 
+      text-align: center; 
+      color: #9ca3af; 
+      font-size: 14px;
+    }
+    .cta-button { 
+      display: inline-block; 
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8); 
+      color: white; 
+      padding: 16px 32px; 
+      text-decoration: none; 
+      border-radius: 12px; 
+      font-weight: 600; 
+      text-align: center; 
+      margin: 24px 0;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+    }
+  `;
+
+  const getEmailTemplate = (type: string, userName: string, subject: string, message: string) => {
+    switch (type) {
+      case 'announcement':
+        return `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>${subject}</title>
+            <style>${baseStyles}</style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1>📢 Important Announcement</h1>
+                <p>From the Bible Quiz Competition Team</p>
+              </div>
+              <div class="message-content">
+                <p><strong>Hello ${userName},</strong></p>
+                <p>${message}</p>
+              </div>
+              <div style="text-align: center;">
+                <a href="${import.meta.env.VITE_SITE_URL || 'https://biblequizcompetition.com'}/dashboard" 
+                   class="cta-button">
+                  Visit Dashboard
+                </a>
+              </div>
+              <div class="footer">
+                <p>This is an important announcement from Bible Quiz Competition.</p>
+                <p>You can manage your email preferences in your <a href="${import.meta.env.VITE_SITE_URL || 'https://biblequizcompetition.com'}/dashboard/settings" style="color: #3b82f6;">account settings</a>.</p>
+              </div>
+            </div>
+          </body>
+          </html>
+        `;
+
+      case 'reminder':
+        return `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>${subject}</title>
+            <style>${baseStyles}</style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1>⏰ Friendly Reminder</h1>
+                <p>Don't miss out on your Bible learning journey!</p>
+              </div>
+              <div class="message-content">
+                <p><strong>Hi ${userName},</strong></p>
+                <p>${message}</p>
+              </div>
+              <div style="text-align: center;">
+                <a href="${import.meta.env.VITE_SITE_URL || 'https://biblequizcompetition.com'}/quiz-selection" 
+                   class="cta-button">
+                  Take a Quiz Now
+                </a>
+              </div>
+              <div class="footer">
+                <p>This is a friendly reminder from Bible Quiz Competition.</p>
+                <p>You can manage your email preferences in your <a href="${import.meta.env.VITE_SITE_URL || 'https://biblequizcompetition.com'}/dashboard/settings" style="color: #3b82f6;">account settings</a>.</p>
+              </div>
+            </div>
+          </body>
+          </html>
+        `;
+
+      case 'congratulations':
+        return `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>${subject}</title>
+            <style>${baseStyles}</style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1>🎉 Congratulations!</h1>
+                <p>You're doing amazing in your Bible learning journey!</p>
+              </div>
+              <div class="message-content">
+                <p><strong>Dear ${userName},</strong></p>
+                <p>${message}</p>
+              </div>
+              <div style="text-align: center;">
+                <a href="${import.meta.env.VITE_SITE_URL || 'https://biblequizcompetition.com'}/leaderboard" 
+                   class="cta-button">
+                  View Leaderboard
+                </a>
+              </div>
+              <div class="footer">
+                <p>Congratulations from the Bible Quiz Competition team!</p>
+                <p>You can manage your email preferences in your <a href="${import.meta.env.VITE_SITE_URL || 'https://biblequizcompetition.com'}/dashboard/settings" style="color: #3b82f6;">account settings</a>.</p>
+              </div>
+            </div>
+          </body>
+          </html>
+        `;
+
+      default: // custom
+        return `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>${subject}</title>
+            <style>${baseStyles}</style>
+          </head>
+          <body>
+            <div class="container">
+              <div class="header">
+                <h1>📧 Message from Admin</h1>
+                <p>Personal message from Bible Quiz Competition</p>
+              </div>
+              <div class="message-content">
+                <p><strong>Hello ${userName},</strong></p>
+                <p>${message}</p>
+              </div>
+              <div style="text-align: center;">
+                <a href="${import.meta.env.VITE_SITE_URL || 'https://biblequizcompetition.com'}/dashboard" 
+                   class="cta-button">
+                  Visit Dashboard
+                </a>
+              </div>
+              <div class="footer">
+                <p>This message was sent by the Bible Quiz Competition admin team.</p>
+                <p>You can manage your email preferences in your <a href="${import.meta.env.VITE_SITE_URL || 'https://biblequizcompetition.com'}/dashboard/settings" style="color: #3b82f6;">account settings</a>.</p>
+              </div>
+            </div>
+          </body>
+          </html>
+        `;
+    }
+  };
+
+  return getEmailTemplate(data.emailType || 'custom', data.userName, data.subject, data.message);
+};
+
 export const sendAdminEmail = async (data: AdminEmailData): Promise<{ success: boolean; error?: string }> => {
   try {
     // Check if environment variables are available
@@ -18,54 +234,28 @@ export const sendAdminEmail = async (data: AdminEmailData): Promise<{ success: b
     }
 
     console.log('Attempting to send admin email to:', data.email);
+    console.log('Using SMTP provider (Brevo)');
     console.log('Supabase URL:', import.meta.env.VITE_SUPABASE_URL);
 
-    // Try the admin-specific email function first
-    let response;
-    try {
-      response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-admin-email`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-          },
-          body: JSON.stringify(data),
-        }
-      );
-      
-      // If we get a 404, the function doesn't exist, use fallback
-      if (response.status === 404) {
-        throw new Error('Admin email function not found');
+    // Create HTML content for SMTP
+    const htmlContent = createEmailHTML(data);
+    
+    const response = await fetch(
+      `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-smtp-email`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify({
+          to: data.email,
+          subject: data.subject,
+          html: htmlContent,
+          from: 'Bible Quiz Competition <noreply@biblequizcompetition.com>'
+        }),
       }
-    } catch (fetchError) {
-      console.log('Admin email function not available, trying fallback...');
-      
-      // Fallback: Use the existing quiz completion email function with modified data
-      const fallbackData = {
-        email: data.email,
-        userName: data.userName,
-        quizTitle: data.subject, // Use subject as quiz title
-        score: 100, // Default score for admin emails
-        correctAnswers: 1,
-        totalQuestions: 1,
-        timeUsed: 0,
-        accuracy: 100
-      };
-
-      response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-quiz-completion-email`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-          },
-          body: JSON.stringify(fallbackData),
-        }
-      );
-    }
+    );
 
     console.log('Response status:', response.status);
     console.log('Response headers:', response.headers);

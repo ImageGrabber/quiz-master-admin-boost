@@ -16,3 +16,4 @@ const questions = [
 export default function GenesisCh22Advanced() {
   return <BibleBookQuiz title="Genesis 22 - Advanced" questions={questions} bookName="Genesis" />;
 }
+
