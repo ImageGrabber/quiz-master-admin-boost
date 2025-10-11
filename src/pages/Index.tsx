@@ -570,12 +570,15 @@ const Index = () => {
           `}</style>
           <div className="relative z-10">
             <div className="max-w-4xl mx-auto">
-              <div className="flex justify-center mb-4">
+              {/* <div className="flex justify-center mb-4">
                 <span className="inline-flex items-center px-4 py-1 mt-20 mb-4 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold text-sm shadow">
                   <Calendar className="w-4 h-4 mr-2" />
                   Next Quiz: Saturday, 8 AM – 8 PM <span className="ml-2 text-white font-normal">{nextQuizLabel}</span>
                 </span>
-              </div>
+              </div> */}
+              
+              <div className="mt-20 mb-4"></div>
+              
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10 leading-tight  mb-4">
                 Join the <span className="text-blue-700">Bible Quiz Challenge!</span>
               </h1>
@@ -604,6 +607,7 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 {/* <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-6 text-lg font-semibold rounded shadow-lg hover:shadow-xl transition-all duration-300 border-0" onClick={() => navigate("/auth/login")}> <Play className="w-5 h-5 mr-2" /> Start Quiz Now <ArrowRight className="w-5 h-5 ml-2" /> </Button> */}
                 <Button size="lg" className="px-8 py-6 text-lg font-medium rounded bg-green-500 hover:bg-green-600 text-white transition-all duration-300 border-0" onClick={() => navigate('/host-live-bible-quizzes-with-confidence')}> <Play className="w-5 h-5 mr-2" /> Host a Live Quiz</Button>
+                <Button size="lg" className="px-8 py-6 text-lg font-medium rounded bg-purple-500 hover:bg-purple-600 text-white transition-all duration-300 border-0" onClick={() => navigate('/weekly-quiz')}> <Calendar className="w-5 h-5 mr-2" /> Weekly Quiz</Button>
                 <Button size="lg" className="px-8 py-6 text-lg font-medium rounded bg-orange-500 hover:bg-orange-600 text-white transition-all duration-300 border-0" onClick={() => navigate('/bible-questions-and-answers-hub')}> <Book className="w-5 h-5 mr-2" /> Bible Q&A Hub</Button>
               </div>
               
