@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
-import { Trophy, Search, BookOpen, Users, Target, TrendingUp, Star, Clock, Zap, BookMarked, Heart, Award, Lightbulb, Globe, Shield, Crown, X } from "lucide-react";
+import { Trophy, Search, BookOpen, Users, Target, TrendingUp, Star, Clock, Zap, BookMarked, Heart, Award, Lightbulb, Globe, Shield, Crown, X, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -138,6 +138,21 @@ export default function BibleQA() {
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [isCategoryDialogOpen, setIsCategoryDialogOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (mobileMenuOpen && !(event.target as Element).closest('header')) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    if (mobileMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [mobileMenuOpen]);
 
   // Create a separate random array for Featured Quizzes that changes daily
   const getDailyRandomQuizzes = () => {
@@ -226,27 +241,46 @@ export default function BibleQA() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
       {/* Navbar */}
       <header className="bg-white/70 backdrop-blur-md border-b border-blue-100 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="container mx-auto px-4 py-3 sm:py-4 flex flex-row justify-between items-center relative">
           <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}> 
-            <img src="/sword.png" alt="Bible Quiz Competition Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
-            <span className="text-lg font-semibold text-gray-900">Bible Quiz Competition</span>
+            <img src="/sword.png" alt="Bible Quiz Competition Logo" className="w-6 h-6 sm:w-7 sm:h-7 mr-2 inline-block align-middle" />
+            <span className="text-base sm:text-lg font-semibold text-gray-900">Bible Quiz Competition</span>
           </div>
-          <nav className="flex items-center space-x-2">
+          {/* Hamburger for mobile */}
+          <button
+            className="md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-gray-100 transition-colors"
+            aria-label="Open navigation menu"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+          >
+            <Menu className="w-6 h-6 sm:w-7 sm:h-7 text-gray-900" />
+          </button>
+          {/* Nav links for desktop */}
+          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2 xl:space-x-3">
             <button 
-              className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" 
+              className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" 
               onClick={() => navigate("/bible-questions-and-answers-hub")}
             >
-              Bible Q&A Hub
+              <span className="hidden lg:inline">Bible Q&A Hub</span>
+              <span className="lg:hidden">Q&A Hub</span>
             </button>
             <button 
-              className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" 
+              className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" 
               onClick={() => navigate("/articles")}
             >
               Articles
             </button>
-            <Button variant="ghost" onClick={() => navigate("/auth/register")}>Sign Up</Button>
-            <Button onClick={() => navigate("/auth/login")}>Sign In</Button>
+            <Button variant="ghost" className="px-2 md:px-3 lg:px-4 py-2 text-sm lg:text-base" onClick={() => navigate("/auth/register")}>Sign Up</Button>
+            <Button className="px-2 md:px-3 lg:px-4 py-2 text-sm lg:text-base" onClick={() => navigate("/auth/login")}>Sign In</Button>
           </nav>
+          {/* Mobile dropdown menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden absolute top-full left-0 right-0 mt-2 mx-4 bg-white rounded-xl shadow-xl border border-blue-100 z-50 flex flex-col items-stretch overflow-hidden animate-in slide-in-from-top-2 duration-200">
+              <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A Hub</button>
+              <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
+              <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</button>
+              <button className="bg-black text-white font-semibold px-4 py-4 text-left hover:bg-gray-900 active:bg-gray-800 transition-colors duration-200 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
+            </div>
+          )}
         </div>
       </header>
 
