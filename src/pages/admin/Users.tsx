@@ -13,6 +13,7 @@ import { Eye, Mail, Send, Users as UsersIcon, CheckCircle, XCircle } from "lucid
 import { supabase } from "@/integrations/supabase/client";
 import { sendAdminEmail, sendBulkAdminEmails, AdminEmailData } from "@/lib/adminEmailService";
 import { debugEmailService, debugQuizEmailService } from "@/lib/emailDebug";
+import { testSMTPEmail } from "@/lib/emailTest";
 import { useToast } from "@/hooks/use-toast";
 
 interface UserProfile {
@@ -33,6 +34,7 @@ const Users = () => {
   });
   const [isSendingEmail, setIsSendingEmail] = useState(false);
   const [bulkProgress, setBulkProgress] = useState({ completed: 0, total: 0 });
+  // SMTP is now the only email provider
   const { toast } = useToast();
 
   useEffect(() => {
@@ -183,6 +185,38 @@ const Users = () => {
     }
   };
 
+  const handleTestEmail = async () => {
+    const testEmail = prompt('Enter test email address:');
+    if (!testEmail) return;
+
+    setIsSendingEmail(true);
+    
+    try {
+      const result = await testSMTPEmail(testEmail);
+
+      if (result.success) {
+        toast({
+          title: "Test Email Sent",
+          description: "Test email sent successfully via SMTP (Brevo)",
+        });
+      } else {
+        toast({
+          title: "Test Failed",
+          description: result.error || "Failed to send test email via SMTP",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Test Error",
+        description: "Error testing SMTP email",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSendingEmail(false);
+    }
+  };
+
   return (
     <AdminLayout>
       <div className="space-y-8">
@@ -215,6 +249,15 @@ const Users = () => {
             >
               <XCircle className="w-4 h-4" />
               <span>Debug Email</span>
+            </Button>
+            <Button
+              variant="outline"
+              onClick={handleTestEmail}
+              disabled={isSendingEmail}
+              className="flex items-center space-x-2 text-blue-600 border-blue-200 hover:bg-blue-50"
+            >
+              <Mail className="w-4 h-4" />
+              <span>Test SMTP</span>
             </Button>
           </div>
         </div>
@@ -320,6 +363,12 @@ const Users = () => {
             </DialogHeader>
             
             <div className="space-y-4">
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <p className="text-sm text-blue-800 font-medium">
+                  📧 Using SMTP (Brevo) - smtp-relay.brevo.com:587
+                </p>
+              </div>
+
               <div>
                 <Label htmlFor="emailType">Email Type</Label>
                 <Select

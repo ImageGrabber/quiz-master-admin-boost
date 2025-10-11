@@ -243,3 +243,4 @@ export default function GenesisChapter22Full() {
     </div>
   );
 }
+
