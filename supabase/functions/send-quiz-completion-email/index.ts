@@ -233,7 +233,7 @@ serve(async (req) => {
     `
 
     // Send email using Brevo SMTP API
-    const brevoApiKey = Deno.env.get('BREVO_API_KEY') || 'NPd2F9mEIJCBj08U'
+    const brevoApiKey = 'NPd2F9mEIJCBj08U'
     
     const response = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
