@@ -685,16 +685,7 @@ const TodaysQuiz = () => {
             </Card>
 
             {/* Enhanced Navigation */}
-            <div className="flex justify-between items-center">
-              <Button
-                variant="outline"
-                onClick={() => navigate('/')}
-                className="px-8 py-4 text-lg font-semibold rounded-xl border-2 border-gray-300 text-gray-600 hover:border-gray-400 hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-lg"
-              >
-                <ArrowLeft className="w-6 h-6 mr-2" />
-                Back to Home
-              </Button>
-              
+            <div className="flex justify-center items-center">
               <Button
                 onClick={currentQuestion === getCurrentQuestions().length - 1 ? handleSubmit : handleNext}
                 disabled={selectedAnswer === null}
