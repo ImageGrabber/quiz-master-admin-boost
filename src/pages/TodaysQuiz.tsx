@@ -596,8 +596,8 @@ const TodaysQuiz = () => {
         <div className="container mx-auto px-4 py-8 relative z-10">
           <div className="max-w-5xl mx-auto">
             {/* Enhanced Header */}
-            <div className="text-center mb-12">
-              <div className="flex items-center justify-center mb-6">
+            <div className="text-center mb-8 sm:mb-12">
+              {/* <div className="flex items-center justify-center mb-6">
                 <div className="relative">
                   <img src="/sword.png" alt="Bible Quiz Competition Logo" className="w-12 h-12 mr-3" />
                   <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center">
@@ -608,26 +608,26 @@ const TodaysQuiz = () => {
                   Today's Quiz - Romans
                 </h1>
               </div>
-              <p className="text-xl text-gray-600 mb-8">Test your knowledge of the book of Romans</p>
+              <p className="text-xl text-gray-600 mb-8">Test your knowledge of the book of Romans</p> */}
               
               {/* Enhanced Timer and Progress */}
-              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 mb-8">
-                <div className="flex items-center gap-3 bg-white/90 backdrop-blur border-2 border-blue-200 rounded-2xl px-4 sm:px-6 py-3 sm:py-4 shadow-xl w-full max-w-xs sm:w-auto">
+              <div className="flex flex-row justify-center items-center gap-3 sm:gap-8 mb-8">
+                <div className="flex items-center gap-2 sm:gap-3 bg-white/90 backdrop-blur border-2 border-blue-200 rounded-2xl px-3 sm:px-6 py-2 sm:py-4 shadow-xl flex-1 max-w-xs sm:w-auto">
                   <div className="hidden sm:flex w-8 h-8 sm:w-10 sm:h-10 bg-blue-500 rounded-full items-center justify-center">
                     <Timer className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-xl sm:text-2xl font-bold text-blue-700">{formatTime(timeLeft)}</div>
-                    <div className="text-xs sm:text-sm text-blue-600 font-medium">Time Remaining</div>
+                    <div className="text-lg sm:text-2xl font-bold text-blue-700">{formatTime(timeLeft)}</div>
+                    <div className="text-xs sm:text-sm text-blue-600 font-medium">Time</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 bg-white/90 backdrop-blur border-2 border-green-200 rounded-2xl px-4 sm:px-6 py-3 sm:py-4 shadow-xl w-full max-w-xs sm:w-auto">
+                <div className="flex items-center gap-2 sm:gap-3 bg-white/90 backdrop-blur border-2 border-green-200 rounded-2xl px-3 sm:px-6 py-2 sm:py-4 shadow-xl flex-1 max-w-xs sm:w-auto">
                   <div className="hidden sm:flex w-8 h-8 sm:w-10 sm:h-10 bg-green-500 rounded-full items-center justify-center">
                     <Brain className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-xl sm:text-2xl font-bold text-green-700">
-                      {currentQuestion + 1} / {getCurrentQuestions().length}
+                    <div className="text-lg sm:text-2xl font-bold text-green-700">
+                      {currentQuestion + 1}/{getCurrentQuestions().length}
                     </div>
                     <div className="text-xs sm:text-sm text-green-600 font-medium">Questions</div>
                   </div>
