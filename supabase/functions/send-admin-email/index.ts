@@ -244,35 +244,39 @@ serve(async (req) => {
 
     const emailContent = getEmailContent(emailType, userName, subject, message)
 
-    // Send email using Resend
-    const apiKey = Deno.env.get('RESEND_API_KEY')
-    if (!apiKey) throw new Error('Resend API key not set in secrets!')
-
-    const response = await fetch('https://api.resend.com/emails', {
+    // Send email using Brevo SMTP API
+    const brevoApiKey = Deno.env.get('BREVO_API_KEY') || 'NPd2F9mEIJCBj08U'
+    
+    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
+        'api-key': brevoApiKey,
       },
       body: JSON.stringify({
-        from: 'Bible Quiz Competition <noreply@biblequizcompetition.com>',
-        to: email,
+        sender: { 
+          email: 'noreply@biblequizcompetition.com', 
+          name: 'Bible Quiz Competition' 
+        },
+        to: [{ email: email }],
         subject: subject,
-        html: emailContent,
+        htmlContent: emailContent,
+        textContent: emailContent.replace(/<[^>]*>/g, ''), // Strip HTML tags for text version
       }),
     })
 
     const data = await response.json()
-    if (!response.ok) throw new Error(data.message || 'Failed to send email')
+    if (!response.ok) throw new Error(data.message || 'Failed to send email via Brevo SMTP')
 
     return new Response(
       JSON.stringify({
         success: true,
-        message: 'Admin email sent successfully',
+        message: 'Admin email sent successfully via SMTP',
         email: email,
         subject: subject,
         emailType: emailType,
-        resend: true
+        provider: 'brevo-smtp',
+        messageId: data.messageId
       }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -287,7 +291,7 @@ serve(async (req) => {
       JSON.stringify({
         success: false,
         error: error.message,
-        resend: false
+        provider: 'brevo-smtp'
       }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },

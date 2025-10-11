@@ -257,6 +257,11 @@ export const sendAdminEmail = async (data: AdminEmailData): Promise<{ success: b
       }
     );
 
+    // If SMTP function is not available, throw an error instead of falling back to Resend
+    if (response.status === 404) {
+      throw new Error('SMTP email function not deployed. Please deploy the send-smtp-email function.');
+    }
+
     console.log('Response status:', response.status);
     console.log('Response headers:', response.headers);
 
