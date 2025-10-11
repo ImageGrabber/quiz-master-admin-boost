@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { trackQuizStart, trackQuizComplete, trackQuestionAnswer, trackQuizAbandon } from "@/utils/analytics";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -245,7 +246,8 @@ const TodaysQuiz = () => {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearTimeout(timer);
     } else if (timeLeft === 0 && !quizCompleted) {
-      // Time's up - auto submit
+      // Time's up - track abandonment and auto submit
+      trackQuizAbandon('todays-quiz-luke', 'Today\'s Quiz - Luke', currentQuestion + 1);
       handleSubmit();
     }
   }, [timeLeft, quizCompleted]);
@@ -266,6 +268,14 @@ const TodaysQuiz = () => {
         correct: isCorrect
       }];
       setAnswers(newAnswers);
+      
+      // Track question answer
+      trackQuestionAnswer(
+        'todays-quiz-luke',
+        currentQuestions[currentQuestion].id.toString(),
+        isCorrect,
+        0 // Time spent on question (could be enhanced with actual timing)
+      );
       
       if (isCorrect) {
         setScore(score + 1);
@@ -292,9 +302,29 @@ const TodaysQuiz = () => {
       }];
       setAnswers(newAnswers);
       
+      // Track final question answer
+      trackQuestionAnswer(
+        'todays-quiz-luke',
+        currentQuestions[currentQuestion].id.toString(),
+        isCorrect,
+        0 // Time spent on question (could be enhanced with actual timing)
+      );
+      
       if (isCorrect) {
         setScore(score + 1);
       }
+      
+      // Track quiz completion
+      const timeSpent = 120 - timeLeft; // Calculate time spent
+      trackQuizComplete(
+        'todays-quiz-luke',
+        'Today\'s Quiz - Luke',
+        score + (isCorrect ? 1 : 0),
+        currentQuestions.length,
+        timeSpent,
+        'mixed'
+      );
+      
       setQuizCompleted(true);
     }
   };
@@ -339,6 +369,9 @@ const TodaysQuiz = () => {
   const handleLanguageSelect = (language: 'english' | 'hindi' | 'malayalam') => {
     setSelectedLanguage(language);
     setShowLanguageSelection(false);
+    
+    // Track quiz start
+    trackQuizStart('todays-quiz-luke', 'Today\'s Quiz - Luke', 'mixed');
   };
 
   // Language selection screen
