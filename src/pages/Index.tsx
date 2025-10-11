@@ -583,7 +583,7 @@ const Index = () => {
                 Join the <span className="text-blue-700">Bible Quiz Challenge!</span>
               </h1>
               <p className="text-xl text-gray-700 mb-8 max-w-4xl mx-auto leading-relaxed">
-                Test your knowledge, compete with others, and climb the leaderboard every Saturday.
+                Test your knowledge, compete with others, and climb the leaderboard every week.
               </p>
               
               {/* Today's Quiz Button - Moved above verse and made bigger */}
