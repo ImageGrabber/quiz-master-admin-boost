@@ -8,7 +8,8 @@ import DefaultSEO from "@/components/DefaultSEO";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ChatWidget from "@/components/ChatWidget";
 import NotificationBanner from "@/components/NotificationBanner";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import Index from "./pages/Index";
 import TodaysQuiz from "./pages/TodaysQuiz";
 import Login from "./pages/auth/Login";
@@ -569,6 +570,8 @@ const App = () => {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
+        <Analytics />
+        <GoogleAnalytics />
       </TooltipProvider>
     </QueryClientProvider>
     </HelmetProvider>
