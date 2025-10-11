@@ -118,8 +118,8 @@ export default function GenesisHub() {
   };
 
 
-  // Detailed bullet points for chapters 17–20
-  const chapterPoints17to20: Record<number, string[]> = {
+  // Detailed bullet points for chapters 17–21
+  const chapterPoints17to21: Record<number, string[]> = {
     17: [
       "Covenant of circumcision; Abram becomes Abraham",
       "Sarai becomes Sarah; Isaac promised",
@@ -139,6 +139,11 @@ export default function GenesisHub() {
       "Abraham in Gerar; Sarah taken",
       "Abimelech's dream; God's warning",
       "Abraham prays; Abimelech healed",
+    ],
+    21: [
+      "Isaac born to Abraham and Sarah",
+      "Hagar and Ishmael sent away",
+      "Treaty at Beersheba with Abimelech",
     ],
   };
 
@@ -484,21 +489,21 @@ export default function GenesisHub() {
           </div>
         </section>
 
-        {/* Per-Chapter quick access (17–20) */}
-        <section id="chapters-17-20" className="mt-10 scroll-mt-24" style={{display: 'none'}}>
+        {/* Per-Chapter quick access (17–21) */}
+        <section id="chapters-17-21" className="mt-10 scroll-mt-24" style={{display: 'none'}}>
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-xl font-semibold text-gray-900">By Chapter (17–20)</h3>
+            <h3 className="text-xl font-semibold text-gray-900">By Chapter (17–21)</h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {[17,18,19,20].map((ch) => (
+            {[17,18,19,20,21].map((ch) => (
               <Card key={ch} className="p-3 flex flex-col h-full">
                 <CardHeader className="pb-2">
                   <CardTitle className="text-lg">Chapter {ch}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {chapterPoints17to20[ch] && (
+                  {chapterPoints17to21[ch] && (
                     <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-2">
-                      {chapterPoints17to20[ch].map((point, idx) => (
+                      {chapterPoints17to21[ch].map((point, idx) => (
                         <li key={idx}>{point}</li>
                       ))}
                     </ul>
@@ -521,7 +526,7 @@ export default function GenesisHub() {
             <h3 className="text-xl font-semibold text-gray-900">Genesis Quiz Chapter Wise</h3>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20].map((ch) => {
+            {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21].map((ch) => {
               // Get the appropriate chapter points based on chapter number
               let currentChapterPoints = null;
               if (ch >= 1 && ch <= 8) {
@@ -530,8 +535,8 @@ export default function GenesisHub() {
                 currentChapterPoints = chapterPoints9to12[ch];
               } else if (ch >= 13 && ch <= 16) {
                 currentChapterPoints = chapterPoints13to16[ch];
-              } else if (ch >= 17 && ch <= 20) {
-                currentChapterPoints = chapterPoints17to20[ch];
+              } else if (ch >= 17 && ch <= 21) {
+                currentChapterPoints = chapterPoints17to21[ch];
               }
 
               return (
@@ -559,6 +564,7 @@ export default function GenesisHub() {
                       {ch === 18 && "Three Visitors"}
                       {ch === 19 && "Sodom's Destruction"}
                       {ch === 20 && "Abraham in Gerar"}
+                      {ch === 21 && "The Birth of Isaac"}
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="flex-1">
