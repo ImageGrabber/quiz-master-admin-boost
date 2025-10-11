@@ -6,225 +6,225 @@ import { Badge } from "@/components/ui/badge";
 import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, User, Calendar, CheckCircle, Globe, Home, Settings, Medal, Crown, Bolt, ArrowLeft, Book, Menu, Timer, Languages } from "lucide-react";
 import { Helmet } from 'react-helmet';
 
-// Romans-themed quiz questions
-const romansQuizQuestions = [
+// Luke-themed quiz questions
+const lukeQuizQuestions = [
   {
     id: 1,
-    question: "Who wrote the book of Romans?",
-    options: ["Peter", "Paul", "John", "James"],
-    correct: 1,
-    explanation: "The Apostle Paul wrote the book of Romans. It is one of his most important epistles."
+    question: "Who wrote the Gospel of Luke?",
+    options: ["Peter", "Paul", "Luke", "John"],
+    correct: 2,
+    explanation: "Luke, a physician and companion of Paul, wrote the Gospel of Luke and the book of Acts."
   },
   {
     id: 2,
-    question: "What is the main theme of Romans 8:28?",
-    options: ["God's wrath", "All things work together for good", "The law", "Circumcision"],
+    question: "What was Luke's profession?",
+    options: ["Fisherman", "Physician", "Tax collector", "Scribe"],
     correct: 1,
-    explanation: "Romans 8:28 states that all things work together for good for those who love God and are called according to His purpose."
+    explanation: "Luke was a physician, which is why he often includes medical details in his Gospel."
   },
   {
     id: 3,
-    question: "According to Romans 3:23, what have all people done?",
-    options: ["Been saved", "Sinned and fall short of God's glory", "Been perfect", "Never sinned"],
+    question: "What did Luke emphasize about Jesus?",
+    options: ["Jesus as a teacher only", "Jesus as the Savior of all people, including Gentiles", "Jesus as a miracle worker only", "Jesus as a prophet only"],
     correct: 1,
-    explanation: "Romans 3:23 states that all have sinned and fall short of the glory of God."
+    explanation: "Luke emphasized Jesus as the universal Savior who came for all people, including Gentiles, the poor, and outcasts."
   },
   {
     id: 4,
-    question: "What is the 'wages of sin' according to Romans 6:23?",
-    options: ["Life", "Death", "Blessings", "Prosperity"],
+    question: "What did Luke record about Jesus' birth?",
+    options: ["He was born in Nazareth", "He was born in Bethlehem and visited by shepherds", "He was born in Jerusalem", "He was born in Egypt"],
     correct: 1,
-    explanation: "Romans 6:23 states that the wages of sin is death, but the gift of God is eternal life."
+    explanation: "Luke records that Jesus was born in Bethlehem and was visited by shepherds, emphasizing God's care for the humble."
   },
   {
     id: 5,
-    question: "In Romans 5:8, when did Christ die for us?",
-    options: ["When we were righteous", "When we were still sinners", "When we were perfect", "When we were good"],
+    question: "What famous parable is unique to Luke's Gospel?",
+    options: ["The Good Shepherd", "The Good Samaritan", "The Sower", "The Mustard Seed"],
     correct: 1,
-    explanation: "Romans 5:8 states that God demonstrates his own love for us in this: While we were still sinners, Christ died for us."
+    explanation: "The Good Samaritan parable is unique to Luke's Gospel and teaches about loving one's neighbor regardless of background."
   },
   {
     id: 6,
-    question: "What does Romans 10:9 say about salvation?",
-    options: ["It's impossible", "If you confess with your mouth and believe in your heart", "Only for Jews", "Only for Gentiles"],
+    question: "What did Luke emphasize about Jesus' ministry?",
+    options: ["Only to Jews", "To all people, including the poor and outcasts", "Only to the rich", "Only to the religious"],
     correct: 1,
-    explanation: "Romans 10:9 states that if you declare with your mouth, 'Jesus is Lord,' and believe in your heart that God raised him from the dead, you will be saved."
+    explanation: "Luke emphasized Jesus' ministry to all people, especially the poor, outcasts, women, and Gentiles."
   },
   {
     id: 7,
-    question: "According to Romans 12:2, what should we not conform to?",
-    options: ["God's will", "The pattern of this world", "The Bible", "Christ's example"],
+    question: "What did Luke record about Jesus' compassion?",
+    options: ["He was harsh", "He showed compassion to all, especially the marginalized", "He was indifferent", "He was selective"],
     correct: 1,
-    explanation: "Romans 12:2 states that we should not conform to the pattern of this world, but be transformed by the renewing of our mind."
+    explanation: "Luke emphasized Jesus' great compassion, especially toward women, children, the poor, and social outcasts."
   },
   {
     id: 8,
-    question: "What does Romans 8:1 say about those in Christ Jesus?",
-    options: ["They are condemned", "There is no condemnation", "They are perfect", "They are sinners"],
+    question: "What did Luke emphasize about the Holy Spirit?",
+    options: ["The Spirit was not important", "The Spirit was central to Jesus' ministry and the church", "The Spirit was limited", "The Spirit was irrelevant"],
     correct: 1,
-    explanation: "Romans 8:1 states that there is now no condemnation for those who are in Christ Jesus."
+    explanation: "Luke emphasized the Holy Spirit's role throughout Jesus' life and ministry, and in the early church."
   },
   {
     id: 9,
-    question: "In Romans 1:16, what is the gospel?",
-    options: ["The power of God for salvation", "A weakness", "Just a story", "A myth"],
-    correct: 0,
-    explanation: "Romans 1:16 states that the gospel is the power of God for the salvation of everyone who believes."
+    question: "What was Luke's message about Jesus' mission?",
+    options: ["He was just a teacher", "He came to seek and save the lost", "He was just a prophet", "He was just a miracle worker"],
+    correct: 1,
+    explanation: "Luke 19:10 states that 'the Son of Man came to seek and to save the lost,' summarizing Jesus' mission."
   },
   {
     id: 10,
-    question: "What does Romans 8:38-39 say about what can separate us from God's love?",
-    options: ["Nothing", "Sin", "Death", "Life"],
-    correct: 0,
-    explanation: "Romans 8:38-39 states that nothing can separate us from the love of God that is in Christ Jesus our Lord."
+    question: "What did Luke emphasize about prayer?",
+    options: ["Prayer was not important", "Jesus prayed frequently and taught about prayer", "Prayer was limited", "Prayer was irrelevant"],
+    correct: 1,
+    explanation: "Luke emphasized Jesus' prayer life, showing him praying at key moments and teaching about persistent prayer."
   }
 ];
 
 // Hindi translations
-const romansQuizQuestionsHindi = [
+const lukeQuizQuestionsHindi = [
   {
     id: 1,
-    question: "रोमियों की पुस्तक किसने लिखी?",
-    options: ["पतरस", "पौलुस", "यूहन्ना", "याकूब"],
-    correct: 1,
-    explanation: "प्रेरित पौलुस ने रोमियों की पुस्तक लिखी। यह उनके सबसे महत्वपूर्ण पत्रों में से एक है।"
+    question: "लूका का सुसमाचार किसने लिखा?",
+    options: ["पतरस", "पौलुस", "लूका", "यूहन्ना"],
+    correct: 2,
+    explanation: "लूका, जो एक चिकित्सक और पौलुस का साथी था, ने लूका का सुसमाचार और प्रेरितों के काम की पुस्तक लिखी।"
   },
   {
     id: 2,
-    question: "रोमियों 8:28 का मुख्य विषय क्या है?",
-    options: ["परमेश्वर का क्रोध", "सब बातें मिलकर भलाई को काम करती हैं", "व्यवस्था", "खतना"],
+    question: "लूका का व्यवसाय क्या था?",
+    options: ["मछुआरा", "चिकित्सक", "कर संग्राहक", "लिपिक"],
     correct: 1,
-    explanation: "रोमियों 8:28 कहता है कि सब बातें मिलकर भलाई को काम करती हैं उनके लिए जो परमेश्वर से प्रेम करते हैं और उसकी इच्छा के अनुसार बुलाए गए हैं।"
+    explanation: "लूका एक चिकित्सक था, इसीलिए वह अपने सुसमाचार में अक्सर चिकित्सा विवरण शामिल करता है।"
   },
   {
     id: 3,
-    question: "रोमियों 3:23 के अनुसार, सभी लोगों ने क्या किया है?",
-    options: ["बचाए गए हैं", "पाप किया है और परमेश्वर की महिमा से कम हैं", "सिद्ध हैं", "कभी पाप नहीं किया"],
+    question: "लूका ने यीशु के बारे में क्या जोर दिया?",
+    options: ["यीशु केवल एक शिक्षक थे", "यीशु सभी लोगों के उद्धारकर्ता थे, जिसमें अन्यजाति भी शामिल हैं", "यीशु केवल एक चमत्कारी थे", "यीशु केवल एक भविष्यद्वक्ता थे"],
     correct: 1,
-    explanation: "रोमियों 3:23 कहता है कि सब ने पाप किया है और परमेश्वर की महिमा से रहित हैं।"
+    explanation: "लूका ने यीशु को सार्वभौमिक उद्धारकर्ता के रूप में जोर दिया जो सभी लोगों के लिए आए, जिसमें अन्यजाति, गरीब और समाज से बाहर किए गए लोग भी शामिल हैं।"
   },
   {
     id: 4,
-    question: "रोमियों 6:23 के अनुसार, 'पाप की मजदूरी' क्या है?",
-    options: ["जीवन", "मृत्यु", "आशीषें", "समृद्धि"],
+    question: "लूका ने यीशु के जन्म के बारे में क्या लिखा?",
+    options: ["वह नासरत में पैदा हुए", "वह बैतलहम में पैदा हुए और चरवाहों ने उन्हें देखा", "वह यरूशलेम में पैदा हुए", "वह मिस्र में पैदा हुए"],
     correct: 1,
-    explanation: "रोमियों 6:23 कहता है कि पाप की मजदूरी मृत्यु है, परन्तु परमेश्वर का वरदान हमारे प्रभु मसीह यीशु में अनन्त जीवन है।"
+    explanation: "लूका लिखता है कि यीशु बैतलहम में पैदा हुए और चरवाहों ने उन्हें देखा, जो विनम्र लोगों के लिए परमेश्वर की देखभाल पर जोर देता है।"
   },
   {
     id: 5,
-    question: "रोमियों 5:8 में, मसीह हमारे लिए कब मरा?",
-    options: ["जब हम धर्मी थे", "जब हम अभी भी पापी थे", "जब हम सिद्ध थे", "जब हम अच्छे थे"],
+    question: "कौन सा प्रसिद्ध दृष्टांत लूका के सुसमाचार में अद्वितीय है?",
+    options: ["अच्छा चरवाहा", "अच्छा सामरी", "बोने वाला", "सरसों का दाना"],
     correct: 1,
-    explanation: "रोमियों 5:8 कहता है कि परमेश्वर अपना प्रेम हम पर इस रीति से प्रगट करता है कि जब हम अभी भी पापी थे, तब मसीह हमारे लिए मरा।"
+    explanation: "अच्छा सामरी का दृष्टांत लूका के सुसमाचार में अद्वितीय है और पृष्ठभूमि की परवाह किए बिना अपने पड़ोसी से प्रेम करने के बारे में सिखाता है।"
   },
   {
     id: 6,
-    question: "रोमियों 10:9 मुक्ति के बारे में क्या कहता है?",
-    options: ["यह असंभव है", "यदि तू अपने मुंह से यीशु को प्रभु जानकर अंगीकार करे", "केवल यहूदियों के लिए", "केवल अन्यजातियों के लिए"],
+    question: "लूका ने यीशु की सेवकाई के बारे में क्या जोर दिया?",
+    options: ["केवल यहूदियों के लिए", "सभी लोगों के लिए, जिसमें गरीब और समाज से बाहर किए गए लोग भी शामिल हैं", "केवल अमीरों के लिए", "केवल धार्मिक लोगों के लिए"],
     correct: 1,
-    explanation: "रोमियों 10:9 कहता है कि यदि तू अपने मुंह से यीशु को प्रभु जानकर अंगीकार करे और अपने मन से विश्वास करे कि परमेश्वर ने उसे मरे हुओं में से जिलाया, तो तू निश्चय उद्धार पाएगा।"
+    explanation: "लूका ने यीशु की सेवकाई को सभी लोगों के लिए जोर दिया, विशेष रूप से गरीबों, समाज से बाहर किए गए लोगों, महिलाओं और अन्यजातियों के लिए।"
   },
   {
     id: 7,
-    question: "रोमियों 12:2 के अनुसार, हमें किसके अनुरूप नहीं होना चाहिए?",
-    options: ["परमेश्वर की इच्छा", "इस संसार के ढंग के अनुसार", "बाइबल", "मसीह के उदाहरण"],
+    question: "लूका ने यीशु की दया के बारे में क्या लिखा?",
+    options: ["वह कठोर थे", "उन्होंने सभी के प्रति दया दिखाई, विशेष रूप से हाशिए पर रहने वालों के प्रति", "वे उदासीन थे", "वे चयनात्मक थे"],
     correct: 1,
-    explanation: "रोमियों 12:2 कहता है कि इस संसार के ढंग के अनुसार न बनो, परन्तु अपने मन के नए हो जाने से तुम्हारा चालचलन बदलता जाए।"
+    explanation: "लूका ने यीशु की महान दया पर जोर दिया, विशेष रूप से महिलाओं, बच्चों, गरीबों और सामाजिक रूप से हाशिए पर रहने वाले लोगों के प्रति।"
   },
   {
     id: 8,
-    question: "रोमियों 8:1 मसीह यीशु में रहने वालों के बारे में क्या कहता है?",
-    options: ["वे दोषी हैं", "अब कोई दोष नहीं", "वे सिद्ध हैं", "वे पापी हैं"],
+    question: "लूका ने पवित्र आत्मा के बारे में क्या जोर दिया?",
+    options: ["आत्मा महत्वपूर्ण नहीं था", "आत्मा यीशु की सेवकाई और कलीसिया के लिए केंद्रीय था", "आत्मा सीमित था", "आत्मा अप्रासंगिक था"],
     correct: 1,
-    explanation: "रोमियों 8:1 कहता है कि अब मसीह यीशु में रहने वालों पर कोई दोष नहीं।"
+    explanation: "लूका ने पवित्र आत्मा की भूमिका पर जोर दिया जो यीशु के जीवन और सेवकाई के दौरान और प्रारंभिक कलीसिया में थी।"
   },
   {
     id: 9,
-    question: "रोमियों 1:16 में, सुसमाचार क्या है?",
-    options: ["मुक्ति के लिए परमेश्वर की सामर्थ्य", "एक कमजोरी", "केवल एक कहानी", "एक कल्पना"],
-    correct: 0,
-    explanation: "रोमियों 1:16 कहता है कि सुसमाचार हर एक विश्वास करने वाले के लिए पहले यहूदी की, फिर यूनानी की भलाई के लिए परमेश्वर की सामर्थ्य है।"
+    question: "लूका का यीशु के मिशन के बारे में क्या संदेश था?",
+    options: ["वे केवल एक शिक्षक थे", "वे खोए हुओं को खोजने और बचाने आए", "वे केवल एक भविष्यद्वक्ता थे", "वे केवल एक चमत्कारी थे"],
+    correct: 1,
+    explanation: "लूका 19:10 कहता है कि 'मनुष्य का पुत्र खोए हुओं को खोजने और बचाने आया है,' जो यीशु के मिशन को संक्षेप में बताता है।"
   },
   {
     id: 10,
-    question: "रोमियों 8:38-39 कहता है कि क्या हमें परमेश्वर के प्रेम से अलग कर सकता है?",
-    options: ["कुछ नहीं", "पाप", "मृत्यु", "जीवन"],
-    correct: 0,
-    explanation: "रोमियों 8:38-39 कहता है कि मृत्यु, न जीवन, न स्वर्गदूत, न प्रधानताएं, न वर्तमान, न भविष्य, न कोई सामर्थ्य, न ऊंचाई, न गहराई, और न कोई और सृष्टि हमें परमेश्वर के प्रेम से अलग कर सकेगी जो हमारे प्रभु मसीह यीशु में है।"
+    question: "लूका ने प्रार्थना के बारे में क्या जोर दिया?",
+    options: ["प्रार्थना महत्वपूर्ण नहीं थी", "यीशु ने बार-बार प्रार्थना की और प्रार्थना के बारे में सिखाया", "प्रार्थना सीमित थी", "प्रार्थना अप्रासंगिक थी"],
+    correct: 1,
+    explanation: "लूका ने यीशु की प्रार्थना जीवन पर जोर दिया, उन्हें महत्वपूर्ण क्षणों में प्रार्थना करते हुए दिखाया और लगातार प्रार्थना के बारे में सिखाते हुए।"
   }
 ];
 
 // Malayalam translations
-const romansQuizQuestionsMalayalam = [
+const lukeQuizQuestionsMalayalam = [
   {
     id: 1,
-    question: "റോമാക്കാരുടെ പുസ്തകം ആരാണ് എഴുതിയത്?",
-    options: ["പത്രോസ്", "പൗലോസ്", "യോഹന്നാൻ", "യാക്കോബ്"],
-    correct: 1,
-    explanation: "അപ്പോസ്തലനായ പൗലോസാണ് റോമാക്കാരുടെ പുസ്തകം എഴുതിയത്. ഇത് അദ്ദേഹത്തിന്റെ ഏറ്റവും പ്രധാനപ്പെട്ട ലേഖനങ്ങളിലൊന്നാണ്."
+    question: "ലൂക്കായുടെ സുവിശേഷം ആരാണ് എഴുതിയത്?",
+    options: ["പത്രോസ്", "പൗലോസ്", "ലൂക്കാസ്", "യോഹന്നാൻ"],
+    correct: 2,
+    explanation: "ലൂക്കാസ്, ഒരു വൈദ്യനും പൗലോസിന്റെ കൂട്ടാളിയുമായിരുന്നു, ലൂക്കായുടെ സുവിശേഷവും പ്രേഷിതന്മാരുടെ പ്രവൃത്തികളുടെ പുസ്തകവും എഴുതി."
   },
   {
     id: 2,
-    question: "റോമാക്കാർ 8:28-ന്റെ പ്രധാന വിഷയം എന്താണ്?",
-    options: ["ദൈവത്തിന്റെ കോപം", "എല്ലാം ഒരുമിച്ച് നന്മയ്ക്ക് പ്രവർത്തിക്കുന്നു", "നിയമം", "ചർമ്മഛേദന"],
+    question: "ലൂക്കാസിന്റെ തൊഴിൽ എന്തായിരുന്നു?",
+    options: ["മീൻപിടുത്തക്കാരൻ", "വൈദ്യൻ", "നികുതി ശേഖരിക്കുന്നവൻ", "ലിപികൻ"],
     correct: 1,
-    explanation: "റോമാക്കാർ 8:28 പറയുന്നത് ദൈവത്തെ സ്നേഹിക്കുന്നവർക്കും അവന്റെ ഉദ്ദേശ്യപ്രകാരം വിളിക്കപ്പെട്ടവർക്കും എല്ലാം ഒരുമിച്ച് നന്മയ്ക്ക് പ്രവർത്തിക്കുന്നു എന്നാണ്."
+    explanation: "ലൂക്കാസ് ഒരു വൈദ്യനായിരുന്നു, അതുകൊണ്ടാണ് അദ്ദേഹം തന്റെ സുവിശേഷത്തിൽ പലപ്പോഴും വൈദ്യശാസ്ത്ര വിവരങ്ങൾ ഉൾപ്പെടുത്തിയിരിക്കുന്നത്."
   },
   {
     id: 3,
-    question: "റോമാക്കാർ 3:23 അനുസരിച്ച്, എല്ലാ ആളുകളും എന്ത് ചെയ്തിരിക്കുന്നു?",
-    options: ["രക്ഷിക്കപ്പെട്ടിരിക്കുന്നു", "പാപം ചെയ്ത് ദൈവത്തിന്റെ മഹത്വത്തിൽ നിന്ന് കുറവാണ്", "പൂർണ്ണമാണ്", "ഒരിക്കലും പാപം ചെയ്തിട്ടില്ല"],
+    question: "ലൂക്കാസ് യേശുവിനെക്കുറിച്ച് എന്ത് ഊന്നിപ്പറഞ്ഞു?",
+    options: ["യേശു ഒരു ഗുരുവായിരുന്നു മാത്രം", "യേശു എല്ലാവരുടെയും രക്ഷകനായിരുന്നു, അന്യജാതികളും ഉൾപ്പെടെ", "യേശു ഒരു അത്ഭുതപ്രവർത്തകനായിരുന്നു മാത്രം", "യേശു ഒരു പ്രവാചകനായിരുന്നു മാത്രം"],
     correct: 1,
-    explanation: "റോമാക്കാർ 3:23 പറയുന്നത് എല്ലാവരും പാപം ചെയ്ത് ദൈവത്തിന്റെ മഹത്വത്തിൽ നിന്ന് കുറവാണ് എന്നാണ്."
+    explanation: "ലൂക്കാസ് യേശുവിനെ സാർവത്രിക രക്ഷകനായി ഊന്നിപ്പറഞ്ഞു, അദ്ദേഹം എല്ലാവർക്കും വേണ്ടി വന്നു, അന്യജാതികൾ, ദരിദ്രർ, ഒഴിഞ്ഞുകിടക്കുന്നവർ എന്നിവരും ഉൾപ്പെടെ."
   },
   {
     id: 4,
-    question: "റോമാക്കാർ 6:23 അനുസരിച്ച്, 'പാപത്തിന്റെ കൂലി' എന്താണ്?",
-    options: ["ജീവൻ", "മരണം", "ആശീർവാദങ്ങൾ", "സമൃദ്ധി"],
+    question: "ലൂക്കാസ് യേശുവിന്റെ ജനനത്തെക്കുറിച്ച് എന്ത് രേഖപ്പെടുത്തി?",
+    options: ["അദ്ദേഹം നാസറത്തിൽ ജനിച്ചു", "അദ്ദേഹം ബെത്ലഹേമിൽ ജനിച്ചു, ഇടയന്മാർ അദ്ദേഹത്തെ കണ്ടു", "അദ്ദേഹം യെരൂശലേമിൽ ജനിച്ചു", "അദ്ദേഹം ഈജിപ്തിൽ ജനിച്ചു"],
     correct: 1,
-    explanation: "റോമാക്കാർ 6:23 പറയുന്നത് പാപത്തിന്റെ കൂലി മരണമാണ്, എന്നാൽ ദൈവത്തിന്റെ കാഴ്ച ക്രിസ്തു യേശുവിൽ നിത്യജീവനാണ് എന്നാണ്."
+    explanation: "ലൂക്കാസ് യേശു ബെത്ലഹേമിൽ ജനിച്ചുവെന്നും ഇടയന്മാർ അദ്ദേഹത്തെ കണ്ടുവെന്നും രേഖപ്പെടുത്തുന്നു, ഇത് വിനീതരായവരുടെ പരിചരണത്തിൽ ദൈവത്തിന്റെ ശ്രദ്ധയെ ഊന്നിപ്പറയുന്നു."
   },
   {
     id: 5,
-    question: "റോമാക്കാർ 5:8-ൽ, ക്രിസ്തു നമുക്ക് വേണ്ടി എപ്പോൾ മരിച്ചു?",
-    options: ["നാം നീതിമാന്മാരായിരിക്കുമ്പോൾ", "നാം ഇപ്പോഴും പാപികളായിരിക്കുമ്പോൾ", "നാം പൂർണ്ണമായിരിക്കുമ്പോൾ", "നാം നല്ലവരായിരിക്കുമ്പോൾ"],
+    question: "ലൂക്കാസിന്റെ സുവിശേഷത്തിൽ അദ്വിതീയമായ പ്രസിദ്ധമായ ഉപമ ഏതാണ്?",
+    options: ["നല്ല ഇടയൻ", "നല്ല ശമറ്യൻ", "വിതക്കുന്നവൻ", "കടുകുമണി"],
     correct: 1,
-    explanation: "റോമാക്കാർ 5:8 പറയുന്നത് ദൈവം തന്റെ സ്നേഹം നമ്മിൽ ഇങ്ങനെ പ്രകടിപ്പിക്കുന്നു: നാം ഇപ്പോഴും പാപികളായിരിക്കുമ്പോൾ ക്രിസ്തു നമുക്ക് വേണ്ടി മരിച്ചു എന്നാണ്."
+    explanation: "നല്ല ശമറ്യന്റെ ഉപമ ലൂക്കാസിന്റെ സുവിശേഷത്തിൽ അദ്വിതീയമാണ്, ഇത് പശ്ചാത്തലം പരിഗണിക്കാതെ അയൽവാസിയെ സ്നേഹിക്കുന്നതിനെക്കുറിച്ച് പഠിപ്പിക്കുന്നു."
   },
   {
     id: 6,
-    question: "റോമാക്കാർ 10:9 രക്ഷയെക്കുറിച്ച് എന്ത് പറയുന്നു?",
-    options: ["ഇത് അസാധ്യമാണ്", "നിങ്ങൾ നിങ്ങളുടെ വായ കൊണ്ട് യേശുവിനെ കർത്താവായി സ്വീകരിച്ച്", "യഹൂദന്മാർക്ക് മാത്രം", "അന്യജാതികൾക്ക് മാത്രം"],
+    question: "ലൂക്കാസ് യേശുവിന്റെ സേവനത്തെക്കുറിച്ച് എന്ത് ഊന്നിപ്പറഞ്ഞു?",
+    options: ["യഹൂദന്മാർക്ക് മാത്രം", "എല്ലാവർക്കും, ദരിദ്രരും ഒഴിഞ്ഞുകിടക്കുന്നവരും ഉൾപ്പെടെ", "പണക്കാരായവർക്ക് മാത്രം", "മതവിശ്വാസികൾക്ക് മാത്രം"],
     correct: 1,
-    explanation: "റോമാക്കാർ 10:9 പറയുന്നത് നിങ്ങൾ നിങ്ങളുടെ വായ കൊണ്ട് യേശുവിനെ കർത്താവായി സ്വീകരിച്ച് നിങ്ങളുടെ ഹൃദയത്തിൽ ദൈവം അവനെ മരിച്ചവരിൽ നിന്ന് ഉയിർപ്പിച്ചു എന്ന് വിശ്വസിച്ചാൽ നിങ്ങൾ രക്ഷിക്കപ്പെടും എന്നാണ്."
+    explanation: "ലൂക്കാസ് യേശുവിന്റെ സേവനത്തെ എല്ലാവർക്കും ഊന്നിപ്പറഞ്ഞു, പ്രത്യേകിച്ച് ദരിദ്രർ, ഒഴിഞ്ഞുകിടക്കുന്നവർ, സ്ത്രീകൾ, അന്യജാതികൾ എന്നിവർക്ക്."
   },
   {
     id: 7,
-    question: "റോമാക്കാർ 12:2 അനുസരിച്ച്, നാം എന്തിനെ അനുസരിച്ച് രൂപപ്പെടരുത്?",
-    options: ["ദൈവത്തിന്റെ ഇച്ഛ", "ഈ ലോകത്തിന്റെ രീതി", "ബൈബിൾ", "ക്രിസ്തുവിന്റെ ഉദാഹരണം"],
+    question: "ലൂക്കാസ് യേശുവിന്റെ കരുണയെക്കുറിച്ച് എന്ത് രേഖപ്പെടുത്തി?",
+    options: ["അദ്ദേഹം കഠിനനായിരുന്നു", "അദ്ദേഹം എല്ലാവരോടും കരുണ കാണിച്ചു, പ്രത്യേകിച്ച് അരികുവാസികളോട്", "അദ്ദേഹം ഉദാസീനനായിരുന്നു", "അദ്ദേഹം തിരഞ്ഞെടുപ്പുകാരനായിരുന്നു"],
     correct: 1,
-    explanation: "റോമാക്കാർ 12:2 പറയുന്നത് ഈ ലോകത്തിന്റെ രീതിയിൽ രൂപപ്പെടരുത്, എന്നാൽ നിങ്ങളുടെ മനസ്സ് പുതുക്കപ്പെട്ട് രൂപാന്തരപ്പെടുക എന്നാണ്."
+    explanation: "ലൂക്കാസ് യേശുവിന്റെ മഹത്തായ കരുണയെ ഊന്നിപ്പറഞ്ഞു, പ്രത്യേകിച്ച് സ്ത്രീകൾ, കുട്ടികൾ, ദരിദ്രർ, സാമൂഹികമായി ഒഴിഞ്ഞുകിടക്കുന്നവർ എന്നിവരോട്."
   },
   {
     id: 8,
-    question: "റോമാക്കാർ 8:1 ക്രിസ്തു യേശുവിൽ ഉള്ളവരെക്കുറിച്ച് എന്ത് പറയുന്നു?",
-    options: ["അവർ കുറ്റക്കാരാണ്", "ഇനി ഒരു കുറ്റവും ഇല്ല", "അവർ പൂർണ്ണമാണ്", "അവർ പാപികളാണ്"],
+    question: "ലൂക്കാസ് പരിശുദ്ധാത്മാവിനെക്കുറിച്ച് എന്ത് ഊന്നിപ്പറഞ്ഞു?",
+    options: ["ആത്മാവ് പ്രധാനമല്ലായിരുന്നു", "ആത്മാവ് യേശുവിന്റെ സേവനത്തിനും സഭയ്ക്കും കേന്ദ്രമായിരുന്നു", "ആത്മാവ് പരിമിതമായിരുന്നു", "ആത്മാവ് അപ്രസക്തമായിരുന്നു"],
     correct: 1,
-    explanation: "റോമാക്കാർ 8:1 പറയുന്നത് ഇനി ക്രിസ്തു യേശുവിൽ ഉള്ളവർക്ക് ഒരു കുറ്റവും ഇല്ല എന്നാണ്."
+    explanation: "ലൂക്കാസ് യേശുവിന്റെ ജീവിതത്തിലും സേവനത്തിലും, പ്രാരംഭ സഭയിലും പരിശുദ്ധാത്മാവിന്റെ പങ്കിനെ ഊന്നിപ്പറഞ്ഞു."
   },
   {
     id: 9,
-    question: "റോമാക്കാർ 1:16-ൽ, സുവിശേഷം എന്താണ്?",
-    options: ["രക്ഷയ്ക്ക് ദൈവത്തിന്റെ ശക്തി", "ഒരു ബലഹീനത", "ഒരു കഥ മാത്രം", "ഒരു കല്പന"],
-    correct: 0,
-    explanation: "റോമാക്കാർ 1:16 പറയുന്നത് സുവിശേഷം എല്ലാ വിശ്വസിക്കുന്നവർക്കും ആദ്യം യഹൂദന്മാർക്ക്, പിന്നെ ഗ്രീക്കന്മാർക്കും രക്ഷയ്ക്ക് ദൈവത്തിന്റെ ശക്തിയാണ് എന്നാണ്."
+    question: "ലൂക്കാസിന്റെ യേശുവിന്റെ ദൗത്യത്തെക്കുറിച്ചുള്ള സന്ദേശം എന്തായിരുന്നു?",
+    options: ["അദ്ദേഹം ഒരു ഗുരുവായിരുന്നു മാത്രം", "അദ്ദേഹം നഷ്ടപ്പെട്ടവരെ തിരയാനും രക്ഷിക്കാനും വന്നു", "അദ്ദേഹം ഒരു പ്രവാചകനായിരുന്നു മാത്രം", "അദ്ദേഹം ഒരു അത്ഭുതപ്രവർത്തകനായിരുന്നു മാത്രം"],
+    correct: 1,
+    explanation: "ലൂക്കാസ് 19:10 പറയുന്നത് 'മനുഷ്യപുത്രൻ നഷ്ടപ്പെട്ടവരെ തിരയാനും രക്ഷിക്കാനും വന്നു' എന്നാണ്, ഇത് യേശുവിന്റെ ദൗത്യത്തെ സംഗ്രഹിക്കുന്നു."
   },
   {
     id: 10,
-    question: "റോമാക്കാർ 8:38-39 പറയുന്നത് എന്താണ് നമ്മെ ദൈവത്തിന്റെ സ്നേഹത്തിൽ നിന്ന് വേർതിരിക്കാൻ കഴിയുമെന്ന്?",
-    options: ["ഒന്നുമില്ല", "പാപം", "മരണം", "ജീവൻ"],
-    correct: 0,
-    explanation: "റോമാക്കാർ 8:38-39 പറയുന്നത് മരണം, ജീവൻ, ദൂതന്മാർ, അധികാരങ്ങൾ, വർത്തമാനം, ഭാവി, ശക്തികൾ, ഉയരം, ആഴം, അല്ലെങ്കിൽ മറ്റേതെങ്കിലും സൃഷ്ടി നമ്മെ ക്രിസ്തു യേശുവിൽ ഉള്ള ദൈവത്തിന്റെ സ്നേഹത്തിൽ നിന്ന് വേർതിരിക്കാൻ കഴിയില്ല എന്നാണ്."
+    question: "ലൂക്കാസ് പ്രാർത്ഥനയെക്കുറിച്ച് എന്ത് ഊന്നിപ്പറഞ്ഞു?",
+    options: ["പ്രാർത്ഥന പ്രധാനമല്ലായിരുന്നു", "യേശു പലപ്പോഴും പ്രാർത്ഥിച്ചു, പ്രാർത്ഥനയെക്കുറിച്ച് പഠിപ്പിച്ചു", "പ്രാർത്ഥന പരിമിതമായിരുന്നു", "പ്രാർത്ഥന അപ്രസക്തമായിരുന്നു"],
+    correct: 1,
+    explanation: "ലൂക്കാസ് യേശുവിന്റെ പ്രാർത്ഥനാ ജീവിതത്തെ ഊന്നിപ്പറഞ്ഞു, അദ്ദേഹത്തെ പ്രധാന നിമിഷങ്ങളിൽ പ്രാർത്ഥിക്കുന്നതായി കാണിച്ചു, സ്ഥിരമായ പ്രാർത്ഥനയെക്കുറിച്ച് പഠിപ്പിച്ചു."
   }
 ];
 
@@ -307,32 +307,32 @@ const TodaysQuiz = () => {
 
   const getCurrentQuestions = () => {
     switch (selectedLanguage) {
-      case 'hindi': return romansQuizQuestionsHindi;
-      case 'malayalam': return romansQuizQuestionsMalayalam;
-      default: return romansQuizQuestions;
+      case 'hindi': return lukeQuizQuestionsHindi;
+      case 'malayalam': return lukeQuizQuestionsMalayalam;
+      default: return lukeQuizQuestions;
     }
   };
 
   const getScoreMessage = () => {
     const percentage = (score / getCurrentQuestions().length) * 100;
     if (selectedLanguage === 'hindi') {
-      if (percentage >= 90) return "उत्कृष्ट! आप रोमियों के विशेषज्ञ हैं!";
-      if (percentage >= 80) return "बहुत बढ़िया! आप रोमियों को अच्छी तरह जानते हैं!";
-      if (percentage >= 70) return "अच्छा काम! रोमियों का अध्ययन जारी रखें!";
-      if (percentage >= 60) return "बुरा नहीं! रोमियों का और अध्ययन करें!";
-      return "अध्ययन जारी रखें! रोमियों में बहुत कुछ है!";
+      if (percentage >= 90) return "उत्कृष्ट! आप लूका के विशेषज्ञ हैं!";
+      if (percentage >= 80) return "बहुत बढ़िया! आप लूका को अच्छी तरह जानते हैं!";
+      if (percentage >= 70) return "अच्छा काम! लूका का अध्ययन जारी रखें!";
+      if (percentage >= 60) return "बुरा नहीं! लूका का और अध्ययन करें!";
+      return "अध्ययन जारी रखें! लूका में बहुत कुछ है!";
     } else if (selectedLanguage === 'malayalam') {
-      if (percentage >= 90) return "മികച്ചത്! നിങ്ങൾ റോമാക്കാരുടെ വിദഗ്ധനാണ്!";
-      if (percentage >= 80) return "വളരെ നല്ലത്! നിങ്ങൾ റോമാക്കാരെ നന്നായി അറിയുന്നു!";
-      if (percentage >= 70) return "നല്ല ജോലി! റോമാക്കാരുടെ പഠനം തുടരുക!";
-      if (percentage >= 60) return "മോശമല്ല! റോമാക്കാരെ കൂടുതൽ പഠിക്കുക!";
-      return "പഠനം തുടരുക! റോമാക്കാരിൽ വളരെയധികം ഉണ്ട്!";
+      if (percentage >= 90) return "മികച്ചത്! നിങ്ങൾ ലൂക്കാസിന്റെ വിദഗ്ധനാണ്!";
+      if (percentage >= 80) return "വളരെ നല്ലത്! നിങ്ങൾ ലൂക്കാസെ നന്നായി അറിയുന്നു!";
+      if (percentage >= 70) return "നല്ല ജോലി! ലൂക്കാസിന്റെ പഠനം തുടരുക!";
+      if (percentage >= 60) return "മോശമല്ല! ലൂക്കാസെ കൂടുതൽ പഠിക്കുക!";
+      return "പഠനം തുടരുക! ലൂക്കാസിൽ വളരെയധികം ഉണ്ട്!";
     } else {
-      if (percentage >= 90) return "Excellent! You're a Romans expert!";
-      if (percentage >= 80) return "Great job! You know Romans well!";
-      if (percentage >= 70) return "Good work! Keep studying Romans!";
-      if (percentage >= 60) return "Not bad! Review Romans more!";
-      return "Keep studying! Romans has much to offer!";
+      if (percentage >= 90) return "Excellent! You're a Luke expert!";
+      if (percentage >= 80) return "Great job! You know Luke well!";
+      if (percentage >= 70) return "Good work! Keep studying Luke!";
+      if (percentage >= 60) return "Not bad! Review Luke more!";
+      return "Keep studying! Luke has much to offer!";
     }
   };
 
@@ -346,8 +346,8 @@ const TodaysQuiz = () => {
     return (
       <>
         <Helmet>
-          <title>Today's Quiz - Romans | Bible Quiz Competition</title>
-          <meta name="description" content="Test your knowledge of the book of Romans with today's special quiz." />
+          <title>Today's Quiz - Luke | Bible Quiz Competition</title>
+          <meta name="description" content="Test your knowledge of the Gospel of Luke with today's special quiz." />
         </Helmet>
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-white">
           <div className="container mx-auto px-4 py-6 sm:py-12">
@@ -355,7 +355,7 @@ const TodaysQuiz = () => {
               {/* Header */}
               <div className="text-center mb-8 sm:mb-12">
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4 sm:mb-6">
-                  Today's Quiz - Romans
+                  Today's Quiz - Luke
                 </h1>
                 <p className="text-base sm:text-lg text-gray-600">Choose your language</p>
               </div>
@@ -439,8 +439,8 @@ const TodaysQuiz = () => {
     return (
       <>
         <Helmet>
-          <title>Today's Quiz - Romans | Bible Quiz Competition</title>
-          <meta name="description" content="Test your knowledge of the book of Romans with today's special quiz." />
+          <title>Today's Quiz - Luke | Bible Quiz Competition</title>
+          <meta name="description" content="Test your knowledge of the Gospel of Luke with today's special quiz." />
         </Helmet>
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white relative overflow-hidden">
           {/* Background decoration */}
@@ -462,7 +462,7 @@ const TodaysQuiz = () => {
                     </div>
                   </div>
                   <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    Today's Quiz - Romans
+                    Today's Quiz - Luke
                   </h1>
                 </div>
                 <div className="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur border border-green-200 rounded-full shadow-lg">
