@@ -7,6 +7,7 @@ import { HelmetProvider } from "react-helmet-async";
 import DefaultSEO from "@/components/DefaultSEO";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ChatWidget from "@/components/ChatWidget";
+import NotificationBanner from "@/components/NotificationBanner";
 import { Analytics } from "@vercel/analytics/next"
 import Index from "./pages/Index";
 import TodaysQuiz from "./pages/TodaysQuiz";
@@ -244,6 +245,7 @@ const App = () => {
           <BrowserRouter>
           <PageViewTracker />
           <ChatWidget />
+          <NotificationBanner />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/todays-quiz" element={<TodaysQuiz />} />
