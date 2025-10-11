@@ -28,7 +28,8 @@ serve(async (req) => {
     }
 
     // Brevo API Configuration
-    const brevoApiKey = 'NPd2F9mEIJCBj08U';
+    const brevoApiKey = Deno.env.get('BREVO_API_KEY')
+    if (!brevoApiKey) throw new Error('BREVO_API_KEY environment variable not set')
 
     // Create email message
     const emailMessage = {
