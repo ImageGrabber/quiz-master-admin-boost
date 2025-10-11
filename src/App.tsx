@@ -9,6 +9,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import ChatWidget from "@/components/ChatWidget";
 import { Analytics } from "@vercel/analytics/next"
 import Index from "./pages/Index";
+import TodaysQuiz from "./pages/TodaysQuiz";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -244,6 +245,7 @@ const App = () => {
           <ChatWidget />
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/todays-quiz" element={<TodaysQuiz />} />
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
             <Route path="/auth/forgot-password" element={<ForgotPassword />} />
