@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from "@/components/ui/dialog";
-import { Eye, Mail, Send, Users as UsersIcon, CheckCircle, XCircle } from "lucide-react";
+import { Eye, Mail, Send, Users as UsersIcon, CheckCircle, XCircle, Download } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { sendAdminEmail, sendBulkAdminEmails, AdminEmailData } from "@/lib/adminEmailService";
 import { debugEmailService, debugQuizEmailService } from "@/lib/emailDebug";
@@ -20,6 +20,8 @@ interface UserProfile {
   id: string;
   full_name: string;
   email: string;
+  created_at?: string;
+  role?: string;
 }
 
 const Users = () => {
@@ -45,7 +47,7 @@ const Users = () => {
     setIsLoading(true);
     const { data, error } = await supabase
       .from('profiles')
-      .select('id, full_name, email');
+      .select('id, full_name, email, created_at, role');
     if (!error && Array.isArray(data)) {
       setUsers(data);
     }
@@ -217,6 +219,46 @@ const Users = () => {
     }
   };
 
+  const handleExportCSV = () => {
+    if (users.length === 0) {
+      toast({
+        title: "No Data",
+        description: "No users to export",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Create CSV content
+    const headers = ['ID', 'Full Name', 'Email', 'Role', 'Created At'];
+    const csvContent = [
+      headers.join(','),
+      ...users.map(user => [
+        user.id,
+        `"${user.full_name || ''}"`,
+        `"${user.email}"`,
+        `"${user.role || 'user'}"`,
+        `"${user.created_at ? new Date(user.created_at).toISOString() : 'N/A'}"`
+      ].join(','))
+    ].join('\n');
+
+    // Create and download file
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `users-export-${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    toast({
+      title: "Export Successful",
+      description: `Exported ${users.length} users to CSV`,
+    });
+  };
+
   return (
     <AdminLayout>
       <div className="space-y-8">
@@ -259,6 +301,14 @@ const Users = () => {
               <Mail className="w-4 h-4" />
               <span>Test SMTP</span>
             </Button>
+            <Button
+              variant="outline"
+              onClick={handleExportCSV}
+              className="flex items-center space-x-2 text-green-600 border-green-200 hover:bg-green-50"
+            >
+              <Download className="w-4 h-4" />
+              <span>Export CSV</span>
+            </Button>
           </div>
         </div>
         <Card className="shadow-lg border-0 bg-white">
@@ -292,6 +342,7 @@ const Users = () => {
                       <TableHead>User ID</TableHead>
                       <TableHead>Full Name</TableHead>
                       <TableHead>Email</TableHead>
+                      <TableHead>Role</TableHead>
                       <TableHead>Actions</TableHead>
                     </TableRow>
                   </TableHeader>
@@ -312,6 +363,11 @@ const Users = () => {
                         <TableCell className="font-mono text-xs">{user.id}</TableCell>
                         <TableCell>{user.full_name}</TableCell>
                         <TableCell>{user.email}</TableCell>
+                        <TableCell>
+                          <Badge variant={user.role === 'admin' ? 'default' : 'secondary'}>
+                            {user.role || 'user'}
+                          </Badge>
+                        </TableCell>
                         <TableCell>
                           <div className="flex space-x-2">
                             <Button
