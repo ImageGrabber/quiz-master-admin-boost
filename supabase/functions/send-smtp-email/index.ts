@@ -27,16 +27,8 @@ serve(async (req) => {
       throw new Error('Subject and HTML content are required')
     }
 
-    // Brevo SMTP Configuration
-    const smtpConfig = {
-      host: 'smtp-relay.brevo.com',
-      port: 587,
-      secure: false, // true for 465, false for other ports
-      auth: {
-        user: '9910ac001@smtp-brevo.com',
-        pass: 'NPd2F9mEIJCBj08U'
-      }
-    };
+    // Brevo API Configuration
+    const brevoApiKey = 'NPd2F9mEIJCBj08U';
 
     // Create email message
     const emailMessage = {
@@ -47,20 +39,22 @@ serve(async (req) => {
       text: html.replace(/<[^>]*>/g, ''), // Strip HTML tags for text version
     };
 
-    // Send email using Deno's built-in SMTP capabilities
-    // Note: This is a simplified implementation. In production, you might want to use a more robust SMTP library
+    // Send email using Brevo API
     const smtpResponse = await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'api-key': smtpConfig.auth.pass, // Using the password as API key for Brevo
+        'api-key': brevoApiKey,
       },
       body: JSON.stringify({
-        sender: { email: from.split('<')[1]?.split('>')[0] || 'noreply@biblequizcompetition.com', name: 'Bible Quiz Competition' },
+        sender: { 
+          email: from.split('<')[1]?.split('>')[0] || 'noreply@biblequizcompetition.com', 
+          name: 'Bible Quiz Competition' 
+        },
         to: [{ email: to }],
         subject: subject,
         htmlContent: html,
-        textContent: emailMessage.text,
+        textContent: html.replace(/<[^>]*>/g, ''), // Strip HTML tags for text version
       }),
     });
 
