@@ -26,6 +26,29 @@ const Leaderboard = () => {
     fetchLeaderboard();
   }, [selectedPeriod]);
 
+  // Add daily refresh mechanism
+  useEffect(() => {
+    const checkForDailyRefresh = () => {
+      const now = new Date();
+      const currentDay = now.getDate();
+      const lastRefreshDay = localStorage.getItem('leaderboardLastRefreshDay');
+      
+      // If it's a new day or first time, refresh the leaderboard
+      if (lastRefreshDay !== currentDay.toString()) {
+        localStorage.setItem('leaderboardLastRefreshDay', currentDay.toString());
+        fetchLeaderboard();
+      }
+    };
+
+    // Check immediately
+    checkForDailyRefresh();
+
+    // Set up interval to check every hour
+    const interval = setInterval(checkForDailyRefresh, 60 * 60 * 1000); // Check every hour
+
+    return () => clearInterval(interval);
+  }, []);
+
   const checkUserRole = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -119,14 +142,17 @@ const Leaderboard = () => {
       const now = new Date();
       const dayOfYear = Math.floor((now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
       
-      // Use day-based seed for consistent daily rotation
+      // Use day-based seed for consistent daily rotation with simple but effective algorithm
       const seed = dayOfYear;
-      const shuffledData = leaderboardData.sort((a, b) => {
-        // Create pseudo-random but consistent ordering based on day
-        const hashA = (a.id + seed).split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-        const hashB = (b.id + seed).split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-        return hashA - hashB;
-      });
+      
+      // Create a simple but effective daily rotation by using modulo on the day
+      const rotationOffset = dayOfYear % leaderboardData.length;
+      
+      // Rotate the array by the daily offset
+      const shuffledData = [
+        ...leaderboardData.slice(rotationOffset),
+        ...leaderboardData.slice(0, rotationOffset)
+      ];
       
       // Reassign ranks after consistent shuffling
       const finalLeaderboard = shuffledData.map((entry, index) => ({
