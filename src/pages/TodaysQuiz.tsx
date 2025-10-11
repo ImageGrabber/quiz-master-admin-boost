@@ -376,17 +376,17 @@ const TodaysQuiz = () => {
               </div>
 
               {/* Language Selection Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
                 <Card 
                   className="cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 hover:border-blue-500"
                   onClick={() => handleLanguageSelect('english')}
                 >
-                  <CardHeader className="text-center">
-                    <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Languages className="w-8 h-8 text-white" />
+                  <CardHeader className="text-center p-4 sm:p-6">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                      <Languages className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                     </div>
-                    <CardTitle className="text-xl">English</CardTitle>
-                    <CardDescription>Take the quiz in English</CardDescription>
+                    <CardTitle className="text-lg sm:text-xl">English</CardTitle>
+                    <CardDescription className="text-sm sm:text-base">Take the quiz in English</CardDescription>
                   </CardHeader>
                 </Card>
 
@@ -394,25 +394,25 @@ const TodaysQuiz = () => {
                   className="cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 hover:border-green-500"
                   onClick={() => handleLanguageSelect('hindi')}
                 >
-                  <CardHeader className="text-center">
-                    <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Languages className="w-8 h-8 text-white" />
+                  <CardHeader className="text-center p-4 sm:p-6">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                      <Languages className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                     </div>
-                    <CardTitle className="text-xl">हिंदी</CardTitle>
-                    <CardDescription>हिंदी में क्विज लें</CardDescription>
+                    <CardTitle className="text-lg sm:text-xl">हिंदी</CardTitle>
+                    <CardDescription className="text-sm sm:text-base">हिंदी में क्विज लें</CardDescription>
                   </CardHeader>
                 </Card>
 
                 <Card 
-                  className="cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 hover:border-purple-500"
+                  className="cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 hover:border-purple-500 sm:col-span-2 lg:col-span-1"
                   onClick={() => handleLanguageSelect('malayalam')}
                 >
-                  <CardHeader className="text-center">
-                    <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Languages className="w-8 h-8 text-white" />
+                  <CardHeader className="text-center p-4 sm:p-6">
+                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                      <Languages className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
                     </div>
-                    <CardTitle className="text-xl">മലയാളം</CardTitle>
-                    <CardDescription>മലയാളത്തിൽ ക്വിസ് എടുക്കുക</CardDescription>
+                    <CardTitle className="text-lg sm:text-xl">മലയാളം</CardTitle>
+                    <CardDescription className="text-sm sm:text-base">മലയാളത്തിൽ ക്വിസ് എടുക്കുക</CardDescription>
                   </CardHeader>
                 </Card>
               </div>
@@ -516,37 +516,37 @@ const TodaysQuiz = () => {
                   </div>
                 </CardHeader>
                 
-                <CardContent className="px-8">
-                  <h3 className="text-xl font-bold text-gray-800 mb-6 text-center">Question Review</h3>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <CardContent className="px-4 sm:px-8">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 sm:mb-6 text-center">Question Review</h3>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                     {answers.map((answer, index) => {
                       const question = getCurrentQuestions().find(q => q.id === answer.questionId);
                       return (
-                        <div key={index} className={`p-6 rounded-xl border-2 transition-all duration-200 hover:scale-105 ${
+                        <div key={index} className={`p-4 sm:p-6 rounded-xl border-2 transition-all duration-200 hover:scale-105 ${
                           answer.correct 
                             ? 'bg-gradient-to-br from-green-50 to-emerald-50 border-green-300 shadow-green-100' 
                             : 'bg-gradient-to-br from-red-50 to-pink-50 border-red-300 shadow-red-100'
                         } shadow-lg`}>
                           <div className="flex items-center justify-between mb-3">
-                            <div className="font-bold text-lg text-gray-800">Question {index + 1}</div>
+                            <div className="font-bold text-base sm:text-lg text-gray-800">Question {index + 1}</div>
                             {answer.correct ? (
-                              <CheckCircle className="w-6 h-6 text-green-500" />
+                              <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-500" />
                             ) : (
-                              <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
-                                <span className="text-white text-sm font-bold">✕</span>
+                              <div className="w-5 h-5 sm:w-6 sm:h-6 bg-red-500 rounded-full flex items-center justify-center">
+                                <span className="text-white text-xs sm:text-sm font-bold">✕</span>
                               </div>
                             )}
                           </div>
-                          <div className="text-gray-700 mb-4 font-medium">{question?.question}</div>
+                          <div className="text-gray-700 mb-3 sm:mb-4 font-medium text-sm sm:text-base leading-relaxed">{question?.question}</div>
                           <div className="space-y-2">
-                            <div className="text-sm">
+                            <div className="text-xs sm:text-sm">
                               <span className="font-semibold text-gray-600">Your answer: </span>
                               <span className={`font-medium ${answer.correct ? 'text-green-700' : 'text-red-700'}`}>
                                 {question?.options[answer.selected]}
                               </span>
                             </div>
                             {!answer.correct && (
-                              <div className="text-sm">
+                              <div className="text-xs sm:text-sm">
                                 <span className="font-semibold text-gray-600">Correct answer: </span>
                                 <span className="font-medium text-green-700">
                                   {question?.options[question.correct]}
@@ -562,22 +562,22 @@ const TodaysQuiz = () => {
               </Card>
 
               {/* Action buttons with enhanced design */}
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4">
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-10 py-4 text-lg font-bold rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105"
+                  className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-bold rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105"
                   onClick={() => navigate('/')}
                 >
-                  <Home className="w-6 h-6 mr-3" />
+                  <Home className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
                   Back to Home
                 </Button>
                 <Button 
                   size="lg" 
                   variant="outline"
-                  className="px-10 py-4 text-lg font-bold rounded-xl border-3 border-blue-600 text-blue-600 hover:bg-blue-50 hover:border-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  className="w-full sm:w-auto px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-bold rounded-xl border-3 border-blue-600 text-blue-600 hover:bg-blue-50 hover:border-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
                   onClick={() => window.location.reload()}
                 >
-                  <Play className="w-6 h-6 mr-3" />
+                  <Play className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
                   Take Again
                 </Button>
               </div>
@@ -620,63 +620,63 @@ const TodaysQuiz = () => {
               <p className="text-xl text-gray-600 mb-8">Test your knowledge of the book of Romans</p>
               
               {/* Enhanced Timer and Progress */}
-              <div className="flex justify-center items-center gap-8 mb-8">
-                <div className="flex items-center gap-3 bg-white/90 backdrop-blur border-2 border-blue-200 rounded-2xl px-6 py-4 shadow-xl">
-                  <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
-                    <Timer className="w-6 h-6 text-white" />
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 mb-8">
+                <div className="flex items-center gap-3 bg-white/90 backdrop-blur border-2 border-blue-200 rounded-2xl px-4 sm:px-6 py-3 sm:py-4 shadow-xl w-full max-w-xs sm:w-auto">
+                  <div className="hidden sm:flex w-8 h-8 sm:w-10 sm:h-10 bg-blue-500 rounded-full items-center justify-center">
+                    <Timer className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-blue-700">{formatTime(timeLeft)}</div>
-                    <div className="text-sm text-blue-600 font-medium">Time Remaining</div>
+                    <div className="text-xl sm:text-2xl font-bold text-blue-700">{formatTime(timeLeft)}</div>
+                    <div className="text-xs sm:text-sm text-blue-600 font-medium">Time Remaining</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 bg-white/90 backdrop-blur border-2 border-green-200 rounded-2xl px-6 py-4 shadow-xl">
-                  <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                    <Brain className="w-6 h-6 text-white" />
+                <div className="flex items-center gap-3 bg-white/90 backdrop-blur border-2 border-green-200 rounded-2xl px-4 sm:px-6 py-3 sm:py-4 shadow-xl w-full max-w-xs sm:w-auto">
+                  <div className="hidden sm:flex w-8 h-8 sm:w-10 sm:h-10 bg-green-500 rounded-full items-center justify-center">
+                    <Brain className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-green-700">
+                    <div className="text-xl sm:text-2xl font-bold text-green-700">
                       {currentQuestion + 1} / {getCurrentQuestions().length}
                     </div>
-                    <div className="text-sm text-green-600 font-medium">Questions</div>
+                    <div className="text-xs sm:text-sm text-green-600 font-medium">Questions</div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Question Card */}
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle className="text-xl mb-4">
+            <Card className="mb-6 sm:mb-8">
+              <CardHeader className="px-4 sm:px-6">
+                <CardTitle className="text-lg sm:text-xl mb-3 sm:mb-4">
                   Question {currentQuestion + 1}
                 </CardTitle>
-                <CardDescription className="text-lg">
+                <CardDescription className="text-base sm:text-lg leading-relaxed">
                   {getCurrentQuestions()[currentQuestion].question}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
+              <CardContent className="px-4 sm:px-6">
+                <div className="space-y-2 sm:space-y-3">
                   {getCurrentQuestions()[currentQuestion].options.map((option, index) => (
                     <button
                       key={index}
                       onClick={() => handleAnswerSelect(index)}
-                      className={`w-full p-4 text-left rounded-lg border-2 transition-all duration-200 ${
+                      className={`w-full p-3 sm:p-4 text-left rounded-lg border-2 transition-all duration-200 ${
                         selectedAnswer === index
                           ? 'border-blue-500 bg-blue-50 text-blue-900'
                           : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
                       }`}
                     >
                       <div className="flex items-center">
-                        <div className={`w-6 h-6 rounded-full border-2 mr-3 flex items-center justify-center ${
+                        <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 mr-3 flex items-center justify-center flex-shrink-0 ${
                           selectedAnswer === index
                             ? 'border-blue-500 bg-blue-500'
                             : 'border-gray-300'
                         }`}>
                           {selectedAnswer === index && (
-                            <CheckCircle className="w-4 h-4 text-white" />
+                            <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                           )}
                         </div>
-                        <span className="text-lg">{option}</span>
+                        <span className="text-sm sm:text-lg leading-relaxed">{option}</span>
                       </div>
                     </button>
                   ))}
@@ -685,18 +685,23 @@ const TodaysQuiz = () => {
             </Card>
 
             {/* Enhanced Navigation */}
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center px-4">
               <Button
                 onClick={currentQuestion === getCurrentQuestions().length - 1 ? handleSubmit : handleNext}
                 disabled={selectedAnswer === null}
-                className={`px-10 py-4 text-lg font-bold rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-105 ${
+                className={`w-full max-w-xs sm:max-w-none px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-bold rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-105 ${
                   selectedAnswer === null
                     ? 'bg-gray-400 cursor-not-allowed'
                     : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white'
                 }`}
               >
-                {currentQuestion === getCurrentQuestions().length - 1 ? 'Submit Quiz' : 'Next Question'}
-                <ArrowRight className="w-6 h-6 ml-2" />
+                <span className="hidden sm:inline">
+                  {currentQuestion === getCurrentQuestions().length - 1 ? 'Submit Quiz' : 'Next Question'}
+                </span>
+                <span className="sm:hidden">
+                  {currentQuestion === getCurrentQuestions().length - 1 ? 'Submit' : 'Next'}
+                </span>
+                <ArrowRight className="w-4 h-4 sm:w-6 sm:h-6 ml-2" />
               </Button>
             </div>
           </div>
