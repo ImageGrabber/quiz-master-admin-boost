@@ -622,7 +622,7 @@ const Index = () => {
               <div className="flex justify-center mb-8">
                 <Button size="lg" className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-12 py-8 text-xl font-bold rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 border-0 transform hover:scale-105" onClick={() => navigate("/todays-quiz")}> 
                   <Calendar className="w-6 h-6 mr-3" /> 
-                  Today's Quiz - Romans 
+                  Today's Quiz - Luke 
                   <ArrowRight className="w-6 h-6 ml-3" /> 
                 </Button>
               </div>
