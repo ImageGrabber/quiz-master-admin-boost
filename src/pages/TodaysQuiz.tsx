@@ -349,82 +349,73 @@ const TodaysQuiz = () => {
           <title>Today's Quiz - Romans | Bible Quiz Competition</title>
           <meta name="description" content="Test your knowledge of the book of Romans with today's special quiz." />
         </Helmet>
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white relative overflow-hidden">
-          {/* Background decoration */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-blue-400 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-400 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-pink-400 rounded-full blur-3xl"></div>
-          </div>
-          
-          <div className="container mx-auto px-4 py-8 relative z-10">
-            <div className="max-w-4xl mx-auto">
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-white">
+          <div className="container mx-auto px-4 py-6 sm:py-12">
+            <div className="max-w-2xl mx-auto">
               {/* Header */}
-              <div className="text-center mb-12">
-                <div className="flex items-center justify-center mb-6">
-                  <div className="relative">
-                    <img src="/sword.png" alt="Bible Quiz Competition Logo" className="w-12 h-12 mr-3" />
-                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center">
-                      <Star className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
-                  <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    Today's Quiz - Romans
-                  </h1>
-                </div>
-                <p className="text-xl text-gray-600 mb-8">Choose your preferred language to begin the quiz</p>
+              <div className="text-center mb-8 sm:mb-12">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4 sm:mb-6">
+                  Today's Quiz - Romans
+                </h1>
+                <p className="text-base sm:text-lg text-gray-600">Choose your language</p>
               </div>
 
-              {/* Language Selection Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
-                <Card 
-                  className="cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 hover:border-blue-500"
+              {/* Language Selection */}
+              <div className="space-y-3 sm:space-y-4">
+                <button
                   onClick={() => handleLanguageSelect('english')}
+                  className="w-full p-4 sm:p-6 bg-white rounded-xl border-2 border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 text-left group"
                 >
-                  <CardHeader className="text-center p-4 sm:p-6">
-                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                      <Languages className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                      <Languages className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
-                    <CardTitle className="text-lg sm:text-xl">English</CardTitle>
-                    <CardDescription className="text-sm sm:text-base">Take the quiz in English</CardDescription>
-                  </CardHeader>
-                </Card>
+                    <div>
+                      <div className="text-lg sm:text-xl font-semibold text-gray-900">English</div>
+                      <div className="text-sm sm:text-base text-gray-600">Take the quiz in English</div>
+                    </div>
+                  </div>
+                </button>
 
-                <Card 
-                  className="cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 hover:border-green-500"
+                <button
                   onClick={() => handleLanguageSelect('hindi')}
+                  className="w-full p-4 sm:p-6 bg-white rounded-xl border-2 border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200 text-left group"
                 >
-                  <CardHeader className="text-center p-4 sm:p-6">
-                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                      <Languages className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                      <Languages className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
-                    <CardTitle className="text-lg sm:text-xl">हिंदी</CardTitle>
-                    <CardDescription className="text-sm sm:text-base">हिंदी में क्विज लें</CardDescription>
-                  </CardHeader>
-                </Card>
+                    <div>
+                      <div className="text-lg sm:text-xl font-semibold text-gray-900">हिंदी</div>
+                      <div className="text-sm sm:text-base text-gray-600">हिंदी में क्विज लें</div>
+                    </div>
+                  </div>
+                </button>
 
-                <Card 
-                  className="cursor-pointer hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 hover:border-purple-500 sm:col-span-2 lg:col-span-1"
+                <button
                   onClick={() => handleLanguageSelect('malayalam')}
+                  className="w-full p-4 sm:p-6 bg-white rounded-xl border-2 border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 text-left group"
                 >
-                  <CardHeader className="text-center p-4 sm:p-6">
-                    <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                      <Languages className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-500 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                      <Languages className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </div>
-                    <CardTitle className="text-lg sm:text-xl">മലയാളം</CardTitle>
-                    <CardDescription className="text-sm sm:text-base">മലയാളത്തിൽ ക്വിസ് എടുക്കുക</CardDescription>
-                  </CardHeader>
-                </Card>
+                    <div>
+                      <div className="text-lg sm:text-xl font-semibold text-gray-900">മലയാളം</div>
+                      <div className="text-sm sm:text-base text-gray-600">മലയാളത്തിൽ ക്വിസ് എടുക്കുക</div>
+                    </div>
+                  </div>
+                </button>
               </div>
 
               {/* Back to Home */}
-              <div className="text-center mt-12">
+              <div className="text-center mt-8 sm:mt-12">
                 <Button
                   variant="outline"
                   onClick={() => navigate('/')}
-                  className="px-8 py-3 text-lg"
+                  className="px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base"
                 >
-                  <ArrowLeft className="w-5 h-5 mr-2" />
+                  <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                   Back to Home
                 </Button>
               </div>
