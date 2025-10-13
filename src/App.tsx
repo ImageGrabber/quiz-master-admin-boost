@@ -12,6 +12,7 @@ import { Analytics } from "@vercel/analytics/react"
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import Index from "./pages/Index";
 import TodaysQuiz from "./pages/TodaysQuiz";
+import TodaysQuizMark from "./pages/TodaysQuizMark";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -266,6 +267,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/todays-quiz" element={<TodaysQuiz />} />
+            <Route path="/todays-quiz-mark" element={<TodaysQuizMark />} />
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
             <Route path="/auth/forgot-password" element={<ForgotPassword />} />
