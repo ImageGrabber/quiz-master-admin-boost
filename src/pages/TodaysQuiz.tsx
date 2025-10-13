@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, User, Calendar, CheckCircle, Globe, Home, Settings, Medal, Crown, Bolt, ArrowLeft, Book, Menu, Timer, Languages } from "lucide-react";
 import { Helmet } from 'react-helmet';
 
-// Hebrews 3-themed quiz questions (English)
+
 const lukeQuizQuestions = [
   {
     id: 1,
