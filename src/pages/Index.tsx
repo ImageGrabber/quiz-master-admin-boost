@@ -353,7 +353,7 @@ function FaqSection() {
     },
     {
       q: "What types of quizzes are available?",
-      a: "We offer Today's Quiz (Romans), Weekly Bible Challenges, public quizzes for all 66 Bible books, and the ability to create and host your own live quizzes with an 8-character join code."
+      a: "We offer Today's Quiz (Hebrews 3), Weekly Bible Challenges, public quizzes for all 66 Bible books, and the ability to create and host your own live quizzes with an 8-character join code."
     },
     {
       q: "How does the scoring system work?",
@@ -648,7 +648,7 @@ const Index = () => {
               <div className="flex justify-center mb-8">
                 <Button size="lg" className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-12 py-8 text-xl font-bold rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 border-0 transform hover:scale-105" onClick={() => navigate("/todays-quiz")}> 
                   <Calendar className="w-6 h-6 mr-3" /> 
-                  Today's Quiz - Luke 
+                  Today's Quiz - Hebrews 3 
                   <ArrowRight className="w-6 h-6 ml-3" /> 
                 </Button>
               </div>
@@ -707,7 +707,7 @@ const Index = () => {
                 </div>
                 <p className="text-lg sm:text-xl text-gray-800 mb-6 leading-relaxed">
                   Join thousands of participants—compete with others and test your biblical knowledge every Saturday.
-                  <span className="font-bold text-yellow-600"> Don’t miss this week’s competition!</span>
+                  <span className="font-bold text-yellow-600"> Don't miss this week's competition!</span>
                 </p>
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div className="bg-white rounded-2xl p-5 border border-blue-100 shadow-sm">
