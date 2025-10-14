@@ -355,7 +355,7 @@ const WeeklyQuiz = () => {
                         <div>
                           <h4 className="font-semibold text-green-800">Quiz Completed!</h4>
                           <p className="text-green-700">
-                            You scored {userAttempt.score} points in {formatTime(userAttempt.seconds_used)}
+                            You scored {userAttempt.score} points
                           </p>
                         </div>
                       </div>
