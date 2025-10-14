@@ -19,7 +19,8 @@ import {
   Trophy,
   Shield,
   Mail,
-  Bell
+  Bell,
+  Heart
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -56,6 +57,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       href: "/admin/activity",
       icon: Activity,
       current: location.pathname === "/admin/activity"
+    },
+    {
+      name: "Prayer Requests",
+      href: "/admin/prayer-requests",
+      icon: Heart,
+      current: location.pathname === "/admin/prayer-requests"
     },
     {
       name: "Competitions",
