@@ -17,7 +17,7 @@ import {
 
 const Help = () => {
   useEffect(() => {
-    // Load Tidio chat script on this page
+    // Load Tidio chat script only on this page
     const script = document.createElement('script');
     script.src = '//code.tidio.co/enkm7pw3z2k1zidnow6e2wj9fdt7jwo2.js';
     script.async = true;

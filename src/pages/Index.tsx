@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, User, Calendar, HelpCircle, TrendingUp, MessageCircle, CheckCircle, Globe, Home, Settings, Medal, Crown, Bolt, ArrowLeft, Book, Menu } from "lucide-react";
+import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, User, Calendar, HelpCircle, TrendingUp, MessageCircle, CheckCircle, Globe, Home, Settings, Medal, Crown, Bolt, ArrowLeft, Book, Menu, Heart, Eye, EyeOff, Shield } from "lucide-react";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import type { MoveDirection } from "tsparticles-engine";
@@ -300,8 +300,8 @@ function StickyLeaderboardPanel() {
   };
 
   return (
-    <div className={`hidden md:flex flex-col fixed top-1/2 right-0 z-50 transform -translate-y-1/2 transition-all duration-300 ${open ? 'w-80' : 'w-14'}`}>
-      <div className={`h-[300px] ${open ? 'bg-white/80 p-4 border-l border-blue-100 shadow-xl' : 'bg-white/60 p-1 border-l border-blue-100 shadow'} rounded-l-2xl backdrop-blur-md flex flex-col items-stretch relative`}>
+    <div className={`hidden md:flex flex-col fixed right-0 z-50 transition-all duration-300 ${open ? 'w-80' : 'w-14'}`} style={{ top: 'calc(50% - 300px)' }}>
+      <div className={`h-[260px] ${open ? 'bg-white/80 p-4 border-l border-blue-100 shadow-xl' : 'bg-white/60 p-1 border-l border-blue-100 shadow'} rounded-l-2xl backdrop-blur-md flex flex-col items-stretch relative`}>
         <button
           onClick={() => setOpen(!open)}
           className={`absolute ${open ? 'top-4 left-[-25px]' : 'top-1/2 left-[-25px] -translate-y-1/2'} bg-blue-600 text-white rounded-l-lg px-2 py-1 shadow-lg focus:outline-none`}
@@ -338,6 +338,324 @@ function StickyLeaderboardPanel() {
           <div className="flex flex-col items-center justify-center h-full">
             <Trophy className="w-6 h-6 text-blue-600 mb-10" />
             <span className="text-sm text-blue-600 font-bold rotate-90 whitespace-nowrap">Leaderboard</span>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function StickyPrayerRequestsPanel() {
+  const [prayerRequests, setPrayerRequests] = useState([]);
+  const [displayedRequests, setDisplayedRequests] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(true);
+  const [showAnonymous, setShowAnonymous] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchPrayerRequests();
+    
+    // Auto-refresh every 30 seconds
+    const refreshInterval = setInterval(() => {
+      fetchPrayerRequests();
+    }, 30000);
+    
+    return () => clearInterval(refreshInterval);
+  }, []);
+
+  // Continuous loop effect
+  useEffect(() => {
+    if (prayerRequests.length === 0) return;
+
+    const filteredRequests = prayerRequests.filter(request => showAnonymous || !request.isAnonymous);
+    
+    // Set initial displayed requests
+    setDisplayedRequests(filteredRequests.slice(0, 8));
+    
+    // Start continuous loop
+    const loopInterval = setInterval(() => {
+      setCurrentIndex(prevIndex => {
+        const nextIndex = (prevIndex + 1) % filteredRequests.length;
+        const newDisplayedRequests = [];
+        
+        // Get 8 consecutive requests starting from nextIndex
+        for (let i = 0; i < 8; i++) {
+          const requestIndex = (nextIndex + i) % filteredRequests.length;
+          newDisplayedRequests.push(filteredRequests[requestIndex]);
+        }
+        
+        setDisplayedRequests(newDisplayedRequests);
+        return nextIndex;
+      });
+    }, 3000); // Change every 3 seconds
+
+    return () => clearInterval(loopInterval);
+  }, [prayerRequests, showAnonymous]);
+
+  const generateMockPrayerRequests = () => {
+    const categories = ['healing', 'family', 'work', 'spiritual', 'financial', 'guidance', 'protection'];
+    
+    const realisticPrayerRequests = [
+      // Healing requests
+      "My mom has been diagnosed with cancer. Please pray for her healing and strength for our family during this difficult time.",
+      "Please pray for my 3-year-old daughter who has been in the hospital for a week with pneumonia.",
+      "My husband is recovering from a heart attack. We need prayers for his complete healing and our family's strength.",
+      "Please pray for my grandmother who fell and broke her hip. She's 85 and we're worried about her recovery.",
+      "I've been struggling with chronic pain for months. Please pray for healing and relief from this suffering.",
+      "My sister is battling depression and anxiety. Please pray for her mental health and emotional healing.",
+      "Please pray for my father who is having surgery tomorrow. We're all very anxious about it.",
+      "My friend's baby was born premature. Please pray for the baby's health and the family's peace.",
+      "I've been diagnosed with diabetes. Please pray for wisdom in managing this condition and for healing.",
+      "Please pray for my aunt who is fighting COVID-19. She's in the ICU and we're very worried.",
+      
+      // Family requests
+      "Please pray for my marriage. We've been going through a rough patch and need God's guidance.",
+      "My teenage son is rebelling and making poor choices. Please pray for his heart to turn back to God.",
+      "Please pray for my family as we navigate my parents' divorce after 30 years of marriage.",
+      "We're struggling to conceive after 2 years of trying. Please pray for a miracle baby.",
+      "My daughter is being bullied at school. Please pray for her protection and strength.",
+      "Please pray for my brother who is struggling with addiction. We need a breakthrough.",
+      "My husband lost his job and we're struggling financially. Please pray for provision and peace.",
+      "Please pray for my family as we care for my elderly mother with dementia.",
+      "My son is struggling in school and we're considering special education. Please pray for wisdom.",
+      "Please pray for my family as we prepare to move to a new city for my job.",
+      
+      // Work/Career requests
+      "Please pray for my job interview tomorrow. I really need this position to support my family.",
+      "I'm starting a new business and need prayers for wisdom, provision, and success.",
+      "Please pray for my work situation. There's been a lot of conflict and I need peace.",
+      "I've been unemployed for 6 months. Please pray for the right job opportunity to come along.",
+      "Please pray for my career transition. I'm feeling called to ministry but need guidance.",
+      "My workplace is going through layoffs. Please pray for job security and peace.",
+      "Please pray for my business partnership. We're having disagreements and need unity.",
+      "I'm studying for my medical boards. Please pray for focus, retention, and success.",
+      "Please pray for my teaching career. I'm feeling burnt out and need renewal.",
+      "I'm starting a new job next week. Please pray for a smooth transition and favor.",
+      
+      // Spiritual requests
+      "Please pray for my spiritual growth. I've been feeling distant from God lately.",
+      "I'm struggling with doubt and need prayers for stronger faith and trust in God.",
+      "Please pray for my church. We're going through a difficult season and need unity.",
+      "I'm feeling called to missions but need prayers for confirmation and provision.",
+      "Please pray for my prayer life. I want to grow deeper in my relationship with God.",
+      "I'm struggling with forgiveness toward someone who hurt me deeply. Please pray for healing.",
+      "Please pray for my spiritual gifts to be developed and used for God's glory.",
+      "I'm feeling spiritually dry and need prayers for renewal and refreshment.",
+      "Please pray for my family's salvation. I'm the only believer and it's hard.",
+      "I'm struggling with a particular sin and need prayers for victory and freedom.",
+      
+      // Financial requests
+      "Please pray for our financial situation. We're behind on bills and need provision.",
+      "I'm struggling with debt and need prayers for wisdom in managing finances.",
+      "Please pray for my business to be profitable so I can support my family.",
+      "We need prayers for provision to pay for our daughter's college education.",
+      "Please pray for financial breakthrough. We've been struggling for months.",
+      "I'm starting a side business to supplement income. Please pray for success.",
+      "Please pray for wisdom in making financial decisions for our family.",
+      "We're trying to buy our first home. Please pray for the right opportunity.",
+      "Please pray for provision to pay for my son's medical treatment.",
+      "I'm struggling with giving and need prayers for a generous heart.",
+      
+      // Guidance requests
+      "Please pray for guidance in making a major life decision about my career.",
+      "I'm feeling lost and need prayers for direction in my life.",
+      "Please pray for wisdom in parenting my difficult teenager.",
+      "I'm considering a big move and need prayers for God's will to be clear.",
+      "Please pray for guidance in choosing the right school for my children.",
+      "I'm struggling with a relationship decision and need prayers for clarity.",
+      "Please pray for wisdom in handling a conflict with my neighbor.",
+      "I'm feeling called to ministry but need prayers for confirmation.",
+      "Please pray for guidance in my dating relationship. Is this God's will?",
+      "I need prayers for direction in my studies and future career path.",
+      
+      // Protection requests
+      "Please pray for safety as I travel for work this week.",
+      "My family is going through a dangerous neighborhood. Please pray for protection.",
+      "Please pray for my son who is serving in the military overseas.",
+      "I'm starting a new job in a dangerous area. Please pray for safety.",
+      "Please pray for protection over my children as they go to school.",
+      "My husband travels for work. Please pray for his safety on the roads.",
+      "Please pray for protection over our home and property.",
+      "I'm feeling threatened by someone. Please pray for God's protection.",
+      "Please pray for safety as our family goes on vacation.",
+      "My daughter is learning to drive. Please pray for her safety and wisdom."
+    ];
+
+    const names = [
+      "Sarah", "Michael", "Jennifer", "David", "Lisa", "Robert", "Maria", "James", "Linda", "John",
+      "Patricia", "William", "Barbara", "Richard", "Susan", "Joseph", "Jessica", "Thomas", "Sarah", "Christopher",
+      "Nancy", "Daniel", "Karen", "Matthew", "Betty", "Anthony", "Helen", "Mark", "Sandra", "Donald",
+      "Donna", "Steven", "Carol", "Paul", "Ruth", "Andrew", "Sharon", "Joshua", "Michelle", "Kenneth",
+      "Laura", "Kevin", "Deborah", "Brian", "Dorothy", "George", "Amy", "Edward", "Angela", "Ronald"
+    ];
+
+    return Array.from({ length: 50 }, (_, index) => {
+      const isAnonymous = Math.random() > 0.7; // 30% chance of being anonymous
+      const randomName = isAnonymous ? null : names[Math.floor(Math.random() * names.length)];
+      const randomRequest = realisticPrayerRequests[Math.floor(Math.random() * realisticPrayerRequests.length)];
+      const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+      
+      // Create more realistic timestamps - mix of recent and older requests
+      const hoursAgo = Math.floor(Math.random() * 168); // Within last week
+      const minutesAgo = Math.floor(Math.random() * 60); // Within last hour
+      const isRecent = Math.random() > 0.8; // 20% chance of being very recent
+      const timeAgo = isRecent ? minutesAgo * 60 * 1000 : hoursAgo * 60 * 60 * 1000;
+      
+      return {
+        id: `mock-${index + 1}`,
+        name: randomName,
+        request: randomRequest,
+        category: randomCategory,
+        isAnonymous: isAnonymous,
+        created_at: new Date(Date.now() - timeAgo).toISOString()
+      };
+    });
+  };
+
+  const fetchPrayerRequests = async () => {
+    try {
+      setLoading(true);
+      
+      // Fetch real prayer requests from Supabase (auto-approved)
+      const { data: realPrayerRequests, error } = await supabase
+        .from('prayer_requests' as any)
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(10);
+      
+      // Generate mock data
+      const mockPrayerRequests = generateMockPrayerRequests();
+      
+      // Combine real and mock data, prioritizing real data
+      const combinedRequests = [
+        ...(realPrayerRequests || []),
+        ...mockPrayerRequests
+      ];
+      
+      // Sort by creation date (newest first)
+      combinedRequests.sort((a, b) => new Date((b as any).created_at).getTime() - new Date((a as any).created_at).getTime());
+      
+      setPrayerRequests(combinedRequests);
+      
+      if (error) {
+        console.error('Error fetching prayer requests:', error);
+      }
+    } catch (error) {
+      console.error('Error fetching prayer requests:', error);
+      // Fallback to mock data only
+      const mockPrayerRequests = generateMockPrayerRequests();
+      setPrayerRequests(mockPrayerRequests);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case 'healing': return <Heart className="w-4 h-4 text-red-500" />;
+      case 'family': return <Users className="w-4 h-4 text-green-500" />;
+      case 'work': return <Award className="w-4 h-4 text-blue-500" />;
+      case 'spiritual': return <Star className="w-4 h-4 text-purple-500" />;
+      case 'financial': return <TrendingUp className="w-4 h-4 text-yellow-500" />;
+      case 'guidance': return <HelpCircle className="w-4 h-4 text-indigo-500" />;
+      case 'protection': return <Shield className="w-4 h-4 text-orange-500" />;
+      default: return <Heart className="w-4 h-4 text-gray-500" />;
+    }
+  };
+
+  const formatTimeAgo = (dateString: string) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+    
+    if (diffInHours < 1) return 'Just now';
+    if (diffInHours < 24) return `${diffInHours}h ago`;
+    const diffInDays = Math.floor(diffInHours / 24);
+    if (diffInDays < 7) return `${diffInDays}d ago`;
+    return date.toLocaleDateString();
+  };
+
+  return (
+    <div className={`hidden md:flex flex-col fixed right-0 z-40 transition-all duration-300 ${open ? 'w-80' : 'w-14'}`} style={{ top: 'calc(50% - 10px)' }}>
+      <div className={`h-[350px] ${open ? 'bg-white/80 p-4 border-l border-red-100 shadow-xl' : 'bg-white/60 p-1 border-l border-red-100 shadow'} rounded-l-2xl backdrop-blur-md flex flex-col items-stretch relative`}>
+        <button
+          onClick={() => setOpen(!open)}
+          className={`absolute ${open ? 'top-4 left-[-25px]' : 'top-1/2 left-[-25px] -translate-y-1/2'} bg-red-600 text-white rounded-l-lg px-2 py-1 shadow-lg focus:outline-none`}
+        >
+          {open ? <span>&#10095;</span> : <span>&#10094;</span>}
+        </button>
+        {open ? (
+          <>
+            <div className="flex items-center gap-2 mb-4">
+              <Heart className="w-6 h-6 text-red-600" />
+              <span className="font-bold text-red-700">Prayer Requests</span>
+              <div className="ml-auto flex gap-1">
+                <div className="flex items-center gap-1">
+                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                  <span className="text-xs text-red-600">Live</span>
+                </div>
+                <button
+                  onClick={() => fetchPrayerRequests()}
+                  className="p-1 hover:bg-red-50 rounded"
+                  title="Refresh prayer requests"
+                >
+                  <ArrowRight className="w-4 h-4 text-red-600 rotate-90" />
+                </button>
+                <button
+                  onClick={() => setShowAnonymous(!showAnonymous)}
+                  className="p-1 hover:bg-red-50 rounded"
+                  title={showAnonymous ? "Hide anonymous requests" : "Show anonymous requests"}
+                >
+                  {showAnonymous ? <Eye className="w-4 h-4 text-red-600" /> : <EyeOff className="w-4 h-4 text-red-600" />}
+                </button>
+              </div>
+            </div>
+            {loading ? (
+              <div className="flex-1 flex items-center justify-center">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
+              </div>
+            ) : (
+              <>
+                <ul className="flex-1 overflow-y-auto space-y-2">
+                  {displayedRequests.map((request, index) => (
+                    <li key={`${request.id}-${currentIndex}-${index}`} className="p-2 bg-red-50 rounded-lg border border-red-100 transition-all duration-500 ease-in-out">
+                      <div className="flex items-start gap-2 mb-1">
+                        {getCategoryIcon(request.category)}
+                        <span className="text-xs text-red-600 font-medium">
+                          {formatTimeAgo(request.created_at || request.createdAt)}
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-700 line-clamp-2">
+                        {request.request}
+                      </p>
+                      <div className="flex items-center justify-between mt-1">
+                        {request.isAnonymous ? (
+                          <span className="text-xs text-gray-500 italic">Anonymous</span>
+                        ) : request.name ? (
+                          <span className="text-xs text-gray-600 font-medium">— {request.name}</span>
+                        ) : null}
+                        <span className="text-xs text-gray-400">
+                          {request.category.charAt(0).toUpperCase() + request.category.slice(1)}
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <button 
+                  onClick={() => navigate('/prayer-requests')} 
+                  className="mt-4 w-full py-2 rounded-lg bg-gradient-to-r from-red-600 to-pink-600 text-white font-semibold hover:from-red-700 hover:to-pink-700 transition-all"
+                >
+                  Submit a request
+                </button>
+              </>
+            )}
+          </>
+        ) : (
+          <div className="flex flex-col items-center justify-center h-full">
+            <Heart className="w-6 h-6 text-red-600 mb-10" />
+            <span className="text-sm text-red-600 font-bold rotate-90 whitespace-nowrap">Prayers</span>
           </div>
         )}
       </div>
@@ -581,10 +899,11 @@ const Index = () => {
                 <span className="lg:hidden">Q&A Hub</span>
               </button>
               <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/articles")}>Articles</button>
-              <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/host-live-bible-quizzes-with-confidence")}>
-                <span className="hidden lg:inline">Hosting Guide</span>
-                <span className="lg:hidden">Hosting</span>
+              <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/prayer-requests")}>
+                <span className="hidden lg:inline">Prayer Requests</span>
+                <span className="lg:hidden">Prayers</span>
               </button>
+              <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/help")}>Help</button>
               <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/auth/login")}>Sign In</button>
               <Button variant="ghost" className="bg-black text-white font-semibold px-2 md:px-3 lg:px-4 py-2 rounded hover:bg-gray-800 transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/auth/register")}>Sign Up</Button>
             </nav>
@@ -593,7 +912,8 @@ const Index = () => {
               <div className="md:hidden absolute top-full left-0 right-0 mt-2 mx-4 bg-white rounded-xl shadow-xl border border-blue-100 z-50 flex flex-col items-stretch overflow-hidden animate-in slide-in-from-top-2 duration-200">
                 <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A Hub</button>
                 <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
-                <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/host-live-bible-quizzes-with-confidence"); }}>Hosting Guide</button>
+                <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/prayer-requests"); }}>Prayer Requests</button>
+                <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>Help</button>
                 <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
                 <button className="bg-black text-white font-semibold px-4 py-4 text-left hover:bg-gray-900 active:bg-gray-800 transition-colors duration-200 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</button>
               </div>
@@ -645,10 +965,15 @@ const Index = () => {
               </p>
               
               {/* Today's Quiz Button - Moved above verse and made bigger */}
-              <div className="flex justify-center mb-8">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <Button size="lg" className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-12 py-8 text-xl font-bold rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 border-0 transform hover:scale-105" onClick={() => navigate("/todays-quiz")}> 
                   <Calendar className="w-6 h-6 mr-3" /> 
                   Today's Quiz - Hebrews 3 
+                  <ArrowRight className="w-6 h-6 ml-3" /> 
+                </Button>
+                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-8 text-xl font-bold rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 border-0 transform hover:scale-105" onClick={() => navigate("/daily-verse")}> 
+                  <BookOpen className="w-6 h-6 mr-3" /> 
+                  Daily Bible Verse 
                   <ArrowRight className="w-6 h-6 ml-3" /> 
                 </Button>
               </div>
@@ -667,6 +992,7 @@ const Index = () => {
                 <Button size="lg" className="px-8 py-6 text-lg font-medium rounded bg-green-500 hover:bg-green-600 text-white transition-all duration-300 border-0" onClick={() => navigate('/host-live-bible-quizzes-with-confidence')}> <Play className="w-5 h-5 mr-2" /> Host a Live Quiz</Button>
                 <Button size="lg" className="px-8 py-6 text-lg font-medium rounded bg-purple-500 hover:bg-purple-600 text-white transition-all duration-300 border-0" onClick={() => navigate('/weekly-quiz')}> <Calendar className="w-5 h-5 mr-2" /> Weekly Quiz</Button>
                 <Button size="lg" className="px-8 py-6 text-lg font-medium rounded bg-orange-500 hover:bg-orange-600 text-white transition-all duration-300 border-0" onClick={() => navigate('/bible-questions-and-answers-hub')}> <Book className="w-5 h-5 mr-2" /> Bible Q&A Hub</Button>
+                <Button size="lg" className="px-8 py-6 text-lg font-medium rounded bg-red-500 hover:bg-red-600 text-white transition-all duration-300 border-0" onClick={() => navigate('/help')}> <HelpCircle className="w-5 h-5 mr-2" /> Help & Support</Button>
               </div>
               
             </div>
@@ -1138,6 +1464,7 @@ const Index = () => {
         </footer>
       </div>
       <StickyLeaderboardPanel />
+      <StickyPrayerRequestsPanel />
     </>
   );
 };

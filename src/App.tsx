@@ -6,13 +6,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import DefaultSEO from "@/components/DefaultSEO";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import ChatWidget from "@/components/ChatWidget";
 import NotificationBanner from "@/components/NotificationBanner";
 import { Analytics } from "@vercel/analytics/react"
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import Index from "./pages/Index";
 import TodaysQuiz from "./pages/TodaysQuiz";
 import TodaysQuizMark from "./pages/TodaysQuizMark";
+import DailyVerse from "./pages/DailyVerse";
+import PrayerRequests from "./pages/PrayerRequests";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -262,12 +263,13 @@ const App = () => {
           <Sonner />
           <BrowserRouter>
           <PageViewTracker />
-          <ChatWidget />
           <NotificationBanner />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/todays-quiz" element={<TodaysQuiz />} />
             <Route path="/todays-quiz-mark" element={<TodaysQuizMark />} />
+            <Route path="/daily-verse" element={<DailyVerse />} />
+            <Route path="/prayer-requests" element={<PrayerRequests />} />
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
             <Route path="/auth/forgot-password" element={<ForgotPassword />} />

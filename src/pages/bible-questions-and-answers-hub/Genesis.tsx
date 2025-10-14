@@ -2,12 +2,26 @@ import { useNavigate } from "react-router-dom";
 import { useState, useMemo, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Layers, Swords, ListOrdered, Brain, Home, ChevronRight, Search } from "lucide-react";
-import Header from "@/components/Header";
+import { BookOpen, Layers, Swords, ListOrdered, Brain, Home, ChevronRight, Search, Menu } from "lucide-react";
 
 export default function GenesisHub() {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (mobileMenuOpen && !(event.target as Element).closest('header')) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    if (mobileMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [mobileMenuOpen]);
 
   const chapterNumbers = [1, 2, 3, 4, 5, 6, 7, 8];
   const filteredChapters = useMemo(() => {
@@ -164,7 +178,47 @@ export default function GenesisHub() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
-      <Header />
+      {/* Navbar */}
+      <header className="bg-white/70 backdrop-blur-md border-b border-blue-100 sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-3 sm:py-4 flex flex-row justify-between items-center relative">
+          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}> 
+            <img src="/sword.png" alt="Bible Quiz Competition Logo" className="w-6 h-6 sm:w-7 sm:h-7 mr-2 inline-block align-middle" />
+            <span className="text-base sm:text-lg font-semibold text-gray-900">Bible Quiz Competition</span>
+          </div>
+          {/* Hamburger for mobile */}
+          <button
+            className="md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-gray-100 transition-colors"
+            aria-label="Open navigation menu"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+          >
+            <Menu className="w-6 h-6 sm:w-7 sm:h-7 text-gray-900" />
+          </button>
+          {/* Nav links for desktop */}
+          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2 xl:space-x-3">
+            <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/bible-questions-and-answers-hub")}>
+              <span className="hidden lg:inline">Bible Q&A Hub</span>
+              <span className="lg:hidden">Q&A Hub</span>
+            </button>
+            <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/articles")}>Articles</button>
+            <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/host-live-bible-quizzes-with-confidence")}>
+              <span className="hidden lg:inline">Hosting Guide</span>
+              <span className="lg:hidden">Hosting</span>
+            </button>
+            <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/auth/login")}>Sign In</button>
+            <Button variant="ghost" className="bg-black text-white font-semibold px-2 md:px-3 lg:px-4 py-2 rounded hover:bg-gray-800 transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/auth/register")}>Sign Up</Button>
+          </nav>
+          {/* Mobile dropdown menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden absolute top-full left-0 right-0 mt-2 mx-4 bg-white rounded-xl shadow-xl border border-blue-100 z-50 flex flex-col items-stretch overflow-hidden animate-in slide-in-from-top-2 duration-200">
+              <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A Hub</button>
+              <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
+              <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/host-live-bible-quizzes-with-confidence"); }}>Hosting Guide</button>
+              <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
+              <button className="bg-black text-white font-semibold px-4 py-4 text-left hover:bg-gray-900 active:bg-gray-800 transition-colors duration-200 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</button>
+            </div>
+          )}
+        </div>
+      </header>
       {/* Full-width hero */}
       <section className="relative overflow-hidden border-b border-blue-100 bg-gradient-to-br from-white via-white/70 to-blue-50 shadow-sm">
         <div className="absolute -top-12 -right-12 w-64 h-64 rounded-full bg-blue-200/30 blur-3xl" />
