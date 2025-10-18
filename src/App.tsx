@@ -51,6 +51,7 @@ import AdminUsers from "./pages/admin/Users";
 import AdminUserSettings from "./pages/admin/UserSettings";
 import WeeklyAttendance from "./pages/admin/WeeklyAttendance";
 import AdminPrayerRequests from "./pages/admin/PrayerRequests";
+import DailyVerses from "./pages/admin/DailyVerses";
 import NotFound from "./pages/NotFound";
 import RLSTest from "./pages/RLSTest";
 import BibleQA from "./pages/BibleQA";
@@ -375,6 +376,7 @@ const App = () => {
             <Route path="/admin/questions" element={<ProtectedRoute requiredRole="admin"><AdminQuestions /></ProtectedRoute>} />
             <Route path="/admin/activity" element={<ProtectedRoute requiredRole="admin"><AdminActivity /></ProtectedRoute>} />
             <Route path="/admin/prayer-requests" element={<ProtectedRoute requiredRole="admin"><AdminPrayerRequests /></ProtectedRoute>} />
+            <Route path="/admin/daily-verses" element={<ProtectedRoute requiredRole="admin"><DailyVerses /></ProtectedRoute>} />
             <Route path="/admin/competitions" element={<ProtectedRoute requiredRole="admin"><AdminCompetitions /></ProtectedRoute>} />
             <Route path="/admin/weekly-attendance" element={<ProtectedRoute requiredRole="admin"><WeeklyAttendance /></ProtectedRoute>} />
             <Route path="/admin/users" element={<ProtectedRoute requiredRole="admin"><AdminUsers /></ProtectedRoute>} />

@@ -11,73 +11,101 @@ import { Helmet } from 'react-helmet';
 const lukeQuizQuestions = [
   {
     id: 1,
-    question: "To whom does Hebrews 3:1 address its message?",
-    options: ["Sinners only", "Holy brothers and sisters who share in the heavenly calling", "Gentile believers only", "Priests and Levites"],
+    question: "According to Hebrews 4:1, what should we be careful about regarding the promise of entering God's rest?",
+    options: ["That we might miss the deadline", "That none of us be found to have fallen short of it", "That we need to work harder to earn it", "That it is only for certain people"],
     correct: 1,
-    explanation: "Hebrews 3:1 addresses 'holy brothers and sisters' who share in the heavenly calling."
+    explanation: "Hebrews 4:1 warns us to be careful that none of us be found to have fallen short of the promise of entering God's rest."
   },
   {
     id: 2,
-    question: "According to Hebrews 3:1, on whom should we fix our thoughts?",
-    options: ["Moses", "Angels", "Jesus", "Abraham"],
-    correct: 2,
-    explanation: "The verse urges believers to fix their thoughts on Jesus."
+    question: "In Hebrews 4:2, why was the message they heard of no value to them?",
+    options: ["Because it was delivered in a foreign language", "Because they did not share the faith of those who obeyed", "Because the message was too complex", "Because they were not listening"],
+    correct: 1,
+    explanation: "The message they heard was of no value because they did not share the faith of those who obeyed."
   },
   {
     id: 3,
-    question: "What two titles are given to Jesus in Hebrews 3:1?",
-    options: ["Prophet and King", "Apostle and High Priest", "Teacher and Shepherd", "Judge and Counselor"],
+    question: "What did God declare on oath in His anger according to Hebrews 4:3?",
+    options: ["That He would destroy the earth", "That they shall never enter My rest", "That He would send a flood", "That He would abandon His people"],
     correct: 1,
-    explanation: "Jesus is called our Apostle and High Priest in Hebrews 3:1."
+    explanation: "God declared on oath in His anger, 'They shall never enter My rest.'"
   },
   {
     id: 4,
-    question: "How is Jesus compared to Moses in Hebrews 3:3?",
-    options: ["Jesus is less faithful than Moses", "Jesus has greater honor than Moses", "They are equal in honor", "Moses is builder; Jesus is house"],
+    question: "According to Hebrews 4:4, what happened on the seventh day?",
+    options: ["God created the sun and moon", "God rested from all His works", "God created man and woman", "God blessed the animals"],
     correct: 1,
-    explanation: "Jesus is found worthy of greater honor than Moses."
+    explanation: "On the seventh day God rested from all His works."
   },
   {
     id: 5,
-    question: "Who is the builder of everything according to Hebrews 3:4?",
-    options: ["Moses", "God", "Abraham", "No one is named"],
+    question: "According to Hebrews 4:8, if Joshua had given them rest, what would God not have done?",
+    options: ["Created a new covenant", "Spoken later about another day", "Sent His Son to earth", "Given them the Ten Commandments"],
     correct: 1,
-    explanation: "Hebrews 3:4 states that God is the builder of everything."
+    explanation: "If Joshua had given them rest, God would not have spoken later about another day."
   },
   {
     id: 6,
-    question: "In Hebrews 3:5-6, how are Moses and Christ contrasted?",
-    options: ["Both are servants in God's house", "Moses is a servant; Christ is the Son over God's house", "Christ is a servant; Moses is the son", "Both are sons over the house"],
+    question: "According to Hebrews 4:9, what remains for the people of God?",
+    options: ["A weekly Sabbath day", "A Sabbath-rest", "A new law", "A different covenant"],
     correct: 1,
-    explanation: "Moses was faithful as a servant in God's house, but Christ is faithful as the Son over God's house."
+    explanation: "There remains a Sabbath-rest for the people of God."
   },
   {
     id: 7,
-    question: "According to Hebrews 3:6, we are God's house if we...",
-    options: ["Offer daily sacrifices", "Keep the Sabbath perfectly", "Hold firmly to our confidence and the hope we boast", "Follow the law of Moses"],
-    correct: 2,
-    explanation: "We are His house if we hold firmly to our confidence and hope."
+    question: "According to Hebrews 4:10, what happens when anyone enters God's rest?",
+    options: ["They become perfect", "They also rest from their works, just as God did from His", "They receive special powers", "They are guaranteed salvation"],
+    correct: 1,
+    explanation: "Anyone who enters God's rest also rests from their works, just as God did from His."
   },
   {
     id: 8,
-    question: "What warning is repeated from Psalm 95 in Hebrews 3:7-8?",
-    options: ["Do not neglect meeting together", "Do not harden your hearts when you hear His voice", "Do not love money", "Do not judge others"],
+    question: "According to Hebrews 4:12, what is the Word of God described as?",
+    options: ["A gentle whisper", "Alive and active, sharper than any double-edged sword", "A beautiful song", "A comforting blanket"],
     correct: 1,
-    explanation: "'Today, if you hear His voice, do not harden your hearts.'"
+    explanation: "The Word of God is alive and active, sharper than any double-edged sword."
   },
   {
     id: 9,
-    question: "Who were the ones who heard and rebelled, according to Hebrews 3:16?",
-    options: ["The Canaanites", "All those Moses led out of Egypt", "Only the leaders", "Only the young"],
+    question: "According to Hebrews 4:12, what does the Word of God penetrate?",
+    options: ["Only the mind", "Even to dividing soul and spirit, joints and marrow", "Only the heart", "Only the body"],
     correct: 1,
-    explanation: "Those who came out of Egypt under Moses rebelled."
+    explanation: "The Word of God penetrates even to dividing soul and spirit, joints and marrow."
   },
   {
     id: 10,
-    question: "Why were some unable to enter God's rest (Hebrews 3:19)?",
-    options: ["Lack of knowledge", "Lack of sacrifices", "Because of their unbelief", "Because of their poverty"],
+    question: "According to Hebrews 4:13, what is NOT hidden from God's sight?",
+    options: ["Some things in creation", "Nothing in all creation", "Only our good deeds", "Only our sins"],
+    correct: 1,
+    explanation: "Nothing in all creation is hidden from God's sight."
+  },
+  {
+    id: 11,
+    question: "According to Hebrews 4:14, who is our great high priest who has ascended into heaven?",
+    options: ["Moses", "Aaron", "Jesus the Son of God", "Melchizedek"],
     correct: 2,
-    explanation: "Hebrews 3:19 states they could not enter because of unbelief."
+    explanation: "Jesus the Son of God is our great high priest who has ascended into heaven."
+  },
+  {
+    id: 12,
+    question: "According to Hebrews 4:15, why can Jesus empathize with our weaknesses?",
+    options: ["Because He studied human nature", "Because He has been tempted in every way, just as we are—yet He did not sin", "Because He was once human", "Because He understands our struggles"],
+    correct: 1,
+    explanation: "Jesus can empathize with our weaknesses because He has been tempted in every way, just as we are—yet He did not sin."
+  },
+  {
+    id: 13,
+    question: "According to Hebrews 4:16, how should we approach God's throne of grace?",
+    options: ["With fear and trembling", "With confidence", "With perfect righteousness", "With many sacrifices"],
+    correct: 1,
+    explanation: "We should approach God's throne of grace with confidence."
+  },
+  {
+    id: 14,
+    question: "According to Hebrews 4:16, what may we receive when we approach God's throne?",
+    options: ["Only judgment", "Mercy and find grace to help us in our time of need", "Only blessings", "Only forgiveness"],
+    correct: 1,
+    explanation: "We may receive mercy and find grace to help us in our time of need."
   }
 ];
 
@@ -85,73 +113,101 @@ const lukeQuizQuestions = [
 const lukeQuizQuestionsHindi = [
   {
     id: 1,
-    question: "इब्रानियों 3:1 का संदेश किसे संबोधित है?",
-    options: ["केवल पापियों को", "पवित्र भाइयों और बहनों को जो स्वर्गीय बुलाहट में सहभागी हैं", "केवल अन्यजाति विश्वासियों को", "याजकों और लेवियों को"],
+    question: "इब्रानियों 4:1 के अनुसार परमेश्वर के विश्राम में प्रवेश करने के वादे के बारे में हमें किस बात से सावधान रहना चाहिए?",
+    options: ["कि हम समय सीमा चूक जाएँ", "कि हम में से कोई भी उस वादे से कम न पाए", "कि हमें इसे कमाने के लिए और कड़ी मेहनत करनी होगी", "कि यह केवल कुछ लोगों के लिए है"],
     correct: 1,
-    explanation: "इब्रानियों 3:1 'पवित्र भाइयों और बहनों' को संबोधित करता है जो स्वर्गीय बुलाहट में सहभागी हैं।"
+    explanation: "इब्रानियों 4:1 हमें चेतावनी देता है कि हम में से कोई भी परमेश्वर के विश्राम में प्रवेश करने के वादे से कम न पाए।"
   },
   {
     id: 2,
-    question: "इब्रानियों 3:1 के अनुसार हमें किस पर ध्यान लगाना चाहिए?",
-    options: ["मूसा", "स्वर्गदूत", "यीशु", "अब्राहम"],
-    correct: 2,
-    explanation: "वचन विश्वासियों को यीशु पर अपने विचार स्थिर करने के लिए कहता है।"
+    question: "इब्रानियों 4:2 के अनुसार उनके लिए सुने गए संदेश का कोई मूल्य क्यों नहीं था?",
+    options: ["क्योंकि यह विदेशी भाषा में दिया गया था", "क्योंकि उन्होंने आज्ञाकारी लोगों के विश्वास को साझा नहीं किया", "क्योंकि संदेश बहुत जटिल था", "क्योंकि वे सुन नहीं रहे थे"],
+    correct: 1,
+    explanation: "उनके लिए सुने गए संदेश का कोई मूल्य नहीं था क्योंकि उन्होंने आज्ञाकारी लोगों के विश्वास को साझा नहीं किया।"
   },
   {
     id: 3,
-    question: "इब्रानियों 3:1 में यीशु के लिए कौन से दो उपाधियाँ दी गई हैं?",
-    options: ["भविष्यद्वक्ता और राजा", "प्रेरित और महायाजक", "शिक्षक और चरवाहा", "न्यायी और सलाहकार"],
+    question: "इब्रानियों 4:3 के अनुसार परमेश्वर ने अपने क्रोध में क्या शपथ ली?",
+    options: ["कि वह पृथ्वी को नष्ट कर देगा", "कि वे कभी मेरे विश्राम में प्रवेश नहीं करेंगे", "कि वह बाढ़ भेजेगा", "कि वह अपने लोगों को छोड़ देगा"],
     correct: 1,
-    explanation: "इब्रानियों 3:1 में यीशु को हमारा प्रेरित और महायाजक कहा गया है।"
+    explanation: "परमेश्वर ने अपने क्रोध में शपथ ली, 'वे कभी मेरे विश्राम में प्रवेश नहीं करेंगे।'"
   },
   {
     id: 4,
-    question: "इब्रानियों 3:3 में यीशु की तुलना मूसा से कैसे की गई है?",
-    options: ["यीशु मूसा से कम विश्वासी है", "यीशु को मूसा से अधिक महिमा मिली है", "दोनों समान महिमा वाले हैं", "मूसा घर का निर्माता है; यीशु घर है"],
+    question: "इब्रानियों 4:4 के अनुसार सातवें दिन क्या हुआ?",
+    options: ["परमेश्वर ने सूर्य और चंद्रमा बनाए", "परमेश्वर ने अपने सभी कामों से विश्राम लिया", "परमेश्वर ने पुरुष और स्त्री बनाए", "परमेश्वर ने जानवरों को आशीर्वाद दिया"],
     correct: 1,
-    explanation: "यीशु मूसा से अधिक महिमा के योग्य ठहराया गया है।"
+    explanation: "सातवें दिन परमेश्वर ने अपने सभी कामों से विश्राम लिया।"
   },
   {
     id: 5,
-    question: "इब्रानियों 3:4 के अनुसार सब कुछ का निर्माता कौन है?",
-    options: ["मूसा", "परमेश्वर", "अब्राहम", "किसी का उल्लेख नहीं"],
+    question: "इब्रानियों 4:8 के अनुसार यदि यहोशू ने उन्हें विश्राम दिया होता, तो परमेश्वर क्या नहीं करता?",
+    options: ["नई वाचा बनाता", "बाद में किसी और दिन के बारे में बात करता", "अपने पुत्र को पृथ्वी पर भेजता", "उन्हें दस आज्ञाएँ देता"],
     correct: 1,
-    explanation: "इब्रानियों 3:4 कहता है कि परमेश्वर सब कुछ का निर्माता है।"
+    explanation: "यदि यहोशू ने उन्हें विश्राम दिया होता, तो परमेश्वर बाद में किसी और दिन के बारे में बात नहीं करता।"
   },
   {
     id: 6,
-    question: "इब्रानियों 3:5-6 में मूसा और मसीह का किस प्रकार विरोधाभास किया गया है?",
-    options: ["दोनों परमेश्वर के घर में सेवक हैं", "मूसा सेवक है; मसीह परमेश्वर के घर पर पुत्र है", "मसीह सेवक है; मूसा पुत्र है", "दोनों घर पर पुत्र हैं"],
+    question: "इब्रानियों 4:9 के अनुसार परमेश्वर के लोगों के लिए क्या बचा रहता है?",
+    options: ["एक साप्ताहिक सब्त दिन", "एक सब्त-विश्राम", "एक नया नियम", "एक अलग वाचा"],
     correct: 1,
-    explanation: "मूसा परमेश्वर के घर में सेवक के समान विश्वासयोग्य था, पर मसीह परमेश्वर के घर पर पुत्र के रूप में विश्वासयोग्य है।"
+    explanation: "परमेश्वर के लोगों के लिए एक सब्त-विश्राम बचा रहता है।"
   },
   {
     id: 7,
-    question: "इब्रानियों 3:6 के अनुसार हम परमेश्वर का घर हैं यदि हम...",
-    options: ["दैनिक बलिदान चढ़ाएँ", "सब्त को पूरी तरह मानें", "अपने भरोसे और आशा को दृढ़ता से थामे रहें", "मूसा की व्यवस्था का पालन करें"],
-    correct: 2,
-    explanation: "यदि हम अपने भरोसे और जिस आशा का घमण्ड करते हैं उसे दृढ़ता से पकड़े रहें तो हम उसका घर हैं।"
+    question: "इब्रानियों 4:10 के अनुसार जब कोई परमेश्वर के विश्राम में प्रवेश करता है तो क्या होता है?",
+    options: ["वे सिद्ध हो जाते हैं", "वे भी अपने कामों से विश्राम लेते हैं, जैसे परमेश्वर ने अपने कामों से लिया", "उन्हें विशेष शक्तियाँ मिलती हैं", "उनकी मुक्ति की गारंटी हो जाती है"],
+    correct: 1,
+    explanation: "जो कोई परमेश्वर के विश्राम में प्रवेश करता है, वह भी अपने कामों से विश्राम लेता है, जैसे परमेश्वर ने अपने कामों से लिया।"
   },
   {
     id: 8,
-    question: "भजन 95 से लिया गया कौन-सा चेतावनी इब्रानियों 3:7-8 में दोहराया गया है?",
-    options: ["सभाओं की उपेक्षा न करो", "आज यदि तुम उसकी आवाज़ सुनो तो अपने मन को कठोर न करो", "धन का प्रेम न करो", "दूसरों का न्याय न करो"],
+    question: "इब्रानियों 4:12 के अनुसार परमेश्वर का वचन कैसे वर्णित है?",
+    options: ["एक कोमल फुसफुसाहट", "जीवित और सक्रिय, किसी भी दोधारी तलवार से तेज", "एक सुंदर गीत", "एक आरामदायक कंबल"],
     correct: 1,
-    explanation: "'आज यदि तुम उसकी आवाज़ सुनो, तो अपने मन को कठोर न करो।'"
+    explanation: "परमेश्वर का वचन जीवित और सक्रिय है, किसी भी दोधारी तलवार से तेज।"
   },
   {
     id: 9,
-    question: "इब्रानियों 3:16 के अनुसार किसने सुना और फिर भी विरोध किया?",
-    options: ["कनानी", "वे सब जो मूसा के द्वारा मिस्र से निकाले गए थे", "केवल सरदार", "केवल जवान"],
+    question: "इब्रानियों 4:12 के अनुसार परमेश्वर का वचन क्या भेदता है?",
+    options: ["केवल मन", "आत्मा और आत्मा, जोड़ों और मज्जा को भी अलग करने तक", "केवल हृदय", "केवल शरीर"],
     correct: 1,
-    explanation: "जो लोग मूसा के द्वारा मिस्र से निकले, उन्हीं ने विद्रोह किया।"
+    explanation: "परमेश्वर का वचन आत्मा और आत्मा, जोड़ों और मज्जा को भी अलग करने तक भेदता है।"
   },
   {
     id: 10,
-    question: "इब्रानियों 3:19 के अनुसार वे परमेश्वर के विश्राम में क्यों न प्रवेश कर सके?",
-    options: ["ज्ञान की कमी के कारण", "बलिदानों की कमी के कारण", "अपने अविश्वास के कारण", "दरिद्रता के कारण"],
+    question: "इब्रानियों 4:13 के अनुसार परमेश्वर की दृष्टि से क्या छुपा नहीं है?",
+    options: ["सृष्टि की कुछ चीजें", "सृष्टि में कुछ भी नहीं", "केवल हमारे अच्छे काम", "केवल हमारे पाप"],
+    correct: 1,
+    explanation: "सृष्टि में कुछ भी परमेश्वर की दृष्टि से छुपा नहीं है।"
+  },
+  {
+    id: 11,
+    question: "इब्रानियों 4:14 के अनुसार हमारा महान महायाजक कौन है जो स्वर्ग में चढ़ गया?",
+    options: ["मूसा", "हारून", "यीशु परमेश्वर का पुत्र", "मल्कीसेदक"],
     correct: 2,
-    explanation: "इब्रानियों 3:19 कहता है कि वे अविश्वास के कारण प्रवेश न कर सके।"
+    explanation: "यीशु परमेश्वर का पुत्र हमारा महान महायाजक है जो स्वर्ग में चढ़ गया।"
+  },
+  {
+    id: 12,
+    question: "इब्रानियों 4:15 के अनुसार यीशु हमारी कमजोरियों के साथ सहानुभूति क्यों रख सकता है?",
+    options: ["क्योंकि उसने मानव प्रकृति का अध्ययन किया", "क्योंकि वह हर तरह से परीक्षित हुआ, जैसे हम हैं—फिर भी उसने पाप नहीं किया", "क्योंकि वह एक बार मानव था", "क्योंकि वह हमारे संघर्षों को समझता है"],
+    correct: 1,
+    explanation: "यीशु हमारी कमजोरियों के साथ सहानुभूति रख सकता है क्योंकि वह हर तरह से परीक्षित हुआ, जैसे हम हैं—फिर भी उसने पाप नहीं किया।"
+  },
+  {
+    id: 13,
+    question: "इब्रानियों 4:16 के अनुसार हमें परमेश्वर के अनुग्रह के सिंहासन के पास कैसे जाना चाहिए?",
+    options: ["भय और कंपकंपी के साथ", "आत्मविश्वास के साथ", "पूर्ण धार्मिकता के साथ", "कई बलिदानों के साथ"],
+    correct: 1,
+    explanation: "हमें आत्मविश्वास के साथ परमेश्वर के अनुग्रह के सिंहासन के पास जाना चाहिए।"
+  },
+  {
+    id: 14,
+    question: "इब्रानियों 4:16 के अनुसार जब हम परमेश्वर के सिंहासन के पास जाते हैं तो हम क्या प्राप्त कर सकते हैं?",
+    options: ["केवल न्याय", "दया और हमारी आवश्यकता के समय में हमारी सहायता के लिए अनुग्रह", "केवल आशीर्वाद", "केवल क्षमा"],
+    correct: 1,
+    explanation: "हम दया और हमारी आवश्यकता के समय में हमारी सहायता के लिए अनुग्रह प्राप्त कर सकते हैं।"
   }
 ];
 
@@ -159,73 +215,101 @@ const lukeQuizQuestionsHindi = [
 const lukeQuizQuestionsMalayalam = [
   {
     id: 1,
-    question: "എബ്രായർ 3:1 ലെ സന്ദേശം ആരെയാണ് അഭിസംബോധന ചെയ്യുന്നത്?",
-    options: ["പാപികൾ മാത്രം", "സ്വർഗ്ഗീയ വിളിക്കു പങ്കാളികളായ വിശുദ്ധ സഹോദരന്മാരെയും സഹോദരിമാരെയും", "അന്യജാതി വിശ്വാസികൾ മാത്രം", "പുരോഹിതരും ലേവ്യരും"],
+    question: "എബ്രായർ 4:1 അനുസരിച്ച് ദൈവത്തിന്റെ വിശ്രമത്തിൽ പ്രവേശിക്കാനുള്ള വാഗ്ദാനത്തെക്കുറിച്ച് നാം എന്തിൽ ശ്രദ്ധാലുവായിരിക്കണം?",
+    options: ["നാം സമയപരിധി നഷ്ടപ്പെടാനിടയുണ്ട്", "നമ്മിൽ ആരും ആ വാഗ്ദാനത്തിൽ നിന്ന് കുറഞ്ഞുപോകാതിരിക്കണം", "അത് നേടാൻ നമുക്ക് കൂടുതൽ കഠിനാധ്വാനം ചെയ്യേണ്ടി വരും", "ഇത് ചില ആളുകൾക്ക് മാത്രമാണ്"],
     correct: 1,
-    explanation: "എബ്രായർ 3:1 സ്വർഗ്ഗീയ വിളിക്കു പങ്കാളികളായ 'വിശുദ്ധ സഹോദരന്മാരെയും സഹോദരിമാരെയും' അഭിസംബോധന ചെയ്യുന്നു."
+    explanation: "എബ്രായർ 4:1 നമ്മെ ദൈവത്തിന്റെ വിശ്രമത്തിൽ പ്രവേശിക്കാനുള്ള വാഗ്ദാനത്തിൽ നിന്ന് ആരും കുറഞ്ഞുപോകാതിരിക്കാൻ ശ്രദ്ധാലുവായിരിക്കാൻ ഉപദേശിക്കുന്നു."
   },
   {
     id: 2,
-    question: "എബ്രായർ 3:1 അനുസരിച്ച്, നാം ആരിലേക്കാണ് നമ്മുടെ ചിന്തകൾ നിയോഗിക്കേണ്ടത്?",
-    options: ["മോശെ", "ദൂതന്മാർ", "യേശു", "അബ്രാഹാം"],
-    correct: 2,
-    explanation: "വചനം വിശ്വാസികളെ യേശുവിൽ ചിന്ത നിശ്ചയിക്കുവാൻ വിളിക്കുന്നു."
+    question: "എബ്രായർ 4:2 അനുസരിച്ച് അവർ കേട്ട സന്ദേശത്തിന് എന്തുകൊണ്ട് മൂല്യമില്ലായിരുന്നു?",
+    options: ["അത് വിദേശഭാഷയിൽ നൽകിയതുകൊണ്ട്", "അവർ അനുസരിച്ചവരുടെ വിശ്വാസം പങ്കിട്ടില്ല", "സന്ദേശം വളരെ സങ്കീർണ്ണമായിരുന്നു", "അവർ കേൾക്കാതിരുന്നു"],
+    correct: 1,
+    explanation: "അവർ കേട്ട സന്ദേശത്തിന് മൂല്യമില്ലായിരുന്നു കാരണം അവർ അനുസരിച്ചവരുടെ വിശ്വാസം പങ്കിട്ടില്ല."
   },
   {
     id: 3,
-    question: "എബ്രായർ 3:1ൽ യേശുവിനെക്കുറിച്ച് ഏതു രണ്ടു പദവികൾ പറയുന്നു?",
-    options: ["പ്രവാചകനും രാജാവും", "അപോസ്തലനും മഹാപുരോഹിതനും", "ഗുരുവും ഇടയനും", "ന്യായാധിപനും ഉപദേശകനും"],
+    question: "എബ്രായർ 4:3 അനുസരിച്ച് ദൈവം തന്റെ കോപത്തിൽ എന്ത് സത്യം ചെയ്തു?",
+    options: ["അവൻ ഭൂമിയെ നശിപ്പിക്കും", "അവർ എന്നെന്നേക്കും എന്റെ വിശ്രമത്തിൽ പ്രവേശിക്കില്ല", "അവൻ വെള്ളപ്പൊക്കം അയയ്ക്കും", "അവൻ തന്റെ ജനത്തെ ഉപേക്ഷിക്കും"],
     correct: 1,
-    explanation: "എബ്രായർ 3:1 യേശുവിനെ നമ്മുടെ അപോസ്തലനും മഹാപുരോഹിതനും എന്നു വിളിക്കുന്നു."
+    explanation: "ദൈവം തന്റെ കോപത്തിൽ സത്യം ചെയ്തു, 'അവർ എന്നെന്നേക്കും എന്റെ വിശ്രമത്തിൽ പ്രവേശിക്കില്ല.'"
   },
   {
     id: 4,
-    question: "എബ്രായർ 3:3ൽ യേശുവിനെ മോശെയുമായി എങ്ങനെ താരതമ്യം ചെയ്യുന്നു?",
-    options: ["യേശു മോശെയേക്കാൾ കുറച്ചേ വിശ്വസ്തനായുള്ളു", "യേശുവിന് മോശെയേക്കാൾ മഹത്വം ഉണ്ട്", "അവർ ഇരുവരും സമാന മഹത്വം ഉള്ളവർ", "മോശെ നിർമ്മാതാവാണ്; യേശു വീട് ആണ്"],
+    question: "എബ്രായർ 4:4 അനുസരിച്ച് ഏഴാം ദിവസം എന്ത് സംഭവിച്ചു?",
+    options: ["ദൈവം സൂര്യനെയും ചന്ദ്രനെയും സൃഷ്ടിച്ചു", "ദൈവം തന്റെ എല്ലാ പ്രവൃത്തികളിൽ നിന്നും വിശ്രമിച്ചു", "ദൈവം പുരുഷനെയും സ്ത്രീയെയും സൃഷ്ടിച്ചു", "ദൈവം മൃഗങ്ങളെ അനുഗ്രഹിച്ചു"],
     correct: 1,
-    explanation: "യേശു മോശെയേക്കാൾ മഹത്വത്തിന് യോഗ്യനാണ്."
+    explanation: "ഏഴാം ദിവസം ദൈവം തന്റെ എല്ലാ പ്രവൃത്തികളിൽ നിന്നും വിശ്രമിച്ചു."
   },
   {
     id: 5,
-    question: "എബ്രായർ 3:4 അനുസരിച്ച് എല്ലാറ്റിന്റെയും നിർമ്മാതാവ് ആർ?",
-    options: ["മോശെ", "ദൈവം", "അബ്രാഹാം", "ആരും പറഞ്ഞിട്ടില്ല"],
+    question: "എബ്രായർ 4:8 അനുസരിച്ച് യോശുവ അവർക്ക് വിശ്രമം നൽകിയിരുന്നുവെങ്കിൽ ദൈവം എന്ത് ചെയ്യില്ലായിരുന്നു?",
+    options: ["പുതിയ നിയമം സൃഷ്ടിക്കുക", "പിന്നീട് മറ്റൊരു ദിവസത്തെക്കുറിച്ച് സംസാരിക്കുക", "തന്റെ പുത്രനെ ഭൂമിയിൽ അയയ്ക്കുക", "അവർക്ക് പത്ത് കല്പനകൾ നൽകുക"],
     correct: 1,
-    explanation: "എബ്രായർ 3:4 പ്രകാരം എല്ലാറ്റിന്റെയും നിർമ്മാതാവ് ദൈവമാണ്."
+    explanation: "യോശുവ അവർക്ക് വിശ്രമം നൽകിയിരുന്നുവെങ്കിൽ ദൈവം പിന്നീട് മറ്റൊരു ദിവസത്തെക്കുറിച്ച് സംസാരിക്കില്ലായിരുന്നു."
   },
   {
     id: 6,
-    question: "എബ്രായർ 3:5-6ൽ മോശെയും ക്രിസ്തുവും എങ്ങനെ വിരുദ്ധമായി കാണിക്കുന്നു?",
-    options: ["ഇരുവരും ദൈവത്തിന്റെ വീട്ടിൽ ദാസന്മാരാണ്", "മോശെ ദാസൻ; ക്രിസ്തു ദൈവത്തിന്റെ വീട്ടിന്മേൽ പുത്രൻ", "ക്രിസ്തു ദാസൻ; മോശെ പുത്രൻ", "ഇരുവരും വീട്ടിന്മേൽ പുത്രന്മാർ"],
+    question: "എബ്രായർ 4:9 അനുസരിച്ച് ദൈവത്തിന്റെ ജനത്തിന് എന്ത് അവശേഷിക്കുന്നു?",
+    options: ["ഒരു ആഴ്ചയിലെ ശബ്ബത്ത് ദിവസം", "ഒരു ശബ്ബത്ത്-വിശ്രമം", "ഒരു പുതിയ നിയമം", "ഒരു വ്യത്യസ്ത നിയമം"],
     correct: 1,
-    explanation: "മോശെ ദൈവത്തിന്റെ വീട്ടിൽ ദാസനായി വിശ്വസ്തനായിരുന്നു; ക്രിസ്തു ദൈവത്തിന്റെ വീട്ടിന്മേൽ പുത്രനായിട്ടാണ് വിശ്വസ്തൻ."
+    explanation: "ദൈവത്തിന്റെ ജനത്തിന് ഒരു ശബ്ബത്ത്-വിശ്രമം അവശേഷിക്കുന്നു."
   },
   {
     id: 7,
-    question: "എബ്രായർ 3:6 പ്രകാരം, നാം ദൈവത്തിന്റെ വീട് ആകുന്നത് എപ്പോൾ?",
-    options: ["ദൈനംദിന യാഗങ്ങൾ അർപ്പിക്കുമ്പോൾ", "ശബ്ബത്ത് പൂർണ്ണമായി ആചരിക്കുമ്പോൾ", "നമ്മുടെ ധൈര്യവും പ്രത്യാശയും ദൃഢമായി പിടിച്ചുനിറുത്തുമ്പോൾ", "മോശെയുടെ ന്യായപ്രമാണം പാലിക്കുമ്പോൾ"],
-    correct: 2,
-    explanation: "നമ്മുടെ ധൈര്യവും പ്രത്യാശയും ദൃഢമായി പിടിച്ചുനിൽക്കുകയാണെങ്കിൽ നാം അവന്റെ വീട് ആകുന്നു."
+    question: "എബ്രായർ 4:10 അനുസരിച്ച് ആരെങ്കിലും ദൈവത്തിന്റെ വിശ്രമത്തിൽ പ്രവേശിക്കുമ്പോൾ എന്ത് സംഭവിക്കുന്നു?",
+    options: ["അവർ പരിപൂർണ്ണരാകുന്നു", "അവരും ദൈവം തന്റെ പ്രവൃത്തികളിൽ നിന്ന് വിശ്രമിച്ചതുപോലെ തങ്ങളുടെ പ്രവൃത്തികളിൽ നിന്ന് വിശ്രമിക്കുന്നു", "അവർക്ക് പ്രത്യേക ശക്തികൾ ലഭിക്കുന്നു", "അവരുടെ മോക്ഷം ഉറപ്പാക്കുന്നു"],
+    correct: 1,
+    explanation: "ആരെങ്കിലും ദൈവത്തിന്റെ വിശ്രമത്തിൽ പ്രവേശിക്കുമ്പോൾ അവരും ദൈവം തന്റെ പ്രവൃത്തികളിൽ നിന്ന് വിശ്രമിച്ചതുപോലെ തങ്ങളുടെ പ്രവൃത്തികളിൽ നിന്ന് വിശ്രമിക്കുന്നു."
   },
   {
     id: 8,
-    question: "എബ്രായർ 3:7-8ൽ സങ്കീർത്തനം 95ൽ നിന്നുള്ള ഏതു മുന്നറിയിപ്പാണ് ആവർത്തിക്കുന്നത്?",
-    options: ["സംഗമങ്ങളെ ഉപേക്ഷിക്കരുത്", "ഇന്ന് നിങ്ങൾ അവന്റെ ശബ്ദം കേട്ടാൽ നിങ്ങളുടെ ഹൃദയം കടുപ്പിക്കരുത്", "ധനസ്നേഹം വിട്ടുകളയുക", "മറ്റുള്ളവരെ വിധിക്കരുത്"],
+    question: "എബ്രായർ 4:12 അനുസരിച്ച് ദൈവത്തിന്റെ വചനം എങ്ങനെ വിവരിക്കപ്പെടുന്നു?",
+    options: ["ഒരു മൃദുവായ ശബ്ദം", "ജീവനുള്ളതും സജീവവുമായ, ഏതെങ്കിലും ഇരുമുനവാൾക്കും കൂടുതൽ മൂർച്ചയുള്ളത്", "ഒരു മനോഹരമായ ഗാനം", "ഒരു ആശ്വാസകരമായ കമ്പിളി"],
     correct: 1,
-    explanation: "\"ഇന്ന് നിങ്ങൾ അവന്റെ ശബ്ദം കേട്ടാൽ, നിങ്ങളുടെ ഹൃദയങ്ങളെ കടുപ്പിക്കരുത്.\""
+    explanation: "ദൈവത്തിന്റെ വചനം ജീവനുള്ളതും സജീവവുമാണ്, ഏതെങ്കിലും ഇരുമുനവാൾക്കും കൂടുതൽ മൂർച്ചയുള്ളത്."
   },
   {
     id: 9,
-    question: "എബ്രായർ 3:16 അനുസരിച്ച് കേട്ട് വിപ്ലവം ചെയ്തവർ ആരായിരുന്നു?",
-    options: ["കനാന്യർ", "വെ സബ് ജോ മോശെയാൽ ഈജിപ്തിൽ നിന്ന് പുറപ്പെട്ട എല്ലാവരും", "മുഖ്യന്മാർ മാത്രം", "യുവാക്കളെ മാത്രം"],
+    question: "എബ്രായർ 4:12 അനുസരിച്ച് ദൈവത്തിന്റെ വചനം എന്ത് തുളച്ചുകയറുന്നു?",
+    options: ["മനസ്സ് മാത്രം", "ആത്മാവിനെയും ആത്മാവിനെയും, സന്ധികളെയും മജ്ജയെയും വേർതിരിക്കുന്നതുവരെ", "ഹൃദയം മാത്രം", "ശരീരം മാത്രം"],
     correct: 1,
-    explanation: "മോശെയാൽ ഈജിപ്തിൽ നിന്നു പുറപ്പെട്ടവരാണ് വിപ്ലവം ചെയ്തത്."
+    explanation: "ദൈവത്തിന്റെ വചനം ആത്മാവിനെയും ആത്മാവിനെയും, സന്ധികളെയും മജ്ജയെയും വേർതിരിക്കുന്നതുവരെ തുളച്ചുകയറുന്നു."
   },
   {
     id: 10,
-    question: "എബ്രായർ 3:19 പ്രകാരം ചിലർ ദൈവത്തിന്റെ വിശ്രമത്തിലേക്ക് പ്രവേശിക്കാനാകാതിരുന്നതെന്തുകൊണ്ട്?",
-    options: ["അറിവില്ലായ്മ കാരണം", "യാഗങ്ങളുടെ കുറവ് കാരണം", "അവരുടെ അവിശ്വാസം മൂലം", "ദാരിദ്ര്യം കാരണം"],
+    question: "എബ്രായർ 4:13 അനുസരിച്ച് ദൈവത്തിന്റെ കാഴ്ചയിൽ നിന്ന് എന്ത് മറഞ്ഞിരിക്കുന്നില്ല?",
+    options: ["സൃഷ്ടിയിലെ ചില കാര്യങ്ങൾ", "സൃഷ്ടിയിൽ ഒന്നും", "ഞങ്ങളുടെ നല്ല പ്രവൃത്തികൾ മാത്രം", "ഞങ്ങളുടെ പാപങ്ങൾ മാത്രം"],
+    correct: 1,
+    explanation: "സൃഷ്ടിയിൽ ഒന്നും ദൈവത്തിന്റെ കാഴ്ചയിൽ നിന്ന് മറഞ്ഞിരിക്കുന്നില്ല."
+  },
+  {
+    id: 11,
+    question: "എബ്രായർ 4:14 അനുസരിച്ച് സ്വർഗ്ഗത്തിൽ കയറിയ ഞങ്ങളുടെ മഹാ മഹാപുരോഹിതൻ ആരാണ്?",
+    options: ["മോശെ", "ആരോൺ", "യേശു ദൈവത്തിന്റെ പുത്രൻ", "മെൽഖീസെദെക്"],
     correct: 2,
-    explanation: "അവരുടെ അവിശ്വാസം കാരണം അവർ പ്രവേശിക്കാനായില്ല എന്നു എബ്രായർ 3:19 പറയുന്നു."
+    explanation: "യേശു ദൈവത്തിന്റെ പുത്രൻ സ്വർഗ്ഗത്തിൽ കയറിയ ഞങ്ങളുടെ മഹാ മഹാപുരോഹിതനാണ്."
+  },
+  {
+    id: 12,
+    question: "എബ്രായർ 4:15 അനുസരിച്ച് യേശു ഞങ്ങളുടെ ബലഹീനതകളോട് സഹാനുഭൂതി കാണിക്കാൻ കഴിയുന്നത് എന്തുകൊണ്ട്?",
+    options: ["അവൻ മനുഷ്യസ്വഭാവം പഠിച്ചതുകൊണ്ട്", "അവൻ ഞങ്ങളെപ്പോലെ എല്ലാ വിധത്തിലും പരീക്ഷിക്കപ്പെട്ടു—എന്നാൽ അവൻ പാപം ചെയ്തില്ല", "അവൻ ഒരിക്കൽ മനുഷ്യനായിരുന്നതുകൊണ്ട്", "അവൻ ഞങ്ങളുടെ പോരാട്ടങ്ങൾ മനസ്സിലാക്കുന്നതുകൊണ്ട്"],
+    correct: 1,
+    explanation: "യേശു ഞങ്ങളുടെ ബലഹീനതകളോട് സഹാനുഭൂതി കാണിക്കാൻ കഴിയുന്നത് അവൻ ഞങ്ങളെപ്പോലെ എല്ലാ വിധത്തിലും പരീക്ഷിക്കപ്പെട്ടതുകൊണ്ടാണ്—എന്നാൽ അവൻ പാപം ചെയ്തില്ല."
+  },
+  {
+    id: 13,
+    question: "എബ്രായർ 4:16 അനുസരിച്ച് ഞങ്ങൾ ദൈവത്തിന്റെ കൃപയുടെ സിംഹാസനത്തിനടുത്ത് എങ്ങനെ പോകണം?",
+    options: ["ഭയത്തോടും വിറയലോടും", "ആത്മവിശ്വാസത്തോടെ", "പൂർണ്ണ നീതിയോടെ", "നിരവധി യാഗങ്ങളോടെ"],
+    correct: 1,
+    explanation: "ഞങ്ങൾ ആത്മവിശ്വാസത്തോടെ ദൈവത്തിന്റെ കൃപയുടെ സിംഹാസനത്തിനടുത്ത് പോകണം."
+  },
+  {
+    id: 14,
+    question: "എബ്രായർ 4:16 അനുസരിച്ച് ഞങ്ങൾ ദൈവത്തിന്റെ സിംഹാസനത്തിനടുത്ത് പോകുമ്പോൾ എന്ത് ലഭിക്കാം?",
+    options: ["ന്യായവിധി മാത്രം", "കരുണയും ഞങ്ങളുടെ ആവശ്യത്തിന് സഹായിക്കാൻ കൃപയും", "അനുഗ്രഹങ്ങൾ മാത്രം", "ക്ഷമ മാത്രം"],
+    correct: 1,
+    explanation: "ഞങ്ങൾ കരുണയും ഞങ്ങളുടെ ആവശ്യത്തിന് സഹായിക്കാൻ കൃപയും ലഭിക്കാം."
   }
 ];
 
@@ -247,7 +331,7 @@ const TodaysQuiz = () => {
       return () => clearTimeout(timer);
     } else if (timeLeft === 0 && !quizCompleted) {
       // Time's up - track abandonment and auto submit
-      trackQuizAbandon('todays-quiz-hebrews-3', 'Today\'s Quiz - Hebrews 3', currentQuestion + 1);
+      trackQuizAbandon('todays-quiz-hebrews-4', 'Today\'s Quiz - Hebrews 4', currentQuestion + 1);
       handleSubmit();
     }
   }, [timeLeft, quizCompleted]);
@@ -271,7 +355,7 @@ const TodaysQuiz = () => {
       
       // Track question answer
       trackQuestionAnswer(
-        'todays-quiz-hebrews-3',
+        'todays-quiz-hebrews-4',
         currentQuestions[currentQuestion].id.toString(),
         isCorrect,
         0 // Time spent on question (could be enhanced with actual timing)
@@ -304,7 +388,7 @@ const TodaysQuiz = () => {
       
       // Track final question answer
       trackQuestionAnswer(
-        'todays-quiz-hebrews-3',
+        'todays-quiz-hebrews-4',
         currentQuestions[currentQuestion].id.toString(),
         isCorrect,
         0 // Time spent on question (could be enhanced with actual timing)
@@ -317,8 +401,8 @@ const TodaysQuiz = () => {
       // Track quiz completion
       const timeSpent = 120 - timeLeft; // Calculate time spent
       trackQuizComplete(
-        'todays-quiz-hebrews-3',
-        'Today\'s Quiz - Hebrews 3',
+        'todays-quiz-hebrews-4',
+        'Today\'s Quiz - Hebrews 4',
         score + (isCorrect ? 1 : 0),
         currentQuestions.length,
         timeSpent,
@@ -346,23 +430,23 @@ const TodaysQuiz = () => {
   const getScoreMessage = () => {
     const percentage = (score / getCurrentQuestions().length) * 100;
     if (selectedLanguage === 'hindi') {
-      if (percentage >= 90) return "उत्कृष्ट! आप इब्रानियों 3 के विशेषज्ञ हैं!";
-      if (percentage >= 80) return "बहुत बढ़िया! आप इब्रानियों 3 को अच्छी तरह जानते हैं!";
-      if (percentage >= 70) return "अच्छा काम! इब्रानियों 3 का अध्ययन जारी रखें!";
-      if (percentage >= 60) return "बुरा नहीं! इब्रानियों 3 का और अध्ययन करें!";
-      return "अध्ययन जारी रखें! इब्रानियों 3 में बहुत कुछ है!";
+      if (percentage >= 90) return "उत्कृष्ट! आप इब्रानियों 4 के विशेषज्ञ हैं!";
+      if (percentage >= 80) return "बहुत बढ़िया! आप इब्रानियों 4 को अच्छी तरह जानते हैं!";
+      if (percentage >= 70) return "अच्छा काम! इब्रानियों 4 का अध्ययन जारी रखें!";
+      if (percentage >= 60) return "बुरा नहीं! इब्रानियों 4 का और अध्ययन करें!";
+      return "अध्ययन जारी रखें! इब्रानियों 4 में बहुत कुछ है!";
     } else if (selectedLanguage === 'malayalam') {
-      if (percentage >= 90) return "മികച്ചത്! നിങ്ങൾ എബ്രായർ 3 നന്നായി അറിയുന്നു!";
-      if (percentage >= 80) return "വളരെ നല്ലത്! നിങ്ങൾ എബ്രായർ 3 നന്നായി അറിയുന്നു!";
-      if (percentage >= 70) return "നല്ല ജോലി! എബ്രായർ 3 പഠനം തുടരുക!";
-      if (percentage >= 60) return "മോശമല്ല! എബ്രായർ 3 കൂടുതൽ പഠിക്കുക!";
-      return "പഠനം തുടരുക! എബ്രായർ 3 ൽ വളരെയധികം ഉണ്ട്!";
+      if (percentage >= 90) return "മികച്ചത്! നിങ്ങൾ എബ്രായർ 4 നന്നായി അറിയുന്നു!";
+      if (percentage >= 80) return "വളരെ നല്ലത്! നിങ്ങൾ എബ്രായർ 4 നന്നായി അറിയുന്നു!";
+      if (percentage >= 70) return "നല്ല ജോലി! എബ്രായർ 4 പഠനം തുടരുക!";
+      if (percentage >= 60) return "മോശമല്ല! എബ്രായർ 4 കൂടുതൽ പഠിക്കുക!";
+      return "പഠനം തുടരുക! എബ്രായർ 4 ൽ വളരെയധികം ഉണ്ട്!";
     } else {
-      if (percentage >= 90) return "Excellent! You're a Hebrews 3 expert!";
-      if (percentage >= 80) return "Great job! You know Hebrews 3 well!";
-      if (percentage >= 70) return "Good work! Keep studying Hebrews 3!";
-      if (percentage >= 60) return "Not bad! Review Hebrews 3 more!";
-      return "Keep studying! Hebrews 3 has much to offer!";
+      if (percentage >= 90) return "Excellent! You're a Hebrews 4 expert!";
+      if (percentage >= 80) return "Great job! You know Hebrews 4 well!";
+      if (percentage >= 70) return "Good work! Keep studying Hebrews 4!";
+      if (percentage >= 60) return "Not bad! Review Hebrews 4 more!";
+      return "Keep studying! Hebrews 4 has much to offer!";
     }
   };
 
@@ -371,7 +455,7 @@ const TodaysQuiz = () => {
     setShowLanguageSelection(false);
     
     // Track quiz start
-    trackQuizStart('todays-quiz-hebrews-3', 'Today\'s Quiz - Hebrews 3', 'mixed');
+    trackQuizStart('todays-quiz-hebrews-4', 'Today\'s Quiz - Hebrews 4', 'mixed');
   };
 
   // Language selection screen
@@ -379,8 +463,8 @@ const TodaysQuiz = () => {
     return (
       <>
         <Helmet>
-          <title>Today's Quiz - Hebrews 3 | Bible Quiz Competition</title>
-          <meta name="description" content="Test your knowledge of Hebrews 3 with today's special quiz." />
+          <title>Today's Quiz - Hebrews 4 | Bible Quiz Competition</title>
+          <meta name="description" content="Test your knowledge of Hebrews 4 with today's special quiz." />
         </Helmet>
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-white">
           <div className="container mx-auto px-4 py-6 sm:py-12">
@@ -388,7 +472,7 @@ const TodaysQuiz = () => {
               {/* Header */}
               <div className="text-center mb-8 sm:mb-12">
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4 sm:mb-6">
-                  Today's Quiz - Hebrews 3
+                  Today's Quiz - Hebrews 4
                 </h1>
                 <p className="text-base sm:text-lg text-gray-600">Choose your language</p>
               </div>
@@ -472,8 +556,8 @@ const TodaysQuiz = () => {
     return (
       <>
         <Helmet>
-          <title>Today's Quiz - Hebrews 3 | Bible Quiz Competition</title>
-          <meta name="description" content="Test your knowledge of Hebrews 3 with today's special quiz." />
+          <title>Today's Quiz - Hebrews 4 | Bible Quiz Competition</title>
+          <meta name="description" content="Test your knowledge of Hebrews 4 with today's special quiz." />
         </Helmet>
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white relative overflow-hidden">
           {/* Background decoration */}
@@ -495,7 +579,7 @@ const TodaysQuiz = () => {
                     </div>
                   </div>
                   <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                    Today's Quiz - Hebrews 3
+                    Today's Quiz - Hebrews 4
                   </h1>
                 </div>
                 <div className="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur border border-green-200 rounded-full shadow-lg">
@@ -615,8 +699,8 @@ const TodaysQuiz = () => {
   return (
     <>
       <Helmet>
-        <title>Today's Quiz - Hebrews 3 | Bible Quiz Competition</title>
-        <meta name="description" content="Test your knowledge of Hebrews 3 with today's special quiz." />
+        <title>Today's Quiz - Hebrews 4 | Bible Quiz Competition</title>
+        <meta name="description" content="Test your knowledge of Hebrews 4 with today's special quiz." />
       </Helmet>
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white relative overflow-hidden">
         {/* Background decoration */}

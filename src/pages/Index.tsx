@@ -300,7 +300,7 @@ function StickyLeaderboardPanel() {
   };
 
   return (
-    <div className={`hidden md:flex flex-col fixed right-0 z-50 transition-all duration-300 ${open ? 'w-80' : 'w-14'}`} style={{ top: 'calc(50% - 300px)' }}>
+    <div className={`hidden md:flex flex-col fixed right-0 z-50 transition-all duration-300 ${open ? 'w-80' : 'w-14'}`} style={{ top: 'calc(50% - 150px)' }}>
       <div className={`h-[260px] ${open ? 'bg-white/80 p-4 border-l border-blue-100 shadow-xl' : 'bg-white/60 p-1 border-l border-blue-100 shadow'} rounded-l-2xl backdrop-blur-md flex flex-col items-stretch relative`}>
         <button
           onClick={() => setOpen(!open)}
@@ -968,7 +968,7 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <Button size="lg" className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-12 py-8 text-xl font-bold rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 border-0 transform hover:scale-105" onClick={() => navigate("/todays-quiz")}> 
                   <Calendar className="w-6 h-6 mr-3" /> 
-                  Today's Quiz - Hebrews 3 
+                  Today's Quiz - Hebrews 4 
                   <ArrowRight className="w-6 h-6 ml-3" /> 
                 </Button>
                 <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-12 py-8 text-xl font-bold rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 border-0 transform hover:scale-105" onClick={() => navigate("/daily-verse")}> 
@@ -1464,7 +1464,6 @@ const Index = () => {
         </footer>
       </div>
       <StickyLeaderboardPanel />
-      <StickyPrayerRequestsPanel />
     </>
   );
 };

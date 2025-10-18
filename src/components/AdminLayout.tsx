@@ -20,7 +20,8 @@ import {
   Shield,
   Mail,
   Bell,
-  Heart
+  Heart,
+  BookOpen
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -93,6 +94,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       href: "/admin/weekly-attendance",
       icon: Calendar,
       current: location.pathname === "/admin/weekly-attendance"
+    },
+    {
+      name: "Daily Verses",
+      href: "/admin/daily-verses",
+      icon: BookOpen,
+      current: location.pathname === "/admin/daily-verses"
     },
     {
       name: "Realtime Health Check",
