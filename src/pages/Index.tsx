@@ -997,6 +997,85 @@ const Index = () => {
     checkAuthAndRedirect();
   }, [navigate]);
 
+  // Load Tidio Chat Widget
+  useEffect(() => {
+    // Function to hide Tidio welcome message
+    const hideTidioWelcomeMessage = () => {
+      // Try various selectors for Tidio welcome message - specifically targeting widgetLabel
+      const selectors = [
+        '.widgetLabel',
+        'button.widgetLabel',
+        'button[class*="widgetLabel"]',
+        'button[class*="tidio"][class*="widgetLabel"]',
+        '[id*="tidio-welcome"]',
+        '[class*="tidio-welcome"]',
+        '[id*="tidio-message-box"]',
+        '[class*="tidio-message-box"]',
+        '[id*="tidio-bubble"]',
+        '[class*="tidio-bubble"]',
+        '.tidio-chat-welcome',
+        '#tidio-chat-welcome',
+        '.tidio-welcome-message',
+        '#tidio-welcome-message'
+      ];
+
+      selectors.forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach((el: Element) => {
+          (el as HTMLElement).style.display = 'none';
+          (el as HTMLElement).style.visibility = 'hidden';
+          (el as HTMLElement).style.opacity = '0';
+          (el as HTMLElement).style.height = '0';
+          (el as HTMLElement).style.width = '0';
+          (el as HTMLElement).style.overflow = 'hidden';
+          (el as HTMLElement).style.pointerEvents = 'none';
+        });
+      });
+    };
+
+    // Check if Tidio script is already loaded
+    if (document.querySelector('script[src*="tidio.co"]')) {
+      // If already loaded, hide welcome message
+      setTimeout(hideTidioWelcomeMessage, 500);
+      // Set up observer to catch it if it appears later
+      const observer = new MutationObserver(hideTidioWelcomeMessage);
+      observer.observe(document.body, { childList: true, subtree: true });
+      
+      // Clean up observer after 10 seconds
+      setTimeout(() => observer.disconnect(), 10000);
+      return;
+    }
+
+    // Create and inject Tidio script (same key as Help page)
+    const script = document.createElement('script');
+    script.src = '//code.tidio.co/enkm7pw3z2k1zidnow6e2wj9fdt7jwo2.js';
+    script.async = true;
+    script.type = 'text/javascript';
+    
+    // Wait for Tidio to load and hide welcome message
+    script.onload = () => {
+      // Give Tidio time to initialize, then hide welcome message
+      setTimeout(hideTidioWelcomeMessage, 1000);
+      // Also set up an observer to hide it if it appears later
+      const observer = new MutationObserver(hideTidioWelcomeMessage);
+      observer.observe(document.body, { childList: true, subtree: true });
+      
+      // Clean up observer after 10 seconds
+      setTimeout(() => observer.disconnect(), 10000);
+    };
+    
+    // Add script to document head
+    document.head.appendChild(script);
+
+    // Cleanup function
+    return () => {
+      const tidioScript = document.querySelector('script[src*="tidio.co"]');
+      if (tidioScript) {
+        tidioScript.remove();
+      }
+    };
+  }, []);
+
 
   const homepageStructuredData = {
     "@context": "https://schema.org",
@@ -1139,8 +1218,7 @@ const Index = () => {
           {JSON.stringify(faqStructuredData)}
         </script>
         
-        {/* Tidio Live Chat */}
-        <script src="//code.tidio.co/YOUR_TIDIO_PUBLIC_KEY.js" async></script>
+        {/* Tidio Live Chat - Loaded via useEffect hook instead */}
       </Helmet>
       <div className="min-h-screen bg-white">
         {/* Guest completion dialog */}
@@ -1233,10 +1311,10 @@ const Index = () => {
         {/* Header */}
         <header className="relative flex items-center justify-between p-6 w-full px-6 md:px-8 lg:px-12">
           <div className="flex items-center space-x-8">
-            <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}>
+            <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}> 
               <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
                 <Brain className="w-3 h-3 text-white" />
-              </div>
+            </div>
               <span className="text-lg font-urbanist font-semibold text-gray-900">Bible Quiz Competition</span>
             </div>
             
@@ -1261,7 +1339,7 @@ const Index = () => {
                   className="pl-10 pr-10 w-80 md:w-96 h-9 text-sm font-urbanist font-light border-gray-300 focus:border-gray-400"
                 />
                 {searchQuery && (
-                  <button
+            <button
                     onClick={() => {
                       setSearchQuery("");
                       setShowSearchResults(false);
@@ -1269,7 +1347,7 @@ const Index = () => {
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                   >
                     <X className="w-4 h-4" />
-                  </button>
+            </button>
                 )}
               </div>
               
@@ -1284,7 +1362,7 @@ const Index = () => {
                     >
                       <div className="font-urbanist font-medium text-gray-900">{page.title}</div>
                       <div className="font-urbanist font-light text-sm text-gray-600">{page.category}</div>
-                    </button>
+              </button>
                   ))}
                 </div>
               )}
@@ -1303,19 +1381,19 @@ const Index = () => {
             </Button>
             <button className="md:hidden" onClick={() => setMobileMenuOpen((open) => !open)}>
               <Menu className="w-6 h-6" />
-            </button>
+              </button>
           </div>
           
-          {/* Mobile dropdown menu */}
-          {mobileMenuOpen && (
+            {/* Mobile dropdown menu */}
+            {mobileMenuOpen && (
             <div className="md:hidden absolute top-full left-6 right-6 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 flex flex-col">
               <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A Hub</button>
               <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
               <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>Help</button>
               <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-t border-gray-200" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
               <Button className="bg-black text-white px-4 py-3 mx-4 mb-4 font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</Button>
-            </div>
-          )}
+              </div>
+            )}
         </header>
 
         {/* Hero Section */}
@@ -1348,7 +1426,7 @@ const Index = () => {
             <p className="text-xl font-urbanist font-light text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
               Compete with others, track your progress, and grow in your knowledge of Scripture with our free Bible quiz platform.
             </p>
-          </div>
+                  </div>
 
           {/* Feature Cards Row */}
           <section className="w-full pb-16 relative z-10">
@@ -1365,28 +1443,28 @@ const Index = () => {
                     <div className="text-center mb-4 relative z-10">
                       <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-3 group-hover:bg-gray-200 transition-colors duration-300">
                         <feature.icon className="w-8 h-8 text-gray-700 group-hover:scale-110 transition-transform duration-300" strokeWidth={1} />
-                      </div>
+            </div>
                     </div>
                     <h3 className="font-urbanist font-medium text-gray-900 text-base text-center relative z-10 group-hover:text-gray-800 transition-colors">{feature.title}</h3>
                     <p className="text-sm font-urbanist font-light text-gray-600 text-center mt-2 relative z-10">{feature.description}</p>
                     
                     {/* Decorative corner accent */}
                     <div className="absolute top-0 right-0 w-12 h-12 border-t border-r border-gray-200 rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-          </section>
+          </div>
+        </section>
         </main>
 
         {/* Main CTA */}
         <section className="text-center pb-24 mb-8">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
-            <Button 
-              size="lg" 
+                  <Button 
+                    size="lg" 
               className="text-lg px-8 py-6 bg-black hover:bg-gray-800 rounded-lg font-urbanist font-light transition-all duration-300 hover:scale-105 hover:shadow-xl group"
-              onClick={() => navigate("/auth/register")}
-            >
+                    onClick={() => navigate("/auth/register")}
+                  >
               <Rocket className="w-5 h-5 mr-2 translate-x-1 transition-transform duration-300" />
               Get Started — It's Free
             </Button>
@@ -1398,8 +1476,8 @@ const Index = () => {
             >
               <Calendar className="w-5 h-5 mr-2 scale-110 transition-transform duration-300" />
               Today's Quiz
-            </Button>
-          </div>
+                  </Button>
+                </div>
         </section>
 
         {/* Bible Q&A Hub Section */}
@@ -1410,7 +1488,7 @@ const Index = () => {
               backgroundImage: `radial-gradient(circle at 1px 1px, black 1px, transparent 0)`,
               backgroundSize: '50px 50px'
             }}></div>
-          </div>
+                </div>
           
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             {/* Header */}
@@ -1422,22 +1500,22 @@ const Index = () => {
                 <h2 className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900">
                   Bible Q&A Hub
                 </h2>
-              </div>
+                </div>
               <p className="text-xl font-urbanist font-light text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
                 Your comprehensive resource for Bible questions and answers. Explore organized content by book, chapter, difficulty level, and category to deepen your understanding of Scripture.
               </p>
-            </div>
+              </div>
 
             {/* Statistics Cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
               <div className="bg-white rounded-lg p-6 border border-gray-200 hover:border-gray-400 hover:shadow-lg transition-all duration-300 text-center group">
                 <div className="text-4xl font-urbanist font-semibold text-gray-900 mb-2 group-hover:scale-110 transition-transform duration-300">66</div>
                 <div className="text-sm font-urbanist font-light text-gray-600">Bible Books</div>
-              </div>
+            </div>
               <div className="bg-white rounded-lg p-6 border border-gray-200 hover:border-gray-400 hover:shadow-lg transition-all duration-300 text-center group">
                 <div className="text-4xl font-urbanist font-semibold text-gray-900 mb-2 group-hover:scale-110 transition-transform duration-300">1,000+</div>
                 <div className="text-sm font-urbanist font-light text-gray-600">Questions</div>
-              </div>
+          </div>
               <div className="bg-white rounded-lg p-6 border border-gray-200 hover:border-gray-400 hover:shadow-lg transition-all duration-300 text-center group">
                 <div className="text-4xl font-urbanist font-semibold text-gray-900 mb-2 group-hover:scale-110 transition-transform duration-300">3</div>
                 <div className="text-sm font-urbanist font-light text-gray-600">Difficulty Levels</div>
@@ -1454,12 +1532,12 @@ const Index = () => {
               <div className="bg-white rounded-lg p-6 border border-gray-200">
                 <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4">
                   <BookOpen className="w-6 h-6 text-gray-700" strokeWidth={1} />
-                </div>
+            </div>
                 <h3 className="font-urbanist font-semibold text-gray-900 mb-2 text-lg">66 Bible Books</h3>
                 <p className="font-urbanist font-light text-gray-600 text-sm leading-relaxed">
                   Complete coverage of all Old and New Testament books with organized questions and answers for each book.
                 </p>
-              </div>
+                  </div>
 
               {/* Feature Card 2 */}
               <div className="bg-white rounded-lg p-6 border border-gray-200">
@@ -1470,19 +1548,19 @@ const Index = () => {
                 <p className="font-urbanist font-light text-gray-600 text-sm leading-relaxed">
                   Beginner, Intermediate, and Advanced questions to match your knowledge level and learning goals.
                 </p>
-              </div>
+            </div>
 
               {/* Feature Card 3 */}
               <div className="bg-white rounded-lg p-6 border border-gray-200">
                 <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4">
                   <Trophy className="w-6 h-6 text-gray-700" strokeWidth={1} />
-                </div>
+            </div>
                 <h3 className="font-urbanist font-semibold text-gray-900 mb-2 text-lg">Chapter Breakdown</h3>
                 <p className="font-urbanist font-light text-gray-600 text-sm leading-relaxed">
                   Study specific chapters in detail with focused questions on key passages, themes, and narratives.
                 </p>
+                </div>
               </div>
-            </div>
 
             {/* Popular Study Areas */}
             <div className="mb-12">
@@ -1516,8 +1594,8 @@ const Index = () => {
                   <div className="font-urbanist font-medium text-gray-900 mb-1">True/False</div>
                   <div className="font-urbanist font-light text-sm text-gray-600">Quick Assessment</div>
                 </button>
+                </div>
               </div>
-            </div>
 
             {/* CTA */}
             <div className="text-center p-10">
@@ -1555,7 +1633,7 @@ const Index = () => {
               <p className="text-xl font-urbanist font-light text-gray-600 max-w-3xl mx-auto leading-relaxed">
                 Get started in minutes with our simple 3-step process
               </p>
-            </div>
+                </div>
             
             <div className="grid md:grid-cols-3 gap-8">
               {howItWorks.map((step, i) => (
@@ -1566,11 +1644,11 @@ const Index = () => {
                   {/* Step number indicator */}
                   <div className="absolute -top-4 -left-4 w-8 h-8 bg-black rounded-full flex items-center justify-center">
                     <span className="text-white font-urbanist font-semibold text-sm">{i + 1}</span>
-                  </div>
+              </div>
                   
                   <div className="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-gray-200 transition-colors duration-300">
                     <step.icon className="w-7 h-7 text-gray-700 group-hover:scale-110 transition-transform duration-300" strokeWidth={1} />
-                  </div>
+            </div>
                   <h3 className="text-xl font-urbanist font-semibold text-gray-900 mb-3">{step.title}</h3>
                   <p className="font-urbanist font-light text-gray-600 text-base leading-relaxed">
                     {step.description}
@@ -1580,10 +1658,10 @@ const Index = () => {
                   {i < howItWorks.length - 1 && (
                     <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-px bg-gradient-to-r from-gray-300 to-transparent transform -translate-y-1/2"></div>
                   )}
-                </div>
+              </div>
               ))}
-            </div>
-          </div>
+                </div>
+              </div>
         </section>
 
         {/* Testimonials Section - Moved here after How It Works */}
@@ -1593,7 +1671,7 @@ const Index = () => {
             <div className="absolute inset-0" style={{
               backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.05) 10px, rgba(0,0,0,0.05) 20px)`,
             }}></div>
-          </div>
+            </div>
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             <div className="text-center mb-12">
               {/* Decorative quote icon */}
@@ -1606,7 +1684,7 @@ const Index = () => {
               <p className="text-lg font-urbanist font-light text-gray-600 max-w-2xl mx-auto">
                 Join thousands of believers who've enhanced their Bible knowledge with our quizzes
               </p>
-            </div>
+                </div>
             
             <div className="relative">
               <Carousel
@@ -1629,18 +1707,18 @@ const Index = () => {
                         <div className="relative z-10 border-t border-gray-100 pt-4 mt-4">
                           <div className="font-urbanist font-semibold text-gray-900">{testimonial.name}</div>
                           <div className="text-sm font-urbanist font-light text-gray-600">{testimonial.role}</div>
-                        </div>
+              </div>
                         
                         {/* Hover accent */}
                         <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-gray-300 to-transparent group-hover:w-full transition-all duration-300"></div>
-                      </div>
+            </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
                 <CarouselPrevious className="left-0 md:-left-12 border-gray-300 hover:border-gray-400" />
                 <CarouselNext className="right-0 md:-right-12 border-gray-300 hover:border-gray-400" />
               </Carousel>
-            </div>
+              </div>
             {/* <div className="text-center mt-12">
               <Button 
                 className="bg-black hover:bg-gray-800 font-urbanist font-light text-base"
@@ -1802,13 +1880,13 @@ const Index = () => {
                 <div className="flex items-center space-x-2 mb-4">
                   <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
                     <Brain className="w-3 h-3 text-white" />
-                  </div>
-                  <span className="text-lg font-urbanist font-light text-gray-900">Bible Quiz Competition</span>
                 </div>
+                  <span className="text-lg font-urbanist font-light text-gray-900">Bible Quiz Competition</span>
+              </div>
                 <p className="font-urbanist font-light text-gray-600 mb-4 max-w-md">
                   Free Bible quiz platform that helps you test your knowledge, compete with others, and grow in your understanding of Scripture.
                 </p>
-              </div>
+            </div>
 
               {/* Product Links */}
               <div>
@@ -1837,7 +1915,7 @@ const Index = () => {
               <div className="flex flex-col md:flex-row justify-between items-center">
                 <div className="flex items-center space-x-6 mb-4 md:mb-0">
                   <span className="font-urbanist font-light text-gray-600">© 2024 Bible Quiz Competition. All rights reserved.</span>
-                </div>
+          </div>
               </div>
             </div>
           </div>
