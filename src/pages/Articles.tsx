@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -21,8 +21,6 @@ import {
   Brain,
   Menu
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
 
 interface Article {
   id: string;

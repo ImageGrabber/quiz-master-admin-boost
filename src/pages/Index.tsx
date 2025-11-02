@@ -1138,6 +1138,9 @@ const Index = () => {
         <script type="application/ld+json">
           {JSON.stringify(faqStructuredData)}
         </script>
+        
+        {/* Tidio Live Chat */}
+        <script src="//code.tidio.co/YOUR_TIDIO_PUBLIC_KEY.js" async></script>
       </Helmet>
       <div className="min-h-screen bg-white">
         {/* Guest completion dialog */}
