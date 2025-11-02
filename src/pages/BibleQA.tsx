@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
-import { Trophy, Search, BookOpen, Users, Target, TrendingUp, Star, Clock, Zap, BookMarked, Heart, Award, Lightbulb, Globe, Shield, Crown, X, Menu } from "lucide-react";
+import { Trophy, Search, BookOpen, Users, Target, TrendingUp, Star, Clock, Zap, BookMarked, Heart, Award, Lightbulb, Globe, Shield, Crown, X, Menu, Brain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -238,76 +238,71 @@ export default function BibleQA() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
-      {/* Navbar */}
-      <header className="bg-white/70 backdrop-blur-md border-b border-blue-100 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-3 sm:py-4 flex flex-row justify-between items-center relative">
-          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}> 
-            <img src="/sword.png" alt="Bible Quiz Competition Logo" className="w-6 h-6 sm:w-7 sm:h-7 mr-2 inline-block align-middle" />
-            <span className="text-base sm:text-lg font-semibold text-gray-900">Bible Quiz Competition</span>
-          </div>
-          {/* Hamburger for mobile */}
-          <button
-            className="md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-gray-100 transition-colors"
-            aria-label="Open navigation menu"
-            onClick={() => setMobileMenuOpen((open) => !open)}
-          >
-            <Menu className="w-6 h-6 sm:w-7 sm:h-7 text-gray-900" />
-          </button>
-          {/* Nav links for desktop */}
-          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2 xl:space-x-3">
-            <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/bible-questions-and-answers-hub")}>
-              <span className="hidden lg:inline">Bible Q&A Hub</span>
-              <span className="lg:hidden">Q&A Hub</span>
-            </button>
-            <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/articles")}>Articles</button>
-            <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/host-live-bible-quizzes-with-confidence")}>
-              <span className="hidden lg:inline">Hosting Guide</span>
-              <span className="lg:hidden">Hosting</span>
-            </button>
-            <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/auth/login")}>Sign In</button>
-            <Button variant="ghost" className="bg-black text-white font-semibold px-2 md:px-3 lg:px-4 py-2 rounded hover:bg-gray-800 transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/auth/register")}>Sign Up</Button>
-          </nav>
-          {/* Mobile dropdown menu */}
-          {mobileMenuOpen && (
-            <div className="md:hidden absolute top-full left-0 right-0 mt-2 mx-4 bg-white rounded-xl shadow-xl border border-blue-100 z-50 flex flex-col items-stretch overflow-hidden animate-in slide-in-from-top-2 duration-200">
-              <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A Hub</button>
-              <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
-              <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/host-live-bible-quizzes-with-confidence"); }}>Hosting Guide</button>
-              <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
-              <button className="bg-black text-white font-semibold px-4 py-4 text-left hover:bg-gray-900 active:bg-gray-800 transition-colors duration-200 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</button>
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="relative flex items-center justify-between p-6 w-full px-6 md:px-8 lg:px-12">
+        <div className="flex items-center space-x-8">
+          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}>
+            <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
+              <Brain className="w-3 h-3 text-white" />
             </div>
-          )}
+            <span className="text-lg font-urbanist font-semibold text-gray-900">Bible Quiz Competition</span>
+          </div>
+          <nav className="hidden md:flex items-center space-x-6">
+            <button onClick={() => navigate("/bible-questions-and-answers-hub")} className="text-gray-600 hover:text-gray-900 font-urbanist font-light">Bible Q&A</button>
+            <button onClick={() => navigate("/articles")} className="text-gray-600 hover:text-gray-900 font-urbanist font-light">Articles</button>
+            <button onClick={() => navigate("/help")} className="text-gray-600 hover:text-gray-900 font-urbanist font-light">Help</button>
+          </nav>
         </div>
+        <div className="flex items-center space-x-4">
+          <Button 
+            className="bg-black hover:bg-gray-800 font-urbanist font-light"
+            onClick={() => navigate("/auth/register")}
+          >
+            Get Started
+          </Button>
+          <button className="md:hidden" onClick={() => setMobileMenuOpen((open) => !open)}>
+            <Menu className="w-6 h-6" />
+          </button>
+        </div>
+        {/* Mobile dropdown menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden absolute top-full left-6 right-6 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 flex flex-col">
+            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A Hub</button>
+            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
+            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>Help</button>
+            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-t border-gray-200" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
+            <Button className="bg-black text-white px-4 py-3 mx-4 mb-4 font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</Button>
+          </div>
+        )}
       </header>
 
       {/* Hero Section with Search */}
-      <section className="py-16 bg-gradient-to-br from-blue-100 via-purple-50 to-white text-center">
-        <div className="max-w-4xl mx-auto px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900">
-            Discover Your <span className="text-blue-600">Bible Knowledge</span>
+      <section className="py-16 bg-white text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h1 className="text-4xl md:text-6xl font-urbanist font-normal text-gray-900 mb-6 leading-tight">
+            Discover Your Bible Knowledge
           </h1>
-          <p className="text-xl text-gray-700 mb-8 max-w-2xl mx-auto">
-            Search through 66 Bible books, take interactive quizzes, and challenge yourself with thousands of questions. 
-            Find exactly what you're looking for or explore new topics.
+          <p className="text-xl font-urbanist font-light text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+            Search through 66 Bible books, take interactive quizzes, and challenge yourself with thousands of questions. Find exactly what you're looking for or explore new topics.
           </p>
           
           {/* Search Bar */}
           <div className="max-w-2xl mx-auto mb-8">
             <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" strokeWidth={1} />
               <Input
                 type="text"
                 placeholder="Search for any Bible book (e.g., Genesis, Matthew, Psalms)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 pr-4 py-4 text-lg border-2 border-blue-200 focus:border-blue-500 rounded-xl shadow-lg"
+                className="pl-12 pr-4 py-4 text-lg font-urbanist font-light border border-gray-300 focus:border-gray-400 rounded-lg"
               />
             </div>
             
             {/* Search Results */}
             {searchQuery && (
-              <div className="mt-4 bg-white rounded-xl shadow-xl border border-gray-200 max-h-64 overflow-y-auto">
+              <div className="mt-4 bg-white rounded-lg shadow-lg border border-gray-200 max-h-64 overflow-y-auto">
                 {filteredBooks.length > 0 ? (
                   filteredBooks.map((book) => {
                     // Find the corresponding quiz for this book
@@ -320,22 +315,22 @@ export default function BibleQA() {
                       <div
                         key={book}
                         onClick={() => handleSearch(book)}
-                        className="px-4 py-3 hover:bg-blue-50 cursor-pointer border-b border-gray-100 last:border-b-0 flex items-center justify-between"
+                        className="px-4 py-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0 flex items-center justify-between transition-colors"
                       >
                         <div className="flex items-center space-x-3">
-                          <span className="font-medium text-gray-800">{book}</span>
+                          <span className="font-urbanist font-medium text-gray-900">{book}</span>
                           {quiz && (
-                            <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                            <span className="text-xs font-urbanist font-light text-gray-600 bg-gray-100 px-2 py-1 rounded">
                               {quiz.difficulty}
                             </span>
                           )}
                         </div>
-                        <span className="text-sm text-blue-600 font-medium">Take Quiz →</span>
+                        <span className="text-sm font-urbanist font-light text-gray-600">Take Quiz →</span>
                       </div>
                     );
                   })
                 ) : (
-                  <div className="px-4 py-3 text-gray-500">No books found matching "{searchQuery}"</div>
+                  <div className="px-4 py-3 font-urbanist font-light text-gray-600">No books found matching "{searchQuery}"</div>
                 )}
               </div>
             )}
@@ -344,12 +339,12 @@ export default function BibleQA() {
           {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
             {quickStats.map((stat) => (
-              <div key={stat.label} className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-blue-100">
-                <div className={`flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100 mx-auto mb-2`}>
-                  <stat.icon className={`w-4 h-4 ${stat.color}`} />
+              <div key={stat.label} className="bg-white rounded-lg p-4 border border-gray-200">
+                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100 mx-auto mb-2">
+                  <stat.icon className="w-4 h-4 text-gray-700" strokeWidth={1} />
                 </div>
-                <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-                <div className="text-sm text-gray-600">{stat.label}</div>
+                <div className="text-2xl font-urbanist font-semibold text-gray-900">{stat.value}</div>
+                <div className="text-sm font-urbanist font-light text-gray-600">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -357,64 +352,64 @@ export default function BibleQA() {
       </section>
 
       {/* Main Content */}
-      <main className="w-full max-w-7xl mx-auto px-4 py-10">
+      <main className="w-full max-w-7xl mx-auto px-6 py-10">
         {/* Book Hubs (e.g., Genesis) */}
-        <section className="mb-12">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl font-bold text-gray-900">Book Study Hubs</h2>
+        <section className="mb-16">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl md:text-4xl font-urbanist font-semibold text-gray-900">Book Study Hubs</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Genesis Hub Card */}
-            <Card className="shadow-lg border-0 hover:shadow-xl transition-all duration-300 cursor-pointer group" onClick={() => navigate('/bible-questions-and-answers-hub/genesis')}>
+            <Card className="border border-gray-200 hover:border-gray-400 transition-all duration-300 cursor-pointer group bg-white" onClick={() => navigate('/bible-questions-and-answers-hub/genesis')}>
               <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center">
-                    <BookOpen className="w-6 h-6 text-white" />
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center">
+                    <BookOpen className="w-6 h-6 text-gray-700" strokeWidth={1} />
                   </div>
                 </div>
-                <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">Genesis Hub</CardTitle>
-                <CardDescription className="text-gray-600">Questions, answers, and quizzes for the Book of Genesis</CardDescription>
+                <CardTitle className="text-xl font-urbanist font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">Genesis Hub</CardTitle>
+                <CardDescription className="font-urbanist font-light text-gray-600">Questions, answers, and quizzes for the Book of Genesis</CardDescription>
               </CardHeader>
               <CardContent>
-                <Button className="w-full" variant="outline">
+                <Button className="w-full font-urbanist font-light border-gray-300" variant="outline">
                   Open Genesis Hub
                 </Button>
               </CardContent>
             </Card>
 
             {/* Placeholder slots for upcoming hubs */}
-            <div className="border-2 border-dashed border-gray-200 rounded-xl p-6 bg-white/50 flex items-center justify-center">
-              <span className="text-gray-500">More book hubs coming soon</span>
+            <div className="border border-dashed border-gray-200 rounded-lg p-6 bg-gray-50 flex items-center justify-center">
+              <span className="font-urbanist font-light text-gray-500">More book hubs coming soon</span>
             </div>
-            <div className="hidden lg:flex border-2 border-dashed border-gray-200 rounded-xl p-6 bg-white/50 items-center justify-center">
-              <span className="text-gray-500">Space reserved for future hubs</span>
+            <div className="hidden lg:flex border border-dashed border-gray-200 rounded-lg p-6 bg-gray-50 items-center justify-center">
+              <span className="font-urbanist font-light text-gray-500">Space reserved for future hubs</span>
             </div>
           </div>
         </section>
         {/* Featured Quizzes */}
-        <section className="mb-12">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl font-bold text-gray-900">Featured Quizzes</h2>
-            <Button variant="outline" onClick={() => setSearchQuery("")}>View All</Button>
+        <section className="mb-16">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl md:text-4xl font-urbanist font-semibold text-gray-900">Featured Quizzes</h2>
+            <Button variant="outline" onClick={() => setSearchQuery("")} className="font-urbanist font-light border-gray-300">View All</Button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {randomFeaturedQuizzes.map((quiz) => (
-              <Card key={quiz.title} className="shadow-lg border-0 hover:shadow-xl transition-all duration-300 cursor-pointer group" onClick={() => navigate(quiz.link)}>
+              <Card key={quiz.title} className="border border-gray-200 hover:border-gray-400 transition-all duration-300 cursor-pointer group bg-white" onClick={() => navigate(quiz.link)}>
                 <CardHeader className="pb-3">
-                  <div className="flex items-center justify-between">
-                    <div className={`w-12 h-12 rounded-lg ${quiz.color} flex items-center justify-center`}>
-                      <quiz.icon className="w-6 h-6 text-white" />
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center">
+                      <quiz.icon className="w-6 h-6 text-gray-700" strokeWidth={1} />
                     </div>
                     <div className="text-right">
-                      <div className="text-sm font-medium text-gray-500">{quiz.difficulty}</div>
-                      <div className="text-sm text-gray-400">{quiz.questions} questions</div>
+                      <div className="text-sm font-urbanist font-medium text-gray-600">{quiz.difficulty}</div>
+                      <div className="text-sm font-urbanist font-light text-gray-500">{quiz.questions} questions</div>
                     </div>
                   </div>
-                  <CardTitle className="text-xl group-hover:text-blue-600 transition-colors">{quiz.title}</CardTitle>
-                  <CardDescription className="text-gray-600">{quiz.description}</CardDescription>
+                  <CardTitle className="text-xl font-urbanist font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">{quiz.title}</CardTitle>
+                  <CardDescription className="font-urbanist font-light text-gray-600">{quiz.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button className="w-full" variant="outline">
+                  <Button className="w-full font-urbanist font-light border-gray-300" variant="outline">
                     Start Quiz
                   </Button>
                 </CardContent>
@@ -424,44 +419,44 @@ export default function BibleQA() {
         </section>
 
         {/* Categories Grid - Organized by Biblical Order */}
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Browse by Biblical Category</h2>
+        <section className="mb-16">
+          <h2 className="text-3xl md:text-4xl font-urbanist font-semibold text-gray-900 mb-8">Browse by Biblical Category</h2>
           <div className="space-y-8">
             {categories.map((category) => {
               const categoryQuizzes = featuredQuizzes.filter(quiz => quiz.category === category.name);
               const isClickable = categoryQuizzes.length > 0;
               
               return (
-                <div key={category.name} className="bg-white rounded-lg shadow-lg border-0 p-6">
+                <div key={category.name} className="bg-white rounded-lg border border-gray-200 p-6">
                   <div 
                     className={`flex items-center space-x-3 mb-4 ${isClickable ? 'cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors' : ''}`}
                     onClick={isClickable ? () => handleCategoryClick(category.name) : undefined}
                   >
-                    <div className={`w-10 h-10 rounded-lg ${category.color} flex items-center justify-center`}>
-                      <category.icon className="w-5 h-5" />
+                    <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center">
+                      <category.icon className="w-5 h-5 text-gray-700" strokeWidth={1} />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-gray-900">{category.name}</h3>
-                      <p className="text-sm text-gray-600">{category.description}</p>
+                      <h3 className="text-xl font-urbanist font-semibold text-gray-900">{category.name}</h3>
+                      <p className="text-sm font-urbanist font-light text-gray-600">{category.description}</p>
                     </div>
                   </div>
                   
                   {categoryQuizzes.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {categoryQuizzes.map((quiz) => (
-                        <Card key={quiz.title} className="shadow-md border-0 hover:shadow-lg transition-all duration-300 cursor-pointer group" onClick={() => navigate(quiz.link)}>
+                        <Card key={quiz.title} className="border border-gray-200 hover:border-gray-400 transition-all duration-300 cursor-pointer group bg-white" onClick={() => navigate(quiz.link)}>
                           <CardContent className="p-4">
                             <div className="flex items-center space-x-3 mb-3">
-                              <div className={`w-8 h-8 rounded-lg ${quiz.color} flex items-center justify-center`}>
-                                <quiz.icon className="w-4 h-4 text-white" />
+                              <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
+                                <quiz.icon className="w-4 h-4 text-gray-700" strokeWidth={1} />
                               </div>
                               <div className="flex-1">
-                                <h4 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">{quiz.title}</h4>
-                                <p className="text-sm text-gray-500">{quiz.difficulty} • {quiz.questions} questions</p>
+                                <h4 className="font-urbanist font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">{quiz.title}</h4>
+                                <p className="text-sm font-urbanist font-light text-gray-500">{quiz.difficulty} • {quiz.questions} questions</p>
                               </div>
                             </div>
-                            <p className="text-sm text-gray-600 mb-3">{quiz.description}</p>
-                            <Button className="w-full" variant="outline" size="sm">
+                            <p className="text-sm font-urbanist font-light text-gray-600 mb-3">{quiz.description}</p>
+                            <Button className="w-full font-urbanist font-light border-gray-300" variant="outline" size="sm">
                               Start Quiz
                             </Button>
                           </CardContent>
@@ -470,7 +465,7 @@ export default function BibleQA() {
                     </div>
                   ) : (
                     <div className="text-center py-8">
-                      <p className="text-gray-500 italic">Quizzes for this category coming soon...</p>
+                      <p className="font-urbanist font-light text-gray-500 italic">Quizzes for this category coming soon...</p>
                     </div>
                   )}
                 </div>
@@ -484,14 +479,14 @@ export default function BibleQA() {
           <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
             <DialogHeader>
               <div className="flex items-center justify-between">
-                <DialogTitle className="text-2xl font-bold text-gray-900">{selectedCategory}</DialogTitle>
+                <DialogTitle className="text-2xl font-urbanist font-semibold text-gray-900">{selectedCategory}</DialogTitle>
                 <Button 
                   variant="ghost" 
                   size="sm" 
                   onClick={() => setIsCategoryDialogOpen(false)}
                   className="h-8 w-8 p-0"
                 >
-                  <X className="h-4 w-4" />
+                  <X className="h-4 w-4" strokeWidth={1} />
                 </Button>
               </div>
             </DialogHeader>
@@ -499,18 +494,18 @@ export default function BibleQA() {
               {getBooksByCategory(selectedCategory).map((book) => (
                 <Card 
                   key={book} 
-                  className="shadow-lg border-0 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                  className="border border-gray-200 hover:border-gray-400 transition-all duration-300 cursor-pointer group bg-white"
                   onClick={() => {
                     handleSearch(book);
                     setIsCategoryDialogOpen(false);
                   }}
                 >
                   <CardContent className="p-4 text-center">
-                    <div className="w-12 h-12 rounded-lg bg-blue-100 flex items-center justify-center mx-auto mb-3">
-                      <BookOpen className="w-6 h-6 text-blue-600" />
+                    <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mx-auto mb-3">
+                      <BookOpen className="w-6 h-6 text-gray-700" strokeWidth={1} />
                     </div>
-                    <h3 className="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">{book}</h3>
-                    <p className="text-sm text-gray-500 mt-1">Take Quiz</p>
+                    <h3 className="font-urbanist font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">{book}</h3>
+                    <p className="text-sm font-urbanist font-light text-gray-500 mt-1">Take Quiz</p>
                   </CardContent>
                 </Card>
               ))}
@@ -521,16 +516,16 @@ export default function BibleQA() {
         {/* Recent Searches */}
         {recentSearches.length > 0 && (
           <section className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Recently Viewed</h2>
+            <h2 className="text-2xl font-urbanist font-semibold text-gray-900 mb-6">Recently Viewed</h2>
             <div className="flex flex-wrap gap-3">
               {recentSearches.map((book) => (
                 <Button
                   key={book}
                   variant="outline"
                   onClick={() => handleSearch(book)}
-                  className="flex items-center space-x-2"
+                  className="flex items-center space-x-2 font-urbanist font-light border-gray-300"
                 >
-                  <Clock className="w-4 h-4" />
+                  <Clock className="w-4 h-4" strokeWidth={1} />
                   <span>{book}</span>
                 </Button>
               ))}
@@ -539,23 +534,73 @@ export default function BibleQA() {
         )}
 
         {/* Call to Action */}
-        <section className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white text-center">
+        <section className="bg-gray-50 rounded-lg p-8 text-center border border-gray-200">
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold mb-4">Ready to Challenge Yourself?</h2>
-            <p className="text-xl mb-6 opacity-90">
+            <h2 className="text-3xl font-urbanist font-semibold text-gray-900 mb-4">Ready to Challenge Yourself?</h2>
+            <p className="text-xl font-urbanist font-light text-gray-600 mb-6">
               Join thousands of users competing in Bible quiz competitions and track your progress.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" onClick={() => navigate("/auth/register")}>
+              <Button size="lg" className="bg-black hover:bg-gray-800 text-white font-urbanist font-light" onClick={() => navigate("/auth/register")}>
                 Sign Up Free
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-black bg-white hover:bg-gray-100" onClick={() => navigate("/auth/login")}>
+              <Button size="lg" variant="outline" className="border-gray-300 text-gray-900 hover:bg-gray-50 font-urbanist font-light" onClick={() => navigate("/auth/login")}>
                 Sign In
               </Button>
             </div>
           </div>
         </section>
       </main>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-200 py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            {/* Company Info */}
+            <div className="col-span-1 md:col-span-2">
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
+                  <Brain className="w-3 h-3 text-white" />
+                </div>
+                <span className="text-lg font-urbanist font-light text-gray-900">Bible Quiz Competition</span>
+              </div>
+              <p className="font-urbanist font-light text-gray-600 mb-4 max-w-md">
+                Free Bible quiz platform that helps you test your knowledge, compete with others, and grow in your understanding of Scripture.
+              </p>
+            </div>
+
+            {/* Product Links */}
+            <div>
+              <h3 className="font-medium text-gray-900 mb-4 font-urbanist">Product</h3>
+              <ul className="space-y-3">
+                <li><a href="/todays-quiz" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Today's Quiz</a></li>
+                <li><a href="/weekly-quiz" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Weekly Quiz</a></li>
+                <li><a href="/public-leaderboard" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Leaderboard</a></li>
+                <li><a href="/help" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Help</a></li>
+              </ul>
+            </div>
+
+            {/* Support Links */}
+            <div>
+              <h3 className="font-medium text-gray-900 mb-4 font-urbanist">Support</h3>
+              <ul className="space-y-3">
+                <li><a href="/help" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Help Center</a></li>
+                <li><a href="#faq" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">FAQ</a></li>
+                <li><a href="mailto:info@biblequizcompetition.com" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Footer */}
+          <div className="border-t border-gray-200 pt-8 mt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <div className="flex items-center space-x-6 mb-4 md:mb-0">
+                <span className="font-urbanist font-light text-gray-600">© 2024 Bible Quiz Competition. All rights reserved.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 } 

@@ -6,6 +6,7 @@
 
 @layer base {
   :root {
+    --font-urbanist: 'Urbanist', system-ui, sans-serif;
     --background: 0 0% 100%;
     --foreground: 142 71% 10%;
 
