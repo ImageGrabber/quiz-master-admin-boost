@@ -1396,8 +1396,8 @@ const Index = () => {
             )}
         </header>
 
-        {/* Hero Section */}
-        <main className="relative flex flex-col items-center justify-center px-6 py-20 overflow-hidden">
+        {/* Hero Section - Ensured to fit within 100vh including buttons */}
+        <main className="relative flex flex-col items-center justify-center px-6 pt-12 pb-8 overflow-hidden min-h-[calc(100vh-80px)] max-h-[100vh]">
           {/* Subtle background pattern */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute inset-0" style={{
@@ -1411,74 +1411,74 @@ const Index = () => {
           <div className="absolute bottom-20 left-1/4 w-24 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-50"></div>
           <div className="absolute bottom-20 right-1/4 w-24 h-px bg-gradient-to-l from-transparent via-gray-300 to-transparent opacity-50"></div>
           
-          <div className="text-center max-w-4xl mx-auto mb-12 relative z-10">
+          <div className="text-center max-w-4xl mx-auto mb-8 relative z-10">
             {/* Subtitle */}
-            <p className="text-sm font-urbanist font-light text-gray-500 uppercase tracking-wider mb-4 mt-28">
+            <p className="text-sm font-urbanist font-light text-gray-500 uppercase tracking-wider mb-3 mt-12 md:mt-16">
               — BIBLE QUIZ COMPETITION —
             </p>
             
             {/* Main Headline */}
-            <h1 className="text-4xl md:text-6xl font-urbanist font-normal text-gray-900 mb-6 leading-tight">
+            <h1 className="text-3xl md:text-5xl font-urbanist font-normal text-gray-900 mb-4 md:mb-5 leading-tight">
               Test Your Bible Knowledge With Fun Quizzes
             </h1>
             
             {/* Description */}
-            <p className="text-xl font-urbanist font-light text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg md:text-xl font-urbanist font-light text-gray-600 mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed">
               Compete with others, track your progress, and grow in your knowledge of Scripture with our free Bible quiz platform.
             </p>
-                  </div>
+          </div>
 
           {/* Feature Cards Row */}
-          <section className="w-full pb-16 relative z-10">
+          <section className="w-full mb-6 md:mb-8 relative z-10">
             <div className="max-w-full mx-auto px-6">
-              <div className="flex justify-center gap-6 flex-wrap">
+              <div className="flex justify-center gap-4 md:gap-6 flex-wrap">
                 {features.map((feature, i) => (
                   <div 
                     key={i} 
-                    className="bg-white rounded-lg p-6 w-64 border border-gray-200 hover:border-gray-400 hover:shadow-lg transition-all duration-300 group relative overflow-hidden"
+                    className="bg-white rounded-lg p-4 md:p-6 w-56 md:w-64 border border-gray-200 hover:border-gray-400 hover:shadow-lg transition-all duration-300 group relative overflow-hidden"
                   >
                     {/* Subtle gradient overlay on hover */}
                     <div className="absolute inset-0 bg-gradient-to-br from-gray-50/0 to-gray-100/0 group-hover:from-gray-50/50 group-hover:to-gray-100/50 transition-all duration-300"></div>
                     
-                    <div className="text-center mb-4 relative z-10">
-                      <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-3 group-hover:bg-gray-200 transition-colors duration-300">
-                        <feature.icon className="w-8 h-8 text-gray-700 group-hover:scale-110 transition-transform duration-300" strokeWidth={1} />
-            </div>
+                    <div className="text-center mb-3 md:mb-4 relative z-10">
+                      <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-100 rounded-lg flex items-center justify-center mx-auto mb-2 md:mb-3 group-hover:bg-gray-200 transition-colors duration-300">
+                        <feature.icon className="w-6 h-6 md:w-8 md:h-8 text-gray-700 group-hover:scale-110 transition-transform duration-300" strokeWidth={1} />
+                      </div>
                     </div>
-                    <h3 className="font-urbanist font-medium text-gray-900 text-base text-center relative z-10 group-hover:text-gray-800 transition-colors">{feature.title}</h3>
-                    <p className="text-sm font-urbanist font-light text-gray-600 text-center mt-2 relative z-10">{feature.description}</p>
+                    <h3 className="font-urbanist font-medium text-gray-900 text-sm md:text-base text-center relative z-10 group-hover:text-gray-800 transition-colors">{feature.title}</h3>
+                    <p className="text-xs md:text-sm font-urbanist font-light text-gray-600 text-center mt-1 md:mt-2 relative z-10">{feature.description}</p>
                     
                     {/* Decorative corner accent */}
                     <div className="absolute top-0 right-0 w-12 h-12 border-t border-r border-gray-200 rounded-bl-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </div>
-              ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Main CTA - Buttons within hero section to ensure visibility in 100vh */}
+          <div className="text-center mb-4 relative z-10">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+              <Button 
+                size="lg" 
+                className="text-base md:text-lg px-6 md:px-8 py-4 md:py-6 bg-black hover:bg-gray-800 rounded-lg font-urbanist font-light transition-all duration-300 hover:scale-105 hover:shadow-xl group"
+                onClick={() => navigate("/auth/register")}
+              >
+                <Rocket className="w-5 h-5 mr-2 translate-x-1 transition-transform duration-300" />
+                Get Started — It's Free
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                className="text-base md:text-lg px-6 md:px-8 py-4 md:py-5 border-2 border-black text-black hover:bg-gray-50 hover:border-gray-700 rounded-lg font-urbanist font-light transition-all duration-300 hover:scale-105 hover:shadow-lg group"
+                onClick={() => navigate("/todays-quiz")}
+              >
+                <Calendar className="w-5 h-5 mr-2 scale-110 transition-transform duration-300" />
+                Today's Quiz
+              </Button>
             </div>
           </div>
-        </section>
         </main>
-
-        {/* Main CTA */}
-        <section className="text-center pb-24 mb-8">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
-                  <Button 
-                    size="lg" 
-              className="text-lg px-8 py-6 bg-black hover:bg-gray-800 rounded-lg font-urbanist font-light transition-all duration-300 hover:scale-105 hover:shadow-xl group"
-                    onClick={() => navigate("/auth/register")}
-                  >
-              <Rocket className="w-5 h-5 mr-2 translate-x-1 transition-transform duration-300" />
-              Get Started — It's Free
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="text-lg px-8 py-5 border-2 border-black text-black hover:bg-gray-50 hover:border-gray-700 rounded-lg font-urbanist font-light transition-all duration-300 hover:scale-105 hover:shadow-lg group"
-              onClick={() => navigate("/todays-quiz")}
-            >
-              <Calendar className="w-5 h-5 mr-2 scale-110 transition-transform duration-300" />
-              Today's Quiz
-                  </Button>
-                </div>
-        </section>
 
         {/* Bible Q&A Hub Section */}
         <section className="relative pt-24 pb-20 bg-gray-50 overflow-hidden">
