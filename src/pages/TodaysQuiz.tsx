@@ -466,60 +466,54 @@ const TodaysQuiz = () => {
           <title>Today's Quiz - Hebrews 4 | Bible Quiz Competition</title>
           <meta name="description" content="Test your knowledge of Hebrews 4 with today's special quiz." />
         </Helmet>
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-white">
+        <div className="min-h-screen bg-white">
           <div className="container mx-auto px-4 py-6 sm:py-12">
             <div className="max-w-2xl mx-auto">
               {/* Header */}
               <div className="text-center mb-8 sm:mb-12">
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4 sm:mb-6">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-urbanist font-semibold text-gray-900 mb-4 sm:mb-6">
                   Today's Quiz - Hebrews 4
                 </h1>
-                <p className="text-base sm:text-lg text-gray-600">Choose your language</p>
+                <p className="text-base sm:text-lg font-urbanist font-light text-gray-600">Choose your language</p>
               </div>
 
               {/* Language Selection */}
               <div className="space-y-3 sm:space-y-4">
                 <button
                   onClick={() => handleLanguageSelect('english')}
-                  className="w-full p-4 sm:p-6 bg-white rounded-xl border-2 border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 text-left group"
+                  className="w-full p-4 sm:p-6 bg-white rounded-lg border border-gray-200 hover:border-gray-400 hover:bg-gray-50 transition-all duration-200 text-left group"
                 >
                   <div className="flex items-center">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                      <Languages className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                    </div>
+                    <Languages className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 mr-4 flex-shrink-0" strokeWidth={1} />
                     <div>
-                      <div className="text-lg sm:text-xl font-semibold text-gray-900">English</div>
-                      <div className="text-sm sm:text-base text-gray-600">Take the quiz in English</div>
+                      <div className="text-lg sm:text-xl font-urbanist font-medium text-gray-900">English</div>
+                      <div className="text-sm sm:text-base font-urbanist font-light text-gray-600">Take the quiz in English</div>
                     </div>
                   </div>
                 </button>
 
                 <button
                   onClick={() => handleLanguageSelect('hindi')}
-                  className="w-full p-4 sm:p-6 bg-white rounded-xl border-2 border-gray-200 hover:border-green-300 hover:bg-green-50 transition-all duration-200 text-left group"
+                  className="w-full p-4 sm:p-6 bg-white rounded-lg border border-gray-200 hover:border-gray-400 hover:bg-gray-50 transition-all duration-200 text-left group"
                 >
                   <div className="flex items-center">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                      <Languages className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                    </div>
+                    <Languages className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 mr-4 flex-shrink-0" strokeWidth={1} />
                     <div>
-                      <div className="text-lg sm:text-xl font-semibold text-gray-900">हिंदी</div>
-                      <div className="text-sm sm:text-base text-gray-600">हिंदी में क्विज लें</div>
+                      <div className="text-lg sm:text-xl font-urbanist font-medium text-gray-900">हिंदी</div>
+                      <div className="text-sm sm:text-base font-urbanist font-light text-gray-600">हिंदी में क्विज लें</div>
                     </div>
                   </div>
                 </button>
 
                 <button
                   onClick={() => handleLanguageSelect('malayalam')}
-                  className="w-full p-4 sm:p-6 bg-white rounded-xl border-2 border-gray-200 hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 text-left group"
+                  className="w-full p-4 sm:p-6 bg-white rounded-lg border border-gray-200 hover:border-gray-400 hover:bg-gray-50 transition-all duration-200 text-left group"
                 >
                   <div className="flex items-center">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-500 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-                      <Languages className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                    </div>
+                    <Languages className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700 mr-4 flex-shrink-0" strokeWidth={1} />
                     <div>
-                      <div className="text-lg sm:text-xl font-semibold text-gray-900">മലയാളം</div>
-                      <div className="text-sm sm:text-base text-gray-600">മലയാളത്തിൽ ക്വിസ് എടുക്കുക</div>
+                      <div className="text-lg sm:text-xl font-urbanist font-medium text-gray-900">മലയാളം</div>
+                      <div className="text-sm sm:text-base font-urbanist font-light text-gray-600">മലയാളത്തിൽ ക്വിസ് എടുക്കുക</div>
                     </div>
                   </div>
                 </button>
@@ -530,9 +524,9 @@ const TodaysQuiz = () => {
                 <Button
                   variant="outline"
                   onClick={() => navigate('/')}
-                  className="px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base"
+                  className="px-6 sm:px-8 py-2 sm:py-3 text-sm sm:text-base font-urbanist font-light border-gray-300"
                 >
-                  <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                  <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-gray-700" strokeWidth={1} />
                   Back to Home
                 </Button>
               </div>
@@ -545,13 +539,6 @@ const TodaysQuiz = () => {
 
   if (quizCompleted) {
     const percentage = Math.round((score / getCurrentQuestions().length) * 100);
-    const getScoreColor = () => {
-      if (percentage >= 90) return 'from-green-500 to-emerald-600';
-      if (percentage >= 80) return 'from-blue-500 to-cyan-600';
-      if (percentage >= 70) return 'from-yellow-500 to-orange-600';
-      if (percentage >= 60) return 'from-orange-500 to-red-600';
-      return 'from-red-500 to-pink-600';
-    };
 
     return (
       <>
@@ -559,65 +546,52 @@ const TodaysQuiz = () => {
           <title>Today's Quiz - Hebrews 4 | Bible Quiz Competition</title>
           <meta name="description" content="Test your knowledge of Hebrews 4 with today's special quiz." />
         </Helmet>
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white relative overflow-hidden">
-          {/* Background decoration */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-20 left-10 w-32 h-32 bg-blue-400 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-400 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-pink-400 rounded-full blur-3xl"></div>
-          </div>
-          
-          <div className="container mx-auto px-4 py-8 relative z-10">
+        <div className="min-h-screen bg-white">
+          <div className="container mx-auto px-4 py-8">
             <div className="max-w-5xl mx-auto">
               {/* Header with celebration */}
               <div className="text-center mb-12">
                 <div className="flex items-center justify-center mb-6">
-                  <div className="relative">
-                    <img src="/sword.png" alt="Bible Quiz Competition Logo" className="w-12 h-12 mr-3" />
-                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center">
-                      <Star className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
-                  <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  <h1 className="text-4xl font-urbanist font-semibold text-gray-900">
                     Today's Quiz - Hebrews 4
                   </h1>
                 </div>
-                <div className="inline-flex items-center px-6 py-3 bg-white/80 backdrop-blur border border-green-200 rounded-full shadow-lg">
-                  <CheckCircle className="w-6 h-6 text-green-500 mr-2" />
-                  <span className="text-lg font-semibold text-green-700">Quiz Completed!</span>
+                <div className="inline-flex items-center px-6 py-3 bg-gray-50 border border-gray-200 rounded-lg">
+                  <CheckCircle className="w-6 h-6 text-gray-700 mr-2" strokeWidth={1} />
+                  <span className="text-lg font-urbanist font-medium text-gray-900">Quiz Completed!</span>
                 </div>
               </div>
 
               {/* Results Card with enhanced design */}
-              <Card className="mb-8 border-0 shadow-2xl bg-white/90 backdrop-blur">
+              <Card className="mb-8 border border-gray-200 bg-white">
                 <CardHeader className="text-center pb-8">
                   <div className="relative mb-6">
-                    <div className={`w-32 h-32 mx-auto rounded-full bg-gradient-to-r ${getScoreColor()} flex items-center justify-center shadow-2xl`}>
-                      <div className="text-white text-4xl font-bold">{percentage}%</div>
+                    <div className={`w-32 h-32 mx-auto rounded-full bg-gray-900 flex items-center justify-center`}>
+                      <div className="text-white text-4xl font-urbanist font-semibold">{percentage}%</div>
                     </div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
-                      <Trophy className="w-5 h-5 text-white" />
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
+                      <Trophy className="w-5 h-5 text-white" strokeWidth={1} />
                     </div>
                   </div>
                   
-                  <CardTitle className="text-3xl mb-4 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                  <CardTitle className="text-3xl mb-4 font-urbanist font-semibold text-gray-900">
                     Your Results
                   </CardTitle>
                   
                   <div className="flex justify-center items-center gap-6 mb-6">
-                    <div className="text-6xl font-bold text-blue-600">{score}</div>
+                    <div className="text-6xl font-urbanist font-semibold text-gray-900">{score}</div>
                     <div className="text-3xl text-gray-400">/</div>
-                    <div className="text-3xl text-gray-600">{getCurrentQuestions().length}</div>
+                    <div className="text-3xl font-urbanist font-light text-gray-600">{getCurrentQuestions().length}</div>
                   </div>
                   
-                  <div className="text-2xl font-bold text-gray-800 mb-3">
+                  <div className="text-2xl font-urbanist font-medium text-gray-900 mb-3">
                     {getScoreMessage()}
                   </div>
                   
                   <div className="flex justify-center">
                     <div className="w-full max-w-md bg-gray-100 rounded-full h-3">
                       <div 
-                        className={`h-3 rounded-full bg-gradient-to-r ${getScoreColor()} transition-all duration-1000 ease-out`}
+                        className="h-3 rounded-full bg-gray-900 transition-all duration-1000 ease-out"
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>
@@ -625,38 +599,38 @@ const TodaysQuiz = () => {
                 </CardHeader>
                 
                 <CardContent className="px-4 sm:px-8">
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-4 sm:mb-6 text-center">Question Review</h3>
+                  <h3 className="text-lg sm:text-xl font-urbanist font-semibold text-gray-900 mb-4 sm:mb-6 text-center">Question Review</h3>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
                     {answers.map((answer, index) => {
                       const question = getCurrentQuestions().find(q => q.id === answer.questionId);
                       return (
-                        <div key={index} className={`p-4 sm:p-6 rounded-xl border-2 transition-all duration-200 hover:scale-105 ${
+                        <div key={index} className={`p-4 sm:p-6 rounded-lg border transition-all duration-200 ${
                           answer.correct 
-                            ? 'bg-gradient-to-br from-green-50 to-emerald-50 border-green-300 shadow-green-100' 
-                            : 'bg-gradient-to-br from-red-50 to-pink-50 border-red-300 shadow-red-100'
-                        } shadow-lg`}>
+                            ? 'bg-gray-50 border-gray-300' 
+                            : 'bg-red-50 border-red-200'
+                        }`}>
                           <div className="flex items-center justify-between mb-3">
-                            <div className="font-bold text-base sm:text-lg text-gray-800">Question {index + 1}</div>
+                            <div className="font-urbanist font-semibold text-base sm:text-lg text-gray-900">Question {index + 1}</div>
                             {answer.correct ? (
-                              <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-500" />
+                              <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" strokeWidth={1} />
                             ) : (
                               <div className="w-5 h-5 sm:w-6 sm:h-6 bg-red-500 rounded-full flex items-center justify-center">
                                 <span className="text-white text-xs sm:text-sm font-bold">✕</span>
                               </div>
                             )}
                           </div>
-                          <div className="text-gray-700 mb-3 sm:mb-4 font-medium text-sm sm:text-base leading-relaxed">{question?.question}</div>
+                          <div className="text-gray-700 mb-3 sm:mb-4 font-urbanist font-light text-sm sm:text-base leading-relaxed">{question?.question}</div>
                           <div className="space-y-2">
                             <div className="text-xs sm:text-sm">
-                              <span className="font-semibold text-gray-600">Your answer: </span>
-                              <span className={`font-medium ${answer.correct ? 'text-green-700' : 'text-red-700'}`}>
+                              <span className="font-urbanist font-medium text-gray-600">Your answer: </span>
+                              <span className={`font-urbanist font-light ${answer.correct ? 'text-gray-900' : 'text-red-700'}`}>
                                 {question?.options[answer.selected]}
                               </span>
                             </div>
                             {!answer.correct && (
                               <div className="text-xs sm:text-sm">
-                                <span className="font-semibold text-gray-600">Correct answer: </span>
-                                <span className="font-medium text-green-700">
+                                <span className="font-urbanist font-medium text-gray-600">Correct answer: </span>
+                                <span className="font-urbanist font-light text-gray-900">
                                   {question?.options[question.correct]}
                                 </span>
                               </div>
@@ -673,19 +647,19 @@ const TodaysQuiz = () => {
               <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4">
                 <Button 
                   size="lg" 
-                  className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-bold rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105"
+                  className="w-full sm:w-auto bg-black hover:bg-gray-800 text-white px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-urbanist font-light rounded-lg transition-all duration-300"
                   onClick={() => navigate('/')}
                 >
-                  <Home className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
+                  <Home className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" strokeWidth={1} />
                   Back to Home
                 </Button>
                 <Button 
                   size="lg" 
                   variant="outline"
-                  className="w-full sm:w-auto px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-bold rounded-xl border-3 border-blue-600 text-blue-600 hover:bg-blue-50 hover:border-blue-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  className="w-full sm:w-auto px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-urbanist font-light rounded-lg border border-gray-300 text-gray-900 hover:bg-gray-50 transition-all duration-300"
                   onClick={() => window.location.reload()}
                 >
-                  <Play className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" />
+                  <Play className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3" strokeWidth={1} />
                   Take Again
                 </Button>
               </div>
@@ -702,63 +676,43 @@ const TodaysQuiz = () => {
         <title>Today's Quiz - Hebrews 4 | Bible Quiz Competition</title>
         <meta name="description" content="Test your knowledge of Hebrews 4 with today's special quiz." />
       </Helmet>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white relative overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-20 left-10 w-32 h-32 bg-blue-400 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-purple-400 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-pink-400 rounded-full blur-3xl"></div>
-        </div>
-        
-        <div className="container mx-auto px-4 py-8 relative z-10">
+      <div className="min-h-screen bg-white">
+        <div className="container mx-auto px-4 py-8">
           <div className="max-w-5xl mx-auto">
             {/* Enhanced Header */}
             <div className="text-center mb-8 sm:mb-12">
-              {/* <div className="flex items-center justify-center mb-6">
-                <div className="relative">
-                  <img src="/sword.png" alt="Bible Quiz Competition Logo" className="w-12 h-12 mr-3" />
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center">
-                    <Star className="w-4 h-4 text-white" />
-                  </div>
-                </div>
-                <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Today's Quiz - Romans
-                </h1>
-              </div>
-              <p className="text-xl text-gray-600 mb-8">Test your knowledge of the book of Romans</p> */}
+              <h1 className="text-3xl sm:text-4xl font-urbanist font-semibold text-gray-900 mb-6">
+                Today's Quiz - Hebrews 4
+              </h1>
               
               {/* Enhanced Timer and Progress */}
               <div className="flex flex-row justify-center items-center gap-3 sm:gap-8 mb-8">
-                <div className="flex items-center gap-2 sm:gap-3 bg-white/90 backdrop-blur border-2 border-blue-200 rounded-2xl px-3 sm:px-6 py-2 sm:py-4 shadow-xl flex-1 max-w-xs sm:w-auto">
-                  <div className="hidden sm:flex w-8 h-8 sm:w-10 sm:h-10 bg-blue-500 rounded-full items-center justify-center">
-                    <Timer className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
-                  </div>
+                <div className="flex items-center gap-2 sm:gap-3 bg-gray-50 border border-gray-200 rounded-lg px-3 sm:px-6 py-2 sm:py-4 flex-1 max-w-xs sm:w-auto">
+                  <Timer className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" strokeWidth={1} />
                   <div>
-                    <div className="text-lg sm:text-2xl font-bold text-blue-700">{formatTime(timeLeft)}</div>
-                    <div className="text-xs sm:text-sm text-blue-600 font-medium">Time</div>
+                    <div className="text-lg sm:text-2xl font-urbanist font-semibold text-gray-900">{formatTime(timeLeft)}</div>
+                    <div className="text-xs sm:text-sm font-urbanist font-light text-gray-600">Time</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-2 sm:gap-3 bg-white/90 backdrop-blur border-2 border-green-200 rounded-2xl px-3 sm:px-6 py-2 sm:py-4 shadow-xl flex-1 max-w-xs sm:w-auto">
-                  <div className="hidden sm:flex w-8 h-8 sm:w-10 sm:h-10 bg-green-500 rounded-full items-center justify-center">
-                    <Brain className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
-                  </div>
+                <div className="flex items-center gap-2 sm:gap-3 bg-gray-50 border border-gray-200 rounded-lg px-3 sm:px-6 py-2 sm:py-4 flex-1 max-w-xs sm:w-auto">
+                  <Brain className="w-5 h-5 sm:w-6 sm:h-6 text-gray-700" strokeWidth={1} />
                   <div>
-                    <div className="text-lg sm:text-2xl font-bold text-green-700">
+                    <div className="text-lg sm:text-2xl font-urbanist font-semibold text-gray-900">
                       {currentQuestion + 1}/{getCurrentQuestions().length}
                     </div>
-                    <div className="text-xs sm:text-sm text-green-600 font-medium">Questions</div>
+                    <div className="text-xs sm:text-sm font-urbanist font-light text-gray-600">Questions</div>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Question Card */}
-            <Card className="mb-6 sm:mb-8">
+            <Card className="mb-6 sm:mb-8 border border-gray-200">
               <CardHeader className="px-4 sm:px-6">
-                <CardTitle className="text-lg sm:text-xl mb-3 sm:mb-4">
+                <CardTitle className="text-lg sm:text-xl mb-3 sm:mb-4 font-urbanist font-semibold text-gray-900">
                   Question {currentQuestion + 1}
                 </CardTitle>
-                <CardDescription className="text-base sm:text-lg leading-relaxed">
+                <CardDescription className="text-base sm:text-lg leading-relaxed font-urbanist font-light text-gray-700">
                   {getCurrentQuestions()[currentQuestion].question}
                 </CardDescription>
               </CardHeader>
@@ -768,20 +722,20 @@ const TodaysQuiz = () => {
                     <button
                       key={index}
                       onClick={() => handleAnswerSelect(index)}
-                      className={`w-full p-3 sm:p-4 text-left rounded-lg border-2 transition-all duration-200 ${
+                      className={`w-full p-3 sm:p-4 text-left rounded-lg border transition-all duration-200 font-urbanist font-light ${
                         selectedAnswer === index
-                          ? 'border-blue-500 bg-blue-50 text-blue-900'
-                          : 'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50'
+                          ? 'border-gray-900 bg-gray-50 text-gray-900'
+                          : 'border-gray-200 bg-white hover:border-gray-400 hover:bg-gray-50 text-gray-700'
                       }`}
                     >
                       <div className="flex items-center">
                         <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full border-2 mr-3 flex items-center justify-center flex-shrink-0 ${
                           selectedAnswer === index
-                            ? 'border-blue-500 bg-blue-500'
+                            ? 'border-gray-900 bg-gray-900'
                             : 'border-gray-300'
                         }`}>
                           {selectedAnswer === index && (
-                            <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+                            <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" strokeWidth={1} />
                           )}
                         </div>
                         <span className="text-sm sm:text-lg leading-relaxed">{option}</span>
@@ -797,10 +751,10 @@ const TodaysQuiz = () => {
               <Button
                 onClick={currentQuestion === getCurrentQuestions().length - 1 ? handleSubmit : handleNext}
                 disabled={selectedAnswer === null}
-                className={`w-full max-w-xs sm:max-w-none px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-bold rounded-xl shadow-2xl transition-all duration-300 transform hover:scale-105 ${
+                className={`w-full max-w-xs sm:max-w-none px-6 sm:px-10 py-3 sm:py-4 text-base sm:text-lg font-urbanist font-light rounded-lg transition-all duration-300 ${
                   selectedAnswer === null
-                    ? 'bg-gray-400 cursor-not-allowed'
-                    : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white'
+                    ? 'bg-gray-300 cursor-not-allowed text-gray-500'
+                    : 'bg-black hover:bg-gray-800 text-white'
                 }`}
               >
                 <span className="hidden sm:inline">
@@ -809,7 +763,7 @@ const TodaysQuiz = () => {
                 <span className="sm:hidden">
                   {currentQuestion === getCurrentQuestions().length - 1 ? 'Submit' : 'Next'}
                 </span>
-                <ArrowRight className="w-4 h-4 sm:w-6 sm:h-6 ml-2" />
+                <ArrowRight className="w-4 h-4 sm:w-6 sm:h-6 ml-2" strokeWidth={1} />
               </Button>
             </div>
           </div>
@@ -820,3 +774,4 @@ const TodaysQuiz = () => {
 };
 
 export default TodaysQuiz;
+
