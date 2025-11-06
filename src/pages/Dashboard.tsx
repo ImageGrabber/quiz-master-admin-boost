@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Brain, Trophy, Clock, Target, LogOut, User, Users, Filter, BookOpen, Calendar, Heart, CheckCircle, Play, Star, Lightbulb, TrendingUp, Flame, Award, Crown, Bolt, Sun, Moon, Book, Share } from "lucide-react";
+import { Brain, Trophy, Clock, Target, LogOut, User, Users, Filter, BookOpen, Calendar, Heart, CheckCircle, Play, Star, Lightbulb, TrendingUp, Flame, Award, Crown, Bolt, Sun, Moon, Book, Share, ArrowRight } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -404,10 +404,10 @@ const Dashboard = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
-          <Brain className="w-12 h-12 text-blue-600 mx-auto mb-4 animate-pulse" />
-          <p className="text-gray-600">Loading your dashboard...</p>
+          <Brain className="w-12 h-12 text-gray-700 mx-auto mb-4 animate-pulse" strokeWidth={1} />
+          <p className="text-gray-600 font-urbanist font-light">Loading your dashboard...</p>
         </div>
       </div>
     );
@@ -445,357 +445,285 @@ const Dashboard = () => {
         )} */}
       {/* </div> */}
 
-      {/* Stats Grid - HIDDEN */}
-      {/* <div className="w-full overflow-x-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 min-w-0">
-          <Card className="shadow-xl border-0 bg-gradient-to-br from-blue-50 via-indigo-50 to-white min-w-0 rounded-2xl hover:shadow-2xl transition">
+      {/* Stats Grid */}
+      <div className="w-full overflow-x-auto mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 min-w-0">
+          <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
             <CardContent className="pt-6">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow">
-                  <Target className="w-4 h-4 text-blue-600" />
+                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <Target className="w-5 h-5 text-gray-700" strokeWidth={1} />
                 </div>
                 <div>
-                  <div className="text-3xl font-extrabold text-gray-900">{stats.totalAttempts}</div>
-                  <div className="text-sm text-gray-600">Total Attempts</div>
+                  <div className="text-3xl font-urbanist font-semibold text-gray-900">{stats.totalAttempts}</div>
+                  <div className="text-sm font-urbanist font-light text-gray-600">Total Attempts</div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="shadow-xl border-0 bg-gradient-to-br from-green-50 via-emerald-50 to-white min-w-0 rounded-2xl hover:shadow-2xl transition">
+          <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
             <CardContent className="pt-6">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow">
-                  <Trophy className="w-4 h-4 text-green-600" />
+                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <Trophy className="w-5 h-5 text-gray-700" strokeWidth={1} />
                 </div>
                 <div>
-                  <div className="text-3xl font-extrabold text-gray-900">{stats.bestScore}</div>
-                  <div className="text-sm text-gray-600">Best Score</div>
+                  <div className="text-3xl font-urbanist font-semibold text-gray-900">{stats.bestScore}</div>
+                  <div className="text-sm font-urbanist font-light text-gray-600">Best Score</div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="shadow-xl border-0 bg-gradient-to-br from-amber-50 via-yellow-50 to-white min-w-0 rounded-2xl hover:shadow-2xl transition">
+          <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
             <CardContent className="pt-6">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow">
-                  <Target className="w-4 h-4 text-yellow-600" />
+                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <Target className="w-5 h-5 text-gray-700" strokeWidth={1} />
                 </div>
                 <div>
-                  <div className="text-3xl font-extrabold text-gray-900">{stats.averageScore}</div>
-                  <div className="text-sm text-gray-600">Average Score</div>
+                  <div className="text-3xl font-urbanist font-semibold text-gray-900">{stats.averageScore}</div>
+                  <div className="text-sm font-urbanist font-light text-gray-600">Average Score</div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="shadow-xl border-0 bg-gradient-to-br from-purple-50 via-fuchsia-50 to-white min-w-0 rounded-2xl hover:shadow-2xl transition">
+          <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
             <CardContent className="pt-6">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow">
-                  <Clock className="w-4 h-4 text-purple-600" />
+                <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <Clock className="w-5 h-5 text-gray-700" strokeWidth={1} />
                 </div>
                 <div>
-                  <div className="text-3xl font-extrabold text-gray-900">{formatTime(stats.totalTimeSpent)}</div>
-                  <div className="text-sm text-gray-600">Time Spent</div>
+                  <div className="text-3xl font-urbanist font-semibold text-gray-900">{formatTime(stats.totalTimeSpent)}</div>
+                  <div className="text-sm font-urbanist font-light text-gray-600">Time Spent</div>
                 </div>
               </div>
             </CardContent>
           </Card>
         </div>
-      </div> */}
+      </div>
 
-      {/* Live Quiz - Full width primary card, with quick actions moved aside */}
-      <div className="grid grid-cols-1 gap-6 mb-6">
-        {/* Weekly Bible Quiz Section - Enhanced */}
-        <Card className="shadow-xl border-0 bg-gradient-to-br from-green-50 via-emerald-50 to-white rounded-2xl overflow-hidden">
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <Award className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <CardTitle className="text-2xl font-bold text-gray-900">Weekly Bible Quiz</CardTitle>
-                  <CardDescription className="text-base text-gray-600">Test your knowledge with this week's special Bible challenge</CardDescription>
-                </div>
-              </div>
-              <div className="hidden md:flex items-center gap-2 bg-green-100 text-green-700 px-3 py-2 rounded-full text-sm font-semibold">
-                <Star className="w-4 h-4" />
-                Featured
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="pt-0">
-            {/* Quiz Details Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-              <div className="bg-white/80 rounded-xl p-4 text-center border border-green-100">
-                <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                  <BookOpen className="w-4 h-4 text-blue-600" />
-                </div>
-                <div className="text-lg font-bold text-gray-900">35</div>
-                <div className="text-xs text-gray-600">Questions</div>
-              </div>
-              <div className="bg-white/80 rounded-xl p-4 text-center border border-green-100">
-                <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                  <Clock className="w-4 h-4 text-yellow-600" />
-                </div>
-                <div className="text-lg font-bold text-gray-900">10m</div>
-                <div className="text-xs text-gray-600">Time Limit</div>
-              </div>
-              <div className="bg-white/80 rounded-xl p-4 text-center border border-green-100">
-                <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                  <Target className="w-4 h-4 text-purple-600" />
-                </div>
-                <div className="text-lg font-bold text-gray-900">Mixed</div>
-                <div className="text-xs text-gray-600">Difficulty</div>
-              </div>
-            </div>
+      {/* Quick Actions */}
+      <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow mb-6">
+        <CardHeader>
+          <CardTitle className="text-xl font-urbanist font-semibold text-gray-900">Quick Actions</CardTitle>
+          <CardDescription className="font-urbanist font-light text-gray-600">Access your favorite features</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Button
+              variant="outline"
+              className="h-auto py-8 border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-black font-urbanist font-light flex flex-col items-center gap-4"
+              onClick={() => navigate('/weekly-quiz')}
+            >
+              <Calendar className="w-20 h-20 text-gray-700" strokeWidth={2.5} />
+              <span className="text-lg font-medium">Attempt Weekly Quiz</span>
+            </Button>
+            <Button
+              variant="outline"
+              className="h-auto py-8 border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-black font-urbanist font-light flex flex-col items-center gap-4"
+              onClick={() => navigate('/bible-questions-and-answers-hub')}
+            >
+              <BookOpen className="w-20 h-20 text-gray-700" strokeWidth={2.5} />
+              <span className="text-lg font-medium">Bible Q&A</span>
+            </Button>
+            <Button
+              variant="outline"
+              className="h-auto py-8 border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-black font-urbanist font-light flex flex-col items-center gap-4"
+              onClick={() => navigate('/public-leaderboard')}
+            >
+              <Trophy className="w-20 h-20 text-gray-700" strokeWidth={2.5} />
+              <span className="text-lg font-medium">Leaderboard</span>
+            </Button>
+            <Button
+              variant="outline"
+              className="h-auto py-8 border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-black font-urbanist font-light flex flex-col items-center gap-4"
+              onClick={() => navigate('/articles')}
+            >
+              <Book className="w-20 h-20 text-gray-700" strokeWidth={2.5} />
+              <span className="text-lg font-medium">Articles</span>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
 
-            {/* This Week's Focus */}
-            <div className="bg-white/60 rounded-xl p-4 mb-6 border border-green-100">
-              <div className="flex items-center gap-2 mb-3">
-                <Lightbulb className="w-5 h-5 text-yellow-600" />
-                <span className="font-semibold text-gray-900">This Week's Focus: Romans</span>
-              </div>
-              <p className="text-sm text-gray-700 leading-relaxed">
-                Dive deep into Paul's letter to the Romans. Test your knowledge of justification by faith, 
-                God's righteousness, and the transformation of believers. Perfect for both beginners and 
-                advanced Bible students.
-              </p>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Button 
-                className="h-14 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300" 
-                onClick={() => navigate('/weekly-quiz')}
-              >
-                <Play className="w-5 h-5 mr-3" /> 
-                Start Weekly Quiz
-              </Button>
-              <Button 
-                variant="outline" 
-                className="h-14 border-2 border-green-200 hover:border-green-300 hover:bg-green-50 font-semibold text-lg transition-all duration-300" 
-                onClick={() => navigate('/leaderboard')}
-              >
-                <Trophy className="w-5 h-5 mr-3" /> 
-                View Leaderboard
-              </Button>
-            </div>
-
-            {/* Additional Info */}
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm text-gray-600">
-              <div className="flex items-center gap-1">
-                <Users className="w-4 h-4" />
-                <span>1,247 participants this week</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Calendar className="w-4 h-4" />
-                <span>Resets every Saturday</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Heart className="w-4 h-4" />
-                <span>Free to participate</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Live Quiz Section - Enhanced */}
-        <Card className="shadow-xl border-0 bg-gradient-to-br from-purple-50 via-indigo-50 to-white rounded-2xl overflow-hidden">
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
-                  <Share className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <CardTitle className="text-2xl font-bold text-gray-900">Live Quiz</CardTitle>
-                  <CardDescription className="text-base text-gray-600">Join real-time quiz sessions or host your own</CardDescription>
-                </div>
-              </div>
-              <div className="hidden md:flex items-center gap-2 bg-purple-100 text-purple-700 px-3 py-2 rounded-full text-sm font-semibold">
-                <Bolt className="w-4 h-4" />
-                Real-time
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="pt-0">
-            {/* Live Quiz Features Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-              <div className="bg-white/80 rounded-xl p-4 text-center border border-purple-100">
-                <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                  <Users className="w-4 h-4 text-blue-600" />
-                </div>
-                <div className="text-lg font-bold text-gray-900">Live</div>
-                <div className="text-xs text-gray-600">Sessions</div>
-              </div>
-              <div className="bg-white/80 rounded-xl p-4 text-center border border-purple-100">
-                <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                  <Clock className="w-4 h-4 text-green-600" />
-                </div>
-                <div className="text-lg font-bold text-gray-900">Real-time</div>
-                <div className="text-xs text-gray-600">Scoring</div>
-              </div>
-              <div className="bg-white/80 rounded-xl p-4 text-center border border-purple-100">
-                <div className="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                  <Trophy className="w-4 h-4 text-yellow-600" />
-                </div>
-                <div className="text-lg font-bold text-gray-900">Instant</div>
-                <div className="text-xs text-gray-600">Results</div>
-              </div>
-              <div className="bg-white/80 rounded-xl p-4 text-center border border-purple-100">
-                <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
-                  <Heart className="w-4 h-4 text-red-600" />
-                </div>
-                <div className="text-lg font-bold text-gray-900">Social</div>
-                <div className="text-xs text-gray-600">Experience</div>
-              </div>
-            </div>
-
-            {/* How Live Quiz Works */}
-            <div className="bg-white/60 rounded-xl p-4 mb-6 border border-purple-100">
-              <div className="flex items-center gap-2 mb-3">
-                <Lightbulb className="w-5 h-5 text-purple-600" />
-                <span className="font-semibold text-gray-900">How Live Quiz Works</span>
-              </div>
-              <p className="text-sm text-gray-700 leading-relaxed mb-3">
-                Join live quiz sessions with other players in real-time. Answer questions simultaneously, 
-                see live leaderboards, and compete for the top spot. Perfect for group study sessions, 
-                church events, or friendly competitions with friends and family.
-              </p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-gray-600">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <span>Join with 8-character code</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <span>Answer questions in real-time</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <span>See live rankings and results</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Action Sections */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Join Live Quiz */}
-              <div className="p-6 rounded-xl border-2 border-purple-200 bg-gradient-to-r from-purple-50 to-indigo-50">
-                <div className="flex items-center gap-2 mb-4">
-                  <Users className="w-5 h-5 text-purple-600" />
-                  <span className="font-semibold text-gray-900">Join Live Session</span>
-                </div>
-                <div className="mb-4">
-                  <label className="block text-sm text-gray-700 mb-2">Enter session code</label>
-                  <div className="flex gap-2">
-                    <input
-                      value={joinCode}
-                      onChange={(e) => setJoinCode(e.target.value.toUpperCase())}
-                      placeholder="8‑character code"
-                      className="flex-1 px-4 py-3 border-2 border-purple-200 rounded-xl font-mono tracking-widest uppercase focus:border-purple-400 focus:outline-none"
-                      maxLength={8}
-                    />
-                    <Button 
-                      className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold"
-                      onClick={() => joinCode.trim().length >= 6 && navigate(`/live-quiz/join/${joinCode.trim()}`)}
-                    >
-                      Join
-                    </Button>
-                  </div>
-                  <div className="text-xs text-gray-500 mt-2">Ask the host for the 8‑character session code</div>
-                </div>
-              </div>
-
-              {/* Host Live Quiz */}
-              <div className="p-6 rounded-xl border-2 border-indigo-200 bg-gradient-to-r from-indigo-50 to-blue-50">
-                <div className="flex items-center gap-2 mb-4">
-                  <Crown className="w-5 h-5 text-indigo-600" />
-                  <span className="font-semibold text-gray-900">Host Your Own</span>
-                </div>
-                <p className="text-sm text-gray-700 mb-4">
-                  Create and host live quiz sessions. Share the code with participants and manage the session in real-time.
-                </p>
-                <div className="grid grid-cols-1 gap-3">
-                  <Button 
-                    className="w-full h-12 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-semibold" 
-                    onClick={() => navigate('/live-quiz')}
-                  >
-                    <Share className="w-4 h-4 mr-2" />
-                    Live Quiz Hub
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    className="w-full h-12 border-2 border-indigo-200 hover:border-indigo-300 hover:bg-indigo-50 font-semibold" 
-                    onClick={() => navigate('/dashboard/quizzes')}
-                  >
-                    <BookOpen className="w-4 h-4 mr-2" />
-                    Create New Quiz
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            {/* Additional Info */}
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-gray-600">
-              <div className="flex items-center gap-1">
-                <Users className="w-4 h-4" />
-                <span>Up to 50 participants per session</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Clock className="w-4 h-4" />
-                <span>Real-time synchronized questions</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <Trophy className="w-4 h-4" />
-                <span>Instant leaderboards</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Challenge System - HIDDEN */}
-        {/* <Card className="shadow-xl border-0 bg-white/70 backdrop-blur rounded-2xl">
+      {/* Progress & Streak Section */}
+      {stats.totalAttempts > 0 && (
+        <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow mb-6">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Trophy className="w-5 h-5 text-orange-600" />
-              Challenge Players
-            </CardTitle>
-            <CardDescription>Challenge other online players to quiz battles</CardDescription>
+            <CardTitle className="text-xl font-urbanist font-semibold text-gray-900">Your Progress</CardTitle>
+            <CardDescription className="font-urbanist font-light text-gray-600">Track your learning journey</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl border bg-gradient-to-r from-orange-50 to-red-50">
-                <div className="text-sm text-gray-700 mb-2">Ready for a challenge?</div>
-                <div className="flex gap-2">
-                  <Button className="flex-1" onClick={() => navigate('/challenge')}>
-                    <Trophy className="w-4 h-4 mr-2" />
-                    Challenge Center
-                  </Button>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Progress towards next level */}
+              <div className="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                <div className="flex items-center gap-2 mb-3">
+                  <TrendingUp className="w-5 h-5 text-gray-700" strokeWidth={1} />
+                  <span className="font-urbanist font-semibold text-gray-900 text-sm">Level Progress</span>
                 </div>
-                <div className="text-xs text-gray-500 mt-2">Find online players and start quiz battles</div>
+                <div className="mb-2">
+                  <div className="flex justify-between items-center mb-1">
+                    <span className="text-xs font-urbanist font-light text-gray-600">Next milestone</span>
+                    <span className="text-xs font-urbanist font-medium text-gray-900">
+                      {stats.totalAttempts < 10 ? `${10 - stats.totalAttempts} more` : 'Achieved!'}
+                    </span>
+                  </div>
+                  <Progress 
+                    value={Math.min((stats.totalAttempts / 10) * 100, 100)} 
+                    className="h-2 bg-gray-200"
+                  />
+                </div>
+                <p className="text-xs font-urbanist font-light text-gray-500 mt-2">
+                  {stats.totalAttempts < 10 
+                    ? `Complete ${10 - stats.totalAttempts} more quiz${10 - stats.totalAttempts === 1 ? '' : 'zes'} to unlock new features`
+                    : 'Great progress! Keep learning'}
+                </p>
               </div>
-              <div className="p-4 rounded-xl border bg-white/80">
-                <div className="text-sm text-gray-700 mb-2">Quick Stats</div>
-                <div className="text-xs text-gray-500">
-                  • Real-time player matching<br/>
-                  • Head-to-head quiz battles<br/>
-                  • Live scoring and rankings
+
+              {/* Improvement indicator */}
+              <div className="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                <div className="flex items-center gap-2 mb-3">
+                  <Target className="w-5 h-5 text-gray-700" strokeWidth={1} />
+                  <span className="font-urbanist font-semibold text-gray-900 text-sm">Performance</span>
+                </div>
+                <div className="mb-2">
+                  <div className="text-2xl font-urbanist font-semibold text-gray-900 mb-1">
+                    {stats.averageScore > 0 ? `${Math.round((stats.bestScore / stats.averageScore - 1) * 100)}%` : '0%'}
+                  </div>
+                  <p className="text-xs font-urbanist font-light text-gray-600">
+                    {stats.averageScore > 0 && stats.bestScore > stats.averageScore
+                      ? 'Above your average'
+                      : 'Getting started'}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 mt-3">
+                  <div className="text-xs font-urbanist font-light text-gray-500">
+                    Best: {stats.bestScore} pts
+                  </div>
+                </div>
+              </div>
+
+              {/* Activity summary */}
+              <div className="p-4 border border-gray-200 rounded-lg bg-gray-50">
+                <div className="flex items-center gap-2 mb-3">
+                  <Clock className="w-5 h-5 text-gray-700" strokeWidth={1} />
+                  <span className="font-urbanist font-semibold text-gray-900 text-sm">Activity</span>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs font-urbanist font-light text-gray-600">Total quizzes</span>
+                    <span className="text-sm font-urbanist font-semibold text-gray-900">{stats.totalAttempts}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs font-urbanist font-light text-gray-600">Time spent</span>
+                    <span className="text-sm font-urbanist font-semibold text-gray-900">{formatTime(stats.totalTimeSpent)}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs font-urbanist font-light text-gray-600">Avg. score</span>
+                    <span className="text-sm font-urbanist font-semibold text-gray-900">{stats.averageScore}</span>
+                  </div>
                 </div>
               </div>
             </div>
           </CardContent>
-        </Card> */}
+        </Card>
+      )}
 
-        {/* Recent Attempts + Badges - HIDDEN */}
-        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          Recent Attempts and Badges sections removed
-        </div> */}
-      </div>
+      {/* Recent Activity - Simple */}
+      {recentAttempts.length > 0 && (
+        <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow mb-6">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle className="text-xl font-urbanist font-semibold text-gray-900">Recent Activity</CardTitle>
+                <CardDescription className="font-urbanist font-light text-gray-600">Your latest quiz attempts</CardDescription>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="font-urbanist font-light text-gray-600"
+                onClick={() => navigate('/dashboard/recent-attempts')}
+              >
+                View All
+                <ArrowRight className="w-4 h-4 ml-1" strokeWidth={1} />
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {recentAttempts.slice(0, 3).map((attempt: any, index: number) => (
+                <div 
+                  key={index} 
+                  className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:border-gray-300 hover:bg-gray-50 transition-colors cursor-pointer"
+                  onClick={() => navigate('/dashboard/recent-attempts')}
+                >
+                  <div className="flex items-center gap-3 flex-1">
+                    <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                      <Trophy className="w-4 h-4 text-gray-700" strokeWidth={1} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-urbanist font-medium text-gray-900 text-sm truncate">
+                        {(attempt.quizzes as any)?.title || 'Quiz'}
+                      </div>
+                      <div className="text-xs font-urbanist font-light text-gray-500">
+                        {new Date(attempt.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="text-right">
+                      <div className="font-urbanist font-semibold text-gray-900 text-sm">{attempt.score || 0}</div>
+                      <div className="text-xs font-urbanist font-light text-gray-500">points</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Encouragement Card */}
+      <Card className="border border-gray-200 bg-gradient-to-br from-gray-50 to-white rounded-lg shadow-sm hover:shadow-md transition-shadow mb-6">
+        <CardContent className="pt-6">
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+              <Lightbulb className="w-6 h-6 text-gray-700" strokeWidth={1} />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-urbanist font-semibold text-gray-900 mb-1">
+                {stats.totalAttempts === 0 
+                  ? 'Ready to Start?'
+                  : stats.totalAttempts < 5
+                  ? 'Keep Going!'
+                  : 'Great Progress!'
+                }
+              </h3>
+              <p className="text-sm font-urbanist font-light text-gray-600 mb-3">
+                {stats.totalAttempts === 0 
+                  ? 'Take your first quiz today and begin your journey to deepen your Bible knowledge. Every question brings you closer to understanding God\'s Word.'
+                  : stats.totalAttempts < 5
+                  ? `You've completed ${stats.totalAttempts} quiz${stats.totalAttempts === 1 ? '' : 'zes'}. Keep practicing to improve your score and unlock new achievements!`
+                  : `Amazing work! You've completed ${stats.totalAttempts} quizzes. Your dedication to learning is inspiring. Keep up the great momentum!`
+                }
+              </p>
+              {stats.totalAttempts === 0 && (
+                <Button
+                  className="bg-black hover:bg-gray-800 text-white font-urbanist font-light"
+                  onClick={() => navigate('/today-quiz')}
+                >
+                  Start Your First Quiz
+                  <ArrowRight className="w-4 h-4 ml-2" strokeWidth={1} />
+                </Button>
+              )}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Quick Actions & Featured Competitions */}
       {/* This section is now replaced by the above grid */}
