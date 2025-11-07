@@ -13,6 +13,8 @@ import Index from "./pages/Index";
 import SignUpToday from "./pages/SignUpToday";
 import EmotionalCheckIn from "./pages/EmotionalCheckIn";
 import JoyRunnerTest from "./pages/JoyRunnerTest";
+import Match3Game from "./pages/Match3Game";
+import MemoryMatchGame from "./pages/MemoryMatchGame";
 import TodaysQuiz from "./pages/TodaysQuiz";
 import TodaysQuizMark from "./pages/TodaysQuizMark";
 import DailyVerse from "./pages/DailyVerse";
@@ -272,6 +274,8 @@ const App = () => {
           <Routes>
             <Route path="/emotional-checkin" element={<EmotionalCheckIn />} />
             <Route path="/joy-runner-test" element={<JoyRunnerTest />} />
+            <Route path="/match-3-game" element={<Match3Game />} />
+            <Route path="/memory-match-game" element={<MemoryMatchGame />} />
             <Route path="/" element={<Index />} />
             <Route path="/signup-today" element={<SignUpToday />} />
             <Route path="/todays-quiz" element={<TodaysQuiz />} />

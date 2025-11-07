@@ -4,9 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, Calendar, HelpCircle, CheckCircle, Globe, Menu, Crown, Medal, Search, X, ChevronLeft, ChevronRight, MessageSquare, Rocket, Sparkles, Heart, Droplet, ArrowLeft } from "lucide-react";
+import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, Calendar, HelpCircle, CheckCircle, Globe, Menu, Crown, Medal, Search, X, ChevronLeft, ChevronRight, MessageSquare, Rocket, Sparkles, Heart, Droplet, ArrowLeft, RotateCcw, TrendingUp, Shield, Eye, EyeOff } from "lucide-react";
 import { Helmet } from 'react-helmet';
 import { supabase } from "@/integrations/supabase/client";
+import { features, howItWorks, bibleTestimonials, stats, publicPages } from "@/data/indexData";
+import { emotionOptions, cbtQuestionsByEmotion, thinkingTrapsInfo, featureSteps, cbtNeutralByDay } from "@/data/emotions";
+import { FaqSection } from "@/components/FaqSection";
+import { StickyPrayerRequestsPanel } from "@/components/StickyPrayerRequestsPanel";
+import { StickyLeaderboardPanel } from "@/components/StickyLeaderboardPanel";
+import { Navigation } from "@/components/Navigation";
 
 interface FallingBubble {
   id: string;
@@ -18,1286 +24,15 @@ interface FallingBubble {
   type: 'good' | 'sin'; // Type of item
 }
 
-const features = [
-  {
-    icon: Brain,
-    title: "Bible Knowledge",
-    description: "1,000+ questions across all categories"
-  },
-  {
-    icon: Clock,
-    title: "Time-Based Scoring",
-    description: "Fast-paced quizzes with time bonuses"
-  },
-  {
-    icon: Trophy,
-    title: "Leaderboards",
-    description: "Compete and track your progress"
-  },
-  {
-    icon: Users,
-    title: "Live Events",
-    description: "Join weekly competitions"
-  }
-];
 
-const howItWorks = [
-  {
-    icon: BookOpen,
-    title: "Sign Up",
-    description: "Create your free account to access all quiz features and track your progress."
-  },
-  {
-    icon: Play,
-    title: "Take Quizzes",
-    description: "Choose from Today's Quiz, Weekly Challenges, or create your own custom quizzes."
-  },
-  {
-    icon: Trophy,
-    title: "Compete & Win",
-    description: "Climb the leaderboard, earn prizes, and compete with believers worldwide."
-  }
-];
+// StickyLeaderboardPanel moved to @/components/StickyLeaderboardPanel.tsx
 
-const bibleTestimonials = [
-  {
-    name: "Pastor Grace Williams",
-    role: "Youth Pastor",
-    content: "The Bible Quiz helped our youth group learn and have fun together. Highly recommended!"
-  },
-  {
-    name: "Samuel Lee",
-    role: "College Student",
-    content: "I love competing in the weekly Bible quizzes. The questions are challenging and fun!"
-  },
-  {
-    name: "Anita Joseph",
-    role: "Sunday School Teacher",
-    content: "A wonderful way to test and grow my Bible knowledge. The leaderboard keeps me motivated!"
-  },
-  {
-    name: "Michael Thompson",
-    role: "Bible Study Leader",
-    content: "This platform has transformed how our study group prepares. The variety of quizzes is incredible!"
-  },
-  {
-    name: "Sarah Chen",
-    role: "Ministry Coordinator",
-    content: "Perfect for keeping our congregation engaged with Scripture. The weekly quizzes are a highlight!"
-  },
-  {
-    name: "David Rodriguez",
-    role: "Seminary Student",
-    content: "An excellent tool for reviewing Bible knowledge. The timed quizzes really test your understanding."
-  },
-  {
-    name: "Emily Johnson",
-    role: "Children's Ministry Director",
-    content: "Our kids love the interactive quizzes! It's made learning Bible stories so much more engaging."
-  },
-  {
-    name: "James Wilson",
-    role: "Retired Pastor",
-    content: "Even after decades of ministry, I learn something new with each quiz. Wonderful resource!"
-  },
-  {
-    name: "Maria Garcia",
-    role: "Small Group Leader",
-    content: "We use these quizzes in our weekly meetings. Great way to encourage friendly competition!"
-  },
-  {
-    name: "Robert Kim",
-    role: "Theology Student",
-    content: "The comprehensive coverage of all 66 books helps me stay sharp on my biblical studies."
-  }
-];
-
-const stats = [
-  { label: "Participants", value: "1,250+", icon: Users },
-  { label: "Questions", value: "500+", icon: BookOpen },
-  { label: "Countries", value: "45", icon: Globe },
-  { label: "Weekly Quizzes", value: "52+", icon: Calendar }
-];
-
-function StickyLeaderboardPanel() {
-  const [leaders, setLeaders] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [open, setOpen] = useState(true);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    fetchLeaders();
-  }, []);
-
-  // Add daily refresh mechanism for homepage leaderboard
-  useEffect(() => {
-    const checkForDailyRefresh = () => {
-      const now = new Date();
-      const currentDay = now.getDate();
-      const lastRefreshDay = localStorage.getItem('homepageLeaderboardLastRefreshDay');
-      
-      // If it's a new day or first time, refresh the leaderboard
-      if (lastRefreshDay !== currentDay.toString()) {
-        localStorage.setItem('homepageLeaderboardLastRefreshDay', currentDay.toString());
-        fetchLeaders();
-      }
-    };
-
-    // Check immediately
-    checkForDailyRefresh();
-
-    // Set up interval to check every hour
-    const interval = setInterval(checkForDailyRefresh, 60 * 60 * 1000); // Check every hour
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const fetchLeaders = async () => {
-    try {
-      setLoading(true);
-      
-      // Fetch real users from the database (SAME as leaderboard pages)
-      const { data: realUsers, error: realUsersError } = await supabase
-        .from('profiles')
-        .select('id, full_name, email')
-        .not('full_name', 'is', null)
-        .limit(20);
-
-      if (realUsersError) {
-        console.error('Error fetching real users:', realUsersError);
-      }
-
-      // Mock data with diverse names for additional entries (SAME as leaderboard pages)
-      const mockNames = [
-        "Sarah Johnson", "Michael Chen", "Emily Rodriguez", "David Kim", "Jessica Williams",
-        "Christopher Brown", "Amanda Davis", "Matthew Wilson", "Ashley Martinez", "Daniel Anderson",
-        "Samantha Taylor", "Ryan Garcia", "Nicole Miller", "Kevin Jones", "Rachel White",
-        "Brandon Lee", "Stephanie Clark", "Tyler Hall", "Megan Young", "Jordan King",
-        "Lauren Scott", "Andrew Green", "Kayla Adams", "Justin Baker", "Brittany Nelson",
-        "Zachary Carter", "Courtney Mitchell", "Nathan Perez", "Danielle Roberts", "Austin Turner",
-        "Kaitlyn Phillips", "Cameron Campbell", "Taylor Parker", "Ethan Evans", "Morgan Edwards",
-        "Connor Collins", "Alexis Stewart", "Noah Sanchez", "Paige Morris", "Lucas Rogers",
-        "Jenna Reed", "Mason Cook", "Brooke Bailey", "Logan Murphy", "Chloe Rivera",
-        "Hunter Cooper", "Madison Richardson", "Jackson Cox", "Abigail Howard", "Liam Ward",
-        "Oliver Thompson", "Charlotte Williams", "Harry Smith", "Amelia Jones", "George Brown",
-        "Isabella Taylor", "William Davies", "Sophie Wilson", "James Murphy", "Emily O'Connor",
-        "Jack Kelly", "Grace O'Brien", "Liam Murphy", "Emma Walsh", "Noah O'Sullivan",
-        "Elena Petrov", "Dmitri Volkov", "Anna Schmidt", "Klaus Mueller", "Ingrid Bergman",
-        "Alessandro Rossi", "Giulia Bianchi", "Marco Ferrari", "Sofia Romano", "Luca Conti",
-        "Pierre Dubois", "Marie Martin", "Hans Weber", "Greta Mueller", "Lars Andersen",
-        "Kwame Asante", "Aisha Okafor", "Tendai Moyo", "Fatou Diallo", "Kofi Mensah",
-        "Zara Nkomo", "Amara Okonkwo", "Tunde Adebayo", "Nia Mbeki", "Jabari Kone",
-        "Ahmed Al-Rashid", "Fatima Hassan", "Omar Khalil", "Layla Ibrahim", "Hassan Ali",
-        "Yasmin Al-Zahra", "Tariq Al-Mahmoud", "Nour Al-Din", "Rania Khalil", "Karim Al-Hassan",
-        "Wei Zhang", "Yuki Tanaka", "Mei Lin", "Hiroshi Sato", "Chen Wei",
-        "Takeshi Yamamoto", "Li Wei", "Kenji Nakamura", "Zhang Ming", "Sakura Suzuki",
-        "Priya Sharma", "Raj Patel", "Arjun Singh", "Vikram Kumar", "Ananya Reddy",
-        "Deepika Singh", "Kavya Nair", "Priyanka Sharma", "Anjali Gupta", "Sunita Patel",
-        "Carlos Rodriguez", "Isabella Lopez", "Diego Martinez", "Carmen Garcia", "Jose Silva",
-        "Sofia Martinez", "Maria Garcia", "Alejandro Ruiz", "Valentina Herrera", "Sebastian Torres"
-      ];
-
-      // Create mixed leaderboard data (SAME logic as leaderboard pages)
-      const leaderboardData = [];
-      
-      // Add real users first (if any exist)
-      if (realUsers && realUsers.length > 0) {
-        realUsers.forEach((user, index) => {
-          leaderboardData.push({
-            id: user.id,
-            name: user.full_name || user.email || 'Anonymous',
-            rank: index + 1
-          });
-        });
-      }
-
-      // Always ensure we have at least 20 mock users for a populated leaderboard
-      const minMockUsers = 20;
-      const remainingSlots = Math.max(minMockUsers, 50 - leaderboardData.length);
-      const selectedMockNames = mockNames.slice(0, remainingSlots);
-      
-      selectedMockNames.forEach((name, index) => {
-        leaderboardData.push({
-          id: `mock-${index + 1}`,
-          name: name,
-          rank: leaderboardData.length + 1
-        });
-      });
-
-      // Create consistent daily rotation instead of random shuffling (SAME as leaderboard)
-      const now = new Date();
-      const dayOfYear = Math.floor((now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
-      
-      // Use day-based seed for consistent daily rotation with simple but effective algorithm
-      const seed = dayOfYear;
-      
-      // Create a simple but effective daily rotation by using modulo on the day
-      const rotationOffset = dayOfYear % leaderboardData.length;
-      
-      // Rotate the array by the daily offset
-      const shuffledData = [
-        ...leaderboardData.slice(rotationOffset),
-        ...leaderboardData.slice(0, rotationOffset)
-      ];
-      
-      // Reassign ranks after consistent shuffling
-      const finalLeaderboard = shuffledData.map((entry, index) => ({
-        ...entry,
-        rank: index + 1
-      }));
-
-      // Get top 3 from the SAME logic as leaderboard pages
-      setLeaders(finalLeaderboard.slice(0, 3));
-    } catch (error) {
-      console.error('Error fetching leaders:', error);
-      
-      // Fallback: Use the SAME fallback names as leaderboard pages
-      const fallbackData = [
-        { id: 'fallback-1', name: 'Sarah Johnson', rank: 1 },
-        { id: 'fallback-2', name: 'Michael Chen', rank: 2 },
-        { id: 'fallback-3', name: 'Emily Rodriguez', rank: 3 }
-      ];
-      setLeaders(fallbackData);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const getRankIcon = (rank) => {
-    switch (rank) {
-      case 0: return <Crown className="w-5 h-5 text-yellow-500" />;
-      case 1: return <Trophy className="w-5 h-5 text-gray-400" />;
-      case 2: return <Medal className="w-5 h-5 text-amber-600" />;
-      default: return <Award className="w-5 h-5 text-blue-500" />;
-    }
-  };
-
-  return (
-    <div className={`hidden md:flex flex-col fixed right-0 z-50 transition-all duration-300 ${open ? 'w-80' : 'w-14'}`} style={{ top: 'calc(50% - 150px)' }}>
-      <div className={`h-[260px] ${open ? 'bg-white/80 p-4 border-l border-blue-100 shadow-xl' : 'bg-white/60 p-1 border-l border-blue-100 shadow'} rounded-l-2xl backdrop-blur-md flex flex-col items-stretch relative`}>
-        <button
-          onClick={() => setOpen(!open)}
-          className={`absolute ${open ? 'top-4 left-[-25px]' : 'top-1/2 left-[-25px] -translate-y-1/2'} bg-blue-600 text-white rounded-l-lg px-2 py-1 shadow-lg focus:outline-none`}
-        >
-          {open ? <span>&#10095;</span> : <span>&#10094;</span>}
-        </button>
-        {open ? (
-          <>
-            <div className="flex items-center gap-2 mb-4">
-              <Trophy className="w-6 h-6 text-blue-600" />
-              <span className="font-bold text-blue-700">Leaderboard</span>
-            </div>
-            {loading ? (
-              <div className="flex-1 flex items-center justify-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-              </div>
-            ) : (
-              <>
-                <ul className="flex-1 overflow-y-auto">
-                  {leaders.slice(0, 3).map((user, i) => (
-                    <li key={user.id} className="flex items-center justify-between py-2 border-b last:border-b-0 border-blue-50">
-                      <div className="flex items-center gap-2">
-                        {getRankIcon(i)}
-                        <span className="font-semibold text-gray-800">{user.name}</span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-                <button onClick={() => navigate('/public-leaderboard')} className="mt-4 w-full py-2 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:from-blue-700 hover:to-purple-700 transition-all">View Full Leaderboard</button>
-              </>
-            )}
-          </>
-        ) : (
-          <div className="flex flex-col items-center justify-center h-full">
-            <Trophy className="w-6 h-6 text-blue-600 mb-10" />
-            <span className="text-sm text-blue-600 font-bold rotate-90 whitespace-nowrap">Leaderboard</span>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// Removed StickyPrayerRequestsPanel - simplified homepage  
-function _StickyPrayerRequestsPanel() {
-  const [prayerRequests, setPrayerRequests] = useState([]);
-  const [displayedRequests, setDisplayedRequests] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(true);
-  const [open, setOpen] = useState(true);
-  const [showAnonymous, setShowAnonymous] = useState(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    fetchPrayerRequests();
-    
-    // Auto-refresh every 30 seconds
-    const refreshInterval = setInterval(() => {
-      fetchPrayerRequests();
-    }, 30000);
-    
-    return () => clearInterval(refreshInterval);
-  }, []);
-
-  // Continuous loop effect
-  useEffect(() => {
-    if (prayerRequests.length === 0) return;
-
-    const filteredRequests = prayerRequests.filter(request => showAnonymous || !request.isAnonymous);
-    
-    // Set initial displayed requests
-    setDisplayedRequests(filteredRequests.slice(0, 8));
-    
-    // Start continuous loop
-    const loopInterval = setInterval(() => {
-      setCurrentIndex(prevIndex => {
-        const nextIndex = (prevIndex + 1) % filteredRequests.length;
-        const newDisplayedRequests = [];
-        
-        // Get 8 consecutive requests starting from nextIndex
-        for (let i = 0; i < 8; i++) {
-          const requestIndex = (nextIndex + i) % filteredRequests.length;
-          newDisplayedRequests.push(filteredRequests[requestIndex]);
-        }
-        
-        setDisplayedRequests(newDisplayedRequests);
-        return nextIndex;
-      });
-    }, 3000); // Change every 3 seconds
-
-    return () => clearInterval(loopInterval);
-  }, [prayerRequests, showAnonymous]);
-
-  const generateMockPrayerRequests = () => {
-    const categories = ['healing', 'family', 'work', 'spiritual', 'financial', 'guidance', 'protection'];
-    
-    const realisticPrayerRequests = [
-      // Healing requests
-      "My mom has been diagnosed with cancer. Please pray for her healing and strength for our family during this difficult time.",
-      "Please pray for my 3-year-old daughter who has been in the hospital for a week with pneumonia.",
-      "My husband is recovering from a heart attack. We need prayers for his complete healing and our family's strength.",
-      "Please pray for my grandmother who fell and broke her hip. She's 85 and we're worried about her recovery.",
-      "I've been struggling with chronic pain for months. Please pray for healing and relief from this suffering.",
-      "My sister is battling depression and anxiety. Please pray for her mental health and emotional healing.",
-      "Please pray for my father who is having surgery tomorrow. We're all very anxious about it.",
-      "My friend's baby was born premature. Please pray for the baby's health and the family's peace.",
-      "I've been diagnosed with diabetes. Please pray for wisdom in managing this condition and for healing.",
-      "Please pray for my aunt who is fighting COVID-19. She's in the ICU and we're very worried.",
-      
-      // Family requests
-      "Please pray for my marriage. We've been going through a rough patch and need God's guidance.",
-      "My teenage son is rebelling and making poor choices. Please pray for his heart to turn back to God.",
-      "Please pray for my family as we navigate my parents' divorce after 30 years of marriage.",
-      "We're struggling to conceive after 2 years of trying. Please pray for a miracle baby.",
-      "My daughter is being bullied at school. Please pray for her protection and strength.",
-      "Please pray for my brother who is struggling with addiction. We need a breakthrough.",
-      "My husband lost his job and we're struggling financially. Please pray for provision and peace.",
-      "Please pray for my family as we care for my elderly mother with dementia.",
-      "My son is struggling in school and we're considering special education. Please pray for wisdom.",
-      "Please pray for my family as we prepare to move to a new city for my job.",
-      
-      // Work/Career requests
-      "Please pray for my job interview tomorrow. I really need this position to support my family.",
-      "I'm starting a new business and need prayers for wisdom, provision, and success.",
-      "Please pray for my work situation. There's been a lot of conflict and I need peace.",
-      "I've been unemployed for 6 months. Please pray for the right job opportunity to come along.",
-      "Please pray for my career transition. I'm feeling called to ministry but need guidance.",
-      "My workplace is going through layoffs. Please pray for job security and peace.",
-      "Please pray for my business partnership. We're having disagreements and need unity.",
-      "I'm studying for my medical boards. Please pray for focus, retention, and success.",
-      "Please pray for my teaching career. I'm feeling burnt out and need renewal.",
-      "I'm starting a new job next week. Please pray for a smooth transition and favor.",
-      
-      // Spiritual requests
-      "Please pray for my spiritual growth. I've been feeling distant from God lately.",
-      "I'm struggling with doubt and need prayers for stronger faith and trust in God.",
-      "Please pray for my church. We're going through a difficult season and need unity.",
-      "I'm feeling called to missions but need prayers for confirmation and provision.",
-      "Please pray for my prayer life. I want to grow deeper in my relationship with God.",
-      "I'm struggling with forgiveness toward someone who hurt me deeply. Please pray for healing.",
-      "Please pray for my spiritual gifts to be developed and used for God's glory.",
-      "I'm feeling spiritually dry and need prayers for renewal and refreshment.",
-      "Please pray for my family's salvation. I'm the only believer and it's hard.",
-      "I'm struggling with a particular sin and need prayers for victory and freedom.",
-      
-      // Financial requests
-      "Please pray for our financial situation. We're behind on bills and need provision.",
-      "I'm struggling with debt and need prayers for wisdom in managing finances.",
-      "Please pray for my business to be profitable so I can support my family.",
-      "We need prayers for provision to pay for our daughter's college education.",
-      "Please pray for financial breakthrough. We've been struggling for months.",
-      "I'm starting a side business to supplement income. Please pray for success.",
-      "Please pray for wisdom in making financial decisions for our family.",
-      "We're trying to buy our first home. Please pray for the right opportunity.",
-      "Please pray for provision to pay for my son's medical treatment.",
-      "I'm struggling with giving and need prayers for a generous heart.",
-      
-      // Guidance requests
-      "Please pray for guidance in making a major life decision about my career.",
-      "I'm feeling lost and need prayers for direction in my life.",
-      "Please pray for wisdom in parenting my difficult teenager.",
-      "I'm considering a big move and need prayers for God's will to be clear.",
-      "Please pray for guidance in choosing the right school for my children.",
-      "I'm struggling with a relationship decision and need prayers for clarity.",
-      "Please pray for wisdom in handling a conflict with my neighbor.",
-      "I'm feeling called to ministry but need prayers for confirmation.",
-      "Please pray for guidance in my dating relationship. Is this God's will?",
-      "I need prayers for direction in my studies and future career path.",
-      
-      // Protection requests
-      "Please pray for safety as I travel for work this week.",
-      "My family is going through a dangerous neighborhood. Please pray for protection.",
-      "Please pray for my son who is serving in the military overseas.",
-      "I'm starting a new job in a dangerous area. Please pray for safety.",
-      "Please pray for protection over my children as they go to school.",
-      "My husband travels for work. Please pray for his safety on the roads.",
-      "Please pray for protection over our home and property.",
-      "I'm feeling threatened by someone. Please pray for God's protection.",
-      "Please pray for safety as our family goes on vacation.",
-      "My daughter is learning to drive. Please pray for her safety and wisdom."
-    ];
-
-    const names = [
-      "Sarah", "Michael", "Jennifer", "David", "Lisa", "Robert", "Maria", "James", "Linda", "John",
-      "Patricia", "William", "Barbara", "Richard", "Susan", "Joseph", "Jessica", "Thomas", "Sarah", "Christopher",
-      "Nancy", "Daniel", "Karen", "Matthew", "Betty", "Anthony", "Helen", "Mark", "Sandra", "Donald",
-      "Donna", "Steven", "Carol", "Paul", "Ruth", "Andrew", "Sharon", "Joshua", "Michelle", "Kenneth",
-      "Laura", "Kevin", "Deborah", "Brian", "Dorothy", "George", "Amy", "Edward", "Angela", "Ronald"
-    ];
-
-    return Array.from({ length: 50 }, (_, index) => {
-      const isAnonymous = Math.random() > 0.7; // 30% chance of being anonymous
-      const randomName = isAnonymous ? null : names[Math.floor(Math.random() * names.length)];
-      const randomRequest = realisticPrayerRequests[Math.floor(Math.random() * realisticPrayerRequests.length)];
-      const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-      
-      // Create more realistic timestamps - mix of recent and older requests
-      const hoursAgo = Math.floor(Math.random() * 168); // Within last week
-      const minutesAgo = Math.floor(Math.random() * 60); // Within last hour
-      const isRecent = Math.random() > 0.8; // 20% chance of being very recent
-      const timeAgo = isRecent ? minutesAgo * 60 * 1000 : hoursAgo * 60 * 60 * 1000;
-      
-      return {
-        id: `mock-${index + 1}`,
-        name: randomName,
-        request: randomRequest,
-        category: randomCategory,
-        isAnonymous: isAnonymous,
-        created_at: new Date(Date.now() - timeAgo).toISOString()
-      };
-    });
-  };
-
-  const fetchPrayerRequests = async () => {
-    try {
-      setLoading(true);
-      
-      // Fetch real prayer requests from Supabase (auto-approved)
-      const { data: realPrayerRequests, error } = await supabase
-        .from('prayer_requests' as any)
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(10);
-      
-      // Generate mock data
-      const mockPrayerRequests = generateMockPrayerRequests();
-      
-      // Combine real and mock data, prioritizing real data
-      const combinedRequests = [
-        ...(realPrayerRequests || []),
-        ...mockPrayerRequests
-      ];
-      
-      // Sort by creation date (newest first)
-      combinedRequests.sort((a, b) => new Date((b as any).created_at).getTime() - new Date((a as any).created_at).getTime());
-      
-      setPrayerRequests(combinedRequests);
-      
-      if (error) {
-        console.error('Error fetching prayer requests:', error);
-      }
-    } catch (error) {
-      console.error('Error fetching prayer requests:', error);
-      // Fallback to mock data only
-      const mockPrayerRequests = generateMockPrayerRequests();
-      setPrayerRequests(mockPrayerRequests);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case 'healing': return <Heart className="w-4 h-4 text-red-500" />;
-      case 'family': return <Users className="w-4 h-4 text-green-500" />;
-      case 'work': return <Award className="w-4 h-4 text-blue-500" />;
-      case 'spiritual': return <Star className="w-4 h-4 text-purple-500" />;
-      case 'financial': return <TrendingUp className="w-4 h-4 text-yellow-500" />;
-      case 'guidance': return <HelpCircle className="w-4 h-4 text-indigo-500" />;
-      case 'protection': return <Shield className="w-4 h-4 text-orange-500" />;
-      default: return <Heart className="w-4 h-4 text-gray-500" />;
-    }
-  };
-
-  const formatTimeAgo = (dateString: string) => {
-    const date = new Date(dateString);
-    const now = new Date();
-    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
-    
-    if (diffInHours < 1) return 'Just now';
-    if (diffInHours < 24) return `${diffInHours}h ago`;
-    const diffInDays = Math.floor(diffInHours / 24);
-    if (diffInDays < 7) return `${diffInDays}d ago`;
-    return date.toLocaleDateString();
-  };
-
-  return (
-    <div className={`hidden md:flex flex-col fixed right-0 z-40 transition-all duration-300 ${open ? 'w-80' : 'w-14'}`} style={{ top: 'calc(50% - 10px)' }}>
-      <div className={`h-[350px] ${open ? 'bg-white/80 p-4 border-l border-red-100 shadow-xl' : 'bg-white/60 p-1 border-l border-red-100 shadow'} rounded-l-2xl backdrop-blur-md flex flex-col items-stretch relative`}>
-        <button
-          onClick={() => setOpen(!open)}
-          className={`absolute ${open ? 'top-4 left-[-25px]' : 'top-1/2 left-[-25px] -translate-y-1/2'} bg-red-600 text-white rounded-l-lg px-2 py-1 shadow-lg focus:outline-none`}
-        >
-          {open ? <span>&#10095;</span> : <span>&#10094;</span>}
-        </button>
-        {open ? (
-          <>
-            <div className="flex items-center gap-2 mb-4">
-              <Heart className="w-6 h-6 text-red-600" />
-              <span className="font-bold text-red-700">Prayer Requests</span>
-              <div className="ml-auto flex gap-1">
-                <div className="flex items-center gap-1">
-                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
-                  <span className="text-xs text-red-600">Live</span>
-                </div>
-                <button
-                  onClick={() => fetchPrayerRequests()}
-                  className="p-1 hover:bg-red-50 rounded"
-                  title="Refresh prayer requests"
-                >
-                  <ArrowRight className="w-4 h-4 text-red-600 rotate-90" />
-                </button>
-                <button
-                  onClick={() => setShowAnonymous(!showAnonymous)}
-                  className="p-1 hover:bg-red-50 rounded"
-                  title={showAnonymous ? "Hide anonymous requests" : "Show anonymous requests"}
-                >
-                  {showAnonymous ? <Eye className="w-4 h-4 text-red-600" /> : <EyeOff className="w-4 h-4 text-red-600" />}
-                </button>
-              </div>
-            </div>
-            {loading ? (
-              <div className="flex-1 flex items-center justify-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
-              </div>
-            ) : (
-              <>
-                <ul className="flex-1 overflow-y-auto space-y-2">
-                  {displayedRequests.map((request, index) => (
-                    <li key={`${request.id}-${currentIndex}-${index}`} className="p-2 bg-red-50 rounded-lg border border-red-100 transition-all duration-500 ease-in-out">
-                      <div className="flex items-start gap-2 mb-1">
-                        {getCategoryIcon(request.category)}
-                        <span className="text-xs text-red-600 font-medium">
-                          {formatTimeAgo(request.created_at || request.createdAt)}
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-700 line-clamp-2">
-                        {request.request}
-                      </p>
-                      <div className="flex items-center justify-between mt-1">
-                        {request.isAnonymous ? (
-                          <span className="text-xs text-gray-500 italic">Anonymous</span>
-                        ) : request.name ? (
-                          <span className="text-xs text-gray-600 font-medium">— {request.name}</span>
-                        ) : null}
-                        <span className="text-xs text-gray-400">
-                          {request.category.charAt(0).toUpperCase() + request.category.slice(1)}
-                        </span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-                <button 
-                  onClick={() => navigate('/prayer-requests')} 
-                  className="mt-4 w-full py-2 rounded-lg bg-gradient-to-r from-red-600 to-pink-600 text-white font-semibold hover:from-red-700 hover:to-pink-700 transition-all"
-                >
-                  Submit a request
-                </button>
-              </>
-            )}
-          </>
-        ) : (
-          <div className="flex flex-col items-center justify-center h-full">
-            <Heart className="w-6 h-6 text-red-600 mb-10" />
-            <span className="text-sm text-red-600 font-bold rotate-90 whitespace-nowrap">Prayers</span>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function FaqSection() {
-  const faqs = [
-    {
-      q: "How do I join a Bible quiz?",
-      a: "Simply visit our homepage and click 'Today's Quiz' to start immediately, or sign up for a free account to access weekly quizzes, create your own quizzes, and track your progress on the leaderboard."
-    },
-    {
-      q: "What types of quizzes are available?",
-      a: "We offer Today's Quiz (Hebrews 3), Weekly Bible Challenges, public quizzes for all 66 Bible books, and the ability to create and host your own live quizzes with an 8-character join code."
-    },
-    {
-      q: "How does the scoring system work?",
-      a: "You earn 4 points for each correct answer, lose 1 point for wrong answers, and receive time bonuses for quick responses. The faster you answer correctly, the more points you earn!"
-    },
-    {
-      q: "Can I create my own quizzes?",
-      a: "Yes! You can create custom Bible quizzes with your own questions, choose between requiring login or allowing guest participation, and host live sessions that others can join with a simple code."
-    },
-    {
-      q: "Is the Bible Quiz suitable for all ages?",
-      a: "Absolutely! Our quizzes are designed for all ages, from children to adults, with questions covering every level of Bible knowledge. Perfect for families, youth groups, and church communities."
-    },
-    {
-      q: "What Bible topics are covered?",
-      a: "We have quizzes for all 66 books of the Bible, including Old Testament stories, New Testament teachings, Bible characters, parables, miracles, prophecies, and much more. Each quiz is carefully crafted to test and expand your knowledge."
-    },
-    {
-      q: "How do I track my progress?",
-      a: "Create a free account to access your personal dashboard, view your quiz history, see your scores, and compete on the global leaderboard. You can also track your improvement over time."
-    },
-    {
-      q: "Can I participate without creating an account?",
-      a: "Yes! You can take Today's Quiz and many public quizzes as a guest. However, creating a free account gives you access to more features, progress tracking, and the ability to create your own quizzes."
-    }
-  ];
-  const [open, setOpen] = useState(null);
-  return (
-    <section className="py-24 bg-white">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="flex flex-col items-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-urbanist font-semibold text-center text-gray-900 mb-4">Frequently Asked Questions</h2>
-          <p className="text-lg font-urbanist font-light text-gray-600 text-center max-w-2xl mb-2">
-            Everything you need to know about Bible Quiz Competition. Can't find your answer?{' '}
-            <a href="mailto:info@biblequizcompetition.com" className="font-urbanist font-light text-gray-900 hover:text-gray-700 underline">Contact our support team.</a>
-          </p>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {faqs.map((faq, i) => (
-            <div key={i} className="rounded-lg border border-gray-200 bg-white p-0 overflow-hidden transition-all">
-              <button
-                className="w-full flex items-center justify-between px-6 py-5 text-lg font-urbanist font-medium text-gray-900 focus:outline-none hover:bg-gray-50 transition-colors"
-                onClick={() => setOpen(open === i ? null : i)}
-                aria-expanded={open === i}
-                aria-controls={`faq-panel-${i}`}
-              >
-                <span className="text-left">{faq.q}</span>
-                <span className={`ml-4 transition-transform flex-shrink-0 ${open === i ? 'rotate-45 text-gray-700' : 'text-gray-500'}`}>+</span>
-              </button>
-              <div
-                id={`faq-panel-${i}`}
-                className={`px-6 pb-5 font-urbanist font-light text-gray-600 text-base leading-relaxed transition-all duration-300 ${open === i ? 'block' : 'hidden'}`}
-              >
-                {faq.a}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+// StickyPrayerRequestsPanel moved to @/components/StickyPrayerRequestsPanel.tsx
 
 // Public pages searchable content - comprehensive list
-const publicPages = [
-  // Main pages
-  { title: "Bible Q&A Hub", path: "/bible-questions-and-answers-hub", category: "Bible Study" },
-  { title: "Articles", path: "/articles", category: "Resources" },
-  { title: "Help & Support", path: "/help", category: "Support" },
-  { title: "Leaderboard", path: "/public-leaderboard", category: "Competition" },
-  { title: "Daily Verse", path: "/daily-verse", category: "Bible Study" },
-  { title: "Prayer Requests", path: "/prayer-requests", category: "Community" },
-  { title: "Today's Quiz", path: "/todays-quiz", category: "Quizzes" },
-  { title: "Weekly Quiz", path: "/weekly-quiz", category: "Quizzes" },
-  
-  // Genesis Hub sub-pages
-  { title: "Genesis Hub", path: "/bible-questions-and-answers-hub/genesis", category: "Bible Study" },
-  { title: "Genesis Beginner", path: "/bible-questions-and-answers-hub/genesis/beginner", category: "Bible Study" },
-  { title: "Genesis Intermediate", path: "/bible-questions-and-answers-hub/genesis/intermediate", category: "Bible Study" },
-  { title: "Genesis Advanced", path: "/bible-questions-and-answers-hub/genesis/advanced", category: "Bible Study" },
-  { title: "Genesis Chapters 1-11", path: "/bible-questions-and-answers-hub/genesis/chapters-1-11", category: "Bible Study" },
-  { title: "Genesis Chapters 12-25", path: "/bible-questions-and-answers-hub/genesis/chapters-12-25", category: "Bible Study" },
-  { title: "Genesis Chapters 26-36", path: "/bible-questions-and-answers-hub/genesis/chapters-26-36", category: "Bible Study" },
-  { title: "Genesis Chapters 37-50", path: "/bible-questions-and-answers-hub/genesis/chapters-37-50", category: "Bible Study" },
-  { title: "Genesis True/False", path: "/bible-questions-and-answers-hub/genesis/true-false", category: "Bible Study" },
-  { title: "Genesis Characters", path: "/bible-questions-and-answers-hub/genesis/characters", category: "Bible Study" },
-  
-  // Public Quiz - Old Testament Pentateuch
-  { title: "Genesis Quiz", path: "/public-quiz/genesis", category: "Quiz" },
-  { title: "Exodus Quiz", path: "/public-quiz/exodus", category: "Quiz" },
-  { title: "Leviticus Quiz", path: "/public-quiz/leviticus", category: "Quiz" },
-  { title: "Numbers Quiz", path: "/public-quiz/numbers", category: "Quiz" },
-  { title: "Deuteronomy Quiz", path: "/public-quiz/deuteronomy", category: "Quiz" },
-  
-  // Public Quiz - Historical Books
-  { title: "Joshua Quiz", path: "/public-quiz/joshua", category: "Quiz" },
-  { title: "Judges Quiz", path: "/public-quiz/judges", category: "Quiz" },
-  { title: "Ruth Quiz", path: "/public-quiz/ruth", category: "Quiz" },
-  { title: "1 Samuel Quiz", path: "/public-quiz/1-samuel", category: "Quiz" },
-  { title: "2 Samuel Quiz", path: "/public-quiz/2-samuel", category: "Quiz" },
-  { title: "1 Kings Quiz", path: "/public-quiz/1-kings", category: "Quiz" },
-  { title: "2 Kings Quiz", path: "/public-quiz/2-kings", category: "Quiz" },
-  { title: "1 Chronicles Quiz", path: "/public-quiz/1-chronicles", category: "Quiz" },
-  { title: "2 Chronicles Quiz", path: "/public-quiz/2-chronicles", category: "Quiz" },
-  { title: "Ezra Quiz", path: "/public-quiz/ezra", category: "Quiz" },
-  { title: "Nehemiah Quiz", path: "/public-quiz/nehemiah", category: "Quiz" },
-  { title: "Esther Quiz", path: "/public-quiz/esther", category: "Quiz" },
-  
-  // Public Quiz - Wisdom Literature
-  { title: "Job Quiz", path: "/public-quiz/job", category: "Quiz" },
-  { title: "Psalms Quiz", path: "/public-quiz/psalms", category: "Quiz" },
-  { title: "Proverbs Quiz", path: "/public-quiz/proverbs", category: "Quiz" },
-  { title: "Ecclesiastes Quiz", path: "/public-quiz/ecclesiastes", category: "Quiz" },
-  { title: "Song of Solomon Quiz", path: "/public-quiz/song-of-solomon", category: "Quiz" },
-  
-  // Public Quiz - Major Prophets
-  { title: "Isaiah Quiz", path: "/public-quiz/isaiah", category: "Quiz" },
-  { title: "Jeremiah Quiz", path: "/public-quiz/jeremiah", category: "Quiz" },
-  { title: "Lamentations Quiz", path: "/public-quiz/lamentations", category: "Quiz" },
-  { title: "Ezekiel Quiz", path: "/public-quiz/ezekiel", category: "Quiz" },
-  { title: "Daniel Quiz", path: "/public-quiz/daniel", category: "Quiz" },
-  
-  // Public Quiz - Minor Prophets
-  { title: "Hosea Quiz", path: "/public-quiz/hosea", category: "Quiz" },
-  { title: "Joel Quiz", path: "/public-quiz/joel", category: "Quiz" },
-  { title: "Amos Quiz", path: "/public-quiz/amos", category: "Quiz" },
-  { title: "Obadiah Quiz", path: "/public-quiz/obadiah", category: "Quiz" },
-  { title: "Jonah Quiz", path: "/public-quiz/jonah", category: "Quiz" },
-  { title: "Micah Quiz", path: "/public-quiz/micah", category: "Quiz" },
-  { title: "Nahum Quiz", path: "/public-quiz/nahum", category: "Quiz" },
-  { title: "Habakkuk Quiz", path: "/public-quiz/habakkuk", category: "Quiz" },
-  { title: "Zephaniah Quiz", path: "/public-quiz/zephaniah", category: "Quiz" },
-  { title: "Haggai Quiz", path: "/public-quiz/haggai", category: "Quiz" },
-  { title: "Zechariah Quiz", path: "/public-quiz/zechariah", category: "Quiz" },
-  { title: "Malachi Quiz", path: "/public-quiz/malachi", category: "Quiz" },
-  
-  // Public Quiz - Gospels
-  { title: "Matthew Quiz", path: "/public-quiz/matthew", category: "Quiz" },
-  { title: "Mark Quiz", path: "/public-quiz/mark", category: "Quiz" },
-  { title: "Luke Quiz", path: "/public-quiz/luke", category: "Quiz" },
-  { title: "John Quiz", path: "/public-quiz/john", category: "Quiz" },
-  
-  // Public Quiz - Acts and Pauline Epistles
-  { title: "Acts Quiz", path: "/public-quiz/acts", category: "Quiz" },
-  { title: "Romans Quiz", path: "/public-quiz/romans", category: "Quiz" },
-  { title: "1 Corinthians Quiz", path: "/public-quiz/1-corinthians", category: "Quiz" },
-  { title: "2 Corinthians Quiz", path: "/public-quiz/2-corinthians", category: "Quiz" },
-  { title: "Galatians Quiz", path: "/public-quiz/galatians", category: "Quiz" },
-  { title: "Ephesians Quiz", path: "/public-quiz/ephesians", category: "Quiz" },
-  { title: "Philippians Quiz", path: "/public-quiz/philippians", category: "Quiz" },
-  { title: "Colossians Quiz", path: "/public-quiz/colossians", category: "Quiz" },
-  { title: "1 Thessalonians Quiz", path: "/public-quiz/1-thessalonians", category: "Quiz" },
-  { title: "2 Thessalonians Quiz", path: "/public-quiz/2-thessalonians", category: "Quiz" },
-  { title: "1 Timothy Quiz", path: "/public-quiz/1-timothy", category: "Quiz" },
-  { title: "2 Timothy Quiz", path: "/public-quiz/2-timothy", category: "Quiz" },
-  { title: "Titus Quiz", path: "/public-quiz/titus", category: "Quiz" },
-  { title: "Philemon Quiz", path: "/public-quiz/philemon", category: "Quiz" },
-  
-  // Public Quiz - General Epistles
-  { title: "Hebrews Quiz", path: "/public-quiz/hebrews", category: "Quiz" },
-  { title: "James Quiz", path: "/public-quiz/james", category: "Quiz" },
-  { title: "1 Peter Quiz", path: "/public-quiz/1-peter", category: "Quiz" },
-  { title: "2 Peter Quiz", path: "/public-quiz/2-peter", category: "Quiz" },
-  { title: "1 John Quiz", path: "/public-quiz/1-john", category: "Quiz" },
-  { title: "2 John Quiz", path: "/public-quiz/2-john", category: "Quiz" },
-  { title: "3 John Quiz", path: "/public-quiz/3-john", category: "Quiz" },
-  { title: "Jude Quiz", path: "/public-quiz/jude", category: "Quiz" },
-  { title: "Revelation Quiz", path: "/public-quiz/revelation", category: "Quiz" },
-  
-  // Articles
-  { title: "Complete Quiz Guide", path: "/articles/complete-quiz-guide", category: "Article" },
-  { title: "Quiz Strategies", path: "/articles/quiz-strategies", category: "Article" },
-  { title: "David King of Israel", path: "/articles/david-king-israel", category: "Article" },
-  { title: "Leaderboard Tips", path: "/articles/leaderboard-tips", category: "Article" },
-  { title: "Moses and Exodus", path: "/articles/moses-exodus-story", category: "Article" },
-  { title: "Esther's Courage", path: "/articles/esther-courage-story", category: "Article" },
-  { title: "Understanding Grace", path: "/articles/understanding-grace", category: "Article" },
-  { title: "Prayer Life Guide", path: "/articles/prayer-life-guide", category: "Article" },
-  { title: "Quiz Time Management", path: "/articles/quiz-time-management", category: "Article" },
-  { title: "Bible Study Methods", path: "/articles/bible-study-methods", category: "Article" },
-  { title: "Quiz Navigation Guide", path: "/articles/quiz-navigation-guide", category: "Article" },
-  { title: "Quiz Scoring Explained", path: "/articles/quiz-scoring-explained", category: "Article" },
-  { title: "Quiz Difficulty Levels", path: "/articles/quiz-difficulty-levels", category: "Article" },
-  { title: "Quiz Feedback System", path: "/articles/quiz-feedback-system", category: "Article" },
-  { title: "Quiz Progress Tracking", path: "/articles/quiz-progress-tracking", category: "Article" },
-  { title: "Memory Techniques", path: "/articles/memory-techniques-quiz", category: "Article" },
-  { title: "Abraham's Faith Journey", path: "/articles/abraham-faith-journey", category: "Article" },
-  { title: "Joseph's Forgiveness Story", path: "/articles/joseph-forgiveness-story", category: "Article" },
-  { title: "Quiz Anxiety Management", path: "/articles/quiz-anxiety-management", category: "Article" },
-  { title: "Question Pattern Recognition", path: "/articles/question-pattern-recognition", category: "Article" },
-  { title: "Quiz Concentration Techniques", path: "/articles/quiz-concentration-techniques", category: "Article" },
-  { title: "Quiz Recovery Strategies", path: "/articles/quiz-recovery-strategies", category: "Article" },
-  { title: "Competition Preparation", path: "/articles/competition-preparation", category: "Article" },
-  { title: "Ruth's Loyalty and Devotion", path: "/articles/ruth-loyalty-devotion", category: "Article" },
-  { title: "Forgiveness and Healing", path: "/articles/forgiveness-healing-power", category: "Article" },
-  { title: "Hope: Biblical Perspective", path: "/articles/hope-biblical-perspective", category: "Article" },
-  { title: "Scripture Memorization", path: "/articles/scripture-memorization-techniques", category: "Article" },
-  { title: "Team Quiz Strategies", path: "/articles/team-quiz-strategies", category: "Article" },
-  { title: "Moses Leadership Lessons", path: "/articles/moses-leadership-lessons", category: "Article" },
-];
+// Moved to @/data/indexData.ts
 
-// Emotional Check-In Data
-const emotionOptions = [
-  {
-    id: "very-anxious",
-    label: "Very Anxious",
-    emoji: "😰",
-    image: "/assets/anxious.webp",
-    color: "text-red-600",
-    bgColor: "bg-red-50",
-    borderColor: "#dc2626",
-    verses: [
-      {
-        reference: "Philippians 4:6-7",
-        text: "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.",
-        encouragement: "God invites you to bring your worries to Him. His peace is available to you right now."
-      }
-    ]
-  },
-  {
-    id: "stressed",
-    label: "Stressed/Overwhelmed",
-    emoji: "😫",
-    image: "/assets/stressed.webp",
-    color: "text-orange-600",
-    bgColor: "bg-orange-50",
-    borderColor: "#ea580c",
-    verses: [
-      {
-        reference: "Matthew 11:28-30",
-        text: "Come to me, all you who are weary and burdened, and I will give you rest.",
-        encouragement: "Jesus offers you rest. Take a deep breath and remember that you can find peace in Him."
-      }
-    ]
-  },
-  {
-    id: "sad",
-    label: "Sad/Depressed",
-    emoji: "😔",
-    image: "/assets/sad.webp",
-    color: "text-blue-600",
-    bgColor: "bg-blue-50",
-    borderColor: "#2563eb",
-    verses: [
-      {
-        reference: "Psalm 34:18",
-        text: "The Lord is close to the brokenhearted and saves those who are crushed in spirit.",
-        encouragement: "God is near to you in your pain. He sees your tears and wants to bring you comfort."
-      }
-    ]
-  },
-  {
-    id: "okay",
-    label: "Okay/Neutral",
-    emoji: "👍",
-    image: "/assets/normal.webp",
-    color: "text-gray-600",
-    bgColor: "bg-gray-50",
-    borderColor: "#4b5563",
-    verses: [
-      {
-        reference: "Jeremiah 29:11",
-        text: "For I know the plans I have for you,' declares the Lord, 'plans to prosper you and not to harm you.",
-        encouragement: "Even in neutral moments, God has wonderful plans for you."
-      }
-    ]
-  },
-  {
-    id: "good",
-    label: "Good/Calm",
-    emoji: "😊",
-    image: "/assets/calm.webp",
-    color: "text-green-600",
-    bgColor: "bg-green-50",
-    borderColor: "#16a34a",
-    verses: [
-      {
-        reference: "Psalm 28:7",
-        text: "The Lord is my strength and my shield; my heart trusts in him, and he helps me.",
-        encouragement: "It's wonderful that you're feeling good! Remember to give thanks to God for this peaceful moment."
-      }
-    ]
-  },
-  {
-    id: "great",
-    label: "Great/Peaceful",
-    emoji: "😌",
-    image: "/assets/peaceful.webp",
-    color: "text-purple-600",
-    bgColor: "bg-purple-50",
-    borderColor: "#9333ea",
-    verses: [
-      {
-        reference: "Romans 15:13",
-        text: "May the God of hope fill you with all joy and peace as you trust in him.",
-        encouragement: "This joy and peace you're experiencing comes from God! Let it overflow and share this blessing with others."
-      }
-    ]
-  }
-];
-
-// Day-based neutral question sets (6 per day, Sun–Sat)
-const cbtNeutralByDay: { [day: string]: any[] } = {
-  sunday: [
-    { id: 101, question: "Do you sometimes struggle to identify your feelings clearly?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_clarity_3132388.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 102, question: "Do you find it helpful to reflect on your thoughts and emotions?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_reflection_5255996.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 103, question: "Are you open to learning new ways to manage stress?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_manage_stress_3482711.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 104, question: "Would a short breathing break help you right now?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_eca07ce68773.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 105, question: "Do you feel supported by friends or family today?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_43490279c0fa.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 106, question: "Would gratitude journaling be helpful this evening?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_9e6261896da8.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-  ],
-  monday: [
-    { id: 201, question: "Is work or study on your mind more than usual today?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_b7833e8f5570.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 202, question: "Would planning your day reduce uncertainty for you?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_eca07ce68773.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 203, question: "Are you getting enough rest and hydration today?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_9e6261896da8.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 204, question: "Would a brief walk help clear your mind?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_manage_stress_3482711.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 205, question: "Do you need to set gentle boundaries today?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_43490279c0fa.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 206, question: "Would prayer or meditation bring peace right now?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_reflection_5255996.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-  ],
-  tuesday: [
-    { id: 301, question: "Do you feel present in the moment today?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_clarity_3132388.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 302, question: "Is there a small task you can complete to gain momentum?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_eca07ce68773.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 303, question: "Would a 5-minute pause help you reset?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_b7833e8f5570.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 304, question: "Do you need encouragement from someone you trust today?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_43490279c0fa.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 305, question: "Have you eaten regularly and kindly to your body?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_9e6261896da8.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 306, question: "Would reading a short verse calm your mind?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_reflection_5255996.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-  ],
-  wednesday: [
-    { id: 401, question: "Do you feel balanced between responsibilities and rest?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_43490279c0fa.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 402, question: "Would listing three wins from today encourage you?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_9e6261896da8.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 403, question: "Is there any tense thought you can gently reframe?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_clarity_3132388.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 404, question: "Would stepping outside for fresh air help?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_manage_stress_3482711.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 405, question: "Do you need to postpone any non-urgent tasks?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_eca07ce68773.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 406, question: "Would sharing how you feel with God or a friend help?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_reflection_5255996.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-  ],
-  thursday: [
-    { id: 501, question: "Is your self-talk kind and compassionate today?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_b7833e8f5570.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 502, question: "Would slowing your pace reduce pressure?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_43490279c0fa.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 503, question: "Is there a verse you can carry with you today?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_reflection_5255996.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 504, question: "Would a warm beverage or water break help settle you?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "https://images.pexels.com/photos/851555/pexels-photo-851555.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 505, question: "Do you feel connected to your purpose today?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "https://images.pexels.com/photos/2927676/pexels-photo-2927676.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 506, question: "Is there a small joy you can notice right now?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_clarity_3132388.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-  ],
-  friday: [
-    { id: 601, question: "Do you need to unwind after the week so far?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_manage_stress_3482711.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 602, question: "Would gentle music or silence be soothing now?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_b7833e8f5570.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 603, question: "Is there anything you can hand over to God today?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_reflection_5255996.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 604, question: "Would a short stretch help release tension?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_43490279c0fa.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 605, question: "Do you want to note something you’re grateful for?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_9e6261896da8.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 606, question: "Would stepping away from screens help right now?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_eca07ce68773.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-  ],
-  saturday: [
-    { id: 701, question: "Do you feel rested as the week wraps up?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_43490279c0fa.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 702, question: "Would a slow morning routine benefit you today?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_clarity_3132388.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 703, question: "Is it helpful to plan one nurturing activity today?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_manage_stress_3482711.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 704, question: "Do you want to connect with someone you care about?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_b7833e8f5570.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 705, question: "Would tidying a small space bring calm?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/unsplash_9e6261896da8.jpg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-    { id: 706, question: "Do you want to pause and breathe before the next thing?", options: ["Yes", "No"], thinkingTraps: { 0: ["neutral"], 1: ["neutral"] }, backgroundImage: "/assets/cbt/cbt_reflection_5255996.jpeg", backgroundGradient: "from-gray-600/80 to-slate-600/80" },
-  ],
-};
-
-// Question sets for different emotion ranges
-const cbtQuestionsByEmotion: { [key: string]: any[] } = {
-  // Very Anxious / Anxious / Stressed / Sad - Negative emotions
-  "negative": [
-    {
-      id: 1,
-      question: "Do you often blame yourself when things go wrong?",
-      options: ["Yes", "No"],
-      thinkingTraps: {
-        0: ["self-blame", "personalization"],
-        1: ["neutral"]
-      },
-      backgroundImage: "/assets/cbt/cbt_blame_7640496.jpeg",
-      backgroundGradient: "from-purple-600/80 to-indigo-600/80"
-    },
-    {
-      id: 2,
-      question: "Do you expect the worst to happen in future situations?",
-      options: ["Yes", "No"],
-      thinkingTraps: {
-        0: ["catastrophizing", "fortune-telling"],
-        1: ["neutral"]
-      },
-      backgroundImage: "/assets/cbt/cbt_worst_897817.jpeg",
-      backgroundGradient: "from-blue-600/80 to-cyan-600/80"
-    },
-    {
-      id: 3,
-      question: "When you make a mistake, do you think you're a complete failure?",
-      options: ["Yes", "No"],
-      thinkingTraps: {
-        0: ["all-or-nothing", "labeling"],
-        1: ["neutral"]
-      },
-      backgroundImage: "/assets/cbt/cbt_failure_3601097.jpeg",
-      backgroundGradient: "from-amber-600/80 to-orange-600/80"
-    },
-    {
-      id: 4,
-      question: "Do you constantly compare yourself to others?",
-      options: ["Yes", "No"],
-      thinkingTraps: {
-        0: ["comparison", "self-blame"],
-        1: ["neutral"]
-      },
-      backgroundImage: "/assets/cbt/cbt_compare_6532612.jpeg",
-      backgroundGradient: "from-pink-600/80 to-rose-600/80"
-    },
-    {
-      id: 5,
-      question: "Do you assume you know what others are thinking about you?",
-      options: ["Yes", "No"],
-      thinkingTraps: {
-        0: ["mind-reading", "jumping-to-conclusions"],
-        1: ["neutral"]
-      },
-      backgroundImage: "/assets/cbt/cbt_mindreading_1194196.jpeg",
-      backgroundGradient: "from-green-600/80 to-emerald-600/80"
-    },
-    {
-      id: 6,
-      question: "Do you focus mainly on negative details while ignoring positive ones?",
-      options: ["Yes", "No"],
-      thinkingTraps: {
-        0: ["mental-filter", "catastrophizing"],
-        1: ["neutral"]
-      },
-      backgroundImage: "/assets/cbt/unsplash_b7833e8f5570.jpg",
-      backgroundGradient: "from-violet-600/80 to-purple-600/80"
-    }
-  ],
-  // Neutral emotions placeholder (unused; selection is day-based via cbtNeutralByDay)
-  "neutral": [],
-  // Good / Great - Positive emotions
-  "positive": [
-    {
-      id: 1,
-      question: "Do you practice gratitude regularly for the good things in your life?",
-      options: ["Yes", "No"],
-      thinkingTraps: {
-        0: ["neutral"],
-        1: ["neutral"]
-      },
-      backgroundImage: "/assets/cbt/unsplash_eca07ce68773.jpg",
-      backgroundGradient: "from-green-600/80 to-emerald-600/80"
-    },
-    {
-      id: 2,
-      question: "Do you have healthy coping strategies for when challenges arise?",
-      options: ["Yes", "No"],
-      thinkingTraps: {
-        0: ["neutral"],
-        1: ["neutral"]
-      },
-      backgroundImage: "/assets/cbt/unsplash_b7833e8f5570.jpg",
-      backgroundGradient: "from-green-600/80 to-emerald-600/80"
-    },
-    {
-      id: 3,
-      question: "Do you feel connected to your faith and spiritual practices?",
-      options: ["Yes", "No"],
-      thinkingTraps: {
-        0: ["neutral"],
-        1: ["neutral"]
-      },
-      backgroundImage: "/assets/cbt/unsplash_43490279c0fa.jpg",
-      backgroundGradient: "from-green-600/80 to-emerald-600/80"
-    },
-    {
-      id: 4,
-      question: "Do you maintain healthy boundaries in relationships?",
-      options: ["Yes", "No"],
-      thinkingTraps: {
-        0: ["neutral"],
-        1: ["neutral"]
-      },
-      backgroundImage: "/assets/cbt/unsplash_9e6261896da8.jpg",
-      backgroundGradient: "from-green-600/80 to-emerald-600/80"
-    },
-    {
-      id: 5,
-      question: "Do you take time for self-care and rest?",
-      options: ["Yes", "No"],
-      thinkingTraps: {
-        0: ["neutral"],
-        1: ["neutral"]
-      },
-      backgroundImage: "/assets/cbt/unsplash_f06f85e504b3.jpg",
-      backgroundGradient: "from-green-600/80 to-emerald-600/80"
-    }
-  ]
-};
-
-const thinkingTrapsInfo: { [key: string]: any } = {
-  "self-blame": {
-    name: "Self-Blame",
-    description: "You tend to take responsibility for things outside your control.",
-    verses: [{
-      reference: "Romans 8:1",
-      text: "Therefore, there is now no condemnation for those who are in Christ Jesus.",
-      quote: "You are not defined by your mistakes. God's grace is greater than any failure."
-    }]
-  },
-  "overgeneralization": {
-    name: "Overgeneralization",
-    description: "You see a single negative event as a never-ending pattern.",
-    verses: [{
-      reference: "Lamentations 3:22-23",
-      text: "Because of the Lord's great love we are not consumed, for his compassions never fail.",
-      quote: "Each day is a fresh start. God's mercies are renewed every morning."
-    }]
-  },
-  "catastrophizing": {
-    name: "Catastrophizing",
-    description: "You expect the worst possible outcome.",
-    verses: [{
-      reference: "Matthew 6:34",
-      text: "Therefore do not worry about tomorrow, for tomorrow will worry about itself.",
-      quote: "God gives you strength for today. Don't borrow tomorrow's worries."
-    }]
-  },
-  "fortune-telling": {
-    name: "Fortune-Telling",
-    description: "You predict negative outcomes as if they're facts.",
-    verses: [{
-      reference: "Jeremiah 29:11",
-      text: "For I know the plans I have for you,' declares the Lord, 'plans to prosper you and not to harm you.",
-      quote: "God has good plans for you. Trust in His timing and purpose."
-    }]
-  },
-  "all-or-nothing": {
-    name: "All-or-Nothing Thinking",
-    description: "You see things in black and white categories.",
-    verses: [{
-      reference: "2 Corinthians 12:9",
-      text: "But he said to me, 'My grace is sufficient for you, for my power is made perfect in weakness.'",
-      quote: "You don't have to be perfect. God's grace covers your weaknesses."
-    }]
-  },
-  "labeling": {
-    name: "Labeling",
-    description: "You attach negative labels to yourself.",
-    verses: [{
-      reference: "1 John 3:1",
-      text: "See what great love the Father has lavished on us, that we should be called children of God!",
-      quote: "You are a child of God, not defined by your mistakes. You are loved and valued."
-    }]
-  },
-  "mind-reading": {
-    name: "Mind-Reading",
-    description: "You assume you know what others are thinking about you.",
-    verses: [{
-      reference: "1 Samuel 16:7",
-      text: "The Lord does not look at the things people look at. People look at the outward appearance, but the Lord looks at the heart.",
-      quote: "God sees your heart, not what others might think. Focus on His opinion of you."
-    }]
-  },
-  "mental-filter": {
-    name: "Mental Filter",
-    description: "You focus exclusively on negative details.",
-    verses: [{
-      reference: "Philippians 4:8",
-      text: "Finally, brothers and sisters, whatever is true, whatever is noble, whatever is right, whatever is pure, whatever is lovely, whatever is admirable—think about such things.",
-      quote: "Focus on what's good and true. God has given you many blessings."
-    }]
-  },
-  "comparison": {
-    name: "Comparison Trap",
-    description: "You constantly compare yourself to others.",
-    verses: [{
-      reference: "Psalm 139:14",
-      text: "I praise you because I am fearfully and wonderfully made; your works are wonderful.",
-      quote: "You are wonderfully made. Your worth doesn't come from comparison but from God."
-    }]
-  },
-  "jumping-to-conclusions": {
-    name: "Jumping to Conclusions",
-    description: "You make negative interpretations without facts.",
-    verses: [{
-      reference: "Proverbs 18:13",
-      text: "To answer before listening—that is folly and shame.",
-      quote: "Take time to gather facts before making assumptions. Truth brings freedom."
-    }]
-  },
-  "personalization": {
-    name: "Personalization",
-    description: "You believe everything others do is a reaction to you.",
-    verses: [{
-      reference: "Romans 12:3",
-      text: "Do not think of yourself more highly than you ought, but rather think of yourself with sober judgment.",
-      quote: "Not everything is about you. Others have their own struggles and concerns."
-    }]
-  },
-  "wellness": {
-    name: "Wellness Check",
-    description: "You're taking time to reflect on your well-being. Continue nurturing your mind, body, and spirit.",
-    verses: [{
-      reference: "Jeremiah 29:11",
-      text: "For I know the plans I have for you,' declares the Lord, 'plans to prosper you and not to harm you, plans to give you hope and a future.",
-      quote: "God has wonderful plans for you. Keep taking care of yourself and trust in His guidance."
-    }]
-  }
-};
-
-const featureSteps = [
-  {
-    id: 1,
-    title: "Daily Personalized Content",
-    description: "Receive personalized daily words of encouragement and Bible verses tailored to your identified thinking patterns. Each morning, get verses and quotes specifically chosen to help you overcome your unique challenges and build resilience.",
-    color: "purple",
-    bgGradient: "from-purple-50 to-indigo-50",
-    borderColor: "border-purple-200",
-    circleColor: "bg-purple-600"
-  },
-  {
-    id: 2,
-    title: "CBT-Based Anxiety Quizzes",
-    description: "Engage with interactive quizzes designed using Cognitive Behavioral Therapy principles. These quizzes help you identify thought patterns, challenge negative thinking, and develop healthier mental habits through Scripture-based exercises.",
-    color: "blue",
-    bgGradient: "from-blue-50 to-indigo-50",
-    borderColor: "border-blue-200",
-    circleColor: "bg-blue-600"
-  },
-  {
-    id: 3,
-    title: "Wellness Habit Tracking",
-    description: "Track your daily habits that support mental wellness: water intake to stay hydrated, mood patterns and emotional check-ins, prayer and meditation time, physical activity and exercise, and sleep quality and rest patterns.",
-    color: "green",
-    bgGradient: "from-green-50 to-emerald-50",
-    borderColor: "border-green-200",
-    circleColor: "bg-green-600"
-  },
-  {
-    id: 4,
-    title: "Supportive Community",
-    description: "Join a caring community of believers who understand your journey. Share experiences, receive encouragement, and offer support to others. Connect with people who are walking the same path toward peace and healing.",
-    color: "amber",
-    bgGradient: "from-amber-50 to-orange-50",
-    borderColor: "border-amber-200",
-    circleColor: "bg-amber-600"
-  },
-  {
-    id: 5,
-    title: "Dedicated Support Team",
-    description: "Access our dedicated support team whenever you need guidance, encouragement, or someone to talk to. Our team is trained to provide biblical counseling and emotional support, ready to help you through difficult moments and celebrate your progress.",
-    color: "pink",
-    bgGradient: "from-pink-50 to-rose-50",
-    borderColor: "border-pink-200",
-    circleColor: "bg-pink-600"
-  }
-];
+// Emotional Check-In Data - moved to @/data/emotionData.ts
 
 function EmotionalCheckInHero() {
   const navigate = useNavigate();
@@ -1313,6 +48,7 @@ function EmotionalCheckInHero() {
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [gameAnswers, setGameAnswers] = useState<any>({});
+  const [retryCount, setRetryCount] = useState(0);
   // Game-specific states
   const [match3Grid, setMatch3Grid] = useState<string[]>([]);
   const [selectedTiles, setSelectedTiles] = useState<number[]>([]);
@@ -1321,6 +57,7 @@ function EmotionalCheckInHero() {
   const [memoryFlipped, setMemoryFlipped] = useState<number[]>([]);
   const [memoryMatched, setMemoryMatched] = useState<string[]>([]);
   const [memoryCards, setMemoryCards] = useState<string[]>([]);
+  const [memoryMoves, setMemoryMoves] = useState(0);
   const [puzzleTiles, setPuzzleTiles] = useState<string[]>([]);
   const [poppedBubbles, setPoppedBubbles] = useState<string[]>([]);
   const [runnerPosition, setRunnerPosition] = useState(0);
@@ -1367,6 +104,36 @@ function EmotionalCheckInHero() {
     }
   }, [thoughtRecordStep, trStep2, trStep7.length]);
 
+  // Helper functions for retry tracking
+  const getRetryCount = (): number => {
+    const today = new Date().toDateString();
+    const stored = localStorage.getItem('memoryGameRetries');
+    if (!stored) return 0;
+    try {
+      const data = JSON.parse(stored);
+      // Reset if it's a different day
+      if (data.date !== today) return 0;
+      return data.count || 0;
+    } catch {
+      return 0;
+    }
+  };
+
+  const incrementRetryCount = (): number => {
+    const today = new Date().toDateString();
+    const currentCount = getRetryCount();
+    const newCount = currentCount + 1;
+    localStorage.setItem('memoryGameRetries', JSON.stringify({
+      date: today,
+      count: newCount
+    }));
+    return newCount;
+  };
+
+  const resetRetryCount = () => {
+    localStorage.removeItem('memoryGameRetries');
+  };
+
   // Initialize Bible game states when game starts
   useEffect(() => {
     if (showBibleGame && !gameCompleted && !gameOver) {
@@ -1378,12 +145,14 @@ function EmotionalCheckInHero() {
       setMemoryFlipped([]);
       setMemoryMatched([]);
       setMemoryCards([]);
+      setMemoryMoves(0);
       setPoppedBubbles([]);
       setRunnerPosition(0);
       setRunnerCollected([]);
       setFallingBubbles([]);
       setScore(0);
       setGameOver(false);
+      setRetryCount(getRetryCount());
       runnerPositionRef.current = 0;
       runnerCollectedRef.current = [];
       scoreRef.current = 0;
@@ -1404,7 +173,10 @@ function EmotionalCheckInHero() {
       
       // Initialize memory cards
       if (game.type === 'memory') {
-        const allCards = game.pairs.flat().sort(() => Math.random() - 0.5);
+        // Duplicate each word to create pairs (each word appears twice)
+        const allGoodCards = [...game.pairs, ...game.pairs];
+        const allSinCards = [...game.sinPairs, ...game.sinPairs];
+        const allCards = [...allGoodCards, ...allSinCards].sort(() => Math.random() - 0.5);
         setMemoryCards(allCards);
       }
     }
@@ -1747,15 +519,19 @@ function EmotionalCheckInHero() {
 
   // Get Bible game activity based on emotion
   const getBibleGameActivity = (emotion: any) => {
-    // Always return Joy Runner game for all emotions
+    // Return Memory Match game
     return {
-      title: 'Joy Runner',
-      description: 'Catch falling bubbles of joy and peace!',
+      title: 'Memory Match',
+      description: 'Match pairs of Bible words!',
       verse: emotion?.verses?.[0]?.text || 'May the God of hope fill you with all joy and peace as you trust in him.',
       reference: emotion?.verses?.[0]?.reference || 'Romans 15:13',
-      type: 'runner',
-      collectibles: ['Joy', 'Peace', 'Hope', 'Love', 'Faith'],
-      targetCollect: 4,
+      type: 'memory',
+      pairs: [
+        'Joy', 'Peace', 'Faith', 'Hope', 'Love', 'Grace'
+      ],
+      sinPairs: [
+        'Pride', 'Envy'
+      ],
       encouragement: 'Amazing! Your peace is a gift from God. Share it with others!'
     };
   };
@@ -1778,9 +554,13 @@ function EmotionalCheckInHero() {
     scoreRef.current = score;
   }, [score]);
 
-  // Game loop for falling bubbles
+  // Game loop for falling bubbles (only for runner game)
   useEffect(() => {
     if (!showBibleGame || gameCompleted || gameOver) return;
+    
+    const game = getBibleGameActivity(selectedEmotion);
+    // Only run game loop for runner game type
+    if (game.type !== 'runner') return;
 
     let lastFrameTime = Date.now();
 
@@ -1913,7 +693,7 @@ function EmotionalCheckInHero() {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [showBibleGame, gameCompleted, gameOver]);
+  }, [showBibleGame, gameCompleted, gameOver, selectedEmotion]);
 
   const handleContinueFromEncouragement = () => {
     setShowFeatures(true);
@@ -2474,6 +1254,7 @@ function EmotionalCheckInHero() {
               {/* Continue Button */}
               <Button
                 onClick={() => {
+                  // Show Memory Match game inline
                   setShowVerseCard(false);
                   setShowBibleGame(true);
                 }}
@@ -2496,29 +1277,85 @@ function EmotionalCheckInHero() {
                 {/* Game Content */}
                 {gameOver ? (
                   /* Game Over Screen */
-                  <div className="text-center space-y-6">
-                    <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center shadow-lg">
+                  <div className="text-center space-y-6 bg-red-50 rounded-lg p-8 border-2 border-red-200">
+                    <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center shadow-lg">
                       <span className="text-4xl">💀</span>
                     </div>
-                    <div className="bg-white rounded-lg p-6 border border-gray-200">
-                      <h3 className="text-2xl font-urbanist font-semibold text-gray-900 mb-3">Game Over!</h3>
-                      <p className="text-base font-urbanist font-light text-gray-700 leading-relaxed mb-4">
-                        You touched a sin! Avoid the red bubbles and collect only the good words.
+                    <div className="bg-white rounded-lg p-6 border border-red-300">
+                      <h3 className="text-2xl font-urbanist font-semibold text-red-900 mb-3">Game Over!</h3>
+                      <p className="text-base font-urbanist font-light text-red-800 leading-relaxed mb-4">
+                        {game.type === 'memory' 
+                          ? "You matched a good word with a sin! Remember: matching good + sin = Game Over."
+                          : "You touched a sin! Avoid the red bubbles and collect only the good words."}
                       </p>
-                      <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 mb-4">
-                        <p className="text-sm font-urbanist font-semibold text-gray-600 mb-1">Final Score</p>
-                        <p className="text-3xl font-urbanist font-bold text-gray-900">{score}</p>
+                      <div className="bg-red-50 rounded-lg p-4 border border-red-200 mb-4">
+                        <p className="text-sm font-urbanist font-semibold text-red-700 mb-1">Final Score</p>
+                        <p className="text-3xl font-urbanist font-bold text-red-900">{score}</p>
                       </div>
                     </div>
-                    <div className="flex justify-center mb-4 md:mb-6 relative z-10">
-                      <Button
-                        onClick={() => navigate("/signup-today")}
-                        className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
-                      >
-                        Continue
-                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
-                      </Button>
-                    </div>
+                    {(() => {
+                      const maxRetries = 3;
+                      const canRetry = retryCount < maxRetries;
+                      const retriesLeft = maxRetries - retryCount;
+                      
+                      return (
+                        <div className="space-y-4">
+                          {!canRetry && (
+                            <div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-4 text-center">
+                              <p className="text-sm font-urbanist font-semibold text-yellow-800">
+                                You've used all {maxRetries} attempts for today. Try again tomorrow!
+                              </p>
+                            </div>
+                          )}
+                          {canRetry && (
+                            <div className="bg-blue-50 border-2 border-blue-300 rounded-lg p-4 text-center">
+                              <p className="text-sm font-urbanist font-semibold text-blue-800">
+                                Attempts remaining: {retriesLeft} / {maxRetries}
+                              </p>
+                            </div>
+                          )}
+                          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4 md:mb-6 relative z-10">
+                            {canRetry ? (
+                              <Button
+                                onClick={() => {
+                                  // Reset game states
+                                  setGameOver(false);
+                                  setGameCompleted(false);
+                                  setScore(0);
+                                  setMemoryFlipped([]);
+                                  setMemoryMatched([]);
+                                  setMemoryMoves(0);
+                                  // Reinitialize memory cards
+                                  const allGoodCards = [...game.pairs, ...game.pairs];
+                                  const allSinCards = [...game.sinPairs, ...game.sinPairs];
+                                  const allCards = [...allGoodCards, ...allSinCards].sort(() => Math.random() - 0.5);
+                                  setMemoryCards(allCards);
+                                }}
+                                className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800"
+                              >
+                                Retry
+                                <RotateCcw className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+                              </Button>
+                            ) : (
+                              <Button
+                                onClick={() => navigate("/signup-today")}
+                                className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                              >
+                                Sign in to get unlimited turns
+                                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+                              </Button>
+                            )}
+                            <Button
+                              onClick={() => navigate("/signup-today")}
+                              className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
+                            >
+                              Continue
+                              <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+                            </Button>
+                          </div>
+                        </div>
+                      );
+                    })()}
                   </div>
                 ) : !gameCompleted ? (
                   <div className="space-y-6">
@@ -2612,58 +1449,119 @@ function EmotionalCheckInHero() {
 
                     {/* Game Type: Memory Match */}
                     {game.type === 'memory' && (
-                      <div className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-lg p-6 border-2 border-pink-200">
-                        <div className="flex justify-between items-center mb-4">
-                          <h3 className="text-lg font-bold text-gray-900">Memory Match</h3>
-                          <div className="bg-white px-4 py-2 rounded-full border-2 border-pink-300">
-                            <span className="text-sm font-bold text-pink-600">Matched: {memoryMatched.length / 2} / {game.pairs.length}</span>
-                          </div>
-                        </div>
-                        <div className="grid grid-cols-4 gap-3 mb-4">
-                          {memoryCards.map((card: string, index: number) => {
-                            const isFlipped = memoryFlipped.includes(index) || memoryMatched.includes(card);
-                            return (
-                              <button
-                                key={index}
-                                onClick={() => {
-                                  if (memoryFlipped.length < 2 && !isFlipped) {
-                                    const newFlipped = [...memoryFlipped, index];
-                                    setMemoryFlipped(newFlipped);
-                                    if (newFlipped.length === 2) {
-                                      const [first, second] = newFlipped;
-                                      const firstCard = memoryCards[first];
-                                      const secondCard = memoryCards[second];
-                                      const isPair = game.pairs.some(pair => 
-                                        (pair[0] === firstCard && pair[1] === secondCard) ||
-                                        (pair[0] === secondCard && pair[1] === firstCard)
-                                      );
-                                      if (isPair) {
-                                        const newMatched = [...memoryMatched, firstCard, secondCard];
-                                        setMemoryMatched(newMatched);
-                                        if (newMatched.length >= game.pairs.length * 2) {
-                                          setTimeout(() => setGameCompleted(true), 500);
+                      <div className="grid lg:grid-cols-3 gap-6">
+                        {/* Game Board - Left Side */}
+                        <div className="lg:col-span-2">
+                          <div className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-lg p-6 border-2 border-pink-200">
+                            <div className="mb-4">
+                              <h3 className="text-center text-lg font-bold text-gray-900 mb-2">Memory Cards</h3>
+                            </div>
+                            <div className="grid grid-cols-4 gap-1.5 mb-4 max-w-xs mx-auto">
+                              {memoryCards.map((card: string, index: number) => {
+                                const isFlipped = memoryFlipped.includes(index) || memoryMatched.includes(card);
+                                const allSinCards = game.sinPairs;
+                                const isSin = allSinCards.includes(card);
+                                return (
+                                  <button
+                                    key={index}
+                                    onClick={() => {
+                                      if (gameCompleted || gameOver) return;
+                                      const card = memoryCards[index];
+                                      const isFlipped = memoryFlipped.includes(index) || memoryMatched.includes(card);
+                                      if (isFlipped || memoryFlipped.length >= 2) return;
+
+                                      const newFlipped = [...memoryFlipped, index];
+                                      setMemoryFlipped(newFlipped);
+                                      setMemoryMoves(memoryMoves + 1);
+
+                                      if (newFlipped.length === 2) {
+                                        const [firstIndex, secondIndex] = newFlipped;
+                                        const firstCard = memoryCards[firstIndex];
+                                        const secondCard = memoryCards[secondIndex];
+
+                                        const allSinCards = game.sinPairs;
+                                        const allGoodCards = game.pairs;
+                                        const firstIsSin = allSinCards.includes(firstCard);
+                                        const secondIsSin = allSinCards.includes(secondCard);
+                                        const firstIsGood = allGoodCards.includes(firstCard);
+                                        const secondIsGood = allGoodCards.includes(secondCard);
+
+                                        if ((firstIsGood && secondIsSin) || (firstIsSin && secondIsGood)) {
+                                          // Increment retry count when game over
+                                          const newCount = incrementRetryCount();
+                                          setRetryCount(newCount);
+                                          setTimeout(() => setGameOver(true), 500);
+                                          return;
+                                        }
+
+                                        // Check if both are sin cards and they match (same word)
+                                        if (firstIsSin && secondIsSin && firstCard === secondCard) {
+                                          // Sin pair matched - allowed, just clear them (no points, no game over)
+                                          setTimeout(() => setMemoryFlipped([]), 500);
+                                          return;
+                                        }
+
+                                        // Check if both cards are the same word (identical match)
+                                        if (firstCard === secondCard) {
+                                          // Good match found!
+                                          const newMatched = [...memoryMatched, firstCard, secondCard];
+                                          setMemoryMatched(newMatched);
+                                          setScore(score + 50);
+                                          if (newMatched.length >= game.pairs.length * 2) {
+                                            // Game completed successfully - reset retry count
+                                            resetRetryCount();
+                                            setRetryCount(0);
+                                            setTimeout(() => setGameCompleted(true), 500);
+                                          } else {
+                                            setTimeout(() => setMemoryFlipped([]), 500);
+                                          }
+                                        } else {
+                                          // No match - flip back after delay
+                                          setTimeout(() => setMemoryFlipped([]), 1000);
                                         }
                                       }
-                                      setTimeout(() => setMemoryFlipped([]), 1000);
-                                    }
-                                  }
-                                }}
-                                className={`aspect-square rounded-xl border-2 transition-all transform flex items-center justify-center ${
-                                  isFlipped
-                                    ? 'border-pink-500 bg-pink-100'
-                                    : 'border-gray-300 bg-gray-200 hover:border-pink-300'
-                                }`}
-                              >
-                                {isFlipped ? (
-                                  <span className="text-xs font-bold text-gray-700">{card}</span>
-                                ) : (
-                                  <span className="text-2xl">❓</span>
-                                )}
-                              </button>
-                            );
-                          })}
+                                    }}
+                                    className={`aspect-square rounded-md border-2 transition-all transform hover:scale-105 flex items-center justify-center font-bold text-[10px] ${
+                                      isFlipped
+                                        ? isSin
+                                          ? 'border-red-500 bg-red-100 text-red-900 shadow-md'
+                                          : 'border-pink-500 bg-pink-100 text-pink-900 shadow-md'
+                                        : 'border-gray-300 bg-gray-200 hover:border-pink-300 hover:bg-gray-100'
+                                    }`}
+                                  >
+                                    {isFlipped ? (
+                                      <span className={`text-[10px] font-bold leading-tight ${isSin ? 'text-red-900' : 'text-gray-700'}`}>{card}</span>
+                                    ) : (
+                                      <span className="text-base">❓</span>
+                                    )}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
                         </div>
-                        <p className="text-xs text-gray-500 text-center">Click cards to find matching pairs!</p>
+
+                        {/* Stats - Right Side */}
+                        <div className="lg:col-span-1 flex items-center">
+                          <div className="w-full space-y-3">
+                            <div className="bg-white rounded-lg p-3 border border-gray-200">
+                              <p className="text-xs text-gray-500 mb-1">Matched</p>
+                              <p className="text-lg font-bold text-gray-900">{memoryMatched.length / 2} / {game.pairs.length}</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-3 border border-gray-200">
+                              <p className="text-xs text-gray-500 mb-1">Moves</p>
+                              <p className="text-lg font-bold text-gray-900">{memoryMoves}</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-3 border border-gray-200">
+                              <p className="text-xs text-gray-500 mb-1">Score</p>
+                              <p className="text-lg font-bold text-gray-900">{score}</p>
+                            </div>
+                            <div className="bg-white rounded-lg p-3 border border-gray-200">
+                              <p className="text-xs text-gray-500 mb-1">Flipped</p>
+                              <p className="text-lg font-bold text-gray-900">{memoryFlipped.length} / 2</p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     )}
 
@@ -3023,11 +1921,6 @@ const Index = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [showGuestComplete, setShowGuestComplete] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<typeof publicPages>([]);
-  const [showSearchResults, setShowSearchResults] = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
   const [showFeedbackDialog, setShowFeedbackDialog] = useState(false);
   const [feedbackForm, setFeedbackForm] = useState({
     name: "",
@@ -3036,19 +1929,7 @@ const Index = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Close mobile menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (mobileMenuOpen && !(event.target as Element).closest('header')) {
-        setMobileMenuOpen(false);
-      }
-    };
-
-    if (mobileMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
-    }
-  }, [mobileMenuOpen]);
+  // Navigation moved to @/components/Navigation.tsx
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -3060,41 +1941,6 @@ const Index = () => {
       window.history.replaceState({}, '', url.toString());
     }
   }, [location.search]);
-
-  // Search functionality
-  useEffect(() => {
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase().trim();
-      const filtered = publicPages.filter(page => 
-        page.title.toLowerCase().includes(query) ||
-        page.category.toLowerCase().includes(query) ||
-        page.path.toLowerCase().includes(query)
-      );
-      setSearchResults(filtered);
-      setShowSearchResults(true);
-    } else {
-      setSearchResults([]);
-      setShowSearchResults(false);
-    }
-  }, [searchQuery]);
-
-  // Close search results when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setShowSearchResults(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
-  const handleSearchSelect = (path: string) => {
-    navigate(path);
-    setSearchQuery("");
-    setShowSearchResults(false);
-  };
 
   const handleFeedbackSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -3474,92 +2320,7 @@ const Index = () => {
           </DialogContent>
         </Dialog>
         {/* Header */}
-        <header className="relative flex items-center justify-between p-6 w-full px-6 md:px-8 lg:px-12">
-          <div className="flex items-center space-x-8">
-            <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}> 
-              <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
-                <Brain className="w-3 h-3 text-white" />
-            </div>
-              <span className="text-lg font-urbanist font-semibold text-gray-900">Bible Quiz Competition</span>
-            </div>
-            
-            <nav className="hidden md:flex items-center space-x-6">
-              <button onClick={() => navigate("/bible-questions-and-answers-hub")} className="text-gray-600 hover:text-gray-900 font-urbanist font-light">Bible Q&A</button>
-              <button onClick={() => navigate("/articles")} className="text-gray-600 hover:text-gray-900 font-urbanist font-light">Articles</button>
-              <button onClick={() => navigate("/help")} className="text-gray-600 hover:text-gray-900 font-urbanist font-light">Help</button>
-            </nav>
-          </div>
-          
-          <div className="flex items-center space-x-4">
-            {/* Search Bar */}
-            <div ref={searchRef} className="hidden md:block relative">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                <Input
-                  type="text"
-                  placeholder="Search..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onFocus={() => searchQuery.trim() && setShowSearchResults(true)}
-                  className="pl-10 pr-10 w-80 md:w-96 h-9 text-sm font-urbanist font-light border-gray-300 focus:border-gray-400"
-                />
-                {searchQuery && (
-            <button
-                    onClick={() => {
-                      setSearchQuery("");
-                      setShowSearchResults(false);
-                    }}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                  >
-                    <X className="w-4 h-4" />
-            </button>
-                )}
-              </div>
-              
-              {/* Search Results Dropdown */}
-              {showSearchResults && searchResults.length > 0 && (
-                <div className="absolute top-full mt-2 left-0 right-0 bg-white rounded-lg shadow-lg border border-gray-200 z-50 max-h-96 overflow-y-auto">
-                  {searchResults.map((page, index) => (
-                    <button
-                      key={index}
-                      onClick={() => handleSearchSelect(page.path)}
-                      className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors border-b last:border-b-0 border-gray-100"
-                    >
-                      <div className="font-urbanist font-medium text-gray-900">{page.title}</div>
-                      <div className="font-urbanist font-light text-sm text-gray-600">{page.category}</div>
-              </button>
-                  ))}
-                </div>
-              )}
-              {showSearchResults && searchQuery.trim() && searchResults.length === 0 && (
-                <div className="absolute top-full mt-2 left-0 right-0 bg-white rounded-lg shadow-lg border border-gray-200 z-50 p-4">
-                  <div className="font-urbanist font-light text-gray-600 text-sm">No results found</div>
-                </div>
-              )}
-            </div>
-            
-            <Button 
-              className="bg-black hover:bg-gray-800 font-urbanist font-light"
-              onClick={() => navigate("/auth/register")}
-            >
-              Get Started
-            </Button>
-            <button className="md:hidden" onClick={() => setMobileMenuOpen((open) => !open)}>
-              <Menu className="w-6 h-6" />
-              </button>
-          </div>
-          
-            {/* Mobile dropdown menu */}
-            {mobileMenuOpen && (
-            <div className="md:hidden absolute top-full left-6 right-6 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 flex flex-col">
-              <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A Hub</button>
-              <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
-              <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>Help</button>
-              <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-t border-gray-200" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
-              <Button className="bg-black text-white px-4 py-3 mx-4 mb-4 font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</Button>
-              </div>
-            )}
-        </header>
+        <Navigation />
 
         {/* Hero Section with Emotional Check-In */}
         <EmotionalCheckInHero />
@@ -3581,13 +2342,13 @@ const Index = () => {
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             {/* Header */}
             <div className="text-center mb-8">
-              <p className="text-sm font-urbanist font-light text-purple-600 uppercase tracking-wider mb-3">
+              <p className="text-base md:text-lg font-urbanist font-light text-purple-600 uppercase tracking-wider mb-3">
                 — More Than Quizzes —
               </p>
-              <h2 className="text-3xl md:text-5xl font-urbanist font-medium text-gray-700 mb-3 md:mb-4 leading-tight">
+              <h2 className="text-4xl md:text-6xl font-urbanist font-medium text-gray-700 mb-3 md:mb-4 leading-tight">
                 Your Complete Wellness Journey
               </h2>
-              <p className="text-base md:text-base font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
                 We're here to support you through your care, worries, anxiety, and every step of your journey toward peace through quizzes, CBT tools, and comprehensive wellness resources.
               </p>
             </div>
@@ -3601,8 +2362,8 @@ const Index = () => {
                         <span className="text-xl">📊</span>
                       </div>
                       <div>
-                        <h3 className="text-base font-urbanist font-semibold text-gray-900 mb-2">Daily Records</h3>
-                        <p className="text-sm font-urbanist font-light text-gray-600 leading-relaxed">
+                        <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Daily Records</h3>
+                        <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
                           Track your emotional journey and progress over time with detailed analytics
                         </p>
                       </div>
@@ -3616,8 +2377,8 @@ const Index = () => {
                         <span className="text-xl">💧</span>
                       </div>
                       <div>
-                        <h3 className="text-base font-urbanist font-semibold text-gray-900 mb-2">Water Intake Tracker</h3>
-                        <p className="text-sm font-urbanist font-light text-gray-600 leading-relaxed">
+                        <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Water Intake Tracker</h3>
+                        <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
                           Monitor your daily hydration and maintain optimal wellness
                         </p>
                       </div>
@@ -3631,8 +2392,8 @@ const Index = () => {
                         <span className="text-xl">🧘</span>
                       </div>
                       <div>
-                        <h3 className="text-base font-urbanist font-semibold text-gray-900 mb-2">CBT Tools</h3>
-                        <p className="text-sm font-urbanist font-light text-gray-600 leading-relaxed">
+                        <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">CBT Tools</h3>
+                        <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
                           Access thought records, emotional check-ins, and mindfulness practices for peace
                         </p>
                       </div>
@@ -3646,8 +2407,8 @@ const Index = () => {
                         <span className="text-xl">🔥</span>
                       </div>
                       <div>
-                        <h3 className="text-base font-urbanist font-semibold text-gray-900 mb-2">Streak Maintenance</h3>
-                        <p className="text-sm font-urbanist font-light text-gray-600 leading-relaxed">
+                        <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Streak Maintenance</h3>
+                        <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
                           Build and maintain daily habits with streak tracking to stay motivated
                         </p>
                       </div>
@@ -3661,8 +2422,8 @@ const Index = () => {
                         <Heart className="w-5 h-5 text-gray-700" strokeWidth={1} />
                       </div>
                       <div>
-                        <h3 className="text-base font-urbanist font-semibold text-gray-900 mb-2">Emotional Check-In</h3>
-                        <p className="text-sm font-urbanist font-light text-gray-600 leading-relaxed">
+                        <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Emotional Check-In</h3>
+                        <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
                           Daily mood tracking with personalized insights and Bible verses
                         </p>
                       </div>
@@ -3676,8 +2437,8 @@ const Index = () => {
                         <Play className="w-5 h-5 text-gray-700" strokeWidth={1} />
                       </div>
                       <div>
-                        <h3 className="text-base font-urbanist font-semibold text-gray-900 mb-2">Interactive Bible Games</h3>
-                        <p className="text-sm font-urbanist font-light text-gray-600 leading-relaxed">
+                        <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Interactive Bible Games</h3>
+                        <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
                           Engage with faith-based games that combine fun with spiritual growth
                         </p>
                       </div>
@@ -3688,7 +2449,7 @@ const Index = () => {
             {/* CTA */}
             <div className="flex justify-center">
               <Button 
-                className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                className="px-6 md:px-8 py-4 md:py-6 text-lg md:text-xl font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
                 onClick={() => navigate("/signup-today")}
               >
                 Start Your Wellness Journey
@@ -3715,13 +2476,13 @@ const Index = () => {
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             {/* Header */}
             <div className="text-center mb-8">
-              <p className="text-sm font-urbanist font-light text-purple-600 uppercase tracking-wider mb-3">
+              <p className="text-base md:text-lg font-urbanist font-light text-purple-600 uppercase tracking-wider mb-3">
                 — Bible Q&A Hub —
               </p>
-              <h2 className="text-3xl md:text-5xl font-urbanist font-medium text-gray-700 mb-3 md:mb-4 leading-tight">
+              <h2 className="text-4xl md:text-6xl font-urbanist font-medium text-gray-700 mb-3 md:mb-4 leading-tight">
                 Deepen Your Understanding of Scripture
               </h2>
-              <p className="text-base md:text-base font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
                 Your comprehensive resource for Bible questions and answers. Explore organized content by book, chapter, difficulty level, and category.
               </p>
             </div>
@@ -3729,20 +2490,20 @@ const Index = () => {
             {/* Statistics Cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                   <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 text-center">
-                    <div className="text-3xl font-urbanist font-semibold text-gray-900 mb-1">66</div>
-                    <div className="text-xs font-urbanist font-light text-gray-600">Bible Books</div>
+                    <div className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900 mb-1">66</div>
+                    <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Bible Books</div>
                   </div>
                   <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 text-center">
-                    <div className="text-3xl font-urbanist font-semibold text-gray-900 mb-1">1,000+</div>
-                    <div className="text-xs font-urbanist font-light text-gray-600">Questions</div>
+                    <div className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900 mb-1">1,000+</div>
+                    <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Questions</div>
                   </div>
                   <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 text-center">
-                    <div className="text-3xl font-urbanist font-semibold text-gray-900 mb-1">3</div>
-                    <div className="text-xs font-urbanist font-light text-gray-600">Difficulty Levels</div>
+                    <div className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900 mb-1">3</div>
+                    <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Difficulty Levels</div>
                   </div>
                   <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 text-center">
-                    <div className="text-3xl font-urbanist font-semibold text-gray-900 mb-1">10+</div>
-                    <div className="text-xs font-urbanist font-light text-gray-600">Study Categories</div>
+                    <div className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900 mb-1">10+</div>
+                    <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Study Categories</div>
                   </div>
             </div>
 
@@ -3752,8 +2513,8 @@ const Index = () => {
                     <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mb-3">
                       <BookOpen className="w-5 h-5 text-gray-700" strokeWidth={1} />
                     </div>
-                    <h3 className="text-base font-urbanist font-semibold text-gray-900 mb-2">66 Bible Books</h3>
-                    <p className="text-sm font-urbanist font-light text-gray-600 leading-relaxed">
+                    <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">66 Bible Books</h3>
+                    <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
                       Complete coverage of all Old and New Testament books with organized questions and answers.
                     </p>
                   </div>
@@ -3762,8 +2523,8 @@ const Index = () => {
                     <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center mb-3">
                       <Brain className="w-5 h-5 text-gray-700" strokeWidth={1} />
                     </div>
-                    <h3 className="text-base font-urbanist font-semibold text-gray-900 mb-2">Difficulty Levels</h3>
-                    <p className="text-sm font-urbanist font-light text-gray-600 leading-relaxed">
+                    <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Difficulty Levels</h3>
+                    <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
                       Beginner, Intermediate, and Advanced questions to match your knowledge level.
                     </p>
                   </div>
@@ -3772,8 +2533,8 @@ const Index = () => {
                     <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center mb-3">
                       <Trophy className="w-5 h-5 text-gray-700" strokeWidth={1} />
                     </div>
-                    <h3 className="text-base font-urbanist font-semibold text-gray-900 mb-2">Chapter Breakdown</h3>
-                    <p className="text-sm font-urbanist font-light text-gray-600 leading-relaxed">
+                    <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Chapter Breakdown</h3>
+                    <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
                       Study specific chapters in detail with focused questions on key passages and themes.
                     </p>
                   </div>
@@ -3781,35 +2542,35 @@ const Index = () => {
 
             {/* Popular Study Areas */}
             <div className="mb-8">
-                  <h3 className="text-lg font-urbanist font-semibold text-gray-900 mb-4 text-center">Popular Study Areas</h3>
+                  <h3 className="text-xl md:text-2xl font-urbanist font-semibold text-gray-900 mb-4 text-center">Popular Study Areas</h3>
                   <div className="grid md:grid-cols-4 gap-3">
                     <button 
                       onClick={() => navigate("/bible-questions-and-answers-hub/genesis")}
                       className="bg-white rounded-lg p-4 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left"
                     >
-                      <div className="text-sm font-urbanist font-semibold text-gray-900 mb-1">Genesis Hub</div>
-                      <div className="text-xs font-urbanist font-light text-gray-600">Book of Beginnings</div>
+                      <div className="text-base md:text-lg font-urbanist font-semibold text-gray-900 mb-1">Genesis Hub</div>
+                      <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Book of Beginnings</div>
                     </button>
                     <button 
                       onClick={() => navigate("/bible-questions-and-answers-hub/pauline-epistles")}
                       className="bg-white rounded-lg p-4 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left"
                     >
-                      <div className="text-sm font-urbanist font-semibold text-gray-900 mb-1">Pauline Epistles</div>
-                      <div className="text-xs font-urbanist font-light text-gray-600">Apostle Paul's Letters</div>
+                      <div className="text-base md:text-lg font-urbanist font-semibold text-gray-900 mb-1">Pauline Epistles</div>
+                      <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Apostle Paul's Letters</div>
                     </button>
                     <button 
                       onClick={() => navigate("/bible-questions-and-answers-hub")}
                       className="bg-white rounded-lg p-4 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left"
                     >
-                      <div className="text-sm font-urbanist font-semibold text-gray-900 mb-1">Character Studies</div>
-                      <div className="text-xs font-urbanist font-light text-gray-600">Biblical Figures</div>
+                      <div className="text-base md:text-lg font-urbanist font-semibold text-gray-900 mb-1">Character Studies</div>
+                      <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Biblical Figures</div>
                     </button>
                     <button 
                       onClick={() => navigate("/bible-questions-and-answers-hub")}
                       className="bg-white rounded-lg p-4 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left"
                     >
-                      <div className="text-sm font-urbanist font-semibold text-gray-900 mb-1">True/False</div>
-                      <div className="text-xs font-urbanist font-light text-gray-600">Quick Assessment</div>
+                      <div className="text-base md:text-lg font-urbanist font-semibold text-gray-900 mb-1">True/False</div>
+                      <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Quick Assessment</div>
                     </button>
                   </div>
             </div>
@@ -3817,7 +2578,7 @@ const Index = () => {
             {/* CTA */}
             <div className="flex justify-center">
               <Button 
-                className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                className="px-6 md:px-8 py-4 md:py-6 text-lg md:text-xl font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
                 onClick={() => navigate("/bible-questions-and-answers-hub")}
               >
                 Explore Bible Q&A Hub
@@ -3844,13 +2605,13 @@ const Index = () => {
           <div className="max-w-4xl mx-auto px-6 relative z-10">
             {/* Header */}
             <div className="text-center mb-8">
-              <p className="text-sm font-urbanist font-light text-purple-600 uppercase tracking-wider mb-3">
+              <p className="text-base md:text-lg font-urbanist font-light text-purple-600 uppercase tracking-wider mb-3">
                 — How It Works —
               </p>
-              <h2 className="text-3xl md:text-5xl font-urbanist font-medium text-gray-700 mb-3 md:mb-4 leading-tight">
+              <h2 className="text-4xl md:text-6xl font-urbanist font-medium text-gray-700 mb-3 md:mb-4 leading-tight">
                 Get Started in Minutes
               </h2>
-              <p className="text-base md:text-base font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
                 Our simple 3-step process to begin your journey
               </p>
             </div>
@@ -3867,9 +2628,9 @@ const Index = () => {
                       <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center mb-4">
                         <step.icon className="w-5 h-5 text-gray-700" strokeWidth={1} />
                       </div>
-                      <div className="text-xs font-urbanist font-semibold text-gray-500 mb-2">Step {i + 1}</div>
-                      <h3 className="text-base font-urbanist font-semibold text-gray-900 mb-2">{step.title}</h3>
-                      <p className="text-sm font-urbanist font-light text-gray-600 leading-relaxed">
+                      <div className="text-sm md:text-base font-urbanist font-semibold text-gray-500 mb-2">Step {i + 1}</div>
+                      <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">{step.title}</h3>
+                      <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
                         {step.description}
                       </p>
                     </div>
@@ -3897,13 +2658,13 @@ const Index = () => {
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             {/* Header */}
             <div className="text-center mb-8">
-              <p className="text-sm font-urbanist font-light text-purple-600 uppercase tracking-wider mb-3">
+              <p className="text-base md:text-lg font-urbanist font-light text-purple-600 uppercase tracking-wider mb-3">
                 — What Our Users Say —
               </p>
-              <h2 className="text-3xl md:text-5xl font-urbanist font-medium text-gray-700 mb-3 md:mb-4 leading-tight">
+              <h2 className="text-4xl md:text-6xl font-urbanist font-medium text-gray-700 mb-3 md:mb-4 leading-tight">
                 Join Thousands of Believers
               </h2>
-              <p className="text-base md:text-base font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
                 See how our platform has helped others grow in faith and wellness
               </p>
             </div>
@@ -3923,12 +2684,12 @@ const Index = () => {
                         {/* Decorative quote mark */}
                         <div className="absolute top-4 left-4 text-4xl text-gray-200 font-serif leading-none opacity-50">"</div>
                         
-                        <p className="font-urbanist font-light text-gray-700 mb-4 relative z-10 pl-6">
+                        <p className="text-base md:text-lg font-urbanist font-light text-gray-700 mb-4 relative z-10 pl-6">
                           {testimonial.content}
                         </p>
                         <div className="relative z-10 border-t border-gray-100 pt-4 mt-4">
-                          <div className="font-urbanist font-semibold text-gray-900">{testimonial.name}</div>
-                          <div className="text-sm font-urbanist font-light text-gray-600">{testimonial.role}</div>
+                          <div className="text-base md:text-lg font-urbanist font-semibold text-gray-900">{testimonial.name}</div>
+                          <div className="text-sm md:text-base font-urbanist font-light text-gray-600">{testimonial.role}</div>
               </div>
                         
                         {/* Hover accent */}
