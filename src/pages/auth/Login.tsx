@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Mail, Lock, CheckCircle, XCircle, AlertTriangle, Brain, Menu, ArrowRight, Trophy, BookOpen } from "lucide-react";
+import { Mail, Lock, CheckCircle, XCircle, AlertTriangle, Brain, Menu, ArrowRight, Trophy, BookOpen, Heart, Droplet } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -120,47 +120,91 @@ const Login = () => {
         </header>
 
         {/* Login Form */}
-        <main className="flex flex-col md:flex-row items-center justify-center px-6 py-12 md:py-16 min-h-[calc(100vh-100px)] max-w-7xl mx-auto">
-          {/* Left Side - Heading and Benefits */}
-          <div className="w-full md:w-1/2 max-w-lg mb-12 md:mb-0 md:pr-16 lg:pr-20">
-            <div className="mb-10">
-              <div className="mb-6">
-                <h1 className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900 whitespace-nowrap">Welcome back</h1>
-              </div>
-              <p className="text-xl font-urbanist font-light text-gray-600 leading-relaxed">Sign in to access quizzes, track your progress, and compete for prizes.</p>
-            </div>
-
-            {/* Benefits Cards */}
-            <div className="space-y-4">
-              <div className="bg-white border border-gray-200 rounded-lg p-4 hover:border-gray-400 transition-colors duration-300 group">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-200 transition-colors">
-                    <Trophy className="w-5 h-5 text-gray-700" strokeWidth={1} />
-                  </div>
-                  <div>
-                    <h3 className="font-urbanist font-medium text-gray-900 mb-1">Track Your Progress</h3>
-                    <p className="text-sm font-urbanist font-light text-gray-600">View your quiz history and see how you rank</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-white border border-gray-200 rounded-lg p-4 hover:border-gray-400 transition-colors duration-300 group">
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center group-hover:bg-gray-200 transition-colors">
-                    <BookOpen className="w-5 h-5 text-gray-700" strokeWidth={1} />
-                  </div>
-                  <div>
-                    <h3 className="font-urbanist font-medium text-gray-900 mb-1">Continue Learning</h3>
-                    <p className="text-sm font-urbanist font-light text-gray-600">Access Bible Q&A Hub and educational articles</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <main className="relative py-12 md:py-20 bg-white overflow-hidden">
+          {/* Subtle background pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0" style={{
+              backgroundImage: `radial-gradient(circle at 2px 2px, black 1px, transparent 0)`,
+              backgroundSize: '40px 40px'
+            }}></div>
           </div>
+          
+          {/* Decorative accent lines */}
+          <div className="absolute top-0 left-1/4 w-24 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-50"></div>
+          <div className="absolute top-0 right-1/4 w-24 h-px bg-gradient-to-l from-transparent via-gray-300 to-transparent opacity-50"></div>
+          
+          <div className="max-w-4xl mx-auto px-6 relative z-10">
+            {/* Header */}
+            <div className="text-center mb-8">
+              <p className="text-sm font-urbanist font-light text-purple-600 uppercase tracking-wider mb-3">
+                — Welcome Back —
+              </p>
+              <h1 className="text-3xl md:text-5xl font-urbanist font-medium text-gray-700 mb-3 md:mb-4 leading-tight">
+                Sign In to Your Account
+              </h1>
+              <p className="text-base md:text-base font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
+                Access quizzes, track your progress, and continue your wellness journey
+              </p>
+            </div>
 
-          {/* Right Side - Login Form */}
-          <div className="w-full md:w-1/2 max-w-md">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Main Content Card */}
+            <div className="w-full max-w-4xl mx-auto mb-6 md:mb-8 relative z-10">
+              <div className="bg-white rounded-lg p-6 md:p-8 shadow-lg border border-gray-200">
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                  {/* Left Side - Benefits */}
+                  <div className="space-y-4 order-2 md:order-1">
+                    <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0">
+                          <Trophy className="w-5 h-5 text-gray-700" strokeWidth={1} />
+                        </div>
+                        <div>
+                          <h3 className="text-base font-urbanist font-semibold text-gray-900 mb-2">Track Your Progress</h3>
+                          <p className="text-sm font-urbanist font-light text-gray-600 leading-relaxed">View your quiz history and see how you rank</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center flex-shrink-0">
+                          <BookOpen className="w-5 h-5 text-gray-700" strokeWidth={1} />
+                        </div>
+                        <div>
+                          <h3 className="text-base font-urbanist font-semibold text-gray-900 mb-2">Continue Learning</h3>
+                          <p className="text-sm font-urbanist font-light text-gray-600 leading-relaxed">Access Bible Q&A Hub and educational articles</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center flex-shrink-0">
+                          <Heart className="w-5 h-5 text-gray-700" strokeWidth={1} />
+                        </div>
+                        <div>
+                          <h3 className="text-base font-urbanist font-semibold text-gray-900 mb-2">Emotional Wellness</h3>
+                          <p className="text-sm font-urbanist font-light text-gray-600 leading-relaxed">Track your mood, use CBT tools, and find peace through God's word</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
+                      <div className="flex items-start gap-4">
+                        <div className="w-10 h-10 rounded-lg bg-cyan-100 flex items-center justify-center flex-shrink-0">
+                          <Droplet className="w-5 h-5 text-gray-700" strokeWidth={1} />
+                        </div>
+                        <div>
+                          <h3 className="text-base font-urbanist font-semibold text-gray-900 mb-2">Water Intake Tracking</h3>
+                          <p className="text-sm font-urbanist font-light text-gray-600 leading-relaxed">Monitor your daily hydration and maintain optimal wellness</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Side - Login Form */}
+                  <div className="order-1 md:order-2 flex flex-col md:items-center">
+            <form onSubmit={handleSubmit} className="space-y-6 w-full">
               <div>
                 <Label htmlFor="email" className="font-urbanist font-medium text-gray-900 text-sm mb-2 block">
                   Email Address<span className="text-gray-500 ml-1">*</span>
@@ -222,7 +266,7 @@ const Login = () => {
               
               <Button
                 type="submit"
-                className="w-full h-14 bg-black hover:bg-gray-800 text-white font-urbanist font-light rounded-lg transition-all duration-300 mt-8 flex items-center justify-center gap-2 group shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
                 disabled={isLoading || !email || !password}
               >
                 {isLoading ? (
@@ -233,19 +277,23 @@ const Login = () => {
                 ) : (
                   <>
                     <span>Sign In</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" strokeWidth={1} />
+                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform duration-300" strokeWidth={1} />
                   </>
                 )}
               </Button>
             </form>
             
-            <div className="mt-6 text-center">
+            <div className="mt-6 text-center w-full">
               <p className="font-urbanist font-light text-gray-600">
                 Don't have an account?{' '}
                 <Link to="/auth/register" className="text-gray-900 hover:text-gray-700 hover:underline font-urbanist font-medium">
                   Create account
                 </Link>
               </p>
+            </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </main>

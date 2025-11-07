@@ -10,8 +10,9 @@ import NotificationBanner from "@/components/NotificationBanner";
 import { Analytics } from "@vercel/analytics/react"
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import Index from "./pages/Index";
-import PersonalizedSupport from "./pages/PersonalizedSupport";
+import SignUpToday from "./pages/SignUpToday";
 import EmotionalCheckIn from "./pages/EmotionalCheckIn";
+import JoyRunnerTest from "./pages/JoyRunnerTest";
 import TodaysQuiz from "./pages/TodaysQuiz";
 import TodaysQuizMark from "./pages/TodaysQuizMark";
 import DailyVerse from "./pages/DailyVerse";
@@ -270,8 +271,9 @@ const App = () => {
           <NotificationBanner />
           <Routes>
             <Route path="/emotional-checkin" element={<EmotionalCheckIn />} />
-            <Route path="/personalized-support" element={<PersonalizedSupport />} />
+            <Route path="/joy-runner-test" element={<JoyRunnerTest />} />
             <Route path="/" element={<Index />} />
+            <Route path="/signup-today" element={<SignUpToday />} />
             <Route path="/todays-quiz" element={<TodaysQuiz />} />
             <Route path="/todays-quiz-mark" element={<TodaysQuizMark />} />
             <Route path="/daily-verse" element={<DailyVerse />} />
