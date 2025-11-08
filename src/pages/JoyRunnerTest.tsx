@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, ArrowRight } from 'lucide-react';
+import { RotateCcw, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface FallingBubble {
   id: string;
@@ -13,18 +14,22 @@ interface FallingBubble {
 }
 
 const JoyRunnerTest = () => {
+  const navigate = useNavigate();
   const [gameCompleted, setGameCompleted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [runnerPosition, setRunnerPosition] = useState(0); // 0-3 positions
   const [runnerCollected, setRunnerCollected] = useState<string[]>([]);
   const [fallingBubbles, setFallingBubbles] = useState<FallingBubble[]>([]);
+  const [retryCount, setRetryCount] = useState(0);
   const gameAreaRef = useRef<HTMLDivElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | null>(null);
   const lastSpawnTimeRef = useRef<number>(Date.now());
   const runnerPositionRef = useRef(0);
   const runnerCollectedRef = useRef<string[]>([]);
   const scoreRef = useRef(0);
+  const gameCompletedRef = useRef(false);
+  const gameOverRef = useRef(false);
 
   // Good words limited to 5 letters or less
   const allGoodWords = ['Joy', 'Hope', 'Love', 'Faith', 'Grace', 'Mercy', 'Peace', 'Trust', 'Truth', 'Light', 'Glory', 'Bless', 'Honor', 'Power', 'Cross', 'Heart', 'Unity', 'Serve', 'Share', 'Guide', 'Angel', 'Saint'];
@@ -55,13 +60,94 @@ const JoyRunnerTest = () => {
     scoreRef.current = score;
   }, [score]);
 
+  useEffect(() => {
+    gameCompletedRef.current = gameCompleted;
+  }, [gameCompleted]);
+
+  useEffect(() => {
+    gameOverRef.current = gameOver;
+  }, [gameOver]);
+
+  // Retry count management
+  const getRetryCount = (): number => {
+    try {
+      const data = localStorage.getItem('memoryGameRetries');
+      if (!data) return 0;
+      const parsed = JSON.parse(data);
+      const today = new Date().toDateString();
+      if (parsed.date !== today) return 0;
+      return parsed.count || 0;
+    } catch {
+      return 0;
+    }
+  };
+
+  const incrementRetryCount = (): number => {
+    const today = new Date().toDateString();
+    const currentCount = getRetryCount();
+    const newCount = currentCount + 1;
+    localStorage.setItem('memoryGameRetries', JSON.stringify({
+      date: today,
+      count: newCount
+    }));
+    return newCount;
+  };
+
+  const resetRetryCount = () => {
+    localStorage.removeItem('memoryGameRetries');
+  };
+
+  // Initialize retry count on mount
+  useEffect(() => {
+    const currentRetryCount = getRetryCount();
+    setRetryCount(currentRetryCount);
+  }, []);
+
+  // Initialize game state
+  useEffect(() => {
+    setRunnerPosition(0);
+    setRunnerCollected([]);
+    setFallingBubbles([]);
+    setScore(0);
+    setGameOver(false);
+    setGameCompleted(false);
+    runnerPositionRef.current = 0;
+    runnerCollectedRef.current = [];
+    scoreRef.current = 0;
+    lastSpawnTimeRef.current = Date.now();
+    gameCompletedRef.current = false;
+    gameOverRef.current = false;
+  }, []);
+
   // Game loop for falling bubbles
   useEffect(() => {
-    if (gameCompleted || gameOver) return;
+    // Use refs to check game state to avoid stopping due to dependency changes
+    // Also check state initially to ensure we start correctly
+    if (gameCompleted || gameOver) {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
+      }
+      return;
+    }
+
+    // Sync refs with current state before starting
+    gameCompletedRef.current = gameCompleted;
+    gameOverRef.current = gameOver;
 
     let lastFrameTime = Date.now();
+    let isRunning = true;
 
     const gameLoop = (currentTime: number) => {
+      // Check if game should continue using refs (avoids stale closures)
+      if (!isRunning || gameCompletedRef.current || gameOverRef.current) {
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+          animationFrameRef.current = null;
+        }
+        return;
+      }
+
       const deltaTime = currentTime - lastFrameTime;
       lastFrameTime = currentTime;
       
@@ -166,7 +252,9 @@ const JoyRunnerTest = () => {
             // For sins: require FULL connection - bubble center must be within runner's vertical bounds
             if (bubble.type === 'sin' && bubbleCenter >= runnerTop && bubbleCenter <= runnerBottom) {
               // Sin fully connected - game over!
+              gameOverRef.current = true;
               setGameOver(true);
+              isRunning = false;
               return { ...bubble, collected: true, y: newY };
             }
           }
@@ -180,17 +268,54 @@ const JoyRunnerTest = () => {
         }).filter((bubble): bubble is FallingBubble => bubble !== null);
       });
 
-      animationFrameRef.current = requestAnimationFrame(gameLoop);
+      // Continue loop only if game is still running (check refs to avoid stale closures)
+      if (isRunning && !gameCompletedRef.current && !gameOverRef.current) {
+        animationFrameRef.current = requestAnimationFrame(gameLoop);
+      } else {
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+          animationFrameRef.current = null;
+        }
+      }
     };
 
+    // Start the game loop
     animationFrameRef.current = requestAnimationFrame(gameLoop);
 
     return () => {
+      isRunning = false;
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
       }
     };
-  }, [gameCompleted, gameOver]);
+  }, []);
+
+  const handleRetry = () => {
+    // Increment retry count when user clicks Retry
+    const newCount = incrementRetryCount();
+    setRetryCount(newCount);
+    
+    // Reset game states
+    setGameOver(false);
+    setGameCompleted(false);
+    setScore(0);
+    setRunnerPosition(0);
+    setRunnerCollected([]);
+    setFallingBubbles([]);
+    runnerPositionRef.current = 0;
+    runnerCollectedRef.current = [];
+    scoreRef.current = 0;
+    lastSpawnTimeRef.current = Date.now();
+    gameCompletedRef.current = false;
+    gameOverRef.current = false;
+    
+    // Force re-sync retry count after increment
+    setTimeout(() => {
+      const updatedCount = getRetryCount();
+      setRetryCount(updatedCount);
+    }, 0);
+  };
 
   const handleReset = () => {
     setGameCompleted(false);
@@ -203,6 +328,10 @@ const JoyRunnerTest = () => {
     runnerCollectedRef.current = [];
     scoreRef.current = 0;
     lastSpawnTimeRef.current = Date.now();
+    gameCompletedRef.current = false;
+    gameOverRef.current = false;
+    resetRetryCount();
+    setRetryCount(0);
   };
 
   return (
@@ -212,36 +341,70 @@ const JoyRunnerTest = () => {
           {/* Game Content */}
           {gameOver ? (
             /* Game Over Screen */
-            <div className="text-center space-y-6">
-              <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-red-400 to-red-600 flex items-center justify-center shadow-lg">
-                <span className="text-4xl">💀</span>
-              </div>
-              <div className="bg-white rounded-xl p-6 border-2 border-red-200">
-                <h3 className="text-2xl font-bold text-gray-900 mb-3">Game Over!</h3>
-                <p className="text-gray-700 text-base leading-relaxed mb-4">
-                  You touched a sin! Avoid the red bubbles and collect only the good words.
-                </p>
-                <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg p-4 border-2 border-purple-200">
-                  <p className="text-sm font-semibold text-purple-600 mb-1">Final Score</p>
-                  <p className="text-3xl font-bold text-purple-700">{score}</p>
+            (() => {
+              const currentRetryCount = getRetryCount();
+              const maxRetries = 3;
+              const canRetryNow = currentRetryCount < maxRetries;
+
+              return (
+                <div className="text-center space-y-6 bg-red-50 rounded-lg p-8 border-2 border-red-200">
+                  <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center shadow-lg">
+                    <span className="text-4xl">💀</span>
+                  </div>
+                  <div className="bg-white rounded-lg p-6 border border-red-300">
+                    <h3 className="text-2xl font-urbanist font-semibold text-red-900 mb-3">Game Over!</h3>
+                    <p className="text-base font-urbanist font-light text-red-800 leading-relaxed mb-4">
+                      You caught a sin bubble! Try again!
+                    </p>
+                    {currentRetryCount < maxRetries && (
+                      <div className={`mb-4 px-4 py-2 rounded-lg ${
+                        currentRetryCount === 2 ? 'bg-orange-100 text-orange-800' :
+                        currentRetryCount === 1 ? 'bg-red-100 text-red-800' :
+                        'bg-blue-100 text-blue-800'
+                      }`}>
+                        <p className="text-sm font-urbanist font-semibold">
+                          Attempts remaining: {maxRetries - currentRetryCount} / {maxRetries}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4 md:mb-6 relative z-10">
+                    {canRetryNow ? (
+                      <Button
+                        onClick={handleRetry}
+                        className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800"
+                      >
+                        Retry
+                        <RotateCcw className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => navigate("/signup-today")}
+                        className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                      >
+                        Sign in to get unlimited turns
+                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+                      </Button>
+                    )}
+                    <Button
+                      onClick={() => navigate("/signup-today")}
+                      className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
+                    >
+                      Continue
+                      <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+                    </Button>
+                  </div>
                 </div>
-              </div>
-              <Button
-                onClick={handleReset}
-                className="px-8 py-4 text-lg bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white shadow-lg"
-              >
-                Try Again
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-            </div>
+              );
+            })()
           ) : !gameCompleted ? (
             <div className="space-y-6">
               {/* Joy Runner Game */}
               <div className="bg-gradient-to-br from-violet-50 to-purple-50 rounded-xl p-6 border-2 border-violet-200">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-bold text-gray-900">Joy Runner</h3>
-                  <div className="bg-white px-4 py-2 rounded-full border-2 border-violet-300">
-                    <span className="text-sm font-bold text-violet-600">
+                  <h3 className="text-lg font-urbanist font-semibold text-gray-900">Joy Runner</h3>
+                  <div className="bg-gray-50 px-4 py-2 rounded-lg border border-gray-200">
+                    <span className="text-sm font-urbanist font-semibold text-gray-700">
                       Score: {score}
                     </span>
                   </div>
@@ -257,7 +420,7 @@ const JoyRunnerTest = () => {
                   
                   {/* Runner character */}
                   <div 
-                    className="absolute bottom-16 text-2xl transition-all duration-200 z-30"
+                    className="absolute bottom-16 text-3xl md:text-4xl lg:text-5xl transition-all duration-200 z-30"
                     style={{ 
                       left: `${12.5 + runnerPosition * 25}%`,
                       transform: 'translateX(-50%)'
@@ -299,24 +462,24 @@ const JoyRunnerTest = () => {
                 </div>
                 
                 {/* Controls */}
-                <div className="flex gap-2 justify-center mb-4">
+                <div className="flex gap-2 justify-center">
                   <Button
                     onClick={() => setRunnerPosition(Math.max(0, runnerPosition - 1))}
-                    className="bg-violet-600 hover:bg-violet-700 text-white px-6"
+                    className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={runnerPosition === 0}
                   >
                     ← Move Left
                   </Button>
                   <Button
                     onClick={() => setRunnerPosition(Math.min(3, runnerPosition + 1))}
-                    className="bg-violet-600 hover:bg-violet-700 text-white px-6"
+                    className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
                     disabled={runnerPosition === 3}
                   >
                     Move Right →
                   </Button>
                 </div>
                 
-                <p className="text-xs text-gray-500 text-center">
+                <p className="text-xs font-urbanist font-light text-gray-500 text-center">
                   Move the runner left/right to catch good bubbles (purple) and avoid sins (red)! 
                   <br />
                   <span className="text-red-600 font-semibold">Red bubbles = Game Over!</span>
@@ -327,19 +490,12 @@ const JoyRunnerTest = () => {
             /* Completion Screen */
             <div className="text-center space-y-6">
               <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center shadow-lg">
-                <CheckCircle className="w-12 h-12 text-white" />
+                <span className="text-4xl">🎉</span>
               </div>
-              <div className="bg-white rounded-xl p-6 border-2 border-green-200">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">🎉 Activity Complete!</h3>
-                <p className="text-gray-700 text-base leading-relaxed">{game.encouragement}</p>
+              <div className="bg-white rounded-lg p-6 border border-gray-200">
+                <h3 className="text-xl font-urbanist font-semibold text-gray-900 mb-3">🎉 Activity Complete!</h3>
+                <p className="text-base font-urbanist font-light text-gray-700 leading-relaxed">{game.encouragement}</p>
               </div>
-              <Button
-                onClick={handleReset}
-                className="px-8 py-4 text-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-lg"
-              >
-                Play Again
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
             </div>
           )}
         </div>

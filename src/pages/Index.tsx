@@ -13,16 +13,9 @@ import { FaqSection } from "@/components/FaqSection";
 import { StickyPrayerRequestsPanel } from "@/components/StickyPrayerRequestsPanel";
 import { StickyLeaderboardPanel } from "@/components/StickyLeaderboardPanel";
 import { Navigation } from "@/components/Navigation";
+import { MemoryMatchGame } from "@/components/games/MemoryMatchGame";
+import { JoyRunnerGame } from "@/components/games/JoyRunnerGame";
 
-interface FallingBubble {
-  id: string;
-  item: string;
-  x: number; // horizontal position (0-3)
-  y: number; // vertical position (0-100%)
-  speed: number;
-  collected: boolean;
-  type: 'good' | 'sin'; // Type of item
-}
 
 
 // StickyLeaderboardPanel moved to @/components/StickyLeaderboardPanel.tsx
@@ -49,26 +42,12 @@ function EmotionalCheckInHero() {
   const [score, setScore] = useState(0);
   const [gameAnswers, setGameAnswers] = useState<any>({});
   const [retryCount, setRetryCount] = useState(0);
+  const [selectedGameType, setSelectedGameType] = useState<'memory' | 'runner' | null>(null);
   // Game-specific states
   const [match3Grid, setMatch3Grid] = useState<string[]>([]);
   const [selectedTiles, setSelectedTiles] = useState<number[]>([]);
   const [matches, setMatches] = useState(0);
   const [collectedItems, setCollectedItems] = useState<string[]>([]);
-  const [memoryFlipped, setMemoryFlipped] = useState<number[]>([]);
-  const [memoryMatched, setMemoryMatched] = useState<string[]>([]);
-  const [memoryCards, setMemoryCards] = useState<string[]>([]);
-  const [memoryMoves, setMemoryMoves] = useState(0);
-  const [puzzleTiles, setPuzzleTiles] = useState<string[]>([]);
-  const [poppedBubbles, setPoppedBubbles] = useState<string[]>([]);
-  const [runnerPosition, setRunnerPosition] = useState(0);
-  const [runnerCollected, setRunnerCollected] = useState<string[]>([]);
-  const [fallingBubbles, setFallingBubbles] = useState<FallingBubble[]>([]);
-  const gameAreaRef = useRef<HTMLDivElement>(null);
-  const animationFrameRef = useRef<number>();
-  const lastSpawnTimeRef = useRef<number>(Date.now());
-  const runnerPositionRef = useRef(0);
-  const runnerCollectedRef = useRef<string[]>([]);
-  const scoreRef = useRef(0);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<{ [key: number]: number }>({});
   const [showEncouragement, setShowEncouragement] = useState(false);
@@ -134,53 +113,50 @@ function EmotionalCheckInHero() {
     localStorage.removeItem('memoryGameRetries');
   };
 
+  // Check if retry count needs to reset (new day) and reset game state if needed
+  useEffect(() => {
+    const currentRetryCount = getRetryCount();
+    setRetryCount(currentRetryCount);
+    
+    // Always reset game-related states on mount to prevent auto-showing
+    // This ensures users start fresh each time they visit the page
+    // Use a small timeout to ensure this runs after any other initialization
+    const resetGameStates = () => {
+      setShowBibleGame(false);
+      setGameOver(false);
+      setGameCompleted(false);
+      setShowVerseCard(false);
+      setScore(0);
+      setSelectedGameType(null);
+    };
+    
+    // Reset immediately
+    resetGameStates();
+    
+    // Also reset after a brief delay to catch any race conditions
+    const timeoutId = setTimeout(resetGameStates, 100);
+    
+    return () => clearTimeout(timeoutId);
+  }, []); // Run once on mount to check for day change
+
   // Initialize Bible game states when game starts
   useEffect(() => {
     if (showBibleGame && !gameCompleted && !gameOver) {
-      const game = getBibleGameActivity(selectedEmotion);
-      // Reset all game states
-      setMatches(0);
-      setSelectedTiles([]);
-      setCollectedItems([]);
-      setMemoryFlipped([]);
-      setMemoryMatched([]);
-      setMemoryCards([]);
-      setMemoryMoves(0);
-      setPoppedBubbles([]);
-      setRunnerPosition(0);
-      setRunnerCollected([]);
-      setFallingBubbles([]);
+      // If no game type selected yet, randomly choose one
+      if (!selectedGameType) {
+        const randomType = Math.random() < 0.5 ? 'memory' : 'runner';
+        setSelectedGameType(randomType);
+      }
+      
+      // Reset game states
       setScore(0);
       setGameOver(false);
-      setRetryCount(getRetryCount());
-      runnerPositionRef.current = 0;
-      runnerCollectedRef.current = [];
-      scoreRef.current = 0;
-      lastSpawnTimeRef.current = Date.now();
-      
-      // Initialize match-3 grid
-      if (game.type === 'match3') {
-        const gridWords = [...game.words, ...game.words, ...game.words].slice(0, 9);
-        setMatch3Grid(gridWords);
-      }
-      
-      // Initialize puzzle tiles
-      if (game.type === 'puzzle') {
-        const text = game.puzzleText;
-        const chars = text.split('').filter(c => c !== ' ');
-        setPuzzleTiles([...chars, ''].sort(() => Math.random() - 0.5));
-      }
-      
-      // Initialize memory cards
-      if (game.type === 'memory') {
-        // Duplicate each word to create pairs (each word appears twice)
-        const allGoodCards = [...game.pairs, ...game.pairs];
-        const allSinCards = [...game.sinPairs, ...game.sinPairs];
-        const allCards = [...allGoodCards, ...allSinCards].sort(() => Math.random() - 0.5);
-        setMemoryCards(allCards);
-      }
+      setGameCompleted(false);
+      // Always sync retry count from localStorage when game initializes
+      const currentRetryCount = getRetryCount();
+      setRetryCount(currentRetryCount);
     }
-  }, [showBibleGame, gameCompleted, selectedEmotion]);
+  }, [showBibleGame, gameCompleted, selectedEmotion, selectedGameType]);
 
   // Map thinking trap IDs to distortion names
   const getDistortionName = (trapId: string | null): string => {
@@ -518,22 +494,36 @@ function EmotionalCheckInHero() {
   };
 
   // Get Bible game activity based on emotion
-  const getBibleGameActivity = (emotion: any) => {
-    // Return Memory Match game
-    return {
-      title: 'Memory Match',
-      description: 'Match pairs of Bible words!',
-      verse: emotion?.verses?.[0]?.text || 'May the God of hope fill you with all joy and peace as you trust in him.',
-      reference: emotion?.verses?.[0]?.reference || 'Romans 15:13',
-      type: 'memory',
-      pairs: [
-        'Joy', 'Peace', 'Faith', 'Hope', 'Love', 'Grace'
-      ],
-      sinPairs: [
-        'Pride', 'Envy'
-      ],
-      encouragement: 'Amazing! Your peace is a gift from God. Share it with others!'
-    };
+  const getBibleGameActivity = (emotion: any, gameType?: 'memory' | 'runner') => {
+    // Use provided gameType or randomly choose between Memory Match and Joy Runner
+    const type = gameType || (Math.random() < 0.5 ? 'memory' : 'runner');
+    
+    if (type === 'memory') {
+      return {
+        title: 'Memory Match',
+        description: 'Match pairs of Bible words!',
+        verse: emotion?.verses?.[0]?.text || 'May the God of hope fill you with all joy and peace as you trust in him.',
+        reference: emotion?.verses?.[0]?.reference || 'Romans 15:13',
+        type: 'memory',
+        pairs: [
+          'Joy', 'Peace', 'Faith', 'Hope', 'Love', 'Grace'
+        ],
+        sinPairs: [
+          'Pride', 'Envy'
+        ],
+        encouragement: 'Amazing! Your peace is a gift from God. Share it with others!'
+      };
+    } else {
+      return {
+        title: 'Joy Runner',
+        description: 'Catch good bubbles and avoid sins!',
+        verse: emotion?.verses?.[0]?.text || 'May the God of hope fill you with all joy and peace as you trust in him.',
+        reference: emotion?.verses?.[0]?.reference || 'Romans 15:13',
+        type: 'runner',
+        targetBubbles: 10,
+        encouragement: 'Amazing! Your peace is a gift from God. Share it with others!'
+      };
+    }
   };
 
   // Good words limited to 5 letters or less
@@ -541,159 +531,6 @@ function EmotionalCheckInHero() {
   const goodWords = allGoodWords.filter(word => word.length <= 5);
   const sins = ['Pride', 'Envy', 'Wrath', 'Greed', 'Lust', 'Sloth', 'Lies', 'Hate', 'Fear', 'Anger', 'Doubt', 'Shame', 'Guilt'];
 
-  // Keep refs in sync with state
-  useEffect(() => {
-    runnerPositionRef.current = runnerPosition;
-  }, [runnerPosition]);
-
-  useEffect(() => {
-    runnerCollectedRef.current = runnerCollected;
-  }, [runnerCollected]);
-
-  useEffect(() => {
-    scoreRef.current = score;
-  }, [score]);
-
-  // Game loop for falling bubbles (only for runner game)
-  useEffect(() => {
-    if (!showBibleGame || gameCompleted || gameOver) return;
-    
-    const game = getBibleGameActivity(selectedEmotion);
-    // Only run game loop for runner game type
-    if (game.type !== 'runner') return;
-
-    let lastFrameTime = Date.now();
-
-    const gameLoop = (currentTime: number) => {
-      const deltaTime = currentTime - lastFrameTime;
-      lastFrameTime = currentTime;
-      
-      const now = Date.now();
-      
-      // Calculate speed and density level based on score (every 10 points = +1 level)
-      const speedLevel = Math.floor(scoreRef.current / 10);
-      const speedMultiplier = 1 + (speedLevel * 0.3); // 30% speed increase per level
-      const baseSpeed = 0.3 + Math.random() * 0.2; // Base speed: 0.3 to 0.5
-      const finalSpeed = baseSpeed * speedMultiplier;
-      
-      // Spawn rate decreases (more bubbles) as level increases
-      // Base: 1000-2000ms, Level 1: 800-1600ms, Level 2: 600-1200ms, etc.
-      const baseSpawnMin = 1000;
-      const baseSpawnMax = 2000;
-      const spawnReduction = speedLevel * 200; // Reduce spawn time by 200ms per level
-      const spawnMin = Math.max(300, baseSpawnMin - spawnReduction); // Minimum 300ms
-      const spawnMax = Math.max(600, baseSpawnMax - spawnReduction); // Minimum 600ms
-      const spawnInterval = spawnMin + Math.random() * (spawnMax - spawnMin);
-      
-      // Spawn bubbles more frequently as level increases
-      if (now - lastSpawnTimeRef.current > spawnInterval) {
-        // Spawn multiple bubbles at higher levels (1 bubble at level 0, 2 at level 1+, etc.)
-        const bubblesToSpawn = 1 + Math.min(speedLevel, 2); // Max 3 bubbles at once
-        
-        for (let i = 0; i < bubblesToSpawn; i++) {
-          const randomX = Math.floor(Math.random() * 4);
-          const isGood = Math.random() > 0.55; // 45% chance of good, 55% chance of sin
-          
-          let newBubble: FallingBubble;
-          
-          if (isGood) {
-            const randomItem = goodWords[Math.floor(Math.random() * goodWords.length)];
-            newBubble = {
-              id: `bubble-${Date.now()}-${Math.random()}-${i}`,
-              item: randomItem,
-              x: randomX,
-              y: 0,
-              speed: finalSpeed,
-              collected: false,
-              type: 'good'
-            };
-          } else {
-            const randomSin = sins[Math.floor(Math.random() * sins.length)];
-            newBubble = {
-              id: `bubble-${Date.now()}-${Math.random()}-${i}`,
-              item: randomSin,
-              x: randomX,
-              y: 0,
-              speed: finalSpeed,
-              collected: false,
-              type: 'sin'
-            };
-          }
-          
-          setFallingBubbles(prev => [...prev, newBubble]);
-        }
-        
-        lastSpawnTimeRef.current = now;
-      }
-
-      // Update bubble positions
-      setFallingBubbles(prev => {
-        return prev.map(bubble => {
-          if (bubble.collected) return bubble;
-          
-          // Use consistent speed based on deltaTime (normalized to ~60fps)
-          const normalizedSpeed = (deltaTime / 16.67) * bubble.speed;
-          const newY = bubble.y + normalizedSpeed;
-          
-          // Calculate collision: bubble bottom touches runner top
-          // Container is h-96 (384px), bubble is 48px (12.5%), runner is at bottom-16 (64px from bottom)
-          // Runner bottom: 384px - 64px = 320px from top
-          // Runner top: 320px - 48px (runner height) = 272px = ~71% from top
-          // Runner center: ~77% from top
-          // Bubble bottom = bubble.y + 12.5% (bubble height)
-          // Bubble center = bubble.y + 6.25% (half bubble height)
-          const bubbleBottom = newY + 12.5;
-          const bubbleCenter = newY + 6.25;
-          const runnerTop = 71; // Runner's top edge position (% from top)
-          const runnerCenter = 77; // Runner's center position (% from top)
-          const runnerBottom = 83; // Runner's bottom edge position (% from top)
-          
-          // Check collision: same x position
-          if (bubble.x === runnerPositionRef.current && !bubble.collected) {
-            // For good items: collect when bubble bottom touches runner top
-            if (bubble.type === 'good' && bubbleBottom >= runnerTop && newY <= runnerTop + 5) {
-              // Good item collected - increase score by 2 points
-              const newScore = scoreRef.current + 2;
-              scoreRef.current = newScore;
-              setScore(newScore);
-              
-              if (!runnerCollectedRef.current.includes(bubble.item)) {
-                const newCollected = [...runnerCollectedRef.current, bubble.item];
-                runnerCollectedRef.current = newCollected;
-                setRunnerCollected(newCollected);
-              }
-              
-              return { ...bubble, collected: true, y: newY };
-            }
-            
-            // For sins: require FULL connection - bubble center must be within runner's vertical bounds
-            if (bubble.type === 'sin' && bubbleCenter >= runnerTop && bubbleCenter <= runnerBottom) {
-              // Sin fully connected - game over!
-              setGameOver(true);
-              return { ...bubble, collected: true, y: newY };
-            }
-          }
-          
-          // Remove bubble only if it falls completely off screen (past 100%)
-          if (newY > 100) {
-            return null;
-          }
-          
-          return { ...bubble, y: newY };
-        }).filter((bubble): bubble is FallingBubble => bubble !== null);
-      });
-
-      animationFrameRef.current = requestAnimationFrame(gameLoop);
-    };
-
-    animationFrameRef.current = requestAnimationFrame(gameLoop);
-
-    return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-  }, [showBibleGame, gameCompleted, gameOver, selectedEmotion]);
 
   const handleContinueFromEncouragement = () => {
     setShowFeatures(true);
@@ -869,7 +706,7 @@ function EmotionalCheckInHero() {
       <div className={`text-center max-w-4xl mx-auto relative z-10 ${!showBibleGame ? 'mb-8' : ''}`}>
         {/* Subtitle */}
         {!showBibleGame && (
-          <p className="text-sm font-urbanist font-light text-purple-600 uppercase tracking-wider mb-3 mt-0 md:mt-2">
+          <p className="text-sm font-urbanist font-light text-purple-600 uppercase tracking-wider mb-6 md:mb-8 mt-0 md:mt-2">
             — How Are You Feeling Today? —
           </p>
         )}
@@ -1246,7 +1083,7 @@ function EmotionalCheckInHero() {
               
               {/* Verse Text */}
               <div className="mb-6">
-                <p className="text-lg md:text-xl lg:text-lg font-normal text-white text-center leading-relaxed drop-shadow-2xl">
+                <p className="text-lg md:text-xl lg:text-lg font-normal text-white text-center leading-normal md:leading-relaxed drop-shadow-2xl">
                   "{selectedVerse.text}"
                 </p>
               </div>
@@ -1254,11 +1091,13 @@ function EmotionalCheckInHero() {
               {/* Continue Button */}
               <Button
                 onClick={() => {
-                  // Show Memory Match game inline
+                  // Reset game type to get a new random game
+                  setSelectedGameType(null);
+                  // Show Memory Match or Joy Runner game inline (or attempts exhausted message)
                   setShowVerseCard(false);
                   setShowBibleGame(true);
                 }}
-                className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                className="mt-6 md:mt-8 px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
               >
                 Let's play a bible game
                 <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
@@ -1268,96 +1107,36 @@ function EmotionalCheckInHero() {
         </div>
       ) : showBibleGame ? (
         (() => {
-          const game = getBibleGameActivity(selectedEmotion);
+          const game = getBibleGameActivity(selectedEmotion, selectedGameType || undefined);
           const emotion = selectedEmotion || emotionOptions[2];
+          const currentRetryCount = getRetryCount();
+          const maxRetries = 3;
+          const canPlay = currentRetryCount < maxRetries;
           
           return (
             <div className="w-full max-w-4xl mx-auto mb-6 md:mb-8 relative z-10">
               <div className="bg-white rounded-lg p-6 md:p-8 shadow-lg border border-gray-200">
-                {/* Game Content */}
-                {gameOver ? (
-                  /* Game Over Screen */
-                  <div className="text-center space-y-6 bg-red-50 rounded-lg p-8 border-2 border-red-200">
-                    <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center shadow-lg">
-                      <span className="text-4xl">💀</span>
+                {/* Show "All Attempts Used" message if no attempts left */}
+                {!canPlay ? (
+                  <div className="text-center space-y-6">
+                    <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg">
+                      <span className="text-4xl">⏰</span>
                     </div>
-                    <div className="bg-white rounded-lg p-6 border border-red-300">
-                      <h3 className="text-2xl font-urbanist font-semibold text-red-900 mb-3">Game Over!</h3>
-                      <p className="text-base font-urbanist font-light text-red-800 leading-relaxed mb-4">
-                        {game.type === 'memory' 
-                          ? "You matched a good word with a sin! Remember: matching good + sin = Game Over."
-                          : "You touched a sin! Avoid the red bubbles and collect only the good words."}
+                    <div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-8">
+                      <h3 className="text-2xl font-urbanist font-semibold text-yellow-900 mb-3">All Attempts Completed</h3>
+                      <p className="text-base font-urbanist font-light text-yellow-800 leading-relaxed mb-6">
+                        You've used all {maxRetries} attempts for today. Come back tomorrow for more games!
                       </p>
-                      <div className="bg-red-50 rounded-lg p-4 border border-red-200 mb-4">
-                        <p className="text-sm font-urbanist font-semibold text-red-700 mb-1">Final Score</p>
-                        <p className="text-3xl font-urbanist font-bold text-red-900">{score}</p>
-                      </div>
+                      <Button
+                        onClick={() => navigate("/signup-today")}
+                        className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                      >
+                        Sign in to get unlimited turns
+                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+                      </Button>
                     </div>
-                    {(() => {
-                      const maxRetries = 3;
-                      const canRetry = retryCount < maxRetries;
-                      const retriesLeft = maxRetries - retryCount;
-                      
-                      return (
-                        <div className="space-y-4">
-                          {!canRetry && (
-                            <div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-4 text-center">
-                              <p className="text-sm font-urbanist font-semibold text-yellow-800">
-                                You've used all {maxRetries} attempts for today. Try again tomorrow!
-                              </p>
-                            </div>
-                          )}
-                          {canRetry && (
-                            <div className="bg-blue-50 border-2 border-blue-300 rounded-lg p-4 text-center">
-                              <p className="text-sm font-urbanist font-semibold text-blue-800">
-                                Attempts remaining: {retriesLeft} / {maxRetries}
-                              </p>
-                            </div>
-                          )}
-                          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4 md:mb-6 relative z-10">
-                            {canRetry ? (
-                              <Button
-                                onClick={() => {
-                                  // Reset game states
-                                  setGameOver(false);
-                                  setGameCompleted(false);
-                                  setScore(0);
-                                  setMemoryFlipped([]);
-                                  setMemoryMatched([]);
-                                  setMemoryMoves(0);
-                                  // Reinitialize memory cards
-                                  const allGoodCards = [...game.pairs, ...game.pairs];
-                                  const allSinCards = [...game.sinPairs, ...game.sinPairs];
-                                  const allCards = [...allGoodCards, ...allSinCards].sort(() => Math.random() - 0.5);
-                                  setMemoryCards(allCards);
-                                }}
-                                className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800"
-                              >
-                                Retry
-                                <RotateCcw className="w-4 h-4 md:w-5 md:h-5 ml-2" />
-                              </Button>
-                            ) : (
-                              <Button
-                                onClick={() => navigate("/signup-today")}
-                                className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
-                              >
-                                Sign in to get unlimited turns
-                                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
-                              </Button>
-                            )}
-                            <Button
-                              onClick={() => navigate("/signup-today")}
-                              className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
-                            >
-                              Continue
-                              <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
-                            </Button>
-                          </div>
-                        </div>
-                      );
-                    })()}
                   </div>
-                ) : !gameCompleted ? (
+                ) : (
                   <div className="space-y-6">
                     {/* Game Type: Match-3 (Candy Crush style) */}
                     {game.type === 'match3' && (
@@ -1449,314 +1228,43 @@ function EmotionalCheckInHero() {
 
                     {/* Game Type: Memory Match */}
                     {game.type === 'memory' && (
-                      <div className="grid lg:grid-cols-3 gap-6">
-                        {/* Game Board - Left Side */}
-                        <div className="lg:col-span-2">
-                          <div className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-lg p-6 border-2 border-pink-200">
-                            <div className="mb-4">
-                              <h3 className="text-center text-lg font-bold text-gray-900 mb-2">Memory Cards</h3>
-                            </div>
-                            <div className="grid grid-cols-4 gap-1.5 mb-4 max-w-xs mx-auto">
-                              {memoryCards.map((card: string, index: number) => {
-                                const isFlipped = memoryFlipped.includes(index) || memoryMatched.includes(card);
-                                const allSinCards = game.sinPairs;
-                                const isSin = allSinCards.includes(card);
-                                return (
-                                  <button
-                                    key={index}
-                                    onClick={() => {
-                                      if (gameCompleted || gameOver) return;
-                                      const card = memoryCards[index];
-                                      const isFlipped = memoryFlipped.includes(index) || memoryMatched.includes(card);
-                                      if (isFlipped || memoryFlipped.length >= 2) return;
-
-                                      const newFlipped = [...memoryFlipped, index];
-                                      setMemoryFlipped(newFlipped);
-                                      setMemoryMoves(memoryMoves + 1);
-
-                                      if (newFlipped.length === 2) {
-                                        const [firstIndex, secondIndex] = newFlipped;
-                                        const firstCard = memoryCards[firstIndex];
-                                        const secondCard = memoryCards[secondIndex];
-
-                                        const allSinCards = game.sinPairs;
-                                        const allGoodCards = game.pairs;
-                                        const firstIsSin = allSinCards.includes(firstCard);
-                                        const secondIsSin = allSinCards.includes(secondCard);
-                                        const firstIsGood = allGoodCards.includes(firstCard);
-                                        const secondIsGood = allGoodCards.includes(secondCard);
-
-                                        if ((firstIsGood && secondIsSin) || (firstIsSin && secondIsGood)) {
-                                          // Increment retry count when game over
-                                          const newCount = incrementRetryCount();
-                                          setRetryCount(newCount);
-                                          setTimeout(() => setGameOver(true), 500);
-                                          return;
-                                        }
-
-                                        // Check if both are sin cards and they match (same word)
-                                        if (firstIsSin && secondIsSin && firstCard === secondCard) {
-                                          // Sin pair matched - allowed, just clear them (no points, no game over)
-                                          setTimeout(() => setMemoryFlipped([]), 500);
-                                          return;
-                                        }
-
-                                        // Check if both cards are the same word (identical match)
-                                        if (firstCard === secondCard) {
-                                          // Good match found!
-                                          const newMatched = [...memoryMatched, firstCard, secondCard];
-                                          setMemoryMatched(newMatched);
-                                          setScore(score + 50);
-                                          if (newMatched.length >= game.pairs.length * 2) {
-                                            // Game completed successfully - reset retry count
-                                            resetRetryCount();
-                                            setRetryCount(0);
-                                            setTimeout(() => setGameCompleted(true), 500);
-                                          } else {
-                                            setTimeout(() => setMemoryFlipped([]), 500);
-                                          }
-                                        } else {
-                                          // No match - flip back after delay
-                                          setTimeout(() => setMemoryFlipped([]), 1000);
-                                        }
-                                      }
-                                    }}
-                                    className={`aspect-square rounded-md border-2 transition-all transform hover:scale-105 flex items-center justify-center font-bold text-[10px] ${
-                                      isFlipped
-                                        ? isSin
-                                          ? 'border-red-500 bg-red-100 text-red-900 shadow-md'
-                                          : 'border-pink-500 bg-pink-100 text-pink-900 shadow-md'
-                                        : 'border-gray-300 bg-gray-200 hover:border-pink-300 hover:bg-gray-100'
-                                    }`}
-                                  >
-                                    {isFlipped ? (
-                                      <span className={`text-[10px] font-bold leading-tight ${isSin ? 'text-red-900' : 'text-gray-700'}`}>{card}</span>
-                                    ) : (
-                                      <span className="text-base">❓</span>
-                                    )}
-                                  </button>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Stats - Right Side */}
-                        <div className="lg:col-span-1 flex items-center">
-                          <div className="w-full space-y-3">
-                            <div className="bg-white rounded-lg p-3 border border-gray-200">
-                              <p className="text-xs text-gray-500 mb-1">Matched</p>
-                              <p className="text-lg font-bold text-gray-900">{memoryMatched.length / 2} / {game.pairs.length}</p>
-                            </div>
-                            <div className="bg-white rounded-lg p-3 border border-gray-200">
-                              <p className="text-xs text-gray-500 mb-1">Moves</p>
-                              <p className="text-lg font-bold text-gray-900">{memoryMoves}</p>
-                            </div>
-                            <div className="bg-white rounded-lg p-3 border border-gray-200">
-                              <p className="text-xs text-gray-500 mb-1">Score</p>
-                              <p className="text-lg font-bold text-gray-900">{score}</p>
-                            </div>
-                            <div className="bg-white rounded-lg p-3 border border-gray-200">
-                              <p className="text-xs text-gray-500 mb-1">Flipped</p>
-                              <p className="text-lg font-bold text-gray-900">{memoryFlipped.length} / 2</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Game Type: Puzzle (Sliding puzzle) */}
-                    {game.type === 'puzzle' && (
-                      <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg p-6 border-2 border-amber-200">
-                        <h3 className="text-lg font-bold text-gray-900 mb-4">Slide Puzzle</h3>
-                        <div className="grid grid-cols-4 gap-2 mb-4 max-w-xs mx-auto">
-                          {puzzleTiles.map((char: string, index: number) => (
-                            <div
-                              key={index}
-                              className={`aspect-square rounded-lg border-2 flex items-center justify-center ${
-                                char === '' ? 'bg-gray-300 border-gray-400' : 'bg-white border-amber-300'
-                              }`}
-                            >
-                              <span className="text-sm font-bold text-gray-700">{char}</span>
-                            </div>
-                          ))}
-                        </div>
-                        <Button
-                          onClick={() => setGameCompleted(true)}
-                          className="w-full bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700 text-white"
-                        >
-                          Puzzle Complete! ✓
-                        </Button>
-                      </div>
-                    )}
-
-                    {/* Game Type: Bubble Pop */}
-                    {game.type === 'bubble' && (
-                      <div className="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-lg p-6 border-2 border-teal-200">
-                        <div className="flex justify-between items-center mb-4">
-                          <h3 className="text-lg font-bold text-gray-900">Pop Bubbles</h3>
-                          <div className="bg-white px-4 py-2 rounded-full border-2 border-teal-300">
-                            <span className="text-sm font-bold text-teal-600">Popped: {poppedBubbles.length} / {game.targetBubbles}</span>
-                          </div>
-                        </div>
-                        <div className="flex flex-wrap gap-3 mb-4 justify-center">
-                          {game.bubbles.map((bubble: string, index: number) => (
-                            <button
-                              key={index}
-                              onClick={() => {
-                                if (!poppedBubbles.includes(bubble)) {
-                                  const newPopped = [...poppedBubbles, bubble];
-                                  setPoppedBubbles(newPopped);
-                                  if (newPopped.length >= game.targetBubbles) {
-                                    setTimeout(() => setGameCompleted(true), 500);
-                                  }
-                                }
-                              }}
-                              className={`w-20 h-20 rounded-full border-2 transition-all transform hover:scale-110 ${
-                                poppedBubbles.includes(bubble)
-                                  ? 'bg-teal-200 border-teal-400 scale-90 opacity-50'
-                                  : 'bg-gradient-to-br from-teal-200 to-cyan-200 border-teal-400 hover:scale-125 animate-pulse'
-                              }`}
-                            >
-                              {poppedBubbles.includes(bubble) ? (
-                                <span className="text-2xl">✓</span>
-                              ) : (
-                                <span className="text-xs font-bold text-gray-700">{bubble}</span>
-                              )}
-                            </button>
-                          ))}
-                        </div>
-                        <p className="text-xs text-gray-500 text-center">Click bubbles to pop them!</p>
-                      </div>
+                      <MemoryMatchGame
+                        game={game}
+                        score={score}
+                        setScore={setScore}
+                        gameCompleted={gameCompleted}
+                        setGameCompleted={setGameCompleted}
+                        gameOver={gameOver}
+                        setGameOver={setGameOver}
+                        retryCount={retryCount}
+                        setRetryCount={setRetryCount}
+                        getRetryCount={getRetryCount}
+                        incrementRetryCount={incrementRetryCount}
+                        resetRetryCount={resetRetryCount}
+                        canRetry={currentRetryCount < maxRetries}
+                      />
                     )}
 
                     {/* Game Type: Runner (Mario style) */}
                     {game.type === 'runner' && (
-                      <div className="space-y-6">
-                        <div className="flex justify-between items-center">
-                          <h3 className="text-lg font-urbanist font-semibold text-gray-900">Joy Runner</h3>
-                          <div className="bg-gray-50 px-4 py-2 rounded-lg border border-gray-200">
-                            <span className="text-sm font-urbanist font-semibold text-gray-700">
-                              Score: {score}
-                            </span>
-                          </div>
-                        </div>
-                        
-                        {/* Game Area */}
-                        <div 
-                          ref={gameAreaRef}
-                          className="relative bg-gradient-to-b from-sky-200 to-blue-300 rounded-lg p-4 mb-4 overflow-hidden"
-                          style={{ minHeight: '400px' }}
-                        >
-                          {/* Ground/Platform */}
-                          <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-green-400 to-green-300 border-t-2 border-green-500 z-20"></div>
-                          
-                          {/* Runner character */}
-                          <div 
-                            className="absolute bottom-16 text-3xl md:text-4xl lg:text-5xl transition-all duration-200 z-30"
-                            style={{ 
-                              left: `${12.5 + runnerPosition * 25}%`,
-                              transform: 'translateX(-50%)'
-                            }}
-                          >
-                            🏃
-                          </div>
-                          
-                          {/* Falling Bubbles */}
-                          {fallingBubbles.map((bubble) => {
-                            const bubbleLeft = `${12.5 + bubble.x * 25}%`;
-                            const isSin = bubble.type === 'sin';
-                            
-                            return (
-                              <div
-                                key={bubble.id}
-                                className={`absolute w-12 h-12 rounded-full border-2 flex items-center justify-center z-10 ${
-                                  bubble.collected
-                                    ? 'opacity-0 scale-0 transition-all duration-300'
-                                    : isSin
-                                    ? 'opacity-100 scale-100 bg-gradient-to-br from-red-500 to-red-600 border-red-700 shadow-lg'
-                                    : 'opacity-100 scale-100 bg-gradient-to-br from-violet-300 to-purple-400 border-violet-600 shadow-lg'
-                                }`}
-                                style={{
-                                  left: bubbleLeft,
-                                  top: `${bubble.y}%`,
-                                  transform: 'translateX(-50%)',
-                                  transition: bubble.collected ? 'opacity 0.3s, transform 0.3s' : 'none'
-                                }}
-                              >
-                                <span className="text-xs font-bold text-white">{bubble.item}</span>
-                              </div>
-                            );
-                          })}
-                          
-                          {/* Clouds for decoration */}
-                          <div className="absolute top-4 left-10 w-16 h-8 bg-white/30 rounded-full opacity-60 z-0"></div>
-                          <div className="absolute top-8 right-20 w-20 h-10 bg-white/30 rounded-full opacity-60 z-0"></div>
-                        </div>
-                        
-                        {/* Controls */}
-                        <div className="flex gap-2 justify-center">
-                          <Button
-                            onClick={() => setRunnerPosition(Math.max(0, runnerPosition - 1))}
-                            className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                            disabled={runnerPosition === 0}
-                          >
-                            ← Move Left
-                          </Button>
-                          <Button
-                            onClick={() => setRunnerPosition(Math.min(3, runnerPosition + 1))}
-                            className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                            disabled={runnerPosition === 3}
-                          >
-                            Move Right →
-                          </Button>
-                        </div>
-                        
-                        <p className="text-xs font-urbanist font-light text-gray-500 text-center">
-                          Move the runner left/right to catch good bubbles (purple) and avoid sins (red)! 
-                          <br />
-                          <span className="text-red-600 font-semibold">Red bubbles = Game Over!</span>
-                        </p>
-                      </div>
+                      <JoyRunnerGame
+                        game={game}
+                        score={score}
+                        setScore={setScore}
+                        gameCompleted={gameCompleted}
+                        setGameCompleted={setGameCompleted}
+                        gameOver={gameOver}
+                        setGameOver={setGameOver}
+                        retryCount={retryCount}
+                        setRetryCount={setRetryCount}
+                        getRetryCount={getRetryCount}
+                        incrementRetryCount={incrementRetryCount}
+                        resetRetryCount={resetRetryCount}
+                        canRetry={currentRetryCount < maxRetries}
+                        goodWords={goodWords}
+                        sins={sins}
+                      />
                     )}
-                  </div>
-                ) : (
-                  /* Completion Screen */
-                  <div className="text-center space-y-6">
-                    <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center shadow-lg">
-                      <CheckCircle className="w-12 h-12 text-white" />
-                    </div>
-                    <div className="bg-white rounded-lg p-6 border border-gray-200">
-                      <h3 className="text-xl font-urbanist font-semibold text-gray-900 mb-3">🎉 Activity Complete!</h3>
-                      <p className="text-base font-urbanist font-light text-gray-700 leading-relaxed">{game.encouragement}</p>
-                    </div>
-                    <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
-                      <p className="text-sm font-urbanist font-semibold text-gray-600 mb-2">{game.reference}</p>
-                      <p className="text-base font-urbanist font-light text-gray-700 italic leading-relaxed">{game.verse}</p>
-                    </div>
-                    <div className="flex justify-center mb-4 md:mb-6 relative z-10">
-                      <Button
-                        onClick={() => {
-                          setShowBibleGame(false);
-                          setGameCompleted(false);
-                          setGameAnswers({});
-                          // Reset to home/initial state
-                          setShowQuestions(false);
-                          setShowWaterIntake(false);
-                          setSliderValue(2.5);
-                          setCurrentQuestionIndex(0);
-                          setAnswers({});
-                          setShowEncouragement(false);
-                          setThinkingTrap(null);
-                          setSelectedVerse(null);
-                          setSelectedEmotion(null);
-                        }}
-                        className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
-                      >
-                        Return Home
-                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
-                      </Button>
-                    </div>
                   </div>
                 )}
               </div>
@@ -2326,7 +1834,7 @@ const Index = () => {
         <EmotionalCheckInHero />
 
         {/* Wellness Features Section */}
-        <section className="relative py-12 md:py-20 bg-white overflow-hidden">
+        <section id="wellness-journey" className="relative py-12 md:py-20 bg-white overflow-hidden">
           {/* Subtle background pattern */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute inset-0" style={{
@@ -2349,7 +1857,7 @@ const Index = () => {
                 Your Complete Wellness Journey
               </h2>
               <p className="text-lg md:text-xl font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
-                We're here to support you through your care, worries, anxiety, and every step of your journey toward peace through quizzes, CBT tools, and comprehensive wellness resources.
+                Join the leading online Bible quiz competition 2025 and participate in the best Bible quiz competition 2025. We're here to support you through your care, worries, anxiety, and every step of your journey toward peace through Bible quiz competition, CBT tools, and comprehensive wellness resources.
               </p>
             </div>
 
@@ -2439,7 +1947,7 @@ const Index = () => {
                       <div>
                         <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Interactive Bible Games</h3>
                         <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
-                          Engage with faith-based games that combine fun with spiritual growth
+                          Engage with faith-based games in our online Bible quiz competition that combine fun with spiritual growth. Join Bible competitions 2025 and compete in Bible competition challenges.
                         </p>
                       </div>
                     </div>
@@ -2483,7 +1991,7 @@ const Index = () => {
                 Deepen Your Understanding of Scripture
               </h2>
               <p className="text-lg md:text-xl font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
-                Your comprehensive resource for Bible questions and answers. Explore organized content by book, chapter, difficulty level, and category.
+                Your comprehensive resource for Bible questions and answers in the Bible quiz competition 2025. Explore organized content by book, chapter, difficulty level, and category. Check Bible quiz competition 2025 results and track your progress in our online Bible quiz competition.
               </p>
             </div>
 
@@ -2612,7 +2120,7 @@ const Index = () => {
                 Get Started in Minutes
               </h2>
               <p className="text-lg md:text-xl font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
-                Our simple 3-step process to begin your journey
+                Join the Bible quiz competition 2025 today! Our simple 3-step process helps you begin your journey in the online Bible quiz competition and start competing in Bible competitions.
               </p>
             </div>
 
@@ -2665,7 +2173,7 @@ const Index = () => {
                 Join Thousands of Believers
               </h2>
               <p className="text-lg md:text-xl font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
-                See how our platform has helped others grow in faith and wellness
+                See how our Bible quiz competition platform has helped others grow in faith and wellness. Join thousands participating in Bible competition 2025 and Bible competitions worldwide.
               </p>
             </div>
             
@@ -2857,7 +2365,7 @@ const Index = () => {
                 Ready to Start Your Journey?
               </h2>
               <p className="text-base md:text-base font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
-                Join thousands of believers who've enhanced their Bible knowledge and wellness with our platform
+                Join thousands of believers who've enhanced their Bible knowledge and wellness with our platform. Participate in the Bible quiz competition 2025, check Bible quiz competition 2025 results, and compete in the best online Bible quiz competition and Bible competitions.
               </p>
             </div>
 
@@ -2891,7 +2399,7 @@ const Index = () => {
                   <span className="text-lg font-urbanist font-light text-gray-900">Bible Quiz Competition</span>
               </div>
                 <p className="font-urbanist font-light text-gray-600 mb-4 max-w-md">
-                  More than a quiz platform. We support you through Bible study, emotional wellness, CBT tools, water intake tracking, and every step of your journey toward peace.
+                  More than a quiz platform. Join the leading Bible quiz competition 2025 and participate in online Bible quiz competition. We support you through Bible study, emotional wellness, CBT tools, water intake tracking, and every step of your journey toward peace. Check Bible quiz competition 2025 results and compete in Bible competition challenges.
                 </p>
             </div>
 
