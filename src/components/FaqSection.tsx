@@ -4,11 +4,11 @@ export function FaqSection() {
   const faqs = [
     {
       q: "What is Bible Quiz Competition?",
-      a: "Bible Quiz Competition is a comprehensive platform that combines Bible quizzes, wellness tools, and spiritual growth resources. We offer 1,000+ Bible questions across all 66 books, interactive games, emotional check-ins, CBT tools, water intake tracking, and daily records to support your complete wellness journey."
+      a: "Bible Quiz Competition is a comprehensive platform that combines Bible quizzes, wellness tools, and spiritual growth resources. Join the leading online Bible quiz competition 2025 and participate in Bible quiz competition 2025. We offer 1,000+ Bible questions across all 66 books, interactive games, emotional check-ins, CBT tools, water intake tracking, and daily records to support your complete wellness journey."
     },
     {
       q: "What types of quizzes are available?",
-      a: "We offer public quizzes for all 66 Bible books, weekly Bible challenges, competition quizzes with leaderboards, and the ability to create and host your own live quizzes. Our Bible Q&A Hub includes 1,000+ questions organized by book, chapter, difficulty level, and category."
+      a: "We offer public quizzes for all 66 Bible books, weekly Bible challenges, competition quizzes with leaderboards, and the ability to create and host your own live quizzes. Our Bible Q&A Hub includes 1,000+ questions organized by book, chapter, difficulty level, and category. Join our Bible quiz competition 2025 and check Bible quiz competition 2025 results in our online Bible quiz competition."
     },
     {
       q: "What wellness features do you offer?",
@@ -36,7 +36,7 @@ export function FaqSection() {
     },
     {
       q: "How do I track my progress?",
-      a: "Create a free account to access your personal dashboard where you can view your quiz history, scores, daily records, emotional check-ins, water intake, streaks, and compete on global leaderboards. Track your improvement over time across all features."
+      a: "Create a free account to access your personal dashboard where you can view your quiz history, scores, daily records, emotional check-ins, water intake, streaks, and compete on global leaderboards. Track your improvement over time across all features. Check your Bible quiz competition 2025 results and see how you rank in Bible competition 2025 and Bible competitions."
     },
     {
       q: "Can I participate without creating an account?",
