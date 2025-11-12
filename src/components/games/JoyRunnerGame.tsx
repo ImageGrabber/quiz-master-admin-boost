@@ -311,23 +311,26 @@ export function JoyRunnerGame({
   if (gameOver) {
     const currentRetryCount = getRetryCount();
     const maxRetries = 3;
-    const canRetryNow = currentRetryCount < maxRetries;
+    const canRetryNow = canRetry || currentRetryCount < maxRetries;
 
     return (
-      <div className="text-center space-y-6 bg-red-50 rounded-lg p-8 border-2 border-red-200">
-        <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center shadow-lg">
-          <span className="text-4xl">💀</span>
+      <div className="text-center space-y-6 bg-gradient-to-br from-red-50 via-red-100/50 to-orange-50 rounded-2xl p-8 md:p-12 border border-red-200/50 shadow-2xl backdrop-blur-sm">
+        <div className="relative">
+          <div className="absolute inset-0 blur-2xl bg-red-400/20 rounded-full"></div>
+          <div className="relative w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-red-500 via-red-600 to-red-700 flex items-center justify-center shadow-2xl ring-4 ring-red-200/50">
+            <span className="text-5xl animate-bounce">💀</span>
+          </div>
         </div>
-        <div className="bg-white rounded-lg p-6 border border-red-300">
-          <h3 className="text-2xl font-urbanist font-semibold text-red-900 mb-3">Game Over!</h3>
-          <p className="text-base font-urbanist font-light text-red-800 leading-relaxed mb-4">
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 border border-red-200/50 shadow-xl">
+          <h3 className="text-3xl font-urbanist font-bold bg-gradient-to-r from-red-600 to-red-800 bg-clip-text text-transparent mb-4">Game Over!</h3>
+          <p className="text-lg font-urbanist font-medium text-gray-700 leading-relaxed mb-6">
             You caught a sin bubble! Try again!
           </p>
-          {currentRetryCount < maxRetries && (
-            <div className={`mb-4 px-4 py-2 rounded-lg ${
-              currentRetryCount === 2 ? 'bg-orange-100 text-orange-800' :
-              currentRetryCount === 1 ? 'bg-red-100 text-red-800' :
-              'bg-blue-100 text-blue-800'
+          {!canRetry && currentRetryCount < maxRetries && (
+            <div className={`mb-6 px-6 py-3 rounded-xl shadow-md ${
+              currentRetryCount === 2 ? 'bg-gradient-to-r from-orange-100 to-orange-50 text-orange-800 border border-orange-200' :
+              currentRetryCount === 1 ? 'bg-gradient-to-r from-red-100 to-red-50 text-red-800 border border-red-200' :
+              'bg-gradient-to-r from-blue-100 to-blue-50 text-blue-800 border border-blue-200'
             }`}>
               <p className="text-sm font-urbanist font-semibold">
                 Attempts remaining: {maxRetries - currentRetryCount} / {maxRetries}
@@ -339,27 +342,20 @@ export function JoyRunnerGame({
           {canRetryNow ? (
             <Button
               onClick={handleRetry}
-              className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800"
+              className="px-8 py-6 text-base md:text-lg font-urbanist font-semibold text-white shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 hover:from-gray-800 hover:via-gray-700 hover:to-gray-800 rounded-xl hover:scale-105 active:scale-95"
             >
               Retry
-              <RotateCcw className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+              <RotateCcw className="w-5 h-5 ml-2" />
             </Button>
           ) : (
             <Button
               onClick={() => navigate("/signup-today")}
-              className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+              className="px-8 py-6 text-base md:text-lg font-urbanist font-semibold text-white shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 hover:from-purple-700 hover:via-indigo-700 hover:to-purple-700 rounded-xl hover:scale-105 active:scale-95"
             >
               Sign in to get unlimited turns
-              <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+              <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           )}
-          <Button
-            onClick={() => navigate("/signup-today")}
-            className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800"
-          >
-            Continue
-            <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
-          </Button>
         </div>
       </div>
     );
@@ -368,12 +364,15 @@ export function JoyRunnerGame({
   if (gameCompleted) {
     return (
       <div className="text-center space-y-6">
-        <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center shadow-lg">
-          <span className="text-4xl">🎉</span>
+        <div className="relative">
+          <div className="absolute inset-0 blur-2xl bg-green-400/30 rounded-full animate-pulse"></div>
+          <div className="relative w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-green-400 via-emerald-500 to-teal-500 flex items-center justify-center shadow-2xl ring-4 ring-green-200/50 animate-bounce">
+            <span className="text-5xl">🎉</span>
+          </div>
         </div>
-        <div className="bg-white rounded-lg p-6 border border-gray-200">
-          <h3 className="text-xl font-urbanist font-semibold text-gray-900 mb-3">🎉 Activity Complete!</h3>
-          <p className="text-base font-urbanist font-light text-gray-700 leading-relaxed">{game.encouragement}</p>
+        <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 border border-green-200/50 shadow-xl">
+          <h3 className="text-2xl font-urbanist font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-4">🎉 Activity Complete!</h3>
+          <p className="text-lg font-urbanist font-medium text-gray-700 leading-relaxed">{game.encouragement}</p>
         </div>
       </div>
     );
@@ -381,36 +380,55 @@ export function JoyRunnerGame({
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h3 className="text-lg font-urbanist font-semibold text-gray-900">Joy Runner</h3>
-        <div className="bg-gray-50 px-4 py-2 rounded-lg border border-gray-200">
-          <span className="text-sm font-urbanist font-semibold text-gray-700">
-            Score: {score}
-          </span>
+      {/* Header with Score */}
+      <div className="flex flex-nowrap items-center justify-between gap-4 bg-gradient-to-r from-purple-50 via-indigo-50 to-purple-50 rounded-2xl p-6 border border-purple-200/50 shadow-lg backdrop-blur-sm overflow-hidden">
+        <h3 className="text-xl md:text-2xl font-urbanist font-bold bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent whitespace-nowrap">
+          Joy Runner
+        </h3>
+        <div className="bg-white/80 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-xl border border-purple-200/50 shadow-xl ring-2 ring-purple-100/50 flex-shrink-0">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 animate-pulse"></div>
+            <span className="text-base md:text-lg font-urbanist font-bold bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent whitespace-nowrap">
+              Score: <span className="text-gray-900">{score}</span>
+            </span>
+          </div>
         </div>
       </div>
       
       {/* Game Area */}
       <div 
         ref={gameAreaRef}
-        className="relative bg-gradient-to-b from-sky-200 to-blue-300 rounded-lg p-4 mb-4 overflow-hidden"
-        style={{ minHeight: '400px' }}
+        className="relative bg-gradient-to-b from-sky-300 via-blue-400 to-cyan-400 rounded-2xl p-6 mb-6 overflow-hidden shadow-2xl border-2 border-blue-300/50"
+        style={{ minHeight: '450px' }}
       >
-        {/* Ground/Platform */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-green-400 to-green-300 border-t-2 border-green-500 z-20"></div>
+        {/* Animated Background Pattern */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-white/30 rounded-full blur-2xl animate-pulse"></div>
+          <div className="absolute top-32 right-20 w-40 h-40 bg-purple-300/30 rounded-full blur-3xl animate-pulse delay-300"></div>
+          <div className="absolute bottom-20 left-1/3 w-36 h-36 bg-cyan-300/30 rounded-full blur-2xl animate-pulse delay-700"></div>
+        </div>
+
+        {/* Ground/Platform with 3D effect */}
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-green-500 via-green-400 to-green-300 border-t-4 border-green-600 z-20 shadow-[0_-10px_30px_rgba(0,0,0,0.3)]">
+          <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-transparent via-green-200/50 to-transparent"></div>
+          {/* Platform lines for depth */}
+          <div className="absolute top-2 left-0 right-0 h-px bg-green-600/30"></div>
+          <div className="absolute top-4 left-0 right-0 h-px bg-green-600/20"></div>
+        </div>
         
-        {/* Runner character */}
+        {/* Runner character with glow effect */}
         <div 
-          className="absolute bottom-16 text-3xl md:text-4xl lg:text-5xl transition-all duration-200 z-30"
+          className="absolute bottom-20 text-4xl md:text-7xl lg:text-8xl transition-all duration-300 z-30 drop-shadow-2xl filter"
           style={{ 
             left: `${12.5 + runnerPosition * 25}%`,
-            transform: 'translateX(-50%)'
+            transform: 'translateX(-50%)',
+            filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)) drop-shadow(0 0 20px rgba(147, 51, 234, 0.3))'
           }}
         >
           🏃
         </div>
         
-        {/* Falling Bubbles */}
+        {/* Falling Bubbles with enhanced effects */}
         {fallingBubbles.map((bubble) => {
           const bubbleLeft = `${12.5 + bubble.x * 25}%`;
           const isSin = bubble.type === 'sin';
@@ -418,53 +436,65 @@ export function JoyRunnerGame({
           return (
             <div
               key={bubble.id}
-              className={`absolute w-12 h-12 rounded-full border-2 flex items-center justify-center z-10 ${
+              className={`absolute w-14 h-14 md:w-16 md:h-16 rounded-full border-2 flex items-center justify-center z-10 transition-all duration-200 ${
                 bubble.collected
-                  ? 'opacity-0 scale-0 transition-all duration-300'
+                  ? 'opacity-0 scale-0'
                   : isSin
-                  ? 'opacity-100 scale-100 bg-gradient-to-br from-red-500 to-red-600 border-red-700 shadow-lg'
-                  : 'opacity-100 scale-100 bg-gradient-to-br from-violet-300 to-purple-400 border-violet-600 shadow-lg'
+                  ? 'opacity-100 scale-100 bg-gradient-to-br from-red-500 via-red-600 to-red-700 border-red-800 shadow-2xl ring-2 ring-red-400/50 animate-pulse'
+                  : 'opacity-100 scale-100 bg-gradient-to-br from-violet-400 via-purple-500 to-indigo-500 border-violet-700 shadow-2xl ring-2 ring-purple-300/50'
               }`}
               style={{
                 left: bubbleLeft,
                 top: `${bubble.y}%`,
                 transform: 'translateX(-50%)',
-                transition: bubble.collected ? 'opacity 0.3s, transform 0.3s' : 'none'
+                transition: bubble.collected ? 'opacity 0.3s, transform 0.3s' : 'none',
+                filter: isSin ? 'drop-shadow(0 0 8px rgba(239, 68, 68, 0.6))' : 'drop-shadow(0 0 8px rgba(147, 51, 234, 0.6))'
               }}
             >
-              <span className="text-xs font-bold text-white">{bubble.item}</span>
+              <span className="text-xs md:text-sm font-bold text-white drop-shadow-md">{bubble.item}</span>
             </div>
           );
         })}
         
-        {/* Clouds for decoration */}
-        <div className="absolute top-4 left-10 w-16 h-8 bg-white/30 rounded-full opacity-60 z-0"></div>
-        <div className="absolute top-8 right-20 w-20 h-10 bg-white/30 rounded-full opacity-60 z-0"></div>
+        {/* Enhanced Clouds for decoration */}
+        <div className="absolute top-6 left-12 w-20 h-10 bg-white/40 rounded-full opacity-70 z-0 blur-sm animate-pulse"></div>
+        <div className="absolute top-4 left-32 w-16 h-8 bg-white/30 rounded-full opacity-60 z-0 blur-sm"></div>
+        <div className="absolute top-12 right-24 w-24 h-12 bg-white/40 rounded-full opacity-70 z-0 blur-sm animate-pulse delay-500"></div>
+        <div className="absolute top-8 right-12 w-20 h-10 bg-white/30 rounded-full opacity-60 z-0 blur-sm"></div>
       </div>
       
-      {/* Controls */}
-      <div className="flex gap-2 justify-center">
+      {/* Modern Controls */}
+      <div className="flex flex-nowrap gap-4 justify-center">
         <Button
           onClick={() => setRunnerPosition(Math.max(0, runnerPosition - 1))}
-          className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-8 py-6 text-base md:text-lg font-urbanist font-semibold text-white shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 hover:from-purple-700 hover:via-indigo-700 hover:to-purple-700 disabled:opacity-40 disabled:cursor-not-allowed rounded-xl hover:scale-105 active:scale-95 disabled:hover:scale-100 whitespace-nowrap"
           disabled={runnerPosition === 0}
         >
           ← Move Left
         </Button>
         <Button
           onClick={() => setRunnerPosition(Math.min(3, runnerPosition + 1))}
-          className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-8 py-6 text-base md:text-lg font-urbanist font-semibold text-white shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-600 hover:from-purple-700 hover:via-indigo-700 hover:to-purple-700 disabled:opacity-40 disabled:cursor-not-allowed rounded-xl hover:scale-105 active:scale-95 disabled:hover:scale-100 whitespace-nowrap"
           disabled={runnerPosition === 3}
         >
           Move Right →
         </Button>
       </div>
       
-      <p className="text-xs font-urbanist font-light text-gray-500 text-center">
-        Move the runner left/right to catch good bubbles (purple) and avoid sins (red)! 
-        <br />
-        <span className="text-red-600 font-semibold">Red bubbles = Game Over!</span>
-      </p>
+      {/* Instructions with modern styling */}
+      <div className="bg-gradient-to-r from-gray-50 to-purple-50/50 rounded-xl p-4">
+        <p className="text-sm font-urbanist font-medium text-gray-700 text-center">
+          <span className="inline-flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500"></span>
+            Move the runner left/right to catch good bubbles (purple)
+          </span>
+          <br className="hidden sm:block" />
+          <span className="inline-flex items-center gap-2 mt-2 sm:mt-0 sm:ml-2">
+            <span className="w-3 h-3 rounded-full bg-gradient-to-r from-red-500 to-red-600"></span>
+            <span className="text-red-600 font-semibold">Avoid red bubbles = Game Over!</span>
+          </span>
+        </p>
+      </div>
     </div>
   );
 }

@@ -13,8 +13,14 @@ import Index from "./pages/Index";
 import SignUpToday from "./pages/SignUpToday";
 import EmotionalCheckIn from "./pages/EmotionalCheckIn";
 import JoyRunnerTest from "./pages/JoyRunnerTest";
+import JoyRunner from "./pages/JoyRunner";
 import Match3Game from "./pages/Match3Game";
 import MemoryMatchGame from "./pages/MemoryMatchGame";
+import WordSearch from "./pages/WordSearch";
+import MemoryMatch from "./pages/MemoryMatch";
+import VerseMaster from "./pages/VerseMaster";
+import FaithBuilder from "./pages/FaithBuilder";
+import FlappyBird from "./pages/FlappyBird";
 import TodaysQuiz from "./pages/TodaysQuiz";
 import TodaysQuizMark from "./pages/TodaysQuizMark";
 import DailyVerse from "./pages/DailyVerse";
@@ -24,6 +30,7 @@ import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import Dashboard from "./pages/Dashboard";
+import BibleGames from "./pages/BibleGames";
 import MyQuizzes from "./pages/MyQuizzes";
 import CreateQuiz from "./pages/CreateQuiz";
 import CreateGuestQuiz from "./pages/guest/CreateGuestQuiz";
@@ -274,8 +281,14 @@ const App = () => {
           <Routes>
             <Route path="/emotional-checkin" element={<EmotionalCheckIn />} />
             <Route path="/joy-runner-test" element={<JoyRunnerTest />} />
+            <Route path="/joy-runner" element={<ProtectedRoute><JoyRunner /></ProtectedRoute>} />
             <Route path="/match-3-game" element={<Match3Game />} />
             <Route path="/memory-match-game" element={<MemoryMatchGame />} />
+            <Route path="/word-search" element={<ProtectedRoute><WordSearch /></ProtectedRoute>} />
+            <Route path="/memory-match" element={<ProtectedRoute><MemoryMatch /></ProtectedRoute>} />
+            <Route path="/verse-master" element={<ProtectedRoute><VerseMaster /></ProtectedRoute>} />
+            <Route path="/faith-builder" element={<ProtectedRoute><FaithBuilder /></ProtectedRoute>} />
+            <Route path="/flappy-bird" element={<ProtectedRoute><FlappyBird /></ProtectedRoute>} />
             <Route path="/" element={<Index />} />
             <Route path="/signup-today" element={<SignUpToday />} />
             <Route path="/todays-quiz" element={<TodaysQuiz />} />
@@ -287,6 +300,7 @@ const App = () => {
             <Route path="/auth/forgot-password" element={<ForgotPassword />} />
             <Route path="/auth/reset-password" element={<ResetPassword />} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/dashboard/bible-games" element={<ProtectedRoute><BibleGames /></ProtectedRoute>} />
             <Route path="/dashboard/quizzes" element={<ProtectedRoute><MyQuizzes /></ProtectedRoute>} />
             <Route path="/create-quiz" element={<ProtectedRoute><CreateQuiz /></ProtectedRoute>} />
             <Route path="/create-quiz/guest" element={<CreateGuestQuiz />} />

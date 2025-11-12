@@ -56,6 +56,9 @@ const WeeklyQuizTaking = () => {
   const [dialogTitle, setDialogTitle] = useState("");
   const [dialogMessage, setDialogMessage] = useState("");
   const [attemptId, setAttemptId] = useState<string | null>(null);
+  const [shouldStartTimer, setShouldStartTimer] = useState(false);
+  const hasAutoSubmittedRef = useRef(false);
+  const handleQuizCompleteRef = useRef<((finalAnswers?: number[]) => Promise<void>) | null>(null);
 
   // Fetch quiz data and questions on component mount
   useEffect(() => {
@@ -122,35 +125,121 @@ const WeeklyQuizTaking = () => {
     createAttempt();
   }, [quizId]);
 
+  // Store handleQuizComplete in ref for stable reference
+  useEffect(() => {
+    handleQuizCompleteRef.current = handleQuizComplete;
+  });
+
+  // Start timer when quiz is loaded and time is set
+  useEffect(() => {
+    if (!isLoading && quiz && timeLeft > 0 && !isCompleted) {
+      setShouldStartTimer(true);
+    } else {
+      setShouldStartTimer(false);
+    }
+  }, [isLoading, quiz, timeLeft, isCompleted]);
+
   // Timer effect with enhanced warnings
   useEffect(() => {
-    if (timeLeft > 0 && !isCompleted && !isLoading) {
-      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-      
-      // Show time warnings
-      if (timeLeft === 180) { // 3 minutes left
-        setDialogTitle("⚠️ Time Warning");
-        setDialogMessage("You have 3 minutes remaining!");
-        setDialogOpen(true);
-        setShowTimeWarning(true);
-        setTimeout(() => setShowTimeWarning(false), 5000);
-      } else if (timeLeft === 60) { // 1 minute left
-        setDialogTitle("🚨 Final Warning");
-        setDialogMessage("Only 1 minute remaining! Hurry up!");
-        setDialogOpen(true);
-        setShowTimeWarning(true);
-        setTimeout(() => setShowTimeWarning(false), 5000);
-      } else if (timeLeft === 30) { // 30 seconds left
-        setDialogTitle("⏰ Almost Time's Up!");
-        setDialogMessage("Only 30 seconds left!");
-        setDialogOpen(true);
-      }
-      
-      return () => clearTimeout(timer);
-    } else if (timeLeft === 0) {
-      handleQuizComplete();
+    // Don't start timer if conditions aren't met
+    if (!shouldStartTimer || isCompleted) {
+      return;
     }
-  }, [timeLeft, isCompleted, isLoading]);
+
+    // Reset auto-submit flag when timer starts
+    hasAutoSubmittedRef.current = false;
+
+    // Start the timer
+    const timer = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime <= 1) {
+          // Time is up - show dialog and auto submit
+          if (!hasAutoSubmittedRef.current && !isCompleted) {
+            hasAutoSubmittedRef.current = true;
+            setDialogTitle("⏰ Time's Up!");
+            setDialogMessage("Your time has expired. The quiz will be automatically submitted with your current answers.");
+            setDialogOpen(true);
+            // Auto submit after showing dialog - don't set hasAutoSubmittedRef yet, let handleQuizComplete do it
+            setTimeout(() => {
+              console.log('Auto-submitting quiz...');
+              hasAutoSubmittedRef.current = false; // Reset to allow submission
+              if (handleQuizCompleteRef.current) {
+                handleQuizCompleteRef.current().catch(err => {
+                  console.error('Error in auto-submit:', err);
+                });
+              } else {
+                console.error('handleQuizCompleteRef.current is null');
+              }
+            }, 1500);
+          }
+          return 0;
+        }
+        
+        const newTime = prevTime - 1;
+        
+        // Show time warnings
+        if (newTime === 180) { // 3 minutes left
+          setDialogTitle("⚠️ Time Warning");
+          setDialogMessage("You have 3 minutes remaining!");
+          setDialogOpen(true);
+          setShowTimeWarning(true);
+          setTimeout(() => setShowTimeWarning(false), 5000);
+        } else if (newTime === 60) { // 1 minute left
+          setDialogTitle("🚨 Final Warning");
+          setDialogMessage("Only 1 minute remaining! Hurry up!");
+          setDialogOpen(true);
+          setShowTimeWarning(true);
+          setTimeout(() => setShowTimeWarning(false), 5000);
+        } else if (newTime === 30) { // 30 seconds left
+          setDialogTitle("⏰ Almost Time's Up!");
+          setDialogMessage("Only 30 seconds left!");
+          setDialogOpen(true);
+        }
+        
+        return newTime;
+      });
+    }, 1000);
+    
+    return () => {
+      clearInterval(timer);
+    };
+  }, [shouldStartTimer, isCompleted]);
+
+  // Handle time running out (backup check)
+  useEffect(() => {
+    if (timeLeft === 0 && !isLoading && quiz && questions.length > 0 && !hasAutoSubmittedRef.current) {
+      console.log('Time ran out - triggering auto-submit', { isCompleted, hasAutoSubmitted: hasAutoSubmittedRef.current });
+      hasAutoSubmittedRef.current = true;
+      setDialogTitle("⏰ Time's Up!");
+      setDialogMessage("Your time has expired. The quiz will be automatically submitted with your current answers.");
+      setDialogOpen(true);
+      // Auto submit after showing dialog
+      setTimeout(() => {
+        console.log('Auto-submitting quiz from backup check...');
+        // Reset flag to allow submission
+        hasAutoSubmittedRef.current = false;
+        // Call the function directly with current answers
+        const submitQuiz = async () => {
+          // Include current question's answer if selected
+          const completeAnswers = [...answers];
+          if (selectedAnswer !== null && completeAnswers.length === currentQuestion) {
+            completeAnswers.push(selectedAnswer);
+          }
+          // Fill remaining with -1
+          while (completeAnswers.length < questions.length) {
+            completeAnswers.push(-1);
+          }
+          
+          if (handleQuizCompleteRef.current) {
+            await handleQuizCompleteRef.current(completeAnswers).catch(err => {
+              console.error('Error in auto-submit from backup:', err);
+            });
+          }
+        };
+        submitQuiz();
+      }, 1500);
+    }
+  }, [timeLeft, isLoading, quiz, questions.length, answers, selectedAnswer, currentQuestion]);
 
   // Block browser/tab close
   useEffect(() => {
@@ -199,14 +288,37 @@ const WeeklyQuizTaking = () => {
   };
 
   const handleQuizComplete = async (finalAnswers = answers) => {
+    console.log('handleQuizComplete called', { isCompleted, hasAutoSubmitted: hasAutoSubmittedRef.current, finalAnswers });
+    
+    // Prevent multiple submissions
+    if (isCompleted || hasAutoSubmittedRef.current) {
+      console.log('Submission prevented - already completed or submitted');
+      return;
+    }
+    
     setIsCompleted(true);
+    hasAutoSubmittedRef.current = true;
+    console.log('Starting quiz completion...');
     
-    // Calculate score
-    const correctAnswers = finalAnswers.filter((answer, index) => 
-      answer === questions[index]?.correct_index
-    ).length;
+    // Include current question's answer if selected but not yet submitted
+    const completeAnswers = [...finalAnswers];
+    if (selectedAnswer !== null && completeAnswers.length === currentQuestion) {
+      completeAnswers.push(selectedAnswer);
+    }
     
-    const baseScore = correctAnswers * 4 - (questions.length - correctAnswers) * 1;
+    // Ensure we have answers for all questions (fill with -1 for unanswered)
+    while (completeAnswers.length < questions.length) {
+      completeAnswers.push(-1); // -1 means unanswered
+    }
+    
+    // Calculate score (only count answered questions)
+    const answeredQuestions = completeAnswers.filter(answer => answer !== -1).length;
+    const correctAnswers = completeAnswers
+      .filter((answer, index) => answer !== -1 && answer === questions[index]?.correct_index)
+      .length;
+    const wrongAnswers = answeredQuestions - correctAnswers;
+    
+    const baseScore = correctAnswers * 4 - wrongAnswers * 1;
     const timeBonus = Math.ceil((quiz!.time_limit - (quiz!.time_limit - timeLeft)) / 6);
     const totalScore = Math.max(0, baseScore + timeBonus);
     const accuracy = Math.round((correctAnswers / questions.length) * 100);
@@ -221,7 +333,7 @@ const WeeklyQuizTaking = () => {
           .update({
             score: totalScore,
             seconds_used: quiz!.time_limit - timeLeft,
-            answers: finalAnswers,
+            answers: completeAnswers,
             completed: true,
             completed_at: new Date().toISOString()
           })
@@ -292,6 +404,10 @@ const WeeklyQuizTaking = () => {
   };
 
   const handleAnswerSelect = (index: number) => {
+    // Don't allow answer selection if time is up or quiz is completed
+    if (isCompleted || timeLeft === 0) {
+      return;
+    }
     setSelectedAnswer(index);
   };
 
@@ -331,16 +447,31 @@ const WeeklyQuizTaking = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
       {/* Dialog for all notifications */}
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+      <Dialog 
+        open={dialogOpen} 
+        onOpenChange={(open) => {
+          // Prevent closing dialog when time is up
+          if (dialogTitle === "⏰ Time's Up!") {
+            return;
+          }
+          setDialogOpen(open);
+        }}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{dialogTitle}</DialogTitle>
             <DialogDescription>{dialogMessage}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <DialogClose asChild>
-              <Button onClick={() => setDialogOpen(false)}>Close</Button>
-            </DialogClose>
+            {dialogTitle === "⏰ Time's Up!" ? (
+              <Button disabled className="opacity-50 cursor-not-allowed">
+                Submitting...
+              </Button>
+            ) : (
+              <DialogClose asChild>
+                <Button onClick={() => setDialogOpen(false)}>Close</Button>
+              </DialogClose>
+            )}
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -413,11 +544,12 @@ const WeeklyQuizTaking = () => {
                 <Button
                   key={index}
                   variant={selectedAnswer === index ? "default" : "outline"}
+                  disabled={isCompleted || timeLeft === 0}
                   className={`w-full p-6 text-left justify-start text-wrap h-auto min-h-[60px] transition-all duration-200 ${
                     selectedAnswer === index 
                       ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
                       : "hover:bg-blue-50 hover:border-blue-300"
-                  }`}
+                  } ${(isCompleted || timeLeft === 0) ? "opacity-50 cursor-not-allowed" : ""}`}
                   onClick={() => handleAnswerSelect(index)}
                 >
                   <div className="flex items-center space-x-3 w-full">
@@ -440,8 +572,8 @@ const WeeklyQuizTaking = () => {
                 </div>
                 <Button
                   onClick={handleNextQuestion}
-                  disabled={selectedAnswer === null}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                  disabled={selectedAnswer === null || isCompleted || timeLeft === 0}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 font-semibold shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {currentQuestion === questions.length - 1 ? "Finish Weekly Quiz" : "Next Question"}
                 </Button>

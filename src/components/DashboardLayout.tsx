@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Brain, LayoutDashboard, Trophy, User, Settings, LogOut, List, Menu, X, Award, Shield, BookOpen, Star, HelpCircle, Play } from "lucide-react";
+import { Brain, LayoutDashboard, Trophy, User, Settings, LogOut, Menu, X, Award, Shield, BookOpen, Star, HelpCircle, Play } from "lucide-react";
 import Header from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
@@ -13,7 +13,6 @@ interface DashboardLayoutProps {
 const navItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Weekly Quiz", href: "/weekly-quiz", icon: Award },
-  { name: "My Live Quizzes", href: "/dashboard/quizzes", icon: List },
   { name: "Competitions", href: "/competitions", icon: Award },
   { name: "Leaderboard", href: "/leaderboard", icon: Trophy },
   // { name: "Recent Attempts", href: "/dashboard/recent-attempts", icon: User }, // Hidden
@@ -62,23 +61,25 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             </div>
             <span className="text-lg font-urbanist font-semibold text-gray-900">Bible Quiz Competition</span>
           </div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="hidden md:flex text-gray-700 text-sm font-urbanist font-light">
+            Welcome back, <span className="font-medium">{userName}</span>
+            {userPlan === "pro" && (
+              <Badge className="ml-2 bg-black text-white font-urbanist font-light">Pro</Badge>
+            )}
+            {userPlan === "free" && (
+              <Badge className="ml-2 bg-gray-200 text-gray-700 font-urbanist font-light">Free</Badge>
+            )}
+          </div>
           <Button
             variant="ghost"
             size="sm"
-            className="md:hidden ml-2"
+            className="md:hidden"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <X className="w-5 h-5" strokeWidth={1} /> : <Menu className="w-5 h-5" strokeWidth={1} />}
+            {isMobileMenuOpen ? <X className="w-7 h-7" strokeWidth={2} /> : <Menu className="w-7 h-7" strokeWidth={2} />}
           </Button>
-        </div>
-        <div className="flex-1 text-right text-gray-700 text-sm font-urbanist font-light">
-          Welcome back, <span className="font-medium">{userName}</span>
-          {userPlan === "pro" && (
-            <Badge className="ml-2 bg-black text-white font-urbanist font-light">Pro</Badge>
-          )}
-          {userPlan === "free" && (
-            <Badge className="ml-2 bg-gray-200 text-gray-700 font-urbanist font-light">Free</Badge>
-          )}
         </div>
       </header>
       <div className="flex w-full h-screen">
