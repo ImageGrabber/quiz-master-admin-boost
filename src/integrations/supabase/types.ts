@@ -907,6 +907,36 @@ export type Database = {
         }
         Relationships: []
       }
+      feedback: {
+        Row: {
+          id: string
+          name: string
+          place: string
+          feedback: string
+          status: string | null
+          created_at: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          id?: string
+          name: string
+          place: string
+          feedback: string
+          status?: string | null
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          name?: string
+          place?: string
+          feedback?: string
+          status?: string | null
+          created_at?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       push_subscriptions: {
         Row: {
           auth: string

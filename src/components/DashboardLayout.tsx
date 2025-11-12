@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Brain, LayoutDashboard, Trophy, User, Settings, LogOut, List, Menu, X, Award, Shield, BookOpen, Star, HelpCircle, Play } from "lucide-react";
+import { Brain, LayoutDashboard, Trophy, User, Settings, LogOut, Menu, X, Award, Shield, BookOpen, Star, HelpCircle, Play } from "lucide-react";
 import Header from "@/components/Header";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
@@ -13,7 +13,6 @@ interface DashboardLayoutProps {
 const navItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "Weekly Quiz", href: "/weekly-quiz", icon: Award },
-  { name: "My Live Quizzes", href: "/dashboard/quizzes", icon: List },
   { name: "Competitions", href: "/competitions", icon: Award },
   { name: "Leaderboard", href: "/leaderboard", icon: Trophy },
   // { name: "Recent Attempts", href: "/dashboard/recent-attempts", icon: User }, // Hidden
@@ -52,29 +51,35 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen bg-white">
       {/* Top Bar: Logo/name left, welcome right */}
-      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30 w-full h-16 flex items-center px-6 justify-between">
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-30 w-full h-16 flex items-center px-6 md:px-8 lg:px-12 justify-between">
         <div className="flex items-center space-x-2">
-          <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
-          <span className="text-lg font-semibold text-gray-900 align-middle">Bible Quiz Competition</span>
+          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}>
+            <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
+              <Brain className="w-3 h-3 text-white" strokeWidth={1} />
+            </div>
+            <span className="text-lg font-urbanist font-semibold text-gray-900">Bible Quiz Competition</span>
+          </div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="hidden md:flex text-gray-700 text-sm font-urbanist font-light">
+            Welcome back, <span className="font-medium">{userName}</span>
+            {userPlan === "pro" && (
+              <Badge className="ml-2 bg-black text-white font-urbanist font-light">Pro</Badge>
+            )}
+            {userPlan === "free" && (
+              <Badge className="ml-2 bg-gray-200 text-gray-700 font-urbanist font-light">Free</Badge>
+            )}
+          </div>
           <Button
             variant="ghost"
             size="sm"
-            className="md:hidden ml-2"
+            className="md:hidden"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {isMobileMenuOpen ? <X className="w-7 h-7" strokeWidth={2} /> : <Menu className="w-7 h-7" strokeWidth={2} />}
           </Button>
-        </div>
-        <div className="flex-1 text-right text-gray-700 text-sm font-medium">
-          Welcome back, {userName}
-          {userPlan === "pro" && (
-            <Badge className="ml-2 bg-purple-600 text-white">Pro</Badge>
-          )}
-          {userPlan === "free" && (
-            <Badge className="ml-2 bg-green-600 text-white">Free</Badge>
-          )}
         </div>
       </header>
       <div className="flex w-full h-screen">
@@ -90,7 +95,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         <aside className={`
           ${isMobileMenuOpen ? 'fixed inset-y-0 left-0 z-50 flex' : 'hidden'}
           md:static md:flex md:flex-col
-          w-64 h-screen bg-white border-r border-gray-200 shadow-lg transition-transform duration-300 ease-in-out
+          w-64 h-screen bg-white border-r border-gray-200 transition-transform duration-300 ease-in-out
         `}>
           <nav className="flex-1 px-4 py-6 space-y-2">
             {navItems.map((item) => (
@@ -99,13 +104,13 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 <Button
                   key={item.name}
                   variant={location.pathname === item.href ? "default" : "ghost"}
-                  className={`w-full justify-start h-10 ${location.pathname === item.href ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : "text-gray-700 hover:bg-gray-100"}`}
+                  className={`w-full justify-start h-10 font-urbanist font-light ${location.pathname === item.href ? "bg-black text-white hover:bg-gray-800" : "text-gray-700 hover:bg-gray-50"}`}
                   onClick={() => {
                     navigate(item.href);
                     setIsMobileMenuOpen(false);
                   }}
                 >
-                  <item.icon className="w-4 h-4 mr-3" />
+                  <item.icon className="w-4 h-4 mr-3" strokeWidth={1} />
                   {item.name}
                 </Button>
               )
@@ -115,33 +120,33 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
               <Button
                 key="Upgrade"
                 variant={location.pathname === "/dashboard/upgrade" ? "default" : "ghost"}
-                className={`w-full justify-start h-10 ${location.pathname === "/dashboard/upgrade" ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white" : "text-gray-700 hover:bg-gray-100"}`}
+                className={`w-full justify-start h-10 font-urbanist font-light ${location.pathname === "/dashboard/upgrade" ? "bg-black text-white hover:bg-gray-800" : "text-gray-700 hover:bg-gray-50"}`}
                 onClick={() => {
                   navigate("/dashboard/upgrade");
                   setIsMobileMenuOpen(false);
                 }}
               >
-                <Star className="w-4 h-4 mr-3 text-yellow-500" />
+                <Star className="w-4 h-4 mr-3" strokeWidth={1} />
                 Upgrade
               </Button>
             )}
             <div className="pt-4 mt-4 border-t border-gray-200">
               <Button
                 variant="ghost"
-                className="w-full justify-start h-10 text-red-600 hover:bg-red-50"
+                className="w-full justify-start h-10 text-gray-700 hover:bg-gray-50 font-urbanist font-light"
                 onClick={() => {
                   handleLogout();
                   setIsMobileMenuOpen(false);
                 }}
               >
-                <LogOut className="w-4 h-4 mr-3" />
+                <LogOut className="w-4 h-4 mr-3" strokeWidth={1} />
                 Logout
               </Button>
             </div>
           </nav>
         </aside>
         {/* Main Content */}
-        <main className="flex-1 p-6 w-full overflow-x-auto">
+        <main className="flex-1 p-6 md:p-8 w-full overflow-x-auto bg-white">
           {children}
         </main>
       </div>

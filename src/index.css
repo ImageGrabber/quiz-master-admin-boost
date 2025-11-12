@@ -6,6 +6,7 @@
 
 @layer base {
   :root {
+    --font-urbanist: 'Urbanist', system-ui, sans-serif;
     --background: 0 0% 100%;
     --foreground: 142 71% 10%;
 
@@ -93,4 +94,42 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Tidio Chat Widget Customization */
+/* Hide the "Chat with us" welcome message banner, keep only the floating chat icon */
+#tidio-chat-wrapper,
+.tidio-chat-iframe,
+iframe[id*="tidio"],
+iframe[src*="tidio"] {
+  /* Keep the chat widget visible */
+}
+
+/* Hide Tidio welcome message/banner - targeting widgetLabel class */
+.widgetLabel,
+button.widgetLabel,
+button[class*="widgetLabel"],
+button[class*="tidio"][class*="widgetLabel"],
+.tidio-chat-message-box,
+.tidio-chat-welcome,
+.tidio-chat-bubble,
+#tidio-chat-message-box,
+.tidio-welcome-message,
+div[id*="tidio-welcome"],
+div[class*="tidio-chat-welcome"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Keep the floating chat button visible */
+#tidio-chat-button,
+.tidio-chat-button,
+button[class*="tidio-chat"]:not([class*="widgetLabel"]) {
+  display: block !important;
+  visibility: visible !important;
 }
