@@ -67,6 +67,7 @@ import DailyVerses from "./pages/admin/DailyVerses";
 import NotFound from "./pages/NotFound";
 import RLSTest from "./pages/RLSTest";
 import BibleQA from "./pages/BibleQA";
+import SentryTest from "./pages/SentryTest";
 import BibleStudy from "./pages/BibleStudy";
 import PaulineEpistles from "./pages/bible-questions-and-answers-hub/pauline-epistles";
 import PublicLeaderboard from "./pages/PublicLeaderboard";
@@ -295,6 +296,7 @@ const App = () => {
             <Route path="/todays-quiz-mark" element={<TodaysQuizMark />} />
             <Route path="/daily-verse" element={<DailyVerse />} />
             <Route path="/prayer-requests" element={<PrayerRequests />} />
+            <Route path="/sentry-test" element={<SentryTest />} />
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
             <Route path="/auth/forgot-password" element={<ForgotPassword />} />
