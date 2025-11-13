@@ -25,80 +25,132 @@ export function WordSearchGame({ words, gridSize = 15, onComplete }: WordSearchG
   const [isSelecting, setIsSelecting] = useState(false);
   const [startCell, setStartCell] = useState<Position | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const touchStartPos = useRef<Position | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Use smaller grid on mobile
+  const effectiveGridSize = isMobile ? Math.min(gridSize, 10) : gridSize;
+
+  // Detect mobile on mount and resize
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Generate word search grid
   useEffect(() => {
     generateGrid();
-  }, [words, gridSize]);
+  }, [words, effectiveGridSize]);
 
   const generateGrid = () => {
-    const newGrid: string[][] = Array(gridSize).fill(null).map(() => 
-      Array(gridSize).fill('').map(() => getRandomLetter())
-    );
-
-    // Place words in the grid
-    const placedWords: FoundWord[] = [];
-    words.forEach(word => {
-      const upperWord = word.toUpperCase().replace(/\s/g, '');
-      let placed = false;
-      let attempts = 0;
-      
-      while (!placed && attempts < 100) {
-        const direction = Math.floor(Math.random() * 8); // 8 directions
-        const row = Math.floor(Math.random() * gridSize);
-        const col = Math.floor(Math.random() * gridSize);
-        
-        const positions: Position[] = [];
-        let valid = true;
-        
-        for (let i = 0; i < upperWord.length; i++) {
-          let newRow = row;
-          let newCol = col;
-          
-          switch (direction) {
-            case 0: newRow = row; newCol = col + i; break; // Right
-            case 1: newRow = row; newCol = col - i; break; // Left
-            case 2: newRow = row + i; newCol = col; break; // Down
-            case 3: newRow = row - i; newCol = col; break; // Up
-            case 4: newRow = row + i; newCol = col + i; break; // Down-Right
-            case 5: newRow = row + i; newCol = col - i; break; // Down-Left
-            case 6: newRow = row - i; newCol = col + i; break; // Up-Right
-            case 7: newRow = row - i; newCol = col - i; break; // Up-Left
-          }
-          
-          if (newRow < 0 || newRow >= gridSize || newCol < 0 || newCol >= gridSize) {
-            valid = false;
-            break;
-          }
-          
-          positions.push({ row: newRow, col: newCol });
-        }
-        
-        if (valid) {
-          // Check if positions overlap with existing words
-          const overlaps = placedWords.some(found => 
-            found.positions.some(pos => 
-              positions.some(p => p.row === pos.row && p.col === pos.col)
-            )
-          );
-          
-          if (!overlaps) {
-            // Place the word
-            upperWord.split('').forEach((char, idx) => {
-              newGrid[positions[idx].row][positions[idx].col] = char;
-            });
-            
-            placedWords.push({ word: word, positions });
-            placed = true;
-          }
-        }
-        
-        attempts++;
-      }
-    });
+    let allWordsPlaced = false;
+    let attempts = 0;
+    const maxAttempts = 50;
+    let finalPlacedWords: FoundWord[] = [];
+    let finalGrid: string[][] = [];
     
-    setGrid(newGrid);
-    setFoundWords([]);
+    while (!allWordsPlaced && attempts < maxAttempts) {
+      const newGrid: string[][] = Array(effectiveGridSize).fill(null).map(() => 
+        Array(effectiveGridSize).fill('').map(() => getRandomLetter())
+      );
+
+      // Place words in the grid
+      const placedWords: FoundWord[] = [];
+      
+      // Sort words by length (longest first) for better placement
+      const sortedWords = [...words].sort((a, b) => b.length - a.length);
+      
+      sortedWords.forEach(word => {
+        const upperWord = word.toUpperCase().replace(/\s/g, '');
+        let placed = false;
+        let placementAttempts = 0;
+        
+        while (!placed && placementAttempts < 200) {
+          const direction = Math.floor(Math.random() * 8); // 8 directions
+          const row = Math.floor(Math.random() * effectiveGridSize);
+          const col = Math.floor(Math.random() * effectiveGridSize);
+          
+          const positions: Position[] = [];
+          let valid = true;
+          
+          for (let i = 0; i < upperWord.length; i++) {
+            let newRow = row;
+            let newCol = col;
+            
+            switch (direction) {
+              case 0: newRow = row; newCol = col + i; break; // Right
+              case 1: newRow = row; newCol = col - i; break; // Left
+              case 2: newRow = row + i; newCol = col; break; // Down
+              case 3: newRow = row - i; newCol = col; break; // Up
+              case 4: newRow = row + i; newCol = col + i; break; // Down-Right
+              case 5: newRow = row + i; newCol = col - i; break; // Down-Left
+              case 6: newRow = row - i; newCol = col + i; break; // Up-Right
+              case 7: newRow = row - i; newCol = col - i; break; // Up-Left
+            }
+            
+            if (newRow < 0 || newRow >= effectiveGridSize || newCol < 0 || newCol >= effectiveGridSize) {
+              valid = false;
+              break;
+            }
+            
+            positions.push({ row: newRow, col: newCol });
+          }
+          
+          if (valid) {
+            // Check if positions overlap with existing words
+            const overlaps = placedWords.some(found => 
+              found.positions.some(pos => 
+                positions.some(p => p.row === pos.row && p.col === pos.col)
+              )
+            );
+            
+            if (!overlaps) {
+              // Place the word
+              upperWord.split('').forEach((char, idx) => {
+                newGrid[positions[idx].row][positions[idx].col] = char;
+              });
+              
+              placedWords.push({ word: word, positions });
+              placed = true;
+            }
+          }
+          
+          placementAttempts++;
+        }
+      });
+      
+      // Check if all words were placed
+      if (placedWords.length === words.length) {
+        allWordsPlaced = true;
+        finalGrid = newGrid;
+        finalPlacedWords = placedWords;
+        break;
+      } else {
+        // Keep track of best attempt
+        if (placedWords.length > finalPlacedWords.length) {
+          finalGrid = newGrid;
+          finalPlacedWords = placedWords;
+        }
+      }
+      
+      attempts++;
+    }
+    
+    // Set the grid (either with all words or best attempt)
+    if (allWordsPlaced) {
+      setGrid(finalGrid);
+      setFoundWords([]);
+    } else {
+      // If we couldn't place all words, warn and use best attempt
+      console.warn(`Could not place all words after ${maxAttempts} attempts. Placed ${finalPlacedWords.length} of ${words.length}`);
+      setGrid(finalGrid);
+      setFoundWords([]);
+    }
   };
 
   const getRandomLetter = () => {
@@ -142,6 +194,58 @@ export function WordSearchGame({ words, gridSize = 15, onComplete }: WordSearchG
     
     setSelectedCells([]);
     setStartCell(null);
+  };
+
+  const handleCellTouchStart = (e: React.TouchEvent, row: number, col: number) => {
+    e.preventDefault();
+    if (isCellFound(row, col)) return;
+    
+    setIsSelecting(true);
+    setStartCell({ row, col });
+    touchStartPos.current = { row, col };
+    setSelectedCells([{ row, col }]);
+  };
+
+  const handleCellTouchMove = (e: React.TouchEvent, row: number, col: number) => {
+    e.preventDefault();
+    if (!isSelecting || !touchStartPos.current || isCellFound(row, col)) return;
+    
+    const cells = getCellsBetween(touchStartPos.current, { row, col });
+    setSelectedCells(cells);
+  };
+
+  const handleCellTouchEnd = (e: React.TouchEvent) => {
+    e.preventDefault();
+    if (!isSelecting) return;
+    
+    setIsSelecting(false);
+    
+    if (selectedCells.length > 0) {
+      checkWord();
+    }
+    
+    setSelectedCells([]);
+    setStartCell(null);
+    touchStartPos.current = null;
+  };
+
+  const getCellFromTouch = (e: React.TouchEvent): Position | null => {
+    if (!gridRef.current) return null;
+    
+    const touch = e.touches[0] || e.changedTouches[0];
+    const rect = gridRef.current.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
+    
+    const cellSize = rect.width / effectiveGridSize;
+    const col = Math.floor(x / cellSize);
+    const row = Math.floor(y / cellSize);
+    
+    if (row >= 0 && row < effectiveGridSize && col >= 0 && col < effectiveGridSize) {
+      return { row, col };
+    }
+    
+    return null;
   };
 
   const getCellsBetween = (start: Position, end: Position): Position[] => {
@@ -205,7 +309,7 @@ export function WordSearchGame({ words, gridSize = 15, onComplete }: WordSearchG
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-nowrap items-center justify-between gap-4 bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-50 rounded-2xl p-6 border border-blue-200/50 shadow-lg backdrop-blur-sm overflow-hidden">
+      <div className="flex flex-col md:flex-row md:flex-nowrap items-center md:items-center md:justify-between gap-4 bg-gradient-to-r from-blue-50 via-indigo-50 to-blue-50 rounded-2xl p-6 border border-blue-200/50 shadow-lg backdrop-blur-sm overflow-hidden">
         <h3 className="text-xl md:text-2xl font-urbanist font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent whitespace-nowrap">
           Bible Word Search
         </h3>
@@ -243,12 +347,21 @@ export function WordSearchGame({ words, gridSize = 15, onComplete }: WordSearchG
       </div>
 
       {/* Game Grid */}
-      <div className="flex justify-center">
+      <div className="flex justify-center overflow-x-auto">
         <div
           ref={gridRef}
-          className="grid gap-1 p-4 bg-white rounded-2xl border-2 border-gray-200 shadow-xl"
-          style={{ gridTemplateColumns: `repeat(${gridSize}, minmax(0, 1fr))` }}
+          className="grid gap-0.5 md:gap-1 p-2 md:p-4 bg-white rounded-2xl border-2 border-gray-200 shadow-xl select-none"
+          style={{ gridTemplateColumns: `repeat(${effectiveGridSize}, minmax(0, 1fr))` }}
           onMouseLeave={handleCellMouseUp}
+          onTouchMove={(e) => {
+            e.preventDefault();
+            const cell = getCellFromTouch(e);
+            if (cell && touchStartPos.current && isSelecting) {
+              const cells = getCellsBetween(touchStartPos.current, cell);
+              setSelectedCells(cells);
+            }
+          }}
+          onTouchEnd={handleCellTouchEnd}
         >
           {grid.map((row, rowIndex) =>
             row.map((cell, colIndex) => {
@@ -259,19 +372,23 @@ export function WordSearchGame({ words, gridSize = 15, onComplete }: WordSearchG
                 <div
                   key={`${rowIndex}-${colIndex}`}
                   className={`
-                    w-8 h-8 md:w-10 md:h-10 flex items-center justify-center
-                    text-sm md:text-base font-bold font-urbanist
-                    rounded transition-all duration-150 cursor-pointer
+                    w-8 h-8 sm:w-9 sm:h-9 md:w-12 md:h-12 flex items-center justify-center
+                    text-base sm:text-lg md:text-xl font-bold font-urbanist
+                    rounded transition-all duration-150 cursor-pointer touch-manipulation
                     ${isFound 
                       ? 'bg-green-200 text-green-800' 
                       : isSelected
                       ? 'bg-blue-200 text-blue-900'
-                      : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
+                      : 'bg-gray-50 text-gray-700 hover:bg-gray-100 active:bg-blue-100'
                     }
                   `}
                   onMouseDown={() => handleCellMouseDown(rowIndex, colIndex)}
                   onMouseEnter={() => handleCellMouseEnter(rowIndex, colIndex)}
                   onMouseUp={handleCellMouseUp}
+                  onTouchStart={(e) => {
+                    e.stopPropagation();
+                    handleCellTouchStart(e, rowIndex, colIndex);
+                  }}
                 >
                   {cell}
                 </div>

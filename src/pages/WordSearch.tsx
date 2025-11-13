@@ -48,7 +48,7 @@ const WordSearch = () => {
           <div className="p-6">
             <WordSearchGame
               words={bibleWords}
-              gridSize={15}
+              gridSize={12}
               onComplete={handleGameComplete}
             />
           </div>
