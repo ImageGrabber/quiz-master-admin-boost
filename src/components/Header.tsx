@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Brain, Trophy, LogOut, Menu } from "lucide-react";
+import { Brain, Trophy, LogOut, Menu, Heart } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -84,6 +84,14 @@ const Header = () => {
           >
             Hosting Guide
           </button>
+          <Button 
+            variant="ghost" 
+            className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold px-4 py-2 rounded flex items-center space-x-1" 
+            onClick={() => navigate("/donate")}
+          >
+            <Heart className="w-4 h-4" />
+            <span>Donate</span>
+          </Button>
           {showSignIn && (
             <button 
               className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" 
@@ -150,6 +158,13 @@ const Header = () => {
               onClick={() => { setMobileMenuOpen(false); navigate("/host-live-bible-quizzes-with-confidence"); }}
             >
               Hosting Guide
+            </button>
+            <button 
+              className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold px-4 py-3 text-left flex items-center space-x-2" 
+              onClick={() => { setMobileMenuOpen(false); navigate("/donate"); }}
+            >
+              <Heart className="w-4 h-4" />
+              <span>Donate</span>
             </button>
             {showSignIn && (
               <button 
