@@ -1,75 +1,272 @@
 [
   {
     "id": 1,
-    "question": "What did God create on the first day?",
-    "option_a": "Light",
-    "option_b": "Land",
-    "option_c": "Animals",
-    "option_d": "Humans",
+    "question": "In Genesis 1, what did God create on the first day?",
+    "option_a": "Light separated from darkness",
+    "option_b": "The firmament dividing waters",
+    "option_c": "Dry land and seas",
+    "option_d": "Sun, moon, and stars",
     "correct_index": 0
   },
   {
     "id": 2,
-    "question": "Who built the ark?",
-    "option_a": "Moses",
-    "option_b": "Noah",
-    "option_c": "Abraham",
-    "option_d": "David",
+    "question": "How old was Noah when the flood came upon the earth?",
+    "option_a": "500 years old",
+    "option_b": "600 years old",
+    "option_c": "950 years old",
+    "option_d": "120 years old",
     "correct_index": 1
   },
   {
     "id": 3,
-    "question": "What is the first book of the Bible?",
-    "option_a": "Exodus",
-    "option_b": "Genesis",
-    "option_c": "Matthew",
-    "option_d": "Psalms",
+    "question": "What was the name of Abraham's wife before God changed it to Sarah?",
+    "option_a": "Rebekah",
+    "option_b": "Sarai",
+    "option_c": "Rachel",
+    "option_d": "Leah",
     "correct_index": 1
   },
   {
     "id": 4,
-    "question": "How many days was Jonah in the belly of the fish?",
-    "option_a": "3 days",
-    "option_b": "7 days",
-    "option_c": "40 days",
-    "option_d": "1 day",
-    "correct_index": 0
+    "question": "To which Assyrian city was the prophet Jonah sent to preach?",
+    "option_a": "Babylon",
+    "option_b": "Damascus",
+    "option_c": "Nineveh",
+    "option_d": "Tyre",
+    "correct_index": 2
   },
   {
     "id": 5,
-    "question": "Who was thrown into the lions' den?",
-    "option_a": "Daniel",
-    "option_b": "David",
-    "option_c": "Joseph",
-    "option_d": "Samuel",
-    "correct_index": 0
+    "question": "Which king wrote the decree that led to Daniel being thrown into the lions' den?",
+    "option_a": "Nebuchadnezzar",
+    "option_b": "Darius",
+    "option_c": "Cyrus",
+    "option_d": "Belshazzar",
+    "correct_index": 1
   },
   {
     "id": 6,
-    "question": "What is the last book of the New Testament?",
-    "option_a": "Jude",
-    "option_b": "Hebrews",
-    "option_c": "Revelation",
-    "option_d": "3 John",
+    "question": "In Revelation, to which of the seven churches did Jesus say, 'I know your works, that you are neither cold nor hot'?",
+    "option_a": "Ephesus",
+    "option_b": "Smyrna",
+    "option_c": "Laodicea",
+    "option_d": "Philadelphia",
     "correct_index": 2
   },
   {
     "id": 7,
-    "question": "Who was the first king of Israel?",
-    "option_a": "David",
-    "option_b": "Solomon",
-    "option_c": "Saul",
-    "option_d": "Samuel",
-    "correct_index": 2
+    "question": "Who anointed Saul as the first king of Israel?",
+    "option_a": "Samuel the prophet",
+    "option_b": "Nathan the prophet",
+    "option_c": "Eli the priest",
+    "option_d": "Moses",
+    "correct_index": 0
   },
   {
     "id": 8,
-    "question": "In which city was Jesus born?",
-    "option_a": "Jerusalem",
-    "option_b": "Nazareth",
-    "option_c": "Bethlehem",
-    "option_d": "Jericho",
+    "question": "According to the Gospel of Luke, what decree brought Mary and Joseph to Bethlehem?",
+    "option_a": "A festival of the Jews",
+    "option_b": "Caesar Augustus' census decree",
+    "option_c": "King Herod's command",
+    "option_d": "The Passover celebration",
+    "correct_index": 1
+  },
+  {
+    "id": 9,
+    "question": "What did Moses strike to bring forth water in the wilderness of Zin?",
+    "option_a": "The ground",
+    "option_b": "A tree",
+    "option_c": "The rock at Horeb",
+    "option_d": "The rock at Meribah",
+    "correct_index": 3
+  },
+  {
+    "id": 10,
+    "question": "Which of the twelve apostles was a tax collector before following Jesus?",
+    "option_a": "Matthew (Levi)",
+    "option_b": "Simon the Zealot",
+    "option_c": "James son of Alphaeus",
+    "option_d": "Bartholomew",
+    "correct_index": 0
+  },
+  {
+    "id": 11,
+    "question": "In the book of Esther, what was the name of the king who made Esther his queen?",
+    "option_a": "Nebuchadnezzar",
+    "option_b": "Ahasuerus (Xerxes)",
+    "option_c": "Darius",
+    "option_d": "Artaxerxes",
+    "correct_index": 1
+  },
+  {
+    "id": 12,
+    "question": "How many years did the Israelites wander in the wilderness before entering the Promised Land?",
+    "option_a": "20 years",
+    "option_b": "30 years",
+    "option_c": "40 years",
+    "option_d": "50 years",
+    "correct_index": 2
+  },
+  {
+    "id": 13,
+    "question": "What was the name of the garden where Jesus prayed before His arrest?",
+    "option_a": "Garden of Eden",
+    "option_b": "Garden of Gethsemane",
+    "option_c": "Mount of Olives",
+    "option_d": "Garden of Joseph",
+    "correct_index": 1
+  },
+  {
+    "id": 14,
+    "question": "Which prophet was taken up to heaven in a whirlwind?",
+    "option_a": "Elijah",
+    "option_b": "Elisha",
+    "option_c": "Enoch",
+    "option_d": "Isaiah",
+    "correct_index": 0
+  },
+  {
+    "id": 15,
+    "question": "In Paul's letter to the Philippians, what does he say he has learned in every situation?",
+    "option_a": "To pray without ceasing",
+    "option_b": "To be content",
+    "option_c": "To give thanks",
+    "option_d": "To trust in the Lord",
+    "correct_index": 1
+  },
+  {
+    "id": 16,
+    "question": "What musical instrument did David play to soothe King Saul?",
+    "option_a": "Harp",
+    "option_b": "Lyre",
+    "option_c": "Trumpet",
+    "option_d": "Flute",
+    "correct_index": 0
+  },
+  {
+    "id": 17,
+    "question": "How many stones did David choose from the brook to fight Goliath?",
+    "option_a": "3 stones",
+    "option_b": "5 stones",
+    "option_c": "7 stones",
+    "option_d": "10 stones",
+    "correct_index": 1
+  },
+  {
+    "id": 18,
+    "question": "Which book of the Bible contains the famous passage 'For God so loved the world'?",
+    "option_a": "Romans",
+    "option_b": "John",
+    "option_c": "Matthew",
+    "option_d": "1 John",
+    "correct_index": 1
+  },
+  {
+    "id": 19,
+    "question": "What was the name of the place where Jacob wrestled with God and received a new name?",
+    "option_a": "Bethel",
+    "option_b": "Peniel",
+    "option_c": "Shechem",
+    "option_d": "Haran",
+    "correct_index": 1
+  },
+  {
+    "id": 20,
+    "question": "In the parable of the ten virgins, how many were wise and had oil for their lamps?",
+    "option_a": "3",
+    "option_b": "5",
+    "option_c": "7",
+    "option_d": "10",
+    "correct_index": 1
+  },
+  {
+    "id": 21,
+    "question": "Which prophet saw a vision of a valley filled with dry bones?",
+    "option_a": "Jeremiah",
+    "option_b": "Ezekiel",
+    "option_c": "Daniel",
+    "option_d": "Isaiah",
+    "correct_index": 1
+  },
+  {
+    "id": 22,
+    "question": "What did the Magi from the East bring as gifts to Jesus?",
+    "option_a": "Silver, precious stones, and spices",
+    "option_b": "Gold, frankincense, and myrrh",
+    "option_c": "Gold, silver, and bronze",
+    "option_d": "Wine, oil, and grain",
+    "correct_index": 1
+  },
+  {
+    "id": 23,
+    "question": "Who replaced Judas Iscariot as one of the twelve apostles?",
+    "option_a": "Barnabas",
+    "option_b": "Matthias",
+    "option_c": "Paul",
+    "option_d": "Silas",
+    "correct_index": 1
+  },
+  {
+    "id": 24,
+    "question": "In which city was Paul when he had a vision of a man from Macedonia saying, 'Come over and help us'?",
+    "option_a": "Athens",
+    "option_b": "Corinth",
+    "option_c": "Troas",
+    "option_d": "Ephesus",
+    "correct_index": 2
+  },
+  {
+    "id": 25,
+    "question": "What was the name of the Roman centurion whose servant Jesus healed in Capernaum?",
+    "option_a": "Cornelius",
+    "option_b": "Julius",
+    "option_c": "The centurion is unnamed",
+    "option_d": "Marcus",
+    "correct_index": 2
+  },
+  {
+    "id": 26,
+    "question": "How many plagues did God send upon Egypt before Pharaoh released the Israelites?",
+    "option_a": "7",
+    "option_b": "10",
+    "option_c": "12",
+    "option_d": "14",
+    "correct_index": 1
+  },
+  {
+    "id": 27,
+    "question": "Who was the mother of John the Baptist?",
+    "option_a": "Mary",
+    "option_b": "Martha",
+    "option_c": "Elizabeth",
+    "option_d": "Anna",
+    "correct_index": 2
+  },
+  {
+    "id": 28,
+    "question": "In Revelation, what is the number of the beast?",
+    "option_a": "333",
+    "option_b": "444",
+    "option_c": "555",
+    "option_d": "666",
+    "correct_index": 3
+  },
+  {
+    "id": 29,
+    "question": "Which king of Judah became king at the age of 8 and reigned for 31 years?",
+    "option_a": "Josiah",
+    "option_b": "Hezekiah",
+    "option_c": "Manasseh",
+    "option_d": "Uzziah",
+    "correct_index": 0
+  },
+  {
+    "id": 30,
+    "question": "What did Jesus say is the greatest commandment?",
+    "option_a": "Honor your father and mother",
+    "option_b": "You shall not murder",
+    "option_c": "Love the Lord your God with all your heart, soul, and mind",
+    "option_d": "Love your neighbor as yourself",
     "correct_index": 2
   }
 ]
-

@@ -50,6 +50,16 @@ interface CompetitionWithDetails extends Competition {
   user_payment_status?: 'pending' | 'completed' | 'failed' | 'refunded';
 }
 
+interface DailyQuestion {
+  id: number;
+  question: string;
+  option_a: string;
+  option_b: string;
+  option_c: string;
+  option_d: string;
+  correct_index: number;
+}
+
 const Dashboard = () => {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [wellnessStats, setWellnessStats] = useState<WellnessStats>({
@@ -114,6 +124,14 @@ const Dashboard = () => {
   const [answers, setAnswers] = useState<{ [key: number]: number }>({});
   const [thinkingTrap, setThinkingTrap] = useState<string | null>(null);
   const [hasCheckedInToday, setHasCheckedInToday] = useState(false);
+
+  // Daily Quiz State
+  const [dailyQuestions, setDailyQuestions] = useState<DailyQuestion[]>([]);
+  const [currentDailyIndex, setCurrentDailyIndex] = useState(0);
+  const [dailyAnswers, setDailyAnswers] = useState<{ [key: number]: { selected: number; isCorrect: boolean } }>({});
+  const [dailyQuizCompleted, setDailyQuizCompleted] = useState(false);
+  const [dailyScore, setDailyScore] = useState(0);
+
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
@@ -219,7 +237,100 @@ const Dashboard = () => {
     fetchUserData();
     fetchQuizzes();
     fetchCompetitions();
+    fetchQuizzes();
+    fetchCompetitions();
+    fetchDailyQuestions();
   }, []);
+
+  const fetchDailyQuestions = async () => {
+    try {
+      const response = await fetch('/data/dailyQuizQuestions.json');
+      const allQuestions: DailyQuestion[] = await response.json();
+
+      if (allQuestions && allQuestions.length > 0) {
+        // Select 5 questions based on day of year
+        const dayOfYear = getDayOfYear();
+        const questionsPerDay = 5;
+        const startIndex = (dayOfYear * questionsPerDay) % allQuestions.length;
+
+        const selectedQuestions: DailyQuestion[] = [];
+        for (let i = 0; i < questionsPerDay; i++) {
+          selectedQuestions.push(allQuestions[(startIndex + i) % allQuestions.length]);
+        }
+
+        setDailyQuestions(selectedQuestions);
+
+        // Check local storage for today's progress
+        const today = new Date().toISOString().split('T')[0];
+        const savedProgress = localStorage.getItem(`daily_quiz_progress_${today}`);
+
+        if (savedProgress) {
+          const parsed = JSON.parse(savedProgress);
+          setDailyAnswers(parsed.answers || {});
+          setCurrentDailyIndex(parsed.currentIndex || 0);
+          setDailyQuizCompleted(parsed.completed || false);
+          setDailyScore(parsed.score || 0);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching daily questions:', error);
+    }
+  };
+
+  const handleDailyAnswer = (questionId: number, answerIndex: number) => {
+    if (dailyAnswers[questionId] || dailyQuizCompleted) return;
+
+    const currentQuestion = dailyQuestions[currentDailyIndex];
+    const isCorrect = answerIndex === currentQuestion.correct_index;
+
+    const newAnswers = {
+      ...dailyAnswers,
+      [questionId]: { selected: answerIndex, isCorrect }
+    };
+
+    setDailyAnswers(newAnswers);
+
+    if (isCorrect) {
+      setDailyScore(prev => prev + 1);
+      toast({
+        title: "Correct!",
+        description: "Great job!",
+        variant: "default",
+        className: "bg-green-50 border-green-200 text-green-800 duration-2000"
+      });
+    } else {
+      toast({
+        title: "Incorrect",
+        description: `The correct answer was ${String.fromCharCode(65 + currentQuestion.correct_index)}`,
+        variant: "destructive",
+        duration: 2000
+      });
+    }
+
+    // Save progress
+    saveDailyProgress(newAnswers, currentDailyIndex, dailyQuizCompleted, isCorrect ? dailyScore + 1 : dailyScore);
+  };
+
+  const handleNextDailyQuestion = () => {
+    if (currentDailyIndex < dailyQuestions.length - 1) {
+      const nextIndex = currentDailyIndex + 1;
+      setCurrentDailyIndex(nextIndex);
+      saveDailyProgress(dailyAnswers, nextIndex, false, dailyScore);
+    } else {
+      setDailyQuizCompleted(true);
+      saveDailyProgress(dailyAnswers, currentDailyIndex, true, dailyScore);
+    }
+  };
+
+  const saveDailyProgress = (answers: any, index: number, completed: boolean, score: number) => {
+    const today = new Date().toISOString().split('T')[0];
+    localStorage.setItem(`daily_quiz_progress_${today}`, JSON.stringify({
+      answers,
+      currentIndex: index,
+      completed,
+      score
+    }));
+  };
 
   // Check if user has checked in today
   const checkTodayCheckIn = async () => {
@@ -1198,6 +1309,135 @@ const Dashboard = () => {
           </button>
         )} */}
       {/* </div> */}
+
+      {/* </div> */}
+
+      {/* Daily Quiz Card */}
+      {dailyQuestions.length > 0 && (
+        <Card className="relative border-0 shadow-lg hover:shadow-xl transition-all duration-500 rounded-3xl bg-white overflow-hidden mb-6 group">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-amber-50/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-orange-50/50 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4"></div>
+
+          <CardContent className="relative z-10 p-6 md:p-8">
+            <div className="flex flex-col md:flex-row gap-8 items-center">
+              <div className="flex-1 w-full">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-amber-100 rounded-lg">
+                      <Sun className="w-5 h-5 text-amber-600" />
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-900">Daily Challenge</h3>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-slate-500">
+                      {dailyQuizCompleted ? "Completed" : `Question ${currentDailyIndex + 1}/5`}
+                    </span>
+                    <Progress value={dailyQuizCompleted ? 100 : ((currentDailyIndex) / 5) * 100} className="w-24 h-2" />
+                  </div>
+                </div>
+
+                {dailyQuizCompleted ? (
+                  <div className="text-center py-8">
+                    <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Trophy className="w-10 h-10 text-green-600" />
+                    </div>
+                    <h4 className="text-2xl font-bold text-slate-900 mb-2">Challenge Completed!</h4>
+                    <p className="text-slate-600 mb-6">You scored {dailyScore} out of 5 today.</p>
+                    <div className="flex justify-center gap-4">
+                      <div className="p-4 bg-slate-50 rounded-xl text-center min-w-[100px]">
+                        <p className="text-xs text-slate-500 uppercase font-bold">Score</p>
+                        <p className="text-2xl font-bold text-indigo-600">{Math.round((dailyScore / 5) * 100)}%</p>
+                      </div>
+                      <div className="p-4 bg-slate-50 rounded-xl text-center min-w-[100px]">
+                        <p className="text-xs text-slate-500 uppercase font-bold">Streak</p>
+                        <p className="text-2xl font-bold text-amber-600">1 Day</p>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <h4 className="text-xl font-semibold text-slate-800 mb-6 leading-relaxed min-h-[3.5rem]">
+                      {dailyQuestions[currentDailyIndex].question}
+                    </h4>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                      {[
+                        dailyQuestions[currentDailyIndex].option_a,
+                        dailyQuestions[currentDailyIndex].option_b,
+                        dailyQuestions[currentDailyIndex].option_c,
+                        dailyQuestions[currentDailyIndex].option_d
+                      ].map((option, index) => {
+                        const currentQuestionId = dailyQuestions[currentDailyIndex].id;
+                        const answerState = dailyAnswers[currentQuestionId];
+                        const isAnswered = !!answerState;
+                        const isSelected = answerState?.selected === index;
+                        const isCorrect = dailyQuestions[currentDailyIndex].correct_index === index;
+
+                        let buttonClass = "justify-start h-auto py-3 px-4 text-left font-normal text-slate-600 hover:bg-slate-50 border-slate-200 transition-all duration-200";
+
+                        if (isAnswered) {
+                          if (isCorrect) {
+                            buttonClass = "justify-start h-auto py-3 px-4 text-left font-medium bg-green-50 text-green-700 border-green-200 hover:bg-green-50 ring-1 ring-green-200";
+                          } else if (isSelected) {
+                            buttonClass = "justify-start h-auto py-3 px-4 text-left font-medium bg-red-50 text-red-700 border-red-200 hover:bg-red-50 ring-1 ring-red-200";
+                          } else {
+                            buttonClass = "justify-start h-auto py-3 px-4 text-left font-normal text-slate-400 border-slate-100 opacity-60";
+                          }
+                        }
+
+                        return (
+                          <Button
+                            key={index}
+                            variant="outline"
+                            className={buttonClass}
+                            onClick={() => handleDailyAnswer(currentQuestionId, index)}
+                            disabled={isAnswered}
+                          >
+                            <span className={`mr-3 flex-shrink-0 w-6 h-6 rounded-full text-xs flex items-center justify-center font-semibold transition-all ${isAnswered && isCorrect ? 'bg-green-200 text-green-700' :
+                                isAnswered && isSelected ? 'bg-red-200 text-red-700' :
+                                  'bg-slate-100 text-slate-500 group-hover:bg-white'
+                              }`}>
+                              {String.fromCharCode(65 + index)}
+                            </span>
+                            {option}
+                            {isAnswered && isCorrect && (
+                              <CheckCircle className="ml-auto w-4 h-4 text-green-600" />
+                            )}
+                            {isAnswered && isSelected && !isCorrect && (
+                              <AlertTriangle className="ml-auto w-4 h-4 text-red-500" />
+                            )}
+                          </Button>
+                        );
+                      })}
+                    </div>
+
+                    {dailyAnswers[dailyQuestions[currentDailyIndex].id] && (
+                      <div className="flex justify-end animate-in fade-in slide-in-from-bottom-2">
+                        <Button
+                          onClick={handleNextDailyQuestion}
+                          className="bg-slate-900 text-white hover:bg-slate-800 px-6"
+                        >
+                          {currentDailyIndex < 4 ? "Next Question" : "Finish Quiz"}
+                          <ArrowRight className="w-4 h-4 ml-2" />
+                        </Button>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+
+              <div className="hidden md:flex flex-col items-center justify-center w-48 p-4 bg-amber-50/50 rounded-2xl border border-amber-100/50 text-center self-stretch">
+                <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center mb-3">
+                  <Zap className="w-6 h-6 text-amber-500 fill-amber-500" />
+                </div>
+                <p className="text-xs font-medium text-amber-800 uppercase tracking-wide mb-1">Daily Streak</p>
+                <p className="text-2xl font-bold text-slate-900">1 Day</p>
+                <p className="text-xs text-slate-500 mt-1">Keep it up!</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Weekly Bible Quiz - Full Width - First */}
       <Card className="relative border-0 shadow-lg hover:shadow-xl transition-all duration-500 rounded-3xl bg-white overflow-hidden mb-6 group">
