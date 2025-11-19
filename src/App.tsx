@@ -9,7 +9,8 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import NotificationBanner from "@/components/NotificationBanner";
 import { Analytics } from "@vercel/analytics/react"
 import GoogleAnalytics from "@/components/GoogleAnalytics";
-import Index from "./pages/Index";
+import Index from "./pages/homepages/Index";
+import CompetitionHome from "./pages/homepages/CompetitionHome";
 import SignUpToday from "./pages/SignUpToday";
 import EmotionalCheckIn from "./pages/EmotionalCheckIn";
 import JoyRunnerTest from "./pages/JoyRunnerTest";
@@ -65,6 +66,7 @@ import AdminUserSettings from "./pages/admin/UserSettings";
 import WeeklyAttendance from "./pages/admin/WeeklyAttendance";
 import AdminPrayerRequests from "./pages/admin/PrayerRequests";
 import DailyVerses from "./pages/admin/DailyVerses";
+import Notifications from "./pages/admin/Notifications";
 import NotFound from "./pages/NotFound";
 import RLSTest from "./pages/RLSTest";
 import BibleQA from "./pages/BibleQA";
@@ -291,7 +293,9 @@ const App = () => {
             <Route path="/verse-master" element={<ProtectedRoute><VerseMaster /></ProtectedRoute>} />
             <Route path="/faith-builder" element={<ProtectedRoute><FaithBuilder /></ProtectedRoute>} />
             <Route path="/flappy-bird" element={<ProtectedRoute><FlappyBird /></ProtectedRoute>} />
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<CompetitionHome />} />
+            <Route path="/home" element={<Index />} />
+            <Route path="/competition-home" element={<CompetitionHome />} />
             <Route path="/signup-today" element={<SignUpToday />} />
             <Route path="/todays-quiz" element={<TodaysQuiz />} />
             <Route path="/todays-quiz-mark" element={<TodaysQuizMark />} />
@@ -405,6 +409,7 @@ const App = () => {
             <Route path="/admin/activity" element={<ProtectedRoute requiredRole="admin"><AdminActivity /></ProtectedRoute>} />
             <Route path="/admin/prayer-requests" element={<ProtectedRoute requiredRole="admin"><AdminPrayerRequests /></ProtectedRoute>} />
             <Route path="/admin/daily-verses" element={<ProtectedRoute requiredRole="admin"><DailyVerses /></ProtectedRoute>} />
+            <Route path="/admin/notifications" element={<ProtectedRoute requiredRole="admin"><Notifications /></ProtectedRoute>} />
             <Route path="/admin/competitions" element={<ProtectedRoute requiredRole="admin"><AdminCompetitions /></ProtectedRoute>} />
             <Route path="/admin/weekly-attendance" element={<ProtectedRoute requiredRole="admin"><WeeklyAttendance /></ProtectedRoute>} />
             <Route path="/admin/users" element={<ProtectedRoute requiredRole="admin"><AdminUsers /></ProtectedRoute>} />

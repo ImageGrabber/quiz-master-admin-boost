@@ -114,16 +114,22 @@ export function VerseMaster({ verses, onComplete }: VerseMasterProps) {
         const isWrongAnswer = showResult && userAnswers[blankIndex] && !isCorrectAnswer;
 
         elements.push(
-          <span key={index} className="inline-flex items-center mx-1">
+          <span key={index} className="inline-flex items-center mx-0.5 sm:mx-1 flex-wrap">
             <input
               type="text"
               value={userAnswers[blankIndex] || ''}
               onChange={(e) => handleAnswerChange(blankIndex, e.target.value)}
               disabled={showResult}
+              autoComplete="off"
+              autoCapitalize="off"
+              autoCorrect="off"
+              spellCheck="false"
               className={`
-                w-20 md:w-32 lg:w-40 px-2 py-1 text-center
+                w-16 sm:w-20 md:w-32 lg:w-40 px-1.5 sm:px-2 py-1 sm:py-1.5 text-sm sm:text-base text-center
                 border-2 rounded-lg font-urbanist font-semibold
                 transition-all duration-200
+                pointer-events-auto
+                touch-manipulation
                 ${showResult
                   ? isCorrectAnswer
                     ? 'bg-green-200 border-green-500 text-green-900'
@@ -133,16 +139,24 @@ export function VerseMaster({ verses, onComplete }: VerseMasterProps) {
                   : 'bg-white border-amber-400 text-gray-900 focus:border-amber-600 focus:ring-2 focus:ring-amber-200'
                 }
                 disabled:opacity-75
+                focus:outline-none
               `}
               placeholder="?"
-              onKeyPress={(e) => {
+              onKeyDown={(e) => {
                 if (e.key === 'Enter' && !showResult) {
+                  e.preventDefault();
                   checkAnswer();
                 }
               }}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+              onFocus={(e) => {
+                e.target.select();
+              }}
             />
             {showResult && !isCorrectAnswer && (
-              <span className="ml-2 text-xs text-red-600 font-urbanist font-semibold">
+              <span className="ml-1 sm:ml-2 text-xs sm:text-sm text-red-600 font-urbanist font-semibold break-words">
                 ({word})
               </span>
             )}
@@ -151,7 +165,7 @@ export function VerseMaster({ verses, onComplete }: VerseMasterProps) {
         blankIndex++;
       } else {
         elements.push(
-          <span key={index} className="mx-1">
+          <span key={index} className="mx-0.5 sm:mx-1 break-words">
             {word}
           </span>
         );
@@ -230,37 +244,37 @@ export function VerseMaster({ verses, onComplete }: VerseMasterProps) {
       </div>
 
       {/* Verse Card */}
-      <div className="bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 rounded-2xl p-8 border-2 border-amber-200/50 shadow-xl">
-        <div className="flex items-center gap-3 mb-6">
-          <BookOpen className="w-6 h-6 text-amber-600" />
-          <h4 className="text-xl md:text-2xl font-urbanist font-bold text-amber-900">
+      <div className="bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 rounded-2xl p-4 sm:p-6 md:p-8 border-2 border-amber-200/50 shadow-xl">
+        <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+          <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-amber-600 flex-shrink-0" />
+          <h4 className="text-lg sm:text-xl md:text-2xl font-urbanist font-bold text-amber-900 break-words">
             {currentVerse.reference}
           </h4>
         </div>
         
-        <div className="bg-white rounded-xl p-6 md:p-8 border-2 border-amber-200 shadow-lg">
-          <div className="text-lg md:text-xl font-urbanist font-medium text-gray-800 leading-relaxed text-center">
+        <div className="bg-white rounded-xl p-4 sm:p-6 md:p-8 border-2 border-amber-200 shadow-lg">
+          <div className="text-base sm:text-lg md:text-xl font-urbanist font-medium text-gray-800 leading-relaxed sm:leading-relaxed text-center break-words select-text">
             {renderVerse()}
           </div>
         </div>
 
         {/* Result Message */}
         {showResult && (
-          <div className={`mt-6 p-4 rounded-xl border-2 ${
+          <div className={`mt-4 sm:mt-6 p-3 sm:p-4 rounded-xl border-2 ${
             isCorrect
               ? 'bg-green-100 border-green-400'
               : 'bg-red-100 border-red-400'
           }`}>
-            <div className="flex items-center justify-center gap-2">
+            <div className="flex items-center justify-center gap-2 flex-wrap">
               {isCorrect ? (
                 <>
-                  <CheckCircle2 className="w-6 h-6 text-green-600" />
-                  <span className="text-lg font-urbanist font-bold text-green-800">
+                  <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-green-600 flex-shrink-0" />
+                  <span className="text-base sm:text-lg font-urbanist font-bold text-green-800 text-center">
                     Correct! +100 points
                   </span>
                 </>
               ) : (
-                <span className="text-lg font-urbanist font-bold text-red-800">
+                <span className="text-base sm:text-lg font-urbanist font-bold text-red-800 text-center">
                   Not quite right. Try again!
                 </span>
               )}
@@ -270,39 +284,39 @@ export function VerseMaster({ verses, onComplete }: VerseMasterProps) {
       </div>
 
       {/* Controls */}
-      <div className="flex flex-nowrap gap-4 justify-center">
+      <div className="flex flex-wrap gap-3 sm:gap-4 justify-center">
         {!showResult ? (
           <>
             <Button
               onClick={checkAnswer}
               disabled={userAnswers.some(answer => !answer.trim())}
-              className="px-8 py-6 text-base md:text-lg font-urbanist font-semibold text-white shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-amber-600 via-yellow-600 to-amber-600 hover:from-amber-700 hover:via-yellow-700 hover:to-amber-700 disabled:opacity-40 disabled:cursor-not-allowed rounded-xl hover:scale-105 active:scale-95 whitespace-nowrap disabled:hover:scale-100"
+              className="px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 text-sm sm:text-base md:text-lg font-urbanist font-semibold text-white shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-amber-600 via-yellow-600 to-amber-600 hover:from-amber-700 hover:via-yellow-700 hover:to-amber-700 disabled:opacity-40 disabled:cursor-not-allowed rounded-xl hover:scale-105 active:scale-95 whitespace-nowrap disabled:hover:scale-100"
             >
               Check Answer
-              <CheckCircle2 className="w-5 h-5 ml-2" />
+              <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 ml-1.5 sm:ml-2" />
             </Button>
             <Button
               onClick={handleSkip}
-              className="px-8 py-6 text-base md:text-lg font-urbanist font-semibold text-white shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-gray-600 via-gray-500 to-gray-600 hover:from-gray-700 hover:via-gray-600 hover:to-gray-700 rounded-xl hover:scale-105 active:scale-95 whitespace-nowrap"
+              className="px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 text-sm sm:text-base md:text-lg font-urbanist font-semibold text-white shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-gray-600 via-gray-500 to-gray-600 hover:from-gray-700 hover:via-gray-600 hover:to-gray-700 rounded-xl hover:scale-105 active:scale-95 whitespace-nowrap"
             >
               Skip
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1.5 sm:ml-2" />
             </Button>
           </>
         ) : (
           <Button
             onClick={handleNext}
-            className="px-8 py-6 text-base md:text-lg font-urbanist font-semibold text-white shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-amber-600 via-yellow-600 to-amber-600 hover:from-amber-700 hover:via-yellow-700 hover:to-amber-700 rounded-xl hover:scale-105 active:scale-95 whitespace-nowrap"
+            className="px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 text-sm sm:text-base md:text-lg font-urbanist font-semibold text-white shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-amber-600 via-yellow-600 to-amber-600 hover:from-amber-700 hover:via-yellow-700 hover:to-amber-700 rounded-xl hover:scale-105 active:scale-95 whitespace-nowrap"
           >
             {currentVerseIndex < verses.length - 1 ? 'Next Verse' : 'Finish'}
-            <ArrowRight className="w-5 h-5 ml-2" />
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-1.5 sm:ml-2" />
           </Button>
         )}
         <Button
           onClick={resetGame}
-          className="px-8 py-6 text-base md:text-lg font-urbanist font-semibold text-white shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 hover:from-gray-800 hover:via-gray-700 hover:to-gray-800 rounded-xl hover:scale-105 active:scale-95 whitespace-nowrap"
+          className="px-4 sm:px-6 md:px-8 py-4 sm:py-5 md:py-6 text-sm sm:text-base md:text-lg font-urbanist font-semibold text-white shadow-xl hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-gray-700 via-gray-600 to-gray-700 hover:from-gray-800 hover:via-gray-700 hover:to-gray-800 rounded-xl hover:scale-105 active:scale-95 whitespace-nowrap"
         >
-          <RotateCcw className="w-5 h-5 mr-2" />
+          <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2" />
           Reset
         </Button>
       </div>

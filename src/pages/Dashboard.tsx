@@ -101,6 +101,8 @@ const Dashboard = () => {
   const [currentWeeklyQuiz, setCurrentWeeklyQuiz] = useState<any>(null);
   const [weeklyQuizAttempt, setWeeklyQuizAttempt] = useState<any>(null);
   const [isLoadingWeeklyQuiz, setIsLoadingWeeklyQuiz] = useState(false);
+  const [weeklyQuizLeaderboard, setWeeklyQuizLeaderboard] = useState<any[]>([]);
+  const [weeklyQuizStats, setWeeklyQuizStats] = useState<any>(null);
   // Emotional check-in state
   const [showEmotionalCheckIn, setShowEmotionalCheckIn] = useState(false);
   const [selectedEmotion, setSelectedEmotion] = useState<EmotionOption | null>(null);
@@ -132,7 +134,7 @@ const Dashboard = () => {
         text: randomVerse.text,
         encouragement: randomVerse.encouragement
       });
-      
+
       // Set a default thinking trap based on emotion
       let defaultTrap = 'wellness';
       const emotionId = selectedEmotion.id;
@@ -142,9 +144,9 @@ const Dashboard = () => {
         defaultTrap = 'self-blame';
       }
       setThinkingTrap(defaultTrap);
-      
+
       setShowEncouragement(true);
-      
+
       // Save to database
       try {
         const { data: { user } } = await supabase.auth.getUser();
@@ -169,7 +171,7 @@ const Dashboard = () => {
       } catch (error) {
         console.error('Error saving emotional check-in:', error);
       }
-      
+
       // Store check-in data in localStorage as backup
       const checkInData = {
         emotion: selectedEmotion.id,
@@ -269,7 +271,7 @@ const Dashboard = () => {
     const checkDateChange = () => {
       const today = new Date().toISOString().split('T')[0];
       const lastCheck = localStorage.getItem('lastDateCheck');
-      
+
       if (lastCheck !== today) {
         // Date has changed, refresh daily data
         fetchWaterIntake();
@@ -287,7 +289,7 @@ const Dashboard = () => {
 
     // Check immediately
     checkDateChange();
-    
+
     // Check every minute
     const interval = setInterval(checkDateChange, 60000);
 
@@ -332,20 +334,20 @@ const Dashboard = () => {
   // Fetch Bible text from bible-api.com
   const fetchBibleText = async (reference: string, type?: 'ot' | 'nt') => {
     if (!reference) return;
-    
+
     try {
       setIsLoadingBibleText(true);
       // Clean the reference for the API (remove any extra formatting)
       const cleanReference = reference.trim().replace(/\s+/g, ' ');
       const apiUrl = `https://bible-api.com/${encodeURIComponent(cleanReference)}?translation=${selectedTranslation}`;
-      
+
       const response = await fetch(apiUrl);
       if (!response.ok) {
         throw new Error('Failed to fetch Bible text');
       }
-      
+
       const data = await response.json();
-      
+
       if (type === 'ot') {
         setBibleTextOT(data);
       } else if (type === 'nt') {
@@ -401,9 +403,55 @@ const Dashboard = () => {
           .eq('weekly_quiz_id', quizData.id)
           .single();
         setWeeklyQuizAttempt(attemptData || null);
+
+        // Fetch leaderboard (top 5)
+        const { data: leaderboardData } = await supabase
+          .from('weekly_quiz_leaderboard')
+          .select(`
+            rank,
+            score,
+            time_used,
+            user_id,
+            profiles!inner(full_name)
+          `)
+          .eq('weekly_quiz_id', quizData.id)
+          .order('rank')
+          .limit(5);
+
+        if (leaderboardData) {
+          setWeeklyQuizLeaderboard(leaderboardData.map(entry => ({
+            rank: entry.rank,
+            user_id: entry.user_id,
+            score: entry.score,
+            time_used: entry.time_used,
+            display_name: entry.profiles?.full_name || 'Anonymous'
+          })));
+        }
+
+        // Fetch quiz stats
+        const { data: attemptsData } = await supabase
+          .from('weekly_quiz_attempts')
+          .select('id, score, completed')
+          .eq('weekly_quiz_id', quizData.id);
+
+        if (attemptsData) {
+          const totalParticipants = new Set(attemptsData.map(a => a.user_id)).size;
+          const completedCount = attemptsData.filter(a => a.completed).length;
+          const avgScore = attemptsData.length > 0
+            ? attemptsData.reduce((sum, a) => sum + (a.score || 0), 0) / attemptsData.length
+            : 0;
+
+          setWeeklyQuizStats({
+            totalParticipants,
+            completedCount,
+            averageScore: Math.round(avgScore * 10) / 10
+          });
+        }
       } else {
         setCurrentWeeklyQuiz(null);
         setWeeklyQuizAttempt(null);
+        setWeeklyQuizLeaderboard([]);
+        setWeeklyQuizStats(null);
       }
     } catch (error) {
       console.error('Error fetching weekly quiz:', error);
@@ -421,7 +469,7 @@ const Dashboard = () => {
 
       setIsLoadingPrayer(true);
       const today = new Date().toISOString().split('T')[0];
-      
+
       // Check if prayer was recorded today from prayer_tracking table
       const { data, error } = await supabase
         .from('prayer_tracking')
@@ -462,7 +510,7 @@ const Dashboard = () => {
       if (!user) return;
 
       setIsRecordingPrayer(true);
-      
+
       // Record prayer using prayer_tracking table and update streak
       const { data, error } = await supabase.rpc('record_prayer', {
         p_user_id: user.id,
@@ -472,10 +520,10 @@ const Dashboard = () => {
       if (error) throw error;
 
       setTodayPrayed(true);
-      
+
       // Refresh prayer streak
       await fetchTodayPrayer();
-      
+
       // Refresh wellness stats
       await fetchWellnessStats();
 
@@ -536,12 +584,12 @@ const Dashboard = () => {
       const today = new Date();
       const readingDate = today.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
       const dateString = today.toISOString().split('T')[0];
-      
+
       // Use today's readings or fallback
-      const title = todaysReadings 
+      const title = todaysReadings
         ? `${todaysReadings.oldTestament.reference} & ${todaysReadings.newTestament.reference}`
         : readingTitle || 'Bible Reading';
-      
+
       const { data, error } = await supabase.rpc('record_devotional_read', {
         p_user_id: user.id,
         p_devotional_date: readingDate,
@@ -562,10 +610,10 @@ const Dashboard = () => {
 
       // Refresh today's bible reading
       await fetchTodayBibleRead();
-      
+
       // Refresh wellness stats
       await fetchWellnessStats();
-      
+
       // Refresh today's readings (in case date changed)
       const dayOfYear = getDayOfYear();
       const readings = getTodaysReadings(dayOfYear);
@@ -616,7 +664,7 @@ const Dashboard = () => {
       const today = new Date();
       const weekAgo = new Date(today);
       weekAgo.setDate(today.getDate() - 7);
-      
+
       const weeklyWaterData = waterRecords?.filter(record => {
         const recordDate = new Date(record.date);
         return recordDate >= weekAgo;
@@ -667,7 +715,7 @@ const Dashboard = () => {
         const emotionNumbers = emotionalCheckIns
           .map(checkIn => emotionToNumber[checkIn.emotion])
           .filter(num => num !== undefined);
-        
+
         if (emotionNumbers.length > 0) {
           const average = emotionNumbers.reduce((sum, num) => sum + num, 0) / emotionNumbers.length;
           const roundedAverage = Math.round(average);
@@ -743,10 +791,10 @@ const Dashboard = () => {
         title: "Water intake saved!",
         description: `Your daily water intake has been updated to ${amount}ml.`,
       });
-      
+
       // Refresh water intake display
       await fetchWaterIntake();
-      
+
       // Refresh wellness stats after saving
       await fetchWellnessStats();
     } catch (error) {
@@ -778,11 +826,11 @@ const Dashboard = () => {
   const handleMouseMoveRef = useRef<(e: MouseEvent | TouchEvent) => void>();
   handleMouseMoveRef.current = (e: MouseEvent | TouchEvent) => {
     if (!isDragging || !glassRef.current) return;
-    
+
     const rect = glassRef.current.getBoundingClientRect();
     const clientY = 'touches' in e ? e.touches[0]?.clientY : e.clientY;
     if (clientY === undefined) return;
-    
+
     const y = clientY - rect.top;
     const height = rect.height;
     const percentage = Math.max(0, Math.min(1, 1 - (y / height)));
@@ -799,12 +847,12 @@ const Dashboard = () => {
       const handleEnd = () => {
         setIsDragging(false);
       };
-      
+
       document.addEventListener('mousemove', handleMove);
       document.addEventListener('mouseup', handleEnd);
       document.addEventListener('touchmove', handleMove, { passive: false });
       document.addEventListener('touchend', handleEnd);
-      
+
       return () => {
         document.removeEventListener('mousemove', handleMove);
         document.removeEventListener('mouseup', handleEnd);
@@ -974,7 +1022,7 @@ const Dashboard = () => {
   const fetchUserData = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      
+
       if (!user) {
         navigate("/auth/login");
         return;
@@ -1026,10 +1074,10 @@ const Dashboard = () => {
 
       if (attempts) {
         const totalAttempts = attempts.length;
-        const averageScore = totalAttempts > 0 
+        const averageScore = totalAttempts > 0
           ? Math.round(attempts.reduce((sum, attempt) => sum + attempt.score, 0) / totalAttempts)
           : 0;
-        const bestScore = totalAttempts > 0 
+        const bestScore = totalAttempts > 0
           ? Math.max(...attempts.map(attempt => attempt.score))
           : 0;
         const totalTimeSpent = attempts.reduce((sum, attempt) => sum + attempt.seconds_used, 0);
@@ -1140,8 +1188,8 @@ const Dashboard = () => {
             </SelectContent>
           </Select>
         </div> */}
-        {/* Upgrade to Pro button hidden */}
-        {/* {profile?.plan === "free" && (
+      {/* Upgrade to Pro button hidden */}
+      {/* {profile?.plan === "free" && (
           <button
             onClick={handleUpgrade}
             className="ml-2 px-4 py-2 rounded bg-purple-600 text-white font-semibold shadow hover:bg-purple-700 transition whitespace-nowrap"
@@ -1151,1224 +1199,156 @@ const Dashboard = () => {
         )} */}
       {/* </div> */}
 
-      {/* Wellness Stats Grid */}
-      <div className="w-full overflow-x-auto mb-6">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 min-w-0">
-          <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-            <CardContent className="pt-6">
-              <div className="flex flex-col md:flex-row items-center md:items-center space-y-3 md:space-y-0 md:space-x-3">
-                <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
-                  <Flame className="w-5 h-5 text-orange-600" strokeWidth={1} />
-                </div>
-                <div className="text-center md:text-left">
-                  <div className="text-3xl font-urbanist font-semibold text-gray-900">{wellnessStats.currentStreak}</div>
-                  <div className="text-sm font-urbanist font-light text-gray-600">Current Streak</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+      {/* Weekly Bible Quiz - Full Width - First */}
+      <Card className="relative border-0 shadow-lg hover:shadow-xl transition-all duration-500 rounded-3xl bg-white overflow-hidden mb-6 group">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-50/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-50/50 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4"></div>
 
-          <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-            <CardContent className="pt-6">
-              <div className="flex flex-col md:flex-row items-center md:items-center space-y-3 md:space-y-0 md:space-x-3">
-                <div className="w-10 h-10 bg-cyan-100 rounded-lg flex items-center justify-center">
-                  <Droplet className="w-5 h-5 text-cyan-600" strokeWidth={1} />
-                </div>
-                <div className="text-center md:text-left">
-                  <div className="text-3xl font-urbanist font-semibold text-gray-900">{wellnessStats.weeklyAverage}ml</div>
-                  <div className="text-sm font-urbanist font-light text-gray-600">Weekly Avg Water</div>
-                </div>
+        <CardContent className="relative z-10 p-0">
+          {isLoadingWeeklyQuiz ? (
+            <div className="flex items-center justify-center py-16">
+              <div className="flex flex-col items-center gap-3">
+                <Brain className="w-8 h-8 text-indigo-600 animate-pulse" />
+                <p className="text-sm font-urbanist font-medium text-slate-500">Loading weekly quiz...</p>
               </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-            <CardContent className="pt-6">
-              <div className="flex flex-col md:flex-row items-center md:items-center space-y-3 md:space-y-0 md:space-x-3">
-                <div className="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center">
-                  <Heart className="w-5 h-5 text-pink-600" strokeWidth={1} />
+            </div>
+          ) : currentWeeklyQuiz ? (
+            <div className="flex flex-col md:flex-row">
+              {/* Left Side: Content */}
+              <div className="flex-1 p-8 flex flex-col justify-center">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-2.5 bg-indigo-100 rounded-xl">
+                    <Calendar className="w-5 h-5 text-indigo-600" />
+                  </div>
+                  <div className="flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full">
+                    <Clock className="w-3.5 h-3.5 text-slate-500" />
+                    <span className="text-xs font-semibold text-slate-600 uppercase tracking-wide">
+                      {(() => {
+                        const endDate = new Date(currentWeeklyQuiz.week_end_date);
+                        const now = new Date();
+                        const diff = endDate.getTime() - now.getTime();
+                        if (diff <= 0) return 'Ended';
+                        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        if (days > 0) return `${days}d ${hours}h left`;
+                        return `${hours}h left`;
+                      })()}
+                    </span>
+                  </div>
                 </div>
-                <div className="text-center md:text-left">
-                  {wellnessStats.averageEmotion ? (() => {
-                    const emotion = emotionOptions.find(e => e.id === wellnessStats.averageEmotion);
-                    return (
-                      <>
-                        <div className="flex items-center justify-center md:justify-start gap-2">
-                          {emotion?.image ? (
-                            <img 
-                              src={emotion.image} 
-                              alt={emotion.label}
-                              className="w-8 h-8 object-contain"
-                            />
-                          ) : (
-                            <span className="text-3xl">{emotion?.emoji || '😐'}</span>
-                          )}
-                          <span className="text-lg font-urbanist font-semibold text-gray-900">{emotion?.label || 'N/A'}</span>
-                        </div>
-                        <div className="text-sm font-urbanist font-light text-gray-600">Average Emotion</div>
-                      </>
-                    );
-                  })() : (
-                    <>
-                      <div className="text-3xl font-urbanist font-semibold text-gray-900">—</div>
-                      <div className="text-sm font-urbanist font-light text-gray-600">Average Emotion</div>
-                    </>
+
+                <h3 className="text-3xl font-bold text-slate-900 mb-3 leading-tight">
+                  {currentWeeklyQuiz.title}
+                </h3>
+
+                {currentWeeklyQuiz.description && (
+                  <p className="text-slate-600 text-lg mb-8 leading-relaxed max-w-2xl">
+                    {currentWeeklyQuiz.description}
+                  </p>
+                )}
+
+                <div className="flex flex-wrap items-center gap-x-8 gap-y-4 mb-8">
+                  {currentWeeklyQuiz.theme && (
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-full bg-indigo-50 flex items-center justify-center">
+                        <BookOpen className="w-4 h-4 text-indigo-600" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 font-medium uppercase tracking-wider">Theme</p>
+                        <p className="text-sm font-semibold text-slate-900">{currentWeeklyQuiz.theme}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {currentWeeklyQuiz.difficulty && (
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center">
+                        <Target className="w-4 h-4 text-purple-600" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 font-medium uppercase tracking-wider">Difficulty</p>
+                        <p className="text-sm font-semibold text-slate-900 capitalize">{currentWeeklyQuiz.difficulty}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  {currentWeeklyQuiz.total_questions && (
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center">
+                        <Brain className="w-4 h-4 text-blue-600" />
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 font-medium uppercase tracking-wider">Questions</p>
+                        <p className="text-sm font-semibold text-slate-900">{currentWeeklyQuiz.total_questions}</p>
+                      </div>
+                    </div>
                   )}
                 </div>
-              </div>
-            </CardContent>
-          </Card>
 
-          <Card className="border-2 border-purple-200 bg-gradient-to-br from-purple-50 via-indigo-50 to-pink-50 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 cursor-pointer" onClick={() => navigate('/dashboard/bible-games')}>
-            <CardContent className="pt-6">
-              <div className="flex flex-col md:flex-row items-center md:items-center space-y-3 md:space-y-0 md:space-x-3">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-md">
-                  <Gamepad2 className="w-6 h-6 text-white" strokeWidth={2} />
-                </div>
-                <div className="flex-1 text-center md:text-left">
-                  <div className="text-base font-urbanist font-semibold text-gray-900 mb-1">Play Bible Games</div>
-                  <div className="text-xs font-urbanist font-light text-purple-600 flex items-center justify-center md:justify-start gap-1">
-                    <Sparkles className="w-3 h-3" />
-                    Unlimited turns
-                  </div>
-                </div>
-                <div className="text-purple-500">
-                  <Play className="w-5 h-5" strokeWidth={2} />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-
-      {/* Emotional Tracker Widget */}
-      <Card className="w-full border-2 border-pink-200 bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 mb-6">
-        <CardHeader>
-          <CardTitle className="text-xl font-urbanist font-semibold text-gray-900 flex items-center gap-2">
-            <Heart className="w-5 h-5 text-pink-500" strokeWidth={2} />
-            Emotional Tracker
-          </CardTitle>
-          <CardDescription className="font-urbanist font-light text-gray-600">
-            Track your daily mood and emotional wellness
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {!showEmotionalCheckIn && !showEncouragement && (
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-              <div className="flex-1">
-                <h3 className="text-lg font-urbanist font-semibold text-gray-900 mb-2">
-                  Daily Mood Check-In
-                </h3>
-                <p className="text-sm font-urbanist font-light text-gray-600 mb-4">
-                  Take a moment to reflect on how you're feeling today. Track your emotions, receive personalized Bible verses, and access CBT tools for emotional wellness.
-                </p>
-                <div className="flex items-center gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <Heart className="w-4 h-4 text-pink-500" />
-                    <span className="font-urbanist font-light text-gray-600">Personalized verses</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Brain className="w-4 h-4 text-purple-500" />
-                    <span className="font-urbanist font-light text-gray-600">CBT tools</span>
+                <div className="flex items-center gap-4">
+                  <Button
+                    size="lg"
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 rounded-xl shadow-lg shadow-indigo-200 transition-all duration-300 hover:scale-105"
+                    onClick={() => navigate(`/weekly-quiz/${currentWeeklyQuiz.id}`)}
+                  >
+                    <Play className="w-5 h-5 mr-2 fill-current" />
+                    Start Quiz
+                  </Button>
+                  <div className="text-sm text-slate-500 font-medium">
+                    {new Date(currentWeeklyQuiz.week_start_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - {new Date(currentWeeklyQuiz.week_end_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                   </div>
                 </div>
               </div>
-              {!hasCheckedInToday && (
-                <Button
-                  className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-urbanist font-light whitespace-nowrap shadow-md hover:shadow-lg transition-all duration-300"
-                  onClick={() => setShowEmotionalCheckIn(true)}
-                >
-                  <Heart className="w-4 h-4 mr-2" />
-                  Check In Now
-                </Button>
-              )}
-              {hasCheckedInToday && (
-                <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <CheckCircle className="w-4 h-4 text-green-500" />
-                  <span className="font-urbanist font-light">Checked in today</span>
-                </div>
-              )}
-            </div>
-          )}
 
-          {/* Emotion Slider */}
-          {showEmotionalCheckIn && !showEncouragement && selectedEmotion && (
-            <div className="space-y-6">
-              <div className="text-center">
-                <h3 className="text-xl font-urbanist font-semibold text-gray-900 mb-2">
-                  How Are You Feeling Today?
-                </h3>
-                <p className="text-sm font-urbanist font-light text-gray-600">
-                  Move the slider to select your current emotion
-                </p>
-              </div>
-              
-              {/* Emotion Display - matching homepage hero UI */}
-              <div className={`${selectedEmotion.bgColor} rounded-lg p-6 md:p-8 transition-all duration-300`}>
-                <div className="flex flex-col items-center justify-center">
-                  <div className="mb-4 transition-all duration-300">
-                    {selectedEmotion.image ? (
-                      <img 
-                        src={selectedEmotion.image} 
-                        alt={selectedEmotion.label}
-                        className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain"
-                      />
-                    ) : (
-                      <div className="text-7xl md:text-6xl lg:text-7xl">{selectedEmotion.emoji}</div>
-                    )}
-                  </div>
-                  <h3 className={`text-2xl md:text-3xl font-urbanist font-semibold ${selectedEmotion.color} mb-2`}>
-                    {selectedEmotion.label}
-                  </h3>
-                </div>
-              </div>
+              {/* Right Side: Decorative / Illustration */}
+              <div className="hidden md:block w-1/3 bg-gradient-to-br from-indigo-600 to-blue-700 relative overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1507434965515-61970f2bd7c6?q=80&w=1000&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/50 to-transparent"></div>
 
-              {/* Slider - matching homepage hero UI */}
-              <div className="w-full relative">
-                <div className="relative px-2">
-                  <div className="relative">
-                    <input
-                      type="range"
-                      min="0"
-                      max="5"
-                      step="0.1"
-                      value={sliderValue}
-                      onChange={(e) => handleSliderChange(parseFloat(e.target.value))}
-                      className="w-full h-3 md:h-4 bg-transparent rounded-full appearance-none cursor-pointer emotion-slider"
-                      style={{
-                        background: `linear-gradient(to right, 
-                          #f97316 0%, 
-                          #ef4444 25%, 
-                          #6b7280 40%, 
-                          #3b82f6 60%, 
-                          #22c55e 85%, 
-                          #22c55e 100%)`
-                      }}
-                    />
-                    <style>{`
-                      .emotion-slider {
-                        background: linear-gradient(to right, 
-                          #f97316 0%, 
-                          #ef4444 25%, 
-                          #6b7280 40%, 
-                          #3b82f6 60%, 
-                          #22c55e 85%, 
-                          #22c55e 100%);
-                        height: 8px;
-                        border-radius: 9999px;
-                        outline: none;
-                      }
-                      .emotion-slider::-webkit-slider-runnable-track {
-                        width: 100%;
-                        height: 8px;
-                        border-radius: 9999px;
-                        background: linear-gradient(to right, 
-                          #f97316 0%, 
-                          #ef4444 25%, 
-                          #6b7280 40%, 
-                          #3b82f6 60%, 
-                          #22c55e 85%, 
-                          #22c55e 100%);
-                        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-                      }
-                      .emotion-slider::-webkit-slider-thumb {
-                        appearance: none;
-                        width: 24px;
-                        height: 24px;
-                        border-radius: 50%;
-                        background: linear-gradient(135deg, #7b7ff0 0%, #6366f1 100%);
-                        cursor: pointer;
-                        border: 4px solid white;
-                        box-shadow: 0 2px 8px rgba(123, 127, 240, 0.4), 0 4px 12px rgba(123, 127, 240, 0.2);
-                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                        margin-top: -8px;
-                      }
-                      .emotion-slider::-webkit-slider-thumb:hover {
-                        transform: scale(1.15);
-                        box-shadow: 0 4px 12px rgba(123, 127, 240, 0.5), 0 6px 16px rgba(123, 127, 240, 0.3);
-                        background: linear-gradient(135deg, #6366f1 0%, #7b7ff0 100%);
-                      }
-                      .emotion-slider::-webkit-slider-thumb:active {
-                        transform: scale(1.1);
-                        box-shadow: 0 2px 6px rgba(123, 127, 240, 0.6);
-                      }
-                      .emotion-slider::-moz-range-track {
-                        width: 100%;
-                        height: 8px;
-                        border-radius: 9999px;
-                        background: linear-gradient(to right, 
-                          #f97316 0%, 
-                          #ef4444 25%, 
-                          #6b7280 40%, 
-                          #3b82f6 60%, 
-                          #22c55e 85%, 
-                          #22c55e 100%);
-                        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-                      }
-                      .emotion-slider::-moz-range-thumb {
-                        width: 24px;
-                        height: 24px;
-                        border-radius: 50%;
-                        background: linear-gradient(135deg, #7b7ff0 0%, #6366f1 100%);
-                        cursor: pointer;
-                        border: 4px solid white;
-                        box-shadow: 0 2px 8px rgba(123, 127, 240, 0.4), 0 4px 12px rgba(123, 127, 240, 0.2);
-                        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                      }
-                      .emotion-slider::-moz-range-thumb:hover {
-                        transform: scale(1.15);
-                        box-shadow: 0 4px 12px rgba(123, 127, 240, 0.5), 0 6px 16px rgba(123, 127, 240, 0.3);
-                        background: linear-gradient(135deg, #6366f1 0%, #7b7ff0 100%);
-                      }
-                    `}</style>
+                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
+                    <p className="text-indigo-100 text-sm font-medium mb-1">Weekly Challenge</p>
+                    <p className="text-white font-semibold text-lg">
+                      "Study to shew thyself approved unto God..."
+                    </p>
+                    <p className="text-indigo-200 text-xs mt-2 font-mono">2 Timothy 2:15</p>
                   </div>
                 </div>
-                <div className="flex justify-between text-xs font-urbanist font-light text-gray-500 mt-3">
-                  <span>Very Anxious</span>
-                  <span>Great/Peaceful</span>
-                </div>
-              </div>
-
-              <div className="flex gap-3">
-                <Button
-                  variant="outline"
-                  className="flex-1"
-                  onClick={resetEmotionalCheckIn}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  className="flex-1 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white"
-                  onClick={handleSliderConfirm}
-                >
-                  Continue
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
               </div>
             </div>
-          )}
-
-          {/* Encouragement Screen */}
-          {showEncouragement && selectedVerse && thinkingTrap && selectedEmotion && (() => {
-            const trapInfo = thinkingTrapsInfo[thinkingTrap];
-            return (
-              <div className="space-y-6">
-                <div className="rounded-lg p-6 border border-amber-200 bg-white">
-                  <div className="flex items-start gap-3">
-                    <Heart className="w-6 h-6 text-pink-500 mt-1 flex-shrink-0" />
-                    <div>
-                      <p className="text-sm font-urbanist font-light text-gray-700 leading-relaxed">
-                        {selectedVerse.encouragement}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <Button
-                  className="w-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white"
-                  onClick={resetEmotionalCheckIn}
-                >
-                  Done
-                  <CheckCircle className="w-4 h-4 ml-2" />
-                </Button>
+          ) : (
+            <div className="p-8 text-center">
+              <div className="w-16 h-16 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Calendar className="w-8 h-8 text-amber-500" />
               </div>
-            );
-          })()}
+              <h3 className="text-xl font-bold text-slate-900 mb-2">No Active Quiz</h3>
+              <p className="text-slate-500 max-w-md mx-auto mb-6">
+                Check back next Monday for a new weekly challenge! In the meantime, explore our other quizzes.
+              </p>
+              <Button
+                variant="outline"
+                onClick={() => navigate('/weekly-quiz')}
+                className="border-slate-200 text-slate-700"
+              >
+                View Past Quizzes
+              </Button>
+            </div>
+          )}
         </CardContent>
       </Card>
 
-      {/* 2x2 Grid Dashboard Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        {/* First Section: Water Intake Widget */}
-        <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-          <CardHeader>
-            <CardTitle className="text-xl font-urbanist font-semibold text-gray-900 flex items-center gap-2">
-              <Droplet className="w-5 h-5 text-blue-500" />
-              Water Intake Tracker
-            </CardTitle>
-            <CardDescription className="font-urbanist font-light text-gray-600">
-              Track your daily hydration
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="w-full">
-              {/* 2 Column Layout */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 relative">
-                {/* Left Column: Animated Water Glass */}
-                <div className="flex justify-center items-center relative">
-                  <div 
-                    ref={glassRef}
-                    className="relative w-32 h-48 md:w-40 md:h-56 cursor-pointer select-none touch-none"
-                    onMouseDown={handleMouseDown}
-                    onTouchStart={handleTouchStart}
-                  >
-                    {/* Glass outline */}
-                    <svg 
-                      className="absolute inset-0 w-full h-full"
-                      viewBox="0 0 100 150"
-                      preserveAspectRatio="none"
-                    >
-                      <path
-                        d="M 20 10 L 20 140 Q 20 145 25 145 L 75 145 Q 80 145 80 140 L 80 10 Q 80 5 75 5 L 25 5 Q 20 5 20 10 Z"
-                        fill="none"
-                        stroke="#cbd5e1"
-                        strokeWidth="2"
-                      />
-                      <ellipse cx="50" cy="10" rx="30" ry="3" fill="#e2e8f0" />
-                    </svg>
 
-                    {/* Water fill */}
-                    <div 
-                      className="absolute bottom-0 left-0 right-0 transition-all duration-500 ease-out overflow-hidden"
-                      style={{
-                        height: `${waterPercentage}%`,
-                        background: `linear-gradient(to top, 
-                          rgba(59, 130, 246, 0.9) 0%,
-                          rgba(96, 165, 250, 0.8) 50%,
-                          rgba(147, 197, 253, 0.7) 100%
-                        )`,
-                        clipPath: 'inset(0 20% 0 20% round 0 0 8px 8px)',
-                      }}
-                    >
-                      <div 
-                        className="absolute inset-0 opacity-30"
-                        style={{
-                          background: `repeating-linear-gradient(
-                            90deg,
-                            transparent,
-                            transparent 10px,
-                            rgba(255, 255, 255, 0.3) 10px,
-                            rgba(255, 255, 255, 0.3) 20px
-                          )`,
-                          animation: 'wave 3s linear infinite',
-                        }}
-                      />
-                      <div className="absolute inset-0">
-                        {[0, 1, 2, 3, 4].map((i) => (
-                          <div
-                            key={i}
-                            className="absolute rounded-full bg-white/40"
-                            style={{
-                              width: `${4 + (i * 0.8)}px`,
-                              height: `${4 + (i * 0.8)}px`,
-                              left: `${25 + (i * 12)}%`,
-                              bottom: `${5 + (i * 5)}%`,
-                              animation: `bubble ${2 + (i * 0.4)}s ease-in-out infinite`,
-                              animationDelay: `${i * 0.5}s`,
-                            }}
-                          />
-                        ))}
-                      </div>
-                    </div>
 
-                    {/* Small glasses next to the glass - Left side */}
-                    {(() => {
-                      const totalGlasses = Math.min(Math.ceil(waterIntake / 250), 9);
-                      const leftGlasses = Math.ceil(totalGlasses / 2);
-                      return (
-                        <div 
-                          className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-12 md:-translate-x-16 flex flex-col gap-2 items-center z-10 pointer-events-none"
-                        >
-                          {Array.from({ length: leftGlasses }).map((_, i) => (
-                            <div
-                              key={i}
-                              className="w-6 h-8 md:w-8 md:h-10 rounded-b-lg border-2 border-blue-300 bg-blue-100/60 flex items-end justify-center overflow-hidden shadow-md"
-                              style={{
-                                animation: `glassAppear 0.3s ease-out ${i * 0.05}s both`,
-                              }}
-                            >
-                              <div 
-                                className="w-full bg-blue-400 transition-all duration-300"
-                                style={{ height: '85%' }}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      );
-                    })()}
 
-                    {/* Small glasses next to the glass - Right side */}
-                    {(() => {
-                      const totalGlasses = Math.min(Math.ceil(waterIntake / 250), 9);
-                      const rightGlasses = Math.floor(totalGlasses / 2);
-                      return (
-                        <div 
-                          className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-12 md:translate-x-16 flex flex-col gap-2 items-center z-10 pointer-events-none"
-                        >
-                          {Array.from({ length: rightGlasses }).map((_, i) => (
-                            <div
-                              key={i}
-                              className="w-6 h-8 md:w-8 md:h-10 rounded-b-lg border-2 border-blue-300 bg-blue-100/60 flex items-end justify-center overflow-hidden shadow-md"
-                              style={{
-                                animation: `glassAppear 0.3s ease-out ${i * 0.05}s both`,
-                              }}
-                            >
-                              <div 
-                                className="w-full bg-blue-400 transition-all duration-300"
-                                style={{ height: '85%' }}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      );
-                    })()}
 
-                    {isDragging && (
-                      <div className="absolute -right-8 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white text-xs px-2 py-1 rounded shadow-lg">
-                        {waterIntake}ml
-                      </div>
-                    )}
-                  </div>
-                </div>
 
-                {/* Right Column: Details */}
-                <div className="flex flex-col justify-center">
-                  <div className="mb-4">
-                    <p className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">
-                      {waterIntake}ml <span className="text-lg md:text-xl font-normal text-gray-500 relative" style={{ top: '-4px' }}>({Math.round(waterPercentage)}% completed)</span>
-                    </p>
-                    <p className="text-base text-gray-600 mb-4">
-                      {Math.round(waterIntake / 250)} cups
-                    </p>
-                    
-                    {/* Progress bar */}
-                    <div className="w-full bg-gray-100 rounded-full h-2.5 mb-2">
-                      <div 
-                        className="bg-gradient-to-r from-blue-400 to-blue-600 h-2.5 rounded-full transition-all duration-500 ease-out"
-                        style={{ width: `${waterPercentage}%` }}
-                      />
-                    </div>
-                    
-                    <p className="text-sm text-gray-500">
-                      {Math.round(waterPercentage)}% of daily goal (2250ml / 9 cups)
-                    </p>
-                  </div>
 
-                  {/* Water Intake Information */}
-                  <div className="hidden md:block bg-blue-50 rounded-lg p-4 border border-blue-100">
-                    <h4 className="text-sm font-semibold text-gray-900 mb-2">Daily Water Recommendations</h4>
-                    <ul className="text-xs text-gray-700 space-y-1.5">
-                      <li className="flex items-start gap-2">
-                        <span className="text-blue-500 mt-0.5">•</span>
-                        <span>Average adult: <strong>2,000-3,000ml</strong> (8-12 cups) per day</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <span className="text-blue-500 mt-0.5">•</span>
-                        <span>Staying hydrated supports mental clarity and emotional wellness</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
 
-              {/* Save Button */}
-              <div className="flex justify-center">
-                <Button
-                  onClick={() => saveWaterIntake(waterIntake)}
-                  disabled={isSavingWater}
-                  className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50"
-                >
-                  {isSavingWater ? 'Saving...' : 'Save Water Intake'}
-                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
-                </Button>
-              </div>
 
-              <style>{`
-                @keyframes wave {
-                  0% { transform: translateX(0); }
-                  100% { transform: translateX(20px); }
-                }
-                @keyframes bubble {
-                  0%, 100% { transform: translateY(0) scale(1); opacity: 0.4; }
-                  50% { transform: translateY(-10px) scale(1.2); opacity: 0.8; }
-                }
-                @keyframes glassAppear {
-                  0% { 
-                    opacity: 0; 
-                    transform: translateY(10px) scale(0.8); 
-                  }
-                  100% { 
-                    opacity: 1; 
-                    transform: translateY(0) scale(1); 
-                  }
-                }
-              `}</style>
-            </div>
-          </CardContent>
-        </Card>
 
-        {/* Second Section: Bible Reading/Devotional Tracker */}
-        <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-          <CardHeader>
-            <CardTitle className="text-xl font-urbanist font-semibold text-gray-900 flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-purple-500" />
-              Bible Reading Tracker
-            </CardTitle>
-            <CardDescription className="font-urbanist font-light text-gray-600">
-              Track your daily Bible reading
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="w-full">
-              {/* Streak Display */}
-              <div className="mb-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <p className="text-sm font-urbanist font-light text-gray-600">Current Streak</p>
-                    <p className="text-4xl font-urbanist font-semibold text-gray-900">
-                      {streakData?.current_streak || 0} <span className="text-lg text-gray-500">days</span>
-                    </p>
-                  </div>
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 rounded-full flex items-center justify-center">
-                    <Flame className="w-8 h-8 text-orange-500" strokeWidth={2} />
-                  </div>
-                </div>
-                
-                {streakData?.longest_streak && streakData.longest_streak > 0 && (
-                  <div className="bg-purple-50 rounded-lg p-3 border border-purple-100">
-                    <p className="text-base font-urbanist font-light text-gray-600">
-                      Longest streak: <span className="font-semibold text-purple-700">{streakData.longest_streak} days</span>
-                    </p>
-                  </div>
-                )}
-              </div>
 
-              {/* Today's Bible Reading */}
-              <div className="mb-6">
-                {todayBibleRead ? (
-                  <div className="bg-green-50 rounded-lg p-4 border border-green-200">
-                    <div className="flex items-center gap-3 mb-2">
-                      <CheckCircle className="w-5 h-5 text-green-600" strokeWidth={2} />
-                      <p className="font-urbanist font-semibold text-green-900">Today's Reading Complete!</p>
-                    </div>
-                    <p className="text-sm font-urbanist font-light text-green-700">
-                      You read {todayBibleRead.time_spent_seconds ? Math.round(todayBibleRead.time_spent_seconds / 60) : 5} minutes today
-                    </p>
-                    {todayBibleRead.devotional_title && (
-                      <p className="text-xs font-urbanist font-light text-green-600 mt-1">
-                        {todayBibleRead.devotional_title}
-                      </p>
-                    )}
-                  </div>
-                ) : (
-                  <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg p-4 border border-purple-200">
-                    {isLoadingVerse ? (
-                      <div className="text-center py-4">
-                        <p className="text-sm font-urbanist font-light text-gray-600">Loading today's reading...</p>
-                      </div>
-                    ) : todaysReadings ? (
-                      <>
-                        <div className="mb-4">
-                          <p className="text-xs font-urbanist font-medium text-purple-700 mb-2 text-center">
-                            {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                          </p>
-                          <div className="space-y-2">
-                            <div className="bg-orange-50 rounded-lg p-3 border border-orange-200">
-                              <p className="text-xs font-urbanist font-medium text-orange-700 mb-1">Old Testament</p>
-                              <p className="text-sm font-urbanist font-semibold text-gray-900">
-                                {todaysReadings.oldTestament.reference}
-                              </p>
-                            </div>
-                            <div className="bg-blue-50 rounded-lg p-3 border border-blue-200">
-                              <p className="text-xs font-urbanist font-medium text-blue-700 mb-1">New Testament</p>
-                              <p className="text-sm font-urbanist font-semibold text-gray-900">
-                                {todaysReadings.newTestament.reference}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                        <Button
-                          onClick={() => {
-                            setSelectedDate(new Date());
-                            setReadingTitle(`${todaysReadings.oldTestament.reference} & ${todaysReadings.newTestament.reference}`);
-                            setReadingVerse('');
-                            setSelectedReading(null);
-                            // Fetch both readings
-                            fetchBibleText(todaysReadings.oldTestament.reference, 'ot');
-                            fetchBibleText(todaysReadings.newTestament.reference, 'nt');
-                            setIsReadingDialogOpen(true);
-                          }}
-                          className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-urbanist font-light"
-                        >
-                          <BookOpen className="w-4 h-4 mr-2" />
-                          Read Today's Chapters
-                        </Button>
-                      </>
-                    ) : todayVerse ? (
-                      <>
-                        <div className="mb-4 text-center">
-                          <p className="text-xs font-urbanist font-medium text-purple-700 mb-1">Today's Reading</p>
-                          <p className="text-lg font-urbanist font-semibold text-gray-900">
-                            {todayVerse.verse_reference}
-                          </p>
-                        </div>
-                        <Button
-                          onClick={() => {
-                            setSelectedDate(new Date());
-                            setReadingTitle(todayVerse.verse_reference);
-                            setReadingVerse(todayVerse.verse_reference);
-                            fetchBibleText(todayVerse.verse_reference);
-                            setIsReadingDialogOpen(true);
-                          }}
-                          className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-urbanist font-light"
-                        >
-                          <BookOpen className="w-4 h-4 mr-2" />
-                          Read Today's Chapter
-                        </Button>
-                      </>
-                    ) : (
-                      <div className="text-center py-4">
-                        <p className="text-sm font-urbanist font-light text-gray-600 mb-4">
-                          No reading available for today
-                        </p>
-                        <Button
-                          onClick={() => {
-                            setSelectedDate(new Date());
-                            setIsReadingDialogOpen(true);
-                          }}
-                          className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-urbanist font-light"
-                        >
-                          <BookOpen className="w-4 h-4 mr-2" />
-                          Record Reading
-                        </Button>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
 
-              {/* Bible Reading Dialog */}
-              <Dialog open={isReadingDialogOpen} onOpenChange={setIsReadingDialogOpen}>
-                <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
-                  <DialogHeader>
-                    <DialogTitle className="font-urbanist font-semibold">
-                      Read Bible & Record
-                    </DialogTitle>
-                    <DialogDescription className="font-urbanist font-light">
-                      Read today's Bible passage and mark it as complete
-                    </DialogDescription>
-                  </DialogHeader>
-                  
-                  <div className="space-y-4 mt-4">
-                    {/* Translation Selector */}
-                    <div className="flex items-center justify-end">
-                      <Select value={selectedTranslation} onValueChange={(value) => {
-                        setSelectedTranslation(value);
-                        if (todaysReadings) {
-                          fetchBibleText(todaysReadings.oldTestament.reference, 'ot');
-                          fetchBibleText(todaysReadings.newTestament.reference, 'nt');
-                        } else if (readingTitle) {
-                          fetchBibleText(readingTitle);
-                        }
-                      }}>
-                        <SelectTrigger className="w-32 h-8 text-xs">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="web">WEB</SelectItem>
-                          <SelectItem value="kjv">KJV</SelectItem>
-                          <SelectItem value="asv">ASV</SelectItem>
-                          <SelectItem value="bbe">BBE</SelectItem>
-                          <SelectItem value="darby">Darby</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
 
-                    {/* Bible Text Display in Dialog - Show both OT and NT if available */}
-                    {todaysReadings ? (
-                      <div className="space-y-4">
-                        {/* Old Testament Reading */}
-                        <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-lg p-4 border border-orange-200">
-                          <div className="flex items-center justify-between mb-3">
-                            <p className="text-lg font-urbanist font-semibold text-gray-900">
-                              {todaysReadings.oldTestament.reference}
-                            </p>
-                            <Badge className="bg-orange-100 text-orange-700">Old Testament</Badge>
-                          </div>
-                          
-                          {isLoadingBibleText && !bibleTextOT ? (
-                            <div className="text-center py-8">
-                              <p className="text-sm font-urbanist font-light text-gray-500">Loading...</p>
-                            </div>
-                          ) : bibleTextOT ? (
-                            <div className="bg-white rounded-lg p-4 border border-orange-100 max-h-64 overflow-y-auto">
-                              <p className="text-xs font-urbanist font-semibold text-orange-700 mb-3">
-                                {bibleTextOT.reference} ({bibleTextOT.translation_name || selectedTranslation.toUpperCase()})
-                              </p>
-                              <div className="space-y-2">
-                                {bibleTextOT.verses?.map((verse: any, index: number) => (
-                                  <p key={index} className="text-sm font-urbanist font-light text-gray-800 leading-relaxed">
-                                    <span className="font-semibold text-orange-600">{verse.verse}</span> {verse.text}
-                                  </p>
-                                )) || (
-                                  <p className="text-sm font-urbanist font-light text-gray-800 leading-relaxed whitespace-pre-wrap">
-                                    {bibleTextOT.text}
-                                  </p>
-                                )}
-                              </div>
-                            </div>
-                          ) : null}
-                        </div>
-
-                        {/* New Testament Reading */}
-                        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-lg p-4 border border-blue-200">
-                          <div className="flex items-center justify-between mb-3">
-                            <p className="text-lg font-urbanist font-semibold text-gray-900">
-                              {todaysReadings.newTestament.reference}
-                            </p>
-                            <Badge className="bg-blue-100 text-blue-700">New Testament</Badge>
-                          </div>
-                          
-                          {isLoadingBibleText && !bibleTextNT ? (
-                            <div className="text-center py-8">
-                              <p className="text-sm font-urbanist font-light text-gray-500">Loading...</p>
-                            </div>
-                          ) : bibleTextNT ? (
-                            <div className="bg-white rounded-lg p-4 border border-blue-100 max-h-64 overflow-y-auto">
-                              <p className="text-xs font-urbanist font-semibold text-blue-700 mb-3">
-                                {bibleTextNT.reference} ({bibleTextNT.translation_name || selectedTranslation.toUpperCase()})
-                              </p>
-                              <div className="space-y-2">
-                                {bibleTextNT.verses?.map((verse: any, index: number) => (
-                                  <p key={index} className="text-sm font-urbanist font-light text-gray-800 leading-relaxed">
-                                    <span className="font-semibold text-blue-600">{verse.verse}</span> {verse.text}
-                                  </p>
-                                )) || (
-                                  <p className="text-sm font-urbanist font-light text-gray-800 leading-relaxed whitespace-pre-wrap">
-                                    {bibleTextNT.text}
-                                  </p>
-                                )}
-                              </div>
-                            </div>
-                          ) : null}
-                        </div>
-                      </div>
-                    ) : readingTitle ? (
-                      /* Fallback for manual entry */
-                      <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-lg p-4 border border-purple-200">
-                        <div className="flex items-center justify-between mb-3">
-                          <p className="text-lg font-urbanist font-semibold text-gray-900">
-                            {readingTitle}
-                          </p>
-                        </div>
-                        
-                        {isLoadingBibleText ? (
-                          <div className="text-center py-8">
-                            <p className="text-sm font-urbanist font-light text-gray-500">Loading Bible text...</p>
-                          </div>
-                        ) : bibleText ? (
-                          <div className="bg-white rounded-lg p-4 border border-purple-100 max-h-96 overflow-y-auto">
-                            <p className="text-xs font-urbanist font-semibold text-purple-700 mb-3">
-                              {bibleText.reference} ({bibleText.translation_name || selectedTranslation.toUpperCase()})
-                            </p>
-                            <div className="space-y-3">
-                              {bibleText.verses?.map((verse: any, index: number) => (
-                                <p key={index} className="text-sm font-urbanist font-light text-gray-800 leading-relaxed">
-                                  <span className="font-semibold text-purple-600">{verse.verse}</span> {verse.text}
-                                </p>
-                              )) || (
-                                <p className="text-sm font-urbanist font-light text-gray-800 leading-relaxed whitespace-pre-wrap">
-                                  {bibleText.text}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="bg-white rounded-lg p-4 border border-gray-200">
-                            <p className="text-sm font-urbanist font-light text-gray-600 italic">
-                              Enter a Bible reference above to load the text
-                            </p>
-                          </div>
-                        )}
-                      </div>
-                    ) : null}
-
-                    {/* Action Buttons */}
-                    <div className="flex gap-3 pt-4">
-                      <Button
-                        variant="outline"
-                        onClick={() => {
-                          setIsReadingDialogOpen(false);
-                          setReadingTitle("");
-                          setReadingVerse("");
-                        }}
-                        className="flex-1 font-urbanist font-light"
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        onClick={recordBibleReading}
-                        disabled={isRecordingRead || (todaysReadings && (!bibleTextOT || !bibleTextNT)) || (!todaysReadings && !bibleText)}
-                        className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-urbanist font-light disabled:opacity-50"
-                      >
-                        {isRecordingRead ? (
-                          <>Recording...</>
-                        ) : (
-                          <>
-                            <CheckCircle className="w-4 h-4 mr-2" />
-                            Mark as Read
-                          </>
-                        )}
-                      </Button>
-                    </div>
-                  </div>
-                </DialogContent>
-              </Dialog>
-
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Second Row of 2x2 Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        {/* Third Section: Prayer Tracker Widget */}
-        <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-          <CardHeader>
-            <CardTitle className="text-xl font-urbanist font-semibold text-gray-900 flex items-center gap-2">
-              <Heart className="w-5 h-5 text-red-500" />
-              Prayer Tracker
-            </CardTitle>
-            <CardDescription className="font-urbanist font-light text-gray-600">
-              Track your daily prayer
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="w-full">
-              {/* Prayer Streak */}
-              <div className="mb-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div>
-                    <p className="text-sm font-urbanist font-light text-gray-600">Prayer Streak</p>
-                    <p className="text-4xl font-urbanist font-semibold text-gray-900">
-                      {prayerStreak?.current_streak || 0} <span className="text-lg text-gray-500">days</span>
-                    </p>
-                  </div>
-                  <div className="w-16 h-16 bg-gradient-to-br from-red-100 to-pink-200 rounded-full flex items-center justify-center">
-                    <Flame className="w-8 h-8 text-orange-500" strokeWidth={2} />
-                  </div>
-                </div>
-                
-                {prayerStreak?.longest_streak && prayerStreak.longest_streak > 0 && (
-                  <div className="bg-red-50 rounded-lg p-3 border border-red-100 mb-4">
-                    <p className="text-base font-urbanist font-light text-gray-600">
-                      Longest streak: <span className="font-semibold text-red-700">{prayerStreak.longest_streak} days</span>
-                    </p>
-                  </div>
-                )}
-
-                {/* Prayer Status */}
-                {isLoadingPrayer ? (
-                  <div className="text-center py-4">
-                    <p className="text-sm font-urbanist font-light text-gray-500">Loading...</p>
-                  </div>
-                ) : todayPrayed ? (
-                  <div className="bg-green-50 rounded-lg p-4 border border-green-200">
-                    <div className="flex items-center gap-3 mb-2">
-                      <CheckCircle className="w-5 h-5 text-green-600" strokeWidth={2} />
-                      <p className="font-urbanist font-semibold text-green-900">Prayer Complete Today!</p>
-                    </div>
-                    <p className="text-sm font-urbanist font-light text-green-700">
-                      You've prayed today. Keep up the good work!
-                    </p>
-                  </div>
-                ) : (
-                  <div className="bg-red-50 rounded-lg p-4 border border-red-200">
-                    <div className="flex items-center gap-3 mb-2">
-                      <Heart className="w-5 h-5 text-red-600" strokeWidth={2} />
-                      <p className="font-urbanist font-semibold text-red-900">Haven't Prayed Today</p>
-                    </div>
-                    <p className="text-sm font-urbanist font-light text-red-700">
-                      Take a moment to pray and mark it complete.
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              {/* Mark Prayer Button */}
-              <Button
-                onClick={recordPrayer}
-                disabled={isRecordingPrayer || todayPrayed}
-                className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-urbanist font-light disabled:opacity-50"
-              >
-                {isRecordingPrayer ? (
-                  <>Recording...</>
-                ) : todayPrayed ? (
-                  <>
-                    <CheckCircle className="w-4 h-4 mr-2" />
-                    Prayer Complete
-                  </>
-                ) : (
-                  <>
-                    <Heart className="w-4 h-4 mr-2" />
-                    Mark Prayer Complete
-                  </>
-                )}
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Fourth Section: Weekly Bible Quiz */}
-        <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
-          <CardHeader>
-            <CardTitle className="text-xl font-urbanist font-semibold text-gray-900 flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-purple-500" />
-              Weekly Bible Quiz
-            </CardTitle>
-            <CardDescription className="font-urbanist font-light text-gray-600">
-              Test your knowledge with this week's challenge
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            {isLoadingWeeklyQuiz ? (
-              <div className="flex items-center justify-center py-8">
-                <p className="text-sm font-urbanist font-light text-gray-500">Loading...</p>
-              </div>
-            ) : currentWeeklyQuiz ? (
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-lg font-urbanist font-semibold text-gray-900 mb-2">
-                    {currentWeeklyQuiz.title}
-                  </h3>
-                  {currentWeeklyQuiz.description && (
-                    <p className="text-sm font-urbanist font-light text-gray-600 mb-3">
-                      {currentWeeklyQuiz.description}
-                    </p>
-                  )}
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 mb-4">
-                    {currentWeeklyQuiz.theme && (
-                      <div className="flex items-center gap-2">
-                        <BookOpen className="w-4 h-4" />
-                        <span className="font-urbanist font-light">{currentWeeklyQuiz.theme}</span>
-                      </div>
-                    )}
-                    {currentWeeklyQuiz.difficulty && (
-                      <div className="flex items-center gap-2">
-                        <Target className="w-4 h-4" />
-                        <span className="font-urbanist font-light capitalize">{currentWeeklyQuiz.difficulty}</span>
-                      </div>
-                    )}
-                    {currentWeeklyQuiz.total_questions && (
-                      <div className="flex items-center gap-2">
-                        <Brain className="w-4 h-4" />
-                        <span className="font-urbanist font-light">{currentWeeklyQuiz.total_questions} questions</span>
-                      </div>
-                    )}
-                    {currentWeeklyQuiz.time_limit && (
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4" />
-                        <span className="font-urbanist font-light">{Math.floor(currentWeeklyQuiz.time_limit / 60)} min</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                {weeklyQuizAttempt?.completed ? (
-                  <div className="bg-green-50 rounded-lg p-4 border border-green-200">
-                    <div className="flex items-center gap-3 mb-2">
-                      <CheckCircle className="w-5 h-5 text-green-600" strokeWidth={2} />
-                      <p className="font-urbanist font-semibold text-green-900">Quiz Completed</p>
-                    </div>
-                    <p className="text-sm font-urbanist font-light text-green-700 mb-3">
-                      You've completed this week's quiz! Check back next week for a new challenge.
-                    </p>
-                    <Button
-                      variant="outline"
-                      className="w-full border-green-300 text-green-700 hover:bg-green-50 font-urbanist font-light"
-                      onClick={() => navigate('/weekly-quiz')}
-                    >
-                      View Leaderboard
-                    </Button>
-                  </div>
-                ) : (
-                  <Button
-                    className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-urbanist font-light"
-                    onClick={() => navigate(`/weekly-quiz/${currentWeeklyQuiz.id}`)}
-                  >
-                    <Play className="w-4 h-4 mr-2" />
-                    Start Quiz
-                  </Button>
-                )}
-              </div>
-            ) : (
-              <div className="space-y-4">
-                <div className="bg-amber-50 rounded-lg p-4 border border-amber-200">
-                  <div className="flex items-start gap-3 mb-3">
-                    <Calendar className="w-5 h-5 text-amber-600 mt-0.5" strokeWidth={2} />
-                    <div>
-                      <h3 className="text-base font-urbanist font-semibold text-amber-900 mb-1">
-                        No Weekly Quiz Available
-                      </h3>
-                      <p className="text-sm font-urbanist font-light text-amber-700 mb-2">
-                        There's no active weekly quiz for this week. Weekly quizzes are typically available from Monday to Sunday.
-                      </p>
-                      <ul className="text-xs font-urbanist font-light text-amber-700 space-y-1 ml-4 list-disc">
-                        <li>Check back on Monday for the new week's quiz</li>
-                        <li>Weekly quizzes test your Bible knowledge with timed challenges</li>
-                        <li>Compete on the leaderboard and track your progress</li>
-                        <li>Each quiz includes multiple questions with varying difficulty</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <Button
-                    className="flex-1 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-urbanist font-light"
-                    onClick={() => navigate('/weekly-quiz')}
-                  >
-                    <Play className="w-4 h-4 mr-2" />
-                    Attempt Weekly Quiz
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="flex-1 border-gray-300 font-urbanist font-light"
-                    onClick={() => navigate('/weekly-quiz')}
-                  >
-                    View All Quizzes
-                  </Button>
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Progress & Streak Section */}
-      {stats.totalAttempts > 0 && (
-        <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow mb-6">
-          <CardHeader>
-            <CardTitle className="text-xl font-urbanist font-semibold text-gray-900">Your Progress</CardTitle>
-            <CardDescription className="font-urbanist font-light text-gray-600">Track your learning journey</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Progress towards next level */}
-              <div className="p-4 border border-gray-200 rounded-lg bg-gray-50">
-                <div className="flex items-center gap-2 mb-3">
-                  <TrendingUp className="w-5 h-5 text-gray-700" strokeWidth={1} />
-                  <span className="font-urbanist font-semibold text-gray-900 text-sm">Level Progress</span>
-                </div>
-                <div className="mb-2">
-                  <div className="flex justify-between items-center mb-1">
-                    <span className="text-xs font-urbanist font-light text-gray-600">Next milestone</span>
-                    <span className="text-xs font-urbanist font-medium text-gray-900">
-                      {stats.totalAttempts < 10 ? `${10 - stats.totalAttempts} more` : 'Achieved!'}
-                    </span>
-                  </div>
-                  <Progress 
-                    value={Math.min((stats.totalAttempts / 10) * 100, 100)} 
-                    className="h-2 bg-gray-200"
-                  />
-                </div>
-                <p className="text-xs font-urbanist font-light text-gray-500 mt-2">
-                  {stats.totalAttempts < 10 
-                    ? `Complete ${10 - stats.totalAttempts} more quiz${10 - stats.totalAttempts === 1 ? '' : 'zes'} to unlock new features`
-                    : 'Great progress! Keep learning'}
-                </p>
-              </div>
-
-              {/* Improvement indicator */}
-              <div className="p-4 border border-gray-200 rounded-lg bg-gray-50">
-                <div className="flex items-center gap-2 mb-3">
-                  <Target className="w-5 h-5 text-gray-700" strokeWidth={1} />
-                  <span className="font-urbanist font-semibold text-gray-900 text-sm">Performance</span>
-                </div>
-                <div className="mb-2">
-                  <div className="text-2xl font-urbanist font-semibold text-gray-900 mb-1">
-                    {stats.averageScore > 0 ? `${Math.round((stats.bestScore / stats.averageScore - 1) * 100)}%` : '0%'}
-                  </div>
-                  <p className="text-xs font-urbanist font-light text-gray-600">
-                    {stats.averageScore > 0 && stats.bestScore > stats.averageScore
-                      ? 'Above your average'
-                      : 'Getting started'}
-                  </p>
-                </div>
-                <div className="flex items-center gap-2 mt-3">
-                  <div className="text-xs font-urbanist font-light text-gray-500">
-                    Best: {stats.bestScore} pts
-                  </div>
-                </div>
-              </div>
-
-              {/* Activity summary */}
-              <div className="p-4 border border-gray-200 rounded-lg bg-gray-50">
-                <div className="flex items-center gap-2 mb-3">
-                  <Clock className="w-5 h-5 text-gray-700" strokeWidth={1} />
-                  <span className="font-urbanist font-semibold text-gray-900 text-sm">Activity</span>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs font-urbanist font-light text-gray-600">Total quizzes</span>
-                    <span className="text-sm font-urbanist font-semibold text-gray-900">{stats.totalAttempts}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs font-urbanist font-light text-gray-600">Time spent</span>
-                    <span className="text-sm font-urbanist font-semibold text-gray-900">{formatTime(stats.totalTimeSpent)}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs font-urbanist font-light text-gray-600">Avg. score</span>
-                    <span className="text-sm font-urbanist font-semibold text-gray-900">{stats.averageScore}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Recent Activity - Simple */}
-      {recentAttempts.length > 0 && (
-        <Card className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow mb-6">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle className="text-xl font-urbanist font-semibold text-gray-900">Recent Activity</CardTitle>
-                <CardDescription className="font-urbanist font-light text-gray-600">Your latest quiz attempts</CardDescription>
-              </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="font-urbanist font-light text-gray-600"
-                onClick={() => navigate('/dashboard/recent-attempts')}
-              >
-                View All
-                <ArrowRight className="w-4 h-4 ml-1" strokeWidth={1} />
-              </Button>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {recentAttempts.slice(0, 3).map((attempt: any, index: number) => (
-                <div 
-                  key={index} 
-                  className="flex items-center justify-between p-3 border border-gray-200 rounded-lg hover:border-gray-300 hover:bg-gray-50 transition-colors cursor-pointer"
-                  onClick={() => navigate('/dashboard/recent-attempts')}
-                >
-                  <div className="flex items-center gap-3 flex-1">
-                    <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                      <Trophy className="w-4 h-4 text-gray-700" strokeWidth={1} />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="font-urbanist font-medium text-gray-900 text-sm truncate">
-                        {(attempt.quizzes as any)?.title || 'Quiz'}
-                      </div>
-                      <div className="text-xs font-urbanist font-light text-gray-500">
-                        {new Date(attempt.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="text-right">
-                      <div className="font-urbanist font-semibold text-gray-900 text-sm">{attempt.score || 0}</div>
-                      <div className="text-xs font-urbanist font-light text-gray-500">points</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      )}
 
       {/* Quick Actions & Featured Competitions */}
       {/* This section is now replaced by the above grid */}

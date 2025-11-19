@@ -102,6 +102,12 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       current: location.pathname === "/admin/daily-verses"
     },
     {
+      name: "Notifications",
+      href: "/admin/notifications",
+      icon: Bell,
+      current: location.pathname === "/admin/notifications"
+    },
+    {
       name: "Realtime Health Check",
       href: "/live-quiz/health-check",
       icon: Activity,

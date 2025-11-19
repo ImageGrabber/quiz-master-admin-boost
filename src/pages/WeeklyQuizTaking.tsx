@@ -437,7 +437,24 @@ const WeeklyQuizTaking = () => {
   }
 
   if (questions.length === 0) {
-    return null; // Will redirect in useEffect
+    // Show a friendly message instead of a blank page when there are no questions
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+        <div className="max-w-lg w-full px-4">
+          <Card className="text-center p-6">
+            <CardHeader>
+              <CardTitle className="text-lg font-semibold">No Questions Available</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-gray-600 mb-4">This weekly quiz doesn't have any questions yet. Please check back later or return to the weekly quiz list.</p>
+              <div className="flex justify-center">
+                <Button onClick={() => navigate('/weekly-quiz')} className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">Back to Weekly Quizzes</Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
   }
 
   const progress = ((currentQuestion + 1) / questions.length) * 100;

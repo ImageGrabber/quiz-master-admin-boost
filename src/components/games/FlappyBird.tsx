@@ -403,7 +403,7 @@ export function FlappyBird({
       <div className="text-center space-y-6">
         <div className="bg-gradient-to-br from-teal-50 via-cyan-50 to-blue-50 rounded-2xl p-8 border border-teal-200/50 shadow-xl">
           <h3 className="text-2xl font-urbanist font-bold bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent mb-4">
-            Flappy Bird
+            Noah's Dove
           </h3>
           <p className="text-lg font-urbanist font-medium text-gray-700 mb-6">
             Press Space or click Start to begin! Then tap or press Space to fly!
@@ -445,7 +445,7 @@ export function FlappyBird({
       {/* Header with Score */}
       <div className="flex flex-nowrap items-center justify-between gap-4 bg-gradient-to-r from-teal-50 via-cyan-50 to-teal-50 rounded-2xl p-6 border border-teal-200/50 shadow-lg backdrop-blur-sm overflow-hidden">
         <h3 className="text-xl md:text-2xl font-urbanist font-bold bg-gradient-to-r from-teal-600 via-cyan-600 to-teal-600 bg-clip-text text-transparent whitespace-nowrap">
-          Flappy Bird
+          Noah's Dove
         </h3>
         <div className="bg-white/80 backdrop-blur-md px-4 md:px-6 py-2 md:py-3 rounded-xl border border-teal-200/50 shadow-xl ring-2 ring-teal-100/50 flex-shrink-0">
           <div className="flex items-center gap-2">

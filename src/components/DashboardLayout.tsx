@@ -146,8 +146,20 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
           </nav>
         </aside>
         {/* Main Content */}
-        <main className="flex-1 p-6 md:p-8 w-full overflow-x-auto bg-white">
-          {children}
+        <main className="flex-1 p-6 md:p-8 w-full overflow-x-auto bg-gradient-to-b from-blue-50/30 via-indigo-50/20 to-white relative">
+          {/* Animated background orbs */}
+          <div className="fixed top-20 right-10 w-72 h-72 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
+          <div className="fixed bottom-20 left-10 w-96 h-96 bg-gradient-to-tr from-purple-400/20 to-pink-400/20 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: '1s' }}></div>
+          
+          {/* Grid pattern overlay */}
+          <div className="fixed inset-0 opacity-[0.02] pointer-events-none" style={{
+            backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
+          }}></div>
+          
+          <div className="relative z-10">
+            {children}
+          </div>
         </main>
       </div>
     </div>

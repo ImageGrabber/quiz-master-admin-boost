@@ -1,0 +1,75 @@
+[
+  {
+    "id": 1,
+    "question": "What did God create on the first day?",
+    "option_a": "Light",
+    "option_b": "Land",
+    "option_c": "Animals",
+    "option_d": "Humans",
+    "correct_index": 0
+  },
+  {
+    "id": 2,
+    "question": "Who built the ark?",
+    "option_a": "Moses",
+    "option_b": "Noah",
+    "option_c": "Abraham",
+    "option_d": "David",
+    "correct_index": 1
+  },
+  {
+    "id": 3,
+    "question": "What is the first book of the Bible?",
+    "option_a": "Exodus",
+    "option_b": "Genesis",
+    "option_c": "Matthew",
+    "option_d": "Psalms",
+    "correct_index": 1
+  },
+  {
+    "id": 4,
+    "question": "How many days was Jonah in the belly of the fish?",
+    "option_a": "3 days",
+    "option_b": "7 days",
+    "option_c": "40 days",
+    "option_d": "1 day",
+    "correct_index": 0
+  },
+  {
+    "id": 5,
+    "question": "Who was thrown into the lions' den?",
+    "option_a": "Daniel",
+    "option_b": "David",
+    "option_c": "Joseph",
+    "option_d": "Samuel",
+    "correct_index": 0
+  },
+  {
+    "id": 6,
+    "question": "What is the last book of the New Testament?",
+    "option_a": "Jude",
+    "option_b": "Hebrews",
+    "option_c": "Revelation",
+    "option_d": "3 John",
+    "correct_index": 2
+  },
+  {
+    "id": 7,
+    "question": "Who was the first king of Israel?",
+    "option_a": "David",
+    "option_b": "Solomon",
+    "option_c": "Saul",
+    "option_d": "Samuel",
+    "correct_index": 2
+  },
+  {
+    "id": 8,
+    "question": "In which city was Jesus born?",
+    "option_a": "Jerusalem",
+    "option_b": "Nazareth",
+    "option_c": "Bethlehem",
+    "option_d": "Jericho",
+    "correct_index": 2
+  }
+]
+

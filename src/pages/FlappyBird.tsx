@@ -13,12 +13,12 @@ const FlappyBird = () => {
   const [gameOver, setGameOver] = useState(false);
 
   const gameData = {
-    title: "Flappy Bird",
-    description: "Tap to fly! Navigate through obstacles and collect stars in this Bible-themed Flappy Bird game.",
-    verse: "But those who hope in the Lord will renew their strength. They will soar on wings like eagles.",
-    reference: "Isaiah 40:31",
+    title: "Noah's Dove",
+    description: "Tap to fly! Navigate through obstacles and collect stars in this Bible-themed game.",
+    verse: "Then the dove came to him in the evening, and behold, a freshly plucked olive leaf was in her mouth.",
+    reference: "Genesis 8:11",
     type: "flappy",
-    encouragement: "Amazing flight! You soared like an eagle! Keep your hope in the Lord!"
+    encouragement: "Amazing flight! You flew like Noah's dove! Keep your faith in the Lord!"
   };
 
   const goodWords = ['Joy', 'Hope', 'Love', 'Faith', 'Grace', 'Mercy', 'Peace', 'Trust', 'Truth', 'Light'];

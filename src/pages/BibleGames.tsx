@@ -95,8 +95,8 @@ const games: Game[] = [
   },
   {
     id: "flappy-bird",
-    title: "Flappy Bird",
-    description: "Tap to fly! Navigate through obstacles and collect stars in this Bible-themed Flappy Bird game.",
+    title: "Noah's Dove",
+    description: "Tap to fly! Navigate through obstacles and collect stars in this Bible-themed game.",
     category: "Action",
     difficulty: "Intermediate",
     players: 923,
