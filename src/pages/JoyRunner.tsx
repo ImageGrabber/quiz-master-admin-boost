@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import DashboardLayout from "@/components/DashboardLayout";
 import { JoyRunnerGame } from "@/components/games/JoyRunnerGame";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -37,12 +36,12 @@ const JoyRunner = () => {
 
   useEffect(() => {
     setRetryCount(getRetryCount());
-    
+
     // Show loader for 2 seconds
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
-    
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -62,7 +61,7 @@ const JoyRunner = () => {
 
   if (isLoading) {
     return (
-      <DashboardLayout>
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="w-full max-w-4xl mx-auto flex items-center justify-center min-h-[60vh]">
           {/* Loader */}
           <div className="relative w-16 h-16">
@@ -70,12 +69,12 @@ const JoyRunner = () => {
             <div className="absolute inset-0 border-4 border-purple-600 rounded-full border-t-transparent animate-spin"></div>
           </div>
         </div>
-      </DashboardLayout>
+      </div>
     );
   }
 
   return (
-    <DashboardLayout>
+    <div className="min-h-screen bg-slate-50 p-6">
       <div className="w-full max-w-4xl mx-auto">
         {/* Header with back button */}
         <div className="mb-6 flex items-center gap-4">
@@ -110,7 +109,7 @@ const JoyRunner = () => {
           />
         </div>
       </div>
-    </DashboardLayout>
+    </div>
   );
 };
 

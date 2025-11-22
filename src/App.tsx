@@ -19,6 +19,8 @@ import Match3Game from "./pages/Match3Game";
 import MemoryMatchGame from "./pages/MemoryMatchGame";
 import WordSearch from "./pages/WordSearch";
 import MemoryMatch from "./pages/MemoryMatch";
+import ScriptureMatchMultiplayer from "./pages/ScriptureMatchMultiplayer";
+import LostSheep from "./pages/LostSheep";
 import VerseMaster from "./pages/VerseMaster";
 import FaithBuilder from "./pages/FaithBuilder";
 import FlappyBird from "./pages/FlappyBird";
@@ -280,341 +282,343 @@ const App = () => {
           <Toaster />
           <Sonner />
           <BrowserRouter>
-          <PageViewTracker />
-          <NotificationBanner />
-          <Routes>
-            <Route path="/emotional-checkin" element={<EmotionalCheckIn />} />
-            <Route path="/joy-runner-test" element={<JoyRunnerTest />} />
-            <Route path="/joy-runner" element={<ProtectedRoute><JoyRunner /></ProtectedRoute>} />
-            <Route path="/match-3-game" element={<Match3Game />} />
-            <Route path="/memory-match-game" element={<MemoryMatchGame />} />
-            <Route path="/word-search" element={<ProtectedRoute><WordSearch /></ProtectedRoute>} />
-            <Route path="/memory-match" element={<ProtectedRoute><MemoryMatch /></ProtectedRoute>} />
-            <Route path="/verse-master" element={<ProtectedRoute><VerseMaster /></ProtectedRoute>} />
-            <Route path="/faith-builder" element={<ProtectedRoute><FaithBuilder /></ProtectedRoute>} />
-            <Route path="/flappy-bird" element={<ProtectedRoute><FlappyBird /></ProtectedRoute>} />
-            <Route path="/" element={<CompetitionHome />} />
-            <Route path="/home" element={<Index />} />
-            <Route path="/competition-home" element={<CompetitionHome />} />
-            <Route path="/signup-today" element={<SignUpToday />} />
-            <Route path="/todays-quiz" element={<TodaysQuiz />} />
-            <Route path="/todays-quiz-mark" element={<TodaysQuizMark />} />
-            <Route path="/daily-verse" element={<DailyVerse />} />
-            <Route path="/prayer-requests" element={<PrayerRequests />} />
-            <Route path="/sentry-test" element={<SentryTest />} />
-            <Route path="/auth/login" element={<Login />} />
-            <Route path="/auth/register" element={<Register />} />
-            <Route path="/auth/forgot-password" element={<ForgotPassword />} />
-            <Route path="/auth/reset-password" element={<ResetPassword />} />
-            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/dashboard/bible-games" element={<ProtectedRoute><BibleGames /></ProtectedRoute>} />
-            <Route path="/dashboard/quizzes" element={<ProtectedRoute><MyQuizzes /></ProtectedRoute>} />
-            <Route path="/create-quiz" element={<ProtectedRoute><CreateQuiz /></ProtectedRoute>} />
-            <Route path="/create-quiz/guest" element={<CreateGuestQuiz />} />
-            <Route path="/edit-quiz/:quizId" element={<ProtectedRoute><EditQuiz /></ProtectedRoute>} />
-            <Route path="/quiz-results/:quizId" element={<ProtectedRoute><QuizResults /></ProtectedRoute>} />
-            <Route path="/help" element={<Help />} />
-            <Route path="/donate" element={<Donate />} />
-            <Route path="/live-quiz" element={<ProtectedRoute><LiveQuizIntro /></ProtectedRoute>} />
-            {/* SEO-friendly slug for hosting guide */}
-            <Route path="/host-live-bible-quizzes-with-confidence" element={<HostingGuide />} />
-            {/* Backward-compatible old path */}
-            <Route path="/hosting-guide" element={<HostingGuide />} />
-            <Route path="/live-quiz/host/:quizId" element={<LiveQuizHost />} />
-            <Route path="/live-quiz/join/:sessionCode" element={<LiveQuizParticipant />} />
-            <Route path="/live-quiz/health-check" element={<ProtectedRoute requiredRole="admin"><LiveQuizHealthCheck /></ProtectedRoute>} />
-            <Route path="/challenge" element={<ProtectedRoute><Challenge /></ProtectedRoute>} />
-            <Route path="/challenge/:challengeSessionId" element={<ProtectedRoute><Challenge /></ProtectedRoute>} />
-            <Route path="/dashboard/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-            <Route path="/dashboard/upgrade" element={<ProtectedRoute><Upgrade /></ProtectedRoute>} />
-            <Route path="/dashboard/recent-attempts" element={<ProtectedRoute><RecentAttempts /></ProtectedRoute>} />
-            <Route path="/dashboard/bible-study" element={<ProtectedRoute><BibleStudy /></ProtectedRoute>} />
-            <Route path="/quiz-selection" element={<ProtectedRoute><QuizSelection /></ProtectedRoute>} />
-            <Route path="/quiz/:quizId" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
-            <Route path="/result/:id" element={<ProtectedRoute><Result /></ProtectedRoute>} />
-            <Route path="/weekly-quiz" element={<ProtectedRoute><WeeklyQuiz /></ProtectedRoute>} />
-            <Route path="/weekly-quiz/:quizId" element={<ProtectedRoute><WeeklyQuizTaking /></ProtectedRoute>} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/public-leaderboard" element={<PublicLeaderboard />} />
-            <Route path="/articles" element={<Articles />} />
-            <Route path="/articles/:id" element={<ArticleDetail />} />
-            <Route path="/public-quiz/genesis" element={<GenesisPublicQuiz />} />
-            <Route path="/public-quiz/exodus" element={<ExodusPublicQuiz />} />
-            <Route path="/public-quiz/leviticus" element={<LeviticusPublicQuiz />} />
-            <Route path="/public-quiz/numbers" element={<NumbersPublicQuiz />} />
-            <Route path="/public-quiz/deuteronomy" element={<DeuteronomyPublicQuiz />} />
-            <Route path="/public-quiz/psalms" element={<PsalmsPublicQuiz />} />
-            <Route path="/public-quiz/proverbs" element={<ProverbsPublicQuiz />} />
-            <Route path="/public-quiz/isaiah" element={<IsaiahPublicQuiz />} />
-            <Route path="/public-quiz/daniel" element={<DanielPublicQuiz />} />
-            <Route path="/public-quiz/job" element={<JobPublicQuiz />} />
-            <Route path="/public-quiz/joshua" element={<JoshuaPublicQuiz />} />
-            <Route path="/public-quiz/judges" element={<JudgesPublicQuiz />} />
-            <Route path="/public-quiz/ruth" element={<RuthPublicQuiz />} />
-            <Route path="/public-quiz/1-samuel" element={<FirstSamuelPublicQuiz />} />
-            <Route path="/public-quiz/2-samuel" element={<SecondSamuelPublicQuiz />} />
-            <Route path="/public-quiz/1-kings" element={<FirstKingsPublicQuiz />} />
-            <Route path="/public-quiz/2-kings" element={<SecondKingsPublicQuiz />} />
-            <Route path="/public-quiz/1-chronicles" element={<FirstChroniclesPublicQuiz />} />
-            <Route path="/public-quiz/2-chronicles" element={<SecondChroniclesPublicQuiz />} />
-            <Route path="/public-quiz/ezra" element={<EzraPublicQuiz />} />
-            <Route path="/public-quiz/nehemiah" element={<NehemiahPublicQuiz />} />
-            <Route path="/public-quiz/esther" element={<EstherPublicQuiz />} />
-            <Route path="/public-quiz/hosea" element={<HoseaPublicQuiz />} />
-            <Route path="/public-quiz/joel" element={<JoelPublicQuiz />} />
-            <Route path="/public-quiz/amos" element={<AmosPublicQuiz />} />
-            <Route path="/public-quiz/obadiah" element={<ObadiahPublicQuiz />} />
-            <Route path="/public-quiz/jonah" element={<JonahPublicQuiz />} />
-            <Route path="/public-quiz/micah" element={<MicahPublicQuiz />} />
-            <Route path="/public-quiz/nahum" element={<NahumPublicQuiz />} />
-            <Route path="/public-quiz/habakkuk" element={<HabakkukPublicQuiz />} />
-            <Route path="/public-quiz/zephaniah" element={<ZephaniahPublicQuiz />} />
-            <Route path="/public-quiz/haggai" element={<HaggaiPublicQuiz />} />
-            <Route path="/public-quiz/zechariah" element={<ZechariahPublicQuiz />} />
-            <Route path="/public-quiz/malachi" element={<MalachiPublicQuiz />} />
-            <Route path="/public-quiz/matthew" element={<MatthewPublicQuiz />} />
-            <Route path="/public-quiz/mark" element={<MarkPublicQuiz />} />
-            <Route path="/public-quiz/luke" element={<LukePublicQuiz />} />
-            <Route path="/public-quiz/john" element={<JohnPublicQuiz />} />
-            <Route path="/public-quiz/romans" element={<RomansPublicQuiz />} />
-            <Route path="/public-quiz/1-corinthians" element={<CorinthiansPublicQuiz />} />
-            <Route path="/public-quiz/2-corinthians" element={<Corinthians2PublicQuiz />} />
-            <Route path="/public-quiz/galatians" element={<GalatiansPublicQuiz />} />
-            <Route path="/public-quiz/ephesians" element={<EphesiansPublicQuiz />} />
-            <Route path="/public-quiz/philippians" element={<PhilippiansPublicQuiz />} />
-            <Route path="/public-quiz/colossians" element={<ColossiansPublicQuiz />} />
-            <Route path="/public-quiz/1-thessalonians" element={<Thessalonians1PublicQuiz />} />
-            <Route path="/public-quiz/2-thessalonians" element={<Thessalonians2PublicQuiz />} />
-            <Route path="/public-quiz/1-timothy" element={<Timothy1PublicQuiz />} />
-            <Route path="/public-quiz/2-timothy" element={<Timothy2PublicQuiz />} />
-            <Route path="/public-quiz/titus" element={<TitusPublicQuiz />} />
-            <Route path="/public-quiz/philemon" element={<PhilemonPublicQuiz />} />
-            <Route path="/public-quiz/hebrews" element={<HebrewsPublicQuiz />} />
-            <Route path="/public-quiz/james" element={<JamesPublicQuiz />} />
-            <Route path="/public-quiz/1-peter" element={<Peter1PublicQuiz />} />
-            <Route path="/public-quiz/2-peter" element={<Peter2PublicQuiz />} />
-            <Route path="/public-quiz/1-john" element={<John1PublicQuiz />} />
-            <Route path="/public-quiz/2-john" element={<John2PublicQuiz />} />
-            <Route path="/public-quiz/3-john" element={<John3PublicQuiz />} />
-            <Route path="/public-quiz/jude" element={<JudePublicQuiz />} />
-            <Route path="/public-quiz/revelation" element={<RevelationPublicQuiz />} />
-            <Route path="/competitions" element={<ProtectedRoute><Competitions /></ProtectedRoute>} />
-            <Route path="/competition-quiz/:competitionId" element={<ProtectedRoute><CompetitionQuiz /></ProtectedRoute>} />
-            <Route path="/competition-leaderboard/:competitionId" element={<ProtectedRoute><CompetitionLeaderboard /></ProtectedRoute>} />
-            <Route path="/admin" element={<ProtectedRoute requiredRole="admin"><AdminDashboard /></ProtectedRoute>} />
-            <Route path="/admin/attempts" element={<ProtectedRoute requiredRole="admin"><AdminAttempts /></ProtectedRoute>} />
-            <Route path="/admin/upload" element={<ProtectedRoute requiredRole="admin"><AdminUpload /></ProtectedRoute>} />
-            <Route path="/admin/quizzes" element={<ProtectedRoute requiredRole="admin"><AdminQuizzes /></ProtectedRoute>} />
-            <Route path="/admin/questions" element={<ProtectedRoute requiredRole="admin"><AdminQuestions /></ProtectedRoute>} />
-            <Route path="/admin/activity" element={<ProtectedRoute requiredRole="admin"><AdminActivity /></ProtectedRoute>} />
-            <Route path="/admin/prayer-requests" element={<ProtectedRoute requiredRole="admin"><AdminPrayerRequests /></ProtectedRoute>} />
-            <Route path="/admin/daily-verses" element={<ProtectedRoute requiredRole="admin"><DailyVerses /></ProtectedRoute>} />
-            <Route path="/admin/notifications" element={<ProtectedRoute requiredRole="admin"><Notifications /></ProtectedRoute>} />
-            <Route path="/admin/competitions" element={<ProtectedRoute requiredRole="admin"><AdminCompetitions /></ProtectedRoute>} />
-            <Route path="/admin/weekly-attendance" element={<ProtectedRoute requiredRole="admin"><WeeklyAttendance /></ProtectedRoute>} />
-            <Route path="/admin/users" element={<ProtectedRoute requiredRole="admin"><AdminUsers /></ProtectedRoute>} />
-            <Route path="/admin/users/:id" element={<ProtectedRoute requiredRole="admin"><AdminUserSettings /></ProtectedRoute>} />
-            <Route path="/admin/page-views" element={<ProtectedRoute requiredRole="admin"><PageViews /></ProtectedRoute>} />
-            <Route path="/rls-test" element={<ProtectedRoute requiredRole="admin"><RLSTest /></ProtectedRoute>} />
-            <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/genesis" element={<GenesisHub />} />
-            {/* Genesis variants */}
-            <Route path="/bible-questions-and-answers-hub/genesis/advanced" element={<GenesisAdvanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/beginner" element={<GenesisBeginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/intermediate" element={<GenesisIntermediate />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapters-1-11" element={<GenesisCh1to11 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapters-12-25" element={<GenesisCh12to25 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapters-26-36" element={<GenesisCh26to36 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapters-37-50" element={<GenesisCh37to50 />} />
-            {/* Genesis ranges with difficulty */}
-            <Route path="/bible-questions-and-answers-hub/genesis/1-11/beginner" element={<GenesisRange1to11Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/1-11/intermediate" element={<GenesisRange1to11Intermediate />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/1-11/advanced" element={<GenesisRange1to11Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/12-25/beginner" element={<GenesisRange12to25Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/12-25/intermediate" element={<GenesisRange12to25Intermediate />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/12-25/advanced" element={<GenesisRange12to25Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/26-36/beginner" element={<GenesisRange26to36Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/26-36/intermediate" element={<GenesisRange26to36Intermediate />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/26-36/advanced" element={<GenesisRange26to36Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/37-50/beginner" element={<GenesisRange37to50Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/37-50/intermediate" element={<GenesisRange37to50Intermediate />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/37-50/advanced" element={<GenesisRange37to50Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/true-false" element={<GenesisTrueFalse />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/characters" element={<GenesisCharacters />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/fill-in-the-blanks" element={<GenesisFillInTheBlanks />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/match-the-following" element={<GenesisMatchFollowing />} />
-            {/* Genesis per-chapter 1–5 */}
-            <Route path="/bible-questions-and-answers-hub/genesis/ch1-beginner" element={<GenesisCh1Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch1-intermediate" element={<GenesisCh1Intermediate />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch1-advanced" element={<GenesisCh1Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch2-beginner" element={<GenesisCh2Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch2-intermediate" element={<GenesisCh2Intermediate />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch2-advanced" element={<GenesisCh2Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch3-beginner" element={<GenesisCh3Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch3-intermediate" element={<GenesisCh3Intermediate />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch3-advanced" element={<GenesisCh3Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch4-beginner" element={<GenesisCh4Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch4-intermediate" element={<GenesisCh4Intermediate />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch4-advanced" element={<GenesisCh4Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch5-beginner" element={<GenesisCh5Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch5-intermediate" element={<GenesisCh5Intermediate />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch5-advanced" element={<GenesisCh5Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch6-beginner" element={<GenesisCh6Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch6-advanced" element={<GenesisCh6Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch7-beginner" element={<GenesisCh7Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch7-advanced" element={<GenesisCh7Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch8-beginner" element={<GenesisCh8Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch8-advanced" element={<GenesisCh8Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch9-beginner" element={<GenesisCh9Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch9-advanced" element={<GenesisCh9Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch10-beginner" element={<GenesisCh10Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch10-advanced" element={<GenesisCh10Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch11-beginner" element={<GenesisCh11Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch11-advanced" element={<GenesisCh11Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch12-beginner" element={<GenesisCh12Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch12-advanced" element={<GenesisCh12Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch13-beginner" element={<GenesisCh13Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch13-advanced" element={<GenesisCh13Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch14-beginner" element={<GenesisCh14Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch14-advanced" element={<GenesisCh14Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch15-beginner" element={<GenesisCh15Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch15-advanced" element={<GenesisCh15Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch16-beginner" element={<GenesisCh16Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch16-advanced" element={<GenesisCh16Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch17-beginner" element={<GenesisCh17Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch17-advanced" element={<GenesisCh17Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch18-beginner" element={<GenesisCh18Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch18-advanced" element={<GenesisCh18Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch19-beginner" element={<GenesisCh19Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch19-advanced" element={<GenesisCh19Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch20-beginner" element={<GenesisCh20Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch20-advanced" element={<GenesisCh20Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch21-beginner" element={<GenesisCh21Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch21-advanced" element={<GenesisCh21Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch22-beginner" element={<GenesisCh22Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch22-advanced" element={<GenesisCh22Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch23-beginner" element={<GenesisCh23Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch23-advanced" element={<GenesisCh23Advanced />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch24-beginner" element={<GenesisCh24Beginner />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/ch24-advanced" element={<GenesisCh24Advanced />} />
-            {/* Genesis Chapter Detail Pages */}
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-1" element={<GenesisChapter1 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-2" element={<GenesisChapter2 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-3" element={<GenesisChapter3 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-4" element={<GenesisChapter4 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-5" element={<GenesisChapter5 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-6" element={<GenesisChapter6 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-7" element={<GenesisChapter7 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-8" element={<GenesisChapter8 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-1-full" element={<GenesisChapter1Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-2-full" element={<GenesisChapter2Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-3-full" element={<GenesisChapter3Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-4-full" element={<GenesisChapter4Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-5-full" element={<GenesisChapter5Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-6-full" element={<GenesisChapter6Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-7-full" element={<GenesisChapter7Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-8-full" element={<GenesisChapter8Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-9-full" element={<GenesisChapter9Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-10-full" element={<GenesisChapter10Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-11-full" element={<GenesisChapter11Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-12-full" element={<GenesisChapter12Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-13-full" element={<GenesisChapter13Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-14-full" element={<GenesisChapter14Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-15-full" element={<GenesisChapter15Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-16-full" element={<GenesisChapter16Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-21-full" element={<GenesisChapter21Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-22-full" element={<GenesisChapter22Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-23-full" element={<GenesisChapter23Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-24-full" element={<GenesisChapter24Full />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-9" element={<GenesisChapter9 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-10" element={<GenesisChapter10 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-11" element={<GenesisChapter11 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-12" element={<GenesisChapter12 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-13" element={<GenesisChapter13 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-14" element={<GenesisChapter14 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-15" element={<GenesisChapter15 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-16" element={<GenesisChapter16 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-17" element={<GenesisChapter17 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-18" element={<GenesisChapter18 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-19" element={<GenesisChapter19 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-20" element={<GenesisChapter20 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-21" element={<GenesisChapter21 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-22" element={<GenesisChapter22 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-23" element={<GenesisChapter23 />} />
-            <Route path="/bible-questions-and-answers-hub/genesis/chapter-24" element={<GenesisChapter24 />} />
-            <Route path="/bible-questions-and-answers-hub/exodus" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/leviticus" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/numbers" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/deuteronomy" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/joshua" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/judges" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/ruth" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/1-samuel" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/2-samuel" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/1-kings" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/2-kings" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/1-chronicles" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/2-chronicles" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/ezra" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/nehemiah" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/esther" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/job" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/psalms" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/proverbs" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/ecclesiastes" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/song-of-solomon" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/isaiah" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/jeremiah" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/lamentations" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/ezekiel" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/daniel" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/hosea" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/joel" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/amos" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/obadiah" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/jonah" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/micah" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/nahum" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/habakkuk" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/zephaniah" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/haggai" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/zechariah" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/malachi" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/matthew" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/mark" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/luke" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/john" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/acts" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/pauline-epistles" element={<PaulineEpistles />} />
-            <Route path="/bible-questions-and-answers-hub/romans" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/1-corinthians" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/2-corinthians" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/galatians" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/ephesians" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/philippians" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/colossians" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/1-thessalonians" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/2-thessalonians" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/1-timothy" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/2-timothy" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/titus" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/philemon" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/hebrews" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/james" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/1-peter" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/2-peter" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/1-john" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/2-john" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/3-john" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/jude" element={<BibleQA />} />
-            <Route path="/bible-questions-and-answers-hub/revelation" element={<BibleQA />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-        <Analytics />
-        <GoogleAnalytics />
-      </TooltipProvider>
-    </QueryClientProvider>
+            <PageViewTracker />
+            <NotificationBanner />
+            <Routes>
+              <Route path="/emotional-checkin" element={<EmotionalCheckIn />} />
+              <Route path="/joy-runner-test" element={<JoyRunnerTest />} />
+              <Route path="/joy-runner" element={<ProtectedRoute><JoyRunner /></ProtectedRoute>} />
+              <Route path="/match-3-game" element={<Match3Game />} />
+              <Route path="/memory-match-game" element={<MemoryMatchGame />} />
+              <Route path="/word-search" element={<ProtectedRoute><WordSearch /></ProtectedRoute>} />
+              <Route path="/memory-match" element={<ProtectedRoute><MemoryMatch /></ProtectedRoute>} />
+              <Route path="/scripture-match-multiplayer" element={<ScriptureMatchMultiplayer />} />
+              <Route path="/lost-sheep" element={<LostSheep />} />
+              <Route path="/verse-master" element={<ProtectedRoute><VerseMaster /></ProtectedRoute>} />
+              <Route path="/faith-builder" element={<ProtectedRoute><FaithBuilder /></ProtectedRoute>} />
+              <Route path="/flappy-bird" element={<ProtectedRoute><FlappyBird /></ProtectedRoute>} />
+              <Route path="/" element={<CompetitionHome />} />
+              <Route path="/home" element={<Index />} />
+              <Route path="/competition-home" element={<CompetitionHome />} />
+              <Route path="/signup-today" element={<SignUpToday />} />
+              <Route path="/todays-quiz" element={<TodaysQuiz />} />
+              <Route path="/todays-quiz-mark" element={<TodaysQuizMark />} />
+              <Route path="/daily-verse" element={<DailyVerse />} />
+              <Route path="/prayer-requests" element={<PrayerRequests />} />
+              <Route path="/sentry-test" element={<SentryTest />} />
+              <Route path="/auth/login" element={<Login />} />
+              <Route path="/auth/register" element={<Register />} />
+              <Route path="/auth/forgot-password" element={<ForgotPassword />} />
+              <Route path="/auth/reset-password" element={<ResetPassword />} />
+              <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/dashboard/bible-games" element={<ProtectedRoute><BibleGames /></ProtectedRoute>} />
+              <Route path="/dashboard/quizzes" element={<ProtectedRoute><MyQuizzes /></ProtectedRoute>} />
+              <Route path="/create-quiz" element={<ProtectedRoute><CreateQuiz /></ProtectedRoute>} />
+              <Route path="/create-quiz/guest" element={<CreateGuestQuiz />} />
+              <Route path="/edit-quiz/:quizId" element={<ProtectedRoute><EditQuiz /></ProtectedRoute>} />
+              <Route path="/quiz-results/:quizId" element={<ProtectedRoute><QuizResults /></ProtectedRoute>} />
+              <Route path="/help" element={<Help />} />
+              <Route path="/donate" element={<Donate />} />
+              <Route path="/live-quiz" element={<ProtectedRoute><LiveQuizIntro /></ProtectedRoute>} />
+              {/* SEO-friendly slug for hosting guide */}
+              <Route path="/host-live-bible-quizzes-with-confidence" element={<HostingGuide />} />
+              {/* Backward-compatible old path */}
+              <Route path="/hosting-guide" element={<HostingGuide />} />
+              <Route path="/live-quiz/host/:quizId" element={<LiveQuizHost />} />
+              <Route path="/live-quiz/join/:sessionCode" element={<LiveQuizParticipant />} />
+              <Route path="/live-quiz/health-check" element={<ProtectedRoute requiredRole="admin"><LiveQuizHealthCheck /></ProtectedRoute>} />
+              <Route path="/challenge" element={<ProtectedRoute><Challenge /></ProtectedRoute>} />
+              <Route path="/challenge/:challengeSessionId" element={<ProtectedRoute><Challenge /></ProtectedRoute>} />
+              <Route path="/dashboard/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+              <Route path="/dashboard/upgrade" element={<ProtectedRoute><Upgrade /></ProtectedRoute>} />
+              <Route path="/dashboard/recent-attempts" element={<ProtectedRoute><RecentAttempts /></ProtectedRoute>} />
+              <Route path="/dashboard/bible-study" element={<ProtectedRoute><BibleStudy /></ProtectedRoute>} />
+              <Route path="/quiz-selection" element={<ProtectedRoute><QuizSelection /></ProtectedRoute>} />
+              <Route path="/quiz/:quizId" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
+              <Route path="/result/:id" element={<ProtectedRoute><Result /></ProtectedRoute>} />
+              <Route path="/weekly-quiz" element={<ProtectedRoute><WeeklyQuiz /></ProtectedRoute>} />
+              <Route path="/weekly-quiz/:quizId" element={<ProtectedRoute><WeeklyQuizTaking /></ProtectedRoute>} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/public-leaderboard" element={<PublicLeaderboard />} />
+              <Route path="/articles" element={<Articles />} />
+              <Route path="/articles/:id" element={<ArticleDetail />} />
+              <Route path="/public-quiz/genesis" element={<GenesisPublicQuiz />} />
+              <Route path="/public-quiz/exodus" element={<ExodusPublicQuiz />} />
+              <Route path="/public-quiz/leviticus" element={<LeviticusPublicQuiz />} />
+              <Route path="/public-quiz/numbers" element={<NumbersPublicQuiz />} />
+              <Route path="/public-quiz/deuteronomy" element={<DeuteronomyPublicQuiz />} />
+              <Route path="/public-quiz/psalms" element={<PsalmsPublicQuiz />} />
+              <Route path="/public-quiz/proverbs" element={<ProverbsPublicQuiz />} />
+              <Route path="/public-quiz/isaiah" element={<IsaiahPublicQuiz />} />
+              <Route path="/public-quiz/daniel" element={<DanielPublicQuiz />} />
+              <Route path="/public-quiz/job" element={<JobPublicQuiz />} />
+              <Route path="/public-quiz/joshua" element={<JoshuaPublicQuiz />} />
+              <Route path="/public-quiz/judges" element={<JudgesPublicQuiz />} />
+              <Route path="/public-quiz/ruth" element={<RuthPublicQuiz />} />
+              <Route path="/public-quiz/1-samuel" element={<FirstSamuelPublicQuiz />} />
+              <Route path="/public-quiz/2-samuel" element={<SecondSamuelPublicQuiz />} />
+              <Route path="/public-quiz/1-kings" element={<FirstKingsPublicQuiz />} />
+              <Route path="/public-quiz/2-kings" element={<SecondKingsPublicQuiz />} />
+              <Route path="/public-quiz/1-chronicles" element={<FirstChroniclesPublicQuiz />} />
+              <Route path="/public-quiz/2-chronicles" element={<SecondChroniclesPublicQuiz />} />
+              <Route path="/public-quiz/ezra" element={<EzraPublicQuiz />} />
+              <Route path="/public-quiz/nehemiah" element={<NehemiahPublicQuiz />} />
+              <Route path="/public-quiz/esther" element={<EstherPublicQuiz />} />
+              <Route path="/public-quiz/hosea" element={<HoseaPublicQuiz />} />
+              <Route path="/public-quiz/joel" element={<JoelPublicQuiz />} />
+              <Route path="/public-quiz/amos" element={<AmosPublicQuiz />} />
+              <Route path="/public-quiz/obadiah" element={<ObadiahPublicQuiz />} />
+              <Route path="/public-quiz/jonah" element={<JonahPublicQuiz />} />
+              <Route path="/public-quiz/micah" element={<MicahPublicQuiz />} />
+              <Route path="/public-quiz/nahum" element={<NahumPublicQuiz />} />
+              <Route path="/public-quiz/habakkuk" element={<HabakkukPublicQuiz />} />
+              <Route path="/public-quiz/zephaniah" element={<ZephaniahPublicQuiz />} />
+              <Route path="/public-quiz/haggai" element={<HaggaiPublicQuiz />} />
+              <Route path="/public-quiz/zechariah" element={<ZechariahPublicQuiz />} />
+              <Route path="/public-quiz/malachi" element={<MalachiPublicQuiz />} />
+              <Route path="/public-quiz/matthew" element={<MatthewPublicQuiz />} />
+              <Route path="/public-quiz/mark" element={<MarkPublicQuiz />} />
+              <Route path="/public-quiz/luke" element={<LukePublicQuiz />} />
+              <Route path="/public-quiz/john" element={<JohnPublicQuiz />} />
+              <Route path="/public-quiz/romans" element={<RomansPublicQuiz />} />
+              <Route path="/public-quiz/1-corinthians" element={<CorinthiansPublicQuiz />} />
+              <Route path="/public-quiz/2-corinthians" element={<Corinthians2PublicQuiz />} />
+              <Route path="/public-quiz/galatians" element={<GalatiansPublicQuiz />} />
+              <Route path="/public-quiz/ephesians" element={<EphesiansPublicQuiz />} />
+              <Route path="/public-quiz/philippians" element={<PhilippiansPublicQuiz />} />
+              <Route path="/public-quiz/colossians" element={<ColossiansPublicQuiz />} />
+              <Route path="/public-quiz/1-thessalonians" element={<Thessalonians1PublicQuiz />} />
+              <Route path="/public-quiz/2-thessalonians" element={<Thessalonians2PublicQuiz />} />
+              <Route path="/public-quiz/1-timothy" element={<Timothy1PublicQuiz />} />
+              <Route path="/public-quiz/2-timothy" element={<Timothy2PublicQuiz />} />
+              <Route path="/public-quiz/titus" element={<TitusPublicQuiz />} />
+              <Route path="/public-quiz/philemon" element={<PhilemonPublicQuiz />} />
+              <Route path="/public-quiz/hebrews" element={<HebrewsPublicQuiz />} />
+              <Route path="/public-quiz/james" element={<JamesPublicQuiz />} />
+              <Route path="/public-quiz/1-peter" element={<Peter1PublicQuiz />} />
+              <Route path="/public-quiz/2-peter" element={<Peter2PublicQuiz />} />
+              <Route path="/public-quiz/1-john" element={<John1PublicQuiz />} />
+              <Route path="/public-quiz/2-john" element={<John2PublicQuiz />} />
+              <Route path="/public-quiz/3-john" element={<John3PublicQuiz />} />
+              <Route path="/public-quiz/jude" element={<JudePublicQuiz />} />
+              <Route path="/public-quiz/revelation" element={<RevelationPublicQuiz />} />
+              <Route path="/competitions" element={<ProtectedRoute><Competitions /></ProtectedRoute>} />
+              <Route path="/competition-quiz/:competitionId" element={<ProtectedRoute><CompetitionQuiz /></ProtectedRoute>} />
+              <Route path="/competition-leaderboard/:competitionId" element={<ProtectedRoute><CompetitionLeaderboard /></ProtectedRoute>} />
+              <Route path="/admin" element={<ProtectedRoute requiredRole="admin"><AdminDashboard /></ProtectedRoute>} />
+              <Route path="/admin/attempts" element={<ProtectedRoute requiredRole="admin"><AdminAttempts /></ProtectedRoute>} />
+              <Route path="/admin/upload" element={<ProtectedRoute requiredRole="admin"><AdminUpload /></ProtectedRoute>} />
+              <Route path="/admin/quizzes" element={<ProtectedRoute requiredRole="admin"><AdminQuizzes /></ProtectedRoute>} />
+              <Route path="/admin/questions" element={<ProtectedRoute requiredRole="admin"><AdminQuestions /></ProtectedRoute>} />
+              <Route path="/admin/activity" element={<ProtectedRoute requiredRole="admin"><AdminActivity /></ProtectedRoute>} />
+              <Route path="/admin/prayer-requests" element={<ProtectedRoute requiredRole="admin"><AdminPrayerRequests /></ProtectedRoute>} />
+              <Route path="/admin/daily-verses" element={<ProtectedRoute requiredRole="admin"><DailyVerses /></ProtectedRoute>} />
+              <Route path="/admin/notifications" element={<ProtectedRoute requiredRole="admin"><Notifications /></ProtectedRoute>} />
+              <Route path="/admin/competitions" element={<ProtectedRoute requiredRole="admin"><AdminCompetitions /></ProtectedRoute>} />
+              <Route path="/admin/weekly-attendance" element={<ProtectedRoute requiredRole="admin"><WeeklyAttendance /></ProtectedRoute>} />
+              <Route path="/admin/users" element={<ProtectedRoute requiredRole="admin"><AdminUsers /></ProtectedRoute>} />
+              <Route path="/admin/users/:id" element={<ProtectedRoute requiredRole="admin"><AdminUserSettings /></ProtectedRoute>} />
+              <Route path="/admin/page-views" element={<ProtectedRoute requiredRole="admin"><PageViews /></ProtectedRoute>} />
+              <Route path="/rls-test" element={<ProtectedRoute requiredRole="admin"><RLSTest /></ProtectedRoute>} />
+              <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/genesis" element={<GenesisHub />} />
+              {/* Genesis variants */}
+              <Route path="/bible-questions-and-answers-hub/genesis/advanced" element={<GenesisAdvanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/beginner" element={<GenesisBeginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/intermediate" element={<GenesisIntermediate />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapters-1-11" element={<GenesisCh1to11 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapters-12-25" element={<GenesisCh12to25 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapters-26-36" element={<GenesisCh26to36 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapters-37-50" element={<GenesisCh37to50 />} />
+              {/* Genesis ranges with difficulty */}
+              <Route path="/bible-questions-and-answers-hub/genesis/1-11/beginner" element={<GenesisRange1to11Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/1-11/intermediate" element={<GenesisRange1to11Intermediate />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/1-11/advanced" element={<GenesisRange1to11Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/12-25/beginner" element={<GenesisRange12to25Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/12-25/intermediate" element={<GenesisRange12to25Intermediate />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/12-25/advanced" element={<GenesisRange12to25Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/26-36/beginner" element={<GenesisRange26to36Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/26-36/intermediate" element={<GenesisRange26to36Intermediate />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/26-36/advanced" element={<GenesisRange26to36Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/37-50/beginner" element={<GenesisRange37to50Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/37-50/intermediate" element={<GenesisRange37to50Intermediate />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/37-50/advanced" element={<GenesisRange37to50Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/true-false" element={<GenesisTrueFalse />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/characters" element={<GenesisCharacters />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/fill-in-the-blanks" element={<GenesisFillInTheBlanks />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/match-the-following" element={<GenesisMatchFollowing />} />
+              {/* Genesis per-chapter 1–5 */}
+              <Route path="/bible-questions-and-answers-hub/genesis/ch1-beginner" element={<GenesisCh1Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch1-intermediate" element={<GenesisCh1Intermediate />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch1-advanced" element={<GenesisCh1Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch2-beginner" element={<GenesisCh2Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch2-intermediate" element={<GenesisCh2Intermediate />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch2-advanced" element={<GenesisCh2Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch3-beginner" element={<GenesisCh3Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch3-intermediate" element={<GenesisCh3Intermediate />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch3-advanced" element={<GenesisCh3Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch4-beginner" element={<GenesisCh4Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch4-intermediate" element={<GenesisCh4Intermediate />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch4-advanced" element={<GenesisCh4Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch5-beginner" element={<GenesisCh5Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch5-intermediate" element={<GenesisCh5Intermediate />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch5-advanced" element={<GenesisCh5Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch6-beginner" element={<GenesisCh6Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch6-advanced" element={<GenesisCh6Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch7-beginner" element={<GenesisCh7Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch7-advanced" element={<GenesisCh7Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch8-beginner" element={<GenesisCh8Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch8-advanced" element={<GenesisCh8Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch9-beginner" element={<GenesisCh9Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch9-advanced" element={<GenesisCh9Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch10-beginner" element={<GenesisCh10Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch10-advanced" element={<GenesisCh10Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch11-beginner" element={<GenesisCh11Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch11-advanced" element={<GenesisCh11Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch12-beginner" element={<GenesisCh12Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch12-advanced" element={<GenesisCh12Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch13-beginner" element={<GenesisCh13Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch13-advanced" element={<GenesisCh13Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch14-beginner" element={<GenesisCh14Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch14-advanced" element={<GenesisCh14Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch15-beginner" element={<GenesisCh15Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch15-advanced" element={<GenesisCh15Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch16-beginner" element={<GenesisCh16Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch16-advanced" element={<GenesisCh16Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch17-beginner" element={<GenesisCh17Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch17-advanced" element={<GenesisCh17Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch18-beginner" element={<GenesisCh18Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch18-advanced" element={<GenesisCh18Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch19-beginner" element={<GenesisCh19Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch19-advanced" element={<GenesisCh19Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch20-beginner" element={<GenesisCh20Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch20-advanced" element={<GenesisCh20Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch21-beginner" element={<GenesisCh21Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch21-advanced" element={<GenesisCh21Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch22-beginner" element={<GenesisCh22Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch22-advanced" element={<GenesisCh22Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch23-beginner" element={<GenesisCh23Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch23-advanced" element={<GenesisCh23Advanced />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch24-beginner" element={<GenesisCh24Beginner />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/ch24-advanced" element={<GenesisCh24Advanced />} />
+              {/* Genesis Chapter Detail Pages */}
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-1" element={<GenesisChapter1 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-2" element={<GenesisChapter2 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-3" element={<GenesisChapter3 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-4" element={<GenesisChapter4 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-5" element={<GenesisChapter5 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-6" element={<GenesisChapter6 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-7" element={<GenesisChapter7 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-8" element={<GenesisChapter8 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-1-full" element={<GenesisChapter1Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-2-full" element={<GenesisChapter2Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-3-full" element={<GenesisChapter3Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-4-full" element={<GenesisChapter4Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-5-full" element={<GenesisChapter5Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-6-full" element={<GenesisChapter6Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-7-full" element={<GenesisChapter7Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-8-full" element={<GenesisChapter8Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-9-full" element={<GenesisChapter9Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-10-full" element={<GenesisChapter10Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-11-full" element={<GenesisChapter11Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-12-full" element={<GenesisChapter12Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-13-full" element={<GenesisChapter13Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-14-full" element={<GenesisChapter14Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-15-full" element={<GenesisChapter15Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-16-full" element={<GenesisChapter16Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-21-full" element={<GenesisChapter21Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-22-full" element={<GenesisChapter22Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-23-full" element={<GenesisChapter23Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-24-full" element={<GenesisChapter24Full />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-9" element={<GenesisChapter9 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-10" element={<GenesisChapter10 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-11" element={<GenesisChapter11 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-12" element={<GenesisChapter12 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-13" element={<GenesisChapter13 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-14" element={<GenesisChapter14 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-15" element={<GenesisChapter15 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-16" element={<GenesisChapter16 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-17" element={<GenesisChapter17 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-18" element={<GenesisChapter18 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-19" element={<GenesisChapter19 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-20" element={<GenesisChapter20 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-21" element={<GenesisChapter21 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-22" element={<GenesisChapter22 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-23" element={<GenesisChapter23 />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/chapter-24" element={<GenesisChapter24 />} />
+              <Route path="/bible-questions-and-answers-hub/exodus" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/leviticus" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/numbers" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/deuteronomy" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/joshua" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/judges" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/ruth" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/1-samuel" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/2-samuel" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/1-kings" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/2-kings" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/1-chronicles" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/2-chronicles" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/ezra" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/nehemiah" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/esther" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/job" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/psalms" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/proverbs" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/ecclesiastes" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/song-of-solomon" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/isaiah" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/jeremiah" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/lamentations" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/ezekiel" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/daniel" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/hosea" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/joel" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/amos" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/obadiah" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/jonah" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/micah" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/nahum" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/habakkuk" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/zephaniah" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/haggai" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/zechariah" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/malachi" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/matthew" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/mark" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/luke" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/john" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/acts" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/pauline-epistles" element={<PaulineEpistles />} />
+              <Route path="/bible-questions-and-answers-hub/romans" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/1-corinthians" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/2-corinthians" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/galatians" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/ephesians" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/philippians" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/colossians" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/1-thessalonians" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/2-thessalonians" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/1-timothy" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/2-timothy" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/titus" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/philemon" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/hebrews" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/james" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/1-peter" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/2-peter" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/1-john" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/2-john" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/3-john" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/jude" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/revelation" element={<BibleQA />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+          <Analytics />
+          <GoogleAnalytics />
+        </TooltipProvider>
+      </QueryClientProvider>
     </HelmetProvider>
   );
 };

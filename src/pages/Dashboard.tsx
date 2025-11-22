@@ -1312,134 +1312,7 @@ const Dashboard = () => {
 
       {/* </div> */}
 
-      {/* Daily Quiz Card */}
-      {dailyQuestions.length > 0 && (
-        <Card className="relative border-0 shadow-lg hover:shadow-xl transition-all duration-500 rounded-3xl bg-white overflow-hidden mb-6 group">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-amber-50/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-orange-50/50 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4"></div>
-
-          <CardContent className="relative z-10 p-6 md:p-8">
-            <div className="flex flex-col md:flex-row gap-8 items-center">
-              <div className="flex-1 w-full">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-amber-100 rounded-lg">
-                      <Sun className="w-5 h-5 text-amber-600" />
-                    </div>
-                    <h3 className="text-lg font-bold text-slate-900">Daily Challenge</h3>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-slate-500">
-                      {dailyQuizCompleted ? "Completed" : `Question ${currentDailyIndex + 1}/5`}
-                    </span>
-                    <Progress value={dailyQuizCompleted ? 100 : ((currentDailyIndex) / 5) * 100} className="w-24 h-2" />
-                  </div>
-                </div>
-
-                {dailyQuizCompleted ? (
-                  <div className="text-center py-8">
-                    <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Trophy className="w-10 h-10 text-green-600" />
-                    </div>
-                    <h4 className="text-2xl font-bold text-slate-900 mb-2">Challenge Completed!</h4>
-                    <p className="text-slate-600 mb-6">You scored {dailyScore} out of 5 today.</p>
-                    <div className="flex justify-center gap-4">
-                      <div className="p-4 bg-slate-50 rounded-xl text-center min-w-[100px]">
-                        <p className="text-xs text-slate-500 uppercase font-bold">Score</p>
-                        <p className="text-2xl font-bold text-indigo-600">{Math.round((dailyScore / 5) * 100)}%</p>
-                      </div>
-                      <div className="p-4 bg-slate-50 rounded-xl text-center min-w-[100px]">
-                        <p className="text-xs text-slate-500 uppercase font-bold">Streak</p>
-                        <p className="text-2xl font-bold text-amber-600">1 Day</p>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <h4 className="text-xl font-semibold text-slate-800 mb-6 leading-relaxed min-h-[3.5rem]">
-                      {dailyQuestions[currentDailyIndex].question}
-                    </h4>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                      {[
-                        dailyQuestions[currentDailyIndex].option_a,
-                        dailyQuestions[currentDailyIndex].option_b,
-                        dailyQuestions[currentDailyIndex].option_c,
-                        dailyQuestions[currentDailyIndex].option_d
-                      ].map((option, index) => {
-                        const currentQuestionId = dailyQuestions[currentDailyIndex].id;
-                        const answerState = dailyAnswers[currentQuestionId];
-                        const isAnswered = !!answerState;
-                        const isSelected = answerState?.selected === index;
-                        const isCorrect = dailyQuestions[currentDailyIndex].correct_index === index;
-
-                        let buttonClass = "justify-start h-auto py-3 px-4 text-left font-normal text-slate-600 hover:bg-slate-50 border-slate-200 transition-all duration-200";
-
-                        if (isAnswered) {
-                          if (isCorrect) {
-                            buttonClass = "justify-start h-auto py-3 px-4 text-left font-medium bg-green-50 text-green-700 border-green-200 hover:bg-green-50 ring-1 ring-green-200";
-                          } else if (isSelected) {
-                            buttonClass = "justify-start h-auto py-3 px-4 text-left font-medium bg-red-50 text-red-700 border-red-200 hover:bg-red-50 ring-1 ring-red-200";
-                          } else {
-                            buttonClass = "justify-start h-auto py-3 px-4 text-left font-normal text-slate-400 border-slate-100 opacity-60";
-                          }
-                        }
-
-                        return (
-                          <Button
-                            key={index}
-                            variant="outline"
-                            className={buttonClass}
-                            onClick={() => handleDailyAnswer(currentQuestionId, index)}
-                            disabled={isAnswered}
-                          >
-                            <span className={`mr-3 flex-shrink-0 w-6 h-6 rounded-full text-xs flex items-center justify-center font-semibold transition-all ${isAnswered && isCorrect ? 'bg-green-200 text-green-700' :
-                                isAnswered && isSelected ? 'bg-red-200 text-red-700' :
-                                  'bg-slate-100 text-slate-500 group-hover:bg-white'
-                              }`}>
-                              {String.fromCharCode(65 + index)}
-                            </span>
-                            {option}
-                            {isAnswered && isCorrect && (
-                              <CheckCircle className="ml-auto w-4 h-4 text-green-600" />
-                            )}
-                            {isAnswered && isSelected && !isCorrect && (
-                              <AlertTriangle className="ml-auto w-4 h-4 text-red-500" />
-                            )}
-                          </Button>
-                        );
-                      })}
-                    </div>
-
-                    {dailyAnswers[dailyQuestions[currentDailyIndex].id] && (
-                      <div className="flex justify-end animate-in fade-in slide-in-from-bottom-2">
-                        <Button
-                          onClick={handleNextDailyQuestion}
-                          className="bg-slate-900 text-white hover:bg-slate-800 px-6"
-                        >
-                          {currentDailyIndex < 4 ? "Next Question" : "Finish Quiz"}
-                          <ArrowRight className="w-4 h-4 ml-2" />
-                        </Button>
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
-
-              <div className="hidden md:flex flex-col items-center justify-center w-48 p-4 bg-amber-50/50 rounded-2xl border border-amber-100/50 text-center self-stretch">
-                <div className="w-12 h-12 bg-white rounded-full shadow-sm flex items-center justify-center mb-3">
-                  <Zap className="w-6 h-6 text-amber-500 fill-amber-500" />
-                </div>
-                <p className="text-xs font-medium text-amber-800 uppercase tracking-wide mb-1">Daily Streak</p>
-                <p className="text-2xl font-bold text-slate-900">1 Day</p>
-                <p className="text-xs text-slate-500 mt-1">Keep it up!</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {/* Weekly Bible Quiz - Full Width - First */}
+      {/* Weekly Bible Quiz - Full Width */}
       <Card className="relative border-0 shadow-lg hover:shadow-xl transition-all duration-500 rounded-3xl bg-white overflow-hidden mb-6 group">
         <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-50/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-50/50 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4"></div>
@@ -1577,18 +1450,116 @@ const Dashboard = () => {
         </CardContent>
       </Card>
 
+      {/* Challenge / Bible Games Card - Full Width */}
+      <Card className="relative border-0 shadow-lg hover:shadow-xl transition-all duration-500 rounded-3xl bg-white overflow-hidden mb-6 group cursor-pointer" onClick={() => navigate('/dashboard/bible-games')}>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-purple-50/50 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/3"></div>
+        <div className="absolute bottom-0 right-0 w-64 h-64 bg-pink-50/50 rounded-full blur-3xl translate-y-1/3 translate-x-1/4"></div>
 
+        <CardContent className="relative z-10 p-0">
+          <div className="flex flex-col md:flex-row">
+            {/* Left Side: Content */}
+            <div className="flex-1 p-8 flex flex-col justify-center">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2.5 bg-purple-100 rounded-xl">
+                  <Gamepad2 className="w-5 h-5 text-purple-600" />
+                </div>
+                <Badge className="bg-purple-100 text-purple-700 hover:bg-purple-100">
+                  New Games Available
+                </Badge>
+              </div>
 
+              <h3 className="text-3xl font-bold text-slate-900 mb-3 leading-tight">
+                Bible Games & Challenges
+              </h3>
 
+              <p className="text-slate-600 text-lg mb-8 leading-relaxed max-w-2xl">
+                Test your biblical knowledge through fun and interactive games. Play memory match, scripture matching with multiplayer, and more!
+              </p>
 
+              <div className="flex flex-wrap items-center gap-6 mb-8">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center">
+                    <Users className="w-4 h-4 text-purple-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 font-medium uppercase tracking-wider">Multiplayer</p>
+                    <p className="text-sm font-semibold text-slate-900">Compete Online</p>
+                  </div>
+                </div>
 
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-full bg-pink-50 flex items-center justify-center">
+                    <Brain className="w-4 h-4 text-pink-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 font-medium uppercase tracking-wider">Memory</p>
+                    <p className="text-sm font-semibold text-slate-900">Challenge Your Mind</p>
+                  </div>
+                </div>
 
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-full bg-amber-50 flex items-center justify-center">
+                    <Trophy className="w-4 h-4 text-amber-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 font-medium uppercase tracking-wider">Rewards</p>
+                    <p className="text-sm font-semibold text-slate-900">Earn Talents</p>
+                  </div>
+                </div>
+              </div>
 
+              <div className="flex items-center gap-4">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 rounded-xl shadow-lg shadow-purple-200 transition-all duration-300 hover:scale-105"
+                  onClick={() => navigate('/dashboard/bible-games')}
+                >
+                  <Play className="w-5 h-5 mr-2 fill-current" />
+                  Play Games
+                </Button>
+                <span className="text-sm text-slate-500 font-medium">
+                  6 games available
+                </span>
+              </div>
+            </div>
 
+            {/* Right Side: Decorative / Game Icons */}
+            <div className="hidden md:block w-1/3 bg-gradient-to-br from-purple-600 via-pink-600 to-purple-700 relative overflow-hidden">
+              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-20"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-purple-900/50 to-transparent"></div>
 
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="grid grid-cols-2 gap-4 p-8">
+                  <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 flex items-center justify-center transform hover:scale-110 transition-transform">
+                    <Brain className="w-10 h-10 text-white" />
+                  </div>
+                  <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 flex items-center justify-center transform hover:scale-110 transition-transform">
+                    <Trophy className="w-10 h-10 text-white" />
+                  </div>
+                  <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 flex items-center justify-center transform hover:scale-110 transition-transform">
+                    <Target className="w-10 h-10 text-white" />
+                  </div>
+                  <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 flex items-center justify-center transform hover:scale-110 transition-transform">
+                    <Zap className="w-10 h-10 text-white" />
+                  </div>
+                </div>
+              </div>
 
-
-
+              <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
+                  <p className="text-purple-100 text-sm font-medium mb-1">🎮 Featured Game</p>
+                  <p className="text-white font-semibold text-lg">
+                    Scripture Match Multiplayer
+                  </p>
+                  <p className="text-purple-200 text-xs mt-2">
+                    Match biblical words with random players online
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Quick Actions & Featured Competitions */}
       {/* This section is now replaced by the above grid */}

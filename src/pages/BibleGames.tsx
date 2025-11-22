@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Gamepad2, Search, TrendingUp, Users, Star, Play, Sparkles, Brain, Heart, Zap } from "lucide-react";
+import { Gamepad2, Search, TrendingUp, Users, Star, Play, Sparkles, Brain, Heart, Zap, Flame, Trophy, Target, ArrowRight } from "lucide-react";
 
 interface Game {
   id: string;
@@ -23,6 +23,34 @@ interface Game {
 }
 
 const games: Game[] = [
+  {
+    id: "scripture-match-multiplayer",
+    title: "Scripture Match",
+    description: "Memory card game with random players online! Match virtues and vices to win.",
+    category: "Puzzle",
+    difficulty: "Intermediate",
+    players: 1543,
+    visits: 52000,
+    rating: 95,
+    votes: 1012,
+    badges: ["Hot", "New", "Multiplayer"],
+    image: "/assets/matching.png",
+    type: 'memory'
+  },
+  {
+    id: "lost-sheep",
+    title: "Lost Sheep",
+    description: "Biblical card game! Avoid being left with the Lost Sheep card. Match pairs to win.",
+    category: "Puzzle",
+    difficulty: "Intermediate",
+    players: 892,
+    visits: 28000,
+    rating: 93,
+    votes: 567,
+    badges: ["New"],
+    image: "/assets/matching.png",
+    type: 'memory'
+  },
   {
     id: "joy-runner",
     title: "Joy Runner",
@@ -133,7 +161,7 @@ const BibleGames = () => {
 
   const filteredGames = games.filter(game => {
     const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         game.description.toLowerCase().includes(searchQuery.toLowerCase());
+      game.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === "All Games" || game.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
@@ -152,7 +180,9 @@ const BibleGames = () => {
   });
 
   const handlePlayGame = (game: Game) => {
-    if (game.id === 'joy-runner') {
+    if (game.id === 'scripture-match-multiplayer') {
+      navigate('/scripture-match-multiplayer');
+    } else if (game.id === 'joy-runner') {
       navigate('/joy-runner');
     } else if (game.id === 'memory-match') {
       navigate('/memory-match');
@@ -173,186 +203,227 @@ const BibleGames = () => {
 
   return (
     <DashboardLayout>
-      <div className="w-full">
-        {/* Header */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                <Gamepad2 className="w-6 h-6 text-purple-600" />
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 -m-6 p-8">
+        {/* Animated Background Elements */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute top-40 right-20 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-pink-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto">
+          {/* Hero Header */}
+          <div className="mb-12">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+              <div className="flex items-center gap-4">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur-xl opacity-75 animate-pulse"></div>
+                  <div className="relative w-16 h-16 bg-gradient-to-br from-purple-600 via-pink-600 to-purple-700 rounded-2xl flex items-center justify-center shadow-2xl">
+                    <Gamepad2 className="w-8 h-8 text-white" />
+                  </div>
+                </div>
+                <div>
+                  <h1 className="text-4xl md:text-5xl font-urbanist font-bold bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+                    Bible Games
+                  </h1>
+                  <p className="text-purple-300 font-urbanist font-light mt-1 flex items-center gap-2">
+                    <Flame className="w-4 h-4 text-orange-400" />
+                    {games.length} Epic Games • Play, Learn, Win
+                  </p>
+                </div>
               </div>
-              <div>
-                <h1 className="text-2xl font-urbanist font-semibold text-gray-900">Bible Games</h1>
-                <p className="text-sm font-urbanist font-light text-gray-600">{games.length} Games</p>
+
+              {/* Stats Cards */}
+              <div className="flex gap-4">
+                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3">
+                  <p className="text-xs text-purple-300 font-urbanist uppercase tracking-wider mb-1">Players Online</p>
+                  <p className="text-2xl font-urbanist font-bold text-white">2.5K+</p>
+                </div>
+                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-3">
+                  <p className="text-xs text-purple-300 font-urbanist uppercase tracking-wider mb-1">Games Played</p>
+                  <p className="text-2xl font-urbanist font-bold text-white">45K+</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Category Tags */}
-          <div className="flex flex-wrap gap-2 mb-4">
-            {categories.map((category) => (
-              <Button
-                key={category}
-                variant={selectedCategory === category ? "default" : "outline"}
-                size="sm"
-                className={`font-urbanist font-light ${
-                  selectedCategory === category
-                    ? "bg-gray-900 text-white hover:bg-gray-800"
-                    : "bg-white text-gray-700 hover:bg-gray-50"
-                }`}
-                onClick={() => setSelectedCategory(category)}
-              >
-                {category}
-              </Button>
-            ))}
-          </div>
+            {/* Search and Filters */}
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+              <div className="flex flex-col lg:flex-row gap-4">
+                {/* Search */}
+                <div className="flex-1 relative">
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-purple-300" />
+                  <Input
+                    type="text"
+                    placeholder="Search games..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-12 h-12 bg-white/5 border-white/10 text-white placeholder:text-purple-300/50 font-urbanist font-light focus:bg-white/10 focus:border-purple-500/50"
+                  />
+                </div>
 
-          {/* Search and Sort */}
-          <div className="flex flex-col md:flex-row gap-4 mb-6">
-            <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <Input
-                type="text"
-                placeholder="Search game by name or description"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 font-urbanist font-light"
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-urbanist font-light text-gray-600">Sort by:</span>
-              <div className="flex gap-2">
-                {sortOptions.map((option) => (
+                {/* Sort */}
+                <div className="flex gap-2">
+                  {sortOptions.map((option) => (
+                    <Button
+                      key={option}
+                      variant="ghost"
+                      size="sm"
+                      className={`font-urbanist font-light h-12 px-6 ${sortBy === option
+                          ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
+                          : "bg-white/5 text-purple-200 hover:bg-white/10 hover:text-white border border-white/10"
+                        }`}
+                      onClick={() => setSortBy(option)}
+                    >
+                      {option}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Category Pills */}
+              <div className="flex flex-wrap gap-2 mt-4">
+                {categories.map((category) => (
                   <Button
-                    key={option}
-                    variant={sortBy === option ? "default" : "ghost"}
+                    key={category}
+                    variant="ghost"
                     size="sm"
-                    className={`font-urbanist font-light text-xs ${
-                      sortBy === option
-                        ? "bg-gray-900 text-white hover:bg-gray-800"
-                        : "text-gray-600 hover:bg-gray-50"
-                    }`}
-                    onClick={() => setSortBy(option)}
+                    className={`font-urbanist font-light rounded-full px-4 py-2 ${selectedCategory === category
+                        ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700"
+                        : "bg-white/5 text-purple-200 hover:bg-white/10 hover:text-white border border-white/10"
+                      }`}
+                    onClick={() => setSelectedCategory(category)}
                   >
-                    {option}
+                    {category}
                   </Button>
                 ))}
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Games Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {sortedGames.map((game) => (
-            <Card
-              key={game.id}
-              className="border border-gray-200 bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
-              onClick={() => handlePlayGame(game)}
-            >
-              <CardContent className="p-0">
-                {/* Game Thumbnail */}
-                <div className="relative h-48 rounded-t-lg overflow-hidden bg-gradient-to-br from-purple-100 to-indigo-100">
-                  {game.image ? (
-                    <img
-                      src={game.image}
-                      alt={game.title}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        // Fallback to gradient if image fails to load
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        if (target.parentElement) {
-                          target.parentElement.className = "relative h-48 bg-gradient-to-br from-purple-100 to-indigo-100 rounded-t-lg flex items-center justify-center";
-                        }
+          {/* Games Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {sortedGames.map((game) => (
+              <div
+                key={game.id}
+                className="group relative"
+                onClick={() => handlePlayGame(game)}
+              >
+                {/* Game Card */}
+                <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20">
+                  {/* Game Thumbnail */}
+                  <div className="relative h-56 overflow-hidden">
+                    {game.image ? (
+                      <>
+                        <img
+                          src={game.image}
+                          alt={game.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent"></div>
+                      </>
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-purple-600 via-pink-600 to-purple-800 flex items-center justify-center">
+                        <Gamepad2 className="w-16 h-16 text-white/50" />
+                      </div>
+                    )}
+
+                    {/* Badges */}
+                    <div className="absolute top-3 left-3 flex flex-wrap gap-2 z-10">
+                      {game.badges.map((badge, index) => (
+                        <Badge
+                          key={index}
+                          className={`font-urbanist font-medium text-xs px-3 py-1 ${badge === "Hot"
+                              ? "bg-gradient-to-r from-red-500 to-orange-500 text-white"
+                              : badge === "Multiplayer"
+                                ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white"
+                                : badge === "New"
+                                  ? "bg-gradient-to-r from-green-500 to-emerald-500 text-white"
+                                  : "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
+                            }`}
+                        >
+                          {badge === "Hot" && "🔥 "}
+                          {badge === "New" && "✨ "}
+                          {badge}
+                        </Badge>
+                      ))}
+                    </div>
+
+                    {/* Difficulty Badge */}
+                    <div className="absolute top-3 right-3 z-10">
+                      <div className={`px-3 py-1 rounded-lg text-xs font-urbanist font-semibold backdrop-blur-xl ${game.difficulty === "Beginner"
+                          ? "bg-green-500/20 text-green-300 border border-green-500/30"
+                          : game.difficulty === "Intermediate"
+                            ? "bg-yellow-500/20 text-yellow-300 border border-yellow-500/30"
+                            : "bg-red-500/20 text-red-300 border border-red-500/30"
+                        }`}>
+                        {game.difficulty}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Game Info */}
+                  <div className="p-5">
+                    <h3 className="text-xl font-urbanist font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
+                      {game.title}
+                    </h3>
+                    <p className="text-sm font-urbanist font-light text-purple-200/70 mb-4 line-clamp-2">
+                      {game.description}
+                    </p>
+
+                    {/* Stats */}
+                    <div className="grid grid-cols-3 gap-3 mb-4">
+                      <div className="bg-white/5 rounded-lg p-2 text-center border border-white/5">
+                        <Star className="w-4 h-4 text-yellow-400 mx-auto mb-1" />
+                        <p className="text-xs font-urbanist font-bold text-white">{game.rating}%</p>
+                      </div>
+                      <div className="bg-white/5 rounded-lg p-2 text-center border border-white/5">
+                        <Users className="w-4 h-4 text-purple-400 mx-auto mb-1" />
+                        <p className="text-xs font-urbanist font-bold text-white">{(game.players / 1000).toFixed(1)}K</p>
+                      </div>
+                      <div className="bg-white/5 rounded-lg p-2 text-center border border-white/5">
+                        <TrendingUp className="w-4 h-4 text-green-400 mx-auto mb-1" />
+                        <p className="text-xs font-urbanist font-bold text-white">{(game.visits / 1000).toFixed(0)}K</p>
+                      </div>
+                    </div>
+
+                    {/* Play Button */}
+                    <Button
+                      className="w-full h-12 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 hover:from-purple-700 hover:via-pink-700 hover:to-purple-800 text-white font-urbanist font-semibold text-base shadow-lg shadow-purple-500/20 transition-all duration-300 group-hover:shadow-purple-500/40"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handlePlayGame(game);
                       }}
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg">
-                        <Gamepad2 className="w-10 h-10 text-white" />
-                      </div>
-                    </div>
-                  )}
-                  {/* Overlay gradient for better text readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                  {/* Badges */}
-                  <div className="absolute top-2 left-2 flex flex-wrap gap-1 z-10">
-                    {game.badges.map((badge, index) => (
-                      <Badge
-                        key={index}
-                        className={`text-xs font-urbanist font-light ${
-                          badge === "Hot"
-                            ? "bg-red-500 text-white"
-                            : badge === "Creators Love"
-                            ? "bg-green-500 text-white"
-                            : badge === "Popular"
-                            ? "bg-blue-500 text-white"
-                            : "bg-purple-500 text-white"
-                        }`}
-                      >
-                        {badge}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Game Info */}
-                <div className="p-4">
-                  <h3 className="text-lg font-urbanist font-semibold text-gray-900 mb-2">
-                    {game.title}
-                  </h3>
-                  <p className="text-xs font-urbanist font-light text-gray-600 mb-3 line-clamp-2">
-                    {game.description}
-                  </p>
-
-                  {/* Stats */}
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center gap-2 text-xs text-gray-500">
-                      <Star className="w-3 h-3" />
-                      <span className="font-urbanist font-light">
-                        {game.rating}% {game.votes} Votes
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-4 text-xs text-gray-500">
-                      <div className="flex items-center gap-1">
-                        <Users className="w-3 h-3" />
-                        <span className="font-urbanist font-light">{game.players.toLocaleString()}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <TrendingUp className="w-3 h-3" />
-                        <span className="font-urbanist font-light">
-                          {game.visits >= 1000 ? `${(game.visits / 1000).toFixed(1)}K` : game.visits} Visits
-                        </span>
-                      </div>
-                    </div>
+                    >
+                      <Play className="w-5 h-5 mr-2 fill-current" />
+                      Play Now
+                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
                   </div>
 
-                  {/* Play Button */}
-                  <Button
-                    className="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-urbanist font-light"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handlePlayGame(game);
-                    }}
-                  >
-                    <Play className="w-4 h-4 mr-2" />
-                    Play Game
-                  </Button>
+                  {/* Hover Glow Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-600/0 via-pink-600/0 to-purple-600/0 group-hover:from-purple-600/10 group-hover:via-pink-600/10 group-hover:to-purple-600/10 transition-all duration-500 rounded-2xl pointer-events-none"></div>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {sortedGames.length === 0 && (
-          <div className="text-center py-12">
-            <Gamepad2 className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-600 font-urbanist font-light">No games found matching your search.</p>
+              </div>
+            ))}
           </div>
-        )}
-      </div>
 
+          {/* No Results */}
+          {sortedGames.length === 0 && (
+            <div className="text-center py-20">
+              <div className="relative inline-block">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full blur-2xl opacity-20 animate-pulse"></div>
+                <Gamepad2 className="relative w-20 h-20 text-purple-400 mx-auto mb-6" />
+              </div>
+              <h3 className="text-2xl font-urbanist font-bold text-white mb-2">No Games Found</h3>
+              <p className="text-purple-300 font-urbanist font-light">Try adjusting your search or filters</p>
+            </div>
+          )}
+        </div>
+      </div>
     </DashboardLayout>
   );
 };

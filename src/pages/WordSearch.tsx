@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DashboardLayout from "@/components/DashboardLayout";
 import { WordSearchGame } from "@/components/games/WordSearchGame";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -29,7 +28,7 @@ const WordSearch = () => {
   };
 
   return (
-    <DashboardLayout>
+    <div className="min-h-screen bg-slate-50 p-6">
       <div className="w-full max-w-4xl mx-auto">
         {/* Header with back button */}
         <div className="mb-6 flex items-center gap-4">
@@ -54,7 +53,7 @@ const WordSearch = () => {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </div>
   );
 };
 

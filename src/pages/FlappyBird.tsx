@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DashboardLayout from "@/components/DashboardLayout";
 import { FlappyBird as FlappyBirdGame } from "@/components/games/FlappyBird";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -25,7 +24,7 @@ const FlappyBird = () => {
   const sins = ['Pride', 'Envy', 'Wrath', 'Greed', 'Lust', 'Sloth'];
 
   return (
-    <DashboardLayout>
+    <div className="min-h-screen bg-slate-50 p-6">
       <div className="w-full max-w-4xl mx-auto">
         {/* Header with back button */}
         <div className="mb-6 flex items-center gap-4">
@@ -57,7 +56,7 @@ const FlappyBird = () => {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </div>
   );
 };
 

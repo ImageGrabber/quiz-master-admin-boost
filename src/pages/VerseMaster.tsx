@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import DashboardLayout from "@/components/DashboardLayout";
 import { VerseMaster as VerseMasterGame } from "@/components/games/VerseMaster";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -59,7 +58,7 @@ const VerseMaster = () => {
   };
 
   return (
-    <DashboardLayout>
+    <div className="min-h-screen bg-slate-50 p-6">
       <div className="w-full max-w-6xl mx-auto">
         {/* Header with back button */}
         <div className="mb-6 flex items-center gap-4">
@@ -83,7 +82,7 @@ const VerseMaster = () => {
           </div>
         </div>
       </div>
-    </DashboardLayout>
+    </div>
   );
 };
 
