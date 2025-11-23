@@ -1617,7 +1617,9 @@ const CompetitionHome = () => {
             </div>
           </div>
         </footer>
-      </div>
+  {/* Tidio Chat Widget */}
+  <script src="//code.tidio.co/your-tidio-public-key.js" async></script>
+  </div>
     </>
   );
 };

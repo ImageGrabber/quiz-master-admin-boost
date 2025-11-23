@@ -202,8 +202,7 @@ const BibleGames = () => {
   };
 
   return (
-    <DashboardLayout>
-      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 -m-6 p-8">
+  <div className="min-h-screen w-full bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 flex flex-col pt-6 px-2 pb-4 m-0 overflow-x-hidden box-border">
         {/* Animated Background Elements */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -247,7 +246,7 @@ const BibleGames = () => {
             </div>
 
             {/* Search and Filters */}
-            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+            <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 w-full max-w-full overflow-x-hidden">
               <div className="flex flex-col lg:flex-row gap-4">
                 {/* Search */}
                 <div className="flex-1 relative">
@@ -309,90 +308,49 @@ const BibleGames = () => {
                 onClick={() => handlePlayGame(game)}
               >
                 {/* Game Card */}
-                <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20">
-                  {/* Game Thumbnail */}
-                  <div className="relative h-56 overflow-hidden">
-                    {game.image ? (
-                      <>
-                        <img
-                          src={game.image}
-                          alt={game.title}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = 'none';
-                          }}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent"></div>
-                      </>
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-purple-600 via-pink-600 to-purple-800 flex items-center justify-center">
-                        <Gamepad2 className="w-16 h-16 text-white/50" />
-                      </div>
-                    )}
-
-                    {/* Badges */}
-                    <div className="absolute top-3 left-3 flex flex-wrap gap-2 z-10">
-                      {game.badges.map((badge, index) => (
-                        <Badge
-                          key={index}
-                          className={`font-urbanist font-medium text-xs px-3 py-1 ${badge === "Hot"
-                              ? "bg-gradient-to-r from-red-500 to-orange-500 text-white"
-                              : badge === "Multiplayer"
-                                ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white"
-                                : badge === "New"
-                                  ? "bg-gradient-to-r from-green-500 to-emerald-500 text-white"
-                                  : "bg-gradient-to-r from-purple-500 to-pink-500 text-white"
-                            }`}
-                        >
-                          {badge === "Hot" && "🔥 "}
-                          {badge === "New" && "✨ "}
-                          {badge}
-                        </Badge>
-                      ))}
-                    </div>
-
-                    {/* Difficulty Badge */}
-                    <div className="absolute top-3 right-3 z-10">
-                      <div className={`px-3 py-1 rounded-lg text-xs font-urbanist font-semibold backdrop-blur-xl ${game.difficulty === "Beginner"
-                          ? "bg-green-500/20 text-green-300 border border-green-500/30"
-                          : game.difficulty === "Intermediate"
-                            ? "bg-yellow-500/20 text-yellow-300 border border-yellow-500/30"
-                            : "bg-red-500/20 text-red-300 border border-red-500/30"
-                        }`}>
-                        {game.difficulty}
-                      </div>
+                <div className="relative bg-slate-900 border-4 border-purple-500 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-pink-500/30 animate-pulse-slow w-full max-w-full">
+                  {/* Only Difficulty Badge remains, now on top right */}
+                  <div className="absolute top-3 right-3 z-10">
+                    <div className={`px-3 py-1 rounded-lg text-xs font-urbanist font-semibold backdrop-blur-xl ${game.difficulty === "Beginner"
+                        ? "bg-green-500/20 text-green-300 border border-green-500/30"
+                        : game.difficulty === "Intermediate"
+                          ? "bg-yellow-500/20 text-yellow-300 border border-yellow-500/30"
+                          : "bg-red-500/20 text-red-300 border border-red-500/30"
+                      }`}>
+                      {game.difficulty}
                     </div>
                   </div>
 
+                  {/* Removed duplicate difficulty badge on right */}
+
                   {/* Game Info */}
-                  <div className="p-5">
-                    <h3 className="text-xl font-urbanist font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
+                  <div className="p-3 md:p-5">
+                    <h3 className="text-lg md:text-xl font-urbanist font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
                       {game.title}
                     </h3>
-                    <p className="text-sm font-urbanist font-light text-purple-200/70 mb-4 line-clamp-2">
+                    <p className="text-xs md:text-sm font-urbanist font-light text-purple-200/70 mb-3 md:mb-4 line-clamp-2">
                       {game.description}
                     </p>
 
                     {/* Stats */}
-                    <div className="grid grid-cols-3 gap-3 mb-4">
+                    <div className="grid grid-cols-3 gap-2 md:gap-3 mb-3 md:mb-4">
                       <div className="bg-white/5 rounded-lg p-2 text-center border border-white/5">
                         <Star className="w-4 h-4 text-yellow-400 mx-auto mb-1" />
-                        <p className="text-xs font-urbanist font-bold text-white">{game.rating}%</p>
+                        <p className="text-xs md:text-xs font-urbanist font-bold text-white">{game.rating}%</p>
                       </div>
                       <div className="bg-white/5 rounded-lg p-2 text-center border border-white/5">
                         <Users className="w-4 h-4 text-purple-400 mx-auto mb-1" />
-                        <p className="text-xs font-urbanist font-bold text-white">{(game.players / 1000).toFixed(1)}K</p>
+                        <p className="text-xs md:text-xs font-urbanist font-bold text-white">{(game.players / 1000).toFixed(1)}K</p>
                       </div>
                       <div className="bg-white/5 rounded-lg p-2 text-center border border-white/5">
                         <TrendingUp className="w-4 h-4 text-green-400 mx-auto mb-1" />
-                        <p className="text-xs font-urbanist font-bold text-white">{(game.visits / 1000).toFixed(0)}K</p>
+                        <p className="text-xs md:text-xs font-urbanist font-bold text-white">{(game.visits / 1000).toFixed(0)}K</p>
                       </div>
                     </div>
 
                     {/* Play Button */}
                     <Button
-                      className="w-full h-12 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 hover:from-purple-700 hover:via-pink-700 hover:to-purple-800 text-white font-urbanist font-semibold text-base shadow-lg shadow-purple-500/20 transition-all duration-300 group-hover:shadow-purple-500/40"
+                      className="w-full h-10 md:h-12 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 hover:from-purple-700 hover:via-pink-700 hover:to-purple-800 text-white font-urbanist font-semibold text-sm md:text-base shadow-lg shadow-purple-500/20 transition-all duration-300 group-hover:shadow-purple-500/40"
                       onClick={(e) => {
                         e.stopPropagation();
                         handlePlayGame(game);
@@ -424,8 +382,7 @@ const BibleGames = () => {
           )}
         </div>
       </div>
-    </DashboardLayout>
-  );
+    );
 };
 
 export default BibleGames;

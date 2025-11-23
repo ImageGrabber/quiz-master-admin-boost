@@ -61,27 +61,33 @@ const JoyRunner = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="w-full max-w-4xl mx-auto flex items-center justify-center min-h-[60vh]">
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4 relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute top-20 left-10 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center justify-center min-h-[60vh]">
           {/* Loader */}
-          <div className="relative w-16 h-16">
-            <div className="absolute inset-0 border-4 border-purple-200 rounded-full"></div>
+          <div className="relative w-20 h-20 mb-6">
+            <div className="absolute inset-0 border-4 border-purple-800 rounded-full"></div>
             <div className="absolute inset-0 border-4 border-purple-600 rounded-full border-t-transparent animate-spin"></div>
           </div>
+          <h2 className="text-3xl font-black text-white mb-2 drop-shadow-lg">Loading Joy Runner...</h2>
+          <p className="text-purple-200 text-lg font-urbanist drop-shadow">Get ready to play and catch the bubbles!</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 p-6">
+    <div className="min-h-screen bg-slate-950 p-6">
       <div className="w-full max-w-4xl mx-auto">
         {/* Header with back button */}
         <div className="mb-6 flex items-center gap-4">
           <Button
             variant="ghost"
             onClick={() => navigate('/dashboard/bible-games')}
-            className="font-urbanist font-light"
+            className="font-urbanist font-light text-slate-400 hover:text-white"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Games
@@ -89,7 +95,7 @@ const JoyRunner = () => {
         </div>
 
         {/* Game Component - with unlimited retries */}
-        <div className="bg-white rounded-lg shadow-sm">
+        <div className="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 rounded-2xl shadow-2xl backdrop-blur-xl p-6">
           <JoyRunnerGame
             game={gameData}
             score={score}
