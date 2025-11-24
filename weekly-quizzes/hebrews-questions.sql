@@ -1,39 +1,57 @@
--- Add 35 questions from the Book of Hebrews to weekly quiz
--- These questions focus specifically on the Book of Hebrews
 
-INSERT INTO weekly_quiz_questions (weekly_quiz_id, question, option_a, option_b, option_c, option_d, correct_index, order_index) VALUES
-(5, 'Who is described as "the radiance of God''s glory and the exact representation of his being" in Hebrews 1:3?', 'Jesus Christ', 'The Holy Spirit', 'Moses', 'Elijah', 0, 1),
-(5, 'According to Hebrews 1:5, which Psalm is quoted when God says "You are my Son; today I have become your Father"?', 'Psalm 2:7', 'Psalm 110:1', 'Psalm 45:6', 'Psalm 102:25', 0, 2),
-(5, 'In Hebrews 2:9, what does it say Jesus was made "a little lower than" for a little while?', 'The angels', 'God', 'The prophets', 'The apostles', 0, 3),
-(5, 'According to Hebrews 3:1, who is called "the apostle and high priest whom we confess"?', 'Jesus', 'Moses', 'Aaron', 'Melchizedek', 0, 4),
-(5, 'In Hebrews 4:12, what is described as "sharper than any double-edged sword"?', 'The word of God', 'The law of Moses', 'The gospel', 'The prophets', 0, 5),
-(5, 'According to Hebrews 4:15, in what way was Jesus tempted?', 'In every way, just as we are', 'Only in the wilderness', 'Only by Satan', 'Only by the Pharisees', 0, 6),
-(5, 'In Hebrews 5:6, which Psalm is quoted when God says "You are a priest forever, in the order of Melchizedek"?', 'Psalm 110:4', 'Psalm 2:7', 'Psalm 45:6', 'Psalm 102:25', 0, 7),
-(5, 'According to Hebrews 6:19, what is described as "an anchor for the soul, firm and secure"?', 'Hope', 'Faith', 'Love', 'Grace', 0, 8),
-(5, 'In Hebrews 7:3, Melchizedek is described as being "without father or mother, without genealogy, without beginning of days or end of life." What does this make him like?', 'The Son of God', 'An angel', 'A prophet', 'A king', 0, 9),
-(5, 'According to Hebrews 7:17, which Psalm is quoted to show that Jesus is a priest forever?', 'Psalm 110:4', 'Psalm 2:7', 'Psalm 45:6', 'Psalm 102:25', 0, 10),
-(5, 'In Hebrews 8:1, where is Jesus described as sitting?', 'At the right hand of the throne of the Majesty in heaven', 'In the temple', 'On Mount Zion', 'In the holy of holies', 0, 11),
-(5, 'According to Hebrews 8:6, Jesus has obtained a more excellent ministry than the old covenant. How much more excellent?', 'As much as the covenant he mediates is superior to the old one', 'Twice as excellent', 'Ten times more excellent', 'Infinitely more excellent', 0, 12),
-(5, 'In Hebrews 9:12, how did Jesus enter the Most Holy Place?', 'By his own blood', 'By the blood of bulls and goats', 'By the blood of lambs', 'By water and the Spirit', 0, 13),
-(5, 'According to Hebrews 9:22, what is required for the forgiveness of sins?', 'The shedding of blood', 'Good works', 'Prayer and fasting', 'Sacrifices and offerings', 0, 14),
-(5, 'In Hebrews 10:4, why can the blood of bulls and goats never take away sins?', 'Because it is impossible', 'Because God doesn''t accept them', 'Because they are not perfect', 'Because they are not human', 0, 15),
-(5, 'According to Hebrews 10:19, what do we have confidence to enter?', 'The Most Holy Place', 'The temple', 'The kingdom of heaven', 'The presence of God', 0, 16),
-(5, 'In Hebrews 10:24, what are we to consider how to spur one another on toward?', 'Love and good deeds', 'Faith and hope', 'Prayer and fasting', 'Worship and praise', 0, 17),
-(5, 'According to Hebrews 10:26, what happens if we deliberately keep on sinning after receiving the knowledge of the truth?', 'No sacrifice for sins is left', 'We must make more sacrifices', 'We need to repent again', 'We lose our salvation', 0, 18),
-(5, 'In Hebrews 11:1, how is faith defined?', 'Confidence in what we hope for and assurance about what we do not see', 'Belief in God', 'Trust in Jesus', 'Hope for the future', 0, 19),
-(5, 'According to Hebrews 11:4, what made Abel''s offering more acceptable than Cain''s?', 'By faith he was commended as righteous', 'Because he gave more', 'Because he was the firstborn', 'Because he was obedient', 0, 20),
-(5, 'In Hebrews 11:5, who was taken from this life so that he did not experience death?', 'Enoch', 'Elijah', 'Moses', 'Elisha', 0, 21),
-(5, 'According to Hebrews 11:7, by what did Noah become heir of the righteousness that comes by faith?', 'By faith he built an ark', 'By faith he obeyed God', 'By faith he warned others', 'By faith he was saved', 0, 22),
-(5, 'In Hebrews 11:8, what did Abraham do when called to go to a place he would later receive as his inheritance?', 'He went, even though he did not know where he was going', 'He asked for directions', 'He waited for a sign', 'He consulted others', 0, 23),
-(5, 'According to Hebrews 11:11, what enabled Sarah to bear children even though she was past age?', 'She considered him faithful who had made the promise', 'She had great faith', 'She was blessed by God', 'She was righteous', 0, 24),
-(5, 'In Hebrews 11:17, what did Abraham do when God tested him?', 'He offered Isaac as a sacrifice', 'He refused to obey', 'He asked for another way', 'He delayed the sacrifice', 0, 25),
-(5, 'According to Hebrews 11:24, what did Moses refuse to be called?', 'The son of Pharaoh''s daughter', 'A prince of Egypt', 'A ruler of the land', 'A king of Egypt', 0, 26),
-(5, 'In Hebrews 11:26, what did Moses regard as of greater value than the treasures of Egypt?', 'The disgrace for the sake of Christ', 'The promises of God', 'The inheritance of the saints', 'The reward of faith', 0, 27),
-(5, 'According to Hebrews 11:29, how did the Israelites pass through the Red Sea?', 'By faith they passed through it as on dry land', 'By the power of Moses', 'By the command of God', 'By the wind of God', 0, 28),
-(5, 'In Hebrews 11:31, who was not killed with those who were disobedient because she welcomed the spies?', 'Rahab the prostitute', 'Ruth the Moabite', 'Deborah the judge', 'Esther the queen', 0, 29),
-(5, 'According to Hebrews 11:35, what did some women receive back from the dead?', 'Their dead, raised to life again', 'Their children', 'Their husbands', 'Their loved ones', 0, 30),
-(5, 'In Hebrews 12:1, what are we to throw off that so easily entangles?', 'Everything that hinders and the sin that so easily entangles', 'Our old ways', 'Our past mistakes', 'Our burdens', 0, 31),
-(5, 'According to Hebrews 12:2, who is the pioneer and perfecter of faith?', 'Jesus', 'Moses', 'Abraham', 'Paul', 0, 32),
-(5, 'In Hebrews 12:6, what does the Lord discipline those he loves?', 'Because the Lord disciplines the one he loves', 'Because he wants to teach them', 'Because he wants to correct them', 'Because he wants to guide them', 0, 33),
-(5, 'According to Hebrews 12:14, what are we to make every effort to live in peace with?', 'Everyone and to be holy', 'Our neighbors', 'Our enemies', 'Our family', 0, 34),
-(5, 'In Hebrews 13:8, what is said about Jesus Christ?', 'Jesus Christ is the same yesterday and today and forever', 'Jesus Christ is Lord', 'Jesus Christ is Savior', 'Jesus Christ is King', 0, 35);
+-- Empty all weekly quiz tables
+TRUNCATE TABLE weekly_quiz_attempts, weekly_quiz_leaderboard, weekly_quiz_questions, weekly_quizzes RESTART IDENTITY CASCADE;
+
+DO $$
+DECLARE
+    quiz_id INTEGER;
+BEGIN
+    -- Create the Hebrews quiz for the current week
+    INSERT INTO weekly_quizzes (
+        week_start_date,
+        week_end_date,
+        title,
+        description,
+        theme,
+        difficulty,
+        total_questions
+    ) VALUES (
+        DATE_TRUNC('week', CURRENT_DATE)::DATE,
+        DATE_TRUNC('week', CURRENT_DATE)::DATE + INTERVAL '6 days',
+        'Weekly Bible Challenge - Hebrews Focus',
+        'Test your knowledge of the Book of Hebrews',
+        'Hebrews',
+        'Hard',
+        15
+    ) RETURNING id INTO quiz_id;
+
+    -- Delete existing questions for this quiz to avoid duplicates
+    DELETE FROM weekly_quiz_questions WHERE weekly_quiz_id = quiz_id;
+
+    -- Insert Questions
+    INSERT INTO weekly_quiz_questions (weekly_quiz_id, question, option_a, option_b, option_c, option_d, correct_index, order_index) VALUES
+    (quiz_id, 'Who is described as "the radiance of God''s glory and the exact representation of his being" in Hebrews 1:3?', 'Jesus Christ', 'The Holy Spirit', 'Moses', 'Elijah', 0, 1),
+    (quiz_id, 'According to Hebrews 1:5, which Psalm is quoted when God says "You are my Son; today I have become your Father"?', 'Psalm 2:7', 'Psalm 110:1', 'Psalm 45:6', 'Psalm 102:25', 0, 2),
+    (quiz_id, 'In Hebrews 2:9, what does it say Jesus was made "a little lower than" for a little while?', 'The angels', 'God', 'The prophets', 'The apostles', 0, 3),
+    (quiz_id, 'According to Hebrews 3:1, who is called "the apostle and high priest whom we confess"?', 'Jesus', 'Moses', 'Aaron', 'Melchizedek', 0, 4),
+    (quiz_id, 'In Hebrews 4:12, what is described as "sharper than any double-edged sword"?', 'The word of God', 'The law of Moses', 'The gospel', 'The prophets', 0, 5),
+    (quiz_id, 'According to Hebrews 4:15, in what way was Jesus tempted?', 'In every way, just as we are', 'Only in the wilderness', 'Only by Satan', 'Only by the Pharisees', 0, 6),
+    (quiz_id, 'In Hebrews 5:6, which Psalm is quoted when God says "You are a priest forever, in the order of Melchizedek"?', 'Psalm 110:4', 'Psalm 2:7', 'Psalm 45:6', 'Psalm 102:25', 0, 7),
+    (quiz_id, 'According to Hebrews 6:19, what is described as "an anchor for the soul, firm and secure"?', 'Hope', 'Faith', 'Love', 'Grace', 0, 8),
+    (quiz_id, 'In Hebrews 7:3, Melchizedek is described as being "without father or mother, without genealogy, without beginning of days or end of life." What does this make him like?', 'The Son of God', 'An angel', 'A prophet', 'A king', 0, 9),
+    (quiz_id, 'According to Hebrews 7:17, which Psalm is quoted to show that Jesus is a priest forever?', 'Psalm 110:4', 'Psalm 2:7', 'Psalm 45:6', 'Psalm 102:25', 0, 10),
+    (quiz_id, 'In Hebrews 8:1, where is Jesus described as sitting?', 'At the right hand of the throne of the Majesty in heaven', 'In the temple', 'On Mount Zion', 'In the holy of holies', 0, 11),
+    (quiz_id, 'According to Hebrews 8:6, Jesus has obtained a more excellent ministry than the old covenant. How much more excellent?', 'As much as the covenant he mediates is superior to the old one', 'Twice as excellent', 'Ten times more excellent', 'Infinitely more excellent', 0, 12),
+    (quiz_id, 'In Hebrews 9:12, how did Jesus enter the Most Holy Place?', 'By his own blood', 'By the blood of bulls and goats', 'By the blood of lambs', 'By water and the Spirit', 0, 13),
+    (quiz_id, 'According to Hebrews 9:22, what is required for the forgiveness of sins?', 'The shedding of blood', 'Good works', 'Prayer and fasting', 'Sacrifices and offerings', 0, 14),
+    (quiz_id, 'In Hebrews 10:4, why can the blood of bulls and goats never take away sins?', 'Because it is impossible', 'Because God doesn''t accept them', 'Because they are not perfect', 'Because they are not human', 0, 15);
+
+    -- Update total_questions to match the actual number of questions inserted
+    UPDATE weekly_quizzes
+    SET total_questions = (
+        SELECT COUNT(*)
+        FROM weekly_quiz_questions
+        WHERE weekly_quiz_id = quiz_id
+    )
+    WHERE id = quiz_id;
+END $$;
