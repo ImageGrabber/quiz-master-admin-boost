@@ -594,7 +594,7 @@ const CompetitionHome = () => {
                   <Button
                     size="lg"
                     className="group relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white px-8 py-6 text-base font-medium tracking-wide rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden"
-                    onClick={() => navigate("/competitions")}
+                    onClick={() => navigate("/auth/login")}
                   >
                     <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
                     <span className="relative flex items-center">
@@ -754,7 +754,7 @@ const CompetitionHome = () => {
                 <Button
                   size="lg"
                   className="group relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white px-8 py-6 text-base font-medium tracking-wide rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden w-full"
-                  onClick={() => navigate("/competitions")}
+                  onClick={() => navigate("/auth/login")}
                 >
                   <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
                   <span className="relative flex items-center justify-center">
@@ -1617,9 +1617,9 @@ const CompetitionHome = () => {
             </div>
           </div>
         </footer>
-  {/* Tidio Chat Widget */}
-  <script src="//code.tidio.co/your-tidio-public-key.js" async></script>
-  </div>
+        {/* Tidio Chat Widget */}
+        <script src="//code.tidio.co/your-tidio-public-key.js" async></script>
+      </div>
     </>
   );
 };
