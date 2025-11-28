@@ -31,7 +31,7 @@ export function Navigation() {
   useEffect(() => {
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase().trim();
-      const filtered = publicPages.filter(page => 
+      const filtered = publicPages.filter(page =>
         page.title.toLowerCase().includes(query) ||
         page.category.toLowerCase().includes(query) ||
         page.path.toLowerCase().includes(query)
@@ -71,10 +71,12 @@ export function Navigation() {
           </div>
           <span className="text-xl md:text-2xl font-urbanist font-semibold text-gray-900">Bible Quiz Competition</span>
         </div>
-        
+
         <nav className="hidden md:flex items-center space-x-6">
+          <button onClick={() => navigate("/bible-questions-and-answers-hub")} className="text-base md:text-lg text-gray-600 hover:text-gray-900 font-urbanist font-light">Bible Q&A</button>
+          <button onClick={() => navigate("/articles")} className="text-base md:text-lg text-gray-600 hover:text-gray-900 font-urbanist font-light">Articles</button>
           <button onClick={() => navigate("/help")} className="text-base md:text-lg text-gray-600 hover:text-gray-900 font-urbanist font-light">Help</button>
-          <Button 
+          <Button
             onClick={() => navigate("/donate")}
             className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-urbanist font-light text-base md:text-lg px-4 md:px-6 py-2 md:py-2.5 flex items-center space-x-2"
           >
@@ -83,7 +85,7 @@ export function Navigation() {
           </Button>
         </nav>
       </div>
-      
+
       <div className="flex items-center space-x-4">
         {/* Search Bar */}
         <div ref={searchRef} className="hidden md:block relative">
@@ -109,7 +111,7 @@ export function Navigation() {
               </button>
             )}
           </div>
-          
+
           {/* Search Results Dropdown */}
           {showSearchResults && searchResults.length > 0 && (
             <div className="absolute top-full mt-2 left-0 right-0 bg-white rounded-lg shadow-lg border border-gray-200 z-50 max-h-96 overflow-y-auto">
@@ -131,8 +133,8 @@ export function Navigation() {
             </div>
           )}
         </div>
-        
-        <Button 
+
+        <Button
           className="bg-black hover:bg-gray-800 font-urbanist font-light text-base md:text-lg px-4 md:px-6 py-2 md:py-2.5"
           onClick={() => navigate("/auth/register")}
         >
@@ -142,13 +144,15 @@ export function Navigation() {
           <Menu className="w-6 h-6" />
         </button>
       </div>
-      
+
       {/* Mobile dropdown menu */}
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-6 right-6 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 flex flex-col">
+          <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A</button>
+          <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>Help</button>
-          <button 
-            className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold px-4 py-3 text-left flex items-center space-x-2 font-urbanist" 
+          <button
+            className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold px-4 py-3 text-left flex items-center space-x-2 font-urbanist"
             onClick={() => { setMobileMenuOpen(false); navigate("/donate"); }}
           >
             <Heart className="w-4 h-4" />
