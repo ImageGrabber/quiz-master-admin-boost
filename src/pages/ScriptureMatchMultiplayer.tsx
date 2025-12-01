@@ -27,7 +27,8 @@ const ScriptureMatchMultiplayer = () => {
   const { toast } = useToast();
   const [currentView, setCurrentView] = useState<'menu' | 'matchmaking' | 'game' | 'gameover'>('menu');
   const [countdown, setCountdown] = useState<number | null>(null);
-  const [playersOnline, setPlayersOnline] = useState(Math.floor(Math.random() * 301) + 200);
+  const [playersOnline, setPlayersOnline] = useState(Math.floor(Math.random() * 51) + 400);
+  const [activePlayers, setActivePlayers] = useState(Math.floor(Math.random() * 31) + 200);
 
   // Game State
   const [activeWords, setActiveWords] = useState<WordItem[]>([]);
@@ -42,7 +43,8 @@ const ScriptureMatchMultiplayer = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setPlayersOnline(Math.floor(Math.random() * 301) + 200);
+      setPlayersOnline(Math.floor(Math.random() * 51) + 400);
+      setActivePlayers(Math.floor(Math.random() * 31) + 200);
     }, 30000);
     return () => clearInterval(interval);
   }, []);
@@ -360,8 +362,12 @@ const ScriptureMatchMultiplayer = () => {
                   <div className="text-xs text-slate-500 uppercase tracking-wider">Online</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-white mb-1">1v1</div>
-                  <div className="text-xs text-slate-500 uppercase tracking-wider">Format</div>
+                  <div className="text-3xl font-bold text-white mb-1">~2s</div>
+                  <div className="text-xs text-slate-500 uppercase tracking-wider">Avg Wait</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-white mb-1">{activePlayers}</div>
+                  <div className="text-xs text-slate-500 uppercase tracking-wider">Active</div>
                 </div>
               </div>
 

@@ -112,12 +112,46 @@ const LostSheep = () => {
         const shuffled = deck.sort(() => Math.random() - 0.5);
 
         // Deal ALL 15 cards (distribute as evenly as possible)
-        const playerCards = shuffled.slice(0, 8); // 8 cards
-        const opponentCards = shuffled.slice(8, 15); // 7 cards
+        const initialPlayerCards = shuffled.slice(0, 8); // 8 cards
+        const initialOpponentCards = shuffled.slice(8, 15); // 7 cards
 
-        setPlayerHand(playerCards);
-        setOpponentHand(opponentCards);
-        setMatchedPairs([]);
+        // Auto-remove pairs from initial hands
+        // We need to do this iteratively until no pairs are left, but for this simple game, 
+        // one pass might be enough if the logic handles multiple pairs. 
+        // Our removeMatchingPairs only removes ONE pair at a time.
+        // Let's make a helper to remove ALL pairs.
+
+        const processHand = (hand: CardItem[]) => {
+            let currentHand = [...hand];
+            let allPairs: CardItem[][] = [];
+            let foundPair = true;
+
+            while (foundPair) {
+                foundPair = false;
+                // Simple pair finding
+                for (let i = 0; i < currentHand.length; i++) {
+                    for (let j = i + 1; j < currentHand.length; j++) {
+                        if (currentHand[i].name === currentHand[j].name && currentHand[i].name !== 'Lost Sheep') {
+                            allPairs.push([currentHand[i], currentHand[j]]);
+                            // Remove these two
+                            const newHand = currentHand.filter((_, idx) => idx !== i && idx !== j);
+                            currentHand = newHand;
+                            foundPair = true;
+                            break;
+                        }
+                    }
+                    if (foundPair) break;
+                }
+            }
+            return { hand: currentHand, pairs: allPairs };
+        };
+
+        const { hand: cleanPlayerHand, pairs: playerPairs } = processHand(initialPlayerCards);
+        const { hand: cleanOpponentHand, pairs: opponentPairs } = processHand(initialOpponentCards);
+
+        setPlayerHand(cleanPlayerHand);
+        setOpponentHand(cleanOpponentHand);
+        setMatchedPairs([...playerPairs, ...opponentPairs]);
         setIsPlayerTurn(true);
         setGameStatus('playing');
         setShowGameOver(false);
@@ -280,29 +314,46 @@ const LostSheep = () => {
         const isFlipped = flippedCardIndex === index && isOpponent;
         const isBeingDrawn = opponentDrawingIndex === index && !isOpponent;
 
+        // Show card face if it's the player's card, or if it's an opponent's card that is currently flipped
+        const showFace = !isOpponent || isFlipped;
+
         return (
             <div
                 key={card.id}
                 className={cn(
                     "relative aspect-[0.7] rounded-xl overflow-hidden transition-all duration-300",
-                    isOpponent && isPlayerTurn && "cursor-pointer hover:scale-105",
-                    isBeingDrawn && "scale-110 ring-4 ring-yellow-400 shadow-lg shadow-yellow-400/50",
-                    isFlipped && "animate-pulse"
+                    isOpponent && isPlayerTurn && "cursor-pointer hover:scale-105 hover:-translate-y-2",
+                    !isOpponent && "hover:scale-105 hover:-translate-y-2 transition-transform", // Add hover effect for player cards
+                    isBeingDrawn && "scale-110 ring-4 ring-yellow-400 shadow-lg shadow-yellow-400/50 z-20",
+                    isFlipped && "animate-pulse ring-4 ring-white shadow-[0_0_30px_rgba(255,255,255,0.5)] z-20"
                 )}
                 onClick={() => isOpponent && isPlayerTurn && handlePlayerDrawCard(index)}
             >
                 <div className={cn(
-                    "w-full h-full flex flex-col items-center justify-center p-3 border-2 rounded-xl",
-                    isLostSheep
-                        ? "bg-gradient-to-br from-red-500 to-red-600 border-red-400/30"
-                        : "bg-gradient-to-br from-green-500 to-green-600 border-green-400/30"
+                    "w-full h-full flex flex-col items-center justify-center p-2 border-2 rounded-xl transition-all duration-500",
+                    showFace
+                        ? (isLostSheep
+                            ? "bg-gradient-to-br from-red-500 to-red-600 border-red-400/30"
+                            : "bg-gradient-to-br from-green-500 to-green-600 border-green-400/30")
+                        : "bg-gradient-to-br from-indigo-600 to-violet-700 border-indigo-400/30"
                 )}>
-                    <span className="text-4xl mb-2">{card.emoji}</span>
-                    <span className="text-xs font-urbanist font-semibold text-white text-center">
-                        {card.name}
-                    </span>
+                    {showFace ? (
+                        <>
+                            <span className="text-3xl sm:text-4xl mb-1 sm:mb-2 drop-shadow-lg transform hover:scale-110 transition-transform duration-200">{card.emoji}</span>
+                            <span className="text-[10px] sm:text-xs font-urbanist font-bold text-white text-center leading-tight shadow-black/20 drop-shadow-md">
+                                {card.name}
+                            </span>
+                        </>
+                    ) : (
+                        <div className="w-full h-full flex items-center justify-center opacity-50">
+                            <div className="w-8 h-8 rounded-full border-2 border-white/30 flex items-center justify-center">
+                                <span className="text-white/50 font-bold text-xs">?</span>
+                            </div>
+                        </div>
+                    )}
+
                     {isBeingDrawn && (
-                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 rounded-full p-1">
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 rounded-full p-1 shadow-lg animate-bounce">
                             <ArrowLeft className="w-4 h-4 text-yellow-900 rotate-90" />
                         </div>
                     )}
@@ -316,153 +367,165 @@ const LostSheep = () => {
         return (
             <MatchmakingScreen
                 playersOnline={playersOnline}
-                countdown={countdown}
+                countdown={currentView === 'matchmaking' ? null : countdown}
                 proTip="Avoid being left with the Lost Sheep card! Match pairs to win."
             />
         );
     }
+
     return (
-        <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4 relative overflow-hidden">
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-20 left-10 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-between p-4 relative overflow-hidden">
+            {/* Background Effects */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-20 left-10 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
             </div>
 
-            <div className="relative z-10 w-full max-w-lg">
-                <Card className="bg-gradient-to-br from-slate-900/95 via-slate-800/95 to-slate-900/95 border-slate-700/50 shadow-2xl backdrop-blur-xl">
-                    <CardContent className="p-10 text-center space-y-6">
-                        <div className="relative w-32 h-32 mx-auto mb-4">
-                            <div className="absolute inset-0 bg-violet-500/20 rounded-full animate-ping"></div>
-                            <div className="relative w-full h-full bg-gradient-to-br from-violet-500 to-indigo-600 rounded-full flex items-center justify-center border-4 border-violet-400/30 shadow-2xl shadow-violet-500/50 animate-pulse">
-                                <Users className="w-16 h-16 text-white" />
-                            </div>
-                        </div>
-
-                        {/* Text Content */}
-                        <div className="space-y-4">
-                            <h2 className="text-4xl font-urbanist font-black text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-purple-400 to-indigo-400">
-                                Finding Opponent
-                                <span className="inline-flex ml-1">
-                                    <span className="animate-bounce" style={{ animationDelay: '0s' }}>.</span>
-                                    <span className="animate-bounce" style={{ animationDelay: '0.2s' }}>.</span>
-                                    <span className="animate-bounce" style={{ animationDelay: '0.4s' }}>.</span>
-                                </span>
-                            </h2>
-
-                            {/* Stats Grid */}
-                            <div className="grid grid-cols-3 gap-3 max-w-md mx-auto">
-                                {/* Online Players */}
-                                <div className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-xl p-3 backdrop-blur-sm">
-                                    <div className="flex items-center justify-center gap-1 mb-1">
-                                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></div>
-                                        <span className="text-xs font-urbanist font-medium text-green-300">Online</span>
-                                    </div>
-                                    <div className="text-2xl font-black text-white">{playersOnline}</div>
-                                </div>
-
-                                {/* Average Wait */}
-                                <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-xl p-3 backdrop-blur-sm">
-                                    <div className="text-xs font-urbanist font-medium text-blue-300 mb-1">Avg Wait</div>
-                                    <div className="text-2xl font-black text-white">~2s</div>
-                                </div>
-
-                                {/* Active Matches */}
-                                <div className="bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-orange-500/20 rounded-xl p-3 backdrop-blur-sm">
-                                    <div className="text-xs font-urbanist font-medium text-orange-300 mb-1">Active</div>
-                                    <div className="text-2xl font-black text-white">{Math.floor(playersOnline / 2)}</div>
-                                </div>
-                            </div>
-
-                            {/* Description */}
-                            <div className="space-y-2">
-                                <p className="text-slate-300 text-sm font-urbanist font-medium">
-                                    Matching you with an opponent of similar skill
-                                </p>
-                                <p className="text-slate-500 text-xs font-urbanist font-light">
-                                    Analyzing player stats and preferences...
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Loading bar */}
-                        <div className="w-full h-2 bg-slate-800/50 rounded-full overflow-hidden backdrop-blur-sm border border-slate-700/50">
-                            <div className="h-full bg-gradient-to-r from-violet-500 via-purple-500 to-indigo-500 animate-pulse shadow-lg shadow-violet-500/50"></div>
-                        </div>
-
-                        {/* Tips */}
-                        <div className="bg-slate-800/30 border border-slate-700/30 rounded-xl p-4 backdrop-blur-sm">
-                            <div className="flex items-start gap-3">
-                                <div className="w-8 h-8 rounded-lg bg-violet-500/20 border border-violet-500/30 flex items-center justify-center flex-shrink-0">
-                                    <Sparkles className="w-4 h-4 text-violet-400" />
-                                </div>
-                                <div className="text-left">
-                                    <p className="text-xs font-urbanist font-semibold text-slate-300 mb-1">Pro Tip</p>
-                                    <p className="text-xs font-urbanist font-light text-slate-400">
-                                        Avoid being left with the Lost Sheep card! Match pairs to win.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </CardContent>
-                    </Card>
-
-                    {/* Player's Hand */}
-                    <div className="space-y-3 mt-6 z-10">
-                        <h2 className="text-lg font-urbanist font-bold text-white">
-                            Your Hand ({playerHand.length} cards)
-                        </h2>
-                        <div className="grid grid-cols-4 md:grid-cols-7 gap-3">
-                            {playerHand.map((card, index) => renderCard(card, index, false))}
-                        </div>
+            {/* Game Header / Status */}
+            <div className="relative z-10 w-full max-w-4xl flex justify-between items-center mb-4 bg-slate-900/50 backdrop-blur-md p-4 rounded-2xl border border-slate-800/50">
+                <div className="flex items-center gap-3">
+                    <div className={cn(
+                        "px-4 py-2 rounded-lg border transition-all duration-300",
+                        !isPlayerTurn
+                            ? "bg-violet-500/20 border-violet-500/50 shadow-[0_0_15px_rgba(139,92,246,0.3)]"
+                            : "bg-slate-800/50 border-slate-700/50 opacity-50"
+                    )}>
+                        <p className={cn(
+                            "text-sm font-urbanist font-bold",
+                            !isPlayerTurn ? "text-violet-200" : "text-slate-400"
+                        )}>
+                            {!isPlayerTurn ? "Opponent's Turn..." : "Opponent Waiting"}
+                        </p>
                     </div>
+                </div>
 
-                    {/* Game Over Modal */}
-                    {showGameOver && (
-                        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-                            <Card className="w-full max-w-md bg-gradient-to-br from-slate-900 to-slate-800 border-slate-700">
-                                <CardContent className="p-8 text-center space-y-6">
-                                    <div className="text-6xl">
-                                        {gameStatus === 'won' ? '🎉' : '🐑'}
-                                    </div>
-                                    <div>
-                                        <h2 className="text-3xl font-urbanist font-black text-white mb-2">
-                                            {gameStatus === 'won' ? 'Sheep Found!' : 'You Found the Lost Sheep!'}
-                                        </h2>
-                                        <p className="text-slate-400 font-urbanist">
-                                            {gameStatus === 'won'
-                                                ? 'Your opponent found the Lost Sheep!'
-                                                : 'The shepherd rejoices!'}
-                                        </p>
-                                    </div>
-                                    <div className="bg-violet-500/20 border border-violet-500/30 rounded-xl p-4">
-                                        <p className="text-white font-urbanist font-semibold">
-                                            Pairs Matched: {matchedPairs.length}
-                                        </p>
-                                    </div>
-                                    <div className="flex gap-3">
-                                        <Button
-                                            onClick={initializeGame}
-                                            className="flex-1 h-12 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500"
-                                        >
-                                            <RefreshCw className="w-4 h-4 mr-2" />
-                                            Play Again
-                                        </Button>
-                                        <Button
-                                            onClick={() => navigate('/dashboard/bible-games')}
-                                            variant="outline"
-                                            className="flex-1 h-12 border-slate-600 hover:bg-slate-800"
-                                        >
-                                            <Home className="w-4 h-4 mr-2" />
-                                            Exit
-                                        </Button>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </div>
-                    )}
+                <div className="flex flex-col items-center">
+                    <div className="text-xs font-urbanist text-slate-400 uppercase tracking-wider mb-1">Pairs Matched</div>
+                    <div className="text-2xl font-black text-white bg-slate-800 px-4 py-1 rounded-lg border border-slate-700">
+                        {matchedPairs.length}
+                    </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                    <div className={cn(
+                        "px-4 py-2 rounded-lg border transition-all duration-300",
+                        isPlayerTurn
+                            ? "bg-green-500/20 border-green-500/50 shadow-[0_0_15px_rgba(34,197,94,0.3)]"
+                            : "bg-slate-800/50 border-slate-700/50 opacity-50"
+                    )}>
+                        <p className={cn(
+                            "text-sm font-urbanist font-bold",
+                            isPlayerTurn ? "text-green-200" : "text-slate-400"
+                        )}>
+                            {isPlayerTurn ? "Your Turn!" : "Wait for Turn"}
+                        </p>
+                    </div>
                 </div>
             </div>
-        );
-    };
 
-    export default LostSheep;
+            {/* Opponent's Hand */}
+            <div className="relative z-10 w-full max-w-4xl mb-8">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                    <Users className="w-4 h-4 text-violet-400" />
+                    <h2 className="text-sm font-urbanist font-bold text-violet-200">
+                        Opponent's Hand ({opponentHand.length})
+                    </h2>
+                </div>
+                <div className="flex justify-center flex-wrap gap-2 px-4 min-h-[120px]">
+                    {opponentHand.map((card, index) => (
+                        <div key={card.id} className="w-16 sm:w-20">
+                            {renderCard(card, index, true)}
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Center Area - Matched Pairs Pile (Visual Only) */}
+            <div className="relative z-10 flex-1 flex items-center justify-center my-4">
+                {matchedPairs.length > 0 ? (
+                    <div className="relative">
+                        {matchedPairs.slice(-3).map((pair, i) => (
+                            <div
+                                key={i}
+                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-32 bg-slate-800 rounded-xl border-2 border-slate-700 shadow-xl flex items-center justify-center transform rotate-6"
+                                style={{
+                                    transform: `translate(-50%, -50%) rotate(${i * 5 - 5}deg)`,
+                                    zIndex: i
+                                }}
+                            >
+                                <div className="text-center opacity-50">
+                                    <span className="text-2xl block">{pair[0].emoji}</span>
+                                    <CheckCircle className="w-6 h-6 text-green-500 mx-auto mt-2" />
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="w-24 h-32 rounded-xl border-2 border-dashed border-slate-800 flex items-center justify-center">
+                        <span className="text-slate-700 text-xs font-urbanist">Pairs Pile</span>
+                    </div>
+                )}
+            </div>
+
+            {/* Player's Hand */}
+            <div className="relative z-10 w-full max-w-4xl mt-auto">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+                    <h2 className="text-sm font-urbanist font-bold text-green-200">
+                        Your Hand ({playerHand.length})
+                    </h2>
+                </div>
+                <div className="grid grid-cols-4 sm:grid-cols-8 gap-2 sm:gap-3 px-4 pb-4">
+                    {playerHand.map((card, index) => renderCard(card, index, false))}
+                </div>
+            </div>
+
+            {/* Game Over Modal */}
+            {showGameOver && (
+                <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
+                    <Card className="w-full max-w-md bg-gradient-to-br from-slate-900 to-slate-800 border-slate-700">
+                        <CardContent className="p-8 text-center space-y-6">
+                            <div className="text-6xl">
+                                {gameStatus === 'won' ? '🎉' : '🐑'}
+                            </div>
+                            <div>
+                                <h2 className="text-3xl font-urbanist font-black text-white mb-2">
+                                    {gameStatus === 'won' ? 'Sheep Found!' : 'You Found the Lost Sheep!'}
+                                </h2>
+                                <p className="text-slate-400 font-urbanist">
+                                    {gameStatus === 'won'
+                                        ? 'Your opponent found the Lost Sheep!'
+                                        : 'The shepherd rejoices!'}
+                                </p>
+                            </div>
+                            <div className="bg-violet-500/20 border border-violet-500/30 rounded-xl p-4">
+                                <p className="text-white font-urbanist font-semibold">
+                                    Pairs Matched: {matchedPairs.length}
+                                </p>
+                            </div>
+                            <div className="flex gap-3">
+                                <Button
+                                    onClick={initializeGame}
+                                    className="flex-1 h-12 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500"
+                                >
+                                    <RefreshCw className="w-4 h-4 mr-2" />
+                                    Play Again
+                                </Button>
+                                <Button
+                                    onClick={() => navigate('/dashboard/bible-games')}
+                                    variant="outline"
+                                    className="flex-1 h-12 border-slate-600 hover:bg-slate-800"
+                                >
+                                    <Home className="w-4 h-4 mr-2" />
+                                    Exit
+                                </Button>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default LostSheep;

@@ -28,6 +28,7 @@ import TodaysQuiz from "./pages/TodaysQuiz";
 import TodaysQuizMark from "./pages/TodaysQuizMark";
 import DailyVerse from "./pages/DailyVerse";
 import PrayerRequests from "./pages/PrayerRequests";
+import SelahSpace from "./pages/SelahSpace";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -297,6 +298,7 @@ const App = () => {
               <Route path="/verse-master" element={<ProtectedRoute><VerseMaster /></ProtectedRoute>} />
               <Route path="/faith-builder" element={<ProtectedRoute><FaithBuilder /></ProtectedRoute>} />
               <Route path="/flappy-bird" element={<ProtectedRoute><FlappyBird /></ProtectedRoute>} />
+              <Route path="/selah-space" element={<SelahSpace />} />
               <Route path="/" element={<CompetitionHome />} />
               <Route path="/home" element={<Index />} />
               <Route path="/competition-home" element={<CompetitionHome />} />
