@@ -579,27 +579,27 @@ const CompetitionHome = () => {
               {/* Left Column - Content */}
               <div className="text-center md:text-left w-full md:w-auto">
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 mb-6 leading-[1.1] tracking-tight">
-                  Bible Quiz Competition
-                  <span className="block mt-2 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-medium">
-                    2025
+                  Bible Quiz &
+                  <span className="block mt-2 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 bg-clip-text text-transparent font-medium">
+                    AI Adventure
                   </span>
                 </h1>
 
                 <p className="text-lg md:text-xl text-slate-600 font-light max-w-xl leading-relaxed mb-10 mx-auto md:mx-0">
-                  Join thousands in daily Bible quiz competitions. Climb leaderboards, earn prizes, and grow your knowledge every day in the ultimate Bible quiz competition of 2025.
+                  Experience the Bible like never before. Join the daily quiz competition or embark on an interactive AI-guided biblical journey.
                 </p>
 
                 {/* Modern CTA Buttons - Desktop only */}
                 <div className="hidden md:flex flex-col sm:flex-row gap-4 mb-12">
                   <Button
                     size="lg"
-                    className="group relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white px-8 py-6 text-base font-medium tracking-wide rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden"
-                    onClick={() => navigate("/auth/login")}
+                    className="group relative bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 hover:from-amber-700 hover:via-orange-700 hover:to-amber-800 text-white px-8 py-6 text-base font-medium tracking-wide rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden"
+                    onClick={() => navigate("/selah-space")}
                   >
                     <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
                     <span className="relative flex items-center">
-                      <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                      Start Competing
+                      <Sparkles className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+                      Start AI Adventure
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </Button>
@@ -609,7 +609,7 @@ const CompetitionHome = () => {
                     className="bg-white/60 backdrop-blur-md border-2 border-indigo-200 text-slate-700 hover:bg-white/80 hover:border-indigo-300 px-8 py-6 text-base font-medium tracking-wide rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                     onClick={() => navigate("/auth/register")}
                   >
-                    Create Account
+                    Join Competition
                   </Button>
                 </div>
 
@@ -689,10 +689,63 @@ const CompetitionHome = () => {
                   </div>
                 )}
 
+                {/* AI Biblical Adventure Card - MOVED TO TOP & ENHANCED */}
+                <div className="w-full max-w-sm md:w-96 mx-auto mb-6">
+                  <div className="group relative">
+                    {/* Featured Badge */}
+                    <div className="absolute -top-3 -right-3 z-20 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-bounce">
+                      NEW!
+                    </div>
+
+                    {/* Game Card */}
+                    <div className="relative bg-white backdrop-blur-xl border-2 border-amber-500/30 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/30">
+                      {/* Game Info */}
+                      <div className="p-5 bg-white">
+                        <h3 className="text-xl font-urbanist font-bold text-slate-900 mb-2 group-hover:text-amber-600 transition-colors flex items-center gap-2">
+                          AI Biblical Adventure
+                          <Sparkles className="w-4 h-4 text-amber-500" />
+                        </h3>
+                        <p className="text-sm font-urbanist font-light text-slate-600 mb-4 line-clamp-2">
+                          D&D-style adventure • AI Game Master • Interactive story
+                        </p>
+
+                        {/* Stats */}
+                        <div className="grid grid-cols-3 gap-3 mb-4">
+                          <div className="bg-amber-50 rounded-lg p-2 text-center border border-amber-100">
+                            <Sparkles className="w-4 h-4 text-amber-500 mx-auto mb-1" />
+                            <p className="text-xs font-urbanist font-bold text-slate-900">AI</p>
+                          </div>
+                          <div className="bg-amber-50 rounded-lg p-2 text-center border border-amber-100">
+                            <Brain className="w-4 h-4 text-purple-500 mx-auto mb-1" />
+                            <p className="text-xs font-urbanist font-bold text-slate-900">Story</p>
+                          </div>
+                          <div className="bg-amber-50 rounded-lg p-2 text-center border border-amber-100">
+                            <TrendingUp className="w-4 h-4 text-green-500 mx-auto mb-1" />
+                            <p className="text-xs font-urbanist font-bold text-slate-900">New</p>
+                          </div>
+                        </div>
+
+                        {/* Play Button */}
+                        <Button
+                          className="w-full h-12 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 hover:from-amber-700 hover:via-orange-700 hover:to-amber-800 text-white font-urbanist font-semibold text-base shadow-lg shadow-amber-500/20 transition-all duration-300 group-hover:shadow-amber-500/40"
+                          onClick={() => navigate("/selah-space")}
+                        >
+                          <Play className="w-5 h-5 mr-2 fill-current" />
+                          Begin Adventure
+                          <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </Button>
+                      </div>
+
+                      {/* Hover Glow Effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-amber-600/0 via-orange-600/0 to-amber-600/0 group-hover:from-amber-600/10 group-hover:via-orange-600/10 group-hover:to-amber-600/10 transition-all duration-500 rounded-2xl pointer-events-none"></div>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="w-full max-w-sm md:w-96 mx-auto">
                   <div className="group relative">
                     {/* Game Card */}
-                    <div className="relative bg-white backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20">
+                    <div className="relative bg-white backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 opacity-90 hover:opacity-100">
                       {/* Game Info */}
                       <div className="p-5 bg-white">
                         <h3 className="text-xl font-urbanist font-bold text-slate-900 mb-2 group-hover:text-purple-600 transition-colors">
@@ -720,7 +773,8 @@ const CompetitionHome = () => {
 
                         {/* Play Button */}
                         <Button
-                          className="w-full h-12 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-700 hover:from-purple-700 hover:via-pink-700 hover:to-purple-800 text-white font-urbanist font-semibold text-base shadow-lg shadow-purple-500/20 transition-all duration-300 group-hover:shadow-purple-500/40"
+                          variant="outline"
+                          className="w-full h-12 border-2 border-purple-200 text-purple-700 hover:bg-purple-50 font-urbanist font-semibold text-base transition-all duration-300"
                           onClick={() => {
                             // Randomly choose between Scripture Match and Lost Sheep
                             const games = [
@@ -732,59 +786,8 @@ const CompetitionHome = () => {
                         >
                           <Play className="w-5 h-5 mr-2 fill-current" />
                           Play Now
-                          <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                         </Button>
                       </div>
-
-                      {/* Hover Glow Effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-600/0 via-pink-600/0 to-purple-600/0 group-hover:from-purple-600/10 group-hover:via-pink-600/10 group-hover:to-purple-600/10 transition-all duration-500 rounded-2xl pointer-events-none"></div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* AI Biblical Adventure Card */}
-                <div className="w-full max-w-sm md:w-96 mx-auto mt-6">
-                  <div className="group relative">
-                    {/* Game Card */}
-                    <div className="relative bg-white backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/20">
-                      {/* Game Info */}
-                      <div className="p-5 bg-white">
-                        <h3 className="text-xl font-urbanist font-bold text-slate-900 mb-2 group-hover:text-amber-600 transition-colors">
-                          AI Biblical Adventure
-                        </h3>
-                        <p className="text-sm font-urbanist font-light text-slate-600 mb-4 line-clamp-2">
-                          D&D-style adventure • AI Game Master • Interactive story
-                        </p>
-
-                        {/* Stats */}
-                        <div className="grid grid-cols-3 gap-3 mb-4">
-                          <div className="bg-slate-100 rounded-lg p-2 text-center border border-slate-200">
-                            <Sparkles className="w-4 h-4 text-amber-500 mx-auto mb-1" />
-                            <p className="text-xs font-urbanist font-bold text-slate-900">AI</p>
-                          </div>
-                          <div className="bg-slate-100 rounded-lg p-2 text-center border border-slate-200">
-                            <Brain className="w-4 h-4 text-purple-500 mx-auto mb-1" />
-                            <p className="text-xs font-urbanist font-bold text-slate-900">Story</p>
-                          </div>
-                          <div className="bg-slate-100 rounded-lg p-2 text-center border border-slate-200">
-                            <TrendingUp className="w-4 h-4 text-green-500 mx-auto mb-1" />
-                            <p className="text-xs font-urbanist font-bold text-slate-900">New</p>
-                          </div>
-                        </div>
-
-                        {/* Play Button */}
-                        <Button
-                          className="w-full h-12 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 hover:from-amber-700 hover:via-orange-700 hover:to-amber-800 text-white font-urbanist font-semibold text-base shadow-lg shadow-amber-500/20 transition-all duration-300 group-hover:shadow-amber-500/40"
-                          onClick={() => navigate("/selah-space")}
-                        >
-                          <Play className="w-5 h-5 mr-2 fill-current" />
-                          Begin Adventure
-                          <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                        </Button>
-                      </div>
-
-                      {/* Hover Glow Effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-amber-600/0 via-orange-600/0 to-amber-600/0 group-hover:from-amber-600/10 group-hover:via-orange-600/10 group-hover:to-amber-600/10 transition-all duration-500 rounded-2xl pointer-events-none"></div>
                     </div>
                   </div>
                 </div>
