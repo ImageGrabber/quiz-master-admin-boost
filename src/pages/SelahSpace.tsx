@@ -20,7 +20,7 @@ const SelahSpace = () => {
                 {/* Desktop: Left Chat (60%), Right Image (40%) */}
 
                 {/* Left Column (Desktop) / Bottom (Mobile) - Chat */}
-                <div className="order-2 md:order-1 w-full md:w-[60%] h-[85%] md:h-full border-r border-amber-200 shadow-xl z-20">
+                <div className="order-2 md:order-1 w-full md:w-[60%] h-[75%] md:h-full border-r border-amber-200 shadow-xl z-20">
                     <ChatInterface
                         messages={messages}
                         isProcessing={isProcessing}
@@ -32,7 +32,7 @@ const SelahSpace = () => {
                 </div>
 
                 {/* Right Column (Desktop) / Top (Mobile) - Visualizer */}
-                <div className="order-1 md:order-2 w-full md:w-[40%] h-[30%] md:h-full relative z-10 flex items-center justify-center bg-amber-100/30 p-2 md:p-4">
+                <div className="order-1 md:order-2 w-full md:w-[40%] h-[25%] md:h-full relative z-10 flex items-center justify-center bg-amber-100/30 p-2 md:p-4">
                     <div className="w-full h-full md:h-full rounded-xl overflow-hidden shadow-lg border border-amber-200/50">
                         <Visualizer prompt={currentImagePrompt} gameStarted={gameStarted} />
                     </div>
