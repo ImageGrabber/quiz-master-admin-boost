@@ -32,8 +32,8 @@ const SelahSpace = () => {
                 </div>
 
                 {/* Right Column (Desktop) / Top (Mobile) - Visualizer */}
-                <div className="order-1 md:order-2 w-full md:w-[40%] h-[15%] md:h-full relative z-10 flex items-center justify-center bg-amber-100/30 p-2 md:p-4">
-                    <div className="w-[50%] md:w-full h-full md:h-full rounded-xl overflow-hidden shadow-lg border border-amber-200/50">
+                <div className="order-1 md:order-2 w-full md:w-[40%] h-[30%] md:h-full relative z-10 flex items-center justify-center bg-amber-100/30 p-2 md:p-4">
+                    <div className="w-full h-full md:h-full rounded-xl overflow-hidden shadow-lg border border-amber-200/50">
                         <Visualizer prompt={currentImagePrompt} gameStarted={gameStarted} />
                     </div>
                 </div>
