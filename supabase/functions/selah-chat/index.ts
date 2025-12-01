@@ -10,6 +10,19 @@ const corsHeaders = {
 const ipTurnCounts = new Map<string, number>();
 const MAX_TURNS = 10;
 
+const STARTING_THEMES = [
+    "The court of King David, dealing with political intrigue and psalms of praise.",
+    "The wilderness of the Exodus, facing trials of faith and survival.",
+    "The bustling streets of Jerusalem during the time of the Judges.",
+    "A fishing village in Galilee, witnessing miracles and teachings.",
+    "The exile in Babylon, maintaining faith amidst a foreign culture.",
+    "Paul's missionary journeys, spreading the word in new lands.",
+    "The construction of Solomon's Temple, a time of wisdom and grandeur.",
+    "The days of Elijah the Prophet, standing against idolatry.",
+    "Nehemiah rebuilding the walls of Jerusalem, facing opposition and hard work.",
+    "The early church in Acts, sharing all things in common and facing persecution."
+];
+
 serve(async (req) => {
     // Handle CORS preflight requests
     if (req.method === 'OPTIONS') {
@@ -17,7 +30,7 @@ serve(async (req) => {
     }
 
     try {
-        const { message, gameState, adCompleted } = await req.json()
+        const { message, gameState, adCompleted, history = [] } = await req.json()
         const mistralApiKey = Deno.env.get('MISTRAL_API_KEY')
 
         if (!mistralApiKey) {
@@ -99,11 +112,19 @@ serve(async (req) => {
     - Examples: "desert marketplace at dusk, merchants and travelers, oil lamps glowing, ancient middle eastern architecture"
     - "mountain cave entrance, stormy sky, olive trees, dramatic sunbeams breaking through clouds"
     
+    STARTING_THEMES:
+    - The current adventure theme is: {{THEME}}
+    
     STARTING SCENARIO:
-    If this is the first message (message is "START_ADVENTURE"), begin with an intriguing opening scenario that hooks the player into the adventure.
+    If this is the first message (message is "START_ADVENTURE"), begin with an intriguing opening scenario based on the {{THEME}} that hooks the player into the adventure.
+    Do NOT use the generic "sun hangs low over Canaan" opening. Create something unique and specific to the theme.
     
     CONTINUING SCENARIOS:
     If the player has made a choice, acknowledge their decision and present the consequences with a new scenario and choices.`
+
+        // Select a random theme for the start
+        const theme = STARTING_THEMES[Math.floor(Math.random() * STARTING_THEMES.length)];
+        const finalSystemPrompt = systemPrompt.replace('{{THEME}}', theme);
 
         const response = await fetch('https://api.mistral.ai/v1/chat/completions', {
             method: 'POST',
@@ -114,7 +135,8 @@ serve(async (req) => {
             body: JSON.stringify({
                 model: 'mistral-small-latest',
                 messages: [
-                    { role: 'system', content: systemPrompt },
+                    { role: 'system', content: finalSystemPrompt },
+                    ...history,
                     { role: 'user', content: message }
                 ],
                 response_format: { type: 'json_object' }

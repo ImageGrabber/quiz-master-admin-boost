@@ -35,7 +35,10 @@ export const useSelahAI = () => {
 
         try {
             const { data, error } = await supabase.functions.invoke('selah-chat', {
-                body: { message: 'START_ADVENTURE' }
+                body: {
+                    message: 'START_ADVENTURE',
+                    history: []
+                }
             });
 
             if (error) throw error;
@@ -73,8 +76,17 @@ export const useSelahAI = () => {
         setIsProcessing(true);
 
         try {
+            // Format history for backend (exclude current user message as it's sent separately)
+            const history = messages.map(msg => ({
+                role: msg.sender === 'user' ? 'user' : 'assistant',
+                content: msg.text
+            }));
+
             const { data, error } = await supabase.functions.invoke('selah-chat', {
-                body: { message: choice }
+                body: {
+                    message: choice,
+                    history: history
+                }
             });
 
             if (error) throw error;
