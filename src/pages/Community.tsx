@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {
     Heart,
-    MessageSquare,
     Share2,
     MoreHorizontal,
     Send,
@@ -52,6 +51,30 @@ const Community = () => {
     const [loading, setLoading] = useState(true);
     const [currentUser, setCurrentUser] = useState<any>(null);
     const [selectedTag, setSelectedTag] = useState<string | null>(null);
+
+    // Calculate trending topics from posts
+    const trendingTopics = useMemo(() => {
+        const tagCounts: { [key: string]: number } = {};
+
+        posts.forEach(post => {
+            // Find all hashtags in the post content
+            // Matches #tag, #Tag123, etc.
+            const matches = post.content.match(/#[a-zA-Z0-9_]+/g);
+            if (matches) {
+                matches.forEach(tag => {
+                    // We'll count exact matches to preserve casing preference
+                    // e.g. #DailyBread vs #dailybread
+                    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+                });
+            }
+        });
+
+        // Convert to array, sort by count desc, take top 5
+        return Object.entries(tagCounts)
+            .sort(([, countA], [, countB]) => countB - countA)
+            .slice(0, 5)
+            .map(([tag]) => tag);
+    }, [posts]);
 
     useEffect(() => {
         fetchUser();
@@ -438,10 +461,6 @@ const Community = () => {
                                                 <Heart className={`w-5 h-5 mr-1.5 group-hover:scale-110 transition-transform ${post.user_has_liked ? 'fill-current' : ''}`} />
                                                 <span className="font-medium">{post.likes.count}</span>
                                             </Button>
-                                            <Button variant="ghost" size="sm" className="text-slate-500 hover:text-blue-600 hover:bg-blue-50 px-2">
-                                                <MessageSquare className="w-5 h-5 mr-1.5" />
-                                                <span className="font-medium">{post.comments.count}</span>
-                                            </Button>
                                         </div>
                                         {/* Share button removed */}
                                     </div>
@@ -460,20 +479,24 @@ const Community = () => {
                             Trending Topics
                         </h3>
                         <div className="flex flex-wrap gap-2">
-                            {["#DailyBread", "#GenesisChallenge", "#Prayer", "#Worship", "#SundaySchool"].map(tag => (
-                                <Badge
-                                    key={tag}
-                                    onClick={() => setSelectedTag(tag)}
-                                    variant="secondary"
-                                    className={`cursor-pointer px-3 py-1 font-normal transition-colors
-                                        ${selectedTag === tag
-                                            ? 'bg-blue-100 text-blue-700 hover:bg-blue-200 ring-1 ring-blue-300'
-                                            : 'bg-slate-100 hover:bg-slate-200 text-slate-600'
-                                        }`}
-                                >
-                                    {tag}
-                                </Badge>
-                            ))}
+                            {trendingTopics.length > 0 ? (
+                                trendingTopics.map(tag => (
+                                    <Badge
+                                        key={tag}
+                                        onClick={() => setSelectedTag(tag)}
+                                        variant="secondary"
+                                        className={`cursor-pointer px-3 py-1 font-normal transition-colors
+                                            ${selectedTag === tag
+                                                ? 'bg-blue-100 text-blue-700 hover:bg-blue-200 ring-1 ring-blue-300'
+                                                : 'bg-slate-100 hover:bg-slate-200 text-slate-600'
+                                            }`}
+                                    >
+                                        {tag}
+                                    </Badge>
+                                ))
+                            ) : (
+                                <p className="text-sm text-slate-400">No trending topics yet.</p>
+                            )}
                         </div>
                     </div>
 
