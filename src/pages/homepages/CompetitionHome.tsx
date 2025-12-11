@@ -140,6 +140,22 @@ const CompetitionHome = () => {
   const [testimonialsPerViewState, setTestimonialsPerViewState] = useState(3);
 
   useEffect(() => {
+    // Load Tidio chat script
+    const script = document.createElement('script');
+    script.src = '//code.tidio.co/enkm7pw3z2k1zidnow6e2wj9fdt7jwo2.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // Clean up script when component unmounts
+      const existingScript = document.querySelector('script[src*="tidio.co"]');
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     const updateTestimonialsPerView = () => {
       setTestimonialsPerViewState(window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1);
     };
