@@ -83,10 +83,20 @@ const Login = () => {
 
   const handleGoogleLogin = async () => {
     try {
+      // Determine redirect URL based on environment
+      const getRedirectUrl = () => {
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          return `${window.location.origin}/dashboard`;
+        }
+        // Force the whitelisted production URL for all other environments (www, vercel, etc.)
+        // This prevents the "redirect to root/#" issue when the origin doesn't match the whitelist exactly
+        return 'https://biblequizcompetition.com/dashboard';
+      };
+
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/dashboard`
+          redirectTo: getRedirectUrl()
         }
       });
       if (error) throw error;
