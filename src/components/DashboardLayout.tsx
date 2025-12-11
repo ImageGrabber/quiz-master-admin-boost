@@ -1,48 +1,90 @@
+
 import { ReactNode, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Brain, LayoutDashboard, Trophy, User, Settings, LogOut, Menu, X, Award, Shield, BookOpen, Star, HelpCircle, Play } from "lucide-react";
-import Header from "@/components/Header";
+import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  LayoutDashboard,
+  BookOpen,
+  Award,
+  BarChart2,
+  Settings,
+  Search,
+  Bell,
+  MessageSquare,
+  LogOut,
+  Menu,
+  Brain,
+  Home,
+  Users,
+  UserPlus,
+  User // Added User icon
+} from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { Badge } from "@/components/ui/badge";
 
 interface DashboardLayoutProps {
   children: ReactNode;
+  title?: string;
+  subtitle?: string;
+  hideHeader?: boolean;
 }
 
 const navItems = [
-  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Weekly Quiz", href: "/weekly-quiz", icon: Award },
-  { name: "Competitions", href: "/competitions", icon: Award },
-  { name: "Leaderboard", href: "/leaderboard", icon: Trophy },
-  // { name: "Recent Attempts", href: "/dashboard/recent-attempts", icon: User }, // Hidden
-  { name: "Settings", href: "/dashboard/settings", icon: Settings },
-  { name: "Help", href: "/help", icon: HelpCircle },
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard }, // Stats Page
+  { name: "Community", href: "/dashboard/community", icon: Users },
+  { name: "All Quizzes", href: "/quiz-selection", icon: BookOpen }, // Library
+  { name: "Results", href: "/leaderboard", icon: BarChart2 },
 ];
 
-const DashboardLayout = ({ children }: DashboardLayoutProps) => {
+const DashboardLayout = ({ children, title, subtitle, hideHeader = false }: DashboardLayoutProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [userName, setUserName] = useState<string>("");
-  const [userPlan, setUserPlan] = useState<string>("");
+  const [userName, setUserName] = useState<string>("User");
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [userAvatar, setUserAvatar] = useState<string>("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const showUpgrade = false; // Set to true to show the Upgrade tab in the sidebar
 
   useEffect(() => {
-    async function fetchUserName() {
+    async function fetchUserData() {
       const { data: { user } } = await supabase.auth.getUser();
       if (user) {
+        setUserEmail(user.email || "");
         const { data: profile } = await supabase
           .from('profiles')
-          .select('full_name, plan')
+          .select('full_name, avatar_url')
           .eq('id', user.id)
           .single();
-        console.log('Fetched profile:', profile);
-        setUserName(profile && 'full_name' in profile ? String(profile.full_name) : "User");
-        setUserPlan(profile && 'plan' in profile ? String(profile.plan) : "");
+        if (profile) {
+          if (profile.full_name) setUserName(profile.full_name);
+          if (profile.avatar_url) setUserAvatar(profile.avatar_url);
+        }
+
+        // Subscribe to profile changes
+        const channel = supabase
+          .channel('schema-db-changes')
+          .on(
+            'postgres_changes',
+            {
+              event: 'UPDATE',
+              schema: 'public',
+              table: 'profiles',
+              filter: `id=eq.${user.id}`
+            },
+            (payload) => {
+              const newProfile = payload.new as any;
+              if (newProfile.full_name) setUserName(newProfile.full_name);
+              if (newProfile.avatar_url) setUserAvatar(newProfile.avatar_url);
+            }
+          )
+          .subscribe();
+
+        return () => {
+          supabase.removeChannel(channel);
+        };
       }
     }
-    fetchUserName();
+    fetchUserData();
   }, []);
 
   const handleLogout = async () => {
@@ -51,119 +93,138 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Top Bar: Logo/name left, welcome right */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-30 w-full h-16 flex items-center px-6 md:px-8 lg:px-12 justify-between">
-        <div className="flex items-center space-x-2">
-          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}>
-            <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
-              <Brain className="w-3 h-3 text-white" strokeWidth={1} />
+    <div className="h-screen bg-[#f3f5f9] font-sans flex text-slate-800 overflow-hidden">
+
+      {/* Sidebar */}
+      <aside className={`
+        fixed inset-y-0 left-0 z-50 w-64 bg-[#f3f5f9] transition-transform duration-300 ease-in-out
+        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+        md:relative flex flex-col h-full
+      `}>
+        {/* Logo Area */}
+        <div className="h-20 flex-shrink-0 flex items-center px-8">
+          {/* Same Logo content */}
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate("/")}>
+            <div className="bg-blue-600 rounded-lg p-1.5">
+              <Brain className="w-5 h-5 text-white" />
             </div>
-            <span className="text-lg font-urbanist font-semibold text-gray-900">Bible Quiz Competition</span>
+            <span className="text-xl font-bold text-slate-900 tracking-tight">Bible Quiz</span>
           </div>
         </div>
-        <div className="flex items-center gap-4">
-          <div className="hidden md:flex text-gray-700 text-sm font-urbanist font-light">
-            Welcome back, <span className="font-medium">{userName}</span>
-            {userPlan === "pro" && (
-              <Badge className="ml-2 bg-black text-white font-urbanist font-light">Pro</Badge>
-            )}
-            {userPlan === "free" && (
-              <Badge className="ml-2 bg-gray-200 text-gray-700 font-urbanist font-light">Free</Badge>
-            )}
-          </div>
+
+        {/* Nav Links */}
+        <nav className="flex-1 px-4 py-6 space-y-4 overflow-y-auto custom-scrollbar">
+          {navItems.map((item) => {
+            // Logic to determine active state:
+            // 1. Exact match
+            // 2. Sub-path match (but strictly for directories, not partial words)
+            // 3. Prioritize longest match
+            const sortedMatches = navItems
+              .filter(nav =>
+                location.pathname === nav.href ||
+                location.pathname.startsWith(nav.href + '/')
+              )
+              .sort((a, b) => b.href.length - a.href.length);
+
+            const activeItem = sortedMatches[0];
+            const isActive = activeItem?.name === item.name;
+
+            return (
+              <Button
+                key={item.name}
+                variant="ghost"
+                className={`w-full justify-start h-12 px-6 rounded-xl text-base font-medium transition-all duration-200
+                  ${isActive
+                    ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30 hover:bg-blue-700 hover:text-white"
+                    : "text-slate-500 hover:bg-white hover:text-slate-900"
+                  }
+                `}
+                onClick={() => {
+                  navigate(item.href);
+                  setIsMobileMenuOpen(false);
+                }}
+              >
+                <item.icon className={`w-5 h-5 mr-4 ${isActive ? "text-white" : "text-slate-400"}`} strokeWidth={2} />
+                {item.name}
+              </Button>
+            );
+          })}
+        </nav>
+
+        {/* Bottom Actions */}
+        <div className="p-4 mt-auto flex-shrink-0">
           <Button
             variant="ghost"
-            size="sm"
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="w-full justify-start h-12 px-6 rounded-xl text-slate-500 hover:bg-white hover:text-slate-900 font-medium"
+            onClick={() => navigate("/dashboard/settings")}
           >
-            {isMobileMenuOpen ? <X className="w-7 h-7" strokeWidth={2} /> : <Menu className="w-7 h-7" strokeWidth={2} />}
+            <Settings className="w-5 h-5 mr-4 text-slate-400" strokeWidth={2} />
+            Settings
+          </Button>
+          <Button
+            variant="ghost"
+            className="w-full justify-start h-12 px-6 rounded-xl text-slate-500 hover:bg-white hover:text-red-600 font-medium mt-2"
+            onClick={handleLogout}
+          >
+            <LogOut className="w-5 h-5 mr-4 text-slate-400 hover:text-red-500" strokeWidth={2} />
+            Logout
           </Button>
         </div>
-      </header>
-      <div className="flex w-full h-screen">
-        {/* Sidebar */}
-        {/* Mobile Sidebar Overlay */}
-        {isMobileMenuOpen && (
-          <div 
-            className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
-            onClick={() => setIsMobileMenuOpen(false)}
-          />
-        )}
-        {/* Sidebar: hidden on mobile unless toggled, flex column on desktop */}
-        <aside className={`
-          ${isMobileMenuOpen ? 'fixed inset-y-0 left-0 z-50 flex' : 'hidden'}
-          md:static md:flex md:flex-col
-          w-64 h-screen bg-white border-r border-gray-200 transition-transform duration-300 ease-in-out
-        `}>
-          <nav className="flex-1 px-4 py-6 space-y-2">
-            {navItems.map((item) => (
-              // Hide the Competitions tab from the sidebar
-              item.name === "Competitions" ? null : (
-                <Button
-                  key={item.name}
-                  variant={location.pathname === item.href ? "default" : "ghost"}
-                  className={`w-full justify-start h-10 font-urbanist font-light ${location.pathname === item.href ? "bg-black text-white hover:bg-gray-800" : "text-gray-700 hover:bg-gray-50"}`}
-                  onClick={() => {
-                    navigate(item.href);
-                    setIsMobileMenuOpen(false);
-                  }}
-                >
-                  <item.icon className="w-4 h-4 mr-3" strokeWidth={1} />
-                  {item.name}
-                </Button>
-              )
-            ))}
-            {/* Hide Upgrade tab unless showUpgrade is true */}
-            {showUpgrade && userPlan === "free" && (
-              <Button
-                key="Upgrade"
-                variant={location.pathname === "/dashboard/upgrade" ? "default" : "ghost"}
-                className={`w-full justify-start h-10 font-urbanist font-light ${location.pathname === "/dashboard/upgrade" ? "bg-black text-white hover:bg-gray-800" : "text-gray-700 hover:bg-gray-50"}`}
-                onClick={() => {
-                  navigate("/dashboard/upgrade");
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                <Star className="w-4 h-4 mr-3" strokeWidth={1} />
-                Upgrade
-              </Button>
+      </aside>
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col h-full bg-white md:rounded-l-[3rem] shadow-[-10px_0_30px_-15px_rgba(0,0,0,0.05)] overflow-hidden relative z-10">
+
+        {/* Topbar */}
+        <header className="h-20 flex items-center justify-between px-8 border-b border-slate-50/50 bg-white/80 backdrop-blur-sm sticky top-0 z-30">
+
+
+          {/* Mobile Menu Toggle */}
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+              <Menu className="w-6 h-6" />
+            </Button>
+
+            {title && (
+              <div className="flex flex-col">
+                <h1 className="text-xl font-bold text-slate-900 leading-tight">{title}</h1>
+                {subtitle && <p className="text-xs text-slate-500 leading-tight hidden sm:block">{subtitle}</p>}
+              </div>
             )}
-            <div className="pt-4 mt-4 border-t border-gray-200">
-              <Button
-                variant="ghost"
-                className="w-full justify-start h-10 text-gray-700 hover:bg-gray-50 font-urbanist font-light"
-                onClick={() => {
-                  handleLogout();
-                  setIsMobileMenuOpen(false);
-                }}
-              >
-                <LogOut className="w-4 h-4 mr-3" strokeWidth={1} />
-                Logout
-              </Button>
-            </div>
-          </nav>
-        </aside>
-        {/* Main Content */}
-        <main className="flex-1 p-6 md:p-8 w-full overflow-x-auto bg-gradient-to-b from-blue-50/30 via-indigo-50/20 to-white relative">
-          {/* Animated background orbs */}
-          <div className="fixed top-20 right-10 w-72 h-72 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl animate-pulse pointer-events-none"></div>
-          <div className="fixed bottom-20 left-10 w-96 h-96 bg-gradient-to-tr from-purple-400/20 to-pink-400/20 rounded-full blur-3xl animate-pulse pointer-events-none" style={{ animationDelay: '1s' }}></div>
-          
-          {/* Grid pattern overlay */}
-          <div className="fixed inset-0 opacity-[0.02] pointer-events-none" style={{
-            backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
-          }}></div>
-          
-          <div className="relative z-10">
-            {children}
           </div>
+
+          {/* Right Actions */}
+          <div className="flex items-center gap-6 ml-auto">
+            <div className="flex items-center gap-3">
+              <div className="text-right hidden md:block">
+                <p className="text-sm font-bold text-slate-900 leading-none mb-1">{userName}</p>
+                <p className="text-xs text-slate-500 leading-none">{userEmail}</p>
+              </div>
+              <Avatar className="w-10 h-10 border-2 border-white shadow-sm cursor-pointer">
+                <AvatarImage src={userAvatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${userName}`} />
+                <AvatarFallback className="bg-blue-100 text-blue-700 font-bold">
+                  {userName.substring(0, 2).toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+            </div>
+          </div>
+        </header>
+
+        {/* Page Content */}
+        <main className="flex-1 overflow-y-auto bg-gradient-to-br from-white via-indigo-50/10 to-blue-50/10 p-8">
+          {children}
         </main>
       </div>
+
+      {/* Mobile Overlay */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 md:hidden backdrop-blur-sm"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
     </div>
   );
 };
 
-export default DashboardLayout; 
+export default DashboardLayout;

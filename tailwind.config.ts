@@ -20,6 +20,8 @@ export default {
 		extend: {
 			fontFamily: {
 				urbanist: ['var(--font-urbanist)', 'system-ui', 'sans-serif'],
+				'inter-tight': ['"Inter Tight"', 'sans-serif'],
+				'instrument-serif': ['"Instrument Serif"', 'serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

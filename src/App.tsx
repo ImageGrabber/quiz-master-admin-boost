@@ -34,6 +34,8 @@ import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import Dashboard from "./pages/Dashboard";
+import Community from "./pages/Community";
+import Connections from "./pages/Connections";
 import BibleGames from "./pages/BibleGames";
 import MyQuizzes from "./pages/MyQuizzes";
 import CreateQuiz from "./pages/CreateQuiz";
@@ -312,7 +314,10 @@ const App = () => {
               <Route path="/auth/register" element={<Register />} />
               <Route path="/auth/forgot-password" element={<ForgotPassword />} />
               <Route path="/auth/reset-password" element={<ResetPassword />} />
+              <Route path="/auth/reset-password" element={<ResetPassword />} />
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+              <Route path="/dashboard/community" element={<ProtectedRoute><Community /></ProtectedRoute>} />
+              <Route path="/dashboard/connections" element={<ProtectedRoute><Connections /></ProtectedRoute>} />
               <Route path="/dashboard/bible-games" element={<ProtectedRoute><BibleGames /></ProtectedRoute>} />
               <Route path="/dashboard/quizzes" element={<ProtectedRoute><MyQuizzes /></ProtectedRoute>} />
               <Route path="/create-quiz" element={<ProtectedRoute><CreateQuiz /></ProtectedRoute>} />

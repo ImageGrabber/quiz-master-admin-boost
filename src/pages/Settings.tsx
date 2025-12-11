@@ -7,15 +7,15 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
-import { 
-  User, 
-  Mail, 
-  Lock, 
-  Bell, 
-  Shield, 
-  Trash2, 
-  Save, 
-  Eye, 
+import {
+  User,
+  Mail,
+  Lock,
+  Bell,
+  Shield,
+  Trash2,
+  Save,
+  Eye,
   EyeOff,
   AlertTriangle,
   CheckCircle
@@ -37,9 +37,27 @@ interface UserProfile {
   id: string;
   email: string;
   full_name: string;
+  avatar_url?: string; // Added
   role: string;
   created_at: string;
 }
+
+const AVATAR_PRESETS = [
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Felix",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Bob",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Caleb",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Dora",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Eliza",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Gus",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Hilda",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Jack",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Leo",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Max",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Nolan",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Oscar",
+  "https://api.dicebear.com/7.x/avataaars/svg?seed=Ryan",
+];
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -48,17 +66,18 @@ const Settings = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
-  
+
   // Profile form state
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
-  
-  // Password change state
+  const [avatarUrl, setAvatarUrl] = useState(""); // State for avatar
+
+  // ... (password state remains)
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPasswords, setShowPasswords] = useState(false);
-  
-  // Notification preferences (stored in localStorage for demo)
+
+  // ... (notifications state remains)
   const [emailNotifications, setEmailNotifications] = useState(() => {
     const stored = localStorage.getItem('emailNotifications');
     return stored ? JSON.parse(stored) : true;
@@ -83,7 +102,7 @@ const Settings = () => {
   const fetchUserProfile = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      
+
       if (!user) {
         navigate("/auth/login");
         return;
@@ -99,6 +118,7 @@ const Settings = () => {
         setProfile(profileData);
         setFullName(profileData.full_name || "");
         setEmail(profileData.email || "");
+        setAvatarUrl(profileData.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${profileData.full_name || 'User'}`);
       }
     } catch (error) {
       console.error('Error fetching user profile:', error);
@@ -114,14 +134,15 @@ const Settings = () => {
 
   const handleSaveProfile = async () => {
     if (!profile) return;
-    
+
     setIsSaving(true);
     try {
       const { error } = await supabase
         .from('profiles')
         .update({
           full_name: fullName,
-          email: email
+          email: email,
+          avatar_url: avatarUrl // Save avatar
         })
         .eq('id', profile.id);
 
@@ -279,7 +300,10 @@ const Settings = () => {
   }
 
   return (
-    <DashboardLayout>
+    <DashboardLayout
+      title="Settings"
+      subtitle="Manage your account and preferences"
+    >
       {/* Dialog for all notifications */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
@@ -294,40 +318,68 @@ const Settings = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      <div className="space-y-6">
-        {/* Header */}
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-          <p className="text-gray-600 mt-2">Manage your account and preferences</p>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Profile Settings */}
-          <div className="lg:col-span-2 space-y-6">
+      <div className="max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
+        {/* Header removed */}
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Settings Column */}
+          <div className="lg:col-span-2 space-y-8">
+
             {/* Profile Information */}
-            <Card className="shadow-lg border-0 bg-white">
+            <Card className="border-slate-100 shadow-sm hover:shadow-md transition-shadow">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <User className="w-5 h-5 text-blue-600" />
+                <CardTitle className="flex items-center space-x-2 text-slate-800">
+                  <User className="w-5 h-5 text-blue-500" />
                   <span>Profile Information</span>
                 </CardTitle>
-                <CardDescription>
-                  Update your personal information and account details
+                <CardDescription className="text-slate-500">
+                  Update your personal information and avatar
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <CardContent className="space-y-6">
+                <div className="flex flex-col items-center space-y-6 p-6 bg-slate-50/50 rounded-xl border border-slate-100">
+                  <div className="relative">
+                    <img
+                      src={avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${fullName || 'User'}`}
+                      alt="Profile Avatar"
+                      className="w-24 h-24 rounded-full border-4 border-white shadow-md bg-white"
+                    />
+                    <div className="absolute bottom-0 right-0 bg-blue-500 rounded-full p-1.5 border-2 border-white shadow-sm">
+                      <User className="w-3 h-3 text-white" />
+                    </div>
+                  </div>
+
+                  <div className="w-full">
+                    <Label className="mb-3 block text-center text-sm font-medium text-slate-600">Choose Avatar</Label>
+                    <div className="flex flex-wrap justify-center gap-3">
+                      {AVATAR_PRESETS.slice(0, 8).map((preset, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setAvatarUrl(preset)}
+                          className={`w-10 h-10 rounded-full border-2 overflow-hidden transition-all hover:scale-110 ${avatarUrl === preset ? 'border-blue-500 ring-2 ring-blue-100 shadow-md scale-110' : 'border-slate-200 hover:border-blue-300'
+                            }`}
+                        >
+                          <img src={preset} alt={`Avatar ${index + 1}`} className="w-full h-full object-cover" />
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="fullName">Full Name</Label>
+                    <Label htmlFor="fullName" className="text-slate-600">Full Name</Label>
                     <Input
                       id="fullName"
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="Enter your full name"
+                      className="border-slate-200 focus-visible:ring-blue-500"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email Address</Label>
+                    <Label htmlFor="email" className="text-slate-600">Email Address</Label>
                     <Input
                       id="email"
                       type="email"
@@ -335,44 +387,42 @@ const Settings = () => {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email"
                       disabled
+                      className="bg-slate-50 border-slate-200 text-slate-500 cursor-not-allowed"
                     />
                   </div>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Badge className="bg-blue-100 text-blue-700">
-                    {profile?.role || 'user'}
-                  </Badge>
-                  <span className="text-sm text-gray-600">Account Type</span>
+
+                <div className="flex justify-end pt-2">
+                  <Button
+                    onClick={handleSaveProfile}
+                    disabled={isSaving}
+                    className="bg-blue-600 hover:bg-blue-700 text-white shadow-sm hover:shadow transition-all"
+                  >
+                    {isSaving ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                        Saving...
+                      </>
+                    ) : (
+                      <>
+                        <Save className="w-4 h-4 mr-2" />
+                        Save Changes
+                      </>
+                    )}
+                  </Button>
                 </div>
-                <Button 
-                  onClick={handleSaveProfile}
-                  disabled={isSaving}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
-                >
-                  {isSaving ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                      Saving...
-                    </>
-                  ) : (
-                    <>
-                      <Save className="w-4 h-4 mr-2" />
-                      Save Changes
-                    </>
-                  )}
-                </Button>
               </CardContent>
             </Card>
 
             {/* Password Change */}
-            <Card className="shadow-lg border-0 bg-white">
+            <Card className="border-slate-100 shadow-sm hover:shadow-md transition-shadow">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Lock className="w-5 h-5 text-green-600" />
-                  <span>Change Password</span>
+                <CardTitle className="flex items-center space-x-2 text-slate-800">
+                  <Lock className="w-5 h-5 text-emerald-500" />
+                  <span>Security</span>
                 </CardTitle>
-                <CardDescription>
-                  Update your password to keep your account secure
+                <CardDescription className="text-slate-500">
+                  Manage your password and security settings
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -385,12 +435,13 @@ const Settings = () => {
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
                       placeholder="Enter new password"
+                      className="border-slate-200 focus-visible:ring-emerald-500 pr-10"
                     />
                     <Button
                       type="button"
                       variant="ghost"
                       size="sm"
-                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                      className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent text-slate-400 hover:text-slate-600"
                       onClick={() => setShowPasswords(!showPasswords)}
                     >
                       {showPasswords ? (
@@ -402,97 +453,53 @@ const Settings = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="confirmPassword">Confirm New Password</Label>
+                  <Label htmlFor="confirmPassword">Confirm Password</Label>
                   <Input
                     id="confirmPassword"
                     type={showPasswords ? "text" : "password"}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Confirm new password"
+                    className="border-slate-200 focus-visible:ring-emerald-500"
                   />
                 </div>
-                <Button 
-                  onClick={handleChangePassword}
-                  disabled={isChangingPassword || !newPassword || !confirmPassword}
-                  className="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white"
-                >
-                  {isChangingPassword ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                      Changing Password...
-                    </>
-                  ) : (
-                    <>
-                      <Lock className="w-4 h-4 mr-2" />
-                      Change Password
-                    </>
-                  )}
-                </Button>
+                <div className="flex justify-end pt-2">
+                  <Button
+                    onClick={handleChangePassword}
+                    disabled={isChangingPassword || !newPassword || !confirmPassword}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm hover:shadow transition-all"
+                  >
+                    {isChangingPassword ? "Updating..." : "Update Password"}
+                  </Button>
+                </div>
               </CardContent>
             </Card>
-
-            {/* Notification Preferences */}
-            {/*
-            <Card className="shadow-lg border-0 bg-white">
-              <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Bell className="w-5 h-5 text-yellow-600" />
-                  <span>Notification Preferences</span>
-                </CardTitle>
-                <CardDescription>
-                  Choose how you want to be notified about quiz activities
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                ...
-              </CardContent>
-            </Card>
-            */}
           </div>
 
-          {/* Sidebar */}
+          {/* Sidebar Column */}
           <div className="space-y-6">
-            {/* Account Status */}
-            <Card className="shadow-lg border-0 bg-white">
+            <Card className="border-slate-100 shadow-sm hover:shadow-md transition-shadow">
               <CardHeader>
-                <CardTitle className="flex items-center space-x-2">
-                  <Shield className="w-5 h-5 text-blue-600" />
+                <CardTitle className="flex items-center space-x-2 text-slate-800">
+                  <Shield className="w-5 h-5 text-purple-500" />
                   <span>Account Status</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="flex items-center space-x-2">
-                  <CheckCircle className="w-4 h-4 text-green-600" />
-                  <span className="text-sm text-gray-600">Account Active</span>
+                <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-100">
+                  <div className="flex items-center space-x-2">
+                    <CheckCircle className="w-4 h-4 text-green-600" />
+                    <span className="text-sm font-medium text-green-800">Active</span>
+                  </div>
+                  <Badge variant="outline" className="bg-white text-green-700 border-green-200">
+                    {profile?.role || 'User'}
+                  </Badge>
                 </div>
-                <div className="text-sm text-gray-600">
+                <div className="text-xs text-slate-500 text-center">
                   Member since {profile?.created_at ? new Date(profile.created_at).toLocaleDateString() : 'N/A'}
                 </div>
-                <Badge className="bg-blue-100 text-blue-700">
-                  {profile?.role || 'user'}
-                </Badge>
               </CardContent>
             </Card>
-
-            {/* Danger Zone */}
-            {/*
-            <Card className="shadow-lg border-0 bg-white">
-              <CardHeader>
-                <CardTitle className="text-red-600">Danger Zone</CardTitle>
-                <CardDescription>
-                  Irreversible and destructive actions
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button
-                  variant="destructive"
-                  onClick={handleDeleteAccount}
-                >
-                  Delete Account
-                </Button>
-              </CardContent>
-            </Card>
-            */}
           </div>
         </div>
       </div>

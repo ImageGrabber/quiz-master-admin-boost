@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Menu, Search, X, Brain, Heart } from "lucide-react";
+import { Menu, Search, X, Brain } from "lucide-react";
 import { publicPages } from "@/data/indexData";
 
 export function Navigation() {
@@ -76,13 +76,7 @@ export function Navigation() {
           <button onClick={() => navigate("/bible-questions-and-answers-hub")} className="text-base md:text-lg text-gray-600 hover:text-gray-900 font-urbanist font-light">Bible Q&A</button>
           <button onClick={() => navigate("/articles")} className="text-base md:text-lg text-gray-600 hover:text-gray-900 font-urbanist font-light">Articles</button>
           <button onClick={() => navigate("/help")} className="text-base md:text-lg text-gray-600 hover:text-gray-900 font-urbanist font-light">Help</button>
-          <Button
-            onClick={() => navigate("/donate")}
-            className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-urbanist font-light text-base md:text-lg px-4 md:px-6 py-2 md:py-2.5 flex items-center space-x-2"
-          >
-            <Heart className="w-4 h-4" />
-            <span>Donate</span>
-          </Button>
+
         </nav>
       </div>
 
@@ -151,13 +145,7 @@ export function Navigation() {
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>Help</button>
-          <button
-            className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold px-4 py-3 text-left flex items-center space-x-2 font-urbanist"
-            onClick={() => { setMobileMenuOpen(false); navigate("/donate"); }}
-          >
-            <Heart className="w-4 h-4" />
-            <span>Donate</span>
-          </button>
+
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-t border-gray-200" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
           <Button className="bg-black text-white text-base px-4 py-3 mx-4 mb-4 font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</Button>
         </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Trophy, Medal, Award, Crown, Brain, Play } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -32,7 +32,7 @@ const Leaderboard = () => {
       const now = new Date();
       const currentDay = now.getDate();
       const lastRefreshDay = localStorage.getItem('leaderboardLastRefreshDay');
-      
+
       // If it's a new day or first time, refresh the leaderboard
       if (lastRefreshDay !== currentDay.toString()) {
         localStorage.setItem('leaderboardLastRefreshDay', currentDay.toString());
@@ -69,7 +69,7 @@ const Leaderboard = () => {
   const fetchLeaderboard = async () => {
     try {
       setIsLoading(true);
-      
+
       // Fetch real users from the database
       const { data: realUsers, error: realUsersError } = await supabase
         .from('profiles')
@@ -113,7 +113,7 @@ const Leaderboard = () => {
 
       // Create mixed leaderboard data
       const leaderboardData = [];
-      
+
       // Add real users first (if any exist)
       if (realUsers && realUsers.length > 0) {
         realUsers.forEach((user, index) => {
@@ -129,7 +129,7 @@ const Leaderboard = () => {
       const minMockUsers = 20;
       const remainingSlots = Math.max(minMockUsers, 50 - leaderboardData.length);
       const selectedMockNames = mockNames.slice(0, remainingSlots);
-      
+
       selectedMockNames.forEach((name, index) => {
         leaderboardData.push({
           id: `mock-${index + 1}`,
@@ -141,19 +141,19 @@ const Leaderboard = () => {
       // Create consistent daily rotation instead of random shuffling
       const now = new Date();
       const dayOfYear = Math.floor((now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / (1000 * 60 * 60 * 24));
-      
+
       // Use day-based seed for consistent daily rotation with simple but effective algorithm
       const seed = dayOfYear;
-      
+
       // Create a simple but effective daily rotation by using modulo on the day
       const rotationOffset = dayOfYear % leaderboardData.length;
-      
+
       // Rotate the array by the daily offset
       const shuffledData = [
         ...leaderboardData.slice(rotationOffset),
         ...leaderboardData.slice(0, rotationOffset)
       ];
-      
+
       // Reassign ranks after consistent shuffling
       const finalLeaderboard = shuffledData.map((entry, index) => ({
         ...entry,
@@ -163,14 +163,14 @@ const Leaderboard = () => {
       setLeaderboard(finalLeaderboard);
     } catch (error) {
       console.error('Error fetching leaderboard:', error);
-      
+
       // Fallback: Create mock leaderboard if database fails
       const fallbackData = mockNames.slice(0, 50).map((name, index) => ({
         id: `fallback-${index + 1}`,
         name: name,
         rank: index + 1
       }));
-      
+
       setLeaderboard(fallbackData);
     } finally {
       setIsLoading(false);
@@ -204,81 +204,93 @@ const Leaderboard = () => {
   };
 
   const LeaderboardContent = () => (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="text-center mb-8">
-        <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
-          <Trophy className="w-8 h-8 text-white" />
-        </div>
-        
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">Leaderboard</h1>
-        <p className="text-lg text-gray-600 mb-2">See how you rank against other quiz masters</p>
-        <p className="text-sm text-blue-700 mb-8">Note: This leaderboard shows performance in weekly quizzes and is not related to competitions.</p>
-        
-        {/* Period Filter */}
-        <div className="flex justify-center space-x-4 mb-8">
-          <Button
-            variant={selectedPeriod === "week" ? "default" : "outline"}
-            onClick={() => setSelectedPeriod("week")}
-            className={selectedPeriod === "week" ? "bg-gradient-to-r from-blue-600 to-purple-600" : ""}
-          >
-            This Week
-          </Button>
-          <Button
-            variant={selectedPeriod === "month" ? "default" : "outline"}
-            onClick={() => setSelectedPeriod("month")}
-            className={selectedPeriod === "month" ? "bg-gradient-to-r from-blue-600 to-purple-600" : ""}
-          >
-            This Month
-          </Button>
-          <Button
-            variant={selectedPeriod === "all" ? "default" : "outline"}
-            onClick={() => setSelectedPeriod("all")}
-            className={selectedPeriod === "all" ? "bg-gradient-to-r from-blue-600 to-purple-600" : ""}
-          >
-            All Time
-          </Button>
-        </div>
-      </div>
+    <div className="max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
+
+      {/* Header removed - moved to layout */}
 
       {/* Leaderboard Table */}
-      <Card className="shadow-lg border-0 bg-white">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold text-gray-900">Top Performers</CardTitle>
+      <Card className="border-slate-100 shadow-sm">
+        <CardHeader className="flex flex-col sm:flex-row items-center justify-between gap-4 space-y-0 pb-6">
+          <div>
+            <CardTitle className="text-xl font-bold text-slate-900">Top Performers</CardTitle>
+            <CardDescription className="mt-1">
+              Global rankings across all categories
+            </CardDescription>
+          </div>
+
+          {/* Period Filter */}
+          <div className="flex items-center bg-slate-100 p-1 rounded-lg">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setSelectedPeriod("week")}
+              className={`text-xs font-medium px-3 py-1.5 h-auto rounded-md transition-all ${selectedPeriod === "week"
+                ? "bg-white text-slate-900 shadow-sm"
+                : "text-slate-500 hover:text-slate-900 hover:bg-slate-200/50"
+                }`}
+            >
+              This Week
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setSelectedPeriod("month")}
+              className={`text-xs font-medium px-3 py-1.5 h-auto rounded-md transition-all ${selectedPeriod === "month"
+                ? "bg-white text-slate-900 shadow-sm"
+                : "text-slate-500 hover:text-slate-900 hover:bg-slate-200/50"
+                }`}
+            >
+              This Month
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setSelectedPeriod("all")}
+              className={`text-xs font-medium px-3 py-1.5 h-auto rounded-md transition-all ${selectedPeriod === "all"
+                ? "bg-white text-slate-900 shadow-sm"
+                : "text-slate-500 hover:text-slate-900 hover:bg-slate-200/50"
+                }`}
+            >
+              All Time
+            </Button>
+          </div>
         </CardHeader>
         <CardContent>
           {isLoading ? (
-            <div className="text-center py-8">
-              <Trophy className="w-12 h-12 text-blue-600 mx-auto mb-4 animate-pulse" />
-              <p className="text-gray-600">Loading leaderboard...</p>
+            <div className="text-center py-12">
+              <Trophy className="w-12 h-12 text-slate-200 mx-auto mb-4 animate-pulse" />
+              <p className="text-slate-500">Loading leaderboard...</p>
             </div>
           ) : leaderboard.length > 0 ? (
-            <div className="space-y-2 max-h-96 overflow-y-auto">
+            <div className="space-y-1">
               {leaderboard.map((entry, index) => (
                 <div
                   key={entry.id}
-                  className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+                  className="flex items-center justify-between p-4 rounded-xl hover:bg-slate-50 transition-colors group"
                 >
-                  <div className="flex items-center space-x-4">
-                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-white shadow-sm">
-                      {getRankIcon(entry.rank)}
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center justify-center w-8 h-8 font-bold text-slate-500">
+                      {index < 3 ? getRankIcon(entry.rank) : `#${entry.rank}`}
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900">{entry.name}</div>
+                      <div className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">{entry.name}</div>
+                      {index < 3 && (
+                        <div className="text-xs text-slate-500">Top {index + 1} Player</div>
+                      )}
                     </div>
                   </div>
-                  <div className="flex items-center space-x-4">
-                    <Badge className={getRankBadgeColor(entry.rank)}>
-                      #{entry.rank}
+                  <div className="flex items-center gap-4">
+                    <Badge variant="secondary" className={`${getRankBadgeColor(entry.rank)} border-0`}>
+                      Rank #{entry.rank}
                     </Badge>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-8">
-              <Trophy className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-600">No leaderboard data available</p>
+            <div className="text-center py-12">
+              <Trophy className="w-12 h-12 text-slate-200 mx-auto mb-4" />
+              <p className="text-slate-500">No leaderboard data available</p>
             </div>
           )}
         </CardContent>
@@ -286,10 +298,11 @@ const Leaderboard = () => {
 
       {/* Quick Action */}
       {userRole === 'user' && (
-        <div className="text-center">
+        <div className="flex justify-center pt-4">
           <Button
             onClick={() => navigate("/quiz-selection")}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+            size="lg"
+            className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20 px-8 rounded-full"
           >
             <Play className="w-4 h-4 mr-2" />
             Take Quiz & Compete
@@ -301,9 +314,20 @@ const Leaderboard = () => {
 
   // Use appropriate layout based on user role
   if (userRole === 'admin') {
-    return <AdminLayout><LeaderboardContent /></AdminLayout>;
+    return (
+      <AdminLayout>
+        <LeaderboardContent />
+      </AdminLayout>
+    );
   } else {
-    return <DashboardLayout><LeaderboardContent /></DashboardLayout>;
+    return (
+      <DashboardLayout
+        title="Leaderboard"
+        subtitle="See how you rank against other quiz masters"
+      >
+        <LeaderboardContent />
+      </DashboardLayout>
+    );
   }
 };
 

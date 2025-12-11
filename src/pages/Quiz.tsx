@@ -64,54 +64,62 @@ const Quiz = () => {
     }
   }, [quizId]);
 
-  useEffect(() => {
-    const checkExistingAttempt = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user || !quizId) return;
-      const { data: attempts, error } = await supabase
-        .from('attempts')
-        .select('id')
-        .eq('user_id', user.id)
-        .eq('quiz_id', parseInt(quizId));
-      if (error) return; // fail silently, let quiz load
-      if (attempts && attempts.length > 0) {
-        navigate('/result/latest', { replace: true });
-      }
-    };
-    checkExistingAttempt();
-  }, [quizId]);
+
 
   // On quiz start, create an in-progress attempt
   useEffect(() => {
     const createAttempt = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user || !quizId) return;
-      // Check for existing in-progress attempt
-      const { data: existing, error: existingError } = await supabase
-        .from('attempts')
-        .select('id, score, completed')
-        .eq('user_id', user.id)
-        .eq('quiz_id', parseInt(quizId))
-        .order('created_at', { ascending: false })
-        .limit(1);
-      if (existing && existing.length > 0 && !existing[0].completed) {
-        setAttemptId(existing[0].id);
-        return;
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user || !quizId) return;
+
+        // Check for existing in-progress attempt
+        const { data: existing, error: existingError } = await supabase
+          .from('attempts')
+          .select('id, score, completed')
+          .eq('user_id', user.id)
+          .eq('quiz_id', parseInt(quizId))
+          .order('created_at', { ascending: false })
+          .limit(1);
+
+        if (existing && existing.length > 0 && !existing[0].completed) {
+          console.log("Resuming existing attempt:", existing[0].id);
+          setAttemptId(existing[0].id);
+          return;
+        }
+
+        console.log("Creating new attempt for quiz:", quizId);
+        // Create new attempt
+        const { data, error } = await supabase
+          .from('attempts')
+          .insert({
+            user_id: user.id,
+            quiz_id: parseInt(quizId),
+            score: 0,
+            seconds_used: 0,
+            answers: [],
+            completed: false
+          })
+          .select('id')
+          .single();
+
+        if (error) {
+          console.error("Error creating attempt:", error);
+          toast({
+            title: "Error starting quiz",
+            description: "Could not create a new attempt record. Your progress might not be saved.",
+            variant: "destructive"
+          });
+          return;
+        }
+
+        if (data && data.id) {
+          console.log("Attempt created:", data.id);
+          setAttemptId(data.id);
+        }
+      } catch (err) {
+        console.error("Unexpected error in createAttempt:", err);
       }
-      // Create new attempt
-      const { data, error } = await supabase
-        .from('attempts')
-        .insert({
-          user_id: user.id,
-          quiz_id: parseInt(quizId),
-          score: 0,
-          seconds_used: 0,
-          answers: [],
-          completed: false
-        })
-        .select('id')
-        .single();
-      if (data && data.id) setAttemptId(data.id);
     };
     createAttempt();
   }, [quizId]);
@@ -148,10 +156,10 @@ const Quiz = () => {
   };
 
   const loadDatabaseQuestions = async () => {
-    // First get the questions for this specific quiz
+    // Get questions directly from quiz_questions table
     const { data: quizQuestions, error: quizError } = await supabase
       .from('quiz_questions')
-      .select('question_id, order_index')
+      .select('id, question, option_a, option_b, option_c, option_d, correct_index, order_index')
       .eq('quiz_id', parseInt(quizId!))
       .order('order_index');
 
@@ -165,31 +173,25 @@ const Quiz = () => {
       return;
     }
 
-    // Get the actual question details
-    const questionIds = quizQuestions.map(qq => qq.question_id);
-    const { data: questionsData, error: questionsError } = await supabase
-      .from('questions')
-      .select('*')
-      .in('id', questionIds)
-      .order('id');
+    // Map to Question interface
+    const formattedQuestions: Question[] = quizQuestions.map(q => ({
+      id: q.id,
+      question: q.question,
+      option_a: q.option_a,
+      option_b: q.option_b,
+      option_c: q.option_c,
+      option_d: q.option_d,
+      correct_index: q.correct_index
+    }));
 
-    if (questionsError) throw questionsError;
-    
-    if (questionsData && questionsData.length > 0) {
-      setQuestions(questionsData);
-    } else {
-      setDialogTitle("No questions available");
-      setDialogMessage("Please contact an administrator to add questions to this quiz.");
-      setDialogOpen(true);
-      navigate("/quiz-selection");
-    }
+    setQuestions(formattedQuestions);
   };
 
   // Timer effect with enhanced warnings
   useEffect(() => {
     if (timeLeft > 0 && !isCompleted && !isLoading) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-      
+
       // Show time warnings
       if (timeLeft === 180) { // 3 minutes left
         setDialogTitle("⚠️ Time Warning");
@@ -208,7 +210,7 @@ const Quiz = () => {
         setDialogMessage("Only 30 seconds left!");
         setDialogOpen(true);
       }
-      
+
       return () => clearTimeout(timer);
     } else if (timeLeft === 0) {
       handleQuizComplete();
@@ -231,12 +233,12 @@ const Quiz = () => {
   // On quiz complete, update attempt with real score
   const handleQuizComplete = async (finalAnswers = answers) => {
     setIsCompleted(true);
-    
+
     // Calculate score
-    const correctAnswers = finalAnswers.filter((answer, index) => 
+    const correctAnswers = finalAnswers.filter((answer, index) =>
       answer === questions[index]?.correct_index
     ).length;
-    
+
     const baseScore = correctAnswers * 4 - (questions.length - correctAnswers) * 1;
     const timeBonus = Math.ceil((600 - (600 - timeLeft)) / 6);
     const totalScore = Math.max(0, baseScore + timeBonus);
@@ -244,7 +246,7 @@ const Quiz = () => {
 
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      
+
       if (user && attemptId) {
         await supabase
           .from('attempts')
@@ -316,13 +318,13 @@ const Quiz = () => {
     setDialogOpen(true);
 
     // Navigate to results page with score
-    navigate(`/result/latest`, { 
-      state: { 
-        score: totalScore, 
-        correct: correctAnswers, 
+    navigate(`/result/latest`, {
+      state: {
+        score: totalScore,
+        correct: correctAnswers,
         total: questions.length,
         timeUsed: 600 - timeLeft
-      } 
+      }
     });
   };
 
@@ -338,7 +340,7 @@ const Quiz = () => {
 
   const handleNextQuestion = () => {
     if (selectedAnswer === null) return;
-    
+
     const newAnswers = [...answers, selectedAnswer];
     setAnswers(newAnswers);
     setSelectedAnswer(null);
@@ -399,27 +401,25 @@ const Quiz = () => {
         <div className="max-w-3xl mx-auto">
           {/* Time Status Card */}
           <div className="mb-6">
-            <Card className={`border-0 shadow-lg transition-all duration-300 ${
-              timeLeft <= 60 
-                ? 'bg-red-50 border-red-200' 
-                : timeLeft <= 180 
-                  ? 'bg-orange-50 border-orange-200'
-                  : 'bg-blue-50 border-blue-200'
-            }`}>
+            <Card className={`border-0 shadow-lg transition-all duration-300 ${timeLeft <= 60
+              ? 'bg-red-50 border-red-200'
+              : timeLeft <= 180
+                ? 'bg-orange-50 border-orange-200'
+                : 'bg-blue-50 border-blue-200'
+              }`}>
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <Clock className={`w-6 h-6 ${
-                      timeLeft <= 60 ? 'text-red-600' : timeLeft <= 180 ? 'text-orange-600' : 'text-blue-600'
-                    }`} />
+                    <Clock className={`w-6 h-6 ${timeLeft <= 60 ? 'text-red-600' : timeLeft <= 180 ? 'text-orange-600' : 'text-blue-600'
+                      }`} />
                     <div>
                       <p className="font-semibold text-gray-900">
                         {timeLeft <= 60 ? 'Final Countdown!' : timeLeft <= 180 ? 'Time is Running Out!' : 'Quiz Timer'}
                       </p>
                       <p className="text-sm text-gray-600">
-                        {timeLeft <= 60 
-                          ? 'Complete your quiz quickly!' 
-                          : timeLeft <= 180 
+                        {timeLeft <= 60
+                          ? 'Complete your quiz quickly!'
+                          : timeLeft <= 180
                             ? 'You have less than 3 minutes remaining'
                             : 'You have plenty of time to think carefully'
                         }
@@ -427,9 +427,8 @@ const Quiz = () => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className={`font-mono text-2xl font-bold ${
-                      timeLeft <= 60 ? 'text-red-600' : timeLeft <= 180 ? 'text-orange-600' : 'text-blue-600'
-                    }`}>
+                    <div className={`font-mono text-2xl font-bold ${timeLeft <= 60 ? 'text-red-600' : timeLeft <= 180 ? 'text-orange-600' : 'text-blue-600'
+                      }`}>
                       {formatTime(timeLeft)}
                     </div>
                     <div className="text-xs text-gray-500">
@@ -451,17 +450,15 @@ const Quiz = () => {
                 <Button
                   key={index}
                   variant={selectedAnswer === index ? "default" : "outline"}
-                  className={`w-full p-6 text-left justify-start text-wrap h-auto min-h-[60px] transition-all duration-200 ${
-                    selectedAnswer === index 
-                      ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
-                      : "hover:bg-blue-50 hover:border-blue-300"
-                  }`}
+                  className={`w-full p-6 text-left justify-start text-wrap h-auto min-h-[60px] transition-all duration-200 ${selectedAnswer === index
+                    ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
+                    : "hover:bg-blue-50 hover:border-blue-300"
+                    }`}
                   onClick={() => handleAnswerSelect(index)}
                 >
                   <div className="flex items-center space-x-3 w-full">
-                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-sm font-semibold ${
-                      selectedAnswer === index ? "bg-white text-blue-600" : "bg-blue-100 text-blue-600"
-                    }`}>
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-sm font-semibold ${selectedAnswer === index ? "bg-white text-blue-600" : "bg-blue-100 text-blue-600"
+                      }`}>
                       {String.fromCharCode(65 + index)}
                     </div>
                     <span className="text-base font-medium flex-1">{option}</span>

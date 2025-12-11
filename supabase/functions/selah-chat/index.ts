@@ -30,7 +30,7 @@ serve(async (req) => {
     }
 
     try {
-        const { message, gameState, adCompleted, history = [] } = await req.json()
+        const { message, gameState, adCompleted, history = [], mode = 'game' } = await req.json()
         const mistralApiKey = Deno.env.get('MISTRAL_API_KEY')
 
         if (!mistralApiKey) {
@@ -56,6 +56,40 @@ serve(async (req) => {
             })
         }
 
+        // CHAT MODE HANDLING
+        if (mode === 'chat') {
+            const chatSystemPrompt = `You are Selah, a wise and gentle biblical guide. 
+            You are helpful, knowledgeable about Scripture, and encouraging.
+            Keep your responses concise (under 50 words) and conversational.
+            Do not act as a Game Master or RPG narrator. just be a helpful chat companion.`;
+
+            const response = await fetch('https://api.mistral.ai/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${mistralApiKey}`
+                },
+                body: JSON.stringify({
+                    model: 'mistral-small-latest',
+                    messages: [
+                        { role: 'system', content: chatSystemPrompt },
+                        ...history,
+                        { role: 'user', content: message }
+                    ]
+                })
+            })
+
+            const data = await response.json()
+            if (!response.ok) throw new Error(`Mistral API error: ${data.message || 'Unknown error'}`)
+
+            return new Response(JSON.stringify({
+                text: data.choices[0].message.content
+            }), {
+                headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            })
+        }
+
+        // GAME MODE LOGIC (Original)
         // Check if this is a turn (not the initial START_ADVENTURE)
         if (message !== 'START_ADVENTURE') {
             const currentTurns = ipTurnCounts.get(ip) || 0;

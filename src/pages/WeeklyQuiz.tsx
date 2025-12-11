@@ -53,7 +53,7 @@ const WeeklyQuiz = () => {
   const fetchCurrentWeeklyQuiz = async () => {
     try {
       setIsLoading(true);
-      
+
       // Get current week's quiz
       const { data: quizData, error: quizError } = await supabase
         .from('weekly_quizzes')
@@ -149,7 +149,10 @@ const WeeklyQuiz = () => {
 
   if (isLoading) {
     return (
-      <DashboardLayout>
+      <DashboardLayout
+        title="Weekly Challenge"
+        subtitle="Loading challenge..."
+      >
         <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center">
           <div className="text-center">
             <Brain className="w-12 h-12 text-indigo-600 mx-auto mb-4 animate-pulse" />
@@ -162,7 +165,10 @@ const WeeklyQuiz = () => {
 
   if (!currentQuiz) {
     return (
-      <DashboardLayout>
+      <DashboardLayout
+        title="Weekly Challenge"
+        subtitle="No quiz active"
+      >
         <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center p-4">
           <div className="text-center max-w-md mx-auto">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mx-auto mb-6">
@@ -180,7 +186,10 @@ const WeeklyQuiz = () => {
   }
 
   return (
-    <DashboardLayout>
+    <DashboardLayout
+      title="Weekly Challenge"
+      subtitle="Compete with others in this week's timed quiz"
+    >
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
           <DialogHeader>
@@ -194,21 +203,19 @@ const WeeklyQuiz = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      
+
       <div className="min-h-[calc(100vh-4rem)] flex flex-col bg-gradient-to-b from-white to-indigo-50/50">
         <main className="flex-1 container mx-auto px-4 py-12 md:py-20 flex flex-col items-center justify-center">
           <div className="max-w-3xl w-full text-center space-y-10">
-            
+
             {/* Header Section */}
             <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-              <Badge variant="secondary" className="px-4 py-1.5 text-sm font-medium bg-indigo-100 text-indigo-700 hover:bg-indigo-200 border-0">
-                Weekly Challenge
-              </Badge>
-              
+              {/* Badge removed as title is now in header, keeping specific Title/Desc for context */}
+
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 tracking-tight leading-tight">
                 {currentQuiz.title}
               </h1>
-              
+
               <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
                 {currentQuiz.description}
               </p>
@@ -223,7 +230,7 @@ const WeeklyQuiz = () => {
                 <div className="font-bold text-2xl text-gray-900">{currentQuiz.total_questions}</div>
                 <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Questions</div>
               </div>
-              
+
               <div className="p-4 rounded-2xl bg-white shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                 <div className="text-indigo-500 mb-2 flex justify-center">
                   <Timer className="w-6 h-6" />
@@ -231,7 +238,7 @@ const WeeklyQuiz = () => {
                 <div className="font-bold text-2xl text-gray-900">{Math.floor(currentQuiz.time_limit / 60)}m</div>
                 <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Time Limit</div>
               </div>
-              
+
               <div className="p-4 rounded-2xl bg-white shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                 <div className="text-indigo-500 mb-2 flex justify-center">
                   <Trophy className="w-6 h-6" />
@@ -239,7 +246,7 @@ const WeeklyQuiz = () => {
                 <div className="font-bold text-2xl text-gray-900 capitalize">{currentQuiz.difficulty}</div>
                 <div className="text-xs font-medium text-gray-500 uppercase tracking-wide">Difficulty</div>
               </div>
-              
+
               <div className="p-4 rounded-2xl bg-white shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                 <div className="text-indigo-500 mb-2 flex justify-center">
                   <Star className="w-6 h-6" />
@@ -251,15 +258,15 @@ const WeeklyQuiz = () => {
 
             {/* Action Area */}
             <div className="pt-8 animate-in fade-in slide-in-from-bottom-12 duration-700 delay-300">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="h-16 px-10 text-lg rounded-full bg-indigo-600 hover:bg-indigo-700 text-white shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
                 onClick={handleStartQuiz}
               >
                 <Play className="w-6 h-6 mr-2 fill-current" />
                 Start Challenge
               </Button>
-              
+
               <p className="mt-6 text-sm text-gray-500 flex items-center justify-center gap-2">
                 <Calendar className="w-4 h-4" />
                 <span>Available until {new Date(currentQuiz.week_end_date).toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}</span>

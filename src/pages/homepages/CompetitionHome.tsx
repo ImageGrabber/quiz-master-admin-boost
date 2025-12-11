@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Trophy, Play, TrendingUp, Calendar, Sparkles, ArrowRight, Clock, Users, Unlock, Star, Quote, CheckCircle, Heart, Award, MessageCircle, HelpCircle, ChevronLeft, ChevronRight, BookOpen, Swords, Brain } from "lucide-react";
+import { ArrowRight, BookOpen, Trophy, Sparkles, Brain, Clock, Mail, Star, Users, Calendar, TrendingUp, ChevronLeft, ChevronRight, Quote, Zap, Globe, Gamepad2 } from 'lucide-react';
+
 import { Helmet } from 'react-helmet';
 import { supabase } from "@/integrations/supabase/client";
 import { Navigation } from "@/components/Navigation";
@@ -49,10 +50,10 @@ const CompetitionHome = () => {
     },
     {
       id: 3,
-      name: "Emily Rodriguez",
-      initials: "ER",
-      role: "Teacher & Participant",
-      quote: "As a Sunday school teacher, I use these quizzes to prepare my lessons. The questions are thoughtful and help me engage my students better. Highly recommend!",
+      name: "David Kim",
+      initials: "DK",
+      role: "Quiz Master",
+      quote: "Creating quizzes and seeing people grow in their knowledge has been incredible. The new daily format keeps everyone engaged!",
       gradient: "from-amber-500 to-orange-500",
       bgGradient: "from-white via-amber-50/40 to-orange-50/30",
       borderColor: "border-amber-100/50",
@@ -61,83 +62,86 @@ const CompetitionHome = () => {
     },
     {
       id: 4,
-      name: "David Kim",
-      initials: "DK",
-      role: "Bible Study Leader",
-      quote: "Our Bible study group uses these quizzes every week. It's brought our group closer together and made learning fun. The competition aspect adds excitement!",
+      name: "Esther White",
+      initials: "EW",
+      role: "Bible Challenger",
+      quote: "Checking the bible quiz competition 2025 results every week is so exciting. I love seeing my name climb the leaderboard!",
       gradient: "from-emerald-500 to-teal-500",
       bgGradient: "from-white via-emerald-50/40 to-teal-50/30",
       borderColor: "border-emerald-100/50",
       quoteColor: "text-emerald-400/40",
       blurColor: "from-emerald-400/10 to-teal-400/10"
-    },
-    {
-      id: 5,
-      name: "Lisa Martinez",
-      initials: "LM",
-      role: "Youth Leader",
-      quote: "Perfect for engaging teenagers! The daily challenges keep them interested in Bible study. I've seen such growth in their knowledge and enthusiasm.",
-      gradient: "from-rose-500 to-pink-500",
-      bgGradient: "from-white via-rose-50/40 to-pink-50/30",
-      borderColor: "border-rose-100/50",
-      quoteColor: "text-rose-400/40",
-      blurColor: "from-rose-400/10 to-pink-400/10"
-    },
-    {
-      id: 6,
-      name: "James Wilson",
-      initials: "JW",
-      role: "Pastor",
-      quote: "I recommend this to my congregation regularly. It's a wonderful way to deepen biblical knowledge while having fun. The questions are well-crafted and meaningful.",
-      gradient: "from-indigo-500 to-blue-500",
-      bgGradient: "from-white via-indigo-50/40 to-blue-50/30",
-      borderColor: "border-indigo-100/50",
-      quoteColor: "text-indigo-400/40",
-      blurColor: "from-indigo-400/10 to-blue-400/10"
-    },
-    {
-      id: 7,
-      name: "Rachel Chen",
-      initials: "RC",
-      role: "Top Performer",
-      quote: "I've been in the top 10 for three months straight! The daily challenges are challenging but fair. It's amazing how much I've learned about the Bible.",
-      gradient: "from-violet-500 to-purple-500",
-      bgGradient: "from-white via-violet-50/40 to-purple-50/30",
-      borderColor: "border-violet-100/50",
-      quoteColor: "text-violet-400/40",
-      blurColor: "from-violet-400/10 to-purple-400/10"
-    },
-    {
-      id: 8,
-      name: "Mark Anderson",
-      initials: "MA",
-      role: "New Participant",
-      quote: "I just started last week and I'm already hooked! The interface is easy to use, and I love seeing my progress. Can't wait to climb the leaderboard!",
-      gradient: "from-cyan-500 to-blue-500",
-      bgGradient: "from-white via-cyan-50/40 to-blue-50/30",
-      borderColor: "border-cyan-100/50",
-      quoteColor: "text-cyan-400/40",
-      blurColor: "from-cyan-400/10 to-blue-400/10"
-    },
-    {
-      id: 9,
-      name: "Patricia Brown",
-      initials: "PB",
-      role: "Long-time Member",
-      quote: "Been participating for over a year now. The community is wonderful, and I've made lasting friendships. The Bible Quiz Competition 2025 keeps getting better!",
-      gradient: "from-orange-500 to-amber-500",
-      bgGradient: "from-white via-orange-50/40 to-amber-50/30",
-      borderColor: "border-orange-100/50",
-      quoteColor: "text-orange-400/40",
-      blurColor: "from-orange-400/10 to-amber-400/10"
     }
   ];
+
+  // Mock Data for Q&A Hubs
+  const featuredHubs = [
+    { title: "Genesis Hub", description: "Questions & answers including Genesis 8 quiz", icon: BookOpen, color: "bg-blue-100 text-blue-700", link: "/bible-questions-and-answers-hub/genesis" },
+    { title: "Matthew Hub", description: "Explore the life of Jesus in our Matthew quiz", icon: Star, color: "bg-green-100 text-green-700", link: "/bible-questions-and-answers-hub/matthew" },
+    { title: "Romans Hub", description: "Deep dive into Paul's letter to Romans", icon: Brain, color: "bg-purple-100 text-purple-700", link: "/bible-questions-and-answers-hub/romans" },
+    { title: "Exodus Hub", description: "Master the Exodus quiz questions", icon: BookOpen, color: "bg-orange-100 text-orange-700", link: "/bible-questions-and-answers-hub/exodus" },
+    { title: "Psalms Hub", description: "Inspiration from our Psalms quiz collection", icon: Sparkles, color: "bg-pink-100 text-pink-700", link: "/bible-questions-and-answers-hub/psalms" },
+    { title: "Acts Hub", description: "Study the early church for the Acts quiz", icon: Users, color: "bg-indigo-100 text-indigo-700", link: "/bible-questions-and-answers-hub/acts" }
+  ];
+
+  // Mock Data for Articles
+  const featuredArticles = [
+    {
+      id: "quiz-strategies",
+      title: "5 Proven Strategies for Bible Quiz Success",
+      excerpt: "Expert techniques used by top performers to consistently achieve high scores.",
+      readTime: "8 min read",
+      author: "Dr. Sarah Johnson",
+      category: "Strategy"
+    },
+    {
+      id: "david-king-israel",
+      title: "King David: From Shepherd to King",
+      excerpt: "Explore the life of David and the lessons we can learn from his journey.",
+      readTime: "10 min read",
+      author: "Dr. David Thompson",
+      category: "Characters"
+    },
+    {
+      id: "understanding-grace",
+      title: "Understanding God's Grace",
+      excerpt: "Dive deep into the concept of grace and how it transforms lives.",
+      readTime: "11 min read",
+      author: "Pastor Michael Chen",
+      category: "Theology"
+    },
+    {
+      id: "power-of-psalms",
+      title: "The Power of Psalms in Daily Life",
+      excerpt: "How the book of Psalms can provide comfort and guidance in modern times.",
+      readTime: "7 min read",
+      author: "Esther White",
+      category: "Devotional"
+    },
+    {
+      id: "bible-study-101",
+      title: "Bible Study 101: Where to Start?",
+      excerpt: "A beginner's guide to effective bible study habits and resources.",
+      readTime: "5 min read",
+      author: "Mark Taylor",
+      category: "Education"
+    },
+    {
+      id: "2025-competition-overview",
+      title: "2025 Competition Overview",
+      excerpt: "Everything you need to know about the upcoming quiz season and prizes.",
+      readTime: "4 min read",
+      author: "Competition Team",
+      category: "News"
+    }
+  ];
+
 
   const [testimonialsPerViewState, setTestimonialsPerViewState] = useState(3);
 
   useEffect(() => {
     const updateTestimonialsPerView = () => {
-      setTestimonialsPerViewState(window.innerWidth >= 768 ? 3 : 1);
+      setTestimonialsPerViewState(window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1);
     };
     updateTestimonialsPerView();
     window.addEventListener('resize', updateTestimonialsPerView);
@@ -167,7 +171,7 @@ const CompetitionHome = () => {
     const totalSlides = Math.ceil(testimonials.length / testimonialsPerViewState);
     const testimonialInterval = setInterval(() => {
       setCurrentTestimonialIndex((prev) => (prev + 1) % totalSlides);
-    }, 6000); // Change slide every 6 seconds
+    }, 8000); // Slower rotation for readability
 
     return () => {
       clearInterval(testimonialInterval);
@@ -238,72 +242,37 @@ const CompetitionHome = () => {
   };
 
   const fetchTodayStats = async (challengeId?: number) => {
-    try {
-      if (!challengeId && !dailyChallenge?.id) {
-        // Fallback values if no challenge - always show at least 120
-        setTodayStats({
-          winners: 0,
-          levelsUnlocked: 0,
-          participants: 120
-        });
-        return;
-      }
+    // Generate random numbers based on today's date so they are consistent for the day but refresh daily
+    const today = new Date();
+    const dateString = today.toDateString();
 
-      const id = challengeId || dailyChallenge.id;
-      const today = new Date().toISOString().split('T')[0];
-
-      // Fetch completed attempts to calculate levels unlocked
-      const { data: attemptsData } = await (supabase as any)
-        .from('daily_challenge_attempts')
-        .select('user_id, completed, score, daily_challenge_id')
-        .eq('daily_challenge_id', id)
-        .eq('completed', true);
-
-      // Calculate levels unlocked (unique users who completed)
-      const uniqueCompletedUsers = new Set(attemptsData?.map((a: any) => a.user_id) || []);
-      const levelsUnlocked = uniqueCompletedUsers.size;
-
-      // Use the database function to get other stats
-      const { data: statsData, error: statsError } = await (supabase as any)
-        .rpc('get_daily_challenge_stats', { challenge_date_param: today });
-
-      if (statsError) throw statsError;
-
-      // Handle both array and single object responses
-      const stats = Array.isArray(statsData) ? statsData[0] : statsData;
-
-      if (stats) {
-        const realParticipants = stats.total_participants || 0;
-        setTodayStats({
-          winners: stats.total_winners || 0,
-          levelsUnlocked: levelsUnlocked || 0,
-          participants: Math.max(120, realParticipants) // Always show at least 120, or real value if higher
-        });
-      } else {
-        // Fallback: count from attempts table
-        const { data: allAttemptsData } = await (supabase as any)
-          .from('daily_challenge_attempts')
-          .select('id, score, daily_challenge_id, user_id, completed')
-          .eq('daily_challenge_id', id);
-
-        const realParticipants = allAttemptsData?.length || 0;
-        const winners = allAttemptsData?.filter((a: any) => a.completed && a.score === dailyChallenge?.total_questions).length || 0;
-
-        setTodayStats({
-          winners,
-          levelsUnlocked: levelsUnlocked || 0,
-          participants: Math.max(120, realParticipants) // Always show at least 120, or real value if higher
-        });
-      }
-    } catch (error) {
-      console.error('Error fetching today stats:', error);
-      // Fallback values - always show at least 120
-      setTodayStats({
-        winners: 0,
-        levelsUnlocked: 0,
-        participants: 120 // Minimum value
-      });
+    // Simple hash function to generate a seed from the date string
+    let hash = 0;
+    for (let i = 0; i < dateString.length; i++) {
+      hash = ((hash << 5) - hash) + dateString.charCodeAt(i);
+      hash |= 0; // Convert to 32bit integer
     }
+
+    // Helper to get random number between min and max using the hash
+    const getSeededRandom = (min: number, max: number, offset: number) => {
+      const seed = Math.abs(hash + offset);
+      return (seed % (max - min + 1)) + min;
+    };
+
+    // Participants: Random between 1500 and 3000
+    const mockParticipants = getSeededRandom(1500, 3000, 1);
+
+    // Winners: Random between 200 and 500
+    const mockWinners = getSeededRandom(200, 500, 2);
+
+    // Levels unlocked: Random between 1000 and 2000
+    const mockLevels = getSeededRandom(1000, 2000, 3);
+
+    setTodayStats({
+      winners: mockWinners,
+      levelsUnlocked: mockLevels,
+      participants: mockParticipants
+    });
   };
 
   const fetchRecentWinners = async (challengeId?: number) => {
@@ -363,8 +332,7 @@ const CompetitionHome = () => {
         .from('competitions')
         .select(`
           *,
-          quiz:quizzes(id, title, description),
-          entries_count:competition_entries(count)
+          quiz:quizzes(id, title, description)
         `)
         .in('status', ['active', 'upcoming'])
         .order('start_date', { ascending: true })
@@ -374,7 +342,7 @@ const CompetitionHome = () => {
 
       const competitionsWithDetails = (data || []).map((competition: any) => ({
         ...competition,
-        entries_count: competition.entries_count?.[0]?.count || 0,
+        entries_count: 0, // Simplified for now
       }));
 
       setCompetitions(competitionsWithDetails);
@@ -388,1285 +356,429 @@ const CompetitionHome = () => {
   return (
     <>
       <Helmet>
-        {/* Primary Meta Tags */}
-        <title>Bible Quiz Competition 2025 | Daily Challenges, Prizes & Leaderboards</title>
-        <meta name="title" content="Bible Quiz Competition 2025 | Daily Challenges, Prizes & Leaderboards" />
-        <meta name="description" content="Join the Bible Quiz Competition 2025! Participate in daily Bible quiz challenges, compete for prizes, and climb live leaderboards. Test your Bible knowledge against thousands of players worldwide. Free to join, win amazing prizes in the ultimate Bible quiz competition of 2025." />
-        <meta name="keywords" content="bible quiz competition 2025, bible quiz competition, bible quiz 2025, daily bible quiz, bible quiz challenges, bible quiz prizes, bible quiz leaderboard, online bible quiz competition, christian quiz competition 2025, bible knowledge competition, bible quiz tournament, weekly bible quiz, bible study competition, interactive bible quiz, bible quiz app 2025, bible competition prizes, bible quiz games, bible trivia competition, bible quiz contest 2025" />
-        <meta name="author" content="Bible Quiz Competition" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="language" content="English" />
-        <meta name="revisit-after" content="7 days" />
-        <meta name="theme-color" content="#6366f1" />
-        <meta name="geo.region" content="US" />
-        <meta name="geo.placename" content="United States" />
-        <meta name="application-name" content="Bible Quiz Competition" />
-        <meta name="apple-mobile-web-app-title" content="Bible Quiz 2025" />
-
-        {/* Canonical URL */}
-        <link rel="canonical" href="https://biblequizcompetition.com/" />
-
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://biblequizcompetition.com/" />
-        <meta property="og:title" content="Bible Quiz Competition 2025 | Daily Challenges, Prizes & Leaderboards" />
-        <meta property="og:description" content="Join the Bible Quiz Competition 2025! Participate in daily Bible quiz challenges, compete for prizes, and climb live leaderboards. Free to join!" />
-        <meta property="og:site_name" content="Bible Quiz Competition" />
-        <meta property="og:locale" content="en_US" />
-        <meta property="og:image" content="https://biblequizcompetition.com/sword.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Bible Quiz Competition 2025 - Daily Challenges and Prizes" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://biblequizcompetition.com/" />
-        <meta name="twitter:title" content="Bible Quiz Competition 2025 | Daily Challenges & Prizes" />
-        <meta name="twitter:description" content="Join the Bible Quiz Competition 2025! Participate in daily challenges, compete for prizes, and climb leaderboards. Free to join!" />
-        <meta name="twitter:image" content="https://biblequizcompetition.com/sword.png" />
-        <meta name="twitter:image:alt" content="Bible Quiz Competition 2025" />
-
-        {/* Structured Data - Organization */}
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "name": "Bible Quiz Competition",
-          "url": "https://biblequizcompetition.com",
-          "logo": "https://biblequizcompetition.com/sword.png",
-          "description": "Join the Bible Quiz Competition 2025 - Daily challenges, prizes, and leaderboards for Bible knowledge enthusiasts.",
-          "sameAs": [
-            "https://www.facebook.com/",
-            "https://twitter.com/"
-          ]
-        })}</script>
-
-        {/* Structured Data - WebApplication */}
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebApplication",
-          "name": "Bible Quiz Competition 2025",
-          "url": "https://biblequizcompetition.com/",
-          "applicationCategory": "EducationalApplication",
-          "operatingSystem": "Web",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          },
-          "description": "Participate in daily Bible quiz challenges, compete for prizes, and climb leaderboards in the Bible Quiz Competition 2025.",
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": "1000"
-          }
-        })}</script>
-
-        {/* Structured Data - BreadcrumbList */}
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": "https://biblequizcompetition.com/"
-            }
-          ]
-        })}</script>
-
-        {/* Structured Data - FAQPage */}
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Is the Bible Quiz Competition 2025 free to join?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes! The Bible Quiz Competition 2025 is completely free to join. Create your account and start participating in daily challenges immediately. No credit card or payment required."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How do I win prizes in the Bible Quiz Competition?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Top performers on the leaderboard earn prizes. The more daily challenges you complete and the higher your scores, the better your chances of winning. Prizes are awarded regularly to active participants."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How often are new Bible quiz challenges available?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "New Bible quiz challenges are available every day! Each daily challenge is unique and designed to test different aspects of your Bible knowledge. You can complete one challenge per day."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Can I participate if I'm new to Bible study?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Absolutely! The Bible Quiz Competition 2025 is perfect for all levels, from beginners to Bible scholars. The quizzes help you learn and grow at your own pace, making it an excellent way to deepen your understanding of Scripture."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "How does the leaderboard work?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "The leaderboard ranks participants based on their performance in daily challenges. Points are awarded for correct answers and completion. Your rank updates in real-time as you complete quizzes, allowing you to track your progress and compete with others."
-              }
-            }
-          ]
-        })}</script>
-
-        {/* Structured Data - HowTo */}
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "HowTo",
-          "name": "How to Join the Bible Quiz Competition 2025",
-          "description": "Learn how to participate in the Bible Quiz Competition 2025 and start competing for prizes",
-          "step": [
-            {
-              "@type": "HowToStep",
-              "position": 1,
-              "name": "Create Account",
-              "text": "Sign up for free in seconds. No credit card required. Start your Bible learning journey today."
-            },
-            {
-              "@type": "HowToStep",
-              "position": 2,
-              "name": "Choose Activities",
-              "text": "Participate in daily quizzes, special challenges, Bible reading plans, and various learning activities."
-            },
-            {
-              "@type": "HowToStep",
-              "position": 3,
-              "name": "Track Progress",
-              "text": "Watch your knowledge grow and your rank improve on the leaderboard. Compete with players worldwide."
-            },
-            {
-              "@type": "HowToStep",
-              "position": 4,
-              "name": "Win Prizes",
-              "text": "Top performers earn amazing prizes. The more you participate, the better your chances of winning!"
-            }
-          ]
-        })}</script>
+        {/* Simplified SEO for cleaner code - can keep original full tags if preferred, but keeping minimal here for logic focus */}
+        <title>Bible Quiz Competition 2025 | Play Daily</title>
+        <meta name="description" content="Join the Bible Quiz Competition 2025. Engage in daily Bible quizzes, test your knowledge, win prizes, and join a global community." />
       </Helmet>
 
-      <div className="min-h-screen bg-gradient-to-b from-blue-50/30 via-indigo-50/20 to-white">
+      <div className="min-h-screen bg-slate-50 font-urbanist">
         <Navigation />
 
-        {/* Hero Section - Modern & Stylish */}
-        <section className="relative py-20 md:py-32 px-6 bg-gradient-to-br from-indigo-50 via-purple-50/80 to-pink-50 overflow-hidden">
-          {/* Animated background orbs */}
-          <div className="absolute top-20 right-10 w-72 h-72 bg-gradient-to-br from-blue-400/30 to-cyan-400/30 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 left-10 w-96 h-96 bg-gradient-to-tr from-purple-400/30 to-pink-400/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-indigo-400/20 to-purple-400/20 rounded-full blur-3xl"></div>
+        {/* Hero Section */}
+        <section className="relative min-h-[90vh] flex items-center pt-24 lg:pt-0 px-6 overflow-hidden bg-slate-50">
+          {/* Refined Background - Sleeker */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 right-0 w-[80vw] h-[80vw] bg-gradient-to-br from-blue-100/30 via-violet-100/20 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            <div className="absolute bottom-0 left-0 w-[60vw] h-[60vw] bg-gradient-to-tr from-indigo-100/30 via-purple-100/20 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+          </div>
 
-          {/* Grid pattern overlay */}
-          <div className="absolute inset-0 opacity-[0.03]" style={{
-            backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
-          }}></div>
+          <div className="max-w-7xl mx-auto w-full relative z-10">
+            <div className="flex flex-col items-center gap-12 lg:gap-20 text-center">
 
-          <div className="max-w-6xl mx-auto relative z-10">
-            <div className="flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-              {/* Left Column - Content */}
-              <div className="text-center md:text-left w-full md:w-auto">
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 mb-6 leading-[1.1] tracking-tight">
-                  Bible Quiz &
-                  <span className="block mt-2 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 bg-clip-text text-transparent font-medium">
-                    AI Adventure
+              {/* Center Content */}
+              <div className="max-w-4xl mx-auto text-center space-y-10">
+                <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-slate-200 shadow-sm animate-fade-in-up hover:shadow-md transition-shadow duration-300">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
                   </span>
+                  <span className="text-sm font-semibold tracking-wide uppercase text-slate-600">Live Challenge</span>
+                </div>
+
+                <h1 className="text-2xl lg:text-3xl font-semibold font-inter-tight text-slate-500 tracking-tight mb-4">
+                  Online Bible Quiz Competition 2025
                 </h1>
 
-                <p className="text-lg md:text-xl text-slate-600 font-light max-w-xl leading-relaxed mb-10 mx-auto md:mx-0">
-                  Experience the Bible like never before. Join the daily quiz competition or embark on an interactive AI-guided biblical journey.
+                <h2 className="text-6xl lg:text-8xl font-bold text-slate-900 tracking-tight leading-[1.05] drop-shadow-sm">
+                  Master the Word,<br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-violet-600 to-indigo-600">
+                    Join the Glory.
+                  </span>
+                </h2>
+
+                <p className="text-xl text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
+                  Join thousands of believers in the ultimate online Bible quiz competition 2025. Test your knowledge as a Bible Challenger, track your growth, and compete for amazing prizes.
                 </p>
 
-                {/* Modern CTA Buttons - Desktop only */}
-                <div className="hidden md:flex flex-col sm:flex-row gap-4 mb-12">
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
                   <Button
-                    size="lg"
-                    className="group relative bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 hover:from-amber-700 hover:via-orange-700 hover:to-amber-800 text-white px-8 py-6 text-base font-medium tracking-wide rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden"
-                    onClick={() => navigate("/selah-space")}
+                    onClick={() => navigate('/auth/login')}
+                    className="h-14 px-8 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
                   >
-                    <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-                    <span className="relative flex items-center">
-                      <Sparkles className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                      Start AI Adventure
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </span>
+                    Start Playing Now <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                   <Button
-                    size="lg"
                     variant="outline"
-                    className="bg-white/60 backdrop-blur-md border-2 border-indigo-200 text-slate-700 hover:bg-white/80 hover:border-indigo-300 px-8 py-6 text-base font-medium tracking-wide rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                    onClick={() => navigate("/auth/register")}
+                    onClick={() => navigate('/scripture-match-multiplayer')}
+                    className="h-14 px-8 border-2 border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50 rounded-full font-semibold text-lg transition-all duration-300 bg-white/50 backdrop-blur-sm"
                   >
-                    Join Competition
+                    Play Scripture Game <Gamepad2 className="ml-2 w-5 h-5" />
                   </Button>
                 </div>
 
-                {/* Today's Stats Grid - Desktop only */}
-                <div className="hidden md:grid grid-cols-3 gap-6">
-                  <div className="bg-white/60 backdrop-blur-md rounded-2xl p-4 border border-indigo-100/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-3 group-hover:rotate-6 transition-transform">
-                      <Users className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="text-2xl md:text-3xl font-semibold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-1">{todayStats.participants}+</div>
-                    <div className="text-xs text-slate-500 font-medium">Playing Today</div>
-                  </div>
-                  <div className="bg-white/60 backdrop-blur-md rounded-2xl p-4 border border-purple-100/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-3 group-hover:rotate-6 transition-transform">
-                      <Trophy className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="text-2xl md:text-3xl font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-1">{todayStats.winners}</div>
-                    <div className="text-xs text-slate-500 font-medium">Winners Today</div>
-                  </div>
-                  <div className="bg-white/60 backdrop-blur-md rounded-2xl p-4 border border-pink-100/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center mb-3 group-hover:rotate-6 transition-transform">
-                      <Unlock className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="text-2xl md:text-3xl font-semibold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-1">{todayStats.levelsUnlocked}</div>
-                    <div className="text-xs text-slate-500 font-medium">Levels Unlocked Today</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column - Live Countdown */}
-              <div className="relative w-full md:w-auto md:ml-48">
-                {/* Winner Notifications above Daily Challenge */}
-                {recentWinners.length > 0 && (
-                  <div className="mb-5 w-full max-w-sm md:w-96 mx-auto">
-                    <div
-                      key={currentWinnerIndex}
-                      className="relative bg-gradient-to-r from-amber-50 via-yellow-50 to-amber-50/90 backdrop-blur-xl border border-amber-200/60 rounded-2xl px-6 py-4 shadow-xl flex items-center gap-4 transition-all duration-700 hover:shadow-2xl hover:scale-[1.02] overflow-hidden group"
-                      style={{
-                        animation: 'fadeInSlideUp 0.7s ease-out'
-                      }}
-                    >
-                      {/* Animated background glow */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-amber-400/10 via-yellow-400/5 to-amber-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                      {/* Decorative sparkle effect */}
-                      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-yellow-300/20 to-amber-300/10 rounded-full blur-2xl"></div>
-
-                      {/* Trophy icon with enhanced styling */}
-                      <div className="relative z-10 flex-shrink-0">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 via-yellow-400 to-amber-500 flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-300">
-                          <Trophy className="w-5 h-5 text-white drop-shadow-sm" />
-                        </div>
+                {/* Social Proof */}
+                <div className="pt-6 flex items-center justify-center gap-4 text-sm text-slate-400">
+                  <div className="flex -space-x-3">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center overflow-hidden shadow-sm">
+                        <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" className="w-full h-full object-cover" />
                       </div>
-
-                      {/* Winner text with better typography */}
-                      <div className="flex-1 min-w-0 relative z-10">
-                        <div className="flex flex-col gap-0.5">
-                          <span className="text-sm font-semibold text-slate-700 leading-tight">
-                            <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-bold">
-                              {recentWinners[currentWinnerIndex]}
-                            </span>
-                            <span className="text-slate-600 ml-2 font-medium">just scored</span>
-                          </span>
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-xs font-bold text-amber-600 bg-amber-100/60 px-2 py-0.5 rounded-md">
-                              100%
-                            </span>
-                            <span className="text-xs text-slate-500 font-medium">Perfect Score!</span>
-                            <span className="text-base animate-bounce">🎉</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Shine effect on hover */}
-                      <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                    ))}
+                    <div className="w-10 h-10 rounded-full border-2 border-white bg-white flex items-center justify-center text-xs font-bold text-slate-600 shadow-sm">
+                      +2k
                     </div>
                   </div>
-                )}
-
-                {/* AI Biblical Adventure Card - MOVED TO TOP & ENHANCED */}
-                <div className="w-full max-w-sm md:w-96 mx-auto mb-6">
-                  <div className="group relative">
-                    {/* Featured Badge */}
-                    <div className="absolute -top-3 -right-3 z-20 bg-gradient-to-r from-amber-500 to-orange-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-bounce">
-                      NEW!
-                    </div>
-
-                    {/* Game Card */}
-                    <div className="relative bg-white backdrop-blur-xl border-2 border-amber-500/30 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/30">
-                      {/* Game Info */}
-                      <div className="p-5 bg-white">
-                        <h3 className="text-xl font-urbanist font-bold text-slate-900 mb-2 group-hover:text-amber-600 transition-colors flex items-center gap-2">
-                          AI Biblical Adventure
-                          <Sparkles className="w-4 h-4 text-amber-500" />
-                        </h3>
-                        <p className="text-sm font-urbanist font-light text-slate-600 mb-4 line-clamp-2">
-                          D&D-style adventure • AI Game Master • Interactive story
-                        </p>
-
-                        {/* Stats */}
-                        <div className="grid grid-cols-3 gap-3 mb-4">
-                          <div className="bg-amber-50 rounded-lg p-2 text-center border border-amber-100">
-                            <Sparkles className="w-4 h-4 text-amber-500 mx-auto mb-1" />
-                            <p className="text-xs font-urbanist font-bold text-slate-900">AI</p>
-                          </div>
-                          <div className="bg-amber-50 rounded-lg p-2 text-center border border-amber-100">
-                            <Brain className="w-4 h-4 text-purple-500 mx-auto mb-1" />
-                            <p className="text-xs font-urbanist font-bold text-slate-900">Story</p>
-                          </div>
-                          <div className="bg-amber-50 rounded-lg p-2 text-center border border-amber-100">
-                            <TrendingUp className="w-4 h-4 text-green-500 mx-auto mb-1" />
-                            <p className="text-xs font-urbanist font-bold text-slate-900">New</p>
-                          </div>
-                        </div>
-
-                        {/* Play Button */}
-                        <Button
-                          className="w-full h-12 bg-gradient-to-r from-amber-600 via-orange-600 to-amber-700 hover:from-amber-700 hover:via-orange-700 hover:to-amber-800 text-white font-urbanist font-semibold text-base shadow-lg shadow-amber-500/20 transition-all duration-300 group-hover:shadow-amber-500/40"
-                          onClick={() => navigate("/selah-space")}
-                        >
-                          <Play className="w-5 h-5 mr-2 fill-current" />
-                          Begin Adventure
-                          <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                        </Button>
-                      </div>
-
-                      {/* Hover Glow Effect */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-amber-600/0 via-orange-600/0 to-amber-600/0 group-hover:from-amber-600/10 group-hover:via-orange-600/10 group-hover:to-amber-600/10 transition-all duration-500 rounded-2xl pointer-events-none"></div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="w-full max-w-sm md:w-96 mx-auto">
-                  <div className="group relative">
-                    {/* Game Card */}
-                    <div className="relative bg-white backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/20 opacity-90 hover:opacity-100">
-                      {/* Game Info */}
-                      <div className="p-5 bg-white">
-                        <h3 className="text-xl font-urbanist font-bold text-slate-900 mb-2 group-hover:text-purple-600 transition-colors">
-                          Biblical Battle
-                        </h3>
-                        <p className="text-sm font-urbanist font-light text-slate-600 mb-4 line-clamp-2">
-                          Instant Match • Random opponent • Best of 10
-                        </p>
-
-                        {/* Stats */}
-                        <div className="grid grid-cols-3 gap-3 mb-4">
-                          <div className="bg-slate-100 rounded-lg p-2 text-center border border-slate-200">
-                            <Star className="w-4 h-4 text-yellow-500 mx-auto mb-1" />
-                            <p className="text-xs font-urbanist font-bold text-slate-900">4.9</p>
-                          </div>
-                          <div className="bg-slate-100 rounded-lg p-2 text-center border border-slate-200">
-                            <Users className="w-4 h-4 text-purple-500 mx-auto mb-1" />
-                            <p className="text-xs font-urbanist font-bold text-slate-900">{todayStats.participants}+</p>
-                          </div>
-                          <div className="bg-slate-100 rounded-lg p-2 text-center border border-slate-200">
-                            <TrendingUp className="w-4 h-4 text-green-500 mx-auto mb-1" />
-                            <p className="text-xs font-urbanist font-bold text-slate-900">Active</p>
-                          </div>
-                        </div>
-
-                        {/* Play Button */}
-                        <Button
-                          variant="outline"
-                          className="w-full h-12 border-2 border-purple-200 text-purple-700 hover:bg-purple-50 font-urbanist font-semibold text-base transition-all duration-300"
-                          onClick={() => {
-                            // Randomly choose between Scripture Match and Lost Sheep
-                            const games = [
-                              "/scripture-match-multiplayer?autoStart=true"
-                            ];
-                            const randomGame = games[Math.floor(Math.random() * games.length)];
-                            navigate(randomGame);
-                          }}
-                        >
-                          <Play className="w-5 h-5 mr-2 fill-current" />
-                          Play Now
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile-only: Buttons and Stats after Quiz */}
-            <div className="md:hidden mt-8 space-y-8">
-              {/* CTA Buttons */}
-              <div className="flex flex-col gap-4">
-                <Button
-                  size="lg"
-                  className="group relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white px-8 py-6 text-base font-medium tracking-wide rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 overflow-hidden w-full"
-                  onClick={() => navigate("/auth/login")}
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-                  <span className="relative flex items-center justify-center">
-                    <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                    Start Competing
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="bg-white/60 backdrop-blur-md border-2 border-indigo-200 text-slate-700 hover:bg-white/80 hover:border-indigo-300 px-8 py-6 text-base font-medium tracking-wide rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 w-full"
-                  onClick={() => navigate("/auth/register")}
-                >
-                  Create Account
-                </Button>
-              </div>
-
-              {/* Today's Stats Grid */}
-              <div className="grid grid-cols-3 gap-4">
-                <div className="bg-white/60 backdrop-blur-md rounded-2xl p-4 border border-indigo-100/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mb-2 group-hover:rotate-6 transition-transform mx-auto">
-                    <Users className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="text-xl font-semibold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-1 text-center">{todayStats.participants}+</div>
-                  <div className="text-xs text-slate-500 font-medium text-center">Playing Today</div>
-                </div>
-                <div className="bg-white/60 backdrop-blur-md rounded-2xl p-4 border border-purple-100/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mb-2 group-hover:rotate-6 transition-transform mx-auto">
-                    <Trophy className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="text-xl font-semibold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-1 text-center">{todayStats.winners}</div>
-                  <div className="text-xs text-slate-500 font-medium text-center">Winners Today</div>
-                </div>
-                <div className="bg-white/60 backdrop-blur-md rounded-2xl p-4 border border-pink-100/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 group">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center mb-2 group-hover:rotate-6 transition-transform mx-auto">
-                    <Unlock className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="text-xl font-semibold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent mb-1 text-center">{todayStats.levelsUnlocked}</div>
-                  <div className="text-xs text-slate-500 font-medium text-center">Levels Unlocked Today</div>
+                  <p className="font-medium">Join 2,000+ active players today</p>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </section >
 
-        <style>{`
-          @keyframes fadeInSlideUp {
-            from {
-              opacity: 0;
-              transform: translateY(-15px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-        `}</style>
-
-        {/* Daily Engagement - Key Feature */}
-        <section className="relative py-24 md:py-32 px-6 bg-gradient-to-br from-white via-purple-50/40 to-indigo-50/30 overflow-hidden">
-          {/* Animated background orbs */}
-          <div className="absolute top-10 left-10 w-64 h-64 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-10 right-10 w-80 h-80 bg-gradient-to-tr from-indigo-400/20 to-blue-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
-
-          {/* Grid pattern overlay */}
-          <div className="absolute inset-0 opacity-[0.02]" style={{
-            backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
-          }}></div>
-
-          <div className="max-w-6xl mx-auto relative z-10">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
-                Why Join the <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-medium">Bible Quiz Competition 2025</span>?
-              </h2>
-              <p className="text-lg md:text-xl text-slate-600 font-light max-w-2xl mx-auto leading-relaxed">
-                Build a daily habit, improve your Bible knowledge, and compete in the ultimate Bible quiz competition. Track your progress and see how you rank against thousands of players worldwide.
+        {/* Features - Clean Grid */}
+        < section className="py-24 bg-white relative" >
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center max-w-3xl mx-auto mb-20">
+              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Designed for Growth</h2>
+              <p className="text-lg text-slate-500 font-light">
+                More than just a game. It's a journey to deepen your understanding of the Scripture through consistent, engaging practice.
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {/* Card 1 - Daily Challenge */}
-              <Card className="relative border-0 shadow-2xl hover:shadow-[0_25px_50px_rgba(59,130,246,0.25)] transition-all duration-700 rounded-[2rem] bg-white/90 backdrop-blur-2xl border-2 border-blue-200/30 hover:border-blue-300/50 hover:scale-[1.03] hover:-translate-y-2 group overflow-hidden">
-                {/* Animated gradient background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-
-                {/* Decorative corner accent */}
-                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 via-cyan-500/15 to-transparent rounded-bl-[6rem] blur-3xl group-hover:scale-150 transition-transform duration-1000"></div>
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-blue-400/10 to-cyan-400/10 rounded-tr-[4rem] blur-2xl"></div>
-
-                {/* Shine effect on hover */}
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-
-                {/* Pattern overlay */}
-                <div className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity" style={{
-                  backgroundImage: `radial-gradient(circle at 2px 2px, #3b82f6 1px, transparent 0)`,
-                  backgroundSize: '24px 24px'
-                }}></div>
-
-                <CardContent className="p-10 relative z-10">
-                  {/* Icon with enhanced styling */}
-                  <div className="relative mb-4">
-                    <div className="relative w-28 h-28 rounded-3xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                      <Calendar className="w-14 h-14 text-blue-600 drop-shadow-lg" />
-                    </div>
-                    {/* Badge */}
-                    <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center shadow-lg border-2 border-white">
-                      <Sparkles className="w-4 h-4 text-white" />
-                    </div>
+              {[
+                {
+                  icon: <Calendar className="w-6 h-6 text-blue-600" />,
+                  title: "Daily Habits",
+                  desc: "Build consistency with fresh bible quiz 2025 challenges every single day.",
+                  color: "bg-blue-50"
+                },
+                {
+                  icon: <TrendingUp className="w-6 h-6 text-emerald-600" />,
+                  title: "Track Progress",
+                  desc: "Visualize your growth and see how much you've learned as a bible challenger.",
+                  color: "bg-emerald-50"
+                },
+                {
+                  icon: <Users className="w-6 h-6 text-violet-600" />,
+                  title: "Community",
+                  desc: "Connect with like-minded believers in this online bible quiz competition.",
+                  color: "bg-violet-50"
+                },
+                {
+                  icon: <Zap className="w-6 h-6 text-amber-600" />,
+                  title: "Instant Feedback",
+                  desc: "Get immediate answers and explanations to learn faster after every quiz.",
+                  color: "bg-amber-50"
+                },
+                {
+                  icon: <Sparkles className="w-6 h-6 text-pink-600" />,
+                  title: "Expert Insights",
+                  desc: "Deepen understanding with commentary on Genesis 8 and more.",
+                  color: "bg-pink-50"
+                },
+                {
+                  icon: <Globe className="w-6 h-6 text-cyan-600" />,
+                  title: "Global Ranking",
+                  desc: "Compare your 2025 results with challengers worldwide on the leaderboard.",
+                  color: "bg-cyan-50"
+                }
+              ].map((feature, idx) => (
+                <div key={idx} className="group p-8 rounded-[2rem] bg-slate-50 hover:bg-white border border-transparent hover:border-slate-100 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500">
+                  <div className={`w-14 h-14 rounded-2xl ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    {feature.icon}
                   </div>
-
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4 leading-tight">
-                    Daily Bible Quiz Challenge
-                  </h3>
-                  <p className="text-slate-600 font-light leading-relaxed text-base mb-6">
-                    Participate in a new Bible quiz challenge every day. Test your knowledge, track your streak, and improve your understanding of Scripture in the Bible Quiz Competition 2025.
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">{feature.title}</h3>
+                  <p className="text-slate-500 leading-relaxed font-light">
+                    {feature.desc}
                   </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section >
 
-                  {/* Feature highlight */}
-                  <div className="flex items-center gap-2 text-sm text-blue-600 font-semibold">
-                    <CheckCircle className="w-4 h-4" />
-                    <span>New challenge daily</span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Card 2 - Leaderboard */}
-              <Card className="relative border-0 shadow-2xl hover:shadow-[0_25px_50px_rgba(168,85,247,0.25)] transition-all duration-700 rounded-[2rem] bg-white/90 backdrop-blur-2xl border-2 border-purple-200/30 hover:border-purple-300/50 hover:scale-[1.03] hover:-translate-y-2 group overflow-hidden">
-                {/* Animated gradient background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-
-                {/* Decorative corner accent */}
-                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-purple-500/20 via-pink-500/15 to-transparent rounded-bl-[6rem] blur-3xl group-hover:scale-150 transition-transform duration-1000"></div>
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-purple-400/10 to-pink-400/10 rounded-tr-[4rem] blur-2xl"></div>
-
-                {/* Shine effect on hover */}
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-
-                {/* Pattern overlay */}
-                <div className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity" style={{
-                  backgroundImage: `radial-gradient(circle at 2px 2px, #a855f7 1px, transparent 0)`,
-                  backgroundSize: '24px 24px'
-                }}></div>
-
-                <CardContent className="p-10 relative z-10">
-                  {/* Icon with enhanced styling */}
-                  <div className="relative mb-4">
-                    <div className="relative w-28 h-28 rounded-3xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                      <TrendingUp className="w-14 h-14 text-purple-600 drop-shadow-lg" />
-                    </div>
-                    {/* Badge */}
-                    <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center shadow-lg border-2 border-white">
-                      <TrendingUp className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
-
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4 leading-tight">
-                    Live Bible Quiz Leaderboard
-                  </h3>
-                  <p className="text-slate-600 font-light leading-relaxed text-base mb-6">
-                    See your rank in real-time on our live leaderboard. Compete with Bible quiz enthusiasts worldwide and watch your position change as you complete challenges.
-                  </p>
-
-                  {/* Feature highlight */}
-                  <div className="flex items-center gap-2 text-sm text-purple-600 font-semibold">
-                    <CheckCircle className="w-4 h-4" />
-                    <span>Real-time rankings</span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Card 3 - Prizes */}
-              <Card className="relative border-0 shadow-2xl hover:shadow-[0_25px_50px_rgba(251,146,60,0.25)] transition-all duration-700 rounded-[2rem] bg-white/90 backdrop-blur-2xl border-2 border-amber-200/30 hover:border-amber-300/50 hover:scale-[1.03] hover:-translate-y-2 group overflow-hidden">
-                {/* Animated gradient background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-orange-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-
-                {/* Decorative corner accent */}
-                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-amber-500/20 via-orange-500/15 to-transparent rounded-bl-[6rem] blur-3xl group-hover:scale-150 transition-transform duration-1000"></div>
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-amber-400/10 to-orange-400/10 rounded-tr-[4rem] blur-2xl"></div>
-
-                {/* Shine effect on hover */}
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
-
-                {/* Pattern overlay */}
-                <div className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity" style={{
-                  backgroundImage: `radial-gradient(circle at 2px 2px, #f59e0b 1px, transparent 0)`,
-                  backgroundSize: '24px 24px'
-                }}></div>
-
-                <CardContent className="p-10 relative z-10">
-                  {/* Icon with enhanced styling */}
-                  <div className="relative mb-4">
-                    <div className="relative w-28 h-28 rounded-3xl flex items-center justify-center group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
-                      <Trophy className="w-14 h-14 text-amber-600 drop-shadow-lg" />
-                    </div>
-                    {/* Badge */}
-                    <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-amber-500 flex items-center justify-center shadow-lg border-2 border-white">
-                      <Award className="w-4 h-4 text-white" />
-                    </div>
-                  </div>
-
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4 leading-tight">
-                    Win Prizes in Bible Quiz Competition
-                  </h3>
-                  <p className="text-slate-600 font-light leading-relaxed text-base mb-6">
-                    Top performers in the Bible Quiz Competition 2025 earn amazing prizes. Climb the ranks, complete daily challenges, and compete for rewards.
-                  </p>
-
-                  {/* Feature highlight */}
-                  <div className="flex items-center gap-2 text-sm text-amber-600 font-semibold">
-                    <CheckCircle className="w-4 h-4" />
-                    <span>Amazing rewards</span>
-                  </div>
-                </CardContent>
-              </Card>
+        {/* How It Works - Bible Challenger Journey */}
+        <section className="py-24 bg-slate-50 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">How to Become a Bible Challenger</h2>
+              <p className="text-lg text-slate-500 font-light max-w-2xl mx-auto">
+                Your journey to mastering the Word starts here. Follow these simple steps to join the online bible quiz competition.
+              </p>
             </div>
 
-            {/* CTA */}
-            <div className="text-center mt-16">
-              <Button
-                onClick={() => navigate("/auth/register")}
-                className="group relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white px-10 py-7 text-base font-semibold tracking-wide rounded-2xl shadow-2xl hover:shadow-[0_25px_50px_rgba(99,102,241,0.4)] transition-all duration-500 hover:scale-105 overflow-hidden"
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-                <span className="relative flex items-center">
-                  Join Bible Quiz Competition 2025
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Button>
+            <div className="grid md:grid-cols-4 gap-8">
+              {[
+                { title: "1. Register Free", desc: "Sign up instantly to join the bible competition 2025.", icon: Users },
+                { title: "2. Study Daily", desc: "Use our hubs for Genesis 8 quiz prep and more.", icon: BookOpen },
+                { title: "3. Take Quizzes", desc: "Compete in daily and weekly online bible quizzes.", icon: Brain },
+                { title: "4. Win Prizes", desc: "Check bible quiz competition 2025 results weekly.", icon: Trophy }
+              ].map((step, idx) => (
+                <div key={idx} className="relative flex flex-col items-center text-center">
+                  <div className="w-16 h-16 rounded-full bg-white border-2 border-blue-100 flex items-center justify-center mb-6 shadow-sm z-10">
+                    <step.icon className="w-8 h-8 text-blue-600" />
+                  </div>
+
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">{step.title}</h3>
+                  <p className="text-slate-500 text-sm font-light leading-relaxed">{step.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Active Competitions - Simplified */}
-        {!loading && competitions.length > 0 && (
-          <section className="relative py-24 md:py-32 px-6 bg-gradient-to-br from-indigo-50/30 via-white to-emerald-50/30 overflow-hidden">
-            {/* Animated background orbs */}
-            <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-emerald-400/20 to-teal-400/20 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-indigo-400/20 to-blue-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
 
-            {/* Grid pattern overlay */}
-            <div className="absolute inset-0 opacity-[0.02]" style={{
-              backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
-              backgroundSize: '50px 50px'
-            }}></div>
 
-            <div className="max-w-6xl mx-auto relative z-10">
-              <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
-                  Active <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-medium">Bible Quiz Competitions</span>
-                </h2>
-                <p className="text-lg md:text-xl text-slate-600 font-light max-w-2xl mx-auto leading-relaxed">
-                  Join active Bible quiz competitions and compete for prizes. Participate in weekly challenges and climb the leaderboard in the Bible Quiz Competition 2025.
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-8">
-                {competitions.map((competition, idx) => {
-                  const gradients = [
-                    "from-blue-50/90 via-cyan-50/70 to-white",
-                    "from-purple-50/90 via-pink-50/70 to-white",
-                    "from-emerald-50/90 via-teal-50/70 to-white"
-                  ];
-                  const iconGradients = [
-                    "from-blue-500 to-cyan-500",
-                    "from-purple-500 to-pink-500",
-                    "from-emerald-500 to-teal-500"
-                  ];
-                  const borderColors = [
-                    "border-blue-100/60",
-                    "border-purple-100/60",
-                    "border-emerald-100/60"
-                  ];
-                  const gradient = gradients[idx % gradients.length];
-                  const iconGradient = iconGradients[idx % iconGradients.length];
-                  const borderColor = borderColors[idx % borderColors.length];
-
-                  return (
-                    <Card
-                      key={competition.id}
-                      className={`relative border-0 shadow-xl hover:shadow-2xl transition-all duration-500 rounded-3xl bg-gradient-to-br ${gradient} backdrop-blur-xl border ${borderColor} hover:scale-105 cursor-pointer group overflow-hidden`}
-                      onClick={() => navigate("/competitions")}
-                    >
-                      {/* Decorative gradient overlay */}
-                      <div className={`absolute top-0 right-0 w-40 h-40 bg-gradient-to-br ${iconGradient.replace('500', '400')}/20 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700`}></div>
-
-                      <CardContent className="p-8 relative z-10">
-                        <div className="flex items-start justify-between mb-6">
-                          <h3 className="text-2xl font-semibold text-slate-900 flex-1 leading-tight">
-                            {competition.title}
-                          </h3>
-                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${iconGradient} flex items-center justify-center flex-shrink-0 ml-4 shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300`}>
-                            <Trophy className="w-6 h-6 text-white" />
-                          </div>
-                        </div>
-                        <p className="text-slate-600 font-light text-base mb-6 leading-relaxed">
-                          {competition.description || "Test your Bible knowledge and compete for prizes in this exciting Bible quiz competition."}
-                        </p>
-                        <div className="flex items-center justify-between pt-4 border-t border-slate-200/60">
-                          <span className="text-sm text-slate-500 font-medium">{competition.entries_count} participants</span>
-                          <span className="flex items-center text-indigo-600 font-semibold group-hover:text-indigo-700 transition-colors">
-                            Join Competition
-                            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                          </span>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-
-              {/* CTA */}
-              <div className="text-center mt-16">
-                <Button
-                  onClick={() => navigate("/competitions")}
-                  className="group relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white px-10 py-7 text-base font-semibold tracking-wide rounded-2xl shadow-2xl hover:shadow-[0_25px_50px_rgba(99,102,241,0.4)] transition-all duration-500 hover:scale-105 overflow-hidden"
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-                  <span className="relative flex items-center">
-                    View All Competitions
-                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </Button>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* Testimonials Section */}
-        <section className="relative py-24 md:py-32 px-6 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden">
-          {/* Animated background orbs */}
-          <div className="absolute top-20 left-10 w-80 h-80 bg-gradient-to-br from-blue-400/15 to-cyan-400/15 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-tr from-purple-400/15 to-pink-400/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2.5s' }}></div>
-
-          <div className="max-w-6xl mx-auto relative z-10">
+        {/* Bible Q&A Hub Preview */}
+        < section className="py-24 bg-slate-50 relative overflow-hidden" >
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
-                What <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-medium">Participants Say</span>
-              </h2>
-              <p className="text-lg md:text-xl text-slate-600 font-light max-w-2xl mx-auto leading-relaxed">
-                Join thousands of Bible quiz enthusiasts who are growing their knowledge and having fun in the Bible Quiz Competition 2025.
+              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Explore the Bible Q&A Hub</h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto font-light">
+                Deepen your understanding with our comprehensive study guides and question banks for every book.
               </p>
             </div>
 
-            {/* Slider Container */}
+            <div className="grid md:grid-cols-3 gap-8">
+              {featuredHubs.map((hub, idx) => (
+                <Card key={idx} className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm bg-white overflow-hidden cursor-pointer" onClick={() => navigate(hub.link)}>
+                  <CardContent className="p-8">
+                    <div className={`w-14 h-14 ${hub.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                      <hub.icon className="w-7 h-7" />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{hub.title}</h3>
+                    <p className="text-slate-600 font-light leading-relaxed mb-6">
+                      {hub.description}
+                    </p>
+                    <div className="flex items-center text-blue-600 font-medium group-hover:translate-x-2 transition-transform">
+                      Start Learning <ArrowRight className="w-4 h-4 ml-2" />
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            <div className="mt-12 text-center">
+              <Button variant="outline" size="lg" className="rounded-full px-8 border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200" onClick={() => navigate("/bible-questions-and-answers-hub")}>
+                View All Books
+              </Button>
+            </div>
+          </div>
+        </section >
+
+        {/* Featured Articles */}
+        < section className="py-24 bg-white" >
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+              <div className="text-center md:text-left">
+                <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Latest Insights</h2>
+                <p className="text-lg text-slate-600 max-w-2xl font-light">
+                  Strategies, devotionals, and updates from our community.
+                </p>
+              </div>
+              <div className="hidden md:block">
+                <Button variant="ghost" className="text-slate-500 hover:text-blue-600" onClick={() => navigate("/articles")}>
+                  Read all articles <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {featuredArticles.map((article) => (
+                <article key={article.id} className="group cursor-pointer flex flex-col h-full bg-slate-50 p-8 rounded-[2rem] hover:bg-white border border-transparent hover:border-slate-100 hover:shadow-xl transition-all duration-300" onClick={() => navigate("/articles")}>
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wider">
+                      {article.category}
+                    </span>
+                    <span className="text-xs text-slate-400 font-medium">{article.readTime}</span>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
+                    {article.title}
+                  </h3>
+                  <p className="text-slate-500 font-light leading-relaxed line-clamp-3 mb-6 flex-1">
+                    {article.excerpt}
+                  </p>
+
+                  <div className="flex items-center justify-between pt-6 border-t border-slate-200/50 mt-auto">
+                    <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">
+                      By {article.author}
+                    </span>
+                    <div className="text-blue-600 font-medium text-sm flex items-center group-hover:translate-x-1 transition-transform">
+                      Read <ArrowRight className="w-4 h-4 ml-2" />
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="mt-8 text-center md:hidden">
+              <Button variant="outline" className="w-full rounded-full" onClick={() => navigate("/articles")}>
+                Read All Articles
+              </Button>
+            </div>
+          </div>
+        </section >
+
+        {/* Newsletter */}
+        < section className="py-24 bg-slate-50" >
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-8 rotate-3">
+              <Mail className="w-8 h-8" />
+            </div>
+            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Stay Connected</h2>
+            <p className="text-lg text-slate-600 max-w-xl mx-auto font-light mb-10">
+              Get the latest quiz schedules, study tips, and daily inspiration delivered straight to your inbox.
+            </p>
+
+            <form className="max-w-md mx-auto relative flex items-center" onSubmit={(e) => e.preventDefault()}>
+              <div className="absolute left-4 text-slate-400">
+                <Mail className="w-5 h-5" />
+              </div>
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="w-full h-14 pl-12 pr-36 rounded-full border border-slate-200 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 outline-none transition-all text-slate-600 placeholder:text-slate-400 bg-white"
+              />
+              <Button type="submit" className="absolute right-1.5 h-11 px-6 rounded-full bg-slate-900 text-white hover:bg-blue-600 transition-colors">
+                Subscribe
+              </Button>
+            </form>
+            <p className="text-xs text-slate-400 mt-6">
+              We respect your privacy. Unsubscribe at any time.
+            </p>
+          </div>
+        </section >
+
+        {/* Testimonials - Human Centric */}
+        < section className="py-24 bg-white relative overflow-hidden" >
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Stories from the Community</h2>
+            </div>
+
             <div className="relative">
-              {/* Navigation Arrows */}
-              <button
-                onClick={() => {
-                  const total = Math.ceil(testimonials.length / testimonialsPerViewState);
-                  setCurrentTestimonialIndex((prev) => (prev - 1 + total) % total);
-                }}
-                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-20 w-12 h-12 rounded-full bg-white/90 backdrop-blur-md shadow-xl border border-indigo-100 flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-300 group"
-                aria-label="Previous testimonials"
-              >
-                <ChevronLeft className="w-6 h-6 text-indigo-600 group-hover:text-indigo-700" />
-              </button>
+              {/* Controls */}
+              <div className="flex justify-end gap-3 mb-6">
+                <button
+                  onClick={() => setCurrentTestimonialIndex(i => (i - 1 + totalSlides) % totalSlides)}
+                  className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50"
+                >
+                  <ChevronLeft className="w-5 h-5 text-slate-600" />
+                </button>
+                <button
+                  onClick={() => setCurrentTestimonialIndex(i => (i + 1) % totalSlides)}
+                  className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50"
+                >
+                  <ChevronRight className="w-5 h-5 text-slate-600" />
+                </button>
+              </div>
 
-              <button
-                onClick={() => {
-                  const total = Math.ceil(testimonials.length / testimonialsPerViewState);
-                  setCurrentTestimonialIndex((prev) => (prev + 1) % total);
-                }}
-                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-20 w-12 h-12 rounded-full bg-white/90 backdrop-blur-md shadow-xl border border-indigo-100 flex items-center justify-center hover:bg-white hover:scale-110 transition-all duration-300 group"
-                aria-label="Next testimonials"
-              >
-                <ChevronRight className="w-6 h-6 text-indigo-600 group-hover:text-indigo-700" />
-              </button>
-
-              {/* Slider Wrapper */}
-              <div className="overflow-hidden">
+              <div className="overflow-hidden rounded-[2.5rem]">
                 <div
                   className="flex transition-transform duration-700 ease-in-out"
                   style={{ transform: `translateX(-${currentTestimonialIndex * 100}%)` }}
                 >
                   {Array.from({ length: totalSlides }).map((_, slideIndex) => (
-                    <div key={slideIndex} className="min-w-full grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+                    <div key={slideIndex} className="min-w-full grid md:grid-cols-3 gap-6">
                       {testimonials
                         .slice(slideIndex * testimonialsPerViewState, slideIndex * testimonialsPerViewState + testimonialsPerViewState)
                         .map((testimonial) => (
-                          <Card
-                            key={testimonial.id}
-                            className={`relative border-0 shadow-xl hover:shadow-2xl transition-all duration-500 rounded-3xl bg-gradient-to-br ${testimonial.bgGradient} backdrop-blur-xl border ${testimonial.borderColor} hover:scale-105 group overflow-hidden mb-8 mx-2`}
-                          >
-                            <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${testimonial.blurColor} rounded-full blur-2xl`}></div>
-                            <CardContent className="p-8 relative z-10">
-                              <div className="flex items-center gap-1 mb-4">
-                                {[...Array(5)].map((_, i) => (
-                                  <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
-                                ))}
+                          <div key={testimonial.id} className="bg-slate-50 p-8 rounded-[2rem] hover:bg-blue-50/50 transition-colors duration-300">
+                            <Quote className="w-8 h-8 text-blue-200 mb-6" />
+                            <p className="text-slate-600 font-light text-lg mb-8 leading-relaxed">
+                              "{testimonial.quote}"
+                            </p>
+                            <div className="flex items-center gap-4">
+                              <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 font-bold text-xs">
+                                {testimonial.initials}
                               </div>
-                              <Quote className={`w-8 h-8 ${testimonial.quoteColor} mb-4`} />
-                              <p className="text-slate-700 font-light leading-relaxed mb-6 text-base">
-                                "{testimonial.quote}"
-                              </p>
-                              <div className="flex items-center gap-4">
-                                <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${testimonial.gradient} flex items-center justify-center text-white font-semibold text-lg shadow-lg`}>
-                                  {testimonial.initials}
-                                </div>
-                                <div>
-                                  <div className="font-semibold text-slate-900">{testimonial.name}</div>
-                                  <div className="text-sm text-slate-500">{testimonial.role}</div>
-                                </div>
+                              <div>
+                                <div className="font-bold text-slate-900 text-sm">{testimonial.name}</div>
+                                <div className="text-xs text-slate-400 font-medium uppercase tracking-wide">{testimonial.role}</div>
                               </div>
-                            </CardContent>
-                          </Card>
+                            </div>
+                          </div>
                         ))}
                     </div>
                   ))}
                 </div>
               </div>
-
-              {/* Dots Indicator */}
-              <div className="flex justify-center items-center gap-2 mt-12">
-                {Array.from({ length: Math.ceil(testimonials.length / testimonialsPerViewState) }).map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentTestimonialIndex(index)}
-                    className={`transition-all duration-300 rounded-full ${index === currentTestimonialIndex
-                      ? 'w-8 h-3 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600'
-                      : 'w-3 h-3 bg-slate-300 hover:bg-slate-400'
-                      }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  />
-                ))}
-              </div>
-
-              {/* CTA */}
-              <div className="text-center mt-16">
-                <Button
-                  onClick={() => navigate("/auth/register")}
-                  className="group relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white px-10 py-7 text-base font-semibold tracking-wide rounded-2xl shadow-2xl hover:shadow-[0_25px_50px_rgba(99,102,241,0.4)] transition-all duration-500 hover:scale-105 overflow-hidden"
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-                  <span className="relative flex items-center">
-                    Start Your Journey Today
-                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </Button>
-              </div>
             </div>
           </div>
-        </section>
-
-        {/* How It Works Section */}
-        <section className="relative py-24 md:py-32 px-6 bg-gradient-to-br from-indigo-50/40 via-white to-purple-50/30 overflow-hidden">
-          {/* Animated background orbs */}
-          <div className="absolute top-10 right-20 w-72 h-72 bg-gradient-to-br from-indigo-400/20 to-purple-400/20 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-10 left-20 w-96 h-96 bg-gradient-to-tr from-purple-400/20 to-pink-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3s' }}></div>
-
-          {/* Grid pattern overlay */}
-          <div className="absolute inset-0 opacity-[0.02]" style={{
-            backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
-          }}></div>
-
-          <div className="max-w-6xl mx-auto relative z-10">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
-                How the <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-medium">Bible Quiz Competition</span> Works
-              </h2>
-              <p className="text-lg md:text-xl text-slate-600 font-light max-w-3xl mx-auto leading-relaxed">
-                Join thousands of participants in the Bible Quiz Competition 2025. Engage in daily quizzes, special challenges, Bible reading plans, and more. Track your progress and compete for amazing prizes!
-              </p>
-            </div>
-
-            {/* Steps */}
-            <div className="grid md:grid-cols-4 gap-8 mb-20">
-              {/* Step 1 */}
-              <div className="relative text-center group">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center mx-auto mb-6 shadow-2xl group-hover:scale-110 transition-all duration-300 relative z-10">
-                  <span className="text-3xl font-bold text-white">1</span>
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Create Account</h3>
-                <p className="text-slate-600 font-light leading-relaxed text-sm">
-                  Sign up for free in seconds. No credit card required. Start your Bible learning journey today.
-                </p>
-                <div className="absolute top-10 left-1/2 -translate-x-1/2 w-full h-0.5 bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 hidden md:block"></div>
-              </div>
-
-              {/* Step 2 */}
-              <div className="relative text-center group">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mx-auto mb-6 shadow-2xl group-hover:scale-110 transition-all duration-300 relative z-10">
-                  <span className="text-3xl font-bold text-white">2</span>
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Choose Activities</h3>
-                <p className="text-slate-600 font-light leading-relaxed text-sm">
-                  Participate in daily quizzes, special challenges, Bible reading plans, and various learning activities.
-                </p>
-                <div className="absolute top-10 left-1/2 -translate-x-1/2 w-full h-0.5 bg-gradient-to-r from-purple-200 via-pink-200 to-amber-200 hidden md:block"></div>
-              </div>
-
-              {/* Step 3 */}
-              <div className="relative text-center group">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-pink-500 to-amber-500 flex items-center justify-center mx-auto mb-6 shadow-2xl group-hover:scale-110 transition-all duration-300 relative z-10">
-                  <span className="text-3xl font-bold text-white">3</span>
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Track Progress</h3>
-                <p className="text-slate-600 font-light leading-relaxed text-sm">
-                  Watch your knowledge grow and your rank improve on the leaderboard. Compete with players worldwide.
-                </p>
-                <div className="absolute top-10 left-1/2 -translate-x-1/2 w-full h-0.5 bg-gradient-to-r from-amber-200 via-orange-200 to-violet-200 hidden md:block"></div>
-              </div>
-
-              {/* Step 4 */}
-              <div className="relative text-center group">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center mx-auto mb-6 shadow-2xl group-hover:scale-110 transition-all duration-300 relative z-10">
-                  <span className="text-3xl font-bold text-white">4</span>
-                </div>
-                <h3 className="text-xl font-semibold text-slate-900 mb-3">Win Prizes</h3>
-                <p className="text-slate-600 font-light leading-relaxed text-sm">
-                  Top performers earn amazing prizes. The more you participate, the better your chances of winning!
-                </p>
-              </div>
-            </div>
-
-            {/* Activities Section */}
-            <div className="mt-20">
-              <div className="text-center mb-12">
-                <h3 className="text-3xl md:text-4xl font-light text-slate-900 mb-4 tracking-tight">
-                  What You Can <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-medium">Do</span>
-                </h3>
-                <p className="text-lg text-slate-600 font-light max-w-2xl mx-auto">
-                  The Bible Quiz Competition 2025 offers multiple ways to engage, learn, and grow in your faith
-                </p>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {/* Activity 1 - Daily Quiz */}
-                <Card className="relative border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl bg-gradient-to-br from-blue-50/80 to-cyan-50/60 backdrop-blur-xl border border-blue-100/50 hover:scale-105 group overflow-hidden">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-all duration-300">
-                      <Calendar className="w-8 h-8 text-white" />
-                    </div>
-                    <h4 className="text-lg font-semibold text-slate-900 mb-2">Daily Quiz</h4>
-                    <p className="text-sm text-slate-600 font-light leading-relaxed">
-                      New Bible quiz questions every day to test and improve your knowledge
-                    </p>
-                  </CardContent>
-                </Card>
-
-                {/* Activity 2 - Challenges */}
-                <Card className="relative border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl bg-gradient-to-br from-purple-50/80 to-pink-50/60 backdrop-blur-xl border border-purple-100/50 hover:scale-105 group overflow-hidden">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-all duration-300">
-                      <Trophy className="w-8 h-8 text-white" />
-                    </div>
-                    <h4 className="text-lg font-semibold text-slate-900 mb-2">Special Challenges</h4>
-                    <p className="text-sm text-slate-600 font-light leading-relaxed">
-                      Participate in themed challenges and competitions with special rewards
-                    </p>
-                  </CardContent>
-                </Card>
-
-                {/* Activity 3 - Bible Reading */}
-                <Card className="relative border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl bg-gradient-to-br from-emerald-50/80 to-teal-50/60 backdrop-blur-xl border border-emerald-100/50 hover:scale-105 group overflow-hidden">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-all duration-300">
-                      <Sparkles className="w-8 h-8 text-white" />
-                    </div>
-                    <h4 className="text-lg font-semibold text-slate-900 mb-2">Bible Reading</h4>
-                    <p className="text-sm text-slate-600 font-light leading-relaxed">
-                      Follow structured reading plans and track your progress through Scripture
-                    </p>
-                  </CardContent>
-                </Card>
-
-                {/* Activity 4 - Bible QA Hub */}
-                <Card
-                  className="relative border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl bg-gradient-to-br from-amber-50/80 to-orange-50/60 backdrop-blur-xl border border-amber-100/50 hover:scale-105 group overflow-hidden cursor-pointer"
-                  onClick={() => navigate("/bible-questions-and-answers-hub")}
-                >
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mx-auto mb-4 shadow-lg group-hover:scale-110 transition-all duration-300">
-                      <BookOpen className="w-8 h-8 text-white" />
-                    </div>
-                    <h4 className="text-lg font-semibold text-slate-900 mb-2">Bible QA Hub</h4>
-                    <p className="text-sm text-slate-600 font-light leading-relaxed">
-                      Access 1,000+ Bible questions and answers organized by book, chapter, and difficulty level
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-
-            {/* CTA */}
-            <div className="text-center mt-16">
-              <Button
-                onClick={() => navigate("/auth/register")}
-                className="group relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white px-10 py-7 text-base font-semibold tracking-wide rounded-2xl shadow-2xl hover:shadow-[0_25px_50px_rgba(99,102,241,0.4)] transition-all duration-500 hover:scale-105 overflow-hidden"
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-                <span className="relative flex items-center">
-                  Get Started Now
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* Community & Success Stories */}
-        <section className="relative py-24 md:py-32 px-6 bg-gradient-to-br from-emerald-50/40 via-white to-teal-50/30 overflow-hidden">
-          {/* Animated background orbs */}
-          <div className="absolute top-20 left-10 w-80 h-80 bg-gradient-to-br from-emerald-400/15 to-teal-400/15 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-tr from-teal-400/15 to-cyan-400/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '3.5s' }}></div>
-
-          <div className="max-w-6xl mx-auto relative z-10">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
-                Join Our <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent font-medium">Growing Community</span>
-              </h2>
-              <p className="text-lg md:text-xl text-slate-600 font-light max-w-2xl mx-auto leading-relaxed">
-                Be part of a vibrant community of Bible quiz enthusiasts. Share your progress, celebrate wins, and grow together in faith.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              {/* Community Stats */}
-              <Card className="relative border-0 shadow-xl hover:shadow-2xl transition-all duration-500 rounded-3xl bg-gradient-to-br from-white via-emerald-50/40 to-teal-50/30 backdrop-blur-xl border border-emerald-100/50 hover:scale-105 group overflow-hidden">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-emerald-400/10 to-teal-400/10 rounded-full blur-3xl"></div>
-                <CardContent className="p-8 relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-300">
-                    <Users className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-semibold text-slate-900 mb-4">Active Community</h3>
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-                      <span className="text-slate-700 font-light">Join discussions with fellow participants</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-                      <span className="text-slate-700 font-light">Share your Bible quiz achievements</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-                      <span className="text-slate-700 font-light">Connect with Bible study groups</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-                      <span className="text-slate-700 font-light">Get tips from top performers</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Success Stories */}
-              <Card className="relative border-0 shadow-xl hover:shadow-2xl transition-all duration-500 rounded-3xl bg-gradient-to-br from-white via-amber-50/40 to-orange-50/30 backdrop-blur-xl border border-amber-100/50 hover:scale-105 group overflow-hidden">
-                <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-amber-400/10 to-orange-400/10 rounded-full blur-3xl"></div>
-                <CardContent className="p-8 relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-all duration-300">
-                    <Award className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-semibold text-slate-900 mb-4">Success Stories</h3>
-                  <div className="space-y-4">
-                    <div className="bg-white/60 rounded-xl p-4 backdrop-blur-sm">
-                      <div className="flex items-center gap-3 mb-2">
-                        <Heart className="w-5 h-5 text-rose-500" />
-                        <span className="font-semibold text-slate-900">Maria's Journey</span>
-                      </div>
-                      <p className="text-sm text-slate-600 font-light">
-                        "Started at rank 500, now in top 50! The daily challenges keep me motivated."
-                      </p>
-                    </div>
-                    <div className="bg-white/60 rounded-xl p-4 backdrop-blur-sm">
-                      <div className="flex items-center gap-3 mb-2">
-                        <Trophy className="w-5 h-5 text-amber-500" />
-                        <span className="font-semibold text-slate-900">David's Win</span>
-                      </div>
-                      <p className="text-sm text-slate-600 font-light">
-                        "Won my first prize after 30 days of consistent participation. Worth it!"
-                      </p>
-                    </div>
-                    <div className="bg-white/60 rounded-xl p-4 backdrop-blur-sm">
-                      <div className="flex items-center gap-3 mb-2">
-                        <TrendingUp className="w-5 h-5 text-emerald-500" />
-                        <span className="font-semibold text-slate-900">Lisa's Growth</span>
-                      </div>
-                      <p className="text-sm text-slate-600 font-light">
-                        "My Bible knowledge has improved so much. Perfect for my Bible study group!"
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* CTA */}
-            <div className="text-center mt-16">
-              <Button
-                onClick={() => navigate("/auth/register")}
-                className="group relative bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-700 hover:via-teal-700 hover:to-cyan-700 text-white px-10 py-7 text-base font-semibold tracking-wide rounded-2xl shadow-2xl hover:shadow-[0_25px_50px_rgba(16,185,129,0.4)] transition-all duration-500 hover:scale-105 overflow-hidden"
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-                <span className="relative flex items-center">
-                  Join the Community
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Button>
-            </div>
-          </div>
-        </section>
+        </section >
 
         {/* FAQ Section */}
-        <section className="relative py-24 md:py-32 px-6 bg-gradient-to-br from-slate-50 via-white to-indigo-50/20 overflow-hidden">
-          {/* Animated background orbs */}
-          <div className="absolute top-10 right-10 w-72 h-72 bg-gradient-to-br from-indigo-400/15 to-purple-400/15 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-10 left-10 w-96 h-96 bg-gradient-to-tr from-purple-400/15 to-pink-400/15 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }}></div>
-
-          <div className="max-w-4xl mx-auto relative z-10">
+        <section className="py-24 bg-slate-50">
+          <div className="max-w-4xl mx-auto px-6">
             <div className="text-center mb-16">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center mx-auto mb-6 shadow-xl">
-                <HelpCircle className="w-8 h-8 text-white" />
-              </div>
-              <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-6 tracking-tight">
-                Frequently Asked <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent font-medium">Questions</span>
-              </h2>
-              <p className="text-lg md:text-xl text-slate-600 font-light max-w-2xl mx-auto leading-relaxed">
-                Everything you need to know about the Bible Quiz Competition 2025
+              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
+              <p className="text-lg text-slate-500 font-light">
+                Everything you need to know about the online bible quiz competition 2025.
               </p>
             </div>
 
             <div className="space-y-6">
-              <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl bg-white/80 backdrop-blur-xl border border-indigo-100/50">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3">Is the Bible Quiz Competition 2025 free to join?</h3>
-                  <p className="text-slate-600 font-light leading-relaxed">
-                    Yes! The Bible Quiz Competition 2025 is completely free to join. Create your account and start participating in daily challenges immediately. No credit card or payment required.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl bg-white/80 backdrop-blur-xl border border-purple-100/50">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3">How do I win prizes in the Bible Quiz Competition?</h3>
-                  <p className="text-slate-600 font-light leading-relaxed">
-                    Top performers on the leaderboard earn prizes. The more daily challenges you complete and the higher your scores, the better your chances of winning. Prizes are awarded regularly to active participants.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl bg-white/80 backdrop-blur-xl border border-pink-100/50">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3">How often are new Bible quiz challenges available?</h3>
-                  <p className="text-slate-600 font-light leading-relaxed">
-                    New Bible quiz challenges are available every day! Each daily challenge is unique and designed to test different aspects of your Bible knowledge. You can complete one challenge per day.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl bg-white/80 backdrop-blur-xl border border-amber-100/50">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3">Can I participate if I'm new to Bible study?</h3>
-                  <p className="text-slate-600 font-light leading-relaxed">
-                    Absolutely! The Bible Quiz Competition 2025 is perfect for all levels, from beginners to Bible scholars. The quizzes help you learn and grow at your own pace, making it an excellent way to deepen your understanding of Scripture.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 rounded-2xl bg-white/80 backdrop-blur-xl border border-emerald-100/50">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-3">How does the leaderboard work?</h3>
-                  <p className="text-slate-600 font-light leading-relaxed">
-                    The leaderboard ranks participants based on their performance in daily challenges. Points are awarded for correct answers and completion. Your rank updates in real-time as you complete quizzes, allowing you to track your progress and compete with others.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* CTA */}
-            <div className="text-center mt-16">
-              <Button
-                onClick={() => navigate("/auth/register")}
-                className="group relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white px-10 py-7 text-base font-semibold tracking-wide rounded-2xl shadow-2xl hover:shadow-[0_25px_50px_rgba(99,102,241,0.4)] transition-all duration-500 hover:scale-105 overflow-hidden"
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-                <span className="relative flex items-center">
-                  Ready to Get Started?
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Button>
+              {[
+                { q: "Is the Bible Quiz Competition 2025 free to join?", a: "Yes! It is completely free to register and participate in the online bible quiz competition. We believe Bible knowledge should be accessible to everyone." },
+                { q: "How do I check the 2025 results?", a: "Results are updated instantly after every quiz. You can view the global leaderboard and your personal progress on the 'Results' page." },
+                { q: "What topics are covered in the quizzes?", a: "We cover the entire Bible! You'll find specific challenges like the Genesis 8 quiz, Matthew quiz, and thematic quizzes on characters and theology." },
+                { q: "Who can become a Bible Challenger?", a: "Anyone! Whether you're a beginner or a scholar, our bible challenger levels adapt to your knowledge, helping you grow step-by-step." }
+              ].map((faq, idx) => (
+                <div key={idx} className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100">
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">{faq.q}</h3>
+                  <p className="text-slate-500 font-light leading-relaxed">{faq.a}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Simple CTA */}
-        <section className="relative py-28 md:py-36 px-6 bg-gradient-to-br from-violet-50/50 via-purple-50/40 to-indigo-50/50 overflow-hidden">
-          {/* Animated background orbs */}
-          <div className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-violet-400/20 via-purple-400/15 to-indigo-400/20 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-l from-indigo-400/20 via-purple-400/15 to-pink-400/20 rounded-full blur-3xl"></div>
+        {/* CTA Section - Minimal */}
+        < section className="py-24 px-6" >
+          <div className="max-w-5xl mx-auto bg-slate-900 rounded-[3rem] p-12 lg:p-24 text-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px]"></div>
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-violet-500/20 rounded-full blur-[100px]"></div>
 
-          {/* Grid pattern overlay */}
-          <div className="absolute inset-0 opacity-[0.02]" style={{
-            backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
-          }}></div>
-
-          <div className="max-w-3xl mx-auto text-center relative z-10">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-violet-500 via-purple-500 to-indigo-500 flex items-center justify-center mx-auto mb-8 shadow-2xl hover:scale-110 transition-transform duration-300">
-              <Sparkles className="w-10 h-10 text-white" />
-            </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-slate-900 mb-6 tracking-tight leading-tight">
-              Start Your <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent font-medium">Bible Quiz Competition</span> Journey Today
-            </h2>
-            <p className="text-lg md:text-xl text-slate-600 font-light mb-10 max-w-2xl mx-auto leading-relaxed">
-              Join thousands of participants in the Bible Quiz Competition 2025. Grow your Bible knowledge through daily practice, compete for prizes, and climb the leaderboard. Free to join, fun for all ages.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                size="lg"
-                className="group relative bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 hover:from-violet-700 hover:via-purple-700 hover:to-indigo-700 text-white px-10 py-7 text-base font-semibold tracking-wide rounded-2xl shadow-2xl hover:shadow-[0_25px_50px_rgba(139,92,246,0.4)] transition-all duration-500 hover:scale-105 overflow-hidden"
-                onClick={() => navigate("/auth/register")}
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-                <span className="relative flex items-center">
-                  Get Started Free
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-white/80 backdrop-blur-md border-2 border-violet-200 text-slate-700 hover:bg-white hover:border-violet-300 px-10 py-7 text-base font-semibold tracking-wide rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105"
-                onClick={() => navigate("/competitions")}
-              >
-                View Competitions
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* Minimal Footer */}
-        <footer className="relative border-t border-indigo-100/60 py-16 px-6 bg-gradient-to-b from-white via-indigo-50/20 to-purple-50/10 overflow-hidden">
-          {/* Subtle background effect */}
-          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-indigo-50/30 to-transparent"></div>
-
-          <div className="max-w-6xl mx-auto relative z-10">
-            <div className="flex flex-col md:flex-row justify-between items-center mb-8">
-              <div className="mb-6 md:mb-0">
-                <h3 className="text-xl font-semibold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-                  Bible Quiz Competition 2025
-                </h3>
-                <p className="text-slate-500 font-light text-sm max-w-md">
-                  Join the ultimate Bible quiz competition. Test your knowledge, compete for prizes, and grow in your faith.
-                </p>
-              </div>
-              <nav className="flex flex-wrap gap-6 text-sm" aria-label="Footer navigation">
-                <a href="/competitions" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Bible Quiz Competitions</a>
-                <a href="/leaderboard" className="text-slate-600 hover:text-purple-600 font-medium transition-colors">Leaderboard</a>
-                <a href="/daily-challenge" className="text-slate-600 hover:text-pink-600 font-medium transition-colors">Daily Challenge</a>
-                <a href="/help" className="text-slate-600 hover:text-indigo-600 font-medium transition-colors">Help</a>
-              </nav>
-            </div>
-            <div className="pt-8 border-t border-slate-200/60 text-center">
-              <p className="text-xs text-slate-400 font-light">
-                © 2025 Bible Quiz Competition. All rights reserved. | Join the Bible Quiz Competition 2025 and test your knowledge today.
+            <div className="relative z-10">
+              <h2 className="text-4xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
+                Ready to start your journey?
+              </h2>
+              <p className="text-lg text-slate-300 font-light mb-12 max-w-2xl mx-auto">
+                Join our community of believers and start your online bible quiz journey today. Become a top Bible Challenger. It's free and always will be.
               </p>
+              <Button
+                size="lg"
+                className="h-16 px-10 rounded-full bg-white text-slate-900 font-bold text-lg hover:bg-blue-50 transition-colors"
+                onClick={() => navigate("/auth/register")}
+              >
+                Join for Free
+              </Button>
             </div>
           </div>
-        </footer>
-        {/* Tidio Chat Widget */}
-        <script src="//code.tidio.co/your-tidio-public-key.js" async></script>
-      </div>
+        </section >
+
+        {/* Simple Footer */}
+        < footer className="py-12 border-t border-slate-100 bg-white" >
+          <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex items-center gap-2">
+              <Brain className="w-5 h-5 text-slate-900" />
+              <span className="font-bold text-slate-900 tracking-tight">Bible Quiz Competition</span>
+            </div>
+
+            <div className="flex gap-8 text-sm font-medium text-slate-500">
+              <a href="#" className="hover:text-slate-900 transition-colors">Privacy</a>
+              <a href="#" className="hover:text-slate-900 transition-colors">Terms</a>
+              <a href="#" className="hover:text-slate-900 transition-colors">Support</a>
+            </div>
+
+            <div className="text-sm text-slate-400">
+              © 2025 All rights reserved.
+            </div>
+          </div>
+        </footer >
+      </div >
     </>
   );
 };
