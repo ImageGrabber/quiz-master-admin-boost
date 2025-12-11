@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
 import { Trophy, Search, BookOpen, Users, Target, TrendingUp, Star, Clock, Zap, BookMarked, Heart, Award, Lightbulb, Globe, Shield, Crown, X, Menu, Brain } from "lucide-react";
@@ -39,7 +40,7 @@ const featuredQuizzes = [
   { title: "Leviticus Quiz", description: "Laws and sacrifices - Priestly duties, offerings, and holiness codes", difficulty: "Intermediate", questions: 10, icon: BookMarked, color: "bg-orange-500", link: "/public-quiz/leviticus", category: "Pentateuch", seoTitle: "Leviticus Bible Quiz - Laws, Sacrifices, and Holiness" },
   { title: "Numbers Quiz", description: "Wilderness wanderings - Israel's journey, the census, and God's provision", difficulty: "Intermediate", questions: 10, icon: Target, color: "bg-purple-500", link: "/public-quiz/numbers", category: "Pentateuch", seoTitle: "Numbers Bible Quiz - Wilderness Journey and God's Faithfulness" },
   { title: "Deuteronomy Quiz", description: "Moses' final words - Laws restated, blessings and curses, entering the Promised Land", difficulty: "Intermediate", questions: 10, icon: Crown, color: "bg-red-500", link: "/public-quiz/deuteronomy", category: "Pentateuch", seoTitle: "Deuteronomy Bible Quiz - Moses' Final Words and Laws" },
-  
+
   // Historical Books (Joshua to Esther) - All 12 books with 10 questions each
   { title: "Joshua Quiz", description: "Conquering the promised land - Entering Canaan, Jericho, and dividing the land", difficulty: "Beginner", questions: 10, icon: Target, color: "bg-teal-500", link: "/public-quiz/joshua", category: "Historical Books", seoTitle: "Joshua Bible Quiz - Conquest of the Promised Land" },
   { title: "Judges Quiz", description: "Cycle of deliverance - Othniel, Deborah, Gideon, Samson and the judges", difficulty: "Beginner", questions: 10, icon: Shield, color: "bg-green-500", link: "/public-quiz/judges", category: "Historical Books", seoTitle: "Judges Bible Quiz - Period of Judges and Deliverers" },
@@ -53,16 +54,16 @@ const featuredQuizzes = [
   { title: "Ezra Quiz", description: "Return from exile - Rebuilding the temple and restoring worship", difficulty: "Intermediate", questions: 10, icon: Lightbulb, color: "bg-yellow-500", link: "/public-quiz/ezra", category: "Historical Books", seoTitle: "Ezra Bible Quiz - Return from Exile and Temple Rebuilding" },
   { title: "Nehemiah Quiz", description: "Rebuilding Jerusalem's walls - Leadership, opposition, and spiritual renewal", difficulty: "Intermediate", questions: 10, icon: Award, color: "bg-teal-500", link: "/public-quiz/nehemiah", category: "Historical Books", seoTitle: "Nehemiah Bible Quiz - Rebuilding Jerusalem's Walls" },
   { title: "Esther Quiz", description: "Courage and deliverance - Queen Esther saves her people from destruction", difficulty: "Beginner", questions: 10, icon: Star, color: "bg-rose-500", link: "/public-quiz/esther", category: "Historical Books", seoTitle: "Esther Bible Quiz - Queen Esther's Courage and Deliverance" },
-  
+
   // Wisdom Literature (Job to Song of Solomon)
   { title: "Job Quiz", description: "Suffering and faith", difficulty: "Intermediate", questions: 10, icon: Award, color: "bg-indigo-500", link: "/public-quiz/job", category: "Wisdom Literature" },
   { title: "Psalms Quiz", description: "Songs of the heart", difficulty: "Beginner", questions: 10, icon: Heart, color: "bg-purple-500", link: "/public-quiz/psalms", category: "Wisdom Literature" },
   { title: "Proverbs Quiz", description: "Wisdom for daily living", difficulty: "Beginner", questions: 10, icon: Lightbulb, color: "bg-yellow-500", link: "/public-quiz/proverbs", category: "Wisdom Literature" },
-  
+
   // Major Prophets (Isaiah to Daniel)
   { title: "Isaiah Quiz", description: "The major prophet", difficulty: "Intermediate", questions: 10, icon: Crown, color: "bg-red-500", link: "/public-quiz/isaiah", category: "Major Prophets" },
   { title: "Daniel Quiz", description: "Faith in the lion's den", difficulty: "Intermediate", questions: 10, icon: Globe, color: "bg-orange-500", link: "/public-quiz/daniel", category: "Major Prophets" },
-  
+
   // Minor Prophets (Hosea to Malachi) - All 12 books with 10 questions each
   { title: "Hosea Quiz", description: "God's love despite unfaithfulness - Marriage metaphor and divine love", difficulty: "Intermediate", questions: 10, icon: Heart, color: "bg-pink-500", link: "/public-quiz/hosea", category: "Minor Prophets", seoTitle: "Hosea Bible Quiz - God's Love and Israel's Unfaithfulness" },
   { title: "Joel Quiz", description: "Day of the Lord and God's Spirit - Locust plague and future outpouring", difficulty: "Intermediate", questions: 10, icon: Zap, color: "bg-yellow-500", link: "/public-quiz/joel", category: "Minor Prophets", seoTitle: "Joel Bible Quiz - Day of the Lord and God's Spirit" },
@@ -76,13 +77,13 @@ const featuredQuizzes = [
   { title: "Haggai Quiz", description: "Rebuilding the temple - Post-exile prophet and temple reconstruction", difficulty: "Intermediate", questions: 10, icon: BookMarked, color: "bg-green-500", link: "/public-quiz/haggai", category: "Minor Prophets", seoTitle: "Haggai Bible Quiz - Rebuilding the Temple" },
   { title: "Zechariah Quiz", description: "Visions and the coming Messiah - Apocalyptic prophet and future hope", difficulty: "Intermediate", questions: 10, icon: Lightbulb, color: "bg-yellow-500", link: "/public-quiz/zechariah", category: "Minor Prophets", seoTitle: "Zechariah Bible Quiz - Visions and the Coming Messiah" },
   { title: "Malachi Quiz", description: "Last prophet and the coming Messiah - Final words and future hope", difficulty: "Intermediate", questions: 10, icon: Award, color: "bg-red-500", link: "/public-quiz/malachi", category: "Minor Prophets", seoTitle: "Malachi Bible Quiz - Last Prophet and the Coming Messiah" },
-  
+
   // Gospels (Matthew to John) - All 4 books with 10 questions each
   { title: "Matthew Quiz", description: "Jesus as the promised Messiah - King of the Jews and fulfillment of prophecy", difficulty: "Beginner", questions: 10, icon: Crown, color: "bg-blue-500", link: "/public-quiz/matthew", category: "Gospels", seoTitle: "Matthew Bible Quiz - Jesus as the Promised Messiah" },
   { title: "Mark Quiz", description: "Jesus as the suffering servant - Son of God who came to serve and save", difficulty: "Beginner", questions: 10, icon: Shield, color: "bg-green-500", link: "/public-quiz/mark", category: "Gospels", seoTitle: "Mark Bible Quiz - Jesus as the Suffering Servant" },
   { title: "Luke Quiz", description: "Jesus as the universal Savior - Compassionate healer and friend of sinners", difficulty: "Beginner", questions: 10, icon: Heart, color: "bg-purple-500", link: "/public-quiz/luke", category: "Gospels", seoTitle: "Luke Bible Quiz - Jesus as the Universal Savior" },
   { title: "John Quiz", description: "Jesus as the divine Son of God - Word made flesh and giver of eternal life", difficulty: "Intermediate", questions: 10, icon: Star, color: "bg-yellow-500", link: "/public-quiz/john", category: "Gospels", seoTitle: "John Bible Quiz - Jesus as the Divine Son of God" },
-  
+
   // Pauline Epistles (Romans to Philemon) - All 13 books with 10 questions each
   { title: "Romans Quiz", description: "The gospel of God's righteousness - Justification by faith, sin and grace, God's plan for Israel", difficulty: "Advanced", questions: 10, icon: BookOpen, color: "bg-blue-500", link: "/public-quiz/romans", category: "Pauline Epistles", seoTitle: "Romans Bible Quiz - The Gospel of God's Righteousness" },
   { title: "1 Corinthians Quiz", description: "Addressing church problems - Love, spiritual gifts, resurrection, Christian conduct", difficulty: "Intermediate", questions: 10, icon: BookOpen, color: "bg-green-500", link: "/public-quiz/1-corinthians", category: "Pauline Epistles", seoTitle: "1 Corinthians Bible Quiz - Addressing Church Problems" },
@@ -97,7 +98,7 @@ const featuredQuizzes = [
   { title: "2 Timothy Quiz", description: "Paul's final words - Endurance, sound doctrine, finishing the race, God's faithfulness", difficulty: "Intermediate", questions: 10, icon: BookOpen, color: "bg-lime-500", link: "/public-quiz/2-timothy", category: "Pauline Epistles", seoTitle: "2 Timothy Bible Quiz - Paul's Final Words" },
   { title: "Titus Quiz", description: "Church organization - Qualifications for elders, sound doctrine, good works", difficulty: "Intermediate", questions: 10, icon: BookOpen, color: "bg-emerald-500", link: "/public-quiz/titus", category: "Pauline Epistles", seoTitle: "Titus Bible Quiz - Church Organization" },
   { title: "Philemon Quiz", description: "A personal appeal - Forgiveness, Christian brotherhood, Paul's intercession", difficulty: "Beginner", questions: 10, icon: BookOpen, color: "bg-violet-500", link: "/public-quiz/philemon", category: "Pauline Epistles", seoTitle: "Philemon Bible Quiz - A Personal Appeal" },
-  
+
   // General Epistles (Hebrews to Jude) - All 8 books with 10 questions each
   { title: "Hebrews Quiz", description: "The superiority of Christ - New covenant, faith, and perseverance", difficulty: "Advanced", questions: 10, icon: Star, color: "bg-blue-500", link: "/public-quiz/hebrews", category: "General Epistles", seoTitle: "Hebrews Bible Quiz - The Superiority of Christ" },
   { title: "James Quiz", description: "Faith and works - Practical Christian living, wisdom, and trials", difficulty: "Intermediate", questions: 10, icon: BookOpen, color: "bg-green-500", link: "/public-quiz/james", category: "General Epistles", seoTitle: "James Bible Quiz - Faith and Works" },
@@ -107,7 +108,7 @@ const featuredQuizzes = [
   { title: "2 John Quiz", description: "Walking in truth and love - Warning against false teachers", difficulty: "Beginner", questions: 10, icon: BookOpen, color: "bg-yellow-500", link: "/public-quiz/2-john", category: "General Epistles", seoTitle: "2 John Bible Quiz - Walking in Truth and Love" },
   { title: "3 John Quiz", description: "Hospitality and support - Encouraging traveling teachers", difficulty: "Beginner", questions: 10, icon: BookOpen, color: "bg-teal-500", link: "/public-quiz/3-john", category: "General Epistles", seoTitle: "3 John Bible Quiz - Hospitality and Support" },
   { title: "Jude Quiz", description: "Contending for the faith - Warning against false teachers and apostasy", difficulty: "Intermediate", questions: 10, icon: BookOpen, color: "bg-indigo-500", link: "/public-quiz/jude", category: "General Epistles", seoTitle: "Jude Bible Quiz - Contending for the Faith" },
-  
+
   // Apocalyptic (Revelation) - 1 book with 10 questions
   { title: "Revelation Quiz", description: "The end times and final victory - Christ's return, judgment, and new creation", difficulty: "Advanced", questions: 10, icon: Shield, color: "bg-red-500", link: "/public-quiz/revelation", category: "Apocalyptic", seoTitle: "Revelation Bible Quiz - The End Times and Final Victory" }
 ];
@@ -158,23 +159,23 @@ export default function BibleQA() {
   const getDailyRandomQuizzes = () => {
     const today = new Date().toDateString(); // Get today's date as string
     const seed = today.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0); // Create seed from date
-    
+
     // Simple seeded random function
     const seededRandom = (seed: number) => {
       const x = Math.sin(seed) * 10000;
       return x - Math.floor(x);
     };
-    
+
     // Create a copy and shuffle using the daily seed
     const shuffled = [...featuredQuizzes].sort((a, b) => {
       const randomA = seededRandom(seed + a.title.charCodeAt(0));
       const randomB = seededRandom(seed + b.title.charCodeAt(0));
       return randomA - randomB;
     });
-    
+
     return shuffled.slice(0, 9);
   };
-  
+
   const randomFeaturedQuizzes = getDailyRandomQuizzes();
 
   // Get all books for search
@@ -191,17 +192,17 @@ export default function BibleQA() {
     ...bibleBooks.newTestament.Apocalyptic
   ];
 
-  const filteredBooks = allBooks.filter(book => 
+  const filteredBooks = allBooks.filter(book =>
     book.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleSearch = (book: string) => {
     // Find the corresponding quiz from featuredQuizzes
-    const quiz = featuredQuizzes.find(q => 
+    const quiz = featuredQuizzes.find(q =>
       q.title.toLowerCase().includes(book.toLowerCase()) ||
       book.toLowerCase().includes(q.title.toLowerCase().replace(' quiz', ''))
     );
-    
+
     if (quiz) {
       navigate(quiz.link);
     } else {
@@ -209,7 +210,7 @@ export default function BibleQA() {
       const link = `/bible-questions-and-answers-hub/${book.toLowerCase().replace(/ /g, '-')}`;
       navigate(link);
     }
-    
+
     // Add to recent searches
     if (!recentSearches.includes(book)) {
       setRecentSearches(prev => [book, ...prev.slice(0, 4)]);
@@ -239,6 +240,11 @@ export default function BibleQA() {
 
   return (
     <div className="min-h-screen bg-white">
+      <Helmet>
+        <title>Bible Q&A Hub | Bible Quiz Competition 2025</title>
+        <meta name="description" content="Explore our Bible Q&A Hub for comprehensive quizzes and study guides for every book of the Bible, from Genesis to Revelation." />
+        <link rel="canonical" href="https://biblequizcompetition.com/bible-questions-and-answers-hub" />
+      </Helmet>
       {/* Header */}
       <header className="relative flex items-center justify-between p-6 w-full px-6 md:px-8 lg:px-12">
         <div className="flex items-center space-x-8">
@@ -255,7 +261,7 @@ export default function BibleQA() {
           </nav>
         </div>
         <div className="flex items-center space-x-4">
-          <Button 
+          <Button
             className="bg-black hover:bg-gray-800 font-urbanist font-light"
             onClick={() => navigate("/auth/register")}
           >
@@ -286,7 +292,7 @@ export default function BibleQA() {
           <p className="text-xl font-urbanist font-light text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
             Search through 66 Bible books, take interactive quizzes, and challenge yourself with thousands of questions. Find exactly what you're looking for or explore new topics.
           </p>
-          
+
           {/* Search Bar */}
           <div className="max-w-2xl mx-auto mb-8">
             <div className="relative">
@@ -299,18 +305,18 @@ export default function BibleQA() {
                 className="pl-12 pr-4 py-4 text-lg font-urbanist font-light border border-gray-300 focus:border-gray-400 rounded-lg"
               />
             </div>
-            
+
             {/* Search Results */}
             {searchQuery && (
               <div className="mt-4 bg-white rounded-lg shadow-lg border border-gray-200 max-h-64 overflow-y-auto">
                 {filteredBooks.length > 0 ? (
                   filteredBooks.map((book) => {
                     // Find the corresponding quiz for this book
-                    const quiz = featuredQuizzes.find(q => 
+                    const quiz = featuredQuizzes.find(q =>
                       q.title.toLowerCase().includes(book.toLowerCase()) ||
                       book.toLowerCase().includes(q.title.toLowerCase().replace(' quiz', ''))
                     );
-                    
+
                     return (
                       <div
                         key={book}
@@ -425,10 +431,10 @@ export default function BibleQA() {
             {categories.map((category) => {
               const categoryQuizzes = featuredQuizzes.filter(quiz => quiz.category === category.name);
               const isClickable = categoryQuizzes.length > 0;
-              
+
               return (
                 <div key={category.name} className="bg-white rounded-lg border border-gray-200 p-6">
-                  <div 
+                  <div
                     className={`flex items-center space-x-3 mb-4 ${isClickable ? 'cursor-pointer hover:bg-gray-50 p-2 rounded-lg transition-colors' : ''}`}
                     onClick={isClickable ? () => handleCategoryClick(category.name) : undefined}
                   >
@@ -440,7 +446,7 @@ export default function BibleQA() {
                       <p className="text-sm font-urbanist font-light text-gray-600">{category.description}</p>
                     </div>
                   </div>
-                  
+
                   {categoryQuizzes.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {categoryQuizzes.map((quiz) => (
@@ -480,9 +486,9 @@ export default function BibleQA() {
             <DialogHeader>
               <div className="flex items-center justify-between">
                 <DialogTitle className="text-2xl font-urbanist font-semibold text-gray-900">{selectedCategory}</DialogTitle>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={() => setIsCategoryDialogOpen(false)}
                   className="h-8 w-8 p-0"
                 >
@@ -492,8 +498,8 @@ export default function BibleQA() {
             </DialogHeader>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
               {getBooksByCategory(selectedCategory).map((book) => (
-                <Card 
-                  key={book} 
+                <Card
+                  key={book}
                   className="border border-gray-200 hover:border-gray-400 transition-all duration-300 cursor-pointer group bg-white"
                   onClick={() => {
                     handleSearch(book);

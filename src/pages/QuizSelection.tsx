@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -246,6 +247,11 @@ const QuizSelection = () => {
       title="All Quizzes"
       subtitle="Browse and take quizzes to test your knowledge."
     >
+      <Helmet>
+        <title>All Bible Quizzes | Bible Quiz Competition 2025</title>
+        <meta name="description" content="Browse our collection of Bible quizzes for all difficulty levels. Categories include Old Testament, New Testament, Prophets, Gospels, and more." />
+        <link rel="canonical" href="https://biblequizcompetition.com/quiz-selection" />
+      </Helmet>
       {/* Dialog for quiz attempt restrictions */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>

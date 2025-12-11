@@ -20,6 +20,7 @@ const DefaultSEO = () => {
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
+      <link rel="canonical" href={siteUrl} />
       <script type="application/ld+json">{JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'Organization',

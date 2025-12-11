@@ -9,6 +9,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import NotificationBanner from "@/components/NotificationBanner";
 import { Analytics } from "@vercel/analytics/react"
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import PublicRoute from "@/components/PublicRoute";
 import Index from "./pages/homepages/Index";
 import CompetitionHome from "./pages/homepages/CompetitionHome";
 import SignUpToday from "./pages/SignUpToday";
@@ -310,11 +311,10 @@ const App = () => {
               <Route path="/daily-verse" element={<DailyVerse />} />
               <Route path="/prayer-requests" element={<PrayerRequests />} />
               <Route path="/sentry-test" element={<SentryTest />} />
-              <Route path="/auth/login" element={<Login />} />
-              <Route path="/auth/register" element={<Register />} />
-              <Route path="/auth/forgot-password" element={<ForgotPassword />} />
-              <Route path="/auth/reset-password" element={<ResetPassword />} />
-              <Route path="/auth/reset-password" element={<ResetPassword />} />
+              <Route path="/auth/login" element={<PublicRoute><Login /></PublicRoute>} />
+              <Route path="/auth/register" element={<PublicRoute><Register /></PublicRoute>} />
+              <Route path="/auth/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>} />
+              <Route path="/auth/reset-password" element={<PublicRoute><ResetPassword /></PublicRoute>} />
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
               <Route path="/dashboard/community" element={<ProtectedRoute><Community /></ProtectedRoute>} />
               <Route path="/dashboard/connections" element={<ProtectedRoute><Connections /></ProtectedRoute>} />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -42,6 +43,8 @@ const bibleBookModules = import.meta.glob('./bible-questions-and-answers-hub/*.t
 const Quiz = () => {
   const { quizId } = useParams<{ quizId: string }>();
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [quizTitle, setQuizTitle] = useState("");
+  const [quizDescription, setQuizDescription] = useState("");
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [answers, setAnswers] = useState<number[]>([]);
@@ -164,6 +167,20 @@ const Quiz = () => {
       .order('order_index');
 
     if (quizError) throw quizError;
+
+    // Fetch quiz metadata for SEO
+    const { data: quizData } = await supabase
+      .from('quizzes')
+      .select('title, description')
+      .eq('id', parseInt(quizId!))
+      .single();
+
+    if (quizData) {
+      setQuizTitle(quizData.title);
+      setQuizDescription(quizData.description || `Take the ${quizData.title} and test your Bible knowledge.`);
+    }
+
+
 
     if (!quizQuestions || quizQuestions.length === 0) {
       setDialogTitle("No questions found");
@@ -373,6 +390,25 @@ const Quiz = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <Helmet>
+        <title>{quizTitle ? `${quizTitle} | Bible Quiz Competition` : 'Bible Quiz'}</title>
+        <meta name="description" content={quizDescription || "Test your Bible knowledge with our interactive quizzes."} />
+        <link rel="canonical" href={`https://biblequizcompetition.com/quiz/${quizId}`} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Quiz",
+            "name": quizTitle,
+            "description": quizDescription,
+            "numberOfQuestions": questions.length,
+            "provider": {
+              "@type": "Organization",
+              "name": "Bible Quiz Competition",
+              "url": "https://biblequizcompetition.com"
+            }
+          })}
+        </script>
+      </Helmet>
       {/* Dialog for all notifications */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
