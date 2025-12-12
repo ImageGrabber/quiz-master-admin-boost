@@ -22,9 +22,10 @@ interface PublicQuizProps {
   title: string;
   questions: Question[];
   bookName: string;
+  chapter?: string;
 }
 
-const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
+const PublicQuiz = ({ title, questions, bookName, chapter }: PublicQuizProps) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [answers, setAnswers] = useState<number[]>([]);
@@ -42,7 +43,7 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
   useEffect(() => {
     if (timeLeft > 0 && !isCompleted && !isLoading) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
-      
+
       // Show time warnings
       if (timeLeft === 180) { // 3 minutes left
         setDialogTitle("⚠️ Time Warning");
@@ -61,7 +62,7 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
         setDialogMessage("Only 30 seconds left!");
         setDialogOpen(true);
       }
-      
+
       return () => clearTimeout(timer);
     } else if (timeLeft === 0) {
       handleQuizComplete();
@@ -119,7 +120,7 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
   if (isCompleted) {
     const score = calculateScore();
     const correctAnswers = answers.filter((answer, index) => answer === questions[index].answer).length;
-    
+
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
         <Header />
@@ -171,13 +172,12 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
                         {q.options.map((option, optionIndex) => (
                           <div
                             key={optionIndex}
-                            className={`p-2 rounded text-sm ${
-                              optionIndex === q.answer
-                                ? 'bg-green-100 text-green-800 font-semibold'
-                                : optionIndex === userAnswer && !isCorrect
+                            className={`p-2 rounded text-sm ${optionIndex === q.answer
+                              ? 'bg-green-100 text-green-800 font-semibold'
+                              : optionIndex === userAnswer && !isCorrect
                                 ? 'bg-red-100 text-red-800'
                                 : 'bg-gray-100 text-gray-700'
-                            }`}
+                              }`}
                           >
                             {String.fromCharCode(65 + optionIndex)}. {option}
                             {optionIndex === q.answer && <span className="ml-2">✓ Correct</span>}
@@ -206,15 +206,15 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   onClick={() => window.location.reload()}
                   className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
                 >
                   Retake Quiz
                 </Button>
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   variant="outline"
                   onClick={() => navigate('/')}
                   className="border-2 border-gray-300 hover:border-gray-400"
@@ -222,8 +222,8 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
                   <Home className="w-4 h-4 mr-2" />
                   Back to Home
                 </Button>
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   variant="outline"
                   onClick={() => navigate('/auth/register')}
                   className="border-2 border-green-300 text-green-600 hover:border-green-400 hover:bg-green-50"
@@ -293,7 +293,7 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
         <meta name="author" content="Bible Quiz Competition" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={`https://biblequizcompetition.com/public-quiz/${bookName.toLowerCase()}`} />
-        
+
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={`${title} - Free Bible Quiz`} />
@@ -303,13 +303,13 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
         <meta property="og:image" content="https://biblequizcompetition.com/og-image-bible-quiz.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        
+
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${title} - Free Bible Quiz`} />
         <meta name="twitter:description" content={`Test your knowledge of ${bookName} with this free interactive Bible quiz. ${questions.length} questions to challenge your understanding.`} />
         <meta name="twitter:image" content="https://biblequizcompetition.com/og-image-bible-quiz.jpg" />
-        
+
         {/* Structured Data */}
         <script type="application/ld+json">
           {JSON.stringify(generateStructuredData())}
@@ -336,15 +336,15 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
             </div>
             <Progress value={progress} className="mt-4 bg-white/20" />
           </CardHeader>
-          
+
           <CardContent className="p-8">
             {/* SEO-friendly content section */}
             <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
               <h1 className="text-2xl font-bold text-gray-900 mb-2">{title}</h1>
               <p className="text-gray-700 mb-2">
-                Test your knowledge of {bookName} with this comprehensive Bible quiz. 
-                This interactive quiz contains {questions.length} carefully crafted questions 
-                covering key events, characters, and teachings from the book of {bookName}.
+                Test your knowledge of {bookName}{chapter ? ` Chapter ${chapter}` : ''} with this comprehensive Bible quiz.
+                This interactive quiz contains {questions.length} carefully crafted questions
+                covering key events, characters, and teachings from {bookName}{chapter ? ` Chapter ${chapter}` : ''}.
               </p>
               <div className="flex flex-wrap gap-2 text-sm text-blue-600">
                 <span className="bg-blue-100 px-2 py-1 rounded">Free Bible Quiz</span>
@@ -368,7 +368,7 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
                 className="mb-6"
               />
             </div>
-            
+
             <div className="mb-8">
               <h2 className="text-xl font-semibold text-gray-900 mb-6">{currentQ.question}</h2>
               <div className="space-y-3">
@@ -376,11 +376,10 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
                   <button
                     key={index}
                     onClick={() => handleAnswerSelect(index)}
-                    className={`w-full p-4 text-left rounded-lg border-2 transition-all duration-200 ${
-                      selectedAnswer === index
-                        ? 'border-blue-500 bg-blue-50 text-blue-900'
-                        : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'
-                    }`}
+                    className={`w-full p-4 text-left rounded-lg border-2 transition-all duration-200 ${selectedAnswer === index
+                      ? 'border-blue-500 bg-blue-50 text-blue-900'
+                      : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50'
+                      }`}
                   >
                     <span className="font-medium">{String.fromCharCode(65 + index)}. {option}</span>
                   </button>
@@ -403,17 +402,17 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
             </div>
           </CardContent>
         </Card>
-        
+
         {/* SEO-friendly footer content */}
         <div className="mt-8 max-w-6xl mx-auto">
           <Card className="shadow-lg border-0">
             <CardContent className="p-6">
-              <h3 className="text-xl font-bold text-gray-900 mb-4">About This {bookName} Quiz</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">About This {bookName}{chapter ? ` Chapter ${chapter}` : ''} Quiz</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="font-semibold text-gray-800 mb-2">What You'll Learn</h4>
                   <ul className="text-sm text-gray-600 space-y-1">
-                    <li>• Key events and stories from {bookName}</li>
+                    <li>• Key events and stories from {bookName}{chapter ? ` Chapter ${chapter}` : ''}</li>
                     <li>• Important characters and their roles</li>
                     <li>• Biblical teachings and principles</li>
                     <li>• Historical context and significance</li>
@@ -431,8 +430,8 @@ const PublicQuiz = ({ title, questions, bookName }: PublicQuizProps) => {
               </div>
               <div className="mt-4 p-4 bg-gray-50 rounded-lg">
                 <p className="text-sm text-gray-700">
-                  <strong>Perfect for:</strong> Bible study groups, Sunday school classes, personal study, 
-                  and anyone wanting to test their knowledge of {bookName}. This quiz is designed to 
+                  <strong>Perfect for:</strong> Bible study groups, Sunday school classes, personal study,
+                  and anyone wanting to test their knowledge of {bookName}. This quiz is designed to
                   challenge both beginners and advanced Bible students.
                 </p>
               </div>

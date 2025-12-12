@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { articles } from '../src/data/articles.js';
+import { bibleStructure } from '../src/data/bibleData.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -9,7 +11,7 @@ const __dirname = path.dirname(__filename);
 function generateSitemap() {
   const baseUrl = 'https://biblequizcompetition.com';
   const currentDate = new Date().toISOString().split('T')[0];
-  
+
   const urls = [
     // Main pages
     { loc: '/', priority: '1.0', changefreq: 'weekly' },
@@ -68,30 +70,25 @@ function generateSitemap() {
   });
 
   // Article pages
-  const articles = [
-    'complete-quiz-guide', 'quiz-strategies', 'leaderboard-tips',
-    'david-king-israel', 'moses-exodus-story', 'esther-courage-story',
-    'understanding-grace', 'prayer-life-guide', 'quiz-time-management',
-    'bible-study-methods', 'quiz-navigation-guide', 'quiz-scoring-explained',
-    'quiz-difficulty-levels', 'quiz-feedback-system', 'quiz-progress-tracking',
-    'memory-techniques-quiz', 'quiz-anxiety-management', 'question-pattern-recognition',
-    'quiz-concentration-techniques', 'quiz-recovery-strategies', 'competition-preparation',
-    'team-quiz-strategies', 'competition-psychology', 'competition-etiquette',
-    'post-competition-analysis', 'moses-leadership-lessons', 'esther-strategic-wisdom',
-    'abraham-faith-journey', 'joseph-forgiveness-story', 'ruth-loyalty-devotion',
-    'forgiveness-healing-power', 'hope-biblical-perspective', 'love-gods-greatest-commandment',
-    'faith-works-james', 'peace-gods-promise', 'scripture-memorization-techniques',
-    'inductive-bible-study', 'bible-study-journaling', 'group-bible-study-leading',
-    'bible-study-technology'
-  ];
-
+  // Article pages
   articles.forEach(article => {
     urls.push({
-      loc: `/articles/${article}`,
+      loc: `/articles/${article.id}`,
       priority: '0.8',
       changefreq: 'monthly'
     });
   });
+
+  // Programmatic Chapter Quizzes
+  for (const [book, chapters] of Object.entries(bibleStructure)) {
+    for (let i = 1; i <= chapters; i++) {
+      urls.push({
+        loc: `/public-quiz/${book}/chapter-${i}`,
+        priority: '0.7',
+        changefreq: 'monthly'
+      });
+    }
+  }
 
   // Generate XML sitemap
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -113,7 +110,7 @@ function generateSitemap() {
   // Write sitemap to public directory
   const sitemapPath = path.join(__dirname, '../public/sitemap.xml');
   fs.writeFileSync(sitemapPath, sitemap);
-  
+
   console.log(`Generated sitemap with ${urls.length} URLs`);
   console.log(`Sitemap saved to: ${sitemapPath}`);
 }

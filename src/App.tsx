@@ -143,6 +143,7 @@ import John2PublicQuiz from "./pages/public-quizzes/2JohnPublicQuiz";
 import John3PublicQuiz from "./pages/public-quizzes/3JohnPublicQuiz";
 import JudePublicQuiz from "./pages/public-quizzes/JudePublicQuiz";
 import RevelationPublicQuiz from "./pages/public-quizzes/RevelationPublicQuiz";
+import PublicQuizChapter from "./pages/public-quizzes/PublicQuizChapter";
 // Removed static imports of Bible book quiz files for code-splitting
 import Upgrade from "./pages/Upgrade";
 import PageViews from "./pages/admin/PageViews";
@@ -409,6 +410,7 @@ const App = () => {
               <Route path="/public-quiz/3-john" element={<John3PublicQuiz />} />
               <Route path="/public-quiz/jude" element={<JudePublicQuiz />} />
               <Route path="/public-quiz/revelation" element={<RevelationPublicQuiz />} />
+              <Route path="/public-quiz/:book/:chapter" element={<PublicQuizChapter />} />
               <Route path="/competitions" element={<ProtectedRoute><Competitions /></ProtectedRoute>} />
               <Route path="/competition-quiz/:competitionId" element={<ProtectedRoute><CompetitionQuiz /></ProtectedRoute>} />
               <Route path="/competition-leaderboard/:competitionId" element={<ProtectedRoute><CompetitionLeaderboard /></ProtectedRoute>} />
