@@ -12,10 +12,10 @@ serve(async (req) => {
   }
 
   try {
-    const { 
-      email, 
-      userName, 
-      subject, 
+    const {
+      email,
+      userName,
+      subject,
       message,
       emailType = 'custom'
     } = await req.json()
@@ -244,40 +244,79 @@ serve(async (req) => {
 
     const emailContent = getEmailContent(emailType, userName, subject, message)
 
-    // Send email using Brevo SMTP API
+    // Try Resend first
+    const resendApiKey = Deno.env.get('RESEND_API_KEY')
     const brevoApiKey = Deno.env.get('BREVO_API_KEY')
-    if (!brevoApiKey) throw new Error('BREVO_API_KEY environment variable not set')
-    
-    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'api-key': brevoApiKey,
-      },
-      body: JSON.stringify({
-        sender: { 
-          email: 'noreply@biblequizcompetition.com', 
-          name: 'Bible Quiz Competition' 
-        },
-        to: [{ email: email }],
-        subject: subject,
-        htmlContent: emailContent,
-        textContent: emailContent.replace(/<[^>]*>/g, ''), // Strip HTML tags for text version
-      }),
-    })
 
-    const data = await response.json()
-    if (!response.ok) throw new Error(data.message || 'Failed to send email via Brevo SMTP')
+    let result;
+    let provider = 'none';
+
+    if (resendApiKey) {
+      console.log('Using Resend Provider');
+      const res = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${resendApiKey}`
+        },
+        body: JSON.stringify({
+          from: 'Bible Quiz Competition <onboarding@resend.dev>', // Default Resend testing sender
+          to: [email],
+          subject: subject,
+          html: emailContent
+        })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        console.error('Resend Error:', data);
+        if (!brevoApiKey) throw new Error(data.message || 'Failed to send via Resend');
+      } else {
+        result = data;
+        provider = 'resend';
+      }
+    }
+
+    // Fallback to Brevo if Resend failed or not configured
+    if (provider === 'none' && brevoApiKey) {
+      console.log('Using Brevo Provider');
+      const res = await fetch('https://api.brevo.com/v3/smtp/email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'api-key': brevoApiKey,
+        },
+        body: JSON.stringify({
+          sender: {
+            email: 'noreply@biblequizcompetition.com',
+            name: 'Bible Quiz Competition'
+          },
+          to: [{ email: email }],
+          subject: subject,
+          htmlContent: emailContent,
+          textContent: emailContent.replace(/<[^>]*>/g, ''),
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Failed to send email via Brevo SMTP');
+      result = data;
+      provider = 'brevo-smtp';
+    }
+
+    if (provider === 'none') {
+      throw new Error('No email provider configured (RESEND_API_KEY or BREVO_API_KEY not set)');
+    }
 
     return new Response(
       JSON.stringify({
         success: true,
-        message: 'Admin email sent successfully via SMTP',
+        message: `Admin email sent successfully via ${provider}`,
         email: email,
         subject: subject,
         emailType: emailType,
-        provider: 'brevo-smtp',
-        messageId: data.messageId
+        provider: provider,
+        data: result
       }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -287,7 +326,7 @@ serve(async (req) => {
 
   } catch (error) {
     console.error('Error in send-admin-email function:', error)
-    
+
     return new Response(
       JSON.stringify({
         success: false,

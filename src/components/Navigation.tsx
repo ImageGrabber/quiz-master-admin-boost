@@ -74,6 +74,7 @@ export function Navigation() {
 
         <nav className="hidden md:flex items-center space-x-6">
           <button onClick={() => navigate("/bible-questions-and-answers-hub")} className="text-base md:text-lg text-gray-600 hover:text-gray-900 font-urbanist font-light">Bible Q&A</button>
+
           <button onClick={() => navigate("/articles")} className="text-base md:text-lg text-gray-600 hover:text-gray-900 font-urbanist font-light">Articles</button>
           <button onClick={() => navigate("/help")} className="text-base md:text-lg text-gray-600 hover:text-gray-900 font-urbanist font-light">Help</button>
 
@@ -143,6 +144,7 @@ export function Navigation() {
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-6 right-6 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 flex flex-col">
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A</button>
+
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>Help</button>
 

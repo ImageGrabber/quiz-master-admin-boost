@@ -144,6 +144,11 @@ import John3PublicQuiz from "./pages/public-quizzes/3JohnPublicQuiz";
 import JudePublicQuiz from "./pages/public-quizzes/JudePublicQuiz";
 import RevelationPublicQuiz from "./pages/public-quizzes/RevelationPublicQuiz";
 import PublicQuizChapter from "./pages/public-quizzes/PublicQuizChapter";
+import HardBibleQuizForTeens from "./pages/seo-quizzes/HardBibleQuizForTeens";
+import BibleTriviaForKids from "./pages/seo-quizzes/BibleTriviaForKids";
+import BookOfJohnQuizQuestions from "./pages/seo-quizzes/BookOfJohnQuizQuestions";
+import Songs from "./pages/Songs";
+import SongDetail from "./pages/SongDetail";
 // Removed static imports of Bible book quiz files for code-splitting
 import Upgrade from "./pages/Upgrade";
 import PageViews from "./pages/admin/PageViews";
@@ -332,6 +337,11 @@ const App = () => {
               <Route path="/host-live-bible-quizzes-with-confidence" element={<HostingGuide />} />
               {/* Backward-compatible old path */}
               <Route path="/hosting-guide" element={<HostingGuide />} />
+              <Route path="/hard-bible-quiz-for-teens" element={<HardBibleQuizForTeens />} />
+              <Route path="/bible-trivia-for-kids-under-10" element={<BibleTriviaForKids />} />
+              <Route path="/book-of-john-quiz-questions" element={<BookOfJohnQuizQuestions />} />
+              <Route path="/songs" element={<Songs />} />
+              <Route path="/songs/:slug" element={<SongDetail />} />
               <Route path="/live-quiz/host/:quizId" element={<LiveQuizHost />} />
               <Route path="/live-quiz/join/:sessionCode" element={<LiveQuizParticipant />} />
               <Route path="/live-quiz/health-check" element={<ProtectedRoute requiredRole="admin"><LiveQuizHealthCheck /></ProtectedRoute>} />
