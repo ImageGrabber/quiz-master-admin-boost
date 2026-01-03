@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell } from "recharts";
-import { Brain, Trophy, Flame, Target, TrendingUp, BookOpen, Clock } from "lucide-react";
+import { Brain, Trophy, Flame, Target, TrendingUp, BookOpen, Clock, PlayCircle, PlusCircle, LayoutList } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { startOfMonth, format, subMonths, startOfWeek, addDays, isSameDay, subDays, differenceInDays } from "date-fns";
 
@@ -231,6 +232,31 @@ const Dashboard = () => {
             subtitle="Welcome back! Here's your learning overview."
         >
             <div className="max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
+
+                {/* Quick Navigation Links */}
+                <div className="grid grid-cols-2 gap-4">
+                    <Link to="/quiz-selection">
+                        <Card className="hover:bg-slate-50 transition-colors cursor-pointer border-slate-200 shadow-sm h-full group">
+                            <CardContent className="flex flex-col items-center justify-center p-6 text-center space-y-3">
+                                <div className="p-3 bg-blue-100 rounded-full group-hover:bg-blue-200 transition-colors">
+                                    <PlayCircle className="w-6 h-6 text-blue-600" />
+                                </div>
+                                <span className="font-medium text-slate-700">Take a Quiz</span>
+                            </CardContent>
+                        </Card>
+                    </Link>
+
+                    <Link to="/leaderboard">
+                        <Card className="hover:bg-slate-50 transition-colors cursor-pointer border-slate-200 shadow-sm h-full group">
+                            <CardContent className="flex flex-col items-center justify-center p-6 text-center space-y-3">
+                                <div className="p-3 bg-amber-100 rounded-full group-hover:bg-amber-200 transition-colors">
+                                    <Trophy className="w-6 h-6 text-amber-600" />
+                                </div>
+                                <span className="font-medium text-slate-700">Leaderboard</span>
+                            </CardContent>
+                        </Card>
+                    </Link>
+                </div>
 
                 {/* Stats Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

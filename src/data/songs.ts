@@ -1012,4 +1012,133 @@ export const songs: Song[] = [
             }
         }
     },
+    {
+        id: "gin-gin-ke-stuthi-karu",
+        slug: "gin-gin-ke-stuthi-karu",
+        title: "Gin Gin Ke Stuthi Karu",
+        videoUrl: "https://www.youtube.com/embed/0iKUxiCfq_4",
+        description: "Hindi Christian Devotional Song Lyrics",
+        translations: {
+            hindi: {
+                lang: "Hindi (Transliterated)",
+                lyrics: [
+                    {
+                        lines: [
+                            "Gin gin ke stuti karoon",
+                            "Beshumaar tere daanon ke lie",
+                            "Abb tak toone sambhaala mujhe",
+                            "Apanee baahon mein liye huai"
+                        ]
+                    },
+                    {
+                        verse: "1",
+                        lines: [
+                            "Tere shatru ka nishaana",
+                            "Tujh par hoga na saphal",
+                            "Aankhon kee putalee jaise",
+                            "Vo rakhega tujhe har pal"
+                        ]
+                    },
+                    {
+                        verse: "2",
+                        lines: [
+                            "Aadhiyaan ban ke aaye",
+                            "Zindagee ke phikar",
+                            "Kaun hai tera khevanahaara",
+                            "Hai bharosa tera kidhar"
+                        ]
+                    },
+                    {
+                        verse: "3",
+                        lines: [
+                            "Aaye tujhe jo mitaane",
+                            "Ve shastr hogen be asar",
+                            "Tera rachanevaala tujh par",
+                            "Rakhata hai apanee najar"
+                        ]
+                    }
+                ]
+            },
+            english: {
+                lang: "English",
+                lyrics: [
+                    {
+                        lines: [
+                            "I will praise You one by one",
+                            "For Your countless gifts to me",
+                            "You have sustained me until now",
+                            "Holding me within Your arms"
+                        ]
+                    },
+                    {
+                        verse: "1",
+                        lines: [
+                            "The target of your enemy",
+                            "Will not prosper against you",
+                            "Like the apple of His eye",
+                            "He will keep you every moment"
+                        ]
+                    },
+                    {
+                        verse: "2",
+                        lines: [
+                            "Though they come like storms",
+                            "The worries of this life",
+                            "Who is your Helmsman and Guide",
+                            "Where have you placed your trust?"
+                        ]
+                    },
+                    {
+                        verse: "3",
+                        lines: [
+                            "Those who come to destroy you",
+                            "Those weapons will have no effect",
+                            "Your Creator keeps His watch",
+                            "Fixed steadily upon you"
+                        ]
+                    }
+                ]
+            },
+            hindiOriginal: {
+                lang: "Hindi",
+                lyrics: [
+                    {
+                        lines: [
+                            "गिन गिन के स्तुति करूँ",
+                            "बेशुमार तेरे दानों के लिए",
+                            "अब तक तूने सम्भाला मुझे",
+                            "अपनी बाहों में लिये हुऐ"
+                        ]
+                    },
+                    {
+                        verse: "1",
+                        lines: [
+                            "तेरे शत्रु का निशाना",
+                            "तुझ पर होगा न सफल",
+                            "आँखों की पुतली जैसे",
+                            "वो रखेगा तुझे हर पल"
+                        ]
+                    },
+                    {
+                        verse: "2",
+                        lines: [
+                            "आधियाँ बन के आये",
+                            "ज़िन्दगी के फिकर",
+                            "कौन है तेरा खेवनहारा",
+                            "है भरोसा तेरा किधर"
+                        ]
+                    },
+                    {
+                        verse: "3",
+                        lines: [
+                            "आये तुझे जो मिटाने",
+                            "वे शस्त्र होगें बे असर",
+                            "तेरा रचनेवाला तुझ पर",
+                            "रखता है अपनी नजर"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
 ];
