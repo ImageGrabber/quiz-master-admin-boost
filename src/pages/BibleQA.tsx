@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
 import { Trophy, Search, BookOpen, Users, Target, TrendingUp, Star, Clock, Zap, BookMarked, Heart, Award, Lightbulb, Globe, Shield, Crown, X, Menu, Brain } from "lucide-react";
@@ -240,11 +240,27 @@ export default function BibleQA() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Helmet>
-        <title>Bible Q&A Hub | Bible Quiz Competition 2025</title>
-        <meta name="description" content="Explore our Bible Q&A Hub for comprehensive quizzes and study guides for every book of the Bible, from Genesis to Revelation." />
-        <link rel="canonical" href="https://biblequizcompetition.com/bible-questions-and-answers-hub" />
-      </Helmet>
+      <SEO
+        title="Bible Q&A Hub | Bible Quiz Competition 2025"
+        description="Explore our Bible Q&A Hub for comprehensive quizzes and study guides for every book of the Bible, from Genesis to Revelation."
+        url="/bible-questions-and-answers-hub"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          "name": "Bible Q&A Hub",
+          "description": "Comprehensive Bible quizzes and study guides for every book of the Bible.",
+          "url": "https://biblequizcompetition.com/bible-questions-and-answers-hub",
+          "mainEntity": {
+            "@type": "ItemList",
+            "itemListElement": featuredQuizzes.map((quiz, index) => ({
+              "@type": "ListItem",
+              "position": index + 1,
+              "url": `https://biblequizcompetition.com${quiz.link}`,
+              "name": quiz.title
+            }))
+          }
+        }}
+      />
       {/* Header */}
       <header className="relative flex items-center justify-between p-6 w-full px-6 md:px-8 lg:px-12">
         <div className="flex items-center space-x-8">

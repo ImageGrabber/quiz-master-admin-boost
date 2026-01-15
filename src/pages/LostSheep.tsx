@@ -6,6 +6,7 @@ import { ArrowLeft, Trophy, RefreshCw, Home, Users, Sparkles, CheckCircle } from
 import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 import { MatchmakingScreen } from "@/components/MatchmakingScreen";
+import SEO from "@/components/SEO";
 
 interface CardItem {
     id: string;
@@ -375,6 +376,11 @@ const LostSheep = () => {
 
     return (
         <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-between p-4 relative overflow-hidden">
+            <SEO
+                title="Lost Sheep Game | Bible Quiz Competition"
+                description="Play the Lost Sheep game! Find pairs of biblical animals and avoid being left with the Lost Sheep. A fun educational Bible game."
+                url="/lost-sheep"
+            />
             {/* Background Effects */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-20 left-10 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl animate-pulse"></div>

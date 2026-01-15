@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, BookOpen, Trophy, Sparkles, Brain, Clock, Mail, Star, Users, Calendar, TrendingUp, ChevronLeft, ChevronRight, Quote, Zap, Globe, Gamepad2 } from 'lucide-react';
 
-import { Helmet } from 'react-helmet';
+import SEO from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 import { Navigation } from "@/components/Navigation";
+import CommunityHeroWidget from "@/components/CommunityHeroWidget";
+
 
 const CompetitionHome = () => {
   const navigate = useNavigate();
@@ -371,52 +373,46 @@ const CompetitionHome = () => {
 
   return (
     <>
-      <Helmet>
-        {/* Simplified SEO for cleaner code - can keep original full tags if preferred, but keeping minimal here for logic focus */}
-        <title>Bible Quiz Competition 2025 | Play Daily</title>
-        <meta name="description" content="Join the Bible Quiz Competition 2025. Engage in daily Bible quizzes, test your knowledge, win prizes, and join a global community." />
-      </Helmet>
+      <SEO
+        title="Bible Quiz Competition 2025 | Play Daily"
+        description="Join the Bible Quiz Competition 2025. Engage in daily Bible quizzes, test your knowledge, win prizes, and join a global community."
+      />
 
       <div className="min-h-screen bg-slate-50 font-urbanist">
         <Navigation />
 
         {/* Hero Section */}
         <section className="relative min-h-[90vh] flex items-center pt-24 lg:pt-0 px-6 overflow-hidden bg-slate-50">
-          {/* Refined Background - Sleeker */}
+          {/* Refined Background - Sleeker with Pattern */}
           <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
             <div className="absolute top-0 right-0 w-[80vw] h-[80vw] bg-gradient-to-br from-blue-100/30 via-violet-100/20 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
             <div className="absolute bottom-0 left-0 w-[60vw] h-[60vw] bg-gradient-to-tr from-indigo-100/30 via-purple-100/20 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
           </div>
 
           <div className="max-w-7xl mx-auto w-full relative z-10">
-            <div className="flex flex-col items-center gap-12 lg:gap-20 text-center">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
 
-              {/* Center Content */}
-              <div className="max-w-4xl mx-auto text-center space-y-10">
-                <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white border border-slate-200 shadow-sm animate-fade-in-up hover:shadow-md transition-shadow duration-300">
-                  <span className="relative flex h-2.5 w-2.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
-                  </span>
-                  <span className="text-sm font-semibold tracking-wide uppercase text-slate-600">Live Challenge</span>
+              {/* Center Content - Now spans 3 columns (60%) */}
+              <div className="lg:col-span-3 flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
+                <div>
+                  <h1 className="text-2xl lg:text-3xl font-semibold font-inter-tight text-slate-500 tracking-tight mb-4">
+                    Online Bible Quiz Competition 2025
+                  </h1>
+
+                  <h2 className="text-5xl lg:text-7xl font-bold text-slate-900 tracking-tight leading-[1.05] drop-shadow-sm">
+                    Master the Word,<br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-violet-600 to-indigo-600">
+                      Join the Glory.
+                    </span>
+                  </h2>
                 </div>
 
-                <h1 className="text-2xl lg:text-3xl font-semibold font-inter-tight text-slate-500 tracking-tight mb-4">
-                  Online Bible Quiz Competition 2025
-                </h1>
-
-                <h2 className="text-6xl lg:text-8xl font-bold text-slate-900 tracking-tight leading-[1.05] drop-shadow-sm">
-                  Master the Word,<br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-violet-600 to-indigo-600">
-                    Join the Glory.
-                  </span>
-                </h2>
-
-                <p className="text-xl text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
+                <p className="text-xl text-slate-500 font-light max-w-xl mx-auto lg:mx-0 leading-relaxed">
                   Join thousands of believers in the ultimate online Bible quiz competition 2025. Test your knowledge as a Bible Challenger, track your growth, and compete for amazing prizes.
                 </p>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
                   <Button
                     onClick={() => navigate('/auth/login')}
                     className="h-14 px-8 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
@@ -431,22 +427,13 @@ const CompetitionHome = () => {
                     Play Scripture Game <Gamepad2 className="ml-2 w-5 h-5" />
                   </Button>
                 </div>
-
-                {/* Social Proof */}
-                <div className="pt-6 flex items-center justify-center gap-4 text-sm text-slate-400">
-                  <div className="flex -space-x-3">
-                    {[1, 2, 3, 4].map((i) => (
-                      <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center overflow-hidden shadow-sm">
-                        <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" className="w-full h-full object-cover" />
-                      </div>
-                    ))}
-                    <div className="w-10 h-10 rounded-full border-2 border-white bg-white flex items-center justify-center text-xs font-bold text-slate-600 shadow-sm">
-                      +2k
-                    </div>
-                  </div>
-                  <p className="font-medium">Join 2,000+ active players today</p>
-                </div>
               </div>
+
+              {/* Community Widget - Spans 2 columns (40% width) and taller */}
+              <div className="lg:col-span-2 h-[600px] w-full animate-in fade-in slide-in-from-right-8 duration-700 delay-300">
+                <CommunityHeroWidget />
+              </div>
+
             </div>
           </div>
         </section >

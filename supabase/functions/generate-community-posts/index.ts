@@ -39,6 +39,10 @@ serve(async (req) => {
         // This supports the "random name" requirement perfectly.
 
         // Create new Auth User
+        // 2. Find or Create Profile (and Auth User if needed)
+        // ... (existing user creation logic remains same) ...
+
+        // ... (Creating new bot user logic) ...
         console.log(`Creating new bot user: ${randomName}`);
         const email = `bot_${Date.now()}_${Math.random().toString(36).substring(7)}@example.com`;
         const { data: authData, error: authError } = await supabase.auth.admin.createUser({
@@ -60,29 +64,45 @@ serve(async (req) => {
                 email: email,
                 role: 'bot',
                 plan: 'free'
-                // We assume avatar_url is handled by UI falling back to DiceBear with seed=full_name
-                // If we need to store it explicitly:
-                // avatar_url: `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(randomName)}`
             })
 
         if (profileError) {
             console.error("Error creating profile:", profileError);
-            // Try to clean up auth user if profile creation fails? 
-            // For now, just throw
             throw profileError;
         }
         console.log(`Created new bot profile: ${userId}`);
 
-        // 3. Generate Content with Mistral
-        const systemPrompt = `You are a helpful, encouraging member of a Christian Bible study community using the display name "${randomName}".
-    Write a short community post (under 280 characters).
-    Topics can be:
-    - A short Bible verse (cite it).
-    - A brief prayer request or prayer.
-    - A word of encouragement.
-    - A spiritual thought for the day.
-    - "Who wants to join a quiz?" call to action.
-    Do NOT include hashtags unless relevant. Do NOT start with "Here is a post:". Just output the content directly.`;
+        // 3. Fetch Recent Posts to Avoid Duplicates
+        const { data: recentPosts } = await supabase
+            .from('posts')
+            .select('content')
+            .order('created_at', { ascending: false })
+            .limit(10);
+
+        const recentContent = recentPosts?.map(p => p.content).filter(Boolean) || [];
+
+        // 4. Randomized Topics & Context
+        const topics = [
+            "Faith in difficult times", "Gratitude for small things", "The power of prayer",
+            "Forgiveness", "Serving others", "Hope for the future", "God's promises",
+            "Unity in the church", "Overcoming fear", "Joy in the Lord"
+        ];
+        const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+
+        const emotions = ["encouraging", "reflective", "joyful", "compassionate", "resolute"];
+        const randomEmotion = emotions[Math.floor(Math.random() * emotions.length)];
+
+        // 5. Generate Content with Mistral
+        let systemPrompt = `You are a helpful, ${randomEmotion} member of a Christian Bible study community using the display name "${randomName}".
+    Write a short community post (under 280 characters) about: ${randomTopic}.
+    
+    Guidelines:
+    - Include a Bible verse reference if appropriate (doesn't have to be the whole verse text).
+    - Be natural and conversational.
+    - Do NOT start with "Here is a post" or quotes.
+    - Do strictly NOT use any of the following recent posts content:
+    ${recentContent.map(c => `- "${c}"`).join('\n')}
+    `;
 
         const mistralResponse = await fetch('https://api.mistral.ai/v1/chat/completions', {
             method: 'POST',
@@ -92,9 +112,10 @@ serve(async (req) => {
             },
             body: JSON.stringify({
                 model: 'mistral-small-latest',
+                temperature: 0.9,
                 messages: [
                     { role: 'system', content: systemPrompt },
-                    { role: 'user', content: "Write a post now." }
+                    { role: 'user', content: "Write a unique post now." }
                 ]
             })
         });
@@ -104,7 +125,7 @@ serve(async (req) => {
 
         const content = mistralData.choices[0].message.content.trim().replace(/^"|"$/g, '');
 
-        // 4. Insert Post
+        // 6. Insert Post
         const { error: postError } = await supabase
             .from('posts')
             .insert({
