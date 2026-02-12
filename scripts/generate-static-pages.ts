@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { articles } from '../src/data/articles.js';
-import { bibleStructure, bookNames } from '../src/data/bibleData.js';
+import { bibleStructure, bookNames } from '../src/data/bible-data.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
