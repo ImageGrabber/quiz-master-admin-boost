@@ -17,7 +17,7 @@ export const Footer = () => {
                 </div>
 
                 <div className="text-sm text-slate-400">
-                    © 2025 All rights reserved.
+                    © 2025-2026 All rights reserved.
                 </div>
             </div>
         </footer>

@@ -145,6 +145,10 @@ import JudePublicQuiz from "./pages/public-quizzes/JudePublicQuiz";
 import RevelationPublicQuiz from "./pages/public-quizzes/RevelationPublicQuiz";
 import PublicQuizChapter from "./pages/public-quizzes/PublicQuizChapter";
 import HardBibleQuizForTeens from "./pages/seo-quizzes/HardBibleQuizForTeens";
+import BibleQuizQuestionsAndAnswers from "./pages/seo-quizzes/BibleQuizQuestionsAndAnswers";
+import HardestBibleTrivia from "./pages/seo-quizzes/HardestBibleTrivia";
+import BibleQuizForYouth from "./pages/seo-quizzes/BibleQuizForYouth";
+import RulesAndPrizes from "./pages/seo-quizzes/RulesAndPrizes";
 import BibleTriviaForKids from "./pages/seo-quizzes/BibleTriviaForKids";
 import BookOfJohnQuizQuestions from "./pages/seo-quizzes/BookOfJohnQuizQuestions";
 import Songs from "./pages/Songs";
@@ -337,6 +341,13 @@ const App = () => {
               <Route path="/host-live-bible-quizzes-with-confidence" element={<HostingGuide />} />
               {/* Backward-compatible old path */}
               <Route path="/hosting-guide" element={<HostingGuide />} />
+              import RulesAndPrizes from "./pages/seo-quizzes/RulesAndPrizes";
+
+              // ... inside Routes ...
+              <Route path="/rules-and-prizes" element={<RulesAndPrizes />} />
+              <Route path="/bible-quiz-questions-and-answers" element={<BibleQuizQuestionsAndAnswers />} />
+              <Route path="/hardest-bible-trivia-questions" element={<HardestBibleTrivia />} />
+              <Route path="/bible-quiz-with-answers-for-youth" element={<BibleQuizForYouth />} />
               <Route path="/hard-bible-quiz-for-teens" element={<HardBibleQuizForTeens />} />
               <Route path="/bible-trivia-for-kids-under-10" element={<BibleTriviaForKids />} />
               <Route path="/book-of-john-quiz-questions" element={<BookOfJohnQuizQuestions />} />

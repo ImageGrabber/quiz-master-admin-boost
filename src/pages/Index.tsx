@@ -81,7 +81,7 @@ function EmotionalCheckInHero() {
   const [cardDirection, setCardDirection] = useState<'left' | 'right' | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const glassRef = useRef<HTMLDivElement>(null);
-  
+
   // Thought Record state
   const [isThoughtRecordOpen, setIsThoughtRecordOpen] = useState(false);
   const [thoughtRecordStep, setThoughtRecordStep] = useState(1);
@@ -139,7 +139,7 @@ function EmotionalCheckInHero() {
   useEffect(() => {
     const currentRetryCount = getRetryCount();
     setRetryCount(currentRetryCount);
-    
+
     // Always reset game-related states on mount to prevent auto-showing
     // This ensures users start fresh each time they visit the page
     // Use a small timeout to ensure this runs after any other initialization
@@ -154,13 +154,13 @@ function EmotionalCheckInHero() {
       setMemoryMoves(0);
       setSelectedGameType(null);
     };
-    
+
     // Reset immediately
     resetGameStates();
-    
+
     // Also reset after a brief delay to catch any race conditions
     const timeoutId = setTimeout(resetGameStates, 100);
-    
+
     return () => clearTimeout(timeoutId);
   }, []); // Run once on mount to check for day change
 
@@ -172,7 +172,7 @@ function EmotionalCheckInHero() {
         const randomType = Math.random() < 0.5 ? 'memory' : 'runner';
         setSelectedGameType(randomType);
       }
-      
+
       const game = getBibleGameActivity(selectedEmotion, selectedGameType || undefined);
       // Reset all game states
       setMatches(0);
@@ -195,20 +195,20 @@ function EmotionalCheckInHero() {
       runnerCollectedRef.current = [];
       scoreRef.current = 0;
       lastSpawnTimeRef.current = Date.now();
-      
+
       // Initialize match-3 grid
       if (game.type === 'match3') {
         const gridWords = [...game.words, ...game.words, ...game.words].slice(0, 9);
         setMatch3Grid(gridWords);
       }
-      
+
       // Initialize puzzle tiles
       if (game.type === 'puzzle') {
         const text = game.puzzleText;
         const chars = text.split('').filter(c => c !== ' ');
         setPuzzleTiles([...chars, ''].sort(() => Math.random() - 0.5));
       }
-      
+
       // Initialize memory cards
       if (game.type === 'memory') {
         // Duplicate each word to create pairs (each word appears twice)
@@ -247,7 +247,7 @@ function EmotionalCheckInHero() {
       return cbtQuestionsByEmotion.negative;
     } else if (emotionId === "okay") {
       const dayIndex = new Date().getDay(); // 0 Sun ... 6 Sat
-      const dayKey = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"][dayIndex];
+      const dayKey = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"][dayIndex];
       return cbtNeutralByDay[dayKey] || cbtNeutralByDay.sunday;
     } else {
       return cbtQuestionsByEmotion.positive;
@@ -272,11 +272,11 @@ function EmotionalCheckInHero() {
     const index = Math.round(sliderValue);
     const emotion = emotionOptions[index];
     setSelectedEmotion(emotion);
-    
+
     // Reset question index when starting new session
     setCurrentQuestionIndex(0);
     setAnswers({});
-    
+
     // Show water intake widget first
     setShowWaterIntake(true);
   };
@@ -288,7 +288,7 @@ function EmotionalCheckInHero() {
       percentage: Math.round((waterIntake / 2250) * 100),
       date: new Date().toISOString()
     }));
-    
+
     // Continue to questions after water intake
     setShowWaterIntake(false);
     setTimeout(() => {
@@ -321,11 +321,11 @@ function EmotionalCheckInHero() {
   const handleMouseMoveRef = useRef<(e: MouseEvent | TouchEvent) => void>();
   handleMouseMoveRef.current = (e: MouseEvent | TouchEvent) => {
     if (!isDragging || !glassRef.current) return;
-    
+
     const rect = glassRef.current.getBoundingClientRect();
     const clientY = 'touches' in e ? e.touches[0]?.clientY : e.clientY;
     if (clientY === undefined) return;
-    
+
     const y = clientY - rect.top;
     const height = rect.height;
     const percentage = Math.max(0, Math.min(1, 1 - (y / height)));
@@ -342,12 +342,12 @@ function EmotionalCheckInHero() {
       const handleEnd = () => {
         setIsDragging(false);
       };
-      
+
       document.addEventListener('mousemove', handleMove);
       document.addEventListener('mouseup', handleEnd);
       document.addEventListener('touchmove', handleMove, { passive: false });
       document.addEventListener('touchend', handleEnd);
-      
+
       return () => {
         document.removeEventListener('mousemove', handleMove);
         document.removeEventListener('mouseup', handleEnd);
@@ -359,20 +359,20 @@ function EmotionalCheckInHero() {
 
   const handleQuestionAnswer = (questionId: number, optionIndex: number, direction: 'up' | 'down') => {
     if (isTransitioning) return;
-    
+
     setIsTransitioning(true);
     const exitDirection = direction === 'up' ? 'right' : 'left';
     setCardDirection(exitDirection);
-    
+
     const newAnswers = { ...answers, [questionId]: optionIndex };
     setAnswers(newAnswers);
-    
+
     setTimeout(() => {
       if (currentQuestionIndex < cbtQuestions.length - 1) {
         // Reset card position to opposite side for entrance
         setCardDirection(exitDirection === 'right' ? 'left' : 'right');
         setCurrentQuestionIndex(currentQuestionIndex + 1);
-        
+
         // After a brief moment, animate card in
         setTimeout(() => {
           setCardDirection(null);
@@ -428,7 +428,7 @@ function EmotionalCheckInHero() {
       if (totalAnswered === 0) {
         description = "You're taking a healthy step by checking in. Keep nurturing your mind, body, and spirit today.";
       } else if (yesCount / totalAnswered >= 0.6) {
-        const analysis = yesCount === totalAnswered 
+        const analysis = yesCount === totalAnswered
           ? `Analysis: Your consistent responses indicate you're currently experiencing multiple areas of challenge simultaneously. This pattern suggests you may be facing heightened stress, emotional overwhelm, or a period of significant life transition. The areas you've identified point to underlying patterns that may benefit from structured support and self-compassion practices.`
           : `Analysis: Your response pattern reveals heightened awareness around specific challenges. This suggests you're in a phase of active self-reflection and may be experiencing increased sensitivity to stressors. The areas you've identified indicate where your emotional energy is currently focused and where targeted support could be most beneficial.`;
         description = analysis;
@@ -482,10 +482,10 @@ function EmotionalCheckInHero() {
       // Don't navigate immediately - show encouragement screen first
       return;
     }
-    
+
     // Standard thinking trap analysis for negative/positive emotions
     const trapCounts: { [key: string]: number } = {};
-    
+
     cbtQuestions.forEach((question) => {
       const answerIndex = allAnswers[question.id];
       if (answerIndex !== undefined && question.thinkingTraps[answerIndex]) {
@@ -499,9 +499,9 @@ function EmotionalCheckInHero() {
 
     const sortedTraps = Object.entries(trapCounts).sort((a, b) => b[1] - a[1]);
     const primaryTrap = sortedTraps.length > 0 ? sortedTraps[0][0] : 'self-blame';
-    
+
     setThinkingTrap(primaryTrap);
-    
+
     const trapInfo = thinkingTrapsInfo[primaryTrap];
     // Assign a small Bible-related task per trap (non-mutating fallback if already present)
     const trapTasks: { [key: string]: string } = {
@@ -520,10 +520,10 @@ function EmotionalCheckInHero() {
     if (!trapInfo.task) {
       thinkingTrapsInfo[primaryTrap] = { ...trapInfo, task: trapTasks[primaryTrap] || "Read a Psalm (e.g., Psalm 23) and write a one-sentence prayer." };
     }
-    
+
     const randomVerse = trapInfo.verses[Math.floor(Math.random() * trapInfo.verses.length)];
     setSelectedVerse(randomVerse);
-    
+
     // Verse card will be shown, then game will be triggered from there
 
     const checkInData = {
@@ -559,7 +559,7 @@ function EmotionalCheckInHero() {
   const getBibleGameActivity = (emotion: any, gameType?: 'memory' | 'runner') => {
     // Use provided gameType or randomly choose between Memory Match and Joy Runner
     const type = gameType || (Math.random() < 0.5 ? 'memory' : 'runner');
-    
+
     if (type === 'memory') {
       return {
         title: 'Memory Match',
@@ -609,7 +609,7 @@ function EmotionalCheckInHero() {
   // Game loop for falling bubbles (only for runner game)
   useEffect(() => {
     if (!showBibleGame || gameCompleted || gameOver) return;
-    
+
     const game = getBibleGameActivity(selectedEmotion, selectedGameType || undefined);
     // Only run game loop for runner game type
     if (game.type !== 'runner') return;
@@ -619,15 +619,15 @@ function EmotionalCheckInHero() {
     const gameLoop = (currentTime: number) => {
       const deltaTime = currentTime - lastFrameTime;
       lastFrameTime = currentTime;
-      
+
       const now = Date.now();
-      
+
       // Calculate speed and density level based on score (every 10 points = +1 level)
       const speedLevel = Math.floor(scoreRef.current / 10);
       const speedMultiplier = 1 + (speedLevel * 0.3); // 30% speed increase per level
       const baseSpeed = 0.3 + Math.random() * 0.2; // Base speed: 0.3 to 0.5
       const finalSpeed = baseSpeed * speedMultiplier;
-      
+
       // Spawn rate decreases (more bubbles) as level increases
       // Base: 1000-2000ms, Level 1: 800-1600ms, Level 2: 600-1200ms, etc.
       const baseSpawnMin = 1000;
@@ -636,18 +636,18 @@ function EmotionalCheckInHero() {
       const spawnMin = Math.max(300, baseSpawnMin - spawnReduction); // Minimum 300ms
       const spawnMax = Math.max(600, baseSpawnMax - spawnReduction); // Minimum 600ms
       const spawnInterval = spawnMin + Math.random() * (spawnMax - spawnMin);
-      
+
       // Spawn bubbles more frequently as level increases
       if (now - lastSpawnTimeRef.current > spawnInterval) {
         // Spawn multiple bubbles at higher levels (1 bubble at level 0, 2 at level 1+, etc.)
         const bubblesToSpawn = 1 + Math.min(speedLevel, 2); // Max 3 bubbles at once
-        
+
         for (let i = 0; i < bubblesToSpawn; i++) {
           const randomX = Math.floor(Math.random() * 4);
           const isGood = Math.random() > 0.55; // 45% chance of good, 55% chance of sin
-          
+
           let newBubble: FallingBubble;
-          
+
           if (isGood) {
             const randomItem = goodWords[Math.floor(Math.random() * goodWords.length)];
             newBubble = {
@@ -671,10 +671,10 @@ function EmotionalCheckInHero() {
               type: 'sin'
             };
           }
-          
+
           setFallingBubbles(prev => [...prev, newBubble]);
         }
-        
+
         lastSpawnTimeRef.current = now;
       }
 
@@ -682,11 +682,11 @@ function EmotionalCheckInHero() {
       setFallingBubbles(prev => {
         return prev.map(bubble => {
           if (bubble.collected) return bubble;
-          
+
           // Use consistent speed based on deltaTime (normalized to ~60fps)
           const normalizedSpeed = (deltaTime / 16.67) * bubble.speed;
           const newY = bubble.y + normalizedSpeed;
-          
+
           // Calculate collision: bubble bottom touches runner top
           // Container is h-96 (384px), bubble is 48px (12.5%), runner is at bottom-16 (64px from bottom)
           // Runner bottom: 384px - 64px = 320px from top
@@ -699,7 +699,7 @@ function EmotionalCheckInHero() {
           const runnerTop = 71; // Runner's top edge position (% from top)
           const runnerCenter = 77; // Runner's center position (% from top)
           const runnerBottom = 83; // Runner's bottom edge position (% from top)
-          
+
           // Check collision: same x position
           if (bubble.x === runnerPositionRef.current && !bubble.collected) {
             // For good items: collect when bubble bottom touches runner top
@@ -708,16 +708,16 @@ function EmotionalCheckInHero() {
               const newScore = scoreRef.current + 2;
               scoreRef.current = newScore;
               setScore(newScore);
-              
+
               if (!runnerCollectedRef.current.includes(bubble.item)) {
                 const newCollected = [...runnerCollectedRef.current, bubble.item];
                 runnerCollectedRef.current = newCollected;
                 setRunnerCollected(newCollected);
               }
-              
+
               return { ...bubble, collected: true, y: newY };
             }
-            
+
             // For sins: require FULL connection - bubble center must be within runner's vertical bounds
             if (bubble.type === 'sin' && bubbleCenter >= runnerTop && bubbleCenter <= runnerBottom) {
               // Sin fully connected - game over!
@@ -725,12 +725,12 @@ function EmotionalCheckInHero() {
               return { ...bubble, collected: true, y: newY };
             }
           }
-          
+
           // Remove bubble only if it falls completely off screen (past 100%)
           if (newY > 100) {
             return null;
           }
-          
+
           return { ...bubble, y: newY };
         }).filter((bubble): bubble is FallingBubble => bubble !== null);
       });
@@ -771,7 +771,7 @@ function EmotionalCheckInHero() {
   // Features steps screen
   if (showFeatures && showEncouragement) {
     const currentFeature = featureSteps[currentFeatureIndex];
-    
+
     return (
       <main className="relative flex flex-col items-center justify-center px-6 pt-12 md:pt-20 pb-8 overflow-hidden min-h-[calc(100vh-80px)] max-h-[100vh] bg-white">
         <div className="absolute inset-0 opacity-5">
@@ -780,7 +780,7 @@ function EmotionalCheckInHero() {
             backgroundSize: '40px 40px'
           }}></div>
         </div>
-        
+
         <div className="text-center max-w-3xl mx-auto relative z-10 w-full">
           <div className="bg-white rounded-lg border-2 border-gray-200 shadow-lg p-6 md:p-8">
             <div className="mb-6">
@@ -791,7 +791,7 @@ function EmotionalCheckInHero() {
                 Step {currentFeatureIndex + 1} of {featureSteps.length}
               </p>
             </div>
-            
+
             <div className={`bg-gradient-to-br ${currentFeature.bgGradient} rounded-lg p-6 md:p-8 mb-6 border ${currentFeature.borderColor}`}>
               <div className="flex items-center justify-center mb-4">
                 <div className={`w-16 h-16 rounded-full ${currentFeature.circleColor} text-white flex items-center justify-center font-urbanist font-semibold text-2xl`}>
@@ -811,13 +811,12 @@ function EmotionalCheckInHero() {
               {featureSteps.map((_, index) => (
                 <div
                   key={index}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    index < currentFeatureIndex
+                  className={`h-2 rounded-full transition-all duration-300 ${index < currentFeatureIndex
                       ? `${currentFeature.circleColor} w-8`
                       : index === currentFeatureIndex
-                      ? `${currentFeature.circleColor} w-8 opacity-60`
-                      : 'bg-gray-200 w-2'
-                  }`}
+                        ? `${currentFeature.circleColor} w-8 opacity-60`
+                        : 'bg-gray-200 w-2'
+                    }`}
                 />
               ))}
             </div>
@@ -839,7 +838,7 @@ function EmotionalCheckInHero() {
   if (false && showEncouragement && selectedVerse && thinkingTrap && selectedEmotion && !showFeatures) {
     const trapInfo = thinkingTrapsInfo[thinkingTrap] || thinkingTrapsInfo['wellness'];
     const isWellness = thinkingTrap === 'wellness' || selectedEmotion?.id === 'okay';
-    
+
     return (
       <main className="relative flex flex-col items-center justify-center px-6 pt-12 pb-8 overflow-hidden min-h-[calc(100vh-80px)] max-h-[100vh] bg-white">
         <div className="absolute inset-0 opacity-5">
@@ -848,7 +847,7 @@ function EmotionalCheckInHero() {
             backgroundSize: '40px 40px'
           }}></div>
         </div>
-        
+
         <div className="text-center max-w-3xl mx-auto relative z-10 w-full">
           <div className="bg-white rounded-lg border border-gray-200 shadow-xl p-8 md:p-10">
             {/* Header */}
@@ -866,7 +865,7 @@ function EmotionalCheckInHero() {
                 </p>
               </div>
             </div>
-            
+
             {/* Bible Verse Card */}
             <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-lg p-6 md:p-8 mb-8 border border-amber-200">
               <div className="mb-4">
@@ -912,12 +911,12 @@ function EmotionalCheckInHero() {
           backgroundSize: '40px 40px'
         }}></div>
       </div>
-      
+
       {/* Decorative accent lines */}
       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-px h-32 bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
       <div className="absolute bottom-20 left-1/4 w-24 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-50"></div>
       <div className="absolute bottom-20 right-1/4 w-24 h-px bg-gradient-to-l from-transparent via-gray-300 to-transparent opacity-50"></div>
-      
+
       <div className={`text-center max-w-4xl mx-auto relative z-10 ${!showBibleGame ? 'mb-8' : ''}`}>
         {/* Subtitle */}
         {!showBibleGame && (
@@ -925,21 +924,21 @@ function EmotionalCheckInHero() {
             — How Are You Feeling Today? —
           </p>
         )}
-        
+
         {/* Main Headline */}
         {!showVerseCard && !showBibleGame && (
           <h1 className="text-3xl md:text-5xl font-urbanist font-medium text-gray-700 mb-3 md:mb-4 leading-tight">
             Take a Moment to Check In
           </h1>
         )}
-        
+
         {/* Soothing description */}
         {!showQuestions && !showWaterIntake && !showVerseCard && !showBibleGame && (
           <p className="text-base md:text-base font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
             Breathe deeply. Let's explore how you're feeling today and find peace through God's word.
           </p>
         )}
-        
+
         {/* Water intake description */}
         {showWaterIntake && !showQuestions && (
           <p className="text-base md:text-lg font-urbanist font-light text-gray-600 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
@@ -948,199 +947,199 @@ function EmotionalCheckInHero() {
         )}
       </div>
 
-              {/* Water Intake Screen */}
-              {showWaterIntake && !showQuestions ? (
-                <div className="w-full max-w-4xl mx-auto mb-6 md:mb-8 relative z-10">
-                  <div className="bg-white rounded-lg p-6 md:p-8 shadow-lg border border-gray-200">
-                    {/* Water Intake Label */}
-                    <div className="mb-6 text-left">
-                      <p className="text-base md:text-lg font-medium text-gray-600 flex items-center justify-start gap-2">
-                        <Droplet className="w-5 h-5 md:w-6 md:h-6 text-blue-500" />
-                        Water Intake
-                      </p>
-                    </div>
-                    
-                    {/* 2 Column Layout */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 relative">
-                      {/* Left Column: Animated Water Glass */}
-                      <div className="flex justify-center items-center relative">
-                        <div 
-                          ref={glassRef}
-                          className="relative w-32 h-48 md:w-40 md:h-56 cursor-pointer select-none touch-none"
-                          onMouseDown={handleMouseDown}
-                          onTouchStart={handleTouchStart}
-                        >
-                          {/* Glass outline */}
-                          <svg 
-                            className="absolute inset-0 w-full h-full"
-                            viewBox="0 0 100 150"
-                            preserveAspectRatio="none"
-                          >
-                            <path
-                              d="M 20 10 L 20 140 Q 20 145 25 145 L 75 145 Q 80 145 80 140 L 80 10 Q 80 5 75 5 L 25 5 Q 20 5 20 10 Z"
-                              fill="none"
-                              stroke="#cbd5e1"
-                              strokeWidth="2"
-                            />
-                            <ellipse cx="50" cy="10" rx="30" ry="3" fill="#e2e8f0" />
-                          </svg>
+      {/* Water Intake Screen */}
+      {showWaterIntake && !showQuestions ? (
+        <div className="w-full max-w-4xl mx-auto mb-6 md:mb-8 relative z-10">
+          <div className="bg-white rounded-lg p-6 md:p-8 shadow-lg border border-gray-200">
+            {/* Water Intake Label */}
+            <div className="mb-6 text-left">
+              <p className="text-base md:text-lg font-medium text-gray-600 flex items-center justify-start gap-2">
+                <Droplet className="w-5 h-5 md:w-6 md:h-6 text-blue-500" />
+                Water Intake
+              </p>
+            </div>
 
-                          {/* Water fill */}
-                          <div 
-                            className="absolute bottom-0 left-0 right-0 transition-all duration-500 ease-out overflow-hidden"
-                            style={{
-                              height: `${waterPercentage}%`,
-                              background: `linear-gradient(to top, 
+            {/* 2 Column Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-6 relative">
+              {/* Left Column: Animated Water Glass */}
+              <div className="flex justify-center items-center relative">
+                <div
+                  ref={glassRef}
+                  className="relative w-32 h-48 md:w-40 md:h-56 cursor-pointer select-none touch-none"
+                  onMouseDown={handleMouseDown}
+                  onTouchStart={handleTouchStart}
+                >
+                  {/* Glass outline */}
+                  <svg
+                    className="absolute inset-0 w-full h-full"
+                    viewBox="0 0 100 150"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M 20 10 L 20 140 Q 20 145 25 145 L 75 145 Q 80 145 80 140 L 80 10 Q 80 5 75 5 L 25 5 Q 20 5 20 10 Z"
+                      fill="none"
+                      stroke="#cbd5e1"
+                      strokeWidth="2"
+                    />
+                    <ellipse cx="50" cy="10" rx="30" ry="3" fill="#e2e8f0" />
+                  </svg>
+
+                  {/* Water fill */}
+                  <div
+                    className="absolute bottom-0 left-0 right-0 transition-all duration-500 ease-out overflow-hidden"
+                    style={{
+                      height: `${waterPercentage}%`,
+                      background: `linear-gradient(to top, 
                                 rgba(59, 130, 246, 0.9) 0%,
                                 rgba(96, 165, 250, 0.8) 50%,
                                 rgba(147, 197, 253, 0.7) 100%
                               )`,
-                              clipPath: 'inset(0 20% 0 20% round 0 0 8px 8px)',
-                            }}
-                          >
-                            <div 
-                              className="absolute inset-0 opacity-30"
-                              style={{
-                                background: `repeating-linear-gradient(
+                      clipPath: 'inset(0 20% 0 20% round 0 0 8px 8px)',
+                    }}
+                  >
+                    <div
+                      className="absolute inset-0 opacity-30"
+                      style={{
+                        background: `repeating-linear-gradient(
                                   90deg,
                                   transparent,
                                   transparent 10px,
                                   rgba(255, 255, 255, 0.3) 10px,
                                   rgba(255, 255, 255, 0.3) 20px
                                 )`,
-                                animation: 'wave 3s linear infinite',
-                              }}
-                            />
-                            <div className="absolute inset-0">
-                              {[0, 1, 2, 3, 4].map((i) => (
-                                <div
-                                  key={i}
-                                  className="absolute rounded-full bg-white/40"
-                                  style={{
-                                    width: `${4 + (i * 0.8)}px`,
-                                    height: `${4 + (i * 0.8)}px`,
-                                    left: `${25 + (i * 12)}%`,
-                                    bottom: `${5 + (i * 5)}%`,
-                                    animation: `bubble ${2 + (i * 0.4)}s ease-in-out infinite`,
-                                    animationDelay: `${i * 0.5}s`,
-                                  }}
-                                />
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* Small glasses next to the glass - Left side */}
-                          {(() => {
-                            const totalGlasses = Math.min(Math.ceil(waterIntake / 250), 9);
-                            const leftGlasses = Math.ceil(totalGlasses / 2);
-                            return (
-                              <div 
-                                className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-12 md:-translate-x-16 flex flex-col gap-2 items-center z-10 pointer-events-none"
-                              >
-                                {Array.from({ length: leftGlasses }).map((_, i) => (
-                                  <div
-                                    key={i}
-                                    className="w-6 h-8 md:w-8 md:h-10 rounded-b-lg border-2 border-blue-300 bg-blue-100/60 flex items-end justify-center overflow-hidden shadow-md"
-                                    style={{
-                                      animation: `glassAppear 0.3s ease-out ${i * 0.05}s both`,
-                                    }}
-                                  >
-                                    <div 
-                                      className="w-full bg-blue-400 transition-all duration-300"
-                                      style={{ height: '85%' }}
-                                    />
-                                  </div>
-                                ))}
-                              </div>
-                            );
-                          })()}
-
-                          {/* Small glasses next to the glass - Right side */}
-                          {(() => {
-                            const totalGlasses = Math.min(Math.ceil(waterIntake / 250), 9);
-                            const rightGlasses = Math.floor(totalGlasses / 2);
-                            return (
-                              <div 
-                                className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-12 md:translate-x-16 flex flex-col gap-2 items-center z-10 pointer-events-none"
-                              >
-                                {Array.from({ length: rightGlasses }).map((_, i) => (
-                                  <div
-                                    key={i}
-                                    className="w-6 h-8 md:w-8 md:h-10 rounded-b-lg border-2 border-blue-300 bg-blue-100/60 flex items-end justify-center overflow-hidden shadow-md"
-                                    style={{
-                                      animation: `glassAppear 0.3s ease-out ${i * 0.05}s both`,
-                                    }}
-                                  >
-                                    <div 
-                                      className="w-full bg-blue-400 transition-all duration-300"
-                                      style={{ height: '85%' }}
-                                    />
-                                  </div>
-                                ))}
-                              </div>
-                            );
-                          })()}
-
-                          {isDragging && (
-                            <div className="absolute -right-8 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white text-xs px-2 py-1 rounded shadow-lg">
-                              {waterIntake}ml
-                            </div>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Right Column: Details */}
-                      <div className="flex flex-col justify-center">
-                        <div className="mb-4">
-                          <p className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">
-                            {waterIntake}ml <span className="text-lg md:text-xl font-normal text-gray-500 relative" style={{ top: '-4px' }}>({Math.round(waterPercentage)}% completed)</span>
-                          </p>
-                          <p className="text-base text-gray-600 mb-4">
-                            {Math.round(waterIntake / 250)} cups
-                          </p>
-                          
-                          {/* Progress bar */}
-                          <div className="w-full bg-gray-100 rounded-full h-2.5 mb-2">
-                            <div 
-                              className="bg-gradient-to-r from-blue-400 to-blue-600 h-2.5 rounded-full transition-all duration-500 ease-out"
-                              style={{ width: `${waterPercentage}%` }}
-                            />
-                          </div>
-                          
-                          <p className="text-sm text-gray-500">
-                            {Math.round(waterPercentage)}% of daily goal (2250ml / 9 cups)
-                          </p>
-                        </div>
-
-                        {/* Water Intake Information */}
-                        <div className="hidden md:block bg-blue-50 rounded-lg p-4 border border-blue-100">
-                          <h4 className="text-sm font-semibold text-gray-900 mb-2">Daily Water Recommendations</h4>
-                          <ul className="text-xs text-gray-700 space-y-1.5">
-                            <li className="flex items-start gap-2">
-                              <span className="text-blue-500 mt-0.5">•</span>
-                              <span>Average adult: <strong>2,000-3,000ml</strong> (8-12 cups) per day</span>
-                            </li>
-                            <li className="flex items-start gap-2">
-                              <span className="text-blue-500 mt-0.5">•</span>
-                              <span>Staying hydrated supports mental clarity and emotional wellness</span>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
+                        animation: 'wave 3s linear infinite',
+                      }}
+                    />
+                    <div className="absolute inset-0">
+                      {[0, 1, 2, 3, 4].map((i) => (
+                        <div
+                          key={i}
+                          className="absolute rounded-full bg-white/40"
+                          style={{
+                            width: `${4 + (i * 0.8)}px`,
+                            height: `${4 + (i * 0.8)}px`,
+                            left: `${25 + (i * 12)}%`,
+                            bottom: `${5 + (i * 5)}%`,
+                            animation: `bubble ${2 + (i * 0.4)}s ease-in-out infinite`,
+                            animationDelay: `${i * 0.5}s`,
+                          }}
+                        />
+                      ))}
                     </div>
+                  </div>
 
-                    {/* Continue Button */}
-                    <div className="flex justify-center">
-                      <Button
-                        onClick={handleWaterIntakeContinue}
-                        className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+                  {/* Small glasses next to the glass - Left side */}
+                  {(() => {
+                    const totalGlasses = Math.min(Math.ceil(waterIntake / 250), 9);
+                    const leftGlasses = Math.ceil(totalGlasses / 2);
+                    return (
+                      <div
+                        className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-12 md:-translate-x-16 flex flex-col gap-2 items-center z-10 pointer-events-none"
                       >
-                        Continue
-                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
-                      </Button>
-                    </div>
+                        {Array.from({ length: leftGlasses }).map((_, i) => (
+                          <div
+                            key={i}
+                            className="w-6 h-8 md:w-8 md:h-10 rounded-b-lg border-2 border-blue-300 bg-blue-100/60 flex items-end justify-center overflow-hidden shadow-md"
+                            style={{
+                              animation: `glassAppear 0.3s ease-out ${i * 0.05}s both`,
+                            }}
+                          >
+                            <div
+                              className="w-full bg-blue-400 transition-all duration-300"
+                              style={{ height: '85%' }}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })()}
 
-                    <style>{`
+                  {/* Small glasses next to the glass - Right side */}
+                  {(() => {
+                    const totalGlasses = Math.min(Math.ceil(waterIntake / 250), 9);
+                    const rightGlasses = Math.floor(totalGlasses / 2);
+                    return (
+                      <div
+                        className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-12 md:translate-x-16 flex flex-col gap-2 items-center z-10 pointer-events-none"
+                      >
+                        {Array.from({ length: rightGlasses }).map((_, i) => (
+                          <div
+                            key={i}
+                            className="w-6 h-8 md:w-8 md:h-10 rounded-b-lg border-2 border-blue-300 bg-blue-100/60 flex items-end justify-center overflow-hidden shadow-md"
+                            style={{
+                              animation: `glassAppear 0.3s ease-out ${i * 0.05}s both`,
+                            }}
+                          >
+                            <div
+                              className="w-full bg-blue-400 transition-all duration-300"
+                              style={{ height: '85%' }}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })()}
+
+                  {isDragging && (
+                    <div className="absolute -right-8 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white text-xs px-2 py-1 rounded shadow-lg">
+                      {waterIntake}ml
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Right Column: Details */}
+              <div className="flex flex-col justify-center">
+                <div className="mb-4">
+                  <p className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">
+                    {waterIntake}ml <span className="text-lg md:text-xl font-normal text-gray-500 relative" style={{ top: '-4px' }}>({Math.round(waterPercentage)}% completed)</span>
+                  </p>
+                  <p className="text-base text-gray-600 mb-4">
+                    {Math.round(waterIntake / 250)} cups
+                  </p>
+
+                  {/* Progress bar */}
+                  <div className="w-full bg-gray-100 rounded-full h-2.5 mb-2">
+                    <div
+                      className="bg-gradient-to-r from-blue-400 to-blue-600 h-2.5 rounded-full transition-all duration-500 ease-out"
+                      style={{ width: `${waterPercentage}%` }}
+                    />
+                  </div>
+
+                  <p className="text-sm text-gray-500">
+                    {Math.round(waterPercentage)}% of daily goal (2250ml / 9 cups)
+                  </p>
+                </div>
+
+                {/* Water Intake Information */}
+                <div className="hidden md:block bg-blue-50 rounded-lg p-4 border border-blue-100">
+                  <h4 className="text-sm font-semibold text-gray-900 mb-2">Daily Water Recommendations</h4>
+                  <ul className="text-xs text-gray-700 space-y-1.5">
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-500 mt-0.5">•</span>
+                      <span>Average adult: <strong>2,000-3,000ml</strong> (8-12 cups) per day</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="text-blue-500 mt-0.5">•</span>
+                      <span>Staying hydrated supports mental clarity and emotional wellness</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Continue Button */}
+            <div className="flex justify-center">
+              <Button
+                onClick={handleWaterIntakeContinue}
+                className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
+              >
+                Continue
+                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
+              </Button>
+            </div>
+
+            <style>{`
                       @keyframes wave {
                         0% { transform: translateX(0); }
                         100% { transform: translateX(20px); }
@@ -1160,92 +1159,91 @@ function EmotionalCheckInHero() {
                         }
                       }
                     `}</style>
-                  </div>
-                </div>
-              ) : showQuestions && cbtQuestions.length > 0 ? (
-              /* Show Questions - Unique Modern UI */
-                <div className="w-full max-w-2xl mx-auto mb-6 md:mb-8 relative z-10">
-                  {/* Question Card with Modern Design */}
-                  <div 
-                    className={`relative rounded-xl border-2 border-gray-200 shadow-2xl overflow-hidden transition-all duration-500 ease-out ${
-                      cardDirection === 'left' ? 'translate-x-[-120%] opacity-0 scale-95' :
-                      cardDirection === 'right' ? 'translate-x-[120%] opacity-0 scale-95' :
-                      'translate-x-0 opacity-100 scale-100'
-                    }`}
-                    style={{ 
-                      minHeight: '300px',
-                      backgroundImage: `url(${cbtQuestions[Math.min(currentQuestionIndex, cbtQuestions.length - 1)]?.backgroundImage || '/assets/cbt/unsplash_eca07ce68773.jpg'})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                      backgroundRepeat: 'no-repeat'
-                    }}
-                  >
-                    {/* Dark Calming Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-900/70 via-indigo-900/70 to-purple-800/70"></div>
-                    
-                    {/* Additional Soft Gradient Layer */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-purple-900/30"></div>
-                    
-                    {/* Content */}
-                    <div className="relative z-10 p-6 md:p-8 flex flex-col h-full min-h-[300px]">
-                      {/* Question Text */}
-                      <div className="flex-1 flex items-center justify-center">
-                        <h3 className="text-2xl md:text-3xl lg:text-2xl font-normal text-white text-center leading-tight drop-shadow-2xl">
-                          {cbtQuestions[Math.min(currentQuestionIndex, cbtQuestions.length - 1)]?.question || 'Loading...'}
-                        </h3>
-                      </div>
+          </div>
+        </div>
+      ) : showQuestions && cbtQuestions.length > 0 ? (
+        /* Show Questions - Unique Modern UI */
+        <div className="w-full max-w-2xl mx-auto mb-6 md:mb-8 relative z-10">
+          {/* Question Card with Modern Design */}
+          <div
+            className={`relative rounded-xl border-2 border-gray-200 shadow-2xl overflow-hidden transition-all duration-500 ease-out ${cardDirection === 'left' ? 'translate-x-[-120%] opacity-0 scale-95' :
+                cardDirection === 'right' ? 'translate-x-[120%] opacity-0 scale-95' :
+                  'translate-x-0 opacity-100 scale-100'
+              }`}
+            style={{
+              minHeight: '300px',
+              backgroundImage: `url(${cbtQuestions[Math.min(currentQuestionIndex, cbtQuestions.length - 1)]?.backgroundImage || '/assets/cbt/unsplash_eca07ce68773.jpg'})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
+            {/* Dark Calming Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-900/70 via-indigo-900/70 to-purple-800/70"></div>
 
-                      {/* Answer Buttons */}
-                      <div className="mt-8 flex items-center justify-center gap-4">
-                        {/* Yes Button */}
-                        <button
-                          onClick={() => {
-                            const optionIndex = 0;
-                            const safeIndex = Math.min(currentQuestionIndex, cbtQuestions.length - 1);
-                            handleQuestionAnswer(cbtQuestions[safeIndex]?.id || 0, optionIndex, 'up');
-                          }}
-                          disabled={isTransitioning}
-                          className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                        >
-                          <svg className="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <span>Yes</span>
-                        </button>
-                        
-                        {/* No Button */}
-                        <button
-                          onClick={() => {
-                            const optionIndex = 1;
-                            const safeIndex = Math.min(currentQuestionIndex, cbtQuestions.length - 1);
-                            handleQuestionAnswer(cbtQuestions[safeIndex]?.id || 0, optionIndex, 'down');
-                          }}
-                          disabled={isTransitioning}
-                          className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                        >
-                          <svg className="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                          <span>No</span>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+            {/* Additional Soft Gradient Layer */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-purple-900/30"></div>
 
-                  {/* CSS Animations */}
-                  <style>{`
+            {/* Content */}
+            <div className="relative z-10 p-6 md:p-8 flex flex-col h-full min-h-[300px]">
+              {/* Question Text */}
+              <div className="flex-1 flex items-center justify-center">
+                <h3 className="text-2xl md:text-3xl lg:text-2xl font-normal text-white text-center leading-tight drop-shadow-2xl">
+                  {cbtQuestions[Math.min(currentQuestionIndex, cbtQuestions.length - 1)]?.question || 'Loading...'}
+                </h3>
+              </div>
+
+              {/* Answer Buttons */}
+              <div className="mt-8 flex items-center justify-center gap-4">
+                {/* Yes Button */}
+                <button
+                  onClick={() => {
+                    const optionIndex = 0;
+                    const safeIndex = Math.min(currentQuestionIndex, cbtQuestions.length - 1);
+                    handleQuestionAnswer(cbtQuestions[safeIndex]?.id || 0, optionIndex, 'up');
+                  }}
+                  disabled={isTransitioning}
+                  className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  <svg className="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span>Yes</span>
+                </button>
+
+                {/* No Button */}
+                <button
+                  onClick={() => {
+                    const optionIndex = 1;
+                    const safeIndex = Math.min(currentQuestionIndex, cbtQuestions.length - 1);
+                    handleQuestionAnswer(cbtQuestions[safeIndex]?.id || 0, optionIndex, 'down');
+                  }}
+                  disabled={isTransitioning}
+                  className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                  <svg className="w-4 h-4 md:w-5 md:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  <span>No</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* CSS Animations */}
+          <style>{`
                     @keyframes patternMove {
                       0% { transform: translate(0, 0); }
                       100% { transform: translate(30px, 30px); }
                     }
                   `}</style>
-                </div>
+        </div>
       ) : showVerseCard && selectedVerse ? (
         /* Verse Card - Transition before game */
         <div className="w-full max-w-2xl mx-auto mb-6 md:mb-8 relative z-10 -mt-8 md:-mt-12">
-          <div 
+          <div
             className="relative rounded-xl border-2 border-gray-200 shadow-2xl overflow-hidden transition-all duration-500 ease-out"
-            style={{ 
+            style={{
               minHeight: '400px',
               backgroundImage: `url(${cbtQuestions[0]?.backgroundImage || '/assets/cbt/unsplash_eca07ce68773.jpg'})`,
               backgroundSize: 'cover',
@@ -1255,10 +1253,10 @@ function EmotionalCheckInHero() {
           >
             {/* Dark Calming Overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-purple-900/70 via-indigo-900/70 to-purple-800/70"></div>
-            
+
             {/* Additional Soft Gradient Layer */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-purple-900/30"></div>
-            
+
             {/* Content */}
             <div className="relative z-10 p-6 md:p-8 flex flex-col h-full min-h-[400px] items-center justify-center">
               {/* Mood Line */}
@@ -1269,7 +1267,7 @@ function EmotionalCheckInHero() {
                   </p>
                 </div>
               )}
-              
+
               {/* Encouragement Line */}
               {selectedEmotion && (
                 <div className="mb-6">
@@ -1288,21 +1286,21 @@ function EmotionalCheckInHero() {
                   )}
                 </div>
               )}
-              
+
               {/* Verse Reference */}
               <div className="mb-4">
                 <p className="text-lg md:text-xl font-normal text-purple-200 text-center">
                   {selectedVerse.reference}
                 </p>
               </div>
-              
+
               {/* Verse Text */}
               <div className="mb-6">
                 <p className="text-lg md:text-xl lg:text-lg font-normal text-white text-center leading-normal md:leading-relaxed drop-shadow-2xl">
                   "{selectedVerse.text}"
                 </p>
               </div>
-              
+
               {/* Continue Button */}
               <Button
                 onClick={() => {
@@ -1327,7 +1325,7 @@ function EmotionalCheckInHero() {
           const currentRetryCount = getRetryCount();
           const maxRetries = 3;
           const canPlay = currentRetryCount < maxRetries;
-          
+
           return (
             <div className="w-full max-w-4xl mx-auto mb-6 md:mb-8 relative z-10">
               <div className="bg-white rounded-lg p-6 md:p-8 shadow-lg border border-gray-200">
@@ -1360,7 +1358,7 @@ function EmotionalCheckInHero() {
                     <div className="bg-white rounded-lg p-6 border border-red-300">
                       <h3 className="text-2xl font-urbanist font-semibold text-red-900 mb-3">Game Over!</h3>
                       <p className="text-base font-urbanist font-light text-red-800 leading-relaxed mb-4">
-                        {game.type === 'memory' 
+                        {game.type === 'memory'
                           ? "You matched a good word with a sin! Remember: matching good + sin = Game Over."
                           : "You touched a sin! Avoid the red bubbles and collect only the good words."}
                       </p>
@@ -1375,7 +1373,7 @@ function EmotionalCheckInHero() {
                       const currentRetryCount = getRetryCount();
                       const canRetry = currentRetryCount < maxRetries;
                       const retriesLeft = maxRetries - currentRetryCount;
-                      
+
                       return (
                         <div className="space-y-4">
                           {!canRetry && (
@@ -1386,20 +1384,18 @@ function EmotionalCheckInHero() {
                             </div>
                           )}
                           {canRetry && (
-                            <div className={`rounded-lg p-4 text-center border-2 ${
-                              retriesLeft === 1 
-                                ? 'bg-red-50 border-red-300' 
-                                : retriesLeft === 2 
-                                ? 'bg-orange-50 border-orange-300' 
-                                : 'bg-blue-50 border-blue-300'
-                            }`}>
-                              <p className={`text-sm font-urbanist font-semibold ${
-                                retriesLeft === 1 
-                                  ? 'text-red-800' 
-                                  : retriesLeft === 2 
-                                  ? 'text-orange-800' 
-                                  : 'text-blue-800'
+                            <div className={`rounded-lg p-4 text-center border-2 ${retriesLeft === 1
+                                ? 'bg-red-50 border-red-300'
+                                : retriesLeft === 2
+                                  ? 'bg-orange-50 border-orange-300'
+                                  : 'bg-blue-50 border-blue-300'
                               }`}>
+                              <p className={`text-sm font-urbanist font-semibold ${retriesLeft === 1
+                                  ? 'text-red-800'
+                                  : retriesLeft === 2
+                                    ? 'text-orange-800'
+                                    : 'text-blue-800'
+                                }`}>
                                 Attempts remaining: {retriesLeft} / {maxRetries}
                               </p>
                             </div>
@@ -1501,11 +1497,10 @@ function EmotionalCheckInHero() {
                                   }
                                 }
                               }}
-                              className={`aspect-square rounded-xl border-2 transition-all transform hover:scale-105 flex items-center justify-center ${
-                                selectedTiles.includes(index)
+                              className={`aspect-square rounded-xl border-2 transition-all transform hover:scale-105 flex items-center justify-center ${selectedTiles.includes(index)
                                   ? 'border-blue-500 bg-blue-200 scale-110 shadow-lg'
                                   : 'border-gray-300 bg-white hover:border-blue-300'
-                              }`}
+                                }`}
                             >
                               <span className="text-xs font-bold text-gray-700">{word}</span>
                             </button>
@@ -1537,11 +1532,10 @@ function EmotionalCheckInHero() {
                                   }
                                 }
                               }}
-                              className={`aspect-square rounded-xl border-2 transition-all transform hover:scale-110 ${
-                                collectedItems.includes(item)
+                              className={`aspect-square rounded-xl border-2 transition-all transform hover:scale-110 ${collectedItems.includes(item)
                                   ? 'border-green-500 bg-green-200 scale-110 shadow-lg'
                                   : 'border-gray-300 bg-white hover:border-green-300 animate-bounce'
-                              }`}
+                                }`}
                             >
                               <span className="text-xs font-bold text-gray-700">{item}</span>
                               {collectedItems.includes(item) && (
@@ -1626,13 +1620,12 @@ function EmotionalCheckInHero() {
                                         }
                                       }
                                     }}
-                                    className={`aspect-square rounded-md border-2 transition-all transform hover:scale-105 flex items-center justify-center font-bold text-[10px] ${
-                                      isFlipped
+                                    className={`aspect-square rounded-md border-2 transition-all transform hover:scale-105 flex items-center justify-center font-bold text-[10px] ${isFlipped
                                         ? isSin
                                           ? 'border-red-500 bg-red-100 text-red-900 shadow-md'
                                           : 'border-pink-500 bg-pink-100 text-pink-900 shadow-md'
                                         : 'border-gray-300 bg-gray-200 hover:border-pink-300 hover:bg-gray-100'
-                                    }`}
+                                      }`}
                                   >
                                     {isFlipped ? (
                                       <span className={`text-[10px] font-bold leading-tight ${isSin ? 'text-red-900' : 'text-gray-700'}`}>{card}</span>
@@ -1678,9 +1671,8 @@ function EmotionalCheckInHero() {
                           {puzzleTiles.map((char: string, index: number) => (
                             <div
                               key={index}
-                              className={`aspect-square rounded-lg border-2 flex items-center justify-center ${
-                                char === '' ? 'bg-gray-300 border-gray-400' : 'bg-white border-amber-300'
-                              }`}
+                              className={`aspect-square rounded-lg border-2 flex items-center justify-center ${char === '' ? 'bg-gray-300 border-gray-400' : 'bg-white border-amber-300'
+                                }`}
                             >
                               <span className="text-sm font-bold text-gray-700">{char}</span>
                             </div>
@@ -1717,11 +1709,10 @@ function EmotionalCheckInHero() {
                                   }
                                 }
                               }}
-                              className={`w-20 h-20 rounded-full border-2 transition-all transform hover:scale-110 ${
-                                poppedBubbles.includes(bubble)
+                              className={`w-20 h-20 rounded-full border-2 transition-all transform hover:scale-110 ${poppedBubbles.includes(bubble)
                                   ? 'bg-teal-200 border-teal-400 scale-90 opacity-50'
                                   : 'bg-gradient-to-br from-teal-200 to-cyan-200 border-teal-400 hover:scale-125 animate-pulse'
-                              }`}
+                                }`}
                             >
                               {poppedBubbles.includes(bubble) ? (
                                 <span className="text-2xl">✓</span>
@@ -1746,42 +1737,41 @@ function EmotionalCheckInHero() {
                             </span>
                           </div>
                         </div>
-                        
+
                         {/* Game Area */}
-                        <div 
+                        <div
                           ref={gameAreaRef}
                           className="relative bg-gradient-to-b from-sky-200 to-blue-300 rounded-lg p-4 mb-4 overflow-hidden"
                           style={{ minHeight: '400px' }}
                         >
                           {/* Ground/Platform */}
                           <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-green-400 to-green-300 border-t-2 border-green-500 z-20"></div>
-                          
+
                           {/* Runner character */}
-                          <div 
+                          <div
                             className="absolute bottom-16 text-3xl md:text-4xl lg:text-5xl transition-all duration-200 z-30"
-                            style={{ 
+                            style={{
                               left: `${12.5 + runnerPosition * 25}%`,
                               transform: 'translateX(-50%)'
                             }}
                           >
                             🏃
                           </div>
-                          
+
                           {/* Falling Bubbles */}
                           {fallingBubbles.map((bubble) => {
                             const bubbleLeft = `${12.5 + bubble.x * 25}%`;
                             const isSin = bubble.type === 'sin';
-                            
+
                             return (
                               <div
                                 key={bubble.id}
-                                className={`absolute w-12 h-12 rounded-full border-2 flex items-center justify-center z-10 ${
-                                  bubble.collected
+                                className={`absolute w-12 h-12 rounded-full border-2 flex items-center justify-center z-10 ${bubble.collected
                                     ? 'opacity-0 scale-0 transition-all duration-300'
                                     : isSin
-                                    ? 'opacity-100 scale-100 bg-gradient-to-br from-red-500 to-red-600 border-red-700 shadow-lg'
-                                    : 'opacity-100 scale-100 bg-gradient-to-br from-violet-300 to-purple-400 border-violet-600 shadow-lg'
-                                }`}
+                                      ? 'opacity-100 scale-100 bg-gradient-to-br from-red-500 to-red-600 border-red-700 shadow-lg'
+                                      : 'opacity-100 scale-100 bg-gradient-to-br from-violet-300 to-purple-400 border-violet-600 shadow-lg'
+                                  }`}
                                 style={{
                                   left: bubbleLeft,
                                   top: `${bubble.y}%`,
@@ -1793,12 +1783,12 @@ function EmotionalCheckInHero() {
                               </div>
                             );
                           })}
-                          
+
                           {/* Clouds for decoration */}
                           <div className="absolute top-4 left-10 w-16 h-8 bg-white/30 rounded-full opacity-60 z-0"></div>
                           <div className="absolute top-8 right-20 w-20 h-10 bg-white/30 rounded-full opacity-60 z-0"></div>
                         </div>
-                        
+
                         {/* Controls */}
                         <div className="flex gap-2 justify-center">
                           <Button
@@ -1816,9 +1806,9 @@ function EmotionalCheckInHero() {
                             Move Right →
                           </Button>
                         </div>
-                        
+
                         <p className="text-xs font-urbanist font-light text-gray-500 text-center">
-                          Move the runner left/right to catch good bubbles (purple) and avoid sins (red)! 
+                          Move the runner left/right to catch good bubbles (purple) and avoid sins (red)!
                           <br />
                           <span className="text-red-600 font-semibold">Red bubbles = Game Over!</span>
                         </p>
@@ -1876,8 +1866,8 @@ function EmotionalCheckInHero() {
               <div className="flex flex-col items-center justify-center">
                 <div className="mb-4 transition-all duration-300">
                   {currentEmotion.image ? (
-                    <img 
-                      src={currentEmotion.image} 
+                    <img
+                      src={currentEmotion.image}
                       alt={currentEmotion.label}
                       className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 object-contain"
                     />
@@ -1995,12 +1985,12 @@ function EmotionalCheckInHero() {
                 `}</style>
               </div>
             </div>
-            
+
             <div className="flex justify-between mt-4 text-xs md:text-sm font-urbanist font-light text-gray-500">
               <span>Very Anxious</span>
               <span>Great/Peaceful</span>
             </div>
-            
+
             <p className="text-xs md:text-sm font-urbanist font-light text-gray-500 text-center mt-2 md:mt-3">
               Move the slider above to adjust how you're feeling
             </p>
@@ -2050,7 +2040,7 @@ const Index = () => {
   const handleFeedbackSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       // Save feedback directly to Supabase database
       // Verify table is accessible first (helps refresh PostgREST schema if needed)
@@ -2058,7 +2048,7 @@ const Index = () => {
         .from('feedback')
         .select('id')
         .limit(1);
-      
+
       if (checkError && checkError.code === '42P01') {
         throw new Error('Feedback table does not exist. Please run the create-feedback-table.sql migration in Supabase SQL Editor.');
       }
@@ -2083,7 +2073,7 @@ const Index = () => {
           hint: dbError.hint,
           fullError: dbError
         });
-        
+
         // Provide helpful error message based on error type
         if (dbError.code === '42P01') {
           throw new Error('Feedback table does not exist. Please run the create-feedback-table.sql migration in Supabase SQL Editor.');
@@ -2103,7 +2093,7 @@ const Index = () => {
       setShowFeedbackDialog(false);
       setIsSubmitting(false);
       alert('Thank you for your feedback! We\'ll get back to you soon.');
-      
+
     } catch (error) {
       console.error('Error submitting feedback:', error);
       setIsSubmitting(false);
@@ -2156,7 +2146,7 @@ const Index = () => {
       // Set up observer to catch it if it appears later
       const observer = new MutationObserver(hideTidioWelcomeMessage);
       observer.observe(document.body, { childList: true, subtree: true });
-      
+
       // Clean up observer after 10 seconds
       setTimeout(() => observer.disconnect(), 10000);
       return;
@@ -2167,7 +2157,7 @@ const Index = () => {
     script.src = '//code.tidio.co/enkm7pw3z2k1zidnow6e2wj9fdt7jwo2.js';
     script.async = true;
     script.type = 'text/javascript';
-    
+
     // Wait for Tidio to load and hide welcome message
     script.onload = () => {
       // Give Tidio time to initialize, then hide welcome message
@@ -2175,11 +2165,11 @@ const Index = () => {
       // Also set up an observer to hide it if it appears later
       const observer = new MutationObserver(hideTidioWelcomeMessage);
       observer.observe(document.body, { childList: true, subtree: true });
-      
+
       // Clean up observer after 10 seconds
       setTimeout(() => observer.disconnect(), 10000);
     };
-    
+
     // Add script to document head
     document.head.appendChild(script);
 
@@ -2289,10 +2279,10 @@ const Index = () => {
         <meta name="language" content="English" />
         <meta name="revisit-after" content="7 days" />
         <meta name="theme-color" content="#000000" />
-        
+
         {/* Canonical URL */}
         <link rel="canonical" href="https://biblequizcompetition.com/" />
-        
+
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://biblequizcompetition.com/" />
@@ -2304,7 +2294,7 @@ const Index = () => {
         <meta property="og:image:alt" content="Bible Quiz Competition 2025 - Free Online Bible Quizzes" />
         <meta property="og:site_name" content="Bible Quiz Competition" />
         <meta property="og:locale" content="en_US" />
-        
+
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://biblequizcompetition.com/" />
@@ -2312,28 +2302,28 @@ const Index = () => {
         <meta name="twitter:description" content="Join Bible Quiz Competition 2025! Test your Bible knowledge with 1,000+ questions, compete in weekly quizzes, and climb leaderboards." />
         <meta name="twitter:image" content="https://biblequizcompetition.com/favicon.svg" />
         <meta name="twitter:image:alt" content="Bible Quiz Competition 2025" />
-        
+
         {/* Additional SEO Meta Tags */}
         <meta name="geo.region" content="US" />
         <meta name="geo.placename" content="United States" />
         <meta name="application-name" content="Bible Quiz Competition" />
         <meta name="apple-mobile-web-app-title" content="Bible Quiz 2025" />
-        
+
         {/* Structured Data - WebSite */}
         <script type="application/ld+json">
           {JSON.stringify(homepageStructuredData)}
         </script>
-        
+
         {/* Structured Data - Organization */}
         <script type="application/ld+json">
           {JSON.stringify(organizationStructuredData)}
         </script>
-        
+
         {/* Structured Data - FAQPage */}
         <script type="application/ld+json">
           {JSON.stringify(faqStructuredData)}
         </script>
-        
+
         {/* Tidio Live Chat - Loaded via useEffect hook instead */}
       </Helmet>
       <div className="min-h-screen bg-white">
@@ -2439,11 +2429,11 @@ const Index = () => {
               backgroundSize: '40px 40px'
             }}></div>
           </div>
-          
+
           {/* Decorative accent lines */}
           <div className="absolute bottom-20 left-1/4 w-24 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-50"></div>
           <div className="absolute bottom-20 right-1/4 w-24 h-px bg-gradient-to-l from-transparent via-gray-300 to-transparent opacity-50"></div>
-          
+
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             {/* Header */}
             <div className="text-center mb-8">
@@ -2460,100 +2450,100 @@ const Index = () => {
 
             {/* Features Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                  {/* Daily Records */}
-                  <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                        <span className="text-xl">📊</span>
-                      </div>
-                      <div>
-                        <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Daily Records</h3>
-                        <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
-                          Track your emotional journey and progress over time with detailed analytics
-                        </p>
-                      </div>
-                    </div>
+              {/* Daily Records */}
+              <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                    <span className="text-xl">📊</span>
                   </div>
+                  <div>
+                    <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Daily Records</h3>
+                    <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
+                      Track your emotional journey and progress over time with detailed analytics
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-                  {/* Water Intake */}
-                  <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center flex-shrink-0">
-                        <span className="text-xl">💧</span>
-                      </div>
-                      <div>
-                        <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Water Intake Tracker</h3>
-                        <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
-                          Monitor your daily hydration and maintain optimal wellness
-                        </p>
-                      </div>
-                    </div>
+              {/* Water Intake */}
+              <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-cyan-100 flex items-center justify-center flex-shrink-0">
+                    <span className="text-xl">💧</span>
                   </div>
+                  <div>
+                    <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Water Intake Tracker</h3>
+                    <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
+                      Monitor your daily hydration and maintain optimal wellness
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-                  {/* CBT Tools */}
-                  <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
-                        <span className="text-xl">🧘</span>
-                      </div>
-                      <div>
-                        <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">CBT Tools</h3>
-                        <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
-                          Access thought records, emotional check-ins, and mindfulness practices for peace
-                        </p>
-                      </div>
-                    </div>
+              {/* CBT Tools */}
+              <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                    <span className="text-xl">🧘</span>
                   </div>
+                  <div>
+                    <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">CBT Tools</h3>
+                    <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
+                      Access thought records, emotional check-ins, and mindfulness practices for peace
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-                  {/* Streak Maintenance */}
-                  <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                        <span className="text-xl">🔥</span>
-                      </div>
-                      <div>
-                        <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Streak Maintenance</h3>
-                        <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
-                          Build and maintain daily habits with streak tracking to stay motivated
-                        </p>
-                      </div>
-                    </div>
+              {/* Streak Maintenance */}
+              <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                    <span className="text-xl">🔥</span>
                   </div>
+                  <div>
+                    <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Streak Maintenance</h3>
+                    <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
+                      Build and maintain daily habits with streak tracking to stay motivated
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-                  {/* Emotional Check-In */}
-                  <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
-                        <Heart className="w-5 h-5 text-gray-700" strokeWidth={1} />
-                      </div>
-                      <div>
-                        <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Emotional Check-In</h3>
-                        <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
-                          Daily mood tracking with personalized insights and Bible verses
-                        </p>
-                      </div>
-                    </div>
+              {/* Emotional Check-In */}
+              <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                    <Heart className="w-5 h-5 text-gray-700" strokeWidth={1} />
                   </div>
+                  <div>
+                    <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Emotional Check-In</h3>
+                    <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
+                      Daily mood tracking with personalized insights and Bible verses
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-                  {/* Bible Games */}
-                  <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
-                        <Play className="w-5 h-5 text-gray-700" strokeWidth={1} />
-                      </div>
-                      <div>
-                        <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Interactive Bible Games</h3>
-                        <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
-                          Engage with faith-based games in our online Bible quiz competition that combine fun with spiritual growth. Join Bible competitions 2025 and compete in Bible competition challenges.
-                        </p>
-                      </div>
-                    </div>
+              {/* Bible Games */}
+              <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0">
+                    <Play className="w-5 h-5 text-gray-700" strokeWidth={1} />
                   </div>
+                  <div>
+                    <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Interactive Bible Games</h3>
+                    <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
+                      Engage with faith-based games in our online Bible quiz competition that combine fun with spiritual growth. Join Bible competitions 2025 and compete in Bible competition challenges.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* CTA */}
             <div className="flex justify-center">
-              <Button 
+              <Button
                 className="px-6 md:px-8 py-4 md:py-6 text-lg md:text-xl font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
                 onClick={() => navigate("/signup-today")}
               >
@@ -2573,11 +2563,11 @@ const Index = () => {
               backgroundSize: '40px 40px'
             }}></div>
           </div>
-          
+
           {/* Decorative accent lines */}
           <div className="absolute top-0 left-1/4 w-24 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-50"></div>
           <div className="absolute top-0 right-1/4 w-24 h-px bg-gradient-to-l from-transparent via-gray-300 to-transparent opacity-50"></div>
-          
+
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             {/* Header */}
             <div className="text-center mb-8">
@@ -2594,95 +2584,95 @@ const Index = () => {
 
             {/* Statistics Cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                  <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 text-center">
-                    <div className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900 mb-1">66</div>
-                    <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Bible Books</div>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 text-center">
-                    <div className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900 mb-1">1,000+</div>
-                    <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Questions</div>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 text-center">
-                    <div className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900 mb-1">3</div>
-                    <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Difficulty Levels</div>
-                  </div>
-                  <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 text-center">
-                    <div className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900 mb-1">10+</div>
-                    <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Study Categories</div>
-                  </div>
+              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 text-center">
+                <div className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900 mb-1">66</div>
+                <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Bible Books</div>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 text-center">
+                <div className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900 mb-1">1,000+</div>
+                <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Questions</div>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 text-center">
+                <div className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900 mb-1">3</div>
+                <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Difficulty Levels</div>
+              </div>
+              <div className="bg-gray-50 rounded-lg p-4 border border-gray-200 text-center">
+                <div className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900 mb-1">10+</div>
+                <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Study Categories</div>
+              </div>
             </div>
 
             {/* Feature Cards */}
             <div className="grid md:grid-cols-3 gap-4 mb-8">
-                  <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
-                    <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mb-3">
-                      <BookOpen className="w-5 h-5 text-gray-700" strokeWidth={1} />
-                    </div>
-                    <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">66 Bible Books</h3>
-                    <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
-                      Complete coverage of all Old and New Testament books with organized questions and answers.
-                    </p>
-                  </div>
+              <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
+                <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center mb-3">
+                  <BookOpen className="w-5 h-5 text-gray-700" strokeWidth={1} />
+                </div>
+                <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">66 Bible Books</h3>
+                <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
+                  Complete coverage of all Old and New Testament books with organized questions and answers.
+                </p>
+              </div>
 
-                  <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
-                    <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center mb-3">
-                      <Brain className="w-5 h-5 text-gray-700" strokeWidth={1} />
-                    </div>
-                    <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Difficulty Levels</h3>
-                    <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
-                      Beginner, Intermediate, and Advanced questions to match your knowledge level.
-                    </p>
-                  </div>
+              <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
+                <div className="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center mb-3">
+                  <Brain className="w-5 h-5 text-gray-700" strokeWidth={1} />
+                </div>
+                <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Difficulty Levels</h3>
+                <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
+                  Beginner, Intermediate, and Advanced questions to match your knowledge level.
+                </p>
+              </div>
 
-                  <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
-                    <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center mb-3">
-                      <Trophy className="w-5 h-5 text-gray-700" strokeWidth={1} />
-                    </div>
-                    <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Chapter Breakdown</h3>
-                    <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
-                      Study specific chapters in detail with focused questions on key passages and themes.
-                    </p>
-                  </div>
+              <div className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300">
+                <div className="w-10 h-10 rounded-lg bg-amber-100 flex items-center justify-center mb-3">
+                  <Trophy className="w-5 h-5 text-gray-700" strokeWidth={1} />
+                </div>
+                <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Chapter Breakdown</h3>
+                <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
+                  Study specific chapters in detail with focused questions on key passages and themes.
+                </p>
+              </div>
             </div>
 
             {/* Popular Study Areas */}
             <div className="mb-8">
-                  <h3 className="text-xl md:text-2xl font-urbanist font-semibold text-gray-900 mb-4 text-center">Popular Study Areas</h3>
-                  <div className="grid md:grid-cols-4 gap-3">
-                    <button 
-                      onClick={() => navigate("/bible-questions-and-answers-hub/genesis")}
-                      className="bg-white rounded-lg p-4 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left"
-                    >
-                      <div className="text-base md:text-lg font-urbanist font-semibold text-gray-900 mb-1">Genesis Hub</div>
-                      <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Book of Beginnings</div>
-                    </button>
-                    <button 
-                      onClick={() => navigate("/bible-questions-and-answers-hub/pauline-epistles")}
-                      className="bg-white rounded-lg p-4 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left"
-                    >
-                      <div className="text-base md:text-lg font-urbanist font-semibold text-gray-900 mb-1">Pauline Epistles</div>
-                      <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Apostle Paul's Letters</div>
-                    </button>
-                    <button 
-                      onClick={() => navigate("/bible-questions-and-answers-hub")}
-                      className="bg-white rounded-lg p-4 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left"
-                    >
-                      <div className="text-base md:text-lg font-urbanist font-semibold text-gray-900 mb-1">Character Studies</div>
-                      <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Biblical Figures</div>
-                    </button>
-                    <button 
-                      onClick={() => navigate("/bible-questions-and-answers-hub")}
-                      className="bg-white rounded-lg p-4 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left"
-                    >
-                      <div className="text-base md:text-lg font-urbanist font-semibold text-gray-900 mb-1">True/False</div>
-                      <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Quick Assessment</div>
-                    </button>
-                  </div>
+              <h3 className="text-xl md:text-2xl font-urbanist font-semibold text-gray-900 mb-4 text-center">Popular Study Areas</h3>
+              <div className="grid md:grid-cols-4 gap-3">
+                <button
+                  onClick={() => navigate("/bible-questions-and-answers-hub/genesis")}
+                  className="bg-white rounded-lg p-4 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left"
+                >
+                  <div className="text-base md:text-lg font-urbanist font-semibold text-gray-900 mb-1">Genesis Hub</div>
+                  <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Book of Beginnings</div>
+                </button>
+                <button
+                  onClick={() => navigate("/bible-questions-and-answers-hub/pauline-epistles")}
+                  className="bg-white rounded-lg p-4 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left"
+                >
+                  <div className="text-base md:text-lg font-urbanist font-semibold text-gray-900 mb-1">Pauline Epistles</div>
+                  <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Apostle Paul's Letters</div>
+                </button>
+                <button
+                  onClick={() => navigate("/bible-questions-and-answers-hub")}
+                  className="bg-white rounded-lg p-4 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left"
+                >
+                  <div className="text-base md:text-lg font-urbanist font-semibold text-gray-900 mb-1">Character Studies</div>
+                  <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Biblical Figures</div>
+                </button>
+                <button
+                  onClick={() => navigate("/bible-questions-and-answers-hub")}
+                  className="bg-white rounded-lg p-4 border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all text-left"
+                >
+                  <div className="text-base md:text-lg font-urbanist font-semibold text-gray-900 mb-1">True/False</div>
+                  <div className="text-sm md:text-base font-urbanist font-light text-gray-600">Quick Assessment</div>
+                </button>
+              </div>
             </div>
 
             {/* CTA */}
             <div className="flex justify-center">
-              <Button 
+              <Button
                 className="px-6 md:px-8 py-4 md:py-6 text-lg md:text-xl font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
                 onClick={() => navigate("/bible-questions-and-answers-hub")}
               >
@@ -2702,11 +2692,11 @@ const Index = () => {
               backgroundSize: '40px 40px'
             }}></div>
           </div>
-          
+
           {/* Decorative accent lines */}
           <div className="absolute top-0 left-1/4 w-24 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-50"></div>
           <div className="absolute top-0 right-1/4 w-24 h-px bg-gradient-to-l from-transparent via-gray-300 to-transparent opacity-50"></div>
-          
+
           <div className="max-w-4xl mx-auto px-6 relative z-10">
             {/* Header */}
             <div className="text-center mb-8">
@@ -2726,8 +2716,8 @@ const Index = () => {
               <div className="bg-white rounded-lg p-6 md:p-8 shadow-lg border border-gray-200">
                 <div className="grid md:grid-cols-3 gap-6">
                   {howItWorks.map((step, i) => (
-                    <div 
-                      key={i} 
+                    <div
+                      key={i}
                       className="bg-white rounded-lg p-5 border border-gray-200 hover:shadow-md transition-all duration-300 relative"
                     >
                       <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center mb-4">
@@ -2755,11 +2745,11 @@ const Index = () => {
               backgroundSize: '40px 40px'
             }}></div>
           </div>
-          
+
           {/* Decorative accent lines */}
           <div className="absolute bottom-20 left-1/4 w-24 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-50"></div>
           <div className="absolute bottom-20 right-1/4 w-24 h-px bg-gradient-to-l from-transparent via-gray-300 to-transparent opacity-50"></div>
-          
+
           <div className="max-w-6xl mx-auto px-6 relative z-10">
             {/* Header */}
             <div className="text-center mb-8">
@@ -2770,10 +2760,10 @@ const Index = () => {
                 Join Thousands of Believers
               </h2>
               <p className="text-lg md:text-xl font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
-                See how our Bible quiz competition platform has helped others grow in faith and wellness. Join thousands participating in Bible competition 2025 and Bible competitions worldwide.
+                See how our Bible quiz competition platform has helped others grow in faith and wellness. Join thousands participating in Bible competition 2025-2026 and Bible competitions worldwide.
               </p>
             </div>
-            
+
             <div className="relative">
               <Carousel
                 opts={{
@@ -2788,25 +2778,25 @@ const Index = () => {
                       <div className="bg-white p-6 rounded-lg border border-gray-200 hover:border-gray-400 hover:shadow-lg transition-all duration-300 h-full relative group">
                         {/* Decorative quote mark */}
                         <div className="absolute top-4 left-4 text-4xl text-gray-200 font-serif leading-none opacity-50">"</div>
-                        
+
                         <p className="text-base md:text-lg font-urbanist font-light text-gray-700 mb-4 relative z-10 pl-6">
                           {testimonial.content}
                         </p>
                         <div className="relative z-10 border-t border-gray-100 pt-4 mt-4">
                           <div className="text-base md:text-lg font-urbanist font-semibold text-gray-900">{testimonial.name}</div>
                           <div className="text-sm md:text-base font-urbanist font-light text-gray-600">{testimonial.role}</div>
-              </div>
-                        
+                        </div>
+
                         {/* Hover accent */}
                         <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-gray-300 to-transparent group-hover:w-full transition-all duration-300"></div>
-            </div>
+                      </div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
                 <CarouselPrevious className="left-0 md:-left-12 border-gray-300 hover:border-gray-400" />
                 <CarouselNext className="right-0 md:-right-12 border-gray-300 hover:border-gray-400" />
               </Carousel>
-              </div>
+            </div>
             {/* <div className="text-center mt-12">
               <Button 
                 className="bg-black hover:bg-gray-800 font-urbanist font-light text-base"
@@ -2819,13 +2809,13 @@ const Index = () => {
           </div>
         </section>
 
-       
+
 
         <div id="faq">
           <FaqSection />
         </div>
-         {/* Bible Study Section */}
-         {false && (
+        {/* Bible Study Section */}
+        {false && (
           <section className="py-16 bg-gradient-to-br from-green-50 via-blue-100 to-purple-50">
             <div className="max-w-6xl mx-auto px-4">
               <div className="text-center mb-12">
@@ -2922,7 +2912,7 @@ const Index = () => {
               </div>
               <div className="text-center">
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/register")}> 
+                  <Button size="lg" className="bg-gradient-to-r from-green-600 to-blue-600 hover:from-green-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => navigate("/auth/register")}>
                     <BookOpen className="w-5 h-5 mr-2" />
                     Create Account & Start Studying
                   </Button>
@@ -2947,11 +2937,11 @@ const Index = () => {
               backgroundSize: '40px 40px'
             }}></div>
           </div>
-          
+
           {/* Decorative accent lines */}
           <div className="absolute top-0 left-1/4 w-24 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent opacity-50"></div>
           <div className="absolute top-0 right-1/4 w-24 h-px bg-gradient-to-l from-transparent via-gray-300 to-transparent opacity-50"></div>
-          
+
           <div className="max-w-4xl mx-auto px-6 relative z-10">
             {/* Header */}
             <div className="text-center mb-8">
@@ -2962,7 +2952,7 @@ const Index = () => {
                 Ready to Start Your Journey?
               </h2>
               <p className="text-base md:text-base font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
-                Join thousands of believers who've enhanced their Bible knowledge and wellness with our platform. Participate in the Bible quiz competition 2025, check Bible quiz competition 2025 results, and compete in the best online Bible quiz competition and Bible competitions.
+                Join thousands of believers who've enhanced their Bible knowledge and wellness with our platform. Participate in the Bible quiz competition 2025-2026, check Bible quiz competition 2025-2026 results, and compete in the best online Bible quiz competition and Bible competitions.
               </p>
             </div>
 
@@ -2970,7 +2960,7 @@ const Index = () => {
             <div className="w-full max-w-4xl mx-auto mb-6 md:mb-8 relative z-10">
               <div className="bg-white rounded-lg p-6 md:p-8 shadow-lg border border-gray-200">
                 <div className="flex justify-center">
-                  <Button 
+                  <Button
                     className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg font-urbanist font-light text-white shadow-md hover:shadow-lg transition-all duration-300 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
                     onClick={() => navigate("/auth/register")}
                   >
@@ -2992,13 +2982,13 @@ const Index = () => {
                 <div className="flex items-center space-x-2 mb-4">
                   <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
                     <Brain className="w-3 h-3 text-white" />
-                </div>
+                  </div>
                   <span className="text-lg font-urbanist font-light text-gray-900">Bible Quiz Competition</span>
-              </div>
+                </div>
                 <p className="font-urbanist font-light text-gray-600 mb-4 max-w-md">
-                  More than a quiz platform. Join the leading Bible quiz competition 2025 and participate in online Bible quiz competition. We support you through Bible study, emotional wellness, CBT tools, water intake tracking, and every step of your journey toward peace. Check Bible quiz competition 2025 results and compete in Bible competition challenges.
+                  More than a quiz platform. Join the leading Bible quiz competition 2025-2026 and participate in online Bible quiz competition. We support you through Bible study, emotional wellness, CBT tools, water intake tracking, and every step of your journey toward peace. Check Bible quiz competition 2025-2026 results and compete in Bible competition challenges.
                 </p>
-            </div>
+              </div>
 
               {/* Product Links */}
               <div>
@@ -3027,7 +3017,7 @@ const Index = () => {
               <div className="flex flex-col md:flex-row justify-between items-center">
                 <div className="flex items-center space-x-6 mb-4 md:mb-0">
                   <span className="font-urbanist font-light text-gray-600">© 2024 Bible Quiz Competition. All rights reserved.</span>
-          </div>
+                </div>
               </div>
             </div>
           </div>

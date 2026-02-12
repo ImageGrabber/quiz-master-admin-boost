@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import PublicQuiz from "../PublicQuiz";
-import { bookNames } from "@/data/bibleData";
+import { bookNames } from "@/data/bible-data";
 
 export default function PublicQuizChapter() {
     const { book, chapter } = useParams();

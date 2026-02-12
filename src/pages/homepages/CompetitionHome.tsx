@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { ArrowRight, BookOpen, Trophy, Sparkles, Brain, Clock, Mail, Star, Users, Calendar, TrendingUp, ChevronLeft, ChevronRight, Quote, Zap, Globe, Gamepad2 } from 'lucide-react';
 
 import SEO from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 import { Navigation } from "@/components/Navigation";
 import CommunityHeroWidget from "@/components/CommunityHeroWidget";
-
+import { featuredQuizzes, categories } from "@/data/bible-data";
 
 const CompetitionHome = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const CompetitionHome = () => {
       name: "Sarah Johnson",
       initials: "SJ",
       role: "Daily Participant",
-      quote: "The daily Bible quiz challenges have become part of my morning routine. I've learned so much and love competing with others. The Bible Quiz Competition 2025 is amazing!",
+      quote: "The daily Bible quiz challenges have become part of my morning routine. I've learned so much and love competing with others. The Bible Quiz Competition 2025-2026 is amazing!",
       gradient: "from-blue-500 to-cyan-500",
       bgGradient: "from-white via-blue-50/40 to-cyan-50/30",
       borderColor: "border-blue-100/50",
@@ -67,23 +67,13 @@ const CompetitionHome = () => {
       name: "Esther White",
       initials: "EW",
       role: "Bible Challenger",
-      quote: "Checking the bible quiz competition 2025 results every week is so exciting. I love seeing my name climb the leaderboard!",
+      quote: "Checking the bible quiz competition 2025-2026 results every week is so exciting. I love seeing my name climb the leaderboard!",
       gradient: "from-emerald-500 to-teal-500",
       bgGradient: "from-white via-emerald-50/40 to-teal-50/30",
       borderColor: "border-emerald-100/50",
       quoteColor: "text-emerald-400/40",
       blurColor: "from-emerald-400/10 to-teal-400/10"
     }
-  ];
-
-  // Mock Data for Q&A Hubs
-  const featuredHubs = [
-    { title: "Genesis Hub", description: "Questions & answers including Genesis 8 quiz", icon: BookOpen, color: "bg-blue-100 text-blue-700", link: "/bible-questions-and-answers-hub/genesis" },
-    { title: "Matthew Hub", description: "Explore the life of Jesus in our Matthew quiz", icon: Star, color: "bg-green-100 text-green-700", link: "/bible-questions-and-answers-hub/matthew" },
-    { title: "Romans Hub", description: "Deep dive into Paul's letter to Romans", icon: Brain, color: "bg-purple-100 text-purple-700", link: "/bible-questions-and-answers-hub/romans" },
-    { title: "Exodus Hub", description: "Master the Exodus quiz questions", icon: BookOpen, color: "bg-orange-100 text-orange-700", link: "/bible-questions-and-answers-hub/exodus" },
-    { title: "Psalms Hub", description: "Inspiration from our Psalms quiz collection", icon: Sparkles, color: "bg-pink-100 text-pink-700", link: "/bible-questions-and-answers-hub/psalms" },
-    { title: "Acts Hub", description: "Study the early church for the Acts quiz", icon: Users, color: "bg-indigo-100 text-indigo-700", link: "/bible-questions-and-answers-hub/acts" }
   ];
 
   // Mock Data for Articles
@@ -130,7 +120,7 @@ const CompetitionHome = () => {
     },
     {
       id: "2025-competition-overview",
-      title: "2025 Competition Overview",
+      title: "2025-2026 Competition Overview",
       excerpt: "Everything you need to know about the upcoming quiz season and prizes.",
       readTime: "4 min read",
       author: "Competition Team",
@@ -374,8 +364,32 @@ const CompetitionHome = () => {
   return (
     <>
       <SEO
-        title="Bible Quiz Competition 2025 | Play Daily"
-        description="Join the Bible Quiz Competition 2025. Engage in daily Bible quizzes, test your knowledge, win prizes, and join a global community."
+        title="Bible Quiz Competition 2025-2026 | Play Daily"
+        description="Join the Bible Quiz Competition 2025-2026. Engage in daily Bible quizzes, test your knowledge, win prizes, and join a global community."
+        structuredData={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              "name": "Bible Quiz Competition",
+              "url": "https://biblequizcompetition.com",
+              "sameAs": [
+                "https://www.facebook.com/biblequizcompetition",
+                "https://twitter.com/biblequiz"
+              ]
+            },
+            {
+              "@type": "WebSite",
+              "name": "Bible Quiz Competition",
+              "url": "https://biblequizcompetition.com",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://biblequizcompetition.com/search?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            }
+          ]
+        }}
       />
 
       <div className="min-h-screen bg-slate-50 font-urbanist">
@@ -397,7 +411,7 @@ const CompetitionHome = () => {
               <div className="lg:col-span-3 flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
                 <div>
                   <h1 className="text-2xl lg:text-3xl font-semibold font-inter-tight text-slate-500 tracking-tight mb-4">
-                    Online Bible Quiz Competition 2025
+                    Online Bible Quiz Competition 2025-2026
                   </h1>
 
                   <h2 className="text-5xl lg:text-7xl font-bold text-slate-900 tracking-tight leading-[1.05] drop-shadow-sm">
@@ -409,7 +423,7 @@ const CompetitionHome = () => {
                 </div>
 
                 <p className="text-xl text-slate-500 font-light max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                  Join thousands of believers in the ultimate online Bible quiz competition 2025. Test your knowledge as a Bible Challenger, track your growth, and compete for amazing prizes.
+                  Join thousands of believers in the ultimate online Bible quiz competition 2025-2026. Test your knowledge as a Bible Challenger, track your growth, and compete for amazing prizes.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
@@ -453,7 +467,7 @@ const CompetitionHome = () => {
                 {
                   icon: <Calendar className="w-6 h-6 text-blue-600" />,
                   title: "Daily Habits",
-                  desc: "Build consistency with fresh bible quiz 2025 challenges every single day.",
+                  desc: "Build consistency with fresh bible quiz 2025-2026 challenges every single day.",
                   color: "bg-blue-50"
                 },
                 {
@@ -483,7 +497,7 @@ const CompetitionHome = () => {
                 {
                   icon: <Globe className="w-6 h-6 text-cyan-600" />,
                   title: "Global Ranking",
-                  desc: "Compare your 2025 results with challengers worldwide on the leaderboard.",
+                  desc: "Compare your 2025-2026 results with challengers worldwide on the leaderboard.",
                   color: "bg-cyan-50"
                 }
               ].map((feature, idx) => (
@@ -513,10 +527,10 @@ const CompetitionHome = () => {
 
             <div className="grid md:grid-cols-4 gap-8">
               {[
-                { title: "1. Register Free", desc: "Sign up instantly to join the bible competition 2025.", icon: Users },
+                { title: "1. Register Free", desc: "Sign up instantly to join the bible competition 2025-2026.", icon: Users },
                 { title: "2. Study Daily", desc: "Use our hubs for Genesis 8 quiz prep and more.", icon: BookOpen },
                 { title: "3. Take Quizzes", desc: "Compete in daily and weekly online bible quizzes.", icon: Brain },
-                { title: "4. Win Prizes", desc: "Check bible quiz competition 2025 results weekly.", icon: Trophy }
+                { title: "4. Win Prizes", desc: "Check bible quiz competition 2025-2026 results weekly.", icon: Trophy }
               ].map((step, idx) => (
                 <div key={idx} className="relative flex flex-col items-center text-center">
                   <div className="w-16 h-16 rounded-full bg-white border-2 border-blue-100 flex items-center justify-center mb-6 shadow-sm z-10">
@@ -531,32 +545,74 @@ const CompetitionHome = () => {
           </div>
         </section>
 
-
-
-        {/* Bible Q&A Hub Preview */}
-        < section className="py-24 bg-slate-50 relative overflow-hidden" >
+        {/* Browse by Category - Replaces old Featured Hubs */}
+        <section className="py-24 bg-white relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Explore the Bible Q&A Hub</h2>
+              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Browse by Category</h2>
               <p className="text-lg text-slate-600 max-w-2xl mx-auto font-light">
-                Deepen your understanding with our comprehensive study guides and question banks for every book.
+                Explore bible quizzes organized by biblical categories.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {featuredHubs.map((hub, idx) => (
-                <Card key={idx} className="group hover:shadow-xl transition-all duration-300 border-none shadow-sm bg-white overflow-hidden cursor-pointer" onClick={() => navigate(hub.link)}>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {categories.map((category, idx) => (
+                <Card key={idx} className="group hover:shadow-xl transition-all duration-300 border border-slate-100 shadow-sm bg-slate-50 overflow-hidden cursor-pointer" onClick={() => navigate('/bible-questions-and-answers-hub')}>
                   <CardContent className="p-8">
-                    <div className={`w-14 h-14 ${hub.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                      <hub.icon className="w-7 h-7" />
+                    <div className="flex items-center space-x-4 mb-4">
+                      <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm text-blue-600">
+                        <category.icon className="w-6 h-6" />
+                      </div>
+                      <h3 className="text-xl font-bold text-slate-900">{category.name}</h3>
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{hub.title}</h3>
                     <p className="text-slate-600 font-light leading-relaxed mb-6">
-                      {hub.description}
+                      {category.description}
                     </p>
                     <div className="flex items-center text-blue-600 font-medium group-hover:translate-x-2 transition-transform">
-                      Start Learning <ArrowRight className="w-4 h-4 ml-2" />
+                      Explore Category <ArrowRight className="w-4 h-4 ml-2" />
                     </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            <div className="mt-12 text-center">
+              <Button variant="outline" size="lg" className="rounded-full px-8 border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200" onClick={() => navigate("/bible-questions-and-answers-hub")}>
+                View All Categories
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Quizzes Preview */}
+        <section className="py-24 bg-slate-50 relative overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 relative z-10">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Featured Quizzes</h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto font-light">
+                Test your knowledge with our most popular bible quizzes.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featuredQuizzes.slice(0, 6).map((quiz) => (
+                <Card key={quiz.title} className="border border-white hover:border-blue-200 transition-all duration-300 cursor-pointer group bg-white shadow-sm hover:shadow-md" onClick={() => navigate(quiz.link)}>
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center">
+                        <quiz.icon className="w-6 h-6 text-blue-600" strokeWidth={1.5} />
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-urbanist font-medium text-slate-600">{quiz.difficulty}</div>
+                        <div className="text-sm font-urbanist font-light text-slate-500">{quiz.questions} questions</div>
+                      </div>
+                    </div>
+                    <CardTitle className="text-xl font-urbanist font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">{quiz.title}</CardTitle>
+                    <CardDescription className="font-urbanist font-light text-slate-600">{quiz.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <Button className="w-full font-urbanist font-light border-slate-200 hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50" variant="outline">
+                      Start Quiz
+                    </Button>
                   </CardContent>
                 </Card>
               ))}
@@ -564,11 +620,11 @@ const CompetitionHome = () => {
 
             <div className="mt-12 text-center">
               <Button variant="outline" size="lg" className="rounded-full px-8 border-slate-200 text-slate-600 hover:text-blue-600 hover:border-blue-200" onClick={() => navigate("/bible-questions-and-answers-hub")}>
-                View All Books
+                View All Quizzes
               </Button>
             </div>
           </div>
-        </section >
+        </section>
 
         {/* Featured Articles */}
         < section className="py-24 bg-white" >
@@ -718,13 +774,13 @@ const CompetitionHome = () => {
             <div className="text-center mb-16">
               <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
               <p className="text-lg text-slate-500 font-light">
-                Everything you need to know about the online bible quiz competition 2025.
+                Everything you need to know about the online bible quiz competition 2025-2026.
               </p>
             </div>
 
             <div className="space-y-6">
               {[
-                { q: "Is the Bible Quiz Competition 2025 free to join?", a: "Yes! It is completely free to register and participate in the online bible quiz competition. We believe Bible knowledge should be accessible to everyone." },
+                { q: "Is the Bible Quiz Competition 2025-2026 free to join?", a: "Yes! It is completely free to register and participate in the online bible quiz competition. We believe Bible knowledge should be accessible to everyone." },
                 { q: "How do I check the 2025 results?", a: "Results are updated instantly after every quiz. You can view the global leaderboard and your personal progress on the 'Results' page." },
                 { q: "What topics are covered in the quizzes?", a: "We cover the entire Bible! You'll find specific challenges like the Genesis 8 quiz, Matthew quiz, and thematic quizzes on characters and theology." },
                 { q: "Who can become a Bible Challenger?", a: "Anyone! Whether you're a beginner or a scholar, our bible challenger levels adapt to your knowledge, helping you grow step-by-step." }
@@ -770,14 +826,23 @@ const CompetitionHome = () => {
               <span className="font-bold text-slate-900 tracking-tight">Bible Quiz Competition</span>
             </div>
 
-            <div className="flex gap-8 text-sm font-medium text-slate-500">
-              <a href="#" className="hover:text-slate-900 transition-colors">Privacy</a>
-              <a href="#" className="hover:text-slate-900 transition-colors">Terms</a>
-              <a href="#" className="hover:text-slate-900 transition-colors">Support</a>
+            <div className="flex flex-col md:flex-row gap-8 items-center">
+              <div className="flex gap-6 text-sm font-medium text-slate-500">
+                <a href="#" className="hover:text-slate-900 transition-colors">Privacy</a>
+                <a href="#" className="hover:text-slate-900 transition-colors">Terms</a>
+                <a href="#" className="hover:text-slate-900 transition-colors">Support</a>
+              </div>
+              <div className="hidden md:block w-px h-4 bg-slate-200"></div>
+              <div className="flex flex-wrap justify-center gap-6 text-sm font-medium text-slate-500">
+                <button onClick={() => navigate("/bible-quiz-questions-and-answers")} className="hover:text-blue-600 transition-colors">Questions & Answers</button>
+                <button onClick={() => navigate("/rules-and-prizes")} className="hover:text-blue-600 transition-colors">Rules & Prizes</button>
+                <button onClick={() => navigate("/hardest-bible-trivia-questions")} className="hover:text-blue-600 transition-colors">Hardest Trivia</button>
+                <button onClick={() => navigate("/bible-quiz-with-answers-for-youth")} className="hover:text-blue-600 transition-colors">Youth Quiz</button>
+              </div>
             </div>
 
             <div className="text-sm text-slate-400">
-              © 2025 All rights reserved.
+              © 2025-2026 All rights reserved.
             </div>
           </div>
         </footer >
