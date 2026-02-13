@@ -13,12 +13,12 @@ console.log('🚀 Starting Robust SEO build process...');
 try {
   // Step 1: Generate sitemap
   console.log('📋 Generating sitemap...');
-  execSync('node scripts/generate-sitemap.js', { stdio: 'inherit' });
-  
+  execSync('npx tsx scripts/generate-sitemap.ts', { stdio: 'inherit' });
+
   // Step 2: Build with Vite
   console.log('⚡ Building with Vite...');
-  execSync('vite build', { stdio: 'inherit' });
-  
+  execSync('npx vite build', { stdio: 'inherit' });
+
   // Step 3: Try react-snap (optional, may fail in deployment environments)
   console.log('🔄 Attempting pre-rendering with react-snap...');
   try {
@@ -28,17 +28,17 @@ try {
     console.log('⚠️  react-snap failed (this is normal in some deployment environments)');
     console.log('📄 Continuing with static HTML generation...');
   }
-  
+
   // Step 4: Generate static fallbacks (this is the most important part)
   console.log('📄 Generating static HTML fallbacks...');
-  execSync('node scripts/generate-static-pages.js', { stdio: 'inherit' });
-  
+  execSync('npx tsx scripts/generate-static-pages.ts', { stdio: 'inherit' });
+
   // Step 5: Verify build output
   const distDir = path.join(__dirname, '../dist');
   if (fs.existsSync(distDir)) {
     const files = fs.readdirSync(distDir);
     console.log(`✅ Build complete! Generated ${files.length} files in dist/`);
-    
+
     // Check for important files
     const importantFiles = ['index.html', 'sitemap.xml', 'robots.txt'];
     importantFiles.forEach(file => {
@@ -48,12 +48,12 @@ try {
         console.log(`⚠️  ${file} not found`);
       }
     });
-    
+
     // Check for static pages
     const staticPages = fs.readdirSync(distDir).filter(file => file.endsWith('.html') && file !== 'index.html');
     console.log(`✅ Generated ${staticPages.length} static HTML pages`);
   }
-  
+
   console.log('🎉 Robust SEO build process completed successfully!');
   console.log('📈 Your site now has:');
   console.log('   - Comprehensive sitemap with 100+ URLs');
@@ -61,7 +61,7 @@ try {
   console.log('   - Proper meta tags and structured data');
   console.log('   - SEO-optimized robots.txt');
   console.log('   - Ready for search engine crawling!');
-  
+
 } catch (error) {
   console.error('❌ Build failed:', error.message);
   process.exit(1);

@@ -90,48 +90,68 @@ const bibleBooks = [
   '2-john', '3-john', 'jude', 'revelation'
 ];
 
-// Generate HTML template
-function generateHTML(page) {
-  return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${page.title}</title>
-  <meta name="description" content="${page.description}">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://biblequizcompetition.com${page.path}">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
-  ${page.structuredData ? `<script type="application/ld+json">
-    ${JSON.stringify(page.structuredData)}
-  </script>` : ''}
-  <style>
-    body { font-family: 'Jost', sans-serif; }
-  </style>
-</head>
-<body>
-  ${page.content}
-  <script>
-    // Fallback for JavaScript-disabled users
-    console.log('Static page loaded for SEO');
-  </script>
-</body>
-</html>`;
+// Generate HTML using the app shell template
+function generateHTML(page: any, templateHtml: string) {
+  let html = templateHtml;
+
+  // Replace title
+  html = html.replace(/<title>.*<\/title>/, `<title>${page.title}</title>`);
+
+  // Replace description or add if missing
+  if (html.includes('<meta name="description"')) {
+    html = html.replace(/<meta name="description" content=".*?"\s*\/?>/, `<meta name="description" content="${page.description}" />`);
+  } else {
+    html = html.replace('</head>', `<meta name="description" content="${page.description}" />\n</head>`);
+  }
+
+  // Add canonical tag
+  if (html.includes('<link rel="canonical"')) {
+    html = html.replace(/<link rel="canonical" href=".*?"\s*\/?>/, `<link rel="canonical" href="https://biblequizcompetition.com${page.path}" />`);
+  } else {
+    html = html.replace('</head>', `<link rel="canonical" href="https://biblequizcompetition.com${page.path}" />\n</head>`);
+  }
+
+  // Add structured data
+  if (page.structuredData) {
+    const jsonLd = `<script type="application/ld+json">${JSON.stringify(page.structuredData)}</script>`;
+    html = html.replace('</head>', `${jsonLd}\n</head>`);
+  }
+
+  // Inject content into the root div
+  // This assumes the index.html has <div id="root"></div> or similar
+  if (html.includes('<div id="root"></div>')) {
+    html = html.replace('<div id="root"></div>', `<div id="root">${page.content}</div>`);
+  } else if (html.includes('<div id="root">')) {
+    // Handle case where it might not be empty or has attributes
+    html = html.replace('<div id="root">', `<div id="root">${page.content}`);
+  }
+
+  return html;
 }
 
 // Generate static pages
 function generateStaticPages() {
   const distDir = path.join(__dirname, '../dist');
+  const indexHtmlPath = path.join(distDir, 'index.html');
 
-  // Create dist directory if it doesn't exist
+  // Check if dist exists
   if (!fs.existsSync(distDir)) {
-    fs.mkdirSync(distDir, { recursive: true });
+    console.error('❌ dist directory not found. Run vite build first.');
+    process.exit(1);
+  }
+
+  // Read the template
+  let templateHtml = '';
+  try {
+    templateHtml = fs.readFileSync(indexHtmlPath, 'utf-8');
+  } catch (err) { // @ts-ignore
+    console.error('❌ Could not read dist/index.html:', err.message);
+    process.exit(1);
   }
 
   // Generate critical pages
   criticalPages.forEach(page => {
-    const html = generateHTML(page);
+    const html = generateHTML(page, templateHtml);
     const filePath = path.join(distDir, page.path === '/' ? 'index.html' : `${page.path}.html`);
 
     // Create directory if it doesn't exist
@@ -167,7 +187,7 @@ function generateStaticPages() {
         }
       },
       content: `
-        <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
+        <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white pt-20">
           <div class="container mx-auto px-4 py-8">
             <h1 class="text-4xl font-bold text-center mb-8">${bookName} Quiz</h1>
             <p class="text-xl text-center mb-8">Test your knowledge of ${bookName} with this free interactive Bible quiz.</p>
@@ -175,9 +195,8 @@ function generateStaticPages() {
               <h2 class="text-2xl font-semibold mb-4">About This Quiz</h2>
               <p class="mb-6">This quiz covers key themes, characters, and events from the book of ${bookName}. Perfect for Bible study groups, personal study, or quiz competitions.</p>
               <div class="text-center">
-                <button onclick="window.location.href='/public-quiz/${book}'" class="bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold">
-                  Start ${bookName} Quiz
-                </button>
+                 <div class="animate-pulse bg-blue-200 h-10 w-48 mx-auto rounded"></div>
+                 <p class="text-sm text-gray-500 mt-2">Loading interactive quiz...</p>
               </div>
             </div>
           </div>
@@ -185,11 +204,7 @@ function generateStaticPages() {
       `
     };
 
-    const html = generateHTML(page);
-    // Determine file path based on URL structure
-    // We want /public-quiz/genesis to be served from /public-quiz/genesis.html
-    // But the current script was writing to `public-quiz-${book}.html` which looks like a mistake or specific flat structure.
-    // Let's stick to the folder structure implied by the URL.
+    const html = generateHTML(page, templateHtml);
     const filePath = path.join(distDir, `public-quiz/${book}.html`);
     const dir = path.dirname(filePath);
     if (!fs.existsSync(dir)) {
@@ -222,7 +237,7 @@ function generateStaticPages() {
         }
       },
       content: `
-        <div class="min-h-screen bg-gray-50">
+        <div class="min-h-screen bg-gray-50 pt-20">
           <div class="container mx-auto px-4 py-8">
             <article class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
               ${article.imageUrl ? `<img src="${article.imageUrl}" alt="${article.title}" class="w-full h-64 object-cover">` : ''}
@@ -243,7 +258,7 @@ function generateStaticPages() {
                 </div>
                 <div class="mt-8 pt-8 border-t border-gray-100">
                   <div class="flex flex-wrap gap-2">
-                    ${article.tags.map(tag => `<span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">${tag}</span>`).join('')}
+                    ${article.tags.map((tag: any) => `<span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">${tag}</span>`).join('')}
                   </div>
                 </div>
               </div>
@@ -253,7 +268,7 @@ function generateStaticPages() {
       `
     };
 
-    const html = generateHTML(page);
+    const html = generateHTML(page, templateHtml);
     const filePath = path.join(distDir, `articles/${article.id}.html`);
 
     // Create directory if it doesn't exist
@@ -273,44 +288,7 @@ function generateStaticPages() {
   // Generate Chapter Pages (Programmatic SEO)
   console.log('Generating Bible chapter pages...');
 
-  // NOTE: bibleStructure and bookNames are assumed to be defined elsewhere in the file.
-  // For example:
-  // const bibleStructure = {
-  //   genesis: 50, exodus: 40, leviticus: 27, numbers: 36, deuteronomy: 34,
-  //   joshua: 24, judges: 21, ruth: 4, "1-samuel": 31, "2-samuel": 24,
-  //   "1-kings": 22, "2-kings": 25, "1-chronicles": 29, "2-chronicles": 36,
-  //   ezra: 10, nehemiah: 13, esther: 10, job: 42, psalms: 150,
-  //   proverbs: 31, ecclesiastes: 12, "song-of-solomon": 8,
-  //   isaiah: 66, jeremiah: 52, lamentations: 5, ezekiel: 48, daniel: 12,
-  //   hosea: 14, joel: 3, amos: 9, obadiah: 1, jonah: 4,
-  //   micah: 7, nahum: 3, habakkuk: 3, zephaniah: 3,
-  //   haggai: 2, zechariah: 14, malachi: 4, matthew: 28, mark: 16,
-  //   luke: 24, john: 21, acts: 28, romans: 16, "1-corinthians": 16,
-  //   "2-corinthians": 13, galatians: 6, ephesians: 6, philippians: 4,
-  //   colossians: 4, "1-thessalonians": 5, "2-thessalonians": 3,
-  //   "1-timothy": 6, "2-timothy": 4, titus: 3, philemon: 1,
-  //   hebrews: 13, james: 5, "1-peter": 5, "2-peter": 3, "1-john": 5,
-  //   "2-john": 1, "3-john": 1, jude: 1, revelation: 22
-  // };
-  // const bookNames = {
-  //   genesis: "Genesis", exodus: "Exodus", leviticus: "Leviticus", numbers: "Numbers", deuteronomy: "Deuteronomy",
-  //   joshua: "Joshua", judges: "Judges", ruth: "Ruth", "1-samuel": "1 Samuel", "2-samuel": "2 Samuel",
-  //   "1-kings": "1 Kings", "2-kings": "2 Kings", "1-chronicles": "1 Chronicles", "2-chronicles": "2 Chronicles",
-  //   ezra: "Ezra", nehemiah: "Nehemiah", esther: "Esther", job: "Job", psalms: "Psalms",
-  //   proverbs: "Proverbs", ecclesiastes: "Ecclesiastes", "song-of-solomon": "Song of Solomon",
-  //   isaiah: "Isaiah", jeremiah: "Jeremiah", lamentations: "Lamentations", ezekiel: "Ezekiel", daniel: "Daniel",
-  //   hosea: "Hosea", joel: "Joel", amos: "Amos", obadiah: "Obadiah", jonah: "Jonah",
-  //   micah: "Micah", nahum: "Nahum", habakkuk: "Habakkuk", zephaniah: "Zephaniah",
-  //   haggai: "Haggai", zechariah: "Zechariah", malachi: "Malachi", matthew: "Matthew", mark: "Mark",
-  //   luke: "Luke", john: "John", acts: "Acts", romans: "Romans", "1-corinthians": "1 Corinthians",
-  //   "2-corinthians": "2 Corinthians", galatians: "Galatians", ephesians: "Ephesians", philippians: "Philippians",
-  //   colossians: "Colossians", "1-thessalonians": "1 Thessalonians", "2-thessalonians": "2 Thessalonians",
-  //   "1-timothy": "1 Timothy", "2-timothy": "2 Timothy", titus: "Titus", philemon: "Philemon",
-  //   hebrews: "Hebrews", james: "James", "1-peter": "1 Peter", "2-peter": "2 Peter", "1-john": "1 John",
-  //   "2-john": "2 John", "3-john": "3 John", jude: "Jude", revelation: "Revelation"
-  // };
-
-  for (const [book, chapters] of Object.entries(bibleStructure)) {
+  for (const [book, chapters] of Object.entries(bibleStructure)) { // @ts-ignore
     const bookName = bookNames[book] || book.charAt(0).toUpperCase() + book.slice(1);
     const bookDir = path.join(distDir, 'public-quiz', book);
 
@@ -318,7 +296,7 @@ function generateStaticPages() {
       fs.mkdirSync(bookDir, { recursive: true });
     }
 
-    for (let i = 1; i <= chapters; i++) {
+    for (let i = 1; i <= (chapters as number); i++) {
       const chapter = `chapter-${i}`;
       const page = {
         path: `/public-quiz/${book}/${chapter}`,
@@ -340,7 +318,7 @@ function generateStaticPages() {
           }
         },
         content: `
-            <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
+            <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white pt-20">
             <div class="container mx-auto px-4 py-8">
                 <div class="max-w-6xl mx-auto shadow-2xl border-0 bg-white rounded-xl overflow-hidden">
                 <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6">
@@ -353,9 +331,10 @@ function generateStaticPages() {
                         Test your knowledge of ${bookName} Chapter ${i} with this comprehensive Bible quiz. 
                         This interactive quiz contains carefully crafted questions covering key events, characters, and teachings from ${bookName} Chapter ${i}.
                     </p>
-                    <button class="bg-blue-600 text-white px-6 py-2 rounded font-semibold hover:bg-blue-700 transition">
-                        Load Quiz (Requires JavaScript)
-                    </button>
+                    <div class="flex items-center gap-3">
+                         <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
+                         <span class="text-blue-600 font-medium">Loading quiz engine...</span>
+                    </div>
                     </div>
                 </div>
                 </div>
@@ -364,10 +343,9 @@ function generateStaticPages() {
       };
 
       try {
-        const html = generateHTML(page);
+        const html = generateHTML(page, templateHtml);
         const filePath = path.join(bookDir, `${chapter}.html`);
         fs.writeFileSync(filePath, html);
-        // console.log(`Generated chapter page: ${filePath}`); // Commented out to reduce noise
       } catch (err) {
         console.error(`Error generating chapter page ${book} ${chapter}:`, err);
       }
