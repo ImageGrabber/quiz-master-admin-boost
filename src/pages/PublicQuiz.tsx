@@ -9,13 +9,15 @@ import { Clock, Brain, CheckCircle, AlertTriangle, Trophy, Home } from "lucide-r
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import SocialShare from "@/components/SocialShare";
+import { Link } from "react-router-dom";
 
 interface Question {
-  id: number;
+  id: number | string;
   question: string;
   options: string[];
   answer: number;
   explanation?: string;
+  referenceVerse?: string;
 }
 
 interface PublicQuizProps {
@@ -23,9 +25,12 @@ interface PublicQuizProps {
   questions: Question[];
   bookName: string;
   chapter?: string;
+  seoDescription?: string;
+  prevChapterUrl?: string;
+  nextChapterUrl?: string;
 }
 
-const PublicQuiz = ({ title, questions, bookName, chapter }: PublicQuizProps) => {
+const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevChapterUrl, nextChapterUrl }: PublicQuizProps) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [answers, setAnswers] = useState<number[]>([]);
@@ -168,6 +173,16 @@ const PublicQuiz = ({ title, questions, bookName, chapter }: PublicQuizProps) =>
                         )}
                       </div>
                       <p className="text-gray-700 mb-2">{q.question}</p>
+                      {q.referenceVerse && (
+                        <p className="text-sm font-medium text-blue-800 mb-3 bg-blue-100/50 inline-block px-2 py-1 rounded">
+                          Reference: 📖 {q.referenceVerse}
+                        </p>
+                      )}
+                      {q.explanation && (
+                        <p className="text-sm text-gray-600 mb-3 italic">
+                          {q.explanation}
+                        </p>
+                      )}
                       <div className="space-y-1">
                         {q.options.map((option, optionIndex) => (
                           <div
@@ -288,17 +303,17 @@ const PublicQuiz = ({ title, questions, bookName, chapter }: PublicQuizProps) =>
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
       <Helmet>
         <title>{title} - Free Bible Quiz | Bible Quiz Competition</title>
-        <meta name="description" content={`Test your knowledge of ${bookName} with this free interactive Bible quiz. ${questions.length} questions to challenge your understanding of the Bible. No registration required!`} />
+        <meta name="description" content={seoDescription || `Test your knowledge of ${bookName} with this free interactive Bible quiz. ${questions.length} questions to challenge your understanding of the Bible. No registration required!`} />
         <meta name="keywords" content={`${bookName} quiz, Bible quiz, ${bookName} questions, Bible study, Christian quiz, free Bible quiz, ${bookName} test, Bible knowledge`} />
         <meta name="author" content="Bible Quiz Competition" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={`https://biblequizcompetition.com/public-quiz/${bookName.toLowerCase()}`} />
+        <link rel="canonical" href={`https://biblequizcompetition.com/public-quiz/${bookName.toLowerCase()}${chapter ? `/${chapter}` : ''}`} />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={`${title} - Free Bible Quiz`} />
-        <meta property="og:description" content={`Test your knowledge of ${bookName} with this free interactive Bible quiz. ${questions.length} questions to challenge your understanding.`} />
-        <meta property="og:url" content={`https://biblequizcompetition.com/public-quiz/${bookName.toLowerCase()}`} />
+        <meta property="og:description" content={seoDescription || `Test your knowledge of ${bookName} with this free interactive Bible quiz. ${questions.length} questions to challenge your understanding.`} />
+        <meta property="og:url" content={`https://biblequizcompetition.com/public-quiz/${bookName.toLowerCase()}${chapter ? `/${chapter}` : ''}`} />
         <meta property="og:site_name" content="Bible Quiz Competition" />
         <meta property="og:image" content="https://biblequizcompetition.com/og-image-bible-quiz.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -307,7 +322,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter }: PublicQuizProps) =>
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${title} - Free Bible Quiz`} />
-        <meta name="twitter:description" content={`Test your knowledge of ${bookName} with this free interactive Bible quiz. ${questions.length} questions to challenge your understanding.`} />
+        <meta name="twitter:description" content={seoDescription || `Test your knowledge of ${bookName} with this free interactive Bible quiz. ${questions.length} questions to challenge your understanding.`} />
         <meta name="twitter:image" content="https://biblequizcompetition.com/og-image-bible-quiz.jpg" />
 
         {/* Structured Data */}
@@ -342,9 +357,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter }: PublicQuizProps) =>
             <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
               <h1 className="text-2xl font-bold text-gray-900 mb-2">{title}</h1>
               <p className="text-gray-700 mb-2">
-                Test your knowledge of {bookName}{chapter ? ` Chapter ${chapter}` : ''} with this comprehensive Bible quiz.
-                This interactive quiz contains {questions.length} carefully crafted questions
-                covering key events, characters, and teachings from {bookName}{chapter ? ` Chapter ${chapter}` : ''}.
+                {seoDescription || `Test your knowledge of ${bookName}${chapter ? ` Chapter ${chapter}` : ''} with this comprehensive Bible quiz. This interactive quiz contains ${questions.length} carefully crafted questions covering key events, characters, and teachings from ${bookName}${chapter ? ` Chapter ${chapter}` : ''}.`}
               </p>
               <div className="flex flex-wrap gap-2 text-sm text-blue-600">
                 <span className="bg-blue-100 px-2 py-1 rounded">Free Bible Quiz</span>
@@ -402,6 +415,22 @@ const PublicQuiz = ({ title, questions, bookName, chapter }: PublicQuizProps) =>
             </div>
           </CardContent>
         </Card>
+
+        {/* Next / Prev Links (SEO Internal Interlinking) */}
+        {(prevChapterUrl || nextChapterUrl) && (
+          <div className="mt-8 max-w-6xl mx-auto flex justify-between items-center px-4">
+            {prevChapterUrl ? (
+              <Link to={prevChapterUrl} className="text-blue-700 hover:text-blue-900 hover:underline font-semibold flex items-center bg-white p-3 rounded-lg shadow-sm border border-blue-100">
+                ← Previous Chapter
+              </Link>
+            ) : <div />}
+            {nextChapterUrl && (
+              <Link to={nextChapterUrl} className="text-blue-700 hover:text-blue-900 hover:underline font-semibold flex items-center bg-white p-3 rounded-lg shadow-sm border border-blue-100">
+                Next Chapter →
+              </Link>
+            )}
+          </div>
+        )}
 
         {/* SEO-friendly footer content */}
         <div className="mt-8 max-w-6xl mx-auto">

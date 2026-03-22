@@ -145,6 +145,7 @@ import JudePublicQuiz from "./pages/public-quizzes/JudePublicQuiz";
 import RevelationPublicQuiz from "./pages/public-quizzes/RevelationPublicQuiz";
 import PublicQuizChapter from "./pages/public-quizzes/PublicQuizChapter";
 import HardBibleQuizForTeens from "./pages/seo-quizzes/HardBibleQuizForTeens";
+import HardBibleQuizForAdults from "./pages/seo-quizzes/HardBibleQuizForAdults";
 import BibleQuizQuestionsAndAnswers from "./pages/seo-quizzes/BibleQuizQuestionsAndAnswers";
 import HardestBibleTrivia from "./pages/seo-quizzes/HardestBibleTrivia";
 import BibleQuizForYouth from "./pages/seo-quizzes/BibleQuizForYouth";
@@ -349,6 +350,7 @@ const App = () => {
               <Route path="/hardest-bible-trivia-questions" element={<HardestBibleTrivia />} />
               <Route path="/bible-quiz-with-answers-for-youth" element={<BibleQuizForYouth />} />
               <Route path="/hard-bible-quiz-for-teens" element={<HardBibleQuizForTeens />} />
+              <Route path="/hard-bible-quiz-for-adults" element={<HardBibleQuizForAdults />} />
               <Route path="/bible-trivia-for-kids-under-10" element={<BibleTriviaForKids />} />
               <Route path="/book-of-john-quiz-questions" element={<BookOfJohnQuizQuestions />} />
               <Route path="/songs" element={<Songs />} />
