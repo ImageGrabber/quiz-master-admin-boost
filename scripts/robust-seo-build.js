@@ -19,15 +19,6 @@ try {
   console.log('⚡ Building with Vite...');
   execSync('npx vite build', { stdio: 'inherit' });
 
-  // Step 3: Try react-snap (optional, may fail in deployment environments)
-  console.log('🔄 Attempting pre-rendering with react-snap...');
-  try {
-    execSync('react-snap', { stdio: 'inherit' });
-    console.log('✅ Pre-rendering completed successfully');
-  } catch (error) {
-    console.log('⚠️  react-snap failed (this is normal in some deployment environments)');
-    console.log('📄 Continuing with static HTML generation...');
-  }
 
   // Step 4: Generate static fallbacks (this is the most important part)
   console.log('📄 Generating static HTML fallbacks...');
