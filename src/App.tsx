@@ -154,6 +154,10 @@ import BibleTriviaForKids from "./pages/seo-quizzes/BibleTriviaForKids";
 import BookOfJohnQuizQuestions from "./pages/seo-quizzes/BookOfJohnQuizQuestions";
 import Songs from "./pages/Songs";
 import SongDetail from "./pages/SongDetail";
+import AboutUs from "./pages/AboutUs";
+import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 // Removed static imports of Bible book quiz files for code-splitting
 import Upgrade from "./pages/Upgrade";
 import PageViews from "./pages/admin/PageViews";
@@ -342,9 +346,13 @@ const App = () => {
               <Route path="/host-live-bible-quizzes-with-confidence" element={<HostingGuide />} />
               {/* Backward-compatible old path */}
               <Route path="/hosting-guide" element={<HostingGuide />} />
-              import RulesAndPrizes from "./pages/seo-quizzes/RulesAndPrizes";
+              
+              {/* Trust & E-E-A-T Pages */}
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<TermsOfService />} />
 
-              // ... inside Routes ...
               <Route path="/rules-and-prizes" element={<RulesAndPrizes />} />
               <Route path="/bible-quiz-questions-and-answers" element={<BibleQuizQuestionsAndAnswers />} />
               <Route path="/hardest-bible-trivia-questions" element={<HardestBibleTrivia />} />
