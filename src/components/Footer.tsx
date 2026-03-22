@@ -1,5 +1,6 @@
 import React from "react";
 import { Brain } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
     return (
@@ -11,10 +12,10 @@ export const Footer = () => {
                 </div>
 
                 <div className="flex gap-8 text-sm font-medium text-slate-500">
-                    <a href="/about" className="hover:text-slate-900 transition-colors">About Us</a>
-                    <a href="/privacy" className="hover:text-slate-900 transition-colors">Privacy</a>
-                    <a href="/terms" className="hover:text-slate-900 transition-colors">Terms</a>
-                    <a href="/contact" className="hover:text-slate-900 transition-colors">Support</a>
+                    <Link to="/about" className="hover:text-slate-900 transition-colors">About Us</Link>
+                    <Link to="/privacy" className="hover:text-slate-900 transition-colors">Privacy</Link>
+                    <Link to="/terms" className="hover:text-slate-900 transition-colors">Terms</Link>
+                    <Link to="/contact" className="hover:text-slate-900 transition-colors">Support</Link>
                 </div>
 
                 <div className="text-sm text-slate-400">
