@@ -359,7 +359,7 @@ export default function ExodusHub() {
             <h2 className="text-4xl font-urbanist font-semibold text-gray-900">By Difficulty</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col bg-white overflow-hidden group shadow-none" onClick={() => navigate("/bible-questions-and-answers-hub/exodus/beginner")}> 
+            <Card className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col bg-white overflow-hidden group shadow-none" onClick={() => navigate("/bible-questions-and-answers-hub/exodus/ch1-beginner")}> 
               <CardHeader className="pb-3">
                 <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 transition-colors group-hover:bg-green-100">
                   <BookOpen className="w-6 h-6 text-gray-700 group-hover:text-green-700" strokeWidth={1} />
@@ -378,7 +378,7 @@ export default function ExodusHub() {
               </CardContent>
             </Card>
 
-            <Card className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col bg-white overflow-hidden group shadow-none" onClick={() => navigate("/bible-questions-and-answers-hub/exodus/intermediate")}> 
+            <Card className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col bg-white overflow-hidden group shadow-none" onClick={() => navigate("/bible-questions-and-answers-hub/exodus/ch1-intermediate")}> 
               <CardHeader className="pb-3">
                 <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 transition-colors group-hover:bg-yellow-100">
                   <Layers className="w-6 h-6 text-gray-700 group-hover:text-yellow-700" strokeWidth={1} />
@@ -397,7 +397,7 @@ export default function ExodusHub() {
               </CardContent>
             </Card>
 
-            <Card className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col bg-white overflow-hidden group shadow-none" onClick={() => navigate("/bible-questions-and-answers-hub/exodus/advanced")}> 
+            <Card className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col bg-white overflow-hidden group shadow-none" onClick={() => navigate("/bible-questions-and-answers-hub/exodus/ch1-advanced")}> 
               <CardHeader className="pb-3">
                 <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 transition-colors group-hover:bg-red-100">
                   <Swords className="w-6 h-6 text-gray-700 group-hover:text-red-700" strokeWidth={1} />
@@ -440,8 +440,8 @@ export default function ExodusHub() {
                 </CardContent>
                 <CardContent className="pt-4 border-t border-gray-50">
                   <div className="flex flex-col gap-2">
-                    <Button size="sm" variant="outline" className="w-full font-urbanist font-light text-base py-5" onClick={() => navigate(`/bible-questions-and-answers-hub/exodus/${r.range.replace("–", "-")}/beginner`)}>Beginner</Button>
-                    <Button size="sm" className="w-full font-urbanist font-light bg-black text-white hover:bg-gray-800 text-base py-5" onClick={() => navigate(`/bible-questions-and-answers-hub/exodus/${r.range.replace("–", "-")}/advanced`)}>Advanced Quiz</Button>
+                    <Button size="sm" variant="outline" className="w-full font-urbanist font-light text-base py-5" onClick={() => navigate(`/bible-questions-and-answers-hub/exodus/ch${r.range.replace("–", "-")}-beginner`)}>Beginner</Button>
+                    <Button size="sm" className="w-full font-urbanist font-light bg-black text-white hover:bg-gray-800 text-base py-5" onClick={() => navigate(`/bible-questions-and-answers-hub/exodus/ch${r.range.replace("–", "-")}-advanced`)}>Advanced Quiz</Button>
                   </div>
                 </CardContent>
               </Card>

@@ -11,8 +11,8 @@ interface SEOProps {
 }
 
 const SEO = ({
-  title = 'Bible Quiz Competition | Weekly Online Bible Quizzes',
-  description = 'Join weekly Bible quizzes, host live sessions, and climb the leaderboard. Free to join, fun for all ages.',
+  title = 'Online Bible Quiz Competition 2026 | Free Bible Quizzes and Prizes',
+  description = 'Play free Bible quizzes, climb leaderboards, and compete for prizes in Bible Quiz Competition 2026.',
   image,
   url,
   type = 'website',
@@ -71,5 +71,4 @@ const SEO = ({
 };
 
 export default SEO;
-
 

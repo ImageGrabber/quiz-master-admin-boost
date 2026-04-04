@@ -30,7 +30,7 @@ const CompetitionHome = () => {
       name: "Sarah Johnson",
       initials: "SJ",
       role: "Daily Participant",
-      quote: "The daily Bible quiz challenges have become part of my morning routine. I've learned so much and love competing with others. The Bible Quiz Competition 2025-2026 is amazing!",
+      quote: "The daily Bible quiz challenges have become part of my morning routine. I've learned so much and love competing with others. The Bible Quiz Competition 2026 is amazing!",
       gradient: "from-blue-500 to-cyan-500",
       bgGradient: "from-white via-blue-50/40 to-cyan-50/30",
       borderColor: "border-blue-100/50",
@@ -66,7 +66,7 @@ const CompetitionHome = () => {
       name: "Esther White",
       initials: "EW",
       role: "Bible Challenger",
-      quote: "Checking the bible quiz competition 2025-2026 results every week is so exciting. I love seeing my name climb the leaderboard!",
+      quote: "Checking the bible quiz competition 2026 results every week is so exciting. I love seeing my name climb the leaderboard!",
       gradient: "from-emerald-500 to-teal-500",
       bgGradient: "from-white via-emerald-50/40 to-teal-50/30",
       borderColor: "border-emerald-100/50",
@@ -118,12 +118,45 @@ const CompetitionHome = () => {
       category: "Education"
     },
     {
-      id: "2025-competition-overview",
-      title: "2025-2026 Competition Overview",
+      id: "2026-competition-overview",
+      title: "2026 Competition Overview",
       excerpt: "Everything you need to know about the upcoming quiz season and prizes.",
       readTime: "4 min read",
       author: "Competition Team",
       category: "News"
+    }
+  ];
+
+  const trendingSearchLinks = [
+    {
+      label: "Nehemiah Quiz",
+      description: "Leadership, rebuilding the wall, and covenant renewal.",
+      path: "/public-quiz/nehemiah"
+    },
+    {
+      label: "2 Thessalonians Quiz",
+      description: "Day of the Lord, perseverance, and Christian discipline.",
+      path: "/public-quiz/2-thessalonians"
+    },
+    {
+      label: "Philemon Bible Quiz",
+      description: "Forgiveness, restoration, and brotherhood in Christ.",
+      path: "/public-quiz/philemon"
+    },
+    {
+      label: "Bible Quiz Prize Guide",
+      description: "See prize rules, eligibility, and winner updates.",
+      path: "/bible-quiz-prize"
+    },
+    {
+      label: "Quiz Scoring System Explanation",
+      description: "Learn points, timer bonus, and tie-break rules.",
+      path: "/quiz-scoring-system-explanation"
+    },
+    {
+      label: "Online Bible Quiz Competition 2026",
+      description: "Join free challenges and climb the leaderboard.",
+      path: "/online-bible-quiz-competition-2026"
     }
   ];
 
@@ -156,6 +189,16 @@ const CompetitionHome = () => {
   }, []);
 
   const totalSlides = Math.ceil(testimonials.length / testimonialsPerViewState);
+  const highIntentQuizLinks = new Set([
+    "/public-quiz/nehemiah",
+    "/public-quiz/2-thessalonians",
+    "/public-quiz/philemon"
+  ]);
+
+  const prioritizedFeaturedQuizzes = [
+    ...featuredQuizzes.filter((quiz) => highIntentQuizLinks.has(quiz.link)),
+    ...featuredQuizzes.filter((quiz) => !highIntentQuizLinks.has(quiz.link))
+  ].slice(0, 6);
 
   useEffect(() => {
     fetchDailyChallenge();
@@ -363,8 +406,8 @@ const CompetitionHome = () => {
   return (
     <>
       <SEO
-        title="Bible Quiz Competition 2025-2026 | Play Daily"
-        description="Join the Bible Quiz Competition 2025-2026. Engage in daily Bible quizzes, test your knowledge, win prizes, and join a global community."
+        title="Online Bible Quiz Competition 2026 | Free Quizzes, Prizes, and Leaderboards"
+        description="Join the Bible Quiz Competition 2026. Play Nehemiah quiz, 2 Thessalonians quiz, and Philemon Bible quiz, earn timer bonuses, and win bible quiz prizes."
         structuredData={{
           "@context": "https://schema.org",
           "@graph": [
@@ -386,6 +429,30 @@ const CompetitionHome = () => {
                 "target": "https://biblequizcompetition.com/search?q={search_term_string}",
                 "query-input": "required name=search_term_string"
               }
+            },
+            {
+              "@type": "WebPage",
+              "name": "Online Bible Quiz Competition 2026",
+              "url": "https://biblequizcompetition.com/",
+              "description": "Free online Bible quiz competition with daily challenges, score timer bonuses, bible quiz prizes, and chapter quizzes including Nehemiah, 2 Thessalonians, and Philemon.",
+              "about": [
+                { "@type": "Thing", "name": "Bible quiz competition 2026" },
+                { "@type": "Thing", "name": "Nehemiah quiz" },
+                { "@type": "Thing", "name": "2 Thessalonians quiz" },
+                { "@type": "Thing", "name": "Philemon Bible quiz" },
+                { "@type": "Thing", "name": "Quiz scoring system explanation" }
+              ]
+            },
+            {
+              "@type": "ItemList",
+              "name": "Top Bible Quiz Searches",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Nehemiah Quiz", "url": "https://biblequizcompetition.com/public-quiz/nehemiah" },
+                { "@type": "ListItem", "position": 2, "name": "2 Thessalonians Quiz", "url": "https://biblequizcompetition.com/public-quiz/2-thessalonians" },
+                { "@type": "ListItem", "position": 3, "name": "Philemon Bible Quiz", "url": "https://biblequizcompetition.com/public-quiz/philemon" },
+                { "@type": "ListItem", "position": 4, "name": "Bible Quiz Prize", "url": "https://biblequizcompetition.com/bible-quiz-prize" },
+                { "@type": "ListItem", "position": 5, "name": "Quiz Scoring System Explanation", "url": "https://biblequizcompetition.com/quiz-scoring-system-explanation" }
+              ]
             }
           ]
         }}
@@ -394,59 +461,126 @@ const CompetitionHome = () => {
       <div className="min-h-screen bg-slate-50 font-urbanist">
         <Navigation />
 
-        {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center pt-24 lg:pt-0 px-6 overflow-hidden bg-slate-50">
-          {/* Refined Background - Sleeker with Pattern */}
+        <section className="relative overflow-hidden px-6 pt-10 pb-20 lg:pt-16 lg:pb-24 bg-gradient-to-b from-white via-slate-50 to-white">
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-            <div className="absolute top-0 right-0 w-[80vw] h-[80vw] bg-gradient-to-br from-blue-100/30 via-violet-100/20 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-            <div className="absolute bottom-0 left-0 w-[60vw] h-[60vw] bg-gradient-to-tr from-indigo-100/30 via-purple-100/20 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.12),transparent_40%),radial-gradient(circle_at_bottom_left,rgba(99,102,241,0.1),transparent_45%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#64748b10_1px,transparent_1px),linear-gradient(to_bottom,#64748b10_1px,transparent_1px)] bg-[size:22px_22px]" />
           </div>
 
-          <div className="max-w-5xl mx-auto w-full relative z-10">
-            <div className="flex flex-col items-center text-center space-y-8">
-                <div>
-                  <h1 className="text-2xl lg:text-3xl font-semibold font-inter-tight text-slate-500 tracking-tight mb-4">
-                    Online Bible Quiz Competition 2025-2026
-                  </h1>
+          <div className="max-w-7xl mx-auto w-full relative z-10 grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
+            <div className="space-y-8">
+              <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-sm font-semibold text-blue-700">
+                <Trophy className="w-4 h-4" />
+                Live Season 2026
+              </span>
 
-                  <h2 className="text-5xl lg:text-7xl font-bold text-slate-900 tracking-tight leading-[1.05] drop-shadow-sm">
-                    Master the Word,<br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-violet-600 to-indigo-600">
-                      Join the Glory.
-                    </span>
-                  </h2>
-                </div>
+              <div>
+                <h1 className="text-2xl lg:text-3xl font-semibold font-inter-tight text-slate-500 tracking-tight mb-4">
+                  Online Bible Quiz Competition 2026
+                </h1>
 
-                <p className="text-xl text-slate-500 font-light max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                  Join thousands of believers in the ultimate online Bible quiz competition 2025-2026. Test your knowledge as a Bible Challenger, track your growth, and compete for amazing prizes.
-                </p>
+                <h2 className="text-5xl lg:text-7xl font-bold text-slate-900 tracking-tight leading-[1.05]">
+                  Master the Word,<br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600">
+                    Join the Glory.
+                  </span>
+                </h2>
+              </div>
 
-                <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
-                  <Button
-                    onClick={() => navigate('/auth/login')}
-                    className="h-14 px-8 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-semibold text-lg hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl"
-                  >
-                    Start Playing Now <ArrowRight className="ml-2 w-5 h-5" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => navigate('/scripture-match-multiplayer')}
-                    className="h-14 px-8 border-2 border-slate-200 text-slate-700 hover:border-slate-300 hover:bg-slate-50 rounded-full font-semibold text-lg transition-all duration-300 bg-white/50 backdrop-blur-sm"
-                  >
-                    Play Scripture Game <Gamepad2 className="ml-2 w-5 h-5" />
-                  </Button>
-                </div>
+              <p className="text-xl text-slate-500 font-light max-w-2xl leading-relaxed">
+                Join thousands of believers in a free bible competition with daily challenges, transparent scoring, and real bible quiz prizes. Start with our most searched quizzes and grow your Scripture mastery.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
+                <Button
+                  onClick={() => navigate('/auth/login')}
+                  className="h-14 px-8 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-semibold text-lg hover:scale-[1.02] transition-all duration-300 shadow-lg"
+                >
+                  Start Playing Now <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => navigate('/scripture-match-multiplayer')}
+                  className="h-14 px-8 border-2 border-slate-200 text-slate-700 hover:border-blue-200 hover:bg-blue-50 rounded-full font-semibold text-lg transition-all duration-300 bg-white"
+                >
+                  Play Scripture Game <Gamepad2 className="ml-2 w-5 h-5" />
+                </Button>
+              </div>
+
+            </div>
+
+            <div className="lg:pt-10">
+              <Card className="border-slate-200 bg-white/95 backdrop-blur-sm shadow-xl rounded-3xl overflow-hidden">
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-2xl text-slate-900">Today's Challenge Pulse</CardTitle>
+                  <CardDescription className="text-slate-500">
+                    Live momentum from the global bible challenger community.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-5">
+                  <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4">
+                    <p className="text-xs uppercase tracking-widest text-blue-600 font-semibold mb-2">Recent Winner</p>
+                    <p className="text-xl font-bold text-blue-900">{recentWinners[currentWinnerIndex] || "Community Player"}</p>
+                  </div>
+
+                  <div className="space-y-3">
+                    {trendingSearchLinks.slice(0, 3).map((item) => (
+                      <button
+                        key={item.label}
+                        onClick={() => navigate(item.path)}
+                        className="w-full flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-left hover:bg-white hover:border-slate-300 transition-all"
+                      >
+                        <span className="text-sm font-semibold text-slate-700">{item.label}</span>
+                        <ArrowRight className="w-4 h-4 text-slate-500" />
+                      </button>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
-        </section >
+        </section>
+
+        <section className="py-20 bg-gradient-to-b from-slate-50 to-white border-y border-slate-100">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-4">Top Bible Quiz Searches Right Now</h2>
+              <p className="text-lg text-slate-500 font-light max-w-3xl mx-auto leading-relaxed">
+                Jump straight to the quizzes and guides people are searching for most, including Nehemiah quiz, 2 Thessalonians quiz, Philemon Bible quiz, and our scoring explanation.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {trendingSearchLinks.map((item) => (
+                <Card
+                  key={item.label}
+                  className="group border border-slate-200 bg-white hover:bg-slate-50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer rounded-3xl"
+                  onClick={() => navigate(item.path)}
+                >
+                  <CardHeader className="pb-2 space-y-3">
+                    <span className="inline-flex w-fit rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold tracking-wider text-slate-600 uppercase">
+                      Popular
+                    </span>
+                    <CardTitle className="text-lg text-slate-900 group-hover:text-blue-700 transition-colors">{item.label}</CardTitle>
+                    <CardDescription className="text-slate-600 leading-relaxed">{item.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-0">
+                    <Button variant="ghost" className="p-0 h-auto text-blue-600 hover:text-blue-700 hover:bg-transparent font-semibold">
+                      Open Page <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* Features - Clean Grid */}
-        < section className="py-24 bg-white relative" >
+        < section className="py-24 bg-white relative overflow-hidden" >
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center max-w-3xl mx-auto mb-20">
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Designed for Growth</h2>
-              <p className="text-lg text-slate-500 font-light">
+              <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">Designed for Growth</h2>
+              <p className="text-lg text-slate-500 font-light leading-relaxed">
                 More than just a game. It's a journey to deepen your understanding of the Scripture through consistent, engaging practice.
               </p>
             </div>
@@ -456,7 +590,7 @@ const CompetitionHome = () => {
                 {
                   icon: <Calendar className="w-6 h-6 text-blue-600" />,
                   title: "Daily Habits",
-                  desc: "Build consistency with fresh bible quiz 2025-2026 challenges every single day.",
+                  desc: "Build consistency with fresh bible quiz competition 2026 challenges every single day.",
                   color: "bg-blue-50"
                 },
                 {
@@ -478,23 +612,23 @@ const CompetitionHome = () => {
                   color: "bg-amber-50"
                 },
                 {
-                  icon: <Sparkles className="w-6 h-6 text-pink-600" />,
-                  title: "Expert Insights",
-                  desc: "Deepen understanding with commentary on Genesis 8 and more.",
+                  icon: <Clock className="w-6 h-6 text-pink-600" />,
+                  title: "Fair Scoring",
+                  desc: "Read our quiz scoring system explanation, including timer bonus and tie-break rules.",
                   color: "bg-pink-50"
                 },
                 {
                   icon: <Globe className="w-6 h-6 text-cyan-600" />,
                   title: "Global Ranking",
-                  desc: "Compare your 2025-2026 results with challengers worldwide on the leaderboard.",
+                  desc: "Compare your bible quiz competition 2026 results with challengers worldwide on the leaderboard.",
                   color: "bg-cyan-50"
                 }
               ].map((feature, idx) => (
-                <div key={idx} className="group p-8 rounded-[2rem] bg-slate-50 hover:bg-white border border-transparent hover:border-slate-100 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500">
+                <div key={idx} className="group p-8 rounded-3xl bg-slate-50 hover:bg-white border border-slate-100 hover:border-slate-200 hover:shadow-xl transition-all duration-500">
                   <div className={`w-14 h-14 rounded-2xl ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">{feature.title}</h3>
+                  <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">{feature.title}</h3>
                   <p className="text-slate-500 leading-relaxed font-light">
                     {feature.desc}
                   </p>
@@ -505,24 +639,24 @@ const CompetitionHome = () => {
         </section >
 
         {/* How It Works - Bible Challenger Journey */}
-        <section className="py-24 bg-slate-50 relative overflow-hidden">
+        <section className="py-24 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">How to Become a Bible Challenger</h2>
-              <p className="text-lg text-slate-500 font-light max-w-2xl mx-auto">
+              <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">How to Become a Bible Challenger</h2>
+              <p className="text-lg text-slate-500 font-light max-w-2xl mx-auto leading-relaxed">
                 Your journey to mastering the Word starts here. Follow these simple steps to join the online bible quiz competition.
               </p>
             </div>
 
             <div className="grid md:grid-cols-4 gap-8">
               {[
-                { title: "1. Register Free", desc: "Sign up instantly to join the bible competition 2025-2026.", icon: Users },
+                { title: "1. Register Free", desc: "Sign up instantly to join the online bible quiz competition 2026.", icon: Users },
                 { title: "2. Study Daily", desc: "Use our hubs for Genesis 8 quiz prep and more.", icon: BookOpen },
                 { title: "3. Take Quizzes", desc: "Compete in daily and weekly online bible quizzes.", icon: Brain },
-                { title: "4. Win Prizes", desc: "Check bible quiz competition 2025-2026 results weekly.", icon: Trophy }
+                { title: "4. Win Prizes", desc: "Review bible quiz prize rules and check live results weekly.", icon: Trophy }
               ].map((step, idx) => (
-                <div key={idx} className="relative flex flex-col items-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-white border-2 border-blue-100 flex items-center justify-center mb-6 shadow-sm z-10">
+                <div key={idx} className="relative flex flex-col items-center text-center p-6 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                  <div className="w-16 h-16 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center mb-6 shadow-sm z-10">
                     <step.icon className="w-8 h-8 text-blue-600" />
                   </div>
 
@@ -538,18 +672,18 @@ const CompetitionHome = () => {
         <section className="py-24 bg-white relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Browse by Category</h2>
-              <p className="text-lg text-slate-600 max-w-2xl mx-auto font-light">
+              <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">Browse by Category</h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">
                 Explore bible quizzes organized by biblical categories.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {categories.map((category, idx) => (
-                <Card key={idx} className="group hover:shadow-xl transition-all duration-300 border border-slate-100 shadow-sm bg-slate-50 overflow-hidden cursor-pointer" onClick={() => navigate('/bible-questions-and-answers-hub')}>
+                <Card key={idx} className="group hover:shadow-xl transition-all duration-300 border border-slate-200 shadow-sm bg-white overflow-hidden cursor-pointer rounded-3xl hover:-translate-y-1" onClick={() => navigate('/bible-questions-and-answers-hub')}>
                   <CardContent className="p-8">
                     <div className="flex items-center space-x-4 mb-4">
-                      <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-sm text-blue-600">
+                      <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center shadow-sm text-blue-600">
                         <category.icon className="w-6 h-6" />
                       </div>
                       <h3 className="text-xl font-bold text-slate-900">{category.name}</h3>
@@ -557,7 +691,7 @@ const CompetitionHome = () => {
                     <p className="text-slate-600 font-light leading-relaxed mb-6">
                       {category.description}
                     </p>
-                    <div className="flex items-center text-blue-600 font-medium group-hover:translate-x-2 transition-transform">
+                    <div className="flex items-center text-blue-600 font-semibold group-hover:translate-x-2 transition-transform">
                       Explore Category <ArrowRight className="w-4 h-4 ml-2" />
                     </div>
                   </CardContent>
@@ -573,18 +707,18 @@ const CompetitionHome = () => {
         </section>
 
         {/* Featured Quizzes Preview */}
-        <section className="py-24 bg-slate-50 relative overflow-hidden">
+        <section className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Featured Quizzes</h2>
-              <p className="text-lg text-slate-600 max-w-2xl mx-auto font-light">
+              <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">Featured Quizzes</h2>
+              <p className="text-lg text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">
                 Test your knowledge with our most popular bible quizzes.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {featuredQuizzes.slice(0, 6).map((quiz) => (
-                <Card key={quiz.title} className="border border-white hover:border-blue-200 transition-all duration-300 cursor-pointer group bg-white shadow-sm hover:shadow-md" onClick={() => navigate(quiz.link)}>
+              {prioritizedFeaturedQuizzes.map((quiz) => (
+                <Card key={quiz.title} className="border border-slate-200 hover:border-blue-200 transition-all duration-300 cursor-pointer group bg-white shadow-sm hover:shadow-lg rounded-3xl hover:-translate-y-1" onClick={() => navigate(quiz.link)}>
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center">
@@ -620,8 +754,8 @@ const CompetitionHome = () => {
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
               <div className="text-center md:text-left">
-                <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">Latest Insights</h2>
-                <p className="text-lg text-slate-600 max-w-2xl font-light">
+                <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-4">Latest Insights</h2>
+                <p className="text-lg text-slate-600 max-w-2xl font-light leading-relaxed">
                   Strategies, devotionals, and updates from our community.
                 </p>
               </div>
@@ -634,7 +768,7 @@ const CompetitionHome = () => {
 
             <div className="grid md:grid-cols-3 gap-8">
               {featuredArticles.map((article) => (
-                <article key={article.id} className="group cursor-pointer flex flex-col h-full bg-slate-50 p-8 rounded-[2rem] hover:bg-white border border-transparent hover:border-slate-100 hover:shadow-xl transition-all duration-300" onClick={() => navigate("/articles")}>
+                <article key={article.id} className="group cursor-pointer flex flex-col h-full bg-slate-50 p-8 rounded-3xl hover:bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300" onClick={() => navigate("/articles")}>
                   <div className="flex items-center justify-between mb-6">
                     <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wider">
                       {article.category}
@@ -670,12 +804,12 @@ const CompetitionHome = () => {
         </section >
 
         {/* Newsletter */}
-        < section className="py-24 bg-slate-50" >
+        < section className="py-24 bg-gradient-to-b from-slate-50 to-white" >
           <div className="max-w-4xl mx-auto px-6 text-center">
-            <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-8 rotate-3">
+            <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-8">
               <Mail className="w-8 h-8" />
             </div>
-            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Stay Connected</h2>
+            <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">Stay Connected</h2>
             <p className="text-lg text-slate-600 max-w-xl mx-auto font-light mb-10">
               Get the latest quiz schedules, study tips, and daily inspiration delivered straight to your inbox.
             </p>
@@ -687,9 +821,9 @@ const CompetitionHome = () => {
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="w-full h-14 pl-12 pr-36 rounded-full border border-slate-200 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 outline-none transition-all text-slate-600 placeholder:text-slate-400 bg-white"
+                className="w-full h-14 pl-12 pr-36 rounded-full border border-slate-200 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 outline-none transition-all text-slate-600 placeholder:text-slate-400 bg-white shadow-sm"
               />
-              <Button type="submit" className="absolute right-1.5 h-11 px-6 rounded-full bg-slate-900 text-white hover:bg-blue-600 transition-colors">
+              <Button type="submit" className="absolute right-1.5 h-11 px-6 rounded-full bg-slate-900 text-white hover:bg-blue-600 transition-colors font-semibold">
                 Subscribe
               </Button>
             </form>
@@ -703,7 +837,7 @@ const CompetitionHome = () => {
         < section className="py-24 bg-white relative overflow-hidden" >
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Stories from the Community</h2>
+              <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">Stories from the Community</h2>
             </div>
 
             <div className="relative">
@@ -733,7 +867,7 @@ const CompetitionHome = () => {
                       {testimonials
                         .slice(slideIndex * testimonialsPerViewState, slideIndex * testimonialsPerViewState + testimonialsPerViewState)
                         .map((testimonial) => (
-                          <div key={testimonial.id} className="bg-slate-50 p-8 rounded-[2rem] hover:bg-blue-50/50 transition-colors duration-300">
+                          <div key={testimonial.id} className="bg-slate-50 p-8 rounded-3xl border border-slate-200 hover:bg-blue-50/50 hover:border-blue-100 transition-colors duration-300">
                             <Quote className="w-8 h-8 text-blue-200 mb-6" />
                             <p className="text-slate-600 font-light text-lg mb-8 leading-relaxed">
                               "{testimonial.quote}"
@@ -761,20 +895,21 @@ const CompetitionHome = () => {
         <section className="py-24 bg-slate-50">
           <div className="max-w-4xl mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
-              <p className="text-lg text-slate-500 font-light">
-                Everything you need to know about the online bible quiz competition 2025-2026.
+              <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
+              <p className="text-lg text-slate-500 font-light leading-relaxed">
+                Everything you need to know about the online bible quiz competition 2026.
               </p>
             </div>
 
             <div className="space-y-6">
               {[
-                { q: "Is the Bible Quiz Competition 2025-2026 free to join?", a: "Yes! It is completely free to register and participate in the online bible quiz competition. We believe Bible knowledge should be accessible to everyone." },
-                { q: "How do I check the 2025 results?", a: "Results are updated instantly after every quiz. You can view the global leaderboard and your personal progress on the 'Results' page." },
+                { q: "Is the Bible Quiz Competition 2026 free to join?", a: "Yes. It is completely free to register and participate in this online bible quiz competition. Bible study and healthy competition should be accessible to everyone." },
+                { q: "How do I check Bible Quiz Competition 2026 results?", a: "Results are updated after each quiz attempt. You can track your rank on the leaderboard and compare your progress over time." },
+                { q: "Where can I find a quiz scoring system explanation?", a: "Open our scoring guide to see exactly how points are calculated, how timer bonus points work, and how tie-breaks are decided in prize rounds." },
                 { q: "What topics are covered in the quizzes?", a: "We cover the entire Bible! You'll find specific challenges like the Genesis 8 quiz, Matthew quiz, and thematic quizzes on characters and theology." },
                 { q: "Who can become a Bible Challenger?", a: "Anyone! Whether you're a beginner or a scholar, our bible challenger levels adapt to your knowledge, helping you grow step-by-step." }
               ].map((faq, idx) => (
-                <div key={idx} className="bg-white rounded-2xl p-8 shadow-sm border border-slate-100">
+                <div key={idx} className="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:border-slate-300 transition-colors">
                   <h3 className="text-xl font-bold text-slate-900 mb-3">{faq.q}</h3>
                   <p className="text-slate-500 font-light leading-relaxed">{faq.a}</p>
                 </div>
@@ -785,9 +920,9 @@ const CompetitionHome = () => {
 
         {/* CTA Section - Minimal */}
         < section className="py-24 px-6" >
-          <div className="max-w-5xl mx-auto bg-slate-900 rounded-[3rem] p-12 lg:p-24 text-center relative overflow-hidden">
+          <div className="max-w-5xl mx-auto bg-slate-900 rounded-[3rem] p-12 lg:p-24 text-center relative overflow-hidden border border-slate-700">
             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px]"></div>
-            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-violet-500/20 rounded-full blur-[100px]"></div>
+            <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-500/20 rounded-full blur-[100px]"></div>
 
             <div className="relative z-10">
               <h2 className="text-4xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
@@ -798,7 +933,7 @@ const CompetitionHome = () => {
               </p>
               <Button
                 size="lg"
-                className="h-16 px-10 rounded-full bg-white text-slate-900 font-bold text-lg hover:bg-blue-50 transition-colors"
+                className="h-16 px-10 rounded-full bg-white text-slate-900 font-bold text-lg hover:bg-blue-50 transition-colors shadow-lg"
                 onClick={() => navigate("/auth/register")}
               >
                 Join for Free
@@ -808,7 +943,7 @@ const CompetitionHome = () => {
         </section >
 
         {/* Simple Footer */}
-        < footer className="py-12 border-t border-slate-100 bg-white" >
+        < footer className="py-14 border-t border-slate-200 bg-white" >
           <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
               <Brain className="w-5 h-5 text-slate-900" />
@@ -817,9 +952,9 @@ const CompetitionHome = () => {
 
             <div className="flex flex-col md:flex-row gap-8 items-center">
               <div className="flex gap-6 text-sm font-medium text-slate-500">
-                <a href="#" className="hover:text-slate-900 transition-colors">Privacy</a>
-                <a href="#" className="hover:text-slate-900 transition-colors">Terms</a>
-                <a href="#" className="hover:text-slate-900 transition-colors">Support</a>
+                <button onClick={() => navigate("/privacy")} className="hover:text-slate-900 transition-colors">Privacy</button>
+                <button onClick={() => navigate("/terms")} className="hover:text-slate-900 transition-colors">Terms</button>
+                <button onClick={() => navigate("/help")} className="hover:text-slate-900 transition-colors">Support</button>
               </div>
               <div className="hidden md:block w-px h-4 bg-slate-200"></div>
               <div className="flex flex-wrap justify-center gap-6 text-sm font-medium text-slate-500">
@@ -831,7 +966,7 @@ const CompetitionHome = () => {
             </div>
 
             <div className="text-sm text-slate-400">
-              © 2025-2026 All rights reserved.
+              © 2026 All rights reserved.
             </div>
           </div>
         </footer >
