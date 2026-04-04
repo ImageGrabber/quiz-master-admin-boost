@@ -265,6 +265,73 @@ export default function BibleQA() {
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-4xl font-semibold text-gray-900">Book Study Hubs</h2>
           </div>
+
+          {/* Old Testament Slider */}
+          <div className="mb-12 relative">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-medium text-gray-700 flex items-center">
+                <BookOpen className="w-5 h-5 mr-2 text-gray-400" />
+                Old Testament
+              </h3>
+              <span className="text-sm text-gray-400 font-light hidden sm:block italic">39 Books • Scroll to explore →</span>
+            </div>
+            
+            <div className="flex overflow-x-auto pb-6 gap-4 no-scrollbar -mx-4 px-4 snap-x snap-mandatory">
+              {Object.values(bibleBooks.oldTestament).flat().map((book) => (
+                <div 
+                  key={book}
+                  className="flex-shrink-0 w-40 snap-start"
+                  onClick={() => handleSearch(book)}
+                >
+                  <Card className="border border-gray-100 hover:border-gray-300 transition-all duration-300 bg-white overflow-hidden group shadow-none cursor-pointer h-full">
+                    <CardContent className="p-4 flex flex-col items-center text-center space-y-3">
+                      <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
+                        <span className="text-xs font-bold text-blue-400 group-hover:text-blue-900">{book.charAt(0)}</span>
+                      </div>
+                      <span className="text-sm font-medium text-gray-900 line-clamp-1 group-hover:text-black">{book}</span>
+                    </CardContent>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* New Testament Slider */}
+          <div className="mb-12 relative">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-medium text-gray-700 flex items-center">
+                <BookOpen className="w-5 h-5 mr-2 text-gray-400" />
+                New Testament
+              </h3>
+              <span className="text-sm text-gray-400 font-light hidden sm:block italic">27 Books • Scroll to explore →</span>
+            </div>
+            
+            <div className="flex overflow-x-auto pb-6 gap-4 no-scrollbar -mx-4 px-4 snap-x snap-mandatory">
+              {Object.values(bibleBooks.newTestament).flat().map((book) => (
+                <div 
+                  key={book}
+                  className="flex-shrink-0 w-40 snap-start"
+                  onClick={() => handleSearch(book)}
+                >
+                  <Card className="border border-gray-100 hover:border-gray-300 transition-all duration-300 bg-white overflow-hidden group shadow-none cursor-pointer h-full">
+                    <CardContent className="p-4 flex flex-col items-center text-center space-y-3">
+                      <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center group-hover:bg-red-100 transition-colors">
+                        <span className="text-xs font-bold text-red-400 group-hover:text-red-900">{book.charAt(0)}</span>
+                      </div>
+                      <span className="text-sm font-medium text-gray-900 line-clamp-1 group-hover:text-black">{book}</span>
+                    </CardContent>
+                  </Card>
+                </div>
+              ))}
+            </div>
+            
+            {/* Custom scrollbar styling */}
+            <style dangerouslySetInnerHTML={{ __html: `
+              .no-scrollbar::-webkit-scrollbar { display: none; }
+              .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+            `}} />
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredHubs.map((hub) => (
               <Card
