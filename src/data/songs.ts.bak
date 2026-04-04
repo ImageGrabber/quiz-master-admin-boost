@@ -1142,14 +1142,3 @@ export const songs: Song[] = [
         }
     },
 ];
-
-// Import migrated songs and merge (hand-curated songs take priority)
-import migratedSongsData from './migrated-songs.json';
-
-const existingSlugs = new Set(songs.map(s => s.slug));
-const migratedSongs: Song[] = (migratedSongsData as Song[]).filter(
-    (s) => !existingSlugs.has(s.slug)
-);
-
-// Export the combined list  
-export const allSongs: Song[] = [...songs, ...migratedSongs];

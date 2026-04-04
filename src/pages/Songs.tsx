@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { songs } from "@/data/songs";
+import { allSongs as songs } from "@/data/songs";
 import { Music, PlayCircle } from "lucide-react";
 
 const Songs = () => {

@@ -137,6 +137,23 @@ function generateSitemap() {
     }
   }
 
+  // Song pages (migrated 480 songs)
+  const songsJsonPath = path.join(__dirname, '..', 'src', 'data', 'migrated-songs.json');
+  if (fs.existsSync(songsJsonPath)) {
+    const migratedSongs = JSON.parse(fs.readFileSync(songsJsonPath, 'utf-8'));
+    // Main songs listing page
+    urls.push({ loc: '/songs', priority: '0.9', changefreq: 'weekly' });
+    
+    for (const song of migratedSongs) {
+      urls.push({
+        loc: `/songs/${song.slug}`,
+        priority: '0.7',
+        changefreq: 'monthly'
+      });
+    }
+    console.log(`Added ${migratedSongs.length} song URLs to sitemap`);
+  }
+
   // Generate XML sitemap
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
