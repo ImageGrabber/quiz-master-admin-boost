@@ -1,13 +1,40 @@
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { allSongs as songs } from "@/data/songs";
 import { Music, PlayCircle } from "lucide-react";
+import { useState, useMemo } from "react";
+
+const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
 const Songs = () => {
     const navigate = useNavigate();
+    const [activeLetter, setActiveLetter] = useState<string | null>(null);
+
+    // Pre-compute letter counts and sorted/filtered songs
+    const { letterCounts, filteredSongs, totalCount } = useMemo(() => {
+        const counts: Record<string, number> = {};
+        ALPHABET.forEach(l => counts[l] = 0);
+
+        const sorted = [...songs].sort((a, b) =>
+            a.title.localeCompare(b.title, undefined, { sensitivity: 'base' })
+        );
+
+        sorted.forEach(song => {
+            const firstChar = song.title.charAt(0).toUpperCase();
+            if (counts[firstChar] !== undefined) {
+                counts[firstChar]++;
+            }
+        });
+
+        const filtered = activeLetter
+            ? sorted.filter(s => s.title.charAt(0).toUpperCase() === activeLetter)
+            : sorted;
+
+        return { letterCounts: counts, filteredSongs: filtered, totalCount: songs.length };
+    }, [activeLetter]);
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -23,7 +50,7 @@ const Songs = () => {
             <Navigation />
 
             <main className="flex-grow container mx-auto px-4 py-8">
-                <div className="text-center mb-12">
+                <div className="text-center mb-8">
                     <h1 className="text-3xl md:text-5xl font-bold font-urbanist text-gray-900 mb-4">
                         Devotional Songs
                     </h1>
@@ -32,8 +59,71 @@ const Songs = () => {
                     </p>
                 </div>
 
+                {/* A-Z Filter Bar */}
+                <div className="max-w-5xl mx-auto mb-8">
+                    <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+                        {/* "All" button */}
+                        <button
+                            onClick={() => setActiveLetter(null)}
+                            className={`
+                                flex flex-col items-center px-3 py-2 rounded-xl text-sm font-bold transition-all duration-200
+                                ${!activeLetter
+                                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 scale-105'
+                                    : 'bg-white text-gray-700 hover:bg-blue-50 hover:text-blue-600 border border-gray-200'
+                                }
+                            `}
+                        >
+                            <span>All</span>
+                            <span className={`text-[10px] font-medium mt-0.5 ${!activeLetter ? 'text-blue-100' : 'text-gray-400'}`}>
+                                {totalCount}
+                            </span>
+                        </button>
+
+                        {ALPHABET.map(letter => {
+                            const count = letterCounts[letter];
+                            const isActive = activeLetter === letter;
+                            const hasItems = count > 0;
+
+                            return (
+                                <button
+                                    key={letter}
+                                    onClick={() => hasItems && setActiveLetter(letter)}
+                                    disabled={!hasItems}
+                                    className={`
+                                        flex flex-col items-center min-w-[36px] px-2 py-2 rounded-xl text-sm font-bold transition-all duration-200
+                                        ${isActive
+                                            ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 scale-105'
+                                            : hasItems
+                                                ? 'bg-white text-gray-700 hover:bg-blue-50 hover:text-blue-600 border border-gray-200 cursor-pointer'
+                                                : 'bg-gray-100 text-gray-300 border border-gray-100 cursor-not-allowed'
+                                        }
+                                    `}
+                                >
+                                    <span>{letter}</span>
+                                    <span className={`text-[10px] font-medium mt-0.5 ${
+                                        isActive ? 'text-blue-100' : hasItems ? 'text-gray-400' : 'text-gray-300'
+                                    }`}>
+                                        {count}
+                                    </span>
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+
+                {/* Results count */}
+                <div className="max-w-7xl mx-auto mb-6">
+                    <p className="text-sm text-gray-500 font-medium">
+                        {activeLetter ? (
+                            <>Showing <span className="text-blue-600 font-bold">{filteredSongs.length}</span> songs starting with "{activeLetter}"</>
+                        ) : (
+                            <>Showing all <span className="text-blue-600 font-bold">{totalCount}</span> songs</>
+                        )}
+                    </p>
+                </div>
+
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-                    {songs.map((song) => (
+                    {filteredSongs.map((song) => (
                         <Card
                             key={song.id}
                             className="group cursor-pointer hover:shadow-xl transition-all duration-300 border-none bg-white overflow-hidden"
@@ -42,9 +132,10 @@ const Songs = () => {
                             <div className="relative h-48 bg-gray-900 flex items-center justify-center overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
                                 <img
-                                    src={`https://img.youtube.com/vi/${song.videoUrl.split('/').pop()}/maxresdefault.jpg`}
+                                    src={`https://img.youtube.com/vi/${song.videoUrl.split('/').pop()}/hqdefault.jpg`}
                                     alt={song.title}
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80"
+                                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                                 />
                                 <PlayCircle className="w-12 h-12 text-white/90 absolute z-20 group-hover:scale-110 transition-transform" />
                             </div>

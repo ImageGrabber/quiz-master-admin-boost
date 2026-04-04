@@ -33,7 +33,7 @@ const SongDetail = () => {
     const availableTranslations = Object.keys(song.translations);
     const currentTranslation = song.translations[selectedLang] || song.translations['malayalam'];
     const videoId = song.videoUrl.split('/').pop();
-    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 
     // Construct JSON-LD Schema
     const jsonLd = {
