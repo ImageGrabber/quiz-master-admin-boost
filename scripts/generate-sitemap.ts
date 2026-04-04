@@ -70,16 +70,34 @@ function generateSitemap() {
     '2-john', '3-john', 'jude', 'revelation'
   ];
 
-  // Add Bible quiz pages
+  // Bible Questions and Answers Hub
+  bibleBooks.forEach(book => {
+    // Main Book Hub
+    urls.push({
+      loc: `/bible-questions-and-answers-hub/${book}`,
+      priority: '0.9',
+      changefreq: 'monthly'
+    });
+
+    // Difficulty-based quizzes (now have foundations for all 66 books)
+    ['beginner', 'intermediate', 'advanced'].forEach(difficulty => {
+      urls.push({
+        loc: `/bible-questions-and-answers-hub/${book}/${difficulty}`,
+        priority: '0.8',
+        changefreq: 'monthly'
+      });
+    });
+  });
+
+  // Public Quiz Book Pages (Legacy/Static)
   bibleBooks.forEach(book => {
     urls.push({
       loc: `/public-quiz/${book}`,
-      priority: '0.95',
+      priority: '0.7',
       changefreq: 'monthly'
     });
   });
 
-  // Article pages
   // Article pages
   articles.forEach(article => {
     urls.push({
@@ -89,15 +107,21 @@ function generateSitemap() {
     });
   });
 
-  // Programmatic Chapter Quizzes
+  // Programmatic Chapter Quizzes (Optional but good for SEO depth)
   for (const [book, chapters] of Object.entries(bibleStructure)) {
-    for (let i = 1; i <= chapters; i++) {
-      urls.push({
-        loc: `/public-quiz/${book}/chapter-${i}`,
-        priority: '0.7',
-        changefreq: 'monthly'
-      });
-    }
+    // Add first chapter of every book as it's the most searched
+    urls.push({
+      loc: `/bible-questions-and-answers-hub/${book}/chapter-1`,
+      priority: '0.7',
+      changefreq: 'monthly'
+    });
+    
+    // Also include the legacy public-quiz paths if needed
+    urls.push({
+      loc: `/public-quiz/${book}/chapter-1`,
+      priority: '0.6',
+      changefreq: 'monthly'
+    });
   }
 
   // Generate XML sitemap
