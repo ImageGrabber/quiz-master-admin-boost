@@ -110,6 +110,7 @@ export default function NehemiahPublicQuiz() {
       title="Nehemiah Quiz"
       questions={nehemiahQuestions}
       bookName="Nehemiah"
+      seoDescription="Take this free Nehemiah quiz with answers and test your Bible knowledge of Nehemiah's leadership, Jerusalem's wall rebuilding, and key lessons from the book of Nehemiah."
     />
   );
 }

@@ -282,12 +282,27 @@ export default function BibleQA() {
               </CardContent>
             </Card>
 
+            {/* Exodus Hub Card */}
+            <Card className="border border-gray-200 hover:border-gray-400 transition-all duration-300 cursor-pointer group bg-white" onClick={() => navigate('/bible-questions-and-answers-hub/exodus')}>
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center">
+                    <Brain className="w-6 h-6 text-gray-700" strokeWidth={1} />
+                  </div>
+                </div>
+                <CardTitle className="text-xl font-urbanist font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">Exodus Hub</CardTitle>
+                <CardDescription className="font-urbanist font-light text-gray-600">Questions, answers, and quizzes for the Book of Exodus</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button className="w-full font-urbanist font-light border-gray-300" variant="outline">
+                  Open Exodus Hub
+                </Button>
+              </CardContent>
+            </Card>
+
             {/* Placeholder slots for upcoming hubs */}
             <div className="border border-dashed border-gray-200 rounded-lg p-6 bg-gray-50 flex items-center justify-center">
               <span className="font-urbanist font-light text-gray-500">More book hubs coming soon</span>
-            </div>
-            <div className="hidden lg:flex border border-dashed border-gray-200 rounded-lg p-6 bg-gray-50 items-center justify-center">
-              <span className="font-urbanist font-light text-gray-500">Space reserved for future hubs</span>
             </div>
           </div>
         </section>

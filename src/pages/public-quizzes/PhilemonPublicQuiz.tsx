@@ -110,6 +110,7 @@ export default function PhilemonPublicQuiz() {
       title="Philemon Quiz"
       questions={philemonQuestions}
       bookName="Philemon"
+      seoDescription="Try this Philemon Bible quiz with answers and learn Paul's message on forgiveness, restoration, and Christian brotherhood in the shortest Pauline letter."
     />
   );
 }

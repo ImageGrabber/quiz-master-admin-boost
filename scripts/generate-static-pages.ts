@@ -68,6 +68,39 @@ const criticalPages = [
         </div>
       </div>
     `
+  },
+  {
+    path: '/rules-and-prizes',
+    title: 'Bible Quiz Competition Rules, Prizes & Scoring System',
+    description: 'Official Bible Quiz Competition rules and scoring system explanation, including prize details and timer bonus information.',
+    content: `
+      <div class="min-h-screen bg-slate-50">
+        <div class="container mx-auto px-4 py-10">
+          <h1 class="text-4xl font-bold text-slate-900 mb-6">Bible Quiz Competition Rules, Prizes & Scoring System</h1>
+          <p class="text-lg text-slate-600 mb-8">Understand how quiz scoring works, how timer bonuses are applied, and how prize eligibility is determined.</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-lg shadow">
+              <h2 class="text-2xl font-semibold mb-3">Scoring</h2>
+              <p>Daily and weekly quizzes use points and timer bonus; public quizzes emphasize percentage accuracy.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+              <h2 class="text-2xl font-semibold mb-3">Prizes</h2>
+              <p>Prize opportunities vary by event and leaderboard rank, including badges and special competition rewards.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+              <h2 class="text-2xl font-semibold mb-3">Fair Play</h2>
+              <p>One account per person and no external assistance during timed events.</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <a href="/todays-quiz" class="bg-blue-600 text-white px-4 py-2 rounded">Start Today&apos;s Quiz</a>
+            <a href="/public-quiz/nehemiah" class="bg-white border border-slate-200 px-4 py-2 rounded">Nehemiah Quiz</a>
+            <a href="/public-quiz/2-thessalonians" class="bg-white border border-slate-200 px-4 py-2 rounded">2 Thessalonians Quiz</a>
+            <a href="/public-quiz/philemon" class="bg-white border border-slate-200 px-4 py-2 rounded">Philemon Quiz</a>
+          </div>
+        </div>
+      </div>
+    `
   }
 ];
 

@@ -7,7 +7,6 @@ import { ArrowRight, BookOpen, Trophy, Sparkles, Brain, Clock, Mail, Star, Users
 import SEO from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 import { Navigation } from "@/components/Navigation";
-import CommunityHeroWidget from "@/components/CommunityHeroWidget";
 import { featuredQuizzes, categories } from "@/data/bible-data";
 
 const CompetitionHome = () => {
@@ -404,11 +403,8 @@ const CompetitionHome = () => {
             <div className="absolute bottom-0 left-0 w-[60vw] h-[60vw] bg-gradient-to-tr from-indigo-100/30 via-purple-100/20 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
           </div>
 
-          <div className="max-w-7xl mx-auto w-full relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
-
-              {/* Center Content - Now spans 3 columns (60%) */}
-              <div className="lg:col-span-3 flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
+          <div className="max-w-5xl mx-auto w-full relative z-10">
+            <div className="flex flex-col items-center text-center space-y-8">
                 <div>
                   <h1 className="text-2xl lg:text-3xl font-semibold font-inter-tight text-slate-500 tracking-tight mb-4">
                     Online Bible Quiz Competition 2025-2026
@@ -441,13 +437,6 @@ const CompetitionHome = () => {
                     Play Scripture Game <Gamepad2 className="ml-2 w-5 h-5" />
                   </Button>
                 </div>
-              </div>
-
-              {/* Community Widget - Spans 2 columns (40% width) and taller */}
-              <div className="lg:col-span-2 h-[600px] w-full animate-in fade-in slide-in-from-right-8 duration-700 delay-300">
-                <CommunityHeroWidget />
-              </div>
-
             </div>
           </div>
         </section >

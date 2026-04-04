@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,7 +9,6 @@ import { Clock, Brain, CheckCircle, AlertTriangle, Trophy, Home } from "lucide-r
 import { useToast } from "@/hooks/use-toast";
 import Header from "@/components/Header";
 import SocialShare from "@/components/SocialShare";
-import { Link } from "react-router-dom";
 
 interface Question {
   id: number | string;
@@ -28,9 +27,20 @@ interface PublicQuizProps {
   seoDescription?: string;
   prevChapterUrl?: string;
   nextChapterUrl?: string;
+  canonicalPath?: string;
 }
 
-const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevChapterUrl, nextChapterUrl }: PublicQuizProps) => {
+const toSlug = (value: string) =>
+  value
+    .toLowerCase()
+    .trim()
+    .replace(/['’]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+const normalizePath = (value: string) => (value.startsWith("/") ? value : `/${value}`);
+
+const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevChapterUrl, nextChapterUrl, canonicalPath }: PublicQuizProps) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [answers, setAnswers] = useState<number[]>([]);
@@ -43,6 +53,11 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogTitle, setDialogTitle] = useState("");
   const [dialogMessage, setDialogMessage] = useState("");
+  const fallbackPath = `/public-quiz/${toSlug(bookName)}${chapter ? `/chapter-${chapter}` : ""}`;
+  const resolvedPath = normalizePath(
+    canonicalPath || (typeof window !== "undefined" ? window.location.pathname : fallbackPath)
+  );
+  const canonicalUrl = `https://biblequizcompetition.com${resolvedPath}`;
 
   // Timer effect with enhanced warnings
   useEffect(() => {
@@ -208,7 +223,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
               {/* Social Share Section for Quiz Results */}
               <div className="mb-8">
                 <SocialShare
-                  url={`https://biblequizcompetition.com/public-quiz/${bookName.toLowerCase()}`}
+                  url={canonicalUrl}
                   title={`I scored ${score}% on the ${bookName} Bible Quiz!`}
                   description={`I just took the ${bookName} Bible quiz and scored ${score}%! Test your knowledge too with this free interactive Bible quiz.`}
                   variant="inline"
@@ -295,7 +310,8 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
         "@type": "Organization",
         "name": "Bible Quiz Competition",
         "url": "https://biblequizcompetition.com"
-      }
+      },
+      "mainEntityOfPage": canonicalUrl
     };
   };
 
@@ -307,13 +323,13 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
         <meta name="keywords" content={`${bookName} quiz, Bible quiz, ${bookName} questions, Bible study, Christian quiz, free Bible quiz, ${bookName} test, Bible knowledge`} />
         <meta name="author" content="Bible Quiz Competition" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={`https://biblequizcompetition.com/public-quiz/${bookName.toLowerCase()}${chapter ? `/${chapter}` : ''}`} />
+        <link rel="canonical" href={canonicalUrl} />
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={`${title} - Free Bible Quiz`} />
         <meta property="og:description" content={seoDescription || `Test your knowledge of ${bookName} with this free interactive Bible quiz. ${questions.length} questions to challenge your understanding.`} />
-        <meta property="og:url" content={`https://biblequizcompetition.com/public-quiz/${bookName.toLowerCase()}${chapter ? `/${chapter}` : ''}`} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:site_name" content="Bible Quiz Competition" />
         <meta property="og:image" content="https://biblequizcompetition.com/og-image-bible-quiz.jpg" />
         <meta property="og:image:width" content="1200" />
@@ -370,7 +386,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
             {/* Social Share Section */}
             <div className="mb-8">
               <SocialShare
-                url={`https://biblequizcompetition.com/public-quiz/${bookName.toLowerCase()}`}
+                url={canonicalUrl}
                 title={`${title} - Free Bible Quiz`}
                 description={`Test your knowledge of ${bookName} with this free interactive Bible quiz. ${questions.length} questions to challenge your understanding.`}
                 variant="card"

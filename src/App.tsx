@@ -164,6 +164,10 @@ import PageViews from "./pages/admin/PageViews";
 import { usePageView } from "@/hooks/usePageView";
 import RecentAttempts from "./pages/dashboard/recent-attempts";
 import GenesisHub from "./pages/bible-questions-and-answers-hub/Genesis";
+import ExodusHub from "./pages/bible-questions-and-answers-hub/Exodus";
+import ExodusRangeQuiz from "./pages/bible-questions-and-answers-hub/exodus/ExodusRangeQuiz";
+import ExodusLevelQuiz from "./pages/bible-questions-and-answers-hub/exodus/ExodusLevelQuiz";
+import ExodusChapterQuiz from "./pages/bible-questions-and-answers-hub/exodus/ExodusChapterQuiz";
 import GenesisAdvanced from "./pages/bible-questions-and-answers-hub/genesis/advanced";
 import GenesisBeginner from "./pages/bible-questions-and-answers-hub/genesis/beginner";
 import GenesisIntermediate from "./pages/bible-questions-and-answers-hub/genesis/intermediate";
@@ -354,7 +358,11 @@ const App = () => {
               <Route path="/terms" element={<TermsOfService />} />
 
               <Route path="/rules-and-prizes" element={<RulesAndPrizes />} />
+              <Route path="/quiz-scoring-system-explanation" element={<RulesAndPrizes />} />
+              <Route path="/bible-quiz-prize" element={<RulesAndPrizes />} />
               <Route path="/bible-quiz-questions-and-answers" element={<BibleQuizQuestionsAndAnswers />} />
+              <Route path="/online-bible-quiz-competition-2026" element={<CompetitionHome />} />
+              <Route path="/bible-competition-2026" element={<CompetitionHome />} />
               <Route path="/hardest-bible-trivia-questions" element={<HardestBibleTrivia />} />
               <Route path="/bible-quiz-with-answers-for-youth" element={<BibleQuizForYouth />} />
               <Route path="/hard-bible-quiz-for-teens" element={<HardBibleQuizForTeens />} />
@@ -586,7 +594,10 @@ const App = () => {
               <Route path="/bible-questions-and-answers-hub/genesis/chapter-22" element={<GenesisChapter22 />} />
               <Route path="/bible-questions-and-answers-hub/genesis/chapter-23" element={<GenesisChapter23 />} />
               <Route path="/bible-questions-and-answers-hub/genesis/chapter-24" element={<GenesisChapter24 />} />
-              <Route path="/bible-questions-and-answers-hub/exodus" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/exodus" element={<ExodusHub />} />
+              <Route path="/bible-questions-and-answers-hub/exodus/:difficulty" element={<ExodusLevelQuiz />} />
+              <Route path="/bible-questions-and-answers-hub/exodus/:range/:difficulty" element={<ExodusRangeQuiz />} />
+              <Route path="/bible-questions-and-answers-hub/exodus/chapter-:id" element={<ExodusChapterQuiz />} />
               <Route path="/bible-questions-and-answers-hub/leviticus" element={<BibleQA />} />
               <Route path="/bible-questions-and-answers-hub/numbers" element={<BibleQA />} />
               <Route path="/bible-questions-and-answers-hub/deuteronomy" element={<BibleQA />} />

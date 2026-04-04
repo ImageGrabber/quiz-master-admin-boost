@@ -1,227 +1,239 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Trophy, Star, BookOpen, AlertCircle, CheckCircle2, Crown, Zap } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { Navigation } from '@/components/Navigation';
+import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Navigation } from "@/components/Navigation";
+import { AlertCircle, CheckCircle2, Crown, Trophy, Zap } from "lucide-react";
+
+const currentYear = new Date().getFullYear();
+
+const faqItems = [
+  {
+    q: `How does the Bible quiz scoring system work in ${currentYear}?`,
+    a: "Scoring depends on quiz mode. Public book quizzes display accuracy percentage. Daily and weekly quizzes use points (+4 correct, -1 wrong) plus a timer bonus. Competition quizzes use percentage scores for placements.",
+  },
+  {
+    q: "What is the timer bonus in Bible Quiz Competition?",
+    a: "For points-based quiz modes, faster completion adds bonus points. The bonus gets smaller as time runs down, so both accuracy and pace matter.",
+  },
+  {
+    q: "Are there Bible quiz prizes in the online competition?",
+    a: "Yes. Prizes vary by event and season and may include leaderboard recognition, badges, bonus XP, and featured winner highlights. Some special competitions include prize pools.",
+  },
+  {
+    q: "How does Britannica quiz scoring work timer bonus compared to this platform?",
+    a: "Britannica and Bible Quiz Competition are separate platforms with different scoring rules. On Bible Quiz Competition, timer bonus applies in points-based quiz modes, while public book quizzes emphasize percentage accuracy.",
+  },
+  {
+    q: `Can I join the online Bible quiz competition ${currentYear} for free?`,
+    a: "Yes. You can register and start with free quiz modes. Certain premium competition events may include optional entry fees.",
+  },
+];
 
 const RulesAndPrizes = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    return (
-        <div className="min-h-screen bg-slate-50 font-urbanist">
-            <Helmet>
-                <title>Bible Quiz Competition Rules & Prizes 2025 | Scoring System Explained</title>
-                <meta name="description" content="Official rules and scoring system explanation for the 2025 Bible Quiz Competition. Learn how points are calculated, view the prize breakdown, and start competing today." />
-                <meta name="keywords" content="bible quiz prize, quiz scoring system explanation, bible competition rules, daily bible quiz prizes, bible quiz 2025" />
-                <link rel="canonical" href="https://biblequizcompetition.com/rules-and-prizes" />
+  return (
+    <div className="min-h-screen bg-slate-50 font-urbanist">
+      <Helmet>
+        <title>{`Bible Quiz Competition ${currentYear} Rules, Prizes & Scoring System`}</title>
+        <meta
+          name="description"
+          content={`Official Bible Quiz Competition ${currentYear} rules and prize guide. Get a clear quiz scoring system explanation, timer bonus details, and eligibility rules for online Bible quiz competitions.`}
+        />
+        <meta
+          name="keywords"
+          content={`bible quiz prize, quiz scoring system explanation, bible competition, bible quiz competition ${currentYear}, online bible quiz competition ${currentYear}, timer bonus quiz scoring`}
+        />
+        <link rel="canonical" href="https://biblequizcompetition.com/rules-and-prizes" />
 
-                {/* Structured Data for Rules */}
-                <script type="application/ld+json">
-                    {JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "Article",
-                        "headline": "Bible Quiz Competition Rules and Prizes 2025",
-                        "datePublished": "2025-01-01",
-                        "dateModified": "2025-01-01",
-                        "author": {
-                            "@type": "Organization",
-                            "name": "Bible Quiz Competition"
-                        },
-                        "publisher": {
-                            "@type": "Organization",
-                            "name": "Bible Quiz Competition",
-                            "logo": {
-                                "@type": "ImageObject",
-                                "url": "https://biblequizcompetition.com/logo.png" // Placeholder
-                            }
-                        },
-                        "description": "Comprehensive guide to the 2025 Bible Quiz Competition rules, scoring system, and prizes."
-                    })}
-                </script>
-            </Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebPage",
+                "name": `Bible Quiz Competition ${currentYear} Rules, Prizes & Scoring System`,
+                "url": "https://biblequizcompetition.com/rules-and-prizes",
+                "description": `Official rules, prize details, and scoring explanation for Bible Quiz Competition ${currentYear}.`,
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "Bible Quiz Competition",
+                  "url": "https://biblequizcompetition.com",
+                },
+              },
+              {
+                "@type": "FAQPage",
+                "mainEntity": faqItems.map((item) => ({
+                  "@type": "Question",
+                  "name": item.q,
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": item.a,
+                  },
+                })),
+              },
+            ],
+          })}
+        </script>
+      </Helmet>
 
-            <Navigation />
+      <Navigation />
 
-            <main className="container mx-auto px-4 py-8 pt-24">
-                {/* Header */}
-                <header className="text-center mb-16 max-w-4xl mx-auto">
-                    <div className="inline-flex items-center justify-center p-3 bg-blue-100 rounded-full mb-6">
-                        <Trophy className="w-8 h-8 text-blue-600" />
-                    </div>
-                    <h1 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
-                        Rules & Prizes 2025
-                    </h1>
-                    <p className="text-xl text-slate-600 leading-relaxed">
-                        Everything you need to know about the <strong>Bible Quiz Competition 2025</strong>.
-                        Understand the scoring system, qualify for prizes, and master the Word.
-                    </p>
-                </header>
+      <main className="container mx-auto px-4 py-8 pt-24">
+        <header className="text-center mb-14 max-w-4xl mx-auto">
+          <div className="inline-flex items-center justify-center p-3 bg-blue-100 rounded-full mb-5">
+            <Trophy className="w-8 h-8 text-blue-600" />
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-5 tracking-tight">
+            {`Bible Quiz Competition ${currentYear} Rules, Prizes & Scoring System`}
+          </h1>
+          <p className="text-lg text-slate-600 leading-relaxed">
+            Looking for a clear <strong>quiz scoring system explanation</strong> or details about
+            <strong> bible quiz prizes</strong>? This page explains how scores are calculated,
+            how timer bonus works, and what rules apply to the online Bible competition.
+          </p>
+        </header>
 
-                {/* Scoring System Section - Keyword Target: "quiz scoring system explanation" */}
-                <section className="mb-20" id="scoring-system">
-                    <div className="flex items-center gap-3 mb-8 justify-center md:justify-start">
-                        <Zap className="h-8 w-8 text-amber-500" />
-                        <h2 className="text-3xl font-bold text-slate-900">Quiz Scoring System Explanation</h2>
-                    </div>
+        <section className="mb-16" id="scoring-system">
+          <div className="flex items-center gap-3 mb-6 justify-center md:justify-start">
+            <Zap className="h-7 w-7 text-amber-500" />
+            <h2 className="text-3xl font-bold text-slate-900">Quiz Scoring System Explanation</h2>
+          </div>
 
-                    <div className="grid md:grid-cols-2 gap-8 items-start">
-                        <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-                            <h3 className="text-2xl font-bold text-slate-900 mb-4">How Points Are Calculated</h3>
-                            <p className="text-slate-600 mb-6">
-                                Our dynamic scoring algorithm rewards both knowledge and speed. Here is the exact formula used for every question:
-                            </p>
-                            <ul className="space-y-4">
-                                <li className="flex items-start gap-3">
-                                    <CheckCircle2 className="w-6 h-6 text-green-500 shrink-0 mt-0.5" />
-                                    <div>
-                                        <strong className="text-slate-900 block">Base Points</strong>
-                                        <span className="text-slate-600">Every correct answer awards <strong>100 points</strong>.</span>
-                                    </div>
-                                </li>
-                                <li className="flex items-start gap-3">
-                                    <CheckCircle2 className="w-6 h-6 text-green-500 shrink-0 mt-0.5" />
-                                    <div>
-                                        <strong className="text-slate-900 block">Speed Bonus</strong>
-                                        <span className="text-slate-600">Earn up to <strong>50 bonus points</strong> for answering quickly. The faster you answer, the higher your bonus.</span>
-                                    </div>
-                                </li>
-                                <li className="flex items-start gap-3">
-                                    <CheckCircle2 className="w-6 h-6 text-green-500 shrink-0 mt-0.5" />
-                                    <div>
-                                        <strong className="text-slate-900 block">Streak Multiplier</strong>
-                                        <span className="text-slate-600">Answer 3 questions in a row correctly to trigger a <strong>1.5x Multiplier</strong> on subsequent questions.</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+          <div className="grid md:grid-cols-3 gap-5">
+            <Card className="border-slate-200">
+              <CardHeader>
+                <CardTitle>Public Book Quizzes</CardTitle>
+              </CardHeader>
+              <CardContent className="text-slate-600 space-y-2 text-sm">
+                <p>Score is shown as percentage accuracy.</p>
+                <p>Great for practice and chapter-level review.</p>
+                <p>No account required to start.</p>
+              </CardContent>
+            </Card>
 
-                        <div className="bg-slate-900 p-8 rounded-3xl text-white">
-                            <h3 className="text-2xl font-bold mb-4">Example Scenario</h3>
-                            <div className="space-y-6">
-                                <div className="bg-white/10 p-4 rounded-xl">
-                                    <div className="text-sm text-slate-300 mb-1">Question 1 (Correct in 2s)</div>
-                                    <div className="font-mono text-xl text-green-400">100 Base + 48 Speed = 148 pts</div>
-                                </div>
-                                <div className="bg-white/10 p-4 rounded-xl">
-                                    <div className="text-sm text-slate-300 mb-1">Question 2 (Correct in 5s)</div>
-                                    <div className="font-mono text-xl text-green-400">100 Base + 35 Speed = 135 pts</div>
-                                </div>
-                                <div className="bg-blue-600/20 border border-blue-500/50 p-4 rounded-xl">
-                                    <div className="flex items-center gap-2 mb-1">
-                                        <span className="text-sm text-blue-200">Question 3 (Streak Active!)</span>
-                                        <span className="px-2 py-0.5 bg-blue-500 text-xs rounded-full font-bold">1.5x</span>
-                                    </div>
-                                    <div className="font-mono text-xl text-blue-300">(100 + 40) × 1.5 = 210 pts</div>
-                                </div>
-                            </div>
-                            <div className="mt-6 pt-6 border-t border-white/10">
-                                <p className="text-slate-300 text-sm">
-                                    *Incorrect answers receive 0 points and reset your streak to zero.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+            <Card className="border-slate-200">
+              <CardHeader>
+                <CardTitle>Daily & Weekly Quizzes</CardTitle>
+              </CardHeader>
+              <CardContent className="text-slate-600 space-y-2 text-sm">
+                <p>Correct answer: +4 points.</p>
+                <p>Wrong answer: -1 point.</p>
+                <p>Timer bonus is added for faster completion.</p>
+              </CardContent>
+            </Card>
 
-                {/* Prizes Section - Keyword Target: "bible quiz prize" */}
-                <section className="mb-20" id="prizes">
-                    <div className="flex items-center gap-3 mb-8 justify-center md:justify-start">
-                        <Crown className="h-8 w-8 text-amber-500" />
-                        <h2 className="text-3xl font-bold text-slate-900">Bible Quiz Prizes & Rewards</h2>
-                    </div>
-                    <p className="text-lg text-slate-600 max-w-3xl mb-10">
-                        We believe in rewarding dedication to God's Word. Participate in the <strong>Bible Quiz Competition 2025</strong> for a chance to win spiritual resources and recognition.
-                    </p>
+            <Card className="border-slate-200">
+              <CardHeader>
+                <CardTitle>Competition Quizzes</CardTitle>
+              </CardHeader>
+              <CardContent className="text-slate-600 space-y-2 text-sm">
+                <p>Rankings are based on score percentage.</p>
+                <p>Completion time is tracked for event reporting.</p>
+                <p>Used for official event placements.</p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
 
-                    <div className="grid md:grid-cols-3 gap-6">
-                        <Card className="border-blue-100 bg-blue-50 shadow-sm relative overflow-hidden">
-                            <div className="absolute top-0 right-0 p-4 opacity-10">
-                                <Trophy className="w-24 h-24 text-blue-600" />
-                            </div>
-                            <CardHeader>
-                                <CardTitle className="text-blue-700">Daily Winner</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="text-4xl font-bold text-slate-900 mb-2">XP Badge</div>
-                                <p className="text-slate-600 mb-4">Top the daily leaderboard.</p>
-                                <ul className="space-y-2 text-sm text-slate-700">
-                                    <li className="flex gap-2"><Star className="w-4 h-4 text-blue-500" /> "Daily Champion" Profile Badge</li>
-                                    <li className="flex gap-2"><Star className="w-4 h-4 text-blue-500" /> 500 Bonus XP</li>
-                                    <li className="flex gap-2"><Star className="w-4 h-4 text-blue-500" /> Feature on Homepage</li>
-                                </ul>
-                            </CardContent>
-                        </Card>
+        <section className="mb-16" id="prizes">
+          <div className="flex items-center gap-3 mb-6 justify-center md:justify-start">
+            <Crown className="h-7 w-7 text-amber-500" />
+            <h2 className="text-3xl font-bold text-slate-900">Bible Quiz Prizes & Rewards</h2>
+          </div>
 
-                        <Card className="border-amber-100 bg-gradient-to-br from-amber-50 to-orange-50 shadow-md transform md:-translate-y-4">
-                            <div className="absolute top-0 right-0 p-4 opacity-10">
-                                <Crown className="w-24 h-24 text-amber-600" />
-                            </div>
-                            <CardHeader>
-                                <div className="inline-block px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-bold mb-2 w-fit">Most Popular</div>
-                                <CardTitle className="text-amber-800 text-2xl">Monthly Grand Prize</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="text-4xl font-bold text-slate-900 mb-2">$50 Gift Card</div>
-                                <p className="text-slate-600 mb-4">For the highest cumulative score.</p>
-                                <ul className="space-y-3 text-sm text-slate-800 font-medium">
-                                    <li className="flex gap-2"><CheckCircle2 className="w-5 h-5 text-amber-600" /> Amazon or Christianbook.com Gift Card</li>
-                                    <li className="flex gap-2"><CheckCircle2 className="w-5 h-5 text-amber-600" /> "Bible Scholar" Digital Certificate</li>
-                                    <li className="flex gap-2"><CheckCircle2 className="w-5 h-5 text-amber-600" /> Exclusive Interview Article</li>
-                                </ul>
-                            </CardContent>
-                        </Card>
+          <div className="grid md:grid-cols-3 gap-5">
+            <Card className="border-blue-100 bg-blue-50">
+              <CardHeader>
+                <CardTitle className="text-blue-700">Daily Recognition</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-slate-700 space-y-2">
+                <p>Top daily performers can earn leaderboard visibility.</p>
+                <p>Bonus XP and digital badge opportunities.</p>
+              </CardContent>
+            </Card>
 
-                        <Card className="border-purple-100 bg-purple-50 shadow-sm">
-                            <div className="absolute top-0 right-0 p-4 opacity-10">
-                                <BookOpen className="w-24 h-24 text-purple-600" />
-                            </div>
-                            <CardHeader>
-                                <CardTitle className="text-purple-700">Annual Champion</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="text-4xl font-bold text-slate-900 mb-2">Study Bible Package</div>
-                                <p className="text-slate-600 mb-4">The ultimate 2025 winner.</p>
-                                <ul className="space-y-2 text-sm text-slate-700">
-                                    <li className="flex gap-2"><Star className="w-4 h-4 text-purple-500" /> Premium Leather Study Bible</li>
-                                    <li className="flex gap-2"><Star className="w-4 h-4 text-purple-500" /> Full Commentary Set</li>
-                                    <li className="flex gap-2"><Star className="w-4 h-4 text-purple-500" /> Hall of Fame Induction</li>
-                                </ul>
-                            </CardContent>
-                        </Card>
-                    </div>
-                </section>
+            <Card className="border-amber-100 bg-amber-50">
+              <CardHeader>
+                <CardTitle className="text-amber-700">Season Highlights</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-slate-700 space-y-2">
+                <p>Monthly and seasonal standout recognition.</p>
+                <p>Featured winner placements and community highlights.</p>
+              </CardContent>
+            </Card>
 
-                {/* Rules Section */}
-                <section className="max-w-3xl mx-auto bg-white rounded-3xl p-8 border border-slate-200">
-                    <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
-                        <AlertCircle className="w-6 h-6 text-slate-400" />
-                        Official Competition Rules
-                    </h2>
-                    <div className="space-y-6 text-slate-600">
-                        <p>
-                            To ensure fairness in the <strong>online bible quiz competition</strong>, all participants must adhere to the following rules:
-                        </p>
-                        <ol className="list-decimal pl-5 space-y-3">
-                            <li><strong>One Account Per Person:</strong> Multiple accounts to manipulate the leaderboard will result in disqualification.</li>
-                            <li><strong>No External Help:</strong> During timed quizzes, looking up answers is prohibited. Test your true knowledge!</li>
-                            <li><strong>Respectful Conduct:</strong> Any inappropriate usernames or comments in the community section will be banned.</li>
-                            <li><strong>Prize Eligibility:</strong> Winners will be contacted via the email provided at registration. Failure to respond within 7 days may result in forfeiture.</li>
-                        </ol>
-                    </div>
-                </section>
+            <Card className="border-emerald-100 bg-emerald-50">
+              <CardHeader>
+                <CardTitle className="text-emerald-700">Event Prize Pools</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-slate-700 space-y-2">
+                <p>Some official competitions include paid prize pools.</p>
+                <p>Prize distribution depends on event settings and rank.</p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
 
-                <div className="mt-16 text-center">
-                    <h3 className="text-2xl font-bold text-slate-900 mb-4">Ready to win?</h3>
-                    <Button size="lg" className="h-14 px-8 text-lg rounded-full bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-200" onClick={() => navigate('/todays-quiz')}>
-                        Start Today's Quiz <Trophy className="ml-2 w-5 h-5" />
-                    </Button>
-                </div>
+        <section className="mb-16 bg-white rounded-3xl p-8 border border-slate-200" id="rules">
+          <h2 className="text-2xl font-bold text-slate-900 mb-5 flex items-center gap-2">
+            <AlertCircle className="w-6 h-6 text-slate-500" />
+            Official Competition Rules
+          </h2>
+          <ol className="list-decimal pl-6 space-y-3 text-slate-600">
+            <li>One participant account per person to protect leaderboard integrity.</li>
+            <li>No external help during timed quizzes.</li>
+            <li>Respectful conduct is required in usernames, chats, and community posts.</li>
+            <li>Prize eligibility requires valid registration details and timely response.</li>
+            <li>Violation of fair-play rules may result in disqualification.</li>
+          </ol>
+        </section>
 
-            </main>
+        <section className="mb-16" id="faq">
+          <h2 className="text-3xl font-bold text-slate-900 mb-6">FAQ</h2>
+          <div className="space-y-4">
+            {faqItems.map((faq, idx) => (
+              <Card key={idx} className="border-slate-200">
+                <CardHeader>
+                  <CardTitle className="text-lg">{faq.q}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-slate-600">{faq.a}</CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-12 bg-white rounded-3xl p-8 border border-slate-200">
+          <h2 className="text-2xl font-bold text-slate-900 mb-5">Popular Bible Quiz Pages</h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-3">
+            <a href="/public-quiz/nehemiah" className="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700">
+              Nehemiah Quiz
+            </a>
+            <a href="/public-quiz/2-thessalonians" className="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700">
+              2 Thessalonians Quiz
+            </a>
+            <a href="/public-quiz/philemon" className="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700">
+              Philemon Bible Quiz
+            </a>
+            <a href="/competition-home" className="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700">
+              Online Bible Competition
+            </a>
+          </div>
+        </section>
+
+        <div className="text-center pb-10">
+          <Button
+            size="lg"
+            className="h-14 px-8 text-lg rounded-full bg-blue-600 hover:bg-blue-700"
+            onClick={() => navigate("/todays-quiz")}
+          >
+            Start Today&apos;s Quiz <CheckCircle2 className="ml-2 w-5 h-5" />
+          </Button>
         </div>
-    );
+      </main>
+    </div>
+  );
 };
 
 export default RulesAndPrizes;

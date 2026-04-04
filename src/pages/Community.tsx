@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -15,7 +14,6 @@ import {
     Heart,
     Share2,
     MoreHorizontal,
-    Send,
     Trophy,
     Brain,
     Users,
@@ -47,7 +45,6 @@ interface Post {
 
 const Community = () => {
     const [posts, setPosts] = useState<Post[]>([]);
-    const [newPost, setNewPost] = useState("");
     const [loading, setLoading] = useState(true);
     const [currentUser, setCurrentUser] = useState<any>(null);
     const [selectedTag, setSelectedTag] = useState<string | null>(null);
@@ -137,50 +134,6 @@ const Community = () => {
             toast.error("Something went wrong: " + e.message);
         } finally {
             setLoading(false);
-        }
-    };
-
-    const handlePost = async () => {
-        if (!newPost.trim() || !currentUser) return;
-
-        const tempId = Date.now();
-        const tempPost: Post = {
-            id: tempId,
-            user_id: currentUser.id,
-            content: newPost,
-            type: 'post',
-            created_at: new Date().toISOString(),
-            likes: { count: 0 },
-            comments: { count: 0 },
-            profiles: {
-                full_name: currentUser.profile?.full_name || 'User',
-                avatar_url: currentUser.profile?.avatar_url
-            },
-            user_has_liked: false
-        };
-
-        // Optimistic update
-        setPosts(prev => [tempPost, ...prev]);
-        setNewPost("");
-        toast.success("Post shared!");
-
-        try {
-            const { error } = await supabase
-                .from('posts')
-                .insert({
-                    user_id: currentUser.id,
-                    content: tempPost.content,
-                    type: 'post'
-                });
-
-            if (error) throw error;
-            // The subscription will trigger fetchPosts and replace our temp post with the real one
-        } catch (error: any) {
-            console.error("Error creating post:", error);
-            toast.error("Failed to share post: " + error.message);
-            // Revert optimistic update
-            setPosts(prev => prev.filter(p => p.id !== tempId));
-            setNewPost(tempPost.content); // Restore content so user can try again
         }
     };
 
@@ -318,39 +271,6 @@ const Community = () => {
 
                 {/* Main Feed Column */}
                 <div className="flex-1 space-y-6">
-
-                    {/* Create Post Widget */}
-                    <div className="bg-white rounded-2xl p-4 shadow-sm border border-slate-100">
-                        <div className="flex gap-4">
-                            <Avatar className="h-10 w-10">
-                                <AvatarImage src={currentUser?.profile?.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${currentUser?.profile?.full_name || 'User'}`} />
-                                <AvatarFallback>{currentUser?.profile?.full_name?.[0] || 'U'}</AvatarFallback>
-                            </Avatar>
-                            <div className="flex-1 space-y-4">
-                                <Input
-                                    placeholder="Share your thoughts or a verse (use #hashtags)..."
-                                    className="bg-slate-50 border-none h-12 text-base focus-visible:ring-1 focus-visible:ring-blue-500/20"
-                                    value={newPost}
-                                    onChange={(e) => setNewPost(e.target.value)}
-                                    onKeyDown={(e) => e.key === 'Enter' && handlePost()}
-                                />
-
-                                <div className="flex items-center justify-between pt-2 border-t border-slate-50">
-                                    <div className="flex gap-2">
-                                        {/* Simplified: No buttons here for now as per "only text" request */}
-                                    </div>
-                                    <Button
-                                        size="sm"
-                                        className="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6"
-                                        onClick={handlePost}
-                                        disabled={!newPost.trim()}
-                                    >
-                                        Post <Send className="w-3 h-3 ml-2" />
-                                    </Button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     {/* Active Filter Banner */}
                     {selectedTag && (

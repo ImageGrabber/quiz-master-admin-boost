@@ -15,12 +15,22 @@ function generateSitemap() {
   const urls = [
     // Main pages
     { loc: '/', priority: '1.0', changefreq: 'weekly' },
+    { loc: '/competition-home', priority: '0.95', changefreq: 'weekly' },
     { loc: '/todays-quiz', priority: '0.95', changefreq: 'daily' },
     { loc: '/articles', priority: '0.9', changefreq: 'weekly' },
     { loc: '/public-leaderboard', priority: '0.8', changefreq: 'daily' },
     { loc: '/host-live-bible-quizzes-with-confidence', priority: '0.9', changefreq: 'monthly' },
     { loc: '/bible-questions-and-answers-hub', priority: '0.9', changefreq: 'weekly' },
     { loc: '/bible-questions-and-answers-hub/genesis', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/rules-and-prizes', priority: '0.9', changefreq: 'weekly' },
+    { loc: '/bible-quiz-questions-and-answers', priority: '0.9', changefreq: 'weekly' },
+    { loc: '/hardest-bible-trivia-questions', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/bible-quiz-with-answers-for-youth', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/book-of-john-quiz-questions', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/quiz-scoring-system-explanation', priority: '0.7', changefreq: 'monthly' },
+    { loc: '/bible-quiz-prize', priority: '0.7', changefreq: 'monthly' },
+    { loc: '/online-bible-quiz-competition-2026', priority: '0.7', changefreq: 'monthly' },
+    { loc: '/bible-competition-2026', priority: '0.7', changefreq: 'monthly' },
   ];
 
   // Genesis chapters
