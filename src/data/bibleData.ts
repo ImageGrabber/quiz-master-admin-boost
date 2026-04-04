@@ -187,13 +187,111 @@ export const bibleData: Record<string, Record<number, BibleChapter>> = {
     },
     7: { title: "Genesis Chapter 7", subtitle: "The Flood", description: "The entry into the Ark and the prevailing of the floodwaters over the entire earth.", keyPoints: ["Noah, family, and animals enter the ark", "Seven pairs of clean animals; 40 days and nights of rain", "Waters prevail; 150 days"] },
     8: { title: "Genesis Chapter 8", subtitle: "After the Flood", description: "The waters recede, the Ark rests, and Noah builds an altar to the Lord.", keyPoints: ["Waters recede; ark rests; raven and dove sent out", "Altar built; pleasing aroma", "Covenant promise: never again a worldwide flood"] },
-    9: { title: "Genesis Chapter 9", subtitle: "Noah's Covenant", description: "God's covenant with Noah and the sign of the rainbow.", keyPoints: ["Noah plants vineyard; gets drunk", "Ham sees father's nakedness; cursed", "Shem and Japheth blessed; Canaan cursed"] },
-    10: { title: "Genesis Chapter 10", subtitle: "Table of Nations", description: "The genealogy of the descendants of Noah's sons: Shem, Ham, and Japheth.", keyPoints: ["Table of Nations; Japheth's descendants", "Ham's descendants; Canaan's sons", "Shem's descendants; Eber's line"] },
-    11: { title: "Genesis Chapter 11", subtitle: "Tower of Babel", description: "The confusion of languages at Babel and the genealogy of Shem to Abram.", keyPoints: ["Tower of Babel; language confusion", "Shem's genealogy to Terah", "Terah's family; Abram, Nahor, Haran"] },
-    12: { title: "Genesis Chapter 12", subtitle: "Abram's Call", description: "God's call to Abram to leave his country and the promises made to him.", keyPoints: ["God call Abram; leaves Haran", "Abram in Canaan; builds altars", "Famine; goes to Egypt; Sarai taken"] },
-    13: { title: "Genesis Chapter 13", subtitle: "Abram & Lot Separate", description: "Abram and Lot divide their herds and land, with Lot choosing the Jordan plain.", keyPoints: ["Abram and Lot separate; Lot chooses Jordan plain", "Abram settles at Hebron; builds altar", "God renews promises to Abram"] },
-    14: { title: "Genesis Chapter 14", subtitle: "War of the Kings", description: "Abram rescues Lot and meets the priest-king Melchizedek.", keyPoints: ["War of the kings; Lot taken captive", "Abram rescues Lot with 318 men", "Melchizedek blesses Abram; tithe given"] },
-    15: { title: "Genesis Chapter 15", subtitle: "God's Covenant", description: "God confirms His covenant with Abram and promises an heir.", keyPoints: ["God's covenant with Abram; stars promise", "Abram's faith counted as righteousness", "Covenant ceremony; future slavery foretold"] },
+    9: { 
+      title: "Genesis Chapter 9", 
+      subtitle: "Noah's Covenant", 
+      description: "God establishes a covenant with Noah, his sons, and every living creature, promising never again to destroy the earth by a flood.", 
+      keyPoints: [
+        "God's blessing on Noah: 'Be fruitful and multiply'",
+        "The rainbow as a sign of the everlasting covenant",
+        "The prohibition of eating blood and the sanctity of life",
+        "Noah's vineyard and the curse of Canaan"
+      ],
+      detailedContent: [
+        {
+          title: "The Covenant Sign",
+          description: "God set the rainbow in the clouds as a visual reminder of His promise to all generations.",
+          verses: "Genesis 9:12-16",
+          verseText: "And God said, 'This is the sign of the covenant that I make between me and you and every living creature... when I bring clouds over the earth and the bow is seen in the clouds, I will remember my covenant.'"
+        }
+      ]
+    },
+    10: { 
+      title: "Genesis Chapter 10", 
+      subtitle: "Table of Nations", 
+      description: "A genealogical record of the descendants of Shem, Ham, and Japheth, showing how the earth was peopled after the flood.", 
+      keyPoints: [
+        "The seventy nations arising from Noah's three sons",
+        "Nimrod: the first mighty man and hunter before the Lord",
+        "Differentiation by language, clan, and territory"
+      ] 
+    },
+    11: { 
+      title: "Genesis Chapter 11", 
+      subtitle: "Tower of Babel", 
+      description: "The story of human pride at Babel, the confusion of languages, and the genealogy leading to Abram.", 
+      keyPoints: [
+        "The construction of the city and tower reaching to heaven",
+        "God confuses the language to scatter humanity over the earth",
+        "The genealogy from Shem to Terah, the father of Abram"
+      ],
+      detailedContent: [
+        {
+          title: "The Confusion of Languages",
+          description: "Because humanity sought to make a name for themselves through their own strength, God intervened by confusing their speech.",
+          verses: "Genesis 11:4-9",
+          verseText: "Then they said, 'Come, let us build ourselves a city and a tower with its top in the heavens, and let us make a name for ourselves... And the Lord said... \"Come, let us go down and there confuse their language, so that they may not understand one another's speech.\"' So the Lord dispersed them from there over the face of all the earth."
+        }
+      ]
+    },
+    12: { 
+      title: "Genesis Chapter 12", 
+      subtitle: "Abram's Call", 
+      description: "The beginning of the patriarchal narrative as God calls Abram to leave his homeland for a land God will show him.", 
+      keyPoints: [
+        "The great promises: a great nation, a great name, and universal blessing",
+        "Abram's obedience and journey to Canaan",
+        "Abram and Sarai in Egypt during the famine"
+      ],
+      theologicalThemes: [
+        {
+          title: "Divine Sovereignty",
+          points: [
+            "God initiates the call to an ordinary man",
+            "Unconditional nature of the initial promise",
+            "God's protection of Sarai in Pharaoh's house"
+          ]
+        }
+      ]
+    },
+    13: { 
+      title: "Genesis Chapter 13", 
+      subtitle: "Abram & Lot Separate", 
+      description: "Abram and Lot find the land too small for their combined herds and decide to separate in peace.", 
+      keyPoints: [
+        "Abram's generosity in giving Lot first choice of land",
+        "Lot chooses the fertile Jordan plain near Sodom",
+        "God renews the promise of land and offspring to Abram"
+      ] 
+    },
+    14: { 
+      title: "Genesis Chapter 14", 
+      subtitle: "War of the Kings", 
+      description: "Abram leads a rescue mission for Lot and encounters the mysterious King Melchizedek.", 
+      keyPoints: [
+        "The battle of four kings against five",
+        "Abram rescues Lot with 318 trained men",
+        "Melchizedek, King of Salem and Priest of God Most High, blesses Abram"
+      ] 
+    },
+    15: { 
+      title: "Genesis Chapter 15", 
+      subtitle: "God's Covenant", 
+      description: "God formalizes His covenant through a solemn ceremony and promises Abram a biological heir.", 
+      keyPoints: [
+        "Abram's faith credited as righteousness",
+        "The promise of descendants as numerous as the stars",
+        "The vision of the smoking fire pot and flaming torch"
+      ],
+      detailedContent: [
+        {
+          title: "Counting the Stars",
+          description: "God led Abram outside to gaze at the stars as a measure of his future descendants.",
+          verses: "Genesis 15:5-6",
+          verseText: "And he brought him outside and said, 'Look toward heaven, and number the stars, if you are able to number them.' Then he said to him, 'So shall your offspring be.' And he believed the Lord, and he counted it to him as righteousness."
+        }
+      ]
+    },
     16: { title: "Genesis Chapter 16", subtitle: "Hagar & Ishmael", description: "The birth of Ishmael through Hagar, Sarai's maidservant.", keyPoints: ["Sarai gives Hagar to Abram; Ishmael born", "Hagar flees; angel meets her at spring", "Promise of Ishmael's descendants"] },
     17: { title: "Genesis Chapter 17", subtitle: "Covenant of Circumcision", description: "Abram is renamed Abraham, and the sign of circumcision is instituted.", keyPoints: ["Covenant of circumcision; Abram becomes Abraham", "Sarai becomes Sarah; Isaac promised", "Ishmael blessed; covenant established"] },
     18: { title: "Genesis Chapter 18", subtitle: "Abraham Intercedes", description: "Abraham intercedes for Sodom and Gomorrah before the Lord.", keyPoints: ["Three visitors at Mamre; Sarah laughs", "Abraham intercedes for Sodom", "Bargaining for righteous people"] },
@@ -466,6 +564,38 @@ export const bibleData: Record<string, Record<number, BibleChapter>> = {
         "Tobiah's room is cleared out of the Temple courts.",
         "Gates are shut on the Sabbath to prevent trade.",
         "Nehemiah rebukes those who married women from Ashdod and Ammon."
+      ]
+    }
+  },
+  matthew: {
+    1: {
+      title: "Matthew Chapter 1",
+      subtitle: "The Genealogy and Birth",
+      description: "The record of the genealogy of Jesus the Messiah and the account of His miraculous birth to Mary and Joseph.",
+      keyPoints: [
+        "Genealogy from Abraham to David to Exile to Jesus",
+        "The angel's message to Joseph in a dream",
+        "Fulfillment of the Immanuel prophecy",
+        "Naming the child Jesus: 'He will save his people from their sins'"
+      ],
+      detailedContent: [
+        {
+          title: "The Promised Savior",
+          description: "Joseph was directed by an angel to take Mary as his wife and name the child Jesus.",
+          verses: "Matthew 1:20-21",
+          verseText: "'Joseph, son of David, do not fear to take Mary as your wife, for that which is conceived in her is from the Holy Spirit. She will bear a son, and you shall call his name Jesus, for he will save his people from their sins.'"
+        }
+      ]
+    },
+    2: {
+      title: "Matthew Chapter 2",
+      subtitle: "The Visit of the Magi",
+      description: "The journey of the Wise Men to worship King Jesus, and the escape of the holy family to Egypt.",
+      keyPoints: [
+        "Magi follow the star to Bethlehem",
+        "King Herod's plot to kill the infant King",
+        "The gifts of Gold, Frankincense, and Myrrh",
+        "The flight to Egypt and return to Nazareth"
       ]
     }
   }
