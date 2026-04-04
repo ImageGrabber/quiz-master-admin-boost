@@ -1,42 +1,61 @@
-import { useState, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import SEO from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Trophy, Search, BookOpen, Clock, TrendingUp, Brain, X, Users, Target, Swords, ChevronRight, Filter, BookMarked, Zap, Heart } from "lucide-react";
+import { Search, BookOpen, Brain, ChevronRight, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Badge } from "@/components/ui/badge";
-import { Navigation } from "@/components/Navigation";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { bibleBooks, featuredQuizzes, categories as categoryData } from "@/data/bible-data";
-
-const quickStats = [
-  { label: "Total Quizzes", value: "66", icon: BookOpen, color: "text-blue-600" },
-  { label: "Active Users", value: "1,247", icon: Users, color: "text-green-600" },
-  { label: "Questions Answered", value: "45,892", icon: Target, color: "text-purple-600" },
-  { label: "Average Score", value: "78%", icon: TrendingUp, color: "text-orange-600" }
-];
 
 export default function BibleQA() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [isCategoryDialogOpen, setIsCategoryDialogOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Create a separate random array for Featured Quizzes that changes daily
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (mobileMenuOpen && !(event.target as Element).closest("header")) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    if (mobileMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [mobileMenuOpen]);
+
+  const allBooks = useMemo(
+    () => [
+      ...bibleBooks.oldTestament.Pentateuch,
+      ...bibleBooks.oldTestament.Historical,
+      ...bibleBooks.oldTestament.Wisdom,
+      ...bibleBooks.oldTestament.MajorProphets,
+      ...bibleBooks.oldTestament.MinorProphets,
+      ...bibleBooks.newTestament.Gospels,
+      ...bibleBooks.newTestament.Historical,
+      ...bibleBooks.newTestament.PaulineEpistles,
+      ...bibleBooks.newTestament.GeneralEpistles,
+      ...bibleBooks.newTestament.Apocalyptic,
+    ],
+    []
+  );
+
+  const filteredBooks = allBooks.filter((book) => book.toLowerCase().includes(searchQuery.toLowerCase()));
+
   const getDailyRandomQuizzes = () => {
-    const today = new Date().toDateString(); // Get today's date as string
-    const seed = today.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0); // Create seed from date
+    const today = new Date().toDateString();
+    const seed = today.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
 
-    // Simple seeded random function
-    const seededRandom = (seed: number) => {
-      const x = Math.sin(seed) * 10000;
+    const seededRandom = (seedValue: number) => {
+      const x = Math.sin(seedValue) * 10000;
       return x - Math.floor(x);
     };
 
-    // Create a copy and shuffle using the daily seed
     const shuffled = [...featuredQuizzes].sort((a, b) => {
       const randomA = seededRandom(seed + a.title.charCodeAt(0));
       const randomB = seededRandom(seed + b.title.charCodeAt(0));
@@ -46,44 +65,31 @@ export default function BibleQA() {
     return shuffled.slice(0, 9);
   };
 
-  const randomFeaturedQuizzes = getDailyRandomQuizzes();
+  const randomFeaturedQuizzes = useMemo(() => getDailyRandomQuizzes(), []);
 
-  // Get all books for search
-  const allBooks = [
-    ...bibleBooks.oldTestament.Pentateuch,
-    ...bibleBooks.oldTestament.Historical,
-    ...bibleBooks.oldTestament.Wisdom,
-    ...bibleBooks.oldTestament.MajorProphets,
-    ...bibleBooks.oldTestament.MinorProphets,
-    ...bibleBooks.newTestament.Gospels,
-    ...bibleBooks.newTestament.Historical,
-    ...bibleBooks.newTestament.PaulineEpistles,
-    ...bibleBooks.newTestament.GeneralEpistles,
-    ...bibleBooks.newTestament.Apocalyptic
-  ];
+  const handleSearch = (bookInput: string) => {
+    const book = bookInput.trim();
+    if (!book) return;
 
-  const filteredBooks = allBooks.filter(book =>
-    book.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const handleSearch = (book: string) => {
-    // Find the corresponding quiz from featuredQuizzes
-    const quiz = featuredQuizzes.find(q =>
-      q.title.toLowerCase().includes(book.toLowerCase()) ||
-      book.toLowerCase().includes(q.title.toLowerCase().replace(' quiz', ''))
-    );
-
-    if (quiz) {
-      navigate(quiz.link);
+    const directMatch = allBooks.find((b) => b.toLowerCase() === book.toLowerCase());
+    if (directMatch) {
+      navigate(`/bible-questions-and-answers-hub/${directMatch.toLowerCase().replace(/ /g, "-")}`);
     } else {
-      // Fallback to the old behavior if no quiz found
-      const link = `/bible-questions-and-answers-hub/${book.toLowerCase().replace(/ /g, '-')}`;
-      navigate(link);
+      const quiz = featuredQuizzes.find(
+        (q) =>
+          q.title.toLowerCase().includes(book.toLowerCase()) ||
+          book.toLowerCase().includes(q.title.toLowerCase().replace(" quiz", ""))
+      );
+
+      if (quiz) {
+        navigate(quiz.link);
+      } else {
+        navigate(`/bible-questions-and-answers-hub/${book.toLowerCase().replace(/ /g, "-")}`);
+      }
     }
 
-    // Add to recent searches
     if (!recentSearches.includes(book)) {
-      setRecentSearches(prev => [book, ...prev.slice(0, 4)]);
+      setRecentSearches((prev) => [book, ...prev.slice(0, 4)]);
     }
   };
 
@@ -94,359 +100,347 @@ export default function BibleQA() {
 
   const getBooksByCategory = (categoryName: string) => {
     switch (categoryName) {
-      case "Pentateuch": return bibleBooks.oldTestament.Pentateuch;
-      case "Historical Books": return bibleBooks.oldTestament.Historical;
-      case "Wisdom Literature": return bibleBooks.oldTestament.Wisdom;
-      case "Major Prophets": return bibleBooks.oldTestament.MajorProphets;
-      case "Minor Prophets": return bibleBooks.oldTestament.MinorProphets;
-      case "Gospels": return bibleBooks.newTestament.Gospels;
-      case "Historical Books (NT)": return bibleBooks.newTestament.Historical;
-      case "Pauline Epistles": return bibleBooks.newTestament.PaulineEpistles;
-      case "General Epistles": return bibleBooks.newTestament.GeneralEpistles;
-      case "Apocalyptic": return bibleBooks.newTestament.Apocalyptic;
-      default: return [];
+      case "Pentateuch":
+        return bibleBooks.oldTestament.Pentateuch;
+      case "Historical Books":
+        return bibleBooks.oldTestament.Historical;
+      case "Wisdom Literature":
+        return bibleBooks.oldTestament.Wisdom;
+      case "Major Prophets":
+        return bibleBooks.oldTestament.MajorProphets;
+      case "Minor Prophets":
+        return bibleBooks.oldTestament.MinorProphets;
+      case "Gospels":
+        return bibleBooks.newTestament.Gospels;
+      case "Historical Books (NT)":
+        return bibleBooks.newTestament.Historical;
+      case "Pauline Epistles":
+        return bibleBooks.newTestament.PaulineEpistles;
+      case "General Epistles":
+        return bibleBooks.newTestament.GeneralEpistles;
+      case "Apocalyptic":
+        return bibleBooks.newTestament.Apocalyptic;
+      default:
+        return [];
     }
   };
 
+  const featuredHubs = [
+    {
+      id: "genesis",
+      title: "Genesis Hub",
+      description: "Questions, answers, and chapter study guides for the Book of Genesis.",
+    },
+    {
+      id: "exodus",
+      title: "Exodus Hub",
+      description: "Deep-dive into deliverance, covenant, and the tabernacle with structured quizzes.",
+    },
+    {
+      id: "nehemiah",
+      title: "Nehemiah Hub",
+      description: "Leadership, rebuilding, and spiritual renewal studies with focused quizzes.",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-white font-urbanist pb-24 selection:bg-gray-100 selection:text-black">
+    <div className="min-h-screen bg-white text-gray-900 font-urbanist">
       <SEO
-        title="Bible Q&A Hub | Master Your Scripture Knowledge"
-        description="Comprehensive Bible quizzes and study guides for every book of the Bible, from Genesis to Revelation. Track your progress and master the Word."
+        title="Bible Q&A Hub | Bible Quiz Competition"
+        description="Explore all 66 Bible books with chapter quizzes, category hubs, and guided study paths from Genesis to Revelation."
         url="/bible-questions-and-answers-hub"
       />
 
-      <Navigation />
-
-      {/* Premium Hero Section */}
-      <section className="relative pt-24 pb-20 px-6 overflow-hidden">
-        {/* Background Accents */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full -z-10">
-          <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-blue-50/50 rounded-full blur-3xl" />
-          <div className="absolute bottom-[20%] right-[10%] w-96 h-96 bg-orange-50/30 rounded-full blur-3xl" />
-        </div>
-
-        <div className="container mx-auto max-w-5xl text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-50 rounded-full border border-gray-100 mb-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <Trophy className="h-3.5 w-3.5 text-black" strokeWidth={1.5} />
-            <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-widest">Master Your Bible Knowledge</span>
+      <header className="relative flex items-center justify-between p-6 w-full px-6 md:px-8 lg:px-12">
+        <div className="flex items-center space-x-8">
+          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}>
+            <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
+              <Brain className="w-3 h-3 text-white" />
+            </div>
+            <span className="text-lg font-semibold text-gray-900">Bible Quiz Competition</span>
           </div>
+          <nav className="hidden md:flex items-center space-x-6">
+            <button onClick={() => navigate("/bible-questions-and-answers-hub")} className="text-gray-600 hover:text-gray-900 font-light">
+              Bible Q&A
+            </button>
+            <button onClick={() => navigate("/articles")} className="text-gray-600 hover:text-gray-900 font-light">
+              Articles
+            </button>
+            <button onClick={() => navigate("/help")} className="text-gray-600 hover:text-gray-900 font-light">
+              Help
+            </button>
+          </nav>
+        </div>
+        <div className="flex items-center space-x-4">
+          <Button className="bg-black hover:bg-gray-800 font-light" onClick={() => navigate("/auth/register")}>
+            Get Started
+          </Button>
+          <button className="md:hidden" onClick={() => setMobileMenuOpen((open) => !open)}>
+            <Menu className="w-6 h-6" />
+          </button>
+        </div>
+        {mobileMenuOpen && (
+          <div className="md:hidden absolute top-full left-6 right-6 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 flex flex-col">
+            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-light" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>
+              Bible Q&A Hub
+            </button>
+            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-light" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>
+              Articles
+            </button>
+            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>
+              Help
+            </button>
+            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-light border-t border-gray-200" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>
+              Sign In
+            </button>
+            <Button className="bg-black text-white px-4 py-3 mx-4 mb-4 font-light" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>
+              Sign Up
+            </Button>
+          </div>
+        )}
+      </header>
 
-          <h1 className="text-5xl md:text-8xl font-normal text-gray-900 mb-8 leading-[1.05] tracking-tight animate-in fade-in slide-in-from-bottom-6 duration-1000">
-            Discover <span className="font-light italic text-gray-400">the</span> Word
-          </h1>
-
-          <p className="text-lg md:text-2xl font-light text-gray-500 mb-14 max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
-            Explore 66 sacred books through interactive quests, in-depth study hubs, and thousands of expert-curated questions.
+      <section className="py-16 bg-white text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h1 className="text-5xl md:text-7xl font-normal text-gray-900 mb-6 leading-tight">Bible Q&amp;A Hub</h1>
+          <p className="text-2xl font-light text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Search through all 66 books, open chapter study hubs, and challenge yourself with interactive Bible quizzes.
           </p>
 
-          {/* Premium Search Bar */}
-          <div className="max-w-2xl mx-auto relative group animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-400">
-            <div className="absolute inset-0 bg-gray-900/5 blur-3xl group-focus-within:bg-gray-900/10 transition-colors" />
+          <div className="max-w-2xl mx-auto mb-8">
             <div className="relative">
-              <Search className="absolute left-6 top-1/2 -translate-y-1/2 h-6 w-6 text-gray-300 group-focus-within:text-gray-900 transition-colors" strokeWidth={1} />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" strokeWidth={1} />
               <Input
-                type="text"
-                placeholder="Search for any book (Genesis, John, Matthew)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="h-20 pl-16 pr-8 rounded-[2.5rem] border-gray-100 bg-white shadow-2xl shadow-gray-100/50 text-xl font-light focus:ring-0 focus:border-gray-900 transition-all hover:border-gray-200"
+                placeholder="Search books (e.g., Genesis, Matthew, Romans)..."
+                className="pl-12 pr-4 py-4 text-lg font-light border border-gray-300 focus:border-gray-400 rounded-lg"
               />
             </div>
 
-            {/* Live Search Results */}
             {searchQuery && (
-              <div className="absolute top-full left-0 right-0 mt-4 bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 max-h-[400px] overflow-y-auto z-50 p-2 animate-in fade-in slide-in-from-top-2">
+              <div className="mt-4 bg-white rounded-lg shadow-lg border border-gray-200 max-h-64 overflow-y-auto text-left">
                 {filteredBooks.length > 0 ? (
                   filteredBooks.map((book) => (
-                    <div
+                    <button
                       key={book}
                       onClick={() => handleSearch(book)}
-                      className="flex items-center justify-between p-4 hover:bg-white rounded-2xl cursor-pointer transition-all group"
+                      className="w-full px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-b-0 flex items-center justify-between transition-colors"
                     >
-                      <div className="flex items-center gap-4">
-                        <div className="h-10 w-10 bg-gray-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <BookOpen className="h-5 w-5 text-gray-900" strokeWidth={1} />
-                        </div>
-                        <span className="text-lg font-light text-gray-900">{book} Hub</span>
-                      </div>
-                      <ChevronRight className="h-4 w-4 text-gray-300 group-hover:text-gray-900 translate-x-0 group-hover:translate-x-1 transition-all" />
-                    </div>
+                      <span className="font-light text-gray-900">{book}</span>
+                      <span className="text-sm text-gray-500">Open Hub →</span>
+                    </button>
                   ))
                 ) : (
-                  <div className="p-8 text-center text-gray-400 font-light italic">No scriptures found for "{searchQuery}"</div>
+                  <div className="px-4 py-3 text-gray-500 font-light">No books found for "{searchQuery}"</div>
                 )}
               </div>
             )}
           </div>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            <a href="#hubs" className="px-4 py-2 rounded-full border border-gray-200 hover:bg-gray-50 text-sm font-light transition-colors">
+              Study Hubs
+            </a>
+            <a href="#quizzes" className="px-4 py-2 rounded-full border border-gray-200 hover:bg-gray-50 text-sm font-light transition-colors">
+              Featured Quizzes
+            </a>
+            <a href="#categories" className="px-4 py-2 rounded-full border border-gray-200 hover:bg-gray-50 text-sm font-light transition-colors">
+              Categories
+            </a>
+          </div>
         </div>
       </section>
 
-      {/* Quick Stats Grid */}
-      <section className="container mx-auto px-6 mb-24">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-          {quickStats.map((stat, idx) => (
-            <div key={stat.label} className="bg-gray-50/50 border border-gray-100 rounded-3xl p-6 text-center animate-in fade-in zoom-in-95 duration-700" style={{ animationDelay: `${idx * 100}ms` }}>
-              <div className="h-10 w-10 bg-white rounded-xl flex items-center justify-center mx-auto mb-4 border border-gray-50">
-                <stat.icon className={`h-5 w-5 ${stat.color.replace('text-', 'text-opacity-70 text-')}`} strokeWidth={1.5} />
-              </div>
-              <div className="text-3xl font-semibold text-gray-900 mb-1 leading-none">{stat.value}</div>
-              <div className="text-[10px] font-semibold text-gray-400 uppercase tracking-widest">{stat.label}</div>
-            </div>
-          ))}
+      <div className="w-full max-w-7xl mx-auto px-6 py-10">
+        <div className="flex items-center text-sm font-light text-gray-500 mb-12">
+          <button className="hover:text-gray-900" onClick={() => navigate("/")}>
+            Home
+          </button>
+          <ChevronRight className="w-4 h-4 mx-2" />
+          <span className="font-medium text-gray-900 underline underline-offset-4 tracking-wide">Bible Q&amp;A Hub</span>
         </div>
-      </section>
 
-      {/* Main Content Layout */}
-      <main className="container mx-auto px-6 max-w-7xl">
-
-        {/* Book Study Hubs (Genesis Hub, Exodus Hub) */}
-        <section className="mb-32">
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-5xl md:text-7xl font-bold text-gray-900 tracking-tight">Bible Study Hubs</h2>
-            <p className="text-xl font-medium text-gray-500 max-w-2xl mx-auto">Master every book of the Bible through structured guides and in-depth quizzes.</p>
+        <section id="hubs" className="mb-20 scroll-mt-24">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-4xl font-semibold text-gray-900">Book Study Hubs</h2>
           </div>
-
-          <Tabs defaultValue="old" className="w-full">
-            <div className="flex justify-center mb-16">
-              <TabsList className="h-16 p-2 bg-gray-100 rounded-[2rem] border-none">
-                <TabsTrigger value="old" className="px-10 rounded-[1.5rem] text-lg font-medium data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-lg transition-all">
-                  Old Testament
-                </TabsTrigger>
-                <TabsTrigger value="new" className="px-10 rounded-[1.5rem] text-lg font-medium data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-lg transition-all">
-                  New Testament
-                </TabsTrigger>
-              </TabsList>
-            </div>
-
-            <TabsContent value="old" className="space-y-24 animate-in fade-in slide-in-from-bottom-8 duration-700">
-              {[
-                { name: "Pentateuch", books: bibleBooks.oldTestament.Pentateuch },
-                { name: "Historical Books", books: bibleBooks.oldTestament.Historical },
-                { name: "Wisdom Literature", books: bibleBooks.oldTestament.Wisdom },
-                { name: "Major Prophets", books: bibleBooks.oldTestament.MajorProphets },
-                { name: "Minor Prophets", books: bibleBooks.oldTestament.MinorProphets },
-              ].map((cat) => {
-                const meta = categoryData.find(c => c.name === cat.name);
-                return (
-                  <div key={cat.name} className="space-y-10">
-                    <div className="flex items-center gap-6 px-4">
-                      <div className={`h-12 w-12 ${meta?.color.split(' ')[0]} rounded-2xl flex items-center justify-center`}>
-                        {meta && <meta.icon className="h-6 w-6 text-gray-900" strokeWidth={1.5} />}
-                      </div>
-                      <h3 className="text-3xl font-bold text-gray-900 uppercase tracking-tight">{cat.name}</h3>
-                      <div className="flex-1 h-px bg-gray-100" />
-                    </div>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                      {cat.books.map((book) => (
-                        <div
-                          key={book}
-                          onClick={() => handleSearch(book)}
-                          className="group p-6 rounded-[2rem] border border-gray-100 bg-white hover:border-gray-900 hover:shadow-2xl hover:shadow-gray-100 transition-all duration-500 cursor-pointer"
-                        >
-                          <div className="h-12 w-12 bg-gray-50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                            <BookOpen className="h-6 w-6 text-gray-300 group-hover:text-gray-900 transition-colors" strokeWidth={1} />
-                          </div>
-                          <h4 className="text-xl font-bold text-gray-900 mb-1 group-hover:text-gray-700 transition-colors truncate">{book}</h4>
-                          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest group-hover:text-gray-900 transition-colors">Study Hub</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
-            </TabsContent>
-
-            <TabsContent value="new" className="space-y-24 animate-in fade-in slide-in-from-bottom-8 duration-700">
-              {[
-                { name: "Gospels", books: bibleBooks.newTestament.Gospels },
-                { name: "Historical Books (NT)", books: bibleBooks.newTestament.Historical },
-                { name: "Pauline Epistles", books: bibleBooks.newTestament.PaulineEpistles },
-                { name: "General Epistles", books: bibleBooks.newTestament.GeneralEpistles },
-                { name: "Apocalyptic", books: bibleBooks.newTestament.Apocalyptic },
-              ].map((cat) => {
-                const meta = categoryData.find(c => c.name === cat.name || (cat.name === "Historical Books (NT)" && c.name === "Historical Books"));
-                return (
-                  <div key={cat.name} className="space-y-10">
-                    <div className="flex items-center gap-6 px-4">
-                      <div className={`h-12 w-12 ${meta?.color.split(' ')[0] || 'bg-blue-50'} rounded-2xl flex items-center justify-center`}>
-                        {meta && <meta.icon className="h-6 w-6 text-gray-900" strokeWidth={1.5} />}
-                      </div>
-                      <h3 className="text-3xl font-bold text-gray-900 uppercase tracking-tight">{cat.name}</h3>
-                      <div className="flex-1 h-px bg-gray-100" />
-                    </div>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-                      {cat.books.map((book) => (
-                        <div
-                          key={book}
-                          onClick={() => handleSearch(book)}
-                          className="group p-6 rounded-[2rem] border border-gray-100 bg-white hover:border-gray-900 hover:shadow-2xl hover:shadow-gray-100 transition-all duration-500 cursor-pointer"
-                        >
-                          <div className="h-12 w-12 bg-gray-50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                            <BookOpen className="h-6 w-6 text-gray-300 group-hover:text-gray-900 transition-colors" strokeWidth={1} />
-                          </div>
-                          <h4 className="text-xl font-bold text-gray-900 mb-1 group-hover:text-gray-700 transition-colors truncate">{book}</h4>
-                          <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest group-hover:text-gray-900 transition-colors">Study Hub</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
-            </TabsContent>
-          </Tabs>
-        </section>
-
-        {/* Featured Quizzes section */}
-        <section className="mb-24 px-10 py-20 bg-gray-50 rounded-[4rem] border border-gray-100">
-          <div className="flex items-end justify-between mb-16 px-4">
-            <div className="space-y-4">
-              <h2 className="text-4xl md:text-6xl font-normal text-gray-900 tracking-tight">Today's Quests</h2>
-              <p className="text-xl font-light text-gray-500">Curated challenges to test your understanding.</p>
-            </div>
-            <Button variant="outline" onClick={() => setSearchQuery("")} className="hidden sm:flex h-14 px-10 rounded-2xl border-gray-200 font-light text-lg">View Library</Button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {randomFeaturedQuizzes.map((quiz) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredHubs.map((hub) => (
               <Card
-                key={quiz.title}
-                className="group border-none shadow-none hover:shadow-2xl hover:shadow-gray-200 transition-all duration-500 rounded-[2rem] cursor-pointer bg-white overflow-hidden p-2"
-                onClick={() => navigate(quiz.link)}
+                key={hub.id}
+                className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col bg-white overflow-hidden group shadow-none cursor-pointer"
+                onClick={() => navigate(`/bible-questions-and-answers-hub/${hub.id}`)}
               >
-                <CardHeader className="p-8 pb-4">
-                  <div className="flex items-center justify-between mb-8">
-                    <div className="h-12 w-12 bg-gray-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <quiz.icon className="h-6 w-6 text-gray-900" strokeWidth={1} />
-                    </div>
-                    <Badge variant="outline" className="text-[10px] font-semibold uppercase tracking-widest bg-gray-50 border-gray-100 group-hover:bg-gray-900 group-hover:text-white transition-colors">
-                      {quiz.difficulty}
-                    </Badge>
+                <CardHeader className="pb-3">
+                  <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 transition-colors group-hover:bg-gray-200">
+                    <BookOpen className="w-6 h-6 text-gray-700" strokeWidth={1} />
                   </div>
-                  <CardTitle className="text-2xl font-normal text-gray-900 mb-3 leading-tight">{quiz.title}</CardTitle>
-                  <CardDescription className="text-sm font-light text-gray-500 line-clamp-2 leading-relaxed">{quiz.description}</CardDescription>
+                  <CardTitle className="text-2xl font-semibold text-gray-900">{hub.title}</CardTitle>
+                  <CardDescription className="text-lg font-light text-gray-600">{hub.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="px-8 pb-8 flex items-center justify-between mt-4">
-                  <div className="flex items-center gap-2 text-xs font-semibold text-gray-300">
-                    <Target className="h-3.5 w-3.5" />
-                    <span>{quiz.questions} Questions</span>
-                  </div>
-                  <div className="flex items-center gap-1 text-[10px] font-black text-gray-900 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all translate-x-4 group-hover:translate-x-0">
-                    Begin <ChevronRight className="h-3 w-3" />
-                  </div>
+                <CardContent className="pt-4 mt-auto">
+                  <Button className="w-full font-light border-gray-200 text-base py-6" variant="outline">
+                    Open Hub
+                  </Button>
                 </CardContent>
               </Card>
             ))}
           </div>
         </section>
 
-        {/* Biblical Categories Section */}
-        <section className="mb-24">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-16">
-            <h2 className="text-4xl md:text-5xl font-normal text-gray-900 tracking-tight text-center md:text-left">Browse by Category</h2>
-            <div className="flex flex-wrap justify-center gap-3">
-                {categoryData.slice(0, 8).map((category) => (
-                  <button
-                    key={category.name}
-                    className="px-6 py-2 rounded-full border border-gray-100 text-sm font-light text-gray-500 hover:border-gray-900 hover:text-gray-900 hover:bg-white transition-all shadow-sm"
-                    onClick={() => handleCategoryClick(category.name)}
-                  >
-                    {category.name}
-                  </button>
-                ))}
-            </div>
+        <section id="quizzes" className="mb-20 scroll-mt-24">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-4xl font-semibold text-gray-900">Featured Quizzes</h2>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {categoryData.slice(0, 6).map((cat) => (
-              <div
-                key={cat.name}
-                className="p-10 rounded-[3rem] border border-gray-50 bg-white hover:border-gray-100 hover:shadow-xl hover:shadow-gray-50 transition-all duration-700 cursor-pointer group"
-                onClick={() => handleCategoryClick(cat.name)}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {randomFeaturedQuizzes.map((quiz) => (
+              <Card
+                key={quiz.title}
+                className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col h-full bg-white group shadow-none cursor-pointer"
+                onClick={() => navigate(quiz.link)}
               >
-                <div className="h-16 w-16 bg-gray-50 rounded-2xl flex items-center justify-center mb-8 group-hover:rotate-6 transition-transform">
-                  <cat.icon className="h-8 w-8 text-gray-900" strokeWidth={1} />
-                </div>
-                <h3 className="text-2xl font-normal text-gray-900 mb-2">{cat.name}</h3>
-                <p className="text-sm font-light text-gray-500 leading-relaxed">{cat.description}</p>
-                <div className="mt-8 flex items-center gap-2 text-[10px] font-bold text-gray-300 uppercase tracking-[0.2em] group-hover:text-gray-900 transition-colors">
-                  Explore Books <ChevronRight className="h-3 w-3" />
-                </div>
-              </div>
+                <CardHeader className="pb-3 border-b border-gray-50 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center mb-4 group-hover:bg-gray-200 transition-colors">
+                    <quiz.icon className="w-5 h-5 text-gray-700" strokeWidth={1} />
+                  </div>
+                  <CardTitle className="text-2xl font-semibold text-gray-900">{quiz.title}</CardTitle>
+                  <CardDescription className="text-base font-light text-gray-600">{quiz.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="pt-0 flex-grow">
+                  <p className="text-sm font-light text-gray-500 mb-4 leading-relaxed">
+                    {quiz.questions} questions • {quiz.difficulty}
+                  </p>
+                </CardContent>
+                <CardContent className="pt-4 border-t border-gray-50">
+                  <Button size="sm" variant="outline" className="w-full font-light text-base py-5">
+                    Start Quiz
+                  </Button>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </section>
 
-        {/* Unified Call to Action */}
-        <section className="bg-gray-900 rounded-[4rem] p-16 md:p-24 text-center text-white relative overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.1)]">
-          {/* Decorative Background for CTA */}
-          <div className="absolute top-0 left-0 w-full h-full -z-10 opacity-10">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full blur-[100px]" />
+        <section id="categories" className="mb-20 scroll-mt-24">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-4xl font-semibold text-gray-900">Browse by Biblical Category</h2>
           </div>
-
-          <div className="max-w-3xl mx-auto space-y-10">
-            <h2 className="text-4xl md:text-7xl font-normal leading-[1.1] tracking-tight">Master <span className="font-light italic text-gray-400">the</span> Complete Scripture</h2>
-            <p className="text-xl md:text-2xl font-light text-gray-400 leading-relaxed max-w-xl mx-auto">
-              Join a community of believers tracking their growth and exploring the word together.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-6">
-              <Button
-                size="lg"
-                onClick={() => navigate("/auth/register")}
-                className="w-full sm:w-auto h-20 px-14 rounded-3xl bg-white text-gray-900 hover:bg-gray-100 shadow-2xl transition-all hover:scale-105 active:scale-95 text-lg font-normal"
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {categoryData.map((category) => (
+              <Card
+                key={category.name}
+                className="cursor-pointer border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col group bg-white shadow-none"
+                onClick={() => handleCategoryClick(category.name)}
               >
-                Create Free Account
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                onClick={() => navigate("/auth/login")}
-                className="w-full sm:w-auto h-20 px-14 rounded-3xl border-gray-700 text-white hover:bg-gray-800 text-lg font-light"
-              >
-                Sign In
-              </Button>
-            </div>
+                <CardHeader className="pb-3">
+                  <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center mb-4 group-hover:bg-gray-200 transition-colors">
+                    <category.icon className="w-5 h-5 text-gray-700" strokeWidth={1} />
+                  </div>
+                  <CardTitle className="text-2xl font-semibold text-gray-900">{category.name}</CardTitle>
+                  <CardDescription className="text-base font-light text-gray-600">{category.description}</CardDescription>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <Button variant="ghost" size="sm" className="w-full text-sm font-light group-hover:bg-gray-100">
+                    View Books →
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </section>
-      </main>
 
-      {/* Category Selection Dialog */}
-      <Dialog open={isCategoryDialogOpen} onOpenChange={setIsCategoryDialogOpen}>
-        <DialogContent className="max-w-4xl max-h-[85vh] overflow-hidden p-0 rounded-[3rem] border-none bg-white font-urbanist selection:bg-gray-100">
-          <div className="p-12 h-full flex flex-col">
-            <DialogHeader className="mb-10 text-center">
-              <div className="flex flex-col items-center gap-4">
-                <div className="h-16 w-16 bg-gray-50 rounded-2xl flex items-center justify-center">
-                  {selectedCategory && categoryData.find(c => c.name === selectedCategory)?.icon && (() => {
-                    const Icon = categoryData.find(c => c.name === selectedCategory)!.icon;
-                    return <Icon className="h-8 w-8 text-gray-900" strokeWidth={1} />;
-                  })()}
-                </div>
-                <DialogTitle className="text-4xl font-normal text-gray-900 tracking-tight leading-none">{selectedCategory}</DialogTitle>
-                <p className="text-lg font-light text-gray-500">{categoryData.find(c => c.name === selectedCategory)?.description}</p>
-              </div>
-            </DialogHeader>
-
-            <div className="flex-1 overflow-y-auto px-4 custom-scrollbar">
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-12">
-                {selectedCategory && getBooksByCategory(selectedCategory).map((book) => (
-                  <div
-                    key={book}
-                    className="p-6 rounded-[2rem] border border-gray-50 bg-white hover:border-gray-900 hover:shadow-xl hover:shadow-gray-50 transition-all duration-300 cursor-pointer text-center group"
-                    onClick={() => { handleSearch(book); setIsCategoryDialogOpen(false); }}
-                  >
-                    <div className="h-12 w-12 bg-gray-50 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                      <BookOpen className="h-5 w-5 text-gray-900" strokeWidth={1.5} />
-                    </div>
-                    <h4 className="text-lg font-normal text-gray-900 group-hover:text-gray-700 transition-colors mb-1">{book}</h4>
-                    <p className="text-[10px] font-bold text-gray-300 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Explore Hub</p>
-                  </div>
-                ))}
-              </div>
+        {recentSearches.length > 0 && (
+          <section className="mb-20">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-4xl font-semibold text-gray-900">Recently Viewed</h2>
             </div>
+            <div className="flex flex-wrap gap-3">
+              {recentSearches.map((book) => (
+                <Button key={book} variant="outline" onClick={() => handleSearch(book)} className="font-light border-gray-300">
+                  {book}
+                </Button>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+
+      <footer className="bg-white border-t border-gray-100 pt-16 pb-12">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div className="col-span-1 md:col-span-2">
+              <div className="flex items-center space-x-2 mb-6">
+                <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+                  <Brain className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-xl font-semibold text-gray-900">Bible Quiz Competition</span>
+              </div>
+              <p className="text-gray-500 font-light leading-relaxed max-w-sm">
+                Empowering faith through interactive Scripture knowledge and competitive spirit. Join thousands of students learning the Word through fun, challenging quizzes.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-6 uppercase tracking-wider text-sm">Quick Links</h4>
+              <ul className="space-y-4 text-gray-500 font-light">
+                <li><button onClick={() => navigate("/bible-questions-and-answers-hub")} className="hover:text-black transition-colors">Quiz Hub</button></li>
+                <li><button onClick={() => navigate("/articles")} className="hover:text-black transition-colors">Study Articles</button></li>
+                <li><button onClick={() => navigate("/public-leaderboard")} className="hover:text-black transition-colors">Leaderboards</button></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-gray-900 mb-6 uppercase tracking-wider text-sm">Support</h4>
+              <ul className="space-y-4 text-gray-500 font-light">
+                <li><button onClick={() => navigate("/help")} className="hover:text-black transition-colors">Help Center</button></li>
+                <li><button onClick={() => navigate("/contact")} className="hover:text-black transition-colors">Contact Us</button></li>
+                <li><button onClick={() => navigate("/privacy")} className="hover:text-black transition-colors">Privacy Policy</button></li>
+              </ul>
+            </div>
+          </div>
+          <div className="pt-8 border-t border-gray-50 flex flex-col md:flex-row justify-between items-center text-sm font-light text-gray-400">
+            <p>© 2026 Bible Quiz Competition. All rights reserved.</p>
+            <div className="flex space-x-6 mt-4 md:mt-0">
+              <span className="hover:text-black cursor-pointer transition-colors">Twitter</span>
+              <span className="hover:text-black cursor-pointer transition-colors">Facebook</span>
+              <span className="hover:text-black cursor-pointer transition-colors">Instagram</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <Dialog open={isCategoryDialogOpen} onOpenChange={setIsCategoryDialogOpen}>
+        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <div className="flex items-center justify-between">
+              <DialogTitle className="text-2xl font-semibold text-gray-900">{selectedCategory}</DialogTitle>
+              <Button variant="ghost" size="sm" onClick={() => setIsCategoryDialogOpen(false)} className="h-8 w-8 p-0">
+                <X className="h-4 w-4" strokeWidth={1} />
+              </Button>
+            </div>
+          </DialogHeader>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
+            {getBooksByCategory(selectedCategory).map((book) => (
+              <Card
+                key={book}
+                className="border border-gray-200 hover:border-gray-400 transition-all duration-300 cursor-pointer group bg-white"
+                onClick={() => {
+                  handleSearch(book);
+                  setIsCategoryDialogOpen(false);
+                }}
+              >
+                <CardContent className="p-4 text-center">
+                  <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mx-auto mb-3">
+                    <BookOpen className="w-6 h-6 text-gray-700" strokeWidth={1} />
+                  </div>
+                  <h3 className="font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">{book}</h3>
+                  <p className="text-sm font-light text-gray-500 mt-1">Open Hub</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </DialogContent>
       </Dialog>
     </div>
   );
 }
+

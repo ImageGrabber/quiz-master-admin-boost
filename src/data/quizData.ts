@@ -6,7 +6,7 @@ export interface QuizQuestion {
   explanation: string;
 }
 
-export type QuizData = Record<string, Record<number, Record<string, QuizQuestion[]>>>;
+export type QuizData = Record<string, Record<number | string, Record<string, QuizQuestion[]>>>;
 
 export const quizData: QuizData = {
   genesis: {
@@ -38,6 +38,38 @@ export const quizData: QuizData = {
         { chapter: 6, question: "What did God instruct Noah to build?", options: ["A temple", "An altar", "An ark", "A city"], answer: 2, explanation: "Genesis 6:14 — 'Make yourself an ark of gopher wood.'" },
         { chapter: 6, question: "What material was used to seal the Ark?", options: ["Wax", "Pitch", "Mud", "Glue"], answer: 1, explanation: "Genesis 6:14 — '...and cover it inside and out with pitch.'" },
         { chapter: 6, question: "How many cubits long was the Ark?", options: ["100", "200", "300", "400"], answer: 2, explanation: "Genesis 6:15 — 'the length of the ark 300 cubits...'" }
+      ]
+    },
+    '1-11': {
+      beginner: [
+        { chapter: 1, question: "How many days did it take God to create the heavens and the earth?", options: ["3", "5", "6", "7"], answer: 2, explanation: "Genesis 1 — God created the world in six days and rested on the seventh." },
+        { chapter: 3, question: "Who was the first man created by God?", options: ["Noah", "Abraham", "Adam", "Seth"], answer: 2, explanation: "Genesis 2:7 — The Lord God formed man of dust from the ground." },
+        { chapter: 6, question: "Who built an ark to survive the great flood?", options: ["Moses", "Noah", "Enoch", "Methuselah"], answer: 1, explanation: "Genesis 6:14-22 — Noah built the ark as God commanded." },
+        { chapter: 11, question: "What was the name of the tower where languages were confused?", options: ["Zion", "Babel", "Eden", "Ur"], answer: 1, explanation: "Genesis 11:9 — Therefore its name was called Babel, because there the LORD confused the language of all the earth." }
+      ],
+      advanced: [
+        { chapter: 3, question: "What did God place at the east of the Garden of Eden to guard the way to the tree of life?", options: ["A wall of fire", "Cherubim and a flaming sword", "A great mountain", "Twelve angels"], answer: 1, explanation: "Genesis 3:24 — He drove out the man, and at the east of the garden of Eden he placed the cherubim and a flaming sword." },
+        { chapter: 5, question: "Who was the oldest man recorded in the Bible, living 969 years?", options: ["Adam", "Methuselah", "Noah", "Jared"], answer: 1, explanation: "Genesis 5:27 — Thus all the days of Methuselah were 969 years, and he died." },
+        { chapter: 10, question: "Who was described as a 'mighty hunter before the LORD'?", options: ["Cain", "Nimrod", "Esau", "Ishmael"], answer: 1, explanation: "Genesis 10:8-9 — Cush fathered Nimrod; he was the first on earth to be a mighty man. He was a mighty hunter before the LORD." }
+      ]
+    },
+    '12-25': {
+      beginner: [
+        { chapter: 12, question: "To which land did God call Abram to go?", options: ["Egypt", "Canaan", "Babylon", "Moab"], answer: 1, explanation: "Genesis 12:1-5 — Abram went forth to go to the land of Canaan." },
+        { chapter: 17, question: "What was Abram's name changed to?", options: ["Israel", "Abraham", "Isaac", "Jacob"], answer: 1, explanation: "Genesis 17:5 — No longer shall your name be called Abram, but your name shall be Abraham." },
+        { chapter: 21, question: "What was the name of Abraham and Sarah's son?", options: ["Ishmael", "Isaac", "Lot", "Joseph"], answer: 1, explanation: "Genesis 21:3 — Abraham called the name of his son who was born to him, whom Sarah bore him, Isaac." }
+      ]
+    },
+    '26-36': {
+      beginner: [
+        { chapter: 28, question: "What did Jacob see in a dream at Bethel?", options: ["A burning bush", "A ladder reaching to heaven", "A great flood", "A golden calf"], answer: 1, explanation: "Genesis 28:12 — And he dreamed, and behold, there was a ladder set up on the earth, and the top of it reached to heaven." },
+        { chapter: 32, question: "What was Jacob's name changed to after wrestling with God?", options: ["Abraham", "Isaac", "Israel", "Joseph"], answer: 2, explanation: "Genesis 32:28 — Your name shall no longer be called Jacob, but Israel." }
+      ]
+    },
+    '37-50': {
+      beginner: [
+        { chapter: 37, question: "What did Jacob give to Joseph that made his brothers jealous?", options: ["A sword", "A signet ring", "A coat of many colors", "A flock of sheep"], answer: 2, explanation: "Genesis 37:3 — Now Israel loved Joseph more than any of his other sons... and he made him a robe of many colors." },
+        { chapter: 41, question: "To what position did Pharaoh promote Joseph in Egypt?", options: ["General", "Taskmaster", "Second only to Pharaoh", "Priest"], answer: 2, explanation: "Genesis 41:40-41 — Pharaoh said to Joseph, 'Behold, I have set you over all the land of Egypt.'" }
       ]
     }
   },

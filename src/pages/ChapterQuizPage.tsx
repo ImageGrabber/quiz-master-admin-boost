@@ -17,7 +17,7 @@ export default function ChapterQuizPage() {
   const difficulty = match ? match[2].toLowerCase() : "beginner";
 
   const bookQuizzes = quizData[bookKey as keyof typeof quizData];
-  const chapterQuizzes = bookQuizzes ? (bookQuizzes[id as unknown as number] || bookQuizzes[id as string]) : null;
+  const chapterQuizzes = bookQuizzes ? bookQuizzes[id as any] : null;
   const questions = chapterQuizzes ? (chapterQuizzes as any)[difficulty] : null;
 
   if (!questions) {
@@ -43,7 +43,7 @@ export default function ChapterQuizPage() {
 
   return (
     <BibleBookQuiz 
-      title={`${bookNameFormatted} Chapter ${id} - ${difficulty?.charAt(0).toUpperCase()}${difficulty?.slice(1)}`} 
+      title={`${bookNameFormatted} ${id.includes("-") ? "Range" : "Chapter"} ${id} - ${difficulty?.charAt(0).toUpperCase()}${difficulty?.slice(1)}`} 
       questions={questions} 
       bookName={bookNameFormatted} 
       difficulty={difficulty}
