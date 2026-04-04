@@ -2,12 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Menu, Search, X, Brain } from "lucide-react";
+import { Menu, Search, X, Brain, ChevronDown, Music } from "lucide-react";
 import { publicPages } from "@/data/indexData";
 
 export function Navigation() {
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [songsDropdownOpen, setSongsDropdownOpen] = useState(false);
+  const songsDropdownRef = useRef<HTMLDivElement>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<typeof publicPages>([]);
   const [showSearchResults, setShowSearchResults] = useState(false);
@@ -26,6 +28,17 @@ export function Navigation() {
       return () => document.removeEventListener('mousedown', handleClickOutside);
     }
   }, [mobileMenuOpen]);
+
+  // Close songs dropdown when clicking outside
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      if (songsDropdownRef.current && !songsDropdownRef.current.contains(event.target as Node)) {
+        setSongsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => document.removeEventListener('mousedown', handleClick);
+  }, []);
 
   // Search functionality
   useEffect(() => {
@@ -74,6 +87,34 @@ export function Navigation() {
 
         <nav className="hidden md:flex items-center space-x-6">
           <button onClick={() => navigate("/bible-questions-and-answers-hub")} className="text-base md:text-lg text-gray-600 hover:text-gray-900 font-urbanist font-light">Bible Q&A</button>
+
+          {/* Songs Dropdown */}
+          <div ref={songsDropdownRef} className="relative">
+            <button
+              onClick={() => setSongsDropdownOpen(o => !o)}
+              className="flex items-center gap-1 text-base md:text-lg text-gray-600 hover:text-gray-900 font-urbanist font-light"
+            >
+              <Music className="w-4 h-4" />
+              Songs
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${songsDropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {songsDropdownOpen && (
+              <div className="absolute top-full mt-2 left-0 bg-white rounded-lg shadow-lg border border-gray-200 z-50 min-w-[200px] py-1">
+                <button
+                  onClick={() => { setSongsDropdownOpen(false); navigate('/songs'); }}
+                  className="w-full text-left px-4 py-2.5 hover:bg-gray-50 font-urbanist font-light text-base text-gray-700 hover:text-gray-900 transition-colors"
+                >
+                  Malayalam Songs
+                </button>
+                <button
+                  onClick={() => { setSongsDropdownOpen(false); navigate('/english-songs'); }}
+                  className="w-full text-left px-4 py-2.5 hover:bg-gray-50 font-urbanist font-light text-base text-gray-700 hover:text-gray-900 transition-colors"
+                >
+                  English Hymns
+                </button>
+              </div>
+            )}
+          </div>
 
           <button onClick={() => navigate("/articles")} className="text-base md:text-lg text-gray-600 hover:text-gray-900 font-urbanist font-light">Articles</button>
           <button onClick={() => navigate("/help")} className="text-base md:text-lg text-gray-600 hover:text-gray-900 font-urbanist font-light">Help</button>
@@ -144,7 +185,8 @@ export function Navigation() {
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-6 right-6 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 flex flex-col">
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A</button>
-
+          <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/songs"); }}>Malayalam Songs</button>
+          <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/english-songs"); }}>English Hymns</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>Help</button>
 
