@@ -10,6 +10,25 @@ import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/components/ui/use-toast";
 
+const SITE_URL = "https://biblequizcompetition.com";
+
+const getYouTubeVideoId = (url: string): string => {
+    try {
+        if (url.includes("youtu.be/")) {
+            return url.split("youtu.be/")[1]?.split("?")[0] || "";
+        }
+        if (url.includes("/embed/")) {
+            return url.split("/embed/")[1]?.split("?")[0] || "";
+        }
+        if (url.includes("watch?v=")) {
+            return url.split("watch?v=")[1]?.split("&")[0] || "";
+        }
+        return "";
+    } catch {
+        return "";
+    }
+};
+
 const SongDetail = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
@@ -20,6 +39,12 @@ const SongDetail = () => {
     if (!song) {
         return (
             <div className="min-h-screen bg-gray-50 flex flex-col">
+                <Helmet>
+                    <title>Song Not Found | Bible Quiz Competition</title>
+                    <meta name="description" content="The song page you are looking for does not exist. Browse all Christian devotional songs on Bible Quiz Competition." />
+                    <meta name="robots" content="noindex, nofollow" />
+                    <link rel="canonical" href={`${SITE_URL}/songs`} />
+                </Helmet>
                 <Navigation />
                 <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center">
                     <h1 className="text-2xl font-bold text-gray-900 mb-4">Song Not Found</h1>
@@ -31,25 +56,79 @@ const SongDetail = () => {
     }
 
     const availableTranslations = Object.keys(song.translations);
-    const currentTranslation = song.translations[selectedLang] || song.translations['malayalam'];
-    const videoId = song.videoUrl.split('/').pop();
-    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    const primaryLang = song.translations.malayalam ? "malayalam" : availableTranslations[0];
+    const currentTranslation = song.translations[selectedLang] || song.translations[primaryLang];
+    const primaryTranslation = song.translations[primaryLang];
+    const languageNames = availableTranslations.map((lang) => song.translations[lang].lang);
+    const videoId = getYouTubeVideoId(song.videoUrl);
+    const watchUrl = videoId ? `https://www.youtube.com/watch?v=${videoId}` : song.videoUrl;
+    const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : `${SITE_URL}/sword.png`;
+    const canonicalUrl = `${SITE_URL}/songs/${song.slug}`;
+
+    const lyricsExcerpt = primaryTranslation?.lyrics
+        .slice(0, 2)
+        .map((section) => section.lines.join(" "))
+        .join(" ")
+        .slice(0, 700);
+
+    const seoDescription = `Read lyrics and watch the video for ${song.title}. Available in ${languageNames.join(", ")}. ${song.description}`;
+    const seoTitle = `${song.title} Lyrics | ${primaryTranslation?.lang || "Christian Song"} | Bible Quiz Competition`;
+    const seoKeywords = [
+        song.title,
+        `${song.title} lyrics`,
+        "Christian devotional song lyrics",
+        "Malayalam Christian songs",
+        "Bible Quiz Competition songs",
+        ...availableTranslations.map((lang) => `${song.title} ${lang} lyrics`),
+    ].join(", ");
 
     // Construct JSON-LD Schema
     const jsonLd = {
         "@context": "https://schema.org",
-        "@type": "MusicVideoObject",
-        "name": song.title,
-        "description": song.description,
-        "thumbnailUrl": [thumbnailUrl],
-        "uploadDate": new Date().toISOString(), // In a real app, store this in data
-        "embedUrl": song.videoUrl,
-        "contentUrl": `https://www.youtube.com/watch?v=${videoId}`,
-        "inLanguage": selectedLang,
-        "lyrics": {
-            "@type": "Lyrics",
-            "text": currentTranslation.lyrics.map(s => s.lines.join("\n")).join("\n\n")
-        }
+        "@graph": [
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL },
+                    { "@type": "ListItem", "position": 2, "name": "Songs", "item": `${SITE_URL}/songs` },
+                    { "@type": "ListItem", "position": 3, "name": song.title, "item": canonicalUrl }
+                ]
+            },
+            {
+                "@type": "MusicComposition",
+                "name": song.title,
+                "description": song.description,
+                "url": canonicalUrl,
+                "inLanguage": languageNames,
+                "lyrics": lyricsExcerpt
+                    ? {
+                        "@type": "CreativeWork",
+                        "text": lyricsExcerpt
+                    }
+                    : undefined
+            },
+            {
+                "@type": "VideoObject",
+                "name": `${song.title} - Video and Lyrics`,
+                "description": seoDescription,
+                "thumbnailUrl": [thumbnailUrl],
+                "embedUrl": song.videoUrl,
+                "contentUrl": watchUrl,
+                "inLanguage": languageNames,
+                "mainEntityOfPage": canonicalUrl
+            },
+            {
+                "@type": "WebPage",
+                "name": `${song.title} Lyrics`,
+                "url": canonicalUrl,
+                "description": seoDescription,
+                "isPartOf": {
+                    "@type": "WebSite",
+                    "name": "Bible Quiz Competition",
+                    "url": SITE_URL
+                }
+            }
+        ]
     };
 
     const handleShare = async () => {
@@ -83,30 +162,35 @@ const SongDetail = () => {
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
             <Helmet>
-                <title>{song.title} | {currentTranslation.lang} Lyrics | Bible Quiz Competition</title>
+                <title>{seoTitle}</title>
                 <meta
                     name="description"
-                    content={`Read lyrics and watch the video for ${song.title} in ${currentTranslation.lang}. ${song.description}`}
+                    content={seoDescription}
                 />
-                <meta name="keywords" content={`Christian devotional songs, Malayalam Christian songs, ${song.title} lyrics, ${song.title} ${selectedLang}, Bible Quiz Competition songs`} />
-                <link rel="canonical" href={`https://biblequizcompetition.com/songs/${song.slug}`} />
+                <meta name="keywords" content={seoKeywords} />
+                <meta name="robots" content="index, follow, max-image-preview:large" />
+                <link rel="canonical" href={canonicalUrl} />
 
                 {/* Open Graph / Facebook */}
                 <meta property="og:type" content="music.song" />
-                <meta property="og:url" content={`https://biblequizcompetition.com/songs/${song.slug}`} />
-                <meta property="og:title" content={`${song.title} - ${currentTranslation.lang} Lyrics`} />
-                <meta property="og:description" content={`Watch the video and read lyrics for ${song.title}. ${song.description}`} />
+                <meta property="og:url" content={canonicalUrl} />
+                <meta property="og:title" content={seoTitle} />
+                <meta property="og:description" content={seoDescription} />
                 <meta property="og:image" content={thumbnailUrl} />
                 <meta property="og:image:width" content="1280" />
                 <meta property="og:image:height" content="720" />
                 <meta property="og:site_name" content="Bible Quiz Competition" />
+                <meta property="og:locale" content="en_US" />
+                <meta property="og:video" content={song.videoUrl} />
+                <meta property="og:video:type" content="text/html" />
+                <meta property="og:video:url" content={song.videoUrl} />
 
                 {/* Twitter */}
-                <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content={`https://biblequizcompetition.com/songs/${song.slug}`} />
-                <meta property="twitter:title" content={`${song.title} - ${currentTranslation.lang} Lyrics`} />
-                <meta property="twitter:description" content={`Watch the video and read lyrics for ${song.title}. ${song.description}`} />
-                <meta property="twitter:image" content={thumbnailUrl} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:url" content={canonicalUrl} />
+                <meta name="twitter:title" content={seoTitle} />
+                <meta name="twitter:description" content={seoDescription} />
+                <meta name="twitter:image" content={thumbnailUrl} />
 
                 {/* Schema Markup */}
                 <script type="application/ld+json">

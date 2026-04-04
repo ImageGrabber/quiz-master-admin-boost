@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { articles } from '../src/data/articles.js';
 import { bibleStructure } from '../src/data/bible-data.ts';
+import { allSongs } from '../src/data/songs.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -137,21 +138,39 @@ function generateSitemap() {
     }
   }
 
-  // Song pages (migrated 480 songs)
-  const songsJsonPath = path.join(__dirname, '..', 'src', 'data', 'migrated-songs.json');
-  if (fs.existsSync(songsJsonPath)) {
-    const migratedSongs = JSON.parse(fs.readFileSync(songsJsonPath, 'utf-8'));
-    // Main songs listing page
-    urls.push({ loc: '/songs', priority: '0.9', changefreq: 'weekly' });
-    
-    for (const song of migratedSongs) {
+  // Song pages
+  urls.push({ loc: '/songs', priority: '0.9', changefreq: 'weekly' });
+  const uniqueSongSlugs = new Set<string>();
+  for (const song of allSongs) {
+    if (!song.slug || uniqueSongSlugs.has(song.slug)) {
+      continue;
+    }
+    uniqueSongSlugs.add(song.slug);
+    urls.push({
+      loc: `/songs/${song.slug}`,
+      priority: '0.7',
+      changefreq: 'monthly'
+    });
+  }
+  console.log(`Added ${uniqueSongSlugs.size} song URLs to sitemap`);
+
+  // English Song pages
+  const englishSongsJsonPath = path.join(__dirname, '..', 'src', 'data', 'english-songs.json');
+  if (fs.existsSync(englishSongsJsonPath)) {
+    const englishSongs = JSON.parse(fs.readFileSync(englishSongsJsonPath, 'utf-8'));
+    urls.push({ loc: '/english-songs', priority: '0.9', changefreq: 'weekly' });
+
+    const uniqueEnglishSlugs = new Set<string>();
+    for (const song of englishSongs) {
+      if (!song.slug || uniqueEnglishSlugs.has(song.slug)) continue;
+      uniqueEnglishSlugs.add(song.slug);
       urls.push({
-        loc: `/songs/${song.slug}`,
+        loc: `/english-songs/${song.slug}`,
         priority: '0.7',
         changefreq: 'monthly'
       });
     }
-    console.log(`Added ${migratedSongs.length} song URLs to sitemap`);
+    console.log(`Added ${uniqueEnglishSlugs.size} English song URLs to sitemap`);
   }
 
   // Generate XML sitemap

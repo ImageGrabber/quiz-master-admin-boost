@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { articles } from '../src/data/articles.js';
 import { bibleStructure, bookNames } from '../src/data/bible-data.ts';
+import { allSongs } from '../src/data/songs.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -123,26 +124,57 @@ const bibleBooks = [
   '2-john', '3-john', 'jude', 'revelation'
 ];
 
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function escapeRegex(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function upsertMetaTag(html: string, attr: 'name' | 'property', key: string, content: string) {
+  const escapedKey = escapeRegex(key);
+  const regex = new RegExp(`<meta\\s+${attr}=["']${escapedKey}["'][\\s\\S]*?\\/?>`, 'i');
+  const replacement = `<meta ${attr}="${key}" content="${escapeHtml(content)}" />`;
+  if (regex.test(html)) {
+    return html.replace(regex, replacement);
+  }
+  return html.replace('</head>', `${replacement}\n</head>`);
+}
+
+function upsertCanonical(html: string, href: string) {
+  const regex = /<link\s+rel=["']canonical["'][\s\S]*?\/?>/i;
+  const replacement = `<link rel="canonical" href="${href}" />`;
+  if (regex.test(html)) {
+    return html.replace(regex, replacement);
+  }
+  return html.replace('</head>', `${replacement}\n</head>`);
+}
+
 // Generate HTML using the app shell template
 function generateHTML(page: any, templateHtml: string) {
   let html = templateHtml;
+  const pageUrl = `https://biblequizcompetition.com${page.path}`;
 
   // Replace title
-  html = html.replace(/<title>.*<\/title>/, `<title>${page.title}</title>`);
+  html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(page.title)}</title>`);
 
-  // Replace description or add if missing
-  if (html.includes('<meta name="description"')) {
-    html = html.replace(/<meta name="description" content=".*?"\s*\/?>/, `<meta name="description" content="${page.description}" />`);
-  } else {
-    html = html.replace('</head>', `<meta name="description" content="${page.description}" />\n</head>`);
-  }
+  // Core SEO tags
+  html = upsertMetaTag(html, 'name', 'description', page.description);
+  html = upsertCanonical(html, pageUrl);
 
-  // Add canonical tag
-  if (html.includes('<link rel="canonical"')) {
-    html = html.replace(/<link rel="canonical" href=".*?"\s*\/?>/, `<link rel="canonical" href="https://biblequizcompetition.com${page.path}" />`);
-  } else {
-    html = html.replace('</head>', `<link rel="canonical" href="https://biblequizcompetition.com${page.path}" />\n</head>`);
-  }
+  // Social metadata
+  html = upsertMetaTag(html, 'property', 'og:title', page.title);
+  html = upsertMetaTag(html, 'property', 'og:description', page.description);
+  html = upsertMetaTag(html, 'property', 'og:url', pageUrl);
+  html = upsertMetaTag(html, 'name', 'twitter:title', page.title);
+  html = upsertMetaTag(html, 'name', 'twitter:description', page.description);
+  html = upsertMetaTag(html, 'name', 'twitter:url', pageUrl);
 
   // Add structured data
   if (page.structuredData) {
@@ -385,6 +417,109 @@ function generateStaticPages() {
     }
   }
   console.log(`Generated ${Object.values(bibleStructure).reduce((a, b) => a + b, 0)} chapter pages.`);
+
+  // Generate songs listing page
+  const songsListingPage = {
+    path: '/songs',
+    title: 'Christian Devotional Songs | Bible Quiz Competition',
+    description: 'Browse Christian devotional songs with lyrics and videos in Malayalam and other languages.',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Christian Devotional Songs",
+      "description": "A collection of Christian devotional song lyrics and videos.",
+      "url": "https://biblequizcompetition.com/songs"
+    },
+    content: `
+      <div class="min-h-screen bg-gray-50 pt-20">
+        <div class="container mx-auto px-4 py-8">
+          <h1 class="text-4xl font-bold text-gray-900 mb-4">Christian Devotional Songs</h1>
+          <p class="text-lg text-gray-600 mb-8">Read lyrics and watch worship songs. Browse our complete collection of devotional music.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            ${allSongs.slice(0, 60).map((song) => `
+              <a href="/songs/${song.slug}" class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                <h2 class="text-lg font-semibold text-gray-900">${escapeHtml(song.title)}</h2>
+                <p class="text-sm text-gray-600 mt-2">${escapeHtml(song.description)}</p>
+              </a>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `
+  };
+
+  const songsListingHtml = generateHTML(songsListingPage, templateHtml);
+  const songsListingPath = path.join(distDir, 'songs.html');
+  fs.writeFileSync(songsListingPath, songsListingHtml);
+  console.log(`Generated songs listing page: ${songsListingPath}`);
+
+  // Generate individual song pages
+  const songsDir = path.join(distDir, 'songs');
+  if (!fs.existsSync(songsDir)) {
+    fs.mkdirSync(songsDir, { recursive: true });
+  }
+
+  let generatedSongPages = 0;
+  for (const song of allSongs) {
+    if (!song.slug) {
+      continue;
+    }
+
+    const translationKeys = Object.keys(song.translations || {});
+    const primaryKey = song.translations?.malayalam ? 'malayalam' : translationKeys[0];
+    const primaryTranslation = primaryKey ? song.translations[primaryKey] : undefined;
+    const languageNames = translationKeys
+      .map((key) => song.translations[key]?.lang || key)
+      .filter(Boolean);
+    const firstLyricsBlock = primaryTranslation?.lyrics?.[0]?.lines || [];
+    const previewLyrics = firstLyricsBlock.slice(0, 2).join(' ');
+
+    const songPage = {
+      path: `/songs/${song.slug}`,
+      title: `${song.title} Lyrics | ${primaryTranslation?.lang || 'Christian Song'} | Bible Quiz Competition`,
+      description: `${song.description} Read lyrics and watch the song video.`,
+      structuredData: {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "MusicComposition",
+            "name": song.title,
+            "description": song.description,
+            "url": `https://biblequizcompetition.com/songs/${song.slug}`,
+            "inLanguage": languageNames
+          },
+          {
+            "@type": "WebPage",
+            "name": `${song.title} Lyrics`,
+            "url": `https://biblequizcompetition.com/songs/${song.slug}`,
+            "description": `${song.description} Read lyrics and watch the song video.`
+          }
+        ]
+      },
+      content: `
+        <div class="min-h-screen bg-gray-50 pt-20">
+          <div class="container mx-auto px-4 py-8">
+            <a href="/songs" class="text-blue-600 font-medium">&larr; Back to Songs</a>
+            <article class="max-w-4xl mt-4 bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+              <h1 class="text-3xl font-bold text-gray-900 mb-3">${escapeHtml(song.title)}</h1>
+              <p class="text-gray-600 mb-6">${escapeHtml(song.description)}</p>
+              <p class="text-sm text-gray-500 mb-4">Available in: ${escapeHtml(languageNames.join(', '))}</p>
+              <div class="bg-gray-50 border border-gray-100 rounded-lg p-4">
+                <h2 class="text-lg font-semibold text-gray-900 mb-2">Lyrics Preview</h2>
+                <p class="text-gray-700 leading-relaxed">${escapeHtml(previewLyrics || 'Open the full page to read complete lyrics and watch the song video.')}</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      `
+    };
+
+    const html = generateHTML(songPage, templateHtml);
+    const filePath = path.join(songsDir, `${song.slug}.html`);
+    fs.writeFileSync(filePath, html);
+    generatedSongPages += 1;
+  }
+  console.log(`Generated ${generatedSongPages} song pages.`);
 
   console.log('Static pages generation complete!');
 }

@@ -3,17 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { allSongs as songs } from "@/data/songs";
 import { Music, PlayCircle } from "lucide-react";
 import { useState, useMemo } from "react";
+import type { Song } from "@/data/songs";
+import englishSongsData from "@/data/english-songs.json";
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+const songs: Song[] = englishSongsData as Song[];
 
-const Songs = () => {
+const EnglishSongs = () => {
     const navigate = useNavigate();
     const [activeLetter, setActiveLetter] = useState<string | null>(null);
 
-    // Pre-compute letter counts and sorted/filtered songs
     const { letterCounts, filteredSongs, totalCount } = useMemo(() => {
         const counts: Record<string, number> = {};
         ALPHABET.forEach(l => counts[l] = 0);
@@ -24,9 +25,7 @@ const Songs = () => {
 
         sorted.forEach(song => {
             const firstChar = song.title.charAt(0).toUpperCase();
-            if (counts[firstChar] !== undefined) {
-                counts[firstChar]++;
-            }
+            if (counts[firstChar] !== undefined) counts[firstChar]++;
         });
 
         const filtered = activeLetter
@@ -39,12 +38,12 @@ const Songs = () => {
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
             <Helmet>
-                <title>Christian Devotional Songs | Bible Quiz Competition</title>
+                <title>English Christian Hymns & Worship Songs | Bible Quiz Competition</title>
                 <meta
                     name="description"
-                    content="Listen to and read lyrics of popular Christian Malayalam devotional songs. Worship with our curated collection."
+                    content="Browse 500+ classic English Christian hymns with lyrics and YouTube videos. Amazing Grace, How Great Thou Art, and more worship favorites."
                 />
-                <link rel="canonical" href="https://biblequizcompetition.com/songs" />
+                <link rel="canonical" href="https://biblequizcompetition.com/english-songs" />
             </Helmet>
 
             <Navigation />
@@ -52,29 +51,26 @@ const Songs = () => {
             <main className="flex-grow container mx-auto px-4 py-8">
                 <div className="text-center mb-8">
                     <h1 className="text-3xl md:text-5xl font-bold font-urbanist text-gray-900 mb-4">
-                        Devotional Songs
+                        English Christian Hymns
                     </h1>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Worship along with our collection of beautiful Christian devotional songs. Read lyrics, watch videos, and lift your spirit.
+                        Explore our collection of classic English Christian hymns and worship songs. Read lyrics, watch videos, and be inspired.
                     </p>
                 </div>
 
                 {/* A-Z Filter Bar */}
                 <div className="max-w-5xl mx-auto mb-8">
                     <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2">
-                        {/* "All" button */}
                         <button
                             onClick={() => setActiveLetter(null)}
-                            className={`
-                                flex flex-col items-center px-3 py-2 rounded-xl text-sm font-bold transition-all duration-200
+                            className={`flex flex-col items-center px-3 py-2 rounded-xl text-sm font-bold transition-all duration-200
                                 ${!activeLetter
-                                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 scale-105'
-                                    : 'bg-white text-gray-700 hover:bg-blue-50 hover:text-blue-600 border border-gray-200'
-                                }
-                            `}
+                                    ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 scale-105'
+                                    : 'bg-white text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 border border-gray-200'
+                                }`}
                         >
                             <span>All</span>
-                            <span className={`text-[10px] font-medium mt-0.5 ${!activeLetter ? 'text-blue-100' : 'text-gray-400'}`}>
+                            <span className={`text-[10px] font-medium mt-0.5 ${!activeLetter ? 'text-indigo-100' : 'text-gray-400'}`}>
                                 {totalCount}
                             </span>
                         </button>
@@ -89,19 +85,17 @@ const Songs = () => {
                                     key={letter}
                                     onClick={() => hasItems && setActiveLetter(letter)}
                                     disabled={!hasItems}
-                                    className={`
-                                        flex flex-col items-center min-w-[36px] px-2 py-2 rounded-xl text-sm font-bold transition-all duration-200
+                                    className={`flex flex-col items-center min-w-[36px] px-2 py-2 rounded-xl text-sm font-bold transition-all duration-200
                                         ${isActive
-                                            ? 'bg-blue-600 text-white shadow-lg shadow-blue-200 scale-105'
+                                            ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 scale-105'
                                             : hasItems
-                                                ? 'bg-white text-gray-700 hover:bg-blue-50 hover:text-blue-600 border border-gray-200 cursor-pointer'
+                                                ? 'bg-white text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 border border-gray-200 cursor-pointer'
                                                 : 'bg-gray-100 text-gray-300 border border-gray-100 cursor-not-allowed'
-                                        }
-                                    `}
+                                        }`}
                                 >
                                     <span>{letter}</span>
                                     <span className={`text-[10px] font-medium mt-0.5 ${
-                                        isActive ? 'text-blue-100' : hasItems ? 'text-gray-400' : 'text-gray-300'
+                                        isActive ? 'text-indigo-100' : hasItems ? 'text-gray-400' : 'text-gray-300'
                                     }`}>
                                         {count}
                                     </span>
@@ -111,13 +105,12 @@ const Songs = () => {
                     </div>
                 </div>
 
-                {/* Results count */}
                 <div className="max-w-7xl mx-auto mb-6">
                     <p className="text-sm text-gray-500 font-medium">
                         {activeLetter ? (
-                            <>Showing <span className="text-blue-600 font-bold">{filteredSongs.length}</span> songs starting with "{activeLetter}"</>
+                            <>Showing <span className="text-indigo-600 font-bold">{filteredSongs.length}</span> hymns starting with "{activeLetter}"</>
                         ) : (
-                            <>Showing all <span className="text-blue-600 font-bold">{totalCount}</span> songs</>
+                            <>Showing all <span className="text-indigo-600 font-bold">{totalCount}</span> hymns</>
                         )}
                     </p>
                 </div>
@@ -127,26 +120,33 @@ const Songs = () => {
                         <Card
                             key={song.slug}
                             className="group cursor-pointer hover:shadow-xl transition-all duration-300 border-none bg-white overflow-hidden"
-                            onClick={() => navigate(`/songs/${song.slug}`)}
+                            onClick={() => navigate(`/english-songs/${song.slug}`)}
                         >
-                            <div className="relative h-48 bg-gray-900 flex items-center justify-center overflow-hidden">
+                            <div className="relative h-48 bg-gradient-to-br from-indigo-900 to-purple-900 flex items-center justify-center overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
-                                <img
-                                    src={`https://img.youtube.com/vi/${song.videoUrl.split('/').pop()}/hqdefault.jpg`}
-                                    alt={song.title}
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80"
-                                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                                />
+                                {song.videoUrl ? (
+                                    <img
+                                        src={`https://img.youtube.com/vi/${song.videoUrl.split('/').pop()}/hqdefault.jpg`}
+                                        alt={song.title}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80"
+                                        onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                                    />
+                                ) : null}
                                 <PlayCircle className="w-12 h-12 text-white/90 absolute z-20 group-hover:scale-110 transition-transform" />
                             </div>
 
                             <CardContent className="p-6">
                                 <div className="flex items-start gap-3 mb-3">
-                                    <Music className="w-5 h-5 text-blue-600 mt-1 flex-shrink-0" />
-                                    <h3 className="text-xl font-bold font-urbanist text-gray-900 leading-tight group-hover:text-blue-600 transition-colors">
+                                    <Music className="w-5 h-5 text-indigo-600 mt-1 flex-shrink-0" />
+                                    <h3 className="text-xl font-bold font-urbanist text-gray-900 leading-tight group-hover:text-indigo-600 transition-colors">
                                         {song.title}
                                     </h3>
                                 </div>
+                                {(song as any).category && (
+                                    <span className="inline-block text-xs bg-indigo-50 text-indigo-600 px-2 py-1 rounded-full ml-8 mb-2">
+                                        {(song as any).category}
+                                    </span>
+                                )}
                                 <p className="text-sm text-gray-500 line-clamp-2 pl-8">
                                     {song.description}
                                 </p>
@@ -161,4 +161,4 @@ const Songs = () => {
     );
 };
 
-export default Songs;
+export default EnglishSongs;
