@@ -107,21 +107,34 @@ function generateSitemap() {
     });
   });
 
-  // Programmatic Chapter Quizzes (Optional but good for SEO depth)
+  // Bible Questions and Answers Hub (Chapter and Range Quizzes)
   for (const [book, chapters] of Object.entries(bibleStructure)) {
-    // Add first chapter of every book as it's the most searched
-    urls.push({
-      loc: `/bible-questions-and-answers-hub/${book}/chapter-1`,
-      priority: '0.7',
-      changefreq: 'monthly'
-    });
-    
-    // Also include the legacy public-quiz paths if needed
-    urls.push({
-      loc: `/public-quiz/${book}/chapter-1`,
-      priority: '0.6',
-      changefreq: 'monthly'
-    });
+    // 1. Chapters (ch1-beginner, ch1-advanced, etc.)
+    for (let i = 1; i <= (chapters as number); i++) {
+        ['beginner', 'advanced'].forEach(diff => {
+            urls.push({
+                loc: `/bible-questions-and-answers-hub/${book}/ch${i}-${diff}`,
+                priority: '0.6',
+                changefreq: 'monthly'
+            });
+        });
+    }
+
+    // 2. Ranges (ch1-12-beginner, etc.) - Match GenericBookHub logic
+    const numRanges = Math.ceil((chapters as number) / 12);
+    for (let i = 0; i < numRanges; i++) {
+        const start = i * 12 + 1;
+        const end = Math.min((i + 1) * 12, (chapters as number));
+        const range = `${start}-${end}`;
+        
+        ['beginner', 'advanced'].forEach(diff => {
+            urls.push({
+                loc: `/bible-questions-and-answers-hub/${book}/ch${range}-${diff}`,
+                priority: '0.7',
+                changefreq: 'monthly'
+            });
+        });
+    }
   }
 
   // Generate XML sitemap
