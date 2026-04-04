@@ -12,13 +12,25 @@ export default function ChapterQuizPage() {
 
   // Robustly parse the quizId (e.g., "ch1-beginner", "ch1-intermediate" or "ch1-11-advanced")
   // Format: ch[id]-[difficulty]
+  // Robustly parse the quizId (e.g., "ch1-beginner", "ch1-11-advanced", or just "beginner")
+  let id = "foundation";
+  let difficulty = "beginner";
+
   const match = quizId?.match(/^ch(.+)-(beginner|intermediate|advanced)$/i);
-  const id = match ? match[1] : "";
-  const difficulty = match ? match[2].toLowerCase() : "beginner";
+  if (match) {
+    id = match[1];
+    difficulty = match[2].toLowerCase();
+  } else if (quizId?.match(/^(beginner|intermediate|advanced)$/i)) {
+    difficulty = quizId.toLowerCase();
+  }
 
   const bookQuizzes = quizData[bookKey as keyof typeof quizData];
-  const chapterQuizzes = bookQuizzes ? (bookQuizzes[id as unknown as number] || bookQuizzes[id as string]) : null;
-  const questions = chapterQuizzes ? (chapterQuizzes as any)[difficulty] : null;
+  const chapterQuizzes = bookQuizzes 
+    ? (bookQuizzes[id as unknown as number] || bookQuizzes[id as string] || bookQuizzes["foundation"]) 
+    : null;
+  const questions = chapterQuizzes 
+    ? ((chapterQuizzes as any)[difficulty] || (chapterQuizzes as any)["beginner"]) 
+    : null;
 
   if (!questions) {
     const bookNameFormatted = book?.charAt(0).toUpperCase() + book?.slice(1);

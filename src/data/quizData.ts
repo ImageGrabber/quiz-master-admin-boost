@@ -127,6 +127,267 @@ export const quizData: QuizData = {
       ]
     }
   },
+  leviticus: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "What is the primary theme of the book of Leviticus?", options: ["Wandering", "Holiness", "History", "Fasting"], answer: 1, explanation: "Leviticus 19:2 — 'You shall be holy, for I the LORD your God am holy.'" },
+        { chapter: 16, question: "What is the name of the special day where the High Priest enters the Most Holy Place to make atonement for the people?", options: ["Passover", "Day of Atonement (Yom Kippur)", "Purim", "Feast of Booths"], answer: 1, explanation: "Leviticus 16 describes the Day of Atonement rituals." },
+        { chapter: 11, question: "The laws in Leviticus regarding clean and unclean animals are commonly known as what?", options: ["Sabbath laws", "Dietary (Kosher) laws", "Sacrificial laws", "Levitical decorum"], answer: 1, explanation: "Leviticus 11 outlines which animals are clean and unclean for food." }
+      ]
+    }
+  },
+  numbers: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "Why is the book of Numbers called by its name?", options: ["Because of God's many promises", "Because of the two census (numberings) of the people", "Because of the number of years in Egypt", "Because of the 10 commandments"], answer: 1, explanation: "Numbers records two major census takings of the Israelites." },
+        { chapter: 13, question: "How many spies were sent by Moses to explore the land of Canaan?", options: ["2", "10", "12", "70"], answer: 2, explanation: "Numbers 13:1-16 — Moses sent 12 leaders, one from each tribe." },
+        { chapter: 21, question: "What did Moses lift up on a pole so that whoever looked at it would live after being bitten by snakes?", options: ["A golden calf", "A bronze serpent", "A wooden cross", "A stone tablet"], answer: 1, explanation: "Numbers 21:8-9 — 'Moses made a bronze serpent and set it on a pole...'" }
+      ]
+    }
+  },
+  deuteronomy: {
+    foundation: {
+      beginner: [
+        { chapter: 6, question: "The famous command 'Hear, O Israel: The LORD our God, the LORD is one' is known as what?", options: ["The Shema", "The Decalogue", "The Covenant", "The Benediction"], answer: 0, explanation: "Deuteronomy 6:4 is the core of the Shema." },
+        { chapter: 34, question: "On which mountain did Moses die after seeing the Promised Land from a distance?", options: ["Mount Sinai", "Mount Nebo", "Mount Ararat", "Mount Carmel"], answer: 1, explanation: "Deuteronomy 34:1-5 — Moses died on Mount Nebo in the land of Moab." }
+      ]
+    }
+  },
+  joshua: {
+    foundation: {
+      beginner: [
+        { chapter: 6, question: "What city's walls fell down after the Israelites marched around them for seven days?", options: ["Ai", "Gaza", "Jericho", "Jerusalem"], answer: 2, explanation: "Joshua 6 describes the fall of Jericho." },
+        { chapter: 2, question: "Who was the woman in Jericho who hid the two spies sent by Joshua?", options: ["Deborah", "Rahab", "Ruth", "Delilah"], answer: 1, explanation: "Joshua 2 — Rahab the prostitute hid the spies." }
+      ]
+    }
+  },
+  judges: {
+    foundation: {
+      beginner: [
+        { chapter: 16, question: "Which judge had extraordinary strength because of his hair?", options: ["Gideon", "Samson", "Ehud", "Barak"], answer: 1, explanation: "Judges 13-16 tells the story of Samson." },
+        { chapter: 4, question: "Who was the only female judge mentioned in the book of Judges?", options: ["Jael", "Deborah", "Naomi", "Esther"], answer: 1, explanation: "Judges 4-5 tells the story of Deborah." }
+      ]
+    }
+  },
+  ruth: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "Who was Ruth's mother-in-law whom she refused to leave?", options: ["Orpah", "Naomi", "Hannah", "Sarah"], answer: 1, explanation: "Ruth 1:16 — 'But Ruth said, \"Do not urge me to leave you...\"'" },
+        { chapter: 4, question: "Who was the 'kinsman-redeemer' that married Ruth?", options: ["David", "Boaz", "Jesse", "Salmon"], answer: 1, explanation: "Ruth 4 — Boaz married Ruth." }
+      ]
+    }
+  },
+  "1-samuel": {
+    foundation: {
+      beginner: [
+        { chapter: 17, question: "Which young shepherd defeated the giant Goliath?", options: ["Saul", "Jonathan", "David", "Eliab"], answer: 2, explanation: "1 Samuel 17 — David defeated Goliath with a sling and a stone." },
+        { chapter: 3, question: "Who was the boy prophet that was called by God in the middle of the night while serving Eli?", options: ["Samuel", "Nathan", "Elisha", "Jeremiah"], answer: 0, explanation: "1 Samuel 3 — The LORD called Samuel." }
+      ]
+    }
+  },
+  "2-samuel": {
+    foundation: {
+      beginner: [
+        { chapter: 5, question: "Which city did David capture and make the capital of Israel?", options: ["Hebron", "Jerusalem", "Bethlehem", "Samaria"], answer: 1, explanation: "2 Samuel 5 — David captured the stronghold of Zion (Jerusalem)." }
+      ]
+    }
+  },
+  "1-kings": {
+    foundation: {
+      beginner: [
+        { chapter: 3, question: "What did Solomon ask God for when offered anything he wanted?", options: ["Wealth", "Long life", "Wisdom", "Victory in war"], answer: 2, explanation: "1 Kings 3:9 — 'Give your servant therefore an understanding mind...'" }
+      ]
+    }
+  },
+  "2-kings": {
+    foundation: {
+      beginner: [
+        { chapter: 2, question: "How did the prophet Elijah depart from this world?", options: ["He died of old age", "He was taken up in a whirlwind", "He was killed in battle", "He disappeared in a cave"], answer: 1, explanation: "2 Kings 2:11 — 'And Elijah went up by a whirlwind into heaven.'" }
+      ]
+    }
+  },
+  "1-chronicles": {
+    foundation: {
+      beginner: [
+        { chapter: 29, question: "Who was the king that prepared the resources for the first Temple but was not allowed to build it?", options: ["Saul", "David", "Solomon", "Hezekiah"], answer: 1, explanation: "1 Chronicles 22, 29 — David prepared resources but Solomon built it." }
+      ]
+    }
+  },
+  "2-chronicles": {
+    foundation: {
+      beginner: [
+        { chapter: 7, question: "Complete the verse: 'If my people, who are called by my name, ______ themselves and pray...'", options: ["Exalt", "Humble", "Purify", "Prepare"], answer: 1, explanation: "2 Chronicles 7:14 — 'if my people... humble themselves and pray...'" }
+      ]
+    }
+  },
+  ezra: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "Which Persian king issued the decree allowing the Jews to return and rebuild the Temple?", options: ["Cyrus", "Darius", "Artaxerxes", "Xerxes"], answer: 0, explanation: "Ezra 1:1-3 — Cyrus king of Persia made a proclamation." }
+      ]
+    }
+  },
+  esther: {
+    foundation: {
+      beginner: [
+        { chapter: 4, question: "Mordecai told Esther she may have been chosen as Queen for what reason?", options: ["For her beauty", "For such a time as this", "To live in luxury", "To travel the world"], answer: 1, explanation: "Esther 4:14 — '...who knows whether you have not come to the kingdom for such a time as this?'" }
+      ]
+    }
+  },
+  job: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "How does the Bible describe Job's character at the beginning of the book?", options: ["Rich and powerful", "Blameless and upright", "Patient and kind", "A great king"], answer: 1, explanation: "Job 1:1 — '...that man was blameless and upright...'" }
+      ]
+    }
+  },
+  psalms: {
+    foundation: {
+      beginner: [
+        { chapter: 23, question: "Complete the famous opening to Psalm 23: 'The LORD is my ______, I shall not want.'", options: ["King", "Shepherd", "Rock", "Shield"], answer: 1, explanation: "Psalm 23:1 — 'The LORD is my shepherd; I shall not want.'" }
+      ]
+    }
+  },
+  proverbs: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "What is called 'the beginning of knowledge' in Proverbs?", options: ["Hard work", "The fear of the LORD", "Reading books", "Listening to elders"], answer: 1, explanation: "Proverbs 1:7 — 'The fear of the LORD is the beginning of knowledge.'" }
+      ]
+    }
+  },
+  ecclesiastes: {
+    foundation: {
+      beginner: [
+        { chapter: 3, question: "According to Ecclesiastes 3, what is there for every matter under heaven?", options: ["A reason", "A season (and a time)", "A consequence", "A reward"], answer: 1, explanation: "Ecclesiastes 3:1 — 'For everything there is a season, and a time for every matter under heaven.'" }
+      ]
+    }
+  },
+  "song-of-solomon": {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "What is the primary theme of the Song of Solomon?", options: ["Wisdom", "Love and marriage", "History", "Prophecy"], answer: 1, explanation: "Song of Solomon is a poetic celebration of romantic love." }
+      ]
+    }
+  },
+  isaiah: {
+    foundation: {
+      beginner: [
+        { chapter: 6, question: "What was Isaiah's response when he heard the Lord ask, 'Whom shall I send'?", options: ["'Send my brother'", "'I am not worthy'", "'Here I am! Send me.'", "'I will go tomorrow'"], answer: 2, explanation: "Isaiah 6:8 — 'Then I said, \"Here I am! Send me.\"' " }
+      ]
+    }
+  },
+  jeremiah: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "Jeremiah is often known by what nickname due to his sorrow for Israel?", options: ["The Silent Prophet", "The Weeping Prophet", "The Angry Prophet", "The Joyful Prophet"], answer: 1, explanation: "Jeremiah wept deeply over the destruction of Jerusalem." }
+      ]
+    }
+  },
+  lamentations: {
+    foundation: {
+      beginner: [
+        { chapter: 3, question: "In the middle of his grief, the author says God's mercies are what every morning?", options: ["New", "Gone", "Hidden", "Strong"], answer: 0, explanation: "Lamentations 3:22-23 — 'his mercies... they are new every morning.'" }
+      ]
+    }
+  },
+  ezekiel: {
+    foundation: {
+      beginner: [
+        { chapter: 37, question: "In a famous vision, Ezekiel saw a valley full of what?", options: ["Gold", "Dry bones", "Living water", "Fruit trees"], answer: 1, explanation: "Ezekiel 37 — The vision of the Valley of Dry Bones." }
+      ]
+    }
+  },
+  daniel: {
+    foundation: {
+      beginner: [
+        { chapter: 6, question: "Where was Daniel thrown because he refused to stop praying to God?", options: ["A fiery furnace", "A dark dungeon", "A lions' den", "Into the sea"], answer: 2, explanation: "Daniel 6 describes Daniel in the lions' den." }
+      ]
+    }
+  },
+  hosea: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "God told Hosea to marry an unfaithful woman as a symbol of what?", options: ["Israel's unfaithfulness to God", "Economic hardship", "The end of the world", "A new covenant"], answer: 0, explanation: "Hosea 1-3 uses his marriage as a metaphor for Israel's relationship with God." }
+      ]
+    }
+  },
+  joel: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "Joel uses a plague of what insects to warn about the Day of the Lord?", options: ["Flies", "Gnats", "Locusts", "Bees"], answer: 2, explanation: "Joel 1 describes a devastating locust plague." }
+      ]
+    }
+  },
+  amos: {
+    foundation: {
+      beginner: [
+        { chapter: 5, question: "Amos famously called for justice to roll down like what?", options: ["A mountain", "Waters", "Thunder", "Fire"], answer: 1, explanation: "Amos 5:24 — 'But let justice roll down like waters...'" }
+      ]
+    }
+  },
+  obadiah: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "The book of Obadiah is a prophecy against which nation?", options: ["Egypt", "Edom", "Assyria", "Moab"], answer: 1, explanation: "Obadiah is a short prophecy specifically against Edom." }
+      ]
+    }
+  },
+  jonah: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "What swallowed Jonah after he was thrown overboard while fleeing from God?", options: ["A giant shark", "A great fish", "A whirlpool", "A sea dragon"], answer: 1, explanation: "Jonah 1:17 — 'the LORD appointed a great fish to swallow up Jonah.'" }
+      ]
+    }
+  },
+  micah: {
+    foundation: {
+      beginner: [
+        { chapter: 5, question: "Which small town did Micah prophesy would be the birthplace of the Messiah?", options: ["Jerusalem", "Nazareth", "Bethlehem", "Capernaum"], answer: 2, explanation: "Micah 5:2 — 'But you, O Bethlehem Ephrathah...'" }
+      ]
+    }
+  },
+  nahum: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "Nahah's prophecy focuses on the fall of which great city?", options: ["Babylon", "Nineveh", "Tyre", "Sidon"], answer: 1, explanation: "Nahum prophesies the destruction of Nineveh." }
+      ]
+    }
+  },
+  habakkuk: {
+    foundation: {
+      beginner: [
+        { chapter: 2, question: "Finish the verse: 'the righteous shall live by his ______.'", options: ["Works", "Faith", "Strength", "Wisdom"], answer: 1, explanation: "Habakkuk 2:4 — '...but the righteous shall live by his faith.'" }
+      ]
+    }
+  },
+  zephaniah: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "What is the major theme of Zephaniah?", options: ["The Day of the LORD", "The Exodus", "The Flood", "The Temple"], answer: 0, explanation: "Zephaniah repeatedly warns about the coming Day of the LORD." }
+      ]
+    }
+  },
+  haggai: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "What did Haggai encourage the returned exiles to finish building?", options: ["The city walls", "The Temple", "The market", "The palace"], answer: 1, explanation: "Haggai 1 — Aggai urged the people to rebuild the house of the LORD." }
+      ]
+    }
+  },
+  zechariah: {
+    foundation: {
+      beginner: [
+        { chapter: 9, question: "Zechariah prophesied the King coming to Jerusalem riding on what animal?", options: ["A horse", "A donkey", "A camel", "A chariot"], answer: 1, explanation: "Zechariah 9:9 — '...humble and mounted on a donkey...'" }
+      ]
+    }
+  },
+  malachi: {
+    foundation: {
+      beginner: [
+        { chapter: 3, question: "Malachi prophesied the coming of a messenger to prepare the way, often identified with whom?", options: ["John the Baptist", "Elijah", "Moses", "David"], answer: 0, explanation: "Malachi 3:1 is seen as a prophecy of John the Baptist preparing the way for Jesus." }
+      ]
+    }
+  },
   nehemiah: {
     "1-13": {
       beginner: [
@@ -150,13 +411,17 @@ export const quizData: QuizData = {
     }
   },
   matthew: {
-    1: {
+    foundation: {
       beginner: [
-        { chapter: 1, question: "Who was the earthly father of Joseph?", options: ["Jacob", "Isaac", "David", "Solomon"], answer: 0, explanation: "Matthew 1:16 — 'and Jacob the father of Joseph the husband of Mary, of whom Jesus was born...'" },
-        { chapter: 1, question: "What does the name 'Immanuel' mean?", options: ["God is great", "God with us", "God saves", "Prince of Peace"], answer: 1, explanation: "Matthew 1:23 — '...and they shall call his name Immanuel' (which means, God with us)." }
+        { chapter: 5, question: "What is the collective name for the blessings Jesus gave at the start of the Sermon on the Mount?", options: ["The Commandments", "The Beatitudes", "The Parables", "The Epistles"], answer: 1, explanation: "Matthew 5:1-12 contains the Beatitudes." }
       ]
     },
-    // Adding 1-28 Matthew Foundation
+    1: {
+      beginner: [
+        { chapter: 1, question: "Who was the earthly father of Joseph?", options: ["Jacob", "Isaac", "David", "Solomon"], answer: 0, explanation: "Matthew 1:16 — 'and Jacob the father of Joseph...'" },
+        { chapter: 1, question: "What does the name 'Immanuel' mean?", options: ["God is great", "God with us", "God saves", "Prince of Peace"], answer: 1, explanation: "Matthew 1:23 — '...which means, God with us.'" }
+      ]
+    },
     "1-28": {
       beginner: [
         { chapter: 5, question: "What is the collective name for the blessings Jesus gave at the start of the Sermon on the Mount?", options: ["The Commandments", "The Beatitudes", "The Parables", "The Epistles"], answer: 1, explanation: "Matthew 5:1-12 contains the Beatitudes ('Blessed are the...')." },
@@ -165,18 +430,199 @@ export const quizData: QuizData = {
       ]
     }
   },
-  romans: {
-    1: {
+  mark: {
+    foundation: {
       beginner: [
-        { chapter: 1, question: "Who wrote the Book of Romans?", options: ["Peter", "John", "Paul", "James"], answer: 2, explanation: "Romans 1:1 — 'Paul, a servant of Christ Jesus, called to be an apostle...'" },
-        { chapter: 1, question: "Paul says the gospel is the ______ of God for salvation.", options: ["Word", "Power", "Gift", "Love"], answer: 1, explanation: "Romans 1:16 — 'For I am not ashamed of the gospel, for it is the power of God for salvation to everyone who believes...'" }
+        { chapter: 1, question: "Mark opens his gospel with the ministry of which person?", options: ["John the Baptist", "Jesus", "Peter", "The Magi"], answer: 0, explanation: "Mark 1:1-4 begins with John the Baptist in the wilderness." }
+      ]
+    }
+  },
+  luke: {
+    foundation: {
+      beginner: [
+        { chapter: 2, question: "In which city was Jesus born, according to Luke's account?", options: ["Nazareth", "Jerusalem", "Bethlehem", "Hebron"], answer: 2, explanation: "Luke 2:4-7 — Joseph and Mary went to the city of David, which is called Bethlehem." }
+      ]
+    }
+  },
+  john: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "How does John's gospel refer to Jesus in the very first verse?", options: ["The Messiah", "The Son of Man", "The Word", "The Light"], answer: 2, explanation: "John 1:1 — 'In the beginning was the Word, and the Word was with God...'" }
+      ]
+    }
+  },
+  acts: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "What event occurred 40 days after Jesus' resurrection, as described in Acts 1?", options: ["The Ascension", "The Crucifixion", "The Pentecost", "The Baptism"], answer: 0, explanation: "Acts 1:9-11 — Jesus was taken up into heaven." },
+        { chapter: 9, question: "Who was famously converted on the road to Damascus after seeing a bright light?", options: ["Peter", "Saul (Paul)", "Stephen", "Barnabas"], answer: 1, explanation: "Acts 9 describes Saul's vision and conversion." }
+      ]
+    }
+  },
+  romans: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "Who wrote the Book of Romans?", options: ["Peter", "John", "Paul", "James"], answer: 2, explanation: "Romans 1:1 — 'Paul, a servant of Christ Jesus...'" }
       ]
     },
-    // Adding 1-16 Romans Foundation
+    1: {
+      beginner: [
+        { chapter: 1, question: "Who wrote the Book of Romans?", options: ["Peter", "John", "Paul", "James"], answer: 2, explanation: "Romans 1:1 — 'Paul, a servant of Christ Jesus...'" },
+        { chapter: 1, question: "Paul says the gospel is the ______ of God for salvation.", options: ["Word", "Power", "Gift", "Love"], answer: 1, explanation: "Romans 1:16 — 'For I am not ashamed of the gospel... it is the power of God for salvation...'" }
+      ]
+    },
     "1-16": {
       beginner: [
         { chapter: 3, question: "Fill in the blank: 'For all have ______ and fall short of the glory of God.'", options: ["Failed", "Sinned", "Lied", "Forgotten"], answer: 1, explanation: "Romans 3:23 — 'for all have sinned and fall short of the glory of God.'" },
-        { chapter: 8, question: "Paul states that 'all things work together for ______' to those who love God.", options: ["Wealth", "Good", "Success", "Peace"], answer: 1, explanation: "Romans 8:28 — 'And we know that for those who love God all things work together for good...'" }
+        { chapter: 8, question: "Paul states that 'all things work together for ______' to those who love God.", options: ["Wealth", "Good", "Success", "Peace"], answer: 1, explanation: "Romans 8:28 — '...work together for good...'" }
+      ]
+    }
+  },
+  "1-corinthians": {
+    foundation: {
+      beginner: [
+        { chapter: 13, question: "What is the primary topic of the famous 'Love Chapter' in 1 Corinthians?", options: ["Faith", "Hope", "Love", "Wisdom"], answer: 2, explanation: "1 Corinthians 13 is commonly referred to as the Love Chapter." }
+      ]
+    }
+  },
+  "2-corinthians": {
+    foundation: {
+      beginner: [
+        { chapter: 12, question: "Paul says God told him, 'My ______ is sufficient for you, for my power is made perfect in weakness.'", options: ["Strength", "Love", "Grace", "Peace"], answer: 2, explanation: "2 Corinthians 12:9 — '...My grace is sufficient for you...'" }
+      ]
+    }
+  },
+  galatians: {
+    foundation: {
+      beginner: [
+        { chapter: 5, question: "What is the collective name for the qualities such as love, joy, and peace described in Galatians 5?", options: ["The Gifts of the Spirit", "The Fruit of the Spirit", "The Laws of God", "The Beatitudes"], answer: 1, explanation: "Galatians 5:22-23 lists the Fruit of the Spirit." }
+      ]
+    }
+  },
+  ephesians: {
+    foundation: {
+      beginner: [
+        { chapter: 6, question: "In Ephesians 6, Paul tells believers to put on what for spiritual protection?", options: ["The Armor of God", "The Robe of Righteousness", "The Sandal of Peace", "The Crown of Life"], answer: 0, explanation: "Ephesians 6:11-17 describes the Full Armor of God." }
+      ]
+    }
+  },
+  philippians: {
+    foundation: {
+      beginner: [
+        { chapter: 4, question: "Complete the verse: 'I can do all things through ______ who strengthens me.'", options: ["Love", "Faith", "Him (Christ)", "Prayer"], answer: 2, explanation: "Philippians 4:13 — 'I can do all things through him who strengthens me.'" }
+      ]
+    }
+  },
+  colossians: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "Paul emphasizes that Jesus is the image of the ______ God.", options: ["Eternal", "Invisible", "Almighty", "Holy"], answer: 1, explanation: "Colossians 1:15 — 'He is the image of the invisible God...'" }
+      ]
+    }
+  },
+  "1-thessalonians": {
+    foundation: {
+      beginner: [
+        { chapter: 5, question: "Complete the shortest verse in the Bible (in some versions): '______ always.'", options: ["Pray", "Rejoice", "Love", "Believe"], answer: 1, explanation: "1 Thessalonians 5:16 — 'Rejoice always.'" }
+      ]
+    }
+  },
+  "2-thessalonians": {
+    foundation: {
+      beginner: [
+        { chapter: 3, question: "What was Paul's rule about work in 2 Thessalonians?", options: ["Work only 6 days", "If anyone is not willing to work, let him not eat", "Work for the Lord", "Do not work on the Sabbath"], answer: 1, explanation: "2 Thessalonians 3:10 — 'If anyone is not willing to work, let him not eat.'" }
+      ]
+    }
+  },
+  "1-timothy": {
+    foundation: {
+      beginner: [
+        { chapter: 6, question: "What does Paul call 'a root of all kinds of evils'?", options: ["Money", "The love of money", "Pride", "Lies"], answer: 1, explanation: "1 Timothy 6:10 — 'For the love of money is a root of all kinds of evils.'" }
+      ]
+    }
+  },
+  "2-timothy": {
+    foundation: {
+      beginner: [
+        { chapter: 3, question: "Paul says that all Scripture is ______ by God and profitable for teaching.", options: ["Written", "Breathed (Inspired)", "Created", "Sent"], answer: 1, explanation: "2 Timothy 3:16 — 'All Scripture is breathed out by God...'" }
+      ]
+    }
+  },
+  titus: {
+    foundation: {
+      beginner: [
+        { chapter: 2, question: "Titus was left on which island to appoint elders in every town?", options: ["Cyprus", "Malta", "Crete", "Patmos"], answer: 2, explanation: "Titus 1:5 — 'This is why I left you in Crete...'" }
+      ]
+    }
+  },
+  philemon: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "Who was the runaway slave whom Paul asks Philemon to welcome back as a brother?", options: ["Onesimus", "Tychicus", "Timothy", "Epaphras"], answer: 0, explanation: "The letter of Philemon is an appeal for the runaway slave Onesimus." }
+      ]
+    }
+  },
+  hebrews: {
+    foundation: {
+      beginner: [
+        { chapter: 11, question: "Hebrews 11 is famous for listing historical figures of what quality?", options: ["Wisdom", "Strength", "Faith", "Patience"], answer: 2, explanation: "Hebrews 11 is often called the 'Hall of Faith'." }
+      ]
+    }
+  },
+  james: {
+    foundation: {
+      beginner: [
+        { chapter: 2, question: "James famously states that 'faith by itself, if it does not have ______, is dead.'", options: ["Hope", "Love", "Works", "Prayer"], answer: 2, explanation: "James 2:17 — 'So also faith by itself, if it does not have works, is dead.'" }
+      ]
+    }
+  },
+  "1-peter": {
+    foundation: {
+      beginner: [
+        { chapter: 5, question: "Complete the instruction: 'casting all your ______ on Him, because He cares for you.'", options: ["Sins", "Anxieties (Cares)", "Hopes", "Needs"], answer: 1, explanation: "1 Peter 5:7 — 'casting all your anxieties on him, because he cares for you.'" }
+      ]
+    }
+  },
+  "2-peter": {
+    foundation: {
+      beginner: [
+        { chapter: 3, question: "Peter says that with the Lord, one day is as how many years?", options: ["100", "1,000", "10,000", "Infinite"], answer: 1, explanation: "2 Peter 3:8 — '...with the Lord one day is as a thousand years...'" }
+      ]
+    }
+  },
+  "1-john": {
+    foundation: {
+      beginner: [
+        { chapter: 4, question: "What famous three-word definition of God is found in 1 John 4?", options: ["God is Holy", "God is Love", "God is Spirit", "God is Light"], answer: 1, explanation: "1 John 4:8, 16 — 'God is love.'" }
+      ]
+    }
+  },
+  "2-john": {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "What is the primary commandment emphasized in 2 John?", options: ["Go and baptize", "Walk in love", "Observe the Sabbath", "Fast and pray"], answer: 1, explanation: "2 John 1:5-6 — 'And now I ask you... that we love one another... this is love, that we walk according to his commandments.'" }
+      ]
+    }
+  },
+  "3-john": {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "To whom is the third letter of John addressed?", options: ["Gaius", "Theophilus", "Timothy", "The Elect Lady"], answer: 0, explanation: "3 John 1:1 — 'The elder to the beloved Gaius...'" }
+      ]
+    }
+  },
+  jude: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "What does Jude urge believers to 'contend earnestly' for?", options: ["The land", "The faith", "The truth", "The law"], answer: 1, explanation: "Jude 1:3 — '...I found it necessary to write appealing to you to contend for the faith...'" }
+      ]
+    }
+  },
+  revelation: {
+    foundation: {
+      beginner: [
+        { chapter: 1, question: "To whom was the vision of Revelation given on the island of Patmos?", options: ["Peter", "John", "Paul", "Stephen"], answer: 1, explanation: "Revelation 1:9 — 'I, John, your brother... was on the island called Patmos...'" },
+        { chapter: 22, question: "What is the very last word of the Bible?", options: ["Amen", "Forever", "Life", "Victory"], answer: 0, explanation: "Revelation 22:21 — 'The grace of the Lord Jesus be with all. Amen.'" }
       ]
     }
   }
