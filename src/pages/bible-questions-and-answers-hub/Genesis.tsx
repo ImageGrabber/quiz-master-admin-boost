@@ -2,7 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { useState, useMemo, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { BookOpen, Layers, Swords, ListOrdered, Brain, Home, ChevronRight, Search, Menu } from "lucide-react";
+import SEO from "@/components/SEO";
 
 export default function GenesisHub() {
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ export default function GenesisHub() {
     }
   }, [mobileMenuOpen]);
 
-  const chapterNumbers = [1, 2, 3, 4, 5, 6, 7, 8];
+  const chapterNumbers = Array.from({ length: 50 }, (_, i) => i + 1);
   const filteredChapters = useMemo(() => {
     if (!query.trim()) return chapterNumbers;
     const q = query.replace(/[^0-9]/g, "");
@@ -176,412 +178,214 @@ export default function GenesisHub() {
     ],
   };
 
+  const chapterPoints25to36: Record<number, string[]> = {
+    25: ["Death of Abraham", "Ishmael's genealogy", "Birth of Jacob and Esau"],
+    26: ["Isaac in Gerar", "Covenant with Abimelech", "Esau's wives"],
+    27: ["Jacob steals Esau's blessing", "Esau's anger", "Jacob flees to Laban"],
+    28: ["Jacob's ladder dream", "God's promise at Bethel", "Jacob's vow"],
+    29: ["Jacob meets Rachel", "Jacob serves Laban", "Marriage to Leah and Rachel"],
+    30: ["Jacob's children", "Jacob's flocks increase", "Prosperity in Haran"],
+    31: ["Jacob flees from Laban", "Laban pursues Jacob", "Covenant at Mizpah"],
+    32: ["Jacob prepares to meet Esau", "Jacob wrestles with God", "Name changed to Israel"],
+    33: ["Jacob and Esau reconcile", "Jacob settles in Shechem", "Building an altar"],
+    34: ["The defilement of Dinah", "Revenge of Simeon and Levi", "Trouble in Shechem"],
+    35: ["Return to Bethel", "Death of Rachel and Isaac", "Benjamin's birth"],
+    36: ["Esau's genealogy", "Chiefs of Edom", "The land of Seir"],
+  };
+
+  const chapterPoints37to50: Record<number, string[]> = {
+    37: ["Joseph's dreams", "Sold into slavery", "Jacob's mourning"],
+    38: ["Judah and Tamar", "Birth of Perez and Zerah", "Family lineage"],
+    39: ["Joseph in Potiphar's house", "Potiphar's wife's accusation", "Joseph in prison"],
+    40: ["The cupbearer and baker", "Joseph interprets dreams", "Forgotten in prison"],
+    41: ["Pharaoh's dreams", "Joseph becomes ruler", "The gathering of grain"],
+    42: ["Joseph's brothers in Egypt", "First meeting in Egypt", "The return for Benjamin"],
+    43: ["Return with Benjamin", "Feast at Joseph's house", "Brotherly recognition"],
+    44: ["The silver cup test", "Judah's plea for Benjamin", "Sacrificial love"],
+    45: ["Joseph reveals himself", "Reunion with brothers", "Invitation to Jacob"],
+    46: ["Jacob moves to Egypt", "Meeting Joseph in Goshen", "God's promise at Beersheba"],
+    47: ["Presentation to Pharaoh", "Famine management", "Jacob's request"],
+    48: ["Jacob blesses Ephraim and Manasseh", "Adopted grandsons", "Crossing hands"],
+    49: ["Jacob's blessing on 12 sons", "Prophetic words", "Death of Jacob"],
+    50: ["Mourning for Jacob", "Joseph's brothers' fear", "Joseph's death and hope"],
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
-      {/* Navbar */}
-      <header className="bg-white/70 backdrop-blur-md border-b border-blue-100 sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-3 sm:py-4 flex flex-row justify-between items-center relative">
-          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}> 
-            <img src="/sword.png" alt="Bible Quiz Competition Logo" className="w-6 h-6 sm:w-7 sm:h-7 mr-2 inline-block align-middle" />
-            <span className="text-base sm:text-lg font-semibold text-gray-900">Bible Quiz Competition</span>
-          </div>
-          {/* Hamburger for mobile */}
-          <button
-            className="md:hidden p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-gray-100 transition-colors"
-            aria-label="Open navigation menu"
-            onClick={() => setMobileMenuOpen((open) => !open)}
-          >
-            <Menu className="w-6 h-6 sm:w-7 sm:h-7 text-gray-900" />
-          </button>
-          {/* Nav links for desktop */}
-          <nav className="hidden md:flex items-center space-x-1 lg:space-x-2 xl:space-x-3">
-            <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/bible-questions-and-answers-hub")}>
-              <span className="hidden lg:inline">Bible Q&A Hub</span>
-              <span className="lg:hidden">Q&A Hub</span>
-            </button>
-            <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/articles")}>Articles</button>
-            <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/host-live-bible-quizzes-with-confidence")}>
-              <span className="hidden lg:inline">Hosting Guide</span>
-              <span className="lg:hidden">Hosting</span>
-            </button>
-            <button className="text-black font-semibold px-2 md:px-3 lg:px-4 py-2 bg-transparent border-none shadow-none hover:underline transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/auth/login")}>Sign In</button>
-            <Button variant="ghost" className="bg-black text-white font-semibold px-2 md:px-3 lg:px-4 py-2 rounded hover:bg-gray-800 transition-all duration-200 text-sm lg:text-base" onClick={() => navigate("/auth/register")}>Sign Up</Button>
-          </nav>
-          {/* Mobile dropdown menu */}
-          {mobileMenuOpen && (
-            <div className="md:hidden absolute top-full left-0 right-0 mt-2 mx-4 bg-white rounded-xl shadow-xl border border-blue-100 z-50 flex flex-col items-stretch overflow-hidden animate-in slide-in-from-top-2 duration-200">
-              <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A Hub</button>
-              <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
-              <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/host-live-bible-quizzes-with-confidence"); }}>Hosting Guide</button>
-              <button className="text-black font-semibold px-4 py-4 text-left hover:bg-blue-50 active:bg-blue-100 transition-colors duration-200 border-b border-gray-100 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
-              <button className="bg-black text-white font-semibold px-4 py-4 text-left hover:bg-gray-900 active:bg-gray-800 transition-colors duration-200 touch-manipulation" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</button>
+    <div className="min-h-screen bg-white text-gray-900 font-urbanist">
+      <SEO 
+        title="Genesis Quiz Hub | Bible Quiz Competition"
+        description="Master the first book of the Bible with our comprehensive Genesis study hub and interactive quizzes."
+        url="/bible-questions-and-answers-hub/genesis"
+      />
+      {/* Header */}
+      <header className="relative flex items-center justify-between p-6 w-full px-6 md:px-8 lg:px-12">
+        <div className="flex items-center space-x-8">
+          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}>
+            <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
+              <Brain className="w-3 h-3 text-white" />
             </div>
-          )}
-        </div>
-      </header>
-      {/* Full-width hero */}
-      <section className="relative overflow-hidden border-b border-blue-100 bg-gradient-to-br from-white via-white/70 to-blue-50 shadow-sm">
-        <div className="absolute -top-12 -right-12 w-64 h-64 rounded-full bg-blue-200/30 blur-3xl" />
-        <div className="absolute -bottom-16 -left-16 w-72 h-72 rounded-full bg-purple-200/30 blur-3xl" />
-        <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 flex flex-col lg:flex-row gap-6 lg:items-center lg:justify-between">
-          <div className="max-w-2xl">
-            <h1 className="text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight">Genesis Quiz Hub</h1>
-            <p className="text-lg lg:text-xl text-gray-700 mt-2">Pick a difficulty, jump to a chapter, or try special types.</p>
+            <span className="text-lg font-semibold text-gray-900">Bible Quiz Competition</span>
           </div>
-          <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center">
-            <div className="relative w-full sm:w-80">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input
+          <nav className="hidden md:flex items-center space-x-6">
+            <button onClick={() => navigate("/bible-questions-and-answers-hub")} className="text-gray-600 hover:text-gray-900 font-light">Bible Q&A</button>
+            <button onClick={() => navigate("/articles")} className="text-gray-600 hover:text-gray-900 font-light">Articles</button>
+            <button onClick={() => navigate("/help")} className="text-gray-600 hover:text-gray-900 font-light">Help</button>
+          </nav>
+        </div>
+        <div className="flex items-center space-x-4">
+          <Button
+            className="bg-black hover:bg-gray-800 font-light"
+            onClick={() => navigate("/auth/register")}
+          >
+            Get Started
+          </Button>
+          <button className="md:hidden" onClick={() => setMobileMenuOpen((open) => !open)}>
+            <Menu className="w-6 h-6" />
+          </button>
+        </div>
+        {/* Mobile dropdown menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden absolute top-full left-6 right-6 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 flex flex-col">
+            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-light" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A Hub</button>
+            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-light" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
+            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>Help</button>
+            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-light border-t border-gray-200" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
+            <Button className="bg-black text-white px-4 py-3 mx-4 mb-4 font-light" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</Button>
+          </div>
+        )}
+      </header>
+
+      {/* Hero Section */}
+      <section className="py-16 bg-white text-center">
+        <div className="max-w-4xl mx-auto px-6">
+          <h1 className="text-5xl md:text-7xl font-normal text-gray-900 mb-6 leading-tight">
+            Genesis Quiz Hub
+          </h1>
+          <p className="text-2xl font-light text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Pick a difficulty, jump to a chapter, or try special types. Search through 50 chapters and master the book of beginnings.
+          </p>
+
+          {/* Search Bar */}
+          <div className="max-w-2xl mx-auto mb-8">
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" strokeWidth={1} />
+              <Input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Quick search chapters 1–8"
-                className="w-full pl-9 pr-3 py-3 rounded-xl border-2 border-blue-200 focus:border-blue-500 bg-white shadow-sm"
+                placeholder="Quick search chapters (e.g., '1' or 'Creation')..."
+                className="pl-12 pr-4 py-4 text-lg font-light border border-gray-300 focus:border-gray-400 rounded-lg"
               />
             </div>
-            <div className="flex gap-2 overflow-x-auto">
-              <a href="#difficulty" className="px-3 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold shadow">Difficulty</a>
-              <a href="#ranges" className="px-3 py-2 rounded-lg bg-purple-600 text-white text-sm font-semibold shadow">Ranges</a>
-              {/* <a href="#chapters" className="px-3 py-2 rounded-lg bg-emerald-600 text-white text-sm font-semibold shadow">Chapters</a> */}
-              <a href="#genesis-chapter-wise" className="px-3 py-2 rounded-lg bg-indigo-600 text-white text-sm font-semibold shadow">Chapter Wise</a>
-              <a href="#chapters-13-16" className="px-3 py-2 rounded-lg bg-orange-600 text-white text-sm font-semibold shadow" style={{display: 'none'}}>Ch 13-16</a>
-              <a href="#chapters-17-20" className="px-3 py-2 rounded-lg bg-teal-600 text-white text-sm font-semibold shadow" style={{display: 'none'}}>Ch 17-20</a>
-              <a href="#types" className="px-3 py-2 rounded-lg bg-rose-600 text-white text-sm font-semibold shadow">Types</a>
-            </div>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            <a href="#difficulty" className="px-4 py-2 rounded-full border border-gray-200 hover:bg-gray-50 text-sm font-light transition-colors">Difficulty</a>
+            <a href="#ranges" className="px-4 py-2 rounded-full border border-gray-200 hover:bg-gray-50 text-sm font-light transition-colors">Ranges</a>
+            <a href="#genesis-chapter-wise" className="px-4 py-2 rounded-full border border-gray-200 hover:bg-gray-50 text-sm font-light transition-colors">Chapter Wise</a>
+            <a href="#types" className="px-4 py-2 rounded-full border border-gray-200 hover:bg-gray-50 text-sm font-light transition-colors">By Type</a>
           </div>
         </div>
       </section>
 
-      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-10">
+      <div className="w-full max-w-7xl mx-auto px-6 py-10">
         {/* Breadcrumb */}
-        <div className="flex items-center text-sm text-gray-600 mb-4">
-          <Button variant="ghost" size="sm" className="px-2 h-8" onClick={() => navigate("/")}> <Home className="w-4 h-4 mr-1" /> Home</Button>
-          <ChevronRight className="w-4 h-4 mx-1 text-gray-400" />
-          <Button variant="ghost" size="sm" className="px-2 h-8" onClick={() => navigate("/bible-questions-and-answers-hub")}>Bible Q&A Hub</Button>
-          <ChevronRight className="w-4 h-4 mx-1 text-gray-400" />
-          <span className="font-medium text-gray-900">Genesis</span>
+        <div className="flex items-center text-sm font-light text-gray-500 mb-12">
+          <button className="hover:text-gray-900" onClick={() => navigate("/")}>Home</button>
+          <ChevronRight className="w-4 h-4 mx-2" />
+          <button className="hover:text-gray-900" onClick={() => navigate("/bible-questions-and-answers-hub")}>Bible Q&A Hub</button>
+          <ChevronRight className="w-4 h-4 mx-2" />
+          <span className="font-medium text-gray-900 underline underline-offset-4 tracking-wide">Genesis</span>
         </div>
 
         {/* Difficulty section */}
-        <section id="difficulty" className="mb-10 scroll-mt-24">
-          <div className="flex items-center gap-2 mb-4">
-            <Layers className="w-5 h-5 text-blue-600" />
-            <h2 className="text-2xl font-semibold text-gray-900">By Difficulty</h2>
+        <section id="difficulty" className="mb-20 scroll-mt-24">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-4xl font-semibold text-gray-900">By Difficulty</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <Card className="cursor-pointer hover:shadow-lg transition flex flex-col" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/beginner")}> 
-              <CardHeader>
-                <div className="w-10 h-10 rounded-lg bg-green-500 flex items-center justify-center">
-                  <BookOpen className="w-5 h-5 text-white" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col bg-white overflow-hidden group shadow-none" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/beginner")}> 
+              <CardHeader className="pb-3">
+                <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 transition-colors group-hover:bg-green-100">
+                  <BookOpen className="w-6 h-6 text-gray-700 group-hover:text-green-700" strokeWidth={1} />
                 </div>
-                <CardTitle>Beginner</CardTitle>
-                <CardDescription>10 questions from core stories</CardDescription>
+                <CardTitle className="text-2xl font-semibold text-gray-900">Beginner</CardTitle>
+                <CardDescription className="text-lg font-light text-gray-600">10 questions from core stories</CardDescription>
               </CardHeader>
-              <CardContent className="pt-0 text-sm text-gray-700">
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>Creation, Fall, Noah, Abraham & Joseph highlights</li>
-                  <li>Clear phrasing; one-correct-choice questions</li>
-                  <li>Great for first-timers and kids</li>
+              <CardContent className="pt-0 text-base font-light text-gray-600 flex-grow">
+                <ul className="space-y-2">
+                  <li className="flex items-start"><div className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-2 mr-2 flex-shrink-0" />Creation, Fall, Noah, Abraham & Joseph highlights</li>
+                  <li className="flex items-start"><div className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-2 mr-2 flex-shrink-0" />Great for first-timers and kids</li>
                 </ul>
               </CardContent>
-              <CardContent className="mt-auto">
-                <Button variant="outline" className="w-full">Start Beginner</Button>
+              <CardContent className="pt-4 mt-auto">
+                <Button className="w-full font-light border-gray-200 text-base py-6" variant="outline">Start Beginner</Button>
               </CardContent>
             </Card>
-            <Card className="cursor-pointer hover:shadow-lg transition flex flex-col" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/intermediate")}> 
-              <CardHeader>
-                <div className="w-10 h-10 rounded-lg bg-yellow-500 flex items-center justify-center">
-                  <BookOpen className="w-5 h-5 text-white" />
+
+            <Card className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col bg-white overflow-hidden group shadow-none" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/intermediate")}> 
+              <CardHeader className="pb-3">
+                <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 transition-colors group-hover:bg-yellow-100">
+                  <BookOpen className="w-6 h-6 text-gray-700 group-hover:text-yellow-700" strokeWidth={1} />
                 </div>
-                <CardTitle>Intermediate</CardTitle>
-                <CardDescription>15 questions across the book</CardDescription>
+                <CardTitle className="text-2xl font-semibold text-gray-900">Intermediate</CardTitle>
+                <CardDescription className="text-lg font-light text-gray-600">15 questions across the book</CardDescription>
               </CardHeader>
-              <CardContent className="pt-0 text-sm text-gray-700">
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>Mix of people, places, and covenant moments</li>
-                  <li>Chapter references included for review</li>
-                  <li>Ideal for youth groups and small studies</li>
+              <CardContent className="pt-0 text-base font-light text-gray-600 flex-grow">
+                <ul className="space-y-2">
+                  <li className="flex items-start"><div className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-2 mr-2 flex-shrink-0" />Mix of people, places, and covenant moments</li>
+                  <li className="flex items-start"><div className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-2 mr-2 flex-shrink-0" />Ideal for youth groups and small studies</li>
                 </ul>
               </CardContent>
-              <CardContent className="mt-auto">
-                <Button variant="outline" className="w-full">Start Intermediate</Button>
+              <CardContent className="pt-4 mt-auto">
+                <Button className="w-full font-light border-gray-200 text-base py-6" variant="outline">Start Intermediate</Button>
               </CardContent>
             </Card>
-            <Card className="cursor-pointer hover:shadow-lg transition flex flex-col" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/advanced")}> 
-              <CardHeader>
-                <div className="w-10 h-10 rounded-lg bg-red-500 flex items-center justify-center">
-                  <Swords className="w-5 h-5 text-white" />
+
+            <Card className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col bg-white overflow-hidden group shadow-none" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/advanced")}> 
+              <CardHeader className="pb-3">
+                <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 transition-colors group-hover:bg-red-100">
+                  <Swords className="w-6 h-6 text-gray-700 group-hover:text-red-700" strokeWidth={1} />
                 </div>
-                <CardTitle>Advanced</CardTitle>
-                <CardDescription>25 challenging questions</CardDescription>
+                <CardTitle className="text-2xl font-semibold text-gray-900">Advanced</CardTitle>
+                <CardDescription className="text-lg font-light text-gray-600">25 challenging questions</CardDescription>
               </CardHeader>
-              <CardContent className="pt-0 text-sm text-gray-700">
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>Deeper details: Hebrew terms, locations, numbers</li>
-                  <li>Edge cases and less-common characters</li>
-                  <li>Perfect for quiz bowls or seasoned readers</li>
+              <CardContent className="pt-0 text-base font-light text-gray-600 flex-grow">
+                <ul className="space-y-2">
+                  <li className="flex items-start"><div className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-2 mr-2 flex-shrink-0" />Deeper details: Hebrew terms, locations, numbers</li>
+                  <li className="flex items-start"><div className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-2 mr-2 flex-shrink-0" />Perfect for quiz bowls or seasoned readers</li>
                 </ul>
               </CardContent>
-              <CardContent className="mt-auto">
-                <Button className="w-full">Start Advanced</Button>
+              <CardContent className="pt-4 mt-auto">
+                <Button className="w-full font-light border-gray-300 bg-black text-white hover:bg-gray-800 text-base py-6">Start Advanced</Button>
               </CardContent>
             </Card>
           </div>
         </section>
 
-        {/* Chapters section */}
-        <section id="ranges" className="scroll-mt-24">
-          <div className="flex items-center gap-2 mb-4">
-            <ListOrdered className="w-5 h-5 text-purple-600" />
-            <h2 className="text-2xl font-semibold text-gray-900">By Chapter Range</h2>
+        {/* Ranges section */}
+        <section id="ranges" className="mb-20 scroll-mt-24">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-4xl font-semibold text-gray-900">By Chapter Range</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Card className="cursor-pointer hover:shadow-lg transition flex flex-col h-full" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/chapters-1-11")}>
-              <CardHeader>
-                <CardTitle>Genesis 1–11</CardTitle>
-                <CardDescription>Creation to Babel • Creation days, Fall, Flood, Nations</CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="flex flex-wrap gap-2 mb-2 text-xs">
-                  <span className="px-2 py-1 rounded-full bg-blue-100 text-blue-700">Chs 1–11</span>
-                  <span className="px-2 py-1 rounded-full bg-gray-100 text-gray-700">Beginner 10Q</span>
-                  <span className="px-2 py-1 rounded-full bg-gray-100 text-gray-700">Advanced 25Q</span>
-                </div>
-                <div className="text-sm text-gray-700">
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>Creation week details and image of God</li>
-                    <li>The Fall, Cain/Abel, and long lifespans</li>
-                    <li>Ark specs, flood timeline, rainbow covenant</li>
-                    <li>Table of Nations and Tower of Babel</li>
-                  </ul>
-                </div>
-              </CardContent>
-              <CardContent className="mt-auto pb-4">
-                <div className="flex flex-wrap gap-2">
-                  <Button size="sm" variant="outline" onClick={(e) => { e.stopPropagation(); navigate("/bible-questions-and-answers-hub/genesis/1-11/beginner"); }}>Beginner</Button>
-                  <Button size="sm" onClick={(e) => { e.stopPropagation(); navigate("/bible-questions-and-answers-hub/genesis/1-11/advanced"); }}>Advanced</Button>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="cursor-pointer hover:shadow-lg transition flex flex-col h-full" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/chapters-12-25")}>
-              <CardHeader>
-                <CardTitle>Genesis 12–25</CardTitle>
-                <CardDescription>Abraham cycle • Call, covenant, Isaac, Mount Moriah</CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="flex flex-wrap gap-2 mb-2 text-xs">
-                  <span className="px-2 py-1 rounded-full bg-green-100 text-green-700">Chs 12–25</span>
-                  <span className="px-2 py-1 rounded-full bg-gray-100 text-gray-700">Beginner 10Q</span>
-                  <span className="px-2 py-1 rounded-full bg-gray-100 text-gray-700">Advanced 25Q</span>
-                </div>
-                <div className="text-sm text-gray-700">
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>Call of Abram and promises/covenants</li>
-                    <li>Hagar & Ishmael; birth of Isaac; name changes</li>
-                    <li>Mount Moriah, faith counted as righteousness</li>
-                    <li>Sarah’s death, Rebekah found, Esau & Jacob</li>
-                  </ul>
-                </div>
-              </CardContent>
-              <CardContent className="mt-auto pb-4">
-                <div className="flex flex-wrap gap-2">
-                  <Button size="sm" variant="outline" onClick={(e) => { e.stopPropagation(); navigate("/bible-questions-and-answers-hub/genesis/12-25/beginner"); }}>Beginner</Button>
-                  <Button size="sm" onClick={(e) => { e.stopPropagation(); navigate("/bible-questions-and-answers-hub/genesis/12-25/advanced"); }}>Advanced</Button>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="cursor-pointer hover:shadow-lg transition flex flex-col h-full" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/chapters-26-36")}>
-              <CardHeader>
-                <CardTitle>Genesis 26–36</CardTitle>
-                <CardDescription>Isaac, Jacob & Esau • Birthright, ladder, Leah/Rachel, wrestling</CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="flex flex-wrap gap-2 mb-2 text-xs">
-                  <span className="px-2 py-1 rounded-full bg-purple-100 text-purple-700">Chs 26–36</span>
-                  <span className="px-2 py-1 rounded-full bg-gray-100 text-gray-700">Beginner 10Q</span>
-                  <span className="px-2 py-1 rounded-full bg-gray-100 text-gray-700">Advanced 25Q</span>
-                </div>
-                <div className="text-sm text-gray-700">
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>Isaac in Gerar; Esek, Sitnah, Rehoboth wells</li>
-                    <li>Birthright/blessing, Jacob’s ladder at Bethel</li>
-                    <li>Leah/Rachel, mandrakes, speckled flocks</li>
-                    <li>Wrestling at Peniel; name changed to Israel</li>
-                  </ul>
-                </div>
-              </CardContent>
-              <CardContent className="mt-auto pb-4">
-                <div className="flex flex-wrap gap-2">
-                  <Button size="sm" variant="outline" onClick={(e) => { e.stopPropagation(); navigate("/bible-questions-and-answers-hub/genesis/26-36/beginner"); }}>Beginner</Button>
-                  <Button size="sm" onClick={(e) => { e.stopPropagation(); navigate("/bible-questions-and-answers-hub/genesis/26-36/advanced"); }}>Advanced</Button>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="cursor-pointer hover:shadow-lg transition flex flex-col h-full" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/chapters-37-50")}>
-              <CardHeader>
-                <CardTitle>Genesis 37–50</CardTitle>
-                <CardDescription>Joseph narrative • Dreams, Egypt, famine, forgiveness</CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0">
-                <div className="flex flex-wrap gap-2 mb-2 text-xs">
-                  <span className="px-2 py-1 rounded-full bg-amber-100 text-amber-700">Chs 37–50</span>
-                  <span className="px-2 py-1 rounded-full bg-gray-100 text-gray-700">Beginner 10Q</span>
-                  <span className="px-2 py-1 rounded-full bg-gray-100 text-gray-700">Advanced 25Q</span>
-                </div>
-                <div className="text-sm text-gray-700">
-                  <ul className="list-disc pl-5 space-y-1">
-                    <li>Joseph’s dreams, pit and sale to traders</li>
-                    <li>Potiphar’s house, prison, and cupbearer</li>
-                    <li>Pharaoh’s dreams; seven years plenty/famine</li>
-                    <li>Family reunion, Goshen, forgiveness theme</li>
-                  </ul>
-                </div>
-              </CardContent>
-              <CardContent className="mt-auto pb-4">
-                <div className="flex flex-wrap gap-2">
-                  <Button size="sm" variant="outline" onClick={(e) => { e.stopPropagation(); navigate("/bible-questions-and-answers-hub/genesis/37-50/beginner"); }}>Beginner</Button>
-                  <Button size="sm" onClick={(e) => { e.stopPropagation(); navigate("/bible-questions-and-answers-hub/genesis/37-50/advanced"); }}>Advanced</Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-          {/* Per-Chapter quick access (1–5) */}
-          <div id="chapters" className="mt-10 scroll-mt-24" style={{display: 'none'}}>
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="text-xl font-semibold text-gray-900">By Chapter (1–8)</h3>
-              <div className="flex items-center gap-2 text-sm">
-                <span className="text-gray-600">Showing {visibleChapters[0]}–{visibleChapters[visibleChapters.length - 1]}</span>
-                <Button size="sm" variant="outline" disabled={chapterPage === 0} onClick={() => setChapterPage((p) => Math.max(0, p - 1))}>Prev</Button>
-                <Button size="sm" variant="outline" disabled={chapterPage >= totalChapterPages - 1} onClick={() => setChapterPage((p) => Math.min(totalChapterPages - 1, p + 1))}>Next</Button>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              {visibleChapters.map((ch) => (
-                <Card key={ch} className="p-3 flex flex-col h-full">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg">Chapter {ch}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    {chapterPoints[ch] && (
-                      <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-2">
-                        {chapterPoints[ch].map((point, idx) => (
-                          <li key={idx}>{point}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </CardContent>
-                  <CardContent className="mt-auto">
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm" className="flex-1" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/ch${ch}-beginner`)}>Beginner</Button>
-                      <Button size="sm" className="flex-1" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/ch${ch}-advanced`)}>Advanced</Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Per-Chapter quick access (9–12) */}
-        <section id="chapters-9-12" className="mt-10 scroll-mt-24" style={{display: 'none'}}>
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-xl font-semibold text-gray-900">By Chapter (9–12)</h3>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {[9,10,11,12].map((ch) => (
-              <Card key={ch} className="p-3 flex flex-col h-full">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg">Chapter {ch}</CardTitle>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { range: "1–11", title: "Creation to Babel", desc: "Creation days, Fall, Flood, Nations" },
+              { range: "12–25", title: "Abraham Cycle", desc: "Call, covenant, Isaac, Mount Moriah" },
+              { range: "26–36", title: "Isaac, Jacob & Esau", desc: "Birthright, ladder, Leah, Rachel" },
+              { range: "37–50", title: "Joseph Narrative", desc: "Dreams, Egypt, Famine, Forgiveness" }
+            ].map((r) => (
+              <Card key={r.range} className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col h-full bg-white group shadow-none">
+                <CardHeader className="pb-3 border-b border-gray-50 mb-4">
+                  <CardTitle className="text-2xl font-semibold text-gray-900">Genesis {r.range}</CardTitle>
+                  <CardDescription className="text-lg font-light text-gray-600">{r.title}</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-2">
-                    {ch === 9 && (<>
-                      <li>God's covenant with Noah</li>
-                      <li>Rainbow sign; no eating blood</li>
-                      <li>Noah's sons and Canaan</li>
-                    </>)}
-                    {ch === 10 && (<>
-                      <li>Table of Nations</li>
-                      <li>Nimrod's kingdom beginnings</li>
-                      <li>Peoples spread after the flood</li>
-                    </>)}
-                    {ch === 11 && (<>
-                      <li>Tower of Babel and scattered languages</li>
-                      <li>Genealogy down to Abram</li>
-                      <li>Move from Ur to Haran</li>
-                    </>)}
-                    {ch === 12 && (<>
-                      <li>Call of Abram and promises</li>
-                      <li>Journey to Canaan and altar</li>
-                      <li>Sojourn in Egypt</li>
-                    </>)}
-                  </ul>
+                <CardContent className="pt-0 flex-grow">
+                  <p className="text-base font-light text-gray-500 mb-4 leading-relaxed">{r.desc}</p>
                 </CardContent>
-                <CardContent className="mt-auto">
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/ch${ch}-beginner`)}>Beginner</Button>
-                    <Button size="sm" className="flex-1" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/ch${ch}-advanced`)}>Advanced</Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        {/* Per-Chapter quick access (13–16) */}
-        <section id="chapters-13-16" className="mt-10 scroll-mt-24" style={{display: 'none'}}>
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-xl font-semibold text-gray-900">By Chapter (13–16)</h3>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {[13,14,15,16].map((ch) => (
-              <Card key={ch} className="p-3 flex flex-col h-full">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg">Chapter {ch}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {chapterPoints13to16[ch] && (
-                    <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-2">
-                      {chapterPoints13to16[ch].map((point, idx) => (
-                        <li key={idx}>{point}</li>
-                      ))}
-                    </ul>
-                  )}
-                </CardContent>
-                <CardContent className="mt-auto">
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/ch${ch}-beginner`)}>Beginner</Button>
-                    <Button size="sm" className="flex-1" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/ch${ch}-advanced`)}>Advanced</Button>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        {/* Per-Chapter quick access (17–24) */}
-        <section id="chapters-17-24" className="mt-10 scroll-mt-24" style={{display: 'none'}}>
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-xl font-semibold text-gray-900">By Chapter (17–24)</h3>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {[17,18,19,20,21,22,23,24].map((ch) => (
-              <Card key={ch} className="p-3 flex flex-col h-full">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-lg">Chapter {ch}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {chapterPoints17to24[ch] && (
-                    <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-2">
-                      {chapterPoints17to24[ch].map((point, idx) => (
-                        <li key={idx}>{point}</li>
-                      ))}
-                    </ul>
-                  )}
-                </CardContent>
-                <CardContent className="mt-auto">
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/ch${ch}-beginner`)}>Beginner</Button>
-                    <Button size="sm" className="flex-1" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/ch${ch}-advanced`)}>Advanced</Button>
+                <CardContent className="pt-4 border-t border-gray-50">
+                  <div className="flex flex-col gap-2">
+                    <Button size="sm" variant="outline" className="w-full font-light text-base py-5" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/${r.range.replace("–", "-")}/beginner`)}>Beginner</Button>
+                    <Button size="sm" className="w-full font-light bg-black text-white hover:bg-gray-800 text-base py-5" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/${r.range.replace("–", "-")}/advanced`)}>Advanced Quiz</Button>
                   </div>
                 </CardContent>
               </Card>
@@ -590,29 +394,25 @@ export default function GenesisHub() {
         </section>
 
         {/* Genesis Quiz Chapter Wise */}
-        <section id="genesis-chapter-wise" className="mt-10 scroll-mt-24">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="text-xl font-semibold text-gray-900">Genesis Quiz Chapter Wise</h3>
+        <section id="genesis-chapter-wise" className="mb-20 scroll-mt-24">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-4xl font-semibold text-gray-900">Genesis Quiz Chapter Wise</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24].map((ch) => {
-              // Get the appropriate chapter points based on chapter number
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {visibleChapters.map((ch) => {
               let currentChapterPoints = null;
-              if (ch >= 1 && ch <= 8) {
-                currentChapterPoints = chapterPoints[ch];
-              } else if (ch >= 9 && ch <= 12) {
-                currentChapterPoints = chapterPoints9to12[ch];
-              } else if (ch >= 13 && ch <= 16) {
-                currentChapterPoints = chapterPoints13to16[ch];
-              } else if (ch >= 17 && ch <= 24) {
-                currentChapterPoints = chapterPoints17to24[ch];
-              }
+              if (ch >= 1 && ch <= 8) currentChapterPoints = chapterPoints[ch];
+              else if (ch >= 9 && ch <= 12) currentChapterPoints = chapterPoints9to12[ch];
+              else if (ch >= 13 && ch <= 16) currentChapterPoints = chapterPoints13to16[ch];
+              else if (ch >= 17 && ch <= 24) currentChapterPoints = chapterPoints17to24[ch];
+              else if (ch >= 25 && ch <= 36) currentChapterPoints = chapterPoints25to36[ch];
+              else if (ch >= 37 && ch <= 50) currentChapterPoints = chapterPoints37to50[ch];
 
               return (
-                <Card key={ch} className="p-4 flex flex-col h-full hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/chapter-${ch}`)}>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-lg text-blue-600">Chapter {ch}</CardTitle>
-                    <CardDescription className="text-sm text-gray-600">
+                <Card key={ch} className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col h-full cursor-pointer group bg-white shadow-none" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/chapter-${ch}`)}>
+                  <CardHeader className="pb-3 border-b border-gray-50">
+                    <CardTitle className="text-xl font-semibold text-gray-900">Chapter {ch}</CardTitle>
+                    <CardDescription className="text-sm font-light text-gray-500 uppercase tracking-widest mt-1">
                       {ch === 1 && "Creation & Sabbath"}
                       {ch === 2 && "Garden of Eden"}
                       {ch === 3 && "The Fall"}
@@ -629,113 +429,130 @@ export default function GenesisHub() {
                       {ch === 14 && "War of the Kings"}
                       {ch === 15 && "God's Covenant"}
                       {ch === 16 && "Hagar & Ishmael"}
-                      {ch === 17 && "Covenant of Circumcision"}
-                      {ch === 18 && "Three Visitors"}
-                      {ch === 19 && "Sodom's Destruction"}
-                      {ch === 20 && "Abraham in Gerar"}
-                      {ch === 21 && "The Birth of Isaac"}
+                      {ch === 21 && "Birth of Isaac"}
                       {ch === 22 && "Abraham Tested"}
-                      {ch === 23 && "The Death of Sarah"}
-                      {ch === 24 && "Isaac and Rebekah"}
+                      {ch === 27 && "Jacob's Blessing"}
+                      {ch === 28 && "Jacob's Ladder"}
+                      {ch === 32 && "Jacob Wrestles God"}
+                      {ch === 37 && "Joseph's Dreams"}
+                      {ch === 41 && "Pharaoh's Dreams"}
+                      {ch === 45 && "Joseph Revealed"}
+                      {ch === 50 && "Death of Joseph"}
+                      {(![1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,21,22,27,28,32,37,41,45,50].includes(ch)) && "Genesis Study"}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="flex-1">
+                  <CardContent className="pt-4 flex-grow">
                     {currentChapterPoints && (
-                      <ul className="list-disc pl-5 text-sm text-gray-700 space-y-1 mb-3">
-                        {currentChapterPoints.map((point, idx) => (
-                          <li key={idx}>{point}</li>
+                      <ul className="text-sm font-light text-gray-600 space-y-1.5">
+                        {currentChapterPoints.slice(0, 2).map((point, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <span className="text-gray-400 mr-2">•</span>
+                            {point}
+                          </li>
                         ))}
                       </ul>
                     )}
                   </CardContent>
-                  <CardContent className="mt-auto pt-3 border-t border-gray-100">
-                    <div className="text-center">
-                      <Button variant="outline" size="sm" className="w-full" onClick={(e) => { e.stopPropagation(); navigate(`/bible-questions-and-answers-hub/genesis/chapter-${ch}`); }}>
-                        View Chapter Details
-                      </Button>
-                    </div>
+                  <CardContent className="pt-2 border-t border-gray-50">
+                    <Button variant="ghost" size="sm" className="w-full text-sm font-light group-hover:bg-gray-100">
+                      Chapter Details →
+                    </Button>
                   </CardContent>
                 </Card>
               );
             })}
           </div>
+          {totalChapterPages > 1 && (
+            <div className="mt-8 flex justify-center items-center space-x-4">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="font-light"
+                disabled={chapterPage === 0} 
+                onClick={() => setChapterPage(p => p - 1)}
+              >
+                Previous
+              </Button>
+              <span className="text-sm font-light text-gray-500">Page {chapterPage + 1} of {totalChapterPages}</span>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="font-light"
+                disabled={chapterPage >= totalChapterPages - 1} 
+                onClick={() => setChapterPage(p => p + 1)}
+              >
+                Next
+              </Button>
+            </div>
+          )}
         </section>
-
 
         {/* Types section */}
-        <section id="types" className="mt-12 scroll-mt-24">
-          <div className="flex items-center gap-2 mb-4">
-            <BookOpen className="w-5 h-5 text-emerald-600" />
-            <h2 className="text-2xl font-semibold text-gray-900">By Type</h2>
+        <section id="types" className="mb-20 scroll-mt-24">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-4xl font-urbanist font-semibold text-gray-900">By Type</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            <Card className="cursor-pointer hover:shadow-lg transition flex flex-col" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/fill-in-the-blanks")}> 
-              <CardHeader>
-                <CardTitle>Fill in the Blanks</CardTitle>
-                <CardDescription>Complete key verses and phrases</CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0 text-sm text-gray-700">Master memory verses from Genesis—choose the correct word/phrase to complete the sentence.</CardContent>
-            </Card>
-            <Card className="cursor-pointer hover:shadow-lg transition flex flex-col" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/true-false")}> 
-              <CardHeader>
-                <CardTitle>True / False</CardTitle>
-                <CardDescription>Quick facts from Genesis</CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0 text-sm text-gray-700">Rapid-fire statements testing overall comprehension—great warm-up for teams and classes.</CardContent>
-            </Card>
-            <Card className="cursor-pointer hover:shadow-lg transition flex flex-col" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/characters")}> 
-              <CardHeader>
-                <CardTitle>Characters</CardTitle>
-                <CardDescription>People and their roles</CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0 text-sm text-gray-700">Identify key figures, family lines, and roles—from Adam to Joseph’s brothers.</CardContent>
-            </Card>
-            <Card className="cursor-pointer hover:shadow-lg transition flex flex-col" onClick={() => navigate("/bible-questions-and-answers-hub/genesis/match-the-following")}> 
-              <CardHeader>
-                <CardTitle>Match the Following</CardTitle>
-                <CardDescription>Pair people, places, and ideas</CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0 text-sm text-gray-700">Strengthen associations—match names with events, places, and symbols found in Genesis.</CardContent>
-            </Card>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { title: "Fill in the Blanks", desc: "Complete key verses from Genesis", icon: BookOpen, link: "fill-in-the-blanks" },
+              { title: "True / False", desc: "Quick facts on the Genesis journey", icon: Brain, link: "true-false" },
+              { title: "Characters", desc: "Adam to Joseph's brothers", icon: Brain, link: "characters" },
+              { title: "Match the Following", icon: ListOrdered, desc: "Pair people, places, and names", link: "match-the-following" }
+            ].map((t) => (
+              <Card key={t.title} className="cursor-pointer border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col group bg-white shadow-none" onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/${t.link}`)}> 
+                <CardHeader className="pb-3">
+                  <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center mb-4 group-hover:bg-gray-200 transition-colors">
+                    <t.icon className="w-5 h-5 text-gray-700" strokeWidth={1} />
+                  </div>
+                  <CardTitle className="text-2xl font-urbanist font-semibold text-gray-900">{t.title}</CardTitle>
+                  <CardDescription className="text-base font-urbanist font-light text-gray-600">{t.desc}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))}
           </div>
         </section>
-
       </div>
 
-      {/* Footer (same as homepage) */}
-      <footer className="bg-[#181c3a] text-gray-200 pt-16 pb-8 mt-0">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row md:justify-between md:items-start gap-12">
-          <div className="flex-1 min-w-[220px] flex flex-col items-start mb-8 md:mb-0">
-            <div className="flex items-center mb-4">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-2">
-                <Brain className="w-6 h-6 text-white" />
+      {/* Footer */}
+      <footer className="bg-white border-t border-gray-100 pt-16 pb-12">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div className="col-span-1 md:col-span-2">
+              <div className="flex items-center space-x-2 mb-6">
+                <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
+                  <Brain className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-xl font-semibold text-gray-900">Bible Quiz Competition</span>
               </div>
-              <span className="text-xl font-bold text-white">Bible Quiz Competition</span>
+              <p className="text-gray-500 font-light leading-relaxed max-w-sm">
+                Empowering faith through interactive Scripture knowledge and competitive spirit. Join thousands of students learning the Word through fun, challenging quizzes.
+              </p>
             </div>
-            <p className="mb-4 text-gray-300 max-w-xs">Empower your faith with fun, challenging Bible quizzes for all ages. Compete, learn, and grow in your knowledge of Scripture!</p>
-            <p className="text-gray-400 text-sm">Need help? Email <a href="mailto:info@biblequizcompetition.com" className="underline">info@biblequizcompetition.com</a></p>
-          </div>
-          <div className="flex flex-1 flex-col sm:flex-row justify-end gap-12">
             <div>
-              <h4 className="font-bold text-white mb-3">Company</h4>
-              <ul className="space-y-2">
-                <li><a href="#about" className="hover:underline text-gray-300">About</a></li>
-                <li><a href="#features" className="hover:underline text-gray-300">Features</a></li>
-                <li><a href="/public-leaderboard" className="hover:underline text-gray-300">Leaderboard</a></li>
-                <li><a href="#faq" className="hover:underline text-gray-300">FAQ</a></li>
+              <h4 className="font-semibold text-gray-900 mb-6 uppercase tracking-wider text-sm">Quick Links</h4>
+              <ul className="space-y-4 text-gray-500 font-light">
+                <li><button onClick={() => navigate("/bible-questions-and-answers-hub")} className="hover:text-black transition-colors">Quiz Hub</button></li>
+                <li><button onClick={() => navigate("/articles")} className="hover:text-black transition-colors">Study Articles</button></li>
+                <li><button onClick={() => navigate("/leaderboard")} className="hover:text-black transition-colors">Leaderboards</button></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold text-white mb-3">Legal</h4>
-              <ul className="space-y-2">
-                <li><a href="#privacy" className="hover:underline text-gray-300">Privacy</a></li>
-                <li><a href="#terms" className="hover:underline text-gray-300">Terms</a></li>
+              <h4 className="font-semibold text-gray-900 mb-6 uppercase tracking-wider text-sm">Support</h4>
+              <ul className="space-y-4 text-gray-500 font-light">
+                <li><button className="hover:text-black transition-colors">Help Center</button></li>
+                <li><button className="hover:text-black transition-colors">Contact Us</button></li>
+                <li><button className="hover:text-black transition-colors">Privacy Policy</button></li>
               </ul>
             </div>
           </div>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 mt-12 border-t border-blue-900 pt-6 text-center text-white text-sm">
-          © 2024 QuizMaster. All rights reserved.
+          <div className="pt-8 border-t border-gray-50 flex flex-col md:flex-row justify-between items-center text-sm font-light text-gray-400">
+            <p>© 2025 QuizMaster. All rights reserved.</p>
+            <div className="flex space-x-6 mt-4 md:mt-0">
+              <span className="hover:text-black cursor-pointer transition-colors">Twitter</span>
+              <span className="hover:text-black cursor-pointer transition-colors">Facebook</span>
+              <span className="hover:text-black cursor-pointer transition-colors">Instagram</span>
+            </div>
+          </div>
         </div>
       </footer>
     </div>

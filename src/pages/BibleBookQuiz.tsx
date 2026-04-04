@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Clock, Brain, CheckCircle, AlertTriangle } from "lucide-react";
+import { Clock, Brain, CheckCircle, AlertTriangle, ArrowLeft, ChevronRight, Menu } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import Header from "@/components/Header";
 import {
   Dialog,
   DialogContent,
@@ -18,13 +17,14 @@ import {
   DialogClose
 } from "@/components/ui/dialog";
 import { sendQuizCompletionEmailWithFallback, QuizCompletionEmailData } from "@/lib/emailService";
+import SEO from "@/components/SEO";
 
 interface Question {
   chapter: number;
   question: string;
   options: string[];
   answer: number;
-  explanation?: string; // optional explanation or verse reference
+  explanation?: string;
 }
 
 interface BibleBookQuizProps {
@@ -41,34 +41,23 @@ const BibleBookQuiz = ({ title, questions, bookName }: BibleBookQuizProps) => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showTimeWarning, setShowTimeWarning] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogTitle, setDialogTitle] = useState("");
   const [dialogMessage, setDialogMessage] = useState("");
 
-  // Timer effect with enhanced warnings
   useEffect(() => {
     if (timeLeft > 0 && !isCompleted && !isLoading) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
       
-      // Show time warnings
-      if (timeLeft === 180) { // 3 minutes left
-        setDialogTitle("⚠️ Time Warning");
-        setDialogMessage("You have 3 minutes remaining!");
+      if (timeLeft === 180 || timeLeft === 60 || timeLeft === 30) {
+        setDialogTitle(timeLeft === 180 ? "⚠️ Time Warning" : timeLeft === 60 ? "🚨 Final Warning" : "⏰ Almost Time's Up!");
+        setDialogMessage(timeLeft === 180 ? "You have 3 minutes remaining!" : timeLeft === 60 ? "Only 1 minute remaining! Hurry up!" : "Only 30 seconds left!");
         setDialogOpen(true);
         setShowTimeWarning(true);
         setTimeout(() => setShowTimeWarning(false), 5000);
-      } else if (timeLeft === 60) { // 1 minute left
-        setDialogTitle("🚨 Final Warning");
-        setDialogMessage("Only 1 minute remaining! Hurry up!");
-        setDialogOpen(true);
-        setShowTimeWarning(true);
-        setTimeout(() => setShowTimeWarning(false), 5000);
-      } else if (timeLeft === 30) { // 30 seconds left
-        setDialogTitle("⏰ Almost Time's Up!");
-        setDialogMessage("Only 30 seconds left!");
-        setDialogOpen(true);
       }
       
       return () => clearTimeout(timer);
@@ -116,9 +105,7 @@ const BibleBookQuiz = ({ title, questions, bookName }: BibleBookQuizProps) => {
 
     try {
       const { data: { user } } = await supabase.auth.getUser();
-      
       if (user) {
-        // First, check if a quiz exists for this Bible book, if not create one
         let { data: quiz } = await supabase
           .from('quizzes')
           .select('id, title')
@@ -126,7 +113,6 @@ const BibleBookQuiz = ({ title, questions, bookName }: BibleBookQuizProps) => {
           .single();
 
         if (!quiz) {
-          // Create a new quiz for this Bible book
           const { data: newQuiz, error: quizError } = await supabase
             .from('quizzes')
             .insert({
@@ -135,12 +121,10 @@ const BibleBookQuiz = ({ title, questions, bookName }: BibleBookQuizProps) => {
             })
             .select()
             .single();
-
           if (quizError) throw quizError;
           quiz = newQuiz;
         }
 
-        // Save the attempt
         const { error } = await supabase
           .from('attempts')
           .insert({
@@ -153,18 +137,13 @@ const BibleBookQuiz = ({ title, questions, bookName }: BibleBookQuizProps) => {
 
         if (error) {
           console.error('Error saving attempt:', error);
-          setDialogTitle("Error");
-          setDialogMessage("Failed to save your attempt. Please try again.");
-          setDialogOpen(true);
         } else {
-          // Get user profile for email
           const { data: profile } = await supabase
             .from('profiles')
             .select('email, full_name')
             .eq('id', user.id)
             .single();
 
-          // Send completion email
           if (profile?.email) {
             const emailData: QuizCompletionEmailData = {
               email: profile.email,
@@ -177,30 +156,14 @@ const BibleBookQuiz = ({ title, questions, bookName }: BibleBookQuizProps) => {
               accuracy: accuracy
             };
 
-            sendQuizCompletionEmailWithFallback(
-              emailData,
-              () => {
-                console.log('Bible book quiz completion email sent successfully');
-              },
-              (error) => {
-                console.error('Failed to send Bible book quiz completion email:', error);
-              }
-            );
+            sendQuizCompletionEmailWithFallback(emailData, () => {}, (err) => console.error(err));
           }
         }
       }
     } catch (error) {
       console.error('Error saving quiz attempt:', error);
-      setDialogTitle("Error");
-      setDialogMessage("Failed to save your attempt. Please try again.");
-      setDialogOpen(true);
     }
 
-    setDialogTitle("Quiz completed!");
-    setDialogMessage(`You scored ${totalScore} points with ${correctAnswers} correct answers.`);
-    setDialogOpen(true);
-
-    // Navigate to results page with score
     navigate(`/result/latest`, { 
       state: { 
         score: totalScore, 
@@ -213,10 +176,11 @@ const BibleBookQuiz = ({ title, questions, bookName }: BibleBookQuizProps) => {
 
   if (questions.length === 0) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center font-urbanist">
         <div className="text-center">
-          <Brain className="w-12 h-12 text-blue-600 mx-auto mb-4" />
-          <p className="text-gray-600">No questions available for this quiz.</p>
+          <Brain className="w-12 h-12 text-black mx-auto mb-4" />
+          <p className="text-gray-600 font-light">No questions available for this quiz.</p>
+          <Button variant="outline" onClick={() => navigate(-1)} className="mt-4">Go Back</Button>
         </div>
       </div>
     );
@@ -226,153 +190,118 @@ const BibleBookQuiz = ({ title, questions, bookName }: BibleBookQuizProps) => {
   const currentQ = questions[currentQuestion];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-      <Header />
-      {/* Dialog for all notifications */}
+    <div className="min-h-screen bg-white font-urbanist">
+      <SEO title={title} description={`Test your knowledge of ${bookName}`} />
+      
+      {/* Header */}
+      <header className="relative flex items-center justify-between p-6 w-full px-6 md:px-8 lg:px-12 border-b border-gray-100 bg-white z-50">
+        <div className="flex items-center space-x-8">
+          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}>
+            <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
+              <Brain className="w-3 h-3 text-white" />
+            </div>
+            <span className="text-lg font-semibold text-gray-900">Bible Quiz Competition</span>
+          </div>
+        </div>
+        <div className="flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-2 text-gray-500 font-light">
+            <Clock className="w-4 h-4" />
+            <span className="font-mono text-lg">{formatTime(timeLeft)}</span>
+          </div>
+          <Button variant="ghost" onClick={() => navigate(-1)} className="text-gray-500 hover:text-black">
+            Exit Quiz
+          </Button>
+        </div>
+      </header>
+
+      {/* Progress Bar (Sticky) */}
+      <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between text-sm font-light text-gray-500 mb-2">
+            <span>Question {currentQuestion + 1} of {questions.length}</span>
+            <span className="hidden md:inline italic">{bookName} Hub</span>
+          </div>
+          <Progress value={progress} className="h-1 bg-gray-100" />
+        </div>
+      </div>
+
+      <main className="max-w-4xl mx-auto px-6 py-12 md:py-20">
+        <div className="space-y-12">
+          {/* Question Header */}
+          <div className="space-y-6">
+            <div className="flex items-center space-x-3">
+              <Badge variant="outline" className="text-xs uppercase tracking-widest font-light px-3 py-1 rounded-full border-gray-200">
+                Chapter {currentQ.chapter}
+              </Badge>
+              {timeLeft <= 60 && (
+                <Badge className="bg-red-50 text-red-600 border-red-100 font-light px-3 py-1 rounded-full animate-pulse">
+                  Ending Soon
+                </Badge>
+              )}
+            </div>
+            <h1 className="text-4xl md:text-5xl font-normal text-gray-900 leading-tight">
+              {currentQ.question}
+            </h1>
+          </div>
+
+          {/* Options Grid */}
+          <div className="grid grid-cols-1 gap-4">
+            {currentQ.options.map((option, index) => (
+              <button
+                key={index}
+                onClick={() => handleAnswerSelect(index)}
+                className={`w-full p-8 text-left rounded-2xl border-2 transition-all duration-300 flex items-center group ${
+                  selectedAnswer === index 
+                    ? "border-black bg-black text-white" 
+                    : "border-gray-100 bg-white hover:border-gray-300"
+                }`}
+              >
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center mr-6 text-sm font-semibold flex-shrink-0 ${
+                  selectedAnswer === index ? "bg-white text-black" : "bg-gray-100 text-gray-400 group-hover:bg-gray-200"
+                }`}>
+                  {String.fromCharCode(65 + index)}
+                </div>
+                <span className="text-xl font-light leading-relaxed">{option}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Action Footer */}
+          <div className="pt-10 flex flex-col items-center space-y-6">
+            <Button
+              onClick={handleNextQuestion}
+              disabled={selectedAnswer === null}
+              className={`w-full md:w-auto px-12 py-8 text-xl font-light rounded-full transition-all duration-500 ${
+                selectedAnswer !== null 
+                  ? "bg-black text-white hover:bg-gray-800 translate-y-0 opacity-100" 
+                  : "bg-gray-100 text-gray-400 cursor-not-allowed opacity-50"
+              }`}
+            >
+              {currentQuestion === questions.length - 1 ? "Finish Quiz →" : "Next Question →"}
+            </Button>
+            
+            <p className="text-gray-400 font-light italic">
+              Carefully review your answer before continuing.
+            </p>
+          </div>
+        </div>
+      </main>
+
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent>
+        <DialogContent className="font-urbanist rounded-3xl border-none shadow-2xl">
           <DialogHeader>
-            <DialogTitle>{dialogTitle}</DialogTitle>
-            <DialogDescription>{dialogMessage}</DialogDescription>
+            <DialogTitle className="text-2xl font-semibold">{dialogTitle}</DialogTitle>
+            <DialogDescription className="text-lg font-light text-gray-600">{dialogMessage}</DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose asChild>
-              <Button onClick={() => setDialogOpen(false)}>Close</Button>
+              <Button className="bg-black text-white hover:bg-gray-800 rounded-full px-8 py-6">Got it</Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      {/* Floating Time Warning */}
-      {showTimeWarning && (
-        <div className="fixed top-20 right-4 z-50 animate-bounce">
-          <div className="bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg flex items-center space-x-2">
-            <AlertTriangle className="w-5 h-5" />
-            <span className="font-bold">TIME RUNNING OUT!</span>
-          </div>
-        </div>
-      )}
-
-      {/* Minimal progress bar (no extra header branding) */}
-      <div className="bg-white/70 border-b border-blue-100 sticky top-0 z-40">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
-            <span>Question {currentQuestion + 1} of {questions.length}</span>
-            <span className="font-mono">{formatTime(timeLeft)}</span>
-          </div>
-          <Progress value={progress} className="h-2" />
-        </div>
-      </div>
-
-      {/* Quiz Content */}
-      <main className="container mx-auto px-4 py-8">
-        <div className="max-w-3xl mx-auto">
-          {/* Time Status Card */}
-          <div className="mb-6">
-            <Card className={`border-0 shadow-lg transition-all duration-300 ${
-              timeLeft <= 60 
-                ? 'bg-red-50 border-red-200' 
-                : timeLeft <= 180 
-                  ? 'bg-orange-50 border-orange-200'
-                  : 'bg-blue-50 border-blue-200'
-            }`}>
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <Clock className={`w-6 h-6 ${
-                      timeLeft <= 60 ? 'text-red-600' : timeLeft <= 180 ? 'text-orange-600' : 'text-blue-600'
-                    }`} />
-                    <div>
-                      <p className="font-semibold text-gray-900">
-                        {timeLeft <= 60 ? 'Final Countdown!' : timeLeft <= 180 ? 'Time is Running Out!' : 'Quiz Timer'}
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        {timeLeft <= 60 
-                          ? 'Complete your quiz quickly!' 
-                          : timeLeft <= 180 
-                            ? 'You have less than 3 minutes remaining'
-                            : 'You have plenty of time to think carefully'
-                        }
-                      </p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className={`font-mono text-2xl font-bold ${
-                      timeLeft <= 60 ? 'text-red-600' : timeLeft <= 180 ? 'text-orange-600' : 'text-blue-600'
-                    }`}>
-                      {formatTime(timeLeft)}
-                    </div>
-                    <div className="text-xs text-gray-500">
-                      {Math.ceil((timeLeft / 600) * 100)}% remaining
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          <Card className="shadow-2xl border-0 bg-white/80 backdrop-blur-sm">
-            <CardHeader>
-              <div className="flex items-center justify-between mb-2">
-                <Badge className="bg-blue-100 text-blue-700">
-                  Chapter {currentQ.chapter}
-                </Badge>
-              </div>
-              <CardTitle className="text-2xl font-bold text-gray-900 leading-relaxed">
-                {currentQ.question}
-              </CardTitle>
-            </CardHeader>
-            
-            <CardContent className="space-y-4">
-              {currentQ.options.map((option, index) => (
-                <Button
-                  key={index}
-                  variant={selectedAnswer === index ? "default" : "outline"}
-                  className={`w-full p-6 text-left justify-start text-wrap h-auto min-h-[60px] transition-all duration-200 ${
-                    selectedAnswer === index 
-                      ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg" 
-                      : "hover:bg-blue-50 hover:border-blue-300"
-                  }`}
-                  onClick={() => handleAnswerSelect(index)}
-                >
-                  <div className="flex items-center space-x-3 w-full">
-                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-sm font-semibold ${
-                      selectedAnswer === index ? "bg-white text-blue-600" : "bg-blue-100 text-blue-600"
-                    }`}>
-                      {String.fromCharCode(65 + index)}
-                    </div>
-                    <span className="text-base font-medium flex-1">{option}</span>
-                    {selectedAnswer === index && (
-                      <CheckCircle className="w-5 h-5" />
-                    )}
-                  </div>
-                </Button>
-              ))}
-              
-              {selectedAnswer !== null && (
-                <div className="rounded-lg bg-blue-50 border border-blue-200 p-4 text-sm text-gray-800">
-                  {currentQ.explanation ? currentQ.explanation : "Explanation coming soon."}
-                </div>
-              )}
-
-              <div className="pt-6 flex justify-between items-center">
-                <div className="text-sm text-gray-500">
-                  Select an answer to continue
-                </div>
-                
-                <Button
-                  onClick={handleNextQuestion}
-                  disabled={selectedAnswer === null}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  {currentQuestion === questions.length - 1 ? "Finish Quiz" : "Next Question"}
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </main>
     </div>
   );
 };
 
-export default BibleBookQuiz; 
+export default BibleBookQuiz;

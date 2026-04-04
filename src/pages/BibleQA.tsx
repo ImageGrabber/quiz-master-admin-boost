@@ -185,10 +185,10 @@ export default function BibleQA() {
       {/* Hero Section with Search */}
       <section className="py-16 bg-white text-center">
         <div className="max-w-4xl mx-auto px-6">
-          <h1 className="text-4xl md:text-6xl font-urbanist font-normal text-gray-900 mb-6 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-urbanist font-normal text-gray-900 mb-6 leading-tight">
             Discover Your Bible Knowledge
           </h1>
-          <p className="text-xl font-urbanist font-light text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-2xl font-urbanist font-light text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
             Search through 66 Bible books, take interactive quizzes, and challenge yourself with thousands of questions. Find exactly what you're looking for or explore new topics.
           </p>
 
@@ -244,12 +244,12 @@ export default function BibleQA() {
           {/* Quick Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
             {quickStats.map((stat) => (
-              <div key={stat.label} className="bg-white rounded-lg p-4 border border-gray-200">
-                <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100 mx-auto mb-2">
-                  <stat.icon className="w-4 h-4 text-gray-700" strokeWidth={1} />
+              <div key={stat.label} className="bg-white rounded-lg p-6 border border-gray-200">
+                <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gray-100 mx-auto mb-3">
+                  <stat.icon className="w-5 h-5 text-gray-700" strokeWidth={1} />
                 </div>
-                <div className="text-2xl font-urbanist font-semibold text-gray-900">{stat.value}</div>
-                <div className="text-sm font-urbanist font-light text-gray-600">{stat.label}</div>
+                <div className="text-3xl font-urbanist font-semibold text-gray-900">{stat.value}</div>
+                <div className="text-base font-urbanist font-light text-gray-600">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -261,7 +261,7 @@ export default function BibleQA() {
         {/* Book Hubs (e.g., Genesis) */}
         <section className="mb-16">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl md:text-4xl font-urbanist font-semibold text-gray-900">Book Study Hubs</h2>
+            <h2 className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900">Book Study Hubs</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Genesis Hub Card */}
@@ -272,8 +272,8 @@ export default function BibleQA() {
                     <BookOpen className="w-6 h-6 text-gray-700" strokeWidth={1} />
                   </div>
                 </div>
-                <CardTitle className="text-xl font-urbanist font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">Genesis Hub</CardTitle>
-                <CardDescription className="font-urbanist font-light text-gray-600">Questions, answers, and quizzes for the Book of Genesis</CardDescription>
+                <CardTitle className="text-2xl font-urbanist font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">Genesis Hub</CardTitle>
+                <CardDescription className="text-base font-urbanist font-light text-gray-600">Questions, answers, and quizzes for the Book of Genesis</CardDescription>
               </CardHeader>
               <CardContent>
                 <Button className="w-full font-urbanist font-light border-gray-300" variant="outline">
@@ -290,8 +290,8 @@ export default function BibleQA() {
                     <Brain className="w-6 h-6 text-gray-700" strokeWidth={1} />
                   </div>
                 </div>
-                <CardTitle className="text-xl font-urbanist font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">Exodus Hub</CardTitle>
-                <CardDescription className="font-urbanist font-light text-gray-600">Questions, answers, and quizzes for the Book of Exodus</CardDescription>
+                <CardTitle className="text-2xl font-urbanist font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">Exodus Hub</CardTitle>
+                <CardDescription className="text-base font-urbanist font-light text-gray-600">Questions, answers, and quizzes for the Book of Exodus</CardDescription>
               </CardHeader>
               <CardContent>
                 <Button className="w-full font-urbanist font-light border-gray-300" variant="outline">
@@ -309,8 +309,8 @@ export default function BibleQA() {
         {/* Featured Quizzes */}
         <section className="mb-16">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl md:text-4xl font-urbanist font-semibold text-gray-900">Featured Quizzes</h2>
-            <Button variant="outline" onClick={() => setSearchQuery("")} className="font-urbanist font-light border-gray-300">View All</Button>
+            <h2 className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900">Featured Quizzes</h2>
+            <Button variant="outline" onClick={() => setSearchQuery("")} className="font-urbanist font-light border-gray-300 text-base py-5">View All</Button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {randomFeaturedQuizzes.map((quiz) => (
@@ -325,8 +325,8 @@ export default function BibleQA() {
                       <div className="text-sm font-urbanist font-light text-gray-500">{quiz.questions} questions</div>
                     </div>
                   </div>
-                  <CardTitle className="text-xl font-urbanist font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">{quiz.title}</CardTitle>
-                  <CardDescription className="font-urbanist font-light text-gray-600">{quiz.description}</CardDescription>
+                  <CardTitle className="text-2xl font-urbanist font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">{quiz.title}</CardTitle>
+                  <CardDescription className="text-base font-urbanist font-light text-gray-600">{quiz.description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Button className="w-full font-urbanist font-light border-gray-300" variant="outline">
@@ -340,7 +340,7 @@ export default function BibleQA() {
 
         {/* Categories Grid - Organized by Biblical Order */}
         <section className="mb-16">
-          <h2 className="text-3xl md:text-4xl font-urbanist font-semibold text-gray-900 mb-8">Browse by Biblical Category</h2>
+          <h2 className="text-4xl md:text-5xl font-urbanist font-semibold text-gray-900 mb-8">Browse by Biblical Category</h2>
           <div className="space-y-8">
             {categories.map((category) => {
               const categoryQuizzes = featuredQuizzes.filter(quiz => quiz.category === category.name);
