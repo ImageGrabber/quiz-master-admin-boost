@@ -1,12 +1,13 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import SEO from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Search, BookOpen, Brain, ChevronRight, Menu, X } from "lucide-react";
+import { Search, BookOpen, ChevronRight, X, Brain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { bibleBooks, featuredQuizzes, categories as categoryData } from "@/data/bible-data";
+import { Navigation } from "@/components/Navigation";
 
 export default function BibleQA() {
   const navigate = useNavigate();
@@ -14,20 +15,6 @@ export default function BibleQA() {
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isCategoryDialogOpen, setIsCategoryDialogOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (mobileMenuOpen && !(event.target as Element).closest("header")) {
-        setMobileMenuOpen(false);
-      }
-    };
-
-    if (mobileMenuOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => document.removeEventListener("mousedown", handleClickOutside);
-    }
-  }, [mobileMenuOpen]);
 
   const allBooks = useMemo(
     () => [
@@ -151,54 +138,7 @@ export default function BibleQA() {
         url="/bible-questions-and-answers-hub"
       />
 
-      <header className="relative flex items-center justify-between p-6 w-full px-6 md:px-8 lg:px-12">
-        <div className="flex items-center space-x-8">
-          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}>
-            <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
-              <Brain className="w-3 h-3 text-white" />
-            </div>
-            <span className="text-lg font-semibold text-gray-900">Bible Quiz Competition</span>
-          </div>
-          <nav className="hidden md:flex items-center space-x-6">
-            <button onClick={() => navigate("/bible-questions-and-answers-hub")} className="text-gray-600 hover:text-gray-900 font-light">
-              Bible Q&A
-            </button>
-            <button onClick={() => navigate("/articles")} className="text-gray-600 hover:text-gray-900 font-light">
-              Articles
-            </button>
-            <button onClick={() => navigate("/help")} className="text-gray-600 hover:text-gray-900 font-light">
-              Help
-            </button>
-          </nav>
-        </div>
-        <div className="flex items-center space-x-4">
-          <Button className="bg-black hover:bg-gray-800 font-light" onClick={() => navigate("/auth/register")}>
-            Get Started
-          </Button>
-          <button className="md:hidden" onClick={() => setMobileMenuOpen((open) => !open)}>
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
-        {mobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-6 right-6 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 flex flex-col">
-            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-light" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>
-              Bible Q&A Hub
-            </button>
-            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-light" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>
-              Articles
-            </button>
-            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>
-              Help
-            </button>
-            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-light border-t border-gray-200" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>
-              Sign In
-            </button>
-            <Button className="bg-black text-white px-4 py-3 mx-4 mb-4 font-light" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>
-              Sign Up
-            </Button>
-          </div>
-        )}
-      </header>
+      <Navigation />
 
       <section className="py-16 bg-white text-center">
         <div className="max-w-4xl mx-auto px-6">
@@ -510,4 +450,3 @@ export default function BibleQA() {
     </div>
   );
 }
-

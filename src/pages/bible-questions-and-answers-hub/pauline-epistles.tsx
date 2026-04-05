@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Link } from "react-router-dom";
 import { Users, BookOpen, Clock, Star, ArrowRight, BookMarked } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Navigation } from "@/components/Navigation";
 
 const paulineEpistles = [
   {
@@ -140,6 +141,7 @@ const paulineEpistles = [
 export default function PaulineEpistles() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      <Navigation />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-12">

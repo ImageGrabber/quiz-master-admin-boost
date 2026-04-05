@@ -112,6 +112,12 @@ export function Navigation() {
                 >
                   English Hymns
                 </button>
+                <button
+                  onClick={() => { setSongsDropdownOpen(false); navigate('/hindi-songs'); }}
+                  className="w-full text-left px-4 py-2.5 hover:bg-gray-50 font-urbanist font-light text-base text-gray-700 hover:text-gray-900 transition-colors"
+                >
+                  Hindi Songs
+                </button>
               </div>
             )}
           </div>
@@ -187,6 +193,7 @@ export function Navigation() {
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/songs"); }}>Malayalam Songs</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/english-songs"); }}>English Hymns</button>
+          <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/hindi-songs"); }}>Hindi Songs</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>Help</button>
 

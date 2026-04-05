@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { BookOpen, ChevronRight, Home, ArrowLeft, Brain, Sparkles, ScrollText } from "lucide-react";
+import { BookOpen, Brain, Sparkles, ScrollText } from "lucide-react";
 import SEO from "@/components/SEO";
 import { BibleChapter } from "@/data/bibleData";
+import { Navigation } from "@/components/Navigation";
 
 interface ChapterStudyLayoutProps {
   book: string;
@@ -24,22 +25,12 @@ export default function ChapterStudyLayout({ book, chapterId, content, mode }: C
         description={content.description}
         url={`/bible-questions-and-answers-hub/${book}/chapter-${chapterId}${mode === 'full' ? '-full' : ''}`}
       />
-      
-      {/* Premium Header */}
-      <header className="relative flex items-center justify-between p-6 w-full px-6 md:px-8 lg:px-12 border-b border-gray-50">
-        <div className="flex items-center space-x-8">
-          <div className="flex items-center space-x-2 cursor-pointer group" onClick={() => navigate("/")}>
-            <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-              <Brain className="w-4 h-4 text-white" />
-            </div>
-            <span className="text-xl font-semibold text-gray-900 tracking-tight">Bible Quiz Hub</span>
-          </div>
-        </div>
+      <Navigation />
+      <div className="w-full px-6 md:px-8 lg:px-12 py-4 border-b border-gray-50">
         <Button variant="ghost" onClick={() => navigate(`/bible-questions-and-answers-hub/${book}`)} className="text-gray-500 hover:text-black font-light">
-          <ArrowLeft className="w-4 h-4 mr-2" />
           Back to {bookName}
         </Button>
-      </header>
+      </div>
 
       {/* Hero Section */}
       <section className="py-24 bg-white text-center border-b border-gray-50">

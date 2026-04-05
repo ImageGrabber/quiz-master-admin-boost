@@ -173,6 +173,25 @@ function generateSitemap() {
     console.log(`Added ${uniqueEnglishSlugs.size} English song URLs to sitemap`);
   }
 
+  // Hindi Song pages
+  const hindiSongsJsonPath = path.join(__dirname, '..', 'src', 'data', 'hindi-songs.json');
+  if (fs.existsSync(hindiSongsJsonPath)) {
+    const hindiSongs = JSON.parse(fs.readFileSync(hindiSongsJsonPath, 'utf-8'));
+    urls.push({ loc: '/hindi-songs', priority: '0.9', changefreq: 'weekly' });
+
+    const uniqueHindiSlugs = new Set<string>();
+    for (const song of hindiSongs) {
+      if (!song.slug || uniqueHindiSlugs.has(song.slug)) continue;
+      uniqueHindiSlugs.add(song.slug);
+      urls.push({
+        loc: `/hindi-songs/${song.slug}`,
+        priority: '0.7',
+        changefreq: 'monthly'
+      });
+    }
+    console.log(`Added ${uniqueHindiSlugs.size} Hindi song URLs to sitemap`);
+  }
+
   // Generate XML sitemap
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;

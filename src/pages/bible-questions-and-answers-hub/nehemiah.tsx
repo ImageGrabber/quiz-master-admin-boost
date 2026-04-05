@@ -3,27 +3,13 @@ import { useState, useMemo, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { BookOpen, Layers, Swords, ListOrdered, Brain, Home, ChevronRight, Search, Menu } from "lucide-react";
+import { BookOpen, Layers, Swords, ListOrdered, Brain, Home, ChevronRight, Search } from "lucide-react";
 import SEO from "@/components/SEO";
+import { Navigation } from "@/components/Navigation";
 
 export default function NehemiahHub() {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Close mobile menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (mobileMenuOpen && !(event.target as Element).closest('header')) {
-        setMobileMenuOpen(false);
-      }
-    };
-
-    if (mobileMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
-    }
-  }, [mobileMenuOpen]);
 
   const chapterNumbers = Array.from({ length: 13 }, (_, i) => i + 1);
   const filteredChapters = useMemo(() => {
@@ -117,28 +103,7 @@ export default function NehemiahHub() {
         title="Nehemiah Hub: Rebuilding the Walls | Study & Quizzes" 
         description="Comprehensive study guide and interactive quizzes for the Book of Nehemiah. Explore Nehemiah's leadership, the 52-day wall reconstruction, and the spiritual reforms in Jerusalem." 
       />
-
-      {/* Modern, Slim Header */}
-      <header className="sticky top-0 z-50 w-full border-b border-stone-200 bg-white/80 backdrop-blur-md">
-        <div className="container mx-auto flex h-14 items-center justify-between px-4 sm:px-6">
-          <div className="flex items-center gap-2 cursor-pointer group" onClick={() => navigate('/bible-questions-and-answers-hub')}>
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-stone-900 text-white transition-transform group-hover:scale-110">
-              <BookOpen className="h-5 w-5" />
-            </div>
-            <span className="text-sm font-bold tracking-tight text-stone-900 sm:text-base">BIBLE QA HUB</span>
-          </div>
-
-          <nav className="hidden md:flex items-center gap-6">
-            <button onClick={() => navigate('/')} className="text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">Home</button>
-            <button onClick={() => navigate('/bible-questions-and-answers-hub')} className="text-sm font-medium text-stone-600 hover:text-stone-900 transition-colors">Hub</button>
-            <Button variant="ghost" size="sm" onClick={() => navigate('/dashboard')} className="text-stone-600">Dashboard</Button>
-          </nav>
-
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            <Menu className="h-5 w-5" />
-          </Button>
-        </div>
-      </header>
+      <Navigation />
 
       <main className="container mx-auto px-4 py-8 sm:px-6 lg:py-12">
         {/* Hero Section */}

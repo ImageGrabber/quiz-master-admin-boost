@@ -3,6 +3,7 @@ import { quizData } from "@/data/quizData";
 import BibleBookQuiz from "./BibleBookQuiz";
 import { Button } from "@/components/ui/button";
 import { Brain, ArrowLeft } from "lucide-react";
+import { Navigation } from "@/components/Navigation";
 
 export default function ChapterQuizPage() {
   const { book, quizId } = useParams<{ book: string; quizId: string }>();
@@ -37,39 +38,42 @@ export default function ChapterQuizPage() {
     const availableChapters = bookQuizzes ? Object.keys(bookQuizzes).filter(k => k !== id) : [];
 
     return (
-      <div className="min-h-screen bg-white flex flex-col items-center justify-center font-sans p-6 text-center">
-        <Brain className="w-16 h-16 text-stone-900 mb-6 animate-pulse" />
-        <h1 className="text-4xl font-black text-stone-900 mb-4 tracking-tight uppercase">Quiz Under Construction</h1>
-        <p className="text-xl font-bold text-stone-400 max-w-md mb-8 leading-relaxed uppercase tracking-widest text-[10px]">
-          Gathering wisdom for {bookNameFormatted} {id?.includes("-") ? `Range ${id}` : `Chapter ${id}`} ({difficulty}).
-        </p>
+      <div className="min-h-screen bg-white">
+        <Navigation />
+        <div className="flex flex-col items-center justify-center font-sans p-6 text-center min-h-[70vh]">
+          <Brain className="w-16 h-16 text-stone-900 mb-6 animate-pulse" />
+          <h1 className="text-4xl font-black text-stone-900 mb-4 tracking-tight uppercase">Quiz Under Construction</h1>
+          <p className="text-xl font-bold text-stone-400 max-w-md mb-8 leading-relaxed uppercase tracking-widest text-[10px]">
+            Gathering wisdom for {bookNameFormatted} {id?.includes("-") ? `Range ${id}` : `Chapter ${id}`} ({difficulty}).
+          </p>
 
-        {availableChapters.length > 0 && (
-          <div className="mb-10 w-full max-w-md">
-            <p className="text-xs font-semibold text-stone-500 mb-4 uppercase tracking-widest">Available Quizzes in {bookNameFormatted}:</p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {availableChapters.slice(0, 6).map((cap) => (
-                <Button 
-                  key={cap}
-                  variant="outline"
-                  size="sm"
-                  className="border-stone-200 text-stone-600 hover:bg-stone-50 rounded-full text-xs px-4"
-                  onClick={() => navigate(`/bible-questions-and-answers-hub/${bookKey}/ch${cap}-beginner`)}
-                >
-                  {cap.includes("-") ? `Range ${cap}` : `Chapter ${cap}`}
-                </Button>
-              ))}
+          {availableChapters.length > 0 && (
+            <div className="mb-10 w-full max-w-md">
+              <p className="text-xs font-semibold text-stone-500 mb-4 uppercase tracking-widest">Available Quizzes in {bookNameFormatted}:</p>
+              <div className="flex flex-wrap justify-center gap-2">
+                {availableChapters.slice(0, 6).map((cap) => (
+                  <Button 
+                    key={cap}
+                    variant="outline"
+                    size="sm"
+                    className="border-stone-200 text-stone-600 hover:bg-stone-50 rounded-full text-xs px-4"
+                    onClick={() => navigate(`/bible-questions-and-answers-hub/${bookKey}/ch${cap}-beginner`)}
+                  >
+                    {cap.includes("-") ? `Range ${cap}` : `Chapter ${cap}`}
+                  </Button>
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        <Button
-          onClick={() => navigate(`/bible-questions-and-answers-hub/${bookKey}`)}
-          className="bg-stone-900 hover:bg-stone-800 text-white font-black py-6 px-10 rounded-2xl shadow-xl transition-all hover:scale-105"
-        >
-          <ArrowLeft className="w-5 h-5 mr-2" />
-          BACK TO {bookNameFormatted.toUpperCase()} HUB
-        </Button>
+          <Button
+            onClick={() => navigate(`/bible-questions-and-answers-hub/${bookKey}`)}
+            className="bg-stone-900 hover:bg-stone-800 text-white font-black py-6 px-10 rounded-2xl shadow-xl transition-all hover:scale-105"
+          >
+            <ArrowLeft className="w-5 h-5 mr-2" />
+            BACK TO {bookNameFormatted.toUpperCase()} HUB
+          </Button>
+        </div>
       </div>
     );
   }
