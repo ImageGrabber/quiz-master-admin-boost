@@ -103,23 +103,27 @@ const StoryDetail = () => {
 
           {/* Featured Image Section (with SEO Alt Text) */}
           <div className="aspect-video w-full bg-orange-100 rounded-[40px] flex items-center justify-center overflow-hidden shadow-inner border-4 border-white relative group">
-             {["the-brave-shepherd-boy", "noahs-special-boat", "the-kind-neighbor"].includes(story.slug) ? (
                <img 
                  src={`/images/stories/${story.slug}.png`}
                  alt={story.imageAlt}
                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                 onError={(e) => {
+                    // Fallback if image is missing
+                    (e.target as HTMLImageElement).style.display = 'none';
+                    const parent = (e.target as HTMLImageElement).parentElement;
+                    if (parent) {
+                      const fallback = document.createElement('div');
+                      fallback.className = 'absolute inset-0 bg-orange-100 flex flex-col items-center justify-center text-center p-6';
+                      fallback.innerHTML = `
+                        <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto shadow-lg">
+                          <svg class="w-10 h-10 text-orange-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
+                        </div>
+                        <p class="text-orange-800 font-bold text-xl mt-4">${story.imageAlt}</p>
+                      `;
+                      parent.appendChild(fallback);
+                    }
+                 }}
                />
-             ) : (
-               <>
-                 <div className="absolute inset-0 bg-gradient-to-tr from-orange-200/50 to-yellow-100/50 opacity-50" />
-                 <div className="z-10 text-center space-y-4 px-6">
-                   <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto shadow-lg transform group-hover:rotate-12 transition-transform duration-500">
-                     <Sparkles className="w-10 h-10 text-orange-500" />
-                   </div>
-                   <p className="text-orange-800 font-urbanist font-bold text-xl">{story.imageAlt}</p>
-                 </div>
-               </>
-             )}
           </div>
 
           {/* Story Content */}

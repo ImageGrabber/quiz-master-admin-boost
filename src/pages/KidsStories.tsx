@@ -106,18 +106,24 @@ const KidsStories = () => {
                 onClick={() => navigate(`/kids-stories/${story.slug}`)}
               >
                 {/* Illustration Section */}
-                <div className="aspect-[4/3] w-full bg-[#f8fafc] overflow-hidden relative">
-                   {["the-brave-shepherd-boy", "noahs-special-boat", "the-kind-neighbor"].includes(story.slug) ? (
+                <div className="aspect-[4/3] w-full bg-[#f8fafc] overflow-hidden relative border-b border-gray-100">
                      <img 
                        src={`/images/stories/${story.slug}.png`}
                        alt={story.imageAlt}
+                       loading="lazy"
                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                       onError={(e) => {
+                         // Fallback if image is missing
+                         (e.target as HTMLImageElement).style.display = 'none';
+                         const parent = (e.target as HTMLImageElement).parentElement;
+                         if (parent) {
+                           const fallback = document.createElement('div');
+                           fallback.className = 'absolute inset-0 bg-blue-50/50 flex items-center justify-center';
+                           fallback.innerHTML = '<svg class="w-16 h-16 text-blue-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h6z"></path></svg>';
+                           parent.appendChild(fallback);
+                         }
+                       }}
                      />
-                   ) : (
-                     <div className="absolute inset-0 bg-blue-50/50 flex items-center justify-center">
-                       <BookOpen className="w-16 h-16 text-blue-200" />
-                     </div>
-                   )}
                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/10" />
                 </div>
 
