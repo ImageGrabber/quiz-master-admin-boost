@@ -22,6 +22,8 @@ import {
   Brain,
   Menu
 } from "lucide-react";
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 
 interface Article {
   id: string;
@@ -53,7 +55,6 @@ const Articles = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
 
   const filteredArticles = sampleArticles.filter(article => {
@@ -69,19 +70,6 @@ const Articles = () => {
   const featuredArticles = filteredArticles.filter(article => article.featured);
   const regularArticles = filteredArticles.filter(article => !article.featured);
 
-  // Close mobile menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (mobileMenuOpen && !(event.target as Element).closest('header')) {
-        setMobileMenuOpen(false);
-      }
-    };
-
-    if (mobileMenuOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
-    }
-  }, [mobileMenuOpen]);
 
   const generateStructuredData = () => {
     return {
@@ -142,43 +130,7 @@ const Articles = () => {
         </script>
       </Helmet>
 
-      {/* Header */}
-      <header className="relative flex items-center justify-between p-6 w-full px-6 md:px-8 lg:px-12">
-        <div className="flex items-center space-x-8">
-          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}>
-            <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
-              <Brain className="w-3 h-3 text-white" />
-            </div>
-            <span className="text-lg font-urbanist font-semibold text-gray-900">Bible Quiz Competition</span>
-          </div>
-          <nav className="hidden md:flex items-center space-x-6">
-            <button onClick={() => navigate("/bible-questions-and-answers-hub")} className="text-gray-600 hover:text-gray-900 font-urbanist font-light">Bible Q&A</button>
-            <button onClick={() => navigate("/articles")} className="text-gray-600 hover:text-gray-900 font-urbanist font-light">Articles</button>
-            <button onClick={() => navigate("/help")} className="text-gray-600 hover:text-gray-900 font-urbanist font-light">Help</button>
-          </nav>
-        </div>
-        <div className="flex items-center space-x-4">
-          <Button
-            className="bg-black hover:bg-gray-800 font-urbanist font-light"
-            onClick={() => navigate("/auth/register")}
-          >
-            Get Started
-          </Button>
-          <button className="md:hidden" onClick={() => setMobileMenuOpen((open) => !open)}>
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
-        {/* Mobile dropdown menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden absolute top-full left-6 right-6 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 flex flex-col">
-            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A Hub</button>
-            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
-            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>Help</button>
-            <button className="text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-t border-gray-200" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
-            <Button className="bg-black text-white px-4 py-3 mx-4 mb-4 font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</Button>
-          </div>
-        )}
-      </header>
+      <Navigation />
 
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Hero Section */}
@@ -414,55 +366,7 @@ const Articles = () => {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="border-t border-gray-200 py-16 bg-gray-50 mt-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-            {/* Company Info */}
-            <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
-                  <Brain className="w-3 h-3 text-white" />
-                </div>
-                <span className="text-lg font-urbanist font-light text-gray-900">Bible Quiz Competition</span>
-              </div>
-              <p className="font-urbanist font-light text-gray-600 mb-4 max-w-md">
-                Free Bible quiz platform that helps you test your knowledge, compete with others, and grow in your understanding of Scripture.
-              </p>
-            </div>
-
-            {/* Product Links */}
-            <div>
-              <h3 className="font-medium text-gray-900 mb-4 font-urbanist">Product</h3>
-              <ul className="space-y-3">
-                <li><a href="/todays-quiz" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Today's Quiz</a></li>
-                <li><a href="/weekly-quiz" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Weekly Quiz</a></li>
-                <li><a href="/public-leaderboard" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Leaderboard</a></li>
-                <li><a href="/help" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Help</a></li>
-              </ul>
-            </div>
-
-            {/* Support Links */}
-            <div>
-              <h3 className="font-medium text-gray-900 mb-4 font-urbanist">Support</h3>
-              <ul className="space-y-3">
-                <li><a href="/help" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Help Center</a></li>
-                <li><a href="#faq" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">FAQ</a></li>
-                <li><a href="mailto:info@biblequizcompetition.com" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Contact Us</a></li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Bottom Footer */}
-          <div className="border-t border-gray-200 pt-8 mt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="flex items-center space-x-6 mb-4 md:mb-0">
-                <span className="font-urbanist font-light text-gray-600">© 2024 Bible Quiz Competition. All rights reserved.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

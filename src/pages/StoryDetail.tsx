@@ -18,6 +18,9 @@ export interface KidsStory {
   theme: string;
   imageAlt: string;
   keyTakeaways: string[];
+  biblicalMeaning?: string;
+  lifeLesson?: string;
+  discussionQuestions?: string[];
 }
 
 const StoryDetail = () => {
@@ -134,15 +137,66 @@ const StoryDetail = () => {
             
             <div className="relative z-10 space-y-8">
               <Quote className="w-12 h-12 text-orange-200" />
-              <div className="prose prose-lg md:prose-xl max-w-none font-urbanist font-light text-gray-800 leading-relaxed text-left">
-                {story.fullStory.split('\n\n').map((para, i) => (
-                    <p key={i} className="mb-8 last:mb-0">
-                      {i === 0 ? (
-                        <span className="text-6xl font-bold text-orange-500 float-left mr-3 mt-1 leading-[0.8]">{para.charAt(0)}</span>
-                      ) : null}
-                      {i === 0 ? para.substring(1) : para}
-                    </p>
-                ))}
+              <div className="space-y-10">
+                <section>
+                  <h2 className="text-3xl font-bold font-urbanist text-gray-900 mb-6 flex items-center gap-3">
+                    <Sparkles className="w-6 h-6 text-orange-400" />
+                    The Story of {story.title} for Kids
+                  </h2>
+                  <div className="prose prose-lg md:prose-xl max-w-none font-urbanist font-light text-gray-800 leading-relaxed text-left">
+                    {story.fullStory.split('\n\n').map((para, i) => (
+                        <p key={i} className="mb-6 last:mb-0">
+                          {i === 0 ? (
+                            <span className="text-6xl font-bold text-orange-500 float-left mr-3 mt-1 leading-[0.8]">{para.charAt(0)}</span>
+                          ) : null}
+                          {i === 0 ? para.substring(1) : para}
+                        </p>
+                    ))}
+                  </div>
+                </section>
+
+                {story.biblicalMeaning && (
+                  <section className="pt-8 border-t border-orange-50">
+                    <h2 className="text-3xl font-bold font-urbanist text-gray-900 mb-6 flex items-center gap-3">
+                      <BookOpen className="w-7 h-7 text-blue-500" />
+                      What Does This Bible Story Mean?
+                    </h2>
+                    <div className="prose prose-lg md:prose-xl max-w-none font-urbanist font-light text-gray-700 leading-relaxed text-left">
+                      {story.biblicalMeaning}
+                    </div>
+                  </section>
+                )}
+
+                {story.lifeLesson && (
+                  <section className="pt-8 border-t border-orange-50">
+                    <h2 className="text-3xl font-bold font-urbanist text-gray-900 mb-6 flex items-center gap-3">
+                      <Heart className="w-7 h-7 text-red-500" />
+                      Life Lessons for Young Hearts
+                    </h2>
+                    <div className="prose prose-lg md:prose-xl max-w-none font-urbanist font-light text-gray-700 leading-relaxed text-left italic bg-orange-50/30 p-8 rounded-3xl border border-orange-100">
+                      {story.lifeLesson}
+                    </div>
+                  </section>
+                )}
+
+                {story.discussionQuestions && story.discussionQuestions.length > 0 && (
+                  <section className="pt-8 border-t border-orange-50">
+                    <h3 className="text-2xl font-bold font-urbanist text-gray-900 mb-6 flex items-center gap-3">
+                      <Star className="w-6 h-6 text-yellow-500" />
+                      Let's Talk About It: Questions for Kids
+                    </h3>
+                    <div className="grid gap-4">
+                      {story.discussionQuestions.map((q, idx) => (
+                        <div key={idx} className="bg-white border border-orange-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex gap-4 items-start">
+                          <span className="flex-shrink-0 w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-sm">
+                            {idx + 1}
+                          </span>
+                          <p className="font-urbanist font-medium text-gray-700 pt-1">{q}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </section>
+                )}
               </div>
             </div>
           </div>
@@ -199,10 +253,18 @@ const StoryDetail = () => {
           </div>
 
           {/* Call to action */}
-          <div className="text-center py-12">
+          <div className="text-center py-12 flex flex-col md:flex-row items-center justify-center gap-6">
             <Button 
               size="lg" 
-              className="bg-black hover:bg-gray-800 text-white rounded-full px-12 py-8 text-xl font-bold font-urbanist transition-all hover:scale-105"
+              className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white rounded-full px-12 py-8 text-xl font-bold font-urbanist transition-all hover:scale-105 shadow-[0_8px_0_0_#5B21B6] active:translate-y-1 active:shadow-none"
+              onClick={() => navigate(`/kids-stories/${story.slug}/quiz`)}
+            >
+              Take the Story Quiz!
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline"
+              className="bg-white hover:bg-gray-50 text-black border-2 border-black rounded-full px-12 py-8 text-xl font-bold font-urbanist transition-all hover:scale-105"
               onClick={() => navigate("/kids-stories")}
             >
               Explore More Stories

@@ -17,6 +17,41 @@
       "God can use small things to do big miracles.",
       "We don't need to be afraid of giants when God is on our side.",
       "Trusting God is more powerful than any sword or spear."
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "question": "What was David's job before he became a hero?",
+        "options": [
+          "Fisherman",
+          "Shepherd",
+          "Carpenter",
+          "Baker"
+        ],
+        "answer": 1
+      },
+      {
+        "id": 2,
+        "question": "What did David use to defeat the giant Goliath?",
+        "options": [
+          "A giant sword",
+          "A bow and arrow",
+          "A sling and a stone",
+          "A spear"
+        ],
+        "answer": 2
+      },
+      {
+        "id": 3,
+        "question": "How many smooth stones did David pick up from the stream?",
+        "options": [
+          "One",
+          "Three",
+          "Five",
+          "Ten"
+        ],
+        "answer": 2
+      }
     ]
   },
   {
@@ -37,6 +72,41 @@
       "God's promises are true and he always keeps them.",
       "It is better to listen to God than to follow the crowd.",
       "God takes care of those who trust and obey Him."
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "question": "What was the name of the massive boat Noah built?",
+        "options": [
+          "The Titanic",
+          "The Ark",
+          "The Mayflower",
+          "The Speedboat"
+        ],
+        "answer": 1
+      },
+      {
+        "id": 2,
+        "question": "What did God put in the sky as a promise after the flood?",
+        "options": [
+          "A cloud",
+          "The sun",
+          "A rainbow",
+          "A star"
+        ],
+        "answer": 2
+      },
+      {
+        "id": 3,
+        "question": "How many days and nights did it rain?",
+        "options": [
+          "7 days",
+          "12 days",
+          "40 days",
+          "100 days"
+        ],
+        "answer": 2
+      }
     ]
   },
   {
@@ -57,6 +127,41 @@
       "God can multiply our small efforts into something amazing.",
       "We should never be afraid to share what we have.",
       "Jesus cares about our needs, including when we are hungry."
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "question": "What did the little boy have in his lunch basket?",
+        "options": [
+          "3 apples and 1 bread",
+          "5 loaves and 2 fish",
+          "10 cookies",
+          "Milk and honey"
+        ],
+        "answer": 1
+      },
+      {
+        "id": 2,
+        "question": "How many baskets were left over after everyone was full?",
+        "options": [
+          "None",
+          "Five",
+          "Twelve",
+          "Two"
+        ],
+        "answer": 2
+      },
+      {
+        "id": 3,
+        "question": "Where were the people sitting when Jesus gave them food?",
+        "options": [
+          "On chairs",
+          "In a boat",
+          "On soft green grass",
+          "On the sand"
+        ],
+        "answer": 2
+      }
     ]
   },
   {
@@ -77,7 +182,8 @@
       "To God, every single person is important.",
       "God doesn't get angry when we are lost; He wants to help us.",
       "We can always count on God's love to find us."
-    ]
+    ],
+    "quiz": []
   },
   {
     "id": 5,
@@ -97,6 +203,41 @@
       "God can turn bad situations into good ones.",
       "Forgiving others is better than staying angry.",
       "We should always work hard and trust God, no matter where we are."
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "question": "What was special about the coat Joseph's father gave him?",
+        "options": [
+          "It was very warm",
+          "It had many beautiful colors",
+          "It had golden buttons",
+          "It was made of silk"
+        ],
+        "answer": 1
+      },
+      {
+        "id": 2,
+        "question": "Joseph became a powerful leader in which country?",
+        "options": [
+          "Israel",
+          "Babylon",
+          "Egypt",
+          "Persia"
+        ],
+        "answer": 2
+      },
+      {
+        "id": 3,
+        "question": "What did Joseph do when he saw his brothers again?",
+        "options": [
+          "He stayed angry",
+          "He chose to forgive them",
+          "He sent them away",
+          "He didn't talk to them"
+        ],
+        "answer": 1
+      }
     ]
   },
   {
@@ -117,6 +258,41 @@
       "We should help people even if we don't know them.",
       "Kindness is more important than being busy or 'important.'",
       "God wants us to love people from all different backgrounds."
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "question": "Who finally stopped to help the man on the road?",
+        "options": [
+          "A Priest",
+          "A King",
+          "A Samaritan",
+          "A Soldier"
+        ],
+        "answer": 2
+      },
+      {
+        "id": 2,
+        "question": "Where did the Kind Neighbor take the hurt man to rest?",
+        "options": [
+          "A hospital",
+          "His own house",
+          "An inn",
+          "A park"
+        ],
+        "answer": 2
+      },
+      {
+        "id": 3,
+        "question": "What did the Kind Neighbor use to help the man's wounds?",
+        "options": [
+          "Water and soap",
+          "Oil and wine",
+          "Honey",
+          "Leaves"
+        ],
+        "answer": 1
+      }
     ]
   },
   {
@@ -137,6 +313,41 @@
       "Faith means doing what God says even if it seems strange.",
       "No obstacle is too big for God to take down.",
       "Patience and obedience lead to victory."
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "question": "How many days did the people march around the city once?",
+        "options": [
+          "One day",
+          "Three days",
+          "Six days",
+          "Ten days"
+        ],
+        "answer": 2
+      },
+      {
+        "id": 2,
+        "question": "What happened on the seventh day after the long shout?",
+        "options": [
+          "It started to rain",
+          "The walls fell down flat",
+          "The people went home",
+          "The sun stopped shining"
+        ],
+        "answer": 1
+      },
+      {
+        "id": 3,
+        "question": "What instruments did the priests blow?",
+        "options": [
+          "Drums",
+          "Flutes",
+          "Trumpets made of ram's horns",
+          "Harps"
+        ],
+        "answer": 2
+      }
     ]
   },
   {
@@ -157,6 +368,41 @@
       "We should never stop praying, even when it's hard.",
       "God is more powerful than even the scariest lions.",
       "Being honest and faithful is the best way to live."
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "question": "How many times a day did Daniel pray to God?",
+        "options": [
+          "Once",
+          "Twice",
+          "Three times",
+          "Five times"
+        ],
+        "answer": 2
+      },
+      {
+        "id": 2,
+        "question": "Who did God send to shut the mouths of the lions?",
+        "options": [
+          "A brave soldier",
+          "A king",
+          "An angel",
+          "A giant"
+        ],
+        "answer": 2
+      },
+      {
+        "id": 3,
+        "question": "How did Daniel feel in the lions' den?",
+        "options": [
+          "Terribly scared",
+          "Angry",
+          "Peaceful and safe",
+          "Hungry"
+        ],
+        "answer": 2
+      }
     ]
   },
   {
@@ -177,6 +423,41 @@
       "Preparation today makes tomorrow easier.",
       "Great things are accomplished one small step at a time.",
       "Working hard is a way to say 'thank you' to God."
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "question": "Which tiny creature does the Bible tell us to learn from?",
+        "options": [
+          "The Bee",
+          "The Ant",
+          "The Butterfly",
+          "The Spider"
+        ],
+        "answer": 1
+      },
+      {
+        "id": 2,
+        "question": "When do the wise ants gather their food?",
+        "options": [
+          "In the winter",
+          "At night",
+          "In the summer",
+          "Only on weekends"
+        ],
+        "answer": 2
+      },
+      {
+        "id": 3,
+        "question": "Why do the ants work so hard during the sunny days?",
+        "options": [
+          "To play games",
+          "To prepare for the cold winter",
+          "Because they like to walk",
+          "To build a tower"
+        ],
+        "answer": 1
+      }
     ]
   },
   {
@@ -197,6 +478,41 @@
       "Our position and talents can be used to help others.",
       "Prayer and courage go together.",
       "God uses ordinary people to do extraordinary things."
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "question": "Who was the young girl who became a brave Queen?",
+        "options": [
+          "Mary",
+          "Ruth",
+          "Esther",
+          "Sarah"
+        ],
+        "answer": 2
+      },
+      {
+        "id": 2,
+        "question": "What did the King hold out to show Esther she was welcome?",
+        "options": [
+          "A golden scepter",
+          "A crown",
+          "A sword",
+          "His hand"
+        ],
+        "answer": 0
+      },
+      {
+        "id": 3,
+        "question": "Esther was told she became Queen for what reason?",
+        "options": [
+          "To wear pretty dresses",
+          "For such a time as this",
+          "To live in a big house",
+          "To go to parties"
+        ],
+        "answer": 1
+      }
     ]
   }
 ]

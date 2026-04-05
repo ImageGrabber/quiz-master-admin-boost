@@ -6,7 +6,7 @@ import { Search, BookOpen, ChevronRight, X, Brain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { bibleBooks, featuredQuizzes, categories as categoryData } from "@/data/bible-data";
+import { bibleBooks, featuredQuizzes, categories as categoryData, bibleStructure } from "@/data/bible-data";
 import { Navigation } from "@/components/Navigation";
 
 export default function BibleQA() {
@@ -15,6 +15,10 @@ export default function BibleQA() {
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isCategoryDialogOpen, setIsCategoryDialogOpen] = useState(false);
+  
+  const getBookSlug = (book: string) => {
+    return book.toLowerCase().replace(/ /g, "-");
+  };
 
   const allBooks = useMemo(
     () => [
@@ -31,6 +35,35 @@ export default function BibleQA() {
     ],
     []
   );
+
+  const getBookInfo = (book: string) => {
+    const slug = getBookSlug(book);
+    const quiz = featuredQuizzes.find(q => q.link.includes(slug));
+    const chapters = bibleStructure[slug as keyof typeof bibleStructure] || 0;
+    
+    return {
+      summary: quiz?.description || `Study the ${book} with deep-dive chapter quizzes and guided learning.`,
+      chapters: chapters
+    };
+  };
+
+  // Structured Data for SEO
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Bible Question & Answer Hub",
+    "description": "Comprehensive study library for all 66 Bible books with interactive quizzes and chapter guides.",
+    "url": "https://biblequizcompetition.com/bible-questions-and-answers-hub",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": allBooks.slice(0, 10).map((book, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "url": `https://biblequizcompetition.com/bible-questions-and-answers-hub/${getBookSlug(book)}`,
+        "name": book
+      }))
+    }
+  };
 
   const filteredBooks = allBooks.filter((book) => book.toLowerCase().includes(searchQuery.toLowerCase()));
 
@@ -140,6 +173,10 @@ export default function BibleQA() {
 
       <Navigation />
 
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
+
       <section className="py-16 bg-white text-center">
         <div className="max-w-4xl mx-auto px-6">
           <h1 className="text-5xl md:text-7xl font-normal text-gray-900 mb-6 leading-tight">Bible Q&amp;A Hub</h1>
@@ -217,22 +254,50 @@ export default function BibleQA() {
             </div>
             
             <div className="flex overflow-x-auto pb-6 gap-4 no-scrollbar -mx-4 px-4 snap-x snap-mandatory">
-              {Object.values(bibleBooks.oldTestament).flat().map((book) => (
-                <div 
-                  key={book}
-                  className="flex-shrink-0 w-40 snap-start"
-                  onClick={() => handleSearch(book)}
-                >
-                  <Card className="border border-gray-100 hover:border-gray-300 transition-all duration-300 bg-white overflow-hidden group shadow-none cursor-pointer h-full">
-                    <CardContent className="p-4 flex flex-col items-center text-center space-y-3">
-                      <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-colors">
-                        <span className="text-xs font-bold text-blue-400 group-hover:text-blue-900">{book.charAt(0)}</span>
+              {Object.values(bibleBooks.oldTestament).flat().map((book) => {
+                const info = getBookInfo(book);
+                return (
+                  <div 
+                    key={book}
+                    className="flex-shrink-0 w-36 sm:w-44 snap-start h-full"
+                    onClick={() => handleSearch(book)}
+                  >
+                    <Card className="border border-gray-100 hover:border-blue-200 transition-all duration-500 bg-white overflow-hidden group shadow-sm hover:shadow-xl cursor-pointer h-full rounded-2xl relative">
+                      <div className="aspect-[3/4] w-full bg-blue-50/10 overflow-hidden relative border-b border-gray-50">
+                        <img 
+                          src={`/images/books/${getBookSlug(book)}.png`}
+                          alt={`${book} - Chapter Hub & Quizzes`}
+                          loading="lazy"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            const parent = target.parentElement;
+                            if (parent && !parent.querySelector('.fallback-icon')) {
+                              const fallback = document.createElement('div');
+                              fallback.className = 'absolute inset-0 bg-gradient-to-br from-blue-50 to-white flex items-center justify-center fallback-icon opacity-40';
+                              fallback.innerHTML = `<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-inner border border-blue-100">
+                                <span class="text-xl font-bold text-blue-300 font-urbanist">${book.charAt(0)}</span>
+                              </div>`;
+                              parent.appendChild(fallback);
+                            }
+                          }}
+                        />
+                        
+                        {/* Discovery Overlay */}
+                        <div className="absolute inset-x-0 bottom-0 top-0 bg-black/60 translate-y-full group-hover:translate-y-0 transition-transform duration-500 backdrop-blur-sm p-4 flex flex-col justify-end text-white z-20">
+                           <p className="text-[10px] uppercase font-bold tracking-widest text-blue-300 mb-1">{info.chapters} Chapters</p>
+                           <p className="text-xs font-light leading-relaxed mb-4 line-clamp-4 italic opacity-90">{info.summary}</p>
+                           <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700 text-[10px] h-7 rounded-full font-semibold mb-2">Study Now</Button>
+                        </div>
                       </div>
-                      <span className="text-sm font-medium text-gray-900 line-clamp-1 group-hover:text-black">{book}</span>
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
+                      <CardContent className="p-3 flex flex-col items-center text-center">
+                        <span className="text-xs font-bold text-gray-800 line-clamp-1 group-hover:text-blue-600 transition-colors uppercase tracking-tight">{book}</span>
+                      </CardContent>
+                    </Card>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -247,22 +312,50 @@ export default function BibleQA() {
             </div>
             
             <div className="flex overflow-x-auto pb-6 gap-4 no-scrollbar -mx-4 px-4 snap-x snap-mandatory">
-              {Object.values(bibleBooks.newTestament).flat().map((book) => (
-                <div 
-                  key={book}
-                  className="flex-shrink-0 w-40 snap-start"
-                  onClick={() => handleSearch(book)}
-                >
-                  <Card className="border border-gray-100 hover:border-gray-300 transition-all duration-300 bg-white overflow-hidden group shadow-none cursor-pointer h-full">
-                    <CardContent className="p-4 flex flex-col items-center text-center space-y-3">
-                      <div className="w-12 h-12 rounded-full bg-red-50 flex items-center justify-center group-hover:bg-red-100 transition-colors">
-                        <span className="text-xs font-bold text-red-400 group-hover:text-red-900">{book.charAt(0)}</span>
+              {Object.values(bibleBooks.newTestament).flat().map((book) => {
+                const info = getBookInfo(book);
+                return (
+                  <div 
+                    key={book}
+                    className="flex-shrink-0 w-36 sm:w-44 snap-start h-full"
+                    onClick={() => handleSearch(book)}
+                  >
+                    <Card className="border border-gray-100 hover:border-red-200 transition-all duration-500 bg-white overflow-hidden group shadow-sm hover:shadow-xl cursor-pointer h-full rounded-2xl relative">
+                      <div className="aspect-[3/4] w-full bg-red-50/10 overflow-hidden relative border-b border-gray-50">
+                        <img 
+                          src={`/images/books/${getBookSlug(book)}.png`}
+                          alt={`${book} - Chapter Hub & Quizzes`}
+                          loading="lazy"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                            const parent = target.parentElement;
+                            if (parent && !parent.querySelector('.fallback-icon')) {
+                              const fallback = document.createElement('div');
+                              fallback.className = 'absolute inset-0 bg-gradient-to-br from-red-50 to-white flex items-center justify-center fallback-icon opacity-40';
+                              fallback.innerHTML = `<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-inner border border-red-100">
+                                <span class="text-xl font-bold text-red-300 font-urbanist">${book.charAt(0)}</span>
+                              </div>`;
+                              parent.appendChild(fallback);
+                            }
+                          }}
+                        />
+                        
+                        {/* Discovery Overlay */}
+                        <div className="absolute inset-x-0 bottom-0 top-0 bg-black/60 translate-y-full group-hover:translate-y-0 transition-transform duration-500 backdrop-blur-sm p-4 flex flex-col justify-end text-white z-20">
+                           <p className="text-[10px] uppercase font-bold tracking-widest text-red-300 mb-1">{info.chapters} Chapters</p>
+                           <p className="text-xs font-light leading-relaxed mb-4 line-clamp-4 italic opacity-90">{info.summary}</p>
+                           <Button size="sm" className="w-full bg-red-600 hover:bg-red-700 text-[10px] h-7 rounded-full font-semibold mb-2">Study Now</Button>
+                        </div>
                       </div>
-                      <span className="text-sm font-medium text-gray-900 line-clamp-1 group-hover:text-black">{book}</span>
-                    </CardContent>
-                  </Card>
-                </div>
-              ))}
+                      <CardContent className="p-3 flex flex-col items-center text-center">
+                        <span className="text-xs font-bold text-gray-800 line-clamp-1 group-hover:text-red-600 transition-colors uppercase tracking-tight">{book}</span>
+                      </CardContent>
+                    </Card>
+                  </div>
+                );
+              })}
             </div>
             
             {/* Custom scrollbar styling */}

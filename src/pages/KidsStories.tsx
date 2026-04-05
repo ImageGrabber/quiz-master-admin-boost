@@ -141,7 +141,7 @@ const KidsStories = () => {
                       className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white px-10 py-4 rounded-full font-bold text-xl shadow-[0_8px_0_0_#5B21B6] active:translate-y-1 active:shadow-none transition-all flex items-center gap-2"
                       onClick={(e) => {
                         e.stopPropagation();
-                        navigate(`/kids-stories/${story.slug}`);
+                        navigate(`/kids-stories/${story.slug}/quiz`);
                       }}
                     >
                       Quiz Now!

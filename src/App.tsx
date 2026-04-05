@@ -160,6 +160,7 @@ import HindiSongs from "./pages/HindiSongs";
 import HindiSongDetail from "./pages/HindiSongDetail";
 import KidsStories from "./pages/KidsStories";
 import StoryDetail from "./pages/StoryDetail";
+import KidsStoryQuiz from "./pages/KidsStoryQuiz";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -169,12 +170,7 @@ import Upgrade from "./pages/Upgrade";
 import PageViews from "./pages/admin/PageViews";
 import { usePageView } from "@/hooks/usePageView";
 import RecentAttempts from "./pages/dashboard/recent-attempts";
-import GenesisHub from "./pages/bible-questions-and-answers-hub/Genesis";
-import ExodusHub from "./pages/bible-questions-and-answers-hub/Exodus";
-import ChapterPage from "./pages/ChapterPage";
-import ChapterQuizPage from "./pages/ChapterQuizPage";
-import NehemiahHub from "./pages/bible-questions-and-answers-hub/Nehemiah";
-import GenericBookHub from "./pages/bible-questions-and-answers-hub/GenericBookHub";
+import BookDetailHub from "./pages/bible-questions-and-answers-hub/BookDetailHub";
 
 
 const queryClient = new QueryClient();
@@ -265,6 +261,7 @@ const App = () => {
               <Route path="/hindi-songs/:slug" element={<HindiSongDetail />} />
               <Route path="/kids-stories" element={<KidsStories />} />
               <Route path="/kids-stories/:slug" element={<StoryDetail />} />
+              <Route path="/kids-stories/:slug/quiz" element={<KidsStoryQuiz />} />
               <Route path="/live-quiz/host/:quizId" element={<LiveQuizHost />} />
               <Route path="/live-quiz/join/:sessionCode" element={<LiveQuizParticipant />} />
               <Route path="/live-quiz/health-check" element={<ProtectedRoute requiredRole="admin"><LiveQuizHealthCheck /></ProtectedRoute>} />
@@ -363,14 +360,7 @@ const App = () => {
               <Route path="/admin/page-views" element={<ProtectedRoute requiredRole="admin"><PageViews /></ProtectedRoute>} />
               <Route path="/rls-test" element={<ProtectedRoute requiredRole="admin"><RLSTest /></ProtectedRoute>} />
               <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
-              <Route path="/bible-questions-and-answers-hub/genesis" element={<GenesisHub />} />
-              {/* Dynamic Bible Chapter Pages (Genesis & Exodus) */}
-              <Route path="/bible-questions-and-answers-hub/:book/chapter-:id" element={<ChapterPage />} />
-              <Route path="/bible-questions-and-answers-hub/:book/chapter-:id-full" element={<ChapterPage />} />
-              <Route path="/bible-questions-and-answers-hub/:book/:quizId" element={<ChapterQuizPage />} />
-
-              <Route path="/bible-questions-and-answers-hub/exodus" element={<ExodusHub />} />
-              <Route path="/bible-questions-and-answers-hub/:bookSlug" element={<GenericBookHub />} />
+              <Route path="/bible-questions-and-answers-hub/:bookSlug" element={<BookDetailHub />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
