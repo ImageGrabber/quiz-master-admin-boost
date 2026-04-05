@@ -192,6 +192,23 @@ function generateSitemap() {
     console.log(`Added ${uniqueHindiSlugs.size} Hindi song URLs to sitemap`);
   }
 
+  // Kids Stories
+  const kidsStoriesJsonPath = path.join(__dirname, '..', 'src', 'data', 'kids-stories.json');
+  if (fs.existsSync(kidsStoriesJsonPath)) {
+    const kidsStories = JSON.parse(fs.readFileSync(kidsStoriesJsonPath, 'utf-8'));
+    urls.push({ loc: '/kids-stories', priority: '0.9', changefreq: 'weekly' });
+
+    for (const story of kidsStories) {
+      if (!story.slug) continue;
+      urls.push({
+        loc: `/kids-stories/${story.slug}`,
+        priority: '0.8',
+        changefreq: 'monthly'
+      });
+    }
+    console.log(`Added ${kidsStories.length} Kids Story URLs to sitemap`);
+  }
+
   // Generate XML sitemap
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;

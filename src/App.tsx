@@ -158,6 +158,8 @@ import EnglishSongs from "./pages/EnglishSongs";
 import EnglishSongDetail from "./pages/EnglishSongDetail";
 import HindiSongs from "./pages/HindiSongs";
 import HindiSongDetail from "./pages/HindiSongDetail";
+import KidsStories from "./pages/KidsStories";
+import StoryDetail from "./pages/StoryDetail";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -261,6 +263,8 @@ const App = () => {
               <Route path="/english-songs/:slug" element={<EnglishSongDetail />} />
               <Route path="/hindi-songs" element={<HindiSongs />} />
               <Route path="/hindi-songs/:slug" element={<HindiSongDetail />} />
+              <Route path="/kids-stories" element={<KidsStories />} />
+              <Route path="/kids-stories/:slug" element={<StoryDetail />} />
               <Route path="/live-quiz/host/:quizId" element={<LiveQuizHost />} />
               <Route path="/live-quiz/join/:sessionCode" element={<LiveQuizParticipant />} />
               <Route path="/live-quiz/health-check" element={<ProtectedRoute requiredRole="admin"><LiveQuizHealthCheck /></ProtectedRoute>} />

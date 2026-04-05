@@ -237,5 +237,18 @@ export const publicPages = [
   { title: "Scripture Memorization", path: "/articles/scripture-memorization-techniques", category: "Article" },
   { title: "Team Quiz Strategies", path: "/articles/team-quiz-strategies", category: "Article" },
   { title: "Moses Leadership Lessons", path: "/articles/moses-leadership-lessons", category: "Article" },
+  
+  // Kids Stories
+  { title: "Kids Bible Stories Hub", path: "/kids-stories", category: "Kids Stories" },
+  { title: "The Brave Shepherd Boy (David & Goliath)", path: "/kids-stories/the-brave-shepherd-boy", category: "Kids Stories" },
+  { title: "Noah's Special Boat (Noah's Ark)", path: "/kids-stories/noahs-special-boat", category: "Kids Stories" },
+  { title: "The Lunch That Grew (Feeding 5000)", path: "/kids-stories/the-lunch-that-grew", category: "Kids Stories" },
+  { title: "The Lost Sheep's Adventure", path: "/kids-stories/the-lost-sheeps-adventure", category: "Kids Stories" },
+  { title: "Joseph's Colorful Coat", path: "/kids-stories/josephs-colorful-coat", category: "Kids Stories" },
+  { title: "The Kind Neighbor (Good Samaritan)", path: "/kids-stories/the-kind-neighbor", category: "Kids Stories" },
+  { title: "Marching Around Jericho", path: "/kids-stories/marching-around-jericho", category: "Kids Stories" },
+  { title: "Daniel and the Sleepy Lions", path: "/kids-stories/daniel-and-the-sleepy-lions", category: "Kids Stories" },
+  { title: "The Wise Little Workers", path: "/kids-stories/the-wise-little-workers", category: "Kids Stories" },
+  { title: "Queen Esther's Big Choice", path: "/kids-stories/queen-esthers-big-choice", category: "Kids Stories" },
 ];
 

@@ -123,6 +123,7 @@ export function Navigation() {
           </div>
 
           <button onClick={() => navigate("/articles")} className="text-base md:text-lg text-gray-600 hover:text-gray-900 font-urbanist font-light">Articles</button>
+          <button onClick={() => navigate("/kids-stories")} className="text-base md:text-lg text-orange-600 hover:text-orange-700 font-urbanist font-medium bg-orange-50 px-3 py-1 rounded-full border border-orange-100 transition-all">Kids Stories</button>
           <button onClick={() => navigate("/help")} className="text-base md:text-lg text-gray-600 hover:text-gray-900 font-urbanist font-light">Help</button>
 
         </nav>
@@ -195,6 +196,7 @@ export function Navigation() {
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/english-songs"); }}>English Hymns</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/hindi-songs"); }}>Hindi Songs</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
+          <button className="text-base text-orange-600 hover:text-orange-700 px-4 py-3 text-left font-urbanist font-medium" onClick={() => { setMobileMenuOpen(false); navigate("/kids-stories"); }}>Kids Stories</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>Help</button>
 
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-t border-gray-200" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
