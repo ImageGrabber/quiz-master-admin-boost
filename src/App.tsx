@@ -171,6 +171,7 @@ import PageViews from "./pages/admin/PageViews";
 import { usePageView } from "@/hooks/usePageView";
 import RecentAttempts from "./pages/dashboard/recent-attempts";
 import BookDetailHub from "./pages/bible-questions-and-answers-hub/BookDetailHub";
+import GenesisBeginnerQuiz from "./pages/bible-questions-and-answers-hub/GenesisBeginnerQuiz";
 
 
 const queryClient = new QueryClient();
@@ -361,6 +362,7 @@ const App = () => {
               <Route path="/rls-test" element={<ProtectedRoute requiredRole="admin"><RLSTest /></ProtectedRoute>} />
               <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
               <Route path="/bible-questions-and-answers-hub/:bookSlug" element={<BookDetailHub />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/beginner" element={<GenesisBeginnerQuiz />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

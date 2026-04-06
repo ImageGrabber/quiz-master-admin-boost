@@ -146,16 +146,6 @@ export default function BookDetailHub() {
                   {expandedData.subtitle}
                 </p>
               )}
-              
-              {expandedData?.heroImage && (
-                <div className="max-w-5xl mx-auto mt-12 rounded-[3rem] overflow-hidden shadow-2xl shadow-gray-200 aspect-[21/9]">
-                  <img 
-                    src={`/images/hubs/${expandedData.heroImage}`} 
-                    alt={`${bookName} Hero Illustration`}
-                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                  />
-                </div>
-              )}
             </div>
 
             {/* Main Content Area */}
