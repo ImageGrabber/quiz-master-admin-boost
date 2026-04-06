@@ -186,5 +186,92 @@ export const specificChapterQuizzes: Record<string, any> = {
                 explanation: "They will be punished with everlasting destruction and shut out from the presence of the Lord."
             }
         ]
+    },
+    "genesis-1": {
+        seoDescription: "Challenge yourself with 10 questions on the creation of the world in Genesis Chapter 1! Test your knowledge on the days of creation and the initial state of the earth.",
+        prevChapterUrl: "/bible-questions-and-answers-hub/genesis",
+        nextChapterUrl: "/bible-questions-and-answers-hub/genesis/chapter-2",
+        questions: [
+            {
+                id: 1,
+                question: "In the beginning, what was the state of the earth before God started creating?",
+                options: ["Lush and green", "Formless and empty", "A ball of fire", "Frozen and dark"],
+                answer: 1,
+                referenceVerse: "Genesis 1:2",
+                explanation: "The earth was formless and empty, darkness was over the surface of the deep."
+            },
+            {
+                id: 2,
+                question: "What was the very first thing God created by saying 'Let there be...'?",
+                options: ["Heaven", "Earth", "Light", "Sky"],
+                answer: 2,
+                referenceVerse: "Genesis 1:3",
+                explanation: "And God said, 'Let there be light,' and there was light."
+            },
+            {
+                id: 3,
+                question: "On which day did God create the expanse (sky) to separate the waters?",
+                options: ["Day 1", "Day 2", "Day 3", "Day 4"],
+                answer: 1,
+                referenceVerse: "Genesis 1:6-8",
+                explanation: "God made the vault to separate the waters on the second day."
+            },
+            {
+                id: 4,
+                question: "On the third day, God gathered the waters together. What did He call the dry ground?",
+                options: ["Earth", "Land", "Islands", "Soil"],
+                answer: 1,
+                referenceVerse: "Genesis 1:10",
+                explanation: "God called the dry ground 'land,' and the gathered waters he called 'seas.'"
+            },
+            {
+                id: 5,
+                question: "What did God create on the fourth day to serve as signs for seasons, days, and years?",
+                options: ["Animals", "Plants", "Sun, moon, and stars", "Mountains"],
+                answer: 2,
+                referenceVerse: "Genesis 1:14-19",
+                explanation: "God made two great lights and the stars on the fourth day."
+            },
+            {
+                id: 6,
+                question: "On which day did God create the creatures of the sea and the birds of the air?",
+                options: ["Day 3", "Day 4", "Day 5", "Day 6"],
+                answer: 2,
+                referenceVerse: "Genesis 1:20-23",
+                explanation: "God created the great creatures of the ocean and every winged bird on the fifth day."
+            },
+            {
+                id: 7,
+                question: "According to Genesis 1:26, in whose image did God create mankind?",
+                options: ["The angels", "The animals", "His own image", "The stars"],
+                answer: 2,
+                referenceVerse: "Genesis 1:26-27",
+                explanation: "Then God said, 'Let us make mankind in our image, in our likeness...'"
+            },
+            {
+                id: 8,
+                question: "What did God give mankind rule over?",
+                options: ["The fish, birds, and livestock", "Only the plants", "The angels", "Nothing"],
+                answer: 0,
+                referenceVerse: "Genesis 1:26",
+                explanation: "God gave them rule over the fish in the sea, the birds in the sky, and over the livestock and all wild animals."
+            },
+            {
+                id: 9,
+                question: "What did God provide as food for both humans and animals in this chapter?",
+                options: ["Bread", "Meat", "Every green plant and seed-bearing plant", "Honey"],
+                answer: 2,
+                referenceVerse: "Genesis 1:29-30",
+                explanation: "God gave every seed-bearing plant and every tree that has fruit with seed in it for food."
+            },
+            {
+                id: 10,
+                question: "How did God describe the finished creation at the end of the sixth day?",
+                options: ["Good", "Very good", "Excellent", "Finished"],
+                answer: 1,
+                referenceVerse: "Genesis 1:31",
+                explanation: "God saw all that he had made, and it was very good."
+            }
+        ]
     }
 };

@@ -172,6 +172,8 @@ import { usePageView } from "@/hooks/usePageView";
 import RecentAttempts from "./pages/dashboard/recent-attempts";
 import BookDetailHub from "./pages/bible-questions-and-answers-hub/BookDetailHub";
 import GenesisBeginnerQuiz from "./pages/bible-questions-and-answers-hub/GenesisBeginnerQuiz";
+import GenesisIntermediateQuiz from "./pages/bible-questions-and-answers-hub/GenesisIntermediateQuiz";
+import GenesisAdvancedQuiz from "./pages/bible-questions-and-answers-hub/GenesisAdvancedQuiz";
 
 
 const queryClient = new QueryClient();
@@ -363,6 +365,9 @@ const App = () => {
               <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
               <Route path="/bible-questions-and-answers-hub/:bookSlug" element={<BookDetailHub />} />
               <Route path="/bible-questions-and-answers-hub/genesis/beginner" element={<GenesisBeginnerQuiz />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/intermediate" element={<GenesisIntermediateQuiz />} />
+              <Route path="/bible-questions-and-answers-hub/genesis/advanced" element={<GenesisAdvancedQuiz />} />
+              <Route path="/bible-questions-and-answers-hub/:book/:chapter" element={<PublicQuizChapter />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

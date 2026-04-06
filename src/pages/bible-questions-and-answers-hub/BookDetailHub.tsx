@@ -386,7 +386,7 @@ export default function BookDetailHub() {
                 <CardDescription className="text-lg font-light text-gray-500 mt-2 leading-relaxed">Detailed chronologies and theological connections through the book.</CardDescription>
               </CardHeader>
               <CardContent className="p-8 pt-0 mt-auto">
-                <Button className="w-full font-medium border-gray-100 text-base py-7 rounded-2xl group-hover:bg-black group-hover:text-white transition-all" variant="outline">
+                <Button className="w-full font-medium bg-black text-white hover:bg-gray-800 text-base py-7 rounded-2xl border-none transition-all">
                   Standard Level →
                 </Button>
               </CardContent>
@@ -442,7 +442,7 @@ export default function BookDetailHub() {
                     )}
                   </CardContent>
                   <CardContent className="p-4 border-t border-gray-50">
-                    <Button variant="ghost" size="sm" className="w-full text-xs font-bold uppercase tracking-widest group-hover:bg-black group-hover:text-white rounded-xl transition-all">
+                    <Button size="sm" className="w-full text-xs font-bold uppercase tracking-widest bg-black text-white rounded-xl transition-all hover:bg-gray-800 border-none">
                       Read Chapter →
                     </Button>
                   </CardContent>
