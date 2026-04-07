@@ -167,7 +167,7 @@ export default function GenericBookHub() {
                 </ul>
               </CardContent>
               <CardContent className="pt-4 mt-auto">
-                <Button className="w-full font-light border-gray-200 text-base py-6" variant="outline">Start Beginner</Button>
+                <Button className="w-full font-light bg-black text-white hover:bg-gray-800 text-base py-6 border-none transition-all">Start Beginner</Button>
               </CardContent>
             </Card>
 
@@ -186,7 +186,7 @@ export default function GenericBookHub() {
                 </ul>
               </CardContent>
               <CardContent className="pt-4 mt-auto">
-                <Button className="w-full font-light border-gray-200 text-base py-6" variant="outline">Start Intermediate</Button>
+                <Button className="w-full font-light bg-black text-white hover:bg-gray-800 text-base py-6 border-none transition-all">Start Intermediate</Button>
               </CardContent>
             </Card>
 
@@ -228,7 +228,7 @@ export default function GenericBookHub() {
                 </CardContent>
                 <CardContent className="pt-4 border-t border-gray-50">
                   <div className="flex flex-col gap-2">
-                    <Button size="sm" variant="outline" className="w-full font-light text-base py-5" onClick={() => navigate(`/bible-questions-and-answers-hub/${bookSlug.toLowerCase()}/ch${r.range.replace("–", "-")}-beginner`)}>Beginner</Button>
+                    <Button size="sm" className="w-full font-light bg-black text-white hover:bg-gray-800 text-base py-5 border-none transition-all" onClick={() => navigate(`/bible-questions-and-answers-hub/${bookSlug.toLowerCase()}/ch${r.range.replace("–", "-")}-beginner`)}>Beginner</Button>
                     <Button size="sm" className="w-full font-light bg-black text-white hover:bg-gray-800 text-base py-5" onClick={() => navigate(`/bible-questions-and-answers-hub/${bookSlug.toLowerCase()}/ch${r.range.replace("–", "-")}-advanced`)}>Advanced Quiz</Button>
                   </div>
                 </CardContent>
@@ -272,7 +272,7 @@ export default function GenericBookHub() {
                     )}
                   </CardContent>
                   <CardContent className="pt-2 border-t border-gray-50">
-                    <Button variant="ghost" size="sm" className="w-full text-sm font-light group-hover:bg-gray-100">
+                    <Button size="sm" className="w-full text-sm font-light bg-black text-white hover:bg-gray-800 border-none transition-all">
                       Explore Chapter →
                     </Button>
                   </CardContent>

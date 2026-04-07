@@ -370,7 +370,7 @@ export default function BookDetailHub() {
                 <CardDescription className="text-lg font-light text-gray-500 mt-2 leading-relaxed">Core stories, primary characters, and major themes in {bookName}.</CardDescription>
               </CardHeader>
               <CardContent className="p-8 pt-0 mt-auto">
-                <Button className="w-full font-medium border-gray-100 text-base py-7 rounded-2xl group-hover:bg-black group-hover:text-white transition-all" variant="outline">
+                <Button className="w-full font-medium bg-black text-white hover:bg-gray-800 text-base py-7 rounded-2xl border-none transition-all">
                   Launch Study →
                 </Button>
               </CardContent>
