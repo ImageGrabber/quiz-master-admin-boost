@@ -19,7 +19,11 @@ import {
   Home,
   Users,
   UserPlus,
-  User // Added User icon
+  User,
+  Music,
+  Sparkles,
+  Gamepad2,
+  Heart
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -31,9 +35,13 @@ interface DashboardLayoutProps {
 }
 
 const navItems = [
-  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard }, // Stats Page
-  { name: "Community", href: "/dashboard/community", icon: Users },
-  { name: "All Quizzes", href: "/quiz-selection", icon: BookOpen }, // Library
+  { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { name: "All Quizzes", href: "/quiz-selection", icon: BookOpen },
+  { name: "Bible Study", href: "/bible-questions-and-answers-hub", icon: Brain },
+  { name: "Kids Stories", href: "/kids-stories", icon: Sparkles },
+  { name: "Worship Songs", href: "/songs", icon: Music },
+  { name: "Prayer Group", href: "/prayer-requests", icon: Heart },
+  { name: "Multiplayer", href: "/scripture-match-multiplayer", icon: Gamepad2 },
   { name: "Results", href: "/leaderboard", icon: BarChart2 },
 ];
 

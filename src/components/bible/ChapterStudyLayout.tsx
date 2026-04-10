@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { BookOpen, Brain, Sparkles, ScrollText } from "lucide-react";
+import { BookOpen, Brain, Sparkles, ScrollText, HelpCircle, MessageCircleQuestion } from "lucide-react";
+import React from "react";
+import { VerseContextDialog } from "./VerseContextDialog";
 import SEO from "@/components/SEO";
 import { BibleChapter } from "@/data/bibleData";
 import { Navigation } from "@/components/Navigation";
@@ -11,10 +13,18 @@ interface ChapterStudyLayoutProps {
   chapterId: number;
   content: BibleChapter;
   mode: 'study' | 'full';
+  questions?: any[];
 }
 
-export default function ChapterStudyLayout({ book, chapterId, content, mode }: ChapterStudyLayoutProps) {
+export default function ChapterStudyLayout({ book, chapterId, content, mode, questions = [] }: ChapterStudyLayoutProps) {
   const navigate = useNavigate();
+  const [selectedVerse, setSelectedVerse] = React.useState<string | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+
+  const handleVerseClick = (verse: string) => {
+    setSelectedVerse(verse);
+    setIsDialogOpen(true);
+  };
 
   const bookName = book.charAt(0).toUpperCase() + book.slice(1);
 
@@ -139,6 +149,61 @@ export default function ChapterStudyLayout({ book, chapterId, content, mode }: C
                 ))}
               </section>
             )}
+
+            {/* Questions & Answers Section */}
+            {questions && questions.length > 0 && (
+              <section className="pt-20 border-t border-gray-100">
+                <div className="flex items-center gap-4 mb-12">
+                  <div className="w-12 h-12 rounded-2xl bg-black flex items-center justify-center shadow-lg">
+                    <MessageCircleQuestion className="w-6 h-6 text-white" />
+                  </div>
+                  <h2 className="text-4xl font-semibold text-gray-900 tracking-tight">Questions & Answers</h2>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {questions.map((q, idx) => (
+                    <Card key={idx} className="border-stone-100 shadow-sm hover:shadow-xl hover:border-stone-200 transition-all duration-500 rounded-[2.5rem] overflow-hidden bg-white group">
+                      <CardHeader className="p-8 pb-4">
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="text-[10px] font-black text-stone-300 uppercase tracking-widest">Question {idx + 1}</span>
+                          {q.referenceVerse && (
+                            <Button 
+                              variant="ghost" 
+                              size="sm" 
+                              onClick={() => handleVerseClick(q.referenceVerse)}
+                              className="text-[10px] font-black text-orange-600 bg-orange-50 hover:bg-orange-100 px-3 py-1 h-auto rounded-full transition-colors uppercase tracking-widest"
+                            >
+                              <BookOpen className="w-3 h-3 mr-1.5" />
+                              {q.referenceVerse}
+                            </Button>
+                          )}
+                        </div>
+                        <CardTitle className="text-xl font-black text-stone-900 leading-tight tracking-tight">
+                          {q.question}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="p-8 pt-4">
+                        <div className="space-y-4">
+                          <div className="p-5 rounded-2xl bg-stone-50 border border-stone-100">
+                            <span className="text-[10px] font-black text-stone-400 uppercase tracking-widest block mb-2">Answer</span>
+                            <p className="text-stone-900 font-bold text-lg leading-snug">
+                              {q.options[q.answer]}
+                            </p>
+                          </div>
+                          {q.explanation && (
+                            <div className="pl-5 border-l-2 border-orange-100">
+                              <p className="text-sm text-stone-500 font-medium leading-relaxed italic">
+                                {q.explanation}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </section>
+            )}
           </div>
         ) : (
           /* Full Text View */
@@ -168,6 +233,14 @@ export default function ChapterStudyLayout({ book, chapterId, content, mode }: C
           </div>
         )}
       </main>
+
+      <VerseContextDialog 
+        open={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+        book={bookName}
+        chapterId={chapterId}
+        highlightVerse={selectedVerse || ""}
+      />
 
       {/* Premium Infinite Footer */}
       <footer className="py-20 bg-white border-t border-gray-50 text-center">

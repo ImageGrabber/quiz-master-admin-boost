@@ -6,6 +6,8 @@ import { Brain, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 
+import { specificChapterQuizzes } from "@/data/specific-chapter-quizzes";
+
 export default function ChapterPage() {
   const { book, id } = useParams<{ book: string; id: string }>();
   const location = useLocation();
@@ -19,6 +21,11 @@ export default function ChapterPage() {
   const bookKey = book?.toLowerCase() || "";
   const bookContent = bibleData[bookKey];
   const content = bookContent ? bookContent[chapterId] : null;
+
+  // Load specific chapter quiz if available
+  const quizKey = `${bookKey}-${chapterId}`;
+  const chapterQuiz = specificChapterQuizzes[quizKey];
+  const questions = chapterQuiz?.questions || [];
 
   if (!content) {
     return (
@@ -48,7 +55,8 @@ export default function ChapterPage() {
       book={bookKey} 
       chapterId={chapterId} 
       content={content} 
-      mode={mode} 
+      mode={mode}
+      questions={questions}
     />
   );
 }

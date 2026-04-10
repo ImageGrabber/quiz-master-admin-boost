@@ -722,14 +722,20 @@ const CompetitionHome = () => {
         {/* Features - Clean Grid */}
         < section className="py-24 bg-white relative overflow-hidden" >
           <div className="max-w-7xl mx-auto px-6">
-            <div className="text-center max-w-3xl mx-auto mb-20">
-              <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">Designed for Growth</h2>
-              <p className="text-lg text-slate-500 font-light leading-relaxed">
-                More than just a game. It's a journey to deepen your understanding of the Scripture through consistent, engaging practice.
-              </p>
-            </div>
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div className="mb-8 lg:mb-0">
+                <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">Designed for Growth</h2>
+                <p className="text-lg text-slate-500 font-light leading-relaxed mb-10">
+                  More than just a game. It's a journey to deepen your understanding of the Scripture through consistent, engaging practice.
+                </p>
+                <img 
+                  src="/images/home/bible_quiz_glowing.png" 
+                  alt="Glowing open Bible with insightful quiz questions floating, highly effective for scripture learning and bible knowledge" 
+                  className="rounded-3xl shadow-2xl w-full border border-slate-100 hidden lg:block" 
+                />
+              </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+              <div className="grid sm:grid-cols-2 gap-6">
               {[
                 {
                   icon: <Calendar className="w-6 h-6 text-blue-600" />,
@@ -778,6 +784,7 @@ const CompetitionHome = () => {
                   </p>
                 </div>
               ))}
+              </div>
             </div>
           </div>
         </section >
@@ -792,22 +799,30 @@ const CompetitionHome = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-4 gap-8">
-              {[
-                { title: "1. Register Free", desc: "Sign up instantly to join the online bible quiz competition 2026.", icon: Users },
-                { title: "2. Study Daily", desc: "Use our hubs for Genesis 8 quiz prep and more.", icon: BookOpen },
-                { title: "3. Take Quizzes", desc: "Compete in daily and weekly online bible quizzes.", icon: Brain },
-                { title: "4. Win Prizes", desc: "Review bible quiz prize rules and check live results weekly.", icon: Trophy }
-              ].map((step, idx) => (
-                <div key={idx} className="relative flex flex-col items-center text-center p-6 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all">
-                  <div className="w-16 h-16 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center mb-6 shadow-sm z-10">
-                    <step.icon className="w-8 h-8 text-blue-600" />
-                  </div>
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <img 
+                src="/images/home/bible_study_group.png" 
+                alt="Diverse group of young adults studying the Bible together in a modern bright cafe, preparing for the upcoming bible challenge" 
+                className="rounded-[2.5rem] shadow-2xl w-full object-cover hidden lg:block" 
+              />
+               
+              <div className="grid sm:grid-cols-2 gap-6">
+                {[
+                  { title: "1. Register Free", desc: "Sign up instantly to join the online bible quiz competition 2026.", icon: Users },
+                  { title: "2. Study Daily", desc: "Use our hubs for Genesis 8 quiz prep and more.", icon: BookOpen },
+                  { title: "3. Take Quizzes", desc: "Compete in daily and weekly online bible quizzes.", icon: Brain },
+                  { title: "4. Win Prizes", desc: "Review bible quiz prize rules and check live results weekly.", icon: Trophy }
+                ].map((step, idx) => (
+                  <div key={idx} className="relative flex flex-col items-center text-center p-6 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                    <div className="w-16 h-16 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center mb-6 shadow-sm z-10">
+                      <step.icon className="w-8 h-8 text-blue-600" />
+                    </div>
 
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">{step.title}</h3>
-                  <p className="text-slate-500 text-sm font-light leading-relaxed">{step.desc}</p>
-                </div>
-              ))}
+                    <h3 className="text-xl font-bold text-slate-900 mb-2">{step.title}</h3>
+                    <p className="text-slate-500 text-sm font-light leading-relaxed">{step.desc}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -1068,20 +1083,29 @@ const CompetitionHome = () => {
             <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[100px]"></div>
             <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-500/20 rounded-full blur-[100px]"></div>
 
-            <div className="relative z-10">
-              <h2 className="text-4xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
-                Ready to start your journey?
-              </h2>
-              <p className="text-lg text-slate-300 font-light mb-12 max-w-2xl mx-auto">
-                Join our community of believers and start your online bible quiz journey today. Become a top Bible Challenger. It's free and always will be.
-              </p>
-              <Button
-                size="lg"
-                className="h-16 px-10 rounded-full bg-white text-slate-900 font-bold text-lg hover:bg-blue-50 transition-colors shadow-lg"
-                onClick={() => navigate("/auth/register")}
-              >
-                Join for Free
-              </Button>
+            <div className="relative z-10 flex flex-col md:flex-row items-center gap-12 text-left">
+              <div className="flex-1 text-center md:text-left">
+                <h2 className="text-4xl lg:text-6xl font-bold text-white mb-8 tracking-tight">
+                  Ready to start your journey?
+                </h2>
+                <p className="text-lg text-slate-300 font-light mb-12 max-w-2xl mx-auto md:mx-0">
+                  Join our community of believers and start your online bible quiz journey today. Become a top Bible Challenger. It's free and always will be.
+                </p>
+                <Button
+                  size="lg"
+                  className="h-16 px-10 rounded-full bg-white text-slate-900 font-bold text-lg hover:bg-blue-50 transition-colors shadow-lg"
+                  onClick={() => navigate("/auth/register")}
+                >
+                  Join for Free
+                </Button>
+              </div>
+              <div className="flex-1 w-full max-w-sm mx-auto">
+                <img 
+                  src="/images/home/bible_quiz_trophy.png" 
+                  alt="Majestic golden trophy representing excellence and victory in the global Bible Quiz Competition" 
+                  className="w-full rounded-3xl shadow-2xl border-4 border-slate-800/50 transform hover:scale-105 transition-transform duration-500" 
+                />
+              </div>
             </div>
           </div>
         </section >

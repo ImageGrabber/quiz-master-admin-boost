@@ -175,6 +175,7 @@ import GenesisBeginnerQuiz from "./pages/bible-questions-and-answers-hub/Genesis
 import GenesisIntermediateQuiz from "./pages/bible-questions-and-answers-hub/GenesisIntermediateQuiz";
 import GenesisAdvancedQuiz from "./pages/bible-questions-and-answers-hub/GenesisAdvancedQuiz";
 import HubDifficultyRouter from "./pages/bible-questions-and-answers-hub/HubDifficultyRouter";
+import ChapterPage from "./pages/ChapterPage";
 
 
 const queryClient = new QueryClient();
@@ -368,8 +369,8 @@ const App = () => {
               <Route path="/bible-questions-and-answers-hub/genesis/beginner" element={<GenesisBeginnerQuiz />} />
               <Route path="/bible-questions-and-answers-hub/genesis/intermediate" element={<GenesisIntermediateQuiz />} />
               <Route path="/bible-questions-and-answers-hub/genesis/advanced" element={<GenesisAdvancedQuiz />} />
+              <Route path="/bible-questions-and-answers-hub/:book/chapter-:id" element={<ChapterPage />} />
               <Route path="/bible-questions-and-answers-hub/:bookSlug/:difficulty" element={<HubDifficultyRouter />} />
-              <Route path="/bible-questions-and-answers-hub/:book/:chapter" element={<PublicQuizChapter />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
