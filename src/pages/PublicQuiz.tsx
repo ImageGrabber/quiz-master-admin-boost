@@ -175,15 +175,15 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
         />
         
         {/* Modern, Slim Header Consistent with Hub */}
-        <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#0a0a0a]/80 backdrop-blur-xl shadow-md">
+        <header className="sticky top-0 z-50 w-full border-b border-white/60 bg-white/60 backdrop-blur-3xl shadow-md">
           <div className="container mx-auto flex h-14 items-center justify-between px-4 sm:px-6">
             <div className="flex items-center gap-2 cursor-pointer group" onClick={() => navigate('/bible-questions-and-answers-hub')}>
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 border border-white/5 text-white transition-all group-hover:scale-105 group-hover:bg-white/20 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-orange-400 to-rose-500 border-transparent shadow-[0_4px_15px_rgba(244,63,94,0.3)] text-white transition-all group-hover:scale-105 group-hover:bg-white/20 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                 <Brain className="h-4 w-4" />
               </div>
-              <span className="text-sm font-bold tracking-tight text-white sm:text-base uppercase tracking-widest leading-none drop-shadow-sm">BIBLE QA HUB</span>
+              <span className="text-sm font-bold tracking-tight text-stone-900 sm:text-base uppercase tracking-widest leading-none drop-shadow-sm">BIBLE QA HUB</span>
             </div>
-            <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="text-stone-400 hover:text-white hover:bg-white/10 font-bold text-xs uppercase tracking-widest">Home</Button>
+            <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="text-stone-500 hover:text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 shadow-sm bg-white/40 font-bold text-xs uppercase tracking-widest">Home</Button>
           </div>
         </header>
 
@@ -294,7 +294,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                                   setSelectedChapterId(chMatch ? parseInt(chMatch[1]) : parseInt(chapter || "1"));
                                   setIsVerseContextOpen(true);
                                 }}
-                                className="inline-flex items-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-2 text-[11px] font-black text-stone-400 hover:text-white hover:bg-white/10 transition-all uppercase tracking-widest cursor-pointer hover:border-white/20"
+                                className="inline-flex items-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-2 text-[11px] font-black text-stone-500 hover:text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 shadow-sm bg-white/40 transition-all uppercase tracking-widest cursor-pointer hover:border-white/20"
                               >
                                 <BookOpen className="h-3.5 w-3.5" />
                                 <span>{q.referenceVerse}</span>
@@ -420,7 +420,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
   };
 
   return (
-    <div className="min-h-screen bg-[#030303] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,53,15,0.4),rgba(0,0,0,1))] text-[#fafaf9] font-sans selection:bg-orange-500/30 selection:text-orange-200 pb-20">
+    <div className="min-h-screen bg-slate-50 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-50 via-sky-50 to-rose-50 text-slate-800 font-sans selection:bg-rose-200 selection:text-rose-900 pb-20">
       <Helmet>
         <title>{title} - Free Bible Quiz | Bible Quiz Competition</title>
         <meta name="description" content={seoDescription || `Test your knowledge of ${bookName} with this free interactive Bible quiz. ${questions.length} questions to challenge your understanding of the Bible. No registration required!`} />
@@ -441,19 +441,19 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
       />
       
       {/* Slim Header */}
-      <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#0a0a0a]/80 backdrop-blur-xl shadow-md mb-12">
+      <header className="sticky top-0 z-50 w-full border-b border-white/60 bg-white/60 backdrop-blur-3xl shadow-md mb-12">
         <div className="container mx-auto flex h-14 items-center justify-between px-4 sm:px-6">
           <div className="flex items-center gap-2 cursor-pointer group" onClick={() => navigate('/bible-questions-and-answers-hub')}>
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/10 border border-white/5 text-white transition-all group-hover:scale-105 group-hover:bg-white/20 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-orange-400 to-rose-500 border-transparent shadow-[0_4px_15px_rgba(244,63,94,0.3)] text-white transition-all group-hover:scale-105 group-hover:bg-white/20 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]">
               <Brain className="h-4 w-4" />
             </div>
-            <span className="text-sm font-black tracking-tight text-white sm:text-base uppercase tracking-widest leading-none drop-shadow-sm">BIBLE QA HUB</span>
+            <span className="text-sm font-black tracking-tight text-stone-900 sm:text-base uppercase tracking-widest leading-none drop-shadow-sm">BIBLE QA HUB</span>
           </div>
           
           <div className="flex items-center gap-3 sm:gap-4">
-            <div className="hidden sm:flex items-center gap-2 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 shadow-inner">
+            <div className="hidden sm:flex items-center gap-2 px-4 py-1.5 bg-white/60 rounded-full border border-white/80 shadow-sm backdrop-blur-md">
               <span className="text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] pt-0.5">SCORE</span>
-              <span className="text-[11px] font-black tabular-nums tracking-widest text-white drop-shadow-md pb-[1px]">
+              <span className="text-[11px] font-black tabular-nums tracking-widest text-stone-800 font-black pb-[1px]">
                 {scorePoints.toLocaleString()} <span className="text-orange-500">XP</span>
               </span>
             </div>
@@ -465,13 +465,13 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                 </span>
               </div>
             )}
-            <div className="hidden sm:flex items-center gap-2 px-4 py-1.5 bg-white/5 rounded-full border border-white/10 shadow-inner">
+            <div className="hidden sm:flex items-center gap-2 px-4 py-1.5 bg-white/60 rounded-full border border-white/80 shadow-sm backdrop-blur-md">
               <Clock className={`h-3.5 w-3.5 ${timeLeft < 60 ? 'text-red-400 animate-pulse' : 'text-stone-400'}`} />
               <span className={`text-[11px] font-black tabular-nums tracking-widest ${timeLeft < 60 ? 'text-red-400' : 'text-stone-300'}`}>
                 {formatTime(timeLeft)}
               </span>
             </div>
-            <Button variant="ghost" size="sm" onClick={() => navigate('/bible-questions-and-answers-hub')} className="text-stone-400 hover:text-white hover:bg-white/10 font-black text-[10px] uppercase tracking-[0.2em] transition-all">Exit Quest</Button>
+            <Button variant="ghost" size="sm" onClick={() => navigate('/bible-questions-and-answers-hub')} className="text-stone-500 hover:text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 shadow-sm bg-white/40 font-black text-[10px] uppercase tracking-[0.2em] transition-all">Exit Quest</Button>
           </div>
         </div>
         
@@ -484,7 +484,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
         </div>
       </header>
 
-      <div className="container mx-auto px-4 max-w-2xl px-6">
+      <div className="container mx-auto px-4 lg:max-w-6xl pb-12">
         {/* Mobile Timer */}
         <div className="sm:hidden flex justify-center mb-8">
           <div className="flex items-center gap-2 px-5 py-2 bg-white border border-stone-200 rounded-full shadow-sm">
@@ -495,171 +495,204 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
           </div>
         </div>
 
-        <div className="mb-10 space-y-6">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-md px-3 py-1.5 rounded-full shadow-[0_4px_15px_rgba(0,0,0,0.2)] border border-white/10 self-start">
-              <span className="flex h-2 w-2 rounded-full bg-orange-500 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-              </span>
-              <span className="text-[10px] font-black text-stone-300 uppercase tracking-[0.2em] pt-0.5 drop-shadow-sm">QUESTION {currentQuestion + 1} <span className="text-stone-500 mx-1">/</span> {questions.length}</span>
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 pt-4 items-start">
+          
+          {/* ==================== LEFT SIDE: QUESTION & OPTIONS ==================== */}
+          <div className="flex-1 w-full space-y-8">
+            <div className="mb-10 space-y-6">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div className="inline-flex items-center gap-2 bg-white border border-stone-200 shadow-sm px-3 py-1.5 rounded-full self-start">
+                  <span className="flex h-2 w-2 rounded-full bg-orange-500 relative">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                  </span>
+                  <span className="text-[10px] font-black text-stone-500 uppercase tracking-[0.2em] pt-0.5 drop-shadow-sm">QUESTION {currentQuestion + 1} <span className="text-stone-400 mx-1">/</span> {questions.length}</span>
+                </div>
+                <div className="flex gap-2 items-center">
+                  <span className="text-[10px] font-black text-stone-500 bg-white border border-stone-200 shadow-sm px-3 py-1.5 rounded-full uppercase tracking-widest leading-none pt-0.5">{bookName} {chapter ? `CH. ${chapter}` : 'SEC'}</span>
+                </div>
+              </div>
+              <h1 className="text-3xl sm:text-[2.5rem] font-black text-stone-900 leading-[1.15] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-amber-600 via-rose-600 to-indigo-600 pb-2 drop-shadow-sm">
+                {currentQ.question}
+              </h1>
             </div>
-            <div className="flex gap-2 items-center">
-              {currentQ.referenceVerse && (
-                <button 
-                  onClick={() => {
-                    setSelectedVerse(currentQ.referenceVerse || "");
-                    const chMatch = currentQ.referenceVerse.match(/\s(\d+):/);
-                    setSelectedChapterId(chMatch ? parseInt(chMatch[1]) : parseInt(chapter || "1"));
-                    setIsVerseContextOpen(true);
-                  }}
-                  className="group flex items-center gap-1.5 text-[10px] font-black text-orange-400 bg-orange-500/10 hover:bg-orange-500 hover:text-white px-3 py-1.5 rounded-full uppercase tracking-widest leading-none border border-orange-500/20 hover:border-orange-500 hover:shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all duration-300"
-                >
-                  <BookOpen className="w-3 h-3 transition-transform group-hover:scale-110" />
-                  <span className="pt-0.5">{currentQ.referenceVerse}</span>
-                </button>
-              )}
-              <span className="text-[10px] font-black text-stone-400 bg-white/5 px-3 py-1.5 rounded-full uppercase tracking-widest leading-none border border-white/10 shadow-sm pt-0.5">{bookName} {chapter ? `CH. ${chapter}` : 'SEC'}</span>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              {currentQ.options.map((option, index) => {
+                const isSelected = selectedAnswer === index;
+                const isCorrectAnswer = index === currentQ.answer;
+                const showCorrect = hasSubmitted && isCorrectAnswer;
+                const showWrong = hasSubmitted && isSelected && !isCorrectAnswer;
+
+                let stateStyles = '';
+                let textStyles = '';
+                let letterBoxStyles = '';
+
+                if (hasSubmitted) {
+                  if (showCorrect) {
+                    stateStyles = 'border-green-400 bg-green-50 shadow-[0_4px_20px_rgba(34,197,94,0.15)] scale-[1.01] sm:scale-[1.02] z-10';
+                    textStyles = 'text-green-800';
+                    letterBoxStyles = 'bg-green-500 text-white shadow-sm border-transparent';
+                  } else if (showWrong) {
+                    stateStyles = 'border-red-400 bg-red-50 shadow-[0_4px_15px_rgba(239,68,68,0.1)]';
+                    textStyles = 'text-red-800';
+                    letterBoxStyles = 'bg-red-500 text-white border-transparent';
+                  } else {
+                    stateStyles = 'border-stone-200 bg-stone-50 opacity-60 cursor-default';
+                    textStyles = 'text-stone-500';
+                    letterBoxStyles = 'bg-stone-200/50 text-stone-400 border-stone-200';
+                  }
+                } else {
+                  stateStyles = isSelected 
+                    ? 'border-orange-400 bg-orange-50 shadow-[0_4px_20px_rgba(249,115,22,0.15)] scale-[1.01] sm:scale-[1.02] z-10' 
+                    : 'border-stone-200 bg-white shadow-[0_4px_15px_rgba(0,0,0,0.02)] hover:border-orange-300 hover:bg-orange-50 hover:shadow-[0_8px_25px_rgba(249,115,22,0.08)] text-stone-700 hover:-translate-y-1 hover:text-stone-900';
+                  textStyles = isSelected ? 'text-orange-900 drop-shadow-sm' : 'text-stone-700 group-hover:text-stone-900 group-hover:translate-x-1';
+                  letterBoxStyles = isSelected ? 'bg-orange-500 text-white shadow-sm border border-orange-500/50' : 'bg-stone-50 text-stone-400 border border-stone-100 group-hover:bg-orange-100 group-hover:text-orange-600 group-hover:border-orange-200';
+                }
+
+                return (
+                  <button
+                    key={index}
+                    onClick={() => handleAnswerSelect(index)}
+                    disabled={hasSubmitted}
+                    className={`
+                      relative flex items-center w-full p-5 sm:p-6 text-left transition-all duration-500 rounded-3xl border group overflow-hidden
+                      ${stateStyles}
+                    `}
+                  >
+                    {!hasSubmitted && !isSelected && <div className="absolute inset-0 bg-gradient-to-r from-transparent via-stone-100/50 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />}
+                    
+                    <div className={`
+                      relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-sm font-black mr-5 transition-all duration-300
+                      ${letterBoxStyles}
+                    `}>
+                      {String.fromCharCode(65 + index)}
+                    </div>
+                    <span className={`text-base font-bold leading-snug pr-8 transition-all duration-300 ${textStyles}`}>{option}</span>
+                    
+                    {!hasSubmitted && isSelected && (
+                      <div className="absolute right-6 top-1/2 -translate-y-1/2">
+                        <CheckCircle className="h-6 w-6 text-orange-500 animate-in zoom-in spin-in-12 duration-300" />
+                      </div>
+                    )}
+                    {hasSubmitted && showCorrect && (
+                      <div className="absolute right-6 top-1/2 -translate-y-1/2">
+                        <CheckCircle className="h-6 w-6 text-green-600 animate-in zoom-in spin-in-12 duration-300" />
+                      </div>
+                    )}
+                    {hasSubmitted && showWrong && (
+                      <div className="absolute right-6 top-1/2 -translate-y-1/2">
+                        <AlertTriangle className="h-6 w-6 text-red-500 animate-in zoom-in spin-in-12 duration-300" />
+                      </div>
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
-          <h1 className="text-3xl sm:text-[2.5rem] font-black text-white leading-[1.15] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white via-stone-200 to-stone-500 pb-2 drop-shadow-md">
-            {currentQ.question}
-          </h1>
-        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-          {currentQ.options.map((option, index) => {
-            const isSelected = selectedAnswer === index;
-            const isCorrectAnswer = index === currentQ.answer;
-            const showCorrect = hasSubmitted && isCorrectAnswer;
-            const showWrong = hasSubmitted && isSelected && !isCorrectAnswer;
-
-            let stateStyles = '';
-            let textStyles = '';
-            let letterBoxStyles = '';
-
-            if (hasSubmitted) {
-              if (showCorrect) {
-                stateStyles = 'border-green-500/60 bg-green-500/10 shadow-[0_0_30px_rgba(34,197,94,0.15)] scale-[1.01] sm:scale-[1.02] z-10';
-                textStyles = 'text-green-50 drop-shadow-md';
-                letterBoxStyles = 'bg-green-500 text-white shadow-[0_0_15px_rgba(34,197,94,0.4)] border-transparent';
-              } else if (showWrong) {
-                stateStyles = 'border-red-500/50 bg-red-500/10 shadow-[0_0_20px_rgba(239,68,68,0.1)]';
-                textStyles = 'text-red-400';
-                letterBoxStyles = 'bg-red-500 text-white border-transparent';
-              } else {
-                stateStyles = 'border-white/5 bg-white/5 opacity-40 cursor-default';
-                textStyles = 'text-stone-500';
-                letterBoxStyles = 'bg-black/30 text-stone-600 border-white/5';
-              }
-            } else {
-              stateStyles = isSelected 
-                ? 'border-orange-500/60 bg-gradient-to-br from-orange-500/10 to-transparent shadow-[0_0_30px_rgba(249,115,22,0.15)] scale-[1.01] sm:scale-[1.02] z-10' 
-                : 'border-white/10 bg-white/5 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:border-orange-500/40 hover:bg-orange-500/5 hover:shadow-[0_8px_30px_rgba(249,115,22,0.1)] text-stone-300 hover:-translate-y-1 hover:text-white';
-              textStyles = isSelected ? 'text-orange-50 drop-shadow-sm' : 'text-stone-300 group-hover:text-white group-hover:translate-x-1';
-              letterBoxStyles = isSelected ? 'bg-orange-500 bg-opacity-20 text-orange-400 border border-orange-500/50 shadow-[inset_0_0_10px_rgba(249,115,22,0.3)]' : 'bg-black/40 text-stone-500 border border-white/10 group-hover:bg-orange-500/20 group-hover:text-orange-300 group-hover:border-orange-500/40';
-            }
-
-            return (
-              <button
-                key={index}
-                onClick={() => handleAnswerSelect(index)}
-                disabled={hasSubmitted}
-                className={`
-                  relative flex items-center w-full p-5 sm:p-6 text-left transition-all duration-500 rounded-3xl border group overflow-hidden
-                  ${stateStyles}
-                `}
-              >
-                {!hasSubmitted && !isSelected && <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />}
-                
-                <div className={`
-                  relative flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-sm font-black mr-5 shadow-[inset_0_1px_2px_rgba(255,255,255,0.8)] transition-all duration-300
-                  ${letterBoxStyles}
-                `}>
-                  {String.fromCharCode(65 + index)}
-                </div>
-                <span className={`text-base font-bold leading-snug pr-8 transition-all duration-300 ${textStyles}`}>{option}</span>
-                
-                {!hasSubmitted && isSelected && (
-                  <div className="absolute right-6 top-1/2 -translate-y-1/2">
-                    <CheckCircle className="h-6 w-6 text-orange-400 animate-in zoom-in spin-in-12 duration-300" />
+          {/* ==================== RIGHT SIDE: FEEDBACK, ACTIONS & REFERENCE ==================== */}
+          <div className="w-full lg:w-[45%] flex flex-col space-y-6 sticky top-28">
+            <div className={`flex flex-col rounded-[2rem] border overflow-hidden transition-all duration-700 ${hasSubmitted ? (selectedAnswer === currentQ.answer ? 'bg-green-50/80 border-green-200 shadow-[0_8px_40px_rgba(34,197,94,0.15)]' : 'bg-red-50/80 border-red-200 shadow-[0_8px_40px_rgba(239,68,68,0.15)]') : 'bg-white border-stone-200 shadow-[0_8px_30px_rgba(0,0,0,0.05)]'}`}>
+              
+              <div className="p-8 sm:p-10 min-h-[200px] flex flex-col justify-center">
+                {!hasSubmitted ? (
+                  <div className="text-center w-full flex flex-col items-center gap-6 py-6 animate-in fade-in duration-500">
+                    <div className="w-20 h-20 rounded-full bg-stone-50 border border-stone-100 flex items-center justify-center relative overflow-hidden group">
+                       <div className="absolute inset-0 bg-stone-100/50 animate-pulse"></div>
+                       <Brain className="w-8 h-8 text-stone-300 drop-shadow-sm relative z-10" />
+                    </div>
+                    <span className="text-stone-400 font-bold uppercase tracking-[0.2em] text-sm">Awaiting your answer</span>
                   </div>
-                )}
-                {hasSubmitted && showCorrect && (
-                  <div className="absolute right-6 top-1/2 -translate-y-1/2">
-                    <CheckCircle className="h-6 w-6 text-white animate-in zoom-in spin-in-12 duration-300" />
-                  </div>
-                )}
-                {hasSubmitted && showWrong && (
-                  <div className="absolute right-6 top-1/2 -translate-y-1/2">
-                    <AlertTriangle className="h-6 w-6 text-red-500 animate-in zoom-in spin-in-12 duration-300" />
-                  </div>
-                )}
-              </button>
-            );
-          })}
-        </div>
-
-        {hasSubmitted && (
-          <div className="mb-8 animate-in slide-in-from-bottom-4 fade-in duration-500">
-            <div className={`p-6 sm:p-8 rounded-[2rem] border backdrop-blur-md ${selectedAnswer === currentQ.answer ? 'bg-[#0a2f1b]/60 border-[#115e2e]/50 shadow-[0_8px_30px_rgba(20,83,45,0.4)]' : 'bg-[#350a0a]/60 border-[#7f1d1d]/50 shadow-[0_8px_30px_rgba(127,29,29,0.4)]'}`}>
-              <div className="flex items-center gap-3 mb-4">
-                {selectedAnswer === currentQ.answer ? (
-                  <>
-                    <div className="bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-full p-1.5 shadow-[0_0_15px_rgba(34,197,94,0.5)]"><CheckCircle className="w-5 h-5" /></div>
-                    <span className="font-black text-green-300 text-xl tracking-tight drop-shadow-sm">Excellent!</span>
-                  </>
                 ) : (
-                  <>
-                    <div className="bg-gradient-to-br from-red-500 to-rose-600 text-white rounded-full p-1.5 shadow-[0_0_15px_rgba(239,68,68,0.5)]"><AlertTriangle className="w-5 h-5" /></div>
-                    <span className="font-black text-red-300 text-xl tracking-tight drop-shadow-sm">Not Quite</span>
-                  </>
+                  <div className="animate-in slide-in-from-bottom-4 fade-in duration-500 space-y-6">
+                    <div className="flex items-center gap-4 mb-2">
+                      {selectedAnswer === currentQ.answer ? (
+                        <>
+                          <div className="bg-gradient-to-br from-green-500 to-emerald-600 text-white rounded-full p-2.5 shadow-[0_0_20px_rgba(34,197,94,0.4)]"><CheckCircle className="w-6 h-6" /></div>
+                          <span className="font-black text-green-700 text-3xl tracking-tight drop-shadow-sm">Excellent!</span>
+                        </>
+                      ) : (
+                        <>
+                          <div className="bg-gradient-to-br from-red-500 to-rose-600 text-white rounded-full p-2.5 shadow-[0_0_20px_rgba(239,68,68,0.4)]"><AlertTriangle className="w-6 h-6" /></div>
+                          <span className="font-black text-red-700 text-3xl tracking-tight drop-shadow-sm">Not Quite</span>
+                        </>
+                      )}
+                    </div>
+                    
+                    {currentQ.explanation && (
+                      <p className={`text-lg font-medium ${selectedAnswer === currentQ.answer ? 'text-green-800' : 'text-red-800'} leading-relaxed pl-1 pb-2`}>
+                        {currentQ.explanation}
+                      </p>
+                    )}
+                  </div>
                 )}
               </div>
-              {currentQ.explanation && (
-                <p className={`text-base font-medium ${selectedAnswer === currentQ.answer ? 'text-green-100' : 'text-red-100'} leading-relaxed pl-1`}>
-                  {currentQ.explanation}
-                </p>
+
+              {/* Reference Module */}
+              {currentQ.referenceVerse && (
+                <div className={`px-8 sm:px-10 pb-8 pt-6 border-t ${hasSubmitted ? 'border-stone-200/50 bg-white/50' : 'border-stone-100 bg-stone-50'}`}>
+                  <span className="text-[10px] font-black text-stone-500 uppercase tracking-[0.3em] mb-4 block">Scriptural Context</span>
+                  <button 
+                    onClick={() => {
+                      setSelectedVerse(currentQ.referenceVerse || "");
+                      const chMatch = currentQ.referenceVerse.match(/\s(\d+):/);
+                      setSelectedChapterId(chMatch ? parseInt(chMatch[1]) : parseInt(chapter || "1"));
+                      setIsVerseContextOpen(true);
+                    }}
+                    className="group flex w-full items-center justify-between gap-4 text-left rounded-2xl bg-white hover:bg-orange-50 px-5 py-4 border border-stone-200 hover:border-orange-300 hover:shadow-[0_4px_15px_rgba(249,115,22,0.1)] transition-all duration-300"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="p-2.5 bg-stone-100 rounded-xl group-hover:bg-orange-500 text-stone-500 group-hover:text-white transition-colors duration-300">
+                        <BookOpen className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <span className="block font-black text-stone-900 text-base md:text-lg tracking-tight">{currentQ.referenceVerse}</span>
+                        <span className="block text-[10px] uppercase text-stone-500 group-hover:text-orange-600 tracking-widest mt-0.5 transition-colors">Read Chapter Segment</span>
+                      </div>
+                    </div>
+                    <ChevronRight className="w-5 h-5 text-stone-400 group-hover:text-orange-500 transition-colors duration-300" />
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Action Buttons */}
+            <div className="pt-2 flex justify-end">
+              {!hasSubmitted ? (
+                <Button 
+                  onClick={handleSubmit}
+                  disabled={selectedAnswer === null}
+                  size="lg"
+                  className={`
+                    h-16 px-10 sm:px-14 rounded-full font-black text-xs uppercase tracking-[0.2em] gap-3 transition-all duration-500 relative overflow-hidden group/btn w-full sm:w-auto
+                    ${selectedAnswer !== null 
+                      ? 'bg-gradient-to-r from-orange-600 to-amber-600 text-white hover:from-orange-500 hover:to-amber-500 shadow-[0_4px_20px_rgba(249,115,22,0.3)] hover:shadow-[0_8px_30px_rgba(249,115,22,0.4)] hover:-translate-y-1 active:scale-95' 
+                      : 'bg-stone-100 text-stone-400 cursor-not-allowed border border-stone-200'
+                    }
+                  `}
+                >
+                  {selectedAnswer !== null && <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-in-out" />}
+                  <span className="relative z-10 flex items-center justify-center gap-3 w-full drop-shadow-sm">
+                    Check Answer
+                  </span>
+                </Button>
+              ) : (
+                <Button 
+                  onClick={handleNext}
+                  size="lg"
+                  className="h-16 px-10 sm:px-14 rounded-full font-black text-xs uppercase tracking-[0.2em] gap-3 transition-all duration-500 relative overflow-hidden group/btn bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 text-white shadow-[0_4px_20px_rgba(16,185,129,0.3)] hover:shadow-[0_8px_30px_rgba(16,185,129,0.4)] hover:-translate-y-1 active:scale-95 w-full sm:w-auto mt-2"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-in-out" />
+                  <span className="relative z-10 flex items-center justify-center gap-3 w-full">
+                    {currentQuestion === questions.length - 1 ? 'Complete Quest' : 'Continue'}
+                    <ChevronRight className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-2" />
+                  </span>
+                </Button>
               )}
             </div>
           </div>
-        )}
-
-        <div className="flex items-center justify-end gap-6 pt-10 border-t border-white/5">
-
-          {!hasSubmitted ? (
-            <Button 
-              onClick={handleSubmit}
-              disabled={selectedAnswer === null}
-              size="lg"
-              className={`
-                h-16 px-10 sm:px-14 rounded-full font-black text-xs uppercase tracking-[0.2em] gap-3 transition-all duration-500 relative overflow-hidden group/btn w-full sm:w-auto
-                ${selectedAnswer !== null 
-                  ? 'bg-gradient-to-r from-orange-600 to-amber-600 text-white hover:from-orange-500 hover:to-amber-500 shadow-[0_0_30px_rgba(249,115,22,0.3)] hover:shadow-[0_0_40px_rgba(249,115,22,0.5)] hover:-translate-y-1 active:scale-95' 
-                  : 'bg-white/5 text-stone-600 cursor-not-allowed border border-white/5'
-                }
-              `}
-            >
-              {selectedAnswer !== null && <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-in-out" />}
-              <span className="relative z-10 flex items-center justify-center gap-3 w-full drop-shadow-sm">
-                Check Answer
-              </span>
-            </Button>
-          ) : (
-            <Button 
-              onClick={handleNext}
-              size="lg"
-              className="h-16 px-10 sm:px-14 rounded-full font-black text-xs uppercase tracking-[0.2em] gap-3 transition-all duration-500 relative overflow-hidden group/btn bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-400 hover:to-emerald-400 text-white shadow-[0_10px_30px_rgba(16,185,129,0.3)] hover:shadow-[0_10px_40px_rgba(16,185,129,0.5)] hover:-translate-y-1 active:scale-95 w-full sm:w-auto mt-2"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-in-out" />
-              <span className="relative z-10 flex items-center justify-center gap-3 w-full">
-                {currentQuestion === questions.length - 1 ? 'Complete Quest' : 'Continue'}
-                <ChevronRight className="h-5 w-5 transition-transform duration-300 group-hover/btn:translate-x-2" />
-              </span>
-            </Button>
-          )}
         </div>
       </div>
-
       {/* Time Warning Dialog */}
       {dialogOpen && (
         <div className="fixed inset-0 bg-stone-900/40 backdrop-blur-sm flex items-center justify-center z-[100] px-4">
