@@ -260,29 +260,29 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
               {/* Review Section */}
               <div className="space-y-8">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="h-8 w-1.5 bg-stone-900 rounded-full" />
-                  <h3 className="text-xl font-black tracking-tight text-stone-900 uppercase tracking-widest text-sm">Question Review</h3>
+                  <div className="h-8 w-1.5 bg-white/20 rounded-full" />
+                  <h3 className="text-xl font-black tracking-tight text-white uppercase tracking-widest text-sm drop-shadow-sm">Question Review</h3>
                 </div>
                 {questions.map((q, index) => {
                   const userAnswer = answers[index];
                   const isCorrect = userAnswer === q.answer;
                   return (
-                    <div key={q.id} className="overflow-hidden rounded-3xl border border-stone-100 bg-white group transition-all hover:border-stone-300 hover:shadow-lg">
-                      <div className={`h-2 w-full ${isCorrect ? 'bg-green-500' : 'bg-red-500'}`} />
+                    <div key={q.id} className="overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a]/50 backdrop-blur-sm group transition-all hover:border-white/20 hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
+                      <div className={`h-2 w-full ${isCorrect ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]' : 'bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]'}`} />
                       <div className="p-8">
                         <div className="flex items-start justify-between mb-6">
-                          <span className="text-[10px] font-black text-stone-300 uppercase tracking-[0.2em]">QUESTION {index + 1}</span>
+                          <span className="text-[10px] font-black text-stone-500 uppercase tracking-[0.2em]">QUESTION {index + 1}</span>
                           {isCorrect ? (
-                            <div className="flex items-center gap-1.5 text-green-600 text-[10px] font-black uppercase tracking-widest bg-green-50 px-3 py-1 rounded-full">
+                            <div className="flex items-center gap-1.5 text-green-400 text-[10px] font-black uppercase tracking-widest bg-green-500/10 border border-green-500/20 px-3 py-1 rounded-full">
                               <CheckCircle className="w-3.5 h-3.5" /> Correct
                             </div>
                           ) : (
-                            <div className="flex items-center gap-1.5 text-red-600 text-[10px] font-black uppercase tracking-widest bg-red-50 px-3 py-1 rounded-full">
+                            <div className="flex items-center gap-1.5 text-red-400 text-[10px] font-black uppercase tracking-widest bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full">
                               <AlertTriangle className="w-3.5 h-3.5" /> Incorrect
                             </div>
                           )}
                         </div>
-                        <h4 className="text-xl font-black text-stone-900 mb-6 leading-tight tracking-tight">{q.question}</h4>
+                        <h4 className="text-xl font-black text-white mb-6 leading-tight tracking-tight drop-shadow-sm">{q.question}</h4>
                         
                         {(q.referenceVerse || q.explanation) && (
                           <div className="mb-8 space-y-3">
@@ -290,19 +290,18 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                               <button 
                                 onClick={() => {
                                   setSelectedVerse(q.referenceVerse || "");
-                                  // Try to parse chapter from referenceVerse if local chapter isn't set
                                   const chMatch = q.referenceVerse.match(/\s(\d+):/);
                                   setSelectedChapterId(chMatch ? parseInt(chMatch[1]) : parseInt(chapter || "1"));
                                   setIsVerseContextOpen(true);
                                 }}
-                                className="inline-flex items-center gap-2 rounded-xl bg-stone-50 px-4 py-2 text-[11px] font-black text-stone-500 hover:text-orange-600 hover:bg-orange-50 transition-all uppercase tracking-widest cursor-pointer border border-transparent hover:border-orange-100"
+                                className="inline-flex items-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-2 text-[11px] font-black text-stone-400 hover:text-white hover:bg-white/10 transition-all uppercase tracking-widest cursor-pointer hover:border-white/20"
                               >
                                 <BookOpen className="h-3.5 w-3.5" />
                                 <span>{q.referenceVerse}</span>
                               </button>
                             )}
                             {q.explanation && (
-                              <p className="text-sm text-stone-500 font-medium leading-relaxed pl-6 border-l-4 border-stone-100 italic">
+                              <p className="text-sm text-stone-400 font-medium leading-relaxed pl-6 border-l-4 border-white/10 italic">
                                 {q.explanation}
                               </p>
                             )}
@@ -314,9 +313,9 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                             const isCorrectOption = optionIndex === q.answer;
                             const isUserSelection = optionIndex === userAnswer;
                             
-                            let optionClass = "bg-stone-50/50 text-stone-400 border-stone-100/50";
-                            if (isCorrectOption) optionClass = "bg-green-50 text-green-700 border-green-200 shadow-sm";
-                            if (isUserSelection && !isCorrect) optionClass = "bg-red-50 text-red-700 border-red-200 shadow-sm";
+                            let optionClass = "bg-white/5 text-stone-500 border-white/5";
+                            if (isCorrectOption) optionClass = "bg-green-500/10 text-green-400 border-green-500/30 shadow-[0_0_10px_rgba(34,197,94,0.1)]";
+                            if (isUserSelection && !isCorrect) optionClass = "bg-red-500/10 text-red-400 border-red-500/30 shadow-[0_0_10px_rgba(239,68,68,0.1)]";
 
                             return (
                               <div
@@ -340,7 +339,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
               </div>
 
               {/* Social Share Section */}
-              <div className="mt-20 pt-12 border-t border-stone-100">
+              <div className="mt-20 pt-12 border-t border-white/10">
                 <div className="text-center">
                   <h4 className="text-[10px] font-black text-stone-300 uppercase tracking-[0.3em] mb-8">Spread the word</h4>
                   <SocialShare
@@ -527,7 +526,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
           </h1>
         </div>
 
-        <div className="grid gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
           {currentQ.options.map((option, index) => {
             const isSelected = selectedAnswer === index;
             const isCorrectAnswer = index === currentQ.answer;
