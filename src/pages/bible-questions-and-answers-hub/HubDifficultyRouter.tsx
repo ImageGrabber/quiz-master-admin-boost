@@ -2,10 +2,12 @@ import { useParams } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
+import PublicQuiz from "../PublicQuiz";
+import { specificChapterQuizzes } from "@/data/specific-chapter-quizzes";
 
 // Lazy load all quiz components
 const quizMap: Record<string, any> = {
-  genesis: lazy(() => import("./GenesisBeginnerQuiz")), // Genesis has special ones
+  genesis: lazy(() => import("./GenesisBeginnerQuiz")), 
   "genesis-beginner": lazy(() => import("./GenesisBeginnerQuiz")),
   "genesis-intermediate": lazy(() => import("./GenesisIntermediateQuiz")),
   "genesis-advanced": lazy(() => import("./GenesisAdvancedQuiz")),
@@ -50,7 +52,6 @@ const quizMap: Record<string, any> = {
   malachi: lazy(() => import("../public-quizzes/MalachiPublicQuiz")),
   matthew: lazy(() => import("../public-quizzes/MatthewPublicQuiz")),
   mark: lazy(() => import("../public-quizzes/MarkPublicQuiz")),
-  lake: lazy(() => import("../public-quizzes/LukePublicQuiz")), // typo in file list was Luke
   luke: lazy(() => import("../public-quizzes/LukePublicQuiz")),
   john: lazy(() => import("../public-quizzes/JohnPublicQuiz")),
   acts: lazy(() => import("../public-quizzes/ActsPublicQuiz")),
@@ -83,7 +84,35 @@ export default function HubDifficultyRouter() {
   
   if (!bookSlug) return null;
 
-  // For Genesis, we have specific level components
+  // Check for chapter-specific quizzes (e.g., /genesis/ch1-beginner or /genesis/chapter-1)
+  const isChapterRequest = difficulty?.startsWith('ch') || difficulty?.startsWith('chapter-');
+  
+  if (isChapterRequest) {
+    const chapterMatch = difficulty.match(/ch(?:apter-)?(\d+)/i);
+    if (chapterMatch) {
+      const chapterId = chapterMatch[1];
+      const bookKey = bookSlug.toLowerCase();
+      const quizKey = `${bookKey}-${chapterId}`;
+      const chapterData = specificChapterQuizzes[quizKey];
+      
+      if (chapterData) {
+        // Correct book name formatting
+        const formattedBookName = bookSlug.charAt(0).toUpperCase() + bookSlug.slice(1).replace(/-/g, ' ');
+        
+        return (
+          <PublicQuiz 
+            {...chapterData}
+            title={chapterData.title || `${formattedBookName} Chapter ${chapterId} Quiz`}
+            bookName={formattedBookName}
+            chapter={chapterId}
+            questions={chapterData.questions}
+          />
+        );
+      }
+    }
+  }
+
+  // Handle Genesis special levels
   if (bookSlug.toLowerCase() === "genesis" && difficulty) {
     const Component = quizMap[`genesis-${difficulty.toLowerCase()}`];
     if (Component) {
