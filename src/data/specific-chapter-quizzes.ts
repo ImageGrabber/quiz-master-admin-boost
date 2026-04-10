@@ -273,5 +273,76 @@ export const specificChapterQuizzes: Record<string, any> = {
                 explanation: "God saw all that he had made, and it was very good."
             }
         ]
+    },
+    "genesis-2": {
+        seoDescription: "Explore the details of the Garden of Eden and the creation of man and woman in Genesis Chapter 2! Test your knowledge on the rivers of Eden and God's first commands.",
+        prevChapterUrl: "/bible-questions-and-answers-hub/genesis/chapter-1",
+        nextChapterUrl: "/bible-questions-and-answers-hub/genesis/chapter-3",
+        questions: [
+            {
+                id: 1,
+                question: "On which day did God finish His work and rest from all His creation?",
+                options: ["Fifth day", "Sixth day", "Seventh day", "Eighth day"],
+                answer: 2,
+                referenceVerse: "Genesis 2:2",
+                explanation: "By the seventh day God had finished the work he had been doing; so on the seventh day he rested."
+            },
+            {
+                id: 2,
+                question: "How did God form the first man, Adam?",
+                options: ["By speaking him into existence", "From the dust of the ground", "From the light of the sun", "From the sea foam"],
+                answer: 1,
+                referenceVerse: "Genesis 2:7",
+                explanation: "The LORD God formed a man from the dust of the ground and breathed into his nostrils the breath of life."
+            },
+            {
+                id: 3,
+                question: "Which two specific trees were mentioned as being in the middle of the garden?",
+                options: ["Tree of Life and Tree of Knowledge", "Oak and Cedar", "Palm and Olive", "Fig and Vine"],
+                answer: 0,
+                referenceVerse: "Genesis 2:9",
+                explanation: "In the middle of the garden were the tree of life and the tree of the knowledge of good and evil."
+            },
+            {
+                id: 4,
+                question: "A river flowed out of Eden to water the garden and then divided into how many branches?",
+                options: ["Two", "Three", "Four", "Seven"],
+                answer: 2,
+                referenceVerse: "Genesis 2:10",
+                explanation: "A river watering the garden flowed from Eden; from there it was separated into four headwaters."
+            },
+            {
+                id: 5,
+                question: "What was the name of the first river branch, which flowed around the land of Havilah?",
+                options: ["Gihon", "Tigris", "Euphrates", "Pishon"],
+                answer: 3,
+                referenceVerse: "Genesis 2:11",
+                explanation: "The name of the first is the Pishon; it winds through the entire land of Havilah, where there is gold."
+            },
+            {
+                id: 6,
+                question: "What was the only command God gave Adam regarding the trees in the garden?",
+                options: ["Do not touch any tree", "Do not eat from the tree of the knowledge of good and evil", "Eat only from the tree of life", "Name all the trees"],
+                answer: 1,
+                referenceVerse: "Genesis 2:17",
+                explanation: "But you must not eat from the tree of the knowledge of good and evil, for when you eat from it you will certainly die."
+            },
+            {
+                id: 7,
+                question: "What did God use to form the woman, Eve?",
+                options: ["The dust of the ground", "The woman was spoken into existence", "One of Adam's ribs", "A flower from Eden"],
+                answer: 2,
+                referenceVerse: "Genesis 2:21-22",
+                explanation: "Then the LORD God made a woman from the rib he had taken out of the man."
+            },
+            {
+                id: 8,
+                question: "What was the reaction of Adam and his wife to their nakedness in Chapter 2?",
+                options: ["They were ashamed", "They felt no shame", "They hid themselves", "They made clothes"],
+                answer: 1,
+                referenceVerse: "Genesis 2:25",
+                explanation: "Adam and his wife were both naked, and they felt no shame (before the Fall described in Chapter 3)."
+            }
+        ]
     }
 };
