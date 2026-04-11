@@ -46,8 +46,6 @@ export const bookNames = allBooks.reduce((acc, book) => {
     return acc;
 }, {} as Record<string, string>);
 
-}, {} as Record<string, string>);
-
 export { bibleStructure };
 
 export const featuredQuizzes = [
