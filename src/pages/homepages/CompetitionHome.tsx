@@ -521,7 +521,7 @@ const CompetitionHome = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/35 to-white" />
           </div>
 
-          <div className="max-w-7xl mx-auto w-full px-6 relative z-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-end pb-10 md:pb-16">
+          <div className="max-w-7xl mx-auto w-full px-6 relative z-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-end pt-20 md:pt-28 pb-10 md:pb-16">
             <div className="space-y-8 text-white">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.25em] text-white backdrop-blur-md">
                 <Trophy className="w-4 h-4" />
