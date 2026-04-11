@@ -177,7 +177,7 @@ import GenesisAdvancedQuiz from "./pages/bible-questions-and-answers-hub/Genesis
 import GenesisHub from "./pages/bible-questions-and-answers-hub/Genesis";
 import ExodusHub from "./pages/bible-questions-and-answers-hub/Exodus";
 import LeviticusHub from "./pages/bible-questions-and-answers-hub/Leviticus";
-import NehemiahHub from "./pages/bible-questions-and-answers-hub/Nehemiah";
+import NehemiahHub from "./pages/bible-questions-and-answers-hub/nehemiah";
 import HubDifficultyRouter from "./pages/bible-questions-and-answers-hub/HubDifficultyRouter";
 import ChapterPage from "./pages/ChapterPage";
 

@@ -121,7 +121,7 @@ export default function GenesisHub() {
           <img 
             src={GENESIS_IMAGES.creation} 
             alt="Genesis Creation Cinematic" 
-            className="w-full h-full object-cover brightness-[0.4] transition-transform duration-[20s] hover:scale-110"
+            className="w-full h-full object-cover brightness-[0.4] transition-transform duration-[20000ms] hover:scale-110"
           />
         </div>
         
@@ -549,7 +549,7 @@ export default function GenesisHub() {
               <img 
                 src={GENESIS_IMAGES.abraham} 
                 alt="Abraham Looking at Stars" 
-                className="w-full h-[750px] object-cover transition-transform duration-[4s] group-hover:scale-110"
+                className="w-full h-[750px] object-cover transition-transform duration-[4000ms] group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
               <div className="absolute bottom-16 left-16 right-16 text-white space-y-6">

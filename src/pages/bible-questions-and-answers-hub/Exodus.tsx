@@ -277,7 +277,7 @@ export default function ExodusHub() {
           <img 
             src={EXODUS_IMAGES.hero} 
             alt="Exodus Red Sea Parting Cinematic" 
-            className="w-full h-full object-cover brightness-[0.4] transition-transform duration-[20s] hover:scale-110"
+            className="w-full h-full object-cover brightness-[0.4] transition-transform duration-[20000ms] hover:scale-110"
           />
         </div>
         
