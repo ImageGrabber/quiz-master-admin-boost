@@ -190,18 +190,6 @@ const CompetitionHome = () => {
       description: "Worship songs with lyrics and video embeds.",
       path: "/songs",
       icon: Globe
-    },
-    {
-      label: "Public Leaderboard",
-      description: "Track top challengers and global rankings.",
-      path: "/public-leaderboard",
-      icon: TrendingUp
-    },
-    {
-      label: "Daily Quiz",
-      description: "Take today’s timed scripture challenge.",
-      path: "/todays-quiz",
-      icon: Calendar
     }
   ];
 
@@ -315,14 +303,16 @@ const CompetitionHome = () => {
       <div className="min-h-screen bg-white text-gray-900 font-urbanist selection:bg-black/5">
         <Navigation transparent={true} />
 
-        <section className="relative lg:h-[95vh] min-h-[560px] md:min-h-[820px] flex items-center overflow-hidden py-10 md:py-0">
-          <div className="absolute inset-0">
-            <img
-              src="https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&w=2200"
-              alt="Historic library shelves with warm cinematic lighting"
-              className="h-full w-full object-cover object-center brightness-[0.34] transition-transform duration-[18000ms] hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/30 to-white/15" />
+        <section className="relative h-screen flex items-center overflow-hidden">
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_18%,rgba(56,189,248,0.32),transparent_40%),radial-gradient(circle_at_86%_14%,rgba(14,165,233,0.24),transparent_44%),radial-gradient(circle_at_72%_80%,rgba(168,85,247,0.18),transparent_46%),linear-gradient(135deg,#030712_0%,#0b1228_48%,#111827_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(148,163,184,0.14)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.14)_1px,transparent_1px)] bg-[size:34px_34px] opacity-20" />
+            <div className="absolute -top-24 -left-16 h-72 w-72 rounded-full bg-cyan-300/20 blur-3xl animate-pulse" />
+            <div className="absolute top-20 right-[-3rem] h-64 w-64 rounded-full bg-blue-400/18 blur-3xl animate-pulse [animation-delay:900ms]" />
+            <div className="absolute -bottom-24 right-16 h-80 w-80 rounded-full bg-violet-500/18 blur-3xl animate-pulse [animation-delay:1600ms]" />
+            <div className="absolute top-[-8rem] right-[24%] h-80 w-80 rounded-full border border-white/10" />
+            <div className="absolute bottom-[-10rem] left-[20%] h-96 w-96 rounded-full border border-white/10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/52 via-black/18 to-white/35" />
           </div>
 
           <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 relative z-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-8 md:gap-10 items-end pt-20 md:pt-32 pb-8 md:pb-16">
