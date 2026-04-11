@@ -162,6 +162,11 @@ export default function BibleQA() {
       description: "Master the laws of holiness, offerings, and sacred rituals with cinematic study guides.",
     },
     {
+      id: "numbers",
+      title: "Numbers Hub",
+      description: "Explore the census, the wilderness journey, and the test of faith with interactive chapter quizzes.",
+    },
+    {
       id: "nehemiah",
       title: "Nehemiah Hub",
       description: "Leadership, rebuilding, and spiritual renewal studies with focused quizzes.",
