@@ -258,7 +258,6 @@ export default function BibleQA() {
           </div>
         </div>
       </section>
->
 
       <div className="w-full max-w-7xl mx-auto px-6 py-10">
         <div className="flex items-center text-sm font-light text-gray-500 mb-12">
