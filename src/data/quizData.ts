@@ -74,59 +74,6 @@ export const quizData: QuizData = {
       ]
     }
   },
-  exodus: {
-    1: {
-      beginner: [
-        { chapter: 1, question: "Who were the Hebrew midwives that feared God?", options: ["Shiphrah and Puah", "Miriam and Zipporah", "Sarah and Hagar", "Leah and Rachel"], answer: 0, explanation: "Exodus 1:15-17 — The king of Egypt spoke to the Hebrew midwives, Shiphrah and Puah, but they feared God." },
-        { chapter: 1, question: "How many souls of the house of Jacob came into Egypt?", options: ["50", "60", "70", "100"], answer: 2, explanation: "Exodus 1:5 — All the descendants of Jacob were seventy persons; Joseph was already in Egypt." }
-      ],
-      advanced: [
-        { chapter: 1, question: "What were the names of the two store cities the Israelites built for Pharaoh?", options: ["Pithom and Rameses", "Memphis and Thebes", "Ur and Haran", "Succoth and Etham"], answer: 0, explanation: "Exodus 1:11 — They built for Pharaoh store cities, Pithom and Raamses." }
-      ]
-    },
-    2: {
-      beginner: [
-        { chapter: 2, question: "Who found Moses in the basket among the reeds?", options: ["A Hebrew slave", "Pharaoh's daughter", "Miriam", "Zipporah"], answer: 1, explanation: "Exodus 2:5 — Now the daughter of Pharaoh came down to bathe at the river... She saw the basket among the reeds." },
-        { chapter: 2, question: "Moses was from which tribe of Israel?", options: ["Judah", "Levi", "Benjamin", "Reuben"], answer: 1, explanation: "Exodus 2:1 — Now a man from the house of Levi went and took as his wife a Levite woman." }
-      ],
-      advanced: [
-        { chapter: 2, question: "What was the name of the priest of Midian, Moses' father-in-law, in Chapter 2?", options: ["Jethro", "Reuel", "Hobab", "Putiel"], answer: 1, explanation: "Exodus 2:18 — When they came to their father Reuel, he said, 'How is it that you have come home so soon today?'" }
-      ]
-    },
-    3: {
-      beginner: [
-        { chapter: 3, question: "Where did God appear to Moses in a burning bush?", options: ["Mount Moriah", "Mount Sinai (Horeb)", "Mount Nebo", "Mount Carmel"], answer: 1, explanation: "Exodus 3:1 — Moses... came to Horeb, the mountain of God. And the angel of the LORD appeared to him in a flame of fire out of the midst of a bush." },
-        { chapter: 3, question: "What name did God reveal to Moses from the bush?", options: ["The Almighty", "Elohim", "I AM WHO I AM", "The God of Wonders"], answer: 2, explanation: "Exodus 3:14 — God said to Moses, 'I AM WHO I AM.'" }
-      ]
-    },
-    "1-12": {
-      beginner: [
-        { chapter: 2, question: "Who found the baby Moses in the Nile river?", options: ["His mother", "Pharaoh's daughter", "Miriam", "An Egyptian soldier"], answer: 1, explanation: "Exodus 2:5 — 'Then the daughter of Pharaoh came down to bathe at the river... She saw the basket among the reeds.'" },
-        { chapter: 3, question: "God spoke to Moses from what miraculous object?", options: ["A pillar of cloud", "A burning bush", "A stone tablet", "A mountain top"], answer: 1, explanation: "Exodus 3:2 — 'And the angel of the Lord appeared to him in a flame of fire out of the midst of a bush.'" },
-        { chapter: 12, question: "What did the Israelites put on their doorposts to be spared from the final plague?", options: ["Olive oil", "Lamb's blood", "White linen", "Sacred water"], answer: 1, explanation: "Exodus 12:7 — 'Then they shall take some of the blood and put it on the two doorposts...'" }
-      ],
-      advanced: [
-        { chapter: 1, question: "What were the names of the two Hebrew midwives who feared God and saved the baby boys?", options: ["Leah and Rachel", "Shiphrah and Puah", "Miriam and Zipporah", "Sarah and Hagar"], answer: 1, explanation: "Exodus 1:15 — 'Then the king of Egypt said to the Hebrew midwives, one of whom was named Shiphrah and the other Puah...'" },
-        { chapter: 7, question: "What was the very first plague brought upon Egypt?", options: ["Frogs", "Gnats", "Water turned to blood", "Darkness"], answer: 2, explanation: "Exodus 7:17-21 — The first plague was the turning of the Nile into blood." }
-      ]
-    },
-    // Ranges for ExodusHub
-    "13-18": {
-      beginner: [
-        { chapter: 14, question: "Which body of water did God part for the Israelites?", options: ["The Jordan River", "The Nile River", "The Red Sea", "The Sea of Galilee"], answer: 2, explanation: "Exodus 14:21-22 — 'Then Moses stretched out his hand over the sea... and the people of Israel went into the midst of the sea on dry ground.'" }
-      ]
-    },
-    "19-24": {
-      beginner: [
-        { chapter: 20, question: "How many commandments did God give to Moses on Mount Sinai?", options: ["7", "10", "12", "40"], answer: 1, explanation: "Exodus 20 — God gave the Ten Commandments." }
-      ]
-    },
-    "25-40": {
-      beginner: [
-        { chapter: 25, question: "What was the name of the portable earthly dwelling place of God?", options: ["The Temple", "The Tabernacle", "The Citadel", "The Altar"], answer: 1, explanation: "Exodus 25-27 — God gave instructions for the Tabernacle." }
-      ]
-    }
-  },
   leviticus: {
     foundation: {
       beginner: [
