@@ -142,12 +142,16 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
           </div>
 
           <button onClick={() => navigate("/articles")} className={navItemClass}>Articles</button>
-          <button onClick={() => navigate("/kids-stories")} className={`
-            text-base md:text-lg font-urbanist font-medium px-4 py-1.5 rounded-full border transition-all shadow-sm
-            ${transparent && !isScrolled 
-              ? 'text-white bg-white/20 border-white/30 hover:bg-white/30' 
-              : 'text-orange-600 bg-orange-50 border-orange-100 hover:text-orange-700'}
-          `}>Kids Stories</button>
+          <button
+            onClick={() => navigate("/kids-stories")}
+            className={`text-base md:text-lg font-urbanist font-light transition-colors ${
+              transparent && !isScrolled
+                ? "text-white/80 hover:text-white"
+                : "text-orange-600 hover:text-orange-700"
+            }`}
+          >
+            Kids Stories
+          </button>
           <button onClick={() => navigate("/help")} className={navItemClass}>Help</button>
 
         </nav>
@@ -235,4 +239,3 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
     </header>
   );
 }
-
