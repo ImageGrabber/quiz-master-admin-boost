@@ -396,28 +396,44 @@ export default function JoshuaHub() {
           </div>
         </section>
 
-        {/* Chapter Library Grid */}
-        <section id="joshua-chapter-wise" className="mb-40 scroll-mt-24 pt-32 border-t border-gray-100 text-left">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-32 gap-16 text-left">
-            <div className="max-w-2xl">
-               <h2 className="text-[10px] font-bold uppercase tracking-[0.5em] text-orange-500 mb-10 tracking-widest">The Scrolls of Conquest</h2>
-              <h3 className="text-6xl md:text-8xl font-normal text-gray-900 mb-8 italic serif tracking-tighter uppercase leading-none italic">The Library of Joshua</h3>
-              <p className="text-2xl font-light text-gray-400 leading-relaxed italic border-l-2 border-gray-100 pl-8">Complete chapter-by-chapter quiz repository (24 Chapters)</p>
-            </div>
-            <div className="w-full lg:w-[500px]">
-              <div className="relative group">
-                <Search className="absolute left-10 top-1/2 transform -translate-y-1/2 text-gray-300 w-8 h-8" strokeWidth={1} />
-                <Input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Chapter # or keyword..."
-                  className="pl-24 pr-12 py-12 text-2xl font-light border-0 bg-gray-50/70 focus:bg-white focus:ring-0 rounded-[3rem] shadow-inner transition-all duration-700 hover:bg-gray-50"
-                />
-              </div>
+        {/* Chapter Library Grid - Ultra Premium Overhaul */}
+        <section id="joshua-chapter-wise" className="mb-40 scroll-mt-24 pt-32 px-4 md:px-0">
+          <div className="max-w-7xl mx-auto mb-20">
+            <div className="relative group overflow-hidden rounded-[3rem] border border-slate-100 shadow-2xl bg-white p-12 md:p-20 text-center">
+               {/* Background Glow Effect */}
+               <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-orange-500/5 blur-[120px] rounded-full pointer-events-none group-hover:bg-orange-500/10 transition-colors" />
+               <div className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-sky-500/5 blur-[120px] rounded-full pointer-events-none group-hover:bg-sky-500/10 transition-colors" />
+               
+               <div className="relative z-10 space-y-8 animate-in fade-in slide-in-from-bottom-5 duration-1000">
+                  <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-slate-50 border border-slate-100 mb-4">
+                     <Library className="w-5 h-5 text-orange-500" />
+                     <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400 font-urbanist">Chapter Wise Study</span>
+                  </div>
+                  
+                  <h3 className="text-6xl md:text-8xl font-normal text-slate-900 tracking-tighter uppercase leading-[0.9] italic serif">
+                    The Library of <span className="text-orange-600 italic">Joshua</span>
+                  </h3>
+                  
+                  <p className="text-2xl font-light text-slate-400 max-w-2xl mx-auto leading-relaxed italic">
+                    Explore the detailed battle records and ancestral allotments through 24 meticulously curated chapters.
+                  </p>
+
+                  <div className="flex justify-center max-w-xl mx-auto pt-8">
+                    <div className="relative w-full group/search">
+                      <Search className="absolute left-10 top-1/2 transform -translate-y-1/2 text-slate-300 w-8 h-8 group-focus-within/search:text-orange-500 transition-colors" strokeWidth={1} />
+                      <Input
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        placeholder="Search for a chapter or keyword..."
+                        className="pl-24 pr-12 py-12 text-2xl font-light border-slate-100 bg-slate-50/70 focus:bg-white focus:ring-2 focus:ring-orange-500/20 rounded-[3rem] shadow-inner transition-all duration-700 w-full"
+                      />
+                    </div>
+                  </div>
+               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
             {visibleChapters.map((ch) => {
               const isConquest = ch >= 1 && ch <= 12;
               const isInheritance = ch >= 13 && ch <= 21;
@@ -426,78 +442,86 @@ export default function JoshuaHub() {
               let currentChapterPoints = null;
               let cardTitle = "Narrative Insight";
               let cardColor = "orange";
+              let BadgeIcon = Flame;
+              let accentColor = "bg-orange-500";
+              let iconBg = "bg-orange-50";
+              let iconColor = "text-orange-600";
               
               if (ch >= 1 && ch <= 8) {
                 currentChapterPoints = chapterPoints1to8[ch];
                 cardTitle = "Battle Record";
                 cardColor = "orange";
+                BadgeIcon = Sword;
+                accentColor = "bg-orange-600";
+                iconBg = "bg-orange-50";
+                iconColor = "text-orange-600";
               } else if (ch >= 9 && ch <= 16) {
                 currentChapterPoints = chapterPoints9to16[ch];
-                cardTitle = isConquest ? "Campaign Note" : "Tribal Legacy";
+                cardTitle = isConquest ? "Campaign" : "Tribal Legacy";
                 cardColor = isConquest ? "orange" : "sky";
+                BadgeIcon = isConquest ? Flame : Map;
+                accentColor = isConquest ? "bg-orange-500" : "bg-sky-500";
+                iconBg = isConquest ? "bg-orange-50" : "bg-sky-50";
+                iconColor = isConquest ? "text-orange-600" : "text-sky-600";
               } else if (ch >= 17 && ch <= 24) {
                 currentChapterPoints = chapterPoints17to24[ch];
                 cardTitle = isInheritance ? "Inheritance" : "Final Charge";
                 cardColor = isInheritance ? "sky" : "emerald";
+                BadgeIcon = isInheritance ? Compass : ShieldCheck;
+                accentColor = isInheritance ? "bg-sky-500" : "bg-emerald-500";
+                iconBg = isInheritance ? "bg-sky-50" : "bg-emerald-50";
+                iconColor = isInheritance ? "text-sky-600" : "text-emerald-600";
               }
 
               return (
                 <Card 
                   key={ch} 
-                  className="group relative border border-slate-100 hover:border-black/5 hover:translate-y-[-8px] transition-all duration-500 flex flex-col h-full cursor-pointer bg-white shadow-xl shadow-slate-200/20 rounded-[2.5rem] overflow-hidden p-1" 
+                  className="group relative border border-gray-100/60 hover:border-black/5 hover:-translate-y-2 transition-all duration-500 flex flex-col bg-white overflow-hidden shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem]" 
                   onClick={() => navigate(`/bible-questions-and-answers-hub/joshua/chapter-${ch}`)}
                 >
-                  <CardHeader className="p-8 pb-6 text-black italic">
-                    <div className="flex items-center justify-between mb-8 opacity-40">
-                      <div className={`text-[10px] font-bold tracking-[0.3em] group-hover:text-${cardColor}-500 transition-colors uppercase tracking-widest font-urbanist`}>
-                        CHAPTER {ch}
-                      </div>
-                      <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all duration-500">
-                        <ChevronRight className="w-4 h-4" />
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-2 mb-6">
-                       <h4 className={`text-[10px] font-bold uppercase tracking-[0.2em] text-${cardColor}-600/60 font-urbanist`}>
-                         {isConquest ? "The Conquest" : isInheritance ? "The Allotment" : "National Legacy"}
-                       </h4>
-                       <CardTitle className="text-2xl font-normal text-slate-900 italic serif tracking-tight">
-                         {cardTitle}
-                       </CardTitle>
-                    </div>
+                  <div className={`h-2 w-full ${accentColor} absolute top-0`} />
+                  
+                  <CardHeader className="pt-16 pb-8 px-10 text-left">
+                    <CardTitle className="text-5xl font-normal text-gray-900 italic serif mb-4 tracking-tighter">Chapter {ch}</CardTitle>
+                    <CardDescription className={`text-[10px] font-bold uppercase tracking-[0.3em] font-urbanist text-${cardColor}-600/60`}>
+                      {isConquest ? "The Conquest" : isInheritance ? "The Allotment" : "National Legacy"}
+                    </CardDescription>
+                  </CardHeader>
 
-                    <div className="space-y-4 min-h-[100px]">
+                  <CardContent className="px-10 pb-12 flex-grow flex flex-col justify-between text-left">
+                    <div className="space-y-6 mb-12">
                       {currentChapterPoints?.map((pt, idx) => (
-                        <div key={idx} className="flex items-start gap-3">
-                          <div className={`w-1.5 h-1.5 rounded-full bg-slate-200 mt-2 shrink-0 group-hover:bg-${cardColor}-500 transition-colors`} />
-                          <p className="text-[14px] font-light text-slate-500 leading-relaxed group-hover:text-slate-900 transition-colors italic line-clamp-2 antialiased">
-                            {pt}
-                          </p>
+                        <div key={idx} className="flex items-start text-xl font-light text-gray-500 group/pt transition-colors">
+                          <div className={`w-2 h-2 rounded-full ${accentColor} mr-4 mt-2.5 opacity-40 group-hover/pt:opacity-100 transition-opacity`} />
+                          <p className="italic group-hover:text-black transition-colors leading-relaxed antialiased">{pt}</p>
                         </div>
                       ))}
                     </div>
-                  </CardHeader>
-                  <div className="mt-auto p-8 pt-0">
-                    <div className="w-full h-px bg-slate-100 mb-6 group-hover:bg-black/5 transition-colors" />
-                    <Button variant="ghost" className="w-full justify-start px-0 text-[10px] font-bold tracking-[0.2em] text-slate-400 uppercase group-hover:text-black hover:bg-transparent tracking-widest transition-colors font-urbanist">
+                    
+                    <Button className="w-full font-bold bg-black text-white hover:bg-gray-800 rounded-2xl py-8 tracking-[0.2em] uppercase text-xs transition-all shadow-xl shadow-black/10">
                       Explore Chapter
                     </Button>
-                  </div>
+                  </CardContent>
                 </Card>
               );
             })}
           </div>
 
-          {/* Chapters Pagination */}
+          {/* Chapters Pagination - Enhanced Alignment */}
           {totalChapterPages > 1 && (
-            <div className="mt-40 flex items-center justify-between border-t border-gray-100 pt-16 font-bold text-gray-400">
-              <div className="text-[10px] uppercase tracking-[0.3em] font-bold tracking-[0.3em] font-urbanist">
-                Page {chapterPage + 1} / {totalChapterPages}
+            <div className="mt-40 max-w-7xl mx-auto flex items-center justify-between border-t border-slate-100 pt-16 font-bold text-slate-400">
+              <div className="flex items-center gap-4">
+                 <div className="w-12 h-1 px bg-slate-50 rounded-full overflow-hidden shrink-0">
+                    <div className="h-full bg-slate-900 transition-all duration-700" style={{ width: `${(chapterPage + 1) / totalChapterPages * 100}%` }} />
+                 </div>
+                 <div className="text-[11px] uppercase tracking-[0.3em] font-bold font-urbanist">
+                   {chapterPage + 1} / {totalChapterPages}
+                 </div>
               </div>
-              <div className="flex gap-6">
+              <div className="flex gap-4 md:gap-8">
                 <Button 
                   variant="outline" 
-                   className="rounded-[2.5rem] px-12 py-8 font-bold tracking-[0.2em] uppercase text-[10px] border-none bg-gray-50 hover:bg-black hover:text-white transition-all shadow-sm tracking-[0.2em] font-bold"
+                  className="rounded-full px-12 py-8 font-bold tracking-[0.2em] uppercase text-[11px] border border-slate-100 bg-white hover:bg-black hover:text-white transition-all shadow-xl shadow-slate-200/20 active:scale-95 disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-slate-300"
                   disabled={chapterPage === 0} 
                   onClick={() => setChapterPage(p => p - 1)}
                 >
@@ -505,7 +529,7 @@ export default function JoshuaHub() {
                 </Button>
                 <Button 
                   variant="outline" 
-                   className="rounded-[2.5rem] px-12 py-8 font-bold tracking-[0.2em] uppercase text-[10px] border-none bg-gray-50 hover:bg-black hover:text-white transition-all shadow-sm tracking-[0.2em] font-bold"
+                   className="rounded-full px-12 py-8 font-bold tracking-[0.2em] uppercase text-[11px] border border-slate-100 bg-white hover:bg-black hover:text-white transition-all shadow-xl shadow-slate-200/20 active:scale-95 disabled:opacity-30"
                   disabled={chapterPage >= totalChapterPages - 1} 
                   onClick={() => setChapterPage(p => p + 1)}
                 >
