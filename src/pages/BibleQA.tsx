@@ -157,6 +157,11 @@ export default function BibleQA() {
       description: "Deep-dive into deliverance, covenant, and the tabernacle with structured quizzes.",
     },
     {
+      id: "leviticus",
+      title: "Leviticus Hub",
+      description: "Master the laws of holiness, offerings, and sacred rituals with cinematic study guides.",
+    },
+    {
       id: "nehemiah",
       title: "Nehemiah Hub",
       description: "Leadership, rebuilding, and spiritual renewal studies with focused quizzes.",
