@@ -116,8 +116,8 @@ export default function LeviticusHub() {
             <Button size="lg" className="bg-white text-black hover:bg-gray-200 px-10 py-8 text-lg rounded-2xl font-light shadow-2xl transition-all active:scale-95" onClick={() => navigate("/quiz/leviticus-1-27")}>
               Begin Full Journey
             </Button>
-            <Button size="lg" variant="outline" className="border-black/20 text-black hover:bg-black hover:text-white hover:border-black backdrop-blur-sm px-10 py-8 text-lg rounded-2xl font-light transition-all active:scale-95" onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}>
-              Explore Chapters
+            <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-black hover:text-white hover:border-black backdrop-blur-sm px-10 py-8 text-lg rounded-2xl font-light transition-all active:scale-95" onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}>
+              Explore Content
             </Button>
           </div>
         </div>
@@ -389,7 +389,7 @@ export default function LeviticusHub() {
           <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-24 gap-12 text-black">
             <div className="max-w-2xl">
               <h2 className="text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif uppercase leading-none tracking-tight">The Library of Holiness</h2>
-              <p className="text-2xl font-light text-gray-400 leading-relaxed italic">Explore unique study materials and summaries for each of the 27 chapters.</p>
+              <p className="text-2xl font-light text-gray-400 leading-relaxed">Explore unique study materials and summaries for each of the 27 chapters.</p>
             </div>
             {/* Search Bar */}
             <div className="w-full lg:w-[450px]">

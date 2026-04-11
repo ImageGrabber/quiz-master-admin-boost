@@ -390,8 +390,8 @@ export default function BibleQA() {
                   <CardDescription className="text-lg font-light text-gray-600">{hub.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="pt-4 mt-auto">
-                  <Button className="w-full font-light border-gray-200 text-base py-6" variant="outline">
-                    Open Hub
+                  <Button className="w-full font-light border-gray-200 text-base py-6 hover:bg-black hover:text-white transition-colors" variant="outline">
+                    Explore Hub
                   </Button>
                 </CardContent>
               </Card>

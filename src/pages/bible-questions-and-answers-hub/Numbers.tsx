@@ -128,7 +128,7 @@ export default function NumbersHub() {
             <Button size="lg" className="bg-white text-black hover:bg-gray-200 px-10 py-8 text-lg rounded-2xl font-light shadow-2xl transition-all active:scale-95" onClick={() => document.getElementById('difficulty')?.scrollIntoView({ behavior: 'smooth' })}>
               Begin Quiz Journey
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 backdrop-blur-sm px-10 py-8 text-lg rounded-2xl font-light transition-all active:scale-95 border-opacity-40" onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}>
+            <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-black hover:text-white hover:border-black backdrop-blur-sm px-10 py-8 text-lg rounded-2xl font-light transition-all active:scale-95" onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}>
               Explore Content
             </Button>
           </div>
@@ -324,11 +324,11 @@ export default function NumbersHub() {
         </section>
 
         {/* Chapter Wise Grid with Pagination */}
-        <section id="numbers-chapter-wise" className="mb-40 scroll-mt-24 pt-32 border-t border-gray-100 italic">
+        <section id="numbers-chapter-wise" className="mb-40 scroll-mt-24 pt-32 border-t border-gray-100">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-24 gap-12">
             <div className="max-w-2xl">
               <h2 className="text-5xl md:text-7xl font-normal text-gray-900 mb-6 italic serif tracking-tight tracking-tighter">The Library of the Desert</h2>
-              <p className="text-2xl font-light text-gray-400 leading-relaxed font-urbanist not-italic">Detailed analysis and interactive quizzes for every single chapter of Numbers.</p>
+              <p className="text-2xl font-light text-gray-400 leading-relaxed">Detailed analysis and interactive quizzes for every single chapter of Numbers.</p>
             </div>
             <div className="w-full lg:w-[450px]">
               <div className="relative group font-urbanist not-italic">
@@ -376,7 +376,7 @@ export default function NumbersHub() {
                     </div>
                   </CardHeader>
                   <div className="mt-auto p-10 pt-0">
-                    <Button variant="ghost" className="w-full justify-start px-0 text-xs font-semibold tracking-widest text-gray-400 uppercase group-hover:text-black hover:bg-transparent tracking-[0.2em] text-[0.45rem]">
+                    <Button variant="ghost" className="w-full justify-start px-0 text-xs font-semibold tracking-widest text-gray-400 uppercase group-hover:text-black hover:bg-transparent">
                       Explore Chapter
                     </Button>
                   </div>
