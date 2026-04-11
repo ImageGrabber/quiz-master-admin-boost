@@ -3,7 +3,7 @@ import { useState, useMemo, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { BookOpen, Layers, Swords, ListOrdered, Brain, Home, ChevronRight, Search, Quote, Sparkles, Compass, ShieldCheck } from "lucide-react";
+import { BookOpen, Layers, Swords, ListOrdered, Brain, Home, ChevronRight, Search, Quote, Sparkles, Compass, ShieldCheck, Users } from "lucide-react";
 import SEO from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 
@@ -333,6 +333,77 @@ export default function GenesisHub() {
                   <p className="text-xs font-semibold tracking-widest text-blue-400 uppercase">— Genesis 6:8</p>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Specialized Hubs Section */}
+        <section className="mb-40 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-24">
+              <h2 className="text-sm font-semibold uppercase tracking-[0.5em] text-gray-400 mb-8">Specialized Hubs</h2>
+              <h3 className="text-5xl md:text-7xl font-normal text-gray-900 mb-8 italic serif">Targeted Training</h3>
+              <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                Specific training tools for targeted memorization and logic.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { 
+                  title: "Fill in the Blanks", 
+                  desc: "Scripture memorization", 
+                  icon: Quote, 
+                  link: "fill-in-the-blanks",
+                  color: "bg-amber-50",
+                  iconColor: "text-amber-600"
+                },
+                { 
+                  title: "True or False", 
+                  desc: "Rapid logic testing", 
+                  icon: ShieldCheck, 
+                  link: "true-false",
+                  color: "bg-blue-50",
+                  iconColor: "text-blue-600"
+                },
+                { 
+                  title: "Patriarchs", 
+                  desc: "Character focused", 
+                  icon: Users, 
+                  link: "characters",
+                  color: "bg-emerald-50",
+                  iconColor: "text-emerald-600"
+                },
+                { 
+                  title: "Timeline Match", 
+                  desc: "Historical sequencing", 
+                  icon: ListOrdered, 
+                  link: "match-the-following",
+                  color: "bg-indigo-50",
+                  iconColor: "text-indigo-600"
+                }
+              ].map((tool) => (
+                <Card 
+                  key={tool.title}
+                  className="group hover:scale-105 hover:shadow-2xl transition-all duration-500 cursor-pointer border-none bg-white rounded-[2rem] overflow-hidden"
+                  onClick={() => navigate(`/bible-questions-and-answers-hub/genesis/${tool.link}`)}
+                >
+                  <CardHeader className="pt-12 pb-8 px-8">
+                    <div className={`w-14 h-14 rounded-2xl ${tool.color} flex items-center justify-center mb-8`}>
+                      <tool.icon className={`w-7 h-7 ${tool.iconColor}`} strokeWidth={1.5} />
+                    </div>
+                    <CardTitle className="text-2xl font-normal text-gray-900 italic serif mb-2">{tool.title}</CardTitle>
+                    <CardDescription className="text-sm font-light text-gray-500 leading-relaxed">
+                      {tool.desc}
+                    </CardDescription>
+                  </CardHeader>
+                  <div className="px-8 pb-8">
+                    <div className="h-1 w-full bg-gray-50 rounded-full overflow-hidden">
+                      <div className={`h-full w-0 group-hover:w-full transition-all duration-700 bg-black/10`} />
+                    </div>
+                  </div>
+                </Card>
+              ))}
             </div>
           </div>
         </section>
