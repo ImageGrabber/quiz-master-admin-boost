@@ -114,7 +114,9 @@ export default function HubDifficultyRouter() {
 
   // Handle Genesis special levels
   if (bookSlug.toLowerCase() === "genesis" && difficulty) {
-    const Component = quizMap[`genesis-${difficulty.toLowerCase()}`];
+    const diffKey = difficulty.toLowerCase();
+    const Component = quizMap[`genesis-${diffKey}`];
+    
     if (Component) {
       return (
         <Suspense fallback={
@@ -124,6 +126,21 @@ export default function HubDifficultyRouter() {
         }>
           <Component />
         </Suspense>
+      );
+    }
+
+    // Check if it's a specialized Genesis quiz from data
+    const specializedData = specificChapterQuizzes[`genesis-${diffKey}`];
+    if (specializedData) {
+      const formattedBookName = "Genesis";
+      return (
+        <PublicQuiz 
+          {...specializedData}
+          title={specializedData.title || `Genesis ${diffKey.replace(/-/g, ' ').toUpperCase()} Quiz`}
+          bookName={formattedBookName}
+          chapter={specializedData.chapter || diffKey.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+          questions={specializedData.questions}
+        />
       );
     }
   }
