@@ -3,7 +3,7 @@ import { useState, useMemo, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { BookOpen, Layers, Swords, ListOrdered, Brain, Home, ChevronRight, Search, Quote, Sparkles, Compass, ShieldCheck, Users, Flame, Heart, Tent, Cross } from "lucide-react";
+import { BookOpen, Layers, Swords, ListOrdered, Brain, Home, ChevronRight, Search, Quote, Sparkles, Compass, ShieldCheck, Users, Flame, Heart } from "lucide-react";
 import SEO from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -33,383 +33,450 @@ export default function LeviticusHub() {
   const pageSize = 4;
   const [chapterPage, setChapterPage] = useState(0);
   const totalChapterPages = Math.max(1, Math.ceil(filteredChapters.length / pageSize));
-  
-  useEffect(() => { 
-    setChapterPage(0); 
-  }, [query]);
-
+  useEffect(() => { setChapterPage(0); }, [query]);
   const startIdx = chapterPage * pageSize;
   const endIdx = Math.min(startIdx + pageSize, filteredChapters.length);
   const visibleChapters = filteredChapters.slice(startIdx, endIdx);
 
-  const chapterMap: Record<number, string[]> = {
-    1: ["Burnt Offerings: Laws for voluntary animals as a pleasing aroma"],
-    2: ["Grain Offerings: Instructions for fine flour, oil, and frankincense"],
-    3: ["Peace Offerings: Rituals for fellowship offerings from the herd"],
-    4: ["Sin Offerings: Atonement for unintentional collective/individual sins"],
-    5: ["Guilt Offerings: Restitution for sins involving holy things"],
-    6: ["Altar Fire: Priestly duties and perpetual flame maintenance"],
-    7: ["Priestly Portions: Laws concerning the priests' share of offerings"],
-    8: ["The Ordination: Consecration of Aaron and sons before all Israel"],
-    9: ["First Sacrifices: Aaron's ministry begins; glory of LORD appears"],
-    10: ["Nadab and Abihu: The judgment for offering unauthorized fire"],
-    11: ["Clean and Unclean: Defining land, sea, and air dietary laws"],
-    12: ["Purification: Laws concerning offerings after childbirth"],
-    13: ["Leprosy Laws: Procedures for managing infectious skin diseases"],
-    14: ["Cleansing the Leper: Rituals for restoration to the community"],
-    15: ["Bodily Discharges: Mantaining ceremonial purity in daily life"],
-    16: ["Day of Atonement: Annual ritual in the Most Holy Place"],
-    17: ["The Central Altar: Sacrifice at the Tabernacle & sanctity of blood"],
-    18: ["Forbidden Relations: Moral laws against Egyptian/Canaanite acts"],
-    19: ["Holiness in Life: Social justice and neighborly love requirements"],
-    20: ["Penalties for Sin: Consequences for idolatry and moral failures"],
-    21: ["Priestly Purity: High standards for those serving the altar"],
-    22: ["Holy Offerings: Purity for eating and sacrificial perfection"],
-    23: ["Appointed Feasts: The sacred calendar from Sabbath to Tabernacles"],
-    24: ["Lamp and Showbread: Sanctuary light and bread of Presence laws"],
-    25: ["Sabbath and Jubilee: Land rest and liberty in the fiftieth year"],
-    26: ["Blessings and Curses: Promises for obedience vs warnings for rebellion"],
-    27: ["Vows and Tithes: Regulations for vows and the holy tithe"],
+  // Detailed bullet points for chapters 1–8
+  const chapterPoints1to8: Record<number, string[]> = {
+    1: ["Burnt Offerings: Voluntary acts of worship", "Unblemished males of herd or flock", "Completely consumed by fire"],
+    2: ["Grain Offerings: Fine flour and oil", "Seasoned with salt; no leaven", "Memorial portion for the Lord"],
+    3: ["Peace Offerings: Fellowship with God", "Animal's fat offered on the altar", "Shared meal for priest and offerer"],
+    4: ["Sin Offerings: Atonement for mistakes", "Specific rituals for priests & leaders", "Blood sprinkled before the veil"],
+    5: ["Guilt Offerings: Repaying holy debts", "Restitution plus one-fifth penalty", "Atonement for social wrongs"],
+    6: ["Priestly Duties: Maintaining the flame", "The perpetual fire of the altar", "Disposal of sacrificial ashes"],
+    7: ["The Priestly Portions: Sacred shares", "Laws of wave and heave offerings", "Purity required to eat holy food"],
+    8: ["The Ordination: Seven days of service", "Aaron and sons washed and robed", "The ram of consecration blood"],
+  };
+
+  // Detailed bullet points for chapters 9–16
+  const chapterPoints9to16: Record<number, string[]> = {
+    9: ["The First Ministry: Fire from heaven", "Aaron blesses the congregation", "The Glory of the Lord appears"],
+    10: ["Unauthorized Fire: Nadab and Abihu", "Tragedy of strange fire sacrifice", "Laws for grieving for the priests"],
+    11: ["Dietary Holiness: Clean and unclean", "Distinguishing land/sea/air life", "Call to be holy as God is holy"],
+    12: ["Motherhood Laws: Rites after birth", "Purification times for sons/daughters", "Offering of turtledoves or pigeons"],
+    13: ["Diagnosis: Infectious skin diseases", "Priestly inspection and quarantine", "Rules for identifying true leprosy"],
+    14: ["Restoration: Cleansing the leper", "The ritual of two clean birds", "Inspecting the holy plague in houses"],
+    15: ["Ceremonial Purity: Bodily discharges", "Maintaining sanctity in daily life", "The requirement of washing and water"],
+    16: ["Yom Kippur: The Day of Atonement", "Entering the Most Holy Place", "The Scapegoat for Israel's sins"],
+  };
+
+  // Detailed bullet points for chapters 17–24
+  const chapterPoints17to24: Record<number, string[]> = {
+    17: ["The Sanctuary: Centralized sacrifice", "Sanctity of the blood of the animal", "Forbidden acts of eating blood"],
+    18: ["Moral Standards: Forbidden relations", "Rejecting the customs of Egypt/Canaan", "Laws of sexual integrity/holiness"],
+    19: ["The Heart of the Law: Neighborly love", "Honoring parents/elderly; social justice", "'Love your neighbor as yourself'"],
+    20: ["The Penalties: Guarding the covenant", "Capital punishment for spiritism/idolatry", "Maintaining separation from nations"],
+    21: ["High Priesthood: Standards of purity", "Rules for mourning and marriage", "Physical requirements for the altar"],
+    22: ["Sacrificial Perfection: Holy food", "Only unblemished animals accepted", "Purity rules for those eating offerings"],
+    23: ["Appointed Feasts: The Sacred Seven", "From Sabbath to Feast of Booths", "The rhythm of the holy calendar"],
+    24: ["Sanctuary Light: Oil and Showbread", "The perpetual lamp in the Tabernacle", "Judgment of the blasphemer"],
+  };
+
+  // Detailed bullet points for chapters 25–27
+  const chapterPoints25to27: Record<number, string[]> = {
+    25: ["Sabbath & Jubilee: Radical rest", "Release of debts; return of land", "Redemption of the poor and the slave"],
+    26: ["Blessings & Curses: Divine promises", "Rewards for walking in God's statutes", "Sevenfold correction for rebellion"],
+    27: ["Vows & Tithes: Sacred dedications", "Valuations of people and animals", "Redeeming what is devoted to God"],
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white font-['Urbanist',sans-serif]">
+    <div className="min-h-screen bg-white text-gray-900 font-urbanist selection:bg-black/5">
       <SEO 
-        title="Leviticus Hub | Biblical Holiness & Purity Training"
+        title="Leviticus Hub | Biblical Holiness & Purity training"
         description="Master the book of Leviticus with cinematic training modules, 27 detailed chapter quizzes, and deep narratives on the holiness of God."
+        url="/bible-questions-and-answers-hub/leviticus"
       />
       <Navigation />
 
-      {/* Hero Section */}
-      <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
+      {/* Modern Hero Section with Cinematic Background */}
+      <section className="relative h-[75vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0 text-white">
           <img 
             src={LEVITICUS_IMAGES.hero} 
-            alt="The Tabernacle sacrifice" 
-            className="w-full h-full object-cover opacity-60 scale-105"
+            alt="Leviticus Sanctuary Cinematic" 
+            className="w-full h-full object-cover brightness-[0.4] transition-transform duration-[20s] hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0a0a0a]" />
         </div>
         
-        <div className="relative z-10 max-w-5xl px-6 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8 animate-fade-in">
-            <Sparkles className="w-5 h-5 text-yellow-400" />
-            <span className="text-sm font-medium tracking-wider uppercase">The School of Holiness</span>
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
+          <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-md mb-8 animate-in fade-in slide-in-from-top-4 duration-1000">
+            <Sparkles className="w-4 h-4 text-yellow-400" />
+            <span className="text-sm font-light tracking-widest uppercase">The School of Holiness</span>
           </div>
-          <h1 className="text-7xl md:text-9xl font-bold mb-6 tracking-tight leading-none">
-            LEVITICUS
+          <h1 className="text-6xl md:text-9xl font-normal mb-8 leading-tight tracking-tighter animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
+            Leviticus <span className="italic font-serif">Hub</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
-            Uncover the profound rituals, moral codes, and the eternal standard of holiness that bridging the gap between God and man.
+          <p className="text-xl md:text-2xl font-light text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
+            Uncover the profound rituals, moral codes, and the eternal standard of holiness that bridges the gap between God and man.
           </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            <Button 
-                onClick={() => navigate("/quiz/leviticus-1-27")}
-                className="bg-white text-black hover:bg-black hover:text-white px-10 py-8 text-xl rounded-2xl transition-all duration-500 font-bold group border-2 border-transparent hover:border-white shadow-2xl"
-            >
-              Start Full Journey
-              <ChevronRight className="w-6 h-6 ml-2 group-hover:translate-x-2 transition-transform" />
+          
+          <div className="flex flex-wrap justify-center gap-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700">
+            <Button size="lg" className="bg-white text-black hover:bg-gray-200 px-10 py-8 text-lg rounded-2xl font-light shadow-2xl transition-all active:scale-95" onClick={() => navigate("/quiz/leviticus-1-27")}>
+              Begin Full Journey
             </Button>
-            <Button 
-                variant="outline"
-                onClick={() => document.getElementById('chapter-library')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-transparent text-white border-2 border-white/30 hover:bg-white/10 px-10 py-8 text-xl rounded-2xl backdrop-blur-sm transition-all duration-500 font-semibold"
-            >
+            <Button size="lg" variant="outline" className="border-black/20 text-black hover:bg-black hover:text-white hover:border-black backdrop-blur-sm px-10 py-8 text-lg rounded-2xl font-light transition-all active:scale-95" onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}>
               Explore Chapters
             </Button>
           </div>
         </div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white via-white/80 to-transparent" />
       </section>
 
-      <main className="max-w-7xl mx-auto px-6 py-24 space-y-32">
-        {/* Narrative Section 1: Sacrifice & Priesthood */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 text-yellow-400 opacity-80 uppercase tracking-[0.2em] font-bold text-sm">
-              <Flame className="w-5 h-5" />
-              <span>Phase I: The Way to God</span>
-            </div>
-            <h2 className="text-5xl font-bold leading-tight tracking-tight">
-              Atonement Through <span className="text-yellow-500 italic">Sacrifice</span>
-            </h2>
-            <div className="prose prose-invert prose-lg text-gray-400 max-w-none space-y-4">
-              <p>
-                Leviticus begins where Exodus ended—at the entrance of the Tabernacle. It provides the essential vocabulary for dwelling with a Holy God. Through the systems of burnt, grain, peace, sin, and guilt offerings, we discover the weight of transgression and the pathway of restoration.
-              </p>
-              <p>
-                Chapters 8-10 establish the Priesthood, the mediators who guard the sacred space and represent the people. This section culminates in the inaugural fire from heaven, shadowed by the tragedy of unauthorized fire.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-6 pt-4">
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10 group hover:border-yellow-500/50 transition-colors">
-                    <ListOrdered className="w-8 h-8 text-yellow-500 mb-3" />
-                    <h4 className="font-bold mb-1 group-hover:text-yellow-500 transition-colors">The Offerings</h4>
-                    <p className="text-sm text-gray-500">Master every ritual and its symbolic meaning from Chapters 1-7.</p>
-                </div>
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10 group hover:border-yellow-500/50 transition-colors">
-                    <ShieldCheck className="w-8 h-8 text-yellow-500 mb-3" />
-                    <h4 className="font-bold mb-1 group-hover:text-yellow-500 transition-colors">The Priesthood</h4>
-                    <p className="text-sm text-gray-500">Study the ordination and the heavy calling of the Levites.</p>
-                </div>
-            </div>
-          </div>
-          <div className="relative group overflow-hidden rounded-[2rem] border border-white/10">
-            <img 
-              src={LEVITICUS_IMAGES.sacrifices} 
-              alt="Sacrificial Altar" 
-              className="w-full aspect-square object-cover transition-transform duration-1000 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
-                <div className="text-white">
-                    <p className="font-bold text-lg mb-1 italic">"It is the blood that makes atonement..."</p>
-                    <p className="text-white/60 text-sm italic">— Leviticus 17:11</p>
-                </div>
-            </div>
-          </div>
+      <div className="w-full max-w-7xl mx-auto px-6 py-10">
+        {/* Breadcrumb - Clean & Minimal */}
+        <div className="flex items-center text-xs font-light text-gray-400 mb-20 px-2 tracking-widest uppercase">
+          <button className="hover:text-black transition-colors" onClick={() => navigate("/")}>Home</button>
+          <ChevronRight className="w-3 h-3 mx-4 opacity-30" />
+          <button className="hover:text-black transition-colors" onClick={() => navigate("/bible-questions-and-answers-hub")}>Bible Hub</button>
+          <ChevronRight className="w-3 h-3 mx-4 opacity-30" />
+          <span className="text-black font-semibold">Leviticus</span>
         </div>
 
-        {/* Narrative Section 2: Purity & Feasts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center lg:flex-row-reverse">
-          <div className="relative group overflow-hidden rounded-[2rem] border border-white/10 lg:order-last">
-            <img 
-              src={LEVITICUS_IMAGES.feasts} 
-              alt="The Appointed Feasts" 
-              className="w-full aspect-square object-cover transition-transform duration-1000 group-hover:scale-110 shadow-2xl"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
-                <div className="text-white">
-                    <p className="font-bold text-lg mb-1 italic">"You shall be holy, for I am holy..."</p>
-                    <p className="text-white/60 text-sm italic">— Leviticus 19:2</p>
+        {/* Narrative Overview Segment: Intro */}
+        <section id="overview" className="mb-40 scroll-mt-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+            <div className="space-y-10">
+              <div className="space-y-6">
+                <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-gray-400 flex items-center">
+                  <span className="w-12 h-px bg-gray-200 mr-6" />
+                  The Way of Holiness
+                </h2>
+                <h3 className="text-5xl md:text-6xl font-normal leading-tight text-gray-900">A Divine Revelation of Purity and Devotion</h3>
+              </div>
+              <p className="text-2xl font-light text-gray-600 leading-[1.8] first-letter:text-6xl first-letter:font-serif first-letter:mr-4 first-letter:float-left first-letter:text-black first-letter:leading-none">
+                Leviticus provides the essential vocabulary for dwelling with a Holy God. Through the systems of burnt, grain, peace, sin, and guilt offerings, we discover the weight of transgression and the pathway of restoration in the presence of the Almighty.
+              </p>
+              <div className="p-10 rounded-[2.5rem] bg-gray-50 border border-gray-100 flex items-start space-x-8 hover:shadow-xl transition-all duration-500">
+                <Quote className="w-12 h-12 text-gray-200 flex-shrink-0" />
+                <div className="space-y-4">
+                  <p className="text-xl italic font-light text-gray-500 leading-relaxed">
+                    "You shall be holy, for I the LORD your God am holy."
+                  </p>
+                  <p className="text-sm font-semibold tracking-widest text-gray-400 uppercase">— Leviticus 19:2</p>
                 </div>
+              </div>
+            </div>
+            <div className="relative group">
+              <div className="absolute -inset-6 bg-gray-50 rounded-[3rem] -rotate-1 group-hover:rotate-0 transition-transform duration-700" />
+              <img 
+                src={LEVITICUS_IMAGES.priesthood} 
+                alt="High Priest in garments" 
+                className="relative z-10 w-full rounded-[2.5rem] shadow-2xl object-cover h-[600px] border border-white"
+              />
+              <div className="absolute -bottom-10 -left-10 z-20 p-10 bg-white/90 backdrop-blur-2xl rounded-3xl border border-gray-100 shadow-2xl max-w-xs transition-transform group-hover:translate-x-4">
+                <div className="w-12 h-12 rounded-2xl bg-black flex items-center justify-center mb-6">
+                  <ShieldCheck className="w-6 h-6 text-white" />
+                </div>
+                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Core Calling</p>
+                <p className="text-xl font-light text-gray-900 leading-snug tracking-tight italic text-black">Mediation through the Priesthood & Sacred Distinction</p>
+              </div>
             </div>
           </div>
-          <div className="space-y-8 lg:order-first">
-            <div className="inline-flex items-center gap-2 text-yellow-400 opacity-80 uppercase tracking-[0.2em] font-bold text-sm">
-              <Users className="w-5 h-5" />
-              <span>Phase II: The Walk with God</span>
-            </div>
-            <h2 className="text-5xl font-bold leading-tight tracking-tight text-white">
-              Holiness in the <span className="text-yellow-500 italic">Everyday</span>
-            </h2>
-            <div className="prose prose-invert prose-lg text-gray-400 max-w-none space-y-4">
-              <p>
-                Atonement leads to action. The second half of Leviticus (Chapters 11-27) defines what it means to live as a holy people in a broken world. This "Holiness Code" covers everything from dietary laws to business ethics and neighborly love.
-              </p>
-              <p>
-                The chapter on the Day of Atonement (16) serves as the heart of the book, while Chapter 23 outlines the sacred rhythm of time through the annual festivals, calling a nation to remember, rest, and celebrate.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-6 pt-4 text-white">
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10 group hover:border-yellow-500/50 transition-colors">
-                    <Compass className="w-8 h-8 text-yellow-500 mb-3" />
-                    <h4 className="font-bold mb-1 group-hover:text-yellow-500 transition-colors">Sacred Rhythm</h4>
-                    <p className="text-sm text-gray-500 font-medium">Master the Feasts and the significance of the Sabbath Years.</p>
-                </div>
-                <div className="p-4 rounded-xl bg-white/5 border border-white/10 group hover:border-yellow-500/50 transition-colors">
-                    <Heart className="w-8 h-8 text-yellow-500 mb-3" />
-                    <h4 className="font-bold mb-1 group-hover:text-yellow-500 transition-colors">Holiness Code</h4>
-                    <p className="text-sm text-gray-500 font-medium">Learn the laws of social justice and individual purity.</p>
-                </div>
-            </div>
-          </div>
-        </div>
+        </section>
 
-        {/* Chapter Library Grid */}
-        <section id="chapter-library" className="bg-white/5 rounded-[3rem] p-12 border border-white/10 shadow-3xl">
-          <div className="flex flex-col md:flex-row items-end justify-between gap-8 mb-16">
-            <div className="max-w-xl">
-              <h2 className="text-5xl font-bold mb-4">Chapter Library</h2>
-              <p className="text-gray-400 font-medium italic">27 chapters of concentrated training. Find your focus.</p>
+         {/* Theological Insight Section - High End Dark Mode Card */}
+         <section className="mb-40 py-24 bg-gray-900 rounded-[4rem] text-white px-10 lg:px-20 overflow-hidden relative shadow-2xl shadow-gray-900/40">
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-yellow-500/10 blur-[150px] rounded-full translate-x-1/3" />
+          <div className="absolute bottom-0 left-0 w-1/3 h-full bg-red-500/5 blur-[120px] rounded-full -translate-x-1/2" />
+          
+          <div className="relative z-10">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.5em] text-white/30 mb-16">Theological Significance</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
+              <div className="space-y-10 group">
+                <div className="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 transition-colors">
+                  <Flame className="w-8 h-8 text-yellow-400" strokeWidth={1} />
+                </div>
+                <div className="space-y-6">
+                  <h3 className="text-4xl font-normal leading-tight italic serif">The Way of Sacrifice</h3>
+                  <p className="text-xl font-light text-white/50 leading-relaxed">
+                    Leviticus reveals that a holy God cannot simply ignore sin. Atonement by blood is the only way for biological life to exist in the presence of Uncreated Light. Every sacrifice points forward to the ultimate Lamb who would take away the sins of the world.
+                  </p>
+                </div>
+              </div>
+              <div className="space-y-10 group">
+                <div className="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 transition-colors">
+                  <Heart className="w-8 h-8 text-red-400" strokeWidth={1} />
+                </div>
+                <div className="space-y-6">
+                  <h3 className="text-4xl font-normal leading-tight italic serif">The Walk of Purity</h3>
+                  <p className="text-xl font-light text-white/50 leading-relaxed">
+                    Holiness isn't just about ritual; it's about a lifestyle of devotion. Leviticus provides the "Holiness Code," transforming how a people eats, works, loves, and treats the poor. It defines the lifestyle of a redeemed community set apart for God's purposes.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="w-full md:w-96 relative group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 group-focus-within:text-yellow-500 transition-colors" />
-              <Input 
-                placeholder="Search by chapter number..." 
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                className="pl-12 bg-black border-white/20 text-white rounded-2xl h-14 text-lg focus:ring-yellow-500/50"
+          </div>
+        </section>
+
+        {/* Challenge/Difficulty Section */}
+        <section id="difficulty" className="mb-40 scroll-mt-24">
+          <div className="text-center mb-20 text-white">
+            <h2 className="text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif uppercase">The School of Wisdom</h2>
+            <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed italic">Choose your study depth and test your grasp of God's holy standard.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            {[
+              { 
+                level: "Beginner", 
+                desc: "Focus on the five major offerings and the rules for clean animals.", 
+                icon: BookOpen, 
+                color: "bg-green-50", 
+                iconColor: "text-green-600",
+                link: "beginner",
+                accent: "bg-green-500",
+                features: ["Ritual basics", "Sacred food laws", "Major feasts"]
+              },
+              { 
+                level: "Intermediate", 
+                desc: "Study the ordination of priests and the laws of infectious diseases.", 
+                icon: Brain, 
+                color: "bg-yellow-50", 
+                iconColor: "text-yellow-600",
+                link: "intermediate",
+                accent: "bg-yellow-500",
+                features: ["Priestly ministry", "Purity rituals", "Yom Kippur"]
+              },
+              { 
+                level: "Advanced", 
+                desc: "Master the complexities of the Jubilee, vows, and the Holiness Code.", 
+                icon: Swords, 
+                color: "bg-red-50", 
+                iconColor: "text-red-600",
+                link: "advanced",
+                accent: "bg-red-500",
+                features: ["Jubilee laws", "Theological shadows", "Vow valuations"]
+              }
+            ].map((d) => (
+              <Card 
+                key={d.level} 
+                className="group relative border border-gray-100/60 hover:border-black/5 hover:-translate-y-2 transition-all duration-500 flex flex-col bg-white overflow-hidden shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem]" 
+                onClick={() => navigate(`/bible-questions-and-answers-hub/leviticus/${d.link}`)}
+              > 
+                <div className={`h-2 w-full ${d.accent} absolute top-0`} />
+                <CardHeader className="pt-12 pb-8 px-10">
+                  <div className={`w-16 h-16 rounded-2xl ${d.color} flex items-center justify-center mb-8 transition-transform group-hover:scale-110 duration-500 shadow-inner`}>
+                    <d.icon className={`w-8 h-8 ${d.iconColor}`} strokeWidth={1.5} />
+                  </div>
+                  <CardTitle className="text-4xl font-normal text-gray-900 italic serif mb-3">{d.level}</CardTitle>
+                  <CardDescription className="text-sm font-semibold text-gray-400 uppercase tracking-[0.25em]">Leviticus Study Track</CardDescription>
+                </CardHeader>
+                <CardContent className="px-10 pb-12 flex-grow flex flex-col justify-between">
+                  <p className="text-xl font-light text-gray-500 leading-relaxed mb-10">{d.desc}</p>
+                  <ul className="space-y-4 mb-10">
+                    {d.features.map(f => (
+                      <li key={f} className="flex items-center text-sm font-light text-gray-400">
+                        <div className={`w-1.5 h-1.5 rounded-full ${d.accent} mr-3 opacity-50`} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button className="w-full font-light bg-black text-white hover:bg-gray-800 rounded-2xl py-8 tracking-[0.2em] uppercase text-xs transition-all shadow-xl shadow-black/10">Start Training</Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Narrative Flow: Sacred Rhythms */}
+        <section className="mb-40">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center text-white">
+            <div className="order-2 lg:order-1 relative group">
+              <div className="absolute -inset-6 bg-yellow-50 rounded-[3rem] rotate-1 group-hover:rotate-0 transition-transform duration-700" />
+              <img 
+                src={LEVITICUS_IMAGES.feasts} 
+                alt="Sacred Feasts gathering" 
+                className="relative z-10 w-full rounded-[2.5rem] shadow-2xl object-cover h-[700px] border border-white"
               />
             </div>
-          </div>
-
-          {filteredChapters.length === 0 ? (
-            <div className="text-center py-32 bg-black/40 rounded-3xl border border-dashed border-white/10">
-              <Search className="w-16 h-16 text-gray-700 mx-auto mb-4" />
-              <p className="text-2xl text-gray-500 font-light italic">No chapters matching your search...</p>
-            </div>
-          ) : (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-2 rounded-3xl min-h-[420px]">
-                {visibleChapters.map((num) => (
-                  <div 
-                    key={num}
-                    onClick={() => navigate(`/quiz/leviticus-${num}`)}
-                    className="group relative cursor-pointer overflow-hidden rounded-3xl bg-black border border-white/10 hover:border-yellow-500/50 shadow-lg hover:shadow-yellow-500/10 transition-all duration-500 transform hover:-translate-y-2 flex flex-col h-full bg-gradient-to-b from-black to-white/5 active:scale-95"
-                  >
-                    <div className="p-8 flex flex-col flex-grow">
-                      <div className="flex items-center justify-between mb-8">
-                        <span className="text-6xl font-black text-white/5 group-hover:text-yellow-500/20 transition-colors duration-700 leading-none">
-                          {num}
-                        </span>
-                        <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-yellow-500 group-hover:border-yellow-400 transition-all duration-500 shadow-inner">
-                          <ChevronRight className="w-6 h-6 text-white group-hover:text-black transition-colors duration-500" />
-                        </div>
-                      </div>
-                      
-                      <div className="space-y-4">
-                        <h4 className="text-xl font-bold tracking-tight group-hover:text-yellow-500 transition-colors uppercase">
-                          Leviticus {num}
-                        </h4>
-                        <div className="h-px w-12 bg-white/20 group-hover:w-full group-hover:bg-yellow-500/50 transition-all duration-700" />
-                        <ul className="space-y-3">
-                          {chapterMap[num]?.map((pt, i) => (
-                            <li key={i} className="text-sm text-gray-400 font-medium leading-relaxed italic line-clamp-3">
-                              {pt}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Pagination */}
-              <div className="flex items-center justify-between mt-12 bg-black/40 p-4 rounded-3xl border border-white/5">
-                <p className="text-gray-500 font-medium tracking-wide">
-                  Showing <span className="text-white">{startIdx + 1}</span> to <span className="text-white">{endIdx}</span> of {filteredChapters.length}
-                </p>
-                <div className="flex gap-2">
-                  <Button
-                    variant="ghost"
-                    disabled={chapterPage === 0}
-                    onClick={() => setChapterPage(p => p - 1)}
-                    className="h-12 w-12 rounded-xl border border-white/10 hover:bg-white/10 disabled:opacity-30 disabled:hover:bg-transparent transition-all active:scale-90"
-                  >
-                    <ChevronRight className="w-5 h-5 rotate-180" />
-                  </Button>
-                  <div className="flex gap-1">
-                    {Array.from({ length: totalChapterPages }, (_, i) => (
-                      <div 
-                        key={i}
-                        className={`w-3 h-3 rounded-full mt-4 mx-1 transition-all duration-500 ${i === chapterPage ? "bg-yellow-500 scale-125 shadow-[0_0_10px_rgba(234,179,8,0.5)]" : "bg-white/20 hover:bg-white/40"}`}
-                      />
-                    ))}
-                  </div>
-                  <Button
-                    variant="ghost"
-                    disabled={chapterPage >= totalChapterPages - 1}
-                    onClick={() => setChapterPage(p => p + 1)}
-                    className="h-12 w-12 rounded-xl border border-white/10 hover:bg-white/10 disabled:opacity-30 disabled:hover:bg-transparent transition-all active:scale-90"
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                  </Button>
+            <div className="order-1 lg:order-2 space-y-10">
+              <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-gray-400 flex items-center">
+                <span className="w-12 h-px bg-gray-200 mr-6" />
+                The Sacred Calendar
+              </h2>
+              <h3 className="text-5xl font-normal leading-tight text-gray-900 italic serif uppercase">The Sacred Rhythms of a Holy Nation</h3>
+              <p className="text-2xl font-light text-gray-600 leading-[1.8] italic">
+                From the weekly Sabbath to the once-in-a-lifetime Jubilee, God established a rhythm for Israel. Through seven annual festivals, the community was called to remember their redemption, celebrate God's bounty, and rest in His provision. This sacred timing kept their hearts aligned with the Holy One.
+              </p>
+              <div className="flex items-center space-x-6 p-10 bg-yellow-50/40 rounded-[2.5rem] border border-yellow-100/50 hover:bg-yellow-50 transition-colors">
+                <div className="w-16 h-16 bg-yellow-100 rounded-3xl flex items-center justify-center shrink-0 shadow-lg shadow-yellow-200/50">
+                  <Compass className="w-7 h-7 text-yellow-600 font-bold" />
+                </div>
+                <div className="space-y-2">
+                  <p className="text-gray-700 text-xl font-light italic leading-relaxed">"These are the appointed feasts of the LORD..."</p>
+                  <p className="text-xs font-semibold tracking-widest text-yellow-500 uppercase">— Leviticus 23:2</p>
                 </div>
               </div>
-            </>
+            </div>
+          </div>
+        </section>
+
+        {/* Specialized Hubs Section */}
+        <section className="mb-40 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-24 text-white">
+              <h2 className="text-sm font-semibold uppercase tracking-[0.5em] text-gray-400 mb-8">Specialized Hubs</h2>
+              <h3 className="text-5xl md:text-7xl font-normal text-gray-900 mb-8 italic serif">Targeted Training</h3>
+              <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                Refine your understanding through targeted narrative and logic tools.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { 
+                  title: "Fill in the Blanks", 
+                  desc: "Master the exact language of sacrifice", 
+                  icon: Quote, 
+                  link: "fill-in-the-blanks",
+                  color: "bg-amber-50",
+                  iconColor: "text-amber-600"
+                },
+                { 
+                  title: "True or False", 
+                  desc: "Quick logic for Clean vs Unclean", 
+                  icon: ShieldCheck, 
+                  link: "true-false",
+                  color: "bg-blue-50",
+                  iconColor: "text-blue-600"
+                },
+                { 
+                  title: "Consecration", 
+                  desc: "Aaron, Nadab, and High Priests", 
+                  icon: Users, 
+                  link: "characters",
+                  color: "bg-emerald-50",
+                  iconColor: "text-emerald-600"
+                },
+                { 
+                  title: "Festival Match", 
+                  desc: "Aligning the Sacred Feasts", 
+                  icon: ListOrdered, 
+                  link: "match-the-following",
+                  color: "bg-indigo-50",
+                  iconColor: "text-indigo-600"
+                }
+              ].map((tool) => (
+                <Card 
+                  key={tool.title}
+                  className="group hover:scale-105 hover:shadow-2xl transition-all duration-500 cursor-pointer border-none bg-white rounded-[2rem] overflow-hidden"
+                  onClick={() => navigate(`/bible-questions-and-answers-hub/leviticus/${tool.link}`)}
+                >
+                  <CardHeader className="pt-12 pb-8 px-8">
+                    <div className={`w-14 h-14 rounded-2xl ${tool.color} flex items-center justify-center mb-8`}>
+                      <tool.icon className={`w-7 h-7 ${tool.iconColor}`} strokeWidth={1.5} />
+                    </div>
+                    <CardTitle className="text-2xl font-normal text-gray-900 italic serif mb-2 uppercase">{tool.title}</CardTitle>
+                    <CardDescription className="text-sm font-light text-gray-500 leading-relaxed italic">
+                      {tool.desc}
+                    </CardDescription>
+                  </CardHeader>
+                  <div className="px-8 pb-8">
+                    <div className="h-1 w-full bg-gray-50 rounded-full overflow-hidden">
+                      <div className={`h-full w-0 group-hover:w-full transition-all duration-700 bg-black/10`} />
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Integrated Search & Chapter Wisdom */}
+        <section id="leviticus-chapter-wise" className="mb-40 scroll-mt-24 pt-32 border-t border-gray-100">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-24 gap-12 text-black">
+            <div className="max-w-2xl">
+              <h2 className="text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif uppercase leading-none tracking-tight">The Library of Holiness</h2>
+              <p className="text-2xl font-light text-gray-400 leading-relaxed italic">Explore unique study materials and summaries for each of the 27 chapters.</p>
+            </div>
+            {/* Search Bar */}
+            <div className="w-full lg:w-[450px]">
+              <div className="relative group">
+                <div className="absolute inset-x-0 bottom-0 h-1 bg-black/0 group-focus-within:bg-black/10 transition-colors" />
+                <Search className="absolute left-8 top-1/2 transform -translate-y-1/2 text-gray-300 w-6 h-6" strokeWidth={1} />
+                <Input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Chapter # or keyword (e.g. '19' or 'Love')..."
+                  className="pl-20 pr-10 py-10 text-xl font-light border-0 bg-gray-50/50 focus:bg-white focus:ring-0 rounded-[2rem] shadow-inner transition-all duration-500"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {visibleChapters.map((ch) => {
+              let currentChapterPoints = null;
+              if (ch >= 1 && ch <= 8) currentChapterPoints = chapterPoints1to8[ch];
+              else if (ch >= 9 && ch <= 16) currentChapterPoints = chapterPoints9to16[ch];
+              else if (ch >= 17 && ch <= 24) currentChapterPoints = chapterPoints17to24[ch];
+              else if (ch >= 25 && ch <= 27) currentChapterPoints = chapterPoints25to27[ch];
+
+              return (
+                <Card 
+                  key={ch} 
+                  className="group relative border border-gray-100 hover:border-black/5 hover:translate-y-[-8px] transition-all duration-500 flex flex-col h-full cursor-pointer bg-white shadow-xl shadow-gray-200/20 rounded-[2.5rem] overflow-hidden p-2" 
+                  onClick={() => navigate(`/bible-questions-and-answers-hub/leviticus/chapter-${ch}`)}
+                >
+                  <CardHeader className="p-10 pb-6 text-black italic">
+                    <div className="flex items-center justify-between mb-8 opacity-40">
+                      <div className="text-sm font-bold text-gray-300 tracking-[0.2em] group-hover:text-black transition-colors">CHAPTER {ch}</div>
+                      <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all duration-500">
+                        <ChevronRight className="w-4 h-4" />
+                      </div>
+                    </div>
+                    <CardTitle className="text-2xl font-normal text-gray-900 mb-6 italic serif line-clamp-1">Narrative Summary</CardTitle>
+                    <div className="space-y-4">
+                      {currentChapterPoints?.map((pt, idx) => (
+                        <div key={idx} className="flex items-start gap-3">
+                          <div className="w-1.5 h-1.5 rounded-full bg-gray-200 mt-2 shrink-0 group-hover:bg-black transition-colors" />
+                          <p className="text-sm font-light text-gray-500 leading-relaxed group-hover:text-gray-900 transition-colors">{pt}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </CardHeader>
+                    <div className="mt-auto p-10 pt-0">
+                    <Button variant="ghost" className="w-full justify-start px-0 text-xs font-semibold tracking-widest text-gray-400 uppercase group-hover:text-black hover:bg-transparent">
+                      Explore Chapter
+                    </Button>
+                  </div>
+                </Card>
+              );
+            })}
+          </div>
+
+          {/* Chapters Pagination */}
+          {totalChapterPages > 1 && (
+            <div className="mt-32 flex items-center justify-between border-t border-gray-100 pt-12">
+              <div className="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em]">
+                Page {chapterPage + 1} of {totalChapterPages}
+              </div>
+              <div className="flex gap-4">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="rounded-2xl px-8 font-light tracking-widest uppercase text-xs shadow-inner"
+                  disabled={chapterPage === 0} 
+                  onClick={() => setChapterPage(p => p - 1)}
+                >
+                  Previous
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="rounded-2xl px-8 font-light tracking-widest uppercase text-xs"
+                  disabled={chapterPage >= totalChapterPages - 1} 
+                  onClick={() => setChapterPage(p => p + 1)}
+                >
+                  Next
+                </Button>
+              </div>
+            </div>
           )}
         </section>
-
-        {/* Specialized Training Modules */}
-        <section className="space-y-16">
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-6xl font-bold mb-6 tracking-tight">Advanced Mastery</h2>
-            <p className="text-gray-400 text-xl font-light italic">Sharpen your understanding through targeted narrative modules.</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="bg-[#111] border-white/10 overflow-hidden hover:border-yellow-500/50 transition-all duration-500 group rounded-[2.5rem]">
-              <CardHeader className="p-0">
-                <div className="h-48 relative overflow-hidden">
-                  <img src={LEVITICUS_IMAGES.priesthood} alt="The Priests" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-40 group-hover:opacity-80" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111] to-transparent" />
-                </div>
-              </CardHeader>
-              <CardContent className="p-8 space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center mb-6">
-                  <ShieldCheck className="w-6 h-6 text-yellow-500" />
-                </div>
-                <CardTitle className="text-2xl font-bold group-hover:text-yellow-500 transition-colors leading-tight">THE HOLINESS CODE</CardTitle>
-                <CardDescription className="text-gray-400 font-medium italic line-clamp-3">Master the intricate moral and ceremonial laws that defined Israel's identity as a kingdom of priests.</CardDescription>
-                <Button className="w-full bg-white/5 hover:bg-yellow-500 hover:text-black py-6 rounded-2xl transition-all font-bold tracking-wider active:scale-95 border border-white/10 group-hover:border-transparent uppercase">Join Ministry</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-[#111] border-white/10 overflow-hidden hover:border-yellow-500/50 transition-all duration-500 group rounded-[2.5rem]">
-              <CardHeader className="p-0">
-                <div className="h-48 relative overflow-hidden">
-                  <img src={LEVITICUS_IMAGES.sacrifices} alt="Tabernacle" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-40 group-hover:opacity-80" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111] to-transparent" />
-                </div>
-              </CardHeader>
-              <CardContent className="p-8 space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center mb-6">
-                  <Flame className="w-6 h-6 text-yellow-500" />
-                </div>
-                <CardTitle className="text-2xl font-bold group-hover:text-yellow-500 transition-colors leading-tight uppercase">Blood & Atonement</CardTitle>
-                <CardDescription className="text-gray-400 font-medium italic line-clamp-3 text-white/50">Experience the profound symbolism of the Day of Atonement and the theology of substitutionary sacrifice.</CardDescription>
-                <Button className="w-full bg-white/5 hover:bg-yellow-500 hover:text-black py-6 rounded-2xl transition-all font-bold tracking-wider active:scale-95 border border-white/10 group-hover:border-transparent uppercase">Enter Sanctuary</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-[#111] border-white/10 overflow-hidden hover:border-yellow-500/50 transition-all duration-500 group rounded-[2.5rem]">
-              <CardHeader className="p-0">
-                <div className="h-48 relative overflow-hidden">
-                  <img src={LEVITICUS_IMAGES.feasts} alt="The Feasts" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0 opacity-40 group-hover:opacity-80" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#111] to-transparent" />
-                </div>
-              </CardHeader>
-              <CardContent className="p-8 space-y-4">
-                <div className="w-12 h-12 rounded-2xl bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center mb-6">
-                  <Users className="w-6 h-6 text-yellow-500" />
-                </div>
-                <CardTitle className="text-2xl font-bold group-hover:text-yellow-500 transition-colors leading-tight uppercase tracking-tight">THE SACRED CALENDAR</CardTitle>
-                <CardDescription className="text-gray-400 font-medium italic line-clamp-3 text-white/50">Walk through the seven annual festivals and uncover their prophetic significance for Israel and the world.</CardDescription>
-                <Button className="w-full bg-white/5 hover:bg-yellow-500 hover:text-black py-6 rounded-2xl transition-all font-bold tracking-wider active:scale-95 border border-white/10 group-hover:border-transparent uppercase">Begin Pilgrimage</Button>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
-        {/* Training Modes Section */}
-        <section className="bg-gradient-to-br from-yellow-900/10 to-transparent rounded-[3rem] p-16 border border-yellow-500/10 backdrop-blur-3xl shadow-3xl text-white">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="space-y-8">
-              <h2 className="text-6xl font-bold leading-tight uppercase tracking-tight">Refine Your <br /><span className="text-yellow-500">Holiness Study</span></h2>
-              <p className="text-gray-400 text-xl font-light italic leading-loose">
-                Our advanced training modes leverage cognitive science to ensure you don't just memorize the laws, but master their spiritual DNA.
-              </p>
-              <div className="space-y-6 pt-4 italic">
-                {[
-                  { icon: Brain, title: "Narrative Memory", desc: "Connect ritual laws to historical events." },
-                  { icon: Swords, title: "High Priest Challenge", desc: "A rigorous mode for those who seek total book mastery." },
-                  { icon: Layers, title: "Prophetic Depth", desc: "Discover the New Testament fulfillment in every shadow." }
-                ].map((item, i) => (
-                  <div key={i} className="flex gap-6 group">
-                    <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-yellow-500 transition-all duration-300 active:scale-90">
-                      <item.icon className="w-6 h-6 text-yellow-500 group-hover:text-black" />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-bold group-hover:text-yellow-400 transition-colors italic">{item.title}</h4>
-                      <p className="text-gray-500 font-medium">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative p-2 bg-white/5 rounded-[2.5rem] border border-white/10 overflow-hidden transform hover:scale-[1.02] transition-transform duration-700 active:rotate-1">
-              <img src={LEVITICUS_IMAGES.holiness} alt="Holiness glory" className="rounded-[2.2rem] shadow-3xl opacity-80" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-10">
-                <blockquote className="space-y-4 max-w-sm">
-                  <Quote className="w-12 h-12 text-yellow-500 opacity-50 shadow-2xl" />
-                  <p className="text-2xl font-medium text-white italic leading-snug">"Through those who are near me I will be sanctified..."</p>
-                  <cite className="block text-yellow-500/70 font-bold tracking-[0.2em] text-sm italic uppercase">— Leviticus 10:3</cite>
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
+      </div>
 
       <Footer />
     </div>
