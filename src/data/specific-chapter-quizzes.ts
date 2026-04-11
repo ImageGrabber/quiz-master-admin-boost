@@ -7,6 +7,7 @@ import { johnQuizzes } from './chapters/john';
 import { thessalonians2Quizzes } from './chapters/thessalonians2';
 import { numbersQuizzes } from './chapters/numbers';
 import { numbersLevelQuizzes } from './chapters/numbers-levels';
+import { deuteronomyQuizzes } from './chapters/deuteronomy';
 
 export const specificChapterQuizzes: Record<string, any> = {
     ...genesisQuizzes,
@@ -17,5 +18,6 @@ export const specificChapterQuizzes: Record<string, any> = {
     ...johnQuizzes,
     ...thessalonians2Quizzes,
     ...numbersQuizzes,
-    ...numbersLevelQuizzes
+    ...numbersLevelQuizzes,
+    ...deuteronomyQuizzes
 };

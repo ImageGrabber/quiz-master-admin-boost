@@ -19,7 +19,8 @@ import {
   Shield,
   Bell,
   Heart,
-  BookOpen
+  BookOpen,
+  Eye
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -95,6 +96,11 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       name: "Notifications",
       href: "/admin/notifications",
       icon: Bell,
+    },
+    {
+      name: "Traffic Insights",
+      href: "/admin/page-views",
+      icon: Eye,
     },
     {
       name: "Realtime Health Check",

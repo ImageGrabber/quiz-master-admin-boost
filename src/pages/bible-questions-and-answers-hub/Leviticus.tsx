@@ -113,10 +113,10 @@ export default function LeviticusHub() {
           </p>
           
           <div className="flex flex-wrap justify-center gap-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700">
-            <Button size="lg" className="bg-white text-black hover:bg-gray-200 px-10 py-8 text-lg rounded-2xl font-light shadow-2xl transition-all active:scale-95" onClick={() => navigate("/quiz/leviticus-1-27")}>
-              Begin Full Journey
+            <Button size="lg" className="bg-white text-black hover:bg-gray-200 px-10 py-8 text-lg rounded-2xl font-light shadow-2xl transition-all active:scale-95 text-black" onClick={() => document.getElementById('difficulty')?.scrollIntoView({ behavior: 'smooth' })}>
+              Begin Quiz Journey
             </Button>
-            <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-black hover:text-white hover:border-black backdrop-blur-sm px-10 py-8 text-lg rounded-2xl font-light transition-all active:scale-95" onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}>
+            <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white hover:text-black transition-all px-10 py-8 text-lg rounded-2xl font-light active:scale-95" onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}>
               Explore Content
             </Button>
           </div>

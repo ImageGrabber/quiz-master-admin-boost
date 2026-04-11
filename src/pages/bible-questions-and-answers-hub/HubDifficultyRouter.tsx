@@ -11,6 +11,18 @@ const quizMap: Record<string, any> = {
   "genesis-beginner": lazy(() => import("./GenesisBeginnerQuiz")),
   "genesis-intermediate": lazy(() => import("./GenesisIntermediateQuiz")),
   "genesis-advanced": lazy(() => import("./GenesisAdvancedQuiz")),
+  "exodus-beginner": lazy(() => import("./ExodusBeginnerQuiz")),
+  "exodus-intermediate": lazy(() => import("./ExodusIntermediateQuiz")),
+  "exodus-advanced": lazy(() => import("./ExodusAdvancedQuiz")),
+  "leviticus-beginner": lazy(() => import("./LeviticusBeginnerQuiz")),
+  "leviticus-intermediate": lazy(() => import("./LeviticusIntermediateQuiz")),
+  "leviticus-advanced": lazy(() => import("./LeviticusAdvancedQuiz")),
+  "numbers-beginner": lazy(() => import("./NumbersBeginnerQuiz")),
+  "numbers-intermediate": lazy(() => import("./NumbersIntermediateQuiz")),
+  "numbers-advanced": lazy(() => import("./NumbersAdvancedQuiz")),
+  "deuteronomy-beginner": lazy(() => import("./DeuteronomyBeginnerQuiz")),
+  "deuteronomy-intermediate": lazy(() => import("./DeuteronomyIntermediateQuiz")),
+  "deuteronomy-advanced": lazy(() => import("./DeuteronomyAdvancedQuiz")),
   
   exodus: lazy(() => import("../public-quizzes/ExodusPublicQuiz")),
   leviticus: lazy(() => import("../public-quizzes/LeviticusPublicQuiz")),
@@ -131,10 +143,12 @@ export default function HubDifficultyRouter() {
     }
   }
 
-  // Handle Genesis special levels (Legacy Components)
-  if (bookSlug.toLowerCase() === "genesis" && difficulty) {
+  // Handle Book-Specific Level Components (e.g., Genesis, Exodus)
+  if (bookSlug && difficulty) {
     const diffKey = difficulty.toLowerCase();
-    const Component = quizMap[`genesis-${diffKey}`];
+    const bookKey = bookSlug.toLowerCase();
+    const registryKey = `${bookKey}-${diffKey}`;
+    const Component = quizMap[registryKey];
     
     if (Component) {
       return (
@@ -148,14 +162,14 @@ export default function HubDifficultyRouter() {
       );
     }
 
-    // Check if it's a specialized Genesis quiz from data
-    const specializedData = specificChapterQuizzes[`genesis-${diffKey}`];
+    // Check if it's a specialized level from data
+    const specializedData = specificChapterQuizzes[registryKey];
     if (specializedData) {
-      const formattedBookName = "Genesis";
+      const formattedBookName = bookSlug.charAt(0).toUpperCase() + bookSlug.slice(1).replace(/-/g, ' ');
       return (
         <PublicQuiz 
           {...specializedData}
-          title={specializedData.title || `Genesis ${diffKey.replace(/-/g, ' ').toUpperCase()} Quiz`}
+          title={specializedData.title || `${formattedBookName} ${diffKey.replace(/-/g, ' ').toUpperCase()} Quiz`}
           bookName={formattedBookName}
           chapter={specializedData.chapter || diffKey.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
           questions={specializedData.questions}

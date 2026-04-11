@@ -825,21 +825,57 @@ export type Database = {
       }
       page_views: {
         Row: {
+          bot_score: number | null
+          browser: string | null
+          city: string | null
+          country: string | null
+          country_code: string | null
+          device_type: string | null
           id: string
+          is_bot: boolean | null
           ip_address: unknown | null
+          latitude: number | null
           page: string
+          referrer: string | null
+          region: string | null
+          longitude: number | null
+          user_agent: string | null
           viewed_at: string | null
         }
         Insert: {
+          bot_score?: number | null
+          browser?: string | null
+          city?: string | null
+          country?: string | null
+          country_code?: string | null
+          device_type?: string | null
           id?: string
+          is_bot?: boolean | null
           ip_address?: unknown | null
+          latitude?: number | null
           page: string
+          referrer?: string | null
+          region?: string | null
+          longitude?: number | null
+          user_agent?: string | null
           viewed_at?: string | null
         }
         Update: {
+          bot_score?: number | null
+          browser?: string | null
+          city?: string | null
+          country?: string | null
+          country_code?: string | null
+          device_type?: string | null
           id?: string
+          is_bot?: boolean | null
           ip_address?: unknown | null
+          latitude?: number | null
           page?: string
+          referrer?: string | null
+          region?: string | null
+          longitude?: number | null
+          user_agent?: string | null
           viewed_at?: string | null
         }
         Relationships: []

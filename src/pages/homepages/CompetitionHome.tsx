@@ -534,18 +534,19 @@ const CompetitionHome = () => {
         </section>
 
         {/* Features - Clean Grid */}
-        < section className="py-24 bg-white relative overflow-hidden" >
+        < section className="py-24 bg-white relative overflow-hidden border-b border-gray-100" >
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="mb-8 lg:mb-0">
-                <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">Designed for Growth</h2>
-                <p className="text-lg text-slate-500 font-light leading-relaxed mb-10">
+                <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Growth Architecture</p>
+                <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Designed for Growth</h2>
+                <p className="text-lg text-gray-500 font-light leading-relaxed mb-10">
                   More than just a game. It's a journey to deepen your understanding of the Scripture through consistent, engaging practice.
                 </p>
                 <img 
                   src="/images/home/bible_quiz_glowing.png" 
                   alt="Glowing open Bible with insightful quiz questions floating, highly effective for scripture learning and bible knowledge" 
-                  className="rounded-3xl shadow-2xl w-full border border-slate-100 hidden lg:block" 
+                  className="rounded-[2.25rem] shadow-2xl w-full border border-gray-200 hidden lg:block" 
                 />
               </div>
 
@@ -588,12 +589,12 @@ const CompetitionHome = () => {
                   color: "bg-cyan-50"
                 }
               ].map((feature, idx) => (
-                <div key={idx} className="group p-8 rounded-3xl bg-slate-50 hover:bg-white border border-slate-100 hover:border-slate-200 hover:shadow-xl transition-all duration-500">
+                <div key={idx} className="group p-8 rounded-[2rem] bg-white border border-gray-200 hover:border-black/20 shadow-xl shadow-black/5 hover:-translate-y-1 transition-all duration-500">
                   <div className={`w-14 h-14 rounded-2xl ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-3 group-hover:text-blue-700 transition-colors">{feature.title}</h3>
-                  <p className="text-slate-500 leading-relaxed font-light">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-black transition-colors">{feature.title}</h3>
+                  <p className="text-gray-500 leading-relaxed font-light">
                     {feature.desc}
                   </p>
                 </div>
@@ -604,11 +605,12 @@ const CompetitionHome = () => {
         </section >
 
         {/* How It Works - Bible Challenger Journey */}
-        <section className="py-24 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
+        <section className="py-24 bg-gray-50 relative overflow-hidden border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">How to Become a Bible Challenger</h2>
-              <p className="text-lg text-slate-500 font-light max-w-2xl mx-auto leading-relaxed">
+              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Journey Blueprint</p>
+              <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">How to Become a Bible Challenger</h2>
+              <p className="text-lg text-gray-500 font-light max-w-2xl mx-auto leading-relaxed">
                 Your journey to mastering the Word starts here. Follow these simple steps to join the online bible quiz competition.
               </p>
             </div>
@@ -627,13 +629,13 @@ const CompetitionHome = () => {
                   { title: "3. Take Quizzes", desc: "Compete in daily and weekly online bible quizzes.", icon: Brain },
                   { title: "4. Win Prizes", desc: "Review bible quiz prize rules and check live results weekly.", icon: Trophy }
                 ].map((step, idx) => (
-                  <div key={idx} className="relative flex flex-col items-center text-center p-6 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition-all">
+                  <div key={idx} className="relative flex flex-col items-center text-center p-6 rounded-[2rem] bg-white border border-gray-200 shadow-xl shadow-black/5 hover:-translate-y-1 transition-all">
                     <div className="w-16 h-16 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center mb-6 shadow-sm z-10">
                       <step.icon className="w-8 h-8 text-blue-600" />
                     </div>
 
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">{step.title}</h3>
-                    <p className="text-slate-500 text-sm font-light leading-relaxed">{step.desc}</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
+                    <p className="text-gray-500 text-sm font-light leading-relaxed">{step.desc}</p>
                   </div>
                 ))}
               </div>
@@ -642,29 +644,30 @@ const CompetitionHome = () => {
         </section>
 
         {/* Browse by Category - Replaces old Featured Hubs */}
-        <section className="py-24 bg-white relative overflow-hidden">
+        <section className="py-24 bg-white relative overflow-hidden border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">Browse by Category</h2>
-              <p className="text-lg text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">
+              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Organized Discovery</p>
+              <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Browse by Category</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
                 Explore bible quizzes organized by biblical categories.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {categories.map((category, idx) => (
-                <Card key={idx} className="group hover:shadow-xl transition-all duration-300 border border-slate-200 shadow-sm bg-white overflow-hidden cursor-pointer rounded-3xl hover:-translate-y-1" onClick={() => navigate('/bible-questions-and-answers-hub')}>
+                <Card key={idx} className="group transition-all duration-300 border border-gray-200 shadow-xl shadow-black/5 bg-white overflow-hidden cursor-pointer rounded-[2rem] hover:-translate-y-1 hover:border-black/20" onClick={() => navigate('/bible-questions-and-answers-hub')}>
                   <CardContent className="p-8">
                     <div className="flex items-center space-x-4 mb-4">
                       <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center shadow-sm text-blue-600">
                         <category.icon className="w-6 h-6" />
                       </div>
-                      <h3 className="text-xl font-bold text-slate-900">{category.name}</h3>
+                      <h3 className="text-xl font-bold text-gray-900">{category.name}</h3>
                     </div>
-                    <p className="text-slate-600 font-light leading-relaxed mb-6">
+                    <p className="text-gray-600 font-light leading-relaxed mb-6">
                       {category.description}
                     </p>
-                    <div className="flex items-center text-blue-600 font-semibold group-hover:translate-x-2 transition-transform">
+                    <div className="flex items-center text-gray-800 font-semibold group-hover:translate-x-2 transition-transform">
                       Explore Category <ArrowRight className="w-4 h-4 ml-2" />
                     </div>
                   </CardContent>
@@ -680,33 +683,34 @@ const CompetitionHome = () => {
         </section>
 
         {/* Featured Quizzes Preview */}
-        <section className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+        <section className="py-24 bg-gray-50 relative overflow-hidden border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">Featured Quizzes</h2>
-              <p className="text-lg text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">
+              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Curated Challenges</p>
+              <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Featured Quizzes</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
                 Test your knowledge with our most popular bible quizzes.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {prioritizedFeaturedQuizzes.map((quiz) => (
-                <Card key={quiz.title} className="border border-slate-200 hover:border-blue-200 transition-all duration-300 cursor-pointer group bg-white shadow-sm hover:shadow-lg rounded-3xl hover:-translate-y-1" onClick={() => navigate(quiz.link)}>
+                <Card key={quiz.title} className="border border-gray-200 hover:border-black/20 transition-all duration-300 cursor-pointer group bg-white shadow-xl shadow-black/5 hover:shadow-2xl rounded-[2rem] hover:-translate-y-1" onClick={() => navigate(quiz.link)}>
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center">
                         <quiz.icon className="w-6 h-6 text-blue-600" strokeWidth={1.5} />
                       </div>
                       <div className="text-right">
-                        <div className="text-sm font-urbanist font-medium text-slate-600">{quiz.difficulty}</div>
-                        <div className="text-sm font-urbanist font-light text-slate-500">{quiz.questions} questions</div>
+                        <div className="text-sm font-urbanist font-medium text-gray-600">{quiz.difficulty}</div>
+                        <div className="text-sm font-urbanist font-light text-gray-500">{quiz.questions} questions</div>
                       </div>
                     </div>
-                    <CardTitle className="text-xl font-urbanist font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">{quiz.title}</CardTitle>
-                    <CardDescription className="font-urbanist font-light text-slate-600">{quiz.description}</CardDescription>
+                    <CardTitle className="text-xl font-urbanist font-semibold text-gray-900 group-hover:text-black transition-colors">{quiz.title}</CardTitle>
+                    <CardDescription className="font-urbanist font-light text-gray-600">{quiz.description}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Button className="w-full font-urbanist font-light border-slate-200 hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50" variant="outline">
+                    <Button className="w-full font-urbanist font-light border-gray-200 hover:border-black hover:text-black hover:bg-gray-50" variant="outline">
                       Start Quiz
                     </Button>
                   </CardContent>
@@ -723,12 +727,13 @@ const CompetitionHome = () => {
         </section>
 
         {/* Featured Articles */}
-        < section className="py-24 bg-white" >
+        < section className="py-24 bg-white border-b border-gray-100" >
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
               <div className="text-center md:text-left">
-                <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-4">Latest Insights</h2>
-                <p className="text-lg text-slate-600 max-w-2xl font-light leading-relaxed">
+                <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Editorial Picks</p>
+                <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-4">Latest Insights</h2>
+                <p className="text-lg text-gray-600 max-w-2xl font-light leading-relaxed">
                   Strategies, devotionals, and updates from our community.
                 </p>
               </div>
@@ -741,26 +746,26 @@ const CompetitionHome = () => {
 
             <div className="grid md:grid-cols-3 gap-8">
               {featuredArticles.map((article) => (
-                <article key={article.id} className="group cursor-pointer flex flex-col h-full bg-slate-50 p-8 rounded-3xl hover:bg-white border border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300" onClick={() => navigate("/articles")}>
+                <article key={article.id} className="group cursor-pointer flex flex-col h-full bg-white p-8 rounded-[2rem] border border-gray-200 hover:border-black/20 shadow-xl shadow-black/5 hover:-translate-y-1 transition-all duration-300" onClick={() => navigate("/articles")}>
                   <div className="flex items-center justify-between mb-6">
                     <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wider">
                       {article.category}
                     </span>
-                    <span className="text-xs text-slate-400 font-medium">{article.readTime}</span>
+                    <span className="text-xs text-gray-400 font-medium">{article.readTime}</span>
                   </div>
 
-                  <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-blue-600 transition-colors">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 leading-tight group-hover:text-black transition-colors">
                     {article.title}
                   </h3>
-                  <p className="text-slate-500 font-light leading-relaxed line-clamp-3 mb-6 flex-1">
+                  <p className="text-gray-500 font-light leading-relaxed line-clamp-3 mb-6 flex-1">
                     {article.excerpt}
                   </p>
 
-                  <div className="flex items-center justify-between pt-6 border-t border-slate-200/50 mt-auto">
-                    <span className="text-xs font-medium text-slate-400 uppercase tracking-wide">
+                  <div className="flex items-center justify-between pt-6 border-t border-gray-200/60 mt-auto">
+                    <span className="text-xs font-medium text-gray-400 uppercase tracking-wide">
                       By {article.author}
                     </span>
-                    <div className="text-blue-600 font-medium text-sm flex items-center group-hover:translate-x-1 transition-transform">
+                    <div className="text-gray-900 font-medium text-sm flex items-center group-hover:translate-x-1 transition-transform">
                       Read <ArrowRight className="w-4 h-4 ml-2" />
                     </div>
                   </div>
@@ -777,40 +782,42 @@ const CompetitionHome = () => {
         </section >
 
         {/* Newsletter */}
-        < section className="py-24 bg-gradient-to-b from-slate-50 to-white" >
-          <div className="max-w-4xl mx-auto px-6 text-center">
+        < section className="py-24 bg-gray-50 border-b border-gray-100" >
+          <div className="max-w-4xl mx-auto px-6 text-center bg-white border border-gray-200 rounded-[2.75rem] p-10 md:p-14 shadow-2xl shadow-black/10">
             <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-8">
               <Mail className="w-8 h-8" />
             </div>
-            <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">Stay Connected</h2>
-            <p className="text-lg text-slate-600 max-w-xl mx-auto font-light mb-10">
+            <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Community Updates</p>
+            <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Stay Connected</h2>
+            <p className="text-lg text-gray-600 max-w-xl mx-auto font-light mb-10">
               Get the latest quiz schedules, study tips, and daily inspiration delivered straight to your inbox.
             </p>
 
             <form className="max-w-md mx-auto relative flex items-center" onSubmit={(e) => e.preventDefault()}>
-              <div className="absolute left-4 text-slate-400">
+              <div className="absolute left-4 text-gray-400">
                 <Mail className="w-5 h-5" />
               </div>
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="w-full h-14 pl-12 pr-36 rounded-full border border-slate-200 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 outline-none transition-all text-slate-600 placeholder:text-slate-400 bg-white shadow-sm"
+                className="w-full h-14 pl-12 pr-36 rounded-full border border-gray-200 focus:border-blue-400 focus:ring-4 focus:ring-blue-100 outline-none transition-all text-gray-600 placeholder:text-gray-400 bg-white shadow-sm"
               />
-              <Button type="submit" className="absolute right-1.5 h-11 px-6 rounded-full bg-slate-900 text-white hover:bg-blue-600 transition-colors font-semibold">
+              <Button type="submit" className="absolute right-1.5 h-11 px-6 rounded-full bg-black text-white hover:bg-gray-800 transition-colors font-semibold text-[10px] uppercase tracking-[0.2em]">
                 Subscribe
               </Button>
             </form>
-            <p className="text-xs text-slate-400 mt-6">
+            <p className="text-xs text-gray-400 mt-6">
               We respect your privacy. Unsubscribe at any time.
             </p>
           </div>
         </section >
 
         {/* Testimonials - Human Centric */}
-        < section className="py-24 bg-white relative overflow-hidden" >
+        < section className="py-24 bg-white relative overflow-hidden border-b border-gray-100" >
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">Stories from the Community</h2>
+              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Verified Voices</p>
+              <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Stories from the Community</h2>
             </div>
 
             <div className="relative">
@@ -818,15 +825,15 @@ const CompetitionHome = () => {
               <div className="flex justify-end gap-3 mb-6">
                 <button
                   onClick={() => setCurrentTestimonialIndex(i => (i - 1 + totalSlides) % totalSlides)}
-                  className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50"
+                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50"
                 >
-                  <ChevronLeft className="w-5 h-5 text-slate-600" />
+                  <ChevronLeft className="w-5 h-5 text-gray-600" />
                 </button>
                 <button
                   onClick={() => setCurrentTestimonialIndex(i => (i + 1) % totalSlides)}
-                  className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center hover:bg-slate-50"
+                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50"
                 >
-                  <ChevronRight className="w-5 h-5 text-slate-600" />
+                  <ChevronRight className="w-5 h-5 text-gray-600" />
                 </button>
               </div>
 
@@ -840,18 +847,18 @@ const CompetitionHome = () => {
                       {testimonials
                         .slice(slideIndex * testimonialsPerViewState, slideIndex * testimonialsPerViewState + testimonialsPerViewState)
                         .map((testimonial) => (
-                          <div key={testimonial.id} className="bg-slate-50 p-8 rounded-3xl border border-slate-200 hover:bg-blue-50/50 hover:border-blue-100 transition-colors duration-300">
+                          <div key={testimonial.id} className="bg-white p-8 rounded-[2rem] border border-gray-200 shadow-xl shadow-black/5 hover:-translate-y-1 transition-all duration-300">
                             <Quote className="w-8 h-8 text-blue-200 mb-6" />
-                            <p className="text-slate-600 font-light text-lg mb-8 leading-relaxed">
+                            <p className="text-gray-600 font-light text-lg mb-8 leading-relaxed">
                               "{testimonial.quote}"
                             </p>
                             <div className="flex items-center gap-4">
-                              <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 font-bold text-xs">
+                              <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-bold text-xs">
                                 {testimonial.initials}
                               </div>
                               <div>
-                                <div className="font-bold text-slate-900 text-sm">{testimonial.name}</div>
-                                <div className="text-xs text-slate-400 font-medium uppercase tracking-wide">{testimonial.role}</div>
+                                <div className="font-bold text-gray-900 text-sm">{testimonial.name}</div>
+                                <div className="text-xs text-gray-400 font-medium uppercase tracking-wide">{testimonial.role}</div>
                               </div>
                             </div>
                           </div>
@@ -865,11 +872,12 @@ const CompetitionHome = () => {
         </section >
 
         {/* FAQ Section */}
-        <section className="py-24 bg-slate-50">
+        <section className="py-24 bg-gray-50">
           <div className="max-w-4xl mx-auto px-6">
             <div className="text-center mb-16">
-              <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
-              <p className="text-lg text-slate-500 font-light leading-relaxed">
+              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Need Help?</p>
+              <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Frequently Asked Questions</h2>
+              <p className="text-lg text-gray-500 font-light leading-relaxed">
                 Everything you need to know about the online bible quiz competition 2026.
               </p>
             </div>
@@ -882,9 +890,9 @@ const CompetitionHome = () => {
                 { q: "What topics are covered in the quizzes?", a: "We cover the entire Bible! You'll find specific challenges like the Genesis 8 quiz, Matthew quiz, and thematic quizzes on characters and theology." },
                 { q: "Who can become a Bible Challenger?", a: "Anyone! Whether you're a beginner or a scholar, our bible challenger levels adapt to your knowledge, helping you grow step-by-step." }
               ].map((faq, idx) => (
-                <div key={idx} className="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 hover:border-slate-300 transition-colors">
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">{faq.q}</h3>
-                  <p className="text-slate-500 font-light leading-relaxed">{faq.a}</p>
+                <div key={idx} className="bg-white rounded-[2rem] p-8 border border-gray-200 shadow-xl shadow-black/5 hover:-translate-y-1 transition-all">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{faq.q}</h3>
+                  <p className="text-gray-500 font-light leading-relaxed">{faq.a}</p>
                 </div>
               ))}
             </div>

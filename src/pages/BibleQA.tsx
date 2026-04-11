@@ -16,16 +16,16 @@ const getBookSlug = (book: string) => {
 const PremiumBookCard = ({ book, info, onClick }: { book: string; info: any; onClick: () => void }) => {
   return (
     <div
-      className="h-full"
+      className="h-full flex flex-col group"
       onClick={onClick}
     >
-      <Card className="border border-gray-100/50 hover:border-black/10 transition-all duration-700 bg-white overflow-hidden group shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] cursor-pointer h-full rounded-[2.5rem] relative">
-        <div className="aspect-[3/4.5] w-full bg-gray-50 overflow-hidden relative">
+      <Card className="border border-gray-100/50 hover:border-black/10 transition-all duration-700 bg-white overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] cursor-pointer rounded-[2.5rem] relative mb-8">
+        <div className="aspect-[3/4] w-full bg-gray-50 overflow-hidden relative">
           <img
             src={`/images/books/${getBookSlug(book)}.png`}
             alt={`${book} - Chapter Hub & Quizzes`}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-1000 scale-110"
+            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.style.display = 'none';
@@ -41,19 +41,43 @@ const PremiumBookCard = ({ book, info, onClick }: { book: string; info: any; onC
             }}
           />
 
-          {/* Premium Discovery Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/40 to-black/90 opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8 text-white z-20">
-            <div className="translate-y-0 transition-transform duration-700 delay-100">
-              <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-white/60 mb-3">{info.chapters} Chapters</p>
-              <h4 className="text-2xl font-normal italic serif mb-4">{book}</h4>
-              <p className="text-base font-light leading-relaxed mb-8 line-clamp-4 italic opacity-80 font-serif">{info.summary}</p>
-              <Button className="w-full bg-white text-black hover:bg-gray-100 py-6 rounded-2xl text-[10px] font-bold uppercase tracking-[0.25em] transition-all">
-                Enter Portal
-              </Button>
-            </div>
+          {/* Book Name Hover Badge - On Top of Image */}
+          <div className="absolute top-6 left-6 right-6 flex justify-between items-start">
+             <div className="bg-white/90 backdrop-blur-xl border border-white/20 px-6 py-3 rounded-2xl inline-block shadow-lg transform -translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                <span className="text-sm font-bold uppercase tracking-[0.2em] text-black">
+                  {book}
+                </span>
+             </div>
+             <div className="w-10 h-10 rounded-full bg-black flex items-center justify-center shadow-2xl transform translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500">
+                <BookOpen className="w-5 h-5 text-white" strokeWidth={1.5} />
+             </div>
           </div>
+          
+          <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-500" />
         </div>
       </Card>
+
+      {/* Info Content - Outside After Image */}
+      <div className="px-4 space-y-5 text-left flex-grow flex flex-col">
+        <div className="space-y-1">
+          <h4 className="text-xl font-bold text-gray-900 tracking-tight leading-tight">{book} - Chapter Hub & Quizzes</h4>
+          <div className="flex items-center space-x-3">
+            <span className="text-sm font-bold text-gray-900 uppercase tracking-widest">{book}</span>
+            <span className="w-1 h-1 rounded-full bg-gray-300" />
+            <span className="text-sm font-medium text-gray-400 uppercase tracking-widest">{info.chapters} Chapters</span>
+          </div>
+        </div>
+        
+        <div className="space-y-4 flex-grow">
+          <p className="text-base font-light font-serif italic text-gray-500 leading-relaxed line-clamp-3">
+            {info.summary}
+          </p>
+        </div>
+
+        <Button variant="ghost" className="p-0 h-auto text-[10px] font-bold uppercase tracking-[0.3em] text-black hover:bg-transparent hover:translate-x-2 transition-all flex items-center group/btn mt-auto">
+          Enter Portal <ChevronRight className="w-4 h-4 ml-2 transition-transform group-hover/btn:translate-x-1" />
+        </Button>
+      </div>
     </div>
   )
 }
