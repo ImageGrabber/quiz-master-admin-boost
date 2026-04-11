@@ -112,7 +112,26 @@ export default function HubDifficultyRouter() {
     }
   }
 
-  // Handle Genesis special levels
+  // Handle Data-Driven Level Quizzes (Beginner, Intermediate, Advanced)
+  if (difficulty) {
+    const registryKey = `${bookSlug.toLowerCase()}-${difficulty.toLowerCase()}`;
+    const levelData = specificChapterQuizzes[registryKey];
+    
+    if (levelData) {
+      const formattedBookName = bookSlug.charAt(0).toUpperCase() + bookSlug.slice(1).replace(/-/g, ' ');
+      return (
+        <PublicQuiz 
+          {...levelData}
+          title={levelData.title || `${formattedBookName} ${difficulty.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())} Quiz`}
+          bookName={formattedBookName}
+          chapter={levelData.chapter || difficulty.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+          questions={levelData.questions}
+        />
+      );
+    }
+  }
+
+  // Handle Genesis special levels (Legacy Components)
   if (bookSlug.toLowerCase() === "genesis" && difficulty) {
     const diffKey = difficulty.toLowerCase();
     const Component = quizMap[`genesis-${diffKey}`];
