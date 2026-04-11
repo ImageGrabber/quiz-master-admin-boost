@@ -3,10 +3,19 @@ import { useState, useMemo, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { BookOpen, Layers, Swords, ListOrdered, Brain, Home, ChevronRight, Search } from "lucide-react";
+import { BookOpen, Layers, Swords, ListOrdered, Brain, Home, ChevronRight, Search, Quote, Sparkles, Compass, ShieldCheck, Users } from "lucide-react";
 import SEO from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+
+// Cinematic assets generated for the Exodus Hub
+const EXODUS_IMAGES = {
+  hero: "/images/hubs/exodus/hero.png",
+  call: "/images/hubs/exodus/call.png",
+  plagues: "/images/hubs/exodus/plagues.png",
+  sinai: "/images/hubs/exodus/sinai.png",
+  tabernacle: "/images/hubs/exodus/tabernacle.png",
+};
 
 export default function ExodusHub() {
   const navigate = useNavigate();
@@ -254,161 +263,331 @@ export default function ExodusHub() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white text-gray-900 font-urbanist selection:bg-black/5">
       <SEO 
-        title="Exodus Quiz Hub | Bible Quiz Competition"
-        description="Explore the journey from slavery to the Tabernacle with our comprehensive Exodus study hub and interactive quizzes."
+        title="Exodus Quiz Hub | Deliverance & The Law Study Guide"
+        description="Master the second book of the Bible with our comprehensive Exodus study hub. From the burning bush to the glorious Tabernacle. Deep insights and interactive quizzes."
         url="/bible-questions-and-answers-hub/exodus"
       />
       <Navigation />
 
-      {/* Hero Section */}
-      <section className="py-16 bg-white text-center">
-        <div className="max-w-4xl mx-auto px-6">
-          <h1 className="text-5xl md:text-7xl font-urbanist font-normal text-gray-900 mb-6 leading-tight">
-            Exodus Quiz Hub
-          </h1>
-          <p className="text-2xl font-urbanist font-light text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Explore the journey from slavery to the Tabernacle. Search through 40 chapters, take interactive quizzes, and master the second book of the Bible.
-          </p>
-
-          {/* Search Bar */}
-          <div className="max-w-2xl mx-auto mb-8">
-            <div className="relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" strokeWidth={1} />
-              <Input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search chapters 1–40 (e.g., '12' or 'Passover')..."
-                className="pl-12 pr-4 py-4 text-lg font-urbanist font-light border border-gray-300 focus:border-gray-400 rounded-lg"
-              />
-            </div>
+      {/* Modern Hero Section with Cinematic Background */}
+      <section className="relative h-[75vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src={EXODUS_IMAGES.hero} 
+            alt="Exodus Red Sea Parting Cinematic" 
+            className="w-full h-full object-cover brightness-[0.4] transition-transform duration-[20s] hover:scale-110"
+          />
+        </div>
+        
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
+          <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-md mb-8 animate-in fade-in slide-in-from-top-4 duration-1000">
+            <Sparkles className="w-4 h-4 text-yellow-400" />
+            <span className="text-sm font-light tracking-widest uppercase">The Book of Deliverance</span>
           </div>
-
-          <div className="flex flex-wrap justify-center gap-3">
-            <a href="#difficulty" className="px-4 py-2 rounded-full border border-gray-200 hover:bg-gray-50 text-sm font-urbanist font-light transition-colors">Difficulty</a>
-            <a href="#ranges" className="px-4 py-2 rounded-full border border-gray-200 hover:bg-gray-50 text-sm font-urbanist font-light transition-colors">Ranges</a>
-            <a href="#exodus-chapter-wise" className="px-4 py-2 rounded-full border border-gray-200 hover:bg-gray-50 text-sm font-urbanist font-light transition-colors">Chapter Wise</a>
-            <a href="#types" className="px-4 py-2 rounded-full border border-gray-200 hover:bg-gray-50 text-sm font-urbanist font-light transition-colors">By Type</a>
+          <h1 className="text-6xl md:text-9xl font-normal mb-8 leading-tight tracking-tighter animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
+            Exodus <span className="italic font-serif">Hub</span>
+          </h1>
+          <p className="text-xl md:text-2xl font-light text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
+            From the oppression of Egypt to the glory of the Tabernacle. A cinematic interactive portal to master the epic journey of Israel.
+          </p>
+          
+          <div className="flex flex-wrap justify-center gap-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700">
+            <Button size="lg" className="bg-white text-black hover:bg-gray-200 px-10 py-8 text-lg rounded-2xl font-light shadow-2xl transition-all active:scale-95" onClick={() => document.getElementById('difficulty')?.scrollIntoView({ behavior: 'smooth' })}>
+              Begin Quiz Journey
+            </Button>
+            <Button size="lg" variant="outline" className="border-black/20 text-black hover:bg-black/5 backdrop-blur-sm px-10 py-8 text-lg rounded-2xl font-light transition-all active:scale-95" onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}>
+              Explore Content
+            </Button>
           </div>
         </div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-white via-white/80 to-transparent" />
       </section>
 
       <div className="w-full max-w-7xl mx-auto px-6 py-10">
-        {/* Breadcrumb */}
-        <div className="flex items-center text-base font-urbanist font-light text-gray-500 mb-12">
-          <button className="hover:text-gray-900" onClick={() => navigate("/")}>Home</button>
-          <ChevronRight className="w-4 h-4 mx-2" />
-          <button className="hover:text-gray-900" onClick={() => navigate("/bible-questions-and-answers-hub")}>Bible Q&A Hub</button>
-          <ChevronRight className="w-4 h-4 mx-2" />
-          <span className="font-medium text-gray-900 underline underline-offset-4 tracking-wide">Exodus</span>
+        {/* Breadcrumb - Clean & Minimal */}
+        <div className="flex items-center text-xs font-light text-gray-400 mb-20 px-2 tracking-widest uppercase">
+          <button className="hover:text-black transition-colors" onClick={() => navigate("/")}>Home</button>
+          <ChevronRight className="w-3 h-3 mx-4 opacity-30" />
+          <button className="hover:text-black transition-colors" onClick={() => navigate("/bible-questions-and-answers-hub")}>Bible Hub</button>
+          <ChevronRight className="w-3 h-3 mx-4 opacity-30" />
+          <span className="text-black font-semibold">Exodus</span>
         </div>
 
-        {/* Difficulty section */}
-        <section id="difficulty" className="mb-20 scroll-mt-24">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-4xl font-urbanist font-semibold text-gray-900">By Difficulty</h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col bg-white overflow-hidden group shadow-none" onClick={() => navigate("/bible-questions-and-answers-hub/exodus/beginner")}> 
-              <CardHeader className="pb-3">
-                <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 transition-colors group-hover:bg-green-100">
-                  <BookOpen className="w-6 h-6 text-gray-700 group-hover:text-green-700" strokeWidth={1} />
+        {/* Narrative Overview Segment: Intro */}
+        <section id="overview" className="mb-40 scroll-mt-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+            <div className="space-y-10">
+              <div className="space-y-6">
+                <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-gray-400 flex items-center">
+                  <span className="w-12 h-px bg-gray-200 mr-6" />
+                  The Call of Moses
+                </h2>
+                <h3 className="text-5xl md:text-6xl font-normal leading-tight text-gray-900">A Divine Revelation from the Burning Bush</h3>
+              </div>
+              <p className="text-2xl font-light text-gray-600 leading-[1.8] first-letter:text-6xl first-letter:font-serif first-letter:mr-4 first-letter:float-left first-letter:text-black first-letter:leading-none">
+                Exodus, the book of 'departure,' chronicles one of the most significant events in human history: the liberation of Israel from Egyptian bondage. It begins with the cries of an oppressed people and leads to the mountain where God reveals His holy Name and His holy Law.
+              </p>
+              <div className="p-10 rounded-[2.5rem] bg-gray-50 border border-gray-100 flex items-start space-x-8 hover:shadow-xl transition-all duration-500">
+                <Quote className="w-12 h-12 text-gray-200 flex-shrink-0" />
+                <div className="space-y-4">
+                  <p className="text-xl italic font-light text-gray-500 leading-relaxed">
+                    "I have surely seen the affliction of My people... and have heard their cry."
+                  </p>
+                  <p className="text-sm font-semibold tracking-widest text-gray-400 uppercase">— Exodus 3:7</p>
                 </div>
-                <CardTitle className="text-2xl font-urbanist font-semibold text-gray-900">Beginner</CardTitle>
-                <CardDescription className="text-lg font-urbanist font-light text-gray-600">10 questions on major events</CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0 text-base font-urbanist font-light text-gray-600 flex-grow">
-                <ul className="space-y-2">
-                  <li className="flex items-start"><div className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-2 mr-2 flex-shrink-0" />Moses, Plagues, Passover & Red Sea highlights</li>
-                  <li className="flex items-start"><div className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-2 mr-2 flex-shrink-0" />Fundamental stories and key characters</li>
-                </ul>
-              </CardContent>
-              <CardContent className="pt-4 mt-auto">
-                <Button className="w-full font-urbanist font-light border-gray-200 text-base py-6" variant="outline">Start Beginner</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col bg-white overflow-hidden group shadow-none" onClick={() => navigate("/bible-questions-and-answers-hub/exodus/intermediate")}> 
-              <CardHeader className="pb-3">
-                <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 transition-colors group-hover:bg-yellow-100">
-                  <Layers className="w-6 h-6 text-gray-700 group-hover:text-yellow-700" strokeWidth={1} />
+              </div>
+            </div>
+            <div className="relative group">
+              <div className="absolute -inset-6 bg-gray-50 rounded-[3rem] -rotate-1 group-hover:rotate-0 transition-transform duration-700" />
+              <img 
+                src={EXODUS_IMAGES.call} 
+                alt="Moses and the Burning Bush" 
+                className="relative z-10 w-full rounded-[2.5rem] shadow-2xl object-cover h-[600px] border border-white"
+              />
+              <div className="absolute -bottom-10 -left-10 z-20 p-10 bg-white/90 backdrop-blur-2xl rounded-3xl border border-gray-100 shadow-2xl max-w-xs transition-transform group-hover:translate-x-4">
+                <div className="w-12 h-12 rounded-2xl bg-black flex items-center justify-center mb-6">
+                  <Compass className="w-6 h-6 text-white" />
                 </div>
-                <CardTitle className="text-2xl font-urbanist font-semibold text-gray-900">Intermediate</CardTitle>
-                <CardDescription className="text-lg font-urbanist font-light text-gray-600">15 questions across the book</CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0 text-base font-urbanist font-light text-gray-600 flex-grow">
-                <ul className="space-y-2">
-                  <li className="flex items-start"><div className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-2 mr-2 flex-shrink-0" />Wilderness journey, Sinai, and Commandments</li>
-                  <li className="flex items-start"><div className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-2 mr-2 flex-shrink-0" />Focus on laws and historical context</li>
-                </ul>
-              </CardContent>
-              <CardContent className="pt-4 mt-auto">
-                <Button className="w-full font-urbanist font-light border-gray-200 text-base py-6" variant="outline">Start Intermediate</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col bg-white overflow-hidden group shadow-none" onClick={() => navigate("/bible-questions-and-answers-hub/exodus/advanced")}> 
-              <CardHeader className="pb-3">
-                <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mb-4 transition-colors group-hover:bg-red-100">
-                  <Swords className="w-6 h-6 text-gray-700 group-hover:text-red-700" strokeWidth={1} />
-                </div>
-                <CardTitle className="text-2xl font-urbanist font-semibold text-gray-900">Advanced</CardTitle>
-                <CardDescription className="text-lg font-urbanist font-light text-gray-600">25 challenging questions</CardDescription>
-              </CardHeader>
-              <CardContent className="pt-0 text-base font-urbanist font-light text-gray-600 flex-grow">
-                <ul className="space-y-2">
-                  <li className="flex items-start"><div className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-2 mr-2 flex-shrink-0" />Tabernacle dimensions and specific laws</li>
-                  <li className="flex items-start"><div className="w-1.5 h-1.5 rounded-full bg-gray-300 mt-2 mr-2 flex-shrink-0" />Nuanced details for Bible scholars</li>
-                </ul>
-              </CardContent>
-              <CardContent className="pt-4 mt-auto">
-                <Button className="w-full font-urbanist font-light border-gray-300 bg-black text-white hover:bg-gray-800 text-base py-6">Start Advanced</Button>
-              </CardContent>
-            </Card>
+                <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Key Pillar</p>
+                <p className="text-xl font-light text-gray-900 leading-snug tracking-tight italic">God's Personal Name & The Commission of a Leader</p>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Ranges section */}
-        <section id="ranges" className="mb-20 scroll-mt-24">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-4xl font-urbanist font-semibold text-gray-900">By Chapter Range</h2>
+        {/* Theological Insight Section - High End Dark Mode Card */}
+        <section className="mb-40 py-24 bg-gray-900 rounded-[4rem] text-white px-10 lg:px-20 overflow-hidden relative shadow-2xl shadow-gray-900/40">
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-500/10 blur-[150px] rounded-full translate-x-1/3" />
+          <div className="absolute bottom-0 left-0 w-1/3 h-full bg-orange-500/5 blur-[120px] rounded-full -translate-x-1/2" />
+          
+          <div className="relative z-10">
+            <h2 className="text-sm font-semibold uppercase tracking-[0.5em] text-white/30 mb-16">Theological Significance</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
+              <div className="space-y-10 group">
+                <div className="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 transition-colors">
+                  <Layers className="w-8 h-8 text-blue-400" strokeWidth={1} />
+                </div>
+                <div className="space-y-6">
+                  <h3 className="text-4xl font-normal leading-tight italic serif">Redemption by Blood</h3>
+                  <p className="text-xl font-light text-white/50 leading-relaxed">
+                    The Passover in Exodus 12 introduces the central theme of 'Redemption by Blood.' This lamb points directly to Jesus Christ, the 'Lamb of God' who takes away the sin of the world, through whose blood we find true exodus from the power of death.
+                  </p>
+                </div>
+              </div>
+              <div className="space-y-10 group">
+                <div className="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 transition-colors">
+                  <ShieldCheck className="w-8 h-8 text-orange-400" strokeWidth={1} />
+                </div>
+                <div className="space-y-6">
+                  <h3 className="text-4xl font-normal leading-tight italic serif">The Holiness of God's Law</h3>
+                  <p className="text-xl font-light text-white/50 leading-relaxed">
+                    From the lightning of Sinai, God reveals His perfect moral character through the Ten Commandments. The Law serves as a tutor, showing us our need for a Savior while defining the lifestyle of a redeemed community.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        </section>
+
+        {/* Challenge/Difficulty Section - Preserving Existing Functionality with Better UI */}
+        <section id="difficulty" className="mb-40 scroll-mt-24">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif">Master Exodus</h2>
+            <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">Choose your study depth and test your grasp of the second book of the Bible.</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
             {[
-              { range: "1–12", title: "Slavery to Passover", desc: "Moses’ birth, Plagues, Freedom" },
-              { range: "13–18", title: "Wilderness Journey", desc: "Red Sea, Manna, Jethro" },
-              { range: "19–24", title: "Sinai & Covenant", desc: "Commandments, Law, Blood oath" },
-              { range: "25–40", title: "Tabernacle", desc: "Designs, Golden Calf, Glory" }
-            ].map((r) => (
-              <Card key={r.range} className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col h-full bg-white group shadow-none">
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-2xl font-urbanist font-semibold text-gray-900">Exodus {r.range}</CardTitle>
-                  <CardDescription className="text-lg font-urbanist font-light text-gray-600">{r.title}</CardDescription>
-                </CardHeader>
-                <CardContent className="pt-0 flex-grow">
-                  <p className="text-base font-urbanist font-light text-gray-500 mb-4 leading-relaxed">{r.desc}</p>
-                </CardContent>
-                <CardContent className="pt-4 border-t border-gray-50">
-                  <div className="flex flex-col gap-2">
-                    <Button size="sm" variant="outline" className="w-full font-urbanist font-light text-base py-5" onClick={() => navigate(`/bible-questions-and-answers-hub/exodus/beginner`)}>Beginner</Button>
-                    <Button size="sm" className="w-full font-urbanist font-light bg-black text-white hover:bg-gray-800 text-base py-5" onClick={() => navigate(`/bible-questions-and-answers-hub/exodus/advanced`)}>Advanced Quiz</Button>
+              { 
+                level: "Beginner", 
+                desc: "Focus on iconic stories: Plagues, Passover, and the Red Sea.", 
+                icon: BookOpen, 
+                color: "bg-green-50", 
+                iconColor: "text-green-600",
+                link: "beginner",
+                accent: "bg-green-500",
+                features: ["Visual storytelling", "Major events", "Essential characters"]
+              },
+              { 
+                level: "Intermediate", 
+                desc: "Deep dive into wilderness laws, Sinai, and Jethro's advice.", 
+                icon: Brain, 
+                color: "bg-yellow-50", 
+                iconColor: "text-yellow-600",
+                link: "intermediate",
+                accent: "bg-yellow-500",
+                features: ["Wilderness journey", "Sinai commandments", "Social laws"]
+              },
+              { 
+                level: "Advanced", 
+                desc: "Master Tabernacle dimensions, rituals, and theological depths.", 
+                icon: Swords, 
+                color: "bg-red-50", 
+                iconColor: "text-red-600",
+                link: "advanced",
+                accent: "bg-red-500",
+                features: ["Tabernacle specifics", "Hebrew terms", "Theological parallels"]
+              }
+            ].map((d) => (
+              <Card 
+                key={d.level} 
+                className="group relative border border-gray-100/60 hover:border-black/5 hover:-translate-y-2 transition-all duration-500 flex flex-col bg-white overflow-hidden shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem]" 
+                onClick={() => navigate(`/bible-questions-and-answers-hub/exodus/${d.link}`)}
+              > 
+                <div className={`h-2 w-full ${d.accent} absolute top-0`} />
+                <CardHeader className="pt-12 pb-8 px-10">
+                  <div className={`w-16 h-16 rounded-2xl ${d.color} flex items-center justify-center mb-8 transition-transform group-hover:scale-110 duration-500`}>
+                    <d.icon className={`w-8 h-8 ${d.iconColor}`} strokeWidth={1.5} />
                   </div>
+                  <CardTitle className="text-4xl font-normal text-gray-900 italic serif mb-3">{d.level}</CardTitle>
+                  <CardDescription className="text-sm font-semibold text-gray-400 uppercase tracking-[0.25em]">Exodus Study Track</CardDescription>
+                </CardHeader>
+                <CardContent className="px-10 pb-12 flex-grow flex flex-col justify-between">
+                  <p className="text-xl font-light text-gray-500 leading-relaxed mb-10">{d.desc}</p>
+                  <ul className="space-y-4 mb-10">
+                    {d.features.map(f => (
+                      <li key={f} className="flex items-center text-sm font-light text-gray-400">
+                        <div className={`w-1.5 h-1.5 rounded-full ${d.accent} mr-3 opacity-50`} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button className="w-full font-light bg-black text-white hover:bg-gray-800 rounded-2xl py-8 tracking-[0.2em] uppercase text-xs transition-all shadow-xl shadow-black/10">Start Challenge</Button>
                 </CardContent>
               </Card>
             ))}
           </div>
         </section>
 
-        {/* Exodus Quiz Chapter Wise */}
-        <section id="exodus-chapter-wise" className="mb-20 scroll-mt-24">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-4xl font-urbanist font-semibold text-gray-900">Exodus Quiz Chapter Wise</h2>
-            <div className="hidden sm:flex items-center text-sm font-urbanist font-light text-gray-500">
-              Showing {filteredChapters.length} Chapters
+        {/* Narrative Flow: Judgment & Mercy */}
+        <section className="mb-40">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+            <div className="order-2 lg:order-1 relative group">
+              <div className="absolute -inset-6 bg-orange-50 rounded-[3rem] rotate-1 group-hover:rotate-0 transition-transform duration-700" />
+              <img 
+                src={EXODUS_IMAGES.plagues} 
+                alt="The Plagues over Egypt" 
+                className="relative z-10 w-full rounded-[2.5rem] shadow-2xl object-cover h-[700px] border border-white"
+              />
+            </div>
+            <div className="order-1 lg:order-2 space-y-10">
+              <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-gray-400 flex items-center">
+                <span className="w-12 h-px bg-gray-200 mr-6" />
+                Judgment & Deliverance
+              </h2>
+              <h3 className="text-5xl font-normal leading-tight text-gray-900 italic serif">The Path to Freedom Through Miracles</h3>
+              <p className="text-2xl font-light text-gray-600 leading-[1.8]">
+                Through ten powerful plagues, God demonstrated His sovereignty over the gods of Egypt. From the Nile turned to blood to the darkness that could be felt, each judgment was a direct challenge to Pharaoh's authority, leading to the ultimate deliverance of God's people.
+              </p>
+              <div className="flex items-center space-x-6 p-10 bg-orange-50/40 rounded-[2.5rem] border border-orange-100/50 hover:bg-orange-50 transition-colors">
+                <div className="w-16 h-16 bg-orange-100 rounded-3xl flex items-center justify-center shrink-0 shadow-lg shadow-orange-200/50">
+                  <Quote className="w-7 h-7 text-orange-600" />
+                </div>
+                <div className="space-y-2">
+                  <p className="text-gray-700 text-xl font-light italic leading-relaxed">"Who is like You, O Lord, among the gods?"</p>
+                  <p className="text-xs font-semibold tracking-widest text-orange-400 uppercase">— Exodus 15:11</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        </section>
+
+        {/* Specialized Hubs Section */}
+        <section className="mb-40 px-6">
+          <div className="max-w-7xl mx-auto">
+            <div className="text-center mb-24">
+              <h2 className="text-sm font-semibold uppercase tracking-[0.5em] text-gray-400 mb-8">Specialized Hubs</h2>
+              <h3 className="text-5xl md:text-7xl font-normal text-gray-900 mb-8 italic serif">Targeted Training</h3>
+              <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                Specific training tools for targeted memorization and logic.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                { 
+                  title: "Fill in the Blanks", 
+                  desc: "Scripture memorization", 
+                  icon: Quote, 
+                  link: "fill-in-the-blanks",
+                  color: "bg-amber-50",
+                  iconColor: "text-amber-600"
+                },
+                { 
+                  title: "True or False", 
+                  desc: "Rapid logic testing", 
+                  icon: ShieldCheck, 
+                  link: "true-false",
+                  color: "bg-blue-50",
+                  iconColor: "text-blue-600"
+                },
+                { 
+                  title: "Characters", 
+                  desc: "Moses, Aaron, Miriam", 
+                  icon: Users, 
+                  link: "characters",
+                  color: "bg-emerald-50",
+                  iconColor: "text-emerald-600"
+                },
+                { 
+                  title: "Timeline Match", 
+                  desc: "The Plagues & Journey", 
+                  icon: ListOrdered, 
+                  link: "match-the-following",
+                  color: "bg-indigo-50",
+                  iconColor: "text-indigo-600"
+                }
+              ].map((tool) => (
+                <Card 
+                  key={tool.title}
+                  className="group hover:scale-105 hover:shadow-2xl transition-all duration-500 cursor-pointer border-none bg-white rounded-[2rem] overflow-hidden"
+                  onClick={() => navigate(`/bible-questions-and-answers-hub/exodus/${tool.link}`)}
+                >
+                  <CardHeader className="pt-12 pb-8 px-8">
+                    <div className={`w-14 h-14 rounded-2xl ${tool.color} flex items-center justify-center mb-8`}>
+                      <tool.icon className={`w-7 h-7 ${tool.iconColor}`} strokeWidth={1.5} />
+                    </div>
+                    <CardTitle className="text-2xl font-normal text-gray-900 italic serif mb-2">{tool.title}</CardTitle>
+                    <CardDescription className="text-sm font-light text-gray-500 leading-relaxed">
+                      {tool.desc}
+                    </CardDescription>
+                  </CardHeader>
+                  <div className="px-8 pb-8">
+                    <div className="h-1 w-full bg-gray-50 rounded-full overflow-hidden">
+                      <div className={`h-full w-0 group-hover:w-full transition-all duration-700 bg-black/10`} />
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Integrated Search & Chapter Wisdom */}
+        <section id="exodus-chapter-wise" className="mb-40 scroll-mt-24 pt-32 border-t border-gray-100">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-24 gap-12">
+            <div className="max-w-2xl">
+              <h2 className="text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif">The Chapter Library</h2>
+              <p className="text-2xl font-light text-gray-400 leading-relaxed">Each of the 40 chapters contains unique study materials, summaries, and specialized quizzes.</p>
+            </div>
+            {/* Search Bar - Modern & Large */}
+            <div className="w-full lg:w-[450px]">
+              <div className="relative group">
+                <div className="absolute inset-x-0 bottom-0 h-1 bg-black/0 group-focus-within:bg-black/10 transition-colors" />
+                <Search className="absolute left-8 top-1/2 transform -translate-y-1/2 text-gray-300 w-6 h-6" strokeWidth={1} />
+                <Input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Chapter # or keyword (e.g. '12' or 'Manna')..."
+                  className="pl-20 pr-10 py-10 text-xl font-light border-0 bg-gray-50/50 focus:bg-white focus:ring-0 rounded-[2rem] shadow-inner transition-all duration-500"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {visibleChapters.map((ch) => {
               let currentChapterPoints = null;
               if (ch >= 1 && ch <= 8) currentChapterPoints = chapterPoints[ch];
@@ -419,121 +598,66 @@ export default function ExodusHub() {
               else if (ch >= 33 && ch <= 40) currentChapterPoints = chapterPoints33to40[ch];
 
               return (
-                <Card key={ch} className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col h-full cursor-pointer group bg-white shadow-none" onClick={() => navigate(`/bible-questions-and-answers-hub/exodus/chapter-${ch}`)}>
-                  <CardHeader className="pb-3 border-b border-gray-50">
-                    <CardTitle className="text-xl font-urbanist font-semibold text-gray-900">Chapter {ch}</CardTitle>
-                    <CardDescription className="text-sm font-urbanist font-light text-gray-500 uppercase tracking-widest mt-1">
-                      {ch === 1 && "Israel in Egypt"}
-                      {ch === 2 && "Birth of Moses"}
-                      {ch === 3 && "The Burning Bush"}
-                      {ch === 4 && "Signs for Moses"}
-                      {ch === 5 && "Moses and Pharaoh"}
-                      {ch === 6 && "Promises of God"}
-                      {ch === 7 && "The Nile to Blood"}
-                      {ch === 8 && "Frogs, Gnats, Flies"}
-                      {ch === 9 && "Livestock, Boils, Hail"}
-                      {ch === 10 && "Locusts, Darkness"}
-                      {ch === 11 && "Final Warning"}
-                      {ch === 12 && "Passover"}
-                      {ch === 13 && "Firstborn"}
-                      {ch === 14 && "Red Sea"}
-                      {ch === 15 && "Song & Marah"}
-                      {ch === 16 && "Manna"}
-                      {ch === 17 && "Water & Amalek"}
-                      {ch === 18 && "Jethro"}
-                      {ch === 19 && "At Sinai"}
-                      {ch === 20 && "Commandments"}
-                      {ch === 21 && "Injuries"}
-                      {ch === 22 && "Property"}
-                      {ch === 23 && "Justice"}
-                      {ch === 24 && "Covenant"}
-                      {ch === 25 && "Ark"}
-                      {ch === 26 && "Curtains"}
-                      {ch === 27 && "Altar"}
-                      {ch === 28 && "Garments"}
-                      {ch === 29 && "Consecration"}
-                      {ch === 30 && "Incense"}
-                      {ch === 31 && "Artisans"}
-                      {ch === 32 && "Golden Calf"}
-                      {ch === 33 && "God's Glory"}
-                      {ch === 34 && "Renewal"}
-                      {ch === 35 && "Offerings"}
-                      {ch === 36 && "Construction"}
-                      {ch === 37 && "Furniture"}
-                      {ch === 38 && "Metals"}
-                      {ch === 39 && "Garments Done"}
-                      {ch === 40 && "Tabernacle"}
-                    </CardDescription>
+                <Card 
+                  key={ch} 
+                  className="group relative border border-gray-100 hover:border-black/5 hover:translate-y-[-8px] transition-all duration-500 flex flex-col h-full cursor-pointer bg-white shadow-xl shadow-gray-200/20 rounded-[2.5rem] overflow-hidden p-2" 
+                  onClick={() => navigate(`/bible-questions-and-answers-hub/exodus/chapter-${ch}`)}
+                >
+                  <CardHeader className="p-10 pb-6">
+                    <div className="flex items-center justify-between mb-8">
+                      <div className="text-sm font-bold text-gray-300 tracking-[0.2em] group-hover:text-black transition-colors">CHAPTER {ch}</div>
+                      <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all duration-500">
+                        <ChevronRight className="w-4 h-4" />
+                      </div>
+                    </div>
+                    <CardTitle className="text-2xl font-normal text-gray-900 mb-6 italic serif line-clamp-1">Narrative Summary</CardTitle>
+                    <div className="space-y-4">
+                      {currentChapterPoints?.map((pt, idx) => (
+                        <div key={idx} className="flex items-start gap-3">
+                          <div className="w-1.5 h-1.5 rounded-full bg-gray-200 mt-2 shrink-0 group-hover:bg-black transition-colors" />
+                          <p className="text-sm font-light text-gray-500 leading-relaxed group-hover:text-gray-900 transition-colors">{pt}</p>
+                        </div>
+                      ))}
+                    </div>
                   </CardHeader>
-                  <CardContent className="pt-4 flex-grow">
-                    {currentChapterPoints && (
-                      <ul className="text-sm font-urbanist font-light text-gray-600 space-y-1.5">
-                        {currentChapterPoints.slice(0, 2).map((point, idx) => (
-                          <li key={idx} className="flex items-start">
-                            <span className="text-gray-400 mr-2">•</span>
-                            {point}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </CardContent>
-                  <CardContent className="pt-2 border-t border-gray-50">
-                    <Button variant="ghost" size="sm" className="w-full text-sm font-urbanist font-light group-hover:bg-gray-100">
-                      Chapter Details →
+                  <div className="mt-auto p-10 pt-0">
+                    <Button variant="ghost" className="w-full justify-start px-0 text-xs font-semibold tracking-widest text-gray-400 uppercase group-hover:text-black hover:bg-transparent">
+                      Explore Chapter
                     </Button>
-                  </CardContent>
+                  </div>
                 </Card>
               );
             })}
           </div>
+
+          {/* Chapters Pagination */}
           {totalChapterPages > 1 && (
-            <div className="mt-8 flex justify-center items-center space-x-4">
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="font-urbanist font-light"
-                disabled={chapterPage === 0} 
-                onClick={() => setChapterPage(p => p - 1)}
-              >
-                Previous
-              </Button>
-              <span className="text-sm font-urbanist font-light text-gray-500">Page {chapterPage + 1} of {totalChapterPages}</span>
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="font-urbanist font-light"
-                disabled={chapterPage >= totalChapterPages - 1} 
-                onClick={() => setChapterPage(p => p + 1)}
-              >
-                Next
-              </Button>
+            <div className="mt-32 flex items-center justify-between border-t border-gray-100 pt-12">
+              <div className="text-xs font-semibold text-gray-400 uppercase tracking-[0.2em]">
+                Page {chapterPage + 1} of {totalChapterPages}
+              </div>
+              <div className="flex gap-4">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="rounded-2xl px-8 font-light tracking-widest uppercase text-xs"
+                  disabled={chapterPage === 0} 
+                  onClick={() => setChapterPage(p => p - 1)}
+                >
+                  Previous
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="rounded-2xl px-8 font-light tracking-widest uppercase text-xs"
+                  disabled={chapterPage >= totalChapterPages - 1} 
+                  onClick={() => setChapterPage(p => p + 1)}
+                >
+                  Next
+                </Button>
+              </div>
             </div>
           )}
-        </section>
-
-        {/* Types section */}
-        <section id="types" className="mb-20 scroll-mt-24">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-urbanist font-semibold text-gray-900">By Type</h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { title: "Fill in the Blanks", desc: "Complete key verses from Exodus", icon: BookOpen, link: "fill-in-the-blanks" },
-              { title: "True / False", desc: "Quick facts on the Exodus journey", icon: Brain, link: "true-false" },
-              { title: "Characters", desc: "Moses, Aaron, Miriam, and more", icon: Brain, link: "characters" },
-              { title: "Match the Following", icon: ListOrdered, desc: "Pair items, events, and names", link: "match-the-following" }
-            ].map((t) => (
-              <Card key={t.title} className="cursor-pointer border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col group bg-white shadow-none" onClick={() => navigate(`/bible-questions-and-answers-hub/exodus/${t.link}`)}> 
-                <CardHeader className="pb-3">
-                  <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center mb-4 group-hover:bg-gray-200 transition-colors">
-                    <t.icon className="w-5 h-5 text-gray-700" strokeWidth={1} />
-                  </div>
-                  <CardTitle className="text-xl font-urbanist font-semibold text-gray-900">{t.title}</CardTitle>
-                  <CardDescription className="font-urbanist font-light text-gray-600">{t.desc}</CardDescription>
-                </CardHeader>
-              </Card>
-            ))}
-          </div>
         </section>
       </div>
 
