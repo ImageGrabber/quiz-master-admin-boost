@@ -185,27 +185,27 @@ export default function BibleQA() {
         url="/bible-questions-and-answers-hub"
       />
 
-      <Navigation />
+      <Navigation transparent={true} />
 
       <script type="application/ld+json">
         {JSON.stringify(structuredData)}
       </script>
 
       {/* Modern Cinematic Hero Section */}
-      <section className="relative h-[75vh] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[85vh] min-h-[700px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
             src={HUB_IMAGES.hero} 
             alt="Majestic Bible Hub Background" 
-            className="w-full h-full object-cover brightness-[0.4] transition-transform duration-[20000ms] hover:scale-110"
+            className="w-full h-full object-cover brightness-[0.35] transition-transform duration-[20000ms] hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-white" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-white" />
         </div>
         
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
+        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white pt-20">
           <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-md mb-8 animate-in fade-in slide-in-from-top-4 duration-1000">
             <Brain className="w-4 h-4 text-white" />
-            <span className="text-sm font-light tracking-widest uppercase italic">Master the Scriptures</span>
+            <span className="text-sm font-light tracking-widest uppercase italic tracking-[0.3em]">Master the Scriptures</span>
           </div>
           <h1 className="text-6xl md:text-9xl font-normal mb-8 leading-tight tracking-tighter animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
             Bible Q&A <span className="italic font-serif">Hub</span>
