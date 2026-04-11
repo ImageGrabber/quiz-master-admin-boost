@@ -15,13 +15,13 @@ const getBookSlug = (book: string) => {
 
 const PremiumBookCard = ({ book, info, onClick }: { book: string; info: any; onClick: () => void }) => {
   return (
-    <div 
+    <div
       className="flex-shrink-0 w-64 sm:w-72 snap-start h-full pb-8"
       onClick={onClick}
     >
       <Card className="border border-gray-100/50 hover:border-black/10 transition-all duration-700 bg-white overflow-hidden group shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] cursor-pointer h-full rounded-[2.5rem] relative">
         <div className="aspect-[3/4.5] w-full bg-gray-50 overflow-hidden relative">
-          <img 
+          <img
             src={`/images/books/${getBookSlug(book)}.png`}
             alt={`${book} - Chapter Hub & Quizzes`}
             loading="lazy"
@@ -40,27 +40,27 @@ const PremiumBookCard = ({ book, info, onClick }: { book: string; info: any; onC
               }
             }}
           />
-          
+
           {/* Permanent Floating Badge (Glassmorphic) */}
           <div className="absolute bottom-6 left-6 right-6 z-10">
             <div className="bg-white/40 backdrop-blur-xl border border-white/20 px-6 py-3 rounded-2xl flex items-center justify-between transition-all duration-500 group-hover:bg-white group-hover:translate-y-[-10px] shadow-lg">
               <span className="text-sm font-bold uppercase tracking-[0.2em] text-gray-900 line-clamp-1">{book}</span>
               <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center transition-transform group-hover:rotate-45">
-                 <Plus className="w-4 h-4 text-white" />
+                <Plus className="w-4 h-4 text-white" />
               </div>
             </div>
           </div>
 
           {/* Premium Discovery Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/40 to-black/90 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8 text-white z-20">
-             <div className="translate-y-10 group-hover:translate-y-0 transition-transform duration-700 delay-100">
-               <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-white/60 mb-3">{info.chapters} Chapters</p>
-               <h4 className="text-2xl font-normal italic serif mb-4">{book}</h4>
-               <p className="text-base font-light leading-relaxed mb-8 line-clamp-4 italic opacity-80 font-serif">{info.summary}</p>
-               <Button className="w-full bg-white text-black hover:bg-gray-100 py-6 rounded-2xl text-[10px] font-bold uppercase tracking-[0.25em] transition-all">
-                 Enter Portal
-               </Button>
-             </div>
+            <div className="translate-y-10 group-hover:translate-y-0 transition-transform duration-700 delay-100">
+              <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-white/60 mb-3">{info.chapters} Chapters</p>
+              <h4 className="text-2xl font-normal italic serif mb-4">{book}</h4>
+              <p className="text-base font-light leading-relaxed mb-8 line-clamp-4 italic opacity-80 font-serif">{info.summary}</p>
+              <Button className="w-full bg-white text-black hover:bg-gray-100 py-6 rounded-2xl text-[10px] font-bold uppercase tracking-[0.25em] transition-all">
+                Enter Portal
+              </Button>
+            </div>
           </div>
         </div>
       </Card>
@@ -74,7 +74,7 @@ export default function BibleQA() {
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isCategoryDialogOpen, setIsCategoryDialogOpen] = useState(false);
-  
+
   const otSliderRef = useRef<HTMLDivElement>(null);
   const ntSliderRef = useRef<HTMLDivElement>(null);
 
@@ -84,7 +84,7 @@ export default function BibleQA() {
       ref.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
-  
+
   const getBookSlug = (book: string) => {
     return book.toLowerCase().replace(/ /g, "-");
   };
@@ -109,7 +109,7 @@ export default function BibleQA() {
     const slug = getBookSlug(book);
     const quiz = featuredQuizzes.find(q => q.link.includes(slug));
     const chapters = bibleStructure[slug as keyof typeof bibleStructure] || 0;
-    
+
     return {
       summary: quiz?.description || `Study the ${book} with deep-dive chapter quizzes and guided learning.`,
       chapters: chapters
@@ -263,19 +263,19 @@ export default function BibleQA() {
       {/* Modern Cinematic Hero Section */}
       <section className="relative h-[70vh] md:h-[95vh] min-h-[500px] md:min-h-[800px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <img 
-            src={HUB_IMAGES.hero} 
-            alt="Majestic Bible Hub Background" 
+          <img
+            src={HUB_IMAGES.hero}
+            alt="Majestic Bible Hub Background"
             className="w-full h-full object-cover brightness-[0.35] transition-transform duration-[20000ms] hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-white" />
         </div>
-        
+
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white pt-20">
           <h1 className="text-4xl sm:text-6xl md:text-9xl font-normal mb-8 leading-tight tracking-tighter animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
             Bible Q&A <span className="italic font-serif">Hub</span>
           </h1>
-          
+
           <div className="max-w-3xl mx-auto mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
             <div className="relative group">
               <Search className="absolute left-6 md:left-8 top-1/2 transform -translate-y-1/2 text-black/40 group-focus-within:text-black w-5 h-5 md:w-6 md:h-6 transition-colors" strokeWidth={1} />
@@ -285,7 +285,7 @@ export default function BibleQA() {
                 placeholder="Search books..."
                 className={`pl-16 md:pl-20 pr-10 py-8 md:py-12 text-lg md:text-2xl font-light border-transparent bg-white focus:bg-white focus:ring-0 placeholder:text-black/30 text-black shadow-2xl transition-all duration-500 ${searchQuery ? 'rounded-t-2xl md:rounded-t-[2.5rem] rounded-b-none' : 'rounded-2xl md:rounded-[2.5rem]'}`}
               />
-              
+
               {searchQuery && (
                 <div className="absolute top-full left-0 right-0 bg-white backdrop-blur-3xl rounded-b-2xl md:rounded-b-[2rem] shadow-2xl border-t border-gray-100 max-h-80 overflow-y-auto text-left z-[100] p-2 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
                   {filteredBooks.length > 0 ? (
@@ -333,12 +333,23 @@ export default function BibleQA() {
         </div>
 
         <section id="hubs" className="mb-60 scroll-mt-24">
-          <div className="text-center mb-32">
-            <div className="inline-block px-6 py-2 rounded-full border border-gray-100 bg-gray-50 text-[10px] font-bold uppercase tracking-[0.5em] text-gray-400 mb-8">Guided Journeys</div>
-            <h2 className="text-6xl md:text-8xl font-normal text-gray-900 mb-10 italic serif">Book Study Hubs</h2>
-            <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Step into cinematic environments designed for deep scriptural exploration from Genesis to Revelation.
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-40">
+            <div className="relative group overflow-hidden rounded-[2.5rem] shadow-3xl aspect-video lg:aspect-square">
+              <img
+                src="/images/book-study-hubs-hero.jpg"
+                alt="Sacred Scriptures — Ancient Library"
+                className="w-full h-full object-cover transition-transform duration-[10000ms] group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent" />
+            </div>
+
+            <div className="text-left">
+              <h2 className="text-sm font-semibold uppercase tracking-[0.5em] text-gray-400 mb-8">The Eternal Library</h2>
+              <h3 className="text-5xl md:text-7xl font-normal text-gray-900 mb-10 italic serif leading-[1.1]">Cinematic Portals into Sacred Scripture</h3>
+              <p className="text-xl md:text-2xl font-light text-gray-400 leading-relaxed italic serif opacity-80 max-w-2xl">
+                The Bible, a collection of 66 divinely inspired books, serves as the majestic roadmap for our spiritual journey. Our Book Study Hubs provide an immersive gateway to explore each testament, offering structured chapter quizzes and cinematic guides designed to unveil the profound wisdom and timeless narrative of God's Word.
+              </p>
+            </div>
           </div>
 
           {/* Old Testament Slider */}
@@ -349,31 +360,31 @@ export default function BibleQA() {
                 <p className="text-[10px] md:text-sm font-light text-gray-400 tracking-widest uppercase">The Foundational Covenant • 39 Books</p>
               </div>
               <div className="hidden md:flex gap-3">
-                <button 
+                <button
                   onClick={() => scrollSlider(otSliderRef, 'left')}
                   className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all active:scale-90"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
-                <button 
-                   onClick={() => scrollSlider(otSliderRef, 'right')}
-                   className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all active:scale-90"
+                <button
+                  onClick={() => scrollSlider(otSliderRef, 'right')}
+                  className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all active:scale-90"
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
               </div>
             </div>
-            
-            <div 
+
+            <div
               ref={otSliderRef}
               className="flex overflow-x-auto pb-12 gap-8 md:gap-10 no-scrollbar -mx-4 px-4 snap-x snap-mandatory"
             >
               {Object.values(bibleBooks.oldTestament).flat().map((book) => (
-                <PremiumBookCard 
-                  key={book} 
-                  book={book} 
-                  info={getBookInfo(book)} 
-                  onClick={() => handleSearch(book)} 
+                <PremiumBookCard
+                  key={book}
+                  book={book}
+                  info={getBookInfo(book)}
+                  onClick={() => handleSearch(book)}
                 />
               ))}
             </div>
@@ -387,31 +398,31 @@ export default function BibleQA() {
                 <p className="text-[10px] md:text-sm font-light text-gray-400 tracking-widest uppercase">The Fulfillment of Promise • 27 Books</p>
               </div>
               <div className="hidden md:flex gap-3">
-                <button 
+                <button
                   onClick={() => scrollSlider(ntSliderRef, 'left')}
                   className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all active:scale-90"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
-                <button 
-                   onClick={() => scrollSlider(ntSliderRef, 'right')}
-                   className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all active:scale-90"
+                <button
+                  onClick={() => scrollSlider(ntSliderRef, 'right')}
+                  className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all active:scale-90"
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>
               </div>
             </div>
-            
-            <div 
+
+            <div
               ref={ntSliderRef}
               className="flex overflow-x-auto pb-12 gap-8 md:gap-10 no-scrollbar -mx-4 px-4 snap-x snap-mandatory"
             >
               {Object.values(bibleBooks.newTestament).flat().map((book) => (
-                <PremiumBookCard 
-                  key={book} 
-                  book={book} 
-                  info={getBookInfo(book)} 
-                  onClick={() => handleSearch(book)} 
+                <PremiumBookCard
+                  key={book}
+                  book={book}
+                  info={getBookInfo(book)}
+                  onClick={() => handleSearch(book)}
                 />
               ))}
             </div>
@@ -421,9 +432,9 @@ export default function BibleQA() {
             {featuredHubs.map((hub) => (
               <Card
                 key={hub.id}
-                className="group relative border border-gray-100/60 hover:border-black/5 hover:-translate-y-2 transition-all duration-500 flex flex-col bg-white overflow-hidden shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem]" 
+                className="group relative border border-gray-100/60 hover:border-black/5 hover:-translate-y-2 transition-all duration-500 flex flex-col bg-white overflow-hidden shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem]"
                 onClick={() => navigate(`/bible-questions-and-answers-hub/${hub.id}`)}
-              > 
+              >
                 <div className="h-2 w-full bg-black absolute top-0 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <CardHeader className="pt-12 pb-8 px-10">
                   <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center mb-8 transition-transform group-hover:scale-110 duration-500">
@@ -455,9 +466,9 @@ export default function BibleQA() {
             {randomFeaturedQuizzes.map((quiz) => (
               <Card
                 key={quiz.id}
-                className="group relative border border-gray-100/60 hover:border-black/5 hover:-translate-y-2 transition-all duration-500 flex flex-col bg-white overflow-hidden shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem]" 
+                className="group relative border border-gray-100/60 hover:border-black/5 hover:-translate-y-2 transition-all duration-500 flex flex-col bg-white overflow-hidden shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem]"
                 onClick={() => navigate(quiz.link)}
-              > 
+              >
                 <div className="h-2 w-full bg-gray-900 absolute top-0 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <CardHeader className="pt-12 pb-8 px-10 border-b border-gray-50 mb-6">
                   <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center mb-8 transition-transform group-hover:scale-110 duration-500">
@@ -499,9 +510,9 @@ export default function BibleQA() {
             {categoryData.map((category) => (
               <Card
                 key={category.name}
-                className="group relative border border-gray-100/60 hover:border-black/5 hover:-translate-y-2 transition-all duration-500 flex flex-col bg-white overflow-hidden shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem]" 
+                className="group relative border border-gray-100/60 hover:border-black/5 hover:-translate-y-2 transition-all duration-500 flex flex-col bg-white overflow-hidden shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem]"
                 onClick={() => handleCategoryClick(category.name)}
-              > 
+              >
                 <div className="h-2 w-full bg-black absolute top-0 opacity-0 group-hover:opacity-100 transition-opacity" />
                 <CardHeader className="pt-12 pb-8 px-10">
                   <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center mb-8 transition-transform group-hover:scale-110 duration-500">
