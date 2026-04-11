@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Search, BookOpen, ChevronRight, ChevronLeft, X, Brain, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { bibleBooks, featuredQuizzes, categories as categoryData, bibleStructure } from "@/data/bible-data";
 import { Navigation } from "@/components/Navigation";
 
@@ -296,10 +296,10 @@ export default function BibleQA() {
                       <button
                         key={book}
                         onClick={() => handleSearch(book)}
-                        className="w-full px-8 py-5 hover:bg-black hover:text-white rounded-2xl flex items-center justify-between transition-all group/item"
+                        className="w-full px-8 py-5 hover:bg-black hover:text-white rounded-2xl flex items-center justify-between transition-all group/item text-black"
                       >
                         <span className="text-lg font-normal">{book}</span>
-                        <ChevronRight className="w-5 h-5 opacity-0 group-hover/item:opacity-100 transition-opacity" />
+                        <ChevronRight className="w-5 h-5 opacity-0 group-hover/item:opacity-100 transition-opacity text-black group-hover:text-white" />
                       </button>
                     ))
                   ) : (
@@ -442,19 +442,19 @@ export default function BibleQA() {
           </div>
         </section>
 
-        <section id="quizzes" className="mb-40 scroll-mt-24 border-t border-gray-100 pt-32">
-          <div className="text-center mb-24">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.5em] text-gray-400 mb-8">Test Your Knowledge</h2>
-            <h3 className="text-5xl md:text-7xl font-normal text-gray-900 mb-8 italic serif">Featured Quizzes</h3>
+        <section id="quizzes" className="mb-60 scroll-mt-24">
+          <div className="text-center mb-32">
+            <div className="inline-block px-6 py-2 rounded-full border border-gray-100 bg-gray-50 text-[10px] font-bold uppercase tracking-[0.5em] text-gray-400 mb-8">Test Your Knowledge</div>
+            <h2 className="text-6xl md:text-8xl font-normal text-gray-900 mb-10 italic serif">Featured Quizzes</h2>
             <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Daily refreshed challenges to keep your Word study sharp.
+              Challenge yourself with our curated selection of high-fidelity scriptural examinations.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {randomFeaturedQuizzes.map((quiz) => (
               <Card
-                key={quiz.title}
-                className="group relative border border-gray-100/60 hover:border-black/5 hover:-translate-y-2 transition-all duration-500 flex flex-col h-full bg-white shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem] overflow-hidden"
+                key={quiz.id}
+                className="group relative border border-gray-100/60 hover:border-black/5 hover:-translate-y-2 transition-all duration-500 flex flex-col bg-white overflow-hidden shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem]" 
                 onClick={() => navigate(quiz.link)}
               > 
                 <div className="h-2 w-full bg-gray-900 absolute top-0 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -486,15 +486,15 @@ export default function BibleQA() {
           </div>
         </section>
 
-        <section id="categories" className="mb-40 scroll-mt-24 border-t border-gray-100 pt-32">
-          <div className="text-center mb-24">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.5em] text-gray-400 mb-8">Structured Discovery</h2>
-            <h3 className="text-5xl md:text-7xl font-normal text-gray-900 mb-8 italic serif">Biblical Categories</h3>
+        <section id="categories" className="mb-40 scroll-mt-24 border-t border-gray-100 pt-32 text-gray-900">
+          <div className="text-center mb-32">
+            <div className="inline-block px-6 py-2 rounded-full border border-gray-100 bg-gray-50 text-[10px] font-bold uppercase tracking-[0.5em] text-gray-400 mb-8">Structured Discovery</div>
+            <h3 className="text-6xl md:text-8xl font-normal text-gray-900 mb-10 italic serif">Biblical Categories</h3>
             <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
               Explore the Word through its literary and historical divisions.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {categoryData.map((category) => (
               <Card
                 key={category.name}
@@ -510,8 +510,8 @@ export default function BibleQA() {
                   <CardDescription className="text-sm font-semibold text-gray-400 uppercase tracking-[0.25em]">Bible Category</CardDescription>
                 </CardHeader>
                 <CardContent className="px-10 pb-12 flex-grow flex flex-col justify-between">
-                  <p className="text-xl font-light text-gray-500 leading-relaxed mb-10">{category.description}</p>
-                  <Button variant="ghost" className="w-full justify-start px-0 text-xs font-semibold tracking-widest text-gray-400 uppercase group-hover:text-black hover:bg-transparent">
+                  <p className="text-lg font-light text-gray-500 leading-relaxed mb-10 opacity-80">{category.description}</p>
+                  <Button variant="ghost" className="w-full justify-start px-0 text-[10px] font-bold tracking-[0.3em] text-gray-300 uppercase group-hover:text-black hover:bg-transparent transition-colors">
                     View Books →
                   </Button>
                 </CardContent>
@@ -524,11 +524,12 @@ export default function BibleQA() {
           <section className="mb-40 border-t border-gray-100 pt-32">
             <div className="text-center mb-16">
               <h2 className="text-sm font-semibold uppercase tracking-[0.5em] text-gray-400 mb-6">Continue Your Journey</h2>
-              <h3 className="text-4xl font-normal text-gray-900 italic serif">Recently Viewed</h3>
+              <h3 className="text-4xl font-normal text-gray-900 italic serif mb-4">Recently Viewed</h3>
+              <p className="text-gray-400 font-light italic">Your history of scriptural exploration.</p>
             </div>
             <div className="flex flex-wrap justify-center gap-4">
               {recentSearches.map((book) => (
-                <Button key={book} variant="outline" onClick={() => handleSearch(book)} className="font-light border-gray-200 hover:border-black hover:bg-black hover:text-white rounded-full px-8 py-6 transition-all text-base">
+                <Button key={book} variant="outline" onClick={() => handleSearch(book)} className="font-bold border-gray-100 hover:border-black hover:bg-black hover:text-white rounded-full px-10 py-8 transition-all text-xs tracking-[0.2em] uppercase shadow-lg shadow-gray-100/50">
                   {book}
                 </Button>
               ))}
@@ -537,40 +538,43 @@ export default function BibleQA() {
         )}
       </div>
 
-      <footer className="bg-white border-t border-gray-100 pt-16 pb-12">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+      <footer className="bg-white border-t border-gray-100 pt-32 pb-20">
+        <div className="max-w-[1700px] mx-auto px-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-20 mb-32">
             <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center space-x-2 mb-6">
-                <div className="w-8 h-8 bg-black rounded-full flex items-center justify-center">
-                  <Brain className="w-4 h-4 text-white" />
+              <div className="flex items-center space-x-3 mb-10">
+                <div className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center transform -rotate-6 transition-transform hover:rotate-0">
+                  <Brain className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-xl font-semibold text-gray-900">Bible Quiz Competition</span>
+                <span className="text-2xl font-bold text-gray-900 tracking-tighter">Bible Quiz <span className="italic serif font-normal">Competition</span></span>
               </div>
-              <p className="text-gray-500 font-light leading-relaxed max-w-sm">
-                Empowering faith through interactive Scripture knowledge and competitive spirit. Join thousands of students learning the Word through fun, challenging quizzes.
+              <p className="text-xl text-gray-400 font-light leading-relaxed max-w-sm italic serif">
+                "Thy word is a lamp unto my feet, and a light unto my path."
+              </p>
+              <p className="text-gray-400 font-light leading-relaxed max-w-sm mt-8">
+                Empowering faith through interactive Scripture knowledge and cinematic study experiences.
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-900 mb-6 uppercase tracking-wider text-sm">Quick Links</h4>
-              <ul className="space-y-4 text-gray-500 font-light">
-                <li><button onClick={() => navigate("/bible-questions-and-answers-hub")} className="hover:text-black transition-colors">Quiz Hub</button></li>
-                <li><button onClick={() => navigate("/articles")} className="hover:text-black transition-colors">Study Articles</button></li>
-                <li><button onClick={() => navigate("/public-leaderboard")} className="hover:text-black transition-colors">Leaderboards</button></li>
+              <h4 className="font-bold text-gray-900 mb-10 uppercase tracking-[0.3em] text-[10px]">Quick Links</h4>
+              <ul className="space-y-6 text-sm font-medium text-gray-400">
+                <li><button onClick={() => navigate("/bible-questions-and-answers-hub")} className="hover:text-black hover:translate-x-2 transition-all">Quiz Hub</button></li>
+                <li><button onClick={() => navigate("/articles")} className="hover:text-black hover:translate-x-2 transition-all">Study Articles</button></li>
+                <li><button onClick={() => navigate("/public-leaderboard")} className="hover:text-black hover:translate-x-2 transition-all">Leaderboards</button></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-gray-900 mb-6 uppercase tracking-wider text-sm">Support</h4>
-              <ul className="space-y-4 text-gray-500 font-light">
-                <li><button onClick={() => navigate("/help")} className="hover:text-black transition-colors">Help Center</button></li>
-                <li><button onClick={() => navigate("/contact")} className="hover:text-black transition-colors">Contact Us</button></li>
-                <li><button onClick={() => navigate("/privacy")} className="hover:text-black transition-colors">Privacy Policy</button></li>
+              <h4 className="font-bold text-gray-900 mb-10 uppercase tracking-[0.3em] text-[10px]">Support</h4>
+              <ul className="space-y-6 text-sm font-medium text-gray-400">
+                <li><button onClick={() => navigate("/help")} className="hover:text-black hover:translate-x-2 transition-all">Help Center</button></li>
+                <li><button onClick={() => navigate("/contact")} className="hover:text-black hover:translate-x-2 transition-all">Contact Us</button></li>
+                <li><button onClick={() => navigate("/privacy")} className="hover:text-black hover:translate-x-2 transition-all">Privacy Policy</button></li>
               </ul>
             </div>
           </div>
-          <div className="pt-8 border-t border-gray-50 flex flex-col md:flex-row justify-between items-center text-sm font-light text-gray-400">
-            <p>© 2026 Bible Quiz Competition. All rights reserved.</p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
+          <div className="pt-12 border-t border-gray-50 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+            <p>© 2026 Bible Quiz Competition. Crafted for Excellence.</p>
+            <div className="flex space-x-10 mt-8 md:mt-0">
               <span className="hover:text-black cursor-pointer transition-colors">Twitter</span>
               <span className="hover:text-black cursor-pointer transition-colors">Facebook</span>
               <span className="hover:text-black cursor-pointer transition-colors">Instagram</span>
@@ -580,31 +584,36 @@ export default function BibleQA() {
       </footer>
 
       <Dialog open={isCategoryDialogOpen} onOpenChange={setIsCategoryDialogOpen}>
-        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-          <DialogHeader>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto rounded-[3rem] border-none shadow-3xl p-12">
+          <DialogHeader className="mb-12">
             <div className="flex items-center justify-between">
-              <DialogTitle className="text-2xl font-semibold text-gray-900">{selectedCategory}</DialogTitle>
-              <Button variant="ghost" size="sm" onClick={() => setIsCategoryDialogOpen(false)} className="h-8 w-8 p-0">
-                <X className="h-4 w-4" strokeWidth={1} />
+              <div>
+                <DialogDescription className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-2">Category Portal</DialogDescription>
+                <DialogTitle className="text-5xl font-normal text-gray-900 italic serif">{selectedCategory}</DialogTitle>
+              </div>
+              <Button variant="ghost" size="sm" onClick={() => setIsCategoryDialogOpen(false)} className="h-14 w-14 rounded-full bg-gray-50 hover:bg-black hover:text-white transition-all">
+                <X className="h-6 w-6" strokeWidth={1} />
               </Button>
             </div>
           </DialogHeader>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {getBooksByCategory(selectedCategory).map((book) => (
               <Card
                 key={book}
-                className="border border-gray-200 hover:border-gray-400 transition-all duration-300 cursor-pointer group bg-white"
+                className="group border border-gray-100 hover:border-black/10 hover:-translate-y-2 transition-all duration-500 cursor-pointer bg-white overflow-hidden rounded-3xl p-6"
                 onClick={() => {
                   handleSearch(book);
                   setIsCategoryDialogOpen(false);
                 }}
               >
-                <CardContent className="p-4 text-center">
-                  <div className="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center mx-auto mb-3">
-                    <BookOpen className="w-6 h-6 text-gray-700" strokeWidth={1} />
+                <CardContent className="p-0 text-center">
+                  <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center mx-auto mb-6 transition-transform group-hover:scale-110 group-hover:rotate-6">
+                    <BookOpen className="w-8 h-8 text-gray-400" strokeWidth={1} />
                   </div>
-                  <h3 className="font-semibold text-gray-900 group-hover:text-gray-700 transition-colors">{book}</h3>
-                  <p className="text-sm font-light text-gray-500 mt-1">Open Hub</p>
+                  <h3 className="text-lg font-bold text-gray-900 group-hover:text-black transition-colors uppercase tracking-widest">{book}</h3>
+                  <div className="mt-4 pt-4 border-t border-gray-50 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">Enter Hub →</span>
+                  </div>
                 </CardContent>
               </Card>
             ))}
