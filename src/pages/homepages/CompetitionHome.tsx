@@ -508,69 +508,73 @@ const CompetitionHome = () => {
         }}
       />
 
-      <div className="min-h-screen bg-slate-50 font-urbanist">
-        <Navigation />
+      <div className="min-h-screen bg-white text-gray-900 font-urbanist selection:bg-black/5">
+        <Navigation transparent={true} />
 
-        <section className="relative overflow-hidden px-6 pt-10 pb-20 lg:pt-16 lg:pb-24 bg-gradient-to-b from-white via-slate-50 to-white">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(59,130,246,0.12),transparent_40%),radial-gradient(circle_at_bottom_left,rgba(99,102,241,0.1),transparent_45%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#64748b10_1px,transparent_1px),linear-gradient(to_bottom,#64748b10_1px,transparent_1px)] bg-[size:22px_22px]" />
+        <section className="relative h-[76vh] md:h-[92vh] min-h-[560px] flex items-center overflow-hidden">
+          <div className="absolute inset-0">
+            <img
+              src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=2070&auto=format&fit=crop"
+              alt="Bible study table with notes and open scripture"
+              className="h-full w-full object-cover brightness-[0.28] transition-transform duration-[18000ms] hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/35 to-white" />
           </div>
 
-          <div className="max-w-7xl mx-auto w-full relative z-10 grid lg:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
-            <div className="space-y-8">
-              <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-sm font-semibold text-blue-700">
+          <div className="max-w-7xl mx-auto w-full px-6 relative z-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-end pb-10 md:pb-16">
+            <div className="space-y-8 text-white">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.25em] text-white backdrop-blur-md">
                 <Trophy className="w-4 h-4" />
                 Live Season 2026
               </span>
 
               <div>
-                <h1 className="text-2xl lg:text-3xl font-semibold font-inter-tight text-slate-500 tracking-tight mb-4">
+                <h1 className="text-lg sm:text-2xl lg:text-3xl font-semibold tracking-tight mb-4 text-white/70">
                   Online Bible Quiz Competition 2026
                 </h1>
 
-                <h2 className="text-5xl lg:text-7xl font-bold text-slate-900 tracking-tight leading-[1.05]">
+                <h2 className="text-5xl lg:text-7xl font-normal tracking-tight leading-[1.05]">
                   Master the Word,<br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600">
-                    Join the Glory.
-                  </span>
+                  <span className="italic font-serif text-white">Join the Glory.</span>
                 </h2>
               </div>
 
-              <p className="text-xl text-slate-500 font-light max-w-2xl leading-relaxed">
+              <p className="text-lg md:text-xl text-white/80 font-light max-w-2xl leading-relaxed">
                 Join thousands of believers in a free bible competition with daily challenges, transparent scoring, and real bible quiz prizes. Start with our most searched quizzes and grow your Scripture mastery.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 pt-2">
                 <Button
                   onClick={() => navigate('/auth/login')}
-                  className="h-14 px-8 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-semibold text-lg hover:scale-[1.02] transition-all duration-300 shadow-lg"
+                  className="h-14 px-9 bg-white text-black hover:bg-black hover:text-white rounded-full font-bold text-sm tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl"
                 >
                   Start Playing Now <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
                 <Button
                   variant="outline"
                   onClick={() => navigate('/scripture-match-multiplayer')}
-                  className="h-14 px-8 border-2 border-slate-200 text-slate-700 hover:border-blue-200 hover:bg-blue-50 rounded-full font-semibold text-lg transition-all duration-300 bg-white"
+                  className="h-14 px-9 border border-white/40 text-white hover:bg-white hover:text-black rounded-full font-bold text-sm tracking-[0.2em] uppercase transition-all duration-300 bg-transparent"
                 >
                   Play Scripture Game <Gamepad2 className="ml-2 w-5 h-5" />
                 </Button>
               </div>
-
             </div>
 
             <div className="lg:pt-10">
-              <Card className="border-slate-200 bg-white/95 backdrop-blur-sm shadow-xl rounded-3xl overflow-hidden">
+              <Card className="border border-white/20 bg-white/90 backdrop-blur-xl shadow-2xl rounded-[2.25rem] overflow-hidden">
                 <CardHeader className="pb-4">
-                  <CardTitle className="text-2xl text-slate-900">Today's Challenge Pulse</CardTitle>
-                  <CardDescription className="text-slate-500">
+                  <CardDescription className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-400 mb-2">
+                    Live Momentum
+                  </CardDescription>
+                  <CardTitle className="text-4xl font-normal italic font-serif text-gray-900">Today's Challenge Pulse</CardTitle>
+                  <CardDescription className="text-gray-500">
                     Live momentum from the global bible challenger community.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-5">
-                  <div className="rounded-2xl border border-blue-100 bg-blue-50 p-4">
-                    <p className="text-xs uppercase tracking-widest text-blue-600 font-semibold mb-2">Recent Winner</p>
-                    <p className="text-xl font-bold text-blue-900">{recentWinners[currentWinnerIndex] || "Community Player"}</p>
+                  <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-gray-400 font-bold mb-2">Recent Winner</p>
+                    <p className="text-2xl font-normal italic font-serif text-gray-900">{recentWinners[currentWinnerIndex] || "Community Player"}</p>
                   </div>
 
                   <div className="space-y-3">
@@ -578,10 +582,10 @@ const CompetitionHome = () => {
                       <button
                         key={item.label}
                         onClick={() => navigate(item.path)}
-                        className="w-full flex items-center justify-between rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-left hover:bg-white hover:border-slate-300 transition-all"
+                        className="w-full flex items-center justify-between rounded-2xl border border-gray-100 bg-white px-4 py-3 text-left hover:bg-black hover:text-white transition-all group"
                       >
-                        <span className="text-sm font-semibold text-slate-700">{item.label}</span>
-                        <ArrowRight className="w-4 h-4 text-slate-500" />
+                        <span className="text-sm font-semibold text-gray-700 group-hover:text-white">{item.label}</span>
+                        <ArrowRight className="w-4 h-4 text-gray-500 group-hover:text-white" />
                       </button>
                     ))}
                   </div>
@@ -592,49 +596,50 @@ const CompetitionHome = () => {
         </section>
 
         {/* Premium Bible Study Hub Section */}
-        <section className="py-24 bg-white relative overflow-hidden border-b border-slate-100">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(59,130,246,0.05),transparent_40%)]" />
+        <section className="py-24 bg-white relative overflow-hidden border-b border-gray-100">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,rgba(17,24,39,0.06),transparent_40%)]" />
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
               <div className="max-w-2xl">
-                <h2 className="text-3xl lg:text-5xl font-bold text-slate-900 mb-6 tracking-tight">Premium Bible Study Hub</h2>
-                <p className="text-lg text-slate-500 font-light leading-relaxed">
+                <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">The Eternal Library</p>
+                <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6 tracking-tight">Premium Bible Study Hub</h2>
+                <p className="text-lg text-gray-500 font-light leading-relaxed">
                   Deep-dive into all 66 books with chapter-specific quizzes and theological summaries. Each book is a gateway to deeper understanding.
                 </p>
               </div>
               <Button
                 onClick={() => navigate("/bible-questions-and-answers-hub")}
-                className="rounded-full bg-slate-900 hover:bg-slate-800 text-white px-8 h-12 shadow-lg hover:scale-105 transition-all"
+                className="rounded-full bg-black hover:bg-gray-800 text-white px-8 h-12 shadow-lg hover:scale-105 transition-all text-[10px] font-bold uppercase tracking-[0.2em]"
               >
                 Browse Full Library <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </div>
 
-            <div className="flex overflow-x-auto pb-8 gap-6 no-scrollbar -mx-4 px-4 snap-x snap-mandatory">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
               {allBooks.slice(0, 10).map((book) => {
                 const info = getBookInfo(book);
                 const slug = getBookSlug(book);
                 return (
                   <div
                     key={book}
-                    className="flex-shrink-0 w-44 sm:w-56 snap-start"
+                    className="w-full"
                     onClick={() => navigate(`/bible-questions-and-answers-hub/${slug}`)}
                   >
-                    <Card className="border border-slate-100 hover:border-blue-200 transition-all duration-500 bg-white overflow-hidden group shadow-sm hover:shadow-2xl cursor-pointer rounded-3xl relative">
-                      <div className="aspect-[3/4] w-full bg-slate-50 overflow-hidden relative">
+                    <Card className="border border-gray-100/60 hover:border-black/10 transition-all duration-500 bg-white overflow-hidden group shadow-2xl shadow-gray-200/30 hover:shadow-2xl cursor-pointer rounded-[2rem] relative hover:-translate-y-1">
+                      <div className="aspect-[3/4] w-full bg-gray-50 overflow-hidden relative">
                         <img
                           src={`/images/books/${slug}.png`}
                           alt={`${book} Study Hub`}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
                             target.style.display = 'none';
                             const parent = target.parentElement;
                             if (parent && !parent.querySelector('.fallback-icon')) {
                               const fallback = document.createElement('div');
-                              fallback.className = 'absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center opacity-60';
-                              fallback.innerHTML = `<div class="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm border border-blue-100">
-                                <span class="text-2xl font-bold text-blue-400 font-urbanist">${book.charAt(0)}</span>
+                              fallback.className = 'absolute inset-0 bg-gradient-to-br from-gray-50 to-white flex items-center justify-center opacity-70';
+                              fallback.innerHTML = `<div class="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-sm border border-gray-100">
+                                <span class="text-2xl font-bold text-gray-400 font-urbanist">${book.charAt(0)}</span>
                               </div>`;
                               parent.appendChild(fallback);
                             }
@@ -642,14 +647,14 @@ const CompetitionHome = () => {
                         />
 
                         {/* Discovery Overlay */}
-                        <div className="absolute inset-x-0 bottom-0 top-0 bg-slate-900/80 translate-y-full group-hover:translate-y-0 transition-transform duration-500 backdrop-blur-md p-6 flex flex-col justify-end text-white z-20">
-                          <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-blue-400 mb-2">{info.chapters} Chapters</p>
+                        <div className="absolute inset-x-0 bottom-0 top-0 bg-black/78 translate-y-full group-hover:translate-y-0 transition-transform duration-500 backdrop-blur-md p-6 flex flex-col justify-end text-white z-20">
+                          <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-white/70 mb-2">{info.chapters} Chapters</p>
                           <p className="text-sm font-light leading-relaxed mb-6 line-clamp-4 italic opacity-90">{info.summary}</p>
-                          <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-500 text-xs h-9 rounded-full font-semibold shadow-lg">Start Study</Button>
+                          <Button size="sm" className="w-full bg-white text-black hover:bg-gray-100 text-xs h-9 rounded-full font-bold tracking-[0.16em] uppercase shadow-lg">Start Study</Button>
                         </div>
                       </div>
                       <CardContent className="p-4 text-center">
-                        <span className="text-sm font-bold text-slate-800 line-clamp-1 group-hover:text-blue-600 transition-colors uppercase tracking-wider">{book}</span>
+                        <span className="text-sm font-bold text-gray-800 line-clamp-1 group-hover:text-black transition-colors uppercase tracking-wider">{book}</span>
                       </CardContent>
                     </Card>
                   </div>
@@ -660,12 +665,12 @@ const CompetitionHome = () => {
         </section>
 
         {/* Kids & Songs Featured Section */}
-        <section className="py-24 bg-slate-50">
+        <section className="py-24 bg-gray-50 border-y border-gray-100">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid lg:grid-cols-2 gap-10">
               {/* Kids Stories Card */}
               <div
-                className="group relative overflow-hidden rounded-[2.5rem] bg-indigo-600 p-10 cursor-pointer shadow-2xl hover:scale-[1.02] transition-all duration-500"
+                className="group relative overflow-hidden rounded-[2.5rem] bg-black p-10 cursor-pointer shadow-2xl hover:scale-[1.02] transition-all duration-500 border border-white/10"
                 onClick={() => navigate("/kids-stories")}
               >
                 <div className="absolute top-0 right-0 p-12 opacity-10 group-hover:scale-125 transition-transform duration-700">
@@ -673,16 +678,16 @@ const CompetitionHome = () => {
                 </div>
                 <div className="relative z-10 h-full flex flex-col justify-between">
                   <div className="space-y-4">
-                    <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1 text-sm font-bold text-white backdrop-blur-md">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-md">
                       <Star className="w-4 h-4 fill-white" /> Kids Corner
                     </span>
-                    <h3 className="text-4xl lg:text-5xl font-bold text-white tracking-tight">Interactive Bible Stories</h3>
-                    <p className="text-xl text-indigo-100 font-light max-w-md leading-relaxed">
+                    <h3 className="text-4xl lg:text-5xl font-normal italic font-serif text-white tracking-tight">Interactive Bible Stories</h3>
+                    <p className="text-xl text-white/70 font-light max-w-md leading-relaxed">
                       Beautifully illustrated stories of faith for children, featuring the David & Goliath quiz, Noah's Ark, and more.
                     </p>
                   </div>
                   <div className="pt-10 flex items-center gap-4">
-                    <Button className="bg-white text-indigo-600 hover:bg-indigo-50 rounded-full font-bold px-8 h-12">
+                    <Button className="bg-white text-black hover:bg-gray-100 rounded-full font-bold px-8 h-12 text-[10px] uppercase tracking-[0.2em]">
                       Explore Stories
                     </Button>
                     <span className="text-white/60 text-sm font-medium italic group-hover:translate-x-2 transition-transform">Free Quizzes Included →</span>
@@ -692,27 +697,27 @@ const CompetitionHome = () => {
 
               {/* Songs Card */}
               <div
-                className="group relative overflow-hidden rounded-[2.5rem] bg-slate-900 p-10 cursor-pointer shadow-2xl hover:scale-[1.02] transition-all duration-500"
+                className="group relative overflow-hidden rounded-[2.5rem] bg-white p-10 cursor-pointer shadow-2xl hover:scale-[1.02] transition-all duration-500 border border-gray-200"
                 onClick={() => navigate("/songs")}
               >
                 <div className="absolute bottom-0 right-0 p-12 opacity-10 group-hover:scale-125 transition-transform duration-700">
-                  <Globe className="w-48 h-48 text-white" />
+                  <Globe className="w-48 h-48 text-black" />
                 </div>
                 <div className="relative z-10 h-full flex flex-col justify-between">
                   <div className="space-y-4">
-                    <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-sm font-bold text-white backdrop-blur-md">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-600 backdrop-blur-md">
                       <Zap className="w-4 h-4" /> Global Worship
                     </span>
-                    <h3 className="text-4xl lg:text-5xl font-bold text-white tracking-tight">Christian Song Library</h3>
-                    <p className="text-xl text-slate-400 font-light max-w-md leading-relaxed">
+                    <h3 className="text-4xl lg:text-5xl font-normal italic font-serif text-gray-900 tracking-tight">Christian Song Library</h3>
+                    <p className="text-xl text-gray-500 font-light max-w-md leading-relaxed">
                       Browse 500+ Hindi & International Christian songs with lyrics and video embeds. Perfect for worship and personal study.
                     </p>
                   </div>
                   <div className="pt-10 flex items-center gap-4">
-                    <Button className="bg-blue-600 text-white hover:bg-blue-500 rounded-full font-bold px-8 h-12 border-none">
+                    <Button className="bg-black text-white hover:bg-gray-800 rounded-full font-bold px-8 h-12 border-none text-[10px] uppercase tracking-[0.2em]">
                       Find Songs
                     </Button>
-                    <span className="text-slate-500 text-sm font-medium italic group-hover:translate-x-2 transition-transform">A-Z Directory Available →</span>
+                    <span className="text-gray-500 text-sm font-medium italic group-hover:translate-x-2 transition-transform">A-Z Directory Available →</span>
                   </div>
                 </div>
               </div>
