@@ -1,13 +1,72 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import SEO from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Search, BookOpen, ChevronRight, X, Brain } from "lucide-react";
+import { Search, BookOpen, ChevronRight, ChevronLeft, X, Brain, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { bibleBooks, featuredQuizzes, categories as categoryData, bibleStructure } from "@/data/bible-data";
 import { Navigation } from "@/components/Navigation";
+
+const getBookSlug = (book: string) => {
+  return book.toLowerCase().replace(/ /g, "-");
+};
+
+const PremiumBookCard = ({ book, info, onClick }: { book: string; info: any; onClick: () => void }) => {
+  return (
+    <div 
+      className="flex-shrink-0 w-64 sm:w-72 snap-start h-full pb-8"
+      onClick={onClick}
+    >
+      <Card className="border border-gray-100/50 hover:border-black/10 transition-all duration-700 bg-white overflow-hidden group shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] cursor-pointer h-full rounded-[2.5rem] relative">
+        <div className="aspect-[3/4.5] w-full bg-gray-50 overflow-hidden relative">
+          <img 
+            src={`/images/books/${getBookSlug(book)}.png`}
+            alt={`${book} - Chapter Hub & Quizzes`}
+            loading="lazy"
+            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.style.display = 'none';
+              const parent = target.parentElement;
+              if (parent && !parent.querySelector('.fallback-icon')) {
+                const fallback = document.createElement('div');
+                fallback.className = 'absolute inset-0 bg-gradient-to-br from-gray-50 to-white flex items-center justify-center fallback-icon opacity-40';
+                fallback.innerHTML = `<div class="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-inner border border-gray-100">
+                  <span class="text-4xl font-bold text-gray-300 font-urbanist">${book.charAt(0)}</span>
+                </div>`;
+                parent.appendChild(fallback);
+              }
+            }}
+          />
+          
+          {/* Permanent Floating Badge (Glassmorphic) */}
+          <div className="absolute bottom-6 left-6 right-6 z-10">
+            <div className="bg-white/40 backdrop-blur-xl border border-white/20 px-6 py-3 rounded-2xl flex items-center justify-between transition-all duration-500 group-hover:bg-white group-hover:translate-y-[-10px] shadow-lg">
+              <span className="text-sm font-bold uppercase tracking-[0.2em] text-gray-900 line-clamp-1">{book}</span>
+              <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center transition-transform group-hover:rotate-45">
+                 <Plus className="w-4 h-4 text-white" />
+              </div>
+            </div>
+          </div>
+
+          {/* Premium Discovery Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/40 to-black/90 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8 text-white z-20">
+             <div className="translate-y-10 group-hover:translate-y-0 transition-transform duration-700 delay-100">
+               <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-white/60 mb-3">{info.chapters} Chapters</p>
+               <h4 className="text-2xl font-normal italic serif mb-4">{book}</h4>
+               <p className="text-base font-light leading-relaxed mb-8 line-clamp-4 italic opacity-80 font-serif">{info.summary}</p>
+               <Button className="w-full bg-white text-black hover:bg-gray-100 py-6 rounded-2xl text-[10px] font-bold uppercase tracking-[0.25em] transition-all">
+                 Enter Portal
+               </Button>
+             </div>
+          </div>
+        </div>
+      </Card>
+    </div>
+  )
+}
 
 export default function BibleQA() {
   const navigate = useNavigate();
@@ -15,6 +74,16 @@ export default function BibleQA() {
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isCategoryDialogOpen, setIsCategoryDialogOpen] = useState(false);
+  
+  const otSliderRef = useRef<HTMLDivElement>(null);
+  const ntSliderRef = useRef<HTMLDivElement>(null);
+
+  const scrollSlider = (ref: React.RefObject<HTMLDivElement>, direction: 'left' | 'right') => {
+    if (ref.current) {
+      const scrollAmount = direction === 'left' ? -400 : 400;
+      ref.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
   
   const getBookSlug = (book: string) => {
     return book.toLowerCase().replace(/ /g, "-");
@@ -192,7 +261,7 @@ export default function BibleQA() {
       </script>
 
       {/* Modern Cinematic Hero Section */}
-      <section className="relative h-[85vh] min-h-[700px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[70vh] md:h-[95vh] min-h-[500px] md:min-h-[800px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
             src={HUB_IMAGES.hero} 
@@ -203,25 +272,25 @@ export default function BibleQA() {
         </div>
         
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white pt-20">
-          <h1 className="text-6xl md:text-9xl font-normal mb-8 leading-tight tracking-tighter animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
+          <h1 className="text-4xl sm:text-6xl md:text-9xl font-normal mb-8 leading-tight tracking-tighter animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
             Bible Q&A <span className="italic font-serif">Hub</span>
           </h1>
-          <p className="text-xl md:text-2xl font-light text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
+          <p className="text-lg md:text-2xl font-light text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
             Search through all 66 books, explore cinematic study hubs, and challenge yourself with interactive Scripture quizzes.
           </p>
           
           <div className="max-w-3xl mx-auto mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700">
             <div className="relative group">
-              <Search className="absolute left-8 top-1/2 transform -translate-y-1/2 text-black/40 group-focus-within:text-black w-6 h-6 transition-colors" strokeWidth={1} />
+              <Search className="absolute left-6 md:left-8 top-1/2 transform -translate-y-1/2 text-black/40 group-focus-within:text-black w-5 h-5 md:w-6 md:h-6 transition-colors" strokeWidth={1} />
               <Input
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search books (e.g., Genesis, Matthew)..."
-                className="pl-20 pr-10 py-12 text-2xl font-light border-transparent bg-white focus:bg-white focus:ring-0 rounded-[2.5rem] placeholder:text-black/30 text-black shadow-2xl transition-all duration-500"
+                placeholder="Search books..."
+                className="pl-16 md:pl-20 pr-10 py-8 md:py-12 text-lg md:text-2xl font-light border-transparent bg-white focus:bg-white focus:ring-0 rounded-2xl md:rounded-[2.5rem] placeholder:text-black/30 text-black shadow-2xl transition-all duration-500"
               />
               
               {searchQuery && (
-                <div className="absolute top-full left-0 right-0 mt-4 bg-white backdrop-blur-3xl rounded-[2rem] shadow-2xl border border-gray-100 max-h-80 overflow-y-auto text-left z-50 p-2 overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
+                <div className="absolute top-full left-0 right-0 mt-4 bg-white backdrop-blur-3xl rounded-2xl md:rounded-[2rem] shadow-2xl border border-gray-100 max-h-80 overflow-y-auto text-left z-50 p-2 overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
                   {filteredBooks.length > 0 ? (
                     filteredBooks.map((book) => (
                       <button
@@ -234,165 +303,117 @@ export default function BibleQA() {
                       </button>
                     ))
                   ) : (
-                    <div className="px-8 py-5 text-gray-400 font-light italic">No results found for "{searchQuery}"</div>
+                    <div className="px-8 py-5 text-gray-400 font-light italic">No results found</div>
                   )}
                 </div>
               )}
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-900">
-            <a href="#hubs" className="px-12 py-6 rounded-full bg-white text-black hover:bg-black hover:text-white hover:scale-105 transition-all shadow-2xl shadow-black/20 text-xs font-bold tracking-[0.3em] uppercase">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-900">
+            <a href="#hubs" className="px-8 md:px-12 py-4 md:py-6 rounded-full bg-white text-black hover:bg-black hover:text-white hover:scale-105 transition-all shadow-2xl shadow-black/20 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase">
               Study Hubs
             </a>
-            <a href="#quizzes" className="px-12 py-6 rounded-full bg-white text-black hover:bg-black hover:text-white hover:scale-105 transition-all shadow-2xl shadow-black/20 text-xs font-bold tracking-[0.3em] uppercase">
+            <a href="#quizzes" className="px-8 md:px-12 py-4 md:py-6 rounded-full bg-white text-black hover:bg-black hover:text-white hover:scale-105 transition-all shadow-2xl shadow-black/20 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase">
               Featured Quizzes
             </a>
-            <a href="#categories" className="px-12 py-6 rounded-full bg-white text-black hover:bg-black hover:text-white hover:scale-105 transition-all shadow-2xl shadow-black/20 text-xs font-bold tracking-[0.3em] uppercase">
+            <a href="#categories" className="px-8 md:px-12 py-4 md:py-6 rounded-full bg-white text-black hover:bg-black hover:text-white hover:scale-105 transition-all shadow-2xl shadow-black/20 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase">
               Categories
             </a>
           </div>
         </div>
       </section>
 
-      <div className="w-full max-w-7xl mx-auto px-6 py-10">
-        <div className="flex items-center text-sm font-light text-gray-500 mb-12">
-          <button className="hover:text-gray-900" onClick={() => navigate("/")}>
-            Home
-          </button>
-          <ChevronRight className="w-4 h-4 mx-2" />
-          <span className="font-medium text-gray-900 underline underline-offset-4 tracking-wide">Bible Q&amp;A Hub</span>
+      <div className="w-full max-w-[1700px] mx-auto px-4 md:px-12 pt-20">
+        <div className="flex items-center text-xs font-bold uppercase tracking-[0.2em] text-gray-400 mb-20 opacity-60">
+          <button className="hover:text-black transition-colors" onClick={() => navigate("/")}>Home</button>
+          <ChevronRight className="w-4 h-4 mx-3" />
+          <span className="text-black">Bible Q&A Hub</span>
         </div>
 
-        <section id="hubs" className="mb-40 scroll-mt-24">
-          <div className="text-center mb-24">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.5em] text-gray-400 mb-8">Guided Journeys</h2>
-            <h3 className="text-5xl md:text-7xl font-normal text-gray-900 mb-8 italic serif">Book Study Hubs</h3>
+        <section id="hubs" className="mb-60 scroll-mt-24">
+          <div className="text-center mb-32">
+            <div className="inline-block px-6 py-2 rounded-full border border-gray-100 bg-gray-50 text-[10px] font-bold uppercase tracking-[0.5em] text-gray-400 mb-8">Guided Journeys</div>
+            <h2 className="text-6xl md:text-8xl font-normal text-gray-900 mb-10 italic serif">Book Study Hubs</h2>
             <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Step into cinematic environments designed for deep scriptural exploration.
+              Step into cinematic environments designed for deep scriptural exploration from Genesis to Revelation.
             </p>
           </div>
 
           {/* Old Testament Slider */}
-          <div className="mb-12 relative">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-medium text-gray-700 flex items-center">
-                <BookOpen className="w-5 h-5 mr-2 text-gray-400" />
-                Old Testament
-              </h3>
-              <span className="text-sm text-gray-400 font-light hidden sm:block italic">39 Books • Scroll to explore →</span>
+          <div className="mb-48 relative group/slider">
+            <div className="flex items-end justify-between mb-12 px-2">
+              <div>
+                <h3 className="text-3xl font-normal text-gray-900 italic serif mb-2">Old Testament</h3>
+                <p className="text-[10px] md:text-sm font-light text-gray-400 tracking-widest uppercase">The Foundational Covenant • 39 Books</p>
+              </div>
+              <div className="hidden md:flex gap-3">
+                <button 
+                  onClick={() => scrollSlider(otSliderRef, 'left')}
+                  className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all active:scale-90"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button 
+                   onClick={() => scrollSlider(otSliderRef, 'right')}
+                   className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all active:scale-90"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </div>
             </div>
             
-            <div className="flex overflow-x-auto pb-6 gap-4 no-scrollbar -mx-4 px-4 snap-x snap-mandatory">
-              {Object.values(bibleBooks.oldTestament).flat().map((book) => {
-                const info = getBookInfo(book);
-                return (
-                  <div 
-                    key={book}
-                    className="flex-shrink-0 w-44 sm:w-52 snap-start h-full"
-                    onClick={() => handleSearch(book)}
-                  >
-                    <Card className="border border-gray-100 hover:border-black/5 transition-all duration-500 bg-white overflow-hidden group shadow-2xl shadow-gray-200/40 cursor-pointer h-full rounded-[2rem] relative">
-                      <div className="aspect-[3/4] w-full bg-gray-50 overflow-hidden relative">
-                        <img 
-                          src={`/images/books/${getBookSlug(book)}.png`}
-                          alt={`${book} - Chapter Hub & Quizzes`}
-                          loading="lazy"
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = 'none';
-                            const parent = target.parentElement;
-                            if (parent && !parent.querySelector('.fallback-icon')) {
-                              const fallback = document.createElement('div');
-                              fallback.className = 'absolute inset-0 bg-gradient-to-br from-gray-50 to-white flex items-center justify-center fallback-icon opacity-40';
-                              fallback.innerHTML = `<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-inner border border-gray-100">
-                                <span class="text-xl font-bold text-gray-300 font-urbanist">${book.charAt(0)}</span>
-                              </div>`;
-                              parent.appendChild(fallback);
-                            }
-                          }}
-                        />
-                        
-                        {/* Discovery Overlay */}
-                        <div className="absolute inset-x-0 bottom-0 top-0 bg-black/80 translate-y-full group-hover:translate-y-0 transition-transform duration-500 backdrop-blur-md p-6 flex flex-col justify-end text-white z-20">
-                           <p className="text-[10px] uppercase font-bold tracking-widest text-white/40 mb-2">{info.chapters} Chapters</p>
-                           <p className="text-sm font-light leading-relaxed mb-6 line-clamp-4 italic opacity-90 font-serif">{info.summary}</p>
-                           <Button size="sm" className="w-full bg-white text-black hover:bg-gray-200 text-[10px] h-9 rounded-xl font-semibold uppercase tracking-widest transition-all">Explore</Button>
-                        </div>
-                      </div>
-                      <CardContent className="p-5 flex flex-col items-center text-center">
-                        <span className="text-sm font-semibold text-gray-900 line-clamp-1 group-hover:text-black transition-colors uppercase tracking-widest">{book}</span>
-                      </CardContent>
-                    </Card>
-                  </div>
-                );
-              })}
+            <div 
+              ref={otSliderRef}
+              className="flex overflow-x-auto pb-12 gap-8 md:gap-10 no-scrollbar -mx-4 px-4 snap-x snap-mandatory"
+            >
+              {Object.values(bibleBooks.oldTestament).flat().map((book) => (
+                <PremiumBookCard 
+                  key={book} 
+                  book={book} 
+                  info={getBookInfo(book)} 
+                  onClick={() => handleSearch(book)} 
+                />
+              ))}
             </div>
           </div>
 
           {/* New Testament Slider */}
-          <div className="mb-12 relative">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-xl font-medium text-gray-700 flex items-center">
-                <BookOpen className="w-5 h-5 mr-2 text-gray-400" />
-                New Testament
-              </h3>
-              <span className="text-sm text-gray-400 font-light hidden sm:block italic">27 Books • Scroll to explore →</span>
+          <div className="mb-48 relative group/slider">
+            <div className="flex items-end justify-between mb-12 px-2">
+              <div>
+                <h3 className="text-3xl font-normal text-gray-900 italic serif mb-2">New Testament</h3>
+                <p className="text-[10px] md:text-sm font-light text-gray-400 tracking-widest uppercase">The Fulfillment of Promise • 27 Books</p>
+              </div>
+              <div className="hidden md:flex gap-3">
+                <button 
+                  onClick={() => scrollSlider(ntSliderRef, 'left')}
+                  className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all active:scale-90"
+                >
+                  <ChevronLeft className="w-6 h-6" />
+                </button>
+                <button 
+                   onClick={() => scrollSlider(ntSliderRef, 'right')}
+                   className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all active:scale-90"
+                >
+                  <ChevronRight className="w-6 h-6" />
+                </button>
+              </div>
             </div>
             
-            <div className="flex overflow-x-auto pb-6 gap-4 no-scrollbar -mx-4 px-4 snap-x snap-mandatory">
-              {Object.values(bibleBooks.newTestament).flat().map((book) => {
-                const info = getBookInfo(book);
-                return (
-                  <div 
-                    key={book}
-                    className="flex-shrink-0 w-44 sm:w-52 snap-start h-full"
-                    onClick={() => handleSearch(book)}
-                  >
-                    <Card className="border border-gray-100 hover:border-black/5 transition-all duration-500 bg-white overflow-hidden group shadow-2xl shadow-gray-200/40 cursor-pointer h-full rounded-[2rem] relative">
-                      <div className="aspect-[3/4] w-full bg-gray-50 overflow-hidden relative">
-                        <img 
-                          src={`/images/books/${getBookSlug(book)}.png`}
-                          alt={`${book} - Chapter Hub & Quizzes`}
-                          loading="lazy"
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = 'none';
-                            const parent = target.parentElement;
-                            if (parent && !parent.querySelector('.fallback-icon')) {
-                              const fallback = document.createElement('div');
-                              fallback.className = 'absolute inset-0 bg-gradient-to-br from-gray-50 to-white flex items-center justify-center fallback-icon opacity-40';
-                              fallback.innerHTML = `<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-inner border border-gray-100">
-                                <span class="text-xl font-bold text-gray-300 font-urbanist">${book.charAt(0)}</span>
-                              </div>`;
-                              parent.appendChild(fallback);
-                            }
-                          }}
-                        />
-                        
-                        {/* Discovery Overlay */}
-                        <div className="absolute inset-x-0 bottom-0 top-0 bg-black/80 translate-y-full group-hover:translate-y-0 transition-transform duration-500 backdrop-blur-md p-6 flex flex-col justify-end text-white z-20">
-                           <p className="text-[10px] uppercase font-bold tracking-widest text-white/40 mb-2">{info.chapters} Chapters</p>
-                           <p className="text-sm font-light leading-relaxed mb-6 line-clamp-4 italic opacity-90 font-serif">{info.summary}</p>
-                           <Button size="sm" className="w-full bg-white text-black hover:bg-gray-200 text-[10px] h-9 rounded-xl font-semibold uppercase tracking-widest transition-all">Explore</Button>
-                        </div>
-                      </div>
-                      <CardContent className="p-5 flex flex-col items-center text-center">
-                        <span className="text-sm font-semibold text-gray-900 line-clamp-1 group-hover:text-black transition-colors uppercase tracking-widest">{book}</span>
-                      </CardContent>
-                    </Card>
-                  </div>
-                );
-              })}
+            <div 
+              ref={ntSliderRef}
+              className="flex overflow-x-auto pb-12 gap-8 md:gap-10 no-scrollbar -mx-4 px-4 snap-x snap-mandatory"
+            >
+              {Object.values(bibleBooks.newTestament).flat().map((book) => (
+                <PremiumBookCard 
+                  key={book} 
+                  book={book} 
+                  info={getBookInfo(book)} 
+                  onClick={() => handleSearch(book)} 
+                />
+              ))}
             </div>
-            
-            {/* Custom scrollbar styling */}
-            <style dangerouslySetInnerHTML={{ __html: `
-              .no-scrollbar::-webkit-scrollbar { display: none; }
-              .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-            `}} />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
