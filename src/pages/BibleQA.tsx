@@ -1,8 +1,8 @@
-import { useState, useMemo, useEffect, useRef } from "react";
+import { useState, useMemo } from "react";
 import SEO from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Search, BookOpen, ChevronRight, ChevronLeft, X, Brain, Plus } from "lucide-react";
+import { Search, BookOpen, ChevronRight, X, Brain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -16,7 +16,7 @@ const getBookSlug = (book: string) => {
 const PremiumBookCard = ({ book, info, onClick }: { book: string; info: any; onClick: () => void }) => {
   return (
     <div
-      className="flex-shrink-0 w-64 sm:w-72 snap-start h-full pb-8"
+      className="h-full"
       onClick={onClick}
     >
       <Card className="border border-gray-100/50 hover:border-black/10 transition-all duration-700 bg-white overflow-hidden group shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] cursor-pointer h-full rounded-[2.5rem] relative">
@@ -25,7 +25,7 @@ const PremiumBookCard = ({ book, info, onClick }: { book: string; info: any; onC
             src={`/images/books/${getBookSlug(book)}.png`}
             alt={`${book} - Chapter Hub & Quizzes`}
             loading="lazy"
-            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-1000 scale-110"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.style.display = 'none';
@@ -41,19 +41,9 @@ const PremiumBookCard = ({ book, info, onClick }: { book: string; info: any; onC
             }}
           />
 
-          {/* Permanent Floating Badge (Glassmorphic) */}
-          <div className="absolute bottom-6 left-6 right-6 z-10">
-            <div className="bg-white/40 backdrop-blur-xl border border-white/20 px-6 py-3 rounded-2xl flex items-center justify-between transition-all duration-500 group-hover:bg-white group-hover:translate-y-[-10px] shadow-lg">
-              <span className="text-sm font-bold uppercase tracking-[0.2em] text-gray-900 line-clamp-1">{book}</span>
-              <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center transition-transform group-hover:rotate-45">
-                <Plus className="w-4 h-4 text-white" />
-              </div>
-            </div>
-          </div>
-
           {/* Premium Discovery Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/40 to-black/90 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8 text-white z-20">
-            <div className="translate-y-10 group-hover:translate-y-0 transition-transform duration-700 delay-100">
+          <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/40 to-black/90 opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8 text-white z-20">
+            <div className="translate-y-0 transition-transform duration-700 delay-100">
               <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-white/60 mb-3">{info.chapters} Chapters</p>
               <h4 className="text-2xl font-normal italic serif mb-4">{book}</h4>
               <p className="text-base font-light leading-relaxed mb-8 line-clamp-4 italic opacity-80 font-serif">{info.summary}</p>
@@ -74,16 +64,6 @@ export default function BibleQA() {
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [isCategoryDialogOpen, setIsCategoryDialogOpen] = useState(false);
-
-  const otSliderRef = useRef<HTMLDivElement>(null);
-  const ntSliderRef = useRef<HTMLDivElement>(null);
-
-  const scrollSlider = (ref: React.RefObject<HTMLDivElement>, direction: 'left' | 'right') => {
-    if (ref.current) {
-      const scrollAmount = direction === 'left' ? -400 : 400;
-      ref.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
-  };
 
   const getBookSlug = (book: string) => {
     return book.toLowerCase().replace(/ /g, "-");
@@ -352,33 +332,14 @@ export default function BibleQA() {
             </div>
           </div>
 
-          {/* Old Testament Slider */}
-          <div className="mb-48 relative group/slider">
-            <div className="flex items-end justify-between mb-12 px-2">
-              <div>
-                <h3 className="text-3xl font-normal text-gray-900 italic serif mb-2">Old Testament</h3>
-                <p className="text-[10px] md:text-sm font-light text-gray-400 tracking-widest uppercase">The Foundational Covenant • 39 Books</p>
-              </div>
-              <div className="hidden md:flex gap-3">
-                <button
-                  onClick={() => scrollSlider(otSliderRef, 'left')}
-                  className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all active:scale-90"
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-                <button
-                  onClick={() => scrollSlider(otSliderRef, 'right')}
-                  className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all active:scale-90"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-              </div>
+          {/* Old Testament Grid */}
+          <div className="mb-48">
+            <div className="mb-12 px-2">
+              <h3 className="text-3xl font-normal text-gray-900 italic serif mb-2">Old Testament</h3>
+              <p className="text-[10px] md:text-sm font-light text-gray-400 tracking-widest uppercase">The Foundational Covenant • 39 Books</p>
             </div>
 
-            <div
-              ref={otSliderRef}
-              className="flex overflow-x-auto pb-12 gap-8 md:gap-10 no-scrollbar -mx-4 px-4 snap-x snap-mandatory"
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 md:gap-10">
               {Object.values(bibleBooks.oldTestament).flat().map((book) => (
                 <PremiumBookCard
                   key={book}
@@ -390,33 +351,14 @@ export default function BibleQA() {
             </div>
           </div>
 
-          {/* New Testament Slider */}
-          <div className="mb-48 relative group/slider">
-            <div className="flex items-end justify-between mb-12 px-2">
-              <div>
-                <h3 className="text-3xl font-normal text-gray-900 italic serif mb-2">New Testament</h3>
-                <p className="text-[10px] md:text-sm font-light text-gray-400 tracking-widest uppercase">The Fulfillment of Promise • 27 Books</p>
-              </div>
-              <div className="hidden md:flex gap-3">
-                <button
-                  onClick={() => scrollSlider(ntSliderRef, 'left')}
-                  className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all active:scale-90"
-                >
-                  <ChevronLeft className="w-6 h-6" />
-                </button>
-                <button
-                  onClick={() => scrollSlider(ntSliderRef, 'right')}
-                  className="w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center hover:bg-black hover:text-white transition-all active:scale-90"
-                >
-                  <ChevronRight className="w-6 h-6" />
-                </button>
-              </div>
+          {/* New Testament Grid */}
+          <div className="mb-48">
+            <div className="mb-12 px-2">
+              <h3 className="text-3xl font-normal text-gray-900 italic serif mb-2">New Testament</h3>
+              <p className="text-[10px] md:text-sm font-light text-gray-400 tracking-widest uppercase">The Fulfillment of Promise • 27 Books</p>
             </div>
 
-            <div
-              ref={ntSliderRef}
-              className="flex overflow-x-auto pb-12 gap-8 md:gap-10 no-scrollbar -mx-4 px-4 snap-x snap-mandatory"
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 md:gap-10">
               {Object.values(bibleBooks.newTestament).flat().map((book) => (
                 <PremiumBookCard
                   key={book}
