@@ -74,15 +74,6 @@ export const quizData: QuizData = {
       ]
     }
   },
-  leviticus: {
-    foundation: {
-      beginner: [
-        { chapter: 1, question: "What is the primary theme of the book of Leviticus?", options: ["Wandering", "Holiness", "History", "Fasting"], answer: 1, explanation: "Leviticus 19:2 — 'You shall be holy, for I the LORD your God am holy.'" },
-        { chapter: 16, question: "What is the name of the special day where the High Priest enters the Most Holy Place to make atonement for the people?", options: ["Passover", "Day of Atonement (Yom Kippur)", "Purim", "Feast of Booths"], answer: 1, explanation: "Leviticus 16 describes the Day of Atonement rituals." },
-        { chapter: 11, question: "The laws in Leviticus regarding clean and unclean animals are commonly known as what?", options: ["Sabbath laws", "Dietary (Kosher) laws", "Sacrificial laws", "Levitical decorum"], answer: 1, explanation: "Leviticus 11 outlines which animals are clean and unclean for food." }
-      ]
-    }
-  },
   numbers: {
     foundation: {
       beginner: [
