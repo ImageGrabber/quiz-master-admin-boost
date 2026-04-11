@@ -174,6 +174,7 @@ import BookDetailHub from "./pages/bible-questions-and-answers-hub/BookDetailHub
 import GenesisBeginnerQuiz from "./pages/bible-questions-and-answers-hub/GenesisBeginnerQuiz";
 import GenesisIntermediateQuiz from "./pages/bible-questions-and-answers-hub/GenesisIntermediateQuiz";
 import GenesisAdvancedQuiz from "./pages/bible-questions-and-answers-hub/GenesisAdvancedQuiz";
+import GenesisHub from "./pages/bible-questions-and-answers-hub/Genesis";
 import HubDifficultyRouter from "./pages/bible-questions-and-answers-hub/HubDifficultyRouter";
 import ChapterPage from "./pages/ChapterPage";
 
@@ -365,6 +366,7 @@ const App = () => {
               <Route path="/admin/page-views" element={<ProtectedRoute requiredRole="admin"><PageViews /></ProtectedRoute>} />
               <Route path="/rls-test" element={<ProtectedRoute requiredRole="admin"><RLSTest /></ProtectedRoute>} />
               <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
+              <Route path="/bible-questions-and-answers-hub/genesis" element={<GenesisHub />} />
               <Route path="/bible-questions-and-answers-hub/:bookSlug" element={<BookDetailHub />} />
               <Route path="/bible-questions-and-answers-hub/genesis/beginner" element={<GenesisBeginnerQuiz />} />
               <Route path="/bible-questions-and-answers-hub/genesis/intermediate" element={<GenesisIntermediateQuiz />} />
