@@ -367,18 +367,18 @@ const CompetitionHome = () => {
             <div className="lg:pt-10">
               <Card className="border border-gray-100/70 bg-white shadow-2xl shadow-black/10 rounded-[2.5rem] overflow-hidden">
                 <CardHeader className="pb-4">
-                  <CardDescription className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-400 mb-2">
+                  <CardDescription className="text-xs font-bold uppercase tracking-[0.25em] text-gray-400 mb-2">
                     Explore The Platform
                   </CardDescription>
-                  <CardTitle className="text-4xl font-normal italic font-serif text-gray-900">Start Anywhere</CardTitle>
-                  <CardDescription className="text-gray-500">
+                  <CardTitle className="text-5xl font-normal italic font-serif text-gray-900">Start Anywhere</CardTitle>
+                  <CardDescription className="text-base text-gray-500">
                     Everything available on Bible Quiz Competition, one click away.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-5">
                   <div className="rounded-2xl border border-gray-100 bg-gray-50 px-4 py-3 flex items-center justify-between">
-                    <p className="text-[10px] uppercase tracking-[0.22em] text-gray-400 font-bold">Popular Destinations</p>
-                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">{heroExploreLinks.length} Sections</span>
+                    <p className="text-xs uppercase tracking-[0.22em] text-gray-400 font-bold">Popular Destinations</p>
+                    <span className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500">{heroExploreLinks.length} Sections</span>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-3">
@@ -392,9 +392,9 @@ const CompetitionHome = () => {
                           <div className="h-8 w-8 rounded-xl bg-gray-100 group-hover:bg-white/15 flex items-center justify-center transition-colors">
                             <item.icon className="w-4 h-4 text-gray-700 group-hover:text-white" />
                           </div>
-                          <p className="text-sm font-semibold text-gray-800 group-hover:text-white">{item.label}</p>
+                          <p className="text-base font-semibold text-gray-800 group-hover:text-white">{item.label}</p>
                         </div>
-                        <p className="text-xs text-gray-500 group-hover:text-white/75 leading-relaxed">{item.description}</p>
+                        <p className="text-sm text-gray-500 group-hover:text-white/75 leading-relaxed">{item.description}</p>
                       </button>
                     ))}
                   </div>
@@ -402,7 +402,7 @@ const CompetitionHome = () => {
                   <div className="pt-1">
                     <Button
                       onClick={() => navigate("/bible-questions-and-answers-hub")}
-                      className="w-full h-11 rounded-full bg-black text-white hover:bg-gray-800 text-[10px] font-bold uppercase tracking-[0.2em]"
+                      className="w-full h-11 rounded-full bg-black text-white hover:bg-gray-800 text-xs font-bold uppercase tracking-[0.2em]"
                     >
                       Explore Bible Q&A Hub <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
