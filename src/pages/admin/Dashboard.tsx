@@ -124,7 +124,8 @@ const Dashboard = () => {
       });
 
       // Format recent activity
-      const activity = attempts.slice(0, 5).map(attempt => {
+      const activity = attempts
+        .map(attempt => {
         const timeAgo = new Date(attempt.created_at);
         const now = new Date();
         const diffMinutes = Math.floor((now.getTime() - timeAgo.getTime()) / (1000 * 60));
@@ -141,7 +142,12 @@ const Dashboard = () => {
         }
 
         const profile = profileMap.get(attempt.user_id);
-        const userName = profile?.full_name || profile?.email || 'Anonymous User';
+        const trimmedName = profile?.full_name?.trim();
+        const trimmedEmail = profile?.email?.trim();
+        const userName = trimmedName || trimmedEmail;
+
+        // Skip orphan/guest attempts that do not map to a real profile identity.
+        if (!userName) return null;
 
         return {
           user: userName,
@@ -149,7 +155,9 @@ const Dashboard = () => {
           score: attempt.score,
           time: timeString
         };
-      });
+      })
+      .filter((item): item is RecentActivity => item !== null)
+      .slice(0, 5);
 
       console.log('Recent activity:', activity);
       setRecentActivity(activity);

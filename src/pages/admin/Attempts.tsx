@@ -68,19 +68,27 @@ const Attempts = () => {
         profilesMap.set(profile.id, profile);
       });
 
-      const formattedAttempts = attemptsData?.map(attempt => {
-        const profile = profilesMap.get(attempt.user_id);
-        return {
-          id: attempt.id,
-          user: profile?.full_name || `User ${attempt.user_id?.slice(0, 8) || 'Unknown'}`,
-          email: profile?.email || 'No email',
-          score: attempt.score,
-          secondsUsed: attempt.seconds_used || 0,
-          createdAt: attempt.created_at,
-          answers: attempt.answers,
-          profile: profile
-        };
-      }) || [];
+      const formattedAttempts = attemptsData
+        ?.map(attempt => {
+          const profile = attempt.user_id ? profilesMap.get(attempt.user_id) : undefined;
+          const fullName = profile?.full_name?.trim();
+          const email = profile?.email?.trim();
+
+          // Hide guest/orphan attempts that don't map to a real profile identity.
+          if (!fullName && !email) return null;
+
+          return {
+            id: attempt.id,
+            user: fullName || email!,
+            email: email || "No email",
+            score: attempt.score,
+            secondsUsed: attempt.seconds_used || 0,
+            createdAt: attempt.created_at,
+            answers: attempt.answers,
+            profile: profile
+          };
+        })
+        .filter((attempt): attempt is AttemptData => attempt !== null) || [];
 
       setAttempts(formattedAttempts);
     } catch (error) {
