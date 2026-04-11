@@ -1,24 +1,23 @@
-import { useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Brain, 
-  LayoutDashboard, 
-  FileText, 
-  Upload, 
-  Users, 
-  Settings, 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Brain,
+  LayoutDashboard,
+  FileText,
+  Upload,
+  Users,
+  Settings,
   LogOut,
   Menu,
-  X,
   Home,
   Calendar,
   HelpCircle,
   Activity,
   Trophy,
   Shield,
-  Mail,
   Bell,
   Heart,
   BookOpen
@@ -26,11 +25,14 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 
 interface AdminLayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const AdminLayout = ({ children }: AdminLayoutProps) => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [userName, setUserName] = useState<string>("Admin");
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [userAvatar, setUserAvatar] = useState<string>("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -39,199 +41,234 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       name: "Dashboard",
       href: "/admin",
       icon: LayoutDashboard,
-      current: location.pathname === "/admin"
     },
     {
       name: "Users & Email",
       href: "/admin/users",
       icon: Users,
-      current: location.pathname === "/admin/users" || location.pathname.startsWith("/admin/users/")
     },
     {
       name: "Quiz Attempts",
       href: "/admin/attempts",
       icon: FileText,
-      current: location.pathname === "/admin/attempts"
     },
     {
       name: "Recent Activity",
       href: "/admin/activity",
       icon: Activity,
-      current: location.pathname === "/admin/activity"
     },
     {
       name: "Prayer Requests",
       href: "/admin/prayer-requests",
       icon: Heart,
-      current: location.pathname === "/admin/prayer-requests"
     },
     {
       name: "Competitions",
       href: "/admin/competitions",
       icon: Trophy,
-      current: location.pathname === "/admin/competitions"
     },
     {
       name: "Manage Quizzes",
       href: "/admin/quizzes",
       icon: Brain,
-      current: location.pathname === "/admin/quizzes"
     },
     {
       name: "Questions",
       href: "/admin/questions",
       icon: HelpCircle,
-      current: location.pathname === "/admin/questions"
     },
     {
       name: "Upload Questions",
       href: "/admin/upload",
       icon: Upload,
-      current: location.pathname === "/admin/upload"
     },
     {
       name: "Weekly Quiz Attendance",
       href: "/admin/weekly-attendance",
       icon: Calendar,
-      current: location.pathname === "/admin/weekly-attendance"
     },
     {
       name: "Daily Verses",
       href: "/admin/daily-verses",
       icon: BookOpen,
-      current: location.pathname === "/admin/daily-verses"
     },
     {
       name: "Notifications",
       href: "/admin/notifications",
       icon: Bell,
-      current: location.pathname === "/admin/notifications"
     },
     {
       name: "Realtime Health Check",
       href: "/live-quiz/health-check",
       icon: Activity,
-      current: location.pathname === "/live-quiz/health-check"
+    },
+    {
+      name: "RLS Policy Tester",
+      href: "/rls-test",
+      icon: Shield,
     }
   ];
 
-  const handleNavigation = (href: string) => {
-    navigate(href);
-    setSidebarOpen(false);
-  };
+  useEffect(() => {
+    let channel: ReturnType<typeof supabase.channel> | null = null;
+
+    const fetchUserData = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      setUserEmail(user.email || "");
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("full_name, avatar_url")
+        .eq("id", user.id)
+        .single();
+
+      if (profile?.full_name) setUserName(profile.full_name);
+      if (profile?.avatar_url) setUserAvatar(profile.avatar_url);
+
+      channel = supabase
+        .channel("admin-profile-updates")
+        .on(
+          "postgres_changes",
+          {
+            event: "UPDATE",
+            schema: "public",
+            table: "profiles",
+            filter: `id=eq.${user.id}`,
+          },
+          (payload) => {
+            const updated = payload.new as { full_name?: string; avatar_url?: string };
+            if (updated.full_name) setUserName(updated.full_name);
+            if (updated.avatar_url) setUserAvatar(updated.avatar_url);
+          }
+        )
+        .subscribe();
+    };
+
+    fetchUserData();
+    return () => {
+      if (channel) supabase.removeChannel(channel);
+    };
+  }, []);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate("/");
   };
 
+  const sortedMatches = navigation
+    .filter((item) => location.pathname === item.href || location.pathname.startsWith(item.href + "/"))
+    .sort((a, b) => b.href.length - a.href.length);
+  const activeItemName = sortedMatches[0]?.name;
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Top Bar: Logo/name left, welcome right */}
-      <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30 w-full h-16 flex items-center px-6 justify-between">
-        <div className="flex items-center space-x-2">
-          <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
-          <span className="text-lg font-semibold text-gray-900 align-middle">BibleBattles</span>
-          <Badge className="bg-blue-100 text-blue-700 text-xs">Admin</Badge>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="lg:hidden ml-2"
-            onClick={() => setSidebarOpen(!sidebarOpen)}
-          >
-            {sidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </Button>
-        </div>
-        <div className="flex items-center space-x-4">
-          <div className="text-sm text-gray-600">Welcome back, Admin</div>
-        </div>
-      </header>
-      <div className="flex w-full min-h-[calc(100vh-4rem)]">
-        {/* Mobile Sidebar Overlay */}
-        {sidebarOpen && (
-          <div 
-            className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-            onClick={() => setSidebarOpen(false)}
-          />
-        )}
-        {/* Sidebar: hidden on mobile unless toggled, flex column on desktop */}
-        <aside className={`
-          ${sidebarOpen ? 'fixed inset-y-0 left-0 z-50 flex' : 'hidden'}
-          lg:static lg:flex
-          flex-col
-          w-64 h-full lg:h-screen bg-white border-r border-gray-200 shadow-lg transition-transform duration-300 ease-in-out
-        `}>
-          {/* Sidebar Header */}
-          <div className="flex items-center justify-between px-6 border-b border-gray-200 h-16 lg:hidden">
-            <div className="flex items-center space-x-2">
-              <img src="/sword.png" alt="BibleBattles Logo" className="w-7 h-7 mr-2 inline-block align-middle" />
-              <span className="text-lg font-semibold text-gray-900 align-middle">BibleBattles</span>
-              <Badge className="bg-blue-100 text-blue-700 text-xs">Admin</Badge>
+    <div className="h-screen bg-[#f3f5f9] font-sans flex text-slate-800 overflow-hidden">
+      <aside
+        className={`
+          fixed inset-y-0 left-0 z-50 w-64 bg-[#f3f5f9] transition-transform duration-300 ease-in-out
+          ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+          md:relative flex flex-col h-full
+        `}
+      >
+        <div className="h-20 flex-shrink-0 flex items-center px-8">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate("/")}>
+            <div className="bg-blue-600 rounded-lg p-1.5">
+              <Brain className="w-5 h-5 text-white" />
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setSidebarOpen(false)}
-              className="lg:hidden"
-            >
-              <X className="w-4 h-4" />
-            </Button>
+            <span className="text-xl font-bold text-slate-900 tracking-tight">Bible Quiz</span>
+            <Badge className="bg-blue-100 text-blue-700 text-[10px] ml-1">Admin</Badge>
           </div>
-          {/* Navigation */}
-          <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-            {navigation.map((item) => (
+        </div>
+
+        <nav className="flex-1 px-4 py-6 space-y-4 overflow-y-auto custom-scrollbar">
+          {navigation.map((item) => {
+            const isActive = activeItemName === item.name;
+            return (
               <Button
                 key={item.name}
-                variant={item.current ? "default" : "ghost"}
-                className={`w-full justify-start h-10 ${item.current ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : "text-gray-700 hover:bg-gray-100"}`}
-                onClick={() => handleNavigation(item.href)}
+                variant="ghost"
+                className={`w-full justify-start h-12 px-6 rounded-xl text-base font-medium transition-all duration-200
+                  ${
+                    isActive
+                      ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30 hover:bg-blue-700 hover:text-white"
+                      : "text-slate-500 hover:bg-white hover:text-slate-900"
+                  }`}
+                onClick={() => {
+                  navigate(item.href);
+                  setIsMobileMenuOpen(false);
+                }}
               >
-                <item.icon className="w-4 h-4 mr-3" />
+                <item.icon className={`w-5 h-5 mr-4 ${isActive ? "text-white" : "text-slate-400"}`} strokeWidth={2} />
                 {item.name}
               </Button>
-            ))}
-            {/* RLS Policy Tester link for admins */}
-            <Button
-              key="RLS Policy Tester"
-              variant={location.pathname === "/rls-test" ? "default" : "ghost"}
-              className={`w-full justify-start h-10 ${location.pathname === "/rls-test" ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white" : "text-gray-700 hover:bg-gray-100"}`}
-              onClick={() => handleNavigation("/rls-test")}
-            >
-              <Shield className="w-4 h-4 mr-3" />
-              RLS Policy Tester
+            );
+          })}
+        </nav>
+
+        <div className="p-4 mt-auto flex-shrink-0">
+          <Button
+            variant="ghost"
+            className="w-full justify-start h-12 px-6 rounded-xl text-slate-500 hover:bg-white hover:text-slate-900 font-medium"
+            onClick={() => navigate("/")}
+          >
+            <Home className="w-5 h-5 mr-4 text-slate-400" strokeWidth={2} />
+            Public Site
+          </Button>
+          <Button
+            variant="ghost"
+            className="w-full justify-start h-12 px-6 rounded-xl text-slate-500 hover:bg-white hover:text-slate-900 font-medium mt-2"
+          >
+            <Settings className="w-5 h-5 mr-4 text-slate-400" strokeWidth={2} />
+            Settings
+          </Button>
+          <Button
+            variant="ghost"
+            className="w-full justify-start h-12 px-6 rounded-xl text-slate-500 hover:bg-white hover:text-red-600 font-medium mt-2"
+            onClick={handleLogout}
+          >
+            <LogOut className="w-5 h-5 mr-4 text-slate-400 hover:text-red-500" strokeWidth={2} />
+            Logout
+          </Button>
+        </div>
+      </aside>
+
+      <div className="flex-1 flex flex-col h-full bg-white md:rounded-l-[3rem] shadow-[-10px_0_30px_-15px_rgba(0,0,0,0.05)] overflow-hidden relative z-10">
+        <header className="h-20 flex items-center justify-between px-8 border-b border-slate-50/50 bg-white/80 backdrop-blur-sm sticky top-0 z-30">
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+              <Menu className="w-6 h-6" />
             </Button>
-            <div className="pt-4 mt-4 border-t border-gray-200">
-              <Button
-                variant="ghost"
-                className="w-full justify-start h-10 text-gray-700 hover:bg-gray-100"
-                onClick={() => navigate("/")}
-              >
-                <Home className="w-4 h-4 mr-3" />
-                Public Site
-              </Button>
-              <Button
-                variant="ghost"
-                className="w-full justify-start h-10 text-gray-700 hover:bg-gray-100"
-              >
-                <Settings className="w-4 h-4 mr-3" />
-                Settings
-              </Button>
-              <Button
-                variant="ghost"
-                className="w-full justify-start h-10 text-red-600 hover:bg-red-50"
-                onClick={handleLogout}
-              >
-                <LogOut className="w-4 h-4 mr-3" />
-                Sign Out
-              </Button>
+            <div className="flex flex-col">
+              <h1 className="text-xl font-bold text-slate-900 leading-tight">Admin Dashboard</h1>
+              <p className="text-xs text-slate-500 leading-tight hidden sm:block">Manage quizzes, users, and platform operations</p>
             </div>
-          </nav>
-        </aside>
-        {/* Main Content */}
-        <main className="flex-1 p-6 w-full overflow-x-auto">
+          </div>
+
+          <div className="flex items-center gap-6 ml-auto">
+            <div className="text-right hidden md:block">
+              <p className="text-sm font-bold text-slate-900 leading-none mb-1">{userName}</p>
+              <p className="text-xs text-slate-500 leading-none">{userEmail}</p>
+            </div>
+            <Avatar className="w-10 h-10 border-2 border-white shadow-sm cursor-pointer">
+              <AvatarImage src={userAvatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${userName}`} />
+              <AvatarFallback className="bg-blue-100 text-blue-700 font-bold">
+                {userName.substring(0, 2).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+          </div>
+        </header>
+
+        <main className="flex-1 overflow-y-auto bg-gradient-to-br from-white via-indigo-50/10 to-blue-50/10 p-8">
           {children}
         </main>
       </div>
+
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 md:hidden backdrop-blur-sm"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
     </div>
   );
 };
