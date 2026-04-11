@@ -1,8 +1,41 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { sitemapData } from '../src/data/sitemap-registry.js';
-const { bibleStructure, articles, songs } = sitemapData;
+// Hardcoded metadata to ensure build stability and bypass ESM/TSX loading conflicts
+const bibleStructure = {
+    genesis: 50, exodus: 40, leviticus: 27, numbers: 36, deuteronomy: 34,
+    joshua: 24, judges: 21, ruth: 4, "1-samuel": 31, "2-samuel": 24,
+    "1-kings": 22, "2-kings": 25, "1-chronicles": 29, "2-chronicles": 36,
+    ezra: 10, nehemiah: 13, esther: 10, job: 42, psalms: 150,
+    proverbs: 31, ecclesiastes: 12, "song-of-solomon": 8,
+    isaiah: 66, jeremiah: 52, lamentations: 5, ezekiel: 48, daniel: 12,
+    hosea: 14, joel: 3, amos: 9, obadiah: 1, jonah: 4,
+    micah: 7, nahum: 3, habakkuk: 3, zephaniah: 3,
+    haggai: 2, zechariah: 14, malachi: 4, matthew: 28, mark: 16,
+    luke: 24, john: 21, acts: 28, romans: 16, "1-corinthians": 16,
+    "2-corinthians": 13, galatians: 6, ephesians: 6, philippians: 4,
+    colossians: 4, "1-thessalonians": 5, "2-thessalonians": 3,
+    "1-timothy": 6, "2-timothy": 4, titus: 3, philemon: 1,
+    hebrews: 13, james: 5, "1-peter": 5, "2-peter": 3, "1-john": 5,
+    "2-john": 1, "3-john": 1, jude: 1, revelation: 22
+};
+
+const articles = [
+    { id: "complete-quiz-guide" }, { id: "quiz-strategies" }, { id: "leaderboard-tips" },
+    { id: "david-king-israel" }, { id: "moses-exodus-story" }, { id: "esther-courage-story" },
+    { id: "understanding-grace" }, { id: "prayer-life-guide" }, { id: "quiz-time-management" },
+    { id: "bible-study-methods" }, { id: "quiz-navigation-guide" }, { id: "quiz-scoring-explained" },
+    { id: "quiz-difficulty-levels" }, { id: "quiz-feedback-system" }, { id: "quiz-progress-tracking" },
+    { id: "memory-techniques-quiz" }, { id: "quiz-anxiety-management" }, { id: "question-pattern-recognition" },
+    { id: "quiz-concentration-techniques" }, { id: "quiz-recovery-strategies" }, { id: "competition-preparation" },
+    { id: "team-quiz-strategies" }, { id: "competition-psychology" }, { id: "competition-etiquette" },
+    { id: "post-competition-analysis" }, { id: "moses-leadership-lessons" }, { id: "esther-strategic-wisdom" },
+    { id: "abraham-faith-journey" }, { id: "joseph-forgiveness-story" }, { id: "ruth-loyalty-devotion" },
+    { id: "forgiveness-healing-power" }, { id: "hope-biblical-perspective" }, { id: "love-gods-greatest-commandment" },
+    { id: "faith-works-james" }, { id: "peace-gods-promise" }, { id: "scripture-memorization-techniques" },
+    { id: "inductive-bible-study" }, { id: "bible-study-journaling" }, { id: "group-bible-study-leading" },
+    { id: "bible-study-technology" }
+];
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -140,13 +173,26 @@ function generateSitemap() {
   // Song pages
   urls.push({ loc: '/songs', priority: '0.9', changefreq: 'weekly' });
   const uniqueSongSlugs = new Set<string>();
-  for (const song of allSongs) {
-    if (!song.slug || uniqueSongSlugs.has(song.slug)) {
-      continue;
+  
+  // Add hardcoded song slugs
+  ['ithratholam-yahova-sahayichu', 'lokamam-gambhira-varidhiyil', 'aswasame-enikkere-thingeedunnu', 'ente-daivam-mahathwathil'].forEach(slug => uniqueSongSlugs.add(slug));
+
+  // Read migrated songs directly from JSON
+  const migratedSongsPath = path.join(__dirname, '../src/data/migrated-songs.json');
+  if (fs.existsSync(migratedSongsPath)) {
+    try {
+      const migratedSongs = JSON.parse(fs.readFileSync(migratedSongsPath, 'utf-8'));
+      migratedSongs.forEach((song: any) => {
+        if (song.slug) uniqueSongSlugs.add(song.slug);
+      });
+    } catch (e) {
+      console.error('Error reading migrated songs:', e.message);
     }
-    uniqueSongSlugs.add(song.slug);
+  }
+
+  for (const slug of uniqueSongSlugs) {
     urls.push({
-      loc: `/songs/${song.slug}`,
+      loc: `/songs/${slug}`,
       priority: '0.7',
       changefreq: 'monthly'
     });
