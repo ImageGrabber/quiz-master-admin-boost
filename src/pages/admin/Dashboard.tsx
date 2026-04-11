@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Users, FileText, TrendingUp, Trophy, Plus, Upload, Eye, Brain } from "lucide-react";
+import { Users, FileText, TrendingUp, Trophy, Eye, Brain } from "lucide-react";
 import AdminLayout from "@/components/AdminLayout";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -238,7 +237,7 @@ const Dashboard = () => {
         </div>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8">
           {/* Recent Activity */}
           <Card className="shadow-lg border-0 bg-white">
             <CardHeader>
@@ -271,53 +270,6 @@ const Dashboard = () => {
                     <p>No recent activity</p>
                   </div>
                 )}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Quick Actions */}
-          <Card className="shadow-lg border-0 bg-white">
-            <CardHeader>
-              <CardTitle>Quick Actions</CardTitle>
-              <CardDescription>Common administrative tasks</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <Button
-                  variant="outline"
-                  className="w-full justify-start h-12"
-                  onClick={() => navigate("/admin/attempts")}
-                >
-                  <FileText className="w-4 h-4 mr-3" />
-                  View All Quiz Attempts
-                </Button>
-                
-                <Button
-                  variant="outline"
-                  className="w-full justify-start h-12"
-                  onClick={() => navigate("/admin/upload")}
-                >
-                  <Upload className="w-4 h-4 mr-3" />
-                  Bulk Upload Questions
-                </Button>
-                
-                <Button
-                  variant="outline"
-                  className="w-full justify-start h-12"
-                  onClick={() => navigate("/admin/quizzes")}
-                >
-                  <Plus className="w-4 h-4 mr-3" />
-                  Create New Quiz
-                </Button>
-                
-                <Button
-                  variant="outline"
-                  className="w-full justify-start h-12"
-                  onClick={() => navigate("/leaderboard")}
-                >
-                  <Trophy className="w-4 h-4 mr-3" />
-                  View Public Leaderboard
-                </Button>
               </div>
             </CardContent>
           </Card>
