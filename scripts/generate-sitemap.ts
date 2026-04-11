@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { articles } from '../src/data/articles.js';
-import { bibleStructure } from '../src/data/bible-data.ts';
-import { allSongs } from '../src/data/songs.ts';
+import { articles } from '../src/data/articles';
+import { bibleStructure } from '../src/data/bible-data';
+import { allSongs } from '../src/data/songs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
