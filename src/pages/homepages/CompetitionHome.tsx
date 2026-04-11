@@ -5,7 +5,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { ArrowRight, BookOpen, Trophy, Sparkles, Brain, Clock, Mail, Star, Users, Calendar, TrendingUp, ChevronLeft, ChevronRight, Quote, Zap, Globe, Gamepad2 } from 'lucide-react';
 
 import SEO from "@/components/SEO";
-import { supabase } from "@/integrations/supabase/client";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { bibleBooks, featuredQuizzes, categories, bibleStructure } from "@/data/bible-data";
@@ -37,16 +36,6 @@ const CompetitionHome = () => {
     ...bibleBooks.newTestament.GeneralEpistles,
     ...bibleBooks.newTestament.Apocalyptic,
   ], []);
-  const [competitions, setCompetitions] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [dailyChallenge, setDailyChallenge] = useState<any>(null);
-  const [timeRemaining, setTimeRemaining] = useState({ hours: 0, minutes: 0, seconds: 0 });
-  const [todayStats, setTodayStats] = useState({ winners: 0, levelsUnlocked: 0, participants: 120 });
-  const [recentWinners, setRecentWinners] = useState<string[]>([
-    'Sarah J.', 'Mark T.', 'Emily R.', 'David K.', 'Lisa M.',
-    'John P.', 'Maria S.', 'Alex B.', 'Rachel W.', 'Chris L.'
-  ]);
-  const [currentWinnerIndex, setCurrentWinnerIndex] = useState(0);
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
 
   // Testimonials data
@@ -177,36 +166,42 @@ const CompetitionHome = () => {
     }
   ];
 
-  const trendingSearchLinks = [
+  const heroExploreLinks = [
     {
-      label: "Nehemiah Quiz",
-      description: "Leadership, rebuilding the wall, and covenant renewal.",
-      path: "/public-quiz/nehemiah"
+      label: "Bible Q&A Hub",
+      description: "66 books with chapter quizzes and study paths.",
+      path: "/bible-questions-and-answers-hub",
+      icon: BookOpen
     },
     {
-      label: "2 Thessalonians Quiz",
-      description: "Day of the Lord, perseverance, and Christian discipline.",
-      path: "/public-quiz/2-thessalonians"
+      label: "Scripture Match",
+      description: "Play the multiplayer Bible memory game.",
+      path: "/scripture-match-multiplayer",
+      icon: Gamepad2
     },
     {
-      label: "Philemon Bible Quiz",
-      description: "Forgiveness, restoration, and brotherhood in Christ.",
-      path: "/public-quiz/philemon"
+      label: "Kids Stories",
+      description: "Interactive Bible stories designed for children.",
+      path: "/kids-stories",
+      icon: Star
     },
     {
-      label: "Bible Quiz Prize Guide",
-      description: "See prize rules, eligibility, and winner updates.",
-      path: "/bible-quiz-prize"
+      label: "Christian Songs",
+      description: "Worship songs with lyrics and video embeds.",
+      path: "/songs",
+      icon: Globe
     },
     {
-      label: "Quiz Scoring System Explanation",
-      description: "Learn points, timer bonus, and tie-break rules.",
-      path: "/quiz-scoring-system-explanation"
+      label: "Public Leaderboard",
+      description: "Track top challengers and global rankings.",
+      path: "/public-leaderboard",
+      icon: TrendingUp
     },
     {
-      label: "Online Bible Quiz Competition 2026",
-      description: "Join free challenges and climb the leaderboard.",
-      path: "/online-bible-quiz-competition-2026"
+      label: "Daily Quiz",
+      description: "Take today’s timed scripture challenge.",
+      path: "/todays-quiz",
+      icon: Calendar
     }
   ];
 
@@ -250,22 +245,6 @@ const CompetitionHome = () => {
     ...featuredQuizzes.filter((quiz) => !highIntentQuizLinks.has(quiz.link))
   ].slice(0, 6);
 
-  useEffect(() => {
-    fetchDailyChallenge();
-    fetchActiveCompetitions();
-
-    // Rotate winners every 5 seconds
-    const winnerInterval = setInterval(() => {
-      if (recentWinners.length > 0) {
-        setCurrentWinnerIndex((prev) => (prev + 1) % recentWinners.length);
-      }
-    }, 5000);
-
-    return () => {
-      clearInterval(winnerInterval);
-    };
-  }, [recentWinners.length]);
-
   // Auto-rotate testimonials
   useEffect(() => {
     const totalSlides = Math.ceil(testimonials.length / testimonialsPerViewState);
@@ -277,181 +256,6 @@ const CompetitionHome = () => {
       clearInterval(testimonialInterval);
     };
   }, [testimonialsPerViewState, testimonials.length]);
-
-  useEffect(() => {
-    if (dailyChallenge?.end_time) {
-      // Update countdown every second
-      const countdownInterval = setInterval(() => {
-        updateCountdown();
-      }, 1000);
-
-      // Initial update
-      updateCountdown();
-
-      return () => {
-        clearInterval(countdownInterval);
-      };
-    }
-  }, [dailyChallenge?.end_time]);
-
-  const fetchDailyChallenge = async () => {
-    try {
-      // Call the Supabase function to get or create today's challenge
-      const { data, error } = await (supabase as any)
-        .rpc('get_or_create_daily_challenge');
-
-      if (error) throw error;
-
-      // Handle both array and single object responses
-      const challenge = Array.isArray(data) ? data[0] : data;
-
-      if (challenge) {
-        setDailyChallenge(challenge);
-        // Fetch stats and winners after challenge is loaded
-        fetchTodayStats(challenge.id);
-        fetchRecentWinners(challenge.id);
-      }
-    } catch (error) {
-      console.error('Error fetching daily challenge:', error);
-      // Fallback: use end of day
-      const endOfDay = new Date();
-      endOfDay.setHours(23, 59, 59, 999);
-      setDailyChallenge({ end_time: endOfDay.toISOString() });
-    }
-  };
-
-  const updateCountdown = () => {
-    if (!dailyChallenge?.end_time) return;
-
-    const now = new Date();
-    const endTime = new Date(dailyChallenge.end_time);
-
-    const diff = endTime.getTime() - now.getTime();
-
-    if (diff > 0) {
-      const hours = Math.floor(diff / (1000 * 60 * 60));
-      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-      setTimeRemaining({ hours, minutes, seconds });
-    } else {
-      setTimeRemaining({ hours: 0, minutes: 0, seconds: 0 });
-      // Refresh challenge if time expired
-      fetchDailyChallenge();
-    }
-  };
-
-  const fetchTodayStats = async (challengeId?: number) => {
-    // Generate random numbers based on today's date so they are consistent for the day but refresh daily
-    const today = new Date();
-    const dateString = today.toDateString();
-
-    // Simple hash function to generate a seed from the date string
-    let hash = 0;
-    for (let i = 0; i < dateString.length; i++) {
-      hash = ((hash << 5) - hash) + dateString.charCodeAt(i);
-      hash |= 0; // Convert to 32bit integer
-    }
-
-    // Helper to get random number between min and max using the hash
-    const getSeededRandom = (min: number, max: number, offset: number) => {
-      const seed = Math.abs(hash + offset);
-      return (seed % (max - min + 1)) + min;
-    };
-
-    // Participants: Random between 1500 and 3000
-    const mockParticipants = getSeededRandom(1500, 3000, 1);
-
-    // Winners: Random between 200 and 500
-    const mockWinners = getSeededRandom(200, 500, 2);
-
-    // Levels unlocked: Random between 1000 and 2000
-    const mockLevels = getSeededRandom(1000, 2000, 3);
-
-    setTodayStats({
-      winners: mockWinners,
-      levelsUnlocked: mockLevels,
-      participants: mockParticipants
-    });
-  };
-
-  const fetchRecentWinners = async (challengeId?: number) => {
-    try {
-      if (!challengeId && !dailyChallenge?.id) {
-        // Fallback demo winners
-        setRecentWinners([
-          'Sarah J.', 'Mark T.', 'Emily R.', 'David K.', 'Lisa M.',
-          'John P.', 'Maria S.', 'Alex B.', 'Rachel W.', 'Chris L.'
-        ]);
-        return;
-      }
-
-      const id = challengeId || dailyChallenge.id;
-
-      // Fetch recent winners from daily challenge attempts
-      const { data } = await (supabase as any)
-        .from('daily_challenge_attempts')
-        .select(`
-          user:profiles(full_name, username),
-          score,
-          completed,
-          completed_at
-        `)
-        .eq('daily_challenge_id', id)
-        .eq('completed', true)
-        .order('completed_at', { ascending: false })
-        .limit(10);
-
-      if (data && data.length > 0) {
-        const names = data.map((entry: any) => {
-          const name = entry.user?.full_name || entry.user?.username || 'Anonymous';
-          return name.split(' ')[0] + (name.includes(' ') ? ' ' + name.split(' ')[1][0] + '.' : '');
-        });
-        setRecentWinners(names);
-      } else {
-        // Fallback demo winners
-        setRecentWinners([
-          'Sarah J.', 'Mark T.', 'Emily R.', 'David K.', 'Lisa M.',
-          'John P.', 'Maria S.', 'Alex B.', 'Rachel W.', 'Chris L.'
-        ]);
-      }
-    } catch (error) {
-      console.error('Error fetching recent winners:', error);
-      // Fallback demo winners
-      setRecentWinners([
-        'Sarah J.', 'Mark T.', 'Emily R.', 'David K.', 'Lisa M.',
-        'John P.', 'Maria S.', 'Alex B.', 'Rachel W.', 'Chris L.'
-      ]);
-    }
-  };
-
-
-  const fetchActiveCompetitions = async () => {
-    try {
-      const { data, error } = await (supabase as any)
-        .from('competitions')
-        .select(`
-          *,
-          quiz:quizzes(id, title, description)
-        `)
-        .in('status', ['active', 'upcoming'])
-        .order('start_date', { ascending: true })
-        .limit(3);
-
-      if (error) throw error;
-
-      const competitionsWithDetails = (data || []).map((competition: any) => ({
-        ...competition,
-        entries_count: 0, // Simplified for now
-      }));
-
-      setCompetitions(competitionsWithDetails);
-    } catch (error) {
-      console.error('Error fetching competitions:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <>
@@ -511,18 +315,18 @@ const CompetitionHome = () => {
       <div className="min-h-screen bg-white text-gray-900 font-urbanist selection:bg-black/5">
         <Navigation transparent={true} />
 
-        <section className="relative h-[76vh] md:h-[92vh] min-h-[560px] flex items-center overflow-hidden">
+        <section className="relative h-[70vh] md:h-[95vh] min-h-[560px] md:min-h-[820px] flex items-center overflow-hidden">
           <div className="absolute inset-0">
             <img
-              src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=2070&auto=format&fit=crop"
-              alt="Bible study table with notes and open scripture"
-              className="h-full w-full object-cover brightness-[0.28] transition-transform duration-[18000ms] hover:scale-105"
+              src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2070&auto=format&fit=crop"
+              alt="Majestic Bible library backdrop"
+              className="h-full w-full object-cover brightness-[0.34] transition-transform duration-[18000ms] hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/35 to-white" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/30 to-white/15" />
           </div>
 
-          <div className="max-w-7xl mx-auto w-full px-6 relative z-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-end pt-20 md:pt-28 pb-10 md:pb-16">
-            <div className="space-y-8 text-white">
+          <div className="max-w-7xl mx-auto w-full px-6 relative z-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-end pt-24 md:pt-32 pb-10 md:pb-16">
+            <div className="self-center space-y-8 text-white">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.25em] text-white backdrop-blur-md">
                 <Trophy className="w-4 h-4" />
                 Live Season 2026
@@ -561,33 +365,47 @@ const CompetitionHome = () => {
             </div>
 
             <div className="lg:pt-10">
-              <Card className="border border-white/20 bg-white/90 backdrop-blur-xl shadow-2xl rounded-[2.25rem] overflow-hidden">
+              <Card className="border border-gray-100/70 bg-white shadow-2xl shadow-black/10 rounded-[2.5rem] overflow-hidden">
                 <CardHeader className="pb-4">
                   <CardDescription className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-400 mb-2">
-                    Live Momentum
+                    Explore The Platform
                   </CardDescription>
-                  <CardTitle className="text-4xl font-normal italic font-serif text-gray-900">Today's Challenge Pulse</CardTitle>
+                  <CardTitle className="text-4xl font-normal italic font-serif text-gray-900">Start Anywhere</CardTitle>
                   <CardDescription className="text-gray-500">
-                    Live momentum from the global bible challenger community.
+                    Everything available on Bible Quiz Competition, one click away.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-5">
-                  <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
-                    <p className="text-[10px] uppercase tracking-[0.22em] text-gray-400 font-bold mb-2">Recent Winner</p>
-                    <p className="text-2xl font-normal italic font-serif text-gray-900">{recentWinners[currentWinnerIndex] || "Community Player"}</p>
+                  <div className="rounded-2xl border border-gray-100 bg-gray-50 px-4 py-3 flex items-center justify-between">
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-gray-400 font-bold">Popular Destinations</p>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">{heroExploreLinks.length} Sections</span>
                   </div>
 
-                  <div className="space-y-3">
-                    {trendingSearchLinks.slice(0, 3).map((item) => (
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {heroExploreLinks.map((item) => (
                       <button
                         key={item.label}
                         onClick={() => navigate(item.path)}
-                        className="w-full flex items-center justify-between rounded-2xl border border-gray-100 bg-white px-4 py-3 text-left hover:bg-black hover:text-white transition-all group"
+                        className="rounded-2xl border border-gray-100 bg-white px-4 py-3 text-left hover:bg-black hover:text-white transition-colors group"
                       >
-                        <span className="text-sm font-semibold text-gray-700 group-hover:text-white">{item.label}</span>
-                        <ArrowRight className="w-4 h-4 text-gray-500 group-hover:text-white" />
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="h-8 w-8 rounded-xl bg-gray-100 group-hover:bg-white/15 flex items-center justify-center transition-colors">
+                            <item.icon className="w-4 h-4 text-gray-700 group-hover:text-white" />
+                          </div>
+                          <p className="text-sm font-semibold text-gray-800 group-hover:text-white">{item.label}</p>
+                        </div>
+                        <p className="text-xs text-gray-500 group-hover:text-white/75 leading-relaxed">{item.description}</p>
                       </button>
                     ))}
+                  </div>
+
+                  <div className="pt-1">
+                    <Button
+                      onClick={() => navigate("/bible-questions-and-answers-hub")}
+                      className="w-full h-11 rounded-full bg-black text-white hover:bg-gray-800 text-[10px] font-bold uppercase tracking-[0.2em]"
+                    >
+                      Explore Bible Q&A Hub <ArrowRight className="ml-2 w-4 h-4" />
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
