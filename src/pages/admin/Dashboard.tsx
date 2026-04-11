@@ -173,10 +173,6 @@ const Dashboard = () => {
 
       console.log('Recent activity:', activity);
       setRecentActivity(activity);
-
-      // Calculate user growth percentage (dummy logic for now, replace with real previous count if available)
-      const previousUserCount = stats.totalUsers > 1 ? stats.totalUsers - 1 : stats.totalUsers; // Replace with real previous period count if you have it
-      const userGrowth = previousUserCount > 0 ? Math.round(((stats.totalUsers - previousUserCount) / previousUserCount) * 100) : 0;
     } catch (error) {
       console.error('Error fetching admin data:', error);
     } finally {
@@ -184,16 +180,10 @@ const Dashboard = () => {
     }
   };
 
-  // Calculate user growth percentage (dummy logic for now, replace with real previous count if available)
-  const previousUserCount = stats.totalUsers > 1 ? stats.totalUsers - 1 : stats.totalUsers; // Replace with real previous period count if you have it
-  const userGrowth = previousUserCount > 0 ? Math.round(((stats.totalUsers - previousUserCount) / previousUserCount) * 100) : 0;
-
   const statsCards = [
     {
       title: "Total Users",
       value: stats.totalUsers.toLocaleString(),
-      change: `${userGrowth > 0 ? "+" : ""}${userGrowth}%`,
-      changeType: userGrowth > 0 ? "positive" : userGrowth < 0 ? "negative" : "neutral",
       icon: Users,
       description: "Active quiz takers",
       onClick: () => navigate("/admin/users"),
@@ -201,36 +191,21 @@ const Dashboard = () => {
     {
       title: "Total Attempts",
       value: stats.totalAttempts.toLocaleString(),
-      change: "+23%",
-      changeType: "positive", 
       icon: FileText,
       description: "Quiz attempts"
     },
     {
       title: "Average Score",
       value: stats.averageScore.toString(),
-      change: "+2.1",
-      changeType: "positive",
       icon: TrendingUp,
       description: "Points per attempt"
     },
     {
       title: "Highest Score",
       value: stats.highestScore.toString(),
-      change: "Record!",
-      changeType: "neutral",
       icon: Trophy,
       description: "Best score achieved"
-    },
-    {
-      title: "Page Views",
-      value: "",
-      change: "",
-      changeType: "neutral",
-      icon: Eye,
-      description: "View counts for all pages",
-      onClick: () => navigate("/admin/page-views"),
-    },
+    }
   ];
 
   // Update flag in Supabase
@@ -321,14 +296,6 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-gray-900">{stat.value}</div>
-                <div className="flex items-center mt-2">
-                  <Badge 
-                    variant={stat.changeType === "positive" ? "default" : stat.changeType === "negative" ? "destructive" : "secondary"}
-                    className={stat.changeType === "positive" ? "bg-green-100 text-green-700" : stat.changeType === "negative" ? "bg-red-100 text-red-700" : "bg-gray-100 text-gray-700"}
-                  >
-                    {stat.change}
-                  </Badge>
-                </div>
                 <p className="text-xs text-gray-500 mt-2">{stat.description}</p>
               </CardContent>
             </Card>
@@ -421,31 +388,6 @@ const Dashboard = () => {
           </Card>
         </div>
 
-        {/* System Status */}
-        <Card className="shadow-lg border-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
-              <Brain className="w-5 h-5" />
-              <span>System Status</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="text-center">
-                <div className="text-2xl font-bold">99.9%</div>
-                <div className="text-blue-100">Uptime</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold">125ms</div>
-                <div className="text-blue-100">Avg Response</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold">Active</div>
-                <div className="text-blue-100">All Services</div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </AdminLayout>
   );

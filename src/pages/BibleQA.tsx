@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import SEO from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Search, BookOpen, ChevronRight, X, Brain } from "lucide-react";
+import { Search, BookOpen, ChevronRight, X, Brain, Clock3, BookText, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -136,6 +136,38 @@ export default function BibleQA() {
 
   const randomFeaturedQuizzes = useMemo(() => getDailyRandomQuizzes(), []);
 
+  const getDifficultyClasses = (difficulty: string) => {
+    switch (difficulty) {
+      case "Beginner":
+        return "bg-emerald-50 text-emerald-700 border-emerald-100";
+      case "Intermediate":
+        return "bg-amber-50 text-amber-700 border-amber-100";
+      case "Advanced":
+        return "bg-rose-50 text-rose-700 border-rose-100";
+      default:
+        return "bg-gray-50 text-gray-700 border-gray-100";
+    }
+  };
+
+  const getTestament = (category: string) => {
+    const newTestamentCategories = ["Gospels", "Pauline Epistles", "General Epistles", "Apocalyptic"];
+    return newTestamentCategories.includes(category) ? "New Testament" : "Old Testament";
+  };
+
+  const getEstimatedMinutes = (questions: number, difficulty: string) => {
+    const perQuestion = difficulty === "Advanced" ? 1.2 : difficulty === "Intermediate" ? 1 : 0.8;
+    return Math.max(5, Math.round(questions * perQuestion));
+  };
+
+  const getCoverageTopics = (description: string) => {
+    const afterDash = description.includes(" - ") ? description.split(" - ").slice(1).join(" - ") : description;
+    return afterDash
+      .split(",")
+      .map((part) => part.trim())
+      .filter(Boolean)
+      .slice(0, 3);
+  };
+
   const handleSearch = (bookInput: string) => {
     const book = bookInput.trim();
     if (!book) return;
@@ -193,34 +225,6 @@ export default function BibleQA() {
         return [];
     }
   };
-
-  const featuredHubs = [
-    {
-      id: "genesis",
-      title: "Genesis Hub",
-      description: "Questions, answers, and chapter study guides for the Book of Genesis.",
-    },
-    {
-      id: "exodus",
-      title: "Exodus Hub",
-      description: "Deep-dive into deliverance, covenant, and the tabernacle with structured quizzes.",
-    },
-    {
-      id: "leviticus",
-      title: "Leviticus Hub",
-      description: "Master the laws of holiness, offerings, and sacred rituals with cinematic study guides.",
-    },
-    {
-      id: "numbers",
-      title: "Numbers Hub",
-      description: "Explore the census, the wilderness journey, and the test of faith with interactive chapter quizzes.",
-    },
-    {
-      id: "nehemiah",
-      title: "Nehemiah Hub",
-      description: "Leadership, rebuilding, and spiritual renewal studies with focused quizzes.",
-    },
-  ];
 
   const HUB_IMAGES = {
     hero: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2070&auto=format&fit=crop", // Majestic Library
@@ -370,30 +374,6 @@ export default function BibleQA() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-            {featuredHubs.map((hub) => (
-              <Card
-                key={hub.id}
-                className="group relative border border-gray-100/60 hover:border-black/5 hover:-translate-y-2 transition-all duration-500 flex flex-col bg-white overflow-hidden shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem]"
-                onClick={() => navigate(`/bible-questions-and-answers-hub/${hub.id}`)}
-              >
-                <div className="h-2 w-full bg-black absolute top-0 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <CardHeader className="pt-12 pb-8 px-10">
-                  <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center mb-8 transition-transform group-hover:scale-110 duration-500">
-                    <BookOpen className="w-8 h-8 text-gray-700" strokeWidth={1} />
-                  </div>
-                  <CardTitle className="text-4xl font-normal text-gray-900 italic serif mb-3">{hub.title}</CardTitle>
-                  <CardDescription className="text-sm font-semibold text-gray-400 uppercase tracking-[0.25em]">Study Portal</CardDescription>
-                </CardHeader>
-                <CardContent className="px-10 pb-12 flex-grow flex flex-col justify-between">
-                  <p className="text-xl font-light text-gray-500 leading-relaxed mb-10">{hub.description}</p>
-                  <Button className="w-full font-light bg-black text-white hover:bg-gray-800 rounded-2xl py-8 tracking-[0.2em] uppercase text-xs transition-all shadow-xl shadow-black/10">
-                    Explore Hub
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
         </section>
 
         <section id="quizzes" className="mb-60 scroll-mt-24">
@@ -403,36 +383,68 @@ export default function BibleQA() {
             <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
               Challenge yourself with our curated selection of high-fidelity scriptural examinations.
             </p>
+            <div className="mt-8 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-gray-100 bg-white text-[11px] uppercase tracking-[0.25em] font-bold text-gray-500">
+              <Sparkles className="w-3.5 h-3.5" />
+              9 Fresh Picks Every Day
+            </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {randomFeaturedQuizzes.map((quiz) => (
               <Card
-                key={quiz.id}
-                className="group relative border border-gray-100/60 hover:border-black/5 hover:-translate-y-2 transition-all duration-500 flex flex-col bg-white overflow-hidden shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem]"
+                key={quiz.link}
+                className="group relative border border-gray-100/60 hover:border-black/10 hover:-translate-y-2 transition-all duration-500 flex flex-col bg-white overflow-hidden shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem]"
                 onClick={() => navigate(quiz.link)}
               >
-                <div className="h-2 w-full bg-gray-900 absolute top-0 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <CardHeader className="pt-12 pb-8 px-10 border-b border-gray-50 mb-6">
-                  <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center mb-8 transition-transform group-hover:scale-110 duration-500">
-                    <quiz.icon className="w-8 h-8 text-gray-700" strokeWidth={1} />
-                  </div>
-                  <CardTitle className="text-3xl font-normal text-gray-900 italic serif mb-3">{quiz.title}</CardTitle>
-                  <CardDescription className="text-sm font-semibold text-gray-400 uppercase tracking-[0.25em]">Featured Challenge</CardDescription>
-                </CardHeader>
-                <CardContent className="px-10 pb-4 flex-grow">
-                  <p className="text-xl font-light text-gray-500 leading-relaxed mb-6">{quiz.description}</p>
-                  <div className="flex items-center gap-3">
-                    <div className="px-3 py-1 rounded-full bg-gray-50 text-[10px] font-bold uppercase tracking-widest text-gray-400 border border-gray-100">
-                      {quiz.questions} Questions
-                    </div>
-                    <div className="px-3 py-1 rounded-full bg-gray-50 text-[10px] font-bold uppercase tracking-widest text-gray-400 border border-gray-100">
+                <div className="h-2 w-full bg-gradient-to-r from-gray-900 via-gray-700 to-gray-500 absolute top-0" />
+                <CardHeader className="pt-10 pb-6 px-8 border-b border-gray-50">
+                  <div className="flex items-center justify-between mb-6">
+                    <div className={`px-3 py-1 rounded-full border text-[10px] font-bold uppercase tracking-widest ${getDifficultyClasses(quiz.difficulty)}`}>
                       {quiz.difficulty}
+                    </div>
+                    <div className="px-3 py-1 rounded-full bg-gray-50 border border-gray-100 text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                      {getTestament(quiz.category)}
+                    </div>
+                  </div>
+                  <div className="w-14 h-14 rounded-2xl bg-gray-50 border border-gray-100 flex items-center justify-center mb-6 transition-transform group-hover:scale-110 duration-500">
+                    <quiz.icon className="w-7 h-7 text-gray-700" strokeWidth={1.5} />
+                  </div>
+                  <CardTitle className="text-3xl font-normal text-gray-900 italic serif mb-3 leading-tight">{quiz.title}</CardTitle>
+                  <CardDescription className="text-[11px] font-semibold text-gray-400 uppercase tracking-[0.25em]">{quiz.category}</CardDescription>
+                </CardHeader>
+                <CardContent className="px-8 pt-6 pb-4 flex-grow">
+                  <p className="text-lg font-light text-gray-500 leading-relaxed mb-6 line-clamp-3">{quiz.description}</p>
+
+                  <div className="grid grid-cols-2 gap-3 mb-6">
+                    <div className="rounded-2xl border border-gray-100 bg-gray-50/70 px-4 py-3">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-1">Questions</p>
+                      <p className="text-xl font-normal text-gray-800 italic serif">{quiz.questions}</p>
+                    </div>
+                    <div className="rounded-2xl border border-gray-100 bg-gray-50/70 px-4 py-3">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 mb-1 flex items-center gap-1.5">
+                        <Clock3 className="w-3.5 h-3.5" />
+                        Est. Time
+                      </p>
+                      <p className="text-xl font-normal text-gray-800 italic serif">{getEstimatedMinutes(quiz.questions, quiz.difficulty)} min</p>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-gray-100 bg-white p-4">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-gray-400 mb-3 flex items-center gap-2">
+                      <BookText className="w-3.5 h-3.5" />
+                      What You’ll Cover
+                    </p>
+                    <div className="space-y-2">
+                      {getCoverageTopics(quiz.description).map((topic) => (
+                        <p key={topic} className="text-sm text-gray-600 leading-relaxed">
+                          • {topic}
+                        </p>
+                      ))}
                     </div>
                   </div>
                 </CardContent>
-                <CardContent className="px-10 pb-12 pt-6">
-                  <Button className="w-full font-light bg-black text-white hover:bg-gray-800 rounded-2xl py-8 tracking-[0.2em] uppercase text-xs transition-all shadow-xl shadow-black/10">
-                    Start Challenge
+                <CardContent className="px-8 pb-8 pt-3">
+                  <Button className="w-full font-light bg-black text-white hover:bg-gray-800 rounded-2xl py-7 tracking-[0.2em] uppercase text-xs transition-all shadow-xl shadow-black/10">
+                    Start {quiz.title.replace(/\s+Quiz$/i, "")}
                   </Button>
                 </CardContent>
               </Card>
