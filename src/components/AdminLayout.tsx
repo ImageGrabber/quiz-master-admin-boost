@@ -1,7 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Brain,
@@ -175,8 +174,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
             <div className="bg-blue-600 rounded-lg p-1.5">
               <Brain className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold text-slate-900 tracking-tight">Bible Quiz</span>
-            <Badge className="bg-blue-100 text-blue-700 text-[10px] ml-1">Admin</Badge>
+            <span className="text-xl font-bold text-slate-900 tracking-tight">Admin</span>
           </div>
         </div>
 

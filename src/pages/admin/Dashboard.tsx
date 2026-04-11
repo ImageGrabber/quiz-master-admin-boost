@@ -31,8 +31,6 @@ const Dashboard = () => {
   });
   const [recentActivity, setRecentActivity] = useState<RecentActivity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [hideMembership, setHideMembership] = useState<boolean>(false);
-  const [loadingFlag, setLoadingFlag] = useState(true);
 
   useEffect(() => {
     async function checkAdminAuth() {
@@ -55,23 +53,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchAdminData();
-  }, []);
-
-  // Fetch flag from Supabase on mount
-  useEffect(() => {
-    const fetchFlag = async () => {
-      setLoadingFlag(true);
-      const { data, error } = await supabase
-        .from('feature_flags')
-        .select('value')
-        .eq('key', 'hide_membership_section')
-        .single();
-      if (data && typeof data.value === 'boolean') {
-        setHideMembership(data.value);
-      }
-      setLoadingFlag(false);
-    };
-    fetchFlag();
   }, []);
 
   const fetchAdminData = async () => {
@@ -208,19 +189,6 @@ const Dashboard = () => {
     }
   ];
 
-  // Update flag in Supabase
-  const handleToggleMembership = async () => {
-    setLoadingFlag(true);
-    const { error } = await supabase
-      .from('feature_flags')
-      .update({ value: !hideMembership })
-      .eq('key', 'hide_membership_section');
-    if (!error) {
-      setHideMembership((prev) => !prev);
-    }
-    setLoadingFlag(false);
-  };
-
   if (isLoading) {
     return (
       <AdminLayout>
@@ -243,39 +211,6 @@ const Dashboard = () => {
             <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
             <p className="text-gray-600 mt-2">Overview of your BibleBattles platform</p>
           </div>
-          
-          <div className="flex space-x-3">
-            <Button
-              variant="outline"
-              onClick={() => navigate("/admin/upload")}
-              className="flex items-center space-x-2"
-            >
-              <Upload className="w-4 h-4" />
-              <span>Upload Questions</span>
-            </Button>
-            
-            <Button
-              onClick={() => navigate("/admin/quizzes")}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center space-x-2"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Create Quiz</span>
-            </Button>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-4 mb-6">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={hideMembership}
-              onChange={handleToggleMembership}
-              className="form-checkbox h-5 w-5 text-blue-600"
-              disabled={loadingFlag}
-            />
-            <span className="text-sm font-medium text-gray-700">Hide Membership Section on User Dashboard</span>
-            {loadingFlag && <span className="ml-2 text-xs text-gray-400">Saving...</span>}
-          </label>
         </div>
 
         {/* Stats Grid */}
