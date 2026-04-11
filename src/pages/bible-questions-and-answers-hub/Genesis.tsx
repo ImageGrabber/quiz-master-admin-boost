@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { BookOpen, Layers, Swords, ListOrdered, Brain, Home, ChevronRight, Search, Quote, Sparkles, Compass, ShieldCheck, Users } from "lucide-react";
 import SEO from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 
 // Note: These images were generated specifically for this epic design
 const GENESIS_IMAGES = {
@@ -665,52 +666,7 @@ export default function GenesisHub() {
         </section>
       </div>
 
-      {/* Cinematic Dark Footer */}
-      <footer className="bg-gray-950 pt-40 pb-20 text-white px-10 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-        <div className="max-w-7xl mx-auto flex flex-col items-center">
-          <div className="flex items-center space-x-6 mb-24 opacity-80 group cursor-pointer" onClick={() => navigate("/")}>
-            <div className="w-16 h-16 bg-white rounded-3xl flex items-center justify-center rotate-3 group-hover:rotate-0 transition-transform duration-500 border-b-4 border-gray-200">
-              <Brain className="w-8 h-8 text-black" strokeWidth={1} />
-            </div>
-            <span className="text-4xl font-normal tracking-tighter italic serif text-white/90">Bible Quiz Hub</span>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-20 w-full mb-40 text-center md:text-left">
-            <div className="col-span-2 space-y-12">
-              <h4 className="text-sm font-semibold uppercase tracking-[0.5em] text-white/20">The Mission</h4>
-              <p className="text-2xl font-light text-white/40 leading-[1.7] italic serif max-w-lg mx-auto md:mx-0">
-                To transform Bible study into a premium, interactive journey that empowers generations with the immutable Word of God.
-              </p>
-              <div className="flex gap-10 justify-center md:justify-start">
-                <span className="hover:text-white cursor-pointer transition-colors text-white/30 text-sm tracking-widest">TWITTER</span>
-                <span className="hover:text-white cursor-pointer transition-colors text-white/30 text-sm tracking-widest">NSTAGRAM</span>
-                <span className="hover:text-white cursor-pointer transition-colors text-white/30 text-sm tracking-widest">CONTACT</span>
-              </div>
-            </div>
-            <div className="space-y-10">
-              <h4 className="text-sm font-semibold uppercase tracking-[0.5em] text-white/20">Resources</h4>
-              <div className="flex flex-col space-y-6 text-white/40 text-lg font-light tracking-tight">
-                <button onClick={() => navigate("/bible-questions-and-answers-hub")} className="hover:text-white transition-colors text-left">Study Center</button>
-                <button onClick={() => navigate("/articles")} className="hover:text-white transition-colors text-left">Library</button>
-                <button onClick={() => navigate("/leaderboard")} className="hover:text-white transition-colors text-left">Leaderboard</button>
-              </div>
-            </div>
-            <div className="space-y-10">
-              <h4 className="text-sm font-semibold uppercase tracking-[0.5em] text-white/20">Security</h4>
-              <div className="flex flex-col space-y-6 text-white/40 text-lg font-light tracking-tight">
-                <button className="hover:text-white transition-colors text-left uppercase text-xs tracking-[0.3em]">Privacy</button>
-                <button className="hover:text-white transition-colors text-left uppercase text-xs tracking-[0.3em]">Terms</button>
-                <button className="hover:text-white transition-colors text-left uppercase text-xs tracking-[0.3em]">Cookie Policy</button>
-              </div>
-            </div>
-          </div>
-          
-          <div className="pt-20 border-t border-white/5 w-full text-center">
-            <p className="text-[10px] font-bold text-white/10 uppercase tracking-[0.8em]">© 2026 BIBLE QUIZ HUB • SACRED KNOWLEDGE FOR MODERN SEEKERS</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

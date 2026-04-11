@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { BookOpen, Layers, Swords, ListOrdered, Brain, Home, ChevronRight, Search } from "lucide-react";
 import SEO from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 
 export default function NehemiahHub() {
   const navigate = useNavigate();
