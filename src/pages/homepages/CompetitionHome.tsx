@@ -318,9 +318,9 @@ const CompetitionHome = () => {
         <section className="relative h-[70vh] md:h-[95vh] min-h-[560px] md:min-h-[820px] flex items-center overflow-hidden">
           <div className="absolute inset-0">
             <img
-              src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?q=80&w=2070&auto=format&fit=crop"
-              alt="Majestic Bible library backdrop"
-              className="h-full w-full object-cover brightness-[0.34] transition-transform duration-[18000ms] hover:scale-105"
+              src="/images/vibe/hero.png"
+              alt="Cinematic sacred library with glowing scripture"
+              className="h-full w-full object-cover object-center brightness-[0.34] transition-transform duration-[18000ms] hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/30 to-white/15" />
           </div>
