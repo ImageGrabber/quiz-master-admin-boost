@@ -9,11 +9,11 @@ import { Navigation } from "@/components/Navigation";
 
 // Note: These images were generated specifically for this epic design
 const GENESIS_IMAGES = {
-  hero: "https://images.unsplash.com/photo-1464802686167-b939a6910659?auto=format&fit=crop&q=80&w=2000", 
-  creation: "/Users/stevenmathew/.gemini/antigravity/brain/0703b0b3-c6a5-45a7-b4e6-7aff816db829/genesis_creation_cinematic_1775882842704.png",
-  eden: "/Users/stevenmathew/.gemini/antigravity/brain/0703b0b3-c6a5-45a7-b4e6-7aff816db829/genesis_eden_paradise_1775882854056.png",
-  flood: "/Users/stevenmathew/.gemini/antigravity/brain/0703b0b3-c6a5-45a7-b4e6-7aff816db829/genesis_noah_ark_storm_1775882867593.png",
-  abraham: "/Users/stevenmathew/.gemini/antigravity/brain/0703b0b3-c6a5-45a7-b4e6-7aff816db829/genesis_abraham_stars_1775882883743.png",
+  hero: "/images/hubs/genesis/creation.png", 
+  creation: "/images/hubs/genesis/creation.png",
+  eden: "/images/hubs/genesis/eden.png",
+  flood: "/images/hubs/genesis/flood.png",
+  abraham: "/images/hubs/genesis/abraham.png",
 };
 
 export default function GenesisHub() {
