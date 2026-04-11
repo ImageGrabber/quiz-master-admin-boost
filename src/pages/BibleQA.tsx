@@ -275,22 +275,19 @@ export default function BibleQA() {
           <h1 className="text-4xl sm:text-6xl md:text-9xl font-normal mb-8 leading-tight tracking-tighter animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
             Bible Q&A <span className="italic font-serif">Hub</span>
           </h1>
-          <p className="text-lg md:text-2xl font-light text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
-            Search through all 66 books, explore cinematic study hubs, and challenge yourself with interactive Scripture quizzes.
-          </p>
           
-          <div className="max-w-3xl mx-auto mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700">
+          <div className="max-w-3xl mx-auto mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
             <div className="relative group">
               <Search className="absolute left-6 md:left-8 top-1/2 transform -translate-y-1/2 text-black/40 group-focus-within:text-black w-5 h-5 md:w-6 md:h-6 transition-colors" strokeWidth={1} />
               <Input
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search books..."
-                className="pl-16 md:pl-20 pr-10 py-8 md:py-12 text-lg md:text-2xl font-light border-transparent bg-white focus:bg-white focus:ring-0 rounded-2xl md:rounded-[2.5rem] placeholder:text-black/30 text-black shadow-2xl transition-all duration-500"
+                className={`pl-16 md:pl-20 pr-10 py-8 md:py-12 text-lg md:text-2xl font-light border-transparent bg-white focus:bg-white focus:ring-0 placeholder:text-black/30 text-black shadow-2xl transition-all duration-500 ${searchQuery ? 'rounded-t-2xl md:rounded-t-[2.5rem] rounded-b-none' : 'rounded-2xl md:rounded-[2.5rem]'}`}
               />
               
               {searchQuery && (
-                <div className="absolute top-full left-0 right-0 mt-4 bg-white backdrop-blur-3xl rounded-2xl md:rounded-[2rem] shadow-2xl border border-gray-100 max-h-80 overflow-y-auto text-left z-50 p-2 overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
+                <div className="absolute top-full left-0 right-0 bg-white backdrop-blur-3xl rounded-b-2xl md:rounded-b-[2rem] shadow-2xl border-t border-gray-100 max-h-80 overflow-y-auto text-left z-[100] p-2 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-300">
                   {filteredBooks.length > 0 ? (
                     filteredBooks.map((book) => (
                       <button
@@ -309,6 +306,10 @@ export default function BibleQA() {
               )}
             </div>
           </div>
+
+          <p className="text-lg md:text-2xl font-light text-white/80 mb-16 max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-700">
+            Search through all 66 books, explore cinematic study hubs, and challenge yourself with interactive Scripture quizzes.
+          </p>
 
           <div className="flex flex-wrap justify-center gap-4 md:gap-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-900">
             <a href="#hubs" className="px-8 md:px-12 py-4 md:py-6 rounded-full bg-white text-black hover:bg-black hover:text-white hover:scale-105 transition-all shadow-2xl shadow-black/20 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase">
