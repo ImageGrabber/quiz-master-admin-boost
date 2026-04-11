@@ -240,6 +240,14 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 4:17",
                 explanation: "Cain was then building a city, and he named it after his son Enoch."
+            },
+            {
+                id: 5,
+                question: "What was the name of the son born to Adam and Eve to replace Abel?",
+                options: ["Seth", "Enosh", "Kenan", "Mahalalel"],
+                answer: 0,
+                referenceVerse: "Genesis 4:25",
+                explanation: "Eve said, 'God has granted me another child in place of Abel, since Cain killed him.' She named him Seth."
             }
         ]
     },
@@ -271,6 +279,22 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 2,
                 referenceVerse: "Genesis 5:27",
                 explanation: "Altogether, Methuselah lived a total of 969 years, and then he died."
+            },
+            {
+                id: 4,
+                question: "Who was the father of Methuselah?",
+                options: ["Enoch", "Mahalalel", "Jared", "Lamech"],
+                answer: 0,
+                referenceVerse: "Genesis 5:21",
+                explanation: "When Enoch had lived 65 years, he became the father of Methuselah."
+            },
+            {
+                id: 5,
+                question: "Who was the father of Noah?",
+                options: ["Methuselah", "Lamech", "Enosh", "Seth"],
+                answer: 1,
+                referenceVerse: "Genesis 5:28-29",
+                explanation: "When Lamech had lived 182 years, he had a son. He named him Noah."
             }
         ]
     },
@@ -302,6 +326,22 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 2,
                 referenceVerse: "Genesis 6:14",
                 explanation: "So make yourself an ark of gopher wood; make rooms in it and coat it with pitch inside and out."
+            },
+            {
+                id: 4,
+                question: "What were the dimensions (length) of the Ark that God commanded Noah to build?",
+                options: ["100 cubits", "300 cubits", "500 cubits", "1,000 cubits"],
+                answer: 1,
+                referenceVerse: "Genesis 6:15",
+                explanation: "This is how you are to build it: The ark is to be three hundred cubits long, fifty cubits wide and thirty cubits high."
+            },
+            {
+                id: 5,
+                question: "With whom did God say He would establish His covenant first in regard to the Ark?",
+                options: ["The animals", "Noah", "The sons of God", "The Nephilim"],
+                answer: 1,
+                referenceVerse: "Genesis 6:18",
+                explanation: "But I will establish my covenant with you, and you will enter the ark—you and your sons and your wife and your sons’ wives with you."
             }
         ]
     },
@@ -333,6 +373,22 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 2,
                 referenceVerse: "Genesis 7:12",
                 explanation: "And rain fell on the earth forty days and forty nights."
+            },
+            {
+                id: 4,
+                question: "How many humans in total were on the Ark during the flood?",
+                options: ["Two", "Four", "Seven", "Eight"],
+                answer: 3,
+                referenceVerse: "Genesis 7:13",
+                explanation: "On that very day Noah and his sons, Shem, Ham and Japheth, together with his wife and the wives of his three sons, entered the ark."
+            },
+            {
+                id: 5,
+                question: "For how many days did the floodwaters remain on the earth after the rain stopped?",
+                options: ["40 days", "70 days", "150 days", "365 days"],
+                answer: 2,
+                referenceVerse: "Genesis 7:24",
+                explanation: "The waters flooded the earth for a hundred and fifty days."
             }
         ]
     },
@@ -364,6 +420,22 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 8:11",
                 explanation: "When the dove returned to him in the evening, there in its beak was a freshly plucked olive leaf!"
+            },
+            {
+                id: 4,
+                question: "What did Noah build as soon as he came out of the Ark?",
+                options: ["A house", "An altar to the LORD", "A farm", "A memorial tower"],
+                answer: 1,
+                referenceVerse: "Genesis 8:20",
+                explanation: "Then Noah built an altar to the LORD and, taking some of all the clean animals and clean birds, he sacrificed burnt offerings on it."
+            },
+            {
+                id: 5,
+                question: "What did God promise never to do again in His heart while the earth remains?",
+                options: ["Never to let it rain again", "Never to curse the ground because of humans or destroy all living creatures", "Never to let humans speak one language", "Never to let the sun set"],
+                answer: 1,
+                referenceVerse: "Genesis 8:21-22",
+                explanation: "The LORD said in his heart: 'Never again will I curse the ground because of humans... and never again will I destroy all living creatures, as I have done.'"
             }
         ]
     },
@@ -387,6 +459,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 9:20",
                 explanation: "Noah, a man of the soil, proceeded to plant a vineyard."
+            },
+            {
+                id: 3,
+                question: "What absolute requirement regarding meat did God give Noah in this chapter?",
+                options: ["Eat no meat at all", "Must not eat meat with its lifeblood still in it", "Eat only sheep", "Wash the meat three times"],
+                answer: 1,
+                referenceVerse: "Genesis 9:4",
+                explanation: "But you must not eat meat that has its lifeblood still in it."
+            },
+            {
+                id: 4,
+                question: "Which of Noah's sons was the father of Canaan?",
+                options: ["Shem", "Ham", "Japheth", "Cush"],
+                answer: 1,
+                referenceVerse: "Genesis 9:18, 22",
+                explanation: "Ham, the father of Canaan, saw his father's nakedness and told his two brothers outside."
+            },
+            {
+                id: 5,
+                question: "How many years did Noah live in total?",
+                options: ["600 years", "850 years", "950 years", "969 years"],
+                answer: 2,
+                referenceVerse: "Genesis 9:29",
+                explanation: "Noah lived a total of 950 years, and then he died."
             }
         ]
     },
@@ -410,6 +506,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 2,
                 referenceVerse: "Genesis 10:21",
                 explanation: "Sons were also born to Shem, whose older brother was Japheth; Shem was the ancestor of all the sons of Eber."
+            },
+            {
+                id: 3,
+                question: "Who was the father of Nimrod?",
+                options: ["Cush", "Mizraim", "Phut", "Canaan"],
+                answer: 0,
+                referenceVerse: "Genesis 10:8",
+                explanation: "Cush was the father of Nimrod, who became a mighty warrior on earth."
+            },
+            {
+                id: 4,
+                question: "Which son of Ham is the ancestor of the Egyptians (Mizraim)?",
+                options: ["Cush", "Mizraim", "Phut", "Canaan"],
+                answer: 1,
+                referenceVerse: "Genesis 10:6, 13",
+                explanation: "The sons of Ham: Cush, Mizraim, Phut and Canaan. Mizraim was the father of the Ludites, Anamites..."
+            },
+            {
+                id: 5,
+                question: "During whose lifetime was the earth divided, according to Chapter 10?",
+                options: ["Peleg", "Eber", "Joktan", "Nimrod"],
+                answer: 0,
+                referenceVerse: "Genesis 10:25",
+                explanation: "Two sons were born to Eber: One was named Peleg, because in his time the earth was divided."
             }
         ]
     },
@@ -441,6 +561,22 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 2,
                 referenceVerse: "Genesis 11:26",
                 explanation: "After Terah had lived 70 years, he became the father of Abram, Nahor and Haran."
+            },
+            {
+                id: 4,
+                question: "Where did Terah, Abram's father, die?",
+                options: ["Ur of the Chaldeans", "Canaan", "Haran", "Egypt"],
+                answer: 2,
+                referenceVerse: "Genesis 11:32",
+                explanation: "Terah lived 205 years, and he died in Haran."
+            },
+            {
+                id: 5,
+                question: "What was the name of Abram's wife?",
+                options: ["Sarai", "Milcah", "Hagar", "Rebekah"],
+                answer: 0,
+                referenceVerse: "Genesis 11:29",
+                explanation: "Abram and Nahor both married. The name of Abram’s wife was Sarai."
             }
         ]
     },
@@ -472,6 +608,22 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 12:10",
                 explanation: "Now there was a famine in the land, and Abram went down to Egypt to live there for a while because the famine was severe."
+            },
+            {
+                id: 4,
+                question: "What did Abram build at Shechem and between Bethel and Ai?",
+                options: ["A city", "A house", "An altar to the LORD", "A temple"],
+                answer: 2,
+                referenceVerse: "Genesis 12:7-8",
+                explanation: "The LORD appeared to Abram... So he built an altar there to the LORD... Between Bethel and Ai he built an altar to the LORD."
+            },
+            {
+                id: 5,
+                question: "What livestock and assets did Pharaoh give Abram in exchange for Sarai?",
+                options: ["Gold and silver only", "Sheep, cattle, donkeys, slaves, and camels", "Chariots and horses", "Fields and vineyards"],
+                answer: 1,
+                referenceVerse: "Genesis 12:16",
+                explanation: "He treated Abram well for her sake, and Abram acquired sheep and cattle, male and female donkeys, male and female servants, and camels."
             }
         ]
     },
@@ -495,6 +647,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 2,
                 referenceVerse: "Genesis 13:11",
                 explanation: "So Lot chose for himself the whole plain of the Jordan and set out toward the east."
+            },
+            {
+                id: 3,
+                question: "Where did Abram build an altar after he and Lot separated?",
+                options: ["At Bethel", "At Hebron, by the great trees of Mamre", "In Sodom", "At Shechem"],
+                answer: 1,
+                referenceVerse: "Genesis 13:18",
+                explanation: "So Abram went to live near the great trees of Mamre at Hebron, where he pitched his tents. There he built an altar to the LORD."
+            },
+            {
+                id: 4,
+                question: "How did God describe the number of Abram's offspring in this chapter?",
+                options: ["Like the stars in the sky", "Like the dust of the earth", "Like the trees in the forest", "As a great multitude"],
+                answer: 1,
+                referenceVerse: "Genesis 13:16",
+                explanation: "I will make your offspring like the dust of the earth, so that if anyone could count the dust, then your offspring could be counted."
+            },
+            {
+                id: 5,
+                question: "Where did Lot eventually live when he moved to the plain?",
+                options: ["In the center of the desert", "Near the city of Sodom", "In Egypt", "Near Gomorrah"],
+                answer: 1,
+                referenceVerse: "Genesis 13:12",
+                explanation: "Abram lived in the land of Canaan, while Lot lived among the cities of the plain and pitched his tents near Sodom."
             }
         ]
     },
@@ -518,6 +694,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 14:14",
                 explanation: "He called out the 318 trained men born in his household and went in pursuit as far as Dan."
+            },
+            {
+                id: 3,
+                question: "How much of everything did Abram give to Melchizedek?",
+                options: ["Half", "A tenth (tithe)", "Nothing", "A fifth"],
+                answer: 1,
+                referenceVerse: "Genesis 14:20",
+                explanation: "Then Abram gave him a tenth of everything."
+            },
+            {
+                id: 4,
+                question: "What was unique about the Valley of Siddim where the kings of Sodom and Gomorrah fled?",
+                options: ["It was full of gold", "It was full of tar pits (bitumen)", "It was a lush oasis", "It was under water"],
+                answer: 1,
+                referenceVerse: "Genesis 14:10",
+                explanation: "Now the Valley of Siddim was full of tar pits, and when the kings of Sodom and Gomorrah fled, some of the men fell into them and the rest fled to the hills."
+            },
+            {
+                id: 5,
+                question: "Who was taken captive during the war of the kings that Abram went to rescue?",
+                options: ["Sarai", "Lot and his possessions", "Terah", "Nahor"],
+                answer: 1,
+                referenceVerse: "Genesis 14:12",
+                explanation: "They also carried off Abram’s nephew Lot and his possessions, since he was living in Sodom."
             }
         ]
     },
@@ -541,6 +741,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 15:6",
                 explanation: "Abram believed the LORD, and he credited it to him as righteousness."
+            },
+            {
+                id: 3,
+                question: "What did God reveal about Abram's descendants' future as strangers in a country not their own?",
+                options: ["They would be kings", "They would be enslaved and mistreated for 400 years", "They would stay there forever", "They would never leave the land of Canaan"],
+                answer: 1,
+                referenceVerse: "Genesis 15:13",
+                explanation: "Then the LORD said to him, 'Know for certain that for four hundred years your descendants will be strangers in a country not their own and that they will be enslaved and mistreated there.'"
+            },
+            {
+                id: 4,
+                question: "What appeared and passed between the pieces of the animals during God's covenant ceremony with Abram?",
+                options: ["A golden eagle", "A smoking firepot and a blazing torch", "A white cloud", "A great wind"],
+                answer: 1,
+                referenceVerse: "Genesis 15:17",
+                explanation: "When the sun had set and darkness had fallen, a smoking firepot with a blazing torch appeared and passed between the pieces."
+            },
+            {
+                id: 5,
+                question: "What were the boundaries of the land God promised to Abram's descendants?",
+                options: ["Only the city of Hebron", "From the Wadi of Egypt to the great river Euphrates", "All of Egypt", "All of the world"],
+                answer: 1,
+                referenceVerse: "Genesis 15:18",
+                explanation: "On that day the LORD made a covenant with Abram and said, 'To your descendants I give this land, from the Wadi of Egypt to the great river, the Euphrates...'"
             }
         ]
     },
@@ -564,6 +788,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 16:13",
                 explanation: "She gave this name to the LORD who spoke to her: 'You are the God who sees me.'"
+            },
+            {
+                id: 3,
+                question: "Who suggested to Abram that he should have a child with Hagar?",
+                options: ["God", "Pharaoh", "Sarai", "Lot"],
+                answer: 2,
+                referenceVerse: "Genesis 16:2",
+                explanation: "Sarai said to Abram, 'The LORD has kept me from having children. Go, sleep with my slave; perhaps I can build a family through her.'"
+            },
+            {
+                id: 4,
+                question: "Where did the angel of the LORD find Hagar when she fled from Sarai?",
+                options: ["In Egypt", "In a palace", "Near a spring in the desert, on the road to Shur", "In Haran"],
+                answer: 2,
+                referenceVerse: "Genesis 16:7",
+                explanation: "The angel of the LORD found Hagar near a spring in the desert; it was the spring that is beside the road to Shur."
+            },
+            {
+                id: 5,
+                question: "How old was Abram when Hagar bore him Ishmael?",
+                options: ["75 years old", "86 years old", "99 years old", "100 years old"],
+                answer: 1,
+                referenceVerse: "Genesis 16:16",
+                explanation: "Abram was eighty-six years old when Hagar bore him Ishmael."
             }
         ]
     },
@@ -587,6 +835,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 17:11",
                 explanation: "You are to undergo circumcision, and it will be the sign of the covenant between me and you."
+            },
+            {
+                id: 3,
+                question: "What did God change Sarai's name to in this chapter?",
+                options: ["Sarah", "Milcah", "Hagar", "Rebekah"],
+                answer: 0,
+                referenceVerse: "Genesis 17:15",
+                explanation: "God also said to Abraham, 'As for Sarai your wife, you are no longer to call her Sarai; her name will be Sarah.'"
+            },
+            {
+                id: 4,
+                question: "How old was Abraham when he was circumcised?",
+                options: ["75 years old", "86 years old", "99 years old", "100 years old"],
+                answer: 2,
+                referenceVerse: "Genesis 17:24",
+                explanation: "Abraham was ninety-nine years old when he was circumcised."
+            },
+            {
+                id: 5,
+                question: "What did Abraham do when God told him Sarah would have a son?",
+                options: ["He wept", "He praised God with a song", "He fell on his face and laughed", "He argued with God"],
+                answer: 2,
+                referenceVerse: "Genesis 17:17",
+                explanation: "Abraham fell facedown; he laughed and said to himself, 'Will a son be born to a man a hundred years old? Will Sarah bear a child at the age of ninety?'"
             }
         ]
     },
@@ -610,6 +882,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 2,
                 referenceVerse: "Genesis 18:32",
                 explanation: "Finally, Abraham said, 'May the Lord not be angry, but let me speak just once more. What if only ten can be found there?' He answered, 'For the sake of ten, I will not destroy it.'"
+            },
+            {
+                id: 3,
+                question: "Where was Abraham when the three visitors appeared to him near the trees of Mamre?",
+                options: ["In his field", "Sitting at the entrance to his tent", "By a river", "In a city"],
+                answer: 1,
+                referenceVerse: "Genesis 18:1",
+                explanation: "The LORD appeared to Abraham near the great trees of Mamre while he was sitting at the entrance to his tent in the heat of the day."
+            },
+            {
+                id: 4,
+                question: "What meal did Abraham and Sarah prepare for the three visitors?",
+                options: ["Locusts and honey", "Fish and bread", "Bread, a choice calf, curds, and milk", "Fruit and nuts"],
+                answer: 2,
+                referenceVerse: "Genesis 18:6-8",
+                explanation: "He then brought some curds and milk and the calf that had been prepared, and set them before them."
+            },
+            {
+                id: 5,
+                question: "Why did God decide to tell Abraham what He was about to do to Sodom?",
+                options: ["Because Abraham was a great warrior", "Because Abraham was the king of the land", "Because he would become a great nation and lead his children in the way of the LORD", "Because Abraham asked"],
+                answer: 2,
+                referenceVerse: "Genesis 18:18-19",
+                explanation: "Abraham will surely become a great and powerful nation... For I have chosen him, so that he will direct his children and his household after him to keep the way of the LORD."
             }
         ]
     },
@@ -633,6 +929,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 19:37-38",
                 explanation: "The older daughter had a son... he is the father of the Moabites... the younger daughter also had a son... he is the father of the Ammonites."
+            },
+            {
+                id: 3,
+                question: "Where was Lot sitting when the two angels arrived in Sodom?",
+                options: ["In the center of the town", "In the gateway of the city", "At the well", "In his house"],
+                answer: 1,
+                referenceVerse: "Genesis 19:1",
+                explanation: "The two angels arrived at Sodom in the evening, and Lot was sitting in the gateway of the city."
+            },
+            {
+                id: 4,
+                question: "What did the angels do to the men of Sodom who were trying to break into Lot's house?",
+                options: ["Struck them with lightning", "Turned them to salt", "Struck them with blindness", "Sent a great fire"],
+                answer: 2,
+                referenceVerse: "Genesis 19:11",
+                explanation: "Then they struck the men who were at the door of the house, young and old, with blindness so that they could not find the door."
+            },
+            {
+                id: 5,
+                question: "What was the name of the small town Lot was allowed to flee to instead of the mountains?",
+                options: ["Zoar", "Bethel", "Haran", "Gerar"],
+                answer: 0,
+                referenceVerse: "Genesis 19:22-23",
+                explanation: "Flee there quickly, because I cannot do anything until you reach it. (That is why the town was called Zoar.)"
             }
         ]
     },
@@ -648,6 +968,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 20:2",
                 explanation: "And there Abraham said of his wife Sarah, 'She is my sister.' Then Abimelech king of Gerar sent for Sarah and took her."
+            },
+            {
+                id: 2,
+                question: "In what way did God speak to Abimelech to warn him about Sarah?",
+                options: ["Through a prophet", "Through a burning bush", "In a dream at night", "By a voice from heaven"],
+                answer: 2,
+                referenceVerse: "Genesis 20:3",
+                explanation: "But God came to Abimelech in a dream one night and said to him, 'You are as good as dead because of the woman you have taken; she is a married woman.'"
+            },
+            {
+                id: 3,
+                question: "How did Abimelech defend his actions when God confronted him in Chapter 20?",
+                options: ["He said he didn't care", "He said he did it with a clear conscience and clean hands", "He blamed Abraham", "He asked for forgiveness immediately"],
+                answer: 1,
+                referenceVerse: "Genesis 20:5",
+                explanation: "Did he not say to me, 'She is my sister,' and didn't she also say, 'He is my brother'? I have done this with a clear conscience and clean hands."
+            },
+            {
+                id: 4,
+                question: "What wealth did Abimelech give to Abraham as a peace offering after being warned by God?",
+                options: ["Sheep, cattle, slaves, and a thousand shekels of silver", "Only 10 pieces of gold", "His entire kingdom", "Nothing"],
+                answer: 0,
+                referenceVerse: "Genesis 20:14-16",
+                explanation: "Then Abimelech brought sheep and cattle and male and female slaves and gave them to Abraham... To Sarah he said, 'I am giving your brother a thousand shekels of silver.'"
+            },
+            {
+                id: 5,
+                question: "Why did Abraham say he had lied and said Sarah was his sister in Gerar?",
+                options: ["He wanted a new wife", "He thought there was no fear of God in that place and they would kill him", "He forgot they were married", "He was trying to trick the king"],
+                answer: 1,
+                referenceVerse: "Genesis 20:11",
+                explanation: "Abraham replied, 'I said to myself, \"There is surely no fear of God in this place, and they will kill me because of my wife.\"' "
             }
         ]
     },
@@ -671,6 +1023,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 21:6",
                 explanation: "Sarah said, 'God has brought me laughter, and everyone who hears about this will laugh with me.'"
+            },
+            {
+                id: 3,
+                question: "What did Ishmael do that upset Sarah during the feast on the day Isaac was weaned?",
+                options: ["He stole food", "He mocked or was playing with Isaac", "He ran away", "He refused to eat"],
+                answer: 1,
+                referenceVerse: "Genesis 21:9",
+                explanation: "But Sarah saw that the son whom Hagar the Egyptian had borne to Abraham was mocking."
+            },
+            {
+                id: 4,
+                question: "What happened to Hagar and Ishmael when their water ran out in the desert of Beersheba?",
+                options: ["They returned to Egypt", "God showed Hagar a well of water", "They found a river", "They were rescued by traders"],
+                answer: 1,
+                referenceVerse: "Genesis 21:17-19",
+                explanation: "God heard the boy crying... Then God opened her eyes and she saw a well of water."
+            },
+            {
+                id: 5,
+                question: "What was the name of the place where Abraham and Abimelech made a treaty over a well?",
+                options: ["Bethel", "Gerar", "Beersheba", "Hebron"],
+                answer: 2,
+                referenceVerse: "Genesis 21:31",
+                explanation: "So that place was called Beersheba, because the two men swore an oath there."
             }
         ]
     },
@@ -694,6 +1070,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 22:13",
                 explanation: "Abraham looked up and there in a thicket he saw a ram caught by its horns. He went over and took the ram and sacrificed it as a burnt offering instead of his son."
+            },
+            {
+                id: 3,
+                question: "What did Isaac carry as he and Abraham walked to the place of sacrifice?",
+                options: ["The fire", "The wood for the burnt offering", "The knife", "The ram"],
+                answer: 1,
+                referenceVerse: "Genesis 22:6",
+                explanation: "Abraham took the wood for the burnt offering and placed it on his son Isaac, and he himself carried the fire and the knife."
+            },
+            {
+                id: 4,
+                question: "What name did Abraham give to the place where God provided the ram?",
+                options: ["The LORD Is Peace", "The LORD Will Provide (Jehovah Jireh)", "The LORD Is My Banner", "The House of God"],
+                answer: 1,
+                referenceVerse: "Genesis 22:14",
+                explanation: "So Abraham called that place The LORD Will Provide. And to this day it is said, 'On the mountain of the LORD it will be provided.'"
+            },
+            {
+                id: 5,
+                question: "Who was mentioned as the father of Rebekah at the end of Chapter 22?",
+                options: ["Bethuel", "Laban", "Nahor", "Abimelech"],
+                answer: 0,
+                referenceVerse: "Genesis 22:23",
+                explanation: "Bethuel became the father of Rebekah."
             }
         ]
     },
@@ -717,6 +1117,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 0,
                 referenceVerse: "Genesis 23:8-9",
                 explanation: "Abraham bought the field and cave from Ephron the Hittite."
+            },
+            {
+                id: 3,
+                question: "How much silver did Abraham pay for the field and the cave of Machpelah?",
+                options: ["100 shekels", "400 shekels", "1,000 shekels", "50 pieces of gold"],
+                answer: 1,
+                referenceVerse: "Genesis 23:15-16",
+                explanation: "Abraham agreed to Ephron’s terms and weighed out for him the price he had named... four hundred shekels of silver."
+            },
+            {
+                id: 4,
+                question: "Why did Abraham insist on paying for the land instead of accepting it as a gift?",
+                options: ["He wanted to show off his wealth", "To ensure legal, permanent ownership as a burial site", "Because Ephron was poor", "God commanded him to pay"],
+                answer: 1,
+                referenceVerse: "Genesis 23:17-20",
+                explanation: "The field and the cave in it were deeded to Abraham by the Hittites as a burial site. Abraham wanted a legal purchase to avoid future disputes."
+            },
+            {
+                id: 5,
+                question: "In what land was the Cave of Machpelah located?",
+                options: ["Egypt", "The land of Shinar", "Canaan, near Mamre (Hebron)", "The land of Midian"],
+                answer: 2,
+                referenceVerse: "Genesis 23:19",
+                explanation: "Afterward Abraham buried his wife Sarah in the cave in the field of Machpelah near Mamre (which is at Hebron) in the land of Canaan."
             }
         ]
     },
@@ -740,6 +1164,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 24:29",
                 explanation: "Now Rebekah had a brother named Laban, and he hurried out to the man at the spring."
+            },
+            {
+                id: 3,
+                question: "What gold jewelry did the servant give to Rebekah at the spring?",
+                options: ["A crown", "A nose ring and two gold bracelets", "A necklace", "Anklets"],
+                answer: 1,
+                referenceVerse: "Genesis 24:22",
+                explanation: "When the camels had finished drinking, the man took out a gold nose ring weighing a beka and two gold bracelets weighing ten shekels."
+            },
+            {
+                id: 4,
+                question: "What did Rebekah do when she first saw Isaac approaching in the field?",
+                options: ["She ran to him", "She hid from him", "She got down from her camel and covered herself with a veil", "She sang a song"],
+                answer: 2,
+                referenceVerse: "Genesis 24:64-65",
+                explanation: "Rebekah also looked up and saw Isaac. She got down from her camel and asked the servant, 'Who is that man...?' 'He is my master,' the servant answered. So she took her veil and covered herself."
+            },
+            {
+                id: 5,
+                question: "Where did Isaac bring Rebekah after they met?",
+                options: ["To a new house", "Into the tent of his mother Sarah", "To Egypt", "To Hebron"],
+                answer: 1,
+                referenceVerse: "Genesis 24:67",
+                explanation: "Isaac brought her into the tent of his mother Sarah, and he married Rebekah. So she became his wife, and he loved her."
             }
         ]
     },
@@ -763,6 +1211,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 25:7",
                 explanation: "Abraham lived a hundred and seventy-five years."
+            },
+            {
+                id: 3,
+                question: "Who was the second wife Abraham married after Sarah's death?",
+                options: ["Keturah", "Hagar", "Milcah", "Basemath"],
+                answer: 0,
+                referenceVerse: "Genesis 25:1",
+                explanation: "Abraham had taken another wife, whose name was Keturah."
+            },
+            {
+                id: 4,
+                question: "What was Esau's physical appearance when he was born?",
+                options: ["Smooth and pale", "Red and his whole body was like a hairy garment", "Very tall", "Born with teeth"],
+                answer: 1,
+                referenceVerse: "Genesis 25:25",
+                explanation: "The first to come out was red, and his whole body was like a hairy garment; so they named him Esau."
+            },
+            {
+                id: 5,
+                question: "How old was Isaac when Rebekah gave birth to the twins, Jacob and Esau?",
+                options: ["40 years old", "50 years old", "60 years old", "100 years old"],
+                answer: 2,
+                referenceVerse: "Genesis 25:26",
+                explanation: "Isaac was sixty years old when Rebekah gave birth to them."
             }
         ]
     },
@@ -778,6 +1250,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 26:15",
                 explanation: "So all the wells that his father’s servants had dug in the time of his father Abraham, the Philistines stopped up, filling them with earth."
+            },
+            {
+                id: 2,
+                question: "What did God tell Isaac when he considered going to Egypt during a famine?",
+                options: ["Go to Egypt", "Do not go down to Egypt; live in the land where I tell you", "Return to Haran", "Build a city"],
+                answer: 1,
+                referenceVerse: "Genesis 26:2",
+                explanation: "The LORD appeared to Isaac and said, 'Do not go down to Egypt; live in the land where I tell you to live.'"
+            },
+            {
+                id: 3,
+                question: "Like his father Abraham, what lie did Isaac tell the people of Gerar about his wife Rebekah?",
+                options: ["She is my servant", "She is my sister", "She is my mother", "She is the queen"],
+                answer: 1,
+                referenceVerse: "Genesis 26:7",
+                explanation: "When the men of that place asked him about his wife, he said, 'She is my sister,' because he was afraid to say, 'She is my wife.'"
+            },
+            {
+                id: 4,
+                question: "What was the name of the well Isaac dug that the Philistines did not quarrel over?",
+                options: ["Esek", "Sitnah", "Rehoboth", "Beersheba"],
+                answer: 2,
+                referenceVerse: "Genesis 26:22",
+                explanation: "He moved on from there and dug another well, and no one quarreled over it. He named it Rehoboth, saying, 'Now the LORD has given us room and we will flourish in the land.'"
+            },
+            {
+                id: 5,
+                question: "Who was the king of the Philistines who made a treaty with Isaac at Beersheba?",
+                options: ["Pharaoh", "Abimelech", "Nimrod", "Chedorlaomer"],
+                answer: 1,
+                referenceVerse: "Genesis 26:26-31",
+                explanation: "Abimelech had come to him from Gerar... Isaac said to them, 'Why have you come to me...?' They answered, 'We saw clearly that the LORD was with you... Let us make a treaty with you.'"
             }
         ]
     },
@@ -801,6 +1305,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 27:33",
                 explanation: "Isaac trembled violently and said, 'Who was it, then, that hunted game and brought it to me?'"
+            },
+            {
+                id: 3,
+                question: "What did Esau bring to his father, only to find the blessing was already given?",
+                options: ["A flock of sheep", "Savory food made from wild game he had hunted", "Gold and silver", "The birthright document"],
+                answer: 1,
+                referenceVerse: "Genesis 27:30-31",
+                explanation: "Jacob had hardly left his father’s presence when his brother Esau came in from hunting. He too prepared some tasty food and brought it to his father."
+            },
+            {
+                id: 4,
+                question: "What was the primary part of the blessing Isaac gave to Jacob?",
+                options: ["Long life and many wives", "May God give you heaven’s dew and earth’s richness... be lord over your brothers", "May you be a mighty hunter", "May you return to Egypt"],
+                answer: 1,
+                referenceVerse: "Genesis 27:28-29",
+                explanation: "'May God give you heaven’s dew and earth’s richness... be lord over your brothers, and may the sons of your mother bow down to you.'"
+            },
+            {
+                id: 5,
+                question: "Where did Rebekah tell Jacob to flee to escape his brother Esau's anger?",
+                options: ["To Egypt", "To her brother Laban in Haran", "To the mountains", "To Beersheba"],
+                answer: 1,
+                referenceVerse: "Genesis 27:43",
+                explanation: "'Now then, my son, do what I say: Flee at once to my brother Laban in Haran.'"
             }
         ]
     },
@@ -824,6 +1352,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 28:19",
                 explanation: "He called that place Bethel, though the city used to be called Luz."
+            },
+            {
+                id: 3,
+                question: "What did Jacob use as a pillow the night he had his dream at Bethel?",
+                options: ["A bundle of wool", "A stone", "His cloak", "A wooden log"],
+                answer: 1,
+                referenceVerse: "Genesis 28:11",
+                explanation: "Taking one of the stones there, he put it under his head and lay down to sleep."
+            },
+            {
+                id: 4,
+                question: "What did Jacob do with the stone he had used as a pillow in the morning?",
+                options: ["Threw it away", "Set it up as a pillar and poured oil on top of it", "Brought it with him to Haran", "Broke it into pieces"],
+                answer: 1,
+                referenceVerse: "Genesis 28:18",
+                explanation: "Early the next morning Jacob took the stone he had placed under his head and set it up as a pillar and poured oil on top of it."
+            },
+            {
+                id: 5,
+                question: "What vow did Jacob make regarding his future and his wealth at Bethel?",
+                options: ["To build a palace", "If God will be with me... then the LORD will be my God and I will give a tenth of all I have", "To never return to Canaan", "To marry four wives"],
+                answer: 1,
+                referenceVerse: "Genesis 28:20-22",
+                explanation: "Then Jacob made a vow, saying, 'If God will be with me... then the LORD will be my God... and of all that you give me I will give you a tenth.'"
             }
         ]
     },
@@ -847,6 +1399,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 2,
                 referenceVerse: "Genesis 29:23",
                 explanation: "But when evening came, he took his daughter Leah and brought her to Jacob, and Jacob made love to her."
+            },
+            {
+                id: 3,
+                question: "How were Leah's eyes described in comparison to Rachel's appearance?",
+                options: ["Leah had beautiful eyes", "Leah had weak (delicate) eyes, but Rachel had a lovely figure and was beautiful", "Both were identical", "Leah was more beautiful"],
+                answer: 1,
+                referenceVerse: "Genesis 29:17",
+                explanation: "Leah had weak eyes, but Rachel had a lovely figure and was beautiful."
+            },
+            {
+                id: 4,
+                question: "In what order were the first four sons born to Leah mentioned in this chapter?",
+                options: ["Reuben, Simeon, Levi, Judah", "Judah, Levi, Simeon, Reuben", "Joseph, Benjamin, Dan, Gad", "Asher, Naphtali, Issachar, Zebulun"],
+                answer: 0,
+                referenceVerse: "Genesis 29:32-35",
+                explanation: "Leah became pregnant and gave birth to a son. She named him Reuben... she gave birth to another son and said... 'Simeon'... she conceived again... 'Levi'... she conceived again and said... 'Judah.'"
+            },
+            {
+                id: 5,
+                question: "Where did Jacob first meet Rachel?",
+                options: ["In Laban's house", "At a well in the field where shepherds were watering sheep", "In the city of Haran", "At his father's house"],
+                answer: 1,
+                referenceVerse: "Genesis 29:9-10",
+                explanation: "While he was still talking with them, Rachel came with her father’s sheep... Jacob... rolled the stone away from the mouth of the well and watered his uncle’s sheep."
             }
         ]
     },
@@ -862,6 +1438,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 2,
                 referenceVerse: "Genesis 30:23-24",
                 explanation: "She became pregnant and gave birth to a son... She named him Joseph."
+            },
+            {
+                id: 2,
+                question: "Who were the two sons born to Bilhah, Rachel's servant, whom Rachel claimed as her own?",
+                options: ["Gad and Asher", "Dan and Naphtali", "Issachar and Zebulun", "Joseph and Benjamin"],
+                answer: 1,
+                referenceVerse: "Genesis 30:6-8",
+                explanation: "Rachel said, 'God has vindicated me...'; so she named him Dan. Rachel’s servant Bilhah conceived again and bore Jacob a second son... Rachel named him Naphtali."
+            },
+            {
+                id: 3,
+                question: "What items did Reuben find in the fields that sparked a trade between Leah and Rachel?",
+                options: ["Gold coins", "Mandrakes", "Jewels", "Honey"],
+                answer: 1,
+                referenceVerse: "Genesis 30:14",
+                explanation: "During wheat harvest, Reuben went out into the fields and found some mandrakes, which he brought to his mother Leah. Rachel said to Leah, 'Please give me some of your son’s mandrakes.'"
+            },
+            {
+                id: 4,
+                question: "Through what method did Jacob increase the number of spotted and speckled sheep in his own flock?",
+                options: ["Better food", "Placing peeled branches of poplar, almond and plane trees in the watering troughs", "Buying them from traders", "Praying for a miracle"],
+                answer: 1,
+                referenceVerse: "Genesis 30:37-43",
+                explanation: "Jacob, however, took fresh-cut branches from poplar, almond and plane trees and made white stripes on them by peeling the bark... they bore young that were streaked or speckled or spotted."
+            },
+            {
+                id: 5,
+                question: "Who were the two sons born to Zilpah, Leah's servant, whom Leah claimed?",
+                options: ["Dan and Naphtali", "Gad and Asher", "Reuben and Simeon", "Levi and Judah"],
+                answer: 1,
+                referenceVerse: "Genesis 30:11-13",
+                explanation: "Then Leah said, 'What good fortune!' So she named him Gad. Leah’s servant Zilpah bore Jacob a second son. Then Leah said, 'How happy I am!'... So she named him Asher."
             }
         ]
     },
@@ -877,6 +1485,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 31:19",
                 explanation: "When Laban had gone to shear his sheep, Rachel stole her father’s household gods."
+            },
+            {
+                id: 2,
+                question: "In what way did God warn Laban not to say anything to Jacob, 'either good or bad'?",
+                options: ["Through a messenger", "In a dream at night", "A voice from the clouds", "A burning bush"],
+                answer: 1,
+                referenceVerse: "Genesis 31:24",
+                explanation: "Then God came to Laban the Aramean in a dream at night and said to him, 'Be careful not to say anything to Jacob, either good or bad.'"
+            },
+            {
+                id: 3,
+                question: "How did Rachel hide the stolen idols when Laban searched her tent?",
+                options: ["She buried them", "She put them in a chest", "She sat on them in her camel's saddle", "She gave them to a servant"],
+                answer: 2,
+                referenceVerse: "Genesis 31:34-35",
+                explanation: "Now Rachel had taken the household gods and put them inside her camel’s saddle and was sitting on them... She said to her father, 'Don’t be angry... I am having my period.'"
+            },
+            {
+                id: 4,
+                question: "What was the name of the marker (heap of stones) that Jacob and Laban set up as a boundary and witness?",
+                options: ["Bethel", "Mizpah (or Galeed)", "Peniel", "Hebron"],
+                answer: 1,
+                referenceVerse: "Genesis 31:47-49",
+                explanation: "Laban called it Jegar Sahadutha, and Jacob called it Galeed... It was also called Mizpah, because he said, 'May the LORD keep watch between you and me when we are away from each other.'"
+            },
+            {
+                id: 5,
+                question: "How many times did Jacob say Laban had changed his wages during the twenty years he worked for him?",
+                options: ["Never", "Three times", "Seven times", "Ten times"],
+                answer: 3,
+                referenceVerse: "Genesis 31:7, 41",
+                explanation: "Yet your father has cheated me by changing my wages ten times."
             }
         ]
     },
@@ -900,6 +1540,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 32:25",
                 explanation: "When the man saw that he could not overpower him, he touched the socket of Jacob’s hip so that his hip was wrenched as he wrestled with the man."
+            },
+            {
+                id: 3,
+                question: "Who did Jacob meet on his way after leaving Laban, causing him to say, 'This is the camp of God'?",
+                options: ["Esau", "The angels of God", "A group of traders", "His father Isaac"],
+                answer: 1,
+                referenceVerse: "Genesis 32:1-2",
+                explanation: "Jacob also went on his way, and the angels of God met him. When Jacob saw them, he said, 'This is the camp of God!' So he named that place Mahanaim."
+            },
+            {
+                id: 4,
+                question: "How many men were coming with Esau to meet Jacob, causing Jacob great fear?",
+                options: ["Twelve men", "One hundred men", "Four hundred men", "A thousand men"],
+                answer: 2,
+                referenceVerse: "Genesis 32:6-7",
+                explanation: "They reported, 'Esau is coming to meet you, and four hundred men are with him.' In great fear and distress Jacob divided the people..."
+            },
+            {
+                id: 5,
+                question: "What gift did Jacob prepare to send ahead to Esau to pacify him?",
+                options: ["Gold and jewels", "Herds of goats, sheep, camels, cows, and donkeys", "His favorite son Joseph", "The stolen birthright"],
+                answer: 1,
+                referenceVerse: "Genesis 32:13-15",
+                explanation: "He selected from what he had with him a gift for his brother Esau: two hundred female goats and twenty male goats, two hundred ewes and twenty rams... forty cows and ten bulls..."
             }
         ]
     },
@@ -915,6 +1579,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 33:4",
                 explanation: "But Esau ran to meet Jacob and embraced him; he threw his arms around his neck and kissed him. And they wept."
+            },
+            {
+                id: 2,
+                question: "In what order did Jacob arrange his family when meeting Esau to ensure the safety of those he loved most?",
+                options: ["Rachel and Joseph first", "The servants first, followed by Leah and her children, then Rachel and Joseph last", "Everyone together in one group", "The men in front and women behind"],
+                answer: 1,
+                referenceVerse: "Genesis 33:1-2",
+                explanation: "He put the female servants and their children in front, Leah and her children next, and Rachel and Joseph in the rear."
+            },
+            {
+                id: 3,
+                question: "How many times did Jacob bow down to the ground as he approached his brother Esau?",
+                options: ["Once", "Three times", "Seven times", "Twelve times"],
+                answer: 2,
+                referenceVerse: "Genesis 33:3",
+                explanation: "He himself went on ahead and bowed down to the ground seven times as he approached his brother."
+            },
+            {
+                id: 4,
+                question: "Where did Jacob eventually settle and buy a plot of ground for a hundred pieces of silver after leaving Esau?",
+                options: ["In Egypt", "Near the city of Shechem", "In Beersheba", "At Bethel"],
+                answer: 1,
+                referenceVerse: "Genesis 33:18-19",
+                explanation: "Jacob arrived safely at the city of Shechem in Canaan... For a hundred pieces of silver, he bought from the sons of Hamor the plot of ground where he pitched his tent."
+            },
+            {
+                id: 5,
+                question: "What did Jacob name the altar he built at Shechem?",
+                options: ["Bethel", "Peniel", "El Elohe Israel", "Jehovah Jireh"],
+                answer: 2,
+                referenceVerse: "Genesis 33:20",
+                explanation: "There he set up an altar and called it El Elohe Israel."
             }
         ]
     },
@@ -930,6 +1626,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 34:25",
                 explanation: "Two of Jacob’s sons, Simeon and Levi, Dinah’s brothers, took their swords and attacked the unsuspecting city, killing every male."
+            },
+            {
+                id: 2,
+                question: "Who was the prince of the region who seized and defiled Jacob's daughter Dinah?",
+                options: ["Hamor", "Shechem", "Abimelech", "Potiphar"],
+                answer: 1,
+                referenceVerse: "Genesis 34:2",
+                explanation: "Shechem son of Hamor the Hivite, the ruler of that area, saw her, he took her and violated her."
+            },
+            {
+                id: 3,
+                question: "What condition did the sons of Jacob give to the people of Shechem for them to intermarry?",
+                options: ["They must pay gold", "They must believe in God", "Every male must be circumcised", "They must move to a new land"],
+                answer: 2,
+                referenceVerse: "Genesis 34:14-17",
+                explanation: "We can’t do such a thing... only on one condition: that you become like us by circumcising all your males."
+            },
+            {
+                id: 4,
+                question: "How did Jacob react to the news of Simeon and Levi's slaughter of the people in Shechem?",
+                options: ["He was pleased", "He was troubled and feared the surrounding nations would destroy his family", "He threw a feast", "He made Simeon king"],
+                answer: 1,
+                referenceVerse: "Genesis 34:30",
+                explanation: "Then Jacob said to Simeon and Levi, 'You have brought trouble on me by making me obnoxious to the Canaanites... They will unite their forces against me and attack me, and I and my household will be destroyed.'"
+            },
+            {
+                id: 5,
+                question: "What was Hamor's response to the proposal of intermarriage?",
+                options: ["He refused", "He and his son Shechem agreed and convinced the men of their city to be circumcised", "He attacked Jacob", "He fled the land"],
+                answer: 1,
+                referenceVerse: "Genesis 34:18-24",
+                explanation: "Their proposal seemed good to Hamor and his son Shechem... All the men who went out of the city gate agreed with Hamor and his son Shechem, and every male in the city was circumcised."
             }
         ]
     },
@@ -953,6 +1681,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 3,
                 referenceVerse: "Genesis 35:28",
                 explanation: "Isaac lived a hundred and eighty years."
+            },
+            {
+                id: 3,
+                question: "What did God tell Jacob to do as soon as he arrived in Bethel?",
+                options: ["Plant a garden", "Build an altar to God who appeared to him when he was fleeing Esau", "Go to Egypt", "Build a palace"],
+                answer: 1,
+                referenceVerse: "Genesis 35:1",
+                explanation: "Then God said to Jacob, 'Go up to Bethel and settle there, and build an altar there to God, who appeared to you when you were fleeing from your brother Esau.'"
+            },
+            {
+                id: 4,
+                question: "What did Jacob's family do with their foreign gods and jewelry before going to Bethel?",
+                options: ["Brought them along", "Traded them for sheep", "Gave them to Jacob, who buried them under an oak at Shechem", "Threw them in the river"],
+                answer: 2,
+                referenceVerse: "Genesis 35:2-4",
+                explanation: "So they gave Jacob all the foreign gods they had and the rings in their ears, and Jacob buried them under the oak at Shechem."
+            },
+            {
+                id: 5,
+                question: "What was the name of Rachel's son born just before she died at Ephrath?",
+                options: ["Joseph", "Benjamin (Ben-Oni)", "Gad", "Asher"],
+                answer: 1,
+                referenceVerse: "Genesis 35:18",
+                explanation: "As she breathed her last—for she was dying—she named her son Ben-Oni. But his father named him Benjamin."
             }
         ]
     },
@@ -968,6 +1720,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 36:1",
                 explanation: "This is the account of the family line of Esau (that is, Edom)."
+            },
+            {
+                id: 2,
+                question: "Which region did Esau settle in, away from his brother Jacob?",
+                options: ["The hill country of Seir", "The land of Goshen", "The plain of Shinar", "The land of Canaan"],
+                answer: 0,
+                referenceVerse: "Genesis 36:6-9",
+                explanation: "Esau took his wives and sons and daughters... and moved to a land some distance from his brother Jacob... So Esau (that is, Edom) settled in the hill country of Seir."
+            },
+            {
+                id: 3,
+                question: "Who were Esau's three wives mentioned in this chapter?",
+                options: ["Leah, Rachel, and Zilpah", "Adah, Basemath, and Oholibamah", "Sarah, Rebekah, and Tamar", "Milcah, Sarai, and Hagar"],
+                answer: 1,
+                referenceVerse: "Genesis 36:2-3",
+                explanation: "Esau took his wives from the women of Canaan: Adah... Oholibamah... and Basemath."
+            },
+            {
+                id: 4,
+                question: "What was the title given to the leaders of the clans of Esau's descendants?",
+                options: ["Kings", "Chiefs (or Dukes)", "Priests", "Pharaohs"],
+                answer: 1,
+                referenceVerse: "Genesis 36:15",
+                explanation: "These were the chiefs among Esau’s descendants: The sons of Eliphaz... chief Teman, chief Omar..."
+            },
+            {
+                id: 5,
+                question: "Who was the son of Esau who was the father of Amalek?",
+                options: ["Eliphaz", "Reuel", "Jeush", "Korah"],
+                answer: 0,
+                referenceVerse: "Genesis 36:12",
+                explanation: "Esau’s son Eliphaz also had a concubine named Timna, who bore him Amalek."
             }
         ]
     },
@@ -991,6 +1775,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 37:25-28",
                 explanation: "So when the Midianite merchants came by, his brothers pulled Joseph up out of the cistern and sold him for twenty shekels of silver to the Ishmaelites..."
+            },
+            {
+                id: 3,
+                question: "What were the subjects of Joseph's two dreams that made his brothers hate him even more?",
+                options: ["Stars falling and rivers rising", "Bundles of grain bowing, and the sun, moon, and eleven stars bowing to him", "Lions and eagles", "A great flood"],
+                answer: 1,
+                referenceVerse: "Genesis 37:5-11",
+                explanation: "We were binding sheaves of grain out in the field when suddenly my sheaf rose... and your sheaves gathered around mine and bowed down to it... the sun and moon and eleven stars were bowing down to me."
+            },
+            {
+                id: 4,
+                question: "Which brother suggested that they should throw Joseph into a cistern rather than kill him?",
+                options: ["Judah", "Reuben", "Simeon", "Dan"],
+                answer: 1,
+                referenceVerse: "Genesis 37:21-22",
+                explanation: "When Reuben heard this, he tried to rescue him... 'Don’t shed any blood. Throw him into this cistern here in the wilderness, but don’t lay a hand on him.'"
+            },
+            {
+                id: 5,
+                question: "How did the brothers convince their father Jacob that Joseph had been killed?",
+                options: ["They found his body", "A witness told him", "They dipped his robe in goat's blood and showed it to him", "They sent a letter from Egypt"],
+                answer: 2,
+                referenceVerse: "Genesis 37:31-33",
+                explanation: "Then they got Joseph’s robe, slaughtered a goat and dipped the robe in the blood... and they took it to their father... He recognized it and said, 'It is my son’s robe!'"
             }
         ]
     },
@@ -1006,6 +1814,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 38:27-30",
                 explanation: "When the time came for her to give birth, there were twin boys in her womb... The first was named Perez... then his brother was named Zerah."
+            },
+            {
+                id: 2,
+                question: "Why did the LORD put Judah's first two sons, Er and Onan, to death?",
+                options: ["They were too old", "They were wicked in the LORD's sight", "They died in war", "They were killed by animals"],
+                answer: 1,
+                referenceVerse: "Genesis 38:7-10",
+                explanation: "But Er, Judah’s firstborn, was wicked in the LORD’s sight; so the LORD put him to death... What Onan did was wicked in the LORD’s sight; so the LORD put him to death also."
+            },
+            {
+                id: 3,
+                question: "How did Tamar trick Judah into fathering children with her?",
+                options: ["She married him legally", "She disguised herself as a prostitute by the roadside", "She stole his scepter", "She went to his sheep shearing camp openly"],
+                answer: 1,
+                referenceVerse: "Genesis 38:13-18",
+                explanation: "She took off her widow’s clothes, covered herself with a veil... and sat at the entrance to Enaim... When Judah saw her, he thought she was a prostitute."
+            },
+            {
+                id: 4,
+                question: "What items did Judah give to Tamar (thinking she was a prostitute) as a pledge?",
+                options: ["Gold and silver", "His seal and its cord, and his staff", "A flock of sheep", "His house"],
+                answer: 1,
+                referenceVerse: "Genesis 38:18",
+                explanation: "'What pledge shall I give you?' he asked. 'Your seal and its cord, and the staff in your hand,' she answered."
+            },
+            {
+                id: 5,
+                question: "What was Judah's reaction when he realized Tamar was the woman he had been with?",
+                options: ["He was angry", "He said, 'She is more righteous than I,' because he had not given her to his son Shelah", "He killed her", "He ignored the news"],
+                answer: 1,
+                referenceVerse: "Genesis 38:26",
+                explanation: "Judah recognized them and said, 'She is more righteous than I, since I wouldn’t give her to my son Shelah.'"
             }
         ]
     },
@@ -1029,6 +1869,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 39:17-20",
                 explanation: "She told him this story: 'That Hebrew slave you brought us came to me to make sport of me...' Joseph’s master took him and put him in prison."
+            },
+            {
+                id: 3,
+                question: "What did Potiphar's wife catch hold of when Joseph ran out of the house to avoid her?",
+                options: ["His hand", "His hair", "His cloak (garment)", "His bag"],
+                answer: 2,
+                referenceVerse: "Genesis 39:12",
+                explanation: "She caught him by his cloak and said, 'Come to bed with me!' But he left his cloak in her hand and ran out of the house."
+            },
+            {
+                id: 4,
+                question: "How did the text describe Joseph's physical appearance in this chapter?",
+                options: ["Old and frail", "Well-built and handsome", "Short and strong", "He was never described"],
+                answer: 1,
+                referenceVerse: "Genesis 39:6",
+                explanation: "Now Joseph was well-built and handsome."
+            },
+            {
+                id: 5,
+                question: "How did the prison warden treat Joseph while he was in custody?",
+                options: ["Cruelly", "He put him in charge of all those held in the prison", "He ignored him", "He kept him in a dark pit"],
+                answer: 1,
+                referenceVerse: "Genesis 39:21-23",
+                explanation: "The LORD was with him... he granted him favor in the eyes of the prison warden. So the warden put Joseph in charge of all those held in the prison."
             }
         ]
     },
@@ -1044,6 +1908,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 40:9-13",
                 explanation: "The chief cupbearer told Joseph his dream... Joseph said, 'This is what it means... within three days Pharaoh will lift up your head and restore you to your position.'"
+            },
+            {
+                id: 2,
+                question: "Why were the cupbearer and the baker in prison with Joseph?",
+                options: ["They committed theft", "They were foreign spies", "They had offended their master, the king of Egypt", "They were innocent bystanders"],
+                answer: 2,
+                referenceVerse: "Genesis 40:1-3",
+                explanation: "The chief cupbearer and the chief baker of the king of Egypt offended their master... Pharaoh was angry... and put them in custody in the house of the captain of the guard."
+            },
+            {
+                id: 3,
+                question: "What was the baker's dream that Joseph interpreted?",
+                options: ["Seven cows", "Three baskets of bread on his head; birds were eating out of the top one", "A great vine", "A lion"],
+                answer: 1,
+                referenceVerse: "Genesis 40:16-17",
+                explanation: "When the chief baker saw that Joseph had given a favorable interpretation, he said... 'In my dream there were three baskets of bread on my head... birds were eating them out of the basket on my head.'"
+            },
+            {
+                id: 4,
+                question: "What was Joseph's interpretation of the baker's dream?",
+                options: ["He would be promoted", "Pharaoh would behead him and impale his body on a pole", "He would go home", "He would become a king"],
+                answer: 1,
+                referenceVerse: "Genesis 40:18-19",
+                explanation: "Joseph said... 'Within three days Pharaoh will lift off your head and impale your body on a pole. And the birds will eat away your flesh.'"
+            },
+            {
+                id: 5,
+                question: "What did Joseph ask the cupbearer to do once he was restored to his position?",
+                options: ["Pay him gold", "Kill Potiphar", "Remember me and mention me to Pharaoh to get me out of this prison", "Forget he ever met him"],
+                answer: 2,
+                referenceVerse: "Genesis 40:14",
+                explanation: "But when all goes well with you, remember me and show me kindness; mention me to Pharaoh and get me out of this prison."
             }
         ]
     },
@@ -1067,6 +1963,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 41:46",
                 explanation: "Joseph was thirty years old when he entered the service of Pharaoh king of Egypt."
+            },
+            {
+                id: 3,
+                question: "What new Egyptian name did Pharaoh give to Joseph?",
+                options: ["Potiphera", "Zaphenath-Paneah", "Asenath", "Abimelech"],
+                answer: 1,
+                referenceVerse: "Genesis 41:45",
+                explanation: "Pharaoh gave Joseph the name Zaphenath-Paneah and gave him Asenath daughter of Potiphera, priest of On, to be his wife."
+            },
+            {
+                id: 4,
+                question: "Who was the wife Pharaoh gave to Joseph, and who was her father?",
+                options: ["Tamar daughter of Judah", "Asenath daughter of Potiphera", "Hagar the Egyptian", "Rebekah daughter of Bethuel"],
+                answer: 1,
+                referenceVerse: "Genesis 41:45",
+                explanation: "Pharaoh gave him Asenath daughter of Potiphera, priest of On, to be his wife."
+            },
+            {
+                id: 5,
+                question: "What were the names of Joseph's two sons born before the years of famine?",
+                options: ["Perez and Zerah", "Ephraim and Manasseh", "Manasseh and Ephraim", "Jacob and Esau"],
+                answer: 2,
+                referenceVerse: "Genesis 41:50-52",
+                explanation: "Before the years of famine came, two sons were born to Joseph... Joseph named his firstborn Manasseh... The second son he named Ephraim."
             }
         ]
     },
@@ -1090,6 +2010,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 42:24",
                 explanation: "He turned away from them and began to weep, but then went back and spoke to them again. He had Simeon taken from them and bound before their eyes."
+            },
+            {
+                id: 3,
+                question: "Why did Jacob NOT send Benjamin to Egypt with his other sons the first time?",
+                options: ["Benjamin was sick", "He was afraid that harm might come to him", "Benjamin refused to go", "Pharaoh only asked for ten brothers"],
+                answer: 1,
+                referenceVerse: "Genesis 42:4",
+                explanation: "But Jacob did not send Benjamin, Joseph’s brother, with the others, because he was afraid that harm might come to him."
+            },
+            {
+                id: 4,
+                question: "What did Joseph accuse his brothers of being when they first arrived in Egypt?",
+                options: ["Thieves", "Foreigners", "Spies", "Murderers"],
+                answer: 2,
+                referenceVerse: "Genesis 42:9",
+                explanation: "Then he remembered his dreams about them and said to them, 'You are spies! You have come to see where our land is unprotected.'"
+            },
+            {
+                id: 5,
+                question: "What did the brothers discover in their sacks when they stopped for the night on their way home?",
+                options: ["Waiters", "More grain than they bought", "Their silver they had paid for the grain", "A silver cup"],
+                answer: 2,
+                referenceVerse: "Genesis 42:27-28",
+                explanation: "At the place where they stopped for the night one of them opened his sack to get feed for his donkey, and he saw his silver in the mouth of his sack."
             }
         ]
     },
@@ -1105,6 +2049,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 43:9",
                 explanation: "Judah said to Israel his father... 'I myself will guarantee his safety; you can hold me personally responsible for him.'"
+            },
+            {
+                id: 2,
+                question: "What did Jacob tell his sons to take as gifts to the ruler of Egypt on their second trip?",
+                options: ["Gold and silver armor", "Choice fruits of the land—balm, honey, spices, myrrh, pistachios, and almonds", "Flocks of sheep", "Ten sets of fine clothes"],
+                answer: 1,
+                referenceVerse: "Genesis 43:11-12",
+                explanation: "Then their father Israel said to them... 'put some of the best products of the land in your bags and take them down to the man as a gift—a little balm and a little honey, some spices and myrrh, some pistachio nuts and almonds.'"
+            },
+            {
+                id: 3,
+                question: "Why were the brothers frightened when they were brought to Joseph's house?",
+                options: ["They thought they were being arrested for spying", "They thought it was because of the silver returned in their sacks", "They feared they would be poisoned", "They didn't like the Egyptian customs"],
+                answer: 1,
+                referenceVerse: "Genesis 43:18",
+                explanation: "Now the men were frightened when they were taken to Joseph’s house. They thought, 'We were brought here because of the silver that was put back into our sacks the first time.'"
+            },
+            {
+                id: 4,
+                question: "How much more food was given to Benjamin than to any of his brothers during the feast?",
+                options: ["Double", "Triple", "Five times as much", "Ten times as much"],
+                answer: 2,
+                referenceVerse: "Genesis 43:34",
+                explanation: "When portions were served to them from Joseph’s table, Benjamin’s portion was five times as much as anyone else’s."
+            },
+            {
+                id: 5,
+                question: "What did Joseph's steward say to the brothers about the silver they found in their sacks?",
+                options: ["'It's all right... your God has given you treasure in your sacks; I received your silver'", "'You must pay it back with interest'", "'You are under arrest'", "'Pharaoh has given you a gift'"],
+                answer: 0,
+                referenceVerse: "Genesis 43:23",
+                explanation: "'It’s all right,' he said. 'Don’t be afraid. Your God, the God of your father, has given you treasure in your sacks; I received your silver.' Then he brought Simeon out to them."
             }
         ]
     },
@@ -1120,6 +2096,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 2,
                 referenceVerse: "Genesis 44:12",
                 explanation: "Then he searched, beginning with the oldest and ending with the youngest. And the cup was found in Benjamin's sack."
+            },
+            {
+                id: 2,
+                question: "What 'crime' did Joseph's steward accuse the brothers of after they left the city?",
+                options: ["Stealing food", "Being spies again", "Stealing Joseph's silver cup", "Planning a revolt"],
+                answer: 2,
+                referenceVerse: "Genesis 44:4-6",
+                explanation: "Joseph said to his steward... 'Why have you repaid good with evil? Isn’t this the cup my master drinks from...?' When he overtook them, he spoke these words to them."
+            },
+            {
+                id: 3,
+                question: "What did the brothers say should happen to the person in whose sack the cup was found?",
+                options: ["He should be fined", "He should die, and the rest would become slaves", "He should be sent back to Canaan", "He should be imprisoned for a month"],
+                answer: 1,
+                referenceVerse: "Genesis 44:9",
+                explanation: "If any of your servants is found to have it, he will die; and the rest of us will become my lord’s slaves."
+            },
+            {
+                id: 4,
+                question: "How did the brothers react when the cup was found in Benjamin's sack?",
+                options: ["They laughed", "They abandoned Benjamin", "They tore their clothes and returned to the city", "They attacked the steward"],
+                answer: 2,
+                referenceVerse: "Genesis 44:13",
+                explanation: "At this, they tore their clothes. Then they all loaded their donkeys and returned to the city."
+            },
+            {
+                id: 5,
+                question: "What was Judah's plea to Joseph at the end of the chapter regarding Benjamin?",
+                options: ["Let me kill him myself", "He offered to stay as Joseph's slave in place of the boy", "Let the boy stay and I will come back later", "Benjamin is innocent"],
+                answer: 1,
+                referenceVerse: "Genesis 44:33-34",
+                explanation: "Now then, please let your servant remain here as my lord’s slave in place of the boy, and let the boy return with his brothers."
             }
         ]
     },
@@ -1135,6 +2143,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 45:5",
                 explanation: "And now, do not be distressed and do not be angry with yourselves for selling me here, because it was to save lives that God sent me ahead of you."
+            },
+            {
+                id: 2,
+                question: "Where did Joseph tell his brothers that he and the entire family would live in Egypt?",
+                options: ["In Cairo", "In the region of Goshen", "In the desert", "Near the palace"],
+                answer: 1,
+                referenceVerse: "Genesis 45:10",
+                explanation: "You shall live in the region of Goshen and be near me—you, your children and grandchildren, your flocks and herds, and all you have."
+            },
+            {
+                id: 3,
+                question: "How did Pharaoh react when he heard that Joseph's brothers had come?",
+                options: ["He was angry", "He was suspicious", "He and his officials were pleased", "He ordered them to leave immediately"],
+                answer: 2,
+                referenceVerse: "Genesis 45:16",
+                explanation: "When the news reached Pharaoh’s palace that Joseph’s brothers had come, Pharaoh and all his officials were pleased."
+            },
+            {
+                id: 4,
+                question: "What did Joseph give specifically to Benjamin before the brothers left for Canaan?",
+                options: ["A golden chariot", "300 shekels of silver and five sets of clothes", "A thousand sheep", "Nothing"],
+                answer: 1,
+                referenceVerse: "Genesis 45:22",
+                explanation: "To each of them he gave new clothing, but to Benjamin he gave three hundred shekels of silver and five sets of clothes."
+            },
+            {
+                id: 5,
+                question: "What was Jacob's reaction when his sons told him that Joseph was alive and ruler of all Egypt?",
+                options: ["He laughed", "He was stunned and did not believe them at first", "He wept for joy immediately", "He fell asleep"],
+                answer: 1,
+                referenceVerse: "Genesis 45:26",
+                explanation: "They told him, 'Joseph is still alive! In fact, he is ruler of all Egypt.' Jacob was stunned; he did not believe them."
             }
         ]
     },
@@ -1150,6 +2190,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 46:1-3",
                 explanation: "So Israel set out with all that was his, and when he reached Beersheba, he offered sacrifices to the God of his father Isaac. And God spoke to Israel in a vision at night..."
+            },
+            {
+                id: 2,
+                question: "How many members of Jacob's family (descendants) in total went to Egypt, according to the count in Chapter 46?",
+                options: ["Twelve", "Fifty", "Seventy", "One hundred"],
+                answer: 2,
+                referenceVerse: "Genesis 46:27",
+                explanation: "With the two sons who had been born to Joseph in Egypt, the members of Jacob’s family, which went to Egypt, were seventy in all."
+            },
+            {
+                id: 3,
+                question: "Which of Jacob's sons did he send ahead of him to Goshen to get directions from Joseph?",
+                options: ["Reuben", "Judah", "Simeon", "Levi"],
+                answer: 1,
+                referenceVerse: "Genesis 46:28",
+                explanation: "Now Israel sent Judah ahead of him to Joseph to get directions to Goshen."
+            },
+            {
+                id: 4,
+                question: "What was Joseph's reaction when he finally saw his father Jacob again in Goshen?",
+                options: ["He bowed down", "He threw his arms around him and wept for a long time", "He offered him a meal", "He introduced him to Pharaoh first"],
+                answer: 1,
+                referenceVerse: "Genesis 46:29",
+                explanation: "As soon as Joseph appeared before him, he threw his arms around his father and wept for a long time."
+            },
+            {
+                id: 5,
+                question: "What occupation did Joseph tell his family to say they had to Pharaoh, since 'all shepherds are detestable to the Egyptians'?",
+                options: ["Farmers", "Fishermen", "Keepers of livestock / shepherds", "Builders"],
+                answer: 2,
+                referenceVerse: "Genesis 46:31-34",
+                explanation: "'...You should answer, \"Your servants have tended livestock from our boyhood on, just as our fathers did.\" Then you will be allowed to settle in the region of Goshen, for all shepherds are detestable to the Egyptians.'"
             }
         ]
     },
@@ -1165,6 +2237,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 47:11",
                 explanation: "So Joseph settled his father and his brothers in Egypt and gave them property in the best part of the land, the district of Rameses (Goshen), as Pharaoh directed."
+            },
+            {
+                id: 2,
+                question: "How old was Jacob (Israel) when he stood before Pharaoh and blessed him?",
+                options: ["100 years old", "110 years old", "130 years old", "147 years old"],
+                answer: 2,
+                referenceVerse: "Genesis 47:9",
+                explanation: "And Jacob said to Pharaoh, 'The years of my pilgrimage are a hundred and thirty.'"
+            },
+            {
+                id: 3,
+                question: "As the famine continued, what did the people of Egypt eventually give to Pharaoh in exchange for food?",
+                options: ["Gold and silver armor", "Their land and themselves as slaves", "Their flocks of sheep", "Nothing, he gave it for free"],
+                answer: 1,
+                referenceVerse: "Genesis 47:18-21",
+                explanation: "'...there is nothing left... but our bodies and our land. Buy us and our land in exchange for food, and we with our land will be in bondage to Pharaoh.'"
+            },
+            {
+                id: 4,
+                question: "What portion of the harvest did Joseph establish as a law that should belong to Pharaoh?",
+                options: ["One tenth", "One fifth (20%)", "One half", "One third"],
+                answer: 1,
+                referenceVerse: "Genesis 47:24-26",
+                explanation: "But when the crop comes in, you are to give a fifth of it to Pharaoh. The other four-fifths you may keep... Joseph established it as a law concerning land in Egypt—still in force today—that a fifth of the produce belongs to Pharaoh."
+            },
+            {
+                id: 5,
+                question: "What was the only land that Joseph did NOT buy for Pharaoh during the famine?",
+                options: ["The land of Goshen", "The land of the priests", "The land of the foreigners", "His own house"],
+                answer: 1,
+                referenceVerse: "Genesis 47:22",
+                explanation: "However, he did not buy the land of the priests, because they received a fixed allowance from Pharaoh and had food enough..."
             }
         ]
     },
@@ -1180,6 +2284,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 48:14-19",
                 explanation: "But Israel reached out his right hand and put it on Ephraim’s head, though he was the younger... 'his younger brother will be greater than he.'"
+            },
+            {
+                id: 2,
+                question: "What did Jacob do regarding his grandsons Ephraim and Manasseh to ensure they would be full tribes of Israel?",
+                options: ["He gave them gold", "He adopted them as his own, equal to Reuben and Simeon", "He made them kings in Egypt", "He sent them back to Canaan"],
+                answer: 1,
+                referenceVerse: "Genesis 48:5",
+                explanation: "Now then, your two sons born to you in Egypt before I came to you here will be reckoned as mine; Ephraim and Manasseh will be mine, just as Reuben and Simeon are mine."
+            },
+            {
+                id: 3,
+                question: "Why did Joseph try to move his father's right hand from Ephraim's head to Manasseh's?",
+                options: ["Because Jacob was blind", "Because Manasseh was the firstborn", "He wanted a different blessing", "To trick his father"],
+                answer: 1,
+                referenceVerse: "Genesis 48:17-18",
+                explanation: "When Joseph saw his father placing his right hand on Ephraim’s head he was displeased... 'No, my father, this one is the firstborn; put your right hand on his head.'"
+            },
+            {
+                id: 4,
+                question: "What did Jacob say when he blessed the boys regarding the 'Angel' who had delivered him?",
+                options: ["'May the Angel who has delivered me from all harm bless these boys'", "'The Angel will lead you to war'", "'The Angel has left us'", "'Beware of the Angel'"],
+                answer: 0,
+                referenceVerse: "Genesis 48:16",
+                explanation: "...the Angel who has delivered me from all harm—may he bless these boys."
+            },
+            {
+                id: 5,
+                question: "What specific piece of land did Jacob give to Joseph as his extra portion?",
+                options: ["A garden in Egypt", "The entire land of Goshen", "A ridge of land (Shechem) he took from the Amorites", "Heavily forested mountains"],
+                answer: 2,
+                referenceVerse: "Genesis 48:22",
+                explanation: "And to you I give one more ridge of land than to your brothers, the ridge I took from the Amorites with my sword and my bow."
             }
         ]
     },
@@ -1195,6 +2331,38 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 49:9-10",
                 explanation: "You are a lion’s cub, Judah... The scepter will not depart from Judah, nor the ruler’s staff from between his feet."
+            },
+            {
+                id: 2,
+                question: "Why did Jacob say that his firstborn son, Reuben, would 'no longer excel'?",
+                options: ["Because he was lazy", "Because he went up onto his father's bed and defiled it", "Because he was a coward", "Because he stayed in Egypt"],
+                answer: 1,
+                referenceVerse: "Genesis 49:3-4",
+                explanation: "Reuben, you are my firstborn... turbulent as the waters, you will no longer excel, for you went up onto your father’s bed, onto my couch and defiled it."
+            },
+            {
+                id: 3,
+                question: "Which son did Jacob describe as 'a donkey lying down among the sheepfolds'?",
+                options: ["Dan", "Issachar", "Gad", "Asher"],
+                answer: 1,
+                referenceVerse: "Genesis 49:14",
+                explanation: "Issachar is a rawboned donkey lying down among the sheepfolds."
+            },
+            {
+                id: 4,
+                question: "What animal did Jacob compare his son Benjamin to in his final prophecy?",
+                options: ["A lion", "A ravenous wolf", "A wild donkey", "A serpent"],
+                answer: 1,
+                referenceVerse: "Genesis 49:27",
+                explanation: "Benjamin is a ravenous wolf; in the morning he devours the prey, in the evening he divides the plunder."
+            },
+            {
+                id: 5,
+                question: "Where did Jacob give final instructions to be buried before he died?",
+                options: ["In Egypt", "In the cave in the field of Machpelah, near Mamre", "At Bethel", "In Shechem"],
+                answer: 1,
+                referenceVerse: "Genesis 49:29-32",
+                explanation: "Then he gave them these instructions: '...Bury me with my fathers in the cave in the field of Machpelah, near Mamre in Canaan...'"
             }
         ]
     },
@@ -1218,6 +2386,30 @@ export const genesisQuizzes: Record<string, any> = {
                 answer: 1,
                 referenceVerse: "Genesis 50:25",
                 explanation: "And Joseph made the Israelites swear an oath and said, 'God will surely come to your aid, and then you must carry my bones up from this place.'"
+            },
+            {
+                id: 3,
+                question: "How long did the Egyptians mourn for Jacob (Israel) after his death?",
+                options: ["Seven days", "Forty days", "Seventy days", "A whole year"],
+                answer: 2,
+                referenceVerse: "Genesis 50:3",
+                explanation: "Taking forty days, for that was the time required for embalming. And the Egyptians mourned for him seventy days."
+            },
+            {
+                id: 4,
+                question: "What comforting words did Joseph say to his brothers when they feared his revenge after Jacob's death?",
+                options: ["'I will never forgive you'", "'You intended to harm me, but God intended it for good'", "'You must leave Egypt now'", "'I am your king now'"],
+                answer: 1,
+                referenceVerse: "Genesis 50:20",
+                explanation: "You intended to harm me, but God intended it for good to accomplish what is now being done, the saving of many lives."
+            },
+            {
+                id: 5,
+                question: "How old was Joseph when he died in Egypt?",
+                options: ["100 years old", "110 years old", "120 years old", "130 years old"],
+                answer: 1,
+                referenceVerse: "Genesis 50:26",
+                explanation: "So Joseph died at the age of a hundred and ten. And after they embalmed him, he was placed in a coffin in Egypt."
             }
         ]
     }
