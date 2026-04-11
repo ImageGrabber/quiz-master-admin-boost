@@ -203,10 +203,6 @@ export default function BibleQA() {
         </div>
         
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white pt-20">
-          <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-md mb-8 animate-in fade-in slide-in-from-top-4 duration-1000">
-            <Brain className="w-4 h-4 text-white" />
-            <span className="text-sm font-light tracking-widest uppercase italic tracking-[0.3em]">Master the Scriptures</span>
-          </div>
           <h1 className="text-6xl md:text-9xl font-normal mb-8 leading-tight tracking-tighter animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
             Bible Q&A <span className="italic font-serif">Hub</span>
           </h1>
@@ -214,18 +210,18 @@ export default function BibleQA() {
             Search through all 66 books, explore cinematic study hubs, and challenge yourself with interactive Scripture quizzes.
           </p>
           
-          <div className="max-w-2xl mx-auto mb-12 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700">
+          <div className="max-w-3xl mx-auto mb-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700">
             <div className="relative group">
-              <Search className="absolute left-8 top-1/2 transform -translate-y-1/2 text-white/40 group-focus-within:text-white w-6 h-6 transition-colors" strokeWidth={1} />
+              <Search className="absolute left-8 top-1/2 transform -translate-y-1/2 text-black/40 group-focus-within:text-black w-6 h-6 transition-colors" strokeWidth={1} />
               <Input
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search books (e.g., Genesis, Matthew)..."
-                className="pl-20 pr-10 py-10 text-xl font-light border-white/20 bg-white/10 backdrop-blur-2xl focus:bg-white/20 focus:ring-0 focus:border-white/40 rounded-[2.5rem] placeholder:text-white/30 text-white shadow-2xl transition-all duration-500"
+                className="pl-20 pr-10 py-12 text-2xl font-light border-transparent bg-white focus:bg-white focus:ring-0 rounded-[2.5rem] placeholder:text-black/30 text-black shadow-2xl transition-all duration-500"
               />
               
               {searchQuery && (
-                <div className="absolute top-full left-0 right-0 mt-4 bg-white/95 backdrop-blur-3xl rounded-[2rem] shadow-2xl border border-white/20 max-h-80 overflow-y-auto text-left z-50 p-2 overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
+                <div className="absolute top-full left-0 right-0 mt-4 bg-white backdrop-blur-3xl rounded-[2rem] shadow-2xl border border-gray-100 max-h-80 overflow-y-auto text-left z-50 p-2 overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
                   {filteredBooks.length > 0 ? (
                     filteredBooks.map((book) => (
                       <button
@@ -233,7 +229,7 @@ export default function BibleQA() {
                         onClick={() => handleSearch(book)}
                         className="w-full px-8 py-5 hover:bg-black hover:text-white rounded-2xl flex items-center justify-between transition-all group/item"
                       >
-                        <span className="text-lg font-light">{book}</span>
+                        <span className="text-lg font-normal">{book}</span>
                         <ChevronRight className="w-5 h-5 opacity-0 group-hover/item:opacity-100 transition-opacity" />
                       </button>
                     ))
@@ -245,14 +241,14 @@ export default function BibleQA() {
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-900">
-            <a href="#hubs" className="px-8 py-4 rounded-full border border-white/20 bg-white/5 hover:bg-white hover:text-black backdrop-blur-md text-sm font-light tracking-widest uppercase transition-all">
+          <div className="flex flex-wrap justify-center gap-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-900">
+            <a href="#hubs" className="px-12 py-6 rounded-full bg-white text-black hover:bg-black hover:text-white hover:scale-105 transition-all shadow-2xl shadow-black/20 text-xs font-bold tracking-[0.3em] uppercase">
               Study Hubs
             </a>
-            <a href="#quizzes" className="px-8 py-4 rounded-full border border-white/20 bg-white/5 hover:bg-white hover:text-black backdrop-blur-md text-sm font-light tracking-widest uppercase transition-all">
+            <a href="#quizzes" className="px-12 py-6 rounded-full bg-white text-black hover:bg-black hover:text-white hover:scale-105 transition-all shadow-2xl shadow-black/20 text-xs font-bold tracking-[0.3em] uppercase">
               Featured Quizzes
             </a>
-            <a href="#categories" className="px-8 py-4 rounded-full border border-white/20 bg-white/5 hover:bg-white hover:text-black backdrop-blur-md text-sm font-light tracking-widest uppercase transition-all">
+            <a href="#categories" className="px-12 py-6 rounded-full bg-white text-black hover:bg-black hover:text-white hover:scale-105 transition-all shadow-2xl shadow-black/20 text-xs font-bold tracking-[0.3em] uppercase">
               Categories
             </a>
           </div>

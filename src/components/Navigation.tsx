@@ -98,10 +98,10 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
     `}>
       <div className="flex items-center space-x-8">
         <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate("/")}>
-          <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-colors ${transparent && !isScrolled ? 'bg-white' : 'bg-black'}`}>
+          <div className={`w-6 h-6 rounded-full flex items-center justify-center transition-colors shadow-sm ${transparent && !isScrolled ? 'bg-white' : 'bg-black'}`}>
             <Brain className={`w-3 h-3 ${transparent && !isScrolled ? 'text-black' : 'text-white'}`} />
           </div>
-          <span className={`text-xl md:text-2xl font-urbanist font-semibold transition-colors ${transparent && !isScrolled ? 'text-white' : 'text-gray-900'}`}>Bible Quiz Competition</span>
+          <span className={`text-xl md:text-2xl font-urbanist font-bold transition-all ${transparent && !isScrolled ? 'text-white drop-shadow-sm' : 'text-gray-900'}`}>Bible Quiz Competition</span>
         </div>
 
         <nav className="hidden md:flex items-center space-x-6">
@@ -143,9 +143,9 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
 
           <button onClick={() => navigate("/articles")} className={navItemClass}>Articles</button>
           <button onClick={() => navigate("/kids-stories")} className={`
-            text-base md:text-lg font-urbanist font-medium px-3 py-1 rounded-full border transition-all
+            text-base md:text-lg font-urbanist font-medium px-4 py-1.5 rounded-full border transition-all shadow-sm
             ${transparent && !isScrolled 
-              ? 'text-white bg-white/10 border-white/20 hover:bg-white/20' 
+              ? 'text-white bg-white/20 border-white/30 hover:bg-white/30' 
               : 'text-orange-600 bg-orange-50 border-orange-100 hover:text-orange-700'}
           `}>Kids Stories</button>
           <button onClick={() => navigate("/help")} className={navItemClass}>Help</button>
@@ -157,7 +157,7 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
         {/* Search Bar */}
         <div ref={searchRef} className="hidden md:block relative">
           <div className="relative">
-            <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 transition-colors ${transparent && !isScrolled ? 'text-white/40' : 'text-gray-400'}`} />
+            <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 transition-colors ${transparent && !isScrolled ? 'text-white/60' : 'text-gray-400'}`} />
             <Input
               type="text"
               placeholder="Search..."
@@ -165,9 +165,9 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => searchQuery.trim() && setShowSearchResults(true)}
               className={`
-                pl-10 pr-10 w-80 md:w-96 h-10 md:h-11 text-base font-urbanist font-light transition-all
+                pl-10 pr-10 w-80 md:w-96 h-10 md:h-11 text-base font-urbanist font-light transition-all backdrop-blur-md
                 ${transparent && !isScrolled 
-                  ? 'bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:bg-white/20 focus:border-white/40' 
+                  ? 'bg-white/20 border-white/30 text-white placeholder:text-white/60 focus:bg-white/30 focus:border-white/50' 
                   : 'bg-white border-gray-300 text-gray-900 focus:border-gray-400'}
               `}
             />
