@@ -143,7 +143,7 @@ function generateSitemap() {
   // Bible Questions and Answers Hub (Chapter and Range Quizzes)
   for (const [book, chapters] of Object.entries(bibleStructure)) {
     // 1. Chapters (ch1-beginner, ch1-advanced, etc.)
-    for (let i = 1; i <= (chapters as number); i++) {
+    for (let i = 1; i <= chapters; i++) {
         ['beginner', 'advanced'].forEach(diff => {
             urls.push({
                 loc: `/bible-questions-and-answers-hub/${book}/ch${i}-${diff}`,
@@ -154,10 +154,10 @@ function generateSitemap() {
     }
 
     // 2. Ranges (ch1-12-beginner, etc.) - Match GenericBookHub logic
-    const numRanges = Math.ceil((chapters as number) / 12);
+    const numRanges = Math.ceil(chapters / 12);
     for (let i = 0; i < numRanges; i++) {
         const start = i * 12 + 1;
-        const end = Math.min((i + 1) * 12, (chapters as number));
+        const end = Math.min((i + 1) * 12, chapters);
         const range = `${start}-${end}`;
         
         ['beginner', 'advanced'].forEach(diff => {
@@ -172,7 +172,7 @@ function generateSitemap() {
 
   // Song pages
   urls.push({ loc: '/songs', priority: '0.9', changefreq: 'weekly' });
-  const uniqueSongSlugs = new Set<string>();
+  const uniqueSongSlugs = new Set();
   
   // Add hardcoded song slugs
   ['ithratholam-yahova-sahayichu', 'lokamam-gambhira-varidhiyil', 'aswasame-enikkere-thingeedunnu', 'ente-daivam-mahathwathil'].forEach(slug => uniqueSongSlugs.add(slug));
@@ -182,7 +182,7 @@ function generateSitemap() {
   if (fs.existsSync(migratedSongsPath)) {
     try {
       const migratedSongs = JSON.parse(fs.readFileSync(migratedSongsPath, 'utf-8'));
-      migratedSongs.forEach((song: any) => {
+      migratedSongs.forEach((song) => {
         if (song.slug) uniqueSongSlugs.add(song.slug);
       });
     } catch (e) {
@@ -205,7 +205,7 @@ function generateSitemap() {
     const englishSongs = JSON.parse(fs.readFileSync(englishSongsJsonPath, 'utf-8'));
     urls.push({ loc: '/english-songs', priority: '0.9', changefreq: 'weekly' });
 
-    const uniqueEnglishSlugs = new Set<string>();
+    const uniqueEnglishSlugs = new Set();
     for (const song of englishSongs) {
       if (!song.slug || uniqueEnglishSlugs.has(song.slug)) continue;
       uniqueEnglishSlugs.add(song.slug);
@@ -224,7 +224,7 @@ function generateSitemap() {
     const hindiSongs = JSON.parse(fs.readFileSync(hindiSongsJsonPath, 'utf-8'));
     urls.push({ loc: '/hindi-songs', priority: '0.9', changefreq: 'weekly' });
 
-    const uniqueHindiSlugs = new Set<string>();
+    const uniqueHindiSlugs = new Set();
     for (const song of hindiSongs) {
       if (!song.slug || uniqueHindiSlugs.has(song.slug)) continue;
       uniqueHindiSlugs.add(song.slug);

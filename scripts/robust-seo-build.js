@@ -13,7 +13,7 @@ console.log('🚀 Starting Robust SEO build process...');
 try {
   // Step 1: Generate sitemap
   console.log('📋 Generating sitemap...');
-  execSync('npx tsx scripts/generate-sitemap.ts', { stdio: 'inherit' });
+  execSync('node scripts/generate-sitemap.js', { stdio: 'inherit' });
 
   // Step 2: Build with Vite
   console.log('⚡ Building with Vite...');
@@ -22,7 +22,7 @@ try {
 
   // Step 4: Generate static fallbacks (this is the most important part)
   console.log('📄 Generating static HTML fallbacks...');
-  execSync('npx tsx scripts/generate-static-pages.ts', { stdio: 'inherit' });
+  execSync('node scripts/generate-static-pages.js', { stdio: 'inherit' });
 
   // Step 5: Verify build output
   const distDir = path.join(__dirname, '../dist');

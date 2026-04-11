@@ -20,7 +20,7 @@ const bibleStructure = {
     "2-john": 1, "3-john": 1, jude: 1, revelation: 22
 };
 
-const bookNames: Record<string, string> = {
+const bookNames = {
     "genesis": "Genesis", "exodus": "Exodus", "leviticus": "Leviticus", "numbers": "Numbers", "deuteronomy": "Deuteronomy",
     "joshua": "Joshua", "judges": "Judges", "ruth": "Ruth", "1-samuel": "1 Samuel", "2-samuel": "2 Samuel",
     "1-kings": "1 Kings", "2-kings": "2 Kings", "1-chronicles": "1 Chronicles", "2-chronicles": "2 Chronicles",
@@ -63,7 +63,7 @@ const articles = [
 
 // Reference existing migrated songs JSON directly to avoid module loading conflicts
 const migratedSongsPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/data/migrated-songs.json');
-let allSongs: any[] = [
+let allSongs = [
     { slug: "ithratholam-yahova-sahayichu", title: "Ithratholam Yahova Sahayichu", description: "Worship along with this beautiful melody." },
     { slug: "lokamam-gambhira-varidhiyil", title: "Lokamam Gambhira Varidhiyil", description: "Christian Malayalam Devotional Song." }
 ];
@@ -196,7 +196,7 @@ const bibleBooks = [
   '2-john', '3-john', 'jude', 'revelation'
 ];
 
-function escapeHtml(value: string) {
+function escapeHtml(value) {
   return value
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -205,11 +205,11 @@ function escapeHtml(value: string) {
     .replace(/'/g, '&#39;');
 }
 
-function escapeRegex(value: string) {
+function escapeRegex(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function upsertMetaTag(html: string, attr: 'name' | 'property', key: string, content: string) {
+function upsertMetaTag(html, attr, key, content) {
   const escapedKey = escapeRegex(key);
   const regex = new RegExp(`<meta\\s+${attr}=["']${escapedKey}["'][\\s\\S]*?\\/?>`, 'i');
   const replacement = `<meta ${attr}="${key}" content="${escapeHtml(content)}" />`;
@@ -219,7 +219,7 @@ function upsertMetaTag(html: string, attr: 'name' | 'property', key: string, con
   return html.replace('</head>', `${replacement}\n</head>`);
 }
 
-function upsertCanonical(html: string, href: string) {
+function upsertCanonical(html, href) {
   const regex = /<link\s+rel=["']canonical["'][\s\S]*?\/?>/i;
   const replacement = `<link rel="canonical" href="${href}" />`;
   if (regex.test(html)) {
@@ -229,7 +229,7 @@ function upsertCanonical(html: string, href: string) {
 }
 
 // Generate HTML using the app shell template
-function generateHTML(page: any, templateHtml: string) {
+function generateHTML(page, templateHtml) {
   let html = templateHtml;
   const pageUrl = `https://biblequizcompetition.com${page.path}`;
 
@@ -281,7 +281,7 @@ function generateStaticPages() {
   let templateHtml = '';
   try {
     templateHtml = fs.readFileSync(indexHtmlPath, 'utf-8');
-  } catch (err) { // @ts-ignore
+  } catch (err) {
     console.error('❌ Could not read dist/index.html:', err.message);
     process.exit(1);
   }
@@ -395,7 +395,7 @@ function generateStaticPages() {
                 </div>
                 <div class="mt-8 pt-8 border-t border-gray-100">
                   <div class="flex flex-wrap gap-2">
-                    ${article.tags.map((tag: any) => `<span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">${tag}</span>`).join('')}
+                    ${article.tags.map((tag) => `<span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">${tag}</span>`).join('')}
                   </div>
                 </div>
               </div>
@@ -425,7 +425,7 @@ function generateStaticPages() {
   // Generate Chapter Pages (Programmatic SEO)
   console.log('Generating Bible chapter pages...');
 
-  for (const [book, chapters] of Object.entries(bibleStructure)) { // @ts-ignore
+  for (const [book, chapters] of Object.entries(bibleStructure)) { 
     const bookName = bookNames[book] || book.charAt(0).toUpperCase() + book.slice(1);
     const bookDir = path.join(distDir, 'public-quiz', book);
 
@@ -433,7 +433,7 @@ function generateStaticPages() {
       fs.mkdirSync(bookDir, { recursive: true });
     }
 
-    for (let i = 1; i <= (chapters as number); i++) {
+    for (let i = 1; i <= chapters; i++) {
       const chapter = `chapter-${i}`;
       const page = {
         path: `/public-quiz/${book}/${chapter}`,
