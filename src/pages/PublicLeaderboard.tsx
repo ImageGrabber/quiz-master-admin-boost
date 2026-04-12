@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Trophy, Medal, Crown, Star, Users, TrendingUp, Award, Calendar, Clock, Target, Bolt, Menu, Brain, Search, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { Footer } from "@/components/Footer";
 
 interface LeaderboardEntry {
   id: string;
@@ -385,45 +386,7 @@ export default function PublicLeaderboard() {
         </Card>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 pt-16 pb-8 mt-16">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row md:justify-between md:items-start gap-12">
-          {/* Left: Logo and description */}
-          <div className="flex-1 min-w-[220px] flex flex-col items-start mb-8 md:mb-0">
-            <div className="flex items-center mb-4">
-              <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center mr-2">
-                <Brain className="w-3 h-3 text-white" />
-              </div>
-              <span className="text-lg font-urbanist font-semibold text-gray-900">Bible Quiz Competition</span>
-            </div>
-            <p className="mb-4 font-urbanist font-light text-gray-600 max-w-xs">Empower your faith with fun, challenging Bible quizzes for all ages. Compete, learn, and grow in your knowledge of Scripture!</p>
-            <p className="font-urbanist font-light text-gray-600 text-sm">Need help? Email <a href="mailto:info@biblequizcompetition.com" className="underline">info@biblequizcompetition.com</a></p>
-          </div>
-          {/* Center/Right: Links */}
-          <div className="flex flex-1 flex-col sm:flex-row justify-end gap-12">
-            <div>
-              <h4 className="font-urbanist font-semibold text-gray-900 mb-3">Company</h4>
-              <ul className="space-y-3">
-                <li><a href="/" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Home</a></li>
-                <li><a href="/bible-questions-and-answers-hub" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Bible Q&amp;A</a></li>
-                <li><a href="/public-leaderboard" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Leaderboard</a></li>
-                <li><a href="/auth/login" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Sign In</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-urbanist font-semibold text-gray-900 mb-3">Support</h4>
-              <ul className="space-y-3">
-                <li><a href="/help" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Help Center</a></li>
-                <li><a href="#faq" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">FAQ</a></li>
-                <li><a href="mailto:info@biblequizcompetition.com" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Contact Us</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto px-6 mt-12 border-t border-gray-200 pt-8 text-center">
-          <span className="font-urbanist font-light text-gray-600">© 2024 Bible Quiz Competition. All rights reserved.</span>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 } 

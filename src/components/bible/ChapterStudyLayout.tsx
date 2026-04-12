@@ -7,6 +7,7 @@ import { VerseContextDialog } from "./VerseContextDialog";
 import SEO from "@/components/SEO";
 import { BibleChapter } from "@/data/bibleData";
 import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 
 interface ChapterStudyLayoutProps {
   book: string;
@@ -242,28 +243,7 @@ export default function ChapterStudyLayout({ book, chapterId, content, mode, que
         highlightVerse={selectedVerse || ""}
       />
 
-      {/* Premium Infinite Footer */}
-      <footer className="py-20 bg-white border-t border-gray-50 text-center">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-center space-x-2 mb-10">
-            <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center">
-              <Brain className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-2xl font-semibold text-gray-900 tracking-tight">Bible Quiz Competition</span>
-          </div>
-          <p className="text-gray-400 font-light text-lg mb-10 max-w-sm mx-auto leading-relaxed">
-            Helping you master the Word of God through premium study guides and interactive challenges.
-          </p>
-          <div className="flex justify-center gap-10 text-gray-400 font-light tracking-wide text-sm mb-10">
-            <button key="terms" className="hover:text-black transition-colors">Terms</button>
-            <button key="privacy" className="hover:text-black transition-colors">Privacy</button>
-            <button key="support" className="hover:text-black transition-colors">Support</button>
-          </div>
-          <div className="text-gray-300 font-light text-xs">
-            © 2025 ALL RIGHTS RESERVED
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

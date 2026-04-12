@@ -14,6 +14,7 @@ import {
 import { sendQuizCompletionEmailWithFallback, QuizCompletionEmailData } from "@/lib/emailService";
 import SEO from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 
 interface Question {
   chapter: number;
@@ -184,52 +185,7 @@ const BibleBookQuiz = ({ title, questions, bookName, difficulty = "beginner", us
   const renderLandingFooter = () => {
     if (!useLandingShell) return null;
 
-    return (
-      <footer className="border-t border-gray-200 py-16 bg-gray-50 mt-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-            <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
-                  <Brain className="w-3 h-3 text-white" />
-                </div>
-                <span className="text-lg font-urbanist font-light text-gray-900">Bible Quiz Competition</span>
-              </div>
-              <p className="font-urbanist font-light text-gray-600 mb-4 max-w-md">
-                Free Bible quiz platform that helps you test your knowledge, compete with others, and grow in your understanding of Scripture.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-medium text-gray-900 mb-4 font-urbanist">Product</h3>
-              <ul className="space-y-3">
-                <li><a href="/todays-quiz" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Today's Quiz</a></li>
-                <li><a href="/weekly-quiz" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Weekly Quiz</a></li>
-                <li><a href="/public-leaderboard" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Leaderboard</a></li>
-                <li><a href="/help" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Help</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-medium text-gray-900 mb-4 font-urbanist">Support</h3>
-              <ul className="space-y-3">
-                <li><a href="/help" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Help Center</a></li>
-                <li><a href="/bible-questions-and-answers-hub" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Bible Q&A Hub</a></li>
-                <li><a href="mailto:info@biblequizcompetition.com" className="font-urbanist font-light text-gray-600 hover:text-gray-900 transition-colors">Contact Us</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-200 pt-8 mt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="flex items-center space-x-6 mb-4 md:mb-0">
-                <span className="font-urbanist font-light text-gray-600">© 2026 Bible Quiz Competition. All rights reserved.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
-    );
+    return <Footer />;
   };
 
   if (isCompleted) {

@@ -331,22 +331,7 @@ export default function NehemiahHub() {
         </div>
       </main>
 
-      {/* Modern, Low-profile Footer */}
-      <footer className="mt-20 border-t border-stone-200 bg-white py-12">
-        <div className="container mx-auto px-4 text-center sm:px-6">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-stone-100 text-stone-400 mx-auto mb-6">
-            <BookOpen className="h-6 w-6" />
-          </div>
-          <p className="text-sm text-stone-500 max-w-md mx-auto mb-6">
-            Deepen your walk with God through structured study, interactive testing, and historical context.
-          </p>
-          <div className="flex justify-center gap-6">
-            <button onClick={() => navigate('/')} className="text-xs font-bold uppercase tracking-widest text-stone-400 hover:text-stone-900 transition-colors">Home</button>
-            <button onClick={() => navigate('/bible-questions-and-answers-hub')} className="text-xs font-bold uppercase tracking-widest text-stone-400 hover:text-stone-900 transition-colors">Main Hub</button>
-            <button onClick={() => navigate('/dashboard')} className="text-xs font-bold uppercase tracking-widest text-stone-400 hover:text-stone-900 transition-colors">My Profile</button>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

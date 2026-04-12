@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { bibleBooks, featuredQuizzes, categories as categoryData, bibleStructure } from "@/data/bible-data";
 import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 
 const getBookSlug = (book: string) => {
   return book.toLowerCase().replace(/ /g, "-");
@@ -528,50 +529,7 @@ export default function BibleQA() {
         )}
       </div>
 
-      <footer className="bg-white border-t border-gray-100 pt-32 pb-20">
-        <div className="max-w-[1700px] mx-auto px-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-20 mb-32">
-            <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center space-x-3 mb-10">
-                <div className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center transform -rotate-6 transition-transform hover:rotate-0">
-                  <Brain className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-2xl font-bold text-gray-900 tracking-tighter">Bible Quiz <span className="italic serif font-normal">Competition</span></span>
-              </div>
-              <p className="text-xl text-gray-400 font-light leading-relaxed max-w-sm italic serif">
-                "Thy word is a lamp unto my feet, and a light unto my path."
-              </p>
-              <p className="text-gray-400 font-light leading-relaxed max-w-sm mt-8">
-                Empowering faith through interactive Scripture knowledge and cinematic study experiences.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-bold text-gray-900 mb-10 uppercase tracking-[0.3em] text-[10px]">Quick Links</h4>
-              <ul className="space-y-6 text-sm font-medium text-gray-400">
-                <li><button onClick={() => navigate("/bible-questions-and-answers-hub")} className="hover:text-black hover:translate-x-2 transition-all">Quiz Hub</button></li>
-                <li><button onClick={() => navigate("/articles")} className="hover:text-black hover:translate-x-2 transition-all">Study Articles</button></li>
-                <li><button onClick={() => navigate("/public-leaderboard")} className="hover:text-black hover:translate-x-2 transition-all">Leaderboards</button></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-gray-900 mb-10 uppercase tracking-[0.3em] text-[10px]">Support</h4>
-              <ul className="space-y-6 text-sm font-medium text-gray-400">
-                <li><button onClick={() => navigate("/help")} className="hover:text-black hover:translate-x-2 transition-all">Help Center</button></li>
-                <li><button onClick={() => navigate("/contact")} className="hover:text-black hover:translate-x-2 transition-all">Contact Us</button></li>
-                <li><button onClick={() => navigate("/privacy")} className="hover:text-black hover:translate-x-2 transition-all">Privacy Policy</button></li>
-              </ul>
-            </div>
-          </div>
-          <div className="pt-12 border-t border-gray-50 flex flex-col md:flex-row justify-between items-center text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
-            <p>© 2026 Bible Quiz Competition. Crafted for Excellence.</p>
-            <div className="flex space-x-10 mt-8 md:mt-0">
-              <span className="hover:text-black cursor-pointer transition-colors">Twitter</span>
-              <span className="hover:text-black cursor-pointer transition-colors">Facebook</span>
-              <span className="hover:text-black cursor-pointer transition-colors">Instagram</span>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       <Dialog open={isCategoryDialogOpen} onOpenChange={setIsCategoryDialogOpen}>
         <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto rounded-[3rem] border-none shadow-3xl p-12">

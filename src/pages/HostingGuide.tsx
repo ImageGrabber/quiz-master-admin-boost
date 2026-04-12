@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
+import { Footer } from "@/components/Footer";
 import { Helmet } from "react-helmet-async";
 import { Share2, Users, BookOpen, Settings, Clock, Trophy, Shield, CheckCircle, Sparkles, Copy, Link as LinkIcon, Eye, EyeOff } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -350,48 +351,10 @@ const HostingGuide = () => {
           </div>
         </div>
       </div>
-      {/* Footer (same as homepage) */}
-      <footer className="bg-[#181c3a] text-gray-200 pt-16 pb-8 mt-0">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row md:justify-between md:items-start gap-12">
-          {/* Left: Logo and description */}
-          <div className="flex-1 min-w-[220px] flex flex-col items-start mb-8 md:mb-0">
-            <div className="flex items-center mb-4">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-2">
-                <img src="/sword.png" alt="Bible Quiz Competition Logo" className="w-6 h-6" />
-              </div>
-              <span className="text-xl font-bold text-white">Bible Quiz Competition</span>
-            </div>
-            <p className="mb-4 text-gray-300 max-w-xs">Empower your faith with fun, challenging Bible quizzes for all ages. Compete, learn, and grow in your knowledge of Scripture!</p>
-            <p className="text-gray-400 text-sm">Need help? Email <a href="mailto:info@biblequizcompetition.com" className="underline">info@biblequizcompetition.com</a></p>
-          </div>
-          {/* Center/Right: Links */}
-          <div className="flex flex-1 flex-col sm:flex-row justify-end gap-12">
-            <div>
-              <h4 className="font-bold text-white mb-3">Company</h4>
-              <ul className="space-y-2">
-                <li><a href="#about" className="hover:underline text-gray-300">About</a></li>
-                <li><a href="#features" className="hover:underline text-gray-300">Features</a></li>
-                <li><a href="/public-leaderboard" className="hover:underline text-gray-300">Leaderboard</a></li>
-                <li><a href="#faq" className="hover:underline text-gray-300">FAQ</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-3">Legal</h4>
-              <ul className="space-y-2">
-                <li><a href="#privacy" className="hover:underline text-gray-300">Privacy</a></li>
-                <li><a href="#terms" className="hover:underline text-gray-300">Terms</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 mt-12 border-t border-blue-900 pt-6 text-center text-white text-sm">
-          © 2025 Bible Quiz Competition. All rights reserved.
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
 
 export default HostingGuide;
-
 
