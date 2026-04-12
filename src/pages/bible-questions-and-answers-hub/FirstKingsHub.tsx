@@ -8,23 +8,22 @@ import {
   ChevronRight,
   Search,
   Quote,
-  Heart,
-  Sparkles,
   Crown,
-  Compass,
+  ShieldCheck,
+  Flame,
   Library,
   Brain,
-  Flower2,
+  Compass,
 } from "lucide-react";
 import SEO from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 
-const RUTH_IMAGES = {
-  hero: "/images/hubs/ruth/hero.png",
-  loyalty: "/images/hubs/ruth/loyalty.png",
-  harvest: "/images/hubs/ruth/harvest.png",
-  redemption: "/images/hubs/ruth/redemption.png",
+const FIRST_KINGS_IMAGES = {
+  hero: "/images/book-study-hubs-hero.jpg",
+  temple: "/images/books/1-kings.png",
+  wisdom: "/images/books/1-kings.png",
+ fire: "/images/books/1-kings.png",
 };
 
 const chapterThemes: Record<
@@ -38,56 +37,254 @@ const chapterThemes: Record<
   }
 > = {
   1: {
-    title: "Loss and Loyalty",
-    tag: "Moab to Bethlehem",
-    accent: "bg-rose-500",
-    tagClass: "text-rose-600/70",
+    title: "The Succession Crisis",
+    tag: "Adonijah and the Throne",
+    accent: "bg-slate-600",
+    tagClass: "text-slate-600/70",
     points: [
-      "Naomi returns in grief from Moab",
-      "Ruth pledges covenant loyalty to Naomi",
-      "A journey of faith begins in Bethlehem",
+      "David's old age exposes political tension",
+      "Adonijah exalts himself as king",
+      "Nathan and Bathsheba intervene for Solomon",
     ],
   },
   2: {
-    title: "Providence in the Field",
-    tag: "Gleaning Grace",
-    accent: "bg-amber-500",
-    tagClass: "text-amber-600/70",
+    title: "Solomon Established",
+    tag: "Kingdom Secured",
+    accent: "bg-slate-600",
+    tagClass: "text-slate-600/70",
     points: [
-      "Ruth gleans in the field of Boaz",
-      "Boaz protects and provides generously",
-      "Naomi sees the first signs of hope",
+      "David's final charge to Solomon",
+      "Threats to the throne are removed",
+      "Solomon's reign is firmly established",
     ],
   },
   3: {
-    title: "Faithful Appeal",
-    tag: "Threshing Floor",
-    accent: "bg-sky-500",
-    tagClass: "text-sky-600/70",
+    title: "Wisdom from God",
+    tag: "Gibeon and the Two Mothers",
+    accent: "bg-amber-500",
+    tagClass: "text-amber-600/70",
     points: [
-      "Naomi guides Ruth with wise counsel",
-      "Ruth asks Boaz to redeem their family line",
-      "Boaz responds with integrity and honor",
+      "Solomon asks for discernment, not riches",
+      "God grants unmatched wisdom",
+      "The child judgment reveals royal insight",
     ],
   },
   4: {
-    title: "Redemption and Legacy",
-    tag: "The Gate of Bethlehem",
+    title: "Royal Administration",
+    tag: "Peace and Plenty",
+    accent: "bg-amber-500",
+    tagClass: "text-amber-600/70",
+    points: [
+      "Officials and districts are organized",
+      "The kingdom flourishes in stability",
+      "Solomon's wisdom draws global attention",
+    ],
+  },
+  5: {
+    title: "Preparing the Temple",
+    tag: "Alliance with Hiram",
+    accent: "bg-amber-500",
+    tagClass: "text-amber-600/70",
+    points: [
+      "Tyrian partnership supplies cedar",
+      "Massive labor is mobilized",
+      "The temple project formally begins",
+    ],
+  },
+  6: {
+    title: "Building the Temple",
+    tag: "House for the Lord",
+    accent: "bg-amber-500",
+    tagClass: "text-amber-600/70",
+    points: [
+      "Temple dimensions and design are detailed",
+      "Inner sanctuary and sacred furnishings unfold",
+      "God's promise ties blessing to obedience",
+    ],
+  },
+  7: {
+    title: "Palace and Furnishings",
+    tag: "Glory and Craftsmanship",
+    accent: "bg-amber-500",
+    tagClass: "text-amber-600/70",
+    points: [
+      "Royal complex is completed",
+      "Bronze work by Huram is described",
+      "Temple furniture is fully arranged",
+    ],
+  },
+  8: {
+    title: "Temple Dedication",
+    tag: "Glory Fills the House",
     accent: "bg-emerald-500",
     tagClass: "text-emerald-600/70",
     points: [
-      "Boaz redeems the family inheritance",
-      "Ruth and Boaz are blessed in marriage",
-      "Obed is born in David's royal line",
+      "The ark is brought into the temple",
+      "God's glory-cloud fills the sanctuary",
+      "Solomon prays for covenant mercy",
+    ],
+  },
+  9: {
+    title: "Divine Warning and Works",
+    tag: "Promise with Conditions",
+    accent: "bg-emerald-500",
+    tagClass: "text-emerald-600/70",
+    points: [
+      "God appears again to Solomon",
+      "Faithfulness is required for enduring blessing",
+      "Building projects continue across the land",
+    ],
+  },
+  10: {
+    title: "The Queen of Sheba",
+    tag: "Global Renown",
+    accent: "bg-emerald-500",
+    tagClass: "text-emerald-600/70",
+    points: [
+      "Sheba tests Solomon's wisdom",
+      "His wealth and splendor are displayed",
+      "International admiration reaches its peak",
+    ],
+  },
+  11: {
+    title: "Solomon's Decline",
+    tag: "Divided Heart",
+    accent: "bg-rose-500",
+    tagClass: "text-rose-600/70",
+    points: [
+      "Foreign marriages pull Solomon toward idols",
+      "The kingdom judgment is announced",
+      "Jeroboam is marked for future rule",
+    ],
+  },
+  12: {
+    title: "Kingdom Divides",
+    tag: "Rehoboam and Jeroboam",
+    accent: "bg-rose-500",
+    tagClass: "text-rose-600/70",
+    points: [
+      "Harsh policy fractures national unity",
+      "Ten tribes break from David's house",
+      "Jeroboam installs rival worship centers",
+    ],
+  },
+  13: {
+    title: "The Man of God",
+    tag: "Word and Judgment",
+    accent: "bg-rose-500",
+    tagClass: "text-rose-600/70",
+    points: [
+      "Prophecy confronts the altar at Bethel",
+      "Jeroboam receives a warning sign",
+      "Disobedience brings swift consequence",
+    ],
+  },
+  14: {
+    title: "Households Judged",
+    tag: "Jeroboam and Rehoboam",
+    accent: "bg-rose-500",
+    tagClass: "text-rose-600/70",
+    points: [
+      "Ahijah pronounces judgment on Jeroboam",
+      "Rehoboam's Judah slips into unfaithfulness",
+      "Foreign pressure rises against Jerusalem",
+    ],
+  },
+  15: {
+    title: "A String of Kings",
+    tag: "Asa's Reform",
+    accent: "bg-sky-500",
+    tagClass: "text-sky-600/70",
+    points: [
+      "Judah and Israel see rapid transitions",
+      "Asa removes idolatrous practices",
+      "Regional wars persist along the border",
+    ],
+  },
+  16: {
+    title: "Rise of Omri and Ahab",
+    tag: "Northern Instability",
+    accent: "bg-sky-500",
+    tagClass: "text-sky-600/70",
+    points: [
+      "Dynasties rise and fall violently",
+      "Omri founds Samaria as capital",
+      "Ahab's reign deepens covenant apostasy",
+    ],
+  },
+  17: {
+    title: "Elijah Appears",
+    tag: "Drought and Provision",
+    accent: "bg-sky-500",
+    tagClass: "text-sky-600/70",
+    points: [
+      "Elijah announces drought to Ahab",
+      "God sustains him by brook and widow",
+      "A dead son is restored to life",
+    ],
+  },
+  18: {
+    title: "Mount Carmel",
+    tag: "Fire from Heaven",
+    accent: "bg-sky-500",
+    tagClass: "text-sky-600/70",
+    points: [
+      "Elijah challenges Baal's prophets",
+      "The Lord answers with consuming fire",
+      "Rain returns after long drought",
+    ],
+  },
+  19: {
+    title: "At Horeb",
+    tag: "Still Small Voice",
+    accent: "bg-purple-500",
+    tagClass: "text-purple-600/70",
+    points: [
+      "Elijah flees under Jezebel's threat",
+      "God strengthens him in wilderness",
+      "Elisha is called to prophetic service",
+    ],
+  },
+  20: {
+    title: "Wars with Aram",
+    tag: "Mercy Misused",
+    accent: "bg-purple-500",
+    tagClass: "text-purple-600/70",
+    points: [
+      "Ahab defeats Ben-Hadad twice",
+      "God grants victory despite Ahab",
+      "Ahab's compromise invites rebuke",
+    ],
+  },
+  21: {
+    title: "Naboth's Vineyard",
+    tag: "Abuse of Power",
+    accent: "bg-purple-500",
+    tagClass: "text-purple-600/70",
+    points: [
+      "Ahab covets Naboth's inheritance",
+      "Jezebel engineers judicial murder",
+      "Elijah declares judgment on the house",
+    ],
+  },
+  22: {
+    title: "Micaiah's Warning",
+    tag: "Final Battles",
+    accent: "bg-teal-500",
+    tagClass: "text-teal-600/70",
+    points: [
+      "Ahab rejects true prophetic counsel",
+      "Battle at Ramoth-Gilead turns deadly",
+      "Ahab dies and prophecy is fulfilled",
     ],
   },
 };
 
-export default function RuthHub() {
+export default function FirstKingsHub() {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
 
-  const chapterNumbers = Array.from({ length: 4 }, (_, i) => i + 1);
+  const chapterNumbers = Array.from({ length: 22 }, (_, i) => i + 1);
   const filteredChapters = useMemo(() => {
     if (!query.trim()) return chapterNumbers;
     const q = query.replace(/[^0-9]/g, "");
@@ -122,33 +319,33 @@ export default function RuthHub() {
   return (
     <div className="min-h-screen bg-white text-gray-900 font-urbanist selection:bg-black/5">
       <SEO
-        title="Ruth Quiz Hub | Loyalty and Redemption"
-        description="Explore the Book of Ruth through chapter-based study and interactive quiz paths. Learn loyalty, providence, and redemption in four rich chapters."
-        url="/bible-questions-and-answers-hub/ruth"
+        title="1 Kings Quiz Hub | Temple, Thrones, and Prophets"
+        description="Explore 1 Kings through chapter-based study and interactive quizzes. Follow Solomon's wisdom, the divided kingdom, and Elijah's fire-filled ministry."
+        url="/bible-questions-and-answers-hub/1-kings"
       />
       <Navigation />
 
       <section className="relative h-[85vh] flex items-center justify-center overflow-hidden bg-black">
         <div className="absolute inset-0 z-0">
           <img
-            src={RUTH_IMAGES.hero}
-            alt="The Book of Ruth"
+            src={FIRST_KINGS_IMAGES.hero}
+            alt="The Book of 1 Kings"
             className="w-full h-full object-cover brightness-[0.35] scale-105 transition-transform duration-[30000ms] hover:scale-100"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/75" />
           <div className="absolute inset-x-0 bottom-0 h-96 bg-gradient-to-t from-white via-white/50 to-transparent" />
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 text-center text-white">
           <div className="inline-flex items-center space-x-3 px-6 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl mb-10 animate-in fade-in slide-in-from-top-6 duration-1000">
-            <Flower2 className="w-5 h-5 text-rose-300" />
+            <Crown className="w-5 h-5 text-amber-300" />
             <span className="text-xs font-bold tracking-[0.4em] uppercase text-white/80">Historical Books</span>
           </div>
           <h1 className="text-7xl md:text-[10rem] font-normal mb-8 leading-[0.9] tracking-tighter animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200 uppercase">
-            Ruth <span className="italic font-serif block mt-2 text-white/90">Hub</span>
+            1 Kings <span className="italic font-serif block mt-2 text-white/90">Hub</span>
           </h1>
           <p className="text-2xl md:text-3xl font-light text-white/75 mb-16 max-w-4xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-400">
-            "Where you go I will go, and where you stay I will stay."
+            "If the Lord is God, follow him; but if Baal is God, follow him."
           </p>
 
           <div className="flex flex-wrap justify-center gap-8 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-600">
@@ -174,7 +371,7 @@ export default function RuthHub() {
           <ChevronRight className="w-3 h-3 mx-4 opacity-30" />
           <button className="hover:text-black transition-colors" onClick={() => navigate("/bible-questions-and-answers-hub")}>Bible Hub</button>
           <ChevronRight className="w-3 h-3 mx-4 opacity-30" />
-          <span className="text-black font-semibold">Ruth</span>
+          <span className="text-black font-semibold">1 Kings</span>
         </div>
 
         <section id="overview" className="mb-40 scroll-mt-24">
@@ -183,67 +380,67 @@ export default function RuthHub() {
               <div className="space-y-6">
                 <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-gray-400 flex items-center">
                   <span className="w-12 h-px bg-gray-200 mr-6" />
-                  Covenant Loyalty
+                  Temple and Kingdom
                 </h2>
-                <h3 className="text-5xl md:text-6xl font-normal leading-tight text-gray-900 italic serif">A Story of Faithful Love</h3>
+                <h3 className="text-5xl md:text-6xl font-normal leading-tight text-gray-900 italic serif">From Glory to Division</h3>
               </div>
               <p className="text-2xl font-light text-gray-600 leading-[1.8] first-letter:text-6xl first-letter:font-serif first-letter:mr-4 first-letter:float-left first-letter:text-black first-letter:leading-none capitalize">
-                Ruth is a short but powerful narrative of loss, loyalty, providence, and restoration. In ordinary fields and family decisions, God quietly writes an extraordinary future. This four-chapter book shows that faithful love in hidden places can shape generations.
+                First Kings opens with Solomon's wisdom and the temple's dedication, then turns toward spiritual compromise and national fracture. The narrative contrasts covenant faithfulness with idolatry, showing how leadership decisions shape the destiny of an entire people.
               </p>
               <div className="p-10 rounded-[2.5rem] bg-gray-50 border border-gray-100 flex items-start space-x-8 hover:shadow-xl transition-all duration-500">
                 <Quote className="w-12 h-12 text-gray-200 flex-shrink-0" />
                 <div className="space-y-4">
                   <p className="text-xl italic font-light text-gray-500 leading-relaxed">
-                    "Your people will be my people and your God my God."
+                    "The cloud filled the house of the Lord."
                   </p>
-                  <p className="text-sm font-semibold tracking-widest text-gray-400 uppercase">- Ruth 1:16</p>
+                  <p className="text-sm font-semibold tracking-widest text-gray-400 uppercase">- 1 Kings 8:10</p>
                 </div>
               </div>
             </div>
             <div className="relative group text-left">
               <div className="absolute -inset-6 bg-gray-50 rounded-[3rem] -rotate-1 group-hover:rotate-0 transition-transform duration-700" />
               <img
-                src={RUTH_IMAGES.loyalty}
-                alt="Ruth and Naomi"
+                src={FIRST_KINGS_IMAGES.temple}
+                alt="1 Kings temple narrative"
                 className="relative z-10 w-full rounded-[2.5rem] shadow-2xl object-cover h-[600px] border border-white"
               />
-              <div className="absolute -bottom-10 -left-10 z-20 p-10 bg-white/90 backdrop-blur-2xl rounded-3xl border border-gray-100 shadow-2xl max-w-xs transition-transform group-hover:translate-x-4 shadow-rose-500/5">
+              <div className="absolute -bottom-10 -left-10 z-20 p-10 bg-white/90 backdrop-blur-2xl rounded-3xl border border-gray-100 shadow-2xl max-w-xs transition-transform group-hover:translate-x-4 shadow-amber-500/5">
                 <div className="w-12 h-12 rounded-2xl bg-black flex items-center justify-center mb-6 text-white">
-                  <Heart className="w-6 h-6" />
+                  <ShieldCheck className="w-6 h-6" />
                 </div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Core Theme</p>
-                <p className="text-xl font-light text-gray-900 leading-snug tracking-tight italic text-black serif">Loyal Love in Action</p>
+                <p className="text-xl font-light text-gray-900 leading-snug tracking-tight italic text-black serif">Wisdom, Worship, and Warning</p>
               </div>
             </div>
           </div>
         </section>
 
         <section className="mb-40 py-24 bg-gray-900 rounded-[4rem] text-white px-10 lg:px-20 overflow-hidden relative shadow-2xl shadow-gray-900/40 text-left">
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-rose-500/10 blur-[150px] rounded-full translate-x-1/3" />
-          <div className="absolute bottom-0 left-0 w-1/3 h-full bg-emerald-500/10 blur-[120px] rounded-full -translate-x-1/2" />
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-amber-500/10 blur-[150px] rounded-full translate-x-1/3" />
+          <div className="absolute bottom-0 left-0 w-1/3 h-full bg-sky-500/10 blur-[120px] rounded-full -translate-x-1/2" />
 
           <div className="relative z-10">
             <h2 className="text-sm font-semibold uppercase tracking-[0.5em] text-white/30 mb-16">Theological Core</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-24">
               <div className="space-y-10 group">
                 <div className="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 transition-colors">
-                  <Sparkles className="w-8 h-8 text-rose-300" strokeWidth={1} />
+                  <Crown className="w-8 h-8 text-amber-300" strokeWidth={1} />
                 </div>
                 <div className="space-y-6">
-                  <h3 className="text-4xl font-normal leading-tight italic serif text-white">Hesed in Daily Life</h3>
+                  <h3 className="text-4xl font-normal leading-tight italic serif text-white">Wisdom and Covenant Responsibility</h3>
                   <p className="text-xl font-light text-white/50 leading-relaxed italic">
-                    Ruth highlights steadfast love through practical obedience and sacrificial commitment. The book reveals how covenant love is not abstract theology, but lived fidelity in everyday choices.
+                    Solomon's early reign demonstrates the beauty of God-given wisdom. Yet covenant blessing is never automatic; the book repeatedly ties security and flourishing to faithful obedience.
                   </p>
                 </div>
               </div>
               <div className="space-y-10 group">
                 <div className="w-16 h-16 rounded-3xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-white/10 transition-colors">
-                  <Crown className="w-8 h-8 text-emerald-300" strokeWidth={1} />
+                  <Flame className="w-8 h-8 text-sky-300" strokeWidth={1} />
                 </div>
                 <div className="space-y-6">
-                  <h3 className="text-4xl font-normal leading-tight italic serif text-white">The Redeemer Motif</h3>
+                  <h3 className="text-4xl font-normal leading-tight italic serif text-white">Prophetic Confrontation</h3>
                   <p className="text-xl font-light text-white/50 leading-relaxed italic">
-                    Boaz as kinsman-redeemer points forward to a larger redemptive pattern. Ruth ends with a genealogy that places this family story in the line of King David, linking quiet faithfulness to kingdom history.
+                    Through Elijah, God confronts false worship and calls His people back. The fire on Carmel is not spectacle alone, but a covenant summons to wholehearted allegiance.
                   </p>
                 </div>
               </div>
@@ -257,46 +454,46 @@ export default function RuthHub() {
               Choose Your Track
             </h2>
             <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed italic">
-              Learn the complete arc of Ruth from sorrow to restoration.
+              Explore the temple era, divided monarchy, and Elijah narratives with precision.
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
             {[
               {
                 level: "Beginner",
-                desc: "Focus on the core storyline, key people, and chapter flow.",
+                desc: "Master the main storyline from Solomon to Ahab.",
                 icon: BookOpen,
-                color: "bg-rose-50",
-                iconColor: "text-rose-600",
+                color: "bg-amber-50",
+                iconColor: "text-amber-600",
                 link: "beginner",
-                accent: "bg-rose-500",
-                features: ["Naomi and Ruth", "Boaz's kindness", "The final genealogy"],
+                accent: "bg-amber-500",
+                features: ["Major kings", "Temple story", "Key events"],
               },
               {
                 level: "Intermediate",
-                desc: "Go deeper into covenant loyalty, customs, and redemption themes.",
+                desc: "Dive into covenant patterns, reforms, and failures.",
                 icon: Brain,
-                color: "bg-amber-50",
-                iconColor: "text-amber-600",
+                color: "bg-sky-50",
+                iconColor: "text-sky-600",
                 link: "intermediate",
-                accent: "bg-amber-500",
-                features: ["Gleaning laws", "Kinsman-redeemer role", "Narrative structure"],
+                accent: "bg-sky-500",
+                features: ["Kingdom split", "Prophetic words", "Idolatry dynamics"],
               },
               {
                 level: "Advanced",
-                desc: "Master details, literary patterns, and theological significance.",
+                desc: "Test detailed chapter knowledge and theological links.",
                 icon: Compass,
-                color: "bg-emerald-50",
-                iconColor: "text-emerald-600",
+                color: "bg-purple-50",
+                iconColor: "text-purple-600",
                 link: "advanced",
-                accent: "bg-emerald-500",
-                features: ["Hebrew motifs", "Canonical connections", "Davidic line themes"],
+                accent: "bg-purple-500",
+                features: ["Chronology", "Royal policy details", "Narrative structure"],
               },
             ].map((d) => (
               <Card
                 key={d.level}
                 className="group relative border border-gray-100/60 hover:border-black/5 hover:-translate-y-2 transition-all duration-500 flex flex-col bg-white overflow-hidden shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem]"
-                onClick={() => navigate(`/bible-questions-and-answers-hub/ruth/${d.link}`)}
+                onClick={() => navigate(`/bible-questions-and-answers-hub/1-kings/${d.link}`)}
               >
                 <div className={`h-2 w-full ${d.accent} absolute top-0`} />
                 <CardHeader className="pt-12 pb-8 px-10 text-left">
@@ -304,7 +501,7 @@ export default function RuthHub() {
                     <d.icon className={`w-8 h-8 ${d.iconColor}`} strokeWidth={1.5} />
                   </div>
                   <CardTitle className="text-4xl font-normal text-gray-900 italic serif mb-3">{d.level}</CardTitle>
-                  <CardDescription className="text-sm font-semibold text-gray-400 uppercase tracking-[0.25em]">Ruth Track</CardDescription>
+                  <CardDescription className="text-sm font-semibold text-gray-400 uppercase tracking-[0.25em]">1 Kings Track</CardDescription>
                 </CardHeader>
                 <CardContent className="px-10 pb-12 flex-grow flex flex-col justify-between text-left">
                   <p className="text-xl font-light text-gray-500 leading-relaxed mb-10 italic">{d.desc}</p>
@@ -330,31 +527,31 @@ export default function RuthHub() {
             <div className="order-2 lg:order-1 relative group text-left">
               <div className="absolute -inset-6 bg-slate-50 rounded-[3rem] rotate-1 group-hover:rotate-0 transition-transform duration-700" />
               <img
-                src={RUTH_IMAGES.harvest}
-                alt="Ruth in the fields"
+                src={FIRST_KINGS_IMAGES.wisdom}
+                alt="1 Kings wisdom and temple"
                 className="relative z-10 w-full rounded-[2.5rem] shadow-2xl object-cover h-[700px] border border-white"
               />
             </div>
             <div className="order-1 lg:order-2 space-y-10 text-left">
               <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-gray-400 flex items-center">
                 <span className="w-12 h-px bg-gray-200 mr-6" />
-                Quiet Providence
+                Royal Zenith
               </h2>
               <h3 className="text-5xl font-normal leading-tight text-gray-900 italic serif uppercase tracking-tighter">
-                Grace in the Fields
+                Wisdom and the Temple
               </h3>
               <p className="text-2xl font-light text-gray-600 leading-[1.8] italic font-serif">
-                In Bethlehem's harvest fields, God works behind the scenes through small acts of mercy. Boaz notices Ruth, honors her faithfulness, and extends protection. The storyline teaches that providence often unfolds through ordinary people who choose generosity and integrity.
+                The opening chapters reveal the high point of united monarchy: prudent governance, architectural grandeur, and temple-centered worship. These chapters show what covenant life can look like when wisdom and devotion align.
               </p>
               <div className="flex items-center space-x-6 p-10 bg-amber-50/40 rounded-[2.5rem] border border-amber-100/50 hover:bg-amber-50 transition-colors">
                 <div className="w-16 h-16 bg-amber-100 rounded-3xl flex items-center justify-center shrink-0 shadow-lg shadow-amber-200/50 text-amber-600">
-                  <Sparkles className="w-7 h-7" />
+                  <Crown className="w-7 h-7" />
                 </div>
                 <div className="space-y-2">
                   <p className="text-gray-700 text-xl font-light italic leading-relaxed">
-                    "May the Lord repay you for what you have done."
+                    "Give your servant a discerning heart."
                   </p>
-                  <p className="text-xs font-semibold tracking-widest text-amber-500 uppercase">- Ruth 2:12</p>
+                  <p className="text-xs font-semibold tracking-widest text-amber-500 uppercase">- 1 Kings 3:9</p>
                 </div>
               </div>
             </div>
@@ -366,65 +563,65 @@ export default function RuthHub() {
             <div className="space-y-10 text-left">
               <h2 className="text-sm font-semibold uppercase tracking-[0.4em] text-gray-400 flex items-center">
                 <span className="w-12 h-px bg-gray-200 mr-6" />
-                Redemption Fulfilled
+                Prophetic Fire
               </h2>
               <h3 className="text-5xl font-normal leading-tight text-gray-900 italic serif uppercase tracking-tighter">
-                Boaz at the City Gate
+                Elijah and Covenant Call
               </h3>
               <p className="text-2xl font-light text-gray-600 leading-[1.8] italic font-serif">
-                Chapter 4 culminates in public redemption, marriage, and restored family heritage. What began as famine and emptiness ends in blessing and legacy. The final genealogy links Ruth's faithfulness to the lineage that leads to David, highlighting God's long-range purposes.
+                As idolatry spreads, Elijah confronts kings and crowds with uncompromising truth. The Carmel narrative centers the book's choice: divided allegiance or wholehearted devotion to the living God.
               </p>
-              <div className="flex items-center space-x-6 p-10 bg-emerald-50/40 rounded-[2.5rem] border border-emerald-100/50 hover:bg-emerald-50 transition-colors">
-                <div className="w-16 h-16 bg-emerald-100 rounded-3xl flex items-center justify-center shrink-0 shadow-lg shadow-emerald-200/50 text-emerald-600">
-                  <Crown className="w-7 h-7" />
+              <div className="flex items-center space-x-6 p-10 bg-sky-50/40 rounded-[2.5rem] border border-sky-100/50 hover:bg-sky-50 transition-colors">
+                <div className="w-16 h-16 bg-sky-100 rounded-3xl flex items-center justify-center shrink-0 shadow-lg shadow-sky-200/50 text-sky-600">
+                  <Flame className="w-7 h-7" />
                 </div>
                 <div className="space-y-2">
                   <p className="text-gray-700 text-xl font-light italic leading-relaxed">
-                    "The women said to Naomi: Praise be to the Lord..."
+                    "The Lord, he is God!"
                   </p>
-                  <p className="text-xs font-semibold tracking-widest text-emerald-500 uppercase">- Ruth 4:14</p>
+                  <p className="text-xs font-semibold tracking-widest text-sky-500 uppercase">- 1 Kings 18:39</p>
                 </div>
               </div>
             </div>
             <div className="relative group text-left">
               <div className="absolute -inset-6 bg-slate-50 rounded-[3rem] rotate-1 group-hover:rotate-0 transition-transform duration-700" />
               <img
-                src={RUTH_IMAGES.redemption}
-                alt="Redemption in Ruth"
+                src={FIRST_KINGS_IMAGES.fire}
+                alt="1 Kings Elijah and fire"
                 className="relative z-10 w-full rounded-[2.5rem] shadow-2xl object-cover h-[700px] border border-white"
               />
             </div>
           </div>
         </section>
 
-        <section id="ruth-chapter-wise" className="mb-40 scroll-mt-24 pt-32 px-4 md:px-0">
+        <section id="first-kings-chapter-wise" className="mb-40 scroll-mt-24 pt-32 px-4 md:px-0">
           <div className="max-w-7xl mx-auto mb-20 text-center">
             <div className="relative group overflow-hidden rounded-[3rem] border border-slate-100 shadow-2xl bg-white p-12 md:p-20">
-              <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-rose-500/5 blur-[120px] rounded-full pointer-events-none group-hover:bg-rose-500/10 transition-colors" />
-              <div className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none group-hover:bg-emerald-500/10 transition-colors" />
+              <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-amber-500/5 blur-[120px] rounded-full pointer-events-none group-hover:bg-amber-500/10 transition-colors" />
+              <div className="absolute bottom-0 right-1/4 w-1/2 h-1/2 bg-sky-500/5 blur-[120px] rounded-full pointer-events-none group-hover:bg-sky-500/10 transition-colors" />
 
               <div className="relative z-10 space-y-8 animate-in fade-in slide-in-from-bottom-5 duration-1000">
                 <div className="inline-flex items-center gap-3 px-6 py-2 rounded-full bg-slate-50 border border-slate-100 mb-4">
-                  <Library className="w-5 h-5 text-rose-500" />
+                  <Library className="w-5 h-5 text-amber-500" />
                   <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Chapter Wise Study</span>
                 </div>
 
                 <h3 className="text-6xl md:text-8xl font-normal text-slate-900 tracking-tighter uppercase leading-[0.9] italic serif">
-                  The Story of <span className="text-rose-600 italic">Ruth</span>
+                  The Story of <span className="text-amber-600 italic">1 Kings</span>
                 </h3>
 
                 <p className="text-2xl font-light text-slate-400 max-w-2xl mx-auto leading-relaxed italic">
-                  Walk through each chapter from loyalty to redemption in four focused modules.
+                  Study all 22 chapters from Solomon's coronation to Ahab's final battle.
                 </p>
 
                 <div className="flex justify-center max-w-xl mx-auto pt-8">
                   <div className="relative w-full group/search">
-                    <Search className="absolute left-10 top-1/2 transform -translate-y-1/2 text-slate-300 w-8 h-8 group-focus-within/search:text-rose-500 transition-colors" strokeWidth={1} />
+                    <Search className="absolute left-10 top-1/2 transform -translate-y-1/2 text-slate-300 w-8 h-8 group-focus-within/search:text-amber-500 transition-colors" strokeWidth={1} />
                     <Input
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
                       placeholder="Search for a chapter or theme..."
-                      className="pl-24 pr-12 py-12 text-2xl font-light border-slate-100 bg-slate-50/70 focus:bg-white focus:ring-2 focus:ring-rose-500/20 rounded-[3rem] shadow-inner transition-all duration-700 w-full"
+                      className="pl-24 pr-12 py-12 text-2xl font-light border-slate-100 bg-slate-50/70 focus:bg-white focus:ring-2 focus:ring-amber-500/20 rounded-[3rem] shadow-inner transition-all duration-700 w-full"
                     />
                   </div>
                 </div>
@@ -467,7 +664,7 @@ export default function RuthHub() {
                 <Card
                   key={ch}
                   className="group relative border border-gray-100/60 hover:border-black/5 hover:-translate-y-2 transition-all duration-500 flex flex-col bg-white overflow-hidden shadow-2xl shadow-gray-200/40 cursor-pointer rounded-[2.5rem]"
-                  onClick={() => navigate(`/bible-questions-and-answers-hub/ruth/chapter-${ch}`)}
+                  onClick={() => navigate(`/bible-questions-and-answers-hub/1-kings/chapter-${ch}`)}
                 >
                   <div className={`h-2 w-full ${chapter.accent} absolute top-0`} />
 

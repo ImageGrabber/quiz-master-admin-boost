@@ -182,6 +182,7 @@ import DeuteronomyHub from "./pages/bible-questions-and-answers-hub/Deuteronomy"
 import JoshuaHub from "./pages/bible-questions-and-answers-hub/Joshua";
 import JudgesHub from "./pages/bible-questions-and-answers-hub/Judges";
 import FirstSamuelHub from "./pages/bible-questions-and-answers-hub/1-samuel";
+import FirstKingsHub from "./pages/bible-questions-and-answers-hub/FirstKingsHub";
 import SecondSamuelHub from "./pages/bible-questions-and-answers-hub/SecondSamuelHub";
 import RuthHub from "./pages/bible-questions-and-answers-hub/RuthHub";
 import NehemiahHub from "./pages/bible-questions-and-answers-hub/nehemiah";
@@ -384,6 +385,7 @@ const App = () => {
               <Route path="/bible-questions-and-answers-hub/numbers" element={<NumbersHub />} />
               <Route path="/bible-questions-and-answers-hub/deuteronomy" element={<DeuteronomyHub />} />
               <Route path="/bible-questions-and-answers-hub/joshua" element={<JoshuaHub />} />
+              <Route path="/bible-questions-and-answers-hub/1-kings" element={<FirstKingsHub />} />
               <Route path="/bible-questions-and-answers-hub/2-samuel" element={<SecondSamuelHub />} />
               <Route path="/bible-questions-and-answers-hub/judges" element={<JudgesHub />} />
               <Route path="/bible-questions-and-answers-hub/1-samuel" element={<FirstSamuelHub />} />
