@@ -20,10 +20,10 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 
 const FIRST_KINGS_IMAGES = {
-  hero: "/images/book-study-hubs-hero.jpg",
-  temple: "/images/books/1-kings.png",
-  wisdom: "/images/books/1-kings.png",
-  fire: "/images/books/1-kings.png",
+  hero: "/images/hubs/1-kings/hero.png",
+  temple: "/images/hubs/1-kings/temple.png",
+  wisdom: "/images/hubs/1-kings/wisdom.png",
+  fire: "/images/hubs/1-kings/fire.png",
 };
 
 const chapterThemes: Record<

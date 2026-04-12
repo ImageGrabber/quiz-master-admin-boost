@@ -303,7 +303,7 @@ const CompetitionHome = () => {
       <div className="min-h-screen bg-white text-gray-900 font-urbanist selection:bg-black/5">
         <Navigation transparent={true} />
 
-        <section className="relative h-screen flex items-center overflow-hidden">
+        <section className="relative min-h-[100svh] lg:min-h-screen flex items-center overflow-hidden py-20 sm:py-24 lg:py-0">
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_18%,rgba(56,189,248,0.32),transparent_40%),radial-gradient(circle_at_86%_14%,rgba(14,165,233,0.24),transparent_44%),radial-gradient(circle_at_72%_80%,rgba(168,85,247,0.18),transparent_46%),linear-gradient(135deg,#030712_0%,#0b1228_48%,#111827_100%)]" />
             <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(148,163,184,0.14)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.14)_1px,transparent_1px)] bg-[size:34px_34px] opacity-20" />
@@ -315,25 +315,25 @@ const CompetitionHome = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-black/52 via-black/18 to-white/35" />
           </div>
 
-          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 relative z-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-8 md:gap-10 items-end pt-20 md:pt-32 pb-8 md:pb-16">
-            <div className="self-center space-y-6 md:space-y-8 text-white">
+          <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 relative z-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-6 sm:gap-8 md:gap-10 items-start lg:items-end pt-16 sm:pt-20 md:pt-28 lg:pt-32 pb-6 sm:pb-10 md:pb-16">
+            <div className="self-center space-y-5 sm:space-y-6 md:space-y-8 text-white">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-4 py-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-white backdrop-blur-md">
                 <Trophy className="w-4 h-4" />
                 Live Season 2026
               </span>
 
               <div>
-                <h1 className="text-base sm:text-xl lg:text-3xl font-semibold tracking-tight mb-3 md:mb-4 text-white/75">
+                <h1 className="text-sm sm:text-xl lg:text-3xl font-semibold tracking-tight mb-3 md:mb-4 text-white/75">
                   Online Bible Quiz Competition 2026
                 </h1>
 
-                <h2 className="text-4xl sm:text-5xl lg:text-7xl font-normal tracking-tight leading-[1.08] md:leading-[1.05]">
-                  Master the Word,<br />
-                  <span className="italic font-serif text-white">Join the Glory.</span>
+                <h2 className="text-3xl sm:text-5xl lg:text-7xl font-normal tracking-tight leading-[1.08] md:leading-[1.05]">
+                  Master the Word,<br className="hidden sm:block" />
+                  <span className="italic font-serif text-white block sm:inline">Join the Glory.</span>
                 </h2>
               </div>
 
-              <p className="text-base sm:text-lg md:text-xl text-white/80 font-light max-w-2xl leading-relaxed">
+              <p className="text-sm sm:text-lg md:text-xl text-white/80 font-light max-w-2xl leading-relaxed">
                 Join thousands of believers in a free bible competition with daily challenges, transparent scoring, and real bible quiz prizes. Start with our most searched quizzes and grow your Scripture mastery.
               </p>
 
@@ -342,31 +342,31 @@ const CompetitionHome = () => {
                   onClick={() => navigate('/auth/login')}
                   className="h-12 sm:h-14 px-6 sm:px-9 w-full sm:w-auto bg-white text-black hover:bg-black hover:text-white rounded-full font-bold text-[11px] sm:text-sm tracking-[0.12em] sm:tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl"
                 >
-                  Start Playing Now <ArrowRight className="ml-2 w-5 h-5" />
+                  Start Playing Now <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                 </Button>
                 <Button
                   variant="outline"
                   onClick={() => navigate('/scripture-match-multiplayer')}
                   className="h-12 sm:h-14 px-6 sm:px-9 w-full sm:w-auto border border-white/40 text-white hover:bg-white hover:text-black rounded-full font-bold text-[11px] sm:text-sm tracking-[0.12em] sm:tracking-[0.2em] uppercase transition-all duration-300 bg-transparent"
                 >
-                  Play Scripture Game <Gamepad2 className="ml-2 w-5 h-5" />
+                  Play Scripture Game <Gamepad2 className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                 </Button>
               </div>
             </div>
 
-            <div className="lg:pt-10 w-full">
+            <div className="lg:pt-10 w-full max-w-xl mx-auto lg:mx-0">
               <Card className="border border-gray-100/70 bg-white shadow-2xl shadow-black/10 rounded-[2.5rem] overflow-hidden">
-                <CardHeader className="pb-4">
+                <CardHeader className="pb-4 px-5 sm:px-6">
                   <CardDescription className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-gray-400 mb-2">
                     Explore The Platform
                   </CardDescription>
-                  <CardTitle className="text-4xl sm:text-5xl font-normal italic font-serif text-gray-900">Start Anywhere</CardTitle>
+                  <CardTitle className="text-3xl sm:text-5xl font-normal italic font-serif text-gray-900">Start Anywhere</CardTitle>
                   <CardDescription className="text-sm sm:text-base text-gray-500">
                     Everything available on Bible Quiz Competition, one click away.
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-5">
-                  <div className="rounded-2xl border border-gray-100 bg-gray-50 px-4 py-3 flex items-center justify-between">
+                <CardContent className="space-y-4 sm:space-y-5 px-5 sm:px-6 pb-6 sm:pb-7">
+                  <div className="rounded-2xl border border-gray-100 bg-gray-50 px-4 py-3 flex items-center justify-between gap-3">
                     <p className="text-[11px] sm:text-xs uppercase tracking-[0.16em] sm:tracking-[0.22em] text-gray-400 font-bold">Popular Destinations</p>
                     <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.14em] sm:tracking-[0.2em] text-gray-500">{heroExploreLinks.length} Sections</span>
                   </div>
