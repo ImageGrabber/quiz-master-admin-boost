@@ -20,10 +20,10 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 
 const SECOND_SAMUEL_IMAGES = {
-  hero: "/images/book-study-hubs-hero.jpg",
-  throne: "/images/books/2-samuel.png",
-  covenant: "/images/books/2-samuel.png",
-  conflict: "/images/books/2-samuel.png",
+  hero: "/images/hubs/2-samuel/hero.png",
+  throne: "/images/hubs/2-samuel/throne.png",
+  covenant: "/images/hubs/2-samuel/covenant.png",
+  conflict: "/images/hubs/2-samuel/conflict.png",
 };
 
 const chapterThemes: Record<
