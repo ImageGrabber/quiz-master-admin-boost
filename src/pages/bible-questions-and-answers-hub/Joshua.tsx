@@ -433,6 +433,38 @@ export default function JoshuaHub() {
             </div>
           </div>
 
+          {/* Chapters Pagination - Moved to Top */}
+          {totalChapterPages > 1 && (
+            <div className="mb-12 max-w-7xl mx-auto flex items-center justify-between border-b border-slate-100 pb-12 font-bold text-slate-400">
+              <div className="flex items-center gap-4">
+                 <div className="w-12 h-1 px bg-slate-50 rounded-full overflow-hidden shrink-0">
+                    <div className="h-full bg-slate-900 transition-all duration-700" style={{ width: `${(chapterPage + 1) / totalChapterPages * 100}%` }} />
+                 </div>
+                 <div className="text-[11px] uppercase tracking-[0.3em] font-bold font-urbanist">
+                   {chapterPage + 1} / {totalChapterPages}
+                 </div>
+              </div>
+              <div className="flex gap-4">
+                <Button 
+                  variant="outline" 
+                  className="rounded-full px-10 py-6 font-bold tracking-[0.2em] uppercase text-[10px] border border-slate-100 bg-white hover:bg-black hover:text-white transition-all shadow-lg active:scale-95 disabled:opacity-30"
+                  disabled={chapterPage === 0} 
+                  onClick={() => setChapterPage(p => p - 1)}
+                >
+                  Previous
+                </Button>
+                <Button 
+                  variant="outline" 
+                   className="rounded-full px-10 py-6 font-bold tracking-[0.2em] uppercase text-[10px] border border-slate-100 bg-white hover:bg-black hover:text-white transition-all shadow-lg active:scale-95 disabled:opacity-30"
+                  disabled={chapterPage >= totalChapterPages - 1} 
+                  onClick={() => setChapterPage(p => p + 1)}
+                >
+                  Next
+                </Button>
+              </div>
+            </div>
+          )}
+
           <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
             {visibleChapters.map((ch) => {
               const isConquest = ch >= 1 && ch <= 12;
@@ -507,37 +539,6 @@ export default function JoshuaHub() {
             })}
           </div>
 
-          {/* Chapters Pagination - Enhanced Alignment */}
-          {totalChapterPages > 1 && (
-            <div className="mt-40 max-w-7xl mx-auto flex items-center justify-between border-t border-slate-100 pt-16 font-bold text-slate-400">
-              <div className="flex items-center gap-4">
-                 <div className="w-12 h-1 px bg-slate-50 rounded-full overflow-hidden shrink-0">
-                    <div className="h-full bg-slate-900 transition-all duration-700" style={{ width: `${(chapterPage + 1) / totalChapterPages * 100}%` }} />
-                 </div>
-                 <div className="text-[11px] uppercase tracking-[0.3em] font-bold font-urbanist">
-                   {chapterPage + 1} / {totalChapterPages}
-                 </div>
-              </div>
-              <div className="flex gap-4 md:gap-8">
-                <Button 
-                  variant="outline" 
-                  className="rounded-full px-12 py-8 font-bold tracking-[0.2em] uppercase text-[11px] border border-slate-100 bg-white hover:bg-black hover:text-white transition-all shadow-xl shadow-slate-200/20 active:scale-95 disabled:opacity-30 disabled:hover:bg-white disabled:hover:text-slate-300"
-                  disabled={chapterPage === 0} 
-                  onClick={() => setChapterPage(p => p - 1)}
-                >
-                  Previous
-                </Button>
-                <Button 
-                  variant="outline" 
-                   className="rounded-full px-12 py-8 font-bold tracking-[0.2em] uppercase text-[11px] border border-slate-100 bg-white hover:bg-black hover:text-white transition-all shadow-xl shadow-slate-200/20 active:scale-95 disabled:opacity-30"
-                  disabled={chapterPage >= totalChapterPages - 1} 
-                  onClick={() => setChapterPage(p => p + 1)}
-                >
-                  Next
-                </Button>
-              </div>
-            </div>
-          )}
         </section>
       </div>
 

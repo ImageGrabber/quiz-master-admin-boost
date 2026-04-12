@@ -180,6 +180,7 @@ import LeviticusHub from "./pages/bible-questions-and-answers-hub/Leviticus";
 import NumbersHub from "./pages/bible-questions-and-answers-hub/Numbers";
 import DeuteronomyHub from "./pages/bible-questions-and-answers-hub/Deuteronomy";
 import JoshuaHub from "./pages/bible-questions-and-answers-hub/Joshua";
+import JudgesHub from "./pages/bible-questions-and-answers-hub/Judges";
 import NehemiahHub from "./pages/bible-questions-and-answers-hub/nehemiah";
 import HubDifficultyRouter from "./pages/bible-questions-and-answers-hub/HubDifficultyRouter";
 import ChapterPage from "./pages/ChapterPage";
@@ -380,6 +381,7 @@ const App = () => {
               <Route path="/bible-questions-and-answers-hub/numbers" element={<NumbersHub />} />
               <Route path="/bible-questions-and-answers-hub/deuteronomy" element={<DeuteronomyHub />} />
               <Route path="/bible-questions-and-answers-hub/joshua" element={<JoshuaHub />} />
+              <Route path="/bible-questions-and-answers-hub/judges" element={<JudgesHub />} />
               <Route path="/bible-questions-and-answers-hub/nehemiah" element={<NehemiahHub />} />
               <Route path="/bible-questions-and-answers-hub/:bookSlug" element={<BookDetailHub />} />
               <Route path="/bible-questions-and-answers-hub/genesis/beginner" element={<GenesisBeginnerQuiz />} />
