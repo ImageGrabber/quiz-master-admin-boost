@@ -103,7 +103,7 @@ export default function JudgesHub() {
       <Navigation />
 
       {/* Cinematic Hero Section */}
-      <section className="relative h-[85vh] flex items-center justify-center overflow-hidden bg-black">
+      <section className="relative min-h-[72vh] sm:min-h-[80vh] lg:h-[85vh] flex items-center justify-center overflow-hidden bg-black">
         <div className="absolute inset-0 z-0">
           <img 
             src={JUDGES_IMAGES.hero} 
@@ -118,22 +118,22 @@ export default function JudgesHub() {
             <Shield className="w-5 h-5 text-orange-400" />
             <span className="text-xs font-bold tracking-[0.4em] uppercase text-white/80">Historical Books</span>
           </div>
-          <h1 className="text-7xl md:text-[10rem] font-normal mb-8 leading-[0.9] tracking-tighter animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200 uppercase">
+          <h1 className="text-4xl sm:text-6xl md:text-[10rem] font-normal mb-8 leading-[0.9] tracking-tighter animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200 uppercase">
             Judges <span className="italic font-serif block mt-2 text-white/90">Hub</span>
           </h1>
-          <p className="text-2xl md:text-3xl font-light text-white/70 mb-16 max-w-4xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-400">
+          <p className="text-lg sm:text-2xl md:text-3xl font-light text-white/70 mb-16 max-w-4xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-400">
             "In those days Israel had no king; everyone did as they saw fit."
           </p>
           
           <div className="flex flex-wrap justify-center gap-8 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-600">
             <button 
-              className="bg-white text-black hover:bg-gray-100 px-12 py-6 text-xl rounded-3xl font-bold shadow-2xl transition-all active:scale-95 group flex items-center" 
+              className="bg-white text-black hover:bg-gray-100 px-6 sm:px-12 py-4 sm:py-6 text-sm sm:text-xl rounded-3xl font-bold shadow-2xl transition-all active:scale-95 group flex items-center" 
               onClick={() => document.getElementById('difficulty')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Begin Quiz Journey <ChevronRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </button>
             <button 
-              className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white hover:text-black transition-all px-12 py-6 text-xl rounded-3xl font-light active:scale-95" 
+              className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white hover:text-black transition-all px-6 sm:px-12 py-4 sm:py-6 text-sm sm:text-xl rounded-3xl font-light active:scale-95" 
               onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Explore Content
@@ -161,7 +161,7 @@ export default function JudgesHub() {
                   <span className="w-12 h-px bg-gray-200 mr-6" />
                   Lessons in Fragility
                 </h2>
-                <h3 className="text-5xl md:text-6xl font-normal leading-tight text-gray-900 italic serif">The Era of the Deliverers</h3>
+                <h3 className="text-3xl sm:text-5xl md:text-6xl font-normal leading-tight text-gray-900 italic serif">The Era of the Deliverers</h3>
               </div>
               <p className="text-2xl font-light text-gray-600 leading-[1.8] first-letter:text-6xl first-letter:font-serif first-letter:mr-4 first-letter:float-left first-letter:text-black first-letter:leading-none capitalize">
                 The book of judges marks a period of profound transition and moral struggle. As the generation of Joshua passed, Israel found itself in a recurring cycle of spiritual neglect and divine rescue. Through unlikely heroes, God demonstrated that His strength is perfected in human weakness.
@@ -195,7 +195,7 @@ export default function JudgesHub() {
         </section>
 
         {/* Theological Insight Section */}
-        <section className="mb-40 py-24 bg-gray-900 rounded-[4rem] text-white px-10 lg:px-20 overflow-hidden relative shadow-2xl shadow-gray-900/40 text-left">
+        <section className="mb-24 sm:mb-40 py-14 sm:py-24 bg-gray-900 rounded-[2rem] sm:rounded-[4rem] text-white px-5 sm:px-10 lg:px-20 overflow-hidden relative shadow-2xl shadow-gray-900/40 text-left">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-orange-500/10 blur-[150px] rounded-full translate-x-1/3" />
           <div className="absolute bottom-0 left-0 w-1/3 h-full bg-sky-500/5 blur-[120px] rounded-full -translate-x-1/2" />
           
@@ -231,7 +231,7 @@ export default function JudgesHub() {
         {/* Difficulty Selection Section */}
         <section id="difficulty" className="mb-40 scroll-mt-24 text-center">
           <div className="mb-20">
-            <h2 className="text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif uppercase leading-tight font-serif tracking-tighter italic">Choose Your Deployment</h2>
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif uppercase leading-tight font-serif tracking-tighter italic">Choose Your Deployment</h2>
             <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed italic">Master the cycles of deliverance and the rise of the judges.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -376,7 +376,7 @@ export default function JudgesHub() {
                      <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400 font-urbanist">Chapter Wise Study</span>
                   </div>
                   
-                  <h3 className="text-6xl md:text-8xl font-normal text-slate-900 tracking-tighter uppercase leading-[0.9] italic serif">
+                  <h3 className="text-4xl sm:text-6xl md:text-8xl font-normal text-slate-900 tracking-tighter uppercase leading-[0.9] italic serif">
                     The Library of <span className="text-orange-600 italic">Judges</span>
                   </h3>
                   

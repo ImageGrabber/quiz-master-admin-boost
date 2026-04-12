@@ -107,10 +107,10 @@ export default function GenericBookHub() {
       {/* Hero Section */}
       <section className="py-16 bg-white text-center">
         <div className="max-w-4xl mx-auto px-6">
-          <h1 className="text-5xl md:text-7xl font-normal text-gray-900 mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-normal text-gray-900 mb-6 leading-tight">
             {bookName} Hub
           </h1>
-          <p className="text-2xl font-light text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-2xl font-light text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
             Search through {chapterCount} chapters, jump to a study guide, or test your knowledge with interactive quizzes.
           </p>
 
@@ -149,7 +149,7 @@ export default function GenericBookHub() {
         {/* Difficulty section */}
         <section id="difficulty" className="mb-20 scroll-mt-24">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-4xl font-semibold text-gray-900">By Difficulty</h2>
+            <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900">By Difficulty</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <Card className="border border-gray-200 hover:border-gray-400 transition-all duration-300 flex flex-col bg-white overflow-hidden group shadow-none" onClick={() => navigate(`/bible-questions-and-answers-hub/${bookSlug.toLowerCase()}/beginner`)}> 
@@ -214,7 +214,7 @@ export default function GenericBookHub() {
         {/* Ranges section */}
         <section id="ranges" className="mb-20 scroll-mt-24">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-4xl font-semibold text-gray-900">By Chapter Range</h2>
+            <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900">By Chapter Range</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {ranges.map((r) => (
@@ -240,7 +240,7 @@ export default function GenericBookHub() {
         {/* Chapter Wise section */}
         <section id="chapters" className="mb-20 scroll-mt-24">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-4xl font-semibold text-gray-900">{bookName} Chapters</h2>
+            <h2 className="text-3xl sm:text-4xl font-semibold text-gray-900">{bookName} Chapters</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {visibleChapters.map((ch) => {

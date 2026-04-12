@@ -12,6 +12,12 @@ export const adminSidebarItems: SidebarItem[] = [
     icon: "Eye",
     adminOnly: true,
   },
+  {
+    title: "SEO Audit",
+    href: "/admin/seo-audit",
+    icon: "BarChart3",
+    adminOnly: true,
+  },
 ];
 
 export default adminSidebarItems;

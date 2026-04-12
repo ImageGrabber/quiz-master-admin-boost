@@ -353,8 +353,8 @@ export default function BibleQA() {
 
             <div className="text-left">
               <h2 className="text-sm font-semibold uppercase tracking-[0.5em] text-gray-400 mb-8">The Eternal Library</h2>
-              <h3 className="text-5xl md:text-7xl font-normal text-gray-900 mb-10 italic serif leading-[1.1]">Cinematic Portals into Sacred Scripture</h3>
-              <p className="text-xl md:text-2xl font-light text-gray-400 leading-relaxed italic serif opacity-80 max-w-2xl">
+              <h3 className="text-3xl sm:text-5xl md:text-7xl font-normal text-gray-900 mb-10 italic serif leading-[1.1]">Cinematic Portals into Sacred Scripture</h3>
+              <p className="text-lg sm:text-xl md:text-2xl font-light text-gray-400 leading-relaxed italic serif opacity-80 max-w-2xl">
                 The Bible, a collection of 66 divinely inspired books, serves as the majestic roadmap for our spiritual journey. Our Book Study Hubs provide an immersive gateway to explore each testament, offering structured chapter quizzes and cinematic guides designed to unveil the profound wisdom and timeless narrative of God's Word.
               </p>
             </div>
@@ -403,8 +403,8 @@ export default function BibleQA() {
         <section id="quizzes" className="mb-60 scroll-mt-24">
           <div className="text-center mb-32">
             <div className="inline-block px-6 py-2 rounded-full border border-gray-100 bg-gray-50 text-[10px] font-bold uppercase tracking-[0.5em] text-gray-400 mb-8">Test Your Knowledge</div>
-            <h2 className="text-6xl md:text-8xl font-normal text-gray-900 mb-10 italic serif">Featured Quizzes</h2>
-            <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            <h2 className="text-4xl sm:text-6xl md:text-8xl font-normal text-gray-900 mb-10 italic serif">Featured Quizzes</h2>
+            <p className="text-lg sm:text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
               Challenge yourself with our curated selection of high-fidelity scriptural examinations.
             </p>
             <div className="mt-8 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-gray-100 bg-white text-[11px] uppercase tracking-[0.25em] font-bold text-gray-500">
@@ -479,8 +479,8 @@ export default function BibleQA() {
         <section id="categories" className="mb-40 scroll-mt-24 border-t border-gray-100 pt-32 text-gray-900">
           <div className="text-center mb-32">
             <div className="inline-block px-6 py-2 rounded-full border border-gray-100 bg-gray-50 text-[10px] font-bold uppercase tracking-[0.5em] text-gray-400 mb-8">Structured Discovery</div>
-            <h3 className="text-6xl md:text-8xl font-normal text-gray-900 mb-10 italic serif">Biblical Categories</h3>
-            <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            <h3 className="text-4xl sm:text-6xl md:text-8xl font-normal text-gray-900 mb-10 italic serif">Biblical Categories</h3>
+            <p className="text-lg sm:text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
               Explore the Word through its literary and historical divisions.
             </p>
           </div>

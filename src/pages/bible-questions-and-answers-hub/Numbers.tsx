@@ -103,7 +103,7 @@ export default function NumbersHub() {
       <Navigation />
 
       {/* Modern Hero Section with Cinematic Background */}
-      <section className="relative h-[75vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[68vh] sm:min-h-[75vh] lg:h-[75vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0 text-white">
           <img 
             src={NUMBERS_IMAGES.wilderness} 
@@ -117,18 +117,18 @@ export default function NumbersHub() {
             <Sparkles className="w-4 h-4 text-amber-400" />
             <span className="text-sm font-light tracking-widest uppercase text-white tracking-[0.3em]">The Wilderness Trek</span>
           </div>
-          <h1 className="text-6xl md:text-9xl font-normal mb-8 leading-tight tracking-tighter animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
+          <h1 className="text-4xl sm:text-6xl md:text-9xl font-normal mb-8 leading-tight tracking-tighter animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
             Numbers <span className="italic font-serif">Hub</span>
           </h1>
-          <p className="text-xl md:text-2xl font-light text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
+          <p className="text-base sm:text-xl md:text-2xl font-light text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
             Two censuses, one long journey. From the camp at Sinai to the threshold of the Promised Land.
           </p>
           
           <div className="flex flex-wrap justify-center gap-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700">
-            <Button size="lg" className="bg-white text-black hover:bg-gray-200 px-10 py-8 text-lg rounded-2xl font-light shadow-2xl transition-all active:scale-95" onClick={() => document.getElementById('difficulty')?.scrollIntoView({ behavior: 'smooth' })}>
+            <Button size="lg" className="bg-white text-black hover:bg-gray-200 px-5 sm:px-10 py-4 sm:py-8 text-sm sm:text-lg rounded-2xl font-light shadow-2xl transition-all active:scale-95" onClick={() => document.getElementById('difficulty')?.scrollIntoView({ behavior: 'smooth' })}>
               Begin Quiz Journey
             </Button>
-            <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white hover:text-black transition-all px-10 py-8 text-lg rounded-2xl font-light active:scale-95" onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}>
+            <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white hover:text-black transition-all px-5 sm:px-10 py-4 sm:py-8 text-sm sm:text-lg rounded-2xl font-light active:scale-95" onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}>
               Explore Content
             </Button>
           </div>
@@ -155,7 +155,7 @@ export default function NumbersHub() {
                   <span className="w-12 h-px bg-gray-200 mr-6" />
                   The Test of Faith
                 </h2>
-                <h3 className="text-5xl md:text-6xl font-normal leading-tight text-gray-900 italic serif">The Report of the Twelve Spies</h3>
+                <h3 className="text-3xl sm:text-5xl md:text-6xl font-normal leading-tight text-gray-900 italic serif">The Report of the Twelve Spies</h3>
               </div>
               <p className="text-2xl font-light text-gray-600 leading-[1.8] first-letter:text-6xl first-letter:font-serif first-letter:mr-4 first-letter:float-left first-letter:text-black first-letter:leading-none">
                 Numbers records a journey that should have taken weeks but lasted forty years. It is a profound study of divine patience and human fallibility. From the magnificent arrangements of the tribal camps at Sinai to the rebellions that delayed entry into the Land, every chapter reveals God's faithfulness to a stiff-necked people.
@@ -189,7 +189,7 @@ export default function NumbersHub() {
         </section>
 
         {/* Theological Insight Section */}
-        <section className="mb-40 py-24 bg-gray-900 rounded-[4rem] text-white px-10 lg:px-20 overflow-hidden relative shadow-2xl shadow-gray-900/40">
+        <section className="mb-24 sm:mb-40 py-14 sm:py-24 bg-gray-900 rounded-[2rem] sm:rounded-[4rem] text-white px-5 sm:px-10 lg:px-20 overflow-hidden relative shadow-2xl shadow-gray-900/40">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-amber-500/10 blur-[150px] rounded-full translate-x-1/3" />
           <div className="absolute bottom-0 left-0 w-1/3 h-full bg-orange-500/5 blur-[120px] rounded-full -translate-x-1/2" />
           
@@ -225,7 +225,7 @@ export default function NumbersHub() {
         {/* Challenge/Difficulty Section */}
         <section id="difficulty" className="mb-40 scroll-mt-24">
           <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif tracking-tight">Master Numbers</h2>
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif tracking-tight">Master Numbers</h2>
             <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed uppercase tracking-widest text-[0.45em]">Academic Tracks</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -327,7 +327,7 @@ export default function NumbersHub() {
         <section id="numbers-chapter-wise" className="mb-40 scroll-mt-24 pt-32 border-t border-gray-100">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-24 gap-12">
             <div className="max-w-2xl">
-              <h2 className="text-5xl md:text-7xl font-normal text-gray-900 mb-6 italic serif tracking-tight tracking-tighter">The Library of the Desert</h2>
+              <h2 className="text-3xl sm:text-5xl md:text-7xl font-normal text-gray-900 mb-6 italic serif tracking-tight tracking-tighter">The Library of the Desert</h2>
               <p className="text-2xl font-light text-gray-400 leading-relaxed">Detailed analysis and interactive quizzes for every single chapter of Numbers.</p>
             </div>
             <div className="w-full lg:w-[450px]">

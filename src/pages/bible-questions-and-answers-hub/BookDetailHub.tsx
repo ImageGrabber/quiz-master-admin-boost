@@ -138,11 +138,11 @@ export default function BookDetailHub() {
                <span className="inline-block px-4 py-1.5 rounded-full bg-gray-100 text-gray-400 text-xs font-medium tracking-widest uppercase mb-6">
                 Biblical Study Hub
               </span>
-              <h1 className="text-6xl md:text-8xl font-normal text-gray-900 mb-6 leading-[1.1] tracking-tight">
+              <h1 className="text-4xl sm:text-6xl md:text-8xl font-normal text-gray-900 mb-6 leading-[1.1] tracking-tight">
                 The Book of <span className="italic serif font-light">{bookName}</span>
               </h1>
               {expandedData && (
-                <p className="text-2xl font-light text-gray-500 mb-8 max-w-3xl mx-auto leading-relaxed">
+                <p className="text-lg sm:text-2xl font-light text-gray-500 mb-8 max-w-3xl mx-auto leading-relaxed">
                   {expandedData.subtitle}
                 </p>
               )}

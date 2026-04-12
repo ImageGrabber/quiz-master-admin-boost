@@ -91,7 +91,7 @@ export default function LeviticusHub() {
       <Navigation />
 
       {/* Modern Hero Section with Cinematic Background */}
-      <section className="relative h-[75vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[68vh] sm:min-h-[75vh] lg:h-[75vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0 text-white">
           <img 
             src={LEVITICUS_IMAGES.hero} 
@@ -105,18 +105,18 @@ export default function LeviticusHub() {
             <Sparkles className="w-4 h-4 text-yellow-400" />
             <span className="text-sm font-light tracking-widest uppercase">The School of Holiness</span>
           </div>
-          <h1 className="text-6xl md:text-9xl font-normal mb-8 leading-tight tracking-tighter animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
+          <h1 className="text-4xl sm:text-6xl md:text-9xl font-normal mb-8 leading-tight tracking-tighter animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
             Leviticus <span className="italic font-serif">Hub</span>
           </h1>
-          <p className="text-xl md:text-2xl font-light text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
+          <p className="text-base sm:text-xl md:text-2xl font-light text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
             Uncover the profound rituals, moral codes, and the eternal standard of holiness that bridges the gap between God and man.
           </p>
           
           <div className="flex flex-wrap justify-center gap-6 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-700">
-            <Button size="lg" className="bg-white text-black hover:bg-gray-200 px-10 py-8 text-lg rounded-2xl font-light shadow-2xl transition-all active:scale-95 text-black" onClick={() => document.getElementById('difficulty')?.scrollIntoView({ behavior: 'smooth' })}>
+            <Button size="lg" className="bg-white text-black hover:bg-gray-200 px-5 sm:px-10 py-4 sm:py-8 text-sm sm:text-lg rounded-2xl font-light shadow-2xl transition-all active:scale-95 text-black" onClick={() => document.getElementById('difficulty')?.scrollIntoView({ behavior: 'smooth' })}>
               Begin Quiz Journey
             </Button>
-            <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white hover:text-black transition-all px-10 py-8 text-lg rounded-2xl font-light active:scale-95" onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}>
+            <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white hover:text-black transition-all px-5 sm:px-10 py-4 sm:py-8 text-sm sm:text-lg rounded-2xl font-light active:scale-95" onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}>
               Explore Content
             </Button>
           </div>
@@ -144,7 +144,7 @@ export default function LeviticusHub() {
                   <span className="w-12 h-px bg-gray-200 mr-6" />
                   The Way of Holiness
                 </h2>
-                <h3 className="text-5xl md:text-6xl font-normal leading-tight text-gray-900">A Divine Revelation of Purity and Devotion</h3>
+                <h3 className="text-3xl sm:text-5xl md:text-6xl font-normal leading-tight text-gray-900">A Divine Revelation of Purity and Devotion</h3>
               </div>
               <p className="text-2xl font-light text-gray-600 leading-[1.8] first-letter:text-6xl first-letter:font-serif first-letter:mr-4 first-letter:float-left first-letter:text-black first-letter:leading-none">
                 Leviticus provides the essential vocabulary for dwelling with a Holy God. Through the systems of burnt, grain, peace, sin, and guilt offerings, we discover the weight of transgression and the pathway of restoration in the presence of the Almighty.
@@ -178,7 +178,7 @@ export default function LeviticusHub() {
         </section>
 
          {/* Theological Insight Section - High End Dark Mode Card */}
-         <section className="mb-40 py-24 bg-gray-900 rounded-[4rem] text-white px-10 lg:px-20 overflow-hidden relative shadow-2xl shadow-gray-900/40">
+         <section className="mb-24 sm:mb-40 py-14 sm:py-24 bg-gray-900 rounded-[2rem] sm:rounded-[4rem] text-white px-5 sm:px-10 lg:px-20 overflow-hidden relative shadow-2xl shadow-gray-900/40">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-yellow-500/10 blur-[150px] rounded-full translate-x-1/3" />
           <div className="absolute bottom-0 left-0 w-1/3 h-full bg-red-500/5 blur-[120px] rounded-full -translate-x-1/2" />
           
@@ -214,7 +214,7 @@ export default function LeviticusHub() {
         {/* Challenge/Difficulty Section */}
         <section id="difficulty" className="mb-40 scroll-mt-24">
           <div className="text-center mb-20 text-white">
-            <h2 className="text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif uppercase">The School of Wisdom</h2>
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif uppercase">The School of Wisdom</h2>
             <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed italic">Choose your study depth and test your grasp of God's holy standard.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -318,7 +318,7 @@ export default function LeviticusHub() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-24 text-white">
               <h2 className="text-sm font-semibold uppercase tracking-[0.5em] text-gray-400 mb-8">Specialized Hubs</h2>
-              <h3 className="text-5xl md:text-7xl font-normal text-gray-900 mb-8 italic serif">Targeted Training</h3>
+              <h3 className="text-3xl sm:text-5xl md:text-7xl font-normal text-gray-900 mb-8 italic serif">Targeted Training</h3>
               <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
                 Refine your understanding through targeted narrative and logic tools.
               </p>
@@ -388,7 +388,7 @@ export default function LeviticusHub() {
         <section id="leviticus-chapter-wise" className="mb-40 scroll-mt-24 pt-32 border-t border-gray-100">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-24 gap-12 text-black">
             <div className="max-w-2xl">
-              <h2 className="text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif uppercase leading-none tracking-tight">The Library of Holiness</h2>
+              <h2 className="text-3xl sm:text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif uppercase leading-none tracking-tight">The Library of Holiness</h2>
               <p className="text-2xl font-light text-gray-400 leading-relaxed">Explore unique study materials and summaries for each of the 27 chapters.</p>
             </div>
             {/* Search Bar */}

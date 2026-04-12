@@ -347,7 +347,7 @@ export default function SecondSamuelHub() {
       />
       <Navigation />
 
-      <section className="relative h-[85vh] flex items-center justify-center overflow-hidden bg-black">
+      <section className="relative min-h-[72vh] sm:min-h-[80vh] lg:h-[85vh] flex items-center justify-center overflow-hidden bg-black">
         <div className="absolute inset-0 z-0">
           <img
             src={SECOND_SAMUEL_IMAGES.hero}
@@ -363,22 +363,22 @@ export default function SecondSamuelHub() {
             <Crown className="w-5 h-5 text-amber-300" />
             <span className="text-xs font-bold tracking-[0.4em] uppercase text-white/80">Historical Books</span>
           </div>
-          <h1 className="text-7xl md:text-[10rem] font-normal mb-8 leading-[0.9] tracking-tighter animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200 uppercase">
+          <h1 className="text-4xl sm:text-6xl md:text-[10rem] font-normal mb-8 leading-[0.9] tracking-tighter animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200 uppercase">
             2 Samuel <span className="italic font-serif block mt-2 text-white/90">Hub</span>
           </h1>
-          <p className="text-2xl md:text-3xl font-light text-white/75 mb-16 max-w-4xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-400">
+          <p className="text-lg sm:text-2xl md:text-3xl font-light text-white/75 mb-16 max-w-4xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-400">
             "Your house and your kingdom will endure forever before me."
           </p>
 
           <div className="flex flex-wrap justify-center gap-8 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-600">
             <button
-              className="bg-white text-black hover:bg-gray-100 px-12 py-6 text-xl rounded-3xl font-bold shadow-2xl transition-all active:scale-95 group flex items-center"
+              className="bg-white text-black hover:bg-gray-100 px-6 sm:px-12 py-4 sm:py-6 text-sm sm:text-xl rounded-3xl font-bold shadow-2xl transition-all active:scale-95 group flex items-center"
               onClick={() => document.getElementById("difficulty")?.scrollIntoView({ behavior: "smooth" })}
             >
               Begin Quiz Journey <ChevronRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </button>
             <button
-              className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white hover:text-black transition-all px-12 py-6 text-xl rounded-3xl font-light active:scale-95"
+              className="bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white hover:text-black transition-all px-6 sm:px-12 py-4 sm:py-6 text-sm sm:text-xl rounded-3xl font-light active:scale-95"
               onClick={() => document.getElementById("overview")?.scrollIntoView({ behavior: "smooth" })}
             >
               Explore Content
@@ -404,7 +404,7 @@ export default function SecondSamuelHub() {
                   <span className="w-12 h-px bg-gray-200 mr-6" />
                   Kingship and Covenant
                 </h2>
-                <h3 className="text-5xl md:text-6xl font-normal leading-tight text-gray-900 italic serif">The Rise and Testing of David</h3>
+                <h3 className="text-3xl sm:text-5xl md:text-6xl font-normal leading-tight text-gray-900 italic serif">The Rise and Testing of David</h3>
               </div>
               <p className="text-2xl font-light text-gray-600 leading-[1.8] first-letter:text-6xl first-letter:font-serif first-letter:mr-4 first-letter:float-left first-letter:text-black first-letter:leading-none capitalize">
                 Second Samuel traces David's reign from triumph to turmoil. We witness Jerusalem established, a covenant promise given, and then deep fractures caused by sin and rebellion. Yet the book also reveals God's persistent mercy and His commitment to redemptive purposes through imperfect leaders.
@@ -437,7 +437,7 @@ export default function SecondSamuelHub() {
           </div>
         </section>
 
-        <section className="mb-40 py-24 bg-gray-900 rounded-[4rem] text-white px-10 lg:px-20 overflow-hidden relative shadow-2xl shadow-gray-900/40 text-left">
+        <section className="mb-24 sm:mb-40 py-14 sm:py-24 bg-gray-900 rounded-[2rem] sm:rounded-[4rem] text-white px-5 sm:px-10 lg:px-20 overflow-hidden relative shadow-2xl shadow-gray-900/40 text-left">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-amber-500/10 blur-[150px] rounded-full translate-x-1/3" />
           <div className="absolute bottom-0 left-0 w-1/3 h-full bg-sky-500/10 blur-[120px] rounded-full -translate-x-1/2" />
 
@@ -472,7 +472,7 @@ export default function SecondSamuelHub() {
 
         <section id="difficulty" className="mb-40 scroll-mt-24 text-center">
           <div className="mb-20">
-            <h2 className="text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif uppercase leading-tight font-serif tracking-tighter">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif uppercase leading-tight font-serif tracking-tighter">
               Choose Your Track
             </h2>
             <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed italic">
@@ -628,7 +628,7 @@ export default function SecondSamuelHub() {
                   <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">Chapter Wise Study</span>
                 </div>
 
-                <h3 className="text-6xl md:text-8xl font-normal text-slate-900 tracking-tighter uppercase leading-[0.9] italic serif">
+                <h3 className="text-4xl sm:text-6xl md:text-8xl font-normal text-slate-900 tracking-tighter uppercase leading-[0.9] italic serif">
                   The Story of <span className="text-amber-600 italic">2 Samuel</span>
                 </h3>
 

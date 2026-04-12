@@ -20,7 +20,8 @@ import {
   Bell,
   Heart,
   BookOpen,
-  Eye
+  Eye,
+  BarChart3
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -101,6 +102,11 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       name: "Traffic Insights",
       href: "/admin/page-views",
       icon: Eye,
+    },
+    {
+      name: "SEO Audit",
+      href: "/admin/seo-audit",
+      icon: BarChart3,
     },
     {
       name: "Realtime Health Check",

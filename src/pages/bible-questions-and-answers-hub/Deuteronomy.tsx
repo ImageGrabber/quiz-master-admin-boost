@@ -92,7 +92,7 @@ export default function DeuteronomyHub() {
       <Navigation />
 
       {/* Cinematic Hero Section */}
-      <section className="relative h-[85vh] flex items-center justify-center overflow-hidden bg-black">
+      <section className="relative min-h-[72vh] sm:min-h-[80vh] lg:h-[85vh] flex items-center justify-center overflow-hidden bg-black">
         <div className="absolute inset-0 z-0">
           <img 
             src={DEUTERONOMY_IMAGES.hero} 
@@ -107,18 +107,18 @@ export default function DeuteronomyHub() {
             <ScrollText className="w-5 h-5 text-amber-400" />
             <span className="text-xs font-bold tracking-[0.4em] uppercase text-white/80">The Second Law</span>
           </div>
-          <h1 className="text-7xl md:text-[10rem] font-normal mb-8 leading-[0.9] tracking-tighter animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200">
+          <h1 className="text-4xl sm:text-6xl md:text-[10rem] font-normal mb-8 leading-[0.9] tracking-tighter animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-200">
             Deuteronomy <span className="italic font-serif block mt-2 text-white/90">Hub</span>
           </h1>
-          <p className="text-2xl md:text-3xl font-light text-white/70 mb-16 max-w-4xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-400">
+          <p className="text-lg sm:text-2xl md:text-3xl font-light text-white/70 mb-16 max-w-4xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-400">
             Moses' final charge to a new generation at the border of home. A timeless call to love God with wholehearted devotion.
           </p>
           
           <div className="flex flex-wrap justify-center gap-8 animate-in fade-in slide-in-from-bottom-10 duration-1000 delay-600">
-            <Button size="lg" className="bg-white text-black hover:bg-gray-100 px-12 py-10 text-xl rounded-3xl font-bold shadow-2xl transition-all active:scale-95 group text-black" onClick={() => document.getElementById('difficulty')?.scrollIntoView({ behavior: 'smooth' })}>
+            <Button size="lg" className="bg-white text-black hover:bg-gray-100 px-6 sm:px-12 py-4 sm:py-10 text-sm sm:text-xl rounded-3xl font-bold shadow-2xl transition-all active:scale-95 group text-black" onClick={() => document.getElementById('difficulty')?.scrollIntoView({ behavior: 'smooth' })}>
               Begin Quiz Journey <ChevronRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white hover:text-black transition-all px-12 py-10 text-xl rounded-3xl font-light active:scale-95 text-white" onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}>
+            <Button size="lg" variant="outline" className="bg-white/10 backdrop-blur-md border-white/20 text-white hover:bg-white hover:text-black transition-all px-6 sm:px-12 py-4 sm:py-10 text-sm sm:text-xl rounded-3xl font-light active:scale-95 text-white" onClick={() => document.getElementById('overview')?.scrollIntoView({ behavior: 'smooth' })}>
               Explore Content
             </Button>
           </div>
@@ -144,7 +144,7 @@ export default function DeuteronomyHub() {
                   <span className="w-12 h-px bg-gray-200 mr-6" />
                   The Golden Commandment
                 </h2>
-                <h3 className="text-5xl md:text-6xl font-normal leading-tight text-gray-900">The Shema: The Heart of Devotion</h3>
+                <h3 className="text-3xl sm:text-5xl md:text-6xl font-normal leading-tight text-gray-900">The Shema: The Heart of Devotion</h3>
               </div>
               <p className="text-2xl font-light text-gray-600 leading-[1.8] first-letter:text-6xl first-letter:font-serif first-letter:mr-4 first-letter:float-left first-letter:text-black first-letter:leading-none">
                 "Hear, O Israel: The Lord our God, the Lord is one." This single verse became the heartbeat of Hebrew faith and the cornerstone of Deuteronomy's theology, calling for a love that encompasses heart, soul, and strength.
@@ -178,7 +178,7 @@ export default function DeuteronomyHub() {
         </section>
 
         {/* Theological Insight Section - High End Dark Mode Card */}
-        <section className="mb-40 py-24 bg-gray-900 rounded-[4rem] text-white px-10 lg:px-20 overflow-hidden relative shadow-2xl shadow-gray-900/40 text-left">
+        <section className="mb-24 sm:mb-40 py-14 sm:py-24 bg-gray-900 rounded-[2rem] sm:rounded-[4rem] text-white px-5 sm:px-10 lg:px-20 overflow-hidden relative shadow-2xl shadow-gray-900/40 text-left">
           <div className="absolute top-0 right-0 w-1/2 h-full bg-amber-500/10 blur-[150px] rounded-full translate-x-1/3" />
           <div className="absolute bottom-0 left-0 w-1/3 h-full bg-blue-500/5 blur-[120px] rounded-full -translate-x-1/2" />
           
@@ -214,7 +214,7 @@ export default function DeuteronomyHub() {
         {/* Challenge/Difficulty Section */}
         <section id="difficulty" className="mb-40 scroll-mt-24">
           <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif uppercase">Choose Your Study Depth</h2>
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif uppercase">Choose Your Study Depth</h2>
             <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed italic">Test your grasp of Moses' final charge and the laws of the covenant.</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -318,7 +318,7 @@ export default function DeuteronomyHub() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-24">
               <h2 className="text-sm font-semibold uppercase tracking-[0.5em] text-gray-400 mb-8">Specialized Training</h2>
-              <h3 className="text-5xl md:text-7xl font-normal text-gray-900 mb-8 italic serif">The Scrolls of Wisdom</h3>
+              <h3 className="text-3xl sm:text-5xl md:text-7xl font-normal text-gray-900 mb-8 italic serif">The Scrolls of Wisdom</h3>
               <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed">
                 Refine your mastery through targeted narrative and logic modules.
               </p>
@@ -389,7 +389,7 @@ export default function DeuteronomyHub() {
           <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-32 gap-16 text-left">
             <div className="max-w-2xl">
                <h2 className="text-[10px] font-bold uppercase tracking-[0.5em] text-amber-500 mb-10">The Scrolls of Moab</h2>
-              <h3 className="text-6xl md:text-8xl font-normal text-gray-900 mb-8 italic serif tracking-tighter uppercase leading-none">The Library of Wisdom</h3>
+              <h3 className="text-4xl sm:text-6xl md:text-8xl font-normal text-gray-900 mb-8 italic serif tracking-tighter uppercase leading-none">The Library of Wisdom</h3>
               <p className="text-2xl font-light text-gray-400 leading-relaxed italic border-l-2 border-gray-100 pl-8">Explore unique study materials and summaries for each of the 34 chapters.</p>
             </div>
             <div className="w-full lg:w-[500px]">

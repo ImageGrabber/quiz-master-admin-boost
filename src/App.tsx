@@ -168,6 +168,7 @@ import TermsOfService from "./pages/TermsOfService";
 // Removed static imports of Bible book quiz files for code-splitting
 import Upgrade from "./pages/Upgrade";
 import PageViews from "./pages/admin/PageViews";
+import SeoAudit from "./pages/admin/SeoAudit";
 import { usePageView } from "@/hooks/usePageView";
 import RecentAttempts from "./pages/dashboard/recent-attempts";
 import AllBooksCinematicHub from "./pages/bible-questions-and-answers-hub/AllBooksCinematicHub";
@@ -377,6 +378,7 @@ const App = () => {
               <Route path="/admin/users" element={<ProtectedRoute requiredRole="admin"><AdminUsers /></ProtectedRoute>} />
               <Route path="/admin/users/:id" element={<ProtectedRoute requiredRole="admin"><AdminUserSettings /></ProtectedRoute>} />
               <Route path="/admin/page-views" element={<ProtectedRoute requiredRole="admin"><PageViews /></ProtectedRoute>} />
+              <Route path="/admin/seo-audit" element={<ProtectedRoute requiredRole="admin"><SeoAudit /></ProtectedRoute>} />
               <Route path="/rls-test" element={<ProtectedRoute requiredRole="admin"><RLSTest /></ProtectedRoute>} />
               <Route path="/bible-questions-and-answers-hub" element={<BibleQA />} />
               <Route path="/bible-questions-and-answers-hub/genesis" element={<GenesisHub />} />

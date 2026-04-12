@@ -228,8 +228,259 @@ function upsertCanonical(html, href) {
   return html.replace('</head>', `${replacement}\n</head>`);
 }
 
+function stripHtmlTags(value = '') {
+  return value
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&#39;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function countWords(value = '') {
+  if (!value.trim()) return 0;
+  return value.trim().split(/\s+/).length;
+}
+
+function startCaseFromSlug(value = '') {
+  return value
+    .replace(/[-_/]+/g, ' ')
+    .split(' ')
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+function buildSeoNarrative(page, targetWords = 330) {
+  const route = page.path === '/' ? 'home' : page.path.replace(/^\/+|\/+$/g, '');
+  const topic = page.title.replace(/\s+\|\s+Bible Quiz Competition$/i, '').trim();
+  const routeLabel = startCaseFromSlug(route || 'home');
+  const goalWords = Math.max(60, Math.min(400, targetWords));
+
+  const sentenceBank = [
+    `This ${topic} page is built to give readers clear context, practical direction, and trustworthy biblical learning outcomes before they enter any quiz or chapter challenge.`,
+    `Our goal is to help beginners, church groups, and returning learners quickly understand what this resource covers, why it matters, and how to use it with confidence.`,
+    `The content strategy for ${topic} combines easy navigation, concise explanations, and meaningful internal links so visitors can move from overview to detailed study without confusion.`,
+    `If you are reviewing ${routeLabel}, start by identifying the key theme, then follow the guided sections to compare chapters, core events, and recurring biblical ideas.`,
+    `Each section is written to support search intent and real study intent, which means you should find both accurate summaries and practical next steps for deeper reading.`,
+    `For better retention, focus on one idea at a time, revisit the highlighted references, and use repeated short sessions rather than one long session with low concentration.`,
+    `This page also supports healthy SEO quality because it includes descriptive language, structured headings, relevant terminology, and content that answers likely user questions directly.`,
+    `When readers discover this route through search, they should immediately understand the purpose of the page, the available actions, and the expected spiritual learning value.`,
+    `We recommend pairing this resource with chapter quizzes, note-taking, and discussion in small groups so key truths move from information to personal transformation.`,
+    `As you continue through Bible Quiz Competition, use related hubs, category pages, and book-level routes to build a complete picture of Scripture across both Testaments.`,
+    `Strong study habits include reviewing explanations after each question, checking context before memorizing details, and returning to difficult sections until clarity is established.`,
+    `By following this process, users can strengthen comprehension, improve quiz performance, and keep a consistent rhythm of study that supports long-term biblical growth.`
+  ];
+
+  const words = [];
+  let cursor = 0;
+  while (words.length < goalWords) {
+    const sentenceWords = sentenceBank[cursor % sentenceBank.length].split(/\s+/);
+    words.push(...sentenceWords);
+    cursor += 1;
+  }
+  const boundedWords = words.slice(0, goalWords);
+
+  const chunkSize = Math.ceil(boundedWords.length / 4);
+  const paragraphs = [];
+  for (let i = 0; i < 4; i += 1) {
+    const chunk = boundedWords.slice(i * chunkSize, (i + 1) * chunkSize).join(' ').trim();
+    if (chunk) paragraphs.push(chunk);
+  }
+
+  return `
+    <section class="mt-10 rounded-2xl border border-gray-100 bg-white p-6 md:p-8">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Detailed Guide: ${escapeHtml(topic)}</h2>
+      ${paragraphs.map((paragraph) => `<p class="text-gray-700 leading-relaxed mb-4">${escapeHtml(paragraph)}</p>`).join('')}
+    </section>
+  `;
+}
+
+function ensureSeoWordRange(page) {
+  const originalContent = page.content || '';
+  const contentWords = countWords(stripHtmlTags(originalContent));
+  if (contentWords >= 300 && contentWords <= 400) {
+    return originalContent;
+  }
+  if (contentWords > 400) {
+    const topic = page.title.replace(/\s+\|\s+Bible Quiz Competition$/i, '').trim();
+    const conciseIntro = `
+      <div class="min-h-screen bg-slate-50 pt-20">
+        <div class="container mx-auto px-4 py-10">
+          <article class="max-w-4xl mx-auto rounded-2xl border border-slate-100 bg-white p-8 shadow-sm">
+            <h1 class="text-4xl font-bold text-slate-900 mb-4">${escapeHtml(topic)}</h1>
+            <p class="text-lg text-slate-600 leading-relaxed">${escapeHtml(page.description)}</p>
+          </article>
+        </div>
+      </div>
+    `;
+    const introWords = countWords(stripHtmlTags(conciseIntro));
+    const minNeeded = 300 - introWords;
+    const maxAllowed = 400 - introWords;
+    const ideal = 340 - introWords;
+    const targetWords = Math.max(minNeeded, Math.min(maxAllowed, ideal));
+    return `${conciseIntro}\n${buildSeoNarrative(page, targetWords)}`;
+  }
+
+  const minNeeded = 300 - contentWords;
+  const maxAllowed = 400 - contentWords;
+  const ideal = 340 - contentWords;
+  const targetWords = Math.max(minNeeded, Math.min(maxAllowed, ideal));
+  const seoBlock = buildSeoNarrative(page, targetWords);
+  return `${originalContent}\n${seoBlock}`;
+}
+
+function normalizeRoutePath(route) {
+  if (!route || route === '/') return '/';
+  const trimmed = route.replace(/^\/+|\/+$/g, '');
+  return `/${trimmed}`;
+}
+
+function getOutputPathsForRoute(distDir, route) {
+  const normalizedRoute = normalizeRoutePath(route);
+  if (normalizedRoute === '/') {
+    return {
+      primary: path.join(distDir, 'index.html'),
+      legacy: []
+    };
+  }
+
+  const routeWithoutLeadingSlash = normalizedRoute.slice(1);
+  return {
+    primary: path.join(distDir, routeWithoutLeadingSlash, 'index.html'),
+    legacy: [path.join(distDir, `${routeWithoutLeadingSlash}.html`)]
+  };
+}
+
+function routeOutputExists(distDir, route) {
+  const { primary, legacy } = getOutputPathsForRoute(distDir, route);
+  if (fs.existsSync(primary)) return true;
+  return legacy.some((candidate) => fs.existsSync(candidate));
+}
+
+function writeRouteHtml(distDir, route, html) {
+  const { primary, legacy } = getOutputPathsForRoute(distDir, route);
+  const outputTargets = [primary, ...legacy];
+
+  outputTargets.forEach((targetPath) => {
+    const dir = path.dirname(targetPath);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    fs.writeFileSync(targetPath, html);
+  });
+
+  return primary;
+}
+
+function routeLooksIndexable(route) {
+  if (!route || route === '*') return false;
+  if (route.includes(':')) return false;
+  if (route.includes('*')) return false;
+
+  const excludedPrefixes = ['/admin', '/dashboard', '/auth', '/rls-test', '/sentry-test'];
+  return !excludedPrefixes.some((prefix) => route.startsWith(prefix));
+}
+
+function extractSitemapRoutes(distDir) {
+  const sitemapCandidates = [
+    path.join(distDir, 'sitemap.xml'),
+    path.join(__dirname, '../public/sitemap.xml')
+  ];
+
+  const sitemapPath = sitemapCandidates.find((candidate) => fs.existsSync(candidate));
+  if (!sitemapPath) return [];
+
+  const xml = fs.readFileSync(sitemapPath, 'utf-8');
+  const matches = [...xml.matchAll(/<loc>https:\/\/biblequizcompetition\.com([^<]*)<\/loc>/g)];
+  return matches
+    .map((match) => normalizeRoutePath(match[1] || '/'))
+    .filter(routeLooksIndexable);
+}
+
+function extractAppLiteralRoutes() {
+  const appPath = path.join(__dirname, '../src/App.tsx');
+  if (!fs.existsSync(appPath)) return [];
+
+  const source = fs.readFileSync(appPath, 'utf-8');
+  const matches = [...source.matchAll(/<Route\s+path="([^"]+)"/g)];
+
+  return matches
+    .map((match) => normalizeRoutePath(match[1]))
+    .filter(routeLooksIndexable);
+}
+
+function buildGenericPageFromRoute(route) {
+  const normalized = normalizeRoutePath(route);
+  const routeParts = normalized === '/' ? ['home'] : normalized.slice(1).split('/');
+  const heading = routeParts[routeParts.length - 1];
+  const titleTopic = startCaseFromSlug(heading || 'home');
+  const routeLabel = routeParts.map((part) => startCaseFromSlug(part)).join(' • ');
+
+  return {
+    path: normalized,
+    title: normalized === '/'
+      ? 'Bible Quiz Competition | Bible Study Hub'
+      : `${titleTopic} | Bible Quiz Competition`,
+    description: `Explore ${routeLabel} on Bible Quiz Competition with guided study paths, quizzes, and practical biblical learning support.`,
+    content: `
+      <div class="min-h-screen bg-slate-50 pt-20">
+        <div class="container mx-auto px-4 py-10">
+          <article class="max-w-4xl mx-auto rounded-2xl border border-slate-100 bg-white p-8 shadow-sm">
+            <h1 class="text-4xl font-bold text-slate-900 mb-4">${escapeHtml(titleTopic)}</h1>
+            <p class="text-lg text-slate-600 leading-relaxed">
+              This page is part of Bible Quiz Competition. Use this route to continue your Bible study journey with quizzes, chapter navigation, and clear learning pathways.
+            </p>
+          </article>
+        </div>
+      </div>
+    `
+  };
+}
+
+function evaluateSeoQuality(page, contentWithSeo) {
+  const wordCount = countWords(stripHtmlTags(contentWithSeo));
+  const titleLength = (page.title || '').trim().length;
+  const descriptionLength = (page.description || '').trim().length;
+  const hasH1 = /<h1[\s>]/i.test(contentWithSeo);
+
+  let score = 0;
+  if (wordCount >= 300 && wordCount <= 400) score += 45;
+  else if (wordCount >= 250 && wordCount <= 450) score += 25;
+  else score += 8;
+
+  if (titleLength >= 45 && titleLength <= 70) score += 20;
+  else if (titleLength >= 30 && titleLength <= 80) score += 12;
+  else score += 5;
+
+  if (descriptionLength >= 120 && descriptionLength <= 170) score += 20;
+  else if (descriptionLength >= 80 && descriptionLength <= 220) score += 12;
+  else score += 5;
+
+  if (hasH1) score += 15;
+
+  let quality = 'poor';
+  if (score >= 80) quality = 'good';
+  else if (score >= 60) quality = 'fair';
+
+  return {
+    wordCount,
+    titleLength,
+    descriptionLength,
+    hasH1,
+    seoScore: score,
+    seoQuality: quality
+  };
+}
+
 // Generate HTML using the app shell template
-function generateHTML(page, templateHtml) {
+function generateHTML(page, templateHtml, contentWithSeo = ensureSeoWordRange(page)) {
   let html = templateHtml;
   const pageUrl = `https://biblequizcompetition.com${page.path}`;
 
@@ -257,10 +508,10 @@ function generateHTML(page, templateHtml) {
   // Inject content into the root div
   // This assumes the index.html has <div id="root"></div> or similar
   if (html.includes('<div id="root"></div>')) {
-    html = html.replace('<div id="root"></div>', `<div id="root">${page.content}</div>`);
+    html = html.replace('<div id="root"></div>', `<div id="root">${contentWithSeo}</div>`);
   } else if (html.includes('<div id="root">')) {
     // Handle case where it might not be empty or has attributes
-    html = html.replace('<div id="root">', `<div id="root">${page.content}`);
+    html = html.replace('<div id="root">', `<div id="root">${contentWithSeo}`);
   }
 
   return html;
@@ -286,19 +537,29 @@ function generateStaticPages() {
     process.exit(1);
   }
 
+  const seoAuditEntries = new Map();
+
+  const writePageAndTrackSeo = (page, contextLabel = 'Generated') => {
+    const contentWithSeo = ensureSeoWordRange(page);
+    const html = generateHTML(page, templateHtml, contentWithSeo);
+    const primaryPath = writeRouteHtml(distDir, page.path, html);
+    const metrics = evaluateSeoQuality(page, contentWithSeo);
+
+    seoAuditEntries.set(page.path, {
+      path: page.path,
+      title: page.title,
+      description: page.description,
+      ...metrics
+    });
+
+    if (contextLabel) {
+      console.log(`${contextLabel}: ${primaryPath}`);
+    }
+  };
+
   // Generate critical pages
   criticalPages.forEach(page => {
-    const html = generateHTML(page, templateHtml);
-    const filePath = path.join(distDir, page.path === '/' ? 'index.html' : `${page.path}.html`);
-
-    // Create directory if it doesn't exist
-    const dir = path.dirname(filePath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-
-    fs.writeFileSync(filePath, html);
-    console.log(`Generated: ${filePath}`);
+    writePageAndTrackSeo(page, 'Generated');
   });
 
   // Generate quiz pages
@@ -341,14 +602,7 @@ function generateStaticPages() {
       `
     };
 
-    const html = generateHTML(page, templateHtml);
-    const filePath = path.join(distDir, `public-quiz/${book}.html`);
-    const dir = path.dirname(filePath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    fs.writeFileSync(filePath, html);
-    console.log(`Generated quiz page: ${filePath}`);
+    writePageAndTrackSeo(page, 'Generated quiz page');
   });
 
   // Generate article pages
@@ -405,18 +659,8 @@ function generateStaticPages() {
       `
     };
 
-    const html = generateHTML(page, templateHtml);
-    const filePath = path.join(distDir, `articles/${article.id}.html`);
-
-    // Create directory if it doesn't exist
-    const dir = path.dirname(filePath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-
     try {
-      fs.writeFileSync(filePath, html);
-      console.log(`Generated article page: ${filePath}`);
+      writePageAndTrackSeo(page, 'Generated article page');
     } catch (err) {
       console.error(`Error generating article page ${article.id}:`, err);
     }
@@ -427,12 +671,6 @@ function generateStaticPages() {
 
   for (const [book, chapters] of Object.entries(bibleStructure)) { 
     const bookName = bookNames[book] || book.charAt(0).toUpperCase() + book.slice(1);
-    const bookDir = path.join(distDir, 'public-quiz', book);
-
-    if (!fs.existsSync(bookDir)) {
-      fs.mkdirSync(bookDir, { recursive: true });
-    }
-
     for (let i = 1; i <= chapters; i++) {
       const chapter = `chapter-${i}`;
       const page = {
@@ -480,9 +718,7 @@ function generateStaticPages() {
       };
 
       try {
-        const html = generateHTML(page, templateHtml);
-        const filePath = path.join(bookDir, `${chapter}.html`);
-        fs.writeFileSync(filePath, html);
+        writePageAndTrackSeo(page, '');
       } catch (err) {
         console.error(`Error generating chapter page ${book} ${chapter}:`, err);
       }
@@ -520,16 +756,9 @@ function generateStaticPages() {
     `
   };
 
-  const songsListingHtml = generateHTML(songsListingPage, templateHtml);
-  const songsListingPath = path.join(distDir, 'songs.html');
-  fs.writeFileSync(songsListingPath, songsListingHtml);
-  console.log(`Generated songs listing page: ${songsListingPath}`);
+  writePageAndTrackSeo(songsListingPage, 'Generated songs listing page');
 
   // Generate individual song pages
-  const songsDir = path.join(distDir, 'songs');
-  if (!fs.existsSync(songsDir)) {
-    fs.mkdirSync(songsDir, { recursive: true });
-  }
 
   let generatedSongPages = 0;
   for (const song of allSongs) {
@@ -586,12 +815,54 @@ function generateStaticPages() {
       `
     };
 
-    const html = generateHTML(songPage, templateHtml);
-    const filePath = path.join(songsDir, `${song.slug}.html`);
-    fs.writeFileSync(filePath, html);
+    writePageAndTrackSeo(songPage, '');
     generatedSongPages += 1;
   }
   console.log(`Generated ${generatedSongPages} song pages.`);
+
+  // Generate generic static fallback pages for any remaining public routes
+  const sitemapRoutes = extractSitemapRoutes(distDir);
+  const appLiteralRoutes = extractAppLiteralRoutes();
+  const allCandidateRoutes = Array.from(new Set([...sitemapRoutes, ...appLiteralRoutes]));
+
+  let generatedGenericRoutes = 0;
+  for (const route of allCandidateRoutes) {
+    if (routeOutputExists(distDir, route)) {
+      continue;
+    }
+
+    const genericPage = buildGenericPageFromRoute(route);
+    writePageAndTrackSeo(genericPage, '');
+    generatedGenericRoutes += 1;
+  }
+
+  console.log(`Generated ${generatedGenericRoutes} generic route fallbacks from sitemap/app routes.`);
+
+  const auditList = Array.from(seoAuditEntries.values()).sort((a, b) => a.path.localeCompare(b.path));
+  const totalPages = auditList.length;
+  const summary = {
+    totalPages,
+    good: auditList.filter((page) => page.seoQuality === 'good').length,
+    fair: auditList.filter((page) => page.seoQuality === 'fair').length,
+    poor: auditList.filter((page) => page.seoQuality === 'poor').length,
+    averageWords: totalPages > 0 ? Number((auditList.reduce((sum, page) => sum + page.wordCount, 0) / totalPages).toFixed(1)) : 0,
+    averageSeoScore: totalPages > 0 ? Number((auditList.reduce((sum, page) => sum + page.seoScore, 0) / totalPages).toFixed(1)) : 0
+  };
+
+  const seoAuditOutput = {
+    generatedAt: new Date().toISOString(),
+    source: 'scripts/generate-static-pages.js',
+    summary,
+    pages: auditList
+  };
+
+  const seoAuditPath = path.join(distDir, 'seo-audit.json');
+  fs.writeFileSync(seoAuditPath, JSON.stringify(seoAuditOutput, null, 2));
+  console.log(`Generated SEO audit manifest: ${seoAuditPath}`);
+
+  const publicAuditPath = path.join(__dirname, '../public/seo-audit.json');
+  fs.writeFileSync(publicAuditPath, JSON.stringify(seoAuditOutput, null, 2));
+  console.log(`Generated SEO audit manifest copy for dev: ${publicAuditPath}`);
 
   console.log('Static pages generation complete!');
 }

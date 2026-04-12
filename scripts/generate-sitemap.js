@@ -40,6 +40,31 @@ const articles = [
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+function normalizeRoutePath(route) {
+  if (!route || route === '/') return '/';
+  return `/${route.replace(/^\/+|\/+$/g, '')}`;
+}
+
+function routeLooksIndexable(route) {
+  if (!route || route === '*') return false;
+  if (route.includes(':')) return false;
+  if (route.includes('*')) return false;
+
+  const excludedPrefixes = ['/admin', '/dashboard', '/auth', '/rls-test', '/sentry-test'];
+  return !excludedPrefixes.some((prefix) => route.startsWith(prefix));
+}
+
+function extractAppLiteralRoutes() {
+  const appPath = path.join(__dirname, '../src/App.tsx');
+  if (!fs.existsSync(appPath)) return [];
+
+  const source = fs.readFileSync(appPath, 'utf-8');
+  const matches = [...source.matchAll(/<Route\s+path="([^"]+)"/g)];
+  return matches
+    .map((match) => normalizeRoutePath(match[1]))
+    .filter(routeLooksIndexable);
+}
+
 // Generate comprehensive sitemap
 function generateSitemap() {
   const baseUrl = 'https://biblequizcompetition.com';
@@ -253,6 +278,24 @@ function generateSitemap() {
     }
     console.log(`Added ${kidsStories.length} Kids Story URLs to sitemap`);
   }
+
+  // Include all literal public routes from App.tsx so sitemap stays in sync with routing.
+  const appRoutes = extractAppLiteralRoutes();
+  const existingLocs = new Set(urls.map((url) => url.loc));
+  let addedLiteralRoutes = 0;
+
+  for (const route of appRoutes) {
+    if (existingLocs.has(route)) continue;
+    urls.push({
+      loc: route,
+      priority: '0.6',
+      changefreq: 'monthly'
+    });
+    existingLocs.add(route);
+    addedLiteralRoutes += 1;
+  }
+
+  console.log(`Added ${addedLiteralRoutes} additional literal routes from App.tsx`);
 
   // Generate XML sitemap
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
