@@ -156,6 +156,17 @@ function generateSitemap() {
     });
   });
 
+  // Public Quiz Chapter Pages (Programmatic SEO) - keep sitemap in sync with generated static chapter routes
+  for (const [book, chapters] of Object.entries(bibleStructure)) {
+    for (let i = 1; i <= chapters; i++) {
+      urls.push({
+        loc: `/public-quiz/${book}/chapter-${i}`,
+        priority: '0.65',
+        changefreq: 'monthly'
+      });
+    }
+  }
+
   // Article pages
   articles.forEach(article => {
     urls.push({
