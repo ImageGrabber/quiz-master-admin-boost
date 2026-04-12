@@ -68,7 +68,7 @@ const KNOWN_CRAWLER_IP_PREFIXES = [
   "157.55.",
   "40.77.",
 ];
-const EXCLUDED_VISITOR_IPS = new Set(["99.227.50.157"]);
+const EXCLUDED_VISITOR_IPS = new Set(["99.227.50.157", "2607:fea8:339e:4b00:9dc9:92f5:de04:ccce"]);
 const CRAWLER_USER_AGENT_PATTERN = /googlebot|bingbot|slurp|duckduckbot|yandexbot|baiduspider|applebot|crawler|spider|bot/i;
 
 function getSinceDate(range: TimeRange): Date | null {

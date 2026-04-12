@@ -170,7 +170,7 @@ import Upgrade from "./pages/Upgrade";
 import PageViews from "./pages/admin/PageViews";
 import { usePageView } from "@/hooks/usePageView";
 import RecentAttempts from "./pages/dashboard/recent-attempts";
-import BookDetailHub from "./pages/bible-questions-and-answers-hub/BookDetailHub";
+import AllBooksCinematicHub from "./pages/bible-questions-and-answers-hub/AllBooksCinematicHub";
 import GenesisBeginnerQuiz from "./pages/bible-questions-and-answers-hub/GenesisBeginnerQuiz";
 import GenesisIntermediateQuiz from "./pages/bible-questions-and-answers-hub/GenesisIntermediateQuiz";
 import GenesisAdvancedQuiz from "./pages/bible-questions-and-answers-hub/GenesisAdvancedQuiz";
@@ -392,7 +392,7 @@ const App = () => {
               <Route path="/bible-questions-and-answers-hub/ruth" element={<RuthHub />} />
               <Route path="/bible-questions-and-answers-hub/rith" element={<RuthHub />} />
               <Route path="/bible-questions-and-answers-hub/nehemiah" element={<NehemiahHub />} />
-              <Route path="/bible-questions-and-answers-hub/:bookSlug" element={<BookDetailHub />} />
+              <Route path="/bible-questions-and-answers-hub/:bookSlug" element={<AllBooksCinematicHub />} />
               <Route path="/bible-questions-and-answers-hub/genesis/beginner" element={<GenesisBeginnerQuiz />} />
               <Route path="/bible-questions-and-answers-hub/genesis/intermediate" element={<GenesisIntermediateQuiz />} />
               <Route path="/bible-questions-and-answers-hub/genesis/advanced" element={<GenesisAdvancedQuiz />} />
