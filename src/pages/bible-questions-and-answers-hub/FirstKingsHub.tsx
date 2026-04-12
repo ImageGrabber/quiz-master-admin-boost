@@ -23,7 +23,7 @@ const FIRST_KINGS_IMAGES = {
   hero: "/images/book-study-hubs-hero.jpg",
   temple: "/images/books/1-kings.png",
   wisdom: "/images/books/1-kings.png",
- fire: "/images/books/1-kings.png",
+  fire: "/images/books/1-kings.png",
 };
 
 const chapterThemes: Record<
