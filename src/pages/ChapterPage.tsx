@@ -1,17 +1,14 @@
 import { useParams, useLocation } from "react-router-dom";
 import { bibleData } from "@/data/bibleData";
 import ChapterStudyLayout from "@/components/bible/ChapterStudyLayout";
-import { Button } from "@/components/ui/button";
-import { Brain, ArrowLeft } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { Navigation } from "@/components/Navigation";
-
+import PublicQuiz from "./PublicQuiz";
 import { specificChapterQuizzes } from "@/data/specific-chapter-quizzes";
+import { bookNames } from "@/data/bible-data";
+import { createChapterFallbackQuestions, normalizeQuizQuestions } from "@/lib/quizQuestionNormalizer";
 
 export default function ChapterPage() {
   const { book, id } = useParams<{ book: string; id: string }>();
   const location = useLocation();
-  const navigate = useNavigate();
 
   const chapterId = parseInt(id || "1", 10);
   const isFullText = location.pathname.endsWith("-full");
@@ -25,28 +22,31 @@ export default function ChapterPage() {
   // Load specific chapter quiz if available
   const quizKey = `${bookKey}-${chapterId}`;
   const chapterQuiz = specificChapterQuizzes[quizKey];
-  const questions = chapterQuiz?.questions || [];
+  const formattedBookName =
+    bookNames[bookKey] ||
+    (book ? book.charAt(0).toUpperCase() + book.slice(1).replace(/-/g, " ") : "");
+  const questions = normalizeQuizQuestions(
+    chapterQuiz?.questions || createChapterFallbackQuestions(formattedBookName, chapterId),
+    {
+      bookName: formattedBookName,
+      chapter: chapterId
+    }
+  );
 
   if (!content) {
     return (
-      <div className="min-h-screen bg-white">
-        <Navigation />
-        <div className="flex flex-col items-center justify-center font-urbanist p-6 text-center min-h-[70vh]">
-          <Brain className="w-16 h-16 text-black mb-6 animate-pulse" />
-          <h1 className="text-4xl font-semibold text-gray-900 mb-4 tracking-tight">Chapter Under Construction</h1>
-          <p className="text-xl font-light text-gray-500 max-w-md mb-10 leading-relaxed">
-            We're currently enriching the study guides for {book?.charAt(0).toUpperCase()}{book?.slice(1)} Chapter {chapterId}. Check back soon!
-          </p>
-          <Button 
-            onClick={() => navigate(`/bible-questions-and-answers-hub/${book}`)} 
-            variant="outline"
-            className="border-gray-200 py-6 px-10 rounded-xl font-light text-lg hover:bg-gray-50 flex items-center gap-2"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            Back to {book?.charAt(0).toUpperCase()}{book?.slice(1)} Hub
-          </Button>
-        </div>
-      </div>
+      <PublicQuiz
+        title={`${formattedBookName} Chapter ${chapterId} Quiz`}
+        questions={questions}
+        bookName={formattedBookName}
+        chapter={`${chapterId}`}
+        seoDescription={
+          chapterQuiz?.seoDescription ||
+          `Challenge yourself with ${formattedBookName} Chapter ${chapterId} quiz questions and clear explanations.`
+        }
+        prevChapterUrl={chapterQuiz?.prevChapterUrl}
+        nextChapterUrl={chapterQuiz?.nextChapterUrl}
+      />
     );
   }
 

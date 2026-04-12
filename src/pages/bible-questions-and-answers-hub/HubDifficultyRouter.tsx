@@ -1,9 +1,10 @@
 import { useParams } from "react-router-dom";
 import { lazy, Suspense } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Loader2 } from "lucide-react";
 import PublicQuiz from "../PublicQuiz";
 import { specificChapterQuizzes } from "@/data/specific-chapter-quizzes";
+import { bookNames } from "@/data/bible-data";
+import { createChapterFallbackQuestions, normalizeQuizQuestions } from "@/lib/quizQuestionNormalizer";
 
 // Lazy load all quiz components
 const quizMap: Record<string, any> = {
@@ -106,21 +107,29 @@ export default function HubDifficultyRouter() {
       const bookKey = bookSlug.toLowerCase();
       const quizKey = `${bookKey}-${chapterId}`;
       const chapterData = specificChapterQuizzes[quizKey];
-      
-      if (chapterData) {
-        // Correct book name formatting
-        const formattedBookName = bookSlug.charAt(0).toUpperCase() + bookSlug.slice(1).replace(/-/g, ' ');
-        
-        return (
-          <PublicQuiz 
-            {...chapterData}
-            title={chapterData.title || `${formattedBookName} Chapter ${chapterId} Quiz`}
-            bookName={formattedBookName}
-            chapter={chapterId}
-            questions={chapterData.questions}
-          />
-        );
-      }
+
+      const formattedBookName =
+        bookNames[bookKey] ||
+        bookSlug.charAt(0).toUpperCase() + bookSlug.slice(1).replace(/-/g, " ");
+
+      const chapterQuestions = normalizeQuizQuestions(
+        chapterData?.questions || createChapterFallbackQuestions(formattedBookName, chapterId),
+        { bookName: formattedBookName, chapter: chapterId }
+      );
+
+      return (
+        <PublicQuiz
+          {...chapterData}
+          title={chapterData?.title || `${formattedBookName} Chapter ${chapterId} Quiz`}
+          bookName={formattedBookName}
+          chapter={chapterId}
+          questions={chapterQuestions}
+          seoDescription={
+            chapterData?.seoDescription ||
+            `Test your understanding of ${formattedBookName} Chapter ${chapterId} with chapter-based questions and explanations.`
+          }
+        />
+      );
     }
   }
 

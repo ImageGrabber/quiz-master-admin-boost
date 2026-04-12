@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import PublicQuiz from "../PublicQuiz";
 import { bookNames } from "@/data/bible-data";
 import { specificChapterQuizzes } from "@/data/specific-chapter-quizzes";
+import { createChapterFallbackQuestions, normalizeQuizQuestions } from "@/lib/quizQuestionNormalizer";
 
 export default function PublicQuizChapter() {
     const { book, chapter } = useParams();
@@ -12,25 +13,10 @@ export default function PublicQuizChapter() {
     const quizKey = `${book?.toLowerCase()}-${chapterNum}`;
     const specificQuiz = specificChapterQuizzes[quizKey];
 
-    // In a real app, we would fetch questions specific to this chapter here.
-    // We are now slowly migrating to specific quizzes!
-    // If no specific quiz exists yet, use the generic fallback.
-    const questions = specificQuiz?.questions || [
-        {
-            id: 1,
-            question: `What is a key theme in ${formattedBook} Chapter ${chapterNum}?`,
-            options: ["Faith", "Obedience", "Love", "Depends on the context"],
-            answer: 3,
-            explanation: `Read ${formattedBook} Chapter ${chapterNum} to discover the specific themes and lessons.`
-        },
-        {
-            id: 2,
-            question: `Who is a main character in ${formattedBook} Chapter ${chapterNum}?`,
-            options: ["Moses", "David", "Jesus", "Context specific"],
-            answer: 3,
-            explanation: `The characters vary by chapter. Study ${formattedBook} Chapter ${chapterNum} to find out!`
-        }
-    ];
+    const questions = normalizeQuizQuestions(
+        specificQuiz?.questions || createChapterFallbackQuestions(formattedBook, chapterNum),
+        { bookName: formattedBook, chapter: chapterNum }
+    );
 
     return (
         <PublicQuiz

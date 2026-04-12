@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
@@ -12,14 +12,16 @@ import SocialShare from "@/components/SocialShare";
 import SEO from "@/components/SEO";
 import { VerseContextDialog } from "@/components/bible/VerseContextDialog";
 import React from "react";
+import { normalizeQuizQuestions } from "@/lib/quizQuestionNormalizer";
 
 interface Question {
-  id: number | string;
+  id?: number | string;
   question: string;
   options: string[];
-  answer: number;
+  answer?: number;
   explanation?: string;
   referenceVerse?: string;
+  chapter?: number | string;
 }
 
 interface PublicQuizProps {
@@ -62,6 +64,10 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
   const [isVerseContextOpen, setIsVerseContextOpen] = useState(false);
   const [selectedVerse, setSelectedVerse] = useState("");
   const [selectedChapterId, setSelectedChapterId] = useState(1);
+  const normalizedQuestions = useMemo(
+    () => normalizeQuizQuestions(questions, { bookName, chapter }),
+    [questions, bookName, chapter]
+  );
   const fallbackPath = `/public-quiz/${toSlug(bookName)}${chapter ? `/chapter-${chapter}` : ""}`;
   const resolvedPath = normalizePath(
     canonicalPath || (typeof window !== "undefined" ? window.location.pathname : fallbackPath)
@@ -113,7 +119,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
   const handleSubmit = () => {
     if (selectedAnswer !== null && !hasSubmitted) {
       setHasSubmitted(true);
-      const isCorrect = selectedAnswer === questions[currentQuestion].answer;
+      const isCorrect = selectedAnswer === normalizedQuestions[currentQuestion].answer;
       
       const newAnswers = [...answers];
       newAnswers[currentQuestion] = selectedAnswer;
@@ -131,7 +137,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
   };
 
   const handleNext = () => {
-    if (currentQuestion < questions.length - 1) {
+    if (currentQuestion < normalizedQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
       setSelectedAnswer(null);
       setHasSubmitted(false);
@@ -148,11 +154,11 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
   const calculateScore = () => {
     let correct = 0;
     answers.forEach((answer, index) => {
-      if (answer === questions[index].answer) {
+      if (answer === normalizedQuestions[index].answer) {
         correct++;
       }
     });
-    return Math.round((correct / questions.length) * 100);
+    return Math.round((correct / normalizedQuestions.length) * 100);
   };
 
   const getScoreMessage = (score: number) => {
@@ -165,7 +171,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
 
   if (isCompleted) {
     const score = calculateScore();
-    const correctAnswers = answers.filter((answer, index) => answer === questions[index].answer).length;
+    const correctAnswers = answers.filter((answer, index) => answer === normalizedQuestions[index].answer).length;
 
     return (
       <div className="min-h-screen bg-stone-50 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(255,237,213,0.7),rgba(255,255,255,0))] text-[#1c1917] font-sans selection:bg-orange-100 selection:text-orange-900 pb-20">
@@ -231,7 +237,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                   <div className="relative overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.2)] p-8 rounded-[2rem] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(239,68,68,0.1)] hover:border-red-500/30 hover:-translate-y-1 group">
                     <div className="absolute -right-4 -top-4 w-24 h-24 bg-red-500/20 rounded-full blur-2xl opacity-70 group-hover:bg-red-500/40 transition-colors"></div>
                     <div className="relative z-10 flex flex-col items-center">
-                      <div className="text-4xl font-black text-white mb-2 drop-shadow-sm">{questions.length - correctAnswers}</div>
+                      <div className="text-4xl font-black text-white mb-2 drop-shadow-sm">{normalizedQuestions.length - correctAnswers}</div>
                       <div className="inline-flex items-center gap-1.5 text-[10px] font-black text-red-400 uppercase tracking-[0.2em] bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full"><AlertTriangle className="w-3.5 h-3.5" /> Incorrect</div>
                     </div>
                   </div>
@@ -263,7 +269,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                   <div className="h-8 w-1.5 bg-white/20 rounded-full" />
                   <h3 className="text-xl font-black tracking-tight text-white uppercase tracking-widest text-sm drop-shadow-sm">Question Review</h3>
                 </div>
-                {questions.map((q, index) => {
+                {normalizedQuestions.map((q, index) => {
                   const userAnswer = answers[index];
                   const isCorrect = userAnswer === q.answer;
                   return (
@@ -363,7 +369,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
     );
   }
 
-  if (questions.length === 0) {
+  if (normalizedQuestions.length === 0) {
     return (
       <div className="min-h-screen bg-stone-50 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(255,237,213,0.7),rgba(255,255,255,0))] text-[#1c1917] font-sans">
         <header className="sticky top-0 z-50 w-full border-b border-stone-200/60 bg-white/80 backdrop-blur-md shadow-sm">
@@ -393,16 +399,16 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
     );
   }
 
-  const currentQ = questions[currentQuestion];
-  const progress = ((currentQuestion + 1) / questions.length) * 100;
+  const currentQ = normalizedQuestions[currentQuestion];
+  const progress = ((currentQuestion + 1) / normalizedQuestions.length) * 100;
 
   const generateStructuredData = () => {
     return {
       "@context": "https://schema.org",
       "@type": "Quiz",
       "name": title,
-      "description": `Test your knowledge of ${bookName} with this interactive Bible quiz. ${questions.length} questions to challenge your understanding.`,
-      "numberOfQuestions": questions.length,
+      "description": `Test your knowledge of ${bookName} with this interactive Bible quiz. ${normalizedQuestions.length} questions to challenge your understanding.`,
+      "numberOfQuestions": normalizedQuestions.length,
       "timeRequired": "PT10M",
       "educationalLevel": "Beginner to Advanced",
       "learningResourceType": "Quiz",
@@ -423,7 +429,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
     <div className="min-h-screen bg-slate-50 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-50 via-sky-50 to-rose-50 text-slate-800 font-sans selection:bg-rose-200 selection:text-rose-900 pb-20">
       <Helmet>
         <title>{title} - Free Bible Quiz | Bible Quiz Competition</title>
-        <meta name="description" content={seoDescription || `Test your knowledge of ${bookName} with this free interactive Bible quiz. ${questions.length} questions to challenge your understanding of the Bible. No registration required!`} />
+        <meta name="description" content={seoDescription || `Test your knowledge of ${bookName} with this free interactive Bible quiz. ${normalizedQuestions.length} questions to challenge your understanding of the Bible. No registration required!`} />
         <meta name="keywords" content={`${bookName} quiz, Bible quiz, ${bookName} questions, Bible study, Christian quiz, free Bible quiz, ${bookName} test, Bible knowledge`} />
         <meta name="author" content="Bible Quiz Competition" />
         <meta name="robots" content="index, follow" />
@@ -437,7 +443,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
       
       <SEO 
         title={`${title} | Interactive Bible Quiz`} 
-        description={`Test your knowledge of ${bookName} Chapter ${chapter || ''} with our interactive Bible quiz. ${questions.length} questions of in-depth study.`} 
+        description={`Test your knowledge of ${bookName} Chapter ${chapter || ''} with our interactive Bible quiz. ${normalizedQuestions.length} questions of in-depth study.`} 
       />
       
       {/* Slim Header */}
@@ -530,7 +536,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                     <div className="flex h-1.5 w-1.5 rounded-full bg-rose-500 relative">
                       <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></div>
                     </div>
-                    <span className="text-[10px] font-black text-stone-500 uppercase tracking-[0.25em]">QUESTION {currentQuestion + 1} OF {questions.length}</span>
+                    <span className="text-[10px] font-black text-stone-500 uppercase tracking-[0.25em]">QUESTION {currentQuestion + 1} OF {normalizedQuestions.length}</span>
                   </div>
                   <div className="glass-panel bg-white/40 backdrop-blur-md border border-white/80 shadow-[0_4px_15px_rgba(0,0,0,0.03)] px-4 py-2 rounded-2xl">
                     <span className="text-[10px] font-black text-rose-500 uppercase tracking-[0.25em]">{bookName} {chapter ? `CH. ${chapter}` : 'SEC'}</span>
@@ -724,7 +730,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                   className="h-20 px-12 sm:px-16 rounded-[2rem] font-black text-xs uppercase tracking-[0.3em] transition-all duration-700 relative overflow-hidden group/btn bg-white border-2 border-stone-900 text-stone-900 hover:bg-stone-900 hover:text-white shadow-[0_15px_35px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.2)] hover:-translate-y-1.5 active:scale-95 w-full mt-2"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-4">
-                    {currentQuestion === questions.length - 1 ? 'End Pilgrimage' : 'Proceed Forward'}
+                    {currentQuestion === normalizedQuestions.length - 1 ? 'End Pilgrimage' : 'Proceed Forward'}
                     <ChevronRight className="h-5 w-5 transition-transform duration-500 group-hover/btn:translate-x-2" />
                   </span>
                 </Button>
