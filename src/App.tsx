@@ -165,6 +165,9 @@ import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
+import HoTeriStutiLyrics from "./pages/seo-lyrics/HoTeriStutiLyrics";
+import ApnaBojhPrabhuChords from "./pages/seo-lyrics/ApnaBojhPrabhuChords";
+import HallelujahStutiLyrics from "./pages/seo-lyrics/HallelujahStutiLyrics";
 // Removed static imports of Bible book quiz files for code-splitting
 import Upgrade from "./pages/Upgrade";
 import PageViews from "./pages/admin/PageViews";
@@ -282,6 +285,12 @@ const App = () => {
               <Route path="/kids-stories" element={<KidsStories />} />
               <Route path="/kids-stories/:slug" element={<StoryDetail />} />
               <Route path="/kids-stories/:slug/quiz" element={<KidsStoryQuiz />} />
+              
+              {/* SEO Lyrics Pages */}
+              <Route path="/ho-teri-stuti-aur-aradhana-lyrics-telugu-kannada-malayalam" element={<HoTeriStutiLyrics />} />
+              <Route path="/apna-bojh-prabhu-par-daal-lyrics-chords" element={<ApnaBojhPrabhuChords />} />
+              <Route path="/hallelujah-stuti-gaye-hum-lyrics" element={<HallelujahStutiLyrics />} />
+
               <Route path="/live-quiz/host/:quizId" element={<LiveQuizHost />} />
               <Route path="/live-quiz/join/:sessionCode" element={<LiveQuizParticipant />} />
               <Route path="/live-quiz/health-check" element={<ProtectedRoute requiredRole="admin"><LiveQuizHealthCheck /></ProtectedRoute>} />

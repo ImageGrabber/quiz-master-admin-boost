@@ -1,9 +1,10 @@
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { Music, PlayCircle } from "lucide-react";
+import { Music, PlayCircle, Search } from "lucide-react";
 import { useState, useMemo } from "react";
 import type { Song } from "@/data/songs";
 import englishSongsData from "@/data/english-songs.json";
@@ -14,10 +15,12 @@ const songs: Song[] = englishSongsData as Song[];
 const EnglishSongs = () => {
     const navigate = useNavigate();
     const [activeLetter, setActiveLetter] = useState<string | null>(null);
+    const [searchQuery, setSearchQuery] = useState("");
 
-    const { letterCounts, filteredSongs, totalCount } = useMemo(() => {
+    const { letterCounts, filteredSongs, totalCount, hasSearchQuery } = useMemo(() => {
         const counts: Record<string, number> = {};
         ALPHABET.forEach(l => counts[l] = 0);
+        const normalizedSearch = searchQuery.trim().toLowerCase();
 
         const sorted = [...songs].sort((a, b) =>
             a.title.localeCompare(b.title, undefined, { sensitivity: 'base' })
@@ -28,12 +31,23 @@ const EnglishSongs = () => {
             if (counts[firstChar] !== undefined) counts[firstChar]++;
         });
 
-        const filtered = activeLetter
+        const filteredByLetter = activeLetter
             ? sorted.filter(s => s.title.charAt(0).toUpperCase() === activeLetter)
             : sorted;
+        const filtered = normalizedSearch
+            ? filteredByLetter.filter(s =>
+                s.title.toLowerCase().includes(normalizedSearch) ||
+                s.description.toLowerCase().includes(normalizedSearch)
+            )
+            : filteredByLetter;
 
-        return { letterCounts: counts, filteredSongs: filtered, totalCount: songs.length };
-    }, [activeLetter]);
+        return {
+            letterCounts: counts,
+            filteredSongs: filtered,
+            totalCount: songs.length,
+            hasSearchQuery: normalizedSearch.length > 0
+        };
+    }, [activeLetter, searchQuery]);
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -56,6 +70,19 @@ const EnglishSongs = () => {
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                         Explore our collection of classic English Christian hymns and worship songs. Read lyrics, watch videos, and be inspired.
                     </p>
+                </div>
+
+                <div className="max-w-3xl mx-auto mb-6">
+                    <div className="relative">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                        <Input
+                            type="text"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            placeholder="Search hymns by title or description..."
+                            className="pl-10 h-11 bg-white border-gray-200 focus-visible:ring-indigo-200"
+                        />
+                    </div>
                 </div>
 
                 {/* A-Z Filter Bar */}
@@ -107,9 +134,16 @@ const EnglishSongs = () => {
 
                 <div className="max-w-7xl mx-auto mb-6">
                     <p className="text-sm text-gray-500 font-medium">
-                        {activeLetter ? (
+                        {activeLetter && hasSearchQuery && (
+                            <>Showing <span className="text-indigo-600 font-bold">{filteredSongs.length}</span> hymns starting with "{activeLetter}" matching "{searchQuery.trim()}"</>
+                        )}
+                        {activeLetter && !hasSearchQuery && (
                             <>Showing <span className="text-indigo-600 font-bold">{filteredSongs.length}</span> hymns starting with "{activeLetter}"</>
-                        ) : (
+                        )}
+                        {!activeLetter && hasSearchQuery && (
+                            <>Showing <span className="text-indigo-600 font-bold">{filteredSongs.length}</span> hymns matching "{searchQuery.trim()}"</>
+                        )}
+                        {!activeLetter && !hasSearchQuery && (
                             <>Showing all <span className="text-indigo-600 font-bold">{totalCount}</span> hymns</>
                         )}
                     </p>
