@@ -357,29 +357,56 @@
           "It had golden buttons",
           "It was made of silk"
         ],
-        "answer": 1
+        "answer": 1,
+        "image": "/images/stories/quiz/joseph-coat/q1.png"
       },
       {
         "id": 2,
-        "question": "Joseph became a powerful leader in which country?",
+        "question": "What did Joseph tell his brothers about in his dreams?",
         "options": [
-          "Israel",
-          "Babylon",
-          "Egypt",
-          "Persia"
+          "He was going on a long trip",
+          "He would become a fisherman",
+          "They were bowing down to him",
+          "He found a treasure chest"
         ],
-        "answer": 2
+        "answer": 2,
+        "image": "/images/stories/quiz/joseph-coat/q2.png"
       },
       {
         "id": 3,
-        "question": "What did Joseph do when he saw his brothers again?",
+        "question": "Where did Joseph's brothers send him after they were angry?",
         "options": [
-          "He stayed angry",
+          "To a far away palace",
+          "To the mountains",
+          "To the land of Egypt",
+          "To a sea voyage"
+        ],
+        "answer": 2,
+        "image": "/images/stories/josephs-colorful-coat.png"
+      },
+      {
+        "id": 4,
+        "question": "Joseph became a powerful leader in Egypt because he was:",
+        "options": [
+          "A strong soldier",
+          "Wise and trusted God",
+          "The fastest runner",
+          "Good at building houses"
+        ],
+        "answer": 1,
+        "image": "/images/stories/josephs-colorful-coat.png"
+      },
+      {
+        "id": 5,
+        "question": "What did Joseph do when he saw his brothers again many years later?",
+        "options": [
+          "He stayed angry at them",
+          "He told them to leave",
           "He chose to forgive them",
-          "He sent them away",
           "He didn't talk to them"
         ],
-        "answer": 1
+        "answer": 2,
+        "image": "/images/stories/josephs-colorful-coat.png"
       }
     ]
   },
@@ -412,7 +439,8 @@
           "A Samaritan",
           "A Soldier"
         ],
-        "answer": 2
+        "answer": 2,
+        "image": "/images/stories/the-kind-neighbor.png"
       },
       {
         "id": 2,
@@ -423,7 +451,8 @@
           "An inn",
           "A park"
         ],
-        "answer": 2
+        "answer": 2,
+        "image": "/images/stories/the-kind-neighbor.png"
       },
       {
         "id": 3,
@@ -434,7 +463,32 @@
           "Honey",
           "Leaves"
         ],
-        "answer": 1
+        "answer": 1,
+        "image": "/images/stories/the-kind-neighbor.png"
+      },
+      {
+        "id": 4,
+        "question": "Who were the first two people who walked past the hurt man?",
+        "options": [
+          "A Priest and a Temple Helper",
+          "A Baker and a Farmer",
+          "A Soldier and a Guard",
+          "A King and a Queen"
+        ],
+        "answer": 0,
+        "image": "/images/stories/the-kind-neighbor.png"
+      },
+      {
+        "id": 5,
+        "question": "What happened to the man at the beginning of the story?",
+        "options": [
+          "He got lost in the desert",
+          "He was attacked by robbers",
+          "He fell into a river",
+          "He was looking for his sheep"
+        ],
+        "answer": 1,
+        "image": "/images/stories/the-kind-neighbor.png"
       }
     ]
   },
