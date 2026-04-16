@@ -582,7 +582,9 @@ const PublicQuiz = ({
                     <span className={`text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a]' : 'text-stone-500'} uppercase tracking-[0.25em]`}>QUESTION {currentQuestion + 1} OF {normalizedQuestions.length}</span>
                   </div>
                   <div className={`glass-panel ${isKidsStory ? 'bg-[#FFDE59] border-2 border-[#1a1a1a] shadow-[4px_4px_0_0_#1a1a1a]' : 'bg-white/40 backdrop-blur-md border border-white/80 shadow-[0_4px_15px_rgba(0,0,0,0.03)]'} px-4 py-2 rounded-2xl`}>
-                    <span className={`text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a]' : 'text-rose-500'} uppercase tracking-[0.25em]`}>{isKidsStory ? story.title.toUpperCase() : bookName.toUpperCase()} {chapter ? `CH. ${chapter}` : ''}</span>
+                    <span className={`text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a]' : 'text-rose-500'} uppercase tracking-[0.25em]`}>
+                      {isKidsStory ? (chapter || title).toUpperCase() : bookName.toUpperCase()} {chapter && !isKidsStory ? `CH. ${chapter}` : ''}
+                    </span>
                   </div>
                 </div>
                 
