@@ -93,16 +93,20 @@ const KidsStories = () => {
 
         {/* Ribbon Banner */}
         <div className="relative inline-block mb-24">
-          <div className="bg-[#FCD34D] text-[#1a1a1a] px-12 py-4 rounded-lg font-bold text-2xl md:text-3xl shadow-lg border-2 border-[#1a1a1a] relative z-10 transform -rotate-1">
+          <div className="bg-[#FCD34D] text-[#1a1a1a] px-12 py-4 rounded-3xl font-bold text-2xl md:text-3xl shadow-[8px_8px_0_0_#1a1a1a] border-[4px] border-[#1a1a1a] relative z-10 transform -rotate-1">
              Explore Kids Bible Stories
              {/* Ribbon Tails */}
              <div className="absolute -left-6 top-1/2 -translate-y-1/2 w-8 h-10 bg-[#B45309] -z-10 clip-path-ribbon-left" />
              <div className="absolute -right-6 top-1/2 -translate-y-1/2 w-8 h-10 bg-[#B45309] -z-10 clip-path-ribbon-right" />
           </div>
-          {/* Baby/Angel Illustration spot (lucide icon for now) */}
           <div className="absolute -right-12 -top-12 animate-bounce">
-            <div className="bg-blue-100 p-3 rounded-full border-2 border-white shadow-md">
-              <Sparkles className="w-8 h-8 text-blue-500" />
+            <div className="bg-white p-3 rounded-full border-[4px] border-[#1a1a1a] shadow-[4px_4px_0_0_#1a1a1a]">
+              <Sparkles className="w-8 h-8 text-[#F59E0B]" />
+            </div>
+          </div>
+          <div className="absolute -left-12 -bottom-12 animate-pulse hidden md:block">
+            <div className="bg-white p-3 rounded-full border-[4px] border-[#1a1a1a] shadow-[4px_4px_0_0_#1a1a1a]">
+              <Star className="w-8 h-8 text-[#3B82F6]" />
             </div>
           </div>
         </div>
@@ -154,11 +158,11 @@ const KidsStories = () => {
             return (
               <Card 
                 key={story.slug}
-                className="group border-none shadow-[0_10px_40px_-15px_rgba(0,0,0,0.1)] rounded-[40px] overflow-hidden bg-white hover:scale-[1.03] transition-all duration-500 cursor-pointer flex flex-col h-full"
+                className="group border-[4px] border-[#1a1a1a] shadow-[10px_10px_0_0_#1a1a1a] rounded-[3rem] overflow-hidden bg-white hover:translate-y-[-8px] hover:translate-x-[-4px] hover:shadow-[16px_16px_0_0_#1a1a1a] transition-all duration-300 cursor-pointer flex flex-col h-full"
                 onClick={() => navigate(`/kids-stories/${story.slug}`)}
               >
                 {/* Illustration Section */}
-                <div className="aspect-[4/3] w-full bg-[#f8fafc] overflow-hidden relative border-b border-gray-100">
+                <div className="aspect-[4/3] w-full bg-[#f8fafc] overflow-hidden relative border-b-[4px] border-[#1a1a1a]">
                      <img 
                        src={`/images/stories/${story.slug}.png`}
                        alt={story.imageAlt}
@@ -190,20 +194,21 @@ const KidsStories = () => {
                   
                   <div className="pt-4 flex justify-center w-full">
                     <button 
-                      className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white px-10 py-4 rounded-full font-bold text-xl shadow-[0_8px_0_0_#5B21B6] active:translate-y-1 active:shadow-none transition-all flex items-center gap-2"
+                      className="bg-[#EF4444] hover:bg-[#DC2626] text-white px-10 py-5 rounded-full font-black text-xl border-[4px] border-[#1a1a1a] shadow-[0_6px_0_0_#1a1a1a] active:translate-y-1 active:shadow-none transition-all flex items-center gap-2 group/btn"
                       onClick={(e) => {
                         e.stopPropagation();
                         navigate(`/kids-stories/${story.slug}/quiz`);
                       }}
                     >
+                      <Sparkles className="w-6 h-6 group-hover:rotate-12 transition-transform" />
                       Quiz Now!
                     </button>
                   </div>
                 </div>
 
                 {/* Moral Footer Bar */}
-                <div className={`mt-auto p-4 bg-gradient-to-r ${story.color} mx-6 mb-6 rounded-full flex items-center gap-4 border-2 border-white shadow-md`}>
-                   <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shrink-0 shadow-sm border border-gray-100">
+                <div className={`mt-auto p-4 bg-gradient-to-r ${story.color} mx-6 mb-6 rounded-3xl flex items-center gap-4 border-[4px] border-[#1a1a1a] shadow-sm`}>
+                   <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shrink-0 border-2 border-[#1a1a1a] shadow-sm">
                      <StoryIcon className={`w-6 h-6 ${story.color.split(' ')[1].replace('to-', 'text-')}`} />
                    </div>
                    <div className="text-white text-left overflow-hidden">

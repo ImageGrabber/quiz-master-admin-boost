@@ -92,20 +92,20 @@ const StoryDetail = () => {
           </div>
 
           <div className="text-center space-y-6">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white shadow-sm border border-orange-100 text-orange-600 rounded-full font-urbanist font-medium text-sm">
-              <BookOpen className="w-4 h-4" />
-              <span>Biblical Reference: {story.bibleReference}</span>
+            <div className="inline-flex items-center gap-2 px-6 py-3 bg-white border-[4px] border-[#1a1a1a] shadow-[4px_4px_0_0_#1a1a1a] text-[#1a1a1a] rounded-2xl font-urbanist font-black text-sm uppercase tracking-widest">
+              <BookOpen className="w-4 h-4 text-[#3B82F6]" />
+              <span>Reference: {story.bibleReference}</span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold font-urbanist text-gray-900 tracking-tight leading-tight">
+            <h1 className="text-5xl md:text-7xl font-black font-urbanist text-[#1a1a1a] tracking-tight leading-tight">
               {story.title}
             </h1>
-            <p className="text-lg md:text-xl text-gray-500 italic font-urbanist max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-[#1a1a1a]/60 font-medium font-urbanist max-w-2xl mx-auto italic">
               {story.content}
             </p>
           </div>
 
           {/* Featured Image Section (with SEO Alt Text) */}
-          <div className="aspect-video w-full bg-orange-100 rounded-[40px] flex items-center justify-center overflow-hidden shadow-inner border-4 border-white relative group">
+          <div className="aspect-video w-full bg-white rounded-[3rem] flex items-center justify-center overflow-hidden border-[6px] border-[#1a1a1a] shadow-[12px_12px_0_0_#1a1a1a] relative group">
                <img 
                  src={`/images/stories/${story.slug}.png`}
                  alt={story.imageAlt}
@@ -130,7 +130,7 @@ const StoryDetail = () => {
           </div>
 
           {/* Story Content */}
-          <div className="bg-white rounded-[40px] shadow-sm border border-orange-50 p-8 md:p-16 relative overflow-hidden">
+          <div className="bg-white rounded-[3rem] border-[6px] border-[#1a1a1a] shadow-[12px_12px_0_0_#1a1a1a] p-8 md:p-16 relative overflow-hidden">
             <div className="absolute top-0 right-0 p-8 opacity-5">
               <Sparkles className="w-32 h-32 text-orange-500" />
             </div>
@@ -139,15 +139,15 @@ const StoryDetail = () => {
               <Quote className="w-12 h-12 text-orange-200" />
               <div className="space-y-10">
                 <section>
-                  <h2 className="text-3xl font-bold font-urbanist text-gray-900 mb-6 flex items-center gap-3">
-                    <Sparkles className="w-6 h-6 text-orange-400" />
-                    The Story of {story.title} for Kids
+                  <h2 className="text-3xl md:text-4xl font-black font-urbanist text-[#1a1a1a] mb-8 flex items-center gap-4">
+                    <Sparkles className="w-8 h-8 text-[#F59E0B]" />
+                    The Story of {story.title}
                   </h2>
                   <div className="prose prose-lg md:prose-xl max-w-none font-urbanist font-light text-gray-800 leading-relaxed text-left">
                     {story.fullStory.split('\n\n').map((para, i) => (
-                        <p key={i} className="mb-6 last:mb-0">
+                        <p key={i} className="mb-8 last:mb-0">
                           {i === 0 ? (
-                            <span className="text-6xl font-bold text-orange-500 float-left mr-3 mt-1 leading-[0.8]">{para.charAt(0)}</span>
+                            <span className="text-7xl font-black text-[#EF4444] float-left mr-4 mt-1 leading-[0.7]">{para.charAt(0)}</span>
                           ) : null}
                           {i === 0 ? para.substring(1) : para}
                         </p>
@@ -168,30 +168,30 @@ const StoryDetail = () => {
                 )}
 
                 {story.lifeLesson && (
-                  <section className="pt-8 border-t border-orange-50">
-                    <h2 className="text-3xl font-bold font-urbanist text-gray-900 mb-6 flex items-center gap-3">
-                      <Heart className="w-7 h-7 text-red-500" />
-                      Life Lessons for Young Hearts
+                  <section className="pt-12 border-t-4 border-dashed border-[#1a1a1a]/10">
+                    <h2 className="text-3xl font-black font-urbanist text-[#1a1a1a] mb-6 flex items-center gap-3">
+                      <Heart className="w-8 h-8 text-[#EF4444]" />
+                      Life Lessons
                     </h2>
-                    <div className="prose prose-lg md:prose-xl max-w-none font-urbanist font-light text-gray-700 leading-relaxed text-left italic bg-orange-50/30 p-8 rounded-3xl border border-orange-100">
+                    <div className="prose prose-lg md:prose-xl max-w-none font-urbanist font-bold text-[#1a1a1a] leading-relaxed text-left italic bg-[#FFFBEB] p-8 rounded-[2rem] border-[4px] border-[#1a1a1a] shadow-[6px_6px_0_0_#1a1a1a]">
                       {story.lifeLesson}
                     </div>
                   </section>
                 )}
 
                 {story.discussionQuestions && story.discussionQuestions.length > 0 && (
-                  <section className="pt-8 border-t border-orange-50">
-                    <h3 className="text-2xl font-bold font-urbanist text-gray-900 mb-6 flex items-center gap-3">
-                      <Star className="w-6 h-6 text-yellow-500" />
-                      Let's Talk About It: Questions for Kids
+                  <section className="pt-12 border-t-4 border-dashed border-[#1a1a1a]/10">
+                    <h3 className="text-2xl font-black font-urbanist text-[#1a1a1a] mb-8 flex items-center gap-3">
+                      <Star className="w-8 h-8 text-[#FFDE59]" />
+                      Let's Talk About It!
                     </h3>
-                    <div className="grid gap-4">
+                    <div className="grid gap-6">
                       {story.discussionQuestions.map((q, idx) => (
-                        <div key={idx} className="bg-white border border-orange-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow flex gap-4 items-start">
-                          <span className="flex-shrink-0 w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-sm">
+                        <div key={idx} className="bg-white border-[4px] border-[#1a1a1a] p-6 rounded-2xl shadow-[6px_6px_0_0_#1a1a1a] flex gap-4 items-start hover:translate-y-[-2px] hover:translate-x-[-1px] hover:shadow-[8px_8px_0_0_#1a1a1a] transition-all cursor-default">
+                          <span className="flex-shrink-0 w-10 h-10 rounded-full bg-[#3B82F6] text-white border-[3px] border-[#1a1a1a] flex items-center justify-center font-black text-lg">
                             {idx + 1}
                           </span>
-                          <p className="font-urbanist font-medium text-gray-700 pt-1">{q}</p>
+                          <p className="font-urbanist font-black text-[#1a1a1a] text-lg pt-1">{q}</p>
                         </div>
                       ))}
                     </div>
@@ -202,34 +202,34 @@ const StoryDetail = () => {
           </div>
 
           {/* Bible Verses Section */}
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-3xl p-8 border border-orange-100 shadow-sm space-y-6">
-              <div className="flex items-center gap-3 text-orange-600">
-                <div className="p-2 bg-orange-50 rounded-lg">
-                  <BookOpen className="w-6 h-6" />
+          <div className="grid md:grid-cols-2 gap-10">
+            <div className="bg-white rounded-[2.5rem] p-8 border-[6px] border-[#1a1a1a] shadow-[10px_10px_0_0_#1a1a1a] space-y-6">
+              <div className="flex items-center gap-4 text-[#1a1a1a]">
+                <div className="p-3 bg-[#FFDE59] rounded-2xl border-2 border-[#1a1a1a]">
+                  <BookOpen className="w-8 h-8" />
                 </div>
-                <h3 className="text-xl font-bold font-urbanist">Bible Verses to Remember</h3>
+                <h3 className="text-2xl font-black font-urbanist">Verses to Remember</h3>
               </div>
               <div className="space-y-4">
                 {story.bibleVerses.map((verse, idx) => (
-                  <div key={idx} className="p-4 bg-orange-50/50 rounded-2xl border border-orange-100/50 italic text-gray-700 font-urbanist leading-relaxed">
+                  <div key={idx} className="p-6 bg-gray-50 rounded-2xl border-[3px] border-[#1a1a1a] italic text-[#1a1a1a] font-urbanist font-bold text-lg leading-relaxed shadow-[4px_4px_0_0_#1a1a1a]">
                     "{verse}"
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-white rounded-3xl p-8 border border-green-100 shadow-sm space-y-6">
-              <div className="flex items-center gap-3 text-green-600">
-                <div className="p-2 bg-green-50 rounded-lg">
-                  <Heart className="w-6 h-6" />
+            <div className="bg-white rounded-[2.5rem] p-8 border-[6px] border-[#1a1a1a] shadow-[10px_10px_0_0_#1a1a1a] space-y-6">
+              <div className="flex items-center gap-4 text-[#1a1a1a]">
+                <div className="p-3 bg-[#7ED957] rounded-2xl border-2 border-[#1a1a1a]">
+                  <Heart className="w-8 h-8 font-black" />
                 </div>
-                <h3 className="text-xl font-bold font-urbanist">Key Takeaways</h3>
+                <h3 className="text-2xl font-black font-urbanist">Key Takeaways</h3>
               </div>
-              <ul className="space-y-4">
+              <ul className="space-y-5">
                 {story.keyTakeaways.map((point, idx) => (
-                  <li key={idx} className="flex gap-3 items-start text-gray-700 font-urbanist">
-                    <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
+                  <li key={idx} className="flex gap-4 items-start text-[#1a1a1a] font-urbanist font-black text-lg">
+                    <CheckCircle2 className="w-7 h-7 text-[#7ED957] shrink-0 stroke-[3px]" />
                     <span>{point}</span>
                   </li>
                 ))}
@@ -238,36 +238,36 @@ const StoryDetail = () => {
           </div>
 
           {/* Moral Section */}
-          <div className="bg-gradient-to-br from-orange-500 to-yellow-500 rounded-[32px] p-1 shadow-xl">
-            <div className="bg-white rounded-[31px] p-8 md:p-12 text-center space-y-4">
-              <div className="inline-flex items-center justify-center p-4 bg-orange-100 rounded-2xl mb-2">
-                <Star className="w-8 h-8 text-orange-600" />
+          <div className="bg-[#1a1a1a] rounded-[3rem] p-1.5 shadow-[12px_12px_0_0_#1a1a1a]">
+            <div className="bg-white rounded-[2.8rem] p-10 md:p-14 text-center space-y-6">
+              <div className="inline-flex items-center justify-center p-6 bg-[#FFDE59] border-[4px] border-[#1a1a1a] rounded-[2rem] shadow-[6px_6px_0_0_#1a1a1a]">
+                <Star className="w-10 h-10 text-[#1a1a1a] fill-[#1a1a1a]" />
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold font-urbanist text-gray-900">
+              <h2 className="text-3xl md:text-4xl font-black font-urbanist text-[#1a1a1a]">
                 The Moral of the Story
               </h2>
-              <p className="text-xl md:text-2xl font-medium font-urbanist text-orange-600 italic leading-relaxed">
+              <p className="text-2xl md:text-4xl font-black font-urbanist text-[#EF4444] italic leading-relaxed">
                 "{story.moral}"
               </p>
             </div>
           </div>
 
           {/* Call to action */}
-          <div className="text-center py-12 flex flex-col md:flex-row items-center justify-center gap-6">
+          <div className="text-center py-12 flex flex-col md:flex-row items-center justify-center gap-8">
             <Button 
               size="lg" 
-              className="bg-[#7C3AED] hover:bg-[#6D28D9] text-white rounded-full px-12 py-8 text-xl font-bold font-urbanist transition-all hover:scale-105 shadow-[0_8px_0_0_#5B21B6] active:translate-y-1 active:shadow-none"
+              className="bg-[#EF4444] hover:bg-[#DC2626] text-white rounded-full px-12 py-10 text-2xl font-black font-urbanist transition-all translate-y-[-4px] border-[6px] border-[#1a1a1a] shadow-[0_8px_0_0_#1a1a1a] active:translate-y-[2px] active:shadow-none h-auto"
               onClick={() => navigate(`/kids-stories/${story.slug}/quiz`)}
             >
-              Take the Story Quiz!
+              Take the Quiz!
             </Button>
             <Button 
               size="lg" 
               variant="outline"
-              className="bg-white hover:bg-gray-50 text-black border-2 border-black rounded-full px-12 py-8 text-xl font-bold font-urbanist transition-all hover:scale-105"
+              className="bg-white hover:bg-gray-100 text-[#1a1a1a] border-[6px] border-[#1a1a1a] rounded-full px-12 py-10 text-2xl font-black font-urbanist transition-all translate-y-[-4px] shadow-[0_8px_0_0_#1a1a1a] active:translate-y-[2px] active:shadow-none h-auto"
               onClick={() => navigate("/kids-stories")}
             >
-              Explore More Stories
+              More Stories
             </Button>
           </div>
         </div>

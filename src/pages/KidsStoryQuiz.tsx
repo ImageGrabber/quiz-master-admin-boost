@@ -41,6 +41,7 @@ const KidsStoryQuiz = () => {
       chapter={story.title}
       seoDescription={`Test your knowledge of the story "${story.title}" with this fun Bible quiz for kids!`}
       canonicalPath={`/kids-stories/${slug}/quiz`}
+      isKidsStory={true}
     />
   );
 };

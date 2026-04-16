@@ -34,6 +34,7 @@ interface PublicQuizProps {
   prevChapterUrl?: string;
   nextChapterUrl?: string;
   canonicalPath?: string;
+  isKidsStory?: boolean;
 }
 
 const toSlug = (value: string) =>
@@ -46,7 +47,17 @@ const toSlug = (value: string) =>
 
 const normalizePath = (value: string) => (value.startsWith("/") ? value : `/${value}`);
 
-const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevChapterUrl, nextChapterUrl, canonicalPath }: PublicQuizProps) => {
+const PublicQuiz = ({ 
+  title, 
+  questions, 
+  bookName, 
+  chapter, 
+  seoDescription, 
+  prevChapterUrl, 
+  nextChapterUrl, 
+  canonicalPath,
+  isKidsStory = false
+}: PublicQuizProps) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [answers, setAnswers] = useState<number[]>([]);
@@ -175,91 +186,107 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
     const correctAnswers = answers.filter((answer, index) => answer === normalizedQuestions[index].answer).length;
 
     return (
-      <div className="min-h-screen bg-stone-50 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(255,237,213,0.7),rgba(255,255,255,0))] text-[#1c1917] font-sans selection:bg-orange-100 selection:text-orange-900 pb-20">
+    return (
+      <div className={`min-h-screen ${isKidsStory ? 'bg-[#FFFBEB] font-urbanist' : 'bg-stone-50 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(255,237,213,0.7),rgba(255,255,255,0))] text-[#1c1917] font-sans'} selection:bg-orange-100 selection:text-orange-900 pb-20`}>
         <SEO 
           title={`Results: ${title} | Bible Quiz Hub`} 
           description={`I scored ${score}% on the ${bookName} Bible quiz! Test your knowledge of the scripture with our interactive Bible Study Hub.`} 
         />
         
         {/* Modern, Slim Header Consistent with Hub */}
-        <header className="sticky top-0 z-50 w-full border-b border-white/60 bg-white/60 backdrop-blur-3xl shadow-md">
+        <header className={`sticky top-0 z-50 w-full border-b ${isKidsStory ? 'border-[#1a1a1a] bg-[#FCD34D]' : 'border-white/60 bg-white/60 backdrop-blur-3xl'} shadow-md`}>
           <div className="container mx-auto flex h-14 items-center justify-between px-4 sm:px-6">
-            <div className="flex items-center gap-2 cursor-pointer group" onClick={() => navigate('/bible-questions-and-answers-hub')}>
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-orange-400 to-rose-500 border-transparent shadow-[0_4px_15px_rgba(244,63,94,0.3)] text-white transition-all group-hover:scale-105 group-hover:bg-white/20 group-hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-                <Brain className="h-4 w-4" />
+            <div className="flex items-center gap-2 cursor-pointer group" onClick={() => navigate(isKidsStory ? '/kids-stories' : '/bible-questions-and-answers-hub')}>
+              <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${isKidsStory ? 'bg-white border-2 border-[#1a1a1a]' : 'bg-gradient-to-br from-orange-400 to-rose-500 border-transparent shadow-[0_4px_15px_rgba(244,63,94,0.3)]'} text-white transition-all group-hover:scale-105`}>
+                <Brain className={`h-4 w-4 ${isKidsStory ? 'text-[#1a1a1a]' : 'text-white'}`} />
               </div>
-              <span className="text-sm font-bold tracking-tight text-stone-900 sm:text-base uppercase tracking-widest leading-none drop-shadow-sm">BIBLE QA HUB</span>
+              <span className={`text-sm font-bold tracking-tight ${isKidsStory ? 'text-[#1a1a1a]' : 'text-stone-900'} sm:text-base uppercase tracking-widest leading-none drop-shadow-sm`}>
+                {isKidsStory ? 'KIDS BIBLE STORIES' : 'BIBLE QA HUB'}
+              </span>
             </div>
-            <Button variant="ghost" size="sm" onClick={() => navigate('/')} className="text-stone-500 hover:text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 shadow-sm bg-white/40 font-bold text-xs uppercase tracking-widest">Home</Button>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={() => navigate('/')} 
+              className={`${isKidsStory ? 'text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-white border-2 border-[#1a1a1a]' : 'text-stone-500 hover:text-rose-600 hover:bg-rose-50 border-transparent hover:border-rose-200'} shadow-sm bg-white/40 font-bold text-xs uppercase tracking-widest rounded-full px-4`}
+            >
+              Home
+            </Button>
           </div>
         </header>
 
         <div className="container mx-auto px-4 py-12 max-w-4xl">
-          <Card className="overflow-hidden border border-white/10 shadow-2xl bg-[#0a0a0a]/90 backdrop-blur-3xl rounded-3xl">
-            <div className="h-2 bg-gradient-to-r from-orange-600 to-amber-500 w-full" />
+          <Card className={`overflow-hidden ${isKidsStory ? 'border-[6px] border-[#1a1a1a] shadow-[12px_12px_0_0_#1a1a1a] rounded-[3rem] bg-white' : 'border border-white/10 shadow-2xl bg-[#0a0a0a]/90 backdrop-blur-3xl rounded-3xl'}`}>
+            {!isKidsStory && <div className="h-2 bg-gradient-to-r from-orange-600 to-amber-500 w-full" />}
             <CardHeader className="text-center pt-10 pb-6">
-              <div className="inline-flex items-center gap-2 rounded-full bg-orange-500/10 border border-orange-500/30 px-3 py-1 text-xs font-black text-orange-400 mb-6 uppercase tracking-widest shadow-[inset_0_0_15px_rgba(249,115,22,0.1)]">
+              <div className={`inline-flex items-center gap-2 rounded-full ${isKidsStory ? 'bg-[#7ED957] text-[#1a1a1a] border-2 border-[#1a1a1a]' : 'bg-orange-500/10 border border-orange-500/30 text-orange-400'} px-4 py-2 text-xs font-black mb-6 uppercase tracking-widest shadow-sm`}>
                 <Trophy className="h-3 w-3" />
                 <span>QUIZ COMPLETE</span>
               </div>
-              <CardTitle className="text-4xl sm:text-5xl font-black tracking-tight text-white mb-2 leading-none drop-shadow-md">Your Results</CardTitle>
-              <CardDescription className="text-stone-400 font-bold uppercase tracking-[0.2em] text-[10px]">{bookName} Knowledge Assessment</CardDescription>
+              <CardTitle className={`text-4xl sm:text-6xl font-black tracking-tight ${isKidsStory ? 'text-[#1a1a1a]' : 'text-white'} mb-2 leading-none drop-shadow-md`}>Your Results</CardTitle>
+              <CardDescription className={`${isKidsStory ? 'text-[#1a1a1a]/60' : 'text-stone-400'} font-bold uppercase tracking-[0.2em] text-[10px]`}>{bookName} Knowledge Assessment</CardDescription>
             </CardHeader>
-            <CardContent className="px-6 pb-12 sm:px-12">
-              <div className="text-center mb-12">
+            <CardContent className="px-6 pb-12 sm:px-12 text-center">
+              <div className="mb-12">
                 <div className="relative inline-block mb-8">
-                  <div className="absolute inset-0 bg-orange-500 blur-[80px] opacity-20 rounded-full"></div>
-                  <div className="text-[7rem] sm:text-[9rem] font-black relative z-10 leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-stone-200 to-stone-500 drop-shadow-xl pb-4">{score}<span className="text-5xl sm:text-7xl text-orange-500 drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]">%</span></div>
+                  <div className={`absolute inset-0 ${isKidsStory ? 'bg-[#FFDE59]' : 'bg-orange-500'} blur-[80px] opacity-20 rounded-full`}></div>
+                  <div className={`text-[7rem] sm:text-[9rem] font-black relative z-10 leading-none tracking-tighter ${isKidsStory ? 'text-[#1a1a1a]' : 'text-transparent bg-clip-text bg-gradient-to-b from-white via-stone-200 to-stone-500'} drop-shadow-xl pb-4`}>
+                    {score}<span className={`text-5xl sm:text-7xl ${isKidsStory ? 'text-[#EF4444]' : 'text-orange-500'} drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]`}>%</span>
+                  </div>
                 </div>
-                <p className="text-2xl font-black text-stone-300 mb-10 tracking-tight px-4">{getScoreMessage(score)}</p>
+                <p className={`text-2xl sm:text-3xl font-black ${isKidsStory ? 'text-[#1a1a1a]' : 'text-stone-300'} mb-10 tracking-tight px-4`}>{isKidsStory && score >= 80 ? "Super Star! 🌟 Outstanding!" : getScoreMessage(score)}</p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-14">
-                  <div className="relative overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.2)] p-8 rounded-[2rem] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(245,158,11,0.1)] hover:border-amber-500/30 hover:-translate-y-1 group">
-                    <div className="absolute -right-4 -top-4 w-24 h-24 bg-amber-500/20 rounded-full blur-2xl opacity-70 group-hover:bg-amber-500/40 transition-colors"></div>
+                  <div className={`relative overflow-hidden ${isKidsStory ? 'border-4 border-[#1a1a1a] bg-[#FFDE59]' : 'border border-white/10 bg-white/5'} p-8 rounded-[2rem] transition-all duration-300 group`}>
                     <div className="relative z-10 flex flex-col items-center">
-                      <div className="text-4xl font-black text-white mb-2 drop-shadow-sm">{scorePoints.toLocaleString()}</div>
-                      <div className="inline-flex items-center gap-1.5 text-[10px] font-black text-amber-400 uppercase tracking-[0.2em] bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full"><Trophy className="w-3.5 h-3.5" /> Total XP</div>
+                      <div className={`text-4xl font-black ${isKidsStory ? 'text-[#1a1a1a]' : 'text-white'} mb-2`}>{scorePoints.toLocaleString()}</div>
+                      <div className={`inline-flex items-center gap-1.5 text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a] bg-white border-2 border-[#1a1a1a]' : 'text-amber-400 bg-amber-500/10 border border-amber-500/20'} px-3 py-1 rounded-full uppercase tracking-widest`}><Trophy className="w-3.5 h-3.5" /> Total XP</div>
                     </div>
                   </div>
-                  <div className="relative overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.2)] p-8 rounded-[2rem] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(249,115,22,0.1)] hover:border-orange-500/30 hover:-translate-y-1 group">
-                    <div className="absolute -right-4 -top-4 w-24 h-24 bg-orange-500/20 rounded-full blur-2xl opacity-70 group-hover:bg-orange-500/40 transition-colors"></div>
+                  <div className={`relative overflow-hidden ${isKidsStory ? 'border-4 border-[#1a1a1a] bg-[#FF914D]' : 'border border-white/10 bg-white/5'} p-8 rounded-[2rem] transition-all duration-300 group`}>
                     <div className="relative z-10 flex flex-col items-center">
-                      <div className="text-4xl font-black text-white mb-2 drop-shadow-sm">{maxStreak}</div>
-                      <div className="inline-flex items-center gap-1.5 text-[10px] font-black text-orange-400 uppercase tracking-[0.2em] bg-orange-500/10 border border-orange-500/20 px-3 py-1 rounded-full"><Flame className="w-3.5 h-3.5" /> Best Streak</div>
+                      <div className={`text-4xl font-black ${isKidsStory ? 'text-[#1a1a1a]' : 'text-white'} mb-2`}>{maxStreak}</div>
+                      <div className={`inline-flex items-center gap-1.5 text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a] bg-white border-2 border-[#1a1a1a]' : 'text-orange-400 bg-orange-500/10 border border-orange-500/20'} px-3 py-1 rounded-full uppercase tracking-widest`}><Flame className="w-3.5 h-3.5" /> Best Streak</div>
                     </div>
                   </div>
-                  <div className="relative overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.2)] p-8 rounded-[2rem] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(34,197,94,0.1)] hover:border-green-500/30 hover:-translate-y-1 group">
-                    <div className="absolute -right-4 -top-4 w-24 h-24 bg-green-500/20 rounded-full blur-2xl opacity-70 group-hover:bg-green-500/40 transition-colors"></div>
+                  <div className={`relative overflow-hidden ${isKidsStory ? 'border-4 border-[#1a1a1a] bg-[#7ED957]' : 'border border-white/10 bg-white/5'} p-8 rounded-[2rem] transition-all duration-300 group`}>
                     <div className="relative z-10 flex flex-col items-center">
-                      <div className="text-4xl font-black text-white mb-2 drop-shadow-sm">{correctAnswers}</div>
-                      <div className="inline-flex items-center gap-1.5 text-[10px] font-black text-green-400 uppercase tracking-[0.2em] bg-green-500/10 border border-green-500/20 px-3 py-1 rounded-full"><CheckCircle className="w-3.5 h-3.5" /> Correct</div>
+                      <div className={`text-4xl font-black ${isKidsStory ? 'text-[#1a1a1a]' : 'text-white'} mb-2`}>{correctAnswers}</div>
+                      <div className={`inline-flex items-center gap-1.5 text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a] bg-white border-2 border-[#1a1a1a]' : 'text-green-400 bg-green-500/10 border border-green-500/20'} px-3 py-1 rounded-full uppercase tracking-widest`}><CheckCircle className="w-3.5 h-3.5" /> Correct</div>
                     </div>
                   </div>
-                  <div className="relative overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.2)] p-8 rounded-[2rem] transition-all duration-300 hover:shadow-[0_8px_30px_rgba(239,68,68,0.1)] hover:border-red-500/30 hover:-translate-y-1 group">
-                    <div className="absolute -right-4 -top-4 w-24 h-24 bg-red-500/20 rounded-full blur-2xl opacity-70 group-hover:bg-red-500/40 transition-colors"></div>
+                  <div className={`relative overflow-hidden ${isKidsStory ? 'border-4 border-[#1a1a1a] bg-[#FF66C4]' : 'border border-white/10 bg-white/5'} p-8 rounded-[2rem] transition-all duration-300 group`}>
                     <div className="relative z-10 flex flex-col items-center">
-                      <div className="text-4xl font-black text-white mb-2 drop-shadow-sm">{normalizedQuestions.length - correctAnswers}</div>
-                      <div className="inline-flex items-center gap-1.5 text-[10px] font-black text-red-400 uppercase tracking-[0.2em] bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full"><AlertTriangle className="w-3.5 h-3.5" /> Incorrect</div>
+                      <div className={`text-4xl font-black ${isKidsStory ? 'text-[#1a1a1a]' : 'text-white'} mb-2`}>{normalizedQuestions.length - correctAnswers}</div>
+                      <div className={`inline-flex items-center gap-1.5 text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a] bg-white border-2 border-[#1a1a1a]' : 'text-red-400 bg-red-500/10 border border-red-500/20'} px-3 py-1 rounded-full uppercase tracking-widest`}><AlertTriangle className="w-3.5 h-3.5" /> Incorrect</div>
                     </div>
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8 border-t border-white/10">
+                <div className={`flex flex-col sm:flex-row gap-4 justify-center pt-8 border-t ${isKidsStory ? 'border-[#1a1a1a]' : 'border-white/10'}`}>
                   <Button
                     size="lg"
                     onClick={() => window.location.reload()}
-                    className="bg-white text-stone-900 border border-white hover:bg-stone-200 font-black h-14 px-10 rounded-2xl shadow-[0_0_20px_rgba(255,255,255,0.2)] transition-all hover:scale-105 active:scale-95 text-xs uppercase tracking-widest"
+                    className={`h-16 px-10 rounded-2xl font-black text-sm uppercase tracking-widest transition-all hover:scale-105 active:scale-95 ${
+                      isKidsStory 
+                        ? 'bg-[#EF4444] hover:bg-[#DC2626] text-white border-4 border-[#1a1a1a] shadow-[0_6px_0_0_#1a1a1a] hover:shadow-[0_2px_0_0_#1a1a1a] active:shadow-none translate-y-[-4px] active:translate-y-[2px]' 
+                        : 'bg-white text-stone-900 border border-white hover:bg-stone-200 shadow-[0_0_20px_rgba(255,255,255,0.2)]'
+                    }`}
                   >
                     Retake Quiz
                   </Button>
                   <Button
                     size="lg"
                     variant="outline"
-                    onClick={() => navigate('/bible-questions-and-answers-hub')}
-                    className="border-stone-200 font-black h-14 px-10 rounded-2xl hover:bg-stone-50 text-xs uppercase tracking-widest text-stone-600"
+                    onClick={() => navigate(isKidsStory ? '/kids-stories' : '/bible-questions-and-answers-hub')}
+                    className={`h-16 px-10 rounded-2xl font-black text-sm uppercase tracking-widest transition-all hover:scale-105 active:scale-95 ${
+                      isKidsStory 
+                        ? 'bg-white hover:bg-[#F3F4F6] text-[#1a1a1a] border-4 border-[#1a1a1a] shadow-[0_6px_0_0_#1a1a1a] hover:shadow-[0_2px_0_0_#1a1a1a] active:shadow-none translate-y-[-4px] active:translate-y-[2px]' 
+                        : 'border-stone-200 hover:bg-stone-50 text-stone-600'
+                    }`}
                   >
                     <BookOpen className="w-4 h-4 mr-2" />
-                    Back to Hub
+                    {isKidsStory ? 'More Stories' : 'Back to Hub'}
                   </Button>
                 </div>
               </div>
@@ -267,32 +294,32 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
               {/* Review Section */}
               <div className="space-y-8">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="h-8 w-1.5 bg-white/20 rounded-full" />
-                  <h3 className="text-xl font-black tracking-tight text-white uppercase tracking-widest text-sm drop-shadow-sm">Question Review</h3>
+                  <div className={`h-8 w-2 rounded-full ${isKidsStory ? 'bg-[#3B82F6]' : 'bg-white/20'}`} />
+                  <h3 className={`text-xl font-black tracking-tight ${isKidsStory ? 'text-[#1a1a1a]' : 'text-white'} uppercase tracking-widest text-sm drop-shadow-sm`}>Question Review</h3>
                 </div>
                 {normalizedQuestions.map((q, index) => {
                   const userAnswer = answers[index];
                   const isCorrect = userAnswer === q.answer;
                   return (
-                    <div key={q.id} className="overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a]/50 backdrop-blur-sm group transition-all hover:border-white/20 hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)]">
-                      <div className={`h-2 w-full ${isCorrect ? 'bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]' : 'bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]'}`} />
+                    <div key={q.id} className={`overflow-hidden rounded-[2.5rem] border ${isKidsStory ? 'border-4 border-[#1a1a1a] bg-white shadow-[8px_8px_0_0_#1a1a1a]' : 'border-white/10 bg-[#0a0a0a]/50 backdrop-blur-sm'} group transition-all`}>
+                      <div className={`h-4 w-full ${isCorrect ? 'bg-[#7ED957]' : 'bg-[#EF4444]'} ${!isKidsStory && 'shadow-[0_0_10px_rgba(34,197,94,0.5)]'}`} />
                       <div className="p-8">
-                        <div className="flex items-start justify-between mb-6">
-                          <span className="text-[10px] font-black text-stone-500 uppercase tracking-[0.2em]">QUESTION {index + 1}</span>
+                        <div className="flex items-start justify-between mb-6 text-left">
+                          <span className={`text-[10px] font-black uppercase tracking-[0.2em] ${isKidsStory ? 'text-[#1a1a1a]/40' : 'text-stone-500'}`}>QUESTION {index + 1}</span>
                           {isCorrect ? (
-                            <div className="flex items-center gap-1.5 text-green-400 text-[10px] font-black uppercase tracking-widest bg-green-500/10 border border-green-500/20 px-3 py-1 rounded-full">
+                            <div className={`flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full ${isKidsStory ? 'bg-[#7ED957]/20 text-[#1a1a1a] border-2 border-[#1a1a1a]' : 'text-green-400 bg-green-500/10 border border-green-500/20'}`}>
                               <CheckCircle className="w-3.5 h-3.5" /> Correct
                             </div>
                           ) : (
-                            <div className="flex items-center gap-1.5 text-red-400 text-[10px] font-black uppercase tracking-widest bg-red-500/10 border border-red-500/20 px-3 py-1 rounded-full">
+                            <div className={`flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full ${isKidsStory ? 'bg-[#EF4444]/20 text-[#1a1a1a] border-2 border-[#1a1a1a]' : 'text-red-400 bg-red-500/10 border border-red-500/20'}`}>
                               <AlertTriangle className="w-3.5 h-3.5" /> Incorrect
                             </div>
                           )}
                         </div>
-                        <h4 className="text-xl font-black text-white mb-6 leading-tight tracking-tight drop-shadow-sm">{q.question}</h4>
+                        <h4 className={`text-xl font-black mb-6 leading-tight tracking-tight text-left ${isKidsStory ? 'text-[#1a1a1a]' : 'text-white'}`}>{q.question}</h4>
                         
                         {(q.referenceVerse || q.explanation) && (
-                          <div className="mb-8 space-y-3">
+                          <div className="mb-8 space-y-3 text-left">
                             {q.referenceVerse && (
                               <button 
                                 onClick={() => {
@@ -301,14 +328,18 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                                   setSelectedChapterId(chMatch ? parseInt(chMatch[1]) : parseInt(chapter || "1"));
                                   setIsVerseContextOpen(true);
                                 }}
-                                className="inline-flex items-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-2 text-[11px] font-black text-stone-500 hover:text-rose-600 hover:bg-rose-50 border border-transparent hover:border-rose-200 shadow-sm bg-white/40 transition-all uppercase tracking-widest cursor-pointer hover:border-white/20"
+                                className={`inline-flex items-center gap-2 rounded-xl border-2 px-4 py-2 text-[11px] font-black transition-all uppercase tracking-widest cursor-pointer ${
+                                  isKidsStory 
+                                    ? 'bg-[#F3F4F6] border-[#1a1a1a] text-[#1a1a1a] hover:bg-[#3B82F6] hover:text-white' 
+                                    : 'bg-white/40 border-transparent text-stone-500 hover:text-rose-600 hover:bg-rose-50 hover:border-rose-200'
+                                }`}
                               >
                                 <BookOpen className="h-3.5 w-3.5" />
                                 <span>{q.referenceVerse}</span>
                               </button>
                             )}
                             {q.explanation && (
-                              <p className="text-sm text-stone-400 font-medium leading-relaxed pl-6 border-l-4 border-white/10 italic">
+                              <p className={`text-sm font-medium leading-relaxed pl-6 border-l-4 italic ${isKidsStory ? 'text-[#1a1a1a]/70 border-[#1a1a1a]/20' : 'text-stone-400 border-white/10'}`}>
                                 {q.explanation}
                               </p>
                             )}
@@ -320,14 +351,25 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                             const isCorrectOption = optionIndex === q.answer;
                             const isUserSelection = optionIndex === userAnswer;
                             
-                            let optionClass = "bg-white/5 text-stone-500 border-white/5";
-                            if (isCorrectOption) optionClass = "bg-green-500/10 text-green-400 border-green-500/30 shadow-[0_0_10px_rgba(34,197,94,0.1)]";
-                            if (isUserSelection && !isCorrect) optionClass = "bg-red-500/10 text-red-400 border-red-500/30 shadow-[0_0_10px_rgba(239,68,68,0.1)]";
+                            let optionClass = isKidsStory 
+                              ? "bg-gray-50 text-[#1a1a1a]/40 border-[#1a1a1a]/10 border-2" 
+                              : "bg-white/5 text-stone-500 border-white/5 border";
+                            
+                            if (isCorrectOption) {
+                              optionClass = isKidsStory 
+                                ? "bg-[#7ED957]/20 text-[#1a1a1a] border-[#1a1a1a] border-4" 
+                                : "bg-green-500/10 text-green-400 border-green-500/30 shadow-[0_0_10px_rgba(34,197,94,0.1)] border";
+                            }
+                            if (isUserSelection && !isCorrect) {
+                              optionClass = isKidsStory 
+                                ? "bg-[#EF4444]/20 text-[#1a1a1a] border-[#1a1a1a] border-4 opacity-70" 
+                                : "bg-red-500/10 text-red-400 border-red-500/30 shadow-[0_0_10px_rgba(239,68,68,0.1)] border";
+                            }
 
                             return (
                               <div
                                 key={optionIndex}
-                                className={`p-4 rounded-2xl border text-xs font-bold leading-snug flex items-center justify-between group/option transition-all ${optionClass}`}
+                                className={`p-4 rounded-2xl text-xs font-bold leading-snug flex items-center justify-between group/option transition-all ${optionClass} text-left`}
                               >
                                 <span className="flex gap-3">
                                   <span className="opacity-40">{String.fromCharCode(65 + optionIndex)}</span>
@@ -346,9 +388,9 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
               </div>
 
               {/* Social Share Section */}
-              <div className="mt-20 pt-12 border-t border-white/10">
+              <div className={`mt-20 pt-12 border-t ${isKidsStory ? 'border-[#1a1a1a]/10' : 'border-white/10'}`}>
                 <div className="text-center">
-                  <h4 className="text-[10px] font-black text-stone-300 uppercase tracking-[0.3em] mb-8">Spread the word</h4>
+                  <h4 className={`text-[10px] font-black uppercase tracking-[0.3em] mb-8 ${isKidsStory ? 'text-[#1a1a1a]/40' : 'text-stone-300'}`}>Spread the word</h4>
                   <SocialShare
                     url={canonicalUrl}
                     title={`I scored ${score}% on the ${bookName} Bible Quiz!`}
@@ -367,6 +409,8 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
           </Card>
         </div>
       </div>
+    );
+  }
     );
   }
 
@@ -427,7 +471,7 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-50 via-sky-50 to-rose-50 text-slate-800 font-sans selection:bg-rose-200 selection:text-rose-900 pb-20">
+    <div className={`min-h-screen ${isKidsStory ? 'bg-[#FFFBEB] font-urbanist' : 'bg-slate-50 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-50 via-sky-50 to-rose-50 font-sans'} text-slate-800 selection:bg-rose-200 selection:text-rose-900 pb-20`}>
       <Helmet>
         <title>{title} - Free Bible Quiz | Bible Quiz Competition</title>
         <meta name="description" content={seoDescription || `Test your knowledge of ${bookName} with this free interactive Bible quiz. ${normalizedQuestions.length} questions to challenge your understanding of the Bible. No registration required!`} />
@@ -445,36 +489,34 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
       <SEO 
         title={`${title} | Interactive Bible Quiz`} 
         description={`Test your knowledge of ${bookName} Chapter ${chapter || ''} with our interactive Bible quiz. ${normalizedQuestions.length} questions of in-depth study.`} 
-      />
-      
-      {/* Slim Header */}
-      <header className="sticky top-0 z-50 w-full border-b border-white/40 bg-white/40 backdrop-blur-3xl shadow-[0_2px_20px_rgba(0,0,0,0.03)] mb-12">
+           {/* Slim Header */}
+      <header className={`sticky top-0 z-50 w-full border-b ${isKidsStory ? 'border-[#1a1a1a] bg-[#FCD34D]' : 'border-white/40 bg-white/40 backdrop-blur-3xl shadow-[0_2px_20px_rgba(0,0,0,0.03)]'} mb-12`}>
         <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
-          <div className="flex items-center gap-3 cursor-pointer group" onClick={() => navigate('/bible-questions-and-answers-hub')}>
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-orange-400 to-rose-500 shadow-[0_4px_20px_rgba(244,63,94,0.3)] text-white transition-all group-hover:scale-110 group-hover:rotate-3 group-hover:shadow-[0_0_25px_rgba(244,63,94,0.4)]">
-              <Brain className="h-5 w-5" />
+          <div className="flex items-center gap-3 cursor-pointer group" onClick={() => navigate(isKidsStory ? '/kids-stories' : '/bible-questions-and-answers-hub')}>
+            <div className={`flex h-9 w-9 items-center justify-center rounded-xl ${isKidsStory ? 'bg-white border-2 border-[#1a1a1a]' : 'bg-gradient-to-br from-orange-400 to-rose-500 shadow-[0_4px_20px_rgba(244,63,94,0.3)]'} text-white transition-all group-hover:scale-110`}>
+              <Brain className={`h-5 w-5 ${isKidsStory ? 'text-[#1a1a1a]' : 'text-white'}`} />
             </div>
             <div className="flex flex-col">
-              <span className="text-xs font-black text-stone-400 uppercase tracking-[0.3em] leading-none mb-0.5">SAINTS QUIZ</span>
-              <span className="text-sm font-black tracking-tight text-stone-900 uppercase tracking-widest leading-none drop-shadow-sm">BIBLE QA HUB</span>
+              <span className={`text-xs font-black ${isKidsStory ? 'text-[#1a1a1a]/40' : 'text-stone-400'} uppercase tracking-[0.3em] leading-none mb-0.5`}>{isKidsStory ? 'KIDS MODE' : 'SAINTS QUIZ'}</span>
+              <span className={`text-sm font-black tracking-tight ${isKidsStory ? 'text-[#1a1a1a]' : 'text-stone-900'} uppercase tracking-widest leading-none drop-shadow-sm`}>{isKidsStory ? 'BIBLE STORIES' : 'BIBLE QA HUB'}</span>
             </div>
           </div>
           
           <div className="flex items-center gap-3 sm:gap-6">
-            <div className="hidden md:flex items-center gap-4 px-6 py-2 bg-white/40 rounded-2xl border border-white/60 shadow-[0_4px_15px_rgba(0,0,0,0.03)] backdrop-blur-md">
-              <div className="flex flex-col items-center border-r border-stone-200/50 pr-4">
-                <span className="text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] mb-0.5">SCORE</span>
-                <span className="text-xs font-black tabular-nums tracking-widest text-stone-800">
-                  {scorePoints.toLocaleString()} <span className="text-orange-500 font-black">XP</span>
+            <div className={`hidden md:flex items-center gap-4 px-6 py-2 ${isKidsStory ? 'bg-white border-2 border-[#1a1a1a]' : 'bg-white/40 backdrop-blur-md border border-white/60 shadow-[0_4px_15px_rgba(0,0,0,0.03)]'} rounded-2xl`}>
+              <div className={`flex flex-col items-center border-r ${isKidsStory ? 'border-[#1a1a1a]/10 pr-4' : 'border-stone-200/50 pr-4'}`}>
+                <span className={`text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a]/40' : 'text-stone-400'} uppercase tracking-[0.2em] mb-0.5`}>SCORE</span>
+                <span className={`text-xs font-black tabular-nums tracking-widest ${isKidsStory ? 'text-[#1a1a1a]' : 'text-stone-800'}`}>
+                  {scorePoints.toLocaleString()} <span className={isKidsStory ? 'text-[#F59E0B]' : 'text-orange-500'}>XP</span>
                 </span>
               </div>
               
               {streak >= 2 && (
-                <div className="flex flex-col items-center border-r border-stone-200/50 pr-4 animate-in slide-in-from-top-2 duration-500">
-                  <span className="text-[10px] font-black text-orange-400 uppercase tracking-[0.2em] mb-0.5">STREAK</span>
+                <div className={`flex flex-col items-center border-r ${isKidsStory ? 'border-[#1a1a1a]/10 pr-4' : 'border-stone-200/50 pr-4'} animate-in slide-in-from-top-2 duration-500`}>
+                  <span className={`text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a]/40' : 'text-orange-400'} uppercase tracking-[0.2em] mb-0.5`}>STREAK</span>
                   <div className="flex items-center gap-1.5">
                     <Flame className="w-3 h-3 text-orange-500 fill-orange-500 animate-pulse" />
-                    <span className="text-xs font-black tabular-nums tracking-widest text-orange-600">
+                    <span className={`text-xs font-black tabular-nums tracking-widest ${isKidsStory ? 'text-[#1a1a1a]' : 'text-orange-600'}`}>
                       x{streak}
                     </span>
                   </div>
@@ -482,10 +524,10 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
               )}
 
               <div className="flex flex-col items-center">
-                <span className="text-[10px] font-black text-stone-400 uppercase tracking-[0.2em] mb-0.5">TIME</span>
+                <span className={`text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a]/40' : 'text-stone-400'} uppercase tracking-[0.2em] mb-0.5`}>TIME</span>
                 <div className="flex items-center gap-1.5">
                   <Clock className={`h-3 w-3 ${timeLeft < 60 ? 'text-red-500 animate-pulse' : 'text-stone-400'}`} />
-                  <span className={`text-xs font-black tabular-nums tracking-widest ${timeLeft < 60 ? 'text-red-500' : 'text-stone-700'}`}>
+                  <span className={`text-xs font-black tabular-nums tracking-widest ${timeLeft < 60 ? 'text-red-500' : isKidsStory ? 'text-[#1a1a1a]' : 'text-stone-700'}`}>
                     {formatTime(timeLeft)}
                   </span>
                 </div>
@@ -494,22 +536,23 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
             <Button 
               variant="ghost" 
               size="sm" 
-              onClick={() => navigate('/bible-questions-and-answers-hub')} 
-              className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-400 hover:text-rose-500 hover:bg-rose-50/50 transition-all rounded-xl"
+              onClick={() => navigate(isKidsStory ? '/kids-stories' : '/bible-questions-and-answers-hub')} 
+              className={`text-[10px] font-black uppercase tracking-[0.3em] ${isKidsStory ? 'text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-white border-2 border-[#1a1a1a]' : 'text-stone-400 hover:text-rose-500 hover:bg-rose-50/50'} transition-all rounded-xl`}
             >
-              Exit Quest
+              Exit
             </Button>
           </div>
         </div>
         
         {/* Sleek Progress bar */}
-        <div className="absolute bottom-[-1px] left-0 w-full h-[3px] bg-stone-100/30">
+        <div className={`absolute bottom-[-1px] left-0 w-full h-[4px] ${isKidsStory ? 'bg-[#1a1a1a]/5' : 'bg-stone-100/30'}`}>
           <div 
-            className="h-full bg-gradient-to-r from-orange-500 via-rose-500 to-rose-600 transition-all duration-1000 cubic-bezier(0.4, 0, 0.2, 1) shadow-[0_0_15px_rgba(244,63,94,0.5)]"
+            className={`h-full ${isKidsStory ? 'bg-[#3B82F6]' : 'bg-gradient-to-r from-orange-500 via-rose-500 to-rose-600 shadow-[0_0_15px_rgba(244,63,94,0.5)]'} transition-all duration-1000 cubic-bezier(0.4, 0, 0.2, 1)`}
             style={{ width: `${progress}%` }}
           />
         </div>
       </header>
+ </header>
 
       <div className="container mx-auto px-4 lg:max-w-6xl pb-12">
         {/* Mobile Timer */}
@@ -533,14 +576,14 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
               
               <div className="relative space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
                 <div className="flex flex-wrap items-center gap-4">
-                  <div className="glass-panel inline-flex items-center gap-2.5 bg-white/40 backdrop-blur-md border border-white/80 shadow-[0_4px_15px_rgba(0,0,0,0.03)] px-4 py-2 rounded-2xl">
-                    <div className="flex h-1.5 w-1.5 rounded-full bg-rose-500 relative">
-                      <div className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></div>
+                  <div className={`glass-panel inline-flex items-center gap-2.5 ${isKidsStory ? 'bg-white border-2 border-[#1a1a1a] shadow-[4px_4px_0_0_#1a1a1a]' : 'bg-white/40 backdrop-blur-md border border-white/80 shadow-[0_4px_15px_rgba(0,0,0,0.03)]'} px-4 py-2 rounded-2xl`}>
+                    <div className={`flex h-2 w-2 rounded-full ${isKidsStory ? 'bg-[#3B82F6]' : 'bg-rose-500'} relative`}>
+                      <div className={`animate-ping absolute inline-flex h-full w-full rounded-full ${isKidsStory ? 'bg-[#60A5FA]' : 'bg-rose-400'} opacity-75`}></div>
                     </div>
-                    <span className="text-[10px] font-black text-stone-500 uppercase tracking-[0.25em]">QUESTION {currentQuestion + 1} OF {normalizedQuestions.length}</span>
+                    <span className={`text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a]' : 'text-stone-500'} uppercase tracking-[0.25em]`}>QUESTION {currentQuestion + 1} OF {normalizedQuestions.length}</span>
                   </div>
-                  <div className="glass-panel bg-white/40 backdrop-blur-md border border-white/80 shadow-[0_4px_15px_rgba(0,0,0,0.03)] px-4 py-2 rounded-2xl">
-                    <span className="text-[10px] font-black text-rose-500 uppercase tracking-[0.25em]">{bookName} {chapter ? `CH. ${chapter}` : 'SEC'}</span>
+                  <div className={`glass-panel ${isKidsStory ? 'bg-[#FFDE59] border-2 border-[#1a1a1a] shadow-[4px_4px_0_0_#1a1a1a]' : 'bg-white/40 backdrop-blur-md border border-white/80 shadow-[0_4px_15px_rgba(0,0,0,0.03)]'} px-4 py-2 rounded-2xl`}>
+                    <span className={`text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a]' : 'text-rose-500'} uppercase tracking-[0.25em]`}>{isKidsStory ? story.title.toUpperCase() : bookName.toUpperCase()} {chapter ? `CH. ${chapter}` : ''}</span>
                   </div>
                 </div>
                 
@@ -575,22 +618,43 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
 
                 if (hasSubmitted) {
                   if (showCorrect) {
-                    stateStyles = 'border-emerald-200 bg-emerald-50/70 shadow-[0_8px_30px_rgba(16,185,129,0.15)] scale-[1.02] z-10 transition-all rotate-[0.5deg]';
-                    letterBoxStyles = 'bg-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.4)] border-transparent';
+                    stateStyles = isKidsStory 
+                      ? 'border-[#1a1a1a] bg-[#7ED957] shadow-[8px_8px_0_0_#1a1a1a] z-10 scale-[1.02]'
+                      : 'border-emerald-200 bg-emerald-50/70 shadow-[0_8px_30px_rgba(16,185,129,0.15)] scale-[1.02] z-10 transition-all rotate-[0.5deg]';
+                    letterBoxStyles = isKidsStory 
+                      ? 'bg-white text-[#1a1a1a] border-[#1a1a1a]'
+                      : 'bg-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.4)] border-transparent';
                   } else if (showWrong) {
-                    stateStyles = 'border-rose-200 bg-rose-50/70 shadow-[0_8px_20px_rgba(244,63,94,0.1)] opacity-70';
-                    letterBoxStyles = 'bg-rose-500 text-white border-transparent';
+                    stateStyles = isKidsStory 
+                      ? 'border-[#1a1a1a] bg-[#EF4444] shadow-[8px_8px_0_0_#1a1a1a] opacity-70'
+                      : 'border-rose-200 bg-rose-50/70 shadow-[0_8px_20px_rgba(244,63,94,0.1)] opacity-70';
+                    letterBoxStyles = isKidsStory 
+                      ? 'bg-white text-[#1a1a1a] border-[#1a1a1a]'
+                      : 'bg-rose-500 text-white border-transparent';
                   } else {
-                    stateStyles = 'border-stone-100 bg-stone-50/30 opacity-40 grayscale-[0.5]';
-                    letterBoxStyles = 'bg-stone-100 text-stone-300 border-stone-200';
+                    stateStyles = isKidsStory 
+                      ? 'border-[#1a1a1a]/10 bg-[#F3F4F6] opacity-40 grayscale-[0.8]'
+                      : 'border-stone-100 bg-stone-50/30 opacity-40 grayscale-[0.5]';
+                    letterBoxStyles = isKidsStory 
+                      ? 'bg-white text-[#1a1a1a]/20 border-[#1a1a1a]/10'
+                      : 'bg-stone-100 text-stone-300 border-stone-200';
                   }
                 } else {
                   stateStyles = isSelected 
-                    ? 'border-orange-200 bg-orange-50/80 shadow-[0_12px_40px_rgba(249,115,22,0.15)] scale-[1.03] z-20 border-orange-400 rotate-[-0.5deg]' 
-                    : 'border-white/80 bg-white/40 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-orange-200 hover:bg-white/80 hover:shadow-[0_15px_45px_rgba(249,115,22,0.1)] hover:-translate-y-1.5 active:scale-95';
+                    ? (isKidsStory 
+                        ? 'border-[#1a1a1a] bg-[#FFDE59] shadow-[8px_8px_0_0_#1a1a1a] scale-[1.03] z-20 translate-y-[-4px]' 
+                        : 'border-orange-200 bg-orange-50/80 shadow-[0_12px_40px_rgba(249,115,22,0.15)] scale-[1.03] z-20 border-orange-400 rotate-[-0.5deg]')
+                    : (isKidsStory 
+                        ? 'border-[#1a1a1a]/10 bg-white hover:border-[#1a1a1a] hover:bg-[#FFFBEB] hover:shadow-[4px_4px_0_0_#1a1a1a] hover:translate-y-[-2px]' 
+                        : 'border-white/80 bg-white/40 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-orange-200 hover:bg-white/80 hover:shadow-[0_15px_45_rgba(249,115,22,0.1)] hover:-translate-y-1.5 active:scale-95');
+                  
                   letterBoxStyles = isSelected 
-                    ? 'bg-orange-500 text-white shadow-[0_0_20px_rgba(249,115,22,0.4)] scale-110' 
-                    : 'bg-white border border-stone-100/50 text-stone-400 group-hover:text-orange-600 transition-all';
+                    ? (isKidsStory 
+                        ? 'bg-[#1a1a1a] text-white border-transparent' 
+                        : 'bg-orange-500 text-white shadow-[0_0_20px_rgba(249,115,22,0.4)] scale-110')
+                    : (isKidsStory 
+                        ? 'bg-white border-[#1a1a1a]/10 text-[#1a1a1a]/20 group-hover:border-[#1a1a1a] group-hover:text-[#1a1a1a]' 
+                        : 'bg-white border border-stone-100/50 text-stone-400 group-hover:text-orange-600 transition-all');
                 }
 
                 return (
@@ -599,30 +663,30 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                     onClick={() => handleAnswerSelect(index)}
                     disabled={hasSubmitted}
                     className={`
-                      relative flex items-center w-full p-6 text-left transition-all duration-500 rounded-[2rem] border group 
+                      relative flex items-center w-full p-6 text-left transition-all duration-500 rounded-[2rem] border-4 group 
                       ${stateStyles}
                     `}
                   >
-                    {!hasSubmitted && !isSelected && (
+                    {!hasSubmitted && !isSelected && !isKidsStory && (
                       <div className="absolute inset-0 bg-gradient-to-tr from-orange-100/10 via-transparent to-rose-100/10 opacity-0 group-hover:opacity-100 duration-1000" />
                     )}
                     
                     <div className={`
-                      relative flex h-14 w-14 shrink-0 items-center justify-center rounded-[1.25rem] text-sm font-black mr-6 transition-all duration-500
+                      relative flex h-14 w-14 shrink-0 items-center justify-center rounded-[1.25rem] text-sm font-black mr-6 transition-all duration-500 border-2
                       ${letterBoxStyles}
                     `}>
                       {String.fromCharCode(65 + index)}
                     </div>
-                    <span className={`text-[1.05rem] font-bold leading-snug pr-8 transition-colors duration-300 ${isSelected && !hasSubmitted ? 'text-orange-950 px-1' : 'text-stone-700'}`}>{option}</span>
+                    <span className={`text-[1.05rem] font-bold leading-snug pr-8 transition-colors duration-300 ${isSelected && !hasSubmitted ? (isKidsStory ? 'text-[#1a1a1a]' : 'text-orange-950 px-1') : 'text-stone-700'}`}>{option}</span>
                     
                     {hasSubmitted && showCorrect && (
                       <div className="absolute right-8 top-1/2 -translate-y-1/2">
-                        <CheckCircle className="h-7 w-7 text-emerald-600 animate-in zoom-in spin-in-12 duration-500" />
+                        <CheckCircle className={`h-7 w-7 ${isKidsStory ? 'text-[#1a1a1a]' : 'text-emerald-600'} animate-in zoom-in spin-in-12 duration-500`} />
                       </div>
                     )}
                     {hasSubmitted && showWrong && (
                       <div className="absolute right-8 top-1/2 -translate-y-1/2">
-                        <AlertTriangle className="h-7 w-7 text-rose-500 animate-in zoom-in spin-in-12 duration-500" />
+                        <AlertTriangle className={`h-7 w-7 ${isKidsStory ? 'text-[#1a1a1a]' : 'text-rose-500'} animate-in zoom-in spin-in-12 duration-500`} />
                       </div>
                     )}
                   </button>
@@ -633,20 +697,25 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
 
           {/* ==================== RIGHT SIDE: FEEDBACK, ACTIONS & REFERENCE ==================== */}
           <div className="w-full lg:w-[42%] flex flex-col space-y-6 sticky top-32">
-            <div className={`flex flex-col rounded-[2.5rem] border overflow-hidden transition-all duration-700 ${hasSubmitted ? (selectedAnswer === currentQ.answer ? 'bg-emerald-50/80 border-emerald-200 shadow-[0_20px_60px_rgba(16,185,129,0.15)]' : 'bg-rose-50/80 border-rose-200 shadow-[0_20px_60px_rgba(244,63,94,0.15)]') : 'bg-white/40 backdrop-blur-3xl border-white shadow-[0_15px_50px_rgba(0,0,0,0.06)]'}`}>
-              
-              <div className="p-8 sm:p-12 min-h-[220px] flex flex-col justify-center relative">
+            <div className={`flex flex-col rounded-[2.5rem] border-[4px] overflow-hidden transition-all duration-700 ${
+              hasSubmitted 
+                ? (selectedAnswer === currentQ.answer 
+                  ? (isKidsStory ? 'bg-[#7ED957] border-[#1a1a1a] shadow-[8px_8px_0_0_#1a1a1a]' : 'bg-emerald-50/80 border-emerald-200 shadow-[0_20px_60px_rgba(16,185,129,0.15)]') 
+                  : (isKidsStory ? 'bg-[#EF4444] border-[#1a1a1a] shadow-[8px_8px_0_0_#1a1a1a]' : 'bg-rose-50/80 border-rose-200 shadow-[0_20px_60px_rgba(244,63,94,0.15)]')) 
+                : (isKidsStory ? 'bg-white border-[#1a1a1a] shadow-[8px_8px_0_0_#1a1a1a]' : 'bg-white/40 backdrop-blur-3xl border-white shadow-[0_15px_50px_rgba(0,0,0,0.06)]')
+              }`}>
+                  <div className="p-8 sm:p-12 min-h-[220px] flex flex-col justify-center relative backdrop-blur-sm">
                 {!hasSubmitted ? (
                   <div className="text-center w-full flex flex-col items-center gap-8 py-8 animate-in fade-in zoom-in duration-700">
                     <div className="relative">
-                      <div className="absolute inset-0 bg-stone-200/40 rounded-full blur-2xl animate-pulse" />
-                      <div className="relative w-24 h-24 rounded-[2rem] bg-white border border-stone-100 flex items-center justify-center shadow-[0_8px_25px_rgba(0,0,0,0.04)] rotate-3 hover:rotate-6 transition-transform">
-                         <Brain className="w-10 h-10 text-stone-200" />
+                      {!isKidsStory && <div className="absolute inset-0 bg-stone-200/40 rounded-full blur-2xl animate-pulse" />}
+                      <div className={`relative w-24 h-24 rounded-[2rem] bg-white border-2 ${isKidsStory ? 'border-[#1a1a1a] shadow-[4px_4px_0_0_#1a1a1a]' : 'border-stone-100 shadow-[0_8px_25px_rgba(0,0,0,0.04)]'} flex items-center justify-center rotate-3 hover:rotate-6 transition-transform`}>
+                         <Brain className={`w-10 h-10 ${isKidsStory ? 'text-[#3B82F6]' : 'text-stone-200'}`} />
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <span className="text-stone-300 font-black uppercase tracking-[0.4em] text-[10px] block">MEDITATION PHASE</span>
-                      <p className="text-stone-400 font-bold text-sm tracking-tight">Select an answer to reveal truth</p>
+                      <span className={`${isKidsStory ? 'text-[#1a1a1a]/60' : 'text-stone-300'} font-black uppercase tracking-[0.4em] text-[10px] block`}>{isKidsStory ? 'THINKING TIME' : 'MEDITATION PHASE'}</span>
+                      <p className={`${isKidsStory ? 'text-[#1a1a1a]' : 'text-stone-400'} font-bold text-sm tracking-tight`}>{isKidsStory ? 'Pick the best answer!' : 'Select an answer to reveal truth'}</p>
                     </div>
                   </div>
                 ) : (
@@ -654,18 +723,18 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                     <div className="flex items-center gap-5">
                       {selectedAnswer === currentQ.answer ? (
                         <>
-                          <div className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-2xl p-3 shadow-[0_8px_25px_rgba(16,185,129,0.4)] rotate-6"><CheckCircle className="w-8 h-8 font-black" /></div>
+                          <div className={`rounded-2xl p-3 shadow-sm ${isKidsStory ? 'bg-white border-2 border-[#1a1a1a] text-[#1a1a1a]' : 'bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-[0_8px_25px_rgba(16,185,129,0.4)] rotate-6'}`}><CheckCircle className="w-8 h-8 font-black" /></div>
                           <div className="flex flex-col">
-                            <span className="text-[10px] font-black text-emerald-600 uppercase tracking-[0.3em] mb-1">RELEVATION</span>
-                            <span className="font-black text-emerald-900 text-3xl tracking-tight leading-none">Praise God!</span>
+                            <span className={`text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a]/60' : 'text-emerald-600'} uppercase tracking-[0.3em] mb-1`}>{isKidsStory ? 'YAY!' : 'RELEVATION'}</span>
+                            <span className={`font-black ${isKidsStory ? 'text-[#1a1a1a]' : 'text-emerald-900'} text-3xl tracking-tight leading-none`}>{isKidsStory ? 'Super Job!' : 'Praise God!'}</span>
                           </div>
                         </>
                       ) : (
                         <>
-                          <div className="bg-gradient-to-br from-rose-500 to-red-600 text-white rounded-2xl p-3 shadow-[0_8px_25px_rgba(244,63,94,0.4)] -rotate-6"><AlertTriangle className="w-8 h-8" /></div>
+                          <div className={`rounded-2xl p-3 shadow-sm ${isKidsStory ? 'bg-white border-2 border-[#1a1a1a] text-[#1a1a1a]' : 'bg-gradient-to-br from-rose-500 to-red-600 text-white shadow-[0_8px_25px_rgba(244,63,94,0.4)] -rotate-6'}`}><AlertTriangle className="w-8 h-8" /></div>
                           <div className="flex flex-col">
-                            <span className="text-[10px] font-black text-rose-600 uppercase tracking-[0.3em] mb-1">CORRECTION</span>
-                            <span className="font-black text-rose-900 text-3xl tracking-tight leading-none">Not This Time</span>
+                            <span className={`text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a]/60' : 'text-rose-600'} uppercase tracking-[0.3em] mb-1`}>{isKidsStory ? 'OOH!' : 'CORRECTION'}</span>
+                            <span className={`font-black ${isKidsStory ? 'text-[#1a1a1a]' : 'text-rose-900'} text-3xl tracking-tight leading-none`}>{isKidsStory ? 'Try Again!' : 'Not This Time'}</span>
                           </div>
                         </>
                       )}
@@ -673,8 +742,8 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                     
                     {currentQ.explanation && (
                       <div className="relative">
-                        <div className={`absolute -left-6 top-0 bottom-0 w-1 rounded-full ${selectedAnswer === currentQ.answer ? 'bg-emerald-200' : 'bg-rose-200'}`} />
-                        <p className={`text-lg font-bold leading-relaxed pr-4 ${selectedAnswer === currentQ.answer ? 'text-emerald-800' : 'text-rose-800'}`}>
+                        <div className={`absolute -left-6 top-0 bottom-0 w-1.5 rounded-full ${selectedAnswer === currentQ.answer ? (isKidsStory ? 'bg-[#1a1a1a]' : 'bg-emerald-200') : (isKidsStory ? 'bg-[#1a1a1a]' : 'bg-rose-200')}`} />
+                        <p className={`text-lg font-bold leading-relaxed pr-4 ${selectedAnswer === currentQ.answer ? (isKidsStory ? 'text-[#1a1a1a]' : 'text-emerald-800') : (isKidsStory ? 'text-[#1a1a1a]' : 'text-rose-800')}`}>
                           {currentQ.explanation}
                         </p>
                       </div>
@@ -682,13 +751,14 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                   </div>
                 )}
               </div>
+    </div>
 
               {/* Reference Module */}
               {currentQ.referenceVerse && (
-                <div className={`px-8 sm:px-12 pb-10 pt-8 border-t ${hasSubmitted ? 'border-stone-300/30' : 'border-stone-100 bg-stone-50/50'}`}>
-                  <div className="flex items-center gap-2 mb-6">
-                    <div className="h-1 w-8 bg-stone-200 rounded-full" />
-                    <span className="text-[10px] font-black text-stone-300 uppercase tracking-[0.4em]">Sacred Context</span>
+                <div className={`px-8 sm:px-12 pb-10 pt-8 border-t ${isKidsStory ? 'border-[#1a1a1a]/10' : (hasSubmitted ? 'border-stone-300/30' : 'border-stone-100 bg-stone-50/50')}`}>
+                  <div className="flex items-center gap-2 mb-6 text-left">
+                    <div className={`h-1.5 w-10 rounded-full ${isKidsStory ? 'bg-[#3B82F6]' : 'bg-stone-200'}`} />
+                    <span className={`text-[10px] font-black uppercase tracking-[0.4em] ${isKidsStory ? 'text-[#1a1a1a]/40' : 'text-stone-300'}`}>{isKidsStory ? 'STORY TRUTH' : 'SACRED CONTEXT'}</span>
                   </div>
                   <button 
                     onClick={() => {
@@ -697,17 +767,21 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                       setSelectedChapterId(chMatch ? parseInt(chMatch[1]) : parseInt(chapter || "1"));
                       setIsVerseContextOpen(true);
                     }}
-                    className="group flex w-full items-center justify-between gap-6 text-left rounded-3xl bg-white hover:bg-stone-50 px-6 py-5 border border-stone-200 shadow-sm hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-500"
+                    className={`group flex w-full items-center justify-between gap-6 text-left rounded-3xl transition-all duration-500 px-6 py-5 border-2 ${
+                      isKidsStory 
+                        ? 'bg-[#F3F4F6] border-[#1a1a1a] shadow-[4px_4px_0_0_#1a1a1a] hover:translate-x-1 hover:translate-y-1 hover:shadow-none' 
+                        : 'bg-white hover:bg-stone-50 border-stone-200 shadow-sm hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:-translate-y-1'
+                    }`}
                   >
                     <div className="flex items-center gap-5">
-                      <div className="p-3 bg-stone-50 rounded-2xl text-stone-400 group-hover:bg-rose-500 group-hover:text-white transition-all duration-500 group-hover:rotate-6">
+                      <div className={`p-3 rounded-2xl transition-all duration-500 ${isKidsStory ? 'bg-white text-[#1a1a1a] group-hover:bg-[#3B82F6] group-hover:text-white' : 'bg-stone-50 text-stone-400 group-hover:bg-rose-500 group-hover:text-white group-hover:rotate-6'}`}>
                         <BookOpen className="w-6 h-6 shrink-0" />
                       </div>
                       <div>
-                        <span className="block font-black text-stone-900 text-lg tracking-tight leading-none mb-1.5">{currentQ.referenceVerse}</span>
+                        <span className={`block font-black text-lg tracking-tight leading-none mb-1.5 ${isKidsStory ? 'text-[#1a1a1a]' : 'text-stone-900'}`}>{currentQ.referenceVerse}</span>
                         <div className="flex items-center gap-2">
-                           <span className="block text-[10px] uppercase font-black text-stone-400 group-hover:text-rose-600 tracking-widest transition-colors">Study Scripture</span>
-                           <ChevronRight className="w-3 h-3 text-stone-300 group-hover:text-rose-500 transition-all group-hover:translate-x-1" />
+                           <span className={`block text-[10px] uppercase font-black tracking-widest transition-colors ${isKidsStory ? 'text-[#1a1a1a]/60 group-hover:text-[#3B82F6]' : 'text-stone-400 group-hover:text-rose-600'}`}>{isKidsStory ? 'Read in Bible' : 'Study Scripture'}</span>
+                           <ChevronRight className={`w-3 h-3 transition-all group-hover:translate-x-1 ${isKidsStory ? 'text-[#1a1a1a]/30 group-hover:text-[#3B82F6]' : 'text-stone-300 group-hover:text-rose-500'}`} />
                         </div>
                       </div>
                     </div>
@@ -726,14 +800,16 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                   className={`
                     h-20 px-12 sm:px-16 rounded-[2rem] font-black text-xs uppercase tracking-[0.3em] transition-all duration-700 relative overflow-hidden group/btn w-full
                     ${selectedAnswer !== null 
-                      ? 'bg-stone-900 text-white hover:bg-black shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.3)] hover:-translate-y-1.5 active:scale-95' 
+                      ? (isKidsStory 
+                        ? 'bg-[#EF4444] hover:bg-[#DC2626] text-white border-4 border-[#1a1a1a] shadow-[0_8px_0_0_#1a1a1a] hover:shadow-[0_2px_0_0_#1a1a1a] active:shadow-none translate-y-[-4px] active:translate-y-[2px]' 
+                        : 'bg-stone-900 text-white hover:bg-black shadow-[0_20px_40px_rgba(0,0,0,0.2)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.3)] hover:-translate-y-1.5 active:scale-95')
                       : 'bg-stone-50 text-stone-300 border border-stone-100 cursor-not-allowed'
                     }
                   `}
                 >
-                  {selectedAnswer !== null && <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-in-out" />}
+                  {selectedAnswer !== null && !isKidsStory && <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-in-out" />}
                   <span className="relative z-10 flex items-center justify-center gap-4">
-                    Confirm Selection
+                    {isKidsStory ? 'Confirm My Answer!' : 'Confirm Selection'}
                     <ChevronRight className={`h-5 w-5 transition-transform duration-500 ${selectedAnswer !== null ? 'group-hover/btn:translate-x-2' : ''}`} />
                   </span>
                 </Button>
@@ -741,10 +817,14 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                 <Button 
                   onClick={handleNext}
                   size="lg"
-                  className="h-20 px-12 sm:px-16 rounded-[2rem] font-black text-xs uppercase tracking-[0.3em] transition-all duration-700 relative overflow-hidden group/btn bg-white border-2 border-stone-900 text-stone-900 hover:bg-stone-900 hover:text-white shadow-[0_15px_35px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.2)] hover:-translate-y-1.5 active:scale-95 w-full mt-2"
+                  className={`h-20 px-12 sm:px-16 rounded-[2rem] font-black text-xs uppercase tracking-[0.3em] transition-all duration-700 relative overflow-hidden group/btn w-full mt-2 ${
+                    isKidsStory 
+                      ? 'bg-white hover:bg-[#F3F4F6] text-[#1a1a1a] border-4 border-[#1a1a1a] shadow-[0_8px_0_0_#1a1a1a] hover:shadow-[0_2px_0_0_#1a1a1a] active:shadow-none translate-y-[-4px] active:translate-y-[2px]' 
+                      : 'bg-white border-2 border-stone-900 text-stone-900 hover:bg-stone-900 hover:text-white shadow-[0_15px_35px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_45px_rgba(0,0,0,0.2)] hover:-translate-y-1.5 active:scale-95'
+                  }`}
                 >
                   <span className="relative z-10 flex items-center justify-center gap-4">
-                    {currentQuestion === normalizedQuestions.length - 1 ? 'End Pilgrimage' : 'Proceed Forward'}
+                    {currentQuestion === normalizedQuestions.length - 1 ? (isKidsStory ? 'See My Score!' : 'End Pilgrimage') : (isKidsStory ? 'Next Page' : 'Proceed Forward')}
                     <ChevronRight className="h-5 w-5 transition-transform duration-500 group-hover/btn:translate-x-2" />
                   </span>
                 </Button>
