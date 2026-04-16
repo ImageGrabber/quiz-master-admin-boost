@@ -22,6 +22,7 @@ interface Question {
   explanation?: string;
   referenceVerse?: string;
   chapter?: number | string;
+  image?: string;
 }
 
 interface PublicQuizProps {
@@ -543,6 +544,19 @@ const PublicQuiz = ({ title, questions, bookName, chapter, seoDescription, prevC
                   </div>
                 </div>
                 
+                {currentQ.image && (
+                  <div className="mb-8 rounded-[2rem] overflow-hidden border-4 border-white shadow-2xl max-w-xl mx-auto transform -rotate-1 hover:rotate-0 transition-transform duration-500 bg-white">
+                    <img 
+                      src={currentQ.image} 
+                      alt="Question illustration" 
+                      className="w-full h-auto object-cover aspect-video sm:aspect-[16/9]"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = 'none';
+                      }}
+                    />
+                  </div>
+                )}
+
                 <h1 className="text-3xl sm:text-[2.75rem] font-black text-stone-900 leading-[1.12] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-stone-900 via-stone-800 to-stone-600 drop-shadow-sm max-w-2xl">
                   {currentQ.question}
                 </h1>

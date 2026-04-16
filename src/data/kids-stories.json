@@ -23,23 +23,25 @@
         "id": 1,
         "question": "What was David's job before he became a hero?",
         "options": [
-          "Fisherman",
-          "Shepherd",
-          "Carpenter",
-          "Baker"
+          "A fisherman",
+          "A shepherd",
+          "A carpenter",
+          "A soldier"
         ],
-        "answer": 1
+        "answer": 1,
+        "image": "/images/stories/quiz/david-goliath/q1.png"
       },
       {
         "id": 2,
         "question": "What did David use to defeat the giant Goliath?",
         "options": [
-          "A giant sword",
+          "A sword and shield",
           "A bow and arrow",
           "A sling and a stone",
-          "A spear"
+          "A giant net"
         ],
-        "answer": 2
+        "answer": 2,
+        "image": "/images/stories/quiz/david-goliath/q2.png"
       },
       {
         "id": 3,
@@ -48,9 +50,34 @@
           "One",
           "Three",
           "Five",
-          "Ten"
+          "Seven"
         ],
-        "answer": 2
+        "answer": 2,
+        "image": "/images/stories/quiz/david-goliath/q3.png"
+      },
+      {
+        "id": 4,
+        "question": "Why did David go to the army camp?",
+        "options": [
+          "To join the army",
+          "To bring food to his brothers",
+          "To visit the King",
+          "To hide from the sheep"
+        ],
+        "answer": 1,
+        "image": "/images/stories/quiz/david-goliath/q4.png"
+      },
+      {
+        "id": 5,
+        "question": "What did King Saul think about David fighting the giant?",
+        "options": [
+          "He thought David was the best soldier",
+          "He was happy someone else would fight",
+          "He thought David was too small",
+          "He didn't care"
+        ],
+        "answer": 2,
+        "image": "/images/stories/quiz/david-goliath/q5.png"
       }
     ]
   },

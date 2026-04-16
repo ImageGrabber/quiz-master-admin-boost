@@ -16,6 +16,7 @@ export interface NormalizedQuizQuestion extends QuizQuestionInput {
   answer: number;
   explanation: string;
   chapter?: number | string;
+  image?: string;
 }
 
 interface NormalizeQuizQuestionsOptions {
