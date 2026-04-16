@@ -569,5 +569,60 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": 12,
+    "title": "Moses and the Parting Sea",
+    "slug": "moses-and-the-parting-sea",
+    "content": "The incredible journey of Moses and his people, who walked through the middle of a sea on dry land because they trusted God.",
+    "fullStory": "The Israelites had been in Egypt for a very long time, and they were finally free! But as they traveled toward the land God had promised them, they reached a giant body of water called the Red Sea. Behind them, they heard the thundering of horses and the clatter of chariots. The King of Egypt had changed his mind and was coming after them with his whole army!\n\nThe people were terrified. 'Where can we go?' they cried. 'The sea is in front of us, and the army is behind us! We are trapped!' But Moses stood tall and told the people, 'Do not be afraid. Stand firm and you will see the deliverance the Lord will bring you today!'\n\nGod told Moses, 'Raise your staff and stretch out your hand over the sea to divide the water.' Moses obeyed. He raised his wooden staff high in the air and stretched his hand over the crashing waves. Suddenly, a strong wind began to blow from the east. It blew all night long, and a miracle happened—the water began to pull back!\n\nThe Red Sea parted right in the middle, creating two giant walls of water on each side. Between the walls was a wide path of dry ground. Not muddy, not wet, but perfectly dry! Thousands of people, along with their families and their animals, began to walk right through the middle of the sea. Can you imagine looking to your left and your right and seeing fish swimming inside a wall of water?\n\nOnce everyone was safe on the other side, the Egyptian army tried to follow them. But God told Moses to stretch his hand over the sea once more. As he did, the water came crashing back down, and the army could no longer follow. The Israelites were safe! They sang songs of joy and danced, thanking God for his amazing power. Moses’ story teaches us that even when we feel trapped or scared, God can make a way where there seems to be no way. He is powerful enough to handle any challenge we face!",
+    "bibleVerses": [
+      "Exodus 14:21 - Then Moses stretched out his hand over the sea, and all that night the Lord drove the sea back with a strong east wind and turned it into dry land.",
+      "Isaiah 43:16 - This is what the Lord says—he who made a way through the sea, a path through the mighty waters."
+    ],
+    "moral": "God is powerful enough to make a way through any obstacle when we trust and obey Him.",
+    "bibleReference": "Exodus 14",
+    "theme": "Courage",
+    "imageAlt": "Moses standing with his staff raised as the Red Sea parts in the middle with fish visible in the water walls",
+    "keyTakeaways": [
+      "God is our protector and deliverer.",
+      "Nothing is too hard for God to handle.",
+      "When we follow God's instructions, He shows us His power."
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "question": "What did Moses use to part the Red Sea?",
+        "options": [
+          "A boat",
+          "His staff",
+          "A giant fan",
+          "A bridge"
+        ],
+        "answer": 1
+      },
+      {
+        "id": 2,
+        "question": "What was the ground like in the middle of the sea?",
+        "options": [
+          "Muddy and wet",
+          "Dry ground",
+          "Covered in seaweed",
+          "Full of rocks"
+        ],
+        "answer": 1
+      },
+      {
+        "id": 3,
+        "question": "How did the people feel when they saw the army behind them?",
+        "options": [
+          "Excited",
+          "Hungry",
+          "Terrified",
+          "Sleepy"
+        ],
+        "answer": 2
+      }
+    ]
   }
 ]
