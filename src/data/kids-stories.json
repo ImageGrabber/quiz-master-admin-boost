@@ -521,7 +521,8 @@
           "Six days",
           "Ten days"
         ],
-        "answer": 2
+        "answer": 2,
+        "image": "/images/stories/marching-around-jericho.png"
       },
       {
         "id": 2,
@@ -532,7 +533,8 @@
           "The people went home",
           "The sun stopped shining"
         ],
-        "answer": 1
+        "answer": 1,
+        "image": "/images/stories/marching-around-jericho.png"
       },
       {
         "id": 3,
@@ -543,7 +545,32 @@
           "Trumpets made of ram's horns",
           "Harps"
         ],
-        "answer": 2
+        "answer": 2,
+        "image": "/images/stories/marching-around-jericho.png"
+      },
+      {
+        "id": 4,
+        "question": "On the seventh day, how many times did the people march around the city?",
+        "options": [
+          "Once",
+          "Three times",
+          "Seven times",
+          "Twelve times"
+        ],
+        "answer": 2,
+        "image": "/images/stories/marching-around-jericho.png"
+      },
+      {
+        "id": 5,
+        "question": "What was the very strange battle plan God gave to Joshua?",
+        "options": [
+          "To build giant ladders",
+          "To swim across a river",
+          "To march in silence around the city",
+          "To wait for a giant storm"
+        ],
+        "answer": 2,
+        "image": "/images/stories/marching-around-jericho.png"
       }
     ]
   },
@@ -576,7 +603,8 @@
           "Three times",
           "Five times"
         ],
-        "answer": 2
+        "answer": 2,
+        "image": "/images/stories/daniel-and-the-sleepy-lions.png"
       },
       {
         "id": 2,
@@ -587,18 +615,44 @@
           "An angel",
           "A giant"
         ],
-        "answer": 2
+        "answer": 2,
+        "image": "/images/stories/daniel-and-the-sleepy-lions.png"
       },
       {
         "id": 3,
-        "question": "How did Daniel feel in the lions' den?",
+        "question": "How did Daniel feel while he was in the lions' den?",
         "options": [
           "Terribly scared",
           "Angry",
           "Peaceful and safe",
           "Hungry"
         ],
-        "answer": 2
+        "answer": 2,
+        "image": "/images/stories/daniel-and-the-sleepy-lions.png"
+      },
+      {
+        "id": 4,
+        "question": "In which city did Daniel live and work?",
+        "options": [
+          "Jerusalem",
+          "Babylon",
+          "Egypt",
+          "Rome"
+        ],
+        "answer": 1,
+        "image": "/images/stories/daniel-and-the-sleepy-lions.png"
+      },
+      {
+        "id": 5,
+        "question": "What did the King do after Daniel was safe and pulled out of the pit?",
+        "options": [
+          "He was very angry",
+          "He was overjoyed",
+          "He went for a walk",
+          "He closed the palace"
+        ],
+        "answer": 1,
+        "image": "/images/stories/daniel-and-the-sleepy-lions.png"
       }
     ]
   },
@@ -631,7 +685,8 @@
           "The Butterfly",
           "The Spider"
         ],
-        "answer": 1
+        "answer": 1,
+        "image": "/images/stories/the-wise-little-workers.png"
       },
       {
         "id": 2,
@@ -642,7 +697,8 @@
           "In the summer",
           "Only on weekends"
         ],
-        "answer": 2
+        "answer": 2,
+        "image": "/images/stories/the-wise-little-workers.png"
       },
       {
         "id": 3,
@@ -653,7 +709,32 @@
           "Because they like to walk",
           "To build a tower"
         ],
-        "answer": 1
+        "answer": 1,
+        "image": "/images/stories/the-wise-little-workers.png"
+      },
+      {
+        "id": 4,
+        "question": "Do the ants have a boss or a giant leader telling them what to do?",
+        "options": [
+          "Yes, a giant ant with a whistle",
+          "No, they are self-disciplined",
+          "They follow the bees",
+          "The birds tell them what to do"
+        ],
+        "answer": 1,
+        "image": "/images/stories/the-wise-little-workers.png"
+      },
+      {
+        "id": 5,
+        "question": "What is the big message we can learn from the ants?",
+        "options": [
+          "Little steps of hard work add up to big results",
+          "Ants are faster than rabbits",
+          "We should only work in the summer",
+          "Winter is for sleeping"
+        ],
+        "answer": 0,
+        "image": "/images/stories/the-wise-little-workers.png"
       }
     ]
   },
@@ -686,7 +767,8 @@
           "Esther",
           "Sarah"
         ],
-        "answer": 2
+        "answer": 2,
+        "image": "/images/stories/queen-esthers-big-choice.png"
       },
       {
         "id": 2,
@@ -697,7 +779,8 @@
           "A sword",
           "His hand"
         ],
-        "answer": 0
+        "answer": 0,
+        "image": "/images/stories/queen-esthers-big-choice.png"
       },
       {
         "id": 3,
@@ -708,7 +791,32 @@
           "To live in a big house",
           "To go to parties"
         ],
-        "answer": 1
+        "answer": 1,
+        "image": "/images/stories/queen-esthers-big-choice.png"
+      },
+      {
+        "id": 4,
+        "question": "What did Esther ask her people to do before she went to see the King?",
+        "options": [
+          "To bake a large cake",
+          "To pray and fast",
+          "To hide in the mountains",
+          "To sing songs for the King"
+        ],
+        "answer": 1,
+        "image": "/images/stories/queen-esthers-big-choice.png"
+      },
+      {
+        "id": 5,
+        "question": "What did Queen Esther do to save her people from the mean plan?",
+        "options": [
+          "She ran away",
+          "She bravely told the King the truth",
+          "She built a tall wall",
+          "She went to another country"
+        ],
+        "answer": 1,
+        "image": "/images/stories/queen-esthers-big-choice.png"
       }
     ]
   },
@@ -741,7 +849,8 @@
           "Jerusalem",
           "Bethlehem"
         ],
-        "answer": 1
+        "answer": 1,
+        "image": "/images/stories/jonah-and-the-big-fish.png"
       },
       {
         "id": 2,
@@ -752,7 +861,8 @@
           "Seven days",
           "Forty days"
         ],
-        "answer": 1
+        "answer": 1,
+        "image": "/images/stories/jonah-and-the-big-fish.png"
       },
       {
         "id": 3,
@@ -763,7 +873,32 @@
           "It took him to Tarshish",
           "It fell asleep"
         ],
-        "answer": 1
+        "answer": 1,
+        "image": "/images/stories/jonah-and-the-big-fish.png"
+      },
+      {
+        "id": 4,
+        "question": "Why did Jonah try to run away on a big ship?",
+        "options": [
+          "He wanted to find treasure",
+          "He didn't want to go to Nineveh",
+          "He liked the sea",
+          "He wanted to see the world"
+        ],
+        "answer": 1,
+        "image": "/images/stories/jonah-and-the-big-fish.png"
+      },
+      {
+        "id": 5,
+        "question": "What happened to the stormy sea when Jonah was thrown into the water?",
+        "options": [
+          "It got even stormier",
+          "It became as smooth as glass",
+          "It turned red",
+          "It disappeared"
+        ],
+        "answer": 1,
+        "image": "/images/stories/jonah-and-the-big-fish.png"
       }
     ]
   },
@@ -796,7 +931,8 @@
           "A giant fan",
           "A bridge"
         ],
-        "answer": 1
+        "answer": 1,
+        "image": "/images/stories/moses-and-the-parting-sea.png"
       },
       {
         "id": 2,
@@ -807,7 +943,8 @@
           "Covered in seaweed",
           "Full of rocks"
         ],
-        "answer": 1
+        "answer": 1,
+        "image": "/images/stories/moses-and-the-parting-sea.png"
       },
       {
         "id": 3,
@@ -818,7 +955,32 @@
           "Terrified",
           "Sleepy"
         ],
-        "answer": 2
+        "answer": 2,
+        "image": "/images/stories/moses-and-the-parting-sea.png"
+      },
+      {
+        "id": 4,
+        "question": "What did the people see on their left and right as they walked through the sea?",
+        "options": [
+          "Big stone walls",
+          "Tall mountains",
+          "Giant walls of water",
+          "A forest of trees"
+        ],
+        "answer": 2,
+        "image": "/images/stories/moses-and-the-parting-sea.png"
+      },
+      {
+        "id": 5,
+        "question": "What did the Israelites do after they crossed safely to the other side?",
+        "options": [
+          "They went to sleep",
+          "They built a new boat",
+          "They sang and danced with joy",
+          "They turned back"
+        ],
+        "answer": 2,
+        "image": "/images/stories/moses-and-the-parting-sea.png"
       }
     ]
   }
