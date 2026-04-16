@@ -264,7 +264,69 @@
       "God doesn't get angry when we are lost; He wants to help us.",
       "We can always count on God's love to find us."
     ],
-    "quiz": []
+    "quiz": [
+      {
+        "id": 1,
+        "question": "How many sheep did the Shepherd have at the beginning of the story?",
+        "options": [
+          "Ten sheep",
+          "Fifty sheep",
+          "One hundred sheep",
+          "One thousand sheep"
+        ],
+        "answer": 2,
+        "image": "/images/stories/quiz/the-lost-sheep/q1.png"
+      },
+      {
+        "id": 2,
+        "question": "What did the Shepherd do when he realize one sheep was missing?",
+        "options": [
+          "He stayed home and slept",
+          "He went out into the night to find it",
+          "He forgot about the lost sheep",
+          "He bought a new sheep"
+        ],
+        "answer": 1,
+        "image": "/images/stories/quiz/the-lost-sheep/q2.png"
+      },
+      {
+        "id": 3,
+        "question": "Why did the little sheep wander away from the flock?",
+        "options": [
+          "It was looking for water",
+          "It was chasing a butterfly",
+          "It was scared of the Shepherd",
+          "It wanted to find a new home"
+        ],
+        "answer": 1,
+        "image": "/images/stories/quiz/the-lost-sheep/q3.png"
+      },
+      {
+        "id": 4,
+        "question": "Where did the Shepherd find the lost sheep?",
+        "options": [
+          "In a deep cave",
+          "On a mountaintop",
+          "Caught in prickly bushes",
+          "Swimming in a river"
+        ],
+        "answer": 2,
+        "image": "/images/stories/quiz/the-lost-sheep/q4.png"
+      },
+      {
+        "id": 5,
+        "question": "How did the Shepherd carry the sheep home?",
+        "options": [
+          "He led it with a rope",
+          "He put it in a basket",
+          "He carried it on his shoulders",
+          "He asked it to walk by itself"
+        ],
+        "answer": 2,
+        "image": "/images/stories/quiz/the-lost-sheep/q5.png"
+      }
+    ]
+
   },
   {
     "id": 5,
