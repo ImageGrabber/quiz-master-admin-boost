@@ -103,36 +103,63 @@
     "quiz": [
       {
         "id": 1,
-        "question": "What was the name of the massive boat Noah built?",
+        "question": "What kind of wood did Noah use to build the Ark?",
         "options": [
-          "The Titanic",
-          "The Ark",
-          "The Mayflower",
-          "The Speedboat"
+          "Oak wood",
+          "Cypress wood",
+          "Palm leaves",
+          "Sandcastles"
         ],
-        "answer": 1
+        "answer": 1,
+        "image": "/images/stories/quiz/noah-ark/q1.png"
       },
       {
         "id": 2,
-        "question": "What did God put in the sky as a promise after the flood?",
+        "question": "How did the animals enter the Ark?",
         "options": [
-          "A cloud",
-          "The sun",
-          "A rainbow",
-          "A star"
+          "One by one",
+          "In groups of ten",
+          "Two by two",
+          "They flew in one big swarm"
         ],
-        "answer": 2
+        "answer": 2,
+        "image": "/images/stories/quiz/noah-ark/q2.png"
       },
       {
         "id": 3,
-        "question": "How many days and nights did it rain?",
+        "question": "Which bird brought back a green leaf to show the trees were growing?",
         "options": [
-          "7 days",
-          "12 days",
-          "40 days",
-          "100 days"
+          "An eagle",
+          "A parrot",
+          "A dove",
+          "An owl"
         ],
-        "answer": 2
+        "answer": 2,
+        "image": "/images/stories/quiz/noah-ark/q3.png"
+      },
+      {
+        "id": 4,
+        "question": "Where did the Ark finally rest after the flood?",
+        "options": [
+          "On a beach",
+          "On a mountaintop",
+          "In the middle of the desert",
+          "In a garden"
+        ],
+        "answer": 1,
+        "image": "/images/stories/quiz/noah-ark/q4.png"
+      },
+      {
+        "id": 5,
+        "question": "What beautiful sign did God put in the sky as a promise?",
+        "options": [
+          "The moon",
+          "A giant cloud",
+          "A rainbow",
+          "A falling star"
+        ],
+        "answer": 2,
+        "image": "/images/stories/quiz/noah-ark/q5.png"
       }
     ]
   },
