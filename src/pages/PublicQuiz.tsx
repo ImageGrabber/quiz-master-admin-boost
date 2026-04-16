@@ -186,7 +186,6 @@ const PublicQuiz = ({
     const correctAnswers = answers.filter((answer, index) => answer === normalizedQuestions[index].answer).length;
 
     return (
-    return (
       <div className={`min-h-screen ${isKidsStory ? 'bg-[#FFFBEB] font-urbanist' : 'bg-stone-50 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(255,237,213,0.7),rgba(255,255,255,0))] text-[#1c1917] font-sans'} selection:bg-orange-100 selection:text-orange-900 pb-20`}>
         <SEO 
           title={`Results: ${title} | Bible Quiz Hub`} 
@@ -411,8 +410,6 @@ const PublicQuiz = ({
       </div>
     );
   }
-    );
-  }
 
   if (normalizedQuestions.length === 0) {
     return (
@@ -489,7 +486,9 @@ const PublicQuiz = ({
       <SEO 
         title={`${title} | Interactive Bible Quiz`} 
         description={`Test your knowledge of ${bookName} Chapter ${chapter || ''} with our interactive Bible quiz. ${normalizedQuestions.length} questions of in-depth study.`} 
-           {/* Slim Header */}
+      />
+      
+      {/* Slim Header */}
       <header className={`sticky top-0 z-50 w-full border-b ${isKidsStory ? 'border-[#1a1a1a] bg-[#FCD34D]' : 'border-white/40 bg-white/40 backdrop-blur-3xl shadow-[0_2px_20px_rgba(0,0,0,0.03)]'} mb-12`}>
         <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => navigate(isKidsStory ? '/kids-stories' : '/bible-questions-and-answers-hub')}>
@@ -552,7 +551,7 @@ const PublicQuiz = ({
           />
         </div>
       </header>
- </header>
+
 
       <div className="container mx-auto px-4 lg:max-w-6xl pb-12">
         {/* Mobile Timer */}
@@ -751,7 +750,6 @@ const PublicQuiz = ({
                   </div>
                 )}
               </div>
-    </div>
 
               {/* Reference Module */}
               {currentQ.referenceVerse && (
