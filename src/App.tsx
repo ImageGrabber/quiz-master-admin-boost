@@ -10,8 +10,8 @@ import NotificationBanner from "@/components/NotificationBanner";
 import { Analytics } from "@vercel/analytics/react"
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import PublicRoute from "@/components/PublicRoute";
-import Index from "./pages/homepages/Index";
 import CompetitionHome from "./pages/homepages/CompetitionHome";
+import DevotionalHome from "./pages/homepages/DevotionalHome";
 import SignUpToday from "./pages/SignUpToday";
 import EmotionalCheckIn from "./pages/EmotionalCheckIn";
 import JoyRunnerTest from "./pages/JoyRunnerTest";
@@ -225,8 +225,8 @@ const App = () => {
               <Route path="/faith-builder" element={<ProtectedRoute><FaithBuilder /></ProtectedRoute>} />
               <Route path="/flappy-bird" element={<ProtectedRoute><FlappyBird /></ProtectedRoute>} />
               <Route path="/selah-space" element={<SelahSpace />} />
-              <Route path="/" element={<CompetitionHome />} />
-              <Route path="/home" element={<Index />} />
+              <Route path="/" element={<DevotionalHome />} />
+              <Route path="/home" element={<DevotionalHome />} />
               <Route path="/competition-home" element={<CompetitionHome />} />
               <Route path="/signup-today" element={<SignUpToday />} />
               <Route path="/todays-quiz" element={<TodaysQuiz />} />

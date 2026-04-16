@@ -514,5 +514,60 @@
         "answer": 1
       }
     ]
+  },
+  {
+    "id": 11,
+    "title": "Jonah and the Big Fish",
+    "slug": "jonah-and-the-big-fish",
+    "content": "The famous story of Jonah, who tried to run away from God but learned that God's love and mercy are everywhere.",
+    "fullStory": "Once, long ago, God spoke to a man named Jonah. He had a special job for him. God said, 'Jonah, I want you to go to the big city of Nineveh and tell the people there to stop being mean and start being kind.' But Jonah didn't want to go to Nineveh. He thought the people there were too grumpy and he didn't want to help them. So, instead of going east toward Nineveh, Jonah ran west! He hopped on a big wooden ship headed for a place called Tarshish, thinking he could hide from God.\n\nBut you can't really hide from God, can you? While the ship was out in the middle of the deep blue sea, a massive storm began to blow. The waves grew as tall as mountains, and the wind howled like a hungry wolf. The sailors were terrified! They started throwing their boxes and supplies overboard to make the ship lighter. Jonah realized the storm was because he had disobeyed God. He told the sailors, 'It's my fault. If you throw me into the water, the storm will stop.' The sailors didn't want to do it, but finally, they tossed Jonah into the crashing waves.\n\nSuddenly, the wind stopped, and the sea became as smooth as glass. But Jonah was sinking down, down, down into the cold water. Just then, a miracle happened! God sent a giant fish—some say it was a massive whale—and it opened its mouth wide and swallowed Jonah whole! Jonah wasn't hurt, but it was very dark and very wiggly inside the fish's belly. For three days and three nights, Jonah stayed there. He had a lot of time to think and pray. He told God, 'I am so sorry I didn't listen. If you give me another chance, I will go to Nineveh.'\n\nGod heard Jonah’s prayer. He spoke to the big fish, and the fish swam to the shore and 'Bleh!'—it spit Jonah right onto the dry sand! Jonah blinked in the bright sunshine, thanked God, and immediately started walking toward Nineveh. When he arrived, he told the people about God’s message. To Jonah’s surprise, everyone listened! They said sorry for being mean and promised to be good. Jonah learned that God is full of second chances, not just for him, but for everyone. God’s love is bigger than any ocean and even bigger than the biggest fish!",
+    "bibleVerses": [
+      "Jonah 1:17 - Now the Lord provided a huge fish to swallow Jonah, and Jonah was in the belly of the fish three days and three nights.",
+      "Psalm 139:7 - Where can I go from your Spirit? Where can I flee from your presence?"
+    ],
+    "moral": "You can never run away from God's love, and He is always ready to give you a second chance.",
+    "bibleReference": "Jonah 1-3",
+    "theme": "Obedience",
+    "imageAlt": "Jonah waving happily from the mouth of a friendly giant blue whale in the ocean",
+    "keyTakeaways": [
+      "We should listen to God the first time He speaks.",
+      "God is always with us, even in the middle of a storm.",
+      "God's mercy and forgiveness are for everyone."
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "question": "Where did God first ask Jonah to go?",
+        "options": [
+          "Tarshish",
+          "Nineveh",
+          "Jerusalem",
+          "Bethlehem"
+        ],
+        "answer": 1
+      },
+      {
+        "id": 2,
+        "question": "How many days and nights was Jonah inside the big fish?",
+        "options": [
+          "One day",
+          "Three days",
+          "Seven days",
+          "Forty days"
+        ],
+        "answer": 1
+      },
+      {
+        "id": 3,
+        "question": "What did the big fish do after Jonah prayed?",
+        "options": [
+          "It swam to the bottom of the sea",
+          "It spit him out on dry land",
+          "It took him to Tarshish",
+          "It fell asleep"
+        ],
+        "answer": 1
+      }
+    ]
   }
 ]

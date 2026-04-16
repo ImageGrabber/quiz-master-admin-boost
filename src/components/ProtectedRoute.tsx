@@ -43,7 +43,7 @@ const ProtectedRoute = ({ children, requiredRole }: ProtectedRouteProps) => {
   }, [requiredRole]);
 
   if (loading) return null;
-  if (!isAuthenticated) return <Navigate to="/auth/login" replace />;
+  if (!isAuthenticated) return <Navigate to="/" replace />;
   if (requiredRole && !hasRole) return <Navigate to="/not-authorized" replace />;
   return <>{children}</>;
 };

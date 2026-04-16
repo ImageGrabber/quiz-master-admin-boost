@@ -1,9 +1,10 @@
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { Star, Cloud, Heart, Umbrella, Sparkles, BookOpen, ChevronRight } from "lucide-react";
+import { Star, Cloud, Heart, Umbrella, Sparkles, BookOpen, ChevronRight, ChevronLeft } from "lucide-react";
 import kidsStoriesData from "@/data/kids-stories.json";
 
 export interface KidsStory {
@@ -42,8 +43,20 @@ const stories = kidsStoriesData.map(story => ({
     Star
 }));
 
+const ITEMS_PER_PAGE = 6;
+
 const KidsStories = () => {
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  const totalPages = Math.ceil(stories.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const visibleStories = stories.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+  // Scroll to top when page changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
 
   return (
     <div className="min-h-screen bg-[#FDFCF0] flex flex-col relative overflow-hidden font-urbanist">
@@ -71,10 +84,10 @@ const KidsStories = () => {
         {/* Hero Section */}
         <div className="space-y-6 mb-16">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 animate-fade-in">
-            Welcome to <span className="text-[#EF4444]">Bible</span> <span className="text-[#3B82F6]">Quiz</span> <span className="text-[#F59E0B]">Competition!</span>
+            Read <span className="text-[#EF4444]">Bible</span> <span className="text-[#3B82F6]">Stories</span> for Your <span className="text-[#F59E0B]">Kids</span>
           </h1>
           <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900">
-            <span className="text-[#22C55E]">Play</span> & <span className="text-[#6366F1]">Learn</span> Amazing <span className="text-[#A855F7]">Bible</span> Stories!
+            and <span className="text-[#22C55E]">Play</span> Fun <span className="text-[#6366F1]">Quizzes</span> Together!
           </h2>
         </div>
 
@@ -94,9 +107,48 @@ const KidsStories = () => {
           </div>
         </div>
 
+        {/* Pagination Section */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-3 md:gap-6 mb-16 animate-fade-in relative z-20 px-4">
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+              className="w-12 h-12 md:w-16 md:h-16 bg-[#FCD34D] rounded-2xl border-4 border-[#1a1a1a] shadow-[0_6px_0_0_#1a1a1a] hover:translate-y-1 hover:shadow-[0_2px_0_0_#1a1a1a] active:translate-y-1.5 active:shadow-none transition-all flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed group shrink-0"
+              title="Previous Page"
+            >
+              <ChevronLeft className="w-6 h-6 md:w-10 md:h-10 text-[#1a1a1a] group-hover:scale-110 transition-transform" />
+            </button>
+            
+            <div className="flex gap-2 md:gap-3 flex-wrap justify-center">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <button
+                  key={page}
+                  onClick={() => setCurrentPage(page)}
+                  className={`w-12 h-12 md:w-16 md:h-16 rounded-2xl border-4 border-[#1a1a1a] font-urbanist font-black text-xl md:text-3xl transition-all flex items-center justify-center
+                    ${currentPage === page 
+                      ? "bg-[#7C3AED] text-white shadow-none translate-y-1.5" 
+                      : "bg-white text-[#1a1a1a] shadow-[0_6px_0_0_#1a1a1a] hover:translate-y-1 hover:shadow-[0_2px_0_0_#1a1a1a] active:translate-y-1.5 active:shadow-none"
+                    }`}
+                >
+                  {page}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              disabled={currentPage === totalPages}
+              className="w-12 h-12 md:w-16 md:h-16 bg-[#FCD34D] rounded-2xl border-4 border-[#1a1a1a] shadow-[0_6px_0_0_#1a1a1a] hover:translate-y-1 hover:shadow-[0_2px_0_0_#1a1a1a] active:translate-y-1.5 active:shadow-none transition-all flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed group shrink-0"
+              title="Next Page"
+            >
+              <ChevronRight className="w-6 h-6 md:w-10 md:h-10 text-[#1a1a1a] group-hover:scale-110 transition-transform" />
+            </button>
+          </div>
+        )}
+
         {/* Story Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto px-4">
-          {stories.map((story) => {
+          {visibleStories.map((story) => {
             const StoryIcon = story.icon;
             
             return (
