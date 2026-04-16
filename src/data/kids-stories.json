@@ -192,29 +192,56 @@
           "10 cookies",
           "Milk and honey"
         ],
-        "answer": 1
+        "answer": 1,
+        "image": "/images/stories/quiz/the-lunch-that-grew/q1.png"
       },
       {
         "id": 2,
-        "question": "How many baskets were left over after everyone was full?",
+        "question": "Who brought the little boy and his lunch to Jesus?",
         "options": [
-          "None",
-          "Five",
-          "Twelve",
-          "Two"
+          "Peter",
+          "Andrew",
+          "John",
+          "Philip"
         ],
-        "answer": 2
+        "answer": 1,
+        "image": "/images/stories/quiz/the-lunch-that-grew/q2.png"
       },
       {
         "id": 3,
-        "question": "Where were the people sitting when Jesus gave them food?",
+        "question": "What did Jesus do before he shared the food with everyone?",
         "options": [
-          "On chairs",
-          "In a boat",
-          "On soft green grass",
-          "On the sand"
+          "He went for a walk",
+          "He gave thanks to God",
+          "He asked everyone to leave",
+          "He ate the lunch himself"
         ],
-        "answer": 2
+        "answer": 1,
+        "image": "/images/stories/quiz/the-lunch-that-grew/q3.png"
+      },
+      {
+        "id": 4,
+        "question": "Where did the crowd of people sit to eat their lunch?",
+        "options": [
+          "On wooden chairs",
+          "Inside a big tent",
+          "On the soft green grass",
+          "On the sandy beach"
+        ],
+        "answer": 2,
+        "image": "/images/stories/quiz/the-lunch-that-grew/q4.png"
+      },
+      {
+        "id": 5,
+        "question": "How many baskets were full of leftovers after everyone ate?",
+        "options": [
+          "Zero",
+          "Five",
+          "Twelve",
+          "One hundred"
+        ],
+        "answer": 2,
+        "image": "/images/stories/quiz/the-lunch-that-grew/q5.png"
       }
     ]
   },
