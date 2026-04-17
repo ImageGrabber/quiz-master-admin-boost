@@ -258,82 +258,15 @@ function startCaseFromSlug(value = '') {
 }
 
 function buildSeoNarrative(page, targetWords = 330) {
-  const route = page.path === '/' ? 'home' : page.path.replace(/^\/+|\/+$/g, '');
-  const topic = page.title.replace(/\s+\|\s+Bible Quiz Competition$/i, '').trim();
-  const routeLabel = startCaseFromSlug(route || 'home');
-  const goalWords = Math.max(60, Math.min(400, targetWords));
-
-  const sentenceBank = [
-    `This ${topic} page is built to give readers clear context, practical direction, and trustworthy biblical learning outcomes before they enter any quiz or chapter challenge.`,
-    `Our goal is to help beginners, church groups, and returning learners quickly understand what this resource covers, why it matters, and how to use it with confidence.`,
-    `The content strategy for ${topic} combines easy navigation, concise explanations, and meaningful internal links so visitors can move from overview to detailed study without confusion.`,
-    `If you are reviewing ${routeLabel}, start by identifying the key theme, then follow the guided sections to compare chapters, core events, and recurring biblical ideas.`,
-    `Each section is written to support search intent and real study intent, which means you should find both accurate summaries and practical next steps for deeper reading.`,
-    `For better retention, focus on one idea at a time, revisit the highlighted references, and use repeated short sessions rather than one long session with low concentration.`,
-    `This page also supports healthy SEO quality because it includes descriptive language, structured headings, relevant terminology, and content that answers likely user questions directly.`,
-    `When readers discover this route through search, they should immediately understand the purpose of the page, the available actions, and the expected spiritual learning value.`,
-    `We recommend pairing this resource with chapter quizzes, note-taking, and discussion in small groups so key truths move from information to personal transformation.`,
-    `As you continue through Bible Quiz Competition, use related hubs, category pages, and book-level routes to build a complete picture of Scripture across both Testaments.`,
-    `Strong study habits include reviewing explanations after each question, checking context before memorizing details, and returning to difficult sections until clarity is established.`,
-    `By following this process, users can strengthen comprehension, improve quiz performance, and keep a consistent rhythm of study that supports long-term biblical growth.`
-  ];
-
-  const words = [];
-  let cursor = 0;
-  while (words.length < goalWords) {
-    const sentenceWords = sentenceBank[cursor % sentenceBank.length].split(/\s+/);
-    words.push(...sentenceWords);
-    cursor += 1;
-  }
-  const boundedWords = words.slice(0, goalWords);
-
-  const chunkSize = Math.ceil(boundedWords.length / 4);
-  const paragraphs = [];
-  for (let i = 0; i < 4; i += 1) {
-    const chunk = boundedWords.slice(i * chunkSize, (i + 1) * chunkSize).join(' ').trim();
-    if (chunk) paragraphs.push(chunk);
-  }
-
-  return `
-    <section class="mt-10 rounded-2xl border border-gray-100 bg-white p-6 md:p-8">
-      <h2 class="text-2xl font-semibold text-gray-900 mb-4">Detailed Guide: ${escapeHtml(topic)}</h2>
-      ${paragraphs.map((paragraph) => `<p class="text-gray-700 leading-relaxed mb-4">${escapeHtml(paragraph)}</p>`).join('')}
-    </section>
-  `;
+  // Logic removed to prevent duplicate content filters.
+  // Instead of a generic sentence bank, we rely on specific page content.
+  return '';
 }
 
 function ensureSeoWordRange(page) {
-  const originalContent = page.content || '';
-  const contentWords = countWords(stripHtmlTags(originalContent));
-  if (contentWords >= 300 && contentWords <= 400) {
-    return originalContent;
-  }
-  if (contentWords > 400) {
-    const topic = page.title.replace(/\s+\|\s+Bible Quiz Competition$/i, '').trim();
-    const conciseIntro = `
-      <div class="min-h-screen bg-slate-50 pt-20">
-        <div class="container mx-auto px-4 py-10">
-          <article class="max-w-4xl mx-auto rounded-2xl border border-slate-100 bg-white p-8 shadow-sm">
-            <h1 class="text-4xl font-bold text-slate-900 mb-4">${escapeHtml(topic)}</h1>
-            <p class="text-lg text-slate-600 leading-relaxed">${escapeHtml(page.description)}</p>
-          </article>
-        </div>
-      </div>
-    `;
-    const introWords = countWords(stripHtmlTags(conciseIntro));
-    const minNeeded = 300 - introWords;
-    const maxAllowed = 400 - introWords;
-    const ideal = 340 - introWords;
-    const targetWords = Math.max(minNeeded, Math.min(maxAllowed, ideal));
-    return `${conciseIntro}\n${buildSeoNarrative(page, targetWords)}`;
-  }
-
-  const minNeeded = 300 - contentWords;
-  const maxAllowed = 400 - contentWords;
-  const ideal = 340 - contentWords;
-  const targetWords = Math.max(minNeeded, Math.min(maxAllowed, ideal));
-  const seoBlock = buildSeoNarrative(page, targetWords);
-  return `${originalContent}\n${seoBlock}`;
+  // We no longer pad pages with boilerplate text to hit a word count.
+  // Quality and uniqueness are prioritized over artificial length.
+  return page.content || '';
 }
 
 function normalizeRoutePath(route) {
@@ -423,19 +356,31 @@ function buildGenericPageFromRoute(route) {
   const titleTopic = startCaseFromSlug(heading || 'home');
   const routeLabel = routeParts.map((part) => startCaseFromSlug(part)).join(' • ');
 
+  let title = `${titleTopic} | Bible Quiz Competition`;
+  let description = `Study and learn more about ${titleTopic} at Bible Quiz Competition.`;
+
+  if (normalized.includes('bible-questions-and-answers-hub')) {
+    title = `${titleTopic} Hub & Quizzes | Bible QA`;
+    description = `Deep dive into ${titleTopic} with our comprehensive Bible study hub, featuring specialized quizzes and structured learning paths.`;
+  } else if (normalized.includes('songs')) {
+    title = `${titleTopic} Lyrics & Worship | Bible Quiz Songs`;
+    description = `Access complete lyrics, background, and video for ${titleTopic}. Part of our collection of Christian devotional music and worship resources.`;
+  } else if (normalized.includes('kids-stories')) {
+    title = `${titleTopic} | Children's Bible Story`;
+    description = `An engaging Bible story about ${titleTopic} for kids. Includes interactive elements to help children learn biblical truths.`;
+  }
+
   return {
     path: normalized,
-    title: normalized === '/'
-      ? 'Bible Quiz Competition | Bible Study Hub'
-      : `${titleTopic} | Bible Quiz Competition`,
-    description: `Explore ${routeLabel} on Bible Quiz Competition with guided study paths, quizzes, and practical biblical learning support.`,
+    title,
+    description,
     content: `
       <div class="min-h-screen bg-slate-50 pt-20">
         <div class="container mx-auto px-4 py-10">
           <article class="max-w-4xl mx-auto rounded-2xl border border-slate-100 bg-white p-8 shadow-sm">
             <h1 class="text-4xl font-bold text-slate-900 mb-4">${escapeHtml(titleTopic)}</h1>
             <p class="text-lg text-slate-600 leading-relaxed">
-              This page is part of Bible Quiz Competition. Use this route to continue your Bible study journey with quizzes, chapter navigation, and clear learning pathways.
+              Welcome to the ${escapeHtml(titleTopic)} resource page. This section of Bible Quiz Competition is designed to help you deepen your understanding of Scripture through targeted study and interactive learning.
             </p>
           </article>
         </div>
@@ -491,6 +436,14 @@ function generateHTML(page, templateHtml, contentWithSeo = ensureSeoWordRange(pa
   html = upsertMetaTag(html, 'name', 'description', page.description);
   html = upsertCanonical(html, pageUrl);
 
+  // Indexing instruction
+  if (page.noindex) {
+    html = upsertMetaTag(html, 'name', 'robots', 'noindex, follow');
+  } else {
+    // Default to index, follow if not explicitly noindexed
+    html = upsertMetaTag(html, 'name', 'robots', 'index, follow');
+  }
+
   // Social metadata
   html = upsertMetaTag(html, 'property', 'og:title', page.title);
   html = upsertMetaTag(html, 'property', 'og:description', page.description);
@@ -498,6 +451,7 @@ function generateHTML(page, templateHtml, contentWithSeo = ensureSeoWordRange(pa
   html = upsertMetaTag(html, 'name', 'twitter:title', page.title);
   html = upsertMetaTag(html, 'name', 'twitter:description', page.description);
   html = upsertMetaTag(html, 'name', 'twitter:url', pageUrl);
+
 
   // Add structured data
   if (page.structuredData) {
@@ -677,6 +631,7 @@ function generateStaticPages() {
         path: `/public-quiz/${book}/${chapter}`,
         title: `${bookName} Chapter ${i} Quiz - Free Bible Quiz`,
         description: `Test your knowledge of ${bookName} Chapter ${i} with this free interactive Bible quiz. carefully crafted questions covering key events, characters, and teachings from ${bookName} Chapter ${i}.`,
+        noindex: true, // Deep programmatic routes should not compete for indexing
         structuredData: {
           "@context": "https://schema.org",
           "@type": "Quiz",

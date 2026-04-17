@@ -128,46 +128,21 @@ function generateSitemap() {
     '2-john', '3-john', 'jude', 'revelation'
   ];
 
-  // Bible Questions and Answers Hub
+  // Bible Questions and Answers Hub - ONLY INDEX MAIN BOOK HUBS
   bibleBooks.forEach(book => {
-    // Main Book Hub
+    // Main Book Hub is high value
     urls.push({
       loc: `/bible-questions-and-answers-hub/${book}`,
       priority: '0.9',
       changefreq: 'monthly'
     });
-
-    // Difficulty-based quizzes (now have foundations for all 66 books)
-    ['beginner', 'intermediate', 'advanced'].forEach(difficulty => {
-      urls.push({
-        loc: `/bible-questions-and-answers-hub/${book}/${difficulty}`,
-        priority: '0.8',
-        changefreq: 'monthly'
-      });
-    });
   });
 
-  // Public Quiz Book Pages (Legacy/Static)
-  bibleBooks.forEach(book => {
-    urls.push({
-      loc: `/public-quiz/${book}`,
-      priority: '0.7',
-      changefreq: 'monthly'
-    });
-  });
+  // Featured Quizzes (High value specifically curated quizzes)
+  // These are handled by the literal routes or manual addition if needed, 
+  // but we'll stick to the hubs as the primary indexing entry points.
 
-  // Public Quiz Chapter Pages (Programmatic SEO) - keep sitemap in sync with generated static chapter routes
-  for (const [book, chapters] of Object.entries(bibleStructure)) {
-    for (let i = 1; i <= chapters; i++) {
-      urls.push({
-        loc: `/public-quiz/${book}/chapter-${i}`,
-        priority: '0.65',
-        changefreq: 'monthly'
-      });
-    }
-  }
-
-  // Article pages
+  // Article pages - High value
   articles.forEach(article => {
     urls.push({
       loc: `/articles/${article.id}`,
@@ -175,36 +150,6 @@ function generateSitemap() {
       changefreq: 'monthly'
     });
   });
-
-  // Bible Questions and Answers Hub (Chapter and Range Quizzes)
-  for (const [book, chapters] of Object.entries(bibleStructure)) {
-    // 1. Chapters (ch1-beginner, ch1-advanced, etc.)
-    for (let i = 1; i <= chapters; i++) {
-        ['beginner', 'advanced'].forEach(diff => {
-            urls.push({
-                loc: `/bible-questions-and-answers-hub/${book}/ch${i}-${diff}`,
-                priority: '0.6',
-                changefreq: 'monthly'
-            });
-        });
-    }
-
-    // 2. Ranges (ch1-12-beginner, etc.) - Match GenericBookHub logic
-    const numRanges = Math.ceil(chapters / 12);
-    for (let i = 0; i < numRanges; i++) {
-        const start = i * 12 + 1;
-        const end = Math.min((i + 1) * 12, chapters);
-        const range = `${start}-${end}`;
-        
-        ['beginner', 'advanced'].forEach(diff => {
-            urls.push({
-                loc: `/bible-questions-and-answers-hub/${book}/ch${range}-${diff}`,
-                priority: '0.7',
-                changefreq: 'monthly'
-            });
-        });
-    }
-  }
 
   // Song pages
   urls.push({ loc: '/songs', priority: '0.9', changefreq: 'weekly' });
