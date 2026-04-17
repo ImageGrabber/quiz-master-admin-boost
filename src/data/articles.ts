@@ -1,4 +1,18 @@
-export const articles = [
+export interface Article {
+    id: string;
+    title: string;
+    excerpt: string;
+    content: string;
+    author: string;
+    publishDate: string;
+    readTime: string;
+    category: string;
+    tags: string[];
+    featured: boolean;
+    imageUrl: string;
+}
+
+export const articles: Article[] = [
     {
         id: "complete-quiz-guide",
         title: "The Complete Guide to Bible Quiz Competition: How to Master Every Quiz",
