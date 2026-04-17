@@ -1,6 +1,6 @@
 import React from 'react';
 import PublicQuiz from '../PublicQuiz';
-import { Helmet } from 'react-helmet-async';
+import SEO from '@/components/SEO';
 
 const youthQuestions = [
     {
@@ -78,16 +78,18 @@ const youthQuestions = [
 export default function BibleQuizForYouth() {
     return (
         <>
-            <Helmet>
-                <title>Bible Quiz for Youth with Answers | Fun & Educational</title>
-                <meta name="description" content="Engaging Bible quiz questions for youth and teenagers. Test your knowledge of Bible stories, heroes, and teachings in a fun, interactive format." />
-                <meta name="keywords" content="bible quiz for youth, youth bible trivia, bible questions for teens, sunday school quiz" />
-                <link rel="canonical" href="https://biblequizcompetition.com/bible-quiz-with-answers-for-youth" />
-            </Helmet>
+            <SEO 
+                title="Bible Quiz for Youth with Answers | Fun & Educational Teen Trivia"
+                description="Engaging Bible quiz questions for youth and teenagers. Test your knowledge of Bible stories, heroes, and teachings in a fun, interactive format."
+                keywords="bible quiz for youth, youth bible trivia, bible questions for teens, sunday school quiz, christian youth group activities"
+                author="Bible Quiz Competition"
+                url="/bible-quiz-with-answers-for-youth"
+            />
             <PublicQuiz
                 title="Bible Quiz for Youth"
                 questions={youthQuestions}
                 bookName="Youth Bible Challenge"
+                isKidsStory={true}
             />
         </>
     );

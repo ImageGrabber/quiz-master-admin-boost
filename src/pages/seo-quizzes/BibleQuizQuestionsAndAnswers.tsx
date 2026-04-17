@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -45,30 +45,27 @@ const BibleQuizQuestionsAndAnswers = () => {
 
     return (
         <div className="min-h-screen bg-slate-50">
-            <Helmet>
-                <title>Bible Quiz Questions and Answers | 2025 Edition | PDF & Multiple Choice</title>
-                <meta name="description" content="The ultimate collection of Bible quiz questions and answers for 2025. Includes general knowledge, hard trivia, and youth quizzes. Play online or download as PDF." />
-                <meta name="keywords" content="bible quiz with answers, bible quiz questions and answers pdf, multiple choice bible quiz, bible trivia for youth, hard bible questions" />
-                <link rel="canonical" href="https://biblequizcompetition.com/bible-quiz-questions-and-answers" />
-
-                {/* Structured Data for FAQPage */}
-                <script type="application/ld+json">
-                    {JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "FAQPage",
-                        "mainEntity": [
-                            ...generalKnowledgeQA, ...hardTriviaQA, ...youthQA
-                        ].map(item => ({
-                            "@type": "Question",
-                            "name": item.q,
-                            "acceptedAnswer": {
-                                "@type": "Answer",
-                                "text": item.a
-                            }
-                        }))
-                    })}
-                </script>
-            </Helmet>
+            <SEO
+                title="Bible Quiz Questions and Answers | 2025 Edition | PDF & Multiple Choice"
+                description="The ultimate collection of Bible quiz questions and answers for 2025. Includes general knowledge, hard trivia, and youth quizzes. Play online or download as PDF."
+                keywords="bible quiz with answers, bible quiz questions and answers pdf, multiple choice bible quiz, bible trivia for youth, hard bible questions, scripture knowledge test"
+                author="Bible Quiz Competition"
+                url="/bible-quiz-questions-and-answers"
+                structuredData={{
+                    "@context": "https://schema.org",
+                    "@type": "FAQPage",
+                    "mainEntity": [
+                        ...generalKnowledgeQA, ...hardTriviaQA, ...youthQA
+                    ].map(item => ({
+                        "@type": "Question",
+                        "name": item.q,
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": item.a
+                        }
+                    }))
+                }}
+            />
 
             <Navigation />
 

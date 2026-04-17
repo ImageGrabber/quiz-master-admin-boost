@@ -3,9 +3,12 @@ import { Helmet } from 'react-helmet-async';
 interface SEOProps {
   title?: string;
   description?: string;
+  keywords?: string;
   image?: string;
   url?: string;
   type?: string;
+  author?: string;
+  robots?: string;
   structuredData?: Record<string, any>;
   children?: React.ReactNode;
 }
@@ -13,9 +16,12 @@ interface SEOProps {
 const SEO = ({
   title = 'Online Bible Quiz Competition 2026 | Free Bible Quizzes and Prizes',
   description = 'Play free Bible quizzes, climb leaderboards, and compete for prizes in Bible Quiz Competition 2026.',
+  keywords = 'bible quiz, bible competition, bible trivia, christian games, bible study',
   image,
   url,
   type = 'website',
+  author = 'Bible Quiz Competition',
+  robots = 'index, follow',
   structuredData,
   children
 }: SEOProps) => {
@@ -45,6 +51,9 @@ const SEO = ({
       {/* Basic Meta Tags */}
       <title>{title}</title>
       <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
+      <meta name="author" content={author} />
+      <meta name="robots" content={robots} />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="theme-color" content="#ffffff" />
       <link rel="canonical" href={fullUrl} />

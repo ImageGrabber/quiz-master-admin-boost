@@ -5,7 +5,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Input } from "@/components/ui/input";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, Calendar, HelpCircle, CheckCircle, Globe, Menu, Crown, Medal, Search, X, ChevronLeft, ChevronRight, MessageSquare, Rocket, Sparkles, Heart, Droplet, ArrowLeft, RotateCcw, TrendingUp, Shield, Eye, EyeOff } from "lucide-react";
-import { Helmet } from 'react-helmet';
+import SEO from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 import { features, howItWorks, bibleTestimonials, stats, publicPages } from "@/data/indexData";
 import { emotionOptions, cbtQuestionsByEmotion, thinkingTrapsInfo, featureSteps, cbtNeutralByDay } from "@/data/emotions";
@@ -2268,64 +2268,18 @@ const Index = () => {
 
   return (
     <>
-      <Helmet>
-        {/* Primary Meta Tags */}
-        <title>Bible Quiz Competition 2025 | Free Online Bible Quizzes & Leaderboards</title>
-        <meta name="title" content="Bible Quiz Competition 2025 | Free Online Bible Quizzes & Leaderboards" />
-        <meta name="description" content="Join Bible Quiz Competition 2025! Test your Bible knowledge with 1,000+ questions, compete in weekly quizzes, climb leaderboards, and access free Bible Q&A resources. Free to join, fun for all ages. Participate in the ultimate Bible quiz competition of 2025." />
-        <meta name="keywords" content="bible quiz competition 2025, bible quiz competition, bible quiz 2025, online bible quiz, free bible quiz, bible knowledge quiz, weekly bible quiz, bible quiz leaderboard, bible study quiz, christian quiz competition, bible questions and answers, genesis quiz, exodus quiz, psalms quiz, new testament quiz, bible quiz app, interactive bible quiz, bible quiz for adults, bible quiz for kids, bible competition 2025" />
-        <meta name="author" content="Bible Quiz Competition" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="language" content="English" />
-        <meta name="revisit-after" content="7 days" />
-        <meta name="theme-color" content="#000000" />
-
-        {/* Canonical URL */}
-        <link rel="canonical" href="https://biblequizcompetition.com/" />
-
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://biblequizcompetition.com/" />
-        <meta property="og:title" content="Bible Quiz Competition 2025 | Free Online Bible Quizzes & Leaderboards" />
-        <meta property="og:description" content="Join Bible Quiz Competition 2025! Test your Bible knowledge with 1,000+ questions, compete in weekly quizzes, and climb leaderboards. Free to join!" />
-        <meta property="og:image" content="https://biblequizcompetition.com/favicon.svg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Bible Quiz Competition 2025 - Free Online Bible Quizzes" />
-        <meta property="og:site_name" content="Bible Quiz Competition" />
-        <meta property="og:locale" content="en_US" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content="https://biblequizcompetition.com/" />
-        <meta name="twitter:title" content="Bible Quiz Competition 2025 | Free Online Bible Quizzes" />
-        <meta name="twitter:description" content="Join Bible Quiz Competition 2025! Test your Bible knowledge with 1,000+ questions, compete in weekly quizzes, and climb leaderboards." />
-        <meta name="twitter:image" content="https://biblequizcompetition.com/favicon.svg" />
-        <meta name="twitter:image:alt" content="Bible Quiz Competition 2025" />
-
-        {/* Additional SEO Meta Tags */}
-        <meta name="geo.region" content="US" />
-        <meta name="geo.placename" content="United States" />
-        <meta name="application-name" content="Bible Quiz Competition" />
-        <meta name="apple-mobile-web-app-title" content="Bible Quiz 2025" />
-
-        {/* Structured Data - WebSite */}
-        <script type="application/ld+json">
-          {JSON.stringify(homepageStructuredData)}
-        </script>
-
-        {/* Structured Data - Organization */}
-        <script type="application/ld+json">
-          {JSON.stringify(organizationStructuredData)}
-        </script>
-
-        {/* Structured Data - FAQPage */}
-        <script type="application/ld+json">
-          {JSON.stringify(faqStructuredData)}
-        </script>
-
-        {/* Tidio Live Chat - Loaded via useEffect hook instead */}
-      </Helmet>
+      <SEO
+        title="Bible Quiz Competition 2025-2026 | Free Online Bible Quizzes & Leaderboards"
+        description="Join the Bible Quiz Competition 2025-2026! Test your Bible knowledge with 1,000+ questions, compete in weekly quizzes, climb leaderboards, and access free Bible Q&A resources. Free to join, fun for all ages. Participate in the ultimate Bible quiz competition of 2025."
+        keywords="bible quiz competition 2025-2026, bible quiz competition, bible quiz 2025, online bible quiz, free bible quiz, bible knowledge quiz, weekly bible quiz, bible quiz leaderboard, bible study quiz, christian quiz competition, bible questions and answers, genesis quiz, exodus quiz, psalms quiz, new testament quiz, bible quiz app, interactive bible quiz, bible quiz for adults, bible quiz for kids, bible competition 2025"
+        author="Bible Quiz Competition"
+        url="/"
+        structuredData={[
+          homepageStructuredData,
+          organizationStructuredData,
+          faqStructuredData
+        ]}
+      />
       <div className="min-h-screen bg-white">
         {/* Guest completion dialog */}
         <Dialog open={showGuestComplete} onOpenChange={setShowGuestComplete}>

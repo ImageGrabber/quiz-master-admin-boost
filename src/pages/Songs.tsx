@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -52,14 +52,13 @@ const Songs = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
-            <Helmet>
-                <title>Christian Devotional Songs | Bible Quiz Competition</title>
-                <meta
-                    name="description"
-                    content="Listen to and read lyrics of popular Christian Malayalam devotional songs. Worship with our curated collection."
-                />
-                <link rel="canonical" href="https://biblequizcompetition.com/songs" />
-            </Helmet>
+            <SEO
+                title="Christian Devotional Songs & Worship Lyrics | Bible Quiz Competition"
+                description="Explore a vast library of Christian devotional songs and worship lyrics. Listen to popular tracks, read lyrics, and find chords for your favorite worship songs."
+                keywords="christian devotional songs, worship lyrics, christian song chords, gospel music library, worship song videos, spiritual songs"
+                author="Bible Quiz Competition"
+                url="/songs"
+            />
 
             <Navigation />
 

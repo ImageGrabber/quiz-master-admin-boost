@@ -1,4 +1,5 @@
 import PublicQuiz from "../PublicQuiz";
+import SEO from "@/components/SEO";
 
 const kidsQuestions = [
     {
@@ -115,10 +116,20 @@ const kidsQuestions = [
 
 export default function BibleTriviaForKids() {
     return (
-        <PublicQuiz
-            title="Bible Trivia for Kids under 10"
-            questions={kidsQuestions}
-            bookName="Bible Stories"
-        />
+        <>
+            <SEO 
+                title="Fun Bible Trivia for Kids under 10 | Free Bible Stories Quiz"
+                description="Engaging and fun Bible trivia questions for kids! Test their knowledge of famous Bible stories like Noah's Ark, David and Goliath, and more. Perfect for Sunday school."
+                keywords="bible trivia for kids, easy bible quiz for children, sunday school quizzes, fun bible questions, bible stories quiz"
+                author="Bible Quiz Competition"
+                url="/bible-trivia-for-kids"
+            />
+            <PublicQuiz
+                title="Bible Trivia for Kids under 10"
+                questions={kidsQuestions}
+                bookName="Bible Stories"
+                isKidsStory={true}
+            />
+        </>
     );
 }

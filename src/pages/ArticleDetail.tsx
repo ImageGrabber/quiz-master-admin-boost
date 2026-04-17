@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -3113,25 +3113,28 @@ const ArticleDetail = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
-      <Helmet>
-        <title>{article.title} | Bible Quiz Competition</title>
-        <meta name="description" content={article.excerpt} />
-        <meta name="keywords" content={article.tags.join(", ")} />
-        <meta name="author" content={article.author} />
-        <link rel="canonical" href={`https://biblequizcompetition.com/articles/${article.id}`} />
-        
-        {/* Open Graph */}
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content={article.title} />
-        <meta property="og:description" content={article.excerpt} />
-        <meta property="og:url" content={`https://biblequizcompetition.com/articles/${article.id}`} />
-        <meta property="og:site_name" content="Bible Quiz Competition" />
-        
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={article.title} />
-        <meta name="twitter:description" content={article.excerpt} />
-      </Helmet>
+      <SEO 
+        title={`${article.title} | Bible Quiz Competition`}
+        description={article.excerpt}
+        keywords={article.tags.join(', ') + ', bible quiz, bible study, ' + article.category}
+        author={article.author}
+        type="article"
+        url={`/articles/${id}`}
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": article.title,
+          "description": article.excerpt,
+          "author": {
+            "@type": "Person",
+            "name": article.author
+          },
+          "datePublished": article.publishDate,
+          "url": `https://biblequizcompetition.com/articles/${id}`,
+          "articleSection": article.category,
+          "keywords": article.tags.join(", ")
+        }}
+      />
 
       <Header />
       

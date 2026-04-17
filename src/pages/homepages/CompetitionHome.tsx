@@ -250,6 +250,8 @@ const CompetitionHome = () => {
       <SEO
         title="Online Bible Quiz Competition 2026 | Free Bible Quizzes with Prizes"
         description="Join the Bible Quiz Competition 2026. Play free online Bible quizzes, compete for prizes, and climb the global leaderboard. Master the Word and win!"
+        keywords="bible quiz competition 2026, free bible quiz with prizes, online bible competition, bible trivia 2026, scripture match game, kids bible stories, christian song library"
+        url="/"
         structuredData={{
           "@context": "https://schema.org",
           "@graph": [

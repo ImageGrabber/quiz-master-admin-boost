@@ -478,23 +478,14 @@ const PublicQuiz = ({
 
   return (
     <div className={`min-h-screen ${isKidsStory ? 'bg-[#FFFBEB] font-urbanist' : 'bg-slate-50 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-50 via-sky-50 to-rose-50 font-sans'} text-slate-800 selection:bg-rose-200 selection:text-rose-900 pb-20`}>
-      <Helmet>
-        <title>{title} - Free Bible Quiz | Bible Quiz Competition</title>
-        <meta name="description" content={seoDescription || `Test your knowledge of ${bookName} with this free interactive Bible quiz. ${normalizedQuestions.length} questions to challenge your understanding of the Bible. No registration required!`} />
-        <meta name="keywords" content={`${bookName} quiz, Bible quiz, ${bookName} questions, Bible study, Christian quiz, free Bible quiz, ${bookName} test, Bible knowledge`} />
-        <meta name="author" content="Bible Quiz Competition" />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href={canonicalUrl} />
-
-        {/* Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify(generateStructuredData())}
-        </script>
-      </Helmet>
-      
       <SEO 
-        title={`${title} | Free Online Bible Quiz with Answers`} 
-        description={seoDescription || `Take the free ${bookName} Bible quiz. Includes ${normalizedQuestions.length} questions, answers, and scripture references for deep study.`} 
+        title={`${title} - Free Bible Quiz | Bible Quiz Competition`}
+        description={seoDescription || `Take the free ${bookName} Bible quiz. Includes ${normalizedQuestions.length} questions, answers, and scripture references for deep study.`}
+        keywords={`${bookName} quiz, Bible quiz, ${bookName} questions, Bible study, Christian quiz, free Bible quiz, ${bookName} test, Bible knowledge`}
+        author="Bible Quiz Competition"
+        robots="index, follow"
+        url={resolvedPath}
+        structuredData={generateStructuredData()}
       />
       
       {/* Slim Header */}

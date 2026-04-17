@@ -109,9 +109,40 @@ export default function GenesisHub() {
   return (
     <div className="min-h-screen bg-white text-gray-900 font-urbanist selection:bg-black/5">
       <SEO 
-        title="Genesis Quiz Hub | Book of Beginnings Study Guide"
-        description="Master the first book of the Bible with our comprehensive Genesis study hub. Deep theological insights, life lessons, and interactive chapter quizzes."
+        title="Genesis Bible Quiz Hub | Questions & Answers Study Guide"
+        description="Master the Book of Beginnings with our comprehensive Genesis study hub. Features interactive quizzes, chapter-by-chapter summaries, theological insights, and biblical Q&A."
+        keywords="genesis bible quiz, book of beginnings questions, genesis study guide, genesis chapter summaries, bible questions and answers genesis"
         url="/bible-questions-and-answers-hub/genesis"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the main theme of the Book of Genesis?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Book of Genesis focus on 'beginnings'—the origin of the universe, humanity, sin, and God's covenant relationship with His people."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who is the primary author of Genesis?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Genesis is traditionally attributed to Moses as the first book of the Pentateuch (the Torah)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What are the major sections of Genesis?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Genesis is divided into two main parts: Primeval History (Chapters 1-11) covering Creation, the Fall, and the Flood; and Patriarchal History (Chapters 12-50) focusing on Abraham, Isaac, Jacob, and Joseph."
+              }
+            }
+          ]
+        }}
       />
       <Navigation />
 

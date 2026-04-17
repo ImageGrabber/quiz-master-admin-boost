@@ -1,4 +1,5 @@
 import PublicQuiz from "../PublicQuiz";
+import SEO from "@/components/SEO";
 
 const hardQuestions = [
     {
@@ -115,10 +116,20 @@ const hardQuestions = [
 
 export default function HardBibleQuizForTeens() {
     return (
-        <PublicQuiz
-            title="Hard Bible Quiz for Teens"
-            questions={hardQuestions}
-            bookName="General Bible Knowledge"
-        />
+        <>
+            <SEO 
+                title="Hard Bible Quiz for Teens | Advanced Youth Scripture Challenge"
+                description="Take the hard Bible quiz for teens! Challenge your knowledge with difficult questions about biblical history, prophecy, and the life of Jesus."
+                keywords="hard bible quiz for teens, difficult bible questions for youth, advanced teen bible trivia, scripture challenge for teenagers"
+                author="Bible Quiz Competition"
+                url="/hard-bible-quiz-for-teens"
+            />
+            <PublicQuiz
+                title="Hard Bible Quiz for Teens"
+                questions={hardQuestions}
+                bookName="General Bible Knowledge"
+                isKidsStory={true}
+            />
+        </>
     );
 }

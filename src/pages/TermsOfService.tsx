@@ -1,14 +1,18 @@
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import Header from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 export default function TermsOfService() {
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col font-urbanist">
-            <Helmet>
-                <title>Terms of Service | Bible Quiz Competition</title>
-                <meta name="robots" content="noindex, follow" />
-            </Helmet>
+            <SEO
+                title="Terms of Service | Bible Quiz Competition User Agreement"
+                description="Review the terms of service for using Bible Quiz Competition, including our fair play policies, account responsibilities, and competition rules."
+                keywords="terms of service, user agreement, fair play policy, competition rules"
+                author="Bible Quiz Competition"
+                url="/terms-of-service"
+                robots="noindex, follow"
+            />
             <Header />
             <main className="flex-1 container mx-auto px-4 py-16 max-w-3xl">
                 <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 prose prose-slate">

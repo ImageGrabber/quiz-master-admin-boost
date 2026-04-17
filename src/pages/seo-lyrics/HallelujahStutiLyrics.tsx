@@ -1,33 +1,29 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '@/components/SEO';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
-import { Music, Mic2, Star } from 'lucide-react';
+import { Music, Mic2, Star, Languages } from 'lucide-react';
 
 const HallelujahStutiLyrics = () => {
   return (
     <div className="min-h-screen bg-slate-50">
-      <Helmet>
-        <title>Hallelujah Stuti Gaye Hum Lyrics | Hindi Christian Song</title>
-        <meta name="description" content="Read full lyrics for 'Hallelujah Stuti Gaye Hum' in Hindi and Romanized script. Popular Christian worship song lyrics for church and personal devotions." />
-        <meta name="keywords" content="hallelujah stuti gaye hum lyrics, hallelujah stuti gaye hum hindi lyrics, masih geet 2026, jesus song lyrics hindi" />
-        <link rel="canonical" href="https://biblequizcompetition.com/hallelujah-stuti-gaye-hum-lyrics" />
-        
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "MusicComposition",
-            "name": "Hallelujah Stuti Gaye Hum",
-            "genre": "Christian Worship",
-            "inLanguage": "hi",
-            "lyrics": {
-              "@type": "CreativeWork",
-              "text": "Hallelujah stuti gaye hum, Yeshu ki stuti gaye hum. Kroos par bali dwaaraa, apana lahu bahaayaa..."
-            }
-          })}
-        </script>
-      </Helmet>
+      <SEO
+        title="Hallelujah Stuti Gaye Hum Lyrics | Hindi Christian Song"
+        description="Read full lyrics for 'Hallelujah Stuti Gaye Hum' in Hindi and Romanized script. Popular Christian worship song lyrics for church and personal devotions."
+        keywords="hallelujah stuti gaye hum lyrics, hallelujah stuti gaye hum hindi lyrics, masih geet 2026, jesus song lyrics hindi"
+        url="/hallelujah-stuti-gaye-hum-lyrics"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "MusicComposition",
+          "name": "Hallelujah Stuti Gaye Hum",
+          "genre": "Christian Worship",
+          "inLanguage": "hi",
+          "lyrics": {
+            "@type": "CreativeWork",
+            "text": "Hallelujah stuti gaye hum, Yeshu ki stuti gaye hum. Kroos par bali dwaaraa, apana lahu bahaayaa..."
+          }
+        }}
+      />
 
       <Navigation />
 
@@ -123,8 +119,5 @@ const HallelujahStutiLyrics = () => {
     </div>
   );
 };
-
-// Helper for icon since Languages isn't imported from lucide-react in this block (ah wait, Languages IS available)
-import { Languages } from 'lucide-react';
 
 export default HallelujahStutiLyrics;

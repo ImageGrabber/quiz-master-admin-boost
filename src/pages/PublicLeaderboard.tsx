@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import SEO from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Trophy, Medal, Crown, Star, Users, TrendingUp, Award, Calendar, Clock, Target, Bolt, Menu, Brain, Search, X } from "lucide-react";
@@ -256,6 +257,13 @@ export default function PublicLeaderboard() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
+      <SEO
+        title="Global Bible Quiz Leaderboard | Top Players & Competition Rankings"
+        description="See who's leading the pack in our global Bible quiz competitions! View top scores, track community rankings, and see how you compare to believers worldwide."
+        keywords="bible quiz leaderboard, top bible quiz players, scripture competition rankings, global bible trivia standings, bible quiz winners"
+        author="Bible Quiz Competition"
+        url="/public-leaderboard"
+      />
       {/* Header */}
       <header className="relative flex items-center justify-between p-6 w-full px-6 md:px-8 lg:px-12">
         <div className="flex items-center space-x-8">

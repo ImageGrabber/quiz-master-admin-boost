@@ -2,6 +2,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { bibleData } from "@/data/bibleData";
 import ChapterStudyLayout from "@/components/bible/ChapterStudyLayout";
 import PublicQuiz from "./PublicQuiz";
+import SEO from "@/components/SEO";
 import { specificChapterQuizzes } from "@/data/specific-chapter-quizzes";
 import { bookNames } from "@/data/bible-data";
 import { createChapterFallbackQuestions, normalizeQuizQuestions } from "@/lib/quizQuestionNormalizer";
@@ -35,18 +36,26 @@ export default function ChapterPage() {
 
   if (!content) {
     return (
-      <PublicQuiz
-        title={`${formattedBookName} Chapter ${chapterId} Quiz`}
-        questions={questions}
-        bookName={formattedBookName}
-        chapter={`${chapterId}`}
-        seoDescription={
-          chapterQuiz?.seoDescription ||
-          `Challenge yourself with ${formattedBookName} Chapter ${chapterId} quiz questions and clear explanations.`
-        }
-        prevChapterUrl={chapterQuiz?.prevChapterUrl}
-        nextChapterUrl={chapterQuiz?.nextChapterUrl}
-      />
+      <>
+        <SEO 
+          title={`${formattedBookName} Chapter ${chapterId} Quiz | Bible Questions and Answers`}
+          description={
+            chapterQuiz?.seoDescription ||
+            `Challenge yourself with ${formattedBookName} Chapter ${chapterId} quiz questions and clear explanations. Perfect for individual study or youth groups.`
+          }
+          keywords={`${formattedBookName} chapter ${chapterId} quiz, ${formattedBookName} questions and answers, bible quiz with answers, ${formattedBookName} study`}
+          author="Bible Quiz Competition"
+          url={`/bible-questions-and-answers-hub/${book}/chapter-${chapterId}`}
+        />
+        <PublicQuiz
+          title={`${formattedBookName} Chapter ${chapterId} Quiz`}
+          questions={questions}
+          bookName={formattedBookName}
+          chapter={`${chapterId}`}
+          prevChapterUrl={chapterQuiz?.prevChapterUrl}
+          nextChapterUrl={chapterQuiz?.nextChapterUrl}
+        />
+      </>
     );
   }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '@/components/SEO';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,38 +9,61 @@ import { Music, Languages, Book, Guitar, Video, Star, Heart } from 'lucide-react
 const HoTeriStutiTeluguLyrics = () => {
   return (
     <div className="min-h-screen bg-slate-50">
-      <Helmet>
-        <title>Ho Teri Stuti Aur Aradhana Lyrics in Telugu (స్తుతి ఆరాధన) - Chords & Video</title>
-        <meta name="description" content="Complete Telugu lyrics for 'Ho Teri Stuti Aur Aradhana' (Stuthi Aradhana) with transliteration, guitar chords, and video. Free Christian worship resources in Telugu." />
-        <meta name="keywords" content="ho teri stuti aur aradhana lyrics in telugu, stuthi aradhana telugu lyrics, ho teri stuti telugu chords, telugu christian song lyrics, bible quiz telugu" />
-        <link rel="canonical" href="https://biblequizcompetition.com/ho-teri-stuti-aur-aradhana-lyrics-telugu" />
-        
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "MusicComposition",
-            "name": "Ho Teri Stuti Aur Aradhana (Telugu)",
-            "alternateName": "Stuthi Aradhana",
-            "composer": {
-              "@type": "Person",
-              "name": "Steve Joseph"
+      <SEO
+        title="Ho Teri Stuti Aur Aradhana Lyrics in Telugu (స్తుతి ఆరాధన) - Chords & Video"
+        description="Complete Telugu lyrics for 'Ho Teri Stuti Aur Aradhana' (Stuthi Aradhana) with transliteration, guitar chords, and video. Free Christian worship resources in Telugu."
+        keywords="ho teri stuti aur aradhana lyrics in telugu, stuthi aradhana telugu lyrics, ho teri stuti telugu chords, telugu christian song lyrics, bible quiz telugu"
+        url="/ho-teri-stuti-aur-aradhana-lyrics-telugu"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "MusicComposition",
+              "name": "Ho Teri Stuti Aur Aradhana (Telugu)",
+              "alternateName": "Stuthi Aradhana",
+              "composer": {
+                "@type": "Person",
+                "name": "Steve Joseph"
+              },
+              "genre": "Christian Worship",
+              "inLanguage": "te",
+              "lyrics": {
+                "@type": "CreativeWork",
+                "text": "స్తుతి ఆరాధన నీకే ప్రభు, ప్రాార్థించెదం నీ సన్నిధిలో..."
+              }
             },
-            "genre": "Christian Worship",
-            "inLanguage": "te",
-            "lyrics": {
-              "@type": "CreativeWork",
-              "text": "స్తుతి ఆరాధన నీకే ప్రభు, ప్రాార్థించెదం నీ సన్నిధిలో..."
-            },
-            "video": {
-              "@type": "VideoObject",
-              "name": "Ho Teri Stuti Aur Aradhana Telugu Version",
-              "thumbnailUrl": "https://img.youtube.com/vi/UvdKGzP6Yy0/0.jpg",
-              "contentUrl": "https://www.youtube.com/watch?v=UvdKGzP6Yy0",
-              "embedUrl": "https://www.youtube.com/embed/UvdKGzP6Yy0"
+            {
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "What is the meaning of Ho Teri Stuti Aur Aradhana in Telugu?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "It means 'Lord, may there be Your praise and adoration'. In Telugu, it is commonly translated as 'Stuthi Aradhana Neeke Prabhu'."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Who is the original composer of this song?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The song was originally composed and popularized by Steve Joseph."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "What are the guitar chords for Ho Teri Stuti Aur Aradhana?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The most common scale used is A Minor (Am). The primary chords are Am, F, G, and E (Major or 7th)."
+                  }
+                }
+              ]
             }
-          })}
-        </script>
-      </Helmet>
+          ]
+        }}
+      />
 
       <Navigation />
 

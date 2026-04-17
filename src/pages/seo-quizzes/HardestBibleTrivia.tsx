@@ -1,6 +1,6 @@
 import React from 'react';
 import PublicQuiz from '../PublicQuiz';
-import { Helmet } from 'react-helmet-async';
+import SEO from '@/components/SEO';
 
 const hardestQuestions = [
     {
@@ -78,12 +78,13 @@ const hardestQuestions = [
 export default function HardestBibleTrivia() {
     return (
         <>
-            <Helmet>
-                <title>Hardest Bible Trivia Questions and Answers | Expert Level Quiz</title>
-                <meta name="description" content="Challenge yourself with the hardest Bible trivia questions. Explore obscure facts, deep theology, and difficult details from the Old and New Testaments." />
-                <meta name="keywords" content="hardest bible trivia, difficult bible questions, advanced bible quiz, expert bible knowledge" />
-                <link rel="canonical" href="https://biblequizcompetition.com/hardest-bible-trivia-questions" />
-            </Helmet>
+            <SEO 
+                title="Hardest Bible Trivia Questions and Answers | Expert Level Quiz"
+                description="Challenge yourself with the hardest Bible trivia questions. Explore obscure facts, deep theology, and difficult details from the Old and New Testaments."
+                keywords="hardest bible trivia, difficult bible questions, advanced bible quiz, expert bible knowledge, obscure bible facts, theology quiz, biblical trivia for scholars"
+                author="Bible Quiz Competition"
+                url="/hardest-bible-trivia-questions"
+            />
             <PublicQuiz
                 title="Hardest Bible Trivia Questions"
                 questions={hardestQuestions}

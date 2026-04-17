@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { articles as sampleArticles } from "@/data/articles";
 import { Link, useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -100,35 +100,14 @@ const Articles = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Helmet>
-        <title>Bible Study Articles, Quiz Strategies & Resources | Bible Quiz Competition</title>
-        <meta name="description" content="Explore expert Bible study articles, winning quiz strategies, and Scripture memorization guides. Improve your biblical knowledge with our free Christian resources and study tools." />
-        <meta name="keywords" content="Bible study articles, Bible study methods, Scripture memorization, Bible quiz strategies, free Bible resources, Christian education, Bible trivia tips" />
-        <meta name="author" content="Bible Quiz Competition" />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://biblequizcompetition.com/articles" />
-
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Bible Study Articles & Resources" />
-        <meta property="og:description" content="Discover comprehensive Bible study articles, quiz preparation guides, and spiritual growth resources." />
-        <meta property="og:url" content="https://biblequizcompetition.com/articles" />
-        <meta property="og:site_name" content="Bible Quiz Competition" />
-        <meta property="og:image" content="https://biblequizcompetition.com/og-image-articles.jpg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Bible Study Articles & Resources" />
-        <meta name="twitter:description" content="Discover comprehensive Bible study articles, quiz preparation guides, and spiritual growth resources." />
-        <meta name="twitter:image" content="https://biblequizcompetition.com/og-image-articles.jpg" />
-
-        {/* Structured Data */}
-        <script type="application/ld+json">
-          {JSON.stringify(generateStructuredData())}
-        </script>
-      </Helmet>
+      <SEO
+        title="Bible Study Articles, Quiz Strategies & Resources | Bible Quiz Competition"
+        description="Explore expert Bible study articles, winning quiz strategies, and Scripture memorization guides. Improve your biblical knowledge with our free Christian resources and study tools."
+        keywords="Bible study articles, Bible study methods, Scripture memorization, Bible quiz strategies, free Bible resources, Christian education, Bible trivia tips, worship lyrics chords"
+        author="Bible Quiz Competition"
+        url="/articles"
+        structuredData={generateStructuredData()}
+      />
 
       <Navigation />
 

@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import Header from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ShieldCheck, Users, BookOpen } from "lucide-react";
@@ -6,31 +6,30 @@ import { ShieldCheck, Users, BookOpen } from "lucide-react";
 export default function AboutUs() {
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col font-urbanist">
-            <Helmet>
-                <title>About Us | Bible Quiz Competition</title>
-                <meta name="description" content="Learn about Bible Quiz Competition, our mission to spread biblical literacy, and our vibrant online community of players." />
-                
-                {/* Organization Schema for Google Trust Signals */}
-                <script type="application/ld+json">
-                    {JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "Organization",
-                        "name": "Bible Quiz Competition",
-                        "url": "https://biblequizcompetition.com",
-                        "logo": "https://biblequizcompetition.com/logo.png",
-                        "description": "An interactive platform dedicated to promoting Biblical literacy through fun, engaging, and competitive Bible quizzes.",
-                        "sameAs": [
-                            "https://twitter.com/biblequizcomp",
-                            "https://facebook.com/biblequizcompetition"
-                        ],
-                        "contactPoint": {
-                            "@type": "ContactPoint",
-                            "email": "support@biblequizcompetition.com",
-                            "contactType": "customer service"
-                        }
-                    })}
-                </script>
-            </Helmet>
+            <SEO
+                title="About Us | Bible Quiz Competition Mission & Team"
+                description="Learn about Bible Quiz Competition, our mission to spread biblical literacy, and our vibrant online community of players. Discover how we're making scripture study engaging."
+                keywords="about bible quiz, bible study mission, christian education team, biblical literacy platform, online bible community"
+                author="Bible Quiz Competition"
+                url="/about"
+                structuredData={{
+                    "@context": "https://schema.org",
+                    "@type": "Organization",
+                    "name": "Bible Quiz Competition",
+                    "url": "https://biblequizcompetition.com",
+                    "logo": "https://biblequizcompetition.com/logo.png",
+                    "description": "An interactive platform dedicated to promoting Biblical literacy through fun, engaging, and competitive Bible quizzes.",
+                    "sameAs": [
+                        "https://twitter.com/biblequizcomp",
+                        "https://facebook.com/biblequizcompetition"
+                    ],
+                    "contactPoint": {
+                        "@type": "ContactPoint",
+                        "email": "support@biblequizcompetition.com",
+                        "contactType": "customer service"
+                    }
+                }}
+            />
             
             <Header />
 

@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -39,12 +39,12 @@ const SongDetail = () => {
     if (!song) {
         return (
             <div className="min-h-screen bg-gray-50 flex flex-col">
-                <Helmet>
-                    <title>Song Not Found | Bible Quiz Competition</title>
-                    <meta name="description" content="The song page you are looking for does not exist. Browse all Christian devotional songs on Bible Quiz Competition." />
-                    <meta name="robots" content="noindex, nofollow" />
-                    <link rel="canonical" href={`${SITE_URL}/songs`} />
-                </Helmet>
+                <SEO
+                    title="Song Not Found | Bible Quiz Competition"
+                    description="The song page you are looking for does not exist. Browse all Christian devotional songs on Bible Quiz Competition."
+                    robots="noindex, nofollow"
+                    url="/songs"
+                />
                 <Navigation />
                 <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center">
                     <h1 className="text-2xl font-bold text-gray-900 mb-4">Song Not Found</h1>
@@ -161,42 +161,15 @@ const SongDetail = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
-            <Helmet>
-                <title>{seoTitle}</title>
-                <meta
-                    name="description"
-                    content={seoDescription}
-                />
-                <meta name="keywords" content={seoKeywords} />
-                <meta name="robots" content="index, follow, max-image-preview:large" />
-                <link rel="canonical" href={canonicalUrl} />
-
-                {/* Open Graph / Facebook */}
-                <meta property="og:type" content="music.song" />
-                <meta property="og:url" content={canonicalUrl} />
-                <meta property="og:title" content={seoTitle} />
-                <meta property="og:description" content={seoDescription} />
-                <meta property="og:image" content={thumbnailUrl} />
-                <meta property="og:image:width" content="1280" />
-                <meta property="og:image:height" content="720" />
-                <meta property="og:site_name" content="Bible Quiz Competition" />
-                <meta property="og:locale" content="en_US" />
-                <meta property="og:video" content={song.videoUrl} />
-                <meta property="og:video:type" content="text/html" />
-                <meta property="og:video:url" content={song.videoUrl} />
-
-                {/* Twitter */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:url" content={canonicalUrl} />
-                <meta name="twitter:title" content={seoTitle} />
-                <meta name="twitter:description" content={seoDescription} />
-                <meta name="twitter:image" content={thumbnailUrl} />
-
-                {/* Schema Markup */}
-                <script type="application/ld+json">
-                    {JSON.stringify(jsonLd)}
-                </script>
-            </Helmet>
+            <SEO
+                title={seoTitle}
+                description={seoDescription}
+                keywords={seoKeywords}
+                author="Bible Quiz Competition"
+                url={`/songs/${song.slug}`}
+                image={thumbnailUrl}
+                structuredData={jsonLd}
+            />
 
             <Navigation />
 

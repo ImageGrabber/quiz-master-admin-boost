@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '@/components/SEO';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,26 +8,23 @@ import { Guitar, Music, BookOpen } from 'lucide-react';
 const ApnaBojhPrabhuChords = () => {
   return (
     <div className="min-h-screen bg-slate-50">
-      <Helmet>
-        <title>Apna Bojh Prabhu Par Daal Lyrics & Chords | Hindi Christian Song</title>
-        <meta name="description" content="Get full lyrics and guitar chords for 'Apna Bojh Prabhu Par Daal'. Hindi Christian worship song with easy G major chords and English transliteration." />
-        <meta name="keywords" content="apna bhoj prabhu par daal chords, apna bojh prabhu par daal lyrics chords, hindi christian song chords, masih geet chords" />
-        <link rel="canonical" href="https://biblequizcompetition.com/apna-bojh-prabhu-par-daal-lyrics-chords" />
-        
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "MusicComposition",
-            "name": "Apna Bojh Prabhu Par Daal",
-            "genre": "Christian Worship",
-            "inLanguage": "hi",
-            "lyrics": {
-              "@type": "CreativeWork",
-              "text": "Apna bojh Prabhu par daal, kabhi na ghabarana. Tera aadarman karega, aashchary karm karega..."
-            }
-          })}
-        </script>
-      </Helmet>
+      <SEO
+        title="Apna Bojh Prabhu Par Daal Lyrics & Chords | Hindi Christian Song"
+        description="Get full lyrics and guitar chords for 'Apna Bojh Prabhu Par Daal'. Hindi Christian worship song with easy G major chords and English transliteration."
+        keywords="apna bhoj prabhu par daal chords, apna bojh prabhu par daal lyrics chords, hindi christian song chords, masih geet chords"
+        url="/apna-bojh-prabhu-par-daal-lyrics-chords"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "MusicComposition",
+          "name": "Apna Bojh Prabhu Par Daal",
+          "genre": "Christian Worship",
+          "inLanguage": "hi",
+          "lyrics": {
+            "@type": "CreativeWork",
+            "text": "Apna bojh Prabhu par daal, kabhi na ghabarana. Tera aadarman karega, aashchary karm karega..."
+          }
+        }}
+      />
 
       <Navigation />
 

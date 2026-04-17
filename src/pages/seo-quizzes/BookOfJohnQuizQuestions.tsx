@@ -1,4 +1,5 @@
 import PublicQuiz from "../PublicQuiz";
+import SEO from "@/components/SEO";
 
 // John Quiz Questions - 10 questions about Jesus as the divine Son of God
 const johnQuestions = [
@@ -116,10 +117,19 @@ const johnQuestions = [
 
 export default function BookOfJohnQuizQuestions() {
     return (
-        <PublicQuiz
-            title="Book of John Quiz Questions"
-            questions={johnQuestions}
-            bookName="John"
-        />
+        <>
+            <SEO 
+                title="Book of John Quiz Questions and Answers | Gospel of John Study"
+                description="Test your knowledge of the Gospel of John with these quiz questions. Explore themes of divinity, the 'I Am' statements, and the life of Jesus Christ."
+                keywords="book of john quiz, gospel of john questions and answers, bible study john, jesus son of god quiz, john's gospel trivia"
+                author="Bible Quiz Competition"
+                url="/book-of-john-quiz-questions"
+            />
+            <PublicQuiz
+                title="Book of John Quiz Questions"
+                questions={johnQuestions}
+                bookName="John"
+            />
+        </>
     );
 }

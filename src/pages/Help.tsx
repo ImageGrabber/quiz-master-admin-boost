@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '@/components/SEO';
 import { Navigation } from '@/components/Navigation';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -32,10 +32,13 @@ const Help = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <Helmet>
-        <title>Help & Support | Bible Quiz Competition</title>
-        <meta name="description" content="Get help with Bible Quiz Competition. Find answers to common questions, contact support, and chat with our team." />
-      </Helmet>
+      <SEO
+        title="Help & Support | Bible Quiz Competition Center"
+        description="Get help with Bible Quiz Competition. Find answers to common questions about creating quizzes, joining live sessions, and account management. Contact our 24/7 support team."
+        keywords="bible quiz help, quiz support, bible trivia troubleshooting, how to create bible quiz, live chat support"
+        author="Bible Quiz Competition"
+        url="/help"
+      />
 
       <Navigation />
       

@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import Header from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Mail, MapPin, MessageSquare } from "lucide-react";
@@ -6,10 +6,13 @@ import { Mail, MapPin, MessageSquare } from "lucide-react";
 export default function Contact() {
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col font-urbanist">
-            <Helmet>
-                <title>Contact Us | Bible Quiz Competition</title>
-                <meta name="description" content="Get in touch with the Bible Quiz Competition team for support, partnership inquiries, or general questions." />
-            </Helmet>
+            <SEO
+                title="Contact Us | Bible Quiz Competition Support"
+                description="Get in touch with the Bible Quiz Competition team for support, partnership inquiries, or general questions. We're here to help with your Bible study journey."
+                keywords="contact bible quiz, customer support, bible quiz feedback, partnership inquiries, bible study help"
+                author="Bible Quiz Competition"
+                url="/contact"
+            />
             
             <Header />
 

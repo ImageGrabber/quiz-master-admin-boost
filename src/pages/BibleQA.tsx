@@ -260,6 +260,7 @@ export default function BibleQA() {
       <SEO
         title="Bible Questions and Answers Hub | Online Chapter Study & Quizzes"
         description="Master the Word with our comprehensive Bible Questions and Answers Hub. Explore all 66 books with free chapter-wise quizzes, study guides, and interactive biblical Q&A."
+        keywords="bible questions and answers, bible chapter study, online bible quizzes, scripture study hub, bible knowledge test, biblical q&a, free bible study guides"
         url="/bible-questions-and-answers-hub"
       />
 

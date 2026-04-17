@@ -1,14 +1,18 @@
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import Header from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 export default function PrivacyPolicy() {
     return (
         <div className="min-h-screen bg-slate-50 flex flex-col font-urbanist">
-            <Helmet>
-                <title>Privacy Policy | Bible Quiz Competition</title>
-                <meta name="robots" content="noindex, follow" />
-            </Helmet>
+            <SEO
+                title="Privacy Policy | Bible Quiz Competition Data Protection"
+                description="Read our privacy policy to understand how we collect, use, and protect your personal data at Bible Quiz Competition."
+                keywords="privacy policy, data protection, user privacy, bible quiz security"
+                author="Bible Quiz Competition"
+                url="/privacy-policy"
+                robots="noindex, follow"
+            />
             <Header />
             <main className="flex-1 container mx-auto px-4 py-16 max-w-3xl">
                 <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 prose prose-slate">

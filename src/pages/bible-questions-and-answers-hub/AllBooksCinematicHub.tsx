@@ -224,6 +224,7 @@ export default function AllBooksCinematicHub() {
           detail?.fullOverview?.slice(0, 160) ||
           `Test your knowledge with the free ${bookName} Bible quiz. Explore chapter-wise summaries, character studies, and interactive Q&A for the book of ${bookName}.`
         }
+        keywords={`${bookName} hub, ${bookName} study guide, ${bookName} quiz, online bible study ${bookName}, ${bookName} chapter summaries, free ${bookName} questions and answers`}
         url={`/bible-questions-and-answers-hub/${normalizedSlug}`}
       />
       <Navigation />

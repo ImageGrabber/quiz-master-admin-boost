@@ -1,4 +1,5 @@
 import PublicQuiz from "../PublicQuiz";
+import SEO from "@/components/SEO";
 
 const adultQuestions = [
     {
@@ -75,11 +76,19 @@ const adultQuestions = [
 
 export default function HardBibleQuizForAdults() {
     return (
-        <PublicQuiz
-            title="Hard Bible Quiz for Adults"
-            questions={adultQuestions}
-            bookName="Advanced Bible Trivia"
-            seoDescription="Looking for a real challenge? Try this extremely hard Bible quiz designed specifically for adults, covering advanced biblical trivia, prophecy, and deep theology."
-        />
+        <>
+            <SEO 
+                title="Hard Bible Quiz for Adults | Advanced Biblical Knowledge Test"
+                description="Looking for a real challenge? Try this extremely hard Bible quiz designed specifically for adults, covering advanced biblical trivia, prophecy, and deep theology."
+                keywords="hard bible quiz for adults, advanced bible trivia, difficult bible questions and answers, adult bible study quiz, bible scholar test"
+                author="Bible Quiz Competition"
+                url="/hard-bible-quiz-for-adults"
+            />
+            <PublicQuiz
+                title="Hard Bible Quiz for Adults"
+                questions={adultQuestions}
+                bookName="Advanced Bible Trivia"
+            />
+        </>
     );
 }

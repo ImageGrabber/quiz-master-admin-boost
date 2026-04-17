@@ -32,8 +32,10 @@ export default function ChapterStudyLayout({ book, chapterId, content, mode, que
   return (
     <div className="min-h-screen bg-white font-urbanist">
       <SEO 
-        title={`${content.title} Study Guide | ${bookName}`}
+        title={`${content.title} Study Guide | ${bookName} Chapter ${chapterId}`}
         description={content.description}
+        keywords={`${bookName} chapter ${chapterId}, ${bookName} study guide, ${bookName} summary, bible chapter study, ${content.title} questions and answers, scripture analysis`}
+        author="Bible Quiz Competition"
         url={`/bible-questions-and-answers-hub/${book}/chapter-${chapterId}${mode === 'full' ? '-full' : ''}`}
       />
       <Navigation />

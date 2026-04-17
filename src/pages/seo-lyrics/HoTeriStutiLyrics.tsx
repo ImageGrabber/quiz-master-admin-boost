@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '@/components/SEO';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
@@ -9,30 +9,27 @@ import { Music, Languages, Book, Guitar } from 'lucide-react';
 const HoTeriStutiLyrics = () => {
   return (
     <div className="min-h-screen bg-slate-50">
-      <Helmet>
-        <title>Ho Teri Stuti Aur Aradhana Lyrics in Telugu, Kannada, Malayalam & English</title>
-        <meta name="description" content="Complete lyrics for 'Ho Teri Stuti Aur Aradhana' Hindi Christian song with translations in Telugu, Kannada, Malayalam, and English. Include guitar chords and meaning." />
-        <meta name="keywords" content="ho teri stuti aur aradhana lyrics in telugu, ho teri stuti aur aradhana lyrics in kannada, ho teri stuti aur aradhana malayalam, ho teri stuti aur aradhana lyrics in english, christian worship song chords" />
-        <link rel="canonical" href="https://biblequizcompetition.com/ho-teri-stuti-aur-aradhana-lyrics-telugu-kannada-malayalam" />
-        
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "MusicComposition",
-            "name": "Ho Teri Stuti Aur Aradhana",
-            "composer": {
-              "@type": "Person",
-              "name": "Steve Joseph"
-            },
-            "genre": "Christian Worship",
-            "inLanguage": ["hi", "te", "ml", "kn", "en"],
-            "lyrics": {
-              "@type": "CreativeWork",
-              "text": "Ho teri stuti aur aradhana, Karta hun mein tujhse yeh prarthana..."
-            }
-          })}
-        </script>
-      </Helmet>
+      <SEO
+        title="Ho Teri Stuti Aur Aradhana Lyrics in Telugu, Kannada, Malayalam & English"
+        description="Complete lyrics for 'Ho Teri Stuti Aur Aradhana' Hindi Christian song with translations in Telugu, Kannada, Malayalam, and English. Include guitar chords and meaning."
+        keywords="ho teri stuti aur aradhana lyrics in telugu, ho teri stuti aur aradhana lyrics in kannada, ho teri stuti aur aradhana malayalam, ho teri stuti aur aradhana lyrics in english, christian worship song chords"
+        url="/ho-teri-stuti-aur-aradhana-lyrics-telugu-kannada-malayalam"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "MusicComposition",
+          "name": "Ho Teri Stuti Aur Aradhana",
+          "composer": {
+            "@type": "Person",
+            "name": "Steve Joseph"
+          },
+          "genre": "Christian Worship",
+          "inLanguage": ["hi", "te", "ml", "kn", "en"],
+          "lyrics": {
+            "@type": "CreativeWork",
+            "text": "Ho teri stuti aur aradhana, Karta hun mein tujhse yeh prarthana..."
+          }
+        }}
+      />
 
       <Navigation />
 

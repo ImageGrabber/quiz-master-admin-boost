@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -35,48 +35,40 @@ const RulesAndPrizes = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 font-urbanist">
-      <Helmet>
-        <title>{`Bible Quiz Competition ${currentYear} Rules, Prizes & Scoring System`}</title>
-        <meta
-          name="description"
-          content={`Official Bible Quiz Competition ${currentYear} rules and prize guide. Get a clear quiz scoring system explanation, timer bonus details, and eligibility rules for online Bible quiz competitions.`}
-        />
-        <meta
-          name="keywords"
-          content={`bible quiz prize, quiz scoring system explanation, bible competition, bible quiz competition ${currentYear}, online bible quiz competition ${currentYear}, timer bonus quiz scoring`}
-        />
-        <link rel="canonical" href="https://biblequizcompetition.com/rules-and-prizes" />
-
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@graph": [
-              {
-                "@type": "WebPage",
-                "name": `Bible Quiz Competition ${currentYear} Rules, Prizes & Scoring System`,
-                "url": "https://biblequizcompetition.com/rules-and-prizes",
-                "description": `Official rules, prize details, and scoring explanation for Bible Quiz Competition ${currentYear}.`,
-                "publisher": {
-                  "@type": "Organization",
-                  "name": "Bible Quiz Competition",
-                  "url": "https://biblequizcompetition.com",
+      <SEO
+        title={`Bible Quiz Competition ${currentYear} Rules, Prizes & Scoring System`}
+        description={`Official Bible Quiz Competition ${currentYear} rules and prize guide. Get a clear quiz scoring system explanation, timer bonus details, and eligibility rules for online Bible quiz competitions.`}
+        keywords={`bible quiz prize, quiz scoring system explanation, bible competition, bible quiz competition ${currentYear}, online bible quiz competition ${currentYear}, timer bonus quiz scoring, christian competition rules`}
+        author="Bible Quiz Competition"
+        url="/rules-and-prizes"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebPage",
+              "name": `Bible Quiz Competition ${currentYear} Rules, Prizes & Scoring System`,
+              "url": "https://biblequizcompetition.com/rules-and-prizes",
+              "description": `Official rules, prize details, and scoring explanation for Bible Quiz Competition ${currentYear}.`,
+              "publisher": {
+                "@type": "Organization",
+                "name": "Bible Quiz Competition",
+                "url": "https://biblequizcompetition.com",
+              },
+            },
+            {
+              "@type": "FAQPage",
+              "mainEntity": faqItems.map((item) => ({
+                "@type": "Question",
+                "name": item.q,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": item.a,
                 },
-              },
-              {
-                "@type": "FAQPage",
-                "mainEntity": faqItems.map((item) => ({
-                  "@type": "Question",
-                  "name": item.q,
-                  "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": item.a,
-                  },
-                })),
-              },
-            ],
-          })}
-        </script>
-      </Helmet>
+              })),
+            },
+          ],
+        }}
+      />
 
       <Navigation />
 
