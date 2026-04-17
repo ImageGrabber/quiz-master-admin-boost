@@ -258,9 +258,10 @@ function generateSitemap() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
   urls.forEach(url => {
+    const cleanLoc = url.loc === '/' ? '' : url.loc.replace(/\/+$/, '').toLowerCase();
     sitemap += `
   <url>
-    <loc>${baseUrl}${url.loc}</loc>
+    <loc>${baseUrl}${cleanLoc}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>${url.changefreq}</changefreq>
     <priority>${url.priority}</priority>

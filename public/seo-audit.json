@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-04-17T16:48:16.898Z",
+  "generatedAt": "2026-04-17T16:53:12.461Z",
   "source": "scripts/generate-static-pages.js",
   "summary": {
-    "totalPages": 1366,
+    "totalPages": 1362,
     "good": 0,
     "fair": 67,
-    "poor": 1299,
+    "poor": 1295,
     "averageWords": 38.6,
     "averageSeoScore": 49.1
   },
@@ -17,17 +17,6 @@
       "wordCount": 62,
       "titleLength": 52,
       "descriptionLength": 105,
-      "hasH1": true,
-      "seoScore": 55,
-      "seoQuality": "poor"
-    },
-    {
-      "path": "/apna-bojh-prabhu-par-daal-lyrics-chords",
-      "title": "Apna Bojh Prabhu Par Daal Lyrics Chords | Bible Quiz Competition",
-      "description": "Study and learn more about Apna Bojh Prabhu Par Daal Lyrics Chords at Bible Quiz Competition.",
-      "wordCount": 41,
-      "titleLength": 64,
-      "descriptionLength": 93,
       "hasH1": true,
       "seoScore": 55,
       "seoQuality": "poor"
@@ -72,39 +61,6 @@
       "wordCount": 33,
       "titleLength": 78,
       "descriptionLength": 50,
-      "hasH1": true,
-      "seoScore": 40,
-      "seoQuality": "poor"
-    },
-    {
-      "path": "/hallelujah-stuti-gaye-hum-lyrics",
-      "title": "Hallelujah Stuti Gaye Hum Lyrics | Bible Quiz Competition",
-      "description": "Study and learn more about Hallelujah Stuti Gaye Hum Lyrics at Bible Quiz Competition.",
-      "wordCount": 37,
-      "titleLength": 57,
-      "descriptionLength": 86,
-      "hasH1": true,
-      "seoScore": 55,
-      "seoQuality": "poor"
-    },
-    {
-      "path": "/ho-teri-stuti-aur-aradhana-lyrics-telugu",
-      "title": "Ho Teri Stuti Aur Aradhana Lyrics Telugu | Bible Quiz Competition",
-      "description": "Study and learn more about Ho Teri Stuti Aur Aradhana Lyrics Telugu at Bible Quiz Competition.",
-      "wordCount": 41,
-      "titleLength": 65,
-      "descriptionLength": 94,
-      "hasH1": true,
-      "seoScore": 55,
-      "seoQuality": "poor"
-    },
-    {
-      "path": "/ho-teri-stuti-aur-aradhana-lyrics-telugu-kannada-malayalam",
-      "title": "Ho Teri Stuti Aur Aradhana Lyrics Telugu Kannada Malayalam | Bible Quiz Competition",
-      "description": "Study and learn more about Ho Teri Stuti Aur Aradhana Lyrics Telugu Kannada Malayalam at Bible Quiz Competition.",
-      "wordCount": 45,
-      "titleLength": 83,
-      "descriptionLength": 112,
       "hasH1": true,
       "seoScore": 40,
       "seoQuality": "poor"

@@ -279,35 +279,29 @@ function getOutputPathsForRoute(distDir, route) {
   const normalizedRoute = normalizeRoutePath(route);
   if (normalizedRoute === '/') {
     return {
-      primary: path.join(distDir, 'index.html'),
-      legacy: []
+      primary: path.join(distDir, 'index.html')
     };
   }
 
   const routeWithoutLeadingSlash = normalizedRoute.slice(1);
   return {
-    primary: path.join(distDir, routeWithoutLeadingSlash, 'index.html'),
-    legacy: [path.join(distDir, `${routeWithoutLeadingSlash}.html`)]
+    primary: path.join(distDir, routeWithoutLeadingSlash, 'index.html')
   };
 }
 
 function routeOutputExists(distDir, route) {
-  const { primary, legacy } = getOutputPathsForRoute(distDir, route);
-  if (fs.existsSync(primary)) return true;
-  return legacy.some((candidate) => fs.existsSync(candidate));
+  const { primary } = getOutputPathsForRoute(distDir, route);
+  return fs.existsSync(primary);
 }
 
 function writeRouteHtml(distDir, route, html) {
-  const { primary, legacy } = getOutputPathsForRoute(distDir, route);
-  const outputTargets = [primary, ...legacy];
-
-  outputTargets.forEach((targetPath) => {
-    const dir = path.dirname(targetPath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-    fs.writeFileSync(targetPath, html);
-  });
+  const { primary } = getOutputPathsForRoute(distDir, route);
+  
+  const dir = path.dirname(primary);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+  fs.writeFileSync(primary, html);
 
   return primary;
 }
@@ -427,7 +421,10 @@ function evaluateSeoQuality(page, contentWithSeo) {
 // Generate HTML using the app shell template
 function generateHTML(page, templateHtml, contentWithSeo = ensureSeoWordRange(page)) {
   let html = templateHtml;
-  const pageUrl = `https://biblequizcompetition.com${page.path}`;
+  
+  // Normalize Canonical URL: lowercase, no trailing slash
+  const cleanPath = page.path === '/' ? '' : page.path.replace(/\/+$/, '').toLowerCase();
+  const pageUrl = `https://biblequizcompetition.com${cleanPath}`;
 
   // Replace title
   html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(page.title)}</title>`);

@@ -20,7 +20,10 @@ const SEO = ({
   children
 }: SEOProps) => {
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://biblequizcompetition.com';
-  const fullUrl = url ? (url.startsWith('http') ? url : `${siteUrl}${url}`) : siteUrl;
+  let cleanPath = url || (typeof window !== 'undefined' ? window.location.pathname : '');
+  cleanPath = cleanPath === '/' ? '' : cleanPath.replace(/\/+$/, '').toLowerCase();
+  
+  const fullUrl = cleanPath.startsWith('http') ? cleanPath : `${siteUrl}${cleanPath}`;
   const imageUrl = image ? (image.startsWith('http') ? image : `${siteUrl}${image}`) : `${siteUrl}/sword.png`;
 
   const defaultStructuredData = {
