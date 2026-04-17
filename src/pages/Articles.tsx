@@ -200,6 +200,26 @@ const Articles = () => {
             <h2 className="text-3xl md:text-4xl font-urbanist font-semibold text-gray-900">Trending Worship Lyrics</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
+            <Card className="border border-blue-100 hover:border-blue-300 transition-all bg-white shadow-sm ring-1 ring-blue-50/50">
+              <CardHeader>
+                <div className="flex items-center gap-2 mb-2">
+                  <Badge className="bg-blue-600 text-white hover:bg-blue-700 font-urbanist font-light border-none">Telugu</Badge>
+                  <div className="flex -space-x-1">
+                    <Star className="w-3 h-3 text-amber-400 fill-current" />
+                  </div>
+                </div>
+                <CardTitle className="text-lg font-urbanist font-semibold">Stuthi Aradhana (Telugu)</CardTitle>
+                <CardDescription className="text-sm">Ho Teri Stuti lyrics in Telugu script, Video & Chords</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button variant="outline" size="sm" asChild className="w-full font-urbanist font-light border-blue-200 text-blue-700 hover:bg-blue-50">
+                  <Link to="/ho-teri-stuti-aur-aradhana-lyrics-telugu">
+                    View Telugu Lessons <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
             <Card className="border border-orange-100 hover:border-orange-300 transition-all bg-white shadow-sm">
               <CardHeader>
                 <CardTitle className="text-lg font-urbanist font-semibold">Ho Teri Stuti Aur Aradhana</CardTitle>
@@ -208,7 +228,7 @@ const Articles = () => {
               <CardContent>
                 <Button variant="outline" size="sm" asChild className="w-full font-urbanist font-light border-orange-200 text-orange-700 hover:bg-orange-50">
                   <Link to="/ho-teri-stuti-aur-aradhana-lyrics-telugu-kannada-malayalam">
-                    View Lyrics & Chords <ArrowRight className="w-4 h-4 ml-2" />
+                    View All Versions <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
               </CardContent>

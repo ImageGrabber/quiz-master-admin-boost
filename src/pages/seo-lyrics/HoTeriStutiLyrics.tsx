@@ -108,6 +108,15 @@ const HoTeriStutiLyrics = () => {
                     లోకంలో నీవంటి వారెవరు లేరు - నీవు తప్ప వేరే ప్రభువెవ్వరూ?
                     నీ ఎదుట మాత్రమే మోకరింతును - నీవే నా తండ్రి, నీవే నా ప్రభు`}
                   </div>
+                  <div className="mt-8 pt-8 border-t border-slate-100 text-center">
+                    <p className="text-slate-600 mb-4 font-semibold">Want the full Telugu version with Video and Guitar Chords?</p>
+                    <a 
+                      href="/ho-teri-stuti-aur-aradhana-lyrics-telugu" 
+                      className="inline-flex items-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all transform hover:scale-105 shadow-lg font-urbanist"
+                    >
+                      <Video className="w-5 h-5" /> View Full Telugu Version
+                    </a>
+                  </div>
                 </CardContent>
               </Card>
             </TabsContent>

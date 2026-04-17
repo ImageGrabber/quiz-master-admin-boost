@@ -1,5 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, Star, CheckCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Users, Star, CheckCircle, ChevronLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface MatchmakingScreenProps {
     playersOnline: number;
@@ -8,8 +10,27 @@ interface MatchmakingScreenProps {
 }
 
 export const MatchmakingScreen = ({ playersOnline, countdown, proTip }: MatchmakingScreenProps) => {
+    const navigate = useNavigate();
+
+    const handleBack = () => {
+        if (window.history.length > 1) {
+            navigate(-1);
+            return;
+        }
+        navigate("/bible-games");
+    };
+
     return (
         <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4 relative overflow-hidden">
+            <Button
+                variant="ghost"
+                onClick={handleBack}
+                className="absolute top-4 left-4 z-20 bg-slate-900/60 hover:bg-slate-800/80 text-white border border-slate-700/60 rounded-full h-10 px-3 backdrop-blur-sm"
+            >
+                <ChevronLeft className="w-5 h-5 mr-1" />
+                Back
+            </Button>
+
             {/* Animated Background */}
             <div className="absolute inset-0 overflow-hidden">
                 {/* Floating particles */}

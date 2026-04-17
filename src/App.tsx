@@ -168,6 +168,7 @@ import TermsOfService from "./pages/TermsOfService";
 import HoTeriStutiLyrics from "./pages/seo-lyrics/HoTeriStutiLyrics";
 import ApnaBojhPrabhuChords from "./pages/seo-lyrics/ApnaBojhPrabhuChords";
 import HallelujahStutiLyrics from "./pages/seo-lyrics/HallelujahStutiLyrics";
+import HoTeriStutiTeluguLyrics from "./pages/seo-lyrics/HoTeriStutiTeluguLyrics";
 // Removed static imports of Bible book quiz files for code-splitting
 import Upgrade from "./pages/Upgrade";
 import PageViews from "./pages/admin/PageViews";
@@ -288,6 +289,7 @@ const App = () => {
               
               {/* SEO Lyrics Pages */}
               <Route path="/ho-teri-stuti-aur-aradhana-lyrics-telugu-kannada-malayalam" element={<HoTeriStutiLyrics />} />
+              <Route path="/ho-teri-stuti-aur-aradhana-lyrics-telugu" element={<HoTeriStutiTeluguLyrics />} />
               <Route path="/apna-bojh-prabhu-par-daal-lyrics-chords" element={<ApnaBojhPrabhuChords />} />
               <Route path="/hallelujah-stuti-gaye-hum-lyrics" element={<HallelujahStutiLyrics />} />
 
