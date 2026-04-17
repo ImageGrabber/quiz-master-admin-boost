@@ -10,6 +10,21 @@ Sentry.init({
   sendDefaultPii: true
 });
 
+console.log("React application starting...");
+
+window.addEventListener('error', (event) => {
+  console.error("Global error caught:", event.error);
+});
+
+window.addEventListener('unhandledrejection', (event) => {
+  console.error("Unhandled promise rejection:", event.reason);
+});
+
 const container = document.getElementById("root");
-const root = createRoot(container!);
-root.render(<App />);
+if (!container) {
+  console.error("Root element not found!");
+} else {
+  const root = createRoot(container);
+  root.render(<App />);
+  console.log("React application rendered to root.");
+}
