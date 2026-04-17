@@ -20,7 +20,11 @@ import {
   List,
   Trophy,
   Brain,
-  Menu
+  Menu,
+  Users,
+  Music,
+  Heart,
+  Sparkles
 } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -172,10 +176,87 @@ const Articles = () => {
           </div>
         </div>
 
+        {/* Biblical Study Hubs - New SEO Resources */}
+        <div className="mb-16">
+          <div className="flex items-center gap-3 mb-8">
+            <BookOpen className="w-6 h-6 text-indigo-600" strokeWidth={1} />
+            <h2 className="text-3xl md:text-4xl font-urbanist font-semibold text-gray-900">Biblical Study Hubs</h2>
+          </div>
+          <div className="grid md:grid-cols-4 gap-6">
+            <Card className="border border-indigo-100 hover:border-indigo-300 transition-all bg-white shadow-sm">
+              <CardHeader>
+                <div className="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center mb-4">
+                  <Users className="w-5 h-5 text-indigo-600" strokeWidth={1} />
+                </div>
+                <CardTitle className="text-lg font-urbanist font-semibold text-gray-900">Bible Characters</CardTitle>
+                <CardDescription className="text-sm">Study the lives of Abraham, Moses, David, and Paul.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button variant="outline" size="sm" asChild className="w-full font-urbanist font-light border-indigo-200 text-indigo-700 hover:bg-indigo-50">
+                  <Link to="/bible-characters">
+                    Explore Characters <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border border-sky-100 hover:border-sky-300 transition-all bg-white shadow-sm">
+              <CardHeader>
+                <div className="w-10 h-10 bg-sky-50 rounded-lg flex items-center justify-center mb-4">
+                  <Heart className="w-5 h-5 text-sky-600" strokeWidth={1} />
+                </div>
+                <CardTitle className="text-lg font-urbanist font-semibold text-gray-900">Peace & Anxiety</CardTitle>
+                <CardDescription className="text-sm">Curated verses and reflections for spiritual comfort.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button variant="outline" size="sm" asChild className="w-full font-urbanist font-light border-sky-200 text-sky-700 hover:bg-sky-50">
+                  <Link to="/verses/peace-and-anxiety">
+                    Find Comfort <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border border-amber-100 hover:border-amber-300 transition-all bg-white shadow-sm">
+              <CardHeader>
+                <div className="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center mb-4">
+                  <Sparkles className="w-5 h-5 text-amber-600" strokeWidth={1} />
+                </div>
+                <CardTitle className="text-lg font-urbanist font-semibold text-gray-900">Parables of Jesus</CardTitle>
+                <CardDescription className="text-sm">Interactive quiz on the stories and lessons of Christ.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button variant="outline" size="sm" asChild className="w-full font-urbanist font-light border-amber-200 text-amber-700 hover:bg-amber-50">
+                  <Link to="/quizzes/parables-of-jesus">
+                    Start Quiz <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border border-emerald-100 hover:border-emerald-300 transition-all bg-white shadow-sm">
+              <CardHeader>
+                <div className="w-10 h-10 bg-emerald-50 rounded-lg flex items-center justify-center mb-4">
+                  <Trophy className="w-5 h-5 text-emerald-600" strokeWidth={1} />
+                </div>
+                <CardTitle className="text-lg font-urbanist font-semibold text-gray-900">Top 100 Questions</CardTitle>
+                <CardDescription className="text-sm">The ultimate Bible trivia resource for all levels.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button variant="outline" size="sm" asChild className="w-full font-urbanist font-light border-emerald-200 text-emerald-700 hover:bg-emerald-50">
+                  <Link to="/top-100-bible-quiz-questions">
+                    Master Trivia <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+
         {/* Trending Worship Lyrics - Added for SEO targeting */}
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-8">
-            <Music className="w-6 h-6 text-orange-600" strokeWidth={1} />
+            <Tag className="w-6 h-6 text-orange-600" strokeWidth={1} />
             <h2 className="text-3xl md:text-4xl font-urbanist font-semibold text-gray-900">Trending Worship Lyrics</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">

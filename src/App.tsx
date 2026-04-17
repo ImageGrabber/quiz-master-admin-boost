@@ -169,6 +169,10 @@ import HoTeriStutiLyrics from "./pages/seo-lyrics/HoTeriStutiLyrics";
 import ApnaBojhPrabhuChords from "./pages/seo-lyrics/ApnaBojhPrabhuChords";
 import HallelujahStutiLyrics from "./pages/seo-lyrics/HallelujahStutiLyrics";
 import HoTeriStutiTeluguLyrics from "./pages/seo-lyrics/HoTeriStutiTeluguLyrics";
+import BibleVersesPeace from "./pages/verses/BibleVersesPeace";
+import CharactersHub from "./pages/bible-characters/CharactersHub";
+import ParablesQuiz from "./pages/quizzes/ParablesQuiz";
+import Top100BibleQuiz from "./pages/Top100BibleQuiz";
 // Removed static imports of Bible book quiz files for code-splitting
 import Upgrade from "./pages/Upgrade";
 import PageViews from "./pages/admin/PageViews";
@@ -292,6 +296,10 @@ const App = () => {
               <Route path="/ho-teri-stuti-aur-aradhana-lyrics-telugu" element={<HoTeriStutiTeluguLyrics />} />
               <Route path="/apna-bojh-prabhu-par-daal-lyrics-chords" element={<ApnaBojhPrabhuChords />} />
               <Route path="/hallelujah-stuti-gaye-hum-lyrics" element={<HallelujahStutiLyrics />} />
+              <Route path="/bible-characters" element={<CharactersHub />} />
+              <Route path="/verses/peace-and-anxiety" element={<BibleVersesPeace />} />
+              <Route path="/quizzes/parables-of-jesus" element={<ParablesQuiz />} />
+              <Route path="/top-100-bible-quiz-questions" element={<Top100BibleQuiz />} />
 
               <Route path="/live-quiz/host/:quizId" element={<LiveQuizHost />} />
               <Route path="/live-quiz/join/:sessionCode" element={<LiveQuizParticipant />} />

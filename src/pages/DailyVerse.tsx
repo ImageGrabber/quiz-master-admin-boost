@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, Calendar, Heart, Lightbulb, Share2, ArrowLeft, Menu, Globe } from "lucide-react";
-import { Helmet } from 'react-helmet';
+import SEO from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 
 interface DailyVerse {
@@ -107,15 +107,32 @@ export default function DailyVerse() {
 
   return (
     <>
-      <Helmet>
-        <title>{verse ? (language === 'hindi' ? `दैनिक बाइबल पद - ${verse.verse_reference}` : `Daily Bible Verse - ${verse.verse_reference}`) : 'Daily Bible Verse'} | Bible Quiz Competition</title>
-        <meta name="description" content={verse ? (language === 'hindi' 
+      <SEO 
+        title={verse ? (language === 'hindi' ? `दैनिक बाइबल पद - ${verse.verse_reference}` : `Daily Bible Verse - ${verse.verse_reference}`) : 'Daily Bible Verse'}
+        description={verse ? (language === 'hindi' 
           ? `आज का दैनिक बाइबल पद: ${verse.verse_reference} - "${verse.verse_text_hindi || verse.verse_text}" व्याख्या और अनुप्रयोग के साथ।`
-          : `Today's daily Bible verse: ${verse.verse_reference} - "${verse.verse_text}" with explanation and application.`) : 'Daily Bible verse with explanation and application.'} />
-        <meta name="keywords" content={language === 'hindi' 
+          : `Today's daily Bible verse: ${verse.verse_reference} - "${verse.verse_text}" with explanation and application.`) : 'Daily Bible verse with explanation and application.'}
+        keywords={language === 'hindi' 
           ? "दैनिक बाइबल पद, शास्त्र, भक्ति, ईसाई, बाइबल अध्ययन"
-          : "daily bible verse, scripture, devotion, christian, bible study"} />
-      </Helmet>
+          : "daily bible verse, scripture, devotion, christian, bible study"}
+        url="/daily-verse"
+        structuredData={verse ? {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": language === 'hindi' ? `दैनिक बाइबल पद - ${verse.verse_reference}` : `Daily Bible Verse - ${verse.verse_reference}`,
+          "description": verse.explanation || verse.verse_text,
+          "image": verse.image_url,
+          "author": {
+            "@type": "Organization",
+            "name": "Bible Quiz Competition"
+          },
+          "datePublished": new Date().toISOString().split('T')[0],
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://biblequizcompetition.com/daily-verse"
+          }
+        } : undefined}
+      />
       
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white">
         {/* Navbar */}
