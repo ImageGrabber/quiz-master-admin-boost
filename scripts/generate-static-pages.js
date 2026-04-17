@@ -620,15 +620,24 @@ function generateStaticPages() {
   // Generate Chapter Pages (Programmatic SEO)
   console.log('Generating Bible chapter pages...');
 
+  // Simple category mapping based on typical Bible divisions
+  const bibleCategories = {
+    genesis: "Pentateuch", exodus: "Pentateuch", leviticus: "Pentateuch", numbers: "Pentateuch", deuteronomy: "Pentateuch",
+    matthew: "Gospels", mark: "Gospels", luke: "Gospels", john: "Gospels",
+    acts: "History", romans: "Pauline Epistles", revelation: "Apocalyptic"
+  };
+
   for (const [book, chapters] of Object.entries(bibleStructure)) { 
     const bookName = bookNames[book] || book.charAt(0).toUpperCase() + book.slice(1);
+    const category = bibleCategories[book.toLowerCase()] || 'Bible Story';
+    
     for (let i = 1; i <= chapters; i++) {
       const chapter = `chapter-${i}`;
       const page = {
         path: `/public-quiz/${book}/${chapter}`,
         title: `${bookName} Chapter ${i} Quiz - Free Bible Quiz`,
-        description: `Test your knowledge of ${bookName} Chapter ${i} with this free interactive Bible quiz. carefully crafted questions covering key events, characters, and teachings from ${bookName} Chapter ${i}.`,
-        noindex: true, // Deep programmatic routes should not compete for indexing
+        description: `Deepen your understanding of ${bookName} Chapter ${i} with our interactive quiz. This section of ${bookName} covers key biblical events and teachings within the ${category} category.`,
+        noindex: false, // RESTORED: Part of the "Quality-First Scaling" strategy
         structuredData: {
           "@context": "https://schema.org",
           "@type": "Quiz",
@@ -653,14 +662,15 @@ function generateStaticPages() {
                 </div>
                 <div class="p-8">
                     <div class="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                    <h2 class="text-xl font-bold text-gray-900 mb-2">Start Quiz</h2>
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">Quiz Overview</h2>
                     <p class="text-gray-700 mb-4">
-                        Test your knowledge of ${bookName} Chapter ${i} with this comprehensive Bible quiz. 
-                        This interactive quiz contains carefully crafted questions covering key events, characters, and teachings from ${bookName} Chapter ${i}.
+                        Test your knowledge of <strong>${bookName} Chapter ${i}</strong>. 
+                        As part of the <strong>${category}</strong>, this chapter provides essential context to the broader narrative of the Bible. 
+                        Our interactive quiz contains carefully crafted questions covering key events, characters, and teachings specifically found in ${bookName} Chapter ${i}.
                     </p>
                     <div class="flex items-center gap-3">
                          <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
-                         <span class="text-blue-600 font-medium">Loading quiz engine...</span>
+                         <span class="text-blue-600 font-medium">Loading interactive quiz engine...</span>
                     </div>
                     </div>
                 </div>

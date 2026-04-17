@@ -138,6 +138,18 @@ function generateSitemap() {
     });
   });
 
+  // Public Quiz Chapter Pages (Quality-First Scaling)
+  // Restoring these to the sitemap to maintain the "Indexed" count while we improve their quality.
+  for (const [book, chapters] of Object.entries(bibleStructure)) {
+    for (let i = 1; i <= chapters; i++) {
+      urls.push({
+        loc: `/public-quiz/${book}/chapter-${i}`,
+        priority: '0.5', // Lower priority than hubs
+        changefreq: 'monthly'
+      });
+    }
+  }
+
   // Featured Quizzes (High value specifically curated quizzes)
   // These are handled by the literal routes or manual addition if needed, 
   // but we'll stick to the hubs as the primary indexing entry points.
