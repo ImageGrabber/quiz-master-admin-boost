@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpen, Trophy, Sparkles, Brain, Clock, Mail, Star, Users, Calendar, TrendingUp, ChevronLeft, ChevronRight, Quote, Zap, Globe, Gamepad2 } from 'lucide-react';
+import { ArrowRight, BookOpen, Trophy, Sparkles, Brain, Clock, Mail, Star, Users, Calendar, TrendingUp, ChevronLeft, ChevronRight, Quote, Zap, Globe, Gamepad2, Heart } from 'lucide-react';
 
 import SEO from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
@@ -174,22 +174,22 @@ const CompetitionHome = () => {
       icon: BookOpen
     },
     {
-      label: "Scripture Match",
-      description: "Play the multiplayer Bible memory game.",
-      path: "/scripture-match-multiplayer",
-      icon: Gamepad2
+      label: "Bible Characters",
+      description: "Study the lives of Abraham, Moses, David, and Paul.",
+      path: "/bible-characters",
+      icon: Users
     },
     {
-      label: "Kids Stories",
-      description: "Interactive Bible stories designed for children.",
-      path: "/kids-stories",
-      icon: Star
+      label: "Peace & Anxiety",
+      description: "Find comfort through curated scriptural reflections.",
+      path: "/verses/peace-and-anxiety",
+      icon: Heart
     },
     {
-      label: "Christian Songs",
-      description: "Worship songs with lyrics and video embeds.",
-      path: "/songs",
-      icon: Globe
+      label: "Top 100 Questions",
+      description: "Master the most searched Bible trivia questions.",
+      path: "/top-100-bible-quiz-questions",
+      icon: Trophy
     }
   ];
 
@@ -724,6 +724,79 @@ const CompetitionHome = () => {
                 View All Quizzes
               </Button>
             </div>
+          </div>
+        </section>
+
+        {/* Specialized Biblical Resources - New SEO High-Impact Section */}
+        <section className="py-24 bg-white border-b border-gray-100">
+          <div className="max-w-7xl mx-auto px-6">
+             <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+                <div className="max-w-2xl">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-indigo-600 mb-5">Deepening Your Walk</p>
+                  <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Specialized Biblical Resources</h2>
+                  <p className="text-lg text-gray-500 font-light leading-relaxed">
+                    Explore our curated collection of resources designed for specific study needs, from character deep-dives to finding peace in difficult times.
+                  </p>
+                </div>
+             </div>
+
+             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {/* Bible Characters Hub */}
+                <div className="group cursor-pointer rounded-[2.5rem] border border-gray-100 p-8 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all duration-500" onClick={() => navigate("/bible-characters")}>
+                   <div className="w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                      <Users className="w-7 h-7 text-indigo-600" />
+                   </div>
+                   <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">Bible Characters</h3>
+                   <p className="text-gray-500 font-light leading-relaxed mb-8">
+                      Meet the people of the Bible. From Abraham's faith to Paul's journey, explore the humans God used to change history.
+                   </p>
+                   <Button variant="ghost" className="p-0 text-indigo-600 hover:bg-transparent group-hover:translate-x-1 transition-transform">
+                      Meet the Heroes <ArrowRight className="ml-2 w-4 h-4" />
+                   </Button>
+                </div>
+
+                {/* Peace & Anxiety */}
+                <div className="group cursor-pointer rounded-[2.5rem] border border-gray-100 p-8 hover:border-sky-100 hover:bg-sky-50/30 transition-all duration-500" onClick={() => navigate("/verses/peace-and-anxiety")}>
+                   <div className="w-14 h-14 rounded-2xl bg-sky-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                      <Heart className="w-7 h-7 text-sky-600" />
+                   </div>
+                   <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">Finding Peace</h3>
+                   <p className="text-gray-500 font-light leading-relaxed mb-8">
+                      Are you feeling anxious? Discover the promises of God for peace, rest, and strength during life's most challenging seasons.
+                   </p>
+                   <Button variant="ghost" className="p-0 text-sky-600 hover:bg-transparent group-hover:translate-x-1 transition-transform">
+                      Find Comfort <ArrowRight className="ml-2 w-4 h-4" />
+                   </Button>
+                </div>
+
+                {/* Parables Quiz */}
+                <div className="group cursor-pointer rounded-[2.5rem] border border-gray-100 p-8 hover:border-amber-100 hover:bg-amber-50/30 transition-all duration-500" onClick={() => navigate("/quizzes/parables-of-jesus")}>
+                   <div className="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                      <Sparkles className="w-7 h-7 text-amber-600" />
+                   </div>
+                   <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">Parables of Jesus</h3>
+                   <p className="text-gray-500 font-light leading-relaxed mb-8">
+                      Step into the stories of Jesus. Test your understanding of the wisdom He shared through earthly tales with heavenly meanings.
+                   </p>
+                   <Button variant="ghost" className="p-0 text-amber-600 hover:bg-transparent group-hover:translate-x-1 transition-transform">
+                      Start Parables Quiz <ArrowRight className="ml-2 w-4 h-4" />
+                   </Button>
+                </div>
+
+                {/* Top 100 Questions */}
+                <div className="group cursor-pointer rounded-[2.5rem] border border-gray-100 p-8 hover:border-emerald-100 hover:bg-emerald-50/30 transition-all duration-500" onClick={() => navigate("/top-100-bible-quiz-questions")}>
+                   <div className="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                      <Trophy className="w-7 h-7 text-emerald-600" />
+                   </div>
+                   <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">The Mega Trivia</h3>
+                   <p className="text-gray-500 font-light leading-relaxed mb-8">
+                      Master the ultimate list of 100 Bible questions. Perfect for individual study or preparing for our global competitions.
+                   </p>
+                   <Button variant="ghost" className="p-0 text-emerald-600 hover:bg-transparent group-hover:translate-x-1 transition-transform">
+                      Master the List <ArrowRight className="ml-2 w-4 h-4" />
+                   </Button>
+                </div>
+             </div>
           </div>
         </section>
 
