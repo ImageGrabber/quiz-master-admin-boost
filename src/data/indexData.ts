@@ -1,4 +1,11 @@
 import { Brain, Clock, Users, Trophy, BookOpen, Play, Globe, Calendar } from "lucide-react";
+import { allSongs } from "./songs";
+import englishSongs from "./english-songs.json";
+import hindiSongs from "./hindi-songs.json";
+import kidsStories from "./kids-stories.json";
+import { articles } from "./articles";
+import { featuredQuizzes, bibleBooks } from "./bible-data";
+
 
 export const features = [
   {
@@ -112,7 +119,19 @@ export const publicPages = [
   { title: "Prayer Requests", path: "/prayer-requests", category: "Community" },
   { title: "Today's Quiz", path: "/todays-quiz", category: "Quizzes" },
   { title: "Weekly Quiz", path: "/weekly-quiz", category: "Quizzes" },
+  { title: "Competition Hub", path: "/competitions", category: "Competition" },
+  { title: "Selah Space", path: "/selah-space", category: "Spiritual" },
+  { title: "Bible Games", path: "/bible-games", category: "Games" },
   
+  // Games
+  { title: "Joy Runner", path: "/joy-runner", category: "Games" },
+  { title: "Match 3 Game", path: "/match-3-game", category: "Games" },
+  { title: "Word Search", path: "/word-search-game", category: "Games" },
+  { title: "Memory Match", path: "/memory-match-game", category: "Games" },
+  { title: "Flappy Bird", path: "/flappy-bird-game", category: "Games" },
+  { title: "Verse Master", path: "/verse-master-game", category: "Games" },
+  { title: "Faith Builder", path: "/faith-builder-game", category: "Games" },
+
   // Genesis Hub sub-pages
   { title: "Genesis Hub", path: "/bible-questions-and-answers-hub/genesis", category: "Bible Study" },
   { title: "Genesis Beginner", path: "/bible-questions-and-answers-hub/genesis/beginner", category: "Bible Study" },
@@ -124,131 +143,58 @@ export const publicPages = [
   { title: "Genesis Chapters 37-50", path: "/bible-questions-and-answers-hub/genesis/chapters-37-50", category: "Bible Study" },
   { title: "Genesis True/False", path: "/bible-questions-and-answers-hub/genesis/true-false", category: "Bible Study" },
   { title: "Genesis Characters", path: "/bible-questions-and-answers-hub/genesis/characters", category: "Bible Study" },
-  
-  // Public Quiz - Old Testament Pentateuch
-  { title: "Genesis Quiz", path: "/public-quiz/genesis", category: "Quiz" },
-  { title: "Exodus Quiz", path: "/public-quiz/exodus", category: "Quiz" },
-  { title: "Leviticus Quiz", path: "/public-quiz/leviticus", category: "Quiz" },
-  { title: "Numbers Quiz", path: "/public-quiz/numbers", category: "Quiz" },
-  { title: "Deuteronomy Quiz", path: "/public-quiz/deuteronomy", category: "Quiz" },
-  
-  // Public Quiz - Historical Books
-  { title: "Joshua Quiz", path: "/public-quiz/joshua", category: "Quiz" },
-  { title: "Judges Quiz", path: "/public-quiz/judges", category: "Quiz" },
-  { title: "Ruth Quiz", path: "/public-quiz/ruth", category: "Quiz" },
-  { title: "1 Samuel Quiz", path: "/public-quiz/1-samuel", category: "Quiz" },
-  { title: "2 Samuel Quiz", path: "/public-quiz/2-samuel", category: "Quiz" },
-  { title: "1 Kings Quiz", path: "/public-quiz/1-kings", category: "Quiz" },
-  { title: "2 Kings Quiz", path: "/public-quiz/2-kings", category: "Quiz" },
-  { title: "1 Chronicles Quiz", path: "/public-quiz/1-chronicles", category: "Quiz" },
-  { title: "2 Chronicles Quiz", path: "/public-quiz/2-chronicles", category: "Quiz" },
-  { title: "Ezra Quiz", path: "/public-quiz/ezra", category: "Quiz" },
-  { title: "Nehemiah Quiz", path: "/public-quiz/nehemiah", category: "Quiz" },
-  { title: "Esther Quiz", path: "/public-quiz/esther", category: "Quiz" },
-  
-  // Public Quiz - Wisdom Literature
-  { title: "Job Quiz", path: "/public-quiz/job", category: "Quiz" },
-  { title: "Psalms Quiz", path: "/public-quiz/psalms", category: "Quiz" },
-  { title: "Proverbs Quiz", path: "/public-quiz/proverbs", category: "Quiz" },
-  { title: "Ecclesiastes Quiz", path: "/public-quiz/ecclesiastes", category: "Quiz" },
-  { title: "Song of Solomon Quiz", path: "/public-quiz/song-of-solomon", category: "Quiz" },
-  
-  // Public Quiz - Major Prophets
-  { title: "Isaiah Quiz", path: "/public-quiz/isaiah", category: "Quiz" },
-  { title: "Jeremiah Quiz", path: "/public-quiz/jeremiah", category: "Quiz" },
-  { title: "Lamentations Quiz", path: "/public-quiz/lamentations", category: "Quiz" },
-  { title: "Ezekiel Quiz", path: "/public-quiz/ezekiel", category: "Quiz" },
-  { title: "Daniel Quiz", path: "/public-quiz/daniel", category: "Quiz" },
-  
-  // Public Quiz - Minor Prophets
-  { title: "Hosea Quiz", path: "/public-quiz/hosea", category: "Quiz" },
-  { title: "Joel Quiz", path: "/public-quiz/joel", category: "Quiz" },
-  { title: "Amos Quiz", path: "/public-quiz/amos", category: "Quiz" },
-  { title: "Obadiah Quiz", path: "/public-quiz/obadiah", category: "Quiz" },
-  { title: "Jonah Quiz", path: "/public-quiz/jonah", category: "Quiz" },
-  { title: "Micah Quiz", path: "/public-quiz/micah", category: "Quiz" },
-  { title: "Nahum Quiz", path: "/public-quiz/nahum", category: "Quiz" },
-  { title: "Habakkuk Quiz", path: "/public-quiz/habakkuk", category: "Quiz" },
-  { title: "Zephaniah Quiz", path: "/public-quiz/zephaniah", category: "Quiz" },
-  { title: "Haggai Quiz", path: "/public-quiz/haggai", category: "Quiz" },
-  { title: "Zechariah Quiz", path: "/public-quiz/zechariah", category: "Quiz" },
-  { title: "Malachi Quiz", path: "/public-quiz/malachi", category: "Quiz" },
-  
-  // Public Quiz - Gospels
-  { title: "Matthew Quiz", path: "/public-quiz/matthew", category: "Quiz" },
-  { title: "Mark Quiz", path: "/public-quiz/mark", category: "Quiz" },
-  { title: "Luke Quiz", path: "/public-quiz/luke", category: "Quiz" },
-  { title: "John Quiz", path: "/public-quiz/john", category: "Quiz" },
-  
-  // Public Quiz - Acts and Pauline Epistles
-  { title: "Acts Quiz", path: "/public-quiz/acts", category: "Quiz" },
-  { title: "Romans Quiz", path: "/public-quiz/romans", category: "Quiz" },
-  { title: "1 Corinthians Quiz", path: "/public-quiz/1-corinthians", category: "Quiz" },
-  { title: "2 Corinthians Quiz", path: "/public-quiz/2-corinthians", category: "Quiz" },
-  { title: "Galatians Quiz", path: "/public-quiz/galatians", category: "Quiz" },
-  { title: "Ephesians Quiz", path: "/public-quiz/ephesians", category: "Quiz" },
-  { title: "Philippians Quiz", path: "/public-quiz/philippians", category: "Quiz" },
-  { title: "Colossians Quiz", path: "/public-quiz/colossians", category: "Quiz" },
-  { title: "1 Thessalonians Quiz", path: "/public-quiz/1-thessalonians", category: "Quiz" },
-  { title: "2 Thessalonians Quiz", path: "/public-quiz/2-thessalonians", category: "Quiz" },
-  { title: "1 Timothy Quiz", path: "/public-quiz/1-timothy", category: "Quiz" },
-  { title: "2 Timothy Quiz", path: "/public-quiz/2-timothy", category: "Quiz" },
-  { title: "Titus Quiz", path: "/public-quiz/titus", category: "Quiz" },
-  { title: "Philemon Quiz", path: "/public-quiz/philemon", category: "Quiz" },
-  
-  // Public Quiz - General Epistles
-  { title: "Hebrews Quiz", path: "/public-quiz/hebrews", category: "Quiz" },
-  { title: "James Quiz", path: "/public-quiz/james", category: "Quiz" },
-  { title: "1 Peter Quiz", path: "/public-quiz/1-peter", category: "Quiz" },
-  { title: "2 Peter Quiz", path: "/public-quiz/2-peter", category: "Quiz" },
-  { title: "1 John Quiz", path: "/public-quiz/1-john", category: "Quiz" },
-  { title: "2 John Quiz", path: "/public-quiz/2-john", category: "Quiz" },
-  { title: "3 John Quiz", path: "/public-quiz/3-john", category: "Quiz" },
-  { title: "Jude Quiz", path: "/public-quiz/jude", category: "Quiz" },
-  { title: "Revelation Quiz", path: "/public-quiz/revelation", category: "Quiz" },
-  
-  // Articles
-  { title: "Complete Quiz Guide", path: "/articles/complete-quiz-guide", category: "Article" },
-  { title: "Quiz Strategies", path: "/articles/quiz-strategies", category: "Article" },
-  { title: "David King of Israel", path: "/articles/david-king-israel", category: "Article" },
-  { title: "Leaderboard Tips", path: "/articles/leaderboard-tips", category: "Article" },
-  { title: "Moses and Exodus", path: "/articles/moses-exodus-story", category: "Article" },
-  { title: "Esther's Courage", path: "/articles/esther-courage-story", category: "Article" },
-  { title: "Understanding Grace", path: "/articles/understanding-grace", category: "Article" },
-  { title: "Prayer Life Guide", path: "/articles/prayer-life-guide", category: "Article" },
-  { title: "Quiz Time Management", path: "/articles/quiz-time-management", category: "Article" },
-  { title: "Bible Study Methods", path: "/articles/bible-study-methods", category: "Article" },
-  { title: "Quiz Navigation Guide", path: "/articles/quiz-navigation-guide", category: "Article" },
-  { title: "Quiz Scoring Explained", path: "/articles/quiz-scoring-explained", category: "Article" },
-  { title: "Quiz Difficulty Levels", path: "/articles/quiz-difficulty-levels", category: "Article" },
-  { title: "Quiz Feedback System", path: "/articles/quiz-feedback-system", category: "Article" },
-  { title: "Quiz Progress Tracking", path: "/articles/quiz-progress-tracking", category: "Article" },
-  { title: "Memory Techniques", path: "/articles/memory-techniques-quiz", category: "Article" },
-  { title: "Abraham's Faith Journey", path: "/articles/abraham-faith-journey", category: "Article" },
-  { title: "Joseph's Forgiveness Story", path: "/articles/joseph-forgiveness-story", category: "Article" },
-  { title: "Quiz Anxiety Management", path: "/articles/quiz-anxiety-management", category: "Article" },
-  { title: "Question Pattern Recognition", path: "/articles/question-pattern-recognition", category: "Article" },
-  { title: "Quiz Concentration Techniques", path: "/articles/quiz-concentration-techniques", category: "Article" },
-  { title: "Quiz Recovery Strategies", path: "/articles/quiz-recovery-strategies", category: "Article" },
-  { title: "Competition Preparation", path: "/articles/competition-preparation", category: "Article" },
-  { title: "Ruth's Loyalty and Devotion", path: "/articles/ruth-loyalty-devotion", category: "Article" },
-  { title: "Forgiveness and Healing", path: "/articles/forgiveness-healing-power", category: "Article" },
-  { title: "Hope: Biblical Perspective", path: "/articles/hope-biblical-perspective", category: "Article" },
-  { title: "Scripture Memorization", path: "/articles/scripture-memorization-techniques", category: "Article" },
-  { title: "Team Quiz Strategies", path: "/articles/team-quiz-strategies", category: "Article" },
-  { title: "Moses Leadership Lessons", path: "/articles/moses-leadership-lessons", category: "Article" },
-  
-  // Kids Stories
-  { title: "Kids Bible Stories Hub", path: "/kids-stories", category: "Kids Stories" },
-  { title: "The Brave Shepherd Boy (David & Goliath)", path: "/kids-stories/the-brave-shepherd-boy", category: "Kids Stories" },
-  { title: "Noah's Special Boat (Noah's Ark)", path: "/kids-stories/noahs-special-boat", category: "Kids Stories" },
-  { title: "The Lunch That Grew (Feeding 5000)", path: "/kids-stories/the-lunch-that-grew", category: "Kids Stories" },
-  { title: "The Lost Sheep's Adventure", path: "/kids-stories/the-lost-sheeps-adventure", category: "Kids Stories" },
-  { title: "Joseph's Colorful Coat", path: "/kids-stories/josephs-colorful-coat", category: "Kids Stories" },
-  { title: "The Kind Neighbor (Good Samaritan)", path: "/kids-stories/the-kind-neighbor", category: "Kids Stories" },
-  { title: "Marching Around Jericho", path: "/kids-stories/marching-around-jericho", category: "Kids Stories" },
-  { title: "Daniel and the Sleepy Lions", path: "/kids-stories/daniel-and-the-sleepy-lions", category: "Kids Stories" },
-  { title: "The Wise Little Workers", path: "/kids-stories/the-wise-little-workers", category: "Kids Stories" },
-  { title: "Queen Esther's Big Choice", path: "/kids-stories/queen-esthers-big-choice", category: "Kids Stories" },
+
+  // Bible Book Hubs (Dynamic mapping)
+  ...Object.values(bibleBooks).flatMap(testament => 
+    Object.values(testament).flatMap(categories => 
+      categories.map(book => ({
+        title: `${book} Hub & Quizzes`,
+        path: `/bible-questions-and-answers-hub/${book.toLowerCase().replace(/ /g, "-")}`,
+        category: "Bible Study"
+      }))
+    )
+  ),
+
+  // Featured Quizzes (Dynamic mapping)
+  ...featuredQuizzes.map(quiz => ({
+    title: quiz.title,
+    path: quiz.link,
+    category: "Quiz"
+  })),
+
+  // Articles (Dynamic mapping)
+  ...articles.map(article => ({
+    title: article.title,
+    path: `/articles/${article.id}`,
+    category: "Article"
+  })),
+
+  // Kids Stories (Dynamic mapping)
+  ...kidsStories.map((story: any) => ({
+    title: story.title,
+    path: `/kids-stories/${story.slug}`,
+    category: "Kids Stories"
+  })),
+
+  // Malayalam Songs (Dynamic mapping)
+  ...allSongs.map(song => ({
+    title: song.title,
+    path: `/songs/${song.slug}`,
+    category: "Malayalam Song"
+  })),
+
+  // English Songs (Dynamic mapping)
+  ...(englishSongs as any[]).map(song => ({
+    title: song.title,
+    path: `/english-songs/${song.slug}`,
+    category: "English Hymn"
+  })),
+
+  // Hindi Songs (Dynamic mapping)
+  ...(hindiSongs as any[]).map(song => ({
+    title: song.title,
+    path: `/hindi-songs/${song.slug}`,
+    category: "Hindi Song"
+  }))
 ];
 
