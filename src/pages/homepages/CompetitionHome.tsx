@@ -248,8 +248,8 @@ const CompetitionHome = () => {
   return (
     <>
       <SEO
-        title="Online Bible Quiz Competition 2026 | Free Quizzes, Prizes, and Leaderboards"
-        description="Join the Bible Quiz Competition 2026. Play Nehemiah quiz, 2 Thessalonians quiz, and Philemon Bible quiz, earn timer bonuses, and win bible quiz prizes."
+        title="Online Bible Quiz Competition 2026 | Free Bible Quizzes with Prizes"
+        description="Join the Bible Quiz Competition 2026. Play free online Bible quizzes, compete for prizes, and climb the global leaderboard. Master the Word and win!"
         structuredData={{
           "@context": "https://schema.org",
           "@graph": [
@@ -276,15 +276,14 @@ const CompetitionHome = () => {
               "@type": "WebPage",
               "name": "Online Bible Quiz Competition 2026",
               "url": "https://biblequizcompetition.com/",
-              "description": "Free online Bible quiz competition with daily challenges, score timer bonuses, bible quiz prizes, and chapter quizzes including Nehemiah, 2 Thessalonians, and Philemon.",
+              "description": "Participate in the Free Online Bible Quiz Competition 2026. Features include daily challenges, timer bonuses, and real bible quiz prizes. Study Genesis, Nehemiah, and more.",
               "about": [
                 { "@type": "Thing", "name": "Bible quiz competition 2026" },
+                { "@type": "Thing", "name": "Free Bible Quizzes with Prizes" },
                 { "@type": "Thing", "name": "Bible Study Hub" },
                 { "@type": "Thing", "name": "Kids Bible Stories" },
                 { "@type": "Thing", "name": "Christian Song Library" },
-                { "@type": "Thing", "name": "Nehemiah quiz" },
-                { "@type": "Thing", "name": "2 Thessalonians quiz" },
-                { "@type": "Thing", "name": "Philemon Bible quiz" }
+                { "@type": "Thing", "name": "Online Bible Trivia" }
               ]
             },
             {

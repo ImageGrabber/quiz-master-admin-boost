@@ -101,9 +101,9 @@ const Articles = () => {
   return (
     <div className="min-h-screen bg-white">
       <Helmet>
-        <title>Bible Study Articles & Resources | Bible Quiz Competition</title>
-        <meta name="description" content="Discover comprehensive Bible study articles, quiz preparation guides, and spiritual growth resources. Learn effective study methods, memorize Scripture, and deepen your biblical knowledge." />
-        <meta name="keywords" content="Bible study articles, Bible study methods, Scripture memorization, Bible quiz preparation, biblical knowledge, spiritual growth, Christian education" />
+        <title>Bible Study Articles, Quiz Strategies & Resources | Bible Quiz Competition</title>
+        <meta name="description" content="Explore expert Bible study articles, winning quiz strategies, and Scripture memorization guides. Improve your biblical knowledge with our free Christian resources and study tools." />
+        <meta name="keywords" content="Bible study articles, Bible study methods, Scripture memorization, Bible quiz strategies, free Bible resources, Christian education, Bible trivia tips" />
         <meta name="author" content="Bible Quiz Competition" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://biblequizcompetition.com/articles" />

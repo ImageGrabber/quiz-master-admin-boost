@@ -258,8 +258,8 @@ export default function BibleQA() {
   return (
     <div className="min-h-screen bg-white text-gray-900 font-urbanist selection:bg-black/5">
       <SEO
-        title="Bible Q&A Hub | Bible Quiz Competition"
-        description="Explore all 66 Bible books with chapter quizzes, category hubs, and guided study paths from Genesis to Revelation."
+        title="Bible Questions and Answers Hub | Online Chapter Study & Quizzes"
+        description="Master the Word with our comprehensive Bible Questions and Answers Hub. Explore all 66 books with free chapter-wise quizzes, study guides, and interactive biblical Q&A."
         url="/bible-questions-and-answers-hub"
       />
 

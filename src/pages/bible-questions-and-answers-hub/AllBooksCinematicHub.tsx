@@ -219,10 +219,10 @@ export default function AllBooksCinematicHub() {
   return (
     <div className="min-h-screen bg-white text-gray-900 font-urbanist selection:bg-black/5">
       <SEO
-        title={`${bookName} Quiz Hub | Chapter-Wise Bible Study`}
+        title={`${bookName} Quiz Hub | Online Bible Study Guide & Free Quizzes`}
         description={
           detail?.fullOverview?.slice(0, 160) ||
-          `Explore ${bookName} through chapter-wise quizzes, themed study tracks, and interactive learning.`
+          `Test your knowledge with the free ${bookName} Bible quiz. Explore chapter-wise summaries, character studies, and interactive Q&A for the book of ${bookName}.`
         }
         url={`/bible-questions-and-answers-hub/${normalizedSlug}`}
       />

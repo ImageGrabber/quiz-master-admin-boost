@@ -449,7 +449,7 @@ const PublicQuiz = ({
       "@context": "https://schema.org",
       "@type": "Quiz",
       "name": title,
-      "description": `Test your knowledge of ${bookName} with this interactive Bible quiz. ${normalizedQuestions.length} questions to challenge your understanding.`,
+      "description": seoDescription || `Test your knowledge of ${bookName} with this interactive Bible quiz. ${normalizedQuestions.length} questions to challenge your understanding.`,
       "numberOfQuestions": normalizedQuestions.length,
       "timeRequired": "PT10M",
       "educationalLevel": "Beginner to Advanced",
@@ -463,7 +463,16 @@ const PublicQuiz = ({
         "name": "Bible Quiz Competition",
         "url": "https://biblequizcompetition.com"
       },
-      "mainEntityOfPage": canonicalUrl
+      "mainEntityOfPage": canonicalUrl,
+      "hasPart": normalizedQuestions.map((q, idx) => ({
+        "@type": "Question",
+        "name": `Question ${idx + 1}`,
+        "text": q.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": q.options[q.answer || 0]
+        }
+      }))
     };
   };
 
@@ -484,8 +493,8 @@ const PublicQuiz = ({
       </Helmet>
       
       <SEO 
-        title={`${title} | Interactive Bible Quiz`} 
-        description={`Test your knowledge of ${bookName} Chapter ${chapter || ''} with our interactive Bible quiz. ${normalizedQuestions.length} questions of in-depth study.`} 
+        title={`${title} | Free Online Bible Quiz with Answers`} 
+        description={seoDescription || `Take the free ${bookName} Bible quiz. Includes ${normalizedQuestions.length} questions, answers, and scripture references for deep study.`} 
       />
       
       {/* Slim Header */}
