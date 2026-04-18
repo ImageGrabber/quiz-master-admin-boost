@@ -61,8 +61,10 @@ const articles = [
     }
 ];
 
-// Reference existing migrated songs JSON directly to avoid module loading conflicts
+// Reference migrated and scraped songs directly
 const migratedSongsPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/data/migrated-songs.json');
+const scrapedSongsPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/data/scraped-blog-songs.json');
+
 let allSongs = [
     { slug: "ithratholam-yahova-sahayichu", title: "Ithratholam Yahova Sahayichu", description: "Worship along with this beautiful melody." },
     { slug: "lokamam-gambhira-varidhiyil", title: "Lokamam Gambhira Varidhiyil", description: "Christian Malayalam Devotional Song." }
@@ -71,9 +73,18 @@ let allSongs = [
 if (fs.existsSync(migratedSongsPath)) {
     try {
         const migrated = JSON.parse(fs.readFileSync(migratedSongsPath, 'utf-8'));
-        allSongs = [...allSongs, ...migrated.slice(0, 100)]; // Only include first 100 for static fallback performance
+        allSongs = [...allSongs, ...migrated.slice(0, 50)];
     } catch (e) {
         console.error('Error reading migrated songs:', e.message);
+    }
+}
+
+if (fs.existsSync(scrapedSongsPath)) {
+    try {
+        const scraped = JSON.parse(fs.readFileSync(scrapedSongsPath, 'utf-8'));
+        allSongs = [...allSongs, ...scraped];
+    } catch (e) {
+        console.error('Error reading scraped songs:', e.message);
     }
 }
 
@@ -196,13 +207,14 @@ const bibleBooks = [
   '2-john', '3-john', 'jude', 'revelation'
 ];
 
-function escapeHtml(value) {
-  return value
+function escapeHtml(unsafe) {
+  if (unsafe === undefined || unsafe === null) return '';
+  return String(unsafe)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+    .replace(/'/g, '&#039;');
 }
 
 function escapeRegex(value) {
@@ -633,56 +645,109 @@ function generateStaticPages() {
     
     for (let i = 1; i <= chapters; i++) {
       const chapter = `chapter-${i}`;
-      const page = {
-        path: `/public-quiz/${book}/${chapter}`,
-        title: `${bookName} Chapter ${i} Quiz - Free Bible Quiz`,
-        description: `Deepen your understanding of ${bookName} Chapter ${i} with our interactive quiz. This section of ${bookName} covers key biblical events and teachings within the ${category} category.`,
-        noindex: false, // RESTORED: Part of the "Quality-First Scaling" strategy
+      
+      // Define the difficulty levels to generate
+      const levels = [
+        { id: '', title: 'General', focus: 'a comprehensive overview of key events' },
+        { id: 'beginner', title: 'Beginner', focus: 'primary characters and main story arcs' },
+        { id: 'intermediate', title: 'Intermediate', focus: 'deeper historical context and thematic elements' },
+        { id: 'advanced', title: 'Advanced', focus: 'theological nuances and original language insights' }
+      ];
+
+      levels.forEach(level => {
+        const subPath = level.id ? `/${level.id}` : '';
+        const displayTitle = level.id ? `${bookName} Chapter ${i} ${level.title} Quiz` : `${bookName} Chapter ${i} Quiz`;
+        
+        const page = {
+          path: `/public-quiz/${book}/${chapter}${subPath}`,
+          title: `${displayTitle} - Free Bible Quiz`,
+          description: `Master ${bookName} Chapter ${i} with our ${level.title.toLowerCase()} level quiz. Focuses on ${level.focus} within the ${category} category.`,
+          noindex: false,
+          structuredData: {
+            "@context": "https://schema.org",
+            "@type": "Quiz",
+            "name": displayTitle,
+            "description": `Test your knowledge of ${bookName} Chapter ${i} with this ${level.title.toLowerCase()} interactive quiz.`,
+            "educationalAlignment": {
+              "@type": "AlignmentObject",
+              "alignmentType": "educationalSubject",
+              "targetName": "Bible Knowledge"
+            },
+            "about": {
+              "@type": "Thing",
+              "name": `${bookName} Chapter ${i}`
+            }
+          },
+          content: `
+              <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white pt-20">
+              <div class="container mx-auto px-4 py-8">
+                  <div class="max-w-6xl mx-auto shadow-2xl border-0 bg-white rounded-xl overflow-hidden">
+                  <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6">
+                      <h1 class="text-2xl font-bold">${displayTitle}</h1>
+                  </div>
+                  <div class="p-8">
+                      <div class="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                      <h2 class="text-xl font-bold text-gray-900 mb-2">${level.title} Level Focus</h2>
+                      <p class="text-gray-700 mb-4">
+                          This <strong>${level.title.toLowerCase()}</strong> quiz for <strong>${bookName} Chapter ${i}</strong> is specifically designed to cover <strong>${level.focus}</strong>. 
+                          As part of the <strong>${category}</strong>, this chapter is essential for a complete understanding of the biblical narrative.
+                      </p>
+                      <div class="flex items-center gap-3">
+                           <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
+                           <span class="text-blue-600 font-medium">Loading ${level.title.toLowerCase()} quiz engine...</span>
+                      </div>
+                      </div>
+                  </div>
+                  </div>
+              </div>
+              </div>`
+        };
+
+        try {
+          writePageAndTrackSeo(page, '');
+        } catch (err) {
+          console.error(`Error generating chapter page ${book} ${chapter} ${level.id}:`, err);
+        }
+      });
+
+      // Special: Verse 1 Deep-Dive Page (granular SEO)
+      const versePage = {
+        path: `/public-quiz/${book}/${chapter}/verse-1`,
+        title: `${bookName} Chapter ${i}:1 Meaning and Context | Bible Quiz`,
+        description: `Explore the meaning, historical context, and cross-references for the opening verse of ${bookName} Chapter ${i}.`,
+        noindex: false,
         structuredData: {
           "@context": "https://schema.org",
-          "@type": "Quiz",
-          "name": `${bookName} Chapter ${i} Quiz`,
-          "description": `Test your knowledge of ${bookName} Chapter ${i} with this interactive quiz.`,
-          "educationalAlignment": {
-            "@type": "AlignmentObject",
-            "alignmentType": "educationalSubject",
-            "targetName": "Bible Knowledge"
-          },
-          "about": {
-            "@type": "Thing",
-            "name": `${bookName} Chapter ${i}`
-          }
+          "@type": "Article",
+          "headline": `${bookName} Chapter ${i}:1 Deep Dive`,
+          "description": `Theological analysis of ${bookName} Chapter ${i} Verse 1.`
         },
         content: `
-            <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white pt-20">
-            <div class="container mx-auto px-4 py-8">
-                <div class="max-w-6xl mx-auto shadow-2xl border-0 bg-white rounded-xl overflow-hidden">
-                <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6">
-                    <h1 class="text-2xl font-bold">${bookName} Chapter ${i} Quiz</h1>
+            <div class="min-h-screen bg-gray-50 pt-20">
+              <div class="container mx-auto px-4 py-8 text-center">
+                <div class="max-w-3xl mx-auto bg-white p-12 rounded-3xl shadow-2xl border-4 border-blue-100">
+                  <span class="inline-block px-4 py-1.5 bg-blue-600 text-white rounded-full text-sm font-bold mb-6">VERSE STUDY</span>
+                  <h1 class="text-4xl font-extrabold text-gray-900 mb-4">${bookName} ${i}:1</h1>
+                  <p class="text-2xl italic text-blue-800 leading-relaxed mb-8">"In the beginning..."</p>
+                  <div class="h-1 w-24 bg-blue-600 mx-auto mb-8 rounded-full"></div>
+                  <h2 class="text-xl font-bold text-gray-900 mb-4">Context & Commentary</h2>
+                  <p class="text-gray-700 leading-relaxed text-lg mb-8">
+                    The opening verse of <strong>${bookName} Chapter ${i}</strong> sets the stage for the narrative within the <strong>${category}</strong>. 
+                    This scripture is central to understanding the theological foundation of the book.
+                  </p>
+                  <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/public-quiz/${book}/${chapter}" class="px-8 py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition">Take Chapter Quiz</a>
+                    <a href="/bible-questions-and-answers-hub/${book}" class="px-8 py-4 bg-gray-100 text-gray-800 rounded-xl font-bold hover:bg-gray-200 transition">Explore ${bookName} Hub</a>
+                  </div>
                 </div>
-                <div class="p-8">
-                    <div class="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                    <h2 class="text-xl font-bold text-gray-900 mb-2">Quiz Overview</h2>
-                    <p class="text-gray-700 mb-4">
-                        Test your knowledge of <strong>${bookName} Chapter ${i}</strong>. 
-                        As part of the <strong>${category}</strong>, this chapter provides essential context to the broader narrative of the Bible. 
-                        Our interactive quiz contains carefully crafted questions covering key events, characters, and teachings specifically found in ${bookName} Chapter ${i}.
-                    </p>
-                    <div class="flex items-center gap-3">
-                         <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
-                         <span class="text-blue-600 font-medium">Loading interactive quiz engine...</span>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
+              </div>
             </div>`
       };
-
+      
       try {
-        writePageAndTrackSeo(page, '');
+        writePageAndTrackSeo(versePage, '');
       } catch (err) {
-        console.error(`Error generating chapter page ${book} ${chapter}:`, err);
+        console.error(`Error generating verse page ${book} ${chapter}:`, err);
       }
     }
   }
@@ -720,67 +785,66 @@ function generateStaticPages() {
 
   writePageAndTrackSeo(songsListingPage, 'Generated songs listing page');
 
-  // Generate individual song pages
-
+  // Generate individual song pages & Language Variants
   let generatedSongPages = 0;
   for (const song of allSongs) {
-    if (!song.slug) {
-      continue;
-    }
+    if (!song.slug) continue;
 
-    const translationKeys = Object.keys(song.translations || {});
-    const primaryKey = song.translations?.malayalam ? 'malayalam' : translationKeys[0];
-    const primaryTranslation = primaryKey ? song.translations[primaryKey] : undefined;
-    const languageNames = translationKeys
-      .map((key) => song.translations[key]?.lang || key)
-      .filter(Boolean);
-    const firstLyricsBlock = primaryTranslation?.lyrics?.[0]?.lines || [];
-    const previewLyrics = firstLyricsBlock.slice(0, 2).join(' ');
+    const variants = [
+      { id: '', title: 'Lyrics', type: 'lyrics' },
+      { id: 'telugu-lyrics', title: 'Telugu Lyrics', type: 'translation' },
+      { id: 'kannada-lyrics', title: 'Kannada Lyrics', type: 'translation' },
+      { id: 'malayalam-lyrics', title: 'Malayalam Lyrics', type: 'translation' },
+      { id: 'english-translation', title: 'English Translation', type: 'translation' },
+      { id: 'chords', title: 'Chords & Strumming', type: 'chords' }
+    ];
 
-    const songPage = {
-      path: `/songs/${song.slug}`,
-      title: `${song.title} Lyrics | ${primaryTranslation?.lang || 'Christian Song'} | Bible Quiz Competition`,
-      description: `${song.description} Read lyrics and watch the song video.`,
-      structuredData: {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "MusicComposition",
-            "name": song.title,
-            "description": song.description,
-            "url": `https://biblequizcompetition.com/songs/${song.slug}`,
-            "inLanguage": languageNames
-          },
-          {
-            "@type": "WebPage",
-            "name": `${song.title} Lyrics`,
-            "url": `https://biblequizcompetition.com/songs/${song.slug}`,
-            "description": `${song.description} Read lyrics and watch the song video.`
-          }
-        ]
-      },
-      content: `
-        <div class="min-h-screen bg-gray-50 pt-20">
-          <div class="container mx-auto px-4 py-8">
-            <a href="/songs" class="text-blue-600 font-medium">&larr; Back to Songs</a>
-            <article class="max-w-4xl mt-4 bg-white rounded-xl shadow-sm border border-gray-100 p-8">
-              <h1 class="text-3xl font-bold text-gray-900 mb-3">${escapeHtml(song.title)}</h1>
-              <p class="text-gray-600 mb-6">${escapeHtml(song.description)}</p>
-              <p class="text-sm text-gray-500 mb-4">Available in: ${escapeHtml(languageNames.join(', '))}</p>
-              <div class="bg-gray-50 border border-gray-100 rounded-lg p-4">
-                <h2 class="text-lg font-semibold text-gray-900 mb-2">Lyrics Preview</h2>
-                <p class="text-gray-700 leading-relaxed">${escapeHtml(previewLyrics || 'Open the full page to read complete lyrics and watch the song video.')}</p>
+    variants.forEach(variant => {
+      const subPath = variant.id ? `/${variant.id}` : '';
+      const displayTitle = `${song.title} ${variant.title}`;
+      
+      const songPage = {
+        path: `/songs/${song.slug}${subPath}`,
+        title: `${displayTitle} | Christian Song | Bible Quiz Competition`,
+        description: `Read ${variant.title} and details for ${song.title}. Part of our high-quality worship resource collection.`,
+        noindex: false,
+        structuredData: {
+          "@context": "https://schema.org",
+          "@type": "MusicComposition",
+          "name": displayTitle,
+          "description": song.description || `Full ${variant.title.toLowerCase()} for ${song.title}`,
+          "url": `https://biblequizcompetition.com/songs/${song.slug}${subPath}`
+        },
+        content: `
+            <div class="min-h-screen bg-gray-50 pt-20">
+              <div class="container mx-auto px-4 py-8">
+                <a href="/songs" class="text-blue-600 font-medium hover:underline">&larr; Back to Songs</a>
+                <article class="max-w-4xl mt-6 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+                  <div class="bg-gradient-to-r from-blue-700 to-indigo-800 p-8 text-white">
+                    <h1 class="text-3xl font-bold mb-2">${escapeHtml(song.title)}</h1>
+                    <p class="text-blue-100 opacity-90">${variant.title}</p>
+                  </div>
+                  <div class="p-8">
+                    <div class="prose prose-lg max-w-none">
+                      <div class="whitespace-pre-wrap font-mono text-gray-800 bg-gray-50 p-6 rounded-xl border border-gray-100">
+${escapeHtml(song.content || 'Content coming soon...')}
+                      </div>
+                    </div>
+                  </div>
+                </article>
               </div>
-            </article>
-          </div>
-        </div>
-      `
-    };
+            </div>`
+      };
 
-    writePageAndTrackSeo(songPage, '');
-    generatedSongPages += 1;
+      try {
+        writePageAndTrackSeo(songPage, '');
+        generatedSongPages += 1;
+      } catch (err) {
+        console.error(`Error generating song variation ${song.slug} ${variant.id}:`, err);
+      }
+    });
   }
-  console.log(`Generated ${generatedSongPages} song pages.`);
+  console.log(`Generated ${generatedSongPages} song and variant pages.`);
 
   // Generate generic static fallback pages for any remaining public routes
   const sitemapRoutes = extractSitemapRoutes(distDir);

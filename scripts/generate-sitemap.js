@@ -138,21 +138,20 @@ function generateSitemap() {
     });
   });
 
-  // Public Quiz Chapter Pages (Quality-First Scaling)
-  // Restoring these to the sitemap to maintain the "Indexed" count while we improve their quality.
+  // Public Quiz Chapter Pages (Quality-First Scaling) - Now with Difficulty Tiers
   for (const [book, chapters] of Object.entries(bibleStructure)) {
     for (let i = 1; i <= chapters; i++) {
-      urls.push({
-        loc: `/public-quiz/${book}/chapter-${i}`,
-        priority: '0.5', // Lower priority than hubs
-        changefreq: 'monthly'
+       const baseLoc = `/public-quiz/${book}/chapter-${i}`;
+       // Main + Tiers + Verses
+       ['', '/beginner', '/intermediate', '/advanced', '/verse-1'].forEach(suffix => {
+        urls.push({
+          loc: `${baseLoc}${suffix}`,
+          priority: suffix === '' ? '0.6' : (suffix === '/verse-1' ? '0.7' : '0.5'),
+          changefreq: 'monthly'
+        });
       });
     }
   }
-
-  // Featured Quizzes (High value specifically curated quizzes)
-  // These are handled by the literal routes or manual addition if needed, 
-  // but we'll stick to the hubs as the primary indexing entry points.
 
   // Article pages - High value
   articles.forEach(article => {
@@ -163,23 +162,33 @@ function generateSitemap() {
     });
   });
 
-  // Song pages
+  // Song pages (from blog scrape and existing)
   urls.push({ loc: '/songs', priority: '0.9', changefreq: 'weekly' });
   const uniqueSongSlugs = new Set();
   
   // Add hardcoded song slugs
   ['ithratholam-yahova-sahayichu', 'lokamam-gambhira-varidhiyil', 'aswasame-enikkere-thingeedunnu', 'ente-daivam-mahathwathil'].forEach(slug => uniqueSongSlugs.add(slug));
 
-  // Read migrated songs directly from JSON
-  const migratedSongsPath = path.join(__dirname, '../src/data/migrated-songs.json');
-  if (fs.existsSync(migratedSongsPath)) {
+  // Read scraped blog songs
+  const scrapedSongsPath = path.join(__dirname, '../src/data/scraped-blog-songs.json');
+  if (fs.existsSync(scrapedSongsPath)) {
     try {
-      const migratedSongs = JSON.parse(fs.readFileSync(migratedSongsPath, 'utf-8'));
-      migratedSongs.forEach((song) => {
-        if (song.slug) uniqueSongSlugs.add(song.slug);
+      const scrapedSongs = JSON.parse(fs.readFileSync(scrapedSongsPath, 'utf-8'));
+      scrapedSongs.forEach((song) => {
+        if (song.slug) {
+          uniqueSongSlugs.add(song.slug);
+          // Add language variants for each song to target high-traffic queries
+          ['telugu-lyrics', 'kannada-lyrics', 'malayalam-lyrics', 'english-translation', 'chords'].forEach(variant => {
+             urls.push({
+               loc: `/songs/${song.slug}/${variant}`,
+               priority: '0.6',
+               changefreq: 'monthly'
+             });
+          });
+        }
       });
     } catch (e) {
-      console.error('Error reading migrated songs:', e.message);
+      console.error('Error reading scraped songs:', e.message);
     }
   }
 
