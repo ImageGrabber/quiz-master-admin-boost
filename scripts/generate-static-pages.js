@@ -681,21 +681,84 @@ function generateStaticPages() {
           content: `
               <div class="min-h-screen bg-gradient-to-br from-blue-50 via-purple-100 to-white pt-20">
               <div class="container mx-auto px-4 py-8">
+                  <nav class="text-sm text-gray-500 mb-4" aria-label="Breadcrumb">
+                    <a href="/" class="hover:text-blue-600">Home</a> &raquo;
+                    <a href="/bible-questions-and-answers-hub" class="hover:text-blue-600">Bible Q&A Hub</a> &raquo;
+                    <a href="/bible-questions-and-answers-hub/${book}" class="hover:text-blue-600">${bookName}</a> &raquo;
+                    <span class="text-gray-800">Chapter ${i}${level.id ? ' (' + level.title + ')' : ''}</span>
+                  </nav>
+
                   <div class="max-w-6xl mx-auto shadow-2xl border-0 bg-white rounded-xl overflow-hidden">
                   <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6">
                       <h1 class="text-2xl font-bold">${displayTitle}</h1>
+                      <p class="text-blue-100 mt-1 text-sm">Category: ${category} &bull; ${bookName} &bull; Chapter ${i} of ${chapters}</p>
                   </div>
                   <div class="p-8">
                       <div class="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                      <h2 class="text-xl font-bold text-gray-900 mb-2">${level.title} Level Focus</h2>
-                      <p class="text-gray-700 mb-4">
-                          This <strong>${level.title.toLowerCase()}</strong> quiz for <strong>${bookName} Chapter ${i}</strong> is specifically designed to cover <strong>${level.focus}</strong>. 
-                          As part of the <strong>${category}</strong>, this chapter is essential for a complete understanding of the biblical narrative.
-                      </p>
-                      <div class="flex items-center gap-3">
+                        <h2 class="text-xl font-bold text-gray-900 mb-2">About This Quiz</h2>
+                        <p class="text-gray-700 mb-3">
+                          Welcome to the <strong>${level.title.toLowerCase()} level</strong> quiz covering <strong>${bookName} Chapter ${i}</strong>.
+                          This chapter is part of the <strong>${category}</strong> section of the Bible and presents important themes
+                          that are central to both historical understanding and personal faith.
+                        </p>
+                        <p class="text-gray-700 mb-3">
+                          At the <strong>${level.title.toLowerCase()}</strong> difficulty, you will be tested on <strong>${level.focus}</strong>.
+                          Whether you are preparing for a Bible quiz competition, studying for a church group, or deepening your personal
+                          knowledge of Scripture, this quiz provides a structured way to engage with the text.
+                        </p>
+                      </div>
+
+                      <div class="mb-6 p-4 bg-purple-50 rounded-lg border border-purple-200">
+                        <h2 class="text-lg font-bold text-gray-900 mb-2">Key Themes in ${bookName} Chapter ${i}</h2>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1">
+                          <li>Understanding the narrative context within <strong>${bookName}</strong> as a whole</li>
+                          <li>Identifying major characters, events, and divine interactions in Chapter ${i}</li>
+                          <li>Connecting themes from Chapter ${i} to the broader message of the <strong>${category}</strong></li>
+                          <li>Applying lessons from this chapter to modern faith and daily life</li>
+                        </ul>
+                      </div>
+
+                      <div class="mb-6 p-4 bg-green-50 rounded-lg border border-green-200">
+                        <h2 class="text-lg font-bold text-gray-900 mb-2">What You Will Learn</h2>
+                        <p class="text-gray-700 mb-2">
+                          By completing this ${level.title.toLowerCase()} quiz, you will strengthen your recall of the specific events narrated
+                          in ${bookName} Chapter ${i}, understand the theological significance of those events within the ${category},
+                          and build confidence for competitive Bible quizzing or personal Bible study.
+                        </p>
+                        <p class="text-gray-700">
+                          Each question is crafted to reinforce your comprehension and encourage deeper exploration of the text.
+                          After completing the quiz, review your score breakdown to identify areas for further study.
+                        </p>
+                      </div>
+
+                      <div class="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div class="bg-white border rounded-lg p-3 text-center">
+                          <div class="text-2xl font-bold text-blue-600">10</div>
+                          <div class="text-xs text-gray-500">Questions</div>
+                        </div>
+                        <div class="bg-white border rounded-lg p-3 text-center">
+                          <div class="text-2xl font-bold text-purple-600">${level.title}</div>
+                          <div class="text-xs text-gray-500">Difficulty</div>
+                        </div>
+                        <div class="bg-white border rounded-lg p-3 text-center">
+                          <div class="text-2xl font-bold text-green-600">Free</div>
+                          <div class="text-xs text-gray-500">No signup required</div>
+                        </div>
+                      </div>
+
+                      <div class="flex items-center gap-3 mb-6">
                            <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
                            <span class="text-blue-600 font-medium">Loading ${level.title.toLowerCase()} quiz engine...</span>
                       </div>
+
+                      <div class="border-t pt-6">
+                        <h3 class="text-md font-bold text-gray-800 mb-3">Explore More ${bookName} Quizzes</h3>
+                        <div class="flex flex-wrap gap-2">
+                          ${i > 1 ? `<a href="/public-quiz/${book}/chapter-${i-1}" class="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-blue-100 text-gray-700">← Chapter ${i-1}</a>` : ''}
+                          ${i < chapters ? `<a href="/public-quiz/${book}/chapter-${i+1}" class="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-blue-100 text-gray-700">Chapter ${i+1} →</a>` : ''}
+                          <a href="/bible-questions-and-answers-hub/${book}" class="px-3 py-1 bg-blue-100 rounded-full text-sm hover:bg-blue-200 text-blue-700">All ${bookName} Chapters</a>
+                          <a href="/public-quiz/${book}/${chapter}/verse-1" class="px-3 py-1 bg-purple-100 rounded-full text-sm hover:bg-purple-200 text-purple-700">${bookName} ${i}:1 Deep Dive</a>
+                        </div>
                       </div>
                   </div>
                   </div>
@@ -724,20 +787,62 @@ function generateStaticPages() {
         },
         content: `
             <div class="min-h-screen bg-gray-50 pt-20">
-              <div class="container mx-auto px-4 py-8 text-center">
-                <div class="max-w-3xl mx-auto bg-white p-12 rounded-3xl shadow-2xl border-4 border-blue-100">
-                  <span class="inline-block px-4 py-1.5 bg-blue-600 text-white rounded-full text-sm font-bold mb-6">VERSE STUDY</span>
-                  <h1 class="text-4xl font-extrabold text-gray-900 mb-4">${bookName} ${i}:1</h1>
-                  <p class="text-2xl italic text-blue-800 leading-relaxed mb-8">"In the beginning..."</p>
-                  <div class="h-1 w-24 bg-blue-600 mx-auto mb-8 rounded-full"></div>
-                  <h2 class="text-xl font-bold text-gray-900 mb-4">Context & Commentary</h2>
-                  <p class="text-gray-700 leading-relaxed text-lg mb-8">
-                    The opening verse of <strong>${bookName} Chapter ${i}</strong> sets the stage for the narrative within the <strong>${category}</strong>. 
-                    This scripture is central to understanding the theological foundation of the book.
-                  </p>
+              <div class="container mx-auto px-4 py-8">
+                <nav class="text-sm text-gray-500 mb-4" aria-label="Breadcrumb">
+                  <a href="/" class="hover:text-blue-600">Home</a> &raquo;
+                  <a href="/bible-questions-and-answers-hub/${book}" class="hover:text-blue-600">${bookName}</a> &raquo;
+                  <a href="/public-quiz/${book}/${chapter}" class="hover:text-blue-600">Chapter ${i}</a> &raquo;
+                  <span class="text-gray-800">Verse 1 Study</span>
+                </nav>
+
+                <div class="max-w-3xl mx-auto">
+                  <div class="bg-white p-10 rounded-3xl shadow-2xl border border-blue-100 mb-8">
+                    <span class="inline-block px-4 py-1.5 bg-blue-600 text-white rounded-full text-sm font-bold mb-6">VERSE STUDY</span>
+                    <h1 class="text-4xl font-extrabold text-gray-900 mb-4">${bookName} ${i}:1</h1>
+                    <p class="text-2xl italic text-blue-800 leading-relaxed mb-6">"In the beginning..."</p>
+                    <div class="h-1 w-24 bg-blue-600 mb-8 rounded-full"></div>
+
+                    <h2 class="text-xl font-bold text-gray-900 mb-3">Context & Commentary</h2>
+                    <p class="text-gray-700 leading-relaxed text-lg mb-4">
+                      The opening verse of <strong>${bookName} Chapter ${i}</strong> sets the stage for the narrative within the <strong>${category}</strong>.
+                      This scripture is central to understanding the theological foundation of the book. Scholars and pastors alike emphasize this verse
+                      as a pivotal transition point connecting the themes of the preceding chapters with what follows.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-6">
+                      When studying ${bookName} ${i}:1, it is helpful to consider the historical period in which these events took place,
+                      the original audience, and the literary genre of the passage. The ${category} genre carries specific conventions
+                      that shape how we interpret each verse and its application to modern faith practice.
+                    </p>
+                  </div>
+
+                  <div class="bg-white p-8 rounded-2xl shadow-lg border border-purple-100 mb-8">
+                    <h2 class="text-lg font-bold text-gray-900 mb-3">📖 Study Questions for ${bookName} ${i}:1</h2>
+                    <ol class="list-decimal list-inside text-gray-700 space-y-2">
+                      <li>What is the main action or declaration made in this opening verse?</li>
+                      <li>Who are the key figures mentioned or implied in Chapter ${i}?</li>
+                      <li>How does this verse connect to the broader theme of ${bookName}?</li>
+                      <li>What does this verse reveal about God's character or plan?</li>
+                      <li>How can you apply the lesson of ${bookName} ${i}:1 to your daily life?</li>
+                    </ol>
+                  </div>
+
+                  <div class="bg-white p-8 rounded-2xl shadow-lg border border-green-100 mb-8">
+                    <h2 class="text-lg font-bold text-gray-900 mb-3">🔗 Cross-References & Related Passages</h2>
+                    <p class="text-gray-700 mb-3">
+                      To deepen your understanding of ${bookName} ${i}:1, explore these related areas of Scripture.
+                      Cross-referencing passages provides a fuller picture of the biblical narrative and helps connect themes across the Old and New Testaments.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                      ${i > 1 ? `<a href="/public-quiz/${book}/chapter-${i-1}/verse-1" class="px-3 py-1.5 bg-green-50 border border-green-200 rounded-full text-sm text-green-700 hover:bg-green-100">${bookName} ${i-1}:1</a>` : ''}
+                      ${i < chapters ? `<a href="/public-quiz/${book}/chapter-${i+1}/verse-1" class="px-3 py-1.5 bg-green-50 border border-green-200 rounded-full text-sm text-green-700 hover:bg-green-100">${bookName} ${i+1}:1</a>` : ''}
+                      <a href="/public-quiz/${book}/${chapter}/beginner" class="px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-full text-sm text-blue-700 hover:bg-blue-100">Beginner Quiz</a>
+                      <a href="/public-quiz/${book}/${chapter}/advanced" class="px-3 py-1.5 bg-purple-50 border border-purple-200 rounded-full text-sm text-purple-700 hover:bg-purple-100">Advanced Quiz</a>
+                    </div>
+                  </div>
+
                   <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="/public-quiz/${book}/${chapter}" class="px-8 py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition">Take Chapter Quiz</a>
-                    <a href="/bible-questions-and-answers-hub/${book}" class="px-8 py-4 bg-gray-100 text-gray-800 rounded-xl font-bold hover:bg-gray-200 transition">Explore ${bookName} Hub</a>
+                    <a href="/public-quiz/${book}/${chapter}" class="px-8 py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition text-center">Take Chapter ${i} Quiz</a>
+                    <a href="/bible-questions-and-answers-hub/${book}" class="px-8 py-4 bg-gray-100 text-gray-800 rounded-xl font-bold hover:bg-gray-200 transition text-center">Explore ${bookName} Hub</a>
                   </div>
                 </div>
               </div>
@@ -889,6 +994,25 @@ ${escapeHtml(song.content || 'Content coming soon...')}
   const publicAuditPath = path.join(__dirname, '../public/seo-audit.json');
   fs.writeFileSync(publicAuditPath, JSON.stringify(seoAuditOutput, null, 2));
   console.log(`Generated SEO audit manifest copy for dev: ${publicAuditPath}`);
+
+  // Cleanup: Remove legacy .html files that duplicate the directory-based pages
+  // These cause "Duplicate without user-selected canonical" in Google Search Console
+  let removedLegacy = 0;
+  function removeLegacyHtmlFiles(dir) {
+    if (!fs.existsSync(dir)) return;
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        removeLegacyHtmlFiles(fullPath);
+      } else if (entry.isFile() && entry.name.endsWith('.html') && entry.name !== 'index.html') {
+        fs.unlinkSync(fullPath);
+        removedLegacy++;
+      }
+    }
+  }
+  removeLegacyHtmlFiles(distDir);
+  console.log(`Cleaned up ${removedLegacy} legacy .html files from dist/`);
 
   console.log('Static pages generation complete!');
 }
