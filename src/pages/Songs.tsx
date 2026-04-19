@@ -18,7 +18,7 @@ const SongsHub = () => {
       icon: AudioLines,
       path: "/malayalam-songs",
       color: "from-blue-600 to-indigo-600",
-      image: "/Users/stevenmathew/.gemini/antigravity/brain/8fe80fd6-1c9c-456b-8ac3-d394fd3137f1/malayalam_worship_card_1776610970766.png",
+      image: "/assets/songs/malayalam_card.png",
       count: "100+ Songs"
     },
     {
@@ -28,7 +28,7 @@ const SongsHub = () => {
       icon: Music,
       path: "/hindi-songs",
       color: "from-rose-500 to-orange-500",
-      image: "/Users/stevenmathew/.gemini/antigravity/brain/8fe80fd6-1c9c-456b-8ac3-d394fd3137f1/hindi_worship_card_1776610984889.png",
+      image: "/assets/songs/hindi_card.png",
       count: "25+ Enhanced"
     },
     {
@@ -38,7 +38,7 @@ const SongsHub = () => {
       icon: Sparkles,
       path: "/english-songs",
       color: "from-emerald-500 to-teal-600",
-      image: "/Users/stevenmathew/.gemini/antigravity/brain/8fe80fd6-1c9c-456b-8ac3-d394fd3137f1/english_worship_card_1776610997840.png",
+      image: "/assets/songs/english_card.png",
       count: "Growing Library"
     }
   ];
@@ -64,16 +64,16 @@ const SongsHub = () => {
       <section className="relative pt-32 pb-24 px-6 overflow-hidden bg-white">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(59,130,246,0.08),transparent_50%)]" />
         <div className="max-w-7xl mx-auto text-center relative z-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 text-xs font-bold mb-8 border border-blue-100 uppercase tracking-widest">
-              <Sparkles className="w-3.5 h-3.5 fill-blue-600" /> Premium Worship Hub 2026
-            </span>
-            <h1 className="text-5xl md:text-7xl font-black text-gray-900 mb-8 leading-[1.1] tracking-tight">
-              Voices of Praise: <br /> 
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600">Pure Worship</span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed mb-12 font-light">
-              Explore your favorite worship songs with <span className="font-medium text-gray-900 underline decoration-blue-200 underline-offset-4">verified lyrics</span>, professional guitar chords, and bilingual translations.
-            </p>
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-700 text-xs font-bold mb-8 border border-blue-100 uppercase tracking-widest">
+            Premium Worship Hub 2026
+          </span>
+          <h1 className="text-5xl md:text-7xl font-black text-gray-900 mb-8 leading-[1.1] tracking-tight">
+            Voices of Praise: <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600">Pure Worship</span>
+          </h1>
+          <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed mb-12 font-light">
+            Explore your favorite worship songs with <span className="font-medium text-gray-900 underline decoration-blue-200 underline-offset-4">verified lyrics</span>, professional guitar chords, and bilingual translations.
+          </p>
         </div>
       </section>
 
@@ -86,19 +86,19 @@ const SongsHub = () => {
               className="animate-in fade-in slide-in-from-bottom-4 duration-500"
               style={{ animationDelay: `${idx * 100}ms`, animationFillMode: 'both' }}
             >
-              <Card 
+              <Card
                 className="group h-full bg-white border border-gray-100 shadow-xl shadow-gray-200/40 rounded-[2.5rem] overflow-hidden cursor-pointer hover:-translate-y-2 hover:border-blue-200 transition-all duration-500 flex flex-col"
                 onClick={() => navigate(item.path)}
               >
                 {/* Fixed Aspect Image Header */}
                 <div className="relative aspect-video overflow-hidden">
-                  <img 
-                    src={item.image} 
-                    alt={item.title} 
+                  <img
+                    src={item.image}
+                    alt={item.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                  
+
                   {/* Floating Icon */}
                   <div className={`absolute -bottom-6 left-8 w-14 h-14 rounded-2xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white shadow-2xl border-4 border-white transform transition-transform group-hover:rotate-6`}>
                     <item.icon className="w-7 h-7" />
@@ -115,7 +115,7 @@ const SongsHub = () => {
                       {item.description}
                     </p>
                   </div>
-                  
+
                   <div className="mt-auto flex items-center justify-between pt-8 border-t border-gray-50">
                     <span className="text-[11px] font-black text-gray-900 bg-gray-100 px-4 py-2 rounded-xl uppercase tracking-wider">
                       {item.count}
@@ -135,7 +135,7 @@ const SongsHub = () => {
       <section className="py-32 px-6 bg-white overflow-hidden border-t border-gray-100">
         <div className="max-w-4xl mx-auto">
           <div className="flex flex-col gap-24">
-            
+
             {/* The Heart of Worship */}
             <div className="text-center animate-in fade-in slide-in-from-bottom-8 duration-1000">
               <div className="flex items-center justify-center gap-3 mb-8">
@@ -191,7 +191,7 @@ const SongsHub = () => {
                 <h5 className="text-4xl font-black text-indigo-950 mb-8 tracking-tight">The Musician's Resource 2026</h5>
                 <div className="space-y-6 text-indigo-900/60 text-lg font-light leading-relaxed">
                   <p>
-                    In 2026, we recognize that worship leaders and musicians need more than just text. Our "Chord-Wala" system is designed to empower every guitarist and pianist to lead worship with confidence. 
+                    In 2026, we recognize that worship leaders and musicians need more than just text. Our "Chord-Wala" system is designed to empower every guitarist and pianist to lead worship with confidence.
                   </p>
                   <p>
                     By providing accurate chord sheets alongside English meaning translations, we break down language barriers and musical hurdles. Our mission is to ensure that "every tribe and every tongue" has the tools to praise the Lord.
