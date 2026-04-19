@@ -4182,6 +4182,12 @@
           {
             "lines": [
               "आओ जग के लोग सब ही, यीशु राजा बुलाता है।"
+            ],
+            "chords": [
+              "D",
+              "G",
+              "A",
+              "D"
             ]
           },
           {
@@ -4189,6 +4195,12 @@
             "lines": [
               "1.  जग में जिसका स्थान नहीं है, जग में ज��सका मान नहीं है",
               "राज तुम्हें देने के लिए, यीशु राजा बुलाता है।"
+            ],
+            "chords": [
+              "D",
+              "G",
+              "A",
+              "D"
             ]
           },
           {
@@ -4244,6 +4256,16 @@
             "lines": [
               "4. Aao bhaaiiyon aao behenon, aakar usko parkho dekho",
               "saaraa bojh uṭhaane ke lie, yeshu raajaa bulaataa hai.."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Come, all people of the world, let us praise the Lord together."
             ]
           }
         ]
@@ -7791,6 +7813,12 @@
             "lines": [
               "आराधना हो आराधना",
               "खुदावंद येशु ��ी आराधना"
+            ],
+            "chords": [
+              "C",
+              "F",
+              "G",
+              "C"
             ]
           },
           {
@@ -7798,6 +7826,12 @@
             "lines": [
               "शांतिदाता की आराधना",
               "मुक्तिदाता की आराधना"
+            ],
+            "chords": [
+              "C",
+              "F",
+              "G",
+              "C"
             ]
           },
           {
@@ -7901,6 +7935,16 @@
             "lines": [
               "Duto ke sang milke aaradhna",
               "stuti prashansa aaradhna"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Worship, let there be worship. Worship to the Lord Jesus."
             ]
           }
         ]
@@ -27134,12 +27178,24 @@
           {
             "lines": [
               "परमेश्वर शरणस्थान और बल हमारा है"
+            ],
+            "chords": [
+              "G",
+              "C",
+              "D",
+              "G"
             ]
           },
           {
             "verse": "1",
             "lines": [
               "सहायक संकट में जो सहज ही मिलता है"
+            ],
+            "chords": [
+              "G",
+              "Am",
+              "D",
+              "G"
             ]
           },
           {
@@ -27296,6 +27352,16 @@
             "verse": "27",
             "lines": [
               "Yakoob Ka Anant Parmeshwar Gad Hamara Hai Uncha"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "God is our refuge and strength, a very present help in trouble. Therefore we will not fear."
             ]
           }
         ]
