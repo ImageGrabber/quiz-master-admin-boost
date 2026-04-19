@@ -154,6 +154,7 @@ import RulesAndPrizes from "./pages/seo-quizzes/RulesAndPrizes";
 import BibleTriviaForKids from "./pages/seo-quizzes/BibleTriviaForKids";
 import BookOfJohnQuizQuestions from "./pages/seo-quizzes/BookOfJohnQuizQuestions";
 import Songs from "./pages/Songs";
+import MalayalamSongs from "./pages/MalayalamSongs";
 import SongDetail from "./pages/SongDetail";
 import EnglishSongs from "./pages/EnglishSongs";
 import EnglishSongDetail from "./pages/EnglishSongDetail";
@@ -324,9 +325,9 @@ const App = () => {
               <Route path="/hard-bible-quiz-for-adults" element={<HardBibleQuizForAdults />} />
               <Route path="/bible-trivia-for-kids-under-10" element={<BibleTriviaForKids />} />
               <Route path="/book-of-john-quiz-questions" element={<BookOfJohnQuizQuestions />} />
-              <Route path="/songs" element={<LegacyMalayalamSongsRedirect />} />
+              <Route path="/songs" element={<Songs />} />
               <Route path="/songs/:slug" element={<LegacyMalayalamSongsRedirect />} />
-              <Route path="/malayalam-songs" element={<Songs />} />
+              <Route path="/malayalam-songs" element={<MalayalamSongs />} />
               <Route path="/malayalam-songs/:slug" element={<SongDetail />} />
               <Route path="/english-songs" element={<EnglishSongs />} />
               <Route path="/english-songs/:slug" element={<EnglishSongDetail />} />
