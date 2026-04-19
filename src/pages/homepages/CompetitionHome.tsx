@@ -294,7 +294,7 @@ const CompetitionHome = () => {
               "itemListElement": [
                 { "@type": "ListItem", "position": 1, "name": "Bible Study Hub", "url": "https://biblequizcompetition.com/bible-questions-and-answers-hub" },
                 { "@type": "ListItem", "position": 2, "name": "Kids Bible Stories", "url": "https://biblequizcompetition.com/kids-stories" },
-                { "@type": "ListItem", "position": 3, "name": "Christian Song Library", "url": "https://biblequizcompetition.com/songs" }
+                { "@type": "ListItem", "position": 3, "name": "Christian Song Library", "url": "https://biblequizcompetition.com/malayalam-songs" }
               ]
             }
           ]
@@ -507,7 +507,7 @@ const CompetitionHome = () => {
               {/* Songs Card */}
               <div
                 className="group relative overflow-hidden rounded-[2.5rem] bg-white p-10 cursor-pointer shadow-2xl hover:scale-[1.02] transition-all duration-500 border border-gray-200"
-                onClick={() => navigate("/songs")}
+                onClick={() => navigate("/malayalam-songs")}
               >
                 <div className="absolute bottom-0 right-0 p-12 opacity-10 group-hover:scale-125 transition-transform duration-700">
                   <Globe className="w-48 h-48 text-black" />

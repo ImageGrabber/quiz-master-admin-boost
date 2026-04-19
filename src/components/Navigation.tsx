@@ -120,7 +120,7 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
             {songsDropdownOpen && (
               <div className="absolute top-full mt-2 left-0 bg-white rounded-lg shadow-lg border border-gray-200 z-50 min-w-[200px] py-1">
                 <button
-                  onClick={() => { setSongsDropdownOpen(false); navigate('/songs'); }}
+                  onClick={() => { setSongsDropdownOpen(false); navigate('/malayalam-songs'); }}
                   className="w-full text-left px-4 py-2.5 hover:bg-gray-50 font-urbanist font-light text-base text-gray-700 hover:text-gray-900 transition-colors"
                 >
                   Malayalam Songs
@@ -225,7 +225,7 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-6 right-6 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 flex flex-col overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-b border-gray-50" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A</button>
-          <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-b border-gray-50" onClick={() => { setMobileMenuOpen(false); navigate("/songs"); }}>Malayalam Songs</button>
+          <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-b border-gray-50" onClick={() => { setMobileMenuOpen(false); navigate("/malayalam-songs"); }}>Malayalam Songs</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-b border-gray-50" onClick={() => { setMobileMenuOpen(false); navigate("/english-songs"); }}>English Hymns</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-b border-gray-50" onClick={() => { setMobileMenuOpen(false); navigate("/hindi-songs"); }}>Hindi Songs</button>
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-b border-gray-50" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>

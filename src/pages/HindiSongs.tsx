@@ -4,9 +4,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { Music, PlayCircle, Search } from "lucide-react";
+import { Music, PlayCircle, Search, Guitar } from "lucide-react";
 import { useState, useMemo } from "react";
 import type { Song } from "@/data/songs";
+import { Badge } from "@/components/ui/badge";
 import hindiSongsData from "@/data/hindi-songs.json";
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
@@ -16,8 +17,9 @@ const HindiSongs = () => {
     const navigate = useNavigate();
     const [activeLetter, setActiveLetter] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
+    const [chordsOnly, setChordsOnly] = useState(false);
 
-    const { letterCounts, filteredSongs, totalCount, hasSearchQuery } = useMemo(() => {
+    const { filteredSongs, counts, totalVisible } = useMemo(() => {
         const counts: Record<string, number> = {};
         ALPHABET.forEach(l => counts[l] = 0);
         const normalizedSearch = searchQuery.trim().toLowerCase();
@@ -26,36 +28,58 @@ const HindiSongs = () => {
             a.title.localeCompare(b.title, undefined, { sensitivity: 'base' })
         );
 
-        sorted.forEach(song => {
-            const firstChar = song.title.charAt(0).toUpperCase();
-            if (counts[firstChar] !== undefined) counts[firstChar]++;
+        const filtered = sorted.filter(song => {
+            const matchesSearch = !normalizedSearch || 
+                song.title.toLowerCase().includes(normalizedSearch) ||
+                song.description.toLowerCase().includes(normalizedSearch);
+            
+            const matchesLetter = !activeLetter || 
+                song.title.charAt(0).toUpperCase() === activeLetter;
+
+            const hasChords = chordsOnly ? Object.values(song.translations).some(t => 
+                t.lyrics.some(l => l.chords && l.chords.length > 0)
+            ) : true;
+
+            return matchesSearch && matchesLetter && hasChords;
         });
 
-        const filteredByLetter = activeLetter
-            ? sorted.filter(s => s.title.charAt(0).toUpperCase() === activeLetter)
-            : sorted;
-        const filtered = normalizedSearch
-            ? filteredByLetter.filter(s =>
-                s.title.toLowerCase().includes(normalizedSearch) ||
-                s.description.toLowerCase().includes(normalizedSearch)
-            )
-            : filteredByLetter;
+        // Update counts based on CURRENT search/chords filter but NOT the letter filter
+        sorted.forEach(song => {
+            const matchesSearch = !normalizedSearch || 
+                song.title.toLowerCase().includes(normalizedSearch) ||
+                song.description.toLowerCase().includes(normalizedSearch);
+            
+            const hasChords = chordsOnly ? Object.values(song.translations).some(t => 
+                t.lyrics.some(l => l.chords && l.chords.length > 0)
+            ) : true;
 
-        return {
-            letterCounts: counts,
-            filteredSongs: filtered,
-            totalCount: songs.length,
-            hasSearchQuery: normalizedSearch.length > 0
+            if (matchesSearch && hasChords) {
+                const firstChar = song.title.charAt(0).toUpperCase();
+                if (counts[firstChar] !== undefined) counts[firstChar]++;
+            }
+        });
+
+        return { 
+            filteredSongs: filtered, 
+            counts, 
+            totalVisible: sorted.filter(s => {
+                const matchesSearch = !normalizedSearch || 
+                    s.title.toLowerCase().includes(normalizedSearch);
+                const hasChords = chordsOnly ? Object.values(s.translations).some(t => 
+                    t.lyrics.some(l => l.chords && l.chords.length > 0)
+                ) : true;
+                return matchesSearch && hasChords;
+            }).length
         };
-    }, [activeLetter, searchQuery]);
+    }, [activeLetter, searchQuery, chordsOnly]);
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
             <Helmet>
-                <title>Hindi Christian Songs & Masih Geet Lyrics | Bible Quiz Competition</title>
+                <title>Hindi Christian Songs Lyrics & Guitar Chords | Bible Quiz Competition</title>
                 <meta
                     name="description"
-                    content="Browse Hindi Christian devotional songs with lyrics. Masih Geet, Yeshu Ke Geet, and worship songs in Hindi with YouTube videos."
+                    content="Browse Hindi Christian devotional songs with lyrics and guitar chords. Masih Geet, Yeshu Ke Geet, and worship songs in Hindi with YouTube videos."
                 />
                 <link rel="canonical" href="https://biblequizcompetition.com/hindi-songs" />
             </Helmet>
@@ -72,8 +96,8 @@ const HindiSongs = () => {
                     </p>
                 </div>
 
-                <div className="max-w-3xl mx-auto mb-6">
-                    <div className="relative">
+                <div className="max-w-4xl mx-auto mb-8 flex flex-col md:flex-row gap-4 items-center">
+                    <div className="relative flex-grow w-full">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                         <Input
                             type="text"
@@ -83,6 +107,18 @@ const HindiSongs = () => {
                             className="pl-10 h-11 bg-white border-gray-200 focus-visible:ring-orange-200"
                         />
                     </div>
+                    
+                    <button
+                        onClick={() => setChordsOnly(!chordsOnly)}
+                        className={`flex items-center gap-2 px-4 h-11 rounded-xl font-bold transition-all duration-200 border whitespace-nowrap
+                            ${chordsOnly 
+                                ? 'bg-orange-600 text-white border-orange-600 shadow-lg shadow-orange-100' 
+                                : 'bg-white text-gray-600 border-gray-200 hover:border-orange-300 hover:text-orange-600'
+                            }`}
+                    >
+                        <Guitar className={`w-4 h-4 ${chordsOnly ? 'text-white' : 'text-gray-400'}`} />
+                        Guitar Chords
+                    </button>
                 </div>
 
                 {/* A-Z Filter Bar */}
@@ -98,12 +134,12 @@ const HindiSongs = () => {
                         >
                             <span>All</span>
                             <span className={`text-[10px] font-medium mt-0.5 ${!activeLetter ? 'text-orange-100' : 'text-gray-400'}`}>
-                                {totalCount}
+                                {totalVisible}
                             </span>
                         </button>
 
                         {ALPHABET.map(letter => {
-                            const count = letterCounts[letter];
+                            const count = counts[letter];
                             const isActive = activeLetter === letter;
                             const hasItems = count > 0;
 
@@ -134,54 +170,71 @@ const HindiSongs = () => {
 
                 <div className="max-w-7xl mx-auto mb-6">
                     <p className="text-sm text-gray-500 font-medium">
-                        {activeLetter && hasSearchQuery && (
-                            <>Showing <span className="text-orange-600 font-bold">{filteredSongs.length}</span> songs starting with "{activeLetter}" matching "{searchQuery.trim()}"</>
-                        )}
-                        {activeLetter && !hasSearchQuery && (
+                        {chordsOnly && <span className="mr-2 inline-flex items-center text-orange-600 font-bold bg-orange-50 px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Chords Only</span>}
+                        {activeLetter && (
                             <>Showing <span className="text-orange-600 font-bold">{filteredSongs.length}</span> songs starting with "{activeLetter}"</>
                         )}
-                        {!activeLetter && hasSearchQuery && (
-                            <>Showing <span className="text-orange-600 font-bold">{filteredSongs.length}</span> songs matching "{searchQuery.trim()}"</>
+                        {!activeLetter && (
+                            <>Showing all <span className="text-orange-600 font-bold">{filteredSongs.length}</span> songs</>
                         )}
-                        {!activeLetter && !hasSearchQuery && (
-                            <>Showing all <span className="text-orange-600 font-bold">{totalCount}</span> songs</>
-                        )}
+                        {searchQuery && <> matching "{searchQuery.trim()}"</>}
                     </p>
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-                    {filteredSongs.map((song) => (
-                        <Card
-                            key={song.slug}
-                            className="group cursor-pointer hover:shadow-xl transition-all duration-300 border-none bg-white overflow-hidden"
-                            onClick={() => navigate(`/hindi-songs/${song.slug}`)}
-                        >
-                            <div className="relative h-48 bg-gradient-to-br from-orange-900 to-amber-800 flex items-center justify-center overflow-hidden">
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
-                                {song.videoUrl ? (
-                                    <img
-                                        src={`https://img.youtube.com/vi/${song.videoUrl.split('/').pop()}/hqdefault.jpg`}
-                                        alt={song.title}
-                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80"
-                                        onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                                    />
-                                ) : null}
-                                <PlayCircle className="w-12 h-12 text-white/90 absolute z-20 group-hover:scale-110 transition-transform" />
-                            </div>
+                    {filteredSongs.map((song) => {
+                        const hasChords = Object.values(song.translations).some(t => 
+                            t.lyrics.some(l => l.chords && l.chords.length > 0)
+                        );
 
-                            <CardContent className="p-6">
-                                <div className="flex items-start gap-3 mb-3">
-                                    <Music className="w-5 h-5 text-orange-600 mt-1 flex-shrink-0" />
-                                    <h3 className="text-xl font-bold font-urbanist text-gray-900 leading-tight group-hover:text-orange-600 transition-colors">
-                                        {song.title}
-                                    </h3>
+                        return (
+                            <Card
+                                key={song.slug}
+                                className="group cursor-pointer hover:shadow-xl transition-all duration-300 border-none bg-white overflow-hidden flex flex-col"
+                                onClick={() => navigate(`/hindi-songs/${song.slug}`)}
+                            >
+                                <div className="relative h-48 bg-gradient-to-br from-orange-900 to-amber-800 flex items-center justify-center overflow-hidden">
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
+                                    {song.videoUrl ? (
+                                        <img
+                                            src={`https://img.youtube.com/vi/${song.videoUrl.split('/').pop()}/hqdefault.jpg`}
+                                            alt={song.title}
+                                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80"
+                                            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                                        />
+                                    ) : null}
+                                    <PlayCircle className="w-12 h-12 text-white/90 absolute z-20 group-hover:scale-110 transition-transform" />
+                                    
+                                    {hasChords && (
+                                        <div className="absolute top-4 right-4 z-20">
+                                            <Badge className="bg-orange-600/90 text-white border-none backdrop-blur px-2 py-1 rounded-lg flex items-center gap-1.5 shadow-lg">
+                                                <Guitar className="w-3 h-3" />
+                                                <span className="text-[10px] font-bold uppercase tracking-wider">Chords</span>
+                                            </Badge>
+                                        </div>
+                                    )}
                                 </div>
-                                <p className="text-sm text-gray-500 line-clamp-2 pl-8">
-                                    {song.description}
-                                </p>
-                            </CardContent>
-                        </Card>
-                    ))}
+
+                                <CardContent className="p-6 flex-grow flex flex-col">
+                                    <div className="flex items-start gap-3 mb-3">
+                                        <div className="p-1.5 bg-orange-50 rounded-lg group-hover:bg-orange-100 transition-colors">
+                                            <Music className="w-4 h-4 text-orange-600" />
+                                        </div>
+                                        <h3 className="text-xl font-bold font-urbanist text-gray-900 leading-tight group-hover:text-orange-600 transition-colors">
+                                            {song.title}
+                                        </h3>
+                                    </div>
+                                    <p className="text-sm text-gray-500 line-clamp-2 pl-10 mb-4 flex-grow">
+                                        {song.description}
+                                    </p>
+                                    <div className="pl-10 flex items-center gap-2">
+                                        <div className="h-0.5 w-8 bg-orange-100 rounded-full group-hover:w-12 transition-all duration-300" />
+                                        <span className="text-[10px] font-bold text-orange-600 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Read Lyrics</span>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        );
+                    })}
                 </div>
             </main>
 

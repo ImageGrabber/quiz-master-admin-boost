@@ -4,9 +4,12 @@ import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Music, Languages, Book, Guitar } from 'lucide-react';
+import { Music, Languages, Book, Guitar, Video, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const HoTeriStutiLyrics = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-slate-50">
       <SEO
@@ -128,7 +131,7 @@ const HoTeriStutiLyrics = () => {
                     രാജാധി രാജാവിന്നാരാധനാ
                     എല്ലാ പ്രശംസക്കും യോഗ്യൻ നീയേ
                     പാടുന്നു ഞാൻ അങ്ങേക്കാരാധനാ
-
+                    
                     ഹാല്ലേ ഹാലേലുയ്യ ഹാലേലുയ്യ ഹാലേലുയ്യ
 
                     കരുണയിൻ കരത്താൽ നീ കാക്കുന്നവാൻ
@@ -211,15 +214,16 @@ const HoTeriStutiLyrics = () => {
                   <h2 className="text-2xl font-bold text-blue-600 mb-6 flex items-center justify-center gap-2">
                     <Guitar className="w-6 h-6" /> Guitar Chords (Scale: Am)
                   </h2>
-                  <div className="max-w-md mx-auto text-left font-mono bg-slate-50 p-6 rounded-lg border border-slate-200">
-                    <p className="mb-4"><strong>Intro:</strong> Am | F | G | E</p>
-                    <p className="mb-2"><strong>(Am)</strong> Ho teri stuti aur <strong>(F)</strong> aradhana,</p>
-                    <p className="mb-2"><strong>(G)</strong> Karta hun mein tujhse yeh <strong>(E)</strong> prarthana</p>
-                    <p className="mb-2"><strong>(Am)</strong> Mahima se teri tu is <strong>(F)</strong> jagah ko bhar,</p>
-                    <p className="mb-4"><strong>(G)</strong> Jo bhi tu chahe tu yahan <strong>(E)</strong> par kar</p>
-                    
-                    <p className="mb-2"><strong>(Am)</strong> Hale-hallelujah, <strong>(F)</strong> Hallelujah,</p>
-                    <p className="mb-4"><strong>(G)</strong> Hallelujah <strong>(E)</strong> ...</p>
+                  <div className="max-w-md mx-auto text-left font-mono bg-slate-900 text-white p-8 rounded-2xl shadow-xl border border-slate-700">
+                    <p className="text-orange-400 font-bold mb-4">Strumming: D DU UDU</p>
+                    <div className="space-y-4">
+                      <p><strong>(Am)</strong> Ho teri stuti aur <strong>(F)</strong> aradhana,</p>
+                      <p><strong>(G)</strong> Karta hun mein tujhse yeh <strong>(E)</strong> prarthana</p>
+                      <p><strong>(Am)</strong> Mahima se teri tu is <strong>(F)</strong> jagah ko bhar,</p>
+                      <p><strong>(G)</strong> Jo bhi tu chahe tu yahan <strong>(E)</strong> par kar</p>
+                      
+                      <p className="pt-4 border-t border-slate-700"><strong>(Am)</strong> Hale-hallelujah, <strong>(F)</strong> Hallelujah, <strong>(G)</strong> Hallelujah <strong>(E)</strong></p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>

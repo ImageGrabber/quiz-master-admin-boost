@@ -79,7 +79,7 @@ const BibleQuizQuestionsAndAnswers = () => {
                         From easy questions for kids to hard theology for adults, we have it all.
                     </p>
                     <div className="flex flex-wrap justify-center gap-4">
-                        <Button size="lg" className="bg-blue-600 hover:bg-blue-700" onClick={() => navigate('/todays-quiz')}>
+                        <Button size="lg" className="bg-blue-600 hover:bg-blue-700" onClick={() => navigate('/daily-bible-quiz')}>
                             <Play className="mr-2 h-5 w-5" /> Play Interactive Quiz
                         </Button>
                         <Button size="lg" variant="outline" onClick={handlePrint}>

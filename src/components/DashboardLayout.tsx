@@ -39,7 +39,7 @@ const navItems = [
   { name: "All Quizzes", href: "/quiz-selection", icon: BookOpen },
   { name: "Bible Study", href: "/bible-questions-and-answers-hub", icon: Brain },
   { name: "Kids Stories", href: "/kids-stories", icon: Sparkles },
-  { name: "Worship Songs", href: "/songs", icon: Music },
+  { name: "Worship Songs", href: "/malayalam-songs", icon: Music },
   { name: "Prayer Group", href: "/prayer-requests", icon: Heart },
   { name: "Multiplayer", href: "/scripture-match-multiplayer", icon: Gamepad2 },
   { name: "Results", href: "/leaderboard", icon: BarChart2 },

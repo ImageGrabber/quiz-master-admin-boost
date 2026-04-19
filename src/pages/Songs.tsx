@@ -53,11 +53,11 @@ const Songs = () => {
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
             <SEO
-                title="Christian Devotional Songs & Worship Lyrics | Bible Quiz Competition"
-                description="Explore a vast library of Christian devotional songs and worship lyrics. Listen to popular tracks, read lyrics, and find chords for your favorite worship songs."
-                keywords="christian devotional songs, worship lyrics, christian song chords, gospel music library, worship song videos, spiritual songs"
+                title="Malayalam Christian Songs & Worship Lyrics | Bible Quiz Competition"
+                description="Explore a vast library of Malayalam Christian songs and worship lyrics. Listen to popular tracks, read lyrics, and find chords for your favorite worship songs."
+                keywords="malayalam christian songs, worship lyrics, christian song chords, gospel music library, worship song videos, spiritual songs"
                 author="Bible Quiz Competition"
-                url="/songs"
+                url="/malayalam-songs"
             />
 
             <Navigation />
@@ -65,10 +65,10 @@ const Songs = () => {
             <main className="flex-grow container mx-auto px-4 py-8">
                 <div className="text-center mb-8">
                     <h1 className="text-3xl md:text-5xl font-bold font-urbanist text-gray-900 mb-4">
-                        Devotional Songs
+                        Malayalam Songs
                     </h1>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Worship along with our collection of beautiful Christian devotional songs. Read lyrics, watch videos, and lift your spirit.
+                        Worship along with our collection of beautiful Malayalam Christian songs. Read lyrics, watch videos, and lift your spirit.
                     </p>
                 </div>
 
@@ -160,7 +160,7 @@ const Songs = () => {
                         <Card
                             key={song.slug}
                             className="group cursor-pointer hover:shadow-xl transition-all duration-300 border-none bg-white overflow-hidden"
-                            onClick={() => navigate(`/songs/${song.slug}`)}
+                            onClick={() => navigate(`/malayalam-songs/${song.slug}`)}
                         >
                             <div className="relative h-48 bg-gray-900 flex items-center justify-center overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />

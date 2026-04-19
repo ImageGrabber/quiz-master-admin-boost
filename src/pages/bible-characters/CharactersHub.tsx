@@ -13,7 +13,8 @@ import {
   Heart,
   Crown,
   Flame,
-  Globe
+  Globe,
+  Medal
 } from 'lucide-react';
 import SEO from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
@@ -85,6 +86,94 @@ const CHARACTERS = [
     iconColor: "text-indigo-600",
     link: "/bible-questions-and-answers-hub/acts",
     era: "Early Church"
+  },
+  {
+    id: "noah",
+    name: "Noah",
+    title: "Hero of the Flood",
+    description: "Built the ark in obedience to God, saving his family and every kind of animal from the Great Flood.",
+    icon: Compass,
+    color: "bg-green-50",
+    iconColor: "text-green-600",
+    link: "/bible-questions-and-answers-hub/genesis",
+    era: "Ancient World"
+  },
+  {
+    id: "esther",
+    name: "Esther",
+    title: "The Brave Queen",
+    description: "A Jewish orphan who became Queen of Persia and risked her life to save her people from destruction.",
+    icon: Star,
+    color: "bg-rose-50",
+    iconColor: "text-rose-600",
+    link: "/bible-questions-and-answers-hub/esther",
+    era: "Persian Period"
+  },
+  {
+    id: "ruth",
+    name: "Ruth",
+    title: "Model of Loyalty",
+    description: "A Moabite woman whose devotion to her mother-in-law and faith in God led her into the lineage of King David and Jesus.",
+    icon: Heart,
+    color: "bg-teal-50",
+    iconColor: "text-teal-600",
+    link: "/bible-questions-and-answers-hub/ruth",
+    era: "The Judges"
+  },
+  {
+    id: "daniel",
+    name: "Daniel",
+    title: "Prophet of Integrity",
+    description: "Remained faithful to God in Babylonian exile, surviving the lions' den and receiving profound visions of the future.",
+    icon: ShieldCheck,
+    color: "bg-slate-50",
+    iconColor: "text-slate-600",
+    link: "/bible-questions-and-answers-hub/daniel",
+    era: "The Exile"
+  },
+  {
+    id: "elijah",
+    name: "Elijah",
+    title: "Prophet of Fire",
+    description: "A bold prophet who confronted idolatry, performed miracles, and was taken to heaven in a whirlwind.",
+    icon: Flame,
+    color: "bg-red-50",
+    iconColor: "text-red-600",
+    link: "/bible-questions-and-answers-hub/1-kings",
+    era: "Divided Monarchy"
+  },
+  {
+    id: "john-the-baptist",
+    name: "John the Baptist",
+    title: "Voice in the Wilderness",
+    description: "The precursor to Christ who preached repentance and baptized Jesus in the Jordan River.",
+    icon: User,
+    color: "bg-emerald-50",
+    iconColor: "text-emerald-600",
+    link: "/bible-questions-and-answers-hub/matthew",
+    era: "New Testament"
+  },
+  {
+    id: "sarah",
+    name: "Sarah",
+    title: "Mother of Prosperity",
+    description: "Wife of Abraham who, though initially skeptical, gave birth to Isaac in her old age as promised by God.",
+    icon: Star,
+    color: "bg-pink-50",
+    iconColor: "text-pink-600",
+    link: "/bible-questions-and-answers-hub/genesis",
+    era: "Patriarchal Age"
+  },
+  {
+    id: "joseph",
+    name: "Joseph",
+    title: "Dreamer and Ruler",
+    description: "Sold into slavery by his brothers, he rose to become the second most powerful man in Egypt, saving the region from famine.",
+    icon: Medal,
+    color: "bg-cyan-50",
+    iconColor: "text-cyan-600",
+    link: "/bible-questions-and-answers-hub/genesis",
+    era: "Patriarchal Age"
   }
 ];
 

@@ -1,6 +1,5 @@
 import { createRoot } from 'react-dom/client'
 import * as Sentry from "@sentry/react";
-import App from './App.tsx'
 import './index.css'
 
 Sentry.init({
@@ -25,6 +24,28 @@ if (!container) {
   console.error("Root element not found!");
 } else {
   const root = createRoot(container);
-  root.render(<App />);
-  console.log("React application rendered to root.");
+
+  root.render(
+    <div style={{ padding: "24px", fontFamily: "Jost, sans-serif" }}>
+      Loading application...
+    </div>
+  );
+
+  import('./App.tsx')
+    .then(({ default: App }) => {
+      root.render(
+        <Sentry.ErrorBoundary fallback={<div style={{ padding: "24px", fontFamily: "Jost, sans-serif" }}>Something went wrong while loading this page. Please refresh and try again.</div>}>
+          <App />
+        </Sentry.ErrorBoundary>
+      );
+      console.log("React application rendered to root.");
+    })
+    .catch((error) => {
+      console.error("Failed to load App module:", error);
+      root.render(
+        <div style={{ padding: "24px", fontFamily: "Jost, sans-serif" }}>
+          Failed to load the app. Check browser console for details.
+        </div>
+      );
+    });
 }

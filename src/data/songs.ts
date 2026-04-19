@@ -10,6 +10,7 @@ export interface Song {
             lyrics: {
                 verse?: string;
                 lines: string[];
+                chords?: string[];
             }[];
         };
     };

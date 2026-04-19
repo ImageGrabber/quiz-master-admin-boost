@@ -73,9 +73,17 @@
   <script>
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     OneSignalDeferred.push(async function (OneSignal) {
-      await OneSignal.init({
-        appId: "ca7cdcf3-827e-4370-99ee-946690bf535a",
-      });
+      if (window.location.hostname === "biblequizcompetition.com" || window.location.hostname === "www.biblequizcompetition.com") {
+        try {
+          await OneSignal.init({
+            appId: "ca7cdcf3-827e-4370-99ee-946690bf535a",
+          });
+        } catch (e) {
+          console.error("OneSignal init error:", e);
+        }
+      } else {
+        console.log("OneSignal disabled on " + window.location.hostname);
+      }
     });
   </script>
 
@@ -93,62 +101,6 @@
 
 <body style="font-family: 'Jost', sans-serif; font-size: 17px;">
   <div id="root"></div>
-
-  <!-- OneSignal Test Button - Hidden for now -->
-  <!-- <div id="onesignal-test" style="position: fixed; top: 10px; right: 10px; z-index: 9999; background: #007bff; color: white; padding: 10px; border-radius: 5px; cursor: pointer; font-size: 12px;">
-      Test OneSignal
-    </div> -->
-
-  <!-- Test button functionality - Hidden for now -->
-  <!-- <script>
-      // Test button functionality
-      document.getElementById('onesignal-test').addEventListener('click', function() {
-        console.log('🧪 Manual OneSignal test triggered');
-        
-        // Check if OneSignal is available
-        if (window.OneSignal && typeof window.OneSignal.getNotificationPermission === 'function') {
-          console.log('🔍 OneSignal object available');
-          
-          OneSignal.getNotificationPermission().then(function(permission) {
-            console.log('🔔 Permission:', permission);
-            
-            OneSignal.getUserId().then(function(userId) {
-              console.log('👤 User ID:', userId);
-              
-              if (permission === 'default') {
-                console.log('📱 Showing native prompt...');
-                OneSignal.showNativePrompt().then(function() {
-                  console.log('✅ Prompt shown successfully');
-                }).catch(function(error) {
-                  console.error('❌ Error showing prompt:', error);
-                });
-              } else if (permission === 'denied') {
-                console.log('❌ Notifications blocked by user');
-                document.getElementById('onesignal-test').innerHTML = 'Notifications Blocked';
-                document.getElementById('onesignal-test').style.background = '#ffc107';
-              } else {
-                console.log('✅ Notifications already granted');
-                document.getElementById('onesignal-test').innerHTML = 'Notifications Enabled';
-                document.getElementById('onesignal-test').style.background = '#28a745';
-              }
-            });
-          });
-        } else {
-          console.log('❌ OneSignal not available yet');
-          
-          // Check what's available
-          console.log('🔍 window.OneSignal:', window.OneSignal);
-          console.log('🔍 typeof OneSignal:', typeof window.OneSignal);
-          
-          if (window.OneSignal) {
-            console.log('🔍 OneSignal methods:', Object.keys(window.OneSignal));
-          }
-          
-          document.getElementById('onesignal-test').innerHTML = 'OneSignal Loading...';
-          document.getElementById('onesignal-test').style.background = '#6c757d';
-        }
-      });
-    </script> -->
 
   <script type="module" src="/src/main.tsx"></script>
 </body>

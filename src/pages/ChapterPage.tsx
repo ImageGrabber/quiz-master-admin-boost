@@ -46,6 +46,36 @@ export default function ChapterPage() {
           keywords={`${formattedBookName} chapter ${chapterId} quiz, ${formattedBookName} questions and answers, bible quiz with answers, ${formattedBookName} study`}
           author="Bible Quiz Competition"
           url={`/bible-questions-and-answers-hub/${book}/chapter-${chapterId}`}
+          structuredData={{
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": `How many questions are in the ${formattedBookName} Chapter ${chapterId} quiz?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": `There are typically 5 to 10 professionally curated questions in the ${formattedBookName} Chapter ${chapterId} quiz, each with detailed biblical explanations.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Is the ${formattedBookName} Chapter ${chapterId} quiz free to play?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": `Yes, all chapter-level Bible quizzes on our platform including ${formattedBookName} Chapter ${chapterId} are 100% free and require no registration.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `What is the focus of ${formattedBookName} Chapter ${chapterId} study?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": `The study focuses on the historical context, key theological themes, and significant narrative events found specifically within ${formattedBookName} Chapter ${chapterId}.`
+                }
+              }
+            ]
+          }}
         />
         <PublicQuiz
           title={`${formattedBookName} Chapter ${chapterId} Quiz`}

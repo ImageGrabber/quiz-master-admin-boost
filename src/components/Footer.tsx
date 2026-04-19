@@ -47,7 +47,7 @@ export const Footer = () => {
               <button onClick={() => navigate("/bible-questions-and-answers-hub")} className="block text-slate-200 hover:text-white">Bible Q&A Hub</button>
               <button onClick={() => navigate("/scripture-match-multiplayer")} className="block text-slate-200 hover:text-white">Scripture Match</button>
               <button onClick={() => navigate("/kids-stories")} className="block text-slate-200 hover:text-white">Kids Stories</button>
-              <button onClick={() => navigate("/songs")} className="block text-slate-200 hover:text-white">Christian Songs</button>
+              <button onClick={() => navigate("/malayalam-songs")} className="block text-slate-200 hover:text-white">Christian Songs</button>
               <button onClick={() => navigate("/public-quiz/nehemiah")} className="block text-slate-200 hover:text-white">Nehemiah Quiz</button>
             </div>
           </div>

@@ -2,8 +2,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { lazy, Suspense } from "react";
 import SEO from "@/components/SEO";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import NotificationBanner from "@/components/NotificationBanner";
@@ -173,7 +174,6 @@ import BibleVersesPeace from "./pages/verses/BibleVersesPeace";
 import CharactersHub from "./pages/bible-characters/CharactersHub";
 import ParablesQuiz from "./pages/quizzes/ParablesQuiz";
 import Top100BibleQuiz from "./pages/Top100BibleQuiz";
-// Removed static imports of Bible book quiz files for code-splitting
 import Upgrade from "./pages/Upgrade";
 import PageViews from "./pages/admin/PageViews";
 import SeoAudit from "./pages/admin/SeoAudit";
@@ -198,13 +198,52 @@ import NehemiahHub from "./pages/bible-questions-and-answers-hub/nehemiah";
 import HubDifficultyRouter from "./pages/bible-questions-and-answers-hub/HubDifficultyRouter";
 import ChapterPage from "./pages/ChapterPage";
 import ScrollToTop from "./components/ScrollToTop";
-
-
 const queryClient = new QueryClient();
 
 function PageViewTracker() {
   usePageView();
   return null;
+}
+
+const SundaySchoolQuiz = lazy(() => import('./pages/seo-quizzes/SundaySchoolQuiz'));
+const NoRegistrationQuiz = lazy(() => import('./pages/seo-quizzes/NoRegistrationQuiz'));
+const PrintablePdfQuiz = lazy(() => import('./pages/seo-quizzes/PrintablePdfQuiz'));
+const BeginnersBibleQuiz = lazy(() => import('./pages/seo-quizzes/BeginnersBibleQuiz'));
+const OldTestamentQuiz = lazy(() => import('./pages/seo-quizzes/OldTestamentQuiz'));
+const NewTestamentQuiz = lazy(() => import('./pages/seo-quizzes/NewTestamentQuiz'));
+const TenCommandmentsQuiz = lazy(() => import('./pages/seo-quizzes/TenCommandmentsQuiz'));
+const MultiplayerQuiz = lazy(() => import('./pages/seo-quizzes/MultiplayerQuiz'));
+
+const NoahsArkStory = lazy(() => import('./pages/kids-stories/NoahsArkStory'));
+const DavidGoliathStory = lazy(() => import('./pages/kids-stories/DavidGoliathStory'));
+const CreationStory = lazy(() => import('./pages/kids-stories/CreationStory'));
+const MosesExodusStory = lazy(() => import('./pages/kids-stories/MosesExodusStory'));
+const DanielLionsDenStory = lazy(() => import('./pages/kids-stories/DanielLionsDenStory'));
+const JonahWhaleStory = lazy(() => import('./pages/kids-stories/JonahWhaleStory'));
+
+const StrengthVerses = lazy(() => import('./pages/verses/StrengthVerses'));
+const HealingVerses = lazy(() => import('./pages/verses/HealingVerses'));
+const LoveVerses = lazy(() => import('./pages/verses/LoveVerses'));
+const HopeVerses = lazy(() => import('./pages/verses/HopeVerses'));
+const FaithVerses = lazy(() => import('./pages/verses/FaithVerses'));
+
+const ChristmasQuiz = lazy(() => import('./pages/seo-resources/ChristmasQuiz'));
+const EasterQuiz = lazy(() => import('./pages/seo-resources/EasterQuiz'));
+
+const WorshipSongsChordsHub = lazy(() => import('./pages/seo-lyrics/WorshipSongsChordsHub'));
+const HindiWorshipLanding = lazy(() => import('./pages/seo-lyrics/HindiWorshipLanding'));
+const BeginnerGuitarSongs = lazy(() => import('./pages/seo-lyrics/BeginnerGuitarSongs'));
+
+const WomenOfBible = lazy(() => import('./pages/bible-characters/WomenOfBible'));
+const KingsOfIsrael = lazy(() => import('./pages/bible-characters/KingsOfIsrael'));
+const TwelveDisciples = lazy(() => import('./pages/bible-characters/TwelveDisciples'));
+const ProphetsOfBible = lazy(() => import('./pages/bible-characters/ProphetsOfBible'));
+
+const DailyDevotional = lazy(() => import('./pages/DailyDevotional'));
+
+function LegacyMalayalamSongsRedirect() {
+  const { slug } = useParams();
+  return <Navigate to={slug ? `/malayalam-songs/${slug}` : "/malayalam-songs"} replace />;
 }
 
 const App = () => {
@@ -219,6 +258,7 @@ const App = () => {
             <ScrollToTop />
             <PageViewTracker />
             <NotificationBanner />
+            <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-base text-slate-600">Loading...</div>}>
             <Routes>
               <Route path="/emotional-checkin" element={<EmotionalCheckIn />} />
               <Route path="/joy-runner-test" element={<JoyRunnerTest />} />
@@ -237,8 +277,11 @@ const App = () => {
               <Route path="/home" element={<Index />} />
               <Route path="/competition-home" element={<CompetitionHome />} />
               <Route path="/signup-today" element={<SignUpToday />} />
-              <Route path="/todays-quiz" element={<TodaysQuiz />} />
-              <Route path="/todays-quiz-mark" element={<TodaysQuizMark />} />
+              
+              {/* SEO Redirects */}
+              <Route path="/daily-bible-quiz" element={<TodaysQuiz />} />
+              <Route path="/daily-bible-quiz-mark" element={<TodaysQuizMark />} />
+
               <Route path="/daily-verse" element={<DailyVerse />} />
               <Route path="/prayer-requests" element={<PrayerRequests />} />
               <Route path="/sentry-test" element={<SentryTest />} />
@@ -281,8 +324,10 @@ const App = () => {
               <Route path="/hard-bible-quiz-for-adults" element={<HardBibleQuizForAdults />} />
               <Route path="/bible-trivia-for-kids-under-10" element={<BibleTriviaForKids />} />
               <Route path="/book-of-john-quiz-questions" element={<BookOfJohnQuizQuestions />} />
-              <Route path="/songs" element={<Songs />} />
-              <Route path="/songs/:slug" element={<SongDetail />} />
+              <Route path="/songs" element={<LegacyMalayalamSongsRedirect />} />
+              <Route path="/songs/:slug" element={<LegacyMalayalamSongsRedirect />} />
+              <Route path="/malayalam-songs" element={<Songs />} />
+              <Route path="/malayalam-songs/:slug" element={<SongDetail />} />
               <Route path="/english-songs" element={<EnglishSongs />} />
               <Route path="/english-songs/:slug" element={<EnglishSongDetail />} />
               <Route path="/hindi-songs" element={<HindiSongs />} />
@@ -419,8 +464,51 @@ const App = () => {
               <Route path="/bible-questions-and-answers-hub/genesis/advanced" element={<GenesisAdvancedQuiz />} />
               <Route path="/bible-questions-and-answers-hub/:book/chapter-:id" element={<ChapterPage />} />
               <Route path="/bible-questions-and-answers-hub/:bookSlug/:difficulty" element={<HubDifficultyRouter />} />
+              {/* SEO Landing Pages Batch A */}
+              <Route path="/bible-quiz-for-sunday-school" element={<SundaySchoolQuiz />} />
+              <Route path="/free-bible-quiz-no-signup" element={<NoRegistrationQuiz />} />
+              <Route path="/bible-quiz-printable-pdf" element={<PrintablePdfQuiz />} />
+              <Route path="/bible-quiz-for-beginners" element={<BeginnersBibleQuiz />} />
+              <Route path="/old-testament-quiz" element={<OldTestamentQuiz />} />
+              <Route path="/new-testament-quiz" element={<NewTestamentQuiz />} />
+              <Route path="/10-commandments-quiz" element={<TenCommandmentsQuiz />} />
+              <Route path="/bible-quiz-multiplayer" element={<MultiplayerQuiz />} />
+
+              {/* Kids Story SEO Pages Batch B */}
+              <Route path="/kids-stories/noahs-ark" element={<NoahsArkStory />} />
+              <Route path="/kids-stories/david-and-goliath" element={<DavidGoliathStory />} />
+              <Route path="/kids-stories/creation-story" element={<CreationStory />} />
+              <Route path="/kids-stories/moses-and-the-exodus" element={<MosesExodusStory />} />
+              <Route path="/kids-stories/daniel-and-the-lions-den" element={<DanielLionsDenStory />} />
+              <Route path="/kids-stories/jonah-and-the-big-fish" element={<JonahWhaleStory />} />
+
+              {/* Verse Hubs & Seasonal Batch C & D */}
+              <Route path="/bible-verses-for-strength" element={<StrengthVerses />} />
+              <Route path="/bible-verses-for-healing" element={<HealingVerses />} />
+              <Route path="/verses/love" element={<LoveVerses />} />
+              <Route path="/verses/hope" element={<HopeVerses />} />
+              <Route path="/verses/faith" element={<FaithVerses />} />
+              
+              <Route path="/christmas-bible-quiz" element={<ChristmasQuiz />} />
+              <Route path="/easter-bible-quiz" element={<EasterQuiz />} />
+              
+              {/* Worship Resources Batch D */}
+              <Route path="/christian-worship-songs-chords" element={<WorshipSongsChordsHub />} />
+              <Route path="/hindi-christian-songs-lyrics-chords" element={<HindiWorshipLanding />} />
+              <Route path="/easy-worship-songs-for-beginners-guitar" element={<BeginnerGuitarSongs />} />
+
+              {/* Bible Characters Vertical Batch D */}
+              <Route path="/women-of-the-bible" element={<WomenOfBible />} />
+              <Route path="/kings-of-israel" element={<KingsOfIsrael />} />
+              <Route path="/12-disciples-names-and-facts" element={<TwelveDisciples />} />
+              <Route path="/prophets-of-the-bible" element={<ProphetsOfBible />} />
+
+              {/* Devotional Vertical Batch D */}
+              <Route path="/daily-devotional-for-today" element={<DailyDevotional />} />
+              
               <Route path="*" element={<NotFound />} />
             </Routes>
+            </Suspense>
           </BrowserRouter>
           <Analytics />
           <GoogleAnalytics />

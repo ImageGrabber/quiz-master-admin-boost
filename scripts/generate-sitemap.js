@@ -89,6 +89,49 @@ function generateSitemap() {
     { loc: '/bible-quiz-prize', priority: '0.7', changefreq: 'monthly' },
     { loc: '/online-bible-quiz-competition-2026', priority: '0.7', changefreq: 'monthly' },
     { loc: '/bible-competition-2026', priority: '0.7', changefreq: 'monthly' },
+
+    // Competitive SEO Gap Pages
+    { loc: '/bible-quiz-for-sunday-school', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/free-bible-quiz-no-signup', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/bible-quiz-for-beginners', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/old-testament-quiz', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/new-testament-quiz', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/10-commandments-quiz', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/bible-quiz-printable-pdf', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/bible-quiz-multiplayer', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/bible-quiz-multiplayer', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/christmas-bible-quiz', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/easter-bible-quiz', priority: '0.9', changefreq: 'monthly' },
+
+    // Bible Verse Topic Hubs
+    { loc: '/bible-verses-for-strength', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/bible-verses-for-healing', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/verses/peace-and-anxiety', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/verses/love', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/verses/hope', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/verses/faith', priority: '0.8', changefreq: 'monthly' },
+
+    // Worship Resources Batch D
+    { loc: '/christian-worship-songs-chords', priority: '0.9', changefreq: 'weekly' },
+    { loc: '/hindi-christian-songs-lyrics-chords', priority: '0.9', changefreq: 'weekly' },
+    { loc: '/easy-worship-songs-for-beginners-guitar', priority: '0.9', changefreq: 'weekly' },
+
+    // Bible Characters Vertical Batch D
+    { loc: '/women-of-the-bible', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/kings-of-israel', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/12-disciples-names-and-facts', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/prophets-of-the-bible', priority: '0.9', changefreq: 'monthly' },
+
+    // Devotional Vertical Batch D
+    { loc: '/daily-devotional-for-today', priority: '0.95', changefreq: 'daily' },
+
+    // Kids Story Dedicated Pages
+    { loc: '/kids-stories/noahs-ark', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/kids-stories/david-and-goliath', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/kids-stories/creation-story', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/kids-stories/moses-and-the-exodus', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/kids-stories/daniel-and-the-sleepy-lions', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/kids-stories/jonah-and-the-big-fish', priority: '0.9', changefreq: 'monthly' },
   ];
 
   // Genesis chapters

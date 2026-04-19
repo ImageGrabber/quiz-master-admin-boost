@@ -463,8 +463,8 @@ const TodaysQuiz = () => {
     return (
       <>
         <Helmet>
-          <title>Today's Quiz - Hebrews 4 | Bible Quiz Competition</title>
-          <meta name="description" content="Test your knowledge of Hebrews 4 with today's special quiz." />
+          <title>Daily Bible Quiz - Challenge Your Scripture Knowledge | Bible Quiz Competition</title>
+          <meta name="description" content="Take our Daily Bible Quiz and challenge your scripture knowledge. New questions every day covering the Old and New Testament. No signup required!" />
         </Helmet>
         <div className="min-h-screen bg-white">
           <div className="container mx-auto px-4 py-6 sm:py-12">
@@ -543,8 +543,8 @@ const TodaysQuiz = () => {
     return (
       <>
         <Helmet>
-          <title>Today's Quiz - Hebrews 4 | Bible Quiz Competition</title>
-          <meta name="description" content="Test your knowledge of Hebrews 4 with today's special quiz." />
+          <title>Daily Bible Quiz - Challenge Your Scripture Knowledge | Bible Quiz Competition</title>
+          <meta name="description" content="Take our Daily Bible Quiz and challenge your scripture knowledge. New questions every day covering the Old and New Testament. No signup required!" />
         </Helmet>
         <div className="min-h-screen bg-white">
           <div className="container mx-auto px-4 py-8">
@@ -673,8 +673,8 @@ const TodaysQuiz = () => {
   return (
     <>
       <Helmet>
-        <title>Today's Quiz - Hebrews 4 | Bible Quiz Competition</title>
-        <meta name="description" content="Test your knowledge of Hebrews 4 with today's special quiz." />
+        <title>Daily Bible Quiz - Challenge Your Scripture Knowledge | Bible Quiz Competition</title>
+        <meta name="description" content="Take our Daily Bible Quiz and challenge your scripture knowledge. New questions every day covering the Old and New Testament. No signup required!" />
       </Helmet>
       <div className="min-h-screen bg-white">
         <div className="container mx-auto px-4 py-8">

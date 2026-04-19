@@ -218,7 +218,7 @@ const RulesAndPrizes = () => {
           <Button
             size="lg"
             className="h-14 px-8 text-lg rounded-full bg-blue-600 hover:bg-blue-700"
-            onClick={() => navigate("/todays-quiz")}
+            onClick={() => navigate("/daily-bible-quiz")}
           >
             Start Today&apos;s Quiz <CheckCircle2 className="ml-2 w-5 h-5" />
           </Button>

@@ -43,12 +43,12 @@ const SongDetail = () => {
                     title="Song Not Found | Bible Quiz Competition"
                     description="The song page you are looking for does not exist. Browse all Christian devotional songs on Bible Quiz Competition."
                     robots="noindex, nofollow"
-                    url="/songs"
+                    url="/malayalam-songs"
                 />
                 <Navigation />
                 <main className="flex-grow container mx-auto px-4 py-8 flex flex-col items-center justify-center">
                     <h1 className="text-2xl font-bold text-gray-900 mb-4">Song Not Found</h1>
-                    <Button onClick={() => navigate("/songs")}>Back to Songs</Button>
+                    <Button onClick={() => navigate("/malayalam-songs")}>Back to Malayalam Songs</Button>
                 </main>
                 <Footer />
             </div>
@@ -63,7 +63,7 @@ const SongDetail = () => {
     const videoId = getYouTubeVideoId(song.videoUrl);
     const watchUrl = videoId ? `https://www.youtube.com/watch?v=${videoId}` : song.videoUrl;
     const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : `${SITE_URL}/sword.png`;
-    const canonicalUrl = `${SITE_URL}/songs/${song.slug}`;
+    const canonicalUrl = `${SITE_URL}/malayalam-songs/${song.slug}`;
 
     const lyricsExcerpt = primaryTranslation?.lyrics
         .slice(0, 2)
@@ -90,7 +90,7 @@ const SongDetail = () => {
                 "@type": "BreadcrumbList",
                 "itemListElement": [
                     { "@type": "ListItem", "position": 1, "name": "Home", "item": SITE_URL },
-                    { "@type": "ListItem", "position": 2, "name": "Songs", "item": `${SITE_URL}/songs` },
+                    { "@type": "ListItem", "position": 2, "name": "Malayalam Songs", "item": `${SITE_URL}/malayalam-songs` },
                     { "@type": "ListItem", "position": 3, "name": song.title, "item": canonicalUrl }
                 ]
             },
@@ -166,7 +166,7 @@ const SongDetail = () => {
                 description={seoDescription}
                 keywords={seoKeywords}
                 author="Bible Quiz Competition"
-                url={`/songs/${song.slug}`}
+                url={`/malayalam-songs/${song.slug}`}
                 image={thumbnailUrl}
                 structuredData={jsonLd}
             />
@@ -178,10 +178,10 @@ const SongDetail = () => {
                     <Button
                         variant="ghost"
                         className="pl-0 hover:bg-transparent hover:text-blue-600"
-                        onClick={() => navigate("/songs")}
+                        onClick={() => navigate("/malayalam-songs")}
                     >
                         <ArrowLeft className="mr-2 h-4 w-4" />
-                        Back to All Songs
+                        Back to Malayalam Songs
                     </Button>
 
                     <Button onClick={handleShare} variant="outline" className="gap-2">

@@ -1878,6 +1878,12 @@
               "मैं हूँ अंधा ओ लाचार",
               "मेरी आँख है क्रूस पर ख़ास",
               "हूँ नजात का तलबगार"
+            ],
+            "chords": [
+              "G",
+              "D",
+              "Em",
+              "C"
             ]
           },
           {
@@ -1887,6 +1893,12 @@
               "सिर्फ क्रूस पर है निगाह",
               "बोलता हूँ मैं क्रूस की जय",
               "येशु अब बचाता है"
+            ],
+            "chords": [
+              "G",
+              "D",
+              "C",
+              "G"
             ]
           },
           {
@@ -1977,6 +1989,16 @@
               "teree hee sitaeesh ho",
               "har ek daag hai dil se",
               "door sanna sanna barre ko"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "I come to the Cross, where You shed Your blood for me. Your love set me free."
             ]
           }
         ]
@@ -2243,6 +2265,12 @@
             "lines": [
               "आप की महिमा अपरमपार",
               "डगमग डोले मेरी नाव"
+            ],
+            "chords": [
+              "D",
+              "G",
+              "A",
+              "D"
             ]
           },
           {
@@ -2252,6 +2280,12 @@
               "लिया प्रभु ने मानस औतार",
               "आप हैं पापिन के हितकार",
               "डगमग डोले मेरी नाव"
+            ],
+            "chords": [
+              "Bm",
+              "G",
+              "A",
+              "D"
             ]
           },
           {
@@ -2343,6 +2377,16 @@
             ]
           }
         ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Your glory is infinite, O Lord. Your mercy is over all the earth."
+            ]
+          }
+        ]
       }
     }
   },
@@ -2361,24 +2405,48 @@
               "आओ पवित्र आत्मा",
               "तेरे समुख को हम चाहतें हैं",
               "आला स��� मुझे भर के, तू मुझको चला - 2"
+            ],
+            "chords": [
+              "Em",
+              "D",
+              "Em",
+              "D"
             ]
           },
           {
             "verse": "1",
             "lines": [
               "महीमा की आला तू ही है"
+            ],
+            "chords": [
+              "Am",
+              "D",
+              "Em",
+              "Em"
             ]
           },
           {
             "verse": "2",
             "lines": [
               "मसीह की आला तू ही है"
+            ],
+            "chords": [
+              "Em",
+              "D",
+              "C",
+              "Em"
             ]
           },
           {
             "verse": "3",
             "lines": [
               "अनुग्रह की आला तू ही है"
+            ],
+            "chords": [
+              "Em",
+              "D",
+              "C",
+              "Em"
             ]
           },
           {
@@ -2432,6 +2500,16 @@
             ]
           }
         ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Come Holy Spirit, in Your presence we bow. Your peace and love we seek now."
+            ]
+          }
+        ]
       }
     }
   },
@@ -2451,6 +2529,12 @@
               "आज मसीहा के नाम से",
               "वह ही सच्चा खुदा है",
               "आओ नाचे गायें हम -2"
+            ],
+            "chords": [
+              "G",
+              "C",
+              "D",
+              "G"
             ]
           },
           {
@@ -2462,6 +2546,12 @@
               "बोझ से तुम दबे हो, ज़िन्दगी से थके हो",
               "यीशु बुलाता है, तुझको बुलाता है, मुक्ति दिलाने को",
               "इसल���ए आज हम गाते है, और खुशियाँ मनाते हैं"
+            ],
+            "chords": [
+              "G",
+              "C",
+              "D",
+              "G"
             ]
           },
           {
@@ -2482,6 +2572,16 @@
               "bojh se tum dabe ho, zindagee se thake ho",
               "Yeshu bulaataa hai, tujhako bulaataa hai, mukti dilaane ko",
               "isalie aaj ham gaate hai, aur khushiyaan manaate hain"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Let us dance and sing together. For the Lord has done great things."
             ]
           }
         ]
@@ -8137,253 +8237,61 @@
         "lyrics": [
           {
             "lines": [
-              "1. आदि और अन्त तू ही है, अल्फ़ा और ओमेगा तू ही है,"
+              "आदि और अन्त तू ही है, अल्फ़ा और ओमेगा तू ही है"
+            ],
+            "chords": [
+              "[G] Aadi aur ant tu hi [C] hai, [D] Alfa aur Omega tu hi [G] hai"
             ]
           },
           {
-            "verse": "1",
             "lines": [
               "दूतों की स्तुति तू ही है, बुद्धि और सब ज्ञान तू ही है"
+            ],
+            "chords": [
+              "[G] Duto’n ki stuti tu hi [C] hai, [D] Buddhi aur sab gyan tu hi [G] hai"
             ]
           },
           {
-            "verse": "2",
             "lines": [
-              "यीशु तू महान है, महान है, यीशु तू सच्चा है, सच्चा है,"
+              "यीशु तू महान है, महान है, यीशु तू सच्चा है, सच्चा है"
+            ],
+            "chords": [
+              "[G] Yeshu tu mahaan [C] hai, [D] Yeshu tu achha [G] hai"
+            ],
+            "verse": "Chorus"
+          },
+          {
+            "lines": [
+              "यीशु तू ज़िन्दा है, ज़िन्दा है, यीशु तू धन्य है, धन्य है"
+            ],
+            "chords": [
+              "[G] Yeshu tu zinda [C] hai, [D] Yeshu tu dhanya [G] hai"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "You are the beginning and the end, Alpha and Omega You are"
             ]
           },
           {
-            "verse": "3",
             "lines": [
-              "यीशु तू ज़िन्दा है, ज़िन्दा ह��, यीशु तू धन्य है, धन्य है"
+              "You are the praise of angels, You are wisdom and all knowledge"
             ]
           },
           {
-            "verse": "4",
             "lines": [
-              "दूतों की स्तुति भी तू ही है, बुद्धि और सब ज्ञान तू ही है,"
-            ]
+              "Jesus You are great, You are true"
+            ],
+            "verse": "Chorus"
           },
           {
-            "verse": "5",
             "lines": [
-              "राजाओं का राजा तू ही है, प्रभुओं का प्रभु तू ही है"
-            ]
-          },
-          {
-            "verse": "6",
-            "lines": [
-              "2. जीवन मेरा पापों से भरा, जग अंधेरा और अशुद्ध सारा,"
-            ]
-          },
-          {
-            "verse": "7",
-            "lines": [
-              "मेरे पापों से बचाने को, मेरे लिए जीवन दिया है"
-            ]
-          },
-          {
-            "verse": "8",
-            "lines": [
-              "3. सारे गुनाहगारों के लिए, अपना खून बहाया उसने,"
-            ]
-          },
-          {
-            "verse": "9",
-            "lines": [
-              "खाई कोड़ों की मार भी, दी सलीब पर उसने अपनी जान"
-            ]
-          },
-          {
-            "verse": "10",
-            "lines": [
-              "4. वायदा किया है तूने, वायदा तू करता है पूरा,"
-            ]
-          },
-          {
-            "verse": "11",
-            "lines": [
-              "वायदे के लिए आते हैं, बरकतों की बारिश अब उंडेल"
-            ]
-          },
-          {
-            "verse": "12",
-            "lines": [
-              "5. न्याय करने आनेवाला है, न्याय के साथ राज करने को,"
-            ]
-          },
-          {
-            "verse": "13",
-            "lines": [
-              "धर्मियों को लेकर न्याय से, सिंहासन पर राज करेगा"
-            ]
-          },
-          {
-            "verse": "14",
-            "lines": [
-              "1. Aadi aur ant tu hi hai,"
-            ]
-          },
-          {
-            "verse": "15",
-            "lines": [
-              "alfa aur omega tu hi hai,"
-            ]
-          },
-          {
-            "verse": "16",
-            "lines": [
-              "Dooton ki stuti tu hi hai,"
-            ]
-          },
-          {
-            "verse": "17",
-            "lines": [
-              "buddhi aur sab gyaan tu hi hai"
-            ]
-          },
-          {
-            "verse": "18",
-            "lines": [
-              "Yeshu tu mahaan hai, mahaan hai,"
-            ]
-          },
-          {
-            "verse": "19",
-            "lines": [
-              "Yeshu tu saccha hai, saccha hai,"
-            ]
-          },
-          {
-            "verse": "20",
-            "lines": [
-              "Yeshu tu zinda hai, zinda hai,"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "Yeshu tu dhanya hai, dhanya hai"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "Dooton ki stuti bhi tu hi hai,"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "Buddhi aur sab gyaan tu hi hai,"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
-              "Raajaon ka raja tu hi hai,"
-            ]
-          },
-          {
-            "verse": "25",
-            "lines": [
-              "Prabhuon ka Prabhu tu hi hai"
-            ]
-          },
-          {
-            "verse": "26",
-            "lines": [
-              "2. Jeevan mera paapon se bhara,"
-            ]
-          },
-          {
-            "verse": "27",
-            "lines": [
-              "jag andhera aur ashudh saara,"
-            ]
-          },
-          {
-            "verse": "28",
-            "lines": [
-              "Mere paapon se bachane ko,"
-            ]
-          },
-          {
-            "verse": "29",
-            "lines": [
-              "mere liye Jeevan diya hai"
-            ]
-          },
-          {
-            "verse": "30",
-            "lines": [
-              "3. Saare gunahgaaron ke liye,"
-            ]
-          },
-          {
-            "verse": "31",
-            "lines": [
-              "apna khoon bahaya usne,"
-            ]
-          },
-          {
-            "verse": "32",
-            "lines": [
-              "Khaayi kodo ki maar bhi,"
-            ]
-          },
-          {
-            "verse": "33",
-            "lines": [
-              "dee saleeb par usne apni jaan"
-            ]
-          },
-          {
-            "verse": "34",
-            "lines": [
-              "4. Vaayeda kiya hai tune,"
-            ]
-          },
-          {
-            "verse": "35",
-            "lines": [
-              "vaayeda tu karta hai poora,"
-            ]
-          },
-          {
-            "verse": "36",
-            "lines": [
-              "Vaayede ke liye aate hai,"
-            ]
-          },
-          {
-            "verse": "37",
-            "lines": [
-              "barkaton ki baarish ab undel"
-            ]
-          },
-          {
-            "verse": "38",
-            "lines": [
-              "5. Nyaye karne aanevala hai,"
-            ]
-          },
-          {
-            "verse": "39",
-            "lines": [
-              "nyaye ke saath raaj karne ko,"
-            ]
-          },
-          {
-            "verse": "40",
-            "lines": [
-              "Dharmiyon ko lekar nyaye se,"
-            ]
-          },
-          {
-            "verse": "41",
-            "lines": [
-              "sinhaasan par raaj karega"
+              "Jesus You are alive, You are blessed"
             ]
           }
         ]
@@ -13483,166 +13391,74 @@
         "lyrics": [
           {
             "lines": [
-              "इक आग हर दिल में",
-              "हमको जलाना है",
-              "भटके हुए दिल को",
-              "प्रभु से मिलाना है"
+              "इक आग हर दिल में, हमको जलाना है"
+            ],
+            "chords": [
+              "Am         G           F           Am"
             ]
           },
           {
-            "verse": "1",
             "lines": [
-              "सं��ार की आशा भरी",
-              "नज़रें हम ही पर हैं",
-              "उद्धार का संदेश भी",
-              "कांधों के ऊपर है",
-              "एक दीप से लाखों दिये - 2",
-              "हमको जलाना है"
+              "भटके हुए दिल को, प्रभु से मिलाना है"
+            ],
+            "chords": [
+              "Dm           F        G           Am"
             ]
           },
           {
-            "verse": "2",
             "lines": [
-              "भटके हुए दिल को",
-              "प्रभु से मिलाना है"
+              "संसार की आशा भरी, नज़रें हम ही पर हैं"
+            ],
+            "chords": [
+              "Am         G           F           Am"
+            ],
+            "verse": "1"
+          },
+          {
+            "lines": [
+              "उद्धार का संदेश भी, कांधों के ऊपर है"
+            ],
+            "chords": [
+              "Dm           F        G           Am"
             ]
           },
           {
-            "verse": "3",
             "lines": [
-              "इतने सरल ये रास्ते",
-              "कल ना खुले होंगे",
-              "प्रचार के अवसर हमें",
-              "हाँसिल नहीं होंगे",
-              "तैय��र रहना कल हमें - 2",
-              "खुद को मिटाना है"
+              "एक दीप से लाखों दिये, हमको जलाना है"
+            ],
+            "chords": [
+              "Am         G           F           Am"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "A fire in every heart, we must ignite"
             ]
           },
           {
-            "verse": "4",
             "lines": [
-              "भटके हुए दिल को",
-              "प्रभु से मिलाना है"
+              "The lost lives, we must lead back to the Lord"
             ]
           },
           {
-            "verse": "5",
             "lines": [
-              "Ik Aag Har Dil Mai"
+              "The hopeful eyes of the world are upon us alone"
+            ],
+            "verse": "1"
+          },
+          {
+            "lines": [
+              "The message of salvation is also upon our shoulders"
             ]
           },
           {
-            "verse": "6",
             "lines": [
-              "Humko Jalaana Hai"
-            ]
-          },
-          {
-            "verse": "7",
-            "lines": [
-              "Bhatke Huye Dil Mai"
-            ]
-          },
-          {
-            "verse": "8",
-            "lines": [
-              "Prabhu Se Milaana Hai"
-            ]
-          },
-          {
-            "verse": "9",
-            "lines": [
-              "Sansaar Ki Asha Bhari"
-            ]
-          },
-          {
-            "verse": "10",
-            "lines": [
-              "Nazre Ham Hi Par Hai"
-            ]
-          },
-          {
-            "verse": "11",
-            "lines": [
-              "Udhdhaar Ka Sandesh Bhi"
-            ]
-          },
-          {
-            "verse": "12",
-            "lines": [
-              "Kandho Ke Upar Hai"
-            ]
-          },
-          {
-            "verse": "13",
-            "lines": [
-              "Ek Deep Se Laakho Diye - 2"
-            ]
-          },
-          {
-            "verse": "14",
-            "lines": [
-              "Humko Jalaana Hai"
-            ]
-          },
-          {
-            "verse": "15",
-            "lines": [
-              "Bhatke Huye Dil Ko"
-            ]
-          },
-          {
-            "verse": "16",
-            "lines": [
-              "Prabhu Se Milaana Hai"
-            ]
-          },
-          {
-            "verse": "17",
-            "lines": [
-              "Itne Saral Ye Raaste"
-            ]
-          },
-          {
-            "verse": "18",
-            "lines": [
-              "Kal Na Khue Honge"
-            ]
-          },
-          {
-            "verse": "19",
-            "lines": [
-              "Prachar Ke Avsar Hame"
-            ]
-          },
-          {
-            "verse": "20",
-            "lines": [
-              "Hansil Nahi Honge"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "Taiyaar Rehna Kal Hame - 2"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "Khud Ko Mitaana Hai"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "Bhatke Huye Dil Ko"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
-              "Prabhu Se Milaana Hai"
+              "From one lamp, we must light millions of lamps"
             ]
           }
         ]
@@ -14102,42 +13918,84 @@
           {
             "lines": [
               "तेरे जैसा है कोई नहीं"
+            ],
+            "chords": [
+              "A",
+              "E",
+              "D",
+              "A"
             ]
           },
           {
             "verse": "1",
             "lines": [
               "तेरे चरणों में झुके आसमान"
+            ],
+            "chords": [
+              "A",
+              "E",
+              "D",
+              "A"
             ]
           },
           {
             "verse": "2",
             "lines": [
               "और महिमा गाए ज़मीन"
+            ],
+            "chords": [
+              "E",
+              "Bm",
+              "E",
+              "A"
             ]
           },
           {
             "verse": "3",
             "lines": [
               "तेरे जैसा है कोई नहीं"
+            ],
+            "chords": [
+              "E",
+              "Bm",
+              "E",
+              "A"
             ]
           },
           {
             "verse": "4",
             "lines": [
               "तेरे चरणों में झुके आसमान"
+            ],
+            "chords": [
+              "A",
+              "F#m",
+              "D",
+              "E"
             ]
           },
           {
             "verse": "5",
             "lines": [
               "और महिमा गाए ज़मीन"
+            ],
+            "chords": [
+              "A",
+              "F#m",
+              "D",
+              "E"
             ]
           },
           {
             "verse": "6",
             "lines": [
               "हम गाएं होसन्ना"
+            ],
+            "chords": [
+              "D",
+              "E",
+              "A",
+              "A"
             ]
           },
           {
@@ -14528,6 +14386,16 @@
             "verse": "71",
             "lines": [
               "Tu hai prabhu, hamara khuda"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "We sing Hosanna, You are the King of kings. Your glory lasts forever."
             ]
           }
         ]
@@ -31130,409 +30998,48 @@
         "lyrics": [
           {
             "lines": [
-              "सिर्फ़ यीशु का नाम है,"
+              "सिर्फ़ यीशु का नाम है, सारी ज़मीन पर जिससे हम पाते उद्धार"
+            ],
+            "chords": [
+              "E         C#m         A         B"
             ]
           },
           {
-            "verse": "1",
             "lines": [
-              "सारी ज़मीन पर जिससे हम पाते उद्धार"
-            ]
-          },
-          {
-            "verse": "2",
-            "lines": [
-              "सिर्फ़ यीशु का नाम है,"
-            ]
-          },
-          {
-            "verse": "3",
-            "lines": [
-              "सारी ज़मीन पर जिससे हम पाते उद्धार"
-            ]
-          },
-          {
-            "verse": "4",
-            "lines": [
-              "वह दुनिया में आया,"
-            ]
-          },
-          {
-            "verse": "5",
-            "lines": [
-              "लहू बहाया फ़िदिया जहान को दिया"
-            ]
-          },
-          {
-            "verse": "6",
-            "lines": [
-              "वह दुनिया में आया,"
-            ]
-          },
-          {
-            "verse": "7",
-            "lines": [
-              "लहू बहाया फ़िदिया जहान को दिया"
-            ]
-          },
-          {
-            "verse": "8",
-            "lines": [
-              "हमको बचाने मुक्ति दिलाने,"
-            ]
-          },
-          {
-            "verse": "9",
-            "lines": [
-              "यीशु सलीब पर मुआ"
-            ]
-          },
-          {
-            "verse": "10",
-            "lines": [
-              "सिर्फ़ यीशु का नाम है,"
-            ]
-          },
-          {
-            "verse": "11",
-            "lines": [
-              "सारी जमीन पर जिससे हम पाते उद्धार"
-            ]
-          },
-          {
-            "verse": "12",
-            "lines": [
-              "आसमानों के नीचे,"
-            ]
-          },
-          {
-            "verse": "13",
-            "lines": [
-              "लोगों के बीच में, कोई दूसरा नाम नही है"
-            ]
-          },
-          {
-            "verse": "14",
-            "lines": [
-              "आसमानों के नीचे,"
-            ]
-          },
-          {
-            "verse": "15",
-            "lines": [
-              "लोगों के बीच में, कोई दूसरा नाम नही है"
-            ]
-          },
-          {
-            "verse": "16",
-            "lines": [
-              "सिर्फ़ यीशु का नाम है,"
-            ]
-          },
-          {
-            "verse": "17",
-            "lines": [
-              "सारी जमीन पर जिससे हम पाते उद्धार"
-            ]
-          },
-          {
-            "verse": "18",
-            "lines": [
-              "बाइबल पढो लोगो,"
-            ]
-          },
-          {
-            "verse": "19",
-            "lines": [
-              "दुआ करो तुम, यीशु जल्दी आने वाला है"
-            ]
-          },
-          {
-            "verse": "20",
-            "lines": [
-              "बाइबल पढो लोगो,"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "दुआ करो तुम, यीशु जल्दी आने वाला है"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "जागते रहो और प्रार्थना करो तुम,"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "यीशु जल्दी आने वाला है ,"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
-              "सिर्फ़ यीशु का नाम है,"
-            ]
-          },
-          {
-            "verse": "25",
-            "lines": [
-              "सारी जमीन पर जिससे हम पाते उद्धार"
-            ]
-          },
-          {
-            "verse": "26",
-            "lines": [
-              "जो लाये ईमान अब यीशु के नाम पर,"
-            ]
-          },
-          {
-            "verse": "27",
-            "lines": [
-              "ज़िन्दा हमेशा रहेगा"
-            ]
-          },
-          {
-            "verse": "28",
-            "lines": [
-              "जो लाये ईमान अब यीशु के नाम पर,"
-            ]
-          },
-          {
-            "verse": "29",
-            "lines": [
-              "ज़िन्दा हमेशा रहेगा"
-            ]
-          },
-          {
-            "verse": "30",
-            "lines": [
-              "वो ही मार्ग है, वो ही सत्य है,"
-            ]
-          },
-          {
-            "verse": "31",
-            "lines": [
-              "वो ही अनन्त ���ीवन है,"
-            ]
-          },
-          {
-            "verse": "32",
-            "lines": [
-              "सिर्फ़ यीशु का नाम है,"
-            ]
+              "वह दुनिया में आया, लहू बहाया, फ़िदिया जहान को दिया"
+            ],
+            "chords": [
+              "E         C#m         A         B"
+            ],
+            "verse": "1"
           },
           {
-            "verse": "33",
             "lines": [
-              "सारी जमीन पर जिससे हम पाते उद्धार,"
+              "हमको बचाने मुक्ति दिलाने, यीशु सलीब पर मुआ"
+            ],
+            "chords": [
+              "A         B         E"
             ]
-          },
-          {
-            "verse": "34",
-            "lines": [
-              "Sirf Yeshu Ka Naam Hai,"
-            ]
-          },
-          {
-            "verse": "35",
-            "lines": [
-              "Saari Zameen Par Jisse Ham Paate Uddhar"
-            ]
-          },
-          {
-            "verse": "36",
-            "lines": [
-              "Sirf Yeshu Ka Naam Hai,"
-            ]
-          },
-          {
-            "verse": "37",
-            "lines": [
-              "Saari Zameen Par Jisse Ham Paate Uddhar"
-            ]
-          },
-          {
-            "verse": "38",
-            "lines": [
-              "Veh Duniya Mein Aaya,"
-            ]
-          },
-          {
-            "verse": "39",
-            "lines": [
-              "Lahu Bahaya Phidiya Jahan Ko Diya"
-            ]
-          },
-          {
-            "verse": "40",
-            "lines": [
-              "Veh Duniya Mein Aaya,"
-            ]
-          },
-          {
-            "verse": "41",
-            "lines": [
-              "Lahu Bahaya Phidiya Jahan Ko Diya"
-            ]
-          },
-          {
-            "verse": "42",
-            "lines": [
-              "Humko Bachane Mukti Dilaane,"
-            ]
-          },
-          {
-            "verse": "43",
-            "lines": [
-              "Yeshu Salib Par Mua"
-            ]
-          },
-          {
-            "verse": "44",
-            "lines": [
-              "Sirf Yeshu Ka Naam Hai,"
-            ]
-          },
-          {
-            "verse": "45",
-            "lines": [
-              "Saari Zameen Par Jisse Ham Paate Uddhar"
-            ]
-          },
-          {
-            "verse": "46",
-            "lines": [
-              "Aasmaano Ke Neeche,"
-            ]
-          },
-          {
-            "verse": "47",
-            "lines": [
-              "Logon Ke Beech Mein, Koi Dura Naam Nahi Hai"
-            ]
-          },
-          {
-            "verse": "48",
-            "lines": [
-              "Aasmaano Ke Neeche,"
-            ]
-          },
-          {
-            "verse": "49",
-            "lines": [
-              "Logon Ke Beech Mein, Koi Dura Naam Nahi Hai"
-            ]
-          },
-          {
-            "verse": "50",
-            "lines": [
-              "Sirf Yeshu Ka Naam Hai,"
-            ]
-          },
-          {
-            "verse": "51",
-            "lines": [
-              "Saari Zameen Par Jisse Ham Paate Uddhar"
-            ]
-          },
-          {
-            "verse": "52",
-            "lines": [
-              "Bayibil Pado Logon,"
-            ]
-          },
-          {
-            "verse": "53",
-            "lines": [
-              "Dua Karo Tum, Yeshu Jaldi Aane Wala Hai"
-            ]
-          },
-          {
-            "verse": "54",
-            "lines": [
-              "Bayibil Pado Logon,"
-            ]
-          },
-          {
-            "verse": "55",
-            "lines": [
-              "Dua Karo Tum, Yeshu Jaldi Aane Wala Hai"
-            ]
-          },
-          {
-            "verse": "56",
-            "lines": [
-              "Jaagte Raho Aur Prarthna Karo Tum,"
-            ]
-          },
-          {
-            "verse": "57",
-            "lines": [
-              "Yeshu Jaldi Aane Wala Hai"
-            ]
-          },
-          {
-            "verse": "58",
-            "lines": [
-              "Sirf Yeshu Ka Naam Hai,"
-            ]
-          },
-          {
-            "verse": "59",
-            "lines": [
-              "Saari Zameen Par Jisse Ham Paate Uddhar"
-            ]
-          },
-          {
-            "verse": "60",
-            "lines": [
-              "Jo Laye Imaan Ab Yeshu Ke Naam Par,"
-            ]
-          },
-          {
-            "verse": "61",
-            "lines": [
-              "Zinda Hamesha Rahega"
-            ]
-          },
-          {
-            "verse": "62",
-            "lines": [
-              "Jo Laye Imaan Ab Yeshu Ke Naam Par,"
-            ]
-          },
-          {
-            "verse": "63",
-            "lines": [
-              "Zinda Hamesha Rahega"
-            ]
-          },
-          {
-            "verse": "64",
-            "lines": [
-              "Vo Hi Marg Hai, Vo Hi Satya Hai,"
-            ]
-          },
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
           {
-            "verse": "65",
             "lines": [
-              "Vo Hi Anant Jeevan Hai,"
+              "The name of Jesus is in all the earth, through which we receive salvation"
             ]
           },
           {
-            "verse": "66",
             "lines": [
-              "Sirf Yeshu Ka Naam Hai,"
-            ]
+              "He came into the world, shed His blood, gave a ransom for the world"
+            ],
+            "verse": "1"
           },
           {
-            "verse": "67",
             "lines": [
-              "Saari Zameen Par Jisse Ham Paate Uddhar"
+              "To save us and deliver us, Jesus died on the cross"
             ]
           }
         ]
@@ -33446,96 +32953,124 @@
           {
             "lines": [
               "वंदना करते हैं हम, वंदना करते हैं हम (2)"
+            ],
+            "chords": [
+              "A         D         E"
             ]
           },
           {
             "verse": "1",
             "lines": [
               "हृदय को तेरे सामने, लाकर रखते हैं हम"
+            ],
+            "chords": [
+              "A         D         A"
             ]
           },
           {
             "verse": "2",
             "lines": [
-              "1. हृदय में मेरे मसीहा, जीवन दीप जला,"
+              "हृदय में मेरे मसीहा, जीवन दीप जला,"
+            ],
+            "chords": [
+              "D         E         A"
             ]
           },
           {
             "verse": "3",
             "lines": [
               "हृदय के पापों को धोकर, प्रेम की राह दिखा"
+            ],
+            "chords": [
+              "D         E         A"
             ]
           },
           {
             "verse": "4",
             "lines": [
-              "2. मैं हूं निर्बल मानव, पापों के सागर में खोया,"
+              "मैं हूं निर्बल मानव, पापों के सागर में खोया,"
+            ],
+            "chords": [
+              "A         D         E"
             ]
           },
           {
             "verse": "5",
             "lines": [
               "अब तुम संभालो यीशु जी, भव सागर में हूं खोया"
+            ],
+            "chords": [
+              "D         E         A"
             ]
           },
           {
             "verse": "6",
             "lines": [
-              "3. शक्ति दे दे मुझको, मेरा नहीं कोई मीत,"
+              "शक्ति दे दे मुझको, मेरा नहीं कोई मीत,"
+            ],
+            "chords": [
+              "A         D         E"
             ]
           },
           {
             "verse": "7",
             "lines": [
               "जीवन को मेरे ले ले, गाऊं मैं तेरे ही गीत"
+            ],
+            "chords": [
+              "D         E         A"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "We worship You, we worship You (2)"
             ]
           },
           {
-            "verse": "8",
+            "verse": "1",
             "lines": [
-              "Vandana karte hain hum, Vandana karte hain hum (2)"
+              "We bring and place our hearts before You"
             ]
           },
           {
-            "verse": "9",
+            "verse": "2",
             "lines": [
-              "Hridya ko tere saamne, laakar rakhte hain hum"
+              "In my heart, O Messiah, kindle the lamp of life"
             ]
           },
           {
-            "verse": "10",
+            "verse": "3",
             "lines": [
-              "1. Hridya mein mere Masiha, Jeevan deep jala,"
+              "Wash the sins of the heart, and show the path of love"
             ]
           },
           {
-            "verse": "11",
+            "verse": "4",
             "lines": [
-              "Hridya ke paapon ko dhokar, prem ki raah dikha"
+              "I am a weak human, lost in the sea of sins"
             ]
           },
           {
-            "verse": "12",
+            "verse": "5",
             "lines": [
-              "2. Main hun nirbal maanav, paapon ke saagar mein khoya,"
+              "Now You sustain me, O Jesus, I am lost in the sea of life"
             ]
           },
           {
-            "verse": "13",
+            "verse": "6",
             "lines": [
-              "Ab tum sambhalo Yeshu jee, bhav saagar mein hun khoya"
+              "Give me strength, I have no friend"
             ]
           },
           {
-            "verse": "14",
+            "verse": "7",
             "lines": [
-              "3. Shakti de de mujhko, mera nhi koi meet,"
-            ]
-          },
-          {
-            "verse": "15",
-            "lines": [
-              "Jeevan ko mere le le, gaaoon main tere hi geet"
+              "Take my life, may I sing only Your songs"
             ]
           }
         ]
@@ -34932,314 +34467,64 @@
         "lyrics": [
           {
             "lines": [
-              "यीशु तेरा नाम मेरा शरणस्थान"
+              "यीशु तेरा नाम मेरा शरणस्थान, तेरी में स्तुति करूँगा"
+            ],
+            "chords": [
+              "A         G         D         A"
             ]
           },
           {
-            "verse": "1",
-            "lines": [
-              "तेरी में स्तुति करूँगा"
-            ]
-          },
-          {
-            "verse": "2",
-            "lines": [
-              "यीशु तेरा नाम मेरा शरणस्थान"
-            ]
-          },
-          {
-            "verse": "3",
-            "lines": [
-              "तेरी में स्तुति करूँगा"
-            ]
-          },
-          {
-            "verse": "4",
-            "lines": [
-              "स्तुति करूँगा में स्तुति करूँगा"
-            ]
-          },
-          {
-            "verse": "5",
-            "lines": [
-              "स्तुति करूँगा में स्तुति करूँगा"
-            ]
-          },
-          {
-            "verse": "6",
-            "lines": [
-              "हो यीशु तेरा नाम मेरा शरणस्थान"
-            ]
-          },
-          {
-            "verse": "7",
-            "lines": [
-              "तेरी में स्तुति करूँगा"
-            ]
-          },
-          {
-            "verse": "8",
             "lines": [
               "यहोवा यीरे सब को संभालेगा"
-            ]
+            ],
+            "chords": [
+              "A         G         D         A"
+            ],
+            "verse": "1"
           },
           {
-            "verse": "9",
-            "lines": [
-              "यहोवा यीरे सब को संभालेगा"
-            ]
-          },
-          {
-            "verse": "10",
             "lines": [
               "घबराएंगे नहीं घबराएंगे"
+            ],
+            "chords": [
+              "A         G         D         A"
             ]
           },
           {
-            "verse": "11",
-            "lines": [
-              "घबराएंगे नहीं घबराएंगे"
-            ]
-          },
-          {
-            "verse": "12",
-            "lines": [
-              "यीशु तेरा नाम मेरा शरणस्थान"
-            ]
-          },
-          {
-            "verse": "13",
-            "lines": [
-              "तेरी में स्तुति करूँगा"
-            ]
-          },
-          {
-            "verse": "14",
             "lines": [
               "यहोवा नीसी हमेशा विजय देता है"
+            ],
+            "chords": [
+              "A         G         D         A"
+            ],
+            "verse": "2"
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Jesus Your name is my refuge, I will praise You"
             ]
           },
           {
-            "verse": "15",
             "lines": [
-              "यहोवा नीसी हमेशा विजय देता है"
+              "Jehovah Jireh will take care of everything"
+            ],
+            "verse": "1"
+          },
+          {
+            "lines": [
+              "We will not be afraid, we will not be afraid"
             ]
           },
           {
-            "verse": "16",
             "lines": [
-              "स्तुति हो पिता तेरी स्तुति हो पिता"
-            ]
-          },
-          {
-            "verse": "17",
-            "lines": [
-              "स्तुति हो पिता तेरी स्तुति हो पिता"
-            ]
-          },
-          {
-            "verse": "18",
-            "lines": [
-              "यीशु तेरा नाम मेरा शरणस्थान"
-            ]
-          },
-          {
-            "verse": "19",
-            "lines": [
-              "तेरी में स्तुति करूँगा"
-            ]
-          },
-          {
-            "verse": "20",
-            "lines": [
-              "यहोवा शालोम शांति मुझे देता है"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "यहोवा शालोम शांति मुझे देता है"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "स्तुति हो पिता तेरी स्तुति हो पिता"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "स्तुति हो पिता तेरी स्तुति हो पिता"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
-              "यीशु तेरा नाम मेरा शरणस्थान"
-            ]
-          },
-          {
-            "verse": "25",
-            "lines": [
-              "तेरी में स्तुति करूँगा"
-            ]
-          },
-          {
-            "verse": "26",
-            "lines": [
-              "Yeshu Tera Naam Mera Sharansthaan"
-            ]
-          },
-          {
-            "verse": "27",
-            "lines": [
-              "Teri Main Stuti Karunga"
-            ]
-          },
-          {
-            "verse": "28",
-            "lines": [
-              "Yeshu Tera Naam Mera Sharansthaan"
-            ]
-          },
-          {
-            "verse": "29",
-            "lines": [
-              "Teri Main Stuti Karunga"
-            ]
-          },
-          {
-            "verse": "30",
-            "lines": [
-              "Stuti Karunga Main Stuti Karunga"
-            ]
-          },
-          {
-            "verse": "31",
-            "lines": [
-              "Stuti Karunga Main Stuti Karunga"
-            ]
-          },
-          {
-            "verse": "32",
-            "lines": [
-              "Ho Yeshu Tera Naam Mera Sharansthaan"
-            ]
-          },
-          {
-            "verse": "33",
-            "lines": [
-              "Teri Main Stuti Karunga"
-            ]
-          },
-          {
-            "verse": "34",
-            "lines": [
-              "Yehova Yire Sab Ko Sambhaalega"
-            ]
-          },
-          {
-            "verse": "35",
-            "lines": [
-              "Yehova Yire Sab Ko Sambhaalega"
-            ]
-          },
-          {
-            "verse": "36",
-            "lines": [
-              "Ghabrayenge Nahi Ghabrayenge"
-            ]
-          },
-          {
-            "verse": "37",
-            "lines": [
-              "Ghabrayenge Nahi Ghabrayenge"
-            ]
-          },
-          {
-            "verse": "38",
-            "lines": [
-              "Yeshu Tera Naam Mera Sharansthaan"
-            ]
-          },
-          {
-            "verse": "39",
-            "lines": [
-              "Teri Main Stuti Karunga"
-            ]
-          },
-          {
-            "verse": "40",
-            "lines": [
-              "Yehova Niisi Hamesha Vijay Deta Hai"
-            ]
-          },
-          {
-            "verse": "41",
-            "lines": [
-              "Yehova Niisi Hamesha Vijay Deta Hai"
-            ]
-          },
-          {
-            "verse": "42",
-            "lines": [
-              "Stuti Ho Pita Teri Stuti Ho Pita"
-            ]
-          },
-          {
-            "verse": "43",
-            "lines": [
-              "Stuti Ho Pita Teri Stuti Ho Pita"
-            ]
-          },
-          {
-            "verse": "44",
-            "lines": [
-              "Yeshu Tera Naam Mera Sharansthaan"
-            ]
-          },
-          {
-            "verse": "45",
-            "lines": [
-              "Teri Main Stuti Karunga"
-            ]
-          },
-          {
-            "verse": "46",
-            "lines": [
-              "Yehova Shalom Shanti Mujhe Deta Hai"
-            ]
-          },
-          {
-            "verse": "47",
-            "lines": [
-              "Yehova Shalom Shanti Mujhe Deta Hai"
-            ]
-          },
-          {
-            "verse": "48",
-            "lines": [
-              "Stuti Ho Pita Teri Stuti Ho Pita"
-            ]
-          },
-          {
-            "verse": "49",
-            "lines": [
-              "Stuti Ho Pita Teri Stuti Ho Pita"
-            ]
-          },
-          {
-            "verse": "50",
-            "lines": [
-              "Yeshu Tera Naam Mera Sharansthaan"
-            ]
-          },
-          {
-            "verse": "51",
-            "lines": [
-              "Teri Main Stuti Karunga"
-            ]
+              "Jehovah Nissi always gives us victory"
+            ],
+            "verse": "2"
           }
         ]
       }

@@ -117,7 +117,7 @@ export const publicPages = [
   { title: "Leaderboard", path: "/public-leaderboard", category: "Competition" },
   { title: "Daily Verse", path: "/daily-verse", category: "Bible Study" },
   { title: "Prayer Requests", path: "/prayer-requests", category: "Community" },
-  { title: "Today's Quiz", path: "/todays-quiz", category: "Quizzes" },
+  { title: "Today's Quiz", path: "/daily-bible-quiz", category: "Quizzes" },
   { title: "Weekly Quiz", path: "/weekly-quiz", category: "Quizzes" },
   { title: "Competition Hub", path: "/competitions", category: "Competition" },
   { title: "Selah Space", path: "/selah-space", category: "Spiritual" },
@@ -179,7 +179,7 @@ export const publicPages = [
   // Malayalam Songs (Dynamic mapping)
   ...allSongs.map(song => ({
     title: song.title,
-    path: `/songs/${song.slug}`,
+    path: `/malayalam-songs/${song.slug}`,
     category: "Malayalam Song"
   })),
 

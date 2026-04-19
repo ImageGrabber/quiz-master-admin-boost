@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-04-18T17:42:46.995Z",
+  "generatedAt": "2026-04-18T18:14:25.131Z",
   "source": "scripts/generate-static-pages.js",
   "summary": {
-    "totalPages": 6672,
-    "good": 3768,
-    "fair": 1133,
+    "totalPages": 6692,
+    "good": 3772,
+    "fair": 1149,
     "poor": 1771,
-    "averageWords": 243.1,
+    "averageWords": 242.9,
     "averageSeoScore": 71.1
   },
   "pages": [
@@ -20,6 +20,17 @@
       "hasH1": true,
       "seoScore": 55,
       "seoQuality": "poor"
+    },
+    {
+      "path": "/10-commandments-quiz",
+      "title": "10 Commandments Quiz | Test Your Knowledge of Exodus 20",
+      "description": "Can you name all 10 Commandments? Take our free quiz to test your knowledge of God's law given to Moses on Mount Sinai in Exodus 20.",
+      "wordCount": 153,
+      "titleLength": 55,
+      "descriptionLength": 132,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
     },
     {
       "path": "/articles",
@@ -64,6 +75,171 @@
       "hasH1": true,
       "seoScore": 40,
       "seoQuality": "poor"
+    },
+    {
+      "path": "/bible-quiz-for-beginners",
+      "title": "Bible Quiz for Beginners | Easy Bible Questions & Answers",
+      "description": "Easy Bible quiz questions perfect for beginners. Start your Bible learning journey with simple, encouraging questions from Genesis to Revelation.",
+      "wordCount": 158,
+      "titleLength": 57,
+      "descriptionLength": 145,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
+      "path": "/bible-quiz-for-sunday-school",
+      "title": "Bible Quiz for Sunday School | Free Questions & Answers",
+      "description": "Free Bible quiz questions and answers perfect for Sunday school classes. Age-appropriate, printable, and organized by difficulty level for teachers and students.",
+      "wordCount": 257,
+      "titleLength": 55,
+      "descriptionLength": 161,
+      "hasH1": true,
+      "seoScore": 80,
+      "seoQuality": "good"
+    },
+    {
+      "path": "/bible-quiz-multiplayer",
+      "title": "Bible Quiz Multiplayer | Play Live with Friends & Family",
+      "description": "Challenge friends and family to a live multiplayer Bible quiz. Host real-time competitions, track scores, and see who knows the Bible best.",
+      "wordCount": 205,
+      "titleLength": 56,
+      "descriptionLength": 139,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
+      "path": "/bible-quiz-printable-pdf",
+      "title": "Bible Quiz Printable PDF | Free Download & Print",
+      "description": "Download and print free Bible quiz worksheets in PDF format. Perfect for Sunday school, small groups, youth groups, and personal study. No signup required.",
+      "wordCount": 268,
+      "titleLength": 48,
+      "descriptionLength": 155,
+      "hasH1": true,
+      "seoScore": 80,
+      "seoQuality": "good"
+    },
+    {
+      "path": "/christmas-worship-songs-lyrics",
+      "title": "Christmas Worship Songs Lyrics & Chords | Christian Christmas Music",
+      "description": "Celebrate Christmas with Christian worship songs. Find lyrics, guitar chords, and strumming patterns for beloved Christmas hymns and carols.",
+      "wordCount": 248,
+      "titleLength": 67,
+      "descriptionLength": 140,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
+      "path": "/easter-worship-songs-lyrics",
+      "title": "Easter Worship Songs Lyrics & Chords | Resurrection Sunday Music",
+      "description": "Worship the risen Lord with Easter songs. Find lyrics, guitar chords, and strumming patterns for powerful resurrection and Good Friday hymns.",
+      "wordCount": 236,
+      "titleLength": 64,
+      "descriptionLength": 141,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
+      "path": "/free-bible-quiz-no-signup",
+      "title": "Free Bible Quiz — No Signup, No Registration Required",
+      "description": "Take free Bible quizzes instantly with no signup, no email, and no registration. Covers all 66 books with beginner to advanced difficulty levels.",
+      "wordCount": 154,
+      "titleLength": 53,
+      "descriptionLength": 145,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
+      "path": "/kids-stories/creation-story",
+      "title": "Creation Story for Kids | God Made the World in 7 Days",
+      "description": "Read the Creation story from Genesis 1 told simply for children. Learn what God made on each of the 7 days of creation with a fun quiz.",
+      "wordCount": 136,
+      "titleLength": 54,
+      "descriptionLength": 135,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
+      "path": "/kids-stories/daniel-lions-den",
+      "title": "Daniel in the Lion's Den for Kids | Bible Story",
+      "description": "Read the story of Daniel in the lion's den for children. Learn how Daniel's faith in God kept him safe when he was thrown to hungry lions.",
+      "wordCount": 206,
+      "titleLength": 47,
+      "descriptionLength": 138,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
+      "path": "/kids-stories/david-and-goliath",
+      "title": "David and Goliath Story for Kids | Bible Story with Quiz",
+      "description": "Read the exciting story of David and Goliath told for children. Learn how a young shepherd defeated a giant with faith, courage, and a sling.",
+      "wordCount": 266,
+      "titleLength": 56,
+      "descriptionLength": 141,
+      "hasH1": true,
+      "seoScore": 80,
+      "seoQuality": "good"
+    },
+    {
+      "path": "/kids-stories/jonah-and-the-whale",
+      "title": "Jonah and the Whale Story for Kids | Bible Story",
+      "description": "Read the story of Jonah and the great fish for children. Learn what happens when Jonah tried to run away from God and ended up inside a whale.",
+      "wordCount": 232,
+      "titleLength": 48,
+      "descriptionLength": 142,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
+      "path": "/kids-stories/moses-and-exodus",
+      "title": "Moses and the Exodus Story for Kids | Bible Story",
+      "description": "Read the exciting story of Moses and the Exodus told for children. From baby in a basket to parting the Red Sea — an epic Bible adventure.",
+      "wordCount": 223,
+      "titleLength": 49,
+      "descriptionLength": 138,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
+      "path": "/kids-stories/noahs-ark",
+      "title": "Noah's Ark Story for Kids | Bible Story with Quiz",
+      "description": "Read the story of Noah's Ark told simply for children. Includes a fun quiz, key lessons, and discussion questions for Sunday school and home study.",
+      "wordCount": 276,
+      "titleLength": 49,
+      "descriptionLength": 147,
+      "hasH1": true,
+      "seoScore": 80,
+      "seoQuality": "good"
+    },
+    {
+      "path": "/new-testament-quiz",
+      "title": "New Testament Quiz Questions & Answers | Free Bible Quiz",
+      "description": "Test your New Testament knowledge with free quizzes covering Matthew through Revelation. Includes the Gospels, Epistles, and Apocalyptic literature.",
+      "wordCount": 132,
+      "titleLength": 56,
+      "descriptionLength": 148,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
+      "path": "/old-testament-quiz",
+      "title": "Old Testament Quiz Questions & Answers | Free Bible Quiz",
+      "description": "Test your knowledge of the Old Testament with free quiz questions covering Genesis through Malachi. Includes beginner, intermediate, and advanced levels.",
+      "wordCount": 149,
+      "titleLength": 56,
+      "descriptionLength": 153,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
     },
     {
       "path": "/public-quiz/1-chronicles",
@@ -73401,6 +73577,50 @@
       "hasH1": true,
       "seoScore": 48,
       "seoQuality": "poor"
+    },
+    {
+      "path": "/verses/faith",
+      "title": "Bible Verses About Faith | Scriptures to Strengthen Your Belief",
+      "description": "Deepen your faith with 25+ powerful Bible verses about trusting God, walking by faith, and the heroes of faith from Hebrews 11.",
+      "wordCount": 143,
+      "titleLength": 63,
+      "descriptionLength": 127,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
+      "path": "/verses/hope",
+      "title": "Bible Verses About Hope | Scriptures for Encouragement",
+      "description": "Find hope in Scripture. 25+ Bible verses about hope, encouragement, and God's promises for the future when you need reassurance.",
+      "wordCount": 134,
+      "titleLength": 54,
+      "descriptionLength": 128,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
+      "path": "/verses/love",
+      "title": "Bible Verses About Love | God's Love, Romantic Love & More",
+      "description": "Discover the Bible's most powerful verses about love. From God's unconditional love to romantic love and love for others — 30+ scriptures with context.",
+      "wordCount": 152,
+      "titleLength": 58,
+      "descriptionLength": 151,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
+      "path": "/verses/strength",
+      "title": "Bible Verses About Strength | 30+ Scriptures for Hard Times",
+      "description": "Find strength in God's Word. 30+ powerful Bible verses about strength, courage, and perseverance for when you need encouragement most.",
+      "wordCount": 153,
+      "titleLength": 59,
+      "descriptionLength": 134,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
     }
   ]
 }
