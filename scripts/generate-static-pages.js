@@ -1783,12 +1783,17 @@ ${escapeHtml(song.content || 'Lyrics are being prepared for this song. Please ch
                 <div class="flex flex-wrap gap-3 mb-6">
                   <a href="/public-quiz/matthew/chapter-27/beginner" class="px-4 py-2 bg-violet-100 rounded-full text-sm text-violet-700 hover:bg-violet-200">Matthew 27 - Crucifixion</a>
                   <a href="/public-quiz/matthew/chapter-28/beginner" class="px-4 py-2 bg-yellow-100 rounded-full text-sm text-yellow-700 hover:bg-yellow-200">Matthew 28 - Resurrection</a>
-                  <a href="/public-quiz/john/chapter-19/beginner" class="px-4 py-2 bg-violet-100 rounded-full text-sm text-violet-700 hover:bg-violet-200">John 19 - The Cross</a>
-                  <a href="/public-quiz/john/chapter-20/beginner" class="px-4 py-2 bg-yellow-100 rounded-full text-sm text-yellow-700 hover:bg-yellow-200">John 20 - He Is Risen</a>
-                  <a href="/songs" class="px-4 py-2 bg-gray-100 rounded-full text-sm hover:bg-gray-200">All Worship Songs →</a>
-                </div>
-    {
-      path: '/daily-bible-quiz',
+	                  <a href="/public-quiz/john/chapter-19/beginner" class="px-4 py-2 bg-violet-100 rounded-full text-sm text-violet-700 hover:bg-violet-200">John 19 - The Cross</a>
+	                  <a href="/public-quiz/john/chapter-20/beginner" class="px-4 py-2 bg-yellow-100 rounded-full text-sm text-yellow-700 hover:bg-yellow-200">John 20 - He Is Risen</a>
+	                  <a href="/songs" class="px-4 py-2 bg-gray-100 rounded-full text-sm hover:bg-gray-200">All Worship Songs →</a>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
+	        </div>`
+	    },
+	    {
+	      path: '/daily-bible-quiz',
       title: 'Daily Bible Quiz - Challenge Your Scripture Knowledge Every Day',
       description: 'Take our Daily Bible Quiz to deepen your understanding of the Word. New questions daily covering Old and New Testament. Perfect for individual or group study.',
       structuredData: {
