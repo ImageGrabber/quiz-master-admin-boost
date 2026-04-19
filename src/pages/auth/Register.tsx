@@ -122,10 +122,10 @@ const Register = () => {
     <>
       <Helmet>
         {/* Primary Meta Tags */}
-        <title>Register for Bible Quiz Competition 2025 | Sign Up for Free Bible Quiz</title>
-        <meta name="title" content="Register for Bible Quiz Competition 2025 | Sign Up for Free Bible Quiz" />
-        <meta name="description" content="Join Bible Quiz Competition 2025 for free! Create your account to participate in daily Bible quiz challenges, compete for prizes, track your Bible quiz results, and climb leaderboards. Start your Bible learning journey today." />
-        <meta name="keywords" content="bible quiz competition 2025 sign up, bible quiz competition 2025 register, bible quiz competition 2025 free, bible quiz sign up, bible quiz competition registration, bible quiz competition 2025 account, free bible quiz competition, bible quiz competition 2025 join, christian quiz competition sign up, bible knowledge competition register" />
+        <title>Register for Bible Quiz Competition 2026 | Sign Up for Free Bible Quiz</title>
+        <meta name="title" content="Register for Bible Quiz Competition 2026 | Sign Up for Free Bible Quiz" />
+        <meta name="description" content="Join Bible Quiz Competition 2026 for free! Create your account to participate in daily Bible quiz challenges, compete for prizes, track your Bible quiz results, and climb leaderboards. Start your Bible learning journey today." />
+        <meta name="keywords" content="bible quiz competition 2026 sign up, bible quiz competition 2026 register, bible quiz competition 2026 free, bible quiz sign up, bible quiz competition registration, bible quiz competition 2026 account, free bible quiz competition, bible quiz competition 2026 join, christian quiz competition sign up, bible knowledge competition register" />
         <meta name="author" content="Bible Quiz Competition" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="language" content="English" />
@@ -133,7 +133,7 @@ const Register = () => {
         <meta name="geo.region" content="US" />
         <meta name="geo.placename" content="United States" />
         <meta name="application-name" content="Bible Quiz Competition" />
-        <meta name="apple-mobile-web-app-title" content="Bible Quiz 2025" />
+        <meta name="apple-mobile-web-app-title" content="Bible Quiz 2026" />
 
         {/* Canonical URL */}
         <link rel="canonical" href="https://biblequizcompetition.com/auth/register" />
@@ -141,29 +141,29 @@ const Register = () => {
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://biblequizcompetition.com/auth/register" />
-        <meta property="og:title" content="Register for Bible Quiz Competition 2025 | Sign Up for Free Bible Quiz" />
-        <meta property="og:description" content="Join Bible Quiz Competition 2025 for free! Create your account to participate in daily Bible quiz challenges, compete for prizes, and track your progress. Free to join!" />
+        <meta property="og:title" content="Register for Bible Quiz Competition 2026 | Sign Up for Free Bible Quiz" />
+        <meta property="og:description" content="Join Bible Quiz Competition 2026 for free! Create your account to participate in daily Bible quiz challenges, compete for prizes, and track your progress. Free to join!" />
         <meta property="og:site_name" content="Bible Quiz Competition" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:image" content="https://biblequizcompetition.com/sword.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Bible Quiz Competition 2025 - Registration Page" />
+        <meta property="og:image:alt" content="Bible Quiz Competition 2026 - Registration Page" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://biblequizcompetition.com/auth/register" />
-        <meta name="twitter:title" content="Register for Bible Quiz Competition 2025" />
-        <meta name="twitter:description" content="Join Bible Quiz Competition 2025 for free! Participate in daily challenges, compete for prizes, and track your Bible quiz results." />
+        <meta name="twitter:title" content="Register for Bible Quiz Competition 2026" />
+        <meta name="twitter:description" content="Join Bible Quiz Competition 2026 for free! Participate in daily challenges, compete for prizes, and track your Bible quiz results." />
         <meta name="twitter:image" content="https://biblequizcompetition.com/sword.png" />
-        <meta name="twitter:image:alt" content="Bible Quiz Competition 2025 Registration" />
+        <meta name="twitter:image:alt" content="Bible Quiz Competition 2026 Registration" />
 
         {/* Structured Data - WebPage */}
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "name": "Register for Bible Quiz Competition 2025",
-          "description": "Join Bible Quiz Competition 2025 for free! Create your account to participate in daily Bible quiz challenges, compete for prizes, and track your progress on leaderboards.",
+          "name": "Register for Bible Quiz Competition 2026",
+          "description": "Join Bible Quiz Competition 2026 for free! Create your account to participate in daily Bible quiz challenges, compete for prizes, and track your progress on leaderboards.",
           "url": "https://biblequizcompetition.com/auth/register",
           "inLanguage": "en-US",
           "isPartOf": {
@@ -194,8 +194,8 @@ const Register = () => {
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Offer",
-          "name": "Free Bible Quiz Competition 2025 Registration",
-          "description": "Join Bible Quiz Competition 2025 completely free. No credit card required. Participate in daily Bible quiz challenges and compete for prizes.",
+          "name": "Free Bible Quiz Competition 2026 Registration",
+          "description": "Join Bible Quiz Competition 2026 completely free. No credit card required. Participate in daily Bible quiz challenges and compete for prizes.",
           "price": "0",
           "priceCurrency": "USD",
           "availability": "https://schema.org/InStock",

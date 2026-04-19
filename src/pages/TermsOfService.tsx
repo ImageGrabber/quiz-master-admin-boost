@@ -17,7 +17,7 @@ export default function TermsOfService() {
             <main className="flex-1 container mx-auto px-4 py-16 max-w-3xl">
                 <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 prose prose-slate">
                     <h1>Terms of Service</h1>
-                    <p>Last updated: January 1, 2025</p>
+                    <p>Last updated: January 1, 2026</p>
                     <p>By using Bible Quiz Competition ("the Platform"), you agree to the following terms.</p>
                     
                     <h2>1. Fair Play & Integrity</h2>

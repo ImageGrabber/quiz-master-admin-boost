@@ -237,7 +237,7 @@ const LiveQuizHealthCheck = () => {
                 <ol className="list-decimal list-inside space-y-1 text-sm">
                   <li>Open your Supabase Dashboard</li>
                   <li>Go to the SQL Editor</li>
-                  <li>Copy and run the migration from: <code>supabase/migrations/20250108000000-add-live-quiz-system.sql</code></li>
+                  <li>Copy and run the migration from: <code>supabase/migrations/20260108000000-add-live-quiz-system.sql</code></li>
                   <li>Click "Refresh" above to verify the setup</li>
                 </ol>
                 <p className="mt-3 text-sm">

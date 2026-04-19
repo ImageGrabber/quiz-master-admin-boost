@@ -4034,6 +4034,12 @@
               "और हम कहते हैं",
               "दिल से कहते हैं",
               "आ प्रभु…"
+            ],
+            "chords": [
+              "G",
+              "C",
+              "D",
+              "G"
             ]
           },
           {
@@ -4052,12 +4058,28 @@
               "saara aadar hum tujhko dete hei",
               "aaur hum kehete hei,",
               "dil se kehete hei"
+            ],
+            "chords": [
+              "G",
+              "C",
+              "D",
+              "G"
             ]
           },
           {
             "verse": "2",
             "lines": [
               "aa prabhu..."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Come Lord Jesus come, Your glory be in me. We worship You with all our heart and soul."
             ]
           }
         ]
@@ -13637,6 +13659,12 @@
               "तू ही सहारा मेरा।",
               "मुश्किल समय में तू ही दिलासा ,",
               "साथ रहेगा तू सदा।"
+            ],
+            "chords": [
+              "G",
+              "D",
+              "Am",
+              "G"
             ]
           },
           {
@@ -13646,6 +13674,12 @@
               "सदा रहेगी मुझ पर",
               "ते��ी विश्वास योग्यता",
               "देखूंगा मैं उम्र भर"
+            ],
+            "chords": [
+              "G",
+              "D",
+              "C",
+              "D"
             ]
           },
           {
@@ -13655,6 +13689,12 @@
               "येशु तेरा नाम रहे ऊंचा।",
               "मैं हाथ उठाकर गाऊंगा ,",
               "येशु तेरा नाम रहे ऊंचा।"
+            ],
+            "chords": [
+              "G",
+              "D",
+              "C",
+              "G"
             ]
           },
           {
@@ -13664,6 +13704,12 @@
               "जीवन नया है दे दिया",
               "नाम ले कर पुकारा मुझे",
               "महिमा से मुझको भर दिया"
+            ],
+            "chords": [
+              "G",
+              "D",
+              "C",
+              "G"
             ]
           },
           {
@@ -13764,6 +13810,46 @@
             "lines": [
               "Hum Haath Uthakar Gayenge",
               "Yeshu Tera Naam Rahe Ooncha"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Jesus Christ is my trust,",
+              "You are my only support.",
+              "Comfort in difficult times,",
+              "You will be with me forever."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Your mercy and goodness",
+              "Will remain on me forever",
+              "Your faithfulness",
+              "I will see all my life"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "I will lift my hands and sing,",
+              "Jesus, may Your name be lifted high.",
+              "I will lift my hands and sing,",
+              "Jesus, may Your name be lifted high."
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "You saved me from death",
+              "You gave me a new life",
+              "Called me by my name",
+              "Filled me with Your glory"
             ]
           }
         ]
@@ -15536,12 +15622,24 @@
           {
             "lines": [
               "Hallelujah Stuti Gaye Hum,"
+            ],
+            "chords": [
+              "G",
+              "D",
+              "C",
+              "G"
             ]
           },
           {
             "verse": "1",
             "lines": [
               "Yeshu ki stuti gaye hum -2"
+            ],
+            "chords": [
+              "G",
+              "D",
+              "G",
+              "G"
             ]
           },
           {
@@ -15620,6 +15718,16 @@
             "verse": "14",
             "lines": [
               "kabhi nahi chhodegaa -2"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Hallelujah, let us sing praise. Let us sing praise to Jesus."
             ]
           }
         ]
@@ -26191,6 +26299,12 @@
               "सुनू गर्जन भयंकर,",
               "समर्थ तेरी",
               "सारे भूमण्डल पर |"
+            ],
+            "chords": [
+              "G",
+              "C",
+              "D",
+              "G"
             ]
           },
           {
@@ -26200,6 +26314,12 @@
               "कितना महान (२)",
               "प्रशंसा ��ोवे प्रभु येशु की,",
               "कितना महान (२)"
+            ],
+            "chords": [
+              "G",
+              "C",
+              "D",
+              "G"
             ]
           },
           {
@@ -26449,6 +26569,16 @@
             "verse": "39",
             "lines": [
               "Prabhu Kitna Mahaan"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Then sings my soul, my Savior God to Thee; How great Thou art, how great Thou art!"
             ]
           }
         ]
@@ -38380,6 +38510,53 @@
             "verse": "31",
             "lines": [
               "Aao Mil Ke Gaao"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "krus_par_bali_dwara",
+    "slug": "krus-par-bali-dwara",
+    "title": "KRUS PAR BALI DWARA",
+    "videoUrl": "https://www.youtube.com/embed/fkK95m5UK5o",
+    "description": "KRUS PAR BALI DWARA - Hindi Christian Devotional Song Lyrics",
+    "translations": {
+      "hindi": {
+        "lang": "Hindi",
+        "lyrics": [
+          {
+            "lines": [
+              "क्रूस पर बलि द्वारा,",
+              "अपना लहू बहाया - 2",
+              "पाप को हटा कर, साफ़ है किया,",
+              "हमको बचा लिया - 2"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "हा - हल्लेलूयाह, हल्लेलूयाह, हल्लेलूयाह - 2"
+            ],
+            "chords": [
+              "G",
+              "C",
+              "D",
+              "G"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Through the sacrifice on the cross,",
+              "He shed His blood - 2",
+              "Removed our sins, made us clean,",
+              "He has saved us - 2"
             ]
           }
         ]

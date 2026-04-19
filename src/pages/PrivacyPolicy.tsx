@@ -17,7 +17,7 @@ export default function PrivacyPolicy() {
             <main className="flex-1 container mx-auto px-4 py-16 max-w-3xl">
                 <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 prose prose-slate">
                     <h1>Privacy Policy</h1>
-                    <p>Last updated: January 1, 2025</p>
+                    <p>Last updated: January 1, 2026</p>
                     <p>At Bible Quiz Competition, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your personal data when you use our web application.</p>
                     
                     <h2>1. Information We Collect</h2>

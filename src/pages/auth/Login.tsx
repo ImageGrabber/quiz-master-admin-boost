@@ -112,10 +112,10 @@ const Login = () => {
     <>
       <Helmet>
         {/* Primary Meta Tags */}
-        <title>Login to Bible Quiz Competition 2025 | Sign In for Bible Quiz Results</title>
-        <meta name="title" content="Login to Bible Quiz Competition 2025 | Sign In for Bible Quiz Results" />
-        <meta name="description" content="Sign in to Bible Quiz Competition 2025 to access your account, view your Bible quiz results, track your progress on leaderboards, and continue your Bible learning journey. Free Bible quiz competition login." />
-        <meta name="keywords" content="bible quiz competition 2025 login, bible quiz login, bible quiz competition sign in, bible quiz results login, bible quiz competition 2025 account, bible quiz leaderboard login, online bible quiz login, bible quiz competition 2025 sign in, christian quiz login, bible knowledge competition login" />
+        <title>Login to Bible Quiz Competition 2026 | Sign In for Bible Quiz Results</title>
+        <meta name="title" content="Login to Bible Quiz Competition 2026 | Sign In for Bible Quiz Results" />
+        <meta name="description" content="Sign in to Bible Quiz Competition 2026 to access your account, view your Bible quiz results, track your progress on leaderboards, and continue your Bible learning journey. Free Bible quiz competition login." />
+        <meta name="keywords" content="bible quiz competition 2026 login, bible quiz login, bible quiz competition sign in, bible quiz results login, bible quiz competition 2026 account, bible quiz leaderboard login, online bible quiz login, bible quiz competition 2026 sign in, christian quiz login, bible knowledge competition login" />
         <meta name="author" content="Bible Quiz Competition" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="language" content="English" />
@@ -123,7 +123,7 @@ const Login = () => {
         <meta name="geo.region" content="US" />
         <meta name="geo.placename" content="United States" />
         <meta name="application-name" content="Bible Quiz Competition" />
-        <meta name="apple-mobile-web-app-title" content="Bible Quiz 2025" />
+        <meta name="apple-mobile-web-app-title" content="Bible Quiz 2026" />
 
         {/* Canonical URL */}
         <link rel="canonical" href="https://biblequizcompetition.com/auth/login" />
@@ -131,29 +131,29 @@ const Login = () => {
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://biblequizcompetition.com/auth/login" />
-        <meta property="og:title" content="Login to Bible Quiz Competition 2025 | Sign In for Bible Quiz Results" />
-        <meta property="og:description" content="Sign in to Bible Quiz Competition 2025 to access your account, view Bible quiz results, and track your progress. Free to join!" />
+        <meta property="og:title" content="Login to Bible Quiz Competition 2026 | Sign In for Bible Quiz Results" />
+        <meta property="og:description" content="Sign in to Bible Quiz Competition 2026 to access your account, view Bible quiz results, and track your progress. Free to join!" />
         <meta property="og:site_name" content="Bible Quiz Competition" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:image" content="https://biblequizcompetition.com/sword.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Bible Quiz Competition 2025 - Login Page" />
+        <meta property="og:image:alt" content="Bible Quiz Competition 2026 - Login Page" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://biblequizcompetition.com/auth/login" />
-        <meta name="twitter:title" content="Login to Bible Quiz Competition 2025" />
+        <meta name="twitter:title" content="Login to Bible Quiz Competition 2026" />
         <meta name="twitter:description" content="Sign in to access your Bible quiz results, track progress, and continue your Bible learning journey. Free to join!" />
         <meta name="twitter:image" content="https://biblequizcompetition.com/sword.png" />
-        <meta name="twitter:image:alt" content="Bible Quiz Competition 2025 Login" />
+        <meta name="twitter:image:alt" content="Bible Quiz Competition 2026 Login" />
 
         {/* Structured Data - WebPage */}
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebPage",
-          "name": "Login to Bible Quiz Competition 2025",
-          "description": "Sign in to Bible Quiz Competition 2025 to access your account, view Bible quiz results, and track your progress on leaderboards.",
+          "name": "Login to Bible Quiz Competition 2026",
+          "description": "Sign in to Bible Quiz Competition 2026 to access your account, view Bible quiz results, and track your progress on leaderboards.",
           "url": "https://biblequizcompetition.com/auth/login",
           "inLanguage": "en-US",
           "isPartOf": {

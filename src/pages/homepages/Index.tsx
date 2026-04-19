@@ -929,14 +929,14 @@ function EmotionalCheckInHero() {
         {/* Main Headline */}
         {!showVerseCard && !showBibleGame && (
           <h1 className="text-3xl md:text-5xl font-urbanist font-medium text-gray-700 mb-3 md:mb-4 leading-tight">
-            Take a Moment to Check In
+            Online Bible Quiz Competition 2026: Win Prizes
           </h1>
         )}
         
         {/* Soothing description */}
         {!showQuestions && !showWaterIntake && !showVerseCard && !showBibleGame && (
           <p className="text-base md:text-base font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
-            Breathe deeply. Let's explore how you're feeling today and find peace through God's word.
+            Join the leading online Bible quiz competition 2026. Test your Bible knowledge, win a prize, and grow through God's word.
           </p>
         )}
         
@@ -2196,10 +2196,10 @@ const Index = () => {
   const homepageStructuredData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Bible Quiz Competition 2025",
+    "name": "Bible Quiz Competition 2026",
     "alternateName": "Bible Quiz Competition",
     "url": "https://biblequizcompetition.com",
-    "description": "Join the ultimate Bible Quiz Competition 2025! Test your Bible knowledge with 1,000+ questions, compete in weekly quizzes, climb leaderboards, and access free Bible Q&A resources. Free to join, fun for all ages.",
+    "description": "Join the ultimate Bible Quiz Competition 2026! Test your Bible knowledge with 1,000+ questions, compete in weekly quizzes, climb leaderboards, and access free Bible Q&A resources. Free to join, fun for all ages.",
     "potentialAction": {
       "@type": "SearchAction",
       "target": {
@@ -2228,7 +2228,7 @@ const Index = () => {
     "name": "Bible Quiz Competition",
     "url": "https://biblequizcompetition.com",
     "logo": "https://biblequizcompetition.com/favicon.svg",
-    "description": "Free online Bible quiz platform offering weekly competitions, leaderboards, and Bible Q&A resources for 2025.",
+    "description": "Free online Bible quiz platform offering weekly competitions, leaderboards, and Bible Q&A resources for 2026.",
     "foundingDate": "2024",
     "founder": {
       "@type": "Organization",
@@ -2251,23 +2251,23 @@ const Index = () => {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What is Bible Quiz Competition 2025?",
+        "name": "What is Bible Quiz Competition 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Bible Quiz Competition 2025 is a free online platform where you can test your Bible knowledge with over 1,000+ questions across all Bible books. Compete in weekly quizzes, track your progress on leaderboards, and access free Bible Q&A resources."
+          "text": "Bible Quiz Competition 2026 is a free online platform where you can test your Bible knowledge with over 1,000+ questions across all Bible books. Compete in weekly quizzes, track your progress on leaderboards, and access free Bible Q&A resources."
         }
       },
       {
         "@type": "Question",
-        "name": "Is Bible Quiz Competition 2025 free?",
+        "name": "Is Bible Quiz Competition 2026 free?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes! Bible Quiz Competition 2025 is completely free to join. Sign up for free and get access to all quizzes, leaderboards, and Bible study resources."
+          "text": "Yes! Bible Quiz Competition 2026 is completely free to join. Sign up for free and get access to all quizzes, leaderboards, and Bible study resources."
         }
       },
       {
         "@type": "Question",
-        "name": "How do I participate in Bible Quiz Competition 2025?",
+        "name": "How do I participate in Bible Quiz Competition 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Simply sign up for a free account, choose from Today's Quiz, Weekly Challenges, or explore our Bible Q&A Hub. Take quizzes, compete with others, and climb the leaderboard!"
@@ -2280,10 +2280,10 @@ const Index = () => {
     <>
       <Helmet>
         {/* Primary Meta Tags */}
-        <title>Bible Quiz Competition 2025 | Free Online Bible Quizzes & Leaderboards</title>
-        <meta name="title" content="Bible Quiz Competition 2025 | Free Online Bible Quizzes & Leaderboards" />
-        <meta name="description" content="Join Bible Quiz Competition 2025! Test your Bible knowledge with 1,000+ questions, compete in weekly quizzes, climb leaderboards, and access free Bible Q&A resources. Free to join, fun for all ages. Participate in the ultimate Bible quiz competition of 2025." />
-        <meta name="keywords" content="bible quiz competition 2025, bible quiz competition, bible quiz 2025, online bible quiz, free bible quiz, bible knowledge quiz, weekly bible quiz, bible quiz leaderboard, bible study quiz, christian quiz competition, bible questions and answers, genesis quiz, exodus quiz, psalms quiz, new testament quiz, bible quiz app, interactive bible quiz, bible quiz for adults, bible quiz for kids, bible competition 2025" />
+        <title>Bible Quiz Competition 2026 | Free Online Bible Quizzes & Leaderboards</title>
+        <meta name="title" content="Bible Quiz Competition 2026 | Free Online Bible Quizzes & Leaderboards" />
+        <meta name="description" content="Join Bible Quiz Competition 2026! Test your Bible knowledge with 1,000+ questions, compete in weekly quizzes, climb leaderboards, and access free Bible Q&A resources. Free to join, fun for all ages. Participate in the ultimate Bible quiz competition of 2026." />
+        <meta name="keywords" content="online bible quiz competition 2026, bible quiz win a prize, bible quiz competition 2026, bible quiz online 2026, free bible quiz, bible knowledge quiz, weekly bible quiz, bible quiz leaderboard, bible study quiz, christian quiz competition, bible questions and answers, genesis quiz, bible quiz results 2026" />
         <meta name="author" content="Bible Quiz Competition" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="language" content="English" />
@@ -2296,28 +2296,28 @@ const Index = () => {
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://biblequizcompetition.com/" />
-        <meta property="og:title" content="Bible Quiz Competition 2025 | Free Online Bible Quizzes & Leaderboards" />
-        <meta property="og:description" content="Join Bible Quiz Competition 2025! Test your Bible knowledge with 1,000+ questions, compete in weekly quizzes, and climb leaderboards. Free to join!" />
+        <meta property="og:title" content="Bible Quiz Competition 2026 | Free Online Bible Quizzes & Leaderboards" />
+        <meta property="og:description" content="Join Bible Quiz Competition 2026! Test your Bible knowledge with 1,000+ questions, compete in weekly quizzes, and climb leaderboards. Free to join!" />
         <meta property="og:image" content="https://biblequizcompetition.com/favicon.svg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Bible Quiz Competition 2025 - Free Online Bible Quizzes" />
+        <meta property="og:image:alt" content="Bible Quiz Competition 2026 - Free Online Bible Quizzes" />
         <meta property="og:site_name" content="Bible Quiz Competition" />
         <meta property="og:locale" content="en_US" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://biblequizcompetition.com/" />
-        <meta name="twitter:title" content="Bible Quiz Competition 2025 | Free Online Bible Quizzes" />
-        <meta name="twitter:description" content="Join Bible Quiz Competition 2025! Test your Bible knowledge with 1,000+ questions, compete in weekly quizzes, and climb leaderboards." />
+        <meta name="twitter:title" content="Bible Quiz Competition 2026 | Free Online Bible Quizzes" />
+        <meta name="twitter:description" content="Join Bible Quiz Competition 2026! Test your Bible knowledge with 1,000+ questions, compete in weekly quizzes, and climb leaderboards." />
         <meta name="twitter:image" content="https://biblequizcompetition.com/favicon.svg" />
-        <meta name="twitter:image:alt" content="Bible Quiz Competition 2025" />
+        <meta name="twitter:image:alt" content="Bible Quiz Competition 2026" />
         
         {/* Additional SEO Meta Tags */}
         <meta name="geo.region" content="US" />
         <meta name="geo.placename" content="United States" />
         <meta name="application-name" content="Bible Quiz Competition" />
-        <meta name="apple-mobile-web-app-title" content="Bible Quiz 2025" />
+        <meta name="apple-mobile-web-app-title" content="Bible Quiz 2026" />
         
         {/* Structured Data - WebSite */}
         <script type="application/ld+json">
@@ -2454,7 +2454,7 @@ const Index = () => {
                 Your Complete Wellness Journey
               </h2>
               <p className="text-lg md:text-xl font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
-                Join the leading online Bible quiz competition 2025 and participate in the best Bible quiz competition 2025. We're here to support you through your care, worries, anxiety, and every step of your journey toward peace through Bible quiz competition, CBT tools, and comprehensive wellness resources.
+                Join the leading online Bible quiz competition 2026 and participate in the best Bible quiz competition 2026. We're here to support you through your care, worries, anxiety, and every step of your journey toward peace through Bible quiz competition, CBT tools, and comprehensive wellness resources.
               </p>
             </div>
 
@@ -2544,7 +2544,7 @@ const Index = () => {
                       <div>
                         <h3 className="text-lg md:text-xl font-urbanist font-semibold text-gray-900 mb-2">Interactive Bible Games</h3>
                         <p className="text-base md:text-lg font-urbanist font-light text-gray-600 leading-relaxed">
-                          Engage with faith-based games in our online Bible quiz competition that combine fun with spiritual growth. Join Bible competitions 2025 and compete in Bible competition challenges.
+                          Engage with faith-based games in our online Bible quiz competition that combine fun with spiritual growth. Join Bible competitions 2026 and compete in Bible competition challenges.
                         </p>
                       </div>
                     </div>
@@ -2588,7 +2588,7 @@ const Index = () => {
                 Deepen Your Understanding of Scripture
               </h2>
               <p className="text-lg md:text-xl font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
-                Your comprehensive resource for Bible questions and answers in the Bible quiz competition 2025. Explore organized content by book, chapter, difficulty level, and category. Check Bible quiz competition 2025 results and track your progress in our online Bible quiz competition.
+                Your comprehensive resource for Bible questions and answers in the Bible quiz competition 2026. Explore organized content by book, chapter, difficulty level, and category. Check Bible quiz competition 2026 results and track your progress in our online Bible quiz competition.
               </p>
             </div>
 
@@ -2717,7 +2717,7 @@ const Index = () => {
                 Get Started in Minutes
               </h2>
               <p className="text-lg md:text-xl font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
-                Join the Bible quiz competition 2025 today! Our simple 3-step process helps you begin your journey in the online Bible quiz competition and start competing in Bible competitions.
+                Join the Bible quiz competition 2026 today! Our simple 3-step process helps you begin your journey in the online Bible quiz competition and start competing in Bible competitions.
               </p>
             </div>
 
@@ -2770,7 +2770,7 @@ const Index = () => {
                 Join Thousands of Believers
               </h2>
               <p className="text-lg md:text-xl font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
-                See how our Bible quiz competition platform has helped others grow in faith and wellness. Join thousands participating in Bible competition 2025 and Bible competitions worldwide.
+                See how our Bible quiz competition platform has helped others grow in faith and wellness. Join thousands participating in Bible competition 2026 and Bible competitions worldwide.
               </p>
             </div>
             
@@ -2962,7 +2962,7 @@ const Index = () => {
                 Ready to Start Your Journey?
               </h2>
               <p className="text-base md:text-base font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
-                Join thousands of believers who've enhanced their Bible knowledge and wellness with our platform. Participate in the Bible quiz competition 2025, check Bible quiz competition 2025 results, and compete in the best online Bible quiz competition and Bible competitions.
+                Join thousands of believers who've enhanced their Bible knowledge and wellness with our platform. Participate in the Bible quiz competition 2026, check Bible quiz competition 2026 results, and compete in the best online Bible quiz competition and Bible competitions.
               </p>
             </div>
 
@@ -2996,7 +2996,7 @@ const Index = () => {
                   <span className="text-lg font-urbanist font-light text-gray-900">Bible Quiz Competition</span>
               </div>
                 <p className="font-urbanist font-light text-gray-600 mb-4 max-w-md">
-                  More than a quiz platform. Join the leading Bible quiz competition 2025 and participate in online Bible quiz competition. We support you through Bible study, emotional wellness, CBT tools, water intake tracking, and every step of your journey toward peace. Check Bible quiz competition 2025 results and compete in Bible competition challenges.
+                  More than a quiz platform. Join the leading Bible quiz competition 2026 and participate in online Bible quiz competition. We support you through Bible study, emotional wellness, CBT tools, water intake tracking, and every step of your journey toward peace. Check Bible quiz competition 2026 results and compete in Bible competition challenges.
                 </p>
             </div>
 

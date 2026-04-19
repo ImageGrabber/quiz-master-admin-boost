@@ -38,7 +38,7 @@ const RulesAndPrizes = () => {
       <SEO
         title={`Bible Quiz Competition ${currentYear} Rules, Prizes & Scoring System`}
         description={`Official Bible Quiz Competition ${currentYear} rules and prize guide. Get a clear quiz scoring system explanation, timer bonus details, and eligibility rules for online Bible quiz competitions.`}
-        keywords={`bible quiz prize, quiz scoring system explanation, bible competition, bible quiz competition ${currentYear}, online bible quiz competition ${currentYear}, timer bonus quiz scoring, christian competition rules`}
+        keywords={`bible quiz win a prize, bible quiz prize, quiz scoring system explanation, bible competition, bible quiz competition ${currentYear}, online bible quiz competition ${currentYear}, timer bonus quiz scoring, christian competition rules, online bible quiz prizes`}
         author="Bible Quiz Competition"
         url="/rules-and-prizes"
         structuredData={{

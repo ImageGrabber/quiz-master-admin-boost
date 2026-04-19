@@ -248,7 +248,7 @@ const QuizSelection = () => {
       subtitle="Browse and take quizzes to test your knowledge."
     >
       <Helmet>
-        <title>All Bible Quizzes | Bible Quiz Competition 2025</title>
+        <title>All Bible Quizzes | Bible Quiz Competition 2026</title>
         <meta name="description" content="Browse our collection of Bible quizzes for all difficulty levels. Categories include Old Testament, New Testament, Prophets, Gospels, and more." />
         <link rel="canonical" href="https://biblequizcompetition.com/quiz-selection" />
       </Helmet>

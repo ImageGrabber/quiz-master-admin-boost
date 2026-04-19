@@ -46,8 +46,8 @@ const BibleQuizQuestionsAndAnswers = () => {
     return (
         <div className="min-h-screen bg-slate-50">
             <SEO
-                title="Bible Quiz Questions and Answers | 2025 Edition | PDF & Multiple Choice"
-                description="The ultimate collection of Bible quiz questions and answers for 2025. Includes general knowledge, hard trivia, and youth quizzes. Play online or download as PDF."
+                title="Bible Quiz Questions and Answers | 2026 Edition | PDF & Multiple Choice"
+                description="The ultimate collection of Bible quiz questions and answers for 2026. Includes general knowledge, hard trivia, and youth quizzes. Play online or download as PDF."
                 keywords="bible quiz with answers, bible quiz questions and answers pdf, multiple choice bible quiz, bible trivia for youth, hard bible questions, scripture knowledge test"
                 author="Bible Quiz Competition"
                 url="/bible-quiz-questions-and-answers"
@@ -72,7 +72,7 @@ const BibleQuizQuestionsAndAnswers = () => {
             <main className="container mx-auto px-4 py-8 pt-24">
                 <header className="text-center mb-12">
                     <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 font-urbanist">
-                        Bible Quiz Questions and Answers (2025 Edition)
+                        Bible Quiz Questions and Answers (2026 Edition)
                     </h1>
                     <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-8 font-urbanist">
                         Test your knowledge with our comprehensive collection of Bible trivia.
