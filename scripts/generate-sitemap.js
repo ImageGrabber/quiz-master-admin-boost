@@ -75,7 +75,8 @@ function routeLooksIndexable(route, options = {}) {
     '/joy-runner',
     '/verse-master',
     '/faith-builder',
-    '/flappy-bird'
+    '/flappy-bird',
+    '/bible-questions-and-answers-hub/rith'
   ]);
   if (excludedExactRoutes.has(route)) return false;
   return !excludedPrefixes.some((prefix) => route.startsWith(prefix));
@@ -137,7 +138,6 @@ function generateSitemap() {
     { loc: '/new-testament-quiz', priority: '0.9', changefreq: 'monthly' },
     { loc: '/10-commandments-quiz', priority: '0.8', changefreq: 'monthly' },
     { loc: '/bible-quiz-printable-pdf', priority: '0.9', changefreq: 'monthly' },
-    { loc: '/bible-quiz-multiplayer', priority: '0.8', changefreq: 'monthly' },
     { loc: '/bible-quiz-multiplayer', priority: '0.8', changefreq: 'monthly' },
     { loc: '/christmas-bible-quiz', priority: '0.9', changefreq: 'monthly' },
     { loc: '/easter-bible-quiz', priority: '0.9', changefreq: 'monthly' },
@@ -220,17 +220,13 @@ function generateSitemap() {
     });
   });
 
-  // Public Quiz Chapter Pages (Quality-First Scaling) - Now with Difficulty Tiers
+  // Public Quiz Chapter Pages
   for (const [book, chapters] of Object.entries(bibleStructure)) {
     for (let i = 1; i <= chapters; i++) {
-       const baseLoc = `/public-quiz/${book}/chapter-${i}`;
-       // Main + Tiers + Verses
-       ['', '/beginner', '/intermediate', '/advanced', '/verse-1'].forEach(suffix => {
-        urls.push({
-          loc: `${baseLoc}${suffix}`,
-          priority: suffix === '' ? '0.6' : (suffix === '/verse-1' ? '0.7' : '0.5'),
-          changefreq: 'monthly'
-        });
+      urls.push({
+        loc: `/public-quiz/${book}/chapter-${i}`,
+        priority: '0.6',
+        changefreq: 'monthly'
       });
     }
   }
@@ -356,11 +352,24 @@ function generateSitemap() {
 
   console.log(`Added ${addedLiteralRoutes} additional literal routes from App.tsx`);
 
+  // Normalize and deduplicate URLs by location
+  const dedupedByLoc = new Map();
+  for (const entry of urls) {
+    const normalizedLoc = entry.loc === '/' ? '/' : `/${entry.loc.replace(/^\/+|\/+$/g, '').toLowerCase()}`;
+    if (!dedupedByLoc.has(normalizedLoc)) {
+      dedupedByLoc.set(normalizedLoc, {
+        ...entry,
+        loc: normalizedLoc
+      });
+    }
+  }
+  const finalUrls = Array.from(dedupedByLoc.values());
+
   // Generate XML sitemap
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
 
-  urls.forEach(url => {
+  finalUrls.forEach(url => {
     const cleanLoc = url.loc === '/' ? '' : url.loc.replace(/\/+$/, '').toLowerCase();
     sitemap += `
   <url>
@@ -378,7 +387,7 @@ function generateSitemap() {
   const sitemapPath = path.join(__dirname, '../public/sitemap.xml');
   fs.writeFileSync(sitemapPath, sitemap);
 
-  console.log(`Generated sitemap with ${urls.length} URLs`);
+  console.log(`Generated sitemap with ${finalUrls.length} URLs`);
   console.log(`Sitemap saved to: ${sitemapPath}`);
 }
 

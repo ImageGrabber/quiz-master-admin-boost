@@ -348,7 +348,8 @@ function routeLooksIndexable(route, options = {}) {
     '/joy-runner',
     '/verse-master',
     '/faith-builder',
-    '/flappy-bird'
+    '/flappy-bird',
+    '/bible-questions-and-answers-hub/rith'
   ]);
   if (excludedExactRoutes.has(route)) return false;
   return !excludedPrefixes.some((prefix) => route.startsWith(prefix));

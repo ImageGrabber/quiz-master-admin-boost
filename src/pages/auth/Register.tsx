@@ -127,7 +127,7 @@ const Register = () => {
         <meta name="description" content="Join Bible Quiz Competition 2026 for free! Create your account to participate in daily Bible quiz challenges, compete for prizes, track your Bible quiz results, and climb leaderboards. Start your Bible learning journey today." />
         <meta name="keywords" content="bible quiz competition 2026 sign up, bible quiz competition 2026 register, bible quiz competition 2026 free, bible quiz sign up, bible quiz competition registration, bible quiz competition 2026 account, free bible quiz competition, bible quiz competition 2026 join, christian quiz competition sign up, bible knowledge competition register" />
         <meta name="author" content="Bible Quiz Competition" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="robots" content="noindex, nofollow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="language" content="English" />
         <meta name="theme-color" content="#6366f1" />
         <meta name="geo.region" content="US" />

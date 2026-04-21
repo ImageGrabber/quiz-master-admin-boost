@@ -117,7 +117,7 @@ const Login = () => {
         <meta name="description" content="Sign in to Bible Quiz Competition 2026 to access your account, view your Bible quiz results, track your progress on leaderboards, and continue your Bible learning journey. Free Bible quiz competition login." />
         <meta name="keywords" content="bible quiz competition 2026 login, bible quiz login, bible quiz competition sign in, bible quiz results login, bible quiz competition 2026 account, bible quiz leaderboard login, online bible quiz login, bible quiz competition 2026 sign in, christian quiz login, bible knowledge competition login" />
         <meta name="author" content="Bible Quiz Competition" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="robots" content="noindex, nofollow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="language" content="English" />
         <meta name="theme-color" content="#6366f1" />
         <meta name="geo.region" content="US" />
@@ -368,4 +368,3 @@ const Login = () => {
 };
 
 export default Login;
-

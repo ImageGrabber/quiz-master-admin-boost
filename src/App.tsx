@@ -457,7 +457,7 @@ const App = () => {
               <Route path="/bible-questions-and-answers-hub/judges" element={<JudgesHub />} />
               <Route path="/bible-questions-and-answers-hub/1-samuel" element={<FirstSamuelHub />} />
               <Route path="/bible-questions-and-answers-hub/ruth" element={<RuthHub />} />
-              <Route path="/bible-questions-and-answers-hub/rith" element={<RuthHub />} />
+              <Route path="/bible-questions-and-answers-hub/rith" element={<Navigate to="/bible-questions-and-answers-hub/ruth" replace />} />
               <Route path="/bible-questions-and-answers-hub/nehemiah" element={<NehemiahHub />} />
               <Route path="/bible-questions-and-answers-hub/:bookSlug" element={<AllBooksCinematicHub />} />
               <Route path="/bible-questions-and-answers-hub/genesis/beginner" element={<GenesisBeginnerQuiz />} />
