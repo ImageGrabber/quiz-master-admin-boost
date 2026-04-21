@@ -326,7 +326,6 @@
         "image": "/images/stories/quiz/the-lost-sheep/q5.png"
       }
     ]
-
   },
   {
     "id": 5,
@@ -981,6 +980,334 @@
         ],
         "answer": 2,
         "image": "/images/stories/moses-and-the-parting-sea.png"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Zacchaeus and the Big Tree",
+    "slug": "zacchaeus-and-the-big-tree",
+    "content": "A short man with a curious heart climbs a tree to see Jesus and discovers that Jesus knows his name and can change his life.",
+    "fullStory": "In the busy town of Jericho, people crowded the streets because Jesus was passing through. Everyone wanted to see Him. Among the crowd was a man named Zacchaeus. He worked as a tax collector, and many people did not like him because they thought he was unfair and greedy. Zacchaeus had heard stories about Jesus and was curious, but there was one problem: he was very short and couldn't see over the crowd.\n\nZacchaeus did something unusual. He ran ahead of everyone and climbed a sycamore tree by the road. From the branches, he could finally see the path where Jesus would walk. He probably thought he was hiding, but Jesus stopped right under that tree, looked up, and called him by name: 'Zacchaeus, come down immediately. I must stay at your house today.' Zacchaeus was shocked and excited at the same time.\n\nThe crowd began to whisper. 'Why would Jesus visit him?' they complained. But Jesus was showing everyone that no one is too far from God's love. Zacchaeus climbed down quickly and welcomed Jesus with joy. As they talked, Zacchaeus's heart began to change. He stood up and said, 'Lord, I will give half of what I own to the poor, and if I cheated anyone, I will pay them back four times as much.'\n\nJesus smiled and said, 'Today salvation has come to this house.' He explained that He came to seek and save the lost. Zacchaeus was not just a man in a tree anymore. He became a man with a new heart.\n\nThis story reminds us that Jesus sees us personally. He knows our name, our mistakes, and our potential. When we welcome Jesus, He helps us become generous, honest, and kind. Just like Zacchaeus, one meeting with Jesus can change our direction forever.",
+    "bibleVerses": [
+      "Luke 19:10 - For the Son of Man came to seek and to save the lost.",
+      "2 Corinthians 5:17 - If anyone is in Christ, the new creation has come: The old has gone, the new is here!"
+    ],
+    "moral": "Jesus knows your name and can transform your heart when you welcome Him.",
+    "bibleReference": "Luke 19:1-10",
+    "theme": "Purpose",
+    "imageAlt": "Zacchaeus smiling from a sycamore tree as Jesus looks up at him",
+    "keyTakeaways": [
+      "Jesus notices every person, even in a big crowd.",
+      "Real change starts in the heart and shows in our actions.",
+      "It is never too late to make things right."
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "question": "Why did Zacchaeus climb a tree?",
+        "options": [
+          "To pick fruit",
+          "To hide from friends",
+          "To see Jesus above the crowd",
+          "To build a tree house"
+        ],
+        "answer": 2,
+        "image": "/images/stories/zacchaeus-and-the-big-tree.png"
+      },
+      {
+        "id": 2,
+        "question": "What kind of work did Zacchaeus do?",
+        "options": [
+          "Fisherman",
+          "Tax collector",
+          "Shepherd",
+          "Carpenter"
+        ],
+        "answer": 1,
+        "image": "/images/stories/zacchaeus-and-the-big-tree.png"
+      },
+      {
+        "id": 3,
+        "question": "What did Jesus say to Zacchaeus?",
+        "options": [
+          "Come down, I will stay at your house",
+          "Stay in the tree",
+          "Go home and sleep",
+          "Walk to the temple"
+        ],
+        "answer": 0,
+        "image": "/images/stories/zacchaeus-and-the-big-tree.png"
+      },
+      {
+        "id": 4,
+        "question": "What did Zacchaeus promise to do after meeting Jesus?",
+        "options": [
+          "Buy a bigger house",
+          "Give to the poor and repay people he cheated",
+          "Move to another town",
+          "Collect more money"
+        ],
+        "answer": 1,
+        "image": "/images/stories/zacchaeus-and-the-big-tree.png"
+      },
+      {
+        "id": 5,
+        "question": "What does this story teach us?",
+        "options": [
+          "Trees are hard to climb",
+          "Jesus can change hearts",
+          "Crowds are noisy",
+          "Money solves everything"
+        ],
+        "answer": 1,
+        "image": "/images/stories/zacchaeus-and-the-big-tree.png"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Jesus Calms the Storm",
+    "slug": "jesus-calms-the-storm",
+    "content": "On a dark and windy night, Jesus speaks to crashing waves and shows His friends that He is greater than every storm.",
+    "fullStory": "One evening, Jesus told His disciples, 'Let's cross to the other side of the lake.' They climbed into a boat and started sailing. The sky looked peaceful at first, and Jesus, tired from teaching all day, lay down at the back of the boat and fell asleep on a cushion.\n\nSuddenly, a fierce storm rushed across the water. Wind roared. Waves slammed into the boat. Water splashed over the sides and began to fill it. Some of the disciples were experienced fishermen, but even they were terrified. The boat rocked wildly, and they thought they might sink.\n\nIn the middle of all the chaos, Jesus was still sleeping. The disciples shook Him and cried, 'Teacher, don't You care if we drown?' Jesus stood up calmly. He looked at the raging wind and the giant waves and said, 'Quiet! Be still!'\n\nAt once, the wind stopped. The waves became smooth. The lake turned quiet like glass. The disciples looked at each other in amazement. Then Jesus asked them gently, 'Why are you so afraid? Do you still have no faith?'\n\nThey whispered, 'Who is this? Even the wind and the waves obey Him!' They had just seen that Jesus was not only their teacher and friend, but also Lord over creation.\n\nThis story helps us when our hearts feel stormy too. Sometimes we face scary situations, big worries, or unexpected problems. Jesus may seem quiet for a moment, but He is always with us in the boat. He has power over every storm, and we can trust Him to bring peace.",
+    "bibleVerses": [
+      "Mark 4:39 - He got up, rebuked the wind and said to the waves, 'Quiet! Be still!'",
+      "Psalm 107:29 - He stilled the storm to a whisper; the waves of the sea were hushed."
+    ],
+    "moral": "Jesus is with you in every storm and has power to bring peace.",
+    "bibleReference": "Mark 4:35-41",
+    "theme": "Faith",
+    "imageAlt": "Jesus standing in a small boat with calm water after a storm",
+    "keyTakeaways": [
+      "Jesus is present even when life feels frightening.",
+      "Prayer is the right response to fear.",
+      "God's power is greater than any storm."
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "question": "What was Jesus doing when the storm started?",
+        "options": [
+          "Rowing the boat",
+          "Praying on shore",
+          "Sleeping in the boat",
+          "Fixing a net"
+        ],
+        "answer": 2,
+        "image": "/images/stories/jesus-calms-the-storm.png"
+      },
+      {
+        "id": 2,
+        "question": "How did the disciples feel during the storm?",
+        "options": [
+          "Excited",
+          "Terrified",
+          "Sleepy",
+          "Hungry"
+        ],
+        "answer": 1,
+        "image": "/images/stories/jesus-calms-the-storm.png"
+      },
+      {
+        "id": 3,
+        "question": "What did Jesus say to the wind and waves?",
+        "options": [
+          "Go away forever",
+          "Quiet! Be still!",
+          "Rain harder",
+          "Turn around"
+        ],
+        "answer": 1,
+        "image": "/images/stories/jesus-calms-the-storm.png"
+      },
+      {
+        "id": 4,
+        "question": "What happened after Jesus spoke?",
+        "options": [
+          "The storm got bigger",
+          "The boat sank",
+          "Everything became calm",
+          "The disciples jumped out"
+        ],
+        "answer": 2,
+        "image": "/images/stories/jesus-calms-the-storm.png"
+      },
+      {
+        "id": 5,
+        "question": "What is the main lesson from this story?",
+        "options": [
+          "Boats are dangerous",
+          "Jesus has power over storms",
+          "Never sail at night",
+          "Fishermen are brave"
+        ],
+        "answer": 1,
+        "image": "/images/stories/jesus-calms-the-storm.png"
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Samuel Hears God's Voice",
+    "slug": "samuel-hears-gods-voice",
+    "content": "A young boy serving in the temple learns to listen closely when God calls his name in the quiet night.",
+    "fullStory": "Samuel was a young boy living at the temple with Eli the priest. Samuel helped with simple tasks each day, like opening doors and caring for the lamps. He was still a child, but he had a willing heart.\n\nOne night, Samuel was lying down to sleep when he heard someone call, 'Samuel!' He jumped up and ran to Eli. 'Here I am. You called me.' Eli looked surprised and said, 'I did not call. Go back and lie down.' Samuel obeyed and returned to bed.\n\nAgain the voice came: 'Samuel!' He ran to Eli a second time. 'Here I am. You called me.' Eli again said, 'I did not call, my son. Go back and lie down.' This happened a third time. Then Eli understood that the Lord was calling the boy.\n\nEli told Samuel, 'Go and lie down. If He calls you, say: Speak, Lord, for your servant is listening.' Samuel returned to his place. Then the Lord called again, 'Samuel! Samuel!' This time Samuel answered, 'Speak, Lord, for your servant is listening.'\n\nGod gave Samuel a message, and from that day Samuel grew into a faithful prophet. People knew that God was with him. Samuel's story shows us that children can hear from God too. We do not need to be famous or grown up for God to use us.\n\nWhen we slow down, pray, and listen with a humble heart, God guides us. He may speak through Scripture, wise people, and the quiet prompting of His Spirit. Like Samuel, we can answer, 'Speak, Lord, I am listening.'",
+    "bibleVerses": [
+      "1 Samuel 3:10 - Then Samuel said, 'Speak, for your servant is listening.'",
+      "Jeremiah 33:3 - Call to me and I will answer you."
+    ],
+    "moral": "God speaks to listening hearts, including children.",
+    "bibleReference": "1 Samuel 3:1-10",
+    "theme": "Obedience",
+    "imageAlt": "Young Samuel in the temple at night listening as God calls his name",
+    "keyTakeaways": [
+      "God can call people at any age.",
+      "Listening to God requires quiet and humility.",
+      "Obedience begins with paying attention."
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "question": "Who was Samuel living with at the temple?",
+        "options": [
+          "Moses",
+          "Eli",
+          "David",
+          "Noah"
+        ],
+        "answer": 1,
+        "image": "/images/stories/samuel-hears-gods-voice.png"
+      },
+      {
+        "id": 2,
+        "question": "How many times did Samuel run to Eli before Eli understood?",
+        "options": [
+          "One",
+          "Two",
+          "Three",
+          "Five"
+        ],
+        "answer": 2,
+        "image": "/images/stories/samuel-hears-gods-voice.png"
+      },
+      {
+        "id": 3,
+        "question": "What did Eli tell Samuel to say?",
+        "options": [
+          "I am busy",
+          "Speak, Lord, your servant is listening",
+          "Come tomorrow",
+          "Ask someone else"
+        ],
+        "answer": 1,
+        "image": "/images/stories/samuel-hears-gods-voice.png"
+      },
+      {
+        "id": 4,
+        "question": "When did God call Samuel?",
+        "options": [
+          "In the afternoon",
+          "At night",
+          "At breakfast",
+          "During a storm"
+        ],
+        "answer": 1,
+        "image": "/images/stories/samuel-hears-gods-voice.png"
+      },
+      {
+        "id": 5,
+        "question": "What does Samuel's story teach us?",
+        "options": [
+          "Children can listen and obey God",
+          "Only adults hear God",
+          "Night is always scary",
+          "Temples are noisy"
+        ],
+        "answer": 0,
+        "image": "/images/stories/samuel-hears-gods-voice.png"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Ruth's Loyal Love",
+    "slug": "ruths-loyal-love",
+    "content": "Ruth chooses faithfulness and kindness, and God honors her loyalty with a beautiful new beginning.",
+    "fullStory": "Ruth lived in Moab and married into a family from Bethlehem. After difficult and sad days, Ruth's husband died, and her mother-in-law Naomi decided to return to Bethlehem. Naomi told Ruth to stay in her own country where life might be easier.\n\nBut Ruth loved Naomi deeply. She answered with words that have inspired people for generations: 'Where you go I will go, and where you stay I will stay. Your people will be my people and your God my God.' Ruth chose loyalty over comfort. She traveled with Naomi to Bethlehem, trusting God for the future.\n\nWhen they arrived, they were poor and needed food. Ruth worked hard in the fields, gathering leftover grain behind the harvesters so she and Naomi could eat. She did not complain. She served with humility and courage.\n\nThe field belonged to a kind man named Boaz, a relative of Naomi's family. Boaz noticed Ruth's faithful character and made sure she was protected. He told his workers to leave extra grain for her. Over time, Ruth and Boaz married, and their family became part of God's amazing plan.\n\nRuth later became the great-grandmother of King David. Her story is included in the family line of Jesus. What began with loss and uncertainty became a story of hope, provision, and purpose.\n\nRuth's story teaches us that faithfulness in small daily choices matters greatly to God. When we choose kindness, loyalty, and hard work, God can write a future bigger and better than we imagined.",
+    "bibleVerses": [
+      "Ruth 1:16 - Where you go I will go, and where you stay I will stay.",
+      "Galatians 6:9 - Let us not become weary in doing good, for at the proper time we will reap a harvest."
+    ],
+    "moral": "God honors loyal love, faithful work, and a heart that chooses kindness.",
+    "bibleReference": "Ruth 1-4",
+    "theme": "Kindness",
+    "imageAlt": "Ruth gathering grain in a golden field while Naomi smiles nearby",
+    "keyTakeaways": [
+      "Loyalty is a powerful expression of love.",
+      "God can bring hope from hard situations.",
+      "Faithful daily work is seen and rewarded by God."
+    ],
+    "quiz": [
+      {
+        "id": 1,
+        "question": "Who did Ruth choose to stay with?",
+        "options": [
+          "Her neighbors",
+          "Naomi",
+          "The king",
+          "Her old friends"
+        ],
+        "answer": 1,
+        "image": "/images/stories/ruths-loyal-love.png"
+      },
+      {
+        "id": 2,
+        "question": "How did Ruth help provide food?",
+        "options": [
+          "She fished in a river",
+          "She gathered grain in fields",
+          "She baked bread to sell",
+          "She bought food from the market"
+        ],
+        "answer": 1,
+        "image": "/images/stories/ruths-loyal-love.png"
+      },
+      {
+        "id": 3,
+        "question": "Who owned the field where Ruth worked?",
+        "options": [
+          "Boaz",
+          "Eli",
+          "Samuel",
+          "Pharaoh"
+        ],
+        "answer": 0,
+        "image": "/images/stories/ruths-loyal-love.png"
+      },
+      {
+        "id": 4,
+        "question": "Ruth became part of whose family line?",
+        "options": [
+          "Noah",
+          "King David",
+          "Jonah",
+          "Daniel"
+        ],
+        "answer": 1,
+        "image": "/images/stories/ruths-loyal-love.png"
+      },
+      {
+        "id": 5,
+        "question": "What is a key lesson from Ruth's story?",
+        "options": [
+          "Kindness and loyalty matter to God",
+          "Only rich people are blessed",
+          "Never move to a new place",
+          "Harvest work is easy"
+        ],
+        "answer": 0,
+        "image": "/images/stories/ruths-loyal-love.png"
       }
     ]
   }

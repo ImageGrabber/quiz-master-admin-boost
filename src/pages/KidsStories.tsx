@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { Star, Cloud, Heart, Umbrella, Sparkles, BookOpen, ChevronRight, ChevronLeft } from "lucide-react";
+import { Star, Cloud, Heart, Sparkles, Image as ImageIcon, ChevronRight, ChevronLeft } from "lucide-react";
 import kidsStoriesData from "@/data/kids-stories.json";
 
 export interface KidsStory {
@@ -44,6 +44,36 @@ const stories = kidsStoriesData.map(story => ({
 }));
 
 const ITEMS_PER_PAGE = 6;
+
+const StoryImageFrame = ({ slug, imageAlt }: { slug: string; imageAlt: string }) => {
+  const [hasError, setHasError] = useState(false);
+
+  return (
+    <div className="aspect-[4/3] w-full bg-[#f8fafc] overflow-hidden relative border-b-[4px] border-[#1a1a1a]">
+      {!hasError && (
+        <img
+          src={`/images/stories/${slug}.png`}
+          alt={imageAlt}
+          loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          onError={() => setHasError(true)}
+        />
+      )}
+      <div
+        className={`absolute inset-0 flex flex-col items-center justify-center gap-2 px-4 text-center bg-[#eff6ff] transition-opacity ${
+          hasError ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="w-14 h-14 rounded-2xl bg-white border-2 border-[#1a1a1a] flex items-center justify-center">
+          <ImageIcon className="w-7 h-7 text-blue-400" />
+        </div>
+        <p className="text-xs font-bold uppercase tracking-wider text-blue-600">Image coming soon</p>
+        <p className="text-sm font-semibold text-gray-600">{imageAlt}</p>
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/10" />
+    </div>
+  );
+};
 
 const KidsStories = () => {
   const navigate = useNavigate();
@@ -162,26 +192,7 @@ const KidsStories = () => {
                 onClick={() => navigate(`/kids-stories/${story.slug}`)}
               >
                 {/* Illustration Section */}
-                <div className="aspect-[4/3] w-full bg-[#f8fafc] overflow-hidden relative border-b-[4px] border-[#1a1a1a]">
-                     <img 
-                       src={`/images/stories/${story.slug}.png`}
-                       alt={story.imageAlt}
-                       loading="lazy"
-                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                       onError={(e) => {
-                         // Fallback if image is missing
-                         (e.target as HTMLImageElement).style.display = 'none';
-                         const parent = (e.target as HTMLImageElement).parentElement;
-                         if (parent) {
-                           const fallback = document.createElement('div');
-                           fallback.className = 'absolute inset-0 bg-blue-50/50 flex items-center justify-center';
-                           fallback.innerHTML = '<svg class="w-16 h-16 text-blue-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a4 4 0 0 0-4-4H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a4 4 0 0 1 4-4h6z"></path></svg>';
-                           parent.appendChild(fallback);
-                         }
-                       }}
-                     />
-                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/10" />
-                </div>
+                <StoryImageFrame slug={story.slug} imageAlt={story.imageAlt} />
 
                 {/* Content Section */}
                 <div className="p-8 flex-grow flex flex-col items-center text-center space-y-4">

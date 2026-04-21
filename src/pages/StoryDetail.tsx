@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { ArrowLeft, BookOpen, Quote, Star, Sparkles, Share2, Heart, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, BookOpen, Quote, Star, Sparkles, Share2, Heart, CheckCircle2, Image as ImageIcon } from "lucide-react";
 import kidsStoriesData from "@/data/kids-stories.json";
 
 export interface KidsStory {
@@ -22,6 +23,34 @@ export interface KidsStory {
   lifeLesson?: string;
   discussionQuestions?: string[];
 }
+
+const StoryHeroImage = ({ slug, imageAlt }: { slug: string; imageAlt: string }) => {
+  const [hasError, setHasError] = useState(false);
+
+  return (
+    <div className="aspect-video w-full bg-white rounded-[3rem] flex items-center justify-center overflow-hidden border-[6px] border-[#1a1a1a] shadow-[12px_12px_0_0_#1a1a1a] relative group">
+      {!hasError && (
+        <img
+          src={`/images/stories/${slug}.png`}
+          alt={imageAlt}
+          className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+          onError={() => setHasError(true)}
+        />
+      )}
+      <div
+        className={`absolute inset-0 bg-orange-100 flex flex-col items-center justify-center text-center p-6 transition-opacity ${
+          hasError ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="w-20 h-20 bg-white rounded-3xl border-2 border-[#1a1a1a] flex items-center justify-center mx-auto shadow-lg">
+          <ImageIcon className="w-10 h-10 text-orange-500" />
+        </div>
+        <p className="text-orange-700 font-black text-sm uppercase tracking-wide mt-4">Story image coming soon</p>
+        <p className="text-orange-800 font-bold text-xl mt-2">{imageAlt}</p>
+      </div>
+    </div>
+  );
+};
 
 const StoryDetail = () => {
   const { slug } = useParams();
@@ -105,29 +134,7 @@ const StoryDetail = () => {
           </div>
 
           {/* Featured Image Section (with SEO Alt Text) */}
-          <div className="aspect-video w-full bg-white rounded-[3rem] flex items-center justify-center overflow-hidden border-[6px] border-[#1a1a1a] shadow-[12px_12px_0_0_#1a1a1a] relative group">
-               <img 
-                 src={`/images/stories/${story.slug}.png`}
-                 alt={story.imageAlt}
-                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                 onError={(e) => {
-                    // Fallback if image is missing
-                    (e.target as HTMLImageElement).style.display = 'none';
-                    const parent = (e.target as HTMLImageElement).parentElement;
-                    if (parent) {
-                      const fallback = document.createElement('div');
-                      fallback.className = 'absolute inset-0 bg-orange-100 flex flex-col items-center justify-center text-center p-6';
-                      fallback.innerHTML = `
-                        <div class="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto shadow-lg">
-                          <svg class="w-10 h-10 text-orange-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path></svg>
-                        </div>
-                        <p class="text-orange-800 font-bold text-xl mt-4">${story.imageAlt}</p>
-                      `;
-                      parent.appendChild(fallback);
-                    }
-                 }}
-               />
-          </div>
+          <StoryHeroImage slug={story.slug} imageAlt={story.imageAlt} />
 
           {/* Story Content */}
           <div className="bg-white rounded-[3rem] border-[6px] border-[#1a1a1a] shadow-[12px_12px_0_0_#1a1a1a] p-8 md:p-16 relative overflow-hidden">
