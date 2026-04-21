@@ -7,12 +7,30 @@ Allow: /articles/
 Allow: /host-live-bible-quizzes-with-confidence
 
 # Disallow private areas
+Disallow: /admin
 Disallow: /admin/
+Disallow: /dashboard
 Disallow: /dashboard/
+Disallow: /auth
 Disallow: /auth/
 Disallow: /quiz/
+Disallow: /quiz-selection
 Disallow: /result/
+Disallow: /live-quiz
 Disallow: /live-quiz/
+Disallow: /challenge
+Disallow: /challenge/
+Disallow: /competitions
+Disallow: /weekly-quiz
+Disallow: /weekly-quiz/
+Disallow: /memory-match
+Disallow: /word-search
+Disallow: /joy-runner
+Disallow: /verse-master
+Disallow: /faith-builder
+Disallow: /flappy-bird
+Allow: /create-quiz/guest
+Disallow: /create-quiz
 Disallow: /competition-quiz/
 Disallow: /competition-leaderboard/
 

@@ -318,12 +318,39 @@ function writeRouteHtml(distDir, route, html) {
   return primary;
 }
 
-function routeLooksIndexable(route) {
+function routeLooksIndexable(route, options = {}) {
+  const { isProtectedRoute = false } = options;
   if (!route || route === '*') return false;
   if (route.includes(':')) return false;
   if (route.includes('*')) return false;
+  if (isProtectedRoute) return false;
 
-  const excludedPrefixes = ['/admin', '/dashboard', '/auth', '/rls-test', '/sentry-test'];
+  const excludedPrefixes = [
+    '/admin',
+    '/dashboard',
+    '/auth',
+    '/rls-test',
+    '/sentry-test',
+    '/challenge',
+    '/competitions',
+    '/competition-quiz',
+    '/competition-leaderboard',
+    '/live-quiz',
+    '/quiz',
+    '/result',
+    '/weekly-quiz'
+  ];
+  const excludedExactRoutes = new Set([
+    '/quiz-selection',
+    '/create-quiz',
+    '/memory-match',
+    '/word-search',
+    '/joy-runner',
+    '/verse-master',
+    '/faith-builder',
+    '/flappy-bird'
+  ]);
+  if (excludedExactRoutes.has(route)) return false;
   return !excludedPrefixes.some((prefix) => route.startsWith(prefix));
 }
 
@@ -348,11 +375,22 @@ function extractAppLiteralRoutes() {
   if (!fs.existsSync(appPath)) return [];
 
   const source = fs.readFileSync(appPath, 'utf-8');
-  const matches = [...source.matchAll(/<Route\s+path="([^"]+)"/g)];
+  const routeTagMatches = [...source.matchAll(/<Route\s+path="([^"]+)"\s+element=\{([\s\S]*?)\}\s*\/>/g)];
 
-  return matches
+  if (routeTagMatches.length > 0) {
+    return routeTagMatches
+      .map((match) => ({
+        route: normalizeRoutePath(match[1]),
+        isProtectedRoute: /<ProtectedRoute\b/.test(match[2] || '')
+      }))
+      .filter(({ route, isProtectedRoute }) => routeLooksIndexable(route, { isProtectedRoute }))
+      .map(({ route }) => route);
+  }
+
+  const fallbackMatches = [...source.matchAll(/<Route\s+path="([^"]+)"/g)];
+  return fallbackMatches
     .map((match) => normalizeRoutePath(match[1]))
-    .filter(routeLooksIndexable);
+    .filter((route) => routeLooksIndexable(route));
 }
 
 function buildGenericPageFromRoute(route) {
