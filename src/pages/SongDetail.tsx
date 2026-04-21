@@ -1,4 +1,5 @@
 import SEO from "@/components/SEO";
+import { generateVideoSchema } from "@/utils/video-seo";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -107,16 +108,12 @@ const SongDetail = () => {
                     }
                     : undefined
             },
-            {
-                "@type": "VideoObject",
-                "name": `${song.title} - Video and Lyrics`,
-                "description": seoDescription,
-                "thumbnailUrl": [thumbnailUrl],
-                "embedUrl": song.videoUrl,
-                "contentUrl": watchUrl,
-                "inLanguage": languageNames,
-                "mainEntityOfPage": canonicalUrl
-            },
+            generateVideoSchema({
+                title: `${song.title} - Christian Song Video and Lyrics`,
+                description: seoDescription,
+                videoUrl: song.videoUrl,
+                thumbnailUrl: thumbnailUrl
+            }),
             {
                 "@type": "WebPage",
                 "name": `${song.title} Lyrics`,

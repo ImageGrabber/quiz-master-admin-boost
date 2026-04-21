@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import { generateVideoSchema } from "@/utils/video-seo";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -38,16 +39,24 @@ const EnglishSongDetail = () => {
 
     const jsonLd = {
         "@context": "https://schema.org",
-        "@type": "MusicComposition",
-        "name": song.title,
-        "description": song.description,
-        ...(thumbnailUrl && { "thumbnailUrl": [thumbnailUrl] }),
-        ...(song.videoUrl && { "embedUrl": song.videoUrl }),
-        "inLanguage": "en",
-        "lyrics": {
-            "@type": "CreativeWork",
-            "text": currentTranslation?.lyrics.map(s => s.lines.join("\n")).join("\n\n") || ''
-        }
+        "@graph": [
+            {
+                "@type": "MusicComposition",
+                "name": song.title,
+                "description": song.description,
+                "inLanguage": "en",
+                "lyrics": {
+                    "@type": "CreativeWork",
+                    "text": currentTranslation?.lyrics.map(s => s.lines.join("\n")).join("\n\n") || ''
+                }
+            },
+            ...(song.videoUrl ? [generateVideoSchema({
+                title: `${song.title} - English Christian Hymn Lyrics & Video`,
+                description: `Read lyrics and watch video for the classic Christian hymn "${song.title}".`,
+                videoUrl: song.videoUrl,
+                thumbnailUrl: thumbnailUrl
+            })] : [])
+        ]
     };
 
     const handleShare = async () => {

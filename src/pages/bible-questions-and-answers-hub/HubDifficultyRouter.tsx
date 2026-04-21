@@ -98,39 +98,41 @@ export default function HubDifficultyRouter() {
   if (!bookSlug) return null;
 
   // Check for chapter-specific quizzes (e.g., /genesis/ch1-beginner or /genesis/chapter-1)
-  const isChapterRequest = difficulty?.startsWith('ch') || difficulty?.startsWith('chapter-');
+  const chapterMatch = difficulty?.match(/ch(?:apter-)?(\d+(?:-\d+)?)/i);
+  const isChapterRequest = !!chapterMatch;
   
   if (isChapterRequest) {
-    const chapterMatch = difficulty.match(/ch(?:apter-)?(\d+)/i);
-    if (chapterMatch) {
-      const chapterId = chapterMatch[1];
-      const bookKey = bookSlug.toLowerCase();
-      const quizKey = `${bookKey}-${chapterId}`;
-      const chapterData = specificChapterQuizzes[quizKey];
+    const chapterId = chapterMatch[1];
+    const bookKey = bookSlug.toLowerCase();
+    const quizKey = `${bookKey}-${chapterId}`;
+    const chapterData = specificChapterQuizzes[quizKey];
 
-      const formattedBookName =
-        bookNames[bookKey] ||
-        bookSlug.charAt(0).toUpperCase() + bookSlug.slice(1).replace(/-/g, " ");
+    const formattedBookName =
+      bookNames[bookKey] ||
+      bookSlug.charAt(0).toUpperCase() + bookSlug.slice(1).replace(/-/g, " ");
 
-      const chapterQuestions = normalizeQuizQuestions(
-        chapterData?.questions || createChapterFallbackQuestions(formattedBookName, chapterId),
-        { bookName: formattedBookName, chapter: chapterId }
-      );
+    const chapterQuestions = normalizeQuizQuestions(
+      chapterData?.questions || createChapterFallbackQuestions(formattedBookName, chapterId),
+      { bookName: formattedBookName, chapter: chapterId }
+    );
 
-      return (
-        <PublicQuiz
-          {...chapterData}
-          title={chapterData?.title || `${formattedBookName} Chapter ${chapterId} Quiz`}
-          bookName={formattedBookName}
-          chapter={chapterId}
-          questions={chapterQuestions}
-          seoDescription={
-            chapterData?.seoDescription ||
-            `Test your understanding of ${formattedBookName} Chapter ${chapterId} with chapter-based questions and explanations.`
-          }
-        />
-      );
-    }
+    // Standardize the canonical URL for all variations of chapter requests
+    const canonicalPath = `/bible-questions-and-answers-hub/${bookSlug.toLowerCase()}/chapter-${chapterId}`;
+
+    return (
+      <PublicQuiz
+        {...chapterData}
+        title={chapterData?.title || `${formattedBookName} Chapter ${chapterId} Quiz`}
+        bookName={formattedBookName}
+        chapter={chapterId}
+        questions={chapterQuestions}
+        canonicalPath={canonicalPath}
+        seoDescription={
+          chapterData?.seoDescription ||
+          `Test your understanding of ${formattedBookName} Chapter ${chapterId} with chapter-based questions and explanations.`
+        }
+      />
+    );
   }
 
   // Handle Data-Driven Level Quizzes (Beginner, Intermediate, Advanced)
@@ -139,7 +141,7 @@ export default function HubDifficultyRouter() {
     const levelData = specificChapterQuizzes[registryKey];
     
     if (levelData) {
-      const formattedBookName = bookSlug.charAt(0).toUpperCase() + bookSlug.slice(1).replace(/-/g, ' ');
+      const formattedBookName = bookNames[bookSlug.toLowerCase()] || bookSlug.charAt(0).toUpperCase() + bookSlug.slice(1).replace(/-/g, ' ');
       return (
         <PublicQuiz 
           {...levelData}
@@ -147,6 +149,7 @@ export default function HubDifficultyRouter() {
           bookName={formattedBookName}
           chapter={levelData.chapter || difficulty.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
           questions={levelData.questions}
+          canonicalPath={`/bible-questions-and-answers-hub/${bookSlug.toLowerCase()}/${difficulty.toLowerCase()}`}
         />
       );
     }

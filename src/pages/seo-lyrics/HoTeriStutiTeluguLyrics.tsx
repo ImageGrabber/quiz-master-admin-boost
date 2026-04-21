@@ -1,5 +1,6 @@
 import React from 'react';
 import SEO from '@/components/SEO';
+import { generateVideoSchema } from '@/utils/video-seo';
 import { Navigation } from '@/components/Navigation';
 import { Footer } from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
@@ -32,6 +33,11 @@ const HoTeriStutiTeluguLyrics = () => {
                 "text": "స్తుతి ఆరాధన నీకే ప్రభు, ప్రాార్థించెదం నీ సన్నిధిలో..."
               }
             },
+            generateVideoSchema({
+              title: "Ho Teri Stuti Aur Aradhana Lyrics in Telugu (స్తుతి ఆరాధన) - Video",
+              description: "Watch the Telugu version video and sing along with lyrics for 'Ho Teri Stuti Aur Aradhana'.",
+              videoUrl: "https://www.youtube.com/embed/UvdKGzP6Yy0"
+            }),
             {
               "@type": "FAQPage",
               "mainEntity": [
