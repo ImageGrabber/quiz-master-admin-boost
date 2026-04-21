@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import * as Sentry from "@sentry/react";
 import './index.css'
+import AppPreloader from "@/components/AppPreloader";
 
 Sentry.init({
   dsn: "https://fa0cf97a7293fc23db237665294745af@o4510354809225217.ingest.us.sentry.io/4510354810077184",
@@ -25,11 +26,7 @@ if (!container) {
 } else {
   const root = createRoot(container);
 
-  root.render(
-    <div style={{ padding: "24px", fontFamily: "Jost, sans-serif" }}>
-      Loading application...
-    </div>
-  );
+  root.render(<AppPreloader message="Loading Wesbite..." />);
 
   import('./App.tsx')
     .then(({ default: App }) => {
@@ -43,9 +40,7 @@ if (!container) {
     .catch((error) => {
       console.error("Failed to load App module:", error);
       root.render(
-        <div style={{ padding: "24px", fontFamily: "Jost, sans-serif" }}>
-          Failed to load the app. Check browser console for details.
-        </div>
+        <AppPreloader message="We hit a loading issue. Please refresh to continue." />
       );
     });
 }

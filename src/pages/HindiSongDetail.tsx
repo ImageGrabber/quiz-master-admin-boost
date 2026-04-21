@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { ArrowLeft, Share2, Music2, Languages, Info } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -41,6 +41,62 @@ const HindiSongDetail = () => {
     const englishTranslation = song.translations['english'];
     const videoId = song.videoUrl ? song.videoUrl.split('/').pop() : '';
     const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '';
+    const canonicalUrl = `https://biblequizcompetition.com/hindi-songs/${song.slug}`;
+
+    const plainTitle = song.title
+        .replace(/\s+/g, " ")
+        .trim()
+        .toLowerCase();
+
+    const titleVariants = useMemo(() => {
+        const variants = new Set<string>();
+        variants.add(`${plainTitle} lyrics`);
+        variants.add(`${plainTitle} chords`);
+        variants.add(`${plainTitle} meaning`);
+        variants.add(`${plainTitle} hindi christian song`);
+
+        // Common Hindi transliteration variants (mai/main/mein, aaradhana/aradhna)
+        variants.add(plainTitle.replace(/\bmai\b/g, "mein"));
+        variants.add(plainTitle.replace(/\bmai\b/g, "main"));
+        variants.add(plainTitle.replace(/aaradhana/g, "aradhna"));
+
+        return Array.from(variants)
+            .map((v) => v.replace(/\s+/g, " ").trim())
+            .filter((v) => v.length > 0)
+            .slice(0, 8);
+    }, [plainTitle]);
+
+    const stats = useMemo(() => {
+        const sections = currentTranslation?.lyrics?.length || 0;
+        const lines = currentTranslation?.lyrics?.reduce((sum, section) => sum + (section.lines?.length || 0), 0) || 0;
+        return { sections, lines };
+    }, [currentTranslation]);
+
+    const relatedSongs = useMemo(() => {
+        const stopWords = new Set(["hai", "ho", "ki", "ke", "mein", "main", "mai", "hum", "tera", "teri"]);
+        const tokens = plainTitle
+            .split(/[^a-z0-9]+/)
+            .filter((w) => w.length > 2 && !stopWords.has(w));
+
+        if (tokens.length === 0) return [];
+
+        const ranked = songs
+            .filter((s) => s.slug !== song.slug)
+            .map((s) => {
+                const haystack = `${s.title} ${s.slug} ${s.description}`.toLowerCase();
+                let score = 0;
+                tokens.forEach((token) => {
+                    if (haystack.includes(token)) score += 1;
+                });
+                return { song: s, score };
+            })
+            .filter((entry) => entry.score > 0)
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 4)
+            .map((entry) => entry.song);
+
+        return ranked;
+    }, [plainTitle, song.slug]);
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -86,9 +142,20 @@ const HindiSongDetail = () => {
     return (
         <div className="min-h-screen bg-gray-50/30">
             <Helmet>
-                <title>{`${song.title} Lyrics${hasChords ? ' & Guitar Chords' : ''}${hasEnglish ? ' (English Translation)' : ''} | Hindi Christian Song`}</title>
-                <meta name="description" content={`Get ${song.title} lyrics in Hindi${hasChords ? ' with guitar chords' : ''}${hasEnglish ? ' and English translation' : ''}. Free Hindi Christian worship song lyrics and video.`} />
-                <meta name="keywords" content={`${song.title} lyrics, ${song.title} chords, hindi christian songs, jesus geet, worship songs hindi, christian devotional songs`} />
+                <title>{`${song.title} Lyrics, Meaning${hasChords ? ' & Guitar Chords' : ''} | Hindi Christian Song`}</title>
+                <meta
+                    name="description"
+                    content={`Read full ${song.title} lyrics in Hindi, understand the meaning line by line, and practice worship with${hasChords ? ' guitar chords,' : ''} transliteration, and Bible-based reflection.`}
+                />
+                <meta
+                    name="keywords"
+                    content={`${song.title} lyrics, ${song.title} meaning, ${song.title} chords, hindi christian songs lyrics, yeshu ke geet, worship songs hindi`}
+                />
+                <link rel="canonical" href={canonicalUrl} />
+                <meta property="og:url" content={canonicalUrl} />
+                <meta property="og:type" content="music.song" />
+                <meta property="og:title" content={`${song.title} Lyrics & Meaning`} />
+                <meta property="og:description" content={`Explore lyrics, meaning, and worship notes for ${song.title}.`} />
                 <script type="application/ld+json">
                     {JSON.stringify(jsonLd)}
                 </script>
@@ -240,6 +307,80 @@ const HindiSongDetail = () => {
                                 </div>
                             </CardContent>
                         </Card>
+
+                        <div className="mt-8 grid grid-cols-1 gap-6">
+                            <Card className="rounded-3xl border-gray-100">
+                                <CardContent className="p-8 space-y-4">
+                                    <h2 className="text-2xl font-bold text-gray-900">About This Song</h2>
+                                    <p className="text-gray-700 leading-relaxed">
+                                        <strong>{song.title}</strong> is a popular Hindi Christian worship song used in personal devotion,
+                                        church prayer meetings, and youth fellowship gatherings. On this page you can study the lyrics deeply,
+                                        sing with confidence, and reflect on the spiritual message behind each section.
+                                    </p>
+                                    <p className="text-gray-700 leading-relaxed">
+                                        This page currently contains <strong>{stats.sections}</strong> lyric sections and <strong>{stats.lines}</strong> lyric lines.
+                                        {hasChords ? " Chords are included for worship leaders and guitar players." : " Chords are being added as they become available."}
+                                        {hasEnglish ? " English meaning is also available for bilingual worship preparation." : " English meaning support is being expanded."}
+                                    </p>
+                                </CardContent>
+                            </Card>
+
+                            <Card className="rounded-3xl border-gray-100">
+                                <CardContent className="p-8 space-y-4">
+                                    <h2 className="text-2xl font-bold text-gray-900">Search Variations People Use</h2>
+                                    <div className="flex flex-wrap gap-2">
+                                        {titleVariants.map((variant) => (
+                                            <span
+                                                key={variant}
+                                                className="px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-xs font-semibold"
+                                            >
+                                                {variant}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </CardContent>
+                            </Card>
+
+                            <Card className="rounded-3xl border-gray-100">
+                                <CardContent className="p-8 space-y-4">
+                                    <h2 className="text-2xl font-bold text-gray-900">FAQ</h2>
+                                    <div className="space-y-4 text-gray-700">
+                                        <div>
+                                            <h3 className="font-bold text-gray-900">Can I use this song in church worship?</h3>
+                                            <p className="text-sm mt-1">Yes. This song is commonly used for congregational worship, prayer meetings, and devotion time.</p>
+                                        </div>
+                                        <div>
+                                            <h3 className="font-bold text-gray-900">Do you provide guitar chords for this song?</h3>
+                                            <p className="text-sm mt-1">{hasChords ? "Yes, available chord lines are shown with the lyrics." : "Not fully yet. We are progressively adding verified chord patterns."}</p>
+                                        </div>
+                                        <div>
+                                            <h3 className="font-bold text-gray-900">Is English meaning available?</h3>
+                                            <p className="text-sm mt-1">{hasEnglish ? "Yes, enable “English Meaning” using the toggle in the sidebar." : "Meaning notes are being expanded; check this page again for updates."}</p>
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+
+                            {relatedSongs.length > 0 && (
+                                <Card className="rounded-3xl border-gray-100">
+                                    <CardContent className="p-8 space-y-4">
+                                        <h2 className="text-2xl font-bold text-gray-900">Related Hindi Worship Songs</h2>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                            {relatedSongs.map((related) => (
+                                                <Button
+                                                    key={related.slug}
+                                                    variant="outline"
+                                                    className="justify-start h-auto py-3 px-4 font-semibold"
+                                                    onClick={() => navigate(`/hindi-songs/${related.slug}`)}
+                                                >
+                                                    {related.title}
+                                                </Button>
+                                            ))}
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            )}
+                        </div>
                     </div>
 
                 </div>

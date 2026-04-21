@@ -153,6 +153,7 @@ import BibleQuizForYouth from "./pages/seo-quizzes/BibleQuizForYouth";
 import RulesAndPrizes from "./pages/seo-quizzes/RulesAndPrizes";
 import BibleTriviaForKids from "./pages/seo-quizzes/BibleTriviaForKids";
 import BookOfJohnQuizQuestions from "./pages/seo-quizzes/BookOfJohnQuizQuestions";
+import OnlineBibleQuizCompetition2026 from "./pages/seo-quizzes/OnlineBibleQuizCompetition2026";
 import Songs from "./pages/Songs";
 import MalayalamSongs from "./pages/MalayalamSongs";
 import SongDetail from "./pages/SongDetail";
@@ -199,6 +200,7 @@ import NehemiahHub from "./pages/bible-questions-and-answers-hub/nehemiah";
 import HubDifficultyRouter from "./pages/bible-questions-and-answers-hub/HubDifficultyRouter";
 import ChapterPage from "./pages/ChapterPage";
 import ScrollToTop from "./components/ScrollToTop";
+import AppPreloader from "@/components/AppPreloader";
 const queryClient = new QueryClient();
 
 function PageViewTracker() {
@@ -259,7 +261,7 @@ const App = () => {
             <ScrollToTop />
             <PageViewTracker />
             <NotificationBanner />
-            <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-base text-slate-600">Loading...</div>}>
+            <Suspense fallback={<AppPreloader />}>
             <Routes>
               <Route path="/emotional-checkin" element={<EmotionalCheckIn />} />
               <Route path="/joy-runner-test" element={<JoyRunnerTest />} />
@@ -317,8 +319,8 @@ const App = () => {
               <Route path="/quiz-scoring-system-explanation" element={<RulesAndPrizes />} />
               <Route path="/bible-quiz-prize" element={<RulesAndPrizes />} />
               <Route path="/bible-quiz-questions-and-answers" element={<BibleQuizQuestionsAndAnswers />} />
-              <Route path="/online-bible-quiz-competition-2026" element={<CompetitionHome />} />
-              <Route path="/bible-competition-2026" element={<CompetitionHome />} />
+              <Route path="/online-bible-quiz-competition-2026" element={<OnlineBibleQuizCompetition2026 />} />
+              <Route path="/bible-competition-2026" element={<OnlineBibleQuizCompetition2026 />} />
               <Route path="/hardest-bible-trivia-questions" element={<HardestBibleTrivia />} />
               <Route path="/bible-quiz-with-answers-for-youth" element={<BibleQuizForYouth />} />
               <Route path="/hard-bible-quiz-for-teens" element={<HardBibleQuizForTeens />} />
@@ -333,6 +335,9 @@ const App = () => {
               <Route path="/english-songs/:slug" element={<EnglishSongDetail />} />
               <Route path="/hindi-songs" element={<HindiSongs />} />
               <Route path="/hindi-songs/:slug" element={<HindiSongDetail />} />
+              <Route path="/hindi-songs/ek-aag-har-dil-mein-lyrics" element={<Navigate to="/hindi-songs/ek-aag-har-dil-mai" replace />} />
+              <Route path="/hindi-songs/vandana-karte-hai-hum-lyrics" element={<Navigate to="/hindi-songs/vandana-karte-hai-hum" replace />} />
+              <Route path="/hindi-songs/aaradhna-ho-aaradhna-lyrics" element={<Navigate to="/hindi-songs/aaradhna-ho-aaradhna" replace />} />
               <Route path="/kids-stories" element={<KidsStories />} />
               <Route path="/kids-stories/:slug" element={<StoryDetail />} />
               <Route path="/kids-stories/:slug/quiz" element={<KidsStoryQuiz />} />

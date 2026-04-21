@@ -349,7 +349,10 @@ function routeLooksIndexable(route, options = {}) {
     '/verse-master',
     '/faith-builder',
     '/flappy-bird',
-    '/bible-questions-and-answers-hub/rith'
+    '/bible-questions-and-answers-hub/rith',
+    '/hindi-songs/ek-aag-har-dil-mein-lyrics',
+    '/hindi-songs/vandana-karte-hai-hum-lyrics',
+    '/hindi-songs/aaradhna-ho-aaradhna-lyrics'
   ]);
   if (excludedExactRoutes.has(route)) return false;
   return !excludedPrefixes.some((prefix) => route.startsWith(prefix));
