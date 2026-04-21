@@ -104,12 +104,13 @@ const malachiQuestions = [
   }
 ];
 
-export default function MalachiPublicQuiz() {
+export default function MalachiPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Malachi Quiz"
       questions={malachiQuestions}
       bookName="Malachi"
+      canonicalPath={canonicalPath}
     />
   );
 }

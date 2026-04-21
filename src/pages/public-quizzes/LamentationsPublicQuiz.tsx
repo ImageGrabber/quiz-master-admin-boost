@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function LamentationsPublicQuiz() {
+export default function LamentationsPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Lamentations Quiz - Songs of Sorrow and Hope"
       questions={questions}
       bookName="Lamentations"
+      canonicalPath={canonicalPath}
     />
   );
 }

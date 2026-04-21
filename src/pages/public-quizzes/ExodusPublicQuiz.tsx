@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function ExodusPublicQuiz() {
+export default function ExodusPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Exodus Quiz - The Great Deliverance"
       questions={questions}
       bookName="Exodus"
+      canonicalPath={canonicalPath}
     />
   );
 }

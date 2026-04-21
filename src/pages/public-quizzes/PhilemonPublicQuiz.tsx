@@ -104,12 +104,13 @@ const philemonQuestions = [
   }
 ];
 
-export default function PhilemonPublicQuiz() {
+export default function PhilemonPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Philemon Quiz"
       questions={philemonQuestions}
       bookName="Philemon"
+      canonicalPath={canonicalPath}
       seoDescription="Try this Philemon Bible quiz with answers and learn Paul's message on forgiveness, restoration, and Christian brotherhood in the shortest Pauline letter."
     />
   );

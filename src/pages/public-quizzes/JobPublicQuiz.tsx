@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function JobPublicQuiz() {
+export default function JobPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Job Quiz - Suffering and Faith"
       questions={questions}
       bookName="Job"
+      canonicalPath={canonicalPath}
     />
   );
 }

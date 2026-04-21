@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function GenesisPublicQuiz() {
+export default function GenesisPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Genesis Quiz - The Beginning of Everything"
       questions={questions}
       bookName="Genesis"
+      canonicalPath={canonicalPath}
     />
   );
 }

@@ -104,12 +104,13 @@ const thessalonians1Questions = [
   }
 ];
 
-export default function Thessalonians1PublicQuiz() {
+export default function Thessalonians1PublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="1 Thessalonians Quiz"
       questions={thessalonians1Questions}
       bookName="1 Thessalonians"
+      canonicalPath={canonicalPath}
     />
   );
 }

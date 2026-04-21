@@ -104,12 +104,13 @@ const firstKingsQuestions = [
   }
 ];
 
-export default function FirstKingsPublicQuiz() {
+export default function FirstKingsPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="1 Kings Quiz"
       questions={firstKingsQuestions}
       bookName="1 Kings"
+      canonicalPath={canonicalPath}
     />
   );
 }

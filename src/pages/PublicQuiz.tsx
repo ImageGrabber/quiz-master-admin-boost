@@ -80,7 +80,7 @@ const PublicQuiz = ({
     () => normalizeQuizQuestions(questions, { bookName, chapter }),
     [questions, bookName, chapter]
   );
-  const fallbackPath = `/public-quiz/${toSlug(bookName)}${chapter ? `/chapter-${chapter}` : ""}`;
+  const fallbackPath = `/bible-questions-and-answers-hub/${toSlug(bookName)}${chapter ? `/chapter-${chapter}` : ""}`;
   const resolvedPath = normalizePath(
     canonicalPath || (typeof window !== "undefined" ? window.location.pathname : fallbackPath)
   );

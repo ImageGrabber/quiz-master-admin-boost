@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function EzekielPublicQuiz() {
+export default function EzekielPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Ezekiel Quiz - Visions of the Glory"
       questions={questions}
       bookName="Ezekiel"
+      canonicalPath={canonicalPath}
     />
   );
 }

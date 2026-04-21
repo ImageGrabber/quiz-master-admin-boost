@@ -104,12 +104,13 @@ const markQuestions = [
   }
 ];
 
-export default function MarkPublicQuiz() {
+export default function MarkPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Mark Quiz"
       questions={markQuestions}
       bookName="Mark"
+      canonicalPath={canonicalPath}
     />
   );
 }

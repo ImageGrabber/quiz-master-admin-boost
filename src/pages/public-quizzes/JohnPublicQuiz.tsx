@@ -104,12 +104,13 @@ const johnQuestions = [
   }
 ];
 
-export default function JohnPublicQuiz() {
+export default function JohnPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="John Quiz"
       questions={johnQuestions}
       bookName="John"
+      canonicalPath={canonicalPath}
     />
   );
 }

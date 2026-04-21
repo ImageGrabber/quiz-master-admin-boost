@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function DanielPublicQuiz() {
+export default function DanielPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Daniel Quiz - Faith in the Lion's Den"
       questions={questions}
       bookName="Daniel"
+      canonicalPath={canonicalPath}
     />
   );
 }

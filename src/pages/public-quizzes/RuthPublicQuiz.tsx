@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function RuthPublicQuiz() {
+export default function RuthPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Ruth Quiz - Loyalty and Redemption"
       questions={questions}
       bookName="Ruth"
+      canonicalPath={canonicalPath}
     />
   );
 }

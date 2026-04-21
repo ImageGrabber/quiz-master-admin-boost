@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function JoshuaPublicQuiz() {
+export default function JoshuaPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Joshua Quiz - Conquering the Promised Land"
       questions={questions}
       bookName="Joshua"
+      canonicalPath={canonicalPath}
     />
   );
 }

@@ -163,13 +163,14 @@ export default function HubDifficultyRouter() {
     const Component = quizMap[registryKey];
     
     if (Component) {
+      const canonicalPath = `/bible-questions-and-answers-hub/${bookSlug.toLowerCase()}/${difficulty.toLowerCase()}`;
       return (
         <Suspense fallback={
           <div className="min-h-screen flex items-center justify-center bg-white">
             <Loader2 className="w-12 h-12 animate-spin text-gray-200" />
           </div>
         }>
-          <Component />
+          <Component canonicalPath={canonicalPath} />
         </Suspense>
       );
     }
@@ -204,13 +205,15 @@ export default function HubDifficultyRouter() {
     );
   }
 
+  const canonicalPath = `/bible-questions-and-answers-hub/${bookSlug.toLowerCase()}${difficulty ? `/${difficulty.toLowerCase()}` : ""}`;
+
   return (
     <Suspense fallback={
       <div className="min-h-screen flex items-center justify-center bg-white">
         <Loader2 className="w-12 h-12 animate-spin text-gray-200" />
       </div>
     }>
-      <Component />
+      <Component canonicalPath={canonicalPath} />
     </Suspense>
   );
 }

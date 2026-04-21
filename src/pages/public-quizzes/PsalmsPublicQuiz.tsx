@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function PsalmsPublicQuiz() {
+export default function PsalmsPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Psalms Quiz - Songs of the Heart"
       questions={questions}
       bookName="Psalms"
+      canonicalPath={canonicalPath}
     />
   );
 }

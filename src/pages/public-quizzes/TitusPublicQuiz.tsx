@@ -104,12 +104,13 @@ const titusQuestions = [
   }
 ];
 
-export default function TitusPublicQuiz() {
+export default function TitusPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Titus Quiz"
       questions={titusQuestions}
       bookName="Titus"
+      canonicalPath={canonicalPath}
     />
   );
 }

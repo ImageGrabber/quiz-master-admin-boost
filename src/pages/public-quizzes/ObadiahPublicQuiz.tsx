@@ -104,12 +104,13 @@ const obadiahQuestions = [
   }
 ];
 
-export default function ObadiahPublicQuiz() {
+export default function ObadiahPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Obadiah Quiz"
       questions={obadiahQuestions}
       bookName="Obadiah"
+      canonicalPath={canonicalPath}
     />
   );
 }

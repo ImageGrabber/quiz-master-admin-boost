@@ -104,12 +104,13 @@ const secondChroniclesQuestions = [
   }
 ];
 
-export default function SecondChroniclesPublicQuiz() {
+export default function SecondChroniclesPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="2 Chronicles Quiz"
       questions={secondChroniclesQuestions}
       bookName="2 Chronicles"
+      canonicalPath={canonicalPath}
     />
   );
 }

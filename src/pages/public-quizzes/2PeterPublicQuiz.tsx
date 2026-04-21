@@ -104,12 +104,13 @@ const peter2Questions = [
   }
 ];
 
-export default function Peter2PublicQuiz() {
+export default function Peter2PublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="2 Peter Quiz"
       questions={peter2Questions}
       bookName="2 Peter"
+      canonicalPath={canonicalPath}
     />
   );
 }

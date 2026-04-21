@@ -211,12 +211,13 @@ const nehemiahBibleBookQuizQuestions = nehemiahQuestions.map((question) => ({
   answer: question.answer
 }));
 
-export default function NehemiahPublicQuiz() {
+export default function NehemiahPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <BibleBookQuiz
       title="The Book of Nehemiah Quiz"
       questions={nehemiahBibleBookQuizQuestions}
       bookName="Nehemiah"
+      canonicalPath={canonicalPath}
       useLandingShell
     />
   );

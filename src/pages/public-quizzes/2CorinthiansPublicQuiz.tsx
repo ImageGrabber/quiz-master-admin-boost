@@ -104,12 +104,13 @@ const corinthians2Questions = [
   }
 ];
 
-export default function Corinthians2PublicQuiz() {
+export default function Corinthians2PublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="2 Corinthians Quiz"
       questions={corinthians2Questions}
       bookName="2 Corinthians"
+      canonicalPath={canonicalPath}
     />
   );
 }

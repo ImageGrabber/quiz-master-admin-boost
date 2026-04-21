@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function IsaiahPublicQuiz() {
+export default function IsaiahPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Isaiah Quiz - The Major Prophet"
       questions={questions}
       bookName="Isaiah"
+      canonicalPath={canonicalPath}
     />
   );
 }

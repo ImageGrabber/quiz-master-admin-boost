@@ -30,9 +30,17 @@ interface BibleBookQuizProps {
   bookName: string;
   difficulty?: string;
   useLandingShell?: boolean;
+  canonicalPath?: string;
 }
 
-const BibleBookQuiz = ({ title, questions, bookName, difficulty = "beginner", useLandingShell = false }: BibleBookQuizProps) => {
+const BibleBookQuiz = ({
+  title,
+  questions,
+  bookName,
+  difficulty = "beginner",
+  useLandingShell = false,
+  canonicalPath
+}: BibleBookQuizProps) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [answers, setAnswers] = useState<number[]>([]);
@@ -198,7 +206,11 @@ const BibleBookQuiz = ({ title, questions, bookName, difficulty = "beginner", us
 
     return (
       <div className="min-h-screen bg-white text-gray-900 font-urbanist selection:bg-orange-100 selection:text-orange-900 pb-20 animate-in fade-in duration-700">
-        <SEO title={`Results: ${title}`} description={`Your results for the ${bookName} quiz.`} />
+        <SEO
+          title={`Results: ${title}`}
+          description={`Your results for the ${bookName} quiz.`}
+          url={canonicalPath}
+        />
         
         <Navigation />
 
@@ -337,7 +349,7 @@ const BibleBookQuiz = ({ title, questions, bookName, difficulty = "beginner", us
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-urbanist selection:bg-gray-100 selection:text-black pb-20">
-      <SEO title={title} description={`Test your knowledge of ${bookName}`} />
+      <SEO title={title} description={`Test your knowledge of ${bookName}`} url={canonicalPath} />
       
       <Navigation />
       

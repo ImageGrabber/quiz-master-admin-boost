@@ -104,12 +104,13 @@ const jonahQuestions = [
   }
 ];
 
-export default function JonahPublicQuiz() {
+export default function JonahPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Jonah Quiz"
       questions={jonahQuestions}
       bookName="Jonah"
+      canonicalPath={canonicalPath}
     />
   );
 }

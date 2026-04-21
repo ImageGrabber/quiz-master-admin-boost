@@ -104,12 +104,13 @@ const haggaiQuestions = [
   }
 ];
 
-export default function HaggaiPublicQuiz() {
+export default function HaggaiPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Haggai Quiz"
       questions={haggaiQuestions}
       bookName="Haggai"
+      canonicalPath={canonicalPath}
     />
   );
 }

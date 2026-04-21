@@ -104,12 +104,13 @@ const thessalonians2Questions = [
   }
 ];
 
-export default function Thessalonians2PublicQuiz() {
+export default function Thessalonians2PublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="2 Thessalonians Quiz"
       questions={thessalonians2Questions}
       bookName="2 Thessalonians"
+      canonicalPath={canonicalPath}
       seoDescription="Practice with this free 2 Thessalonians quiz and answers. Review key verses on the day of the Lord, perseverance, and Christian discipline from Paul's second letter."
     />
   );

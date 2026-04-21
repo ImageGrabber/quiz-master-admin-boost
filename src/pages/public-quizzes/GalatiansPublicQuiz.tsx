@@ -104,12 +104,13 @@ const galatiansQuestions = [
   }
 ];
 
-export default function GalatiansPublicQuiz() {
+export default function GalatiansPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Galatians Quiz"
       questions={galatiansQuestions}
       bookName="Galatians"
+      canonicalPath={canonicalPath}
     />
   );
 }

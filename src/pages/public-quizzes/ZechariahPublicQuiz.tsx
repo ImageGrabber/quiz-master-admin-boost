@@ -104,12 +104,13 @@ const zechariahQuestions = [
   }
 ];
 
-export default function ZechariahPublicQuiz() {
+export default function ZechariahPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Zechariah Quiz"
       questions={zechariahQuestions}
       bookName="Zechariah"
+      canonicalPath={canonicalPath}
     />
   );
 }

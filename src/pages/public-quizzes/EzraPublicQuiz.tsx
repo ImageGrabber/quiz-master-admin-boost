@@ -104,12 +104,13 @@ const ezraQuestions = [
   }
 ];
 
-export default function EzraPublicQuiz() {
+export default function EzraPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Ezra Quiz"
       questions={ezraQuestions}
       bookName="Ezra"
+      canonicalPath={canonicalPath}
     />
   );
 }

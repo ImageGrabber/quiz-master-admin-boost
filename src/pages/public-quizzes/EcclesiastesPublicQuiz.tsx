@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function EcclesiastesPublicQuiz() {
+export default function EcclesiastesPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Ecclesiastes Quiz - Wisdom & Vanity"
       questions={questions}
       bookName="Ecclesiastes"
+      canonicalPath={canonicalPath}
     />
   );
 }

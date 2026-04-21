@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function JeremiahPublicQuiz() {
+export default function JeremiahPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Jeremiah Quiz - The Call of the Prophet"
       questions={questions}
       bookName="Jeremiah"
+      canonicalPath={canonicalPath}
     />
   );
 }

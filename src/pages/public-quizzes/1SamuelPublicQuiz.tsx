@@ -104,12 +104,13 @@ const firstSamuelQuestions = [
   }
 ];
 
-export default function FirstSamuelPublicQuiz() {
+export default function FirstSamuelPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="1 Samuel Quiz"
       questions={firstSamuelQuestions}
       bookName="1 Samuel"
+      canonicalPath={canonicalPath}
     />
   );
 }

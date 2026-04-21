@@ -104,12 +104,13 @@ const hoseaQuestions = [
   }
 ];
 
-export default function HoseaPublicQuiz() {
+export default function HoseaPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Hosea Quiz"
       questions={hoseaQuestions}
       bookName="Hosea"
+      canonicalPath={canonicalPath}
     />
   );
 }

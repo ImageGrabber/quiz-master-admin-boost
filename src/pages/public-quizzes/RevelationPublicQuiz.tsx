@@ -104,12 +104,13 @@ const revelationQuestions = [
   }
 ];
 
-export default function RevelationPublicQuiz() {
+export default function RevelationPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Revelation Quiz"
       questions={revelationQuestions}
       bookName="Revelation"
+      canonicalPath={canonicalPath}
     />
   );
 }

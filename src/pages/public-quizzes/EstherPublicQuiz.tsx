@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function EstherPublicQuiz() {
+export default function EstherPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Esther Quiz - Courage and Deliverance"
       questions={questions}
       bookName="Esther"
+      canonicalPath={canonicalPath}
     />
   );
 }

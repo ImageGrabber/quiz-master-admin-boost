@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function SongOfSolomonPublicQuiz() {
+export default function SongOfSolomonPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Song of Solomon Quiz - The Greatest Song"
       questions={questions}
       bookName="Song of Solomon"
+      canonicalPath={canonicalPath}
     />
   );
 }

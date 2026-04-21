@@ -104,12 +104,13 @@ const deuteronomyQuestions = [
   }
 ];
 
-export default function DeuteronomyPublicQuiz() {
+export default function DeuteronomyPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Deuteronomy Quiz"
       questions={deuteronomyQuestions}
       bookName="Deuteronomy"
+      canonicalPath={canonicalPath}
     />
   );
 }

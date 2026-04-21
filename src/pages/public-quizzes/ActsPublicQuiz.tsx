@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function ActsPublicQuiz() {
+export default function ActsPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Acts Quiz - The Birth of the Church"
       questions={questions}
       bookName="Acts"
+      canonicalPath={canonicalPath}
     />
   );
 }

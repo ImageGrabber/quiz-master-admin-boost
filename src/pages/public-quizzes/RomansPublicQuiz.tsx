@@ -104,12 +104,13 @@ const romansQuestions = [
   }
 ];
 
-export default function RomansPublicQuiz() {
+export default function RomansPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Romans Quiz"
       questions={romansQuestions}
       bookName="Romans"
+      canonicalPath={canonicalPath}
     />
   );
 }

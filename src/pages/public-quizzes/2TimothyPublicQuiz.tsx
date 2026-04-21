@@ -104,12 +104,13 @@ const timothy2Questions = [
   }
 ];
 
-export default function Timothy2PublicQuiz() {
+export default function Timothy2PublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="2 Timothy Quiz"
       questions={timothy2Questions}
       bookName="2 Timothy"
+      canonicalPath={canonicalPath}
     />
   );
 }

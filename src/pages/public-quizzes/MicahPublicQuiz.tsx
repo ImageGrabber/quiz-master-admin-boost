@@ -104,12 +104,13 @@ const micahQuestions = [
   }
 ];
 
-export default function MicahPublicQuiz() {
+export default function MicahPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Micah Quiz"
       questions={micahQuestions}
       bookName="Micah"
+      canonicalPath={canonicalPath}
     />
   );
 }

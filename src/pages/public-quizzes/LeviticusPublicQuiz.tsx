@@ -104,12 +104,13 @@ const leviticusQuestions = [
   }
 ];
 
-export default function LeviticusPublicQuiz() {
+export default function LeviticusPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Leviticus Quiz"
       questions={leviticusQuestions}
       bookName="Leviticus"
+      canonicalPath={canonicalPath}
     />
   );
 }

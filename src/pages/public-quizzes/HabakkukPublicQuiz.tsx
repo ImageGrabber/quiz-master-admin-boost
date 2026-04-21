@@ -104,12 +104,13 @@ const habakkukQuestions = [
   }
 ];
 
-export default function HabakkukPublicQuiz() {
+export default function HabakkukPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Habakkuk Quiz"
       questions={habakkukQuestions}
       bookName="Habakkuk"
+      canonicalPath={canonicalPath}
     />
   );
 }

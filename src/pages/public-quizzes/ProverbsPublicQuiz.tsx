@@ -73,12 +73,13 @@ const questions = [
   }
 ];
 
-export default function ProverbsPublicQuiz() {
+export default function ProverbsPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Proverbs Quiz - Wisdom for Daily Living"
       questions={questions}
       bookName="Proverbs"
+      canonicalPath={canonicalPath}
     />
   );
 }

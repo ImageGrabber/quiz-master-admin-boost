@@ -104,12 +104,13 @@ const amosQuestions = [
   }
 ];
 
-export default function AmosPublicQuiz() {
+export default function AmosPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Amos Quiz"
       questions={amosQuestions}
       bookName="Amos"
+      canonicalPath={canonicalPath}
     />
   );
 }

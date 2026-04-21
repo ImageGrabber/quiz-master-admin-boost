@@ -104,12 +104,13 @@ const nahumQuestions = [
   }
 ];
 
-export default function NahumPublicQuiz() {
+export default function NahumPublicQuiz({ canonicalPath }: { canonicalPath?: string }) {
   return (
     <PublicQuiz 
       title="Nahum Quiz"
       questions={nahumQuestions}
       bookName="Nahum"
+      canonicalPath={canonicalPath}
     />
   );
 }
