@@ -354,6 +354,36 @@ function routeLooksIndexable(route, options = {}) {
   return !excludedPrefixes.some((prefix) => route.startsWith(prefix));
 }
 
+function shouldForceNoindexRoute(route) {
+  const normalizedRoute = normalizeRoutePath(route);
+  const noindexPrefixes = [
+    '/admin',
+    '/dashboard',
+    '/auth',
+    '/challenge',
+    '/competitions',
+    '/competition-quiz',
+    '/competition-leaderboard',
+    '/live-quiz',
+    '/quiz',
+    '/result',
+    '/weekly-quiz'
+  ];
+  const noindexExactRoutes = new Set([
+    '/quiz-selection',
+    '/create-quiz',
+    '/memory-match',
+    '/word-search',
+    '/joy-runner',
+    '/verse-master',
+    '/faith-builder',
+    '/flappy-bird'
+  ]);
+
+  if (noindexExactRoutes.has(normalizedRoute)) return true;
+  return noindexPrefixes.some((prefix) => normalizedRoute.startsWith(prefix));
+}
+
 function extractSitemapRoutes(distDir) {
   const sitemapCandidates = [
     path.join(distDir, 'sitemap.xml'),
@@ -490,8 +520,9 @@ function generateHTML(page, templateHtml, contentWithSeo = ensureSeoWordRange(pa
   html = upsertCanonical(html, pageUrl);
 
   // Indexing instruction
-  if (page.noindex) {
-    html = upsertMetaTag(html, 'name', 'robots', 'noindex, follow');
+  const enforceNoindex = page.noindex || shouldForceNoindexRoute(page.path);
+  if (enforceNoindex) {
+    html = upsertMetaTag(html, 'name', 'robots', 'noindex, nofollow');
   } else {
     // Default to index, follow if not explicitly noindexed
     html = upsertMetaTag(html, 'name', 'robots', 'index, follow');
