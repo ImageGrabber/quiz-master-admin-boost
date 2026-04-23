@@ -10,6 +10,7 @@
     "build:seo": "npm run generate-sitemap && vite build && npm run generate-static",
     "generate-static": "node scripts/generate-static-pages.js",
     "generate-sitemap": "node scripts/generate-sitemap.js",
+    "scrape:hindi:merge": "node scripts/scrape-hindi-songs-merge.cjs",
     "lint": "eslint .",
     "preview": "vite preview",
     "populate-bible-quizzes": "node scripts/populate-bible-qa-quizzes.js",

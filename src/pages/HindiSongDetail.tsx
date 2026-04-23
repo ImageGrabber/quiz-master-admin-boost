@@ -15,6 +15,15 @@ import hindiSongsData from "@/data/hindi-songs.json";
 
 const songs: Song[] = hindiSongsData as Song[];
 
+const toQuerySlug = (value: string) =>
+    value
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+
+const dedupe = (items: string[]) => Array.from(new Set(items.filter(Boolean)));
+
 const HindiSongDetail = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
@@ -43,27 +52,30 @@ const HindiSongDetail = () => {
     const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '';
     const canonicalUrl = `https://biblequizcompetition.com/hindi-songs/${song.slug}`;
 
-    const plainTitle = song.title
-        .replace(/\s+/g, " ")
-        .trim()
-        .toLowerCase();
+    const plainTitle = toQuerySlug(song.title);
 
     const titleVariants = useMemo(() => {
         const variants = new Set<string>();
         variants.add(`${plainTitle} lyrics`);
+        variants.add(`${plainTitle} hindi lyrics`);
+        variants.add(`${plainTitle} lyrics in hindi`);
+        variants.add(`${plainTitle} song lyrics`);
         variants.add(`${plainTitle} chords`);
         variants.add(`${plainTitle} meaning`);
         variants.add(`${plainTitle} hindi christian song`);
+        variants.add(`${plainTitle} yeshu ke geet`);
 
         // Common Hindi transliteration variants (mai/main/mein, aaradhana/aradhna)
         variants.add(plainTitle.replace(/\bmai\b/g, "mein"));
         variants.add(plainTitle.replace(/\bmai\b/g, "main"));
+        variants.add(plainTitle.replace(/\bmein\b/g, "main"));
         variants.add(plainTitle.replace(/aaradhana/g, "aradhna"));
+        variants.add(plainTitle.replace(/prabhu/g, "yeshu"));
 
         return Array.from(variants)
             .map((v) => v.replace(/\s+/g, " ").trim())
             .filter((v) => v.length > 0)
-            .slice(0, 8);
+            .slice(0, 12);
     }, [plainTitle]);
 
     const stats = useMemo(() => {
@@ -98,17 +110,108 @@ const HindiSongDetail = () => {
         return ranked;
     }, [plainTitle, song.slug]);
 
+    const allLyricsText = useMemo(() => {
+        const hindiText = currentTranslation?.lyrics?.flatMap((section) => section.lines || []).join("\n") || "";
+        const englishText = englishTranslation?.lyrics?.flatMap((section) => section.lines || []).join("\n") || "";
+        return { hindiText, englishText };
+    }, [currentTranslation, englishTranslation]);
+
+    const songAliases = useMemo(() => {
+        const base = plainTitle;
+        return dedupe([
+            base,
+            base.replace(/\bmein\b/g, "main"),
+            base.replace(/\bmain\b/g, "mein"),
+            base.replace(/\bmai\b/g, "main"),
+            base.replace(/yeshu/g, "jesus"),
+            base.replace(/stuti/g, "stutiya"),
+            `${base} lyrics`,
+            `${base} lyrics in hindi`,
+            `${base} chords`,
+        ]).slice(0, 10);
+    }, [plainTitle]);
+
+    const hasChords = Object.values(song.translations).some(t =>
+        t.lyrics.some(l => l.chords && l.chords.length > 0)
+    );
+    const hasEnglish = !!song.translations['english'];
+
     const jsonLd = {
         "@context": "https://schema.org",
         "@graph": [
+            {
+                "@type": "WebPage",
+                "name": `${song.title} Lyrics in Hindi`,
+                "url": canonicalUrl,
+                "description": `Hindi Christian song lyrics, chords, and meaning for ${song.title}.`,
+                "inLanguage": ["hi", "en"]
+            },
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://biblequizcompetition.com/"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Hindi Songs",
+                        "item": "https://biblequizcompetition.com/hindi-songs"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 3,
+                        "name": song.title,
+                        "item": canonicalUrl
+                    }
+                ]
+            },
             {
                 "@type": "MusicComposition",
                 "name": song.title,
                 "description": song.description,
                 "lyrics": {
                     "@type": "CreativeWork",
-                    "text": currentTranslation?.lyrics?.map(s => s.lines.join("\n")).join("\n\n") || ''
-                }
+                    "text": allLyricsText.hindiText
+                },
+                "alternateName": songAliases,
+                "inLanguage": "hi"
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": `${song.title} lyrics कहाँ मिलेंगी?`,
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": `इस पेज पर ${song.title} के full Hindi lyrics और worship-friendly format उपलब्ध है।`
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": `Is ${song.title} available with chords?`,
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": hasChords
+                                ? "Yes, available chord lines are displayed above the corresponding lyric lines."
+                                : "Chords are being added progressively as verified patterns become available."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": `Can I read ${song.title} meaning in English?`,
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": hasEnglish
+                                ? "Yes, English meaning lines are available. Toggle the English meaning switch."
+                                : "English meaning is being expanded and may be added soon for this song."
+                        }
+                    }
+                ]
             },
             ...(song.videoUrl ? [generateVideoSchema({
                 title: `${song.title} - Hindi Christian Song Lyrics & Video`,
@@ -134,11 +237,6 @@ const HindiSongDetail = () => {
         }
     };
 
-    const hasChords = Object.values(song.translations).some(t => 
-        t.lyrics.some(l => l.chords && l.chords.length > 0)
-    );
-    const hasEnglish = !!song.translations['english'];
-
     return (
         <div className="min-h-screen bg-gray-50/30">
             <Helmet>
@@ -149,13 +247,23 @@ const HindiSongDetail = () => {
                 />
                 <meta
                     name="keywords"
-                    content={`${song.title} lyrics, ${song.title} meaning, ${song.title} chords, hindi christian songs lyrics, yeshu ke geet, worship songs hindi`}
+                    content={dedupe([
+                        `${song.title} lyrics`,
+                        `${song.title} lyrics in hindi`,
+                        `${song.title} meaning`,
+                        `${song.title} chords`,
+                        "hindi christian songs lyrics",
+                        "yeshu ke geet",
+                        "worship songs hindi",
+                        ...songAliases.slice(0, 4),
+                    ]).join(", ")}
                 />
                 <link rel="canonical" href={canonicalUrl} />
                 <meta property="og:url" content={canonicalUrl} />
                 <meta property="og:type" content="music.song" />
-                <meta property="og:title" content={`${song.title} Lyrics & Meaning`} />
-                <meta property="og:description" content={`Explore lyrics, meaning, and worship notes for ${song.title}.`} />
+                <meta property="og:title" content={`${song.title} Lyrics in Hindi, Meaning${hasChords ? " & Chords" : ""}`} />
+                <meta property="og:description" content={`Explore line-by-line lyrics, meaning, and worship notes for ${song.title}.`} />
+                <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
                 <script type="application/ld+json">
                     {JSON.stringify(jsonLd)}
                 </script>
@@ -187,7 +295,7 @@ const HindiSongDetail = () => {
                                 {hasEnglish && <span className="text-[10px] font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded uppercase tracking-wider">English Translation</span>}
                             </div>
                             <p className="text-gray-500 text-xs leading-relaxed mb-6 font-medium">
-                                Full Hindi lyrics with guitar chords and English meaning.
+                                Full Hindi lyrics with worship-friendly structure, guitar chords, English meaning, and search variants.
                             </p>
                             
                             <div className="flex items-center gap-3 mb-8">
@@ -327,6 +435,19 @@ const HindiSongDetail = () => {
 
                             <Card className="rounded-3xl border-gray-100">
                                 <CardContent className="p-8 space-y-4">
+                                    <h2 className="text-2xl font-bold text-gray-900">Quick Song Facts</h2>
+                                    <ul className="text-gray-700 text-sm space-y-2">
+                                        <li><strong>Primary Language:</strong> Hindi</li>
+                                        <li><strong>Total Sections:</strong> {stats.sections}</li>
+                                        <li><strong>Total Lines:</strong> {stats.lines}</li>
+                                        <li><strong>Chords Available:</strong> {hasChords ? "Yes" : "Not yet"}</li>
+                                        <li><strong>English Meaning:</strong> {hasEnglish ? "Yes" : "Not yet"}</li>
+                                    </ul>
+                                </CardContent>
+                            </Card>
+
+                            <Card className="rounded-3xl border-gray-100">
+                                <CardContent className="p-8 space-y-4">
                                     <h2 className="text-2xl font-bold text-gray-900">Search Variations People Use</h2>
                                     <div className="flex flex-wrap gap-2">
                                         {titleVariants.map((variant) => (
@@ -335,6 +456,22 @@ const HindiSongDetail = () => {
                                                 className="px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-xs font-semibold"
                                             >
                                                 {variant}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </CardContent>
+                            </Card>
+
+                            <Card className="rounded-3xl border-gray-100">
+                                <CardContent className="p-8 space-y-4">
+                                    <h2 className="text-2xl font-bold text-gray-900">Also Searched As</h2>
+                                    <div className="flex flex-wrap gap-2">
+                                        {songAliases.map((alias) => (
+                                            <span
+                                                key={alias}
+                                                className="px-3 py-1 rounded-full bg-orange-50 text-orange-700 text-xs font-semibold"
+                                            >
+                                                {alias}
                                             </span>
                                         ))}
                                     </div>

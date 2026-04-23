@@ -79,9 +79,49 @@ const HindiSongs = () => {
                 <title>Hindi Christian Songs Lyrics & Guitar Chords | Bible Quiz Competition</title>
                 <meta
                     name="description"
-                    content="Browse Hindi Christian devotional songs with lyrics and guitar chords. Masih Geet, Yeshu Ke Geet, and worship songs in Hindi with YouTube videos."
+                    content="Browse detailed Hindi Christian song lyrics with guitar chords, English meaning, and worship-ready formatting. Find Masih Geet and Yeshu Ke Geet with search-friendly pages."
                 />
+                <meta
+                    name="keywords"
+                    content="hindi christian songs lyrics, yeshu ke geet, masih geet lyrics, hindi worship songs lyrics, christian song chords hindi"
+                />
+                <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
                 <link rel="canonical" href="https://biblequizcompetition.com/hindi-songs" />
+                <script type="application/ld+json">
+                    {JSON.stringify({
+                        "@context": "https://schema.org",
+                        "@graph": [
+                            {
+                                "@type": "CollectionPage",
+                                "name": "Hindi Christian Songs Lyrics",
+                                "url": "https://biblequizcompetition.com/hindi-songs",
+                                "description": "A collection of Hindi Christian song lyrics, chords, and worship resources.",
+                                "inLanguage": "hi"
+                            },
+                            {
+                                "@type": "FAQPage",
+                                "mainEntity": [
+                                    {
+                                        "@type": "Question",
+                                        "name": "Do these Hindi Christian songs include chords?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "Many songs include guitar chord lines. You can use the chords filter to show songs with chords."
+                                        }
+                                    },
+                                    {
+                                        "@type": "Question",
+                                        "name": "Can I find Hindi lyrics and English meaning on this site?",
+                                        "acceptedAnswer": {
+                                            "@type": "Answer",
+                                            "text": "Yes. Song detail pages provide Hindi lyrics and, where available, English meaning lines."
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    })}
+                </script>
             </Helmet>
 
             <Navigation />
@@ -92,7 +132,7 @@ const HindiSongs = () => {
                         Hindi Christian Songs
                     </h1>
                     <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Browse our collection of Hindi Christian devotional songs and Masih Geet. Read lyrics, watch videos, and worship in Hindi.
+                        Browse detailed Hindi Christian devotional songs and Masih Geet. Read lyrics, view chords, and use search-focused song pages for worship and study.
                     </p>
                 </div>
 
@@ -236,6 +276,28 @@ const HindiSongs = () => {
                         );
                     })}
                 </div>
+
+                <section className="max-w-5xl mx-auto mt-12 grid md:grid-cols-2 gap-6">
+                    <Card className="border-gray-100">
+                        <CardContent className="p-6 space-y-3">
+                            <h2 className="text-xl font-bold text-gray-900">Why These Hindi Song Pages Rank Better</h2>
+                            <p className="text-sm text-gray-600">
+                                Each song page is optimized with exact-match lyric intent, structured layout, optional guitar chords, and internal linking to related Hindi worship songs.
+                            </p>
+                        </CardContent>
+                    </Card>
+                    <Card className="border-gray-100">
+                        <CardContent className="p-6 space-y-3">
+                            <h2 className="text-xl font-bold text-gray-900">Common Searches</h2>
+                            <div className="flex flex-wrap gap-2 text-xs">
+                                <Badge variant="secondary">hindi christian songs lyrics</Badge>
+                                <Badge variant="secondary">yeshu ke geet lyrics</Badge>
+                                <Badge variant="secondary">masih geet hindi</Badge>
+                                <Badge variant="secondary">hindi worship songs chords</Badge>
+                            </div>
+                        </CardContent>
+                    </Card>
+                </section>
             </main>
 
             <Footer />
