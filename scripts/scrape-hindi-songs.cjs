@@ -12,7 +12,8 @@ const path = require('path');
 
 const OUTPUT_FILE = path.join(__dirname, '..', 'src', 'data', 'hindi-songs.json');
 const DELAY_MS = 2000;
-const MAX_SONGS = 500;
+// Override at runtime: MAX_SONGS=1200 node scripts/scrape-hindi-songs.cjs
+const MAX_SONGS = Number(process.env.MAX_SONGS || 1200);
 
 function httpGet(url) {
   return new Promise((resolve, reject) => {

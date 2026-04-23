@@ -6,7 +6,7 @@
  *
  * Usage:
  *   node scripts/scrape-hindi-songs-merge.cjs
- *   MAX_SONGS=120 DELAY_MS=500 node scripts/scrape-hindi-songs-merge.cjs
+ *   MAX_SONGS=1200 DELAY_MS=500 node scripts/scrape-hindi-songs-merge.cjs
  */
 
 const https = require("https");
@@ -16,7 +16,7 @@ const path = require("path");
 
 const OUTPUT_FILE = path.join(__dirname, "..", "src", "data", "hindi-songs.json");
 const DELAY_MS = Number(process.env.DELAY_MS || 800);
-const MAX_SONGS = Number(process.env.MAX_SONGS || 180);
+const MAX_SONGS = Number(process.env.MAX_SONGS || 1200);
 const DOMAIN = "https://www.yeshukegeet.com";
 const NON_SONG_SLUG_PATTERNS = [
   "one-to-one",
