@@ -249,6 +249,12 @@ function LegacyMalayalamSongsRedirect() {
   return <Navigate to={slug ? `/malayalam-songs/${slug}` : "/malayalam-songs"} replace />;
 }
 
+function LegacyPublicQuizVariantRedirect() {
+  const { book, chapter } = useParams();
+  if (!book || !chapter) return <Navigate to="/bible-questions-and-answers-hub" replace />;
+  return <Navigate to={`/public-quiz/${book}/${chapter}`} replace />;
+}
+
 const App = () => {
   return (
     <HelmetProvider>
@@ -430,6 +436,7 @@ const App = () => {
               <Route path="/public-quiz/3-john" element={<John3PublicQuiz />} />
               <Route path="/public-quiz/jude" element={<JudePublicQuiz />} />
               <Route path="/public-quiz/revelation" element={<RevelationPublicQuiz />} />
+              <Route path="/public-quiz/:book/:chapter/:variant" element={<LegacyPublicQuizVariantRedirect />} />
               <Route path="/public-quiz/:book/:chapter" element={<PublicQuizChapter />} />
               <Route path="/competitions" element={<ProtectedRoute><Competitions /></ProtectedRoute>} />
               <Route path="/competition-quiz/:competitionId" element={<ProtectedRoute><CompetitionQuiz /></ProtectedRoute>} />

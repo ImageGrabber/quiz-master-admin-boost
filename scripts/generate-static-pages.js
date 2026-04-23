@@ -724,29 +724,18 @@ function generateStaticPages() {
     
     for (let i = 1; i <= chapters; i++) {
       const chapter = `chapter-${i}`;
-      
-      // Define the difficulty levels to generate
-      const levels = [
-        { id: '', title: 'General', focus: 'a comprehensive overview of key events' },
-        { id: 'beginner', title: 'Beginner', focus: 'primary characters and main story arcs' },
-        { id: 'intermediate', title: 'Intermediate', focus: 'deeper historical context and thematic elements' },
-        { id: 'advanced', title: 'Advanced', focus: 'theological nuances and original language insights' }
-      ];
 
-      levels.forEach(level => {
-        const subPath = level.id ? `/${level.id}` : '';
-        const displayTitle = level.id ? `${bookName} Chapter ${i} ${level.title} Quiz` : `${bookName} Chapter ${i} Quiz`;
-        
-        const page = {
-          path: `/public-quiz/${book}/${chapter}${subPath}`,
+      const displayTitle = `${bookName} Chapter ${i} Quiz`;
+      const page = {
+          path: `/public-quiz/${book}/${chapter}`,
           title: `${displayTitle} - Free Bible Quiz`,
-          description: `Master ${bookName} Chapter ${i} with our ${level.title.toLowerCase()} level quiz. Focuses on ${level.focus} within the ${category} category.`,
+          description: `Master ${bookName} Chapter ${i} with our chapter quiz focused on key events, biblical context, and spiritual insights within the ${category} category.`,
           noindex: false,
           structuredData: {
             "@context": "https://schema.org",
             "@type": "Quiz",
             "name": displayTitle,
-            "description": `Test your knowledge of ${bookName} Chapter ${i} with this ${level.title.toLowerCase()} interactive quiz.`,
+            "description": `Test your knowledge of ${bookName} Chapter ${i} with this interactive chapter quiz.`,
             "educationalAlignment": {
               "@type": "AlignmentObject",
               "alignmentType": "educationalSubject",
@@ -793,7 +782,7 @@ function generateStaticPages() {
                     <a href="/" class="hover:text-blue-600">Home</a> &raquo;
                     <a href="/bible-questions-and-answers-hub" class="hover:text-blue-600">Bible Q&A Hub</a> &raquo;
                     <a href="/bible-questions-and-answers-hub/${book}" class="hover:text-blue-600">${bookName}</a> &raquo;
-                    <span class="text-gray-800">Chapter ${i}${level.id ? ' (' + level.title + ')' : ''}</span>
+                    <span class="text-gray-800">Chapter ${i}</span>
                   </nav>
 
                   <div class="max-w-6xl mx-auto shadow-2xl border-0 bg-white rounded-xl overflow-hidden">
@@ -805,12 +794,11 @@ function generateStaticPages() {
                       <div class="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
                         <h2 class="text-xl font-bold text-gray-900 mb-2">About This Quiz</h2>
                         <p class="text-gray-700 mb-3">
-                          Welcome to the <strong>${level.title.toLowerCase()} level</strong> quiz covering <strong>${bookName} Chapter ${i}</strong>.
+                          Welcome to the chapter quiz covering <strong>${bookName} Chapter ${i}</strong>.
                           This chapter is part of the <strong>${category}</strong> section of the Bible and presents important themes
                           that are central to both historical understanding and personal faith.
                         </p>
                         <p class="text-gray-700 mb-3">
-                          At the <strong>${level.title.toLowerCase()}</strong> difficulty, you will be tested on <strong>${level.focus}</strong>.
                           Whether you are preparing for a Bible quiz competition, studying for a church group, or deepening your personal
                           knowledge of Scripture, this quiz provides a structured way to engage with the text.
                         </p>
@@ -829,7 +817,7 @@ function generateStaticPages() {
                       <div class="mb-6 p-4 bg-green-50 rounded-lg border border-green-200">
                         <h2 class="text-lg font-bold text-gray-900 mb-2">What You Will Learn</h2>
                         <p class="text-gray-700 mb-2">
-                          By completing this ${level.title.toLowerCase()} quiz, you will strengthen your recall of the specific events narrated
+                          By completing this chapter quiz, you will strengthen your recall of the specific events narrated
                           in ${bookName} Chapter ${i}, understand the theological significance of those events within the ${category},
                           and build confidence for competitive Bible quizzing or personal Bible study.
                         </p>
@@ -845,8 +833,8 @@ function generateStaticPages() {
                           <div class="text-xs text-gray-500">Questions</div>
                         </div>
                         <div class="bg-white border rounded-lg p-3 text-center">
-                          <div class="text-2xl font-bold text-purple-600">${level.title}</div>
-                          <div class="text-xs text-gray-500">Difficulty</div>
+                          <div class="text-2xl font-bold text-purple-600">Chapter</div>
+                          <div class="text-xs text-gray-500">Format</div>
                         </div>
                         <div class="bg-white border rounded-lg p-3 text-center">
                           <div class="text-2xl font-bold text-green-600">Free</div>
@@ -856,7 +844,7 @@ function generateStaticPages() {
 
                       <div class="flex items-center gap-3 mb-6">
                            <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-600"></div>
-                           <span class="text-blue-600 font-medium">Loading ${level.title.toLowerCase()} quiz engine...</span>
+                           <span class="text-blue-600 font-medium">Loading chapter quiz engine...</span>
                       </div>
 
                       <div class="border-t pt-6">
@@ -865,102 +853,18 @@ function generateStaticPages() {
                           ${i > 1 ? `<a href="/public-quiz/${book}/chapter-${i-1}" class="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-blue-100 text-gray-700">← Chapter ${i-1}</a>` : ''}
                           ${i < chapters ? `<a href="/public-quiz/${book}/chapter-${i+1}" class="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-blue-100 text-gray-700">Chapter ${i+1} →</a>` : ''}
                           <a href="/bible-questions-and-answers-hub/${book}" class="px-3 py-1 bg-blue-100 rounded-full text-sm hover:bg-blue-200 text-blue-700">All ${bookName} Chapters</a>
-                          <a href="/public-quiz/${book}/${chapter}/verse-1" class="px-3 py-1 bg-purple-100 rounded-full text-sm hover:bg-purple-200 text-purple-700">${bookName} ${i}:1 Deep Dive</a>
                         </div>
                       </div>
                   </div>
                   </div>
               </div>
               </div>`
-        };
-
-        try {
-          writePageAndTrackSeo(page, '');
-        } catch (err) {
-          console.error(`Error generating chapter page ${book} ${chapter} ${level.id}:`, err);
-        }
-      });
-
-      // Special: Verse 1 Deep-Dive Page (granular SEO)
-      const versePage = {
-        path: `/public-quiz/${book}/${chapter}/verse-1`,
-        title: `${bookName} Chapter ${i}:1 Meaning and Context | Bible Quiz`,
-        description: `Explore the meaning, historical context, and cross-references for the opening verse of ${bookName} Chapter ${i}.`,
-        noindex: false,
-        structuredData: {
-          "@context": "https://schema.org",
-          "@type": "Article",
-          "headline": `${bookName} Chapter ${i}:1 Deep Dive`,
-          "description": `Theological analysis of ${bookName} Chapter ${i} Verse 1.`
-        },
-        content: `
-            <div class="min-h-screen bg-gray-50 pt-20">
-              <div class="container mx-auto px-4 py-8">
-                <nav class="text-sm text-gray-500 mb-4" aria-label="Breadcrumb">
-                  <a href="/" class="hover:text-blue-600">Home</a> &raquo;
-                  <a href="/bible-questions-and-answers-hub/${book}" class="hover:text-blue-600">${bookName}</a> &raquo;
-                  <a href="/public-quiz/${book}/${chapter}" class="hover:text-blue-600">Chapter ${i}</a> &raquo;
-                  <span class="text-gray-800">Verse 1 Study</span>
-                </nav>
-
-                <div class="max-w-3xl mx-auto">
-                  <div class="bg-white p-10 rounded-3xl shadow-2xl border border-blue-100 mb-8">
-                    <span class="inline-block px-4 py-1.5 bg-blue-600 text-white rounded-full text-sm font-bold mb-6">VERSE STUDY</span>
-                    <h1 class="text-4xl font-extrabold text-gray-900 mb-4">${bookName} ${i}:1</h1>
-                    <p class="text-2xl italic text-blue-800 leading-relaxed mb-6">"In the beginning..."</p>
-                    <div class="h-1 w-24 bg-blue-600 mb-8 rounded-full"></div>
-
-                    <h2 class="text-xl font-bold text-gray-900 mb-3">Context & Commentary</h2>
-                    <p class="text-gray-700 leading-relaxed text-lg mb-4">
-                      The opening verse of <strong>${bookName} Chapter ${i}</strong> sets the stage for the narrative within the <strong>${category}</strong>.
-                      This scripture is central to understanding the theological foundation of the book. Scholars and pastors alike emphasize this verse
-                      as a pivotal transition point connecting the themes of the preceding chapters with what follows.
-                    </p>
-                    <p class="text-gray-700 leading-relaxed mb-6">
-                      When studying ${bookName} ${i}:1, it is helpful to consider the historical period in which these events took place,
-                      the original audience, and the literary genre of the passage. The ${category} genre carries specific conventions
-                      that shape how we interpret each verse and its application to modern faith practice.
-                    </p>
-                  </div>
-
-                  <div class="bg-white p-8 rounded-2xl shadow-lg border border-purple-100 mb-8">
-                    <h2 class="text-lg font-bold text-gray-900 mb-3">📖 Study Questions for ${bookName} ${i}:1</h2>
-                    <ol class="list-decimal list-inside text-gray-700 space-y-2">
-                      <li>What is the main action or declaration made in this opening verse?</li>
-                      <li>Who are the key figures mentioned or implied in Chapter ${i}?</li>
-                      <li>How does this verse connect to the broader theme of ${bookName}?</li>
-                      <li>What does this verse reveal about God's character or plan?</li>
-                      <li>How can you apply the lesson of ${bookName} ${i}:1 to your daily life?</li>
-                    </ol>
-                  </div>
-
-                  <div class="bg-white p-8 rounded-2xl shadow-lg border border-green-100 mb-8">
-                    <h2 class="text-lg font-bold text-gray-900 mb-3">🔗 Cross-References & Related Passages</h2>
-                    <p class="text-gray-700 mb-3">
-                      To deepen your understanding of ${bookName} ${i}:1, explore these related areas of Scripture.
-                      Cross-referencing passages provides a fuller picture of the biblical narrative and helps connect themes across the Old and New Testaments.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                      ${i > 1 ? `<a href="/public-quiz/${book}/chapter-${i-1}/verse-1" class="px-3 py-1.5 bg-green-50 border border-green-200 rounded-full text-sm text-green-700 hover:bg-green-100">${bookName} ${i-1}:1</a>` : ''}
-                      ${i < chapters ? `<a href="/public-quiz/${book}/chapter-${i+1}/verse-1" class="px-3 py-1.5 bg-green-50 border border-green-200 rounded-full text-sm text-green-700 hover:bg-green-100">${bookName} ${i+1}:1</a>` : ''}
-                      <a href="/public-quiz/${book}/${chapter}/beginner" class="px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-full text-sm text-blue-700 hover:bg-blue-100">Beginner Quiz</a>
-                      <a href="/public-quiz/${book}/${chapter}/advanced" class="px-3 py-1.5 bg-purple-50 border border-purple-200 rounded-full text-sm text-purple-700 hover:bg-purple-100">Advanced Quiz</a>
-                    </div>
-                  </div>
-
-                  <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="/public-quiz/${book}/${chapter}" class="px-8 py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition text-center">Take Chapter ${i} Quiz</a>
-                    <a href="/bible-questions-and-answers-hub/${book}" class="px-8 py-4 bg-gray-100 text-gray-800 rounded-xl font-bold hover:bg-gray-200 transition text-center">Explore ${bookName} Hub</a>
-                  </div>
-                </div>
-              </div>
-            </div>`
       };
       
       try {
-        writePageAndTrackSeo(versePage, '');
+        writePageAndTrackSeo(page, '');
       } catch (err) {
-        console.error(`Error generating verse page ${book} ${chapter}:`, err);
+        console.error(`Error generating chapter page ${book} ${chapter}:`, err);
       }
     }
   }
@@ -1167,12 +1071,12 @@ ${escapeHtml(song.content || 'Lyrics are being prepared for this song. Please ch
 
                   <h2 class="text-xl font-bold text-gray-900 mb-3">Popular Sunday School Quiz Topics</h2>
                   <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
-                    <a href="/public-quiz/genesis/chapter-1/beginner" class="bg-blue-50 p-3 rounded-lg text-center hover:bg-blue-100 transition"><strong>Creation Story</strong><br><span class="text-sm text-gray-500">Genesis 1</span></a>
-                    <a href="/public-quiz/genesis/chapter-6/beginner" class="bg-blue-50 p-3 rounded-lg text-center hover:bg-blue-100 transition"><strong>Noah's Ark</strong><br><span class="text-sm text-gray-500">Genesis 6-9</span></a>
-                    <a href="/public-quiz/exodus/chapter-1/beginner" class="bg-blue-50 p-3 rounded-lg text-center hover:bg-blue-100 transition"><strong>Moses & Exodus</strong><br><span class="text-sm text-gray-500">Exodus 1-14</span></a>
-                    <a href="/public-quiz/matthew/chapter-1/beginner" class="bg-blue-50 p-3 rounded-lg text-center hover:bg-blue-100 transition"><strong>Birth of Jesus</strong><br><span class="text-sm text-gray-500">Matthew 1-2</span></a>
+                    <a href="/public-quiz/genesis/chapter-1" class="bg-blue-50 p-3 rounded-lg text-center hover:bg-blue-100 transition"><strong>Creation Story</strong><br><span class="text-sm text-gray-500">Genesis 1</span></a>
+                    <a href="/public-quiz/genesis/chapter-6" class="bg-blue-50 p-3 rounded-lg text-center hover:bg-blue-100 transition"><strong>Noah's Ark</strong><br><span class="text-sm text-gray-500">Genesis 6-9</span></a>
+                    <a href="/public-quiz/exodus/chapter-1" class="bg-blue-50 p-3 rounded-lg text-center hover:bg-blue-100 transition"><strong>Moses & Exodus</strong><br><span class="text-sm text-gray-500">Exodus 1-14</span></a>
+                    <a href="/public-quiz/matthew/chapter-1" class="bg-blue-50 p-3 rounded-lg text-center hover:bg-blue-100 transition"><strong>Birth of Jesus</strong><br><span class="text-sm text-gray-500">Matthew 1-2</span></a>
                     <a href="/quizzes/parables-of-jesus" class="bg-blue-50 p-3 rounded-lg text-center hover:bg-blue-100 transition"><strong>Parables of Jesus</strong><br><span class="text-sm text-gray-500">Interactive</span></a>
-                    <a href="/public-quiz/acts/chapter-1/beginner" class="bg-blue-50 p-3 rounded-lg text-center hover:bg-blue-100 transition"><strong>Early Church</strong><br><span class="text-sm text-gray-500">Acts 1-5</span></a>
+                    <a href="/public-quiz/acts/chapter-1" class="bg-blue-50 p-3 rounded-lg text-center hover:bg-blue-100 transition"><strong>Early Church</strong><br><span class="text-sm text-gray-500">Acts 1-5</span></a>
                   </div>
 
                   <h2 class="text-xl font-bold text-gray-900 mb-3">Frequently Asked Questions</h2>
@@ -1256,10 +1160,10 @@ ${escapeHtml(song.content || 'Lyrics are being prepared for this song. Please ch
                 </ul>
                 <h2 class="text-xl font-bold mb-3">Recommended Starting Points</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-                  <a href="/public-quiz/genesis/chapter-1/beginner" class="flex items-center gap-3 bg-sky-50 p-4 rounded-lg hover:bg-sky-100 transition"><span class="text-2xl">📖</span><div><strong>Genesis 1 - Creation</strong><p class="text-sm text-gray-500">The very beginning — perfect first quiz</p></div></a>
-                  <a href="/public-quiz/matthew/chapter-1/beginner" class="flex items-center gap-3 bg-sky-50 p-4 rounded-lg hover:bg-sky-100 transition"><span class="text-2xl">✝️</span><div><strong>Matthew 1 - Life of Jesus</strong><p class="text-sm text-gray-500">Start the New Testament journey</p></div></a>
-                  <a href="/public-quiz/psalms/chapter-23/beginner" class="flex items-center gap-3 bg-sky-50 p-4 rounded-lg hover:bg-sky-100 transition"><span class="text-2xl">🎵</span><div><strong>Psalm 23 - The Lord is My Shepherd</strong><p class="text-sm text-gray-500">The most beloved Psalm</p></div></a>
-                  <a href="/public-quiz/john/chapter-3/beginner" class="flex items-center gap-3 bg-sky-50 p-4 rounded-lg hover:bg-sky-100 transition"><span class="text-2xl">❤️</span><div><strong>John 3 - For God So Loved</strong><p class="text-sm text-gray-500">The heart of the Gospel</p></div></a>
+                  <a href="/public-quiz/genesis/chapter-1" class="flex items-center gap-3 bg-sky-50 p-4 rounded-lg hover:bg-sky-100 transition"><span class="text-2xl">📖</span><div><strong>Genesis 1 - Creation</strong><p class="text-sm text-gray-500">The very beginning — perfect first quiz</p></div></a>
+                  <a href="/public-quiz/matthew/chapter-1" class="flex items-center gap-3 bg-sky-50 p-4 rounded-lg hover:bg-sky-100 transition"><span class="text-2xl">✝️</span><div><strong>Matthew 1 - Life of Jesus</strong><p class="text-sm text-gray-500">Start the New Testament journey</p></div></a>
+                  <a href="/public-quiz/psalms/chapter-23" class="flex items-center gap-3 bg-sky-50 p-4 rounded-lg hover:bg-sky-100 transition"><span class="text-2xl">🎵</span><div><strong>Psalm 23 - The Lord is My Shepherd</strong><p class="text-sm text-gray-500">The most beloved Psalm</p></div></a>
+                  <a href="/public-quiz/john/chapter-3" class="flex items-center gap-3 bg-sky-50 p-4 rounded-lg hover:bg-sky-100 transition"><span class="text-2xl">❤️</span><div><strong>John 3 - For God So Loved</strong><p class="text-sm text-gray-500">The heart of the Gospel</p></div></a>
                 </div>
                 <a href="/bible-questions-and-answers-hub" class="inline-block px-8 py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition">Explore All Beginner Quizzes →</a>
               </div>
@@ -1538,7 +1442,7 @@ ${escapeHtml(song.content || 'Lyrics are being prepared for this song. Please ch
                   <li>What does the rainbow mean to you?</li>
                 </ol>
                 <div class="flex flex-wrap gap-3">
-                  <a href="/public-quiz/genesis/chapter-6/beginner" class="px-6 py-3 bg-blue-500 text-white rounded-xl font-bold">Take the Noah Quiz!</a>
+                  <a href="/public-quiz/genesis/chapter-6" class="px-6 py-3 bg-blue-500 text-white rounded-xl font-bold">Take the Noah Quiz!</a>
                   <a href="/kids-stories/creation-story" class="px-6 py-3 bg-gray-100 rounded-xl font-bold">Read Creation Story →</a>
                 </div>
               </div>
@@ -1564,7 +1468,7 @@ ${escapeHtml(song.content || 'Lyrics are being prepared for this song. Please ch
                 <h2 class="text-xl font-bold mb-3">💡 Key Lesson</h2>
                 <p class="text-gray-700 mb-6">No problem is too big for God. Even when we feel small and the challenge seems impossible, God gives us the courage and strength to overcome. Just like David, our faith is our greatest weapon.</p>
                 <div class="flex flex-wrap gap-3">
-                  <a href="/public-quiz/1-samuel/chapter-17/beginner" class="px-6 py-3 bg-emerald-600 text-white rounded-xl font-bold">Take the David & Goliath Quiz!</a>
+                  <a href="/public-quiz/1-samuel/chapter-17" class="px-6 py-3 bg-emerald-600 text-white rounded-xl font-bold">Take the David & Goliath Quiz!</a>
                   <a href="/kids-stories/noahs-ark" class="px-6 py-3 bg-gray-100 rounded-xl font-bold">← Noah's Ark</a>
                   <a href="/kids-stories/moses-and-exodus" class="px-6 py-3 bg-gray-100 rounded-xl font-bold">Moses Story →</a>
                 </div>
@@ -1595,7 +1499,7 @@ ${escapeHtml(song.content || 'Lyrics are being prepared for this song. Please ch
                   <div class="bg-green-50 p-3 rounded-lg col-span-2 text-center"><strong>Day 7:</strong> God rested. He looked at everything and said it was <em>very good</em>. 😊</div>
                 </div>
                 <div class="flex flex-wrap gap-3">
-                  <a href="/public-quiz/genesis/chapter-1/beginner" class="px-6 py-3 bg-yellow-500 text-white rounded-xl font-bold">Take the Creation Quiz!</a>
+                  <a href="/public-quiz/genesis/chapter-1" class="px-6 py-3 bg-yellow-500 text-white rounded-xl font-bold">Take the Creation Quiz!</a>
                   <a href="/kids-stories/noahs-ark" class="px-6 py-3 bg-gray-100 rounded-xl font-bold">Noah's Ark →</a>
                 </div>
               </div>
@@ -1620,7 +1524,7 @@ ${escapeHtml(song.content || 'Lyrics are being prepared for this song. Please ch
                 <p class="text-gray-700 mb-3">Pharaoh refused, so God sent <strong>10 terrible plagues</strong> — water turning to blood, frogs, locusts, darkness, and more. After the final plague, Pharaoh finally let the Israelites go.</p>
                 <p class="text-gray-700 mb-6">But then Pharaoh changed his mind and sent his army after them! The Israelites were trapped at the <strong>Red Sea</strong>. Moses raised his staff, and God parted the waters! The Israelites walked through on dry ground, and the sea closed behind them. They were free at last!</p>
                 <div class="flex flex-wrap gap-3">
-                  <a href="/public-quiz/exodus/chapter-1/beginner" class="px-6 py-3 bg-red-600 text-white rounded-xl font-bold">Take the Exodus Quiz!</a>
+                  <a href="/public-quiz/exodus/chapter-1" class="px-6 py-3 bg-red-600 text-white rounded-xl font-bold">Take the Exodus Quiz!</a>
                   <a href="/kids-stories/david-and-goliath" class="px-6 py-3 bg-gray-100 rounded-xl font-bold">David & Goliath →</a>
                 </div>
               </div>
@@ -1645,7 +1549,7 @@ ${escapeHtml(song.content || 'Lyrics are being prepared for this song. Please ch
                 <p class="text-gray-700 mb-3">The jealous leaders caught him and reported him to the king. The king was heartbroken — he loved Daniel — but the law could not be changed. So Daniel was thrown into the den of hungry lions.</p>
                 <p class="text-gray-700 mb-6">The king couldn't sleep all night. At dawn, he rushed to the den and cried out, "Daniel! Did your God save you?" And Daniel called back, "My God sent His <strong>angel to shut the lions' mouths</strong>! They have not hurt me!" Daniel was lifted out without a single scratch. 🙌</p>
                 <div class="flex flex-wrap gap-3">
-                  <a href="/public-quiz/daniel/chapter-6/beginner" class="px-6 py-3 bg-amber-600 text-white rounded-xl font-bold">Take the Daniel Quiz!</a>
+                  <a href="/public-quiz/daniel/chapter-6" class="px-6 py-3 bg-amber-600 text-white rounded-xl font-bold">Take the Daniel Quiz!</a>
                   <a href="/kids-stories/jonah-and-the-whale" class="px-6 py-3 bg-gray-100 rounded-xl font-bold">Jonah Story →</a>
                 </div>
               </div>
@@ -1670,7 +1574,7 @@ ${escapeHtml(song.content || 'Lyrics are being prepared for this song. Please ch
                 <p class="text-gray-700 mb-3">Inside the fish, Jonah prayed and asked God for forgiveness. Then God told the fish to spit Jonah out onto dry land. This time, Jonah obeyed and went to Nineveh. The people listened to his message and turned back to God!</p>
                 <p class="text-gray-700 mb-6"><strong>Lesson:</strong> You can't run from God! He loves us so much that He will pursue us even when we try to go our own way. And His mercy extends to everyone — even people we think don't deserve it.</p>
                 <div class="flex flex-wrap gap-3">
-                  <a href="/public-quiz/jonah/chapter-1/beginner" class="px-6 py-3 bg-teal-600 text-white rounded-xl font-bold">Take the Jonah Quiz!</a>
+                  <a href="/public-quiz/jonah/chapter-1" class="px-6 py-3 bg-teal-600 text-white rounded-xl font-bold">Take the Jonah Quiz!</a>
                   <a href="/kids-stories/daniel-lions-den" class="px-6 py-3 bg-gray-100 rounded-xl font-bold">← Daniel Story</a>
                   <a href="/kids-stories" class="px-6 py-3 bg-gray-100 rounded-xl font-bold">All Kids Stories</a>
                 </div>
@@ -1715,10 +1619,10 @@ ${escapeHtml(song.content || 'Lyrics are being prepared for this song. Please ch
 
                 <h2 class="text-xl font-bold text-gray-900 mb-3">Popular Printable Quizzes</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-                  <a href="/public-quiz/genesis/chapter-1/beginner" class="flex items-center gap-3 bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition border"><span class="text-2xl">📖</span><div><strong>Genesis 1 — Creation</strong><p class="text-sm text-gray-500">Beginner level • 10 questions</p></div></a>
+                  <a href="/public-quiz/genesis/chapter-1" class="flex items-center gap-3 bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition border"><span class="text-2xl">📖</span><div><strong>Genesis 1 — Creation</strong><p class="text-sm text-gray-500">Beginner level • 10 questions</p></div></a>
                   <a href="/public-quiz/exodus/chapter-20" class="flex items-center gap-3 bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition border"><span class="text-2xl">⛰️</span><div><strong>10 Commandments Quiz</strong><p class="text-sm text-gray-500">Exodus 20 • All levels</p></div></a>
-                  <a href="/public-quiz/matthew/chapter-5/beginner" class="flex items-center gap-3 bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition border"><span class="text-2xl">✝️</span><div><strong>Sermon on the Mount</strong><p class="text-sm text-gray-500">Matthew 5 • Beginner</p></div></a>
-                  <a href="/public-quiz/john/chapter-3/beginner" class="flex items-center gap-3 bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition border"><span class="text-2xl">❤️</span><div><strong>John 3:16 — God's Love</strong><p class="text-sm text-gray-500">John 3 • Beginner</p></div></a>
+                  <a href="/public-quiz/matthew/chapter-5" class="flex items-center gap-3 bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition border"><span class="text-2xl">✝️</span><div><strong>Sermon on the Mount</strong><p class="text-sm text-gray-500">Matthew 5 • Beginner</p></div></a>
+                  <a href="/public-quiz/john/chapter-3" class="flex items-center gap-3 bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition border"><span class="text-2xl">❤️</span><div><strong>John 3:16 — God's Love</strong><p class="text-sm text-gray-500">John 3 • Beginner</p></div></a>
                 </div>
 
                 <h2 class="text-xl font-bold text-gray-900 mb-3">Browse by Difficulty</h2>
@@ -1815,9 +1719,9 @@ ${escapeHtml(song.content || 'Lyrics are being prepared for this song. Please ch
                 <h2 class="text-xl font-bold text-gray-900 mb-3">The Christmas Story in Scripture</h2>
                 <p class="text-gray-700 mb-4">Pair these songs with the biblical Christmas story! Take our quizzes on the birth narratives in Matthew and Luke to deepen your understanding of why we celebrate.</p>
                 <div class="flex flex-wrap gap-3 mb-6">
-                  <a href="/public-quiz/matthew/chapter-1/beginner" class="px-4 py-2 bg-red-100 rounded-full text-sm text-red-700 hover:bg-red-200">Matthew 1 - Birth of Jesus</a>
-                  <a href="/public-quiz/matthew/chapter-2/beginner" class="px-4 py-2 bg-green-100 rounded-full text-sm text-green-700 hover:bg-green-200">Matthew 2 - Wise Men</a>
-                  <a href="/public-quiz/luke/chapter-2/beginner" class="px-4 py-2 bg-red-100 rounded-full text-sm text-red-700 hover:bg-red-200">Luke 2 - Shepherds & Angels</a>
+                  <a href="/public-quiz/matthew/chapter-1" class="px-4 py-2 bg-red-100 rounded-full text-sm text-red-700 hover:bg-red-200">Matthew 1 - Birth of Jesus</a>
+                  <a href="/public-quiz/matthew/chapter-2" class="px-4 py-2 bg-green-100 rounded-full text-sm text-green-700 hover:bg-green-200">Matthew 2 - Wise Men</a>
+                  <a href="/public-quiz/luke/chapter-2" class="px-4 py-2 bg-red-100 rounded-full text-sm text-red-700 hover:bg-red-200">Luke 2 - Shepherds & Angels</a>
                   <a href="/songs" class="px-4 py-2 bg-gray-100 rounded-full text-sm hover:bg-gray-200">All Worship Songs →</a>
                 </div>
               </div>
@@ -1854,10 +1758,10 @@ ${escapeHtml(song.content || 'Lyrics are being prepared for this song. Please ch
                 <h2 class="text-xl font-bold text-gray-900 mb-3">Study the Easter Story</h2>
                 <p class="text-gray-700 mb-4">Understand the biblical account of Jesus' crucifixion and resurrection. These quiz chapters cover the Passion narrative from the Last Supper to the empty tomb.</p>
                 <div class="flex flex-wrap gap-3 mb-6">
-                  <a href="/public-quiz/matthew/chapter-27/beginner" class="px-4 py-2 bg-violet-100 rounded-full text-sm text-violet-700 hover:bg-violet-200">Matthew 27 - Crucifixion</a>
-                  <a href="/public-quiz/matthew/chapter-28/beginner" class="px-4 py-2 bg-yellow-100 rounded-full text-sm text-yellow-700 hover:bg-yellow-200">Matthew 28 - Resurrection</a>
-	                  <a href="/public-quiz/john/chapter-19/beginner" class="px-4 py-2 bg-violet-100 rounded-full text-sm text-violet-700 hover:bg-violet-200">John 19 - The Cross</a>
-	                  <a href="/public-quiz/john/chapter-20/beginner" class="px-4 py-2 bg-yellow-100 rounded-full text-sm text-yellow-700 hover:bg-yellow-200">John 20 - He Is Risen</a>
+                  <a href="/public-quiz/matthew/chapter-27" class="px-4 py-2 bg-violet-100 rounded-full text-sm text-violet-700 hover:bg-violet-200">Matthew 27 - Crucifixion</a>
+                  <a href="/public-quiz/matthew/chapter-28" class="px-4 py-2 bg-yellow-100 rounded-full text-sm text-yellow-700 hover:bg-yellow-200">Matthew 28 - Resurrection</a>
+	                  <a href="/public-quiz/john/chapter-19" class="px-4 py-2 bg-violet-100 rounded-full text-sm text-violet-700 hover:bg-violet-200">John 19 - The Cross</a>
+	                  <a href="/public-quiz/john/chapter-20" class="px-4 py-2 bg-yellow-100 rounded-full text-sm text-yellow-700 hover:bg-yellow-200">John 20 - He Is Risen</a>
 	                  <a href="/songs" class="px-4 py-2 bg-gray-100 rounded-full text-sm hover:bg-gray-200">All Worship Songs →</a>
 	                </div>
 	              </div>
