@@ -340,6 +340,7 @@ const App = () => {
               <Route path="/english-songs" element={<EnglishSongs />} />
               <Route path="/english-songs/:slug" element={<EnglishSongDetail />} />
               <Route path="/hindi-songs" element={<HindiSongs />} />
+              <Route path="/hindi-songs-list" element={<Navigate to="/hindi-songs" replace />} />
               <Route path="/hindi-songs/:slug" element={<HindiSongDetail />} />
               <Route path="/hindi-songs/ek-aag-har-dil-mein-lyrics" element={<Navigate to="/hindi-songs/ek-aag-har-dil-mai" replace />} />
               <Route path="/hindi-songs/vandana-karte-hai-hum-lyrics" element={<Navigate to="/hindi-songs/vandana-karte-hai-hum" replace />} />

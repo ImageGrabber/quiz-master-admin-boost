@@ -64,6 +64,7 @@ const articles = [
 // Reference migrated and scraped songs directly
 const migratedSongsPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/data/migrated-songs.json');
 const scrapedSongsPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/data/scraped-blog-songs.json');
+const hindiSongsPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/data/hindi-songs.json');
 
 let allSongs = [
     { slug: "ithratholam-yahova-sahayichu", title: "Ithratholam Yahova Sahayichu", description: "Worship along with this beautiful melody." },
@@ -86,6 +87,18 @@ if (fs.existsSync(scrapedSongsPath)) {
     } catch (e) {
         console.error('Error reading scraped songs:', e.message);
     }
+}
+
+let hindiSongs = [];
+if (fs.existsSync(hindiSongsPath)) {
+  try {
+    const parsedHindiSongs = JSON.parse(fs.readFileSync(hindiSongsPath, 'utf-8'));
+    if (Array.isArray(parsedHindiSongs)) {
+      hindiSongs = parsedHindiSongs;
+    }
+  } catch (e) {
+    console.error('Error reading Hindi songs dataset:', e.message);
+  }
 }
 
 const __filename = fileURLToPath(import.meta.url);
@@ -267,6 +280,53 @@ function startCaseFromSlug(value = '') {
     .filter(Boolean)
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ');
+}
+
+function getSongTranslation(song, lang) {
+  return song?.translations?.[lang] || null;
+}
+
+function getSongLyricLines(song, lang) {
+  const translation = getSongTranslation(song, lang);
+  if (!translation?.lyrics || !Array.isArray(translation.lyrics)) return [];
+
+  return translation.lyrics
+    .flatMap((section) => (Array.isArray(section?.lines) ? section.lines : []))
+    .map((line) => String(line || '').trim())
+    .filter(Boolean);
+}
+
+function collectUniqueSongChords(song) {
+  const seen = new Set();
+  const chords = [];
+  const translations = song?.translations ? Object.values(song.translations) : [];
+  translations.forEach((translation) => {
+    if (!translation?.lyrics || !Array.isArray(translation.lyrics)) return;
+    translation.lyrics.forEach((section) => {
+      if (!Array.isArray(section?.chords)) return;
+      section.chords.forEach((chord) => {
+        const normalized = String(chord || '').trim();
+        if (!normalized || seen.has(normalized)) return;
+        seen.add(normalized);
+        chords.push(normalized);
+      });
+    });
+  });
+  return chords;
+}
+
+function extractYoutubeWatchUrl(videoUrl = '') {
+  const url = String(videoUrl || '').trim();
+  if (!url) return '';
+  const embedMatch = url.match(/youtube\.com\/embed\/([A-Za-z0-9_-]{6,})/i);
+  if (embedMatch?.[1]) {
+    return `https://www.youtube.com/watch?v=${embedMatch[1]}`;
+  }
+  return url;
+}
+
+function firstN(items = [], count = 12) {
+  return Array.isArray(items) ? items.slice(0, count) : [];
 }
 
 function buildSeoNarrative(page, targetWords = 330) {
@@ -1026,6 +1086,228 @@ ${escapeHtml(song.content || 'Lyrics are being prepared for this song. Please ch
     });
   }
   console.log(`Generated ${generatedSongPages} song and variant pages.`);
+
+  // Generate dedicated Hindi lyrics SEO pages with real lyric content
+  console.log('Generating dedicated Hindi lyrics SEO pages...');
+  let generatedHindiPages = 0;
+  const sortedHindiSongs = [...hindiSongs].sort((a, b) => (a.title || '').localeCompare((b.title || ''), undefined, { sensitivity: 'base' }));
+
+  if (sortedHindiSongs.length > 0) {
+    const hindiListingStructuredData = {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Hindi Christian Songs Lyrics and Chords",
+      "description": "Large collection of Hindi Christian songs with lyrics, meaning, and chords.",
+      "url": "https://biblequizcompetition.com/hindi-songs",
+      "inLanguage": "hi",
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": firstN(sortedHindiSongs, 120).map((song, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "url": `https://biblequizcompetition.com/hindi-songs/${song.slug}`,
+          "name": song.title
+        }))
+      }
+    };
+
+    writePageAndTrackSeo({
+      path: '/hindi-songs',
+      title: 'Hindi Christian Songs Lyrics & Guitar Chords | Bible Quiz Competition',
+      description: `Browse ${sortedHindiSongs.length}+ Hindi Christian songs with full lyrics, chord-friendly formatting, and song-by-song meaning support.`,
+      structuredData: hindiListingStructuredData,
+      content: `
+        <div class="min-h-screen bg-orange-50 pt-20">
+          <div class="container mx-auto px-4 py-8">
+            <article class="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg p-8">
+              <h1 class="text-4xl font-bold text-gray-900 mb-4">Hindi Christian Songs Lyrics & Chords</h1>
+              <p class="text-lg text-gray-700 mb-4">
+                This page includes real lyric content for Hindi worship songs, including searchable song titles, Hindi lines, and chord-ready references.
+                Find <strong>yeshu ke geet</strong>, <strong>masih geet lyrics</strong>, and worship songs in one organized index.
+              </p>
+              <p class="text-gray-700 mb-8">
+                Current collection size: <strong>${sortedHindiSongs.length} songs</strong>. Use individual song pages for full text, related songs, and worship preparation notes.
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                ${sortedHindiSongs.map((song) => {
+                  const lines = getSongLyricLines(song, 'hindi');
+                  const snippet = firstN(lines, 2).join(' / ') || song.description || 'Hindi Christian worship lyrics';
+                  return `
+                    <a href="/hindi-songs/${song.slug}" class="block rounded-xl border border-orange-100 p-4 hover:shadow-md transition">
+                      <h2 class="font-bold text-gray-900">${escapeHtml(song.title || 'Hindi Song')}</h2>
+                      <p class="text-sm text-gray-600 mt-2">${escapeHtml(snippet)}</p>
+                    </a>
+                  `;
+                }).join('')}
+              </div>
+            </article>
+          </div>
+        </div>
+      `
+    }, 'Generated dedicated Hindi listing page');
+    generatedHindiPages += 1;
+
+    writePageAndTrackSeo({
+      path: '/hindi-christian-songs-lyrics-chords',
+      title: 'Hindi Christian Songs Lyrics & Chords | Yeshu Ke Geet Hub',
+      description: 'Explore Hindi Christian song lyrics, chords, and worship resources with direct access to full lyric pages.',
+      structuredData: {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Hindi Christian Songs Lyrics and Chords Hub",
+        "url": "https://biblequizcompetition.com/hindi-christian-songs-lyrics-chords",
+        "inLanguage": ["hi", "en"]
+      },
+      content: `
+        <div class="min-h-screen bg-amber-50 pt-20">
+          <div class="container mx-auto px-4 py-8">
+            <article class="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg p-8">
+              <h1 class="text-4xl font-bold text-gray-900 mb-4">Hindi Christian Songs Lyrics Chords</h1>
+              <p class="text-gray-700 mb-5">
+                Use this landing page for heavy-intent keywords like <strong>hindi christian songs lyrics</strong>, <strong>hindi worship songs chords</strong>, and <strong>yeshu ke geet lyrics</strong>.
+                Every song link opens a page with real lyrics and worship-focused formatting.
+              </p>
+              <div class="flex flex-wrap gap-2 mb-6">
+                <span class="text-xs px-3 py-1 rounded-full bg-amber-100 text-amber-800">hindi christian songs lyrics</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-amber-100 text-amber-800">yeshu ke geet lyrics</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-amber-100 text-amber-800">hindi worship songs chords</span>
+                <span class="text-xs px-3 py-1 rounded-full bg-amber-100 text-amber-800">masih geet lyrics</span>
+              </div>
+              <a href="/hindi-songs" class="inline-block px-6 py-3 rounded-lg bg-amber-600 text-white font-semibold hover:bg-amber-700 transition">Open Full Hindi Songs Library</a>
+            </article>
+          </div>
+        </div>
+      `
+    }, 'Generated Hindi keyword hub page');
+    generatedHindiPages += 1;
+
+    sortedHindiSongs.forEach((song) => {
+      if (!song?.slug) return;
+
+      const hindiLines = getSongLyricLines(song, 'hindi');
+      const englishLines = getSongLyricLines(song, 'english');
+      const hasChords = collectUniqueSongChords(song).length > 0;
+      const chordsPreview = firstN(collectUniqueSongChords(song), 24).join(', ');
+      const hindiLyricsForSchema = firstN(hindiLines, 240).join('\n');
+      const lyricPreview = hindiLines;
+      const englishPreview = englishLines;
+      const videoUrl = extractYoutubeWatchUrl(song.videoUrl);
+
+      const firstLetter = String(song.title || '').trim().charAt(0).toUpperCase();
+      const relatedSongs = firstN(
+        sortedHindiSongs.filter((item) => item.slug !== song.slug && String(item.title || '').trim().charAt(0).toUpperCase() === firstLetter),
+        6
+      );
+      const fallbackRelated = relatedSongs.length > 0
+        ? relatedSongs
+        : firstN(sortedHindiSongs.filter((item) => item.slug !== song.slug), 6);
+
+      writePageAndTrackSeo({
+        path: `/hindi-songs/${song.slug}`,
+        title: `${song.title} Lyrics in Hindi${hasChords ? ' & Chords' : ''} | Hindi Christian Song`,
+        description: `Read full Hindi lyrics for ${song.title}${hasChords ? ' with chords' : ''}, plus worship-ready formatting and related Hindi Christian songs.`,
+        structuredData: {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebPage",
+              "name": `${song.title} lyrics in Hindi`,
+              "url": `https://biblequizcompetition.com/hindi-songs/${song.slug}`,
+              "inLanguage": ["hi", "en"]
+            },
+            {
+              "@type": "MusicComposition",
+              "name": song.title,
+              "inLanguage": "hi",
+              "description": song.description || `${song.title} Hindi Christian worship lyrics`,
+              "lyrics": {
+                "@type": "CreativeWork",
+                "text": hindiLyricsForSchema
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://biblequizcompetition.com/" },
+                { "@type": "ListItem", "position": 2, "name": "Hindi Songs", "item": "https://biblequizcompetition.com/hindi-songs" },
+                { "@type": "ListItem", "position": 3, "name": song.title, "item": `https://biblequizcompetition.com/hindi-songs/${song.slug}` }
+              ]
+            }
+          ]
+        },
+        content: `
+          <div class="min-h-screen bg-orange-50 pt-20">
+            <div class="container mx-auto px-4 py-8">
+              <article class="max-w-5xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+                <header class="p-8 bg-gradient-to-r from-orange-700 to-amber-700 text-white">
+                  <nav class="text-sm text-orange-100 mb-3">
+                    <a href="/" class="hover:underline">Home</a> &raquo;
+                    <a href="/hindi-songs" class="hover:underline"> Hindi Songs</a> &raquo;
+                    <span>${escapeHtml(song.title)}</span>
+                  </nav>
+                  <h1 class="text-3xl md:text-4xl font-bold mb-3">${escapeHtml(song.title)} Lyrics in Hindi</h1>
+                  <p class="text-orange-100">
+                    Real lyric content for this Hindi Christian song${hasChords ? ' with available chord references' : ''}.
+                  </p>
+                </header>
+                <div class="p-8">
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="rounded-lg bg-orange-50 border border-orange-100 p-4">
+                      <div class="text-xs uppercase tracking-wide text-orange-700">Hindi Lines</div>
+                      <div class="text-2xl font-bold text-gray-900">${hindiLines.length}</div>
+                    </div>
+                    <div class="rounded-lg bg-orange-50 border border-orange-100 p-4">
+                      <div class="text-xs uppercase tracking-wide text-orange-700">English Lines</div>
+                      <div class="text-2xl font-bold text-gray-900">${englishLines.length}</div>
+                    </div>
+                    <div class="rounded-lg bg-orange-50 border border-orange-100 p-4">
+                      <div class="text-xs uppercase tracking-wide text-orange-700">Chords</div>
+                      <div class="text-2xl font-bold text-gray-900">${hasChords ? 'Yes' : 'No'}</div>
+                    </div>
+                  </div>
+
+                  <h2 class="text-2xl font-bold text-gray-900 mb-3">Hindi Lyrics</h2>
+                  <div class="rounded-xl border border-gray-100 bg-gray-50 p-6 text-gray-800 leading-8">
+                    ${lyricPreview.length > 0
+                      ? lyricPreview.map((line) => escapeHtml(line)).join('<br />\n')
+                      : 'Lyrics are being updated for this song.'}
+                  </div>
+
+                  ${englishPreview.length > 0 ? `
+                    <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-3">English Meaning / Translation</h2>
+                    <div class="rounded-xl border border-gray-100 bg-slate-50 p-6 text-gray-700 leading-7">
+                      ${englishPreview.map((line) => escapeHtml(line)).join('<br />\n')}
+                    </div>
+                  ` : ''}
+
+                  ${hasChords ? `
+                    <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-3">Chord References</h2>
+                    <p class="text-gray-700">${escapeHtml(chordsPreview)}</p>
+                  ` : ''}
+
+                  ${videoUrl ? `
+                    <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-3">Video</h2>
+                    <p><a href="${escapeHtml(videoUrl)}" class="text-orange-700 underline" target="_blank" rel="noopener noreferrer">Watch / listen on YouTube</a></p>
+                  ` : ''}
+
+                  <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-3">Related Hindi Songs</h2>
+                  <ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    ${fallbackRelated.map((item) => `
+                      <li><a class="text-orange-700 hover:underline" href="/hindi-songs/${item.slug}">${escapeHtml(item.title)}</a></li>
+                    `).join('')}
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </div>
+        `
+      }, '');
+
+      generatedHindiPages += 1;
+    });
+  }
+
+  console.log(`Generated ${generatedHindiPages} dedicated Hindi lyric pages.`);
 
   // =============================================================
   // PHASE 1: Competitive SEO Gap Pages (20 new landing pages)
