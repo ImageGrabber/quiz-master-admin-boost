@@ -17,7 +17,14 @@ const path = require("path");
 const OUTPUT_FILE = path.join(__dirname, "..", "src", "data", "hindi-songs.json");
 const DELAY_MS = Number(process.env.DELAY_MS || 800);
 const MAX_SONGS = Number(process.env.MAX_SONGS || 1200);
-const DOMAIN = "https://www.yeshukegeet.com";
+const YESHUKEGEET_DOMAIN = "https://www.yeshukegeet.com";
+const WAYTOCHURCH_DOMAIN = "https://waytochurch.com";
+const JESUSSONGS_DOMAIN = "https://www.jesussongs.in";
+const JESUSSONGS_FEED_URL = `${JESUSSONGS_DOMAIN}/feeds/posts/default/-/HindiChristianSongLyrics`;
+const MAX_WAYTOCHURCH_LIST_PAGES = Number(process.env.MAX_WAYTOCHURCH_LIST_PAGES || 120);
+const USE_YESHUKEGEET = process.env.USE_YESHUKEGEET !== "0";
+const USE_WAYTOCHURCH = process.env.USE_WAYTOCHURCH !== "0";
+const USE_JESUSSONGS = process.env.USE_JESUSSONGS !== "0";
 const NON_SONG_SLUG_PATTERNS = [
   "one-to-one",
   "hindi-christian-songs",
@@ -62,9 +69,7 @@ function httpGet(url) {
         },
         (res) => {
           if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-            const nextUrl = res.headers.location.startsWith("/")
-              ? `${DOMAIN}${res.headers.location}`
-              : res.headers.location;
+            const nextUrl = new URL(res.headers.location, url).href;
             return resolve(httpGet(nextUrl));
           }
           if (res.statusCode !== 200) {
@@ -93,11 +98,46 @@ function slugify(text) {
     .slice(0, 90);
 }
 
+function slugFromUrl(url = "") {
+  const pathname = (() => {
+    try {
+      return new URL(url).pathname || "";
+    } catch (_) {
+      return "";
+    }
+  })();
+
+  const parts = pathname.split("/").filter(Boolean);
+  const last = parts[parts.length - 1] || "";
+  const maybeSlug = slugify(last);
+  if (maybeSlug) return maybeSlug;
+
+  const waytochurchId = pathname.match(/\/lyrics\/song\/([0-9]+)/i)?.[1];
+  if (waytochurchId) return `waytochurch-hindi-song-${waytochurchId}`;
+
+  return "";
+}
+
 function normalizeTitle(text) {
   return String(text || "")
     .toLowerCase()
     .replace(/\s+/g, " ")
     .replace(/[^a-z0-9\u0900-\u097f ]/g, "")
+    .trim();
+}
+
+function cleanTitle(raw = "") {
+  return String(raw || "")
+    .replace(/\|\s*YESHU.*$/i, "")
+    .replace(/\|\s*Yeshu.*$/i, "")
+    .replace(/\|\s*HINDI CHRISTIAN.*$/i, "")
+    .replace(/\|\s*LATEST.*$/i, "")
+    .replace(/\|\s*GOOD FRIDAY.*$/i, "")
+    .replace(/-+\s*christian song lyrics.*$/i, "")
+    .replace(/-+\s*hindi christian songs?.*$/i, "")
+    .replace(/\s*lyrics\s*$/i, "")
+    .replace(/\s*\(.*methodist.*\)\s*$/i, "")
+    .replace(/\s+lyrics\s*$/i, "")
     .trim();
 }
 
@@ -112,18 +152,7 @@ function pickTitle($) {
     .filter(Boolean);
 
   for (const t of candidates) {
-    const cleaned = t
-      .replace(/\|\s*YESHU.*$/i, "")
-      .replace(/\|\s*Yeshu.*$/i, "")
-      .replace(/\|\s*HINDI CHRISTIAN.*$/i, "")
-      .replace(/\|\s*LATEST.*$/i, "")
-      .replace(/\|\s*GOOD FRIDAY.*$/i, "")
-      .replace(/-+\s*christian song lyrics.*$/i, "")
-      .replace(/-+\s*hindi christian songs?.*$/i, "")
-      .replace(/\s*lyrics\s*$/i, "")
-      .replace(/\s*\(.*methodist.*\)\s*$/i, "")
-      .replace(/\s+lyrics\s*$/i, "")
-      .trim();
+    const cleaned = cleanTitle(t);
     if (cleaned.length >= 3) return cleaned;
   }
   return "";
@@ -157,17 +186,36 @@ function looksLikeNoise(text) {
     "youtube channel",
     "learn piano",
     "download app",
+    "share on whatsapp",
+    "tweet on twitter",
+    "search lyrics",
   ];
   return bad.some((x) => t.includes(x));
 }
 
-function extractLyricsSections($) {
+function extractLinesFromHtmlBlock(htmlBlock = "") {
+  const normalized = String(htmlBlock || "")
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/p>/gi, "\n");
+  const $block = cheerio.load(`<div>${normalized}</div>`);
+  return $block("div")
+    .text()
+    .split("\n")
+    .map((l) => l.trim())
+    .filter((l) => l.length >= 2 && !looksLikeNoise(l));
+}
+
+function extractLyricsSections($, source = "") {
   const sections = [];
   const selectors = [
     "article p",
     ".entry-content p",
     ".blog-item-content p",
     ".sqs-block-content p",
+    ".panel-body p",
+    ".song-text p",
+    ".lyrics p",
+    "#songlyrics p",
     "main p",
     ".post-body p",
   ];
@@ -175,12 +223,10 @@ function extractLyricsSections($) {
   for (const selector of selectors) {
     const local = [];
     $(selector).each((_, el) => {
-      const raw = $(el).text().trim();
-      if (!raw || raw.length < 8 || raw.length > 1600 || looksLikeNoise(raw)) return;
-      const lines = raw
-        .split("\n")
-        .map((l) => l.trim())
-        .filter((l) => l.length >= 2);
+      const rawHtml = $(el).html() || $(el).text();
+      const rawText = $(el).text().trim();
+      if (!rawText || rawText.length < 8 || rawText.length > 4000 || looksLikeNoise(rawText)) return;
+      const lines = extractLinesFromHtmlBlock(rawHtml);
       if (lines.length >= 1) local.push({ lines });
     });
     if (local.length >= 2) {
@@ -188,6 +234,31 @@ function extractLyricsSections($) {
     }
     if (local.length > sections.length) {
       sections.splice(0, sections.length, ...local);
+    }
+  }
+
+  // Fallback for layouts where lyrics live in plain <p> blocks with <br>
+  if (sections.length < 2) {
+    const fallback = [];
+    $("p").each((_, el) => {
+      const rawHtml = $(el).html() || "";
+      const text = $(el).text().trim();
+      if (!rawHtml || !text || text.length < 12 || looksLikeNoise(text)) return;
+      if (!/<br\s*\/?>/i.test(rawHtml) && text.length < 80) return;
+      const lines = extractLinesFromHtmlBlock(rawHtml);
+      if (lines.length >= 2) fallback.push({ lines });
+    });
+    if (fallback.length > sections.length) {
+      return fallback;
+    }
+  }
+
+  if (source === "waytochurch" && sections.length === 0) {
+    const html = $.html();
+    const match = html.match(/<h1[^>]*>[\s\S]*?<\/h1>[\s\S]*?<p>([\s\S]*?)<\/p>/i);
+    if (match?.[1]) {
+      const lines = extractLinesFromHtmlBlock(match[1]);
+      if (lines.length >= 4) return [{ lines }];
     }
   }
 
@@ -224,16 +295,16 @@ async function collectSongUrls() {
   console.log("Collecting Hindi song URLs from A-Z pages...");
 
   for (const letter of letters) {
-    const url = `${DOMAIN}/hindi-lyrics-${letter}`;
+    const url = `${YESHUKEGEET_DOMAIN}/hindi-lyrics-${letter}`;
     try {
       const html = await httpGet(url);
       const $ = cheerio.load(html);
       $("a[href]").each((_, a) => {
         const href = $(a).attr("href");
         if (!href) return;
-        const full = href.startsWith("http") ? href : `${DOMAIN}${href.startsWith("/") ? "" : "/"}${href}`;
-        if (!full.startsWith(DOMAIN)) return;
-        const slug = full.replace(`${DOMAIN}/`, "").trim();
+        const full = href.startsWith("http") ? href : `${YESHUKEGEET_DOMAIN}${href.startsWith("/") ? "" : "/"}${href}`;
+        if (!full.startsWith(YESHUKEGEET_DOMAIN)) return;
+        const slug = full.replace(`${YESHUKEGEET_DOMAIN}/`, "").trim();
         if (!slug || slug.includes("/") || skip.some((k) => slug.includes(k))) return;
         if (NON_SONG_SLUG_PATTERNS.some((k) => slug.includes(k))) return;
         urls.add(full);
@@ -246,7 +317,129 @@ async function collectSongUrls() {
   }
 
   console.log(`\nCollected ${urls.size} candidate URLs`);
-  return Array.from(urls).slice(0, MAX_SONGS);
+  return Array.from(urls);
+}
+
+async function collectWayToChurchSongUrls() {
+  const pendingListPages = [`${WAYTOCHURCH_DOMAIN}/lyrics/list/Hindi`];
+  const seenListPages = new Set();
+  const songUrls = new Set();
+
+  console.log("Collecting Hindi song URLs from waytochurch...");
+
+  while (pendingListPages.length > 0 && seenListPages.size < MAX_WAYTOCHURCH_LIST_PAGES) {
+    const listUrl = pendingListPages.shift();
+    if (!listUrl || seenListPages.has(listUrl)) continue;
+    seenListPages.add(listUrl);
+
+    try {
+      const html = await httpGet(listUrl);
+      const $ = cheerio.load(html);
+
+      $("a[href]").each((_, a) => {
+        const href = $(a).attr("href");
+        if (!href) return;
+        const full = href.startsWith("http") ? href : `${WAYTOCHURCH_DOMAIN}${href.startsWith("/") ? "" : "/"}${href}`;
+
+        if (/^https:\/\/waytochurch\.com\/lyrics\/song\/[0-9]+\//i.test(full)) {
+          songUrls.add(full);
+        }
+
+        if (/^https:\/\/waytochurch\.com\/lyrics\/list\/Hindi/i.test(full) && !seenListPages.has(full)) {
+          pendingListPages.push(full);
+        }
+      });
+
+      process.stdout.write(`L${seenListPages.size}(songs:${songUrls.size}) `);
+      await sleep(150);
+    } catch (_) {
+      process.stdout.write(`L${seenListPages.size}(err) `);
+    }
+  }
+
+  console.log(`\nCollected ${songUrls.size} waytochurch song URLs from ${seenListPages.size} list pages`);
+  return Array.from(songUrls);
+}
+
+function extractYouTubeFromHtml(html = "") {
+  const iframeMatch = String(html).match(/youtube\.com\/embed\/([a-zA-Z0-9_-]{11})/i);
+  if (iframeMatch?.[1]) {
+    return `https://www.youtube.com/embed/${iframeMatch[1]}`;
+  }
+  return "";
+}
+
+function extractAlternateLink(entry = {}) {
+  const links = Array.isArray(entry.link) ? entry.link : [];
+  const alt = links.find((l) => l.rel === "alternate" && l.href);
+  return alt?.href || "";
+}
+
+async function collectJesusSongsFeedSongs() {
+  const songs = [];
+  let startIndex = 1;
+  const batchSize = 100;
+
+  console.log("Collecting Hindi songs from jesussongs.in Blogger feed...");
+
+  while (songs.length < MAX_SONGS) {
+    const url = `${JESUSSONGS_FEED_URL}?alt=json&start-index=${startIndex}&max-results=${batchSize}`;
+    let json;
+    try {
+      json = JSON.parse(await httpGet(url));
+    } catch (err) {
+      console.log(`Feed fetch stopped at start-index=${startIndex}: ${err.message}`);
+      break;
+    }
+
+    const entries = json?.feed?.entry || [];
+    if (!entries.length) break;
+
+    for (const entry of entries) {
+      const title = cleanTitle(entry?.title?.$t || "");
+      if (!title) continue;
+      const pageUrl = extractAlternateLink(entry);
+      const contentHtml = entry?.content?.$t || "";
+      const $entry = cheerio.load(`<article>${contentHtml}</article>`);
+      const lyrics = extractLyricsSections($entry, "jesussongs");
+      if (lyrics.length === 0) continue;
+
+      const slug = slugify(title) || slugFromUrl(pageUrl) || `jesussongs-${songs.length + 1}`;
+      if (!isLikelyHindiSong(title, slug)) continue;
+
+      songs.push({
+        id: slug.replace(/-/g, "_").slice(0, 64),
+        slug,
+        title,
+        videoUrl: extractYouTubeFromHtml(contentHtml),
+        description: `${title} - Hindi Christian devotional song lyrics with worship-friendly formatting.`,
+        translations: {
+          hindi: {
+            lang: "Hindi",
+            lyrics: lyrics.map((section, idx) => ({
+              verse: idx > 0 ? String(idx) : undefined,
+              lines: section.lines,
+            })),
+          },
+        },
+      });
+    }
+
+    process.stdout.write(`F(start:${startIndex} songs:${songs.length}) `);
+    startIndex += entries.length;
+    if (entries.length < batchSize) break;
+    await sleep(250);
+  }
+
+  console.log(`\nCollected ${songs.length} candidate songs from jesussongs.in feed`);
+  return songs;
+}
+
+function hasEnoughLyricContent(lyrics = []) {
+  const lineCount = lyrics.reduce((sum, section) => sum + (Array.isArray(section?.lines) ? section.lines.length : 0), 0);
+  if (lyrics.length >= 2 && lineCount >= 6) return true;
+  if (lineCount >= 10) return true;
+  return false;
 }
 
 async function scrapeOne(url) {
@@ -255,12 +448,13 @@ async function scrapeOne(url) {
 
   const title = pickTitle($);
   if (!title) return null;
-  const slug = slugify(title);
+  const slug = slugify(title) || slugFromUrl(url);
   if (!slug) return null;
   if (!isLikelyHindiSong(title, slug)) return null;
 
-  const lyrics = extractLyricsSections($);
-  if (lyrics.length < 2) return null;
+  const source = url.includes("waytochurch.com") ? "waytochurch" : "yeshukegeet";
+  const lyrics = extractLyricsSections($, source);
+  if (!hasEnoughLyricContent(lyrics)) return null;
 
   return {
     id: slug.replace(/-/g, "_").slice(0, 64),
@@ -311,15 +505,28 @@ async function main() {
   const existing = JSON.parse(fs.readFileSync(OUTPUT_FILE, "utf-8"));
   console.log(`Existing Hindi songs: ${existing.length}`);
 
-  const urls = await collectSongUrls();
-  console.log(`Scraping up to ${urls.length} pages...\n`);
+  const urlSet = new Set();
+  if (USE_YESHUKEGEET) {
+    const yeshuUrls = await collectSongUrls();
+    yeshuUrls.forEach((u) => urlSet.add(u));
+  }
+  if (USE_WAYTOCHURCH) {
+    const wayToChurchUrls = await collectWayToChurchSongUrls();
+    wayToChurchUrls.forEach((u) => urlSet.add(u));
+  }
+
+  const urls = Array.from(urlSet).slice(0, MAX_SONGS);
+  console.log(`Scraping up to ${urls.length} page URLs from web sources...\n`);
 
   const scraped = [];
   let ok = 0;
   let skipped = 0;
   for (let i = 0; i < urls.length; i += 1) {
     const url = urls[i];
-    const short = url.replace(`${DOMAIN}/`, "");
+    const short = url
+      .replace(`${YESHUKEGEET_DOMAIN}/`, "")
+      .replace(`${WAYTOCHURCH_DOMAIN}/`, "")
+      .replace(`${JESUSSONGS_DOMAIN}/`, "");
     process.stdout.write(`[${i + 1}/${urls.length}] ${short}... `);
     try {
       const song = await scrapeOne(url);
@@ -336,6 +543,11 @@ async function main() {
       console.log(`err: ${err.message}`);
     }
     await sleep(DELAY_MS);
+  }
+
+  if (USE_JESUSSONGS && scraped.length < MAX_SONGS) {
+    const feedSongs = await collectJesusSongsFeedSongs();
+    scraped.push(...feedSongs.slice(0, MAX_SONGS - scraped.length));
   }
 
   const { merged, added } = mergeSongs(existing, scraped);
