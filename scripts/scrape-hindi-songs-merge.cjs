@@ -25,6 +25,7 @@ const MAX_WAYTOCHURCH_LIST_PAGES = Number(process.env.MAX_WAYTOCHURCH_LIST_PAGES
 const USE_YESHUKEGEET = process.env.USE_YESHUKEGEET !== "0";
 const USE_WAYTOCHURCH = process.env.USE_WAYTOCHURCH !== "0";
 const USE_JESUSSONGS = process.env.USE_JESUSSONGS !== "0";
+const FAST_WAYTOCHURCH_SEED = process.env.FAST_WAYTOCHURCH_SEED === "1";
 const NON_SONG_SLUG_PATTERNS = [
   "one-to-one",
   "hindi-christian-songs",
@@ -324,6 +325,7 @@ async function collectWayToChurchSongUrls() {
   const pendingListPages = [`${WAYTOCHURCH_DOMAIN}/lyrics/list/Hindi`];
   const seenListPages = new Set();
   const songUrls = new Set();
+  const titleByUrl = new Map();
 
   console.log("Collecting Hindi song URLs from waytochurch...");
 
@@ -343,6 +345,10 @@ async function collectWayToChurchSongUrls() {
 
         if (/^https:\/\/waytochurch\.com\/lyrics\/song\/[0-9]+\//i.test(full)) {
           songUrls.add(full);
+          const label = $(a).text().replace(/\s+/g, " ").trim();
+          if (label && label.length >= 2 && !titleByUrl.has(full)) {
+            titleByUrl.set(full, label);
+          }
         }
 
         if (/^https:\/\/waytochurch\.com\/lyrics\/list\/Hindi/i.test(full) && !seenListPages.has(full)) {
@@ -358,7 +364,7 @@ async function collectWayToChurchSongUrls() {
   }
 
   console.log(`\nCollected ${songUrls.size} waytochurch song URLs from ${seenListPages.size} list pages`);
-  return Array.from(songUrls);
+  return { urls: Array.from(songUrls), titleByUrl };
 }
 
 function extractYouTubeFromHtml(html = "") {
@@ -442,6 +448,44 @@ function hasEnoughLyricContent(lyrics = []) {
   return false;
 }
 
+function getHindiLyricLineCount(song = {}) {
+  const sections = song?.translations?.hindi?.lyrics || [];
+  if (!Array.isArray(sections)) return 0;
+  return sections.reduce((sum, section) => {
+    const lines = Array.isArray(section?.lines) ? section.lines : [];
+    return sum + lines.length;
+  }, 0);
+}
+
+function isSeedLikeSong(song = {}) {
+  if (!song || typeof song !== "object") return true;
+  return getHindiLyricLineCount(song) <= 2;
+}
+
+function buildWayToChurchSeedSongs(titleByUrl) {
+  const seeds = [];
+  for (const [url, rawTitle] of titleByUrl.entries()) {
+    const title = cleanTitle(rawTitle);
+    const slug = slugify(title) || slugFromUrl(url);
+    if (!title || !slug) continue;
+    if (!isLikelyHindiSong(title, slug)) continue;
+    seeds.push({
+      id: slug.replace(/-/g, "_").slice(0, 64),
+      slug,
+      title,
+      videoUrl: "",
+      description: `${title} - Hindi Christian song seed entry imported from waytochurch index.`,
+      translations: {
+        hindi: {
+          lang: "Hindi",
+          lyrics: [{ lines: [title] }],
+        },
+      },
+    });
+  }
+  return seeds;
+}
+
 async function scrapeOne(url) {
   const html = await httpGet(url);
   const $ = cheerio.load(html);
@@ -477,24 +521,45 @@ async function scrapeOne(url) {
 function mergeSongs(existingSongs, newSongs) {
   const bySlug = new Map();
   const byTitle = new Map();
+  let enriched = 0;
 
   for (const song of existingSongs) {
     bySlug.set(song.slug, song);
-    byTitle.set(normalizeTitle(song.title), true);
+    byTitle.set(normalizeTitle(song.title), song);
   }
 
   const added = [];
   const merged = [...existingSongs];
   for (const song of newSongs) {
-    if (bySlug.has(song.slug)) continue;
-    if (byTitle.has(normalizeTitle(song.title))) continue;
+    const existingBySlug = bySlug.get(song.slug);
+    const existingByTitle = byTitle.get(normalizeTitle(song.title));
+    const existingSong = existingBySlug || existingByTitle;
+    if (existingSong) {
+      let touched = false;
+      if (!existingSong.videoUrl && song.videoUrl) {
+        existingSong.videoUrl = song.videoUrl;
+        touched = true;
+      }
+      if (isSeedLikeSong(existingSong) && !isSeedLikeSong(song)) {
+        existingSong.translations = song.translations;
+        if (song.description) existingSong.description = song.description;
+        touched = true;
+      }
+      if (!existingSong.description && song.description) {
+        existingSong.description = song.description;
+        touched = true;
+      }
+      if (touched) enriched += 1;
+      continue;
+    }
+
     bySlug.set(song.slug, song);
-    byTitle.set(normalizeTitle(song.title), true);
+    byTitle.set(normalizeTitle(song.title), song);
     added.push(song);
     merged.push(song);
   }
 
-  return { merged, added };
+  return { merged, added, enriched };
 }
 
 async function main() {
@@ -506,13 +571,19 @@ async function main() {
   console.log(`Existing Hindi songs: ${existing.length}`);
 
   const urlSet = new Set();
+  let wayToChurchSeedSongs = [];
   if (USE_YESHUKEGEET) {
     const yeshuUrls = await collectSongUrls();
     yeshuUrls.forEach((u) => urlSet.add(u));
   }
   if (USE_WAYTOCHURCH) {
-    const wayToChurchUrls = await collectWayToChurchSongUrls();
-    wayToChurchUrls.forEach((u) => urlSet.add(u));
+    const wayToChurchResult = await collectWayToChurchSongUrls();
+    wayToChurchSeedSongs = buildWayToChurchSeedSongs(wayToChurchResult.titleByUrl);
+    if (FAST_WAYTOCHURCH_SEED) {
+      console.log(`Using fast waytochurch seed mode: ${wayToChurchSeedSongs.length} seed songs prepared`);
+    } else {
+      wayToChurchResult.urls.forEach((u) => urlSet.add(u));
+    }
   }
 
   const urls = Array.from(urlSet).slice(0, MAX_SONGS);
@@ -545,18 +616,23 @@ async function main() {
     await sleep(DELAY_MS);
   }
 
+  if (wayToChurchSeedSongs.length > 0) {
+    scraped.push(...wayToChurchSeedSongs);
+  }
+
   if (USE_JESUSSONGS && scraped.length < MAX_SONGS) {
     const feedSongs = await collectJesusSongsFeedSongs();
     scraped.push(...feedSongs.slice(0, MAX_SONGS - scraped.length));
   }
 
-  const { merged, added } = mergeSongs(existing, scraped);
+  const { merged, added, enriched } = mergeSongs(existing, scraped);
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(merged, null, 2));
 
   console.log("\n============================");
   console.log(`Scraped valid songs: ${ok}`);
   console.log(`Skipped/failed: ${skipped}`);
   console.log(`New songs added: ${added.length}`);
+  console.log(`Existing songs enriched: ${enriched}`);
   console.log(`Total songs now: ${merged.length}`);
   console.log(`Saved: ${OUTPUT_FILE}`);
   console.log("============================");
