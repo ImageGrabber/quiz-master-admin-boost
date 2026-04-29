@@ -37,6 +37,18 @@ const HINDI_FEATURED = [
     description: "A joyful praise song perfect for youth groups and Sunday school meetings.",
     link: "/hallelujah-stuti-gaye-hum-lyrics",
     tag: "Joyful"
+  },
+  {
+    title: "Haath Uthaakar Gaoonga",
+    description: "High-intent worship lyric page with easy chords for praise sessions and youth worship teams.",
+    link: "/haath-uthaakar-gaoonga-lyrics",
+    tag: "Trending"
+  },
+  {
+    title: "Aaradhna Ho Aaradhna",
+    description: "Classic reverent worship song with Hindi lyrics, English meaning, and chord progression.",
+    link: "/aaradhna-ho-aaradhna-lyrics",
+    tag: "Classic"
   }
 ];
 
@@ -105,7 +117,7 @@ export default function HindiWorshipLanding() {
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
             {HINDI_FEATURED.map((song, i) => (
               <Card 
                 key={i} 

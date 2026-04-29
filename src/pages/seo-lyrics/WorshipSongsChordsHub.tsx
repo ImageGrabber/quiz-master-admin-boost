@@ -46,6 +46,22 @@ const SONG_CHORDS = [
     difficulty: "Beginner"
   },
   {
+    title: "Haath Uthaakar Gaoonga",
+    artist: "Praise & Worship",
+    key: "G Major",
+    category: "Hindi Worship",
+    link: "/haath-uthaakar-gaoonga-lyrics",
+    difficulty: "Beginner"
+  },
+  {
+    title: "Aaradhna Ho Aaradhna",
+    artist: "Church Classic",
+    key: "C Major",
+    category: "Hindi Worship",
+    link: "/aaradhna-ho-aaradhna-lyrics",
+    difficulty: "Easy"
+  },
+  {
     title: "Amazing Grace",
     artist: "John Newton",
     key: "G Major",

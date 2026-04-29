@@ -210,6 +210,23 @@ const HallelujahStutiLyrics = () => {
             </TabsContent>
           </Tabs>
 
+          <section className="mt-12">
+            <Card>
+              <CardContent className="pt-8 space-y-4">
+                <h2 className="text-2xl font-bold text-slate-900 font-urbanist text-center">Meaning and Worship Use</h2>
+                <p className="text-slate-700 leading-relaxed text-center max-w-3xl mx-auto">
+                  "Hallelujah Stuti Gaye Hum" is a praise-centered Hindi Christian worship song focused on Jesus' sacrifice,
+                  salvation, and lifelong devotion. It works well for opening worship, youth fellowship, prayer meetings,
+                  and small group devotion.
+                </p>
+                <p className="text-slate-700 leading-relaxed text-center max-w-3xl mx-auto">
+                  Use this page to practice pronunciation, compare regional language versions, and prepare guitar-led worship
+                  with simple progression patterns.
+                </p>
+              </CardContent>
+            </Card>
+          </section>
+
           <section className="mt-16 bg-blue-900 rounded-3xl p-8 md:p-12 text-center text-white">
             <h2 className="text-3xl font-bold mb-6 font-urbanist">Take the Bible Quiz</h2>
             <p className="text-blue-100 max-w-2xl mx-auto mb-8 text-lg">
@@ -259,6 +276,26 @@ const HallelujahStutiLyrics = () => {
               </Card>
             </div>
           </section>
+
+          <section className="mt-12">
+            <Card>
+              <CardContent className="pt-8 space-y-5">
+                <h2 className="text-2xl font-bold text-slate-900 font-urbanist text-center">FAQ</h2>
+                <div>
+                  <h3 className="font-bold text-slate-900">Is this song available in multiple languages?</h3>
+                  <p className="text-slate-700 text-sm mt-1">Yes, this page includes Hindi with Telugu, Malayalam, Kannada, and English meaning tabs.</p>
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-900">Can beginners play this on guitar?</h3>
+                  <p className="text-slate-700 text-sm mt-1">Yes. The listed G major progression and simple strumming pattern are beginner friendly.</p>
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-900">Where can I find more Hindi Christian lyrics?</h3>
+                  <p className="text-slate-700 text-sm mt-1">Visit the Hindi Songs section for more worship lyrics, chord pages, and devotional song resources.</p>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
         </div>
       </main>
 
@@ -291,4 +328,3 @@ const Button = ({ children, className, variant, size, ...props }: any) => {
 };
 
 export default HallelujahStutiLyrics;
-

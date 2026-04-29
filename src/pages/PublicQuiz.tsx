@@ -85,6 +85,23 @@ const PublicQuiz = ({
     canonicalPath || (typeof window !== "undefined" ? window.location.pathname : fallbackPath)
   );
   const canonicalUrl = `https://biblequizcompetition.com${resolvedPath}`;
+  const chapterLabel = chapter ? `Chapter ${chapter}` : "Overview";
+  const primaryHubPath = `/bible-questions-and-answers-hub/${toSlug(bookName)}`;
+  const chapterPath = chapter ? `/public-quiz/${toSlug(bookName)}/chapter-${chapter}` : `/public-quiz/${toSlug(bookName)}`;
+  const chapterFaq = [
+    {
+      q: `How do I prepare for the ${bookName} ${chapterLabel} quiz?`,
+      a: `Read the chapter once for flow, then review names, locations, and key events. Retake this quiz to improve recall speed and confidence.`,
+    },
+    {
+      q: `Is this ${bookName} quiz beginner friendly?`,
+      a: "Yes. Questions are designed for both beginners and regular Bible study groups, with explanations to help reinforce learning.",
+    },
+    {
+      q: `Can I use this quiz for church or youth fellowship practice?`,
+      a: "Absolutely. Many teams use chapter quizzes for weekly practice, small group warmups, and Bible competition preparation.",
+    },
+  ];
 
   // Timer effect with enhanced warnings
   useEffect(() => {
@@ -833,6 +850,54 @@ const PublicQuiz = ({
           </div>
         </div>
       </div>
+      {!isKidsStory && (
+        <section className="container mx-auto px-4 lg:max-w-6xl pb-10">
+          <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm">
+            <h2 className="text-2xl font-black text-slate-900 mb-4">{bookName} {chapterLabel} Study Guide</h2>
+            <p className="text-slate-700 leading-relaxed mb-6">
+              This free interactive Bible quiz helps you review scripture with focused questions, answer explanations, and verse references.
+              Use it as a quick revision before competitions or as a daily Bible study routine.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+              <div className="rounded-2xl bg-slate-50 border border-slate-200 p-5">
+                <h3 className="font-bold text-slate-900 mb-2">Best way to score higher</h3>
+                <p className="text-sm text-slate-700">
+                  Start with one attempt for accuracy, then retake the same quiz for speed. Track recurring mistakes and revisit those verses before the next attempt.
+                </p>
+              </div>
+              <div className="rounded-2xl bg-slate-50 border border-slate-200 p-5">
+                <h3 className="font-bold text-slate-900 mb-2">Who should use this page</h3>
+                <p className="text-sm text-slate-700">
+                  Sunday school learners, youth teams, family devotion groups, and anyone preparing for a Bible quiz competition.
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-4 mb-8">
+              <h3 className="text-xl font-black text-slate-900">Quick FAQ</h3>
+              {chapterFaq.map((item) => (
+                <div key={item.q}>
+                  <h4 className="font-bold text-slate-900">{item.q}</h4>
+                  <p className="text-sm text-slate-700 mt-1">{item.a}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <Button variant="outline" onClick={() => navigate(primaryHubPath)}>
+                More {bookName} Quizzes
+              </Button>
+              <Button variant="outline" onClick={() => navigate("/bible-questions-and-answers-hub")}>
+                Browse All Bible Books
+              </Button>
+              <Button variant="outline" onClick={() => navigate(chapterPath)}>
+                Open This Quiz Link
+              </Button>
+            </div>
+          </div>
+        </section>
+      )}
       {/* Time Warning Dialog */}
       {dialogOpen && (
         <div className="fixed inset-0 bg-stone-900/40 backdrop-blur-sm flex items-center justify-center z-[100] px-4">

@@ -69,6 +69,12 @@ export default function OnlineBibleQuizCompetition2026() {
             rank. Consistent practice improves speed, verse recall, and score accuracy during live or scheduled competition events.
           </p>
 
+          <h2 className="text-2xl font-bold text-slate-900 mb-3">Recommended 7-Day Practice Plan</h2>
+          <p className="text-slate-700 mb-8">
+            Day 1-2: start with Genesis and Matthew chapter quizzes. Day 3-4: practice Psalms and Proverbs for wisdom/poetry recall.
+            Day 5: attempt mixed Old and New Testament rounds. Day 6: review wrong answers. Day 7: run one timed mock challenge before competition day.
+          </p>
+
           <h2 className="text-2xl font-bold text-slate-900 mb-3">Who This Is For</h2>
           <p className="text-slate-700 mb-8">
             Sunday school participants, youth fellowship members, competitive Bible quiz teams, and self-learners preparing
@@ -91,6 +97,12 @@ export default function OnlineBibleQuizCompetition2026() {
             </div>
           </div>
 
+          <h2 className="text-2xl font-bold text-slate-900 mb-3">Most Popular Practice Categories</h2>
+          <p className="text-slate-700 mb-8">
+            Chapter-based quizzes, beginner book challenges, and public leaderboard practice are currently the fastest ways to build consistency.
+            Learners who mix chapter practice with weekly full-book review usually improve rank stability over time.
+          </p>
+
           <div className="flex flex-wrap gap-3">
             <Button onClick={() => navigate("/competition-home")} className="bg-slate-900 hover:bg-black text-white">
               Go To Competition Home
@@ -104,4 +116,3 @@ export default function OnlineBibleQuizCompetition2026() {
     </main>
   );
 }
-
