@@ -337,6 +337,7 @@ const App = () => {
               <Route path="/book-of-john-quiz-questions" element={<BookOfJohnQuizQuestions />} />
               <Route path="/songs" element={<Songs />} />
               <Route path="/songs/:slug" element={<LegacyMalayalamSongsRedirect />} />
+              <Route path="/songs/:slug/:variant" element={<LegacyMalayalamSongsRedirect />} />
               <Route path="/malayalam-songs" element={<MalayalamSongs />} />
               <Route path="/malayalam-songs/:slug" element={<SongDetail />} />
               <Route path="/english-songs" element={<EnglishSongs />} />

@@ -258,14 +258,6 @@ function generateSitemap() {
       scrapedSongs.forEach((song) => {
         if (song.slug) {
           uniqueSongSlugs.add(song.slug);
-          // Add language variants for each song to target high-traffic queries
-          ['telugu-lyrics', 'kannada-lyrics', 'malayalam-lyrics', 'english-translation', 'chords'].forEach(variant => {
-             urls.push({
-               loc: `/songs/${song.slug}/${variant}`,
-               priority: '0.6',
-               changefreq: 'monthly'
-             });
-          });
         }
       });
     } catch (e) {
