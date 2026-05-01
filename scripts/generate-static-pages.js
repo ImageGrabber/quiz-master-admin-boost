@@ -282,6 +282,71 @@ function startCaseFromSlug(value = '') {
     .join(' ');
 }
 
+function detectSongThemes(songTitle = '') {
+  const t = String(songTitle || '').toLowerCase();
+  const themeRules = [
+    { key: 'surrender', label: 'Surrender' },
+    { key: 'worship', label: 'Worship' },
+    { key: 'praise', label: 'Praise' },
+    { key: 'grace', label: 'Grace' },
+    { key: 'mercy', label: 'Mercy' },
+    { key: 'cross', label: 'Cross & Salvation' },
+    { key: 'jesus', label: 'Christ-centered' },
+    { key: 'holy', label: 'Holiness' },
+    { key: 'spirit', label: 'Holy Spirit' },
+    { key: 'hope', label: 'Hope' },
+    { key: 'faith', label: 'Faith' },
+    { key: 'love', label: 'Love' },
+    { key: 'victory', label: 'Victory' },
+    { key: 'prayer', label: 'Prayer' }
+  ];
+
+  const matches = themeRules.filter((rule) => t.includes(rule.key)).map((rule) => rule.label);
+  if (matches.length > 0) return matches.slice(0, 3);
+  return ['Worship', 'Faith', 'Devotion'];
+}
+
+function inferSongLanguage(song = {}) {
+  if (song?.translations?.malayalam) return 'Malayalam';
+  if (song?.translations?.english) return 'English';
+  if (song?.translations?.hindi) return 'Hindi';
+  return 'Christian Worship';
+}
+
+function buildOriginalMeaning(song, variant) {
+  const themes = detectSongThemes(song?.title);
+  const variantText = variant?.type === 'chords'
+    ? 'chords-focused worship practice'
+    : variant?.type === 'translation'
+      ? 'translation-focused devotion'
+      : 'lyric-focused devotion';
+
+  return `This page helps believers understand the spiritual message behind "${song.title}" through ${variantText}. The core focus is ${themes.join(', ').toLowerCase()}, making it practical for personal prayer, family devotion, and church worship preparation.`;
+}
+
+function buildWorshipUse(song) {
+  const themes = detectSongThemes(song?.title).map((x) => x.toLowerCase());
+  return `Use this resource for small-group singing, pre-sermon reflection, and worship-team planning. Suggested flow: opening prayer, theme reflection (${themes.join(', ')}), then guided worship response.`;
+}
+
+function buildSongFaqs(song, variant) {
+  const resourceType = variant?.title || 'Lyrics';
+  return [
+    {
+      q: `What is the main meaning of "${song.title}"?`,
+      a: `The song emphasizes biblical devotion and trust in Christ, with practical worship themes for everyday faith.`
+    },
+    {
+      q: `How should I use this ${resourceType.toLowerCase()} page in church or fellowship?`,
+      a: `Use it as a structured worship aid: introduce the theme, pray, sing, and close with a short Scripture-based reflection.`
+    },
+    {
+      q: `Why is this page optimized for search without copying copyrighted sources?`,
+      a: `This page is written with original explanations, summaries, and worship guidance instead of republishing third-party copyrighted text.`
+    }
+  ];
+}
+
 function getSongTranslation(song, lang) {
   return song?.translations?.[lang] || null;
 }
@@ -979,6 +1044,10 @@ function generateStaticPages() {
     variants.forEach(variant => {
       const subPath = variant.id ? `/${variant.id}` : '';
       const displayTitle = `${song.title} ${variant.title}`;
+      const songMeaning = buildOriginalMeaning(song, variant);
+      const worshipUse = buildWorshipUse(song);
+      const songFaqs = buildSongFaqs(song, variant);
+      const languageLabel = inferSongLanguage(song);
       
         const songPage = {
         path: `/songs/${song.slug}${subPath}`,
@@ -1024,8 +1093,21 @@ function generateStaticPages() {
                     
                     <div class="p-8 md:p-12">
                       <div class="prose prose-lg max-w-none">
-                        <div class="whitespace-pre-wrap font-mono text-gray-800 bg-gray-50 p-6 md:p-10 rounded-2xl border border-gray-100 leading-relaxed text-sm md:text-lg">
-${escapeHtml(song.content || 'Lyrics are being prepared for this song. Please check back shortly for the full worship content, chords, and translations.')}
+                        <div class="text-gray-800 bg-gray-50 p-6 md:p-10 rounded-2xl border border-gray-100 leading-relaxed text-base">
+                          <h2 class="text-2xl font-bold text-gray-900 mb-4">Meaning & Devotional Insight</h2>
+                          <p class="mb-5">${escapeHtml(songMeaning)}</p>
+                          <h3 class="text-xl font-bold text-gray-900 mb-3">How To Use In Worship</h3>
+                          <p class="mb-5">${escapeHtml(worshipUse)}</p>
+                          <h3 class="text-xl font-bold text-gray-900 mb-3">Quick FAQs</h3>
+                          <div class="space-y-4">
+                            ${songFaqs.map((faq) => `
+                              <div>
+                                <p class="font-semibold text-gray-900">${escapeHtml(faq.q)}</p>
+                                <p class="text-gray-700">${escapeHtml(faq.a)}</p>
+                              </div>
+                            `).join('')}
+                          </div>
+                          <p class="mt-6 text-xs text-gray-500">Copyright-safe note: this resource contains original explanatory content and worship guidance. Please use authorized sources for official lyrics licensing where required.</p>
                         </div>
                       </div>
                       
@@ -1044,7 +1126,7 @@ ${escapeHtml(song.content || 'Lyrics are being prepared for this song. Please ch
                       <dl class="space-y-4">
                         <div class="flex justify-between border-b border-gray-50 pb-2">
                           <dt class="text-gray-500 text-sm">Language</dt>
-                          <dd class="text-gray-900 font-medium">Hindi / Christian</dd>
+                          <dd class="text-gray-900 font-medium">${escapeHtml(languageLabel)}</dd>
                         </div>
                         <div class="flex justify-between border-b border-gray-50 pb-2">
                           <dt class="text-gray-500 text-sm">Category</dt>
