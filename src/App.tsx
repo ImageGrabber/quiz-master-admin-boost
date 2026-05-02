@@ -13,6 +13,11 @@ import GoogleAnalytics from "@/components/GoogleAnalytics";
 import PublicRoute from "@/components/PublicRoute";
 import Index from "./pages/homepages/Index";
 import CompetitionHome from "./pages/homepages/CompetitionHome";
+import CompetitionPlayerName from "./pages/CompetitionPlayerName";
+import QuizArena from "./pages/QuizArena";
+import ArenaSoloQuiz from "./pages/ArenaSoloQuiz";
+import ArenaMultiplayerQuiz from "./pages/ArenaMultiplayerQuiz";
+import ArenaDuelQuiz from "./pages/ArenaDuelQuiz";
 import SignUpToday from "./pages/SignUpToday";
 import EmotionalCheckIn from "./pages/EmotionalCheckIn";
 import JoyRunnerTest from "./pages/JoyRunnerTest";
@@ -36,6 +41,7 @@ import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import Dashboard from "./pages/Dashboard";
+import EarnMoney from "./pages/EarnMoney";
 import Community from "./pages/Community";
 import Connections from "./pages/Connections";
 import BibleGames from "./pages/BibleGames";
@@ -287,6 +293,11 @@ const App = () => {
               <Route path="/" element={<CompetitionHome />} />
               <Route path="/home" element={<Index />} />
               <Route path="/competition-home" element={<CompetitionHome />} />
+              <Route path="/quiz-arena/name" element={<CompetitionPlayerName />} />
+              <Route path="/quiz-arena" element={<QuizArena />} />
+              <Route path="/quiz-arena/solo" element={<ArenaSoloQuiz />} />
+              <Route path="/quiz-arena/multiplayer" element={<ArenaMultiplayerQuiz />} />
+              <Route path="/quiz-arena/duel" element={<ArenaDuelQuiz />} />
               <Route path="/signup-today" element={<SignUpToday />} />
               
               {/* SEO Redirects */}
@@ -301,6 +312,7 @@ const App = () => {
               <Route path="/auth/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>} />
               <Route path="/auth/reset-password" element={<PublicRoute><ResetPassword /></PublicRoute>} />
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/dashboard/earn" element={<ProtectedRoute><EarnMoney /></ProtectedRoute>} />
               <Route path="/dashboard/community" element={<ProtectedRoute><Community /></ProtectedRoute>} />
               <Route path="/dashboard/connections" element={<ProtectedRoute><Connections /></ProtectedRoute>} />
               <Route path="/dashboard/bible-games" element={<ProtectedRoute><BibleGames /></ProtectedRoute>} />

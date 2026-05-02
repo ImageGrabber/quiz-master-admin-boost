@@ -340,7 +340,7 @@ const CompetitionHome = () => {
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1 md:pt-2 w-full sm:w-auto">
                 <Button
-                  onClick={() => navigate('/auth/login')}
+                  onClick={() => navigate('/quiz-arena/name')}
                   className="h-12 sm:h-14 px-6 sm:px-9 w-full sm:w-auto bg-white text-black hover:bg-black hover:text-white rounded-full font-bold text-[11px] sm:text-sm tracking-[0.12em] sm:tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl"
                 >
                   Start Playing Now <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
