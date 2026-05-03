@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Users, Zap, Swords, CheckCircle2, XCircle, UserRound, Share2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { loadArenaQuestions } from "@/lib/arenaQuestions";
+import { loadArenaQuestions, type ArenaDifficulty } from "@/lib/arenaQuestions";
 import { v4 as uuidv4 } from 'uuid';
 
 type Question = {
@@ -11,10 +11,43 @@ type Question = {
   answer: string;
 };
 
+type DifficultyConfig = {
+  label: ArenaDifficulty;
+  secondsPerQuestion: number;
+  pointsPerCorrect: number;
+  botAccuracy: number;
+  badgeClass: string;
+};
+
+const DIFFICULTY_CONFIG: Record<ArenaDifficulty, DifficultyConfig> = {
+  Easy: {
+    label: "Easy",
+    secondsPerQuestion: 12,
+    pointsPerCorrect: 1,
+    botAccuracy: 0.55,
+    badgeClass: "text-emerald-300 border-emerald-500/30 bg-emerald-500/10",
+  },
+  Medium: {
+    label: "Medium",
+    secondsPerQuestion: 10,
+    pointsPerCorrect: 2,
+    botAccuracy: 0.72,
+    badgeClass: "text-amber-300 border-amber-500/30 bg-amber-500/10",
+  },
+  Hard: {
+    label: "Hard",
+    secondsPerQuestion: 8,
+    pointsPerCorrect: 3,
+    botAccuracy: 0.85,
+    badgeClass: "text-rose-300 border-rose-500/30 bg-rose-500/10",
+  },
+};
+
 const ArenaMultiplayerQuiz = () => {
   const navigate = useNavigate();
   const [phase, setPhase] = useState<'matchmaking' | 'battle' | 'results'>('matchmaking');
   const [matchmakingTime, setMatchmakingTime] = useState(10);
+  const [difficulty, setDifficulty] = useState<ArenaDifficulty>("Medium");
   const [questions, setQuestions] = useState<Question[]>([]);
   const [index, setIndex] = useState(0);
   const [turn, setTurn] = useState<'user' | 'opponent'>('user');
@@ -26,7 +59,7 @@ const ArenaMultiplayerQuiz = () => {
   const [opponentSelected, setOpponentSelected] = useState<string | null>(null);
   const [botAction, setBotAction] = useState<string>("");
   const [lastResult, setLastResult] = useState<{ side: 'user' | 'opponent', correct: boolean } | null>(null);
-  const [questionTimeLeft, setQuestionTimeLeft] = useState(10);
+  const [questionTimeLeft, setQuestionTimeLeft] = useState(DIFFICULTY_CONFIG.Medium.secondsPerQuestion);
   const [matchId, setMatchId] = useState<string | null>(null);
   const [myRole, setMyRole] = useState<'p1' | 'p2'>('p1');
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -41,15 +74,16 @@ const ArenaMultiplayerQuiz = () => {
   }, []);
   
   const myName = useMemo(() => localStorage.getItem("quiz_player_name") || `Disciple_${myId.slice(0,4)}`, [myId]);
+  const mode = DIFFICULTY_CONFIG[difficulty];
 
   const openShareUrl = (url: string) => {
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
   const buildQuestionSet = async () => {
-    const fromTable = await loadArenaQuestions(10);
+    const fromTable = await loadArenaQuestions(10, difficulty);
     if (fromTable.length > 0) return fromTable;
-    throw new Error("No competition questions available in database.");
+    throw new Error(`No ${difficulty} competition questions available in database.`);
   };
 
   const startBattleWithDbQuestions = async (onReady: (qs: Question[]) => void) => {
@@ -78,7 +112,7 @@ const ArenaMultiplayerQuiz = () => {
           const [id, presences]: [string, any] = others[0];
           const other = presences[0];
           
-          if (other.status === 'searching') {
+          if (other.status === 'searching' && other.difficulty === difficulty) {
             const isHost = myId < id; // Smallest ID is host
             setMyRole(isHost ? 'p1' : 'p2');
             setIsBot(false);
@@ -91,7 +125,7 @@ const ArenaMultiplayerQuiz = () => {
                 channel.send({
                   type: 'broadcast',
                   event: 'match_start',
-                  payload: { questions: qs, p1: myId, p2: id, p1_name: myName }
+                  payload: { questions: qs, p1: myId, p2: id, p1_name: myName, difficulty }
                 });
                 setPhase('battle');
               });
@@ -103,6 +137,9 @@ const ArenaMultiplayerQuiz = () => {
         if (payload.p2 === myId && phase === 'matchmaking') {
           setQuestions(payload.questions);
           setOpponentName(payload.p1_name);
+          if (payload.difficulty === "Easy" || payload.difficulty === "Medium" || payload.difficulty === "Hard") {
+            setDifficulty(payload.difficulty);
+          }
           setIsBot(false);
           setMyRole('p2');
           setPhase('battle');
@@ -125,7 +162,7 @@ const ArenaMultiplayerQuiz = () => {
                 setTurn('user');
                 setLastResult(null);
                 setOpponentSelected(null);
-                setQuestionTimeLeft(10);
+                setQuestionTimeLeft(DIFFICULTY_CONFIG[difficulty].secondsPerQuestion);
                 setBotAction("");
               }
             }, 1500);
@@ -134,13 +171,13 @@ const ArenaMultiplayerQuiz = () => {
       })
       .subscribe(async (status) => {
         if (status === 'SUBSCRIBED') {
-          await channel.track({ status: 'searching', name: myName, joined_at: Date.now() });
+          await channel.track({ status: 'searching', name: myName, difficulty, joined_at: Date.now() });
         }
       });
 
     channelRef.current = channel;
     return () => { channel.unsubscribe(); };
-  }, [phase, myId, myName, index, questions.length]);
+  }, [phase, myId, myName, index, questions.length, difficulty]);
 
   // Matchmaking Timer (Fallback to Bot)
   useEffect(() => {
@@ -166,7 +203,7 @@ const ArenaMultiplayerQuiz = () => {
   // Question Timer (User Turn Only)
   useEffect(() => {
     if (phase !== 'battle' || turn !== 'user' || selected || index >= questions.length) {
-      setQuestionTimeLeft(10);
+      setQuestionTimeLeft(mode.secondsPerQuestion);
       return;
     }
 
@@ -182,7 +219,7 @@ const ArenaMultiplayerQuiz = () => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [phase, turn, selected, index, questions.length]);
+  }, [phase, turn, selected, index, questions.length, mode.secondsPerQuestion]);
 
   // Bot Turn Logic (Simulated if no real player)
   useEffect(() => {
@@ -192,10 +229,10 @@ const ArenaMultiplayerQuiz = () => {
     const currentQ = questions[index];
     
     const timer = setTimeout(() => {
-      const isCorrect = Math.random() > 0.3;
+      const isCorrect = Math.random() < mode.botAccuracy;
       const botChoice = isCorrect ? currentQ.answer : currentQ.options.find(o => o !== currentQ.answer);
       
-      const newScore = isCorrect ? opponentScore + 1 : opponentScore;
+      const newScore = isCorrect ? opponentScore + mode.pointsPerCorrect : opponentScore;
       setOpponentScore(newScore);
       setOpponentSelected(botChoice);
       setBotAction(`Answered: ${botChoice}`);
@@ -210,20 +247,20 @@ const ArenaMultiplayerQuiz = () => {
           setBotAction("");
           setOpponentSelected(null);
           setLastResult(null);
-          setQuestionTimeLeft(10);
+          setQuestionTimeLeft(mode.secondsPerQuestion);
         }
       }, 1500);
     }, 1500);
 
     return () => clearTimeout(timer);
-  }, [phase, turn, index, questions, isBot, opponentScore]);
+  }, [phase, turn, index, questions, isBot, opponentScore, mode.botAccuracy, mode.pointsPerCorrect, mode.secondsPerQuestion]);
 
   const onUserAnswer = (option: string) => {
     if (selected || turn !== 'user') return;
     setSelected(option);
     
     const isCorrect = option === questions[index].answer;
-    const newScore = isCorrect ? userScore + 1 : userScore;
+    const newScore = isCorrect ? userScore + mode.pointsPerCorrect : userScore;
     if (isCorrect) setUserScore(newScore);
     setLastResult({ side: 'user', correct: isCorrect });
 
@@ -235,7 +272,7 @@ const ArenaMultiplayerQuiz = () => {
         payload: { 
           sender: myId, 
           type: 'answer', 
-          answer: option, 
+          answer: option,
           correct: isCorrect, 
           score: newScore 
         }
@@ -286,6 +323,28 @@ const ArenaMultiplayerQuiz = () => {
           <div className="space-y-3">
             <h1 className="text-4xl font-black tracking-tighter text-foreground uppercase leading-none">Searching for Opponent</h1>
             <p className="text-muted-foreground font-medium text-sm tracking-tight">Seeking a worthy disciple in the realm...</p>
+          </div>
+
+          <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-5 shadow-2xl">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-4">Select Difficulty</p>
+            <div className="grid grid-cols-3 gap-2">
+              {(["Easy", "Medium", "Hard"] as ArenaDifficulty[]).map((d) => (
+                <button
+                  key={d}
+                  onClick={() => setDifficulty(d)}
+                  className={`py-2.5 rounded-xl border text-[10px] font-black uppercase tracking-[0.16em] transition-all ${
+                    difficulty === d
+                      ? `${DIFFICULTY_CONFIG[d].badgeClass} shadow-lg`
+                      : "border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/5"
+                  }`}
+                >
+                  {d}
+                </button>
+              ))}
+            </div>
+            <p className="text-[10px] text-white/35 mt-3 font-bold uppercase tracking-wider">
+              {mode.secondsPerQuestion}s per question • {mode.pointsPerCorrect} pts per correct
+            </p>
           </div>
 
           <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-8 shadow-2xl">
@@ -351,6 +410,9 @@ const ArenaMultiplayerQuiz = () => {
               <Zap className="h-12 w-12 relative z-10" />
             </div>
             <div className="space-y-2">
+              <div className={`inline-flex rounded-full border px-4 py-1 text-[10px] font-black uppercase tracking-[0.2em] ${mode.badgeClass}`}>
+                {difficulty}
+              </div>
               <h1 className="text-6xl font-black tracking-tighter text-foreground uppercase leading-none">
                 {victory ? "Battle Victory!" : userScore === opponentScore ? "Draw Match" : "Defeated"}
               </h1>
@@ -420,7 +482,10 @@ const ArenaMultiplayerQuiz = () => {
           <div className="h-10 w-px bg-white/10 mx-2" />
           <div className="text-left">
             <p className="text-[9px] font-black text-primary uppercase tracking-widest">Battle Active</p>
-            <div className="flex gap-2"><Swords className="h-4 w-4 text-foreground" /></div>
+            <div className="flex items-center gap-2">
+              <Swords className="h-4 w-4 text-foreground" />
+              <span className={`text-[9px] font-black uppercase tracking-wider rounded-full border px-2 py-0.5 ${mode.badgeClass}`}>{difficulty}</span>
+            </div>
           </div>
         </div>
         <div className="h-10 w-10" />
@@ -440,7 +505,7 @@ const ArenaMultiplayerQuiz = () => {
             <div className="flex-1 flex flex-col justify-center space-y-8 relative">
               {turn === 'user' && !selected && (
                 <div className="absolute -top-4 left-0 w-full h-1 bg-white/5 rounded-full overflow-hidden">
-                  <div className={`h-full transition-all duration-1000 ease-linear bg-primary ${questionTimeLeft <= 3 ? 'animate-pulse' : ''}`} style={{ width: `${(questionTimeLeft / 10) * 100}%` }} />
+                  <div className={`h-full transition-all duration-1000 ease-linear bg-primary ${questionTimeLeft <= 3 ? 'animate-pulse' : ''}`} style={{ width: `${(questionTimeLeft / mode.secondsPerQuestion) * 100}%` }} />
                 </div>
               )}
               <h2 className="text-2xl lg:text-3xl font-black leading-tight text-foreground">{turn === 'user' ? current?.question : "Waiting for Opponent..."}</h2>

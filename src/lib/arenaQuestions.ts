@@ -6,16 +6,26 @@ export type ArenaQuestion = {
   answer: string;
 };
 
+export type ArenaDifficulty = "Easy" | "Medium" | "Hard";
+
 const shuffle = <T,>(arr: T[]): T[] => [...arr].sort(() => Math.random() - 0.5);
 
-export async function loadArenaQuestions(limit = 10): Promise<ArenaQuestion[]> {
+export async function loadArenaQuestions(
+  limit = 10,
+  difficulty?: ArenaDifficulty
+): Promise<ArenaQuestion[]> {
   const fetchSize = Math.max(limit * 5, 100);
 
-  const { data, error } = await supabase
+  let query = supabase
     .from("public_competition_questions")
     .select("question, options, answer")
-    .not("question", "is", null)
-    .limit(fetchSize);
+    .not("question", "is", null);
+
+  if (difficulty) {
+    query = query.eq("difficulty", difficulty);
+  }
+
+  const { data, error } = await query.limit(fetchSize);
 
   if (error || !data) {
     throw error ?? new Error("Failed to load arena questions");
