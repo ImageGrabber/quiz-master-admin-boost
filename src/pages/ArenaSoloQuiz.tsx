@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Timer, CheckCircle2, Trophy, Zap, Coins, ShieldCheck } from "lucide-react";
-import { specificChapterQuizzes } from "@/data/specific-chapter-quizzes";
-import { md5 } from "@/utils/md5";
 import { supabase } from "@/integrations/supabase/client";
+import { loadArenaQuestions } from "@/lib/arenaQuestions";
 
 type Question = {
   question: string;
@@ -20,6 +19,7 @@ const ArenaSoloQuiz = () => {
   const [done, setDone] = useState(false);
   const [timeLeft, setTimeLeft] = useState(240); // 4 minutes
   const [session, setSession] = useState<any>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -35,16 +35,22 @@ const ArenaSoloQuiz = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Initialize: Load questions pool
+  // Initialize: Load questions pool from Supabase table only
   useEffect(() => {
-    const allQuestions: Question[] = [];
-    Object.values(specificChapterQuizzes).forEach((quiz: any) => {
-      if (quiz.questions) quiz.questions.forEach((q: any) => allQuestions.push({
-        question: q.question, options: q.options, answer: q.options[q.answer] || q.answer
-      }));
-    });
-    const shuffled = [...allQuestions].sort(() => 0.5 - Math.random());
-    setQuestions(shuffled.slice(0, 10));
+    const loadQuestions = async () => {
+      try {
+        const fromTable = await loadArenaQuestions(10);
+        if (fromTable.length > 0) {
+          setQuestions(fromTable);
+          return;
+        }
+        setLoadError("No competition questions available in database.");
+      } catch (error: any) {
+        setLoadError(error?.message || "Failed to load questions from database.");
+      }
+    };
+
+    void loadQuestions();
   }, []);
 
   // Timer logic
@@ -88,7 +94,19 @@ const ArenaSoloQuiz = () => {
   const progress = ((index + (selected ? 1 : 0)) / questions.length) * 100;
   const current = questions[index];
 
-  if (!current && !done) return null;
+  if (!current && !done) {
+    return (
+      <main className="h-screen w-full bg-[#020617] text-foreground flex items-center justify-center p-6">
+        <div className="text-center space-y-3">
+          <p className="text-xl font-bold">Unable to start Solo Quest</p>
+          <p className="text-sm text-muted-foreground">{loadError ?? "Loading questions..."}</p>
+          <button onClick={() => navigate("/quiz-arena")} className="px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold">
+            Back to Arena
+          </button>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="h-screen w-full bg-[#020617] text-foreground flex flex-col font-urbanist overflow-hidden selection:bg-primary/30 relative">
@@ -128,19 +146,19 @@ const ArenaSoloQuiz = () => {
 
                 <div className="grid gap-3 sm:grid-cols-2">
                   {current.options.map((option) => {
+                    const isCorrect = option === current.answer;
                     const isSelected = selected === option;
                     return (
                       <button 
                         key={option} 
                         disabled={!!selected} 
                         onClick={() => onAnswer(option)} 
-                        className={`relative w-full text-left p-5 lg:p-6 rounded-2xl border transition-all duration-300 text-sm font-bold ${
-                          !selected ? 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 text-foreground' : ''
-                        } ${
-                          isSelected ? 'bg-primary/20 border-primary text-primary shadow-lg shadow-primary/10' : ''
-                        } ${
-                          selected && !isSelected ? 'opacity-20 border-transparent grayscale' : ''
-                        }`}
+                        className={`relative w-full text-left p-5 lg:p-6 rounded-2xl border transition-all duration-300 text-sm font-bold 
+                          ${!selected ? 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 text-foreground' : ''}
+                          ${isSelected && isCorrect ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400' : ''}
+                          ${isSelected && !isCorrect ? 'bg-rose-500/20 border-rose-500 text-rose-400' : ''}
+                          ${selected && !isSelected ? 'opacity-20 border-transparent grayscale' : ''}
+                        `}
                       >
                         <div className="flex items-center justify-between gap-4"><span>{option}</span></div>
                       </button>

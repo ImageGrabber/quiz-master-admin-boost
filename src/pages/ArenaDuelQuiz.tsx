@@ -1,20 +1,8 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Swords, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const duelQuestions = [
-  {
-    question: "Who led the Israelites out of Egypt?",
-    options: ["Moses", "Aaron", "Joshua", "Elijah"],
-    answer: "Moses",
-  },
-  {
-    question: "Which book comes after Acts?",
-    options: ["Romans", "John", "Hebrews", "Corinthians"],
-    answer: "Romans",
-  },
-];
+import { loadArenaQuestions, type ArenaQuestion } from "@/lib/arenaQuestions";
 
 const ArenaDuelQuiz = () => {
   const navigate = useNavigate();
@@ -25,6 +13,26 @@ const ArenaDuelQuiz = () => {
   const [index, setIndex] = useState(0);
   const [scores, setScores] = useState([0, 0]);
   const [picked, setPicked] = useState<string | null>(null);
+  const [duelQuestions, setDuelQuestions] = useState<ArenaQuestion[]>([]);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const hydrate = async () => {
+      try {
+        const fromTable = await loadArenaQuestions(10);
+        if (fromTable.length > 0) {
+          setDuelQuestions(fromTable);
+          setLoadError(null);
+          return;
+        }
+        setLoadError("No competition questions available in database.");
+      } catch (error: any) {
+        setLoadError(error?.message || "Failed to load questions from database.");
+      }
+    };
+
+    void hydrate();
+  }, []);
 
   const names = useMemo(() => [playerA.trim() || "Player 1", playerB.trim() || "Player 2"], [playerA, playerB]);
   const current = duelQuestions[index];
@@ -64,6 +72,11 @@ const ArenaDuelQuiz = () => {
 
           {!started ? (
             <div className="space-y-4">
+              {loadError && (
+                <div className="rounded-xl border border-rose-300 bg-rose-50 p-3 text-sm text-rose-700">
+                  {loadError}
+                </div>
+              )}
               <div className="grid gap-3 sm:grid-cols-2">
                 <input value={playerA} onChange={(e) => setPlayerA(e.target.value)} className="h-11 rounded-xl border border-slate-200 px-3" />
                 <input value={playerB} onChange={(e) => setPlayerB(e.target.value)} className="h-11 rounded-xl border border-slate-200 px-3" />
@@ -72,6 +85,7 @@ const ArenaDuelQuiz = () => {
                 Final Score: {names[0]} {scores[0]} - {scores[1]} {names[1]} {scores[0] + scores[1] > 0 ? `(Winner: ${winner})` : ""}
               </div>
               <Button
+                disabled={duelQuestions.length === 0}
                 onClick={() => {
                   setScores([0, 0]);
                   setIndex(0);

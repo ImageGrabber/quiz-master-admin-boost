@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Users, Zap, Swords, CheckCircle2, XCircle, UserRound } from "lucide-react";
-import { specificChapterQuizzes } from "@/data/specific-chapter-quizzes";
 import { supabase } from "@/integrations/supabase/client";
+import { loadArenaQuestions } from "@/lib/arenaQuestions";
 import { v4 as uuidv4 } from 'uuid';
 
 type Question = {
@@ -23,11 +23,13 @@ const ArenaMultiplayerQuiz = () => {
   const [opponentName, setOpponentName] = useState("DISCIPLE RIVAL");
   const [isBot, setIsBot] = useState(true);
   const [selected, setSelected] = useState<string | null>(null);
+  const [opponentSelected, setOpponentSelected] = useState<string | null>(null);
   const [botAction, setBotAction] = useState<string>("");
   const [lastResult, setLastResult] = useState<{ side: 'user' | 'opponent', correct: boolean } | null>(null);
   const [questionTimeLeft, setQuestionTimeLeft] = useState(10);
   const [matchId, setMatchId] = useState<string | null>(null);
   const [myRole, setMyRole] = useState<'p1' | 'p2'>('p1');
+  const [loadError, setLoadError] = useState<string | null>(null);
   
   const channelRef = useRef<any>(null);
   const myId = useMemo(() => {
@@ -40,15 +42,20 @@ const ArenaMultiplayerQuiz = () => {
   
   const myName = useMemo(() => localStorage.getItem("quiz_player_name") || `Disciple_${myId.slice(0,4)}`, [myId]);
 
-  // Initialize: Load questions pool (Default for Bot/Host)
-  const generateQuestions = () => {
-    const allQuestions: Question[] = [];
-    Object.values(specificChapterQuizzes).forEach((quiz: any) => {
-      if (quiz.questions) quiz.questions.forEach((q: any) => allQuestions.push({
-        question: q.question, options: q.options, answer: q.options[q.answer] || q.answer
-      }));
-    });
-    return [...allQuestions].sort(() => 0.5 - Math.random()).slice(0, 10);
+  const buildQuestionSet = async () => {
+    const fromTable = await loadArenaQuestions(10);
+    if (fromTable.length > 0) return fromTable;
+    throw new Error("No competition questions available in database.");
+  };
+
+  const startBattleWithDbQuestions = async (onReady: (qs: Question[]) => void) => {
+    try {
+      const qs = await buildQuestionSet();
+      onReady(qs);
+      setLoadError(null);
+    } catch (error: any) {
+      setLoadError(error?.message || "Failed to load questions from database.");
+    }
   };
 
   // Matchmaking & Realtime Setup
@@ -75,14 +82,15 @@ const ArenaMultiplayerQuiz = () => {
             setMatchId(isHost ? `${myId}_${id}` : `${id}_${myId}`);
             
             if (isHost) {
-              const qs = generateQuestions();
-              setQuestions(qs);
-              channel.send({
-                type: 'broadcast',
-                event: 'match_start',
-                payload: { questions: qs, p1: myId, p2: id, p1_name: myName }
+              void startBattleWithDbQuestions((qs) => {
+                setQuestions(qs);
+                channel.send({
+                  type: 'broadcast',
+                  event: 'match_start',
+                  payload: { questions: qs, p1: myId, p2: id, p1_name: myName }
+                });
+                setPhase('battle');
               });
-              setPhase('battle');
             }
           }
         }
@@ -102,6 +110,7 @@ const ArenaMultiplayerQuiz = () => {
           if (payload.type === 'answer') {
             setOpponentScore(payload.score);
             setLastResult({ side: 'opponent', correct: payload.correct });
+            setOpponentSelected(payload.answer);
             setBotAction(`Answered: ${payload.answer}`);
             
             setTimeout(() => {
@@ -111,6 +120,7 @@ const ArenaMultiplayerQuiz = () => {
                 setIndex(i => i + 1);
                 setTurn('user');
                 setLastResult(null);
+                setOpponentSelected(null);
                 setQuestionTimeLeft(10);
                 setBotAction("");
               }
@@ -136,8 +146,10 @@ const ArenaMultiplayerQuiz = () => {
         if (prev <= 1) {
           clearInterval(timer);
           if (isBot) {
-            setQuestions(generateQuestions());
-            setPhase('battle');
+            void startBattleWithDbQuestions((qs) => {
+              setQuestions(qs);
+              setPhase('battle');
+            });
           }
           return 0;
         }
@@ -181,6 +193,7 @@ const ArenaMultiplayerQuiz = () => {
       
       const newScore = isCorrect ? opponentScore + 1 : opponentScore;
       setOpponentScore(newScore);
+      setOpponentSelected(botChoice);
       setBotAction(`Answered: ${botChoice}`);
       setLastResult({ side: 'opponent', correct: isCorrect });
 
@@ -191,6 +204,7 @@ const ArenaMultiplayerQuiz = () => {
           setIndex(i => i + 1);
           setTurn('user');
           setBotAction("");
+          setOpponentSelected(null);
           setLastResult(null);
           setQuestionTimeLeft(10);
         }
@@ -250,6 +264,11 @@ const ArenaMultiplayerQuiz = () => {
         </div>
 
         <div className="relative z-10 text-center space-y-12 max-w-md w-full">
+          {loadError && (
+            <div className="rounded-xl border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+              {loadError}
+            </div>
+          )}
           <div className="relative inline-block">
             <div className="h-40 w-40 rounded-full border-4 border-white/5 border-t-primary animate-spin" />
             <div className="absolute inset-0 flex items-center justify-center">
@@ -371,9 +390,25 @@ const ArenaMultiplayerQuiz = () => {
               )}
               <h2 className="text-2xl lg:text-3xl font-black leading-tight text-foreground">{turn === 'user' ? current?.question : "Waiting for Opponent..."}</h2>
               <div className="grid gap-3">
-                {current?.options.map((opt) => (
-                  <button key={opt} disabled={!!selected || turn !== 'user'} onClick={() => onUserAnswer(opt)} className={`relative w-full text-left p-5 rounded-2xl border transition-all duration-300 text-sm font-bold ${selected === opt ? 'bg-primary/20 border-primary text-primary' : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-primary/50 text-foreground'}`}>{opt}</button>
-                ))}
+                {current?.options.map((opt) => {
+                  const isCorrect = opt === current.answer;
+                  const isSelected = selected === opt;
+                  return (
+                    <button 
+                      key={opt} 
+                      disabled={!!selected || turn !== 'user'} 
+                      onClick={() => onUserAnswer(opt)} 
+                      className={`relative w-full text-left p-5 rounded-2xl border transition-all duration-300 text-sm font-bold 
+                        ${!selected ? 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-primary/50 text-foreground' : ''}
+                        ${isSelected && isCorrect ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400' : ''}
+                        ${isSelected && !isCorrect ? 'bg-rose-500/20 border-rose-500 text-rose-400' : ''}
+                        ${selected && !isSelected ? 'opacity-20 border-transparent grayscale' : ''}
+                      `}
+                    >
+                      {opt}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -389,16 +424,37 @@ const ArenaMultiplayerQuiz = () => {
               </div>
               <div className="ml-auto bg-white/5 px-4 py-2 rounded-2xl border border-white/10"><span className="text-2xl font-black text-foreground">{opponentScore}</span></div>
             </div>
-            <div className="flex-1 flex flex-col justify-center items-center text-center space-y-6">
+            <div className="flex-1 flex flex-col justify-center space-y-6">
               {turn === 'opponent' ? (
                 <>
-                  <div className={`h-20 w-20 rounded-full flex items-center justify-center relative ${isBot ? 'bg-indigo-500/10' : 'bg-sky-500/10'}`}>
-                    <div className={`absolute inset-0 border-2 border-t-transparent rounded-full animate-spin ${isBot ? 'border-indigo-500' : 'border-sky-500'}`} />
-                    {isBot ? <UserRound className="h-8 w-8 text-indigo-500" /> : <Users className="h-8 w-8 text-sky-500" />}
+                  <div className="space-y-4">
+                    <h2 className="text-xl font-black text-foreground italic leading-tight mb-4">"{current?.question}"</h2>
+                    <div className="grid gap-2 w-full max-w-sm mx-auto">
+                      {current?.options.map((opt) => {
+                        const isCorrect = opt === current.answer;
+                        const isOpponentChoice = opponentSelected === opt;
+                        return (
+                          <div 
+                            key={opt}
+                            className={`p-3 rounded-xl border text-xs font-bold transition-all duration-300 text-left
+                              ${!opponentSelected ? 'bg-white/5 border-white/10 text-white/20' : ''}
+                              ${isOpponentChoice && isCorrect ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400' : ''}
+                              ${isOpponentChoice && !isCorrect ? 'bg-rose-500/20 border-rose-500 text-rose-400' : ''}
+                              ${opponentSelected && !isOpponentChoice ? 'opacity-10 border-transparent' : ''}
+                            `}
+                          >
+                            {opt}
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <p className="text-sm font-bold text-white/20 uppercase tracking-widest">{botAction || "Thinking..."}</p>
-                    <h2 className="text-xl font-black text-foreground italic">"{current?.question}"</h2>
+                  <div className="pt-4 flex flex-col items-center gap-3">
+                    <div className={`h-10 w-10 rounded-full flex items-center justify-center relative ${isBot ? 'bg-indigo-500/10' : 'bg-sky-500/10'}`}>
+                      <div className={`absolute inset-0 border-2 border-t-transparent rounded-full animate-spin ${isBot ? 'border-indigo-500' : 'border-sky-500'}`} />
+                      {isBot ? <UserRound className="h-5 w-5 text-indigo-500" /> : <Users className="h-5 w-5 text-sky-500" />}
+                    </div>
+                    <p className="text-[10px] font-bold text-white/20 uppercase tracking-widest">{botAction || "Thinking..."}</p>
                   </div>
                 </>
               ) : (
@@ -419,14 +475,6 @@ const ArenaMultiplayerQuiz = () => {
         </div>
       </div>
 
-      {lastResult && (
-        <div className="fixed top-32 left-1/2 -translate-x-1/2 z-50 animate-in slide-in-from-top-4 duration-300">
-          <div className="flex items-center gap-2 px-6 py-3 rounded-full shadow-2xl font-black text-xs uppercase tracking-widest bg-slate-900/90 text-white border border-white/10 backdrop-blur-md">
-            <Zap className="h-4 w-4 text-primary" />
-            ANSWER SUBMITTED
-          </div>
-        </div>
-      )}
     </main>
   );
 };
