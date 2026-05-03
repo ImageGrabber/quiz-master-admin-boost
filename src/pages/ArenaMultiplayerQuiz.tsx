@@ -242,35 +242,40 @@ const ArenaMultiplayerQuiz = () => {
 
   if (phase === 'matchmaking') {
     return (
-      <main className="h-screen w-full bg-[#fdfbf7] flex flex-col items-center justify-center p-6 relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-100/40 blur-[120px] rounded-full animate-pulse" />
+      <main className="h-screen w-full bg-[#020617] flex flex-col items-center justify-center p-6 relative overflow-hidden font-urbanist">
+        {/* Background ambience - Matchmaking */}
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[1000px] bg-[radial-gradient(ellipse_at_center,_rgba(127,29,29,0.15)_0%,_transparent_60%)] blur-[80px]" />
+          <div className="absolute inset-0 opacity-[0.1] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
         </div>
 
-        <div className="relative z-10 text-center space-y-8 max-w-md w-full">
+        <div className="relative z-10 text-center space-y-12 max-w-md w-full">
           <div className="relative inline-block">
-            <div className="h-32 w-32 rounded-full border-4 border-slate-100 border-t-amber-500 animate-spin" />
+            <div className="h-40 w-40 rounded-full border-4 border-white/5 border-t-primary animate-spin" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <Users className="h-10 w-10 text-slate-300" />
+              <div className="relative">
+                <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full animate-pulse" />
+                <Users className="h-12 w-12 text-foreground relative z-10" />
+              </div>
             </div>
           </div>
           
-          <div className="space-y-2">
-            <h1 className="text-3xl font-black tracking-tighter text-slate-900 uppercase">Searching for Opponent</h1>
-            <p className="text-slate-400 font-medium">Seeking a worthy disciple in the realm...</p>
+          <div className="space-y-3">
+            <h1 className="text-4xl font-black tracking-tighter text-foreground uppercase leading-none">Searching for Opponent</h1>
+            <p className="text-muted-foreground font-medium text-sm tracking-tight">Seeking a worthy disciple in the realm...</p>
           </div>
 
-          <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-xl shadow-black/5">
-            <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">
+          <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-8 shadow-2xl">
+            <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-5">
               <span>Time Remaining</span>
-              <span className="text-amber-600">{matchmakingTime}s</span>
+              <span className="text-primary">{matchmakingTime}s</span>
             </div>
-            <div className="h-1.5 w-full bg-slate-50 rounded-full overflow-hidden">
-              <div className="h-full bg-amber-500 transition-all duration-300" style={{ width: `${(matchmakingTime) * 10}%` }} />
+            <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+              <div className="h-full bg-primary transition-all duration-300" style={{ width: `${(matchmakingTime) * 10}%` }} />
             </div>
           </div>
 
-          <button onClick={() => navigate("/quiz-arena")} className="text-[10px] font-black uppercase tracking-widest text-slate-300 hover:text-slate-900 transition-colors">
+          <button onClick={() => navigate("/quiz-arena")} className="text-[10px] font-black uppercase tracking-widest text-white/20 hover:text-foreground transition-all">
             Cancel Matchmaking
           </button>
         </div>
@@ -281,32 +286,41 @@ const ArenaMultiplayerQuiz = () => {
   if (phase === 'results') {
     const victory = userScore > opponentScore;
     return (
-      <main className="h-screen w-full bg-[#fdfbf7] flex items-center justify-center p-6 overflow-hidden">
-        <div className="max-w-4xl w-full bg-white/80 backdrop-blur-xl border border-white rounded-[3.5rem] p-12 text-center space-y-12 shadow-[0_30px_100px_rgba(0,0,0,0.03)] animate-in zoom-in duration-500">
-          <div className="space-y-4">
-            <div className={`h-24 w-24 mx-auto rounded-3xl flex items-center justify-center text-white shadow-2xl ${victory ? 'bg-amber-500 shadow-amber-500/30' : 'bg-slate-400 shadow-slate-400/30'}`}>
-              <Zap className="h-12 w-12" />
+      <main className="h-screen w-full bg-[#020617] flex items-center justify-center p-6 overflow-hidden font-urbanist">
+        {/* Background ambience - Results */}
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] h-[1000px] bg-[radial-gradient(ellipse_at_top,_rgba(127,29,29,0.15)_0%,_transparent_60%)] blur-[80px]" />
+          <div className="absolute inset-0 opacity-[0.1] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+        </div>
+
+        <div className="max-w-4xl w-full bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-[3.5rem] p-12 text-center space-y-12 shadow-2xl relative z-10 animate-in zoom-in duration-500">
+          <div className="space-y-6">
+            <div className={`h-24 w-24 mx-auto rounded-3xl flex items-center justify-center text-primary-foreground shadow-2xl relative ${victory ? 'bg-primary shadow-primary/30' : 'bg-slate-700 shadow-slate-700/30'}`}>
+              <div className={`absolute inset-0 blur-2xl rounded-full opacity-50 ${victory ? 'bg-primary' : 'bg-slate-700'}`} />
+              <Zap className="h-12 w-12 relative z-10" />
             </div>
-            <h1 className="text-6xl font-black tracking-tighter text-slate-900 uppercase">
-              {victory ? "Battle Victory!" : userScore === opponentScore ? "Draw Match" : "Defeated"}
-            </h1>
-            <p className="text-slate-400 font-medium italic">"The wisdom of the prudent is to give thought to their steps."</p>
+            <div className="space-y-2">
+              <h1 className="text-6xl font-black tracking-tighter text-foreground uppercase leading-none">
+                {victory ? "Battle Victory!" : userScore === opponentScore ? "Draw Match" : "Defeated"}
+              </h1>
+              <p className="text-muted-foreground font-medium italic tracking-tight text-sm">"The wisdom of the prudent is to give thought to their steps."</p>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-8 max-w-lg mx-auto">
-            <div className="bg-slate-50/50 rounded-3xl p-8 border border-slate-100">
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Your Score</p>
-              <p className="text-6xl font-black text-slate-900">{userScore}</p>
+            <div className="bg-white/5 rounded-[2.5rem] p-10 border border-white/5">
+              <p className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-3">Your Score</p>
+              <p className="text-7xl font-black text-foreground tabular-nums leading-none">{userScore}</p>
             </div>
-            <div className="bg-slate-50/50 rounded-3xl p-8 border border-slate-100">
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Opponent Score</p>
-              <p className="text-6xl font-black text-slate-400">{opponentScore}</p>
+            <div className="bg-white/5 rounded-[2.5rem] p-10 border border-white/5">
+              <p className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-3">Opponent Score</p>
+              <p className="text-7xl font-black text-white/20 tabular-nums leading-none">{opponentScore}</p>
             </div>
           </div>
 
           <div className="flex gap-4 max-w-md mx-auto pt-6">
-            <button onClick={() => window.location.reload()} className="flex-1 py-5 bg-amber-500 hover:bg-amber-400 text-white font-black text-xs uppercase tracking-[0.2em] rounded-2xl transition-all shadow-xl shadow-amber-500/20">Rematch</button>
-            <button onClick={() => navigate("/quiz-arena")} className="flex-1 py-5 bg-white border border-slate-200 text-slate-400 hover:text-slate-900 font-black text-xs uppercase tracking-[0.2em] rounded-2xl transition-all">Exit Arena</button>
+            <button onClick={() => window.location.reload()} className="flex-1 py-5 bg-primary hover:bg-primary/90 text-primary-foreground font-black text-xs uppercase tracking-[0.2em] rounded-2xl transition-all shadow-xl shadow-primary/20">Rematch</button>
+            <button onClick={() => navigate("/quiz-arena")} className="flex-1 py-5 bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground font-black text-xs uppercase tracking-[0.2em] rounded-2xl transition-all">Exit Arena</button>
           </div>
         </div>
       </main>
@@ -314,25 +328,25 @@ const ArenaMultiplayerQuiz = () => {
   }
 
   return (
-    <main className="h-screen w-full bg-[#fdfbf7] flex flex-col font-urbanist overflow-hidden selection:bg-amber-100">
-      <div className="fixed inset-0 pointer-events-none opacity-40">
-        <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-amber-100 blur-[150px] rounded-full" />
-        <div className="absolute bottom-0 left-0 w-[40%] h-[40%] bg-indigo-50 blur-[150px] rounded-full" />
+    <main className="h-screen w-full bg-[#020617] text-foreground flex flex-col font-urbanist overflow-hidden selection:bg-primary/30 relative">
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] h-[1000px] bg-[radial-gradient(ellipse_at_top,_rgba(127,29,29,0.15)_0%,_transparent_60%)] blur-[80px]" />
+        <div className="absolute inset-0 opacity-[0.1] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
       </div>
 
       <header className="relative z-10 px-8 py-6 flex items-center justify-between">
-        <button onClick={() => navigate("/quiz-arena")} className="h-10 w-10 rounded-full bg-white border border-slate-100 flex items-center justify-center hover:bg-slate-50 transition-all shadow-sm">
+        <button onClick={() => navigate("/quiz-arena")} className="h-10 w-10 rounded-full bg-slate-900/50 border border-white/10 flex items-center justify-center hover:bg-slate-800 transition-all shadow-sm">
           <ArrowLeft className="h-4 w-4" />
         </button>
         <div className="flex items-center gap-4">
           <div className="text-right">
-            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Round</p>
-            <p className="text-xl font-black text-slate-900">{index + 1} / 10</p>
+            <p className="text-[9px] font-black text-white/20 uppercase tracking-widest">Round</p>
+            <p className="text-xl font-black text-foreground">{index + 1} / 10</p>
           </div>
-          <div className="h-10 w-px bg-slate-200 mx-2" />
+          <div className="h-10 w-px bg-white/10 mx-2" />
           <div className="text-left">
-            <p className="text-[9px] font-black text-amber-500 uppercase tracking-widest">Battle Active</p>
-            <div className="flex gap-2"><Swords className="h-4 w-4 text-slate-900" /></div>
+            <p className="text-[9px] font-black text-primary uppercase tracking-widest">Battle Active</p>
+            <div className="flex gap-2"><Swords className="h-4 w-4 text-foreground" /></div>
           </div>
         </div>
         <div className="h-10 w-10" />
@@ -340,25 +354,25 @@ const ArenaMultiplayerQuiz = () => {
 
       <div className="relative z-10 flex-1 grid grid-cols-2 p-6 gap-6 min-h-0">
         <div className={`flex flex-col transition-all duration-500 ${turn === 'user' ? 'scale-100 opacity-100' : 'scale-95 opacity-30 pointer-events-none grayscale blur-[2px]'}`}>
-          <div className="bg-white border border-slate-100 rounded-[3rem] p-10 flex-1 flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.02)]">
+          <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-[3rem] p-10 flex-1 flex flex-col shadow-2xl">
             <div className="flex items-center gap-4 mb-8">
-              <div className="h-12 w-12 rounded-2xl bg-amber-500 flex items-center justify-center text-white shadow-lg shadow-amber-500/20"><Users className="h-6 w-6" /></div>
+              <div className="h-12 w-12 rounded-2xl bg-primary flex items-center justify-center text-primary-foreground shadow-lg shadow-primary/20"><Users className="h-6 w-6" /></div>
               <div>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Player One</p>
-                <h3 className="text-xl font-black text-slate-900">YOU</h3>
+                <p className="text-[10px] font-black text-white/20 uppercase tracking-widest">Player One</p>
+                <h3 className="text-xl font-black text-foreground">YOU</h3>
               </div>
-              <div className="ml-auto bg-slate-50 px-4 py-2 rounded-2xl border border-slate-100"><span className="text-2xl font-black text-slate-900">{userScore}</span></div>
+              <div className="ml-auto bg-white/5 px-4 py-2 rounded-2xl border border-white/10"><span className="text-2xl font-black text-foreground">{userScore}</span></div>
             </div>
             <div className="flex-1 flex flex-col justify-center space-y-8 relative">
               {turn === 'user' && !selected && (
-                <div className="absolute -top-4 left-0 w-full h-1 bg-slate-50 rounded-full overflow-hidden">
-                  <div className={`h-full transition-all duration-1000 ease-linear ${questionTimeLeft <= 3 ? 'bg-rose-500 animate-pulse' : 'bg-amber-500'}`} style={{ width: `${(questionTimeLeft / 10) * 100}%` }} />
+                <div className="absolute -top-4 left-0 w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                  <div className={`h-full transition-all duration-1000 ease-linear bg-primary ${questionTimeLeft <= 3 ? 'animate-pulse' : ''}`} style={{ width: `${(questionTimeLeft / 10) * 100}%` }} />
                 </div>
               )}
-              <h2 className="text-2xl lg:text-3xl font-black leading-tight text-slate-900">{turn === 'user' ? current?.question : "Waiting for Opponent..."}</h2>
+              <h2 className="text-2xl lg:text-3xl font-black leading-tight text-foreground">{turn === 'user' ? current?.question : "Waiting for Opponent..."}</h2>
               <div className="grid gap-3">
                 {current?.options.map((opt) => (
-                  <button key={opt} disabled={!!selected || turn !== 'user'} onClick={() => onUserAnswer(opt)} className={`relative w-full text-left p-5 rounded-2xl border transition-all duration-300 text-sm font-bold ${selected === opt ? 'bg-amber-50 border-amber-500 text-amber-900' : 'bg-slate-50/50 border-slate-100 hover:bg-white hover:border-amber-200'}`}>{opt}</button>
+                  <button key={opt} disabled={!!selected || turn !== 'user'} onClick={() => onUserAnswer(opt)} className={`relative w-full text-left p-5 rounded-2xl border transition-all duration-300 text-sm font-bold ${selected === opt ? 'bg-primary/20 border-primary text-primary' : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-primary/50 text-foreground'}`}>{opt}</button>
                 ))}
               </div>
             </div>
@@ -366,29 +380,29 @@ const ArenaMultiplayerQuiz = () => {
         </div>
 
         <div className={`flex flex-col transition-all duration-500 ${turn === 'opponent' ? 'scale-100 opacity-100' : 'scale-95 opacity-30 pointer-events-none grayscale blur-[2px]'}`}>
-          <div className="bg-white border border-slate-100 rounded-[3rem] p-10 flex-1 flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.02)]">
+          <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-[3rem] p-10 flex-1 flex flex-col shadow-2xl">
             <div className="flex items-center gap-4 mb-8">
               <div className={`h-12 w-12 rounded-2xl flex items-center justify-center text-white shadow-lg ${isBot ? 'bg-indigo-500 shadow-indigo-500/20' : 'bg-sky-500 shadow-sky-500/20'}`}>{isBot ? <UserRound className="h-6 w-6" /> : <Users className="h-6 w-6" />}</div>
               <div>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Arena Opponent</p>
-                <h3 className="text-xl font-black text-slate-900 uppercase">{opponentName}</h3>
+                <p className="text-[10px] font-black text-white/20 uppercase tracking-widest">Arena Opponent</p>
+                <h3 className="text-xl font-black text-foreground uppercase">{opponentName}</h3>
               </div>
-              <div className="ml-auto bg-slate-50 px-4 py-2 rounded-2xl border border-slate-100"><span className="text-2xl font-black text-slate-900">{opponentScore}</span></div>
+              <div className="ml-auto bg-white/5 px-4 py-2 rounded-2xl border border-white/10"><span className="text-2xl font-black text-foreground">{opponentScore}</span></div>
             </div>
             <div className="flex-1 flex flex-col justify-center items-center text-center space-y-6">
               {turn === 'opponent' ? (
                 <>
-                  <div className={`h-20 w-20 rounded-full flex items-center justify-center relative ${isBot ? 'bg-indigo-50' : 'bg-sky-50'}`}>
+                  <div className={`h-20 w-20 rounded-full flex items-center justify-center relative ${isBot ? 'bg-indigo-500/10' : 'bg-sky-500/10'}`}>
                     <div className={`absolute inset-0 border-2 border-t-transparent rounded-full animate-spin ${isBot ? 'border-indigo-500' : 'border-sky-500'}`} />
                     {isBot ? <UserRound className="h-8 w-8 text-indigo-500" /> : <Users className="h-8 w-8 text-sky-500" />}
                   </div>
                   <div className="space-y-2">
-                    <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">{botAction || "Thinking..."}</p>
-                    <h2 className="text-xl font-black text-slate-900 italic">"{current?.question}"</h2>
+                    <p className="text-sm font-bold text-white/20 uppercase tracking-widest">{botAction || "Thinking..."}</p>
+                    <h2 className="text-xl font-black text-foreground italic">"{current?.question}"</h2>
                   </div>
                 </>
               ) : (
-                <div className="opacity-20 flex flex-col items-center">
+                <div className="opacity-10 flex flex-col items-center">
                   {isBot ? <UserRound className="h-16 w-16 mb-4" /> : <Users className="h-16 w-16 mb-4" />}
                   <p className="text-xs font-black uppercase tracking-widest">Opponent Waiting</p>
                 </div>
@@ -399,17 +413,17 @@ const ArenaMultiplayerQuiz = () => {
       </div>
 
       <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
-        <div className={`px-8 py-3 rounded-full shadow-2xl transition-all duration-500 flex items-center gap-3 backdrop-blur-md ${turn === 'user' ? 'bg-amber-500/90 text-white' : 'bg-indigo-500/90 text-white'}`}>
+        <div className={`px-8 py-3 rounded-full shadow-2xl transition-all duration-500 flex items-center gap-3 backdrop-blur-md ${turn === 'user' ? 'bg-primary/90 text-primary-foreground' : 'bg-indigo-500/90 text-white'}`}>
           <Zap className={`h-5 w-5 ${turn === 'user' ? 'animate-pulse' : ''}`} />
-          <span className="font-black text-xs uppercase tracking-[0.3em]">{turn === 'user' ? "YOUR INQUIRY" : "OPPONENT'S TURN"}</span>
+          <span className="font-black text-xs uppercase tracking-[0.3em]">{turn === 'user' ? "YOUR TURN" : "OPPONENT'S TURN"}</span>
         </div>
       </div>
 
       {lastResult && (
         <div className="fixed top-32 left-1/2 -translate-x-1/2 z-50 animate-in slide-in-from-top-4 duration-300">
-          <div className={`flex items-center gap-2 px-6 py-3 rounded-full shadow-2xl font-black text-xs uppercase tracking-widest ${lastResult.correct ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white'}`}>
-            {lastResult.correct ? <CheckCircle2 className="h-4 w-4" /> : <XCircle className="h-4 w-4" />}
-            {lastResult.side === 'user' ? (lastResult.correct ? "RIGHTEOUS!" : "MISSED!") : (lastResult.correct ? `${opponentName} WAS CORRECT` : `${opponentName} MISSED!`)}
+          <div className="flex items-center gap-2 px-6 py-3 rounded-full shadow-2xl font-black text-xs uppercase tracking-widest bg-slate-900/90 text-white border border-white/10 backdrop-blur-md">
+            <Zap className="h-4 w-4 text-primary" />
+            ANSWER SUBMITTED
           </div>
         </div>
       )}

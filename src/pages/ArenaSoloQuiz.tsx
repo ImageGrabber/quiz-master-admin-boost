@@ -91,29 +91,28 @@ const ArenaSoloQuiz = () => {
   if (!current && !done) return null;
 
   return (
-    <main className="h-screen w-full bg-[#fdfbf7] flex flex-col font-urbanist overflow-hidden selection:bg-amber-100 relative">
-      {/* Background ambience */}
-      <div className="fixed inset-0 pointer-events-none opacity-40">
-        <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-amber-100 blur-[150px] rounded-full" />
-        <div className="absolute bottom-0 left-0 w-[40%] h-[40%] bg-indigo-50 blur-[150px] rounded-full" />
-        <div className="absolute inset-0 opacity-[0.2] mix-blend-multiply bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+    <main className="h-screen w-full bg-[#020617] text-foreground flex flex-col font-urbanist overflow-hidden selection:bg-primary/30 relative">
+      {/* Background ambience - Dark Theme */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] h-[1000px] bg-[radial-gradient(ellipse_at_top,_rgba(127,29,29,0.15)_0%,_transparent_60%)] blur-[80px]" />
+        <div className="absolute inset-0 opacity-[0.1] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
       </div>
 
       <header className="relative z-10 px-8 py-6 flex items-center justify-between">
-        <button onClick={() => navigate("/quiz-arena")} className="h-10 w-10 rounded-full bg-white border border-slate-100 flex items-center justify-center hover:bg-slate-50 transition-all shadow-sm">
+        <button onClick={() => navigate("/quiz-arena")} className="h-10 w-10 rounded-full bg-slate-900/50 border border-white/10 flex items-center justify-center hover:bg-slate-800 transition-all shadow-sm">
           <ArrowLeft className="h-4 w-4" />
         </button>
         
-        <div className={`px-4 py-1.5 rounded-full bg-white border border-slate-100 shadow-sm flex items-center gap-2 text-xs font-black tracking-widest ${timeLeft < 30 ? 'text-rose-500 animate-pulse border-rose-100' : 'text-amber-600'}`}>
+        <div className={`px-4 py-1.5 rounded-full bg-slate-900/50 border border-white/10 shadow-sm flex items-center gap-2 text-xs font-black tracking-widest text-primary ${timeLeft < 30 ? 'animate-pulse border-primary/20' : ''}`}>
           <Timer className="h-3.5 w-3.5" /> {formatTime(timeLeft)}
         </div>
       </header>
 
-      <div className="flex-1 flex flex-col lg:flex-row justify-center items-center gap-8 min-h-0 px-6 max-w-[1400px] mx-auto w-full">
-        <div className="flex-1 max-w-4xl w-full">
-          <div className="bg-white/80 backdrop-blur-xl border border-white rounded-[2.5rem] p-8 lg:p-12 shadow-[0_30px_100px_rgba(0,0,0,0.03)] relative overflow-hidden flex flex-col max-h-[85vh]">
-            <div className="absolute top-0 left-0 w-full h-1.5 bg-slate-50 overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-amber-500 to-amber-300 transition-all duration-700 ease-out relative" style={{ width: `${progress}%` }}>
+      <div className="flex-1 flex flex-col lg:flex-row justify-center items-center gap-8 min-h-0 px-6 max-w-[1400px] mx-auto w-full relative z-10">
+        <div className="flex-1 max-w-5xl w-full">
+          <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-8 lg:p-12 shadow-2xl relative overflow-hidden flex flex-col max-h-[85vh]">
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-white/5 overflow-hidden">
+              <div className="h-full bg-gradient-to-r from-primary to-orange-600 transition-all duration-700 ease-out relative" style={{ width: `${progress}%` }}>
                 <div className="absolute top-0 right-0 h-full w-8 bg-white/30 blur-md animate-[shimmer_2s_infinite]" />
               </div>
             </div>
@@ -121,17 +120,28 @@ const ArenaSoloQuiz = () => {
             {!done ? (
               <div className="space-y-8 overflow-y-auto pr-2 custom-scrollbar">
                 <div className="flex items-center justify-between">
-                  <div className="px-3 py-1 rounded-lg bg-amber-50 text-amber-600 text-[9px] font-black uppercase tracking-widest">Inquiry {index + 1} of 10</div>
-                  <div className="text-[9px] font-black text-slate-300 uppercase tracking-widest">Scroll of Truth</div>
+                  <div className="px-3 py-1 rounded-lg bg-primary/10 text-primary text-[9px] font-black uppercase tracking-widest">Inquiry {index + 1} of 10</div>
+                  <div className="text-[9px] font-black text-white/20 uppercase tracking-widest">Scroll of Truth</div>
                 </div>
 
-                <h1 className="text-3xl lg:text-4xl font-black leading-[1.1] text-slate-900 tracking-tight">{current.question}</h1>
+                <h1 className="text-3xl lg:text-4xl font-black leading-[1.1] text-foreground tracking-tight">{current.question}</h1>
 
                 <div className="grid gap-3 sm:grid-cols-2">
                   {current.options.map((option) => {
                     const isSelected = selected === option;
                     return (
-                      <button key={option} disabled={!!selected} onClick={() => onAnswer(option)} className={`relative w-full text-left p-5 lg:p-6 rounded-2xl border transition-all duration-300 text-sm font-bold ${!selected ? 'bg-slate-50/30 border-slate-100 hover:bg-white hover:border-amber-300 hover:shadow-xl hover:shadow-amber-500/5' : ''} ${isSelected ? 'bg-amber-50 border-amber-500 text-amber-900 shadow-lg shadow-amber-500/10' : ''} ${selected && !isSelected ? 'opacity-40 border-transparent grayscale' : ''}`}>
+                      <button 
+                        key={option} 
+                        disabled={!!selected} 
+                        onClick={() => onAnswer(option)} 
+                        className={`relative w-full text-left p-5 lg:p-6 rounded-2xl border transition-all duration-300 text-sm font-bold ${
+                          !selected ? 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-primary/50 hover:shadow-2xl hover:shadow-primary/5 text-foreground' : ''
+                        } ${
+                          isSelected ? 'bg-primary/20 border-primary text-primary shadow-lg shadow-primary/10' : ''
+                        } ${
+                          selected && !isSelected ? 'opacity-20 border-transparent grayscale' : ''
+                        }`}
+                      >
                         <div className="flex items-center justify-between gap-4"><span>{option}</span></div>
                       </button>
                     );
@@ -139,7 +149,7 @@ const ArenaSoloQuiz = () => {
                 </div>
 
                 <div className="pt-6">
-                  <button disabled={!selected} onClick={next} className="w-full py-5 bg-slate-900 hover:bg-slate-800 text-white font-black text-xs uppercase tracking-[0.4em] rounded-2xl transition-all disabled:opacity-0 disabled:pointer-events-none shadow-2xl shadow-slate-900/10">
+                  <button disabled={!selected} onClick={next} className="w-full py-5 bg-primary hover:bg-primary/90 text-primary-foreground font-black text-xs uppercase tracking-[0.4em] rounded-2xl transition-all disabled:opacity-0 disabled:pointer-events-none shadow-2xl shadow-primary/20">
                     {index === questions.length - 1 ? "FINISH QUEST" : "NEXT"}
                   </button>
                 </div>
@@ -147,100 +157,38 @@ const ArenaSoloQuiz = () => {
             ) : (
               <div className="flex flex-col items-center text-center space-y-8 animate-in fade-in zoom-in duration-700 overflow-y-auto pr-2 custom-scrollbar">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-amber-100 blur-[80px] rounded-full scale-150 animate-pulse" />
-                  <div className="relative h-24 w-24 rounded-[2rem] bg-amber-500 flex items-center justify-center text-white shadow-2xl shadow-amber-500/30">
+                  <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full scale-150 animate-pulse" />
+                  <div className="relative h-24 w-24 rounded-[2rem] bg-primary flex items-center justify-center text-primary-foreground shadow-2xl shadow-primary/30">
                     <Trophy className="h-12 w-12" />
                   </div>
                 </div>
                 
                 <div className="space-y-3">
-                  <h2 className="text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter uppercase leading-none">{timeLeft === 0 ? "Trial Ended" : "Victory"}</h2>
-                  <p className="text-slate-400 font-medium text-sm">Your wisdom has been recorded in the chronicles.</p>
+                  <h2 className="text-4xl lg:text-5xl font-black text-foreground tracking-tighter uppercase leading-none">{timeLeft === 0 ? "Trial Ended" : "Victory"}</h2>
+                  <p className="text-muted-foreground font-medium text-sm">Your wisdom has been recorded in the chronicles.</p>
                 </div>
 
-                <div className="bg-slate-50/50 backdrop-blur-sm border border-slate-100 rounded-3xl px-12 py-6 w-full max-w-sm">
-                  <p className="text-[9px] uppercase tracking-[0.4em] text-slate-400 font-black mb-1">Wisdom Level</p>
-                  <p className="text-6xl font-black text-slate-900">{(score + (timeLeft / 1000)).toFixed(3).replace(/\.0+$/, '')}</p>
-                  <p className="text-[10px] text-slate-400 mt-2 font-bold uppercase tracking-widest">{score} Correct • {timeLeft}s Bonus</p>
+                <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl px-12 py-6 w-full max-w-sm">
+                  <p className="text-[9px] uppercase tracking-[0.4em] text-muted-foreground font-black mb-1">Wisdom Level</p>
+                  <p className="text-6xl font-black text-foreground">{(score + (timeLeft / 1000)).toFixed(3).replace(/\.0+$/, '')}</p>
+                  <p className="text-[10px] text-muted-foreground mt-2 font-bold uppercase tracking-widest">{score} Correct • {timeLeft}s Bonus</p>
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md pt-4">
-                  <button onClick={() => window.location.reload()} className="flex-1 py-4 bg-amber-500 hover:bg-amber-400 text-white font-black text-[10px] uppercase tracking-[0.2em] rounded-xl transition-all shadow-xl shadow-amber-500/10">Retry Trial</button>
-                  <button onClick={() => navigate("/quiz-arena")} className="flex-1 py-4 bg-white border border-slate-200 text-slate-400 hover:text-slate-900 font-black text-[10px] uppercase tracking-[0.2em] rounded-xl transition-all">Exit Arena</button>
+                  <button onClick={() => window.location.reload()} className="flex-1 py-4 bg-primary hover:bg-primary/90 text-primary-foreground font-black text-[10px] uppercase tracking-[0.2em] rounded-xl transition-all shadow-xl shadow-primary/20">Retry Trial</button>
+                  <button onClick={() => navigate("/quiz-arena")} className="flex-1 py-4 bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground font-black text-[10px] uppercase tracking-[0.2em] rounded-xl transition-all">Exit Arena</button>
                 </div>
               </div>
             )}
           </div>
         </div>
-
-        {/* Rewards Sidebar Disclaimer */}
-        <aside className="w-full lg:w-80 space-y-6 animate-in slide-in-from-right duration-700 delay-300">
-          <div className="bg-white/60 backdrop-blur-xl border border-white rounded-[2.5rem] p-8 shadow-[0_20px_50px_rgba(0,0,0,0.02)] relative overflow-hidden group">
-            <div className="absolute -top-10 -right-10 h-32 w-32 bg-amber-100/50 blur-[50px] rounded-full group-hover:scale-150 transition-transform duration-1000" />
-            
-            <div className="relative z-10 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-50 text-amber-600 text-[10px] font-black uppercase tracking-widest">
-                <Zap className="h-3.5 w-3.5 fill-amber-400" /> Divine Rewards
-              </div>
-              
-              <h3 className="text-2xl font-black text-slate-900 leading-tight uppercase tracking-tighter">
-                Turn Wisdom <br />into <span className="text-amber-500">Wealth</span>
-              </h3>
-              
-              <p className="text-slate-500 text-sm font-medium leading-relaxed">
-                Every righteous answer brings you closer to premium scrolls and instant XP. Join our assembly to unlock the full 'Earn Money' portal.
-              </p>
-
-              <div className="space-y-3 pt-4">
-                <div className="flex items-center gap-3 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                  <ShieldCheck className="h-4 w-4 text-emerald-500" /> Verified Payouts
-                </div>
-                <div className="flex items-center gap-3 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                  <Coins className="h-4 w-4 text-amber-500" /> Instant XP Bonus
-                </div>
-              </div>
-
-              {!session ? (
-                <div className="grid gap-3 pt-6 border-t border-slate-100/50">
-                  <button 
-                    onClick={() => navigate("/auth/register")}
-                    className="w-full py-4 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-slate-900/10 hover:bg-slate-800 transition-all"
-                  >
-                    Join Assembly
-                  </button>
-                  <button 
-                    onClick={() => navigate("/auth/login")}
-                    className="w-full py-4 bg-white border border-slate-200 text-slate-900 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-slate-50 transition-all"
-                  >
-                    Sign In
-                  </button>
-                </div>
-              ) : (
-                <div className="pt-6 border-t border-slate-100/50">
-                  <button 
-                    onClick={() => navigate("/dashboard/earn")}
-                    className="w-full py-4 bg-emerald-600 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-emerald-600/10 hover:bg-emerald-500 transition-all"
-                  >
-                    View Reward Portal
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="px-6 text-center">
-            <p className="text-[9px] font-bold text-slate-300 uppercase tracking-[0.3em] leading-relaxed">
-              *Rewards are based on trial performance and assembly standing.
-            </p>
-          </div>
-        </aside>
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #f1f5f9; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.05); border-radius: 10px; }
       `}} />
     </main>
   );
