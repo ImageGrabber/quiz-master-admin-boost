@@ -9,7 +9,7 @@ interface SEOProps {
   type?: string;
   author?: string;
   robots?: string;
-  structuredData?: Record<string, any>;
+  structuredData?: Record<string, any> | Array<Record<string, any>>;
   children?: React.ReactNode;
 }
 
@@ -44,7 +44,9 @@ const SEO = ({
     ]
   };
 
-  const schema = structuredData || defaultStructuredData;
+  const schemas = Array.isArray(structuredData)
+    ? structuredData
+    : [structuredData || defaultStructuredData];
 
   return (
     <Helmet>
@@ -64,18 +66,24 @@ const SEO = ({
       <meta property="og:description" content={description} />
       <meta property="og:type" content={type} />
       <meta property="og:image" content={imageUrl} />
+      <meta property="og:image:alt" content={title} />
       <meta property="og:url" content={fullUrl} />
+      <meta property="og:locale" content="en_US" />
 
       {/* Twitter Card */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={imageUrl} />
+      <meta name="twitter:site" content="@biblequizcomp" />
+      <meta name="twitter:creator" content="@biblequizcomp" />
 
       {/* Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify(schema)}
-      </script>
+      {schemas.map((schema, index) => (
+        <script key={index} type="application/ld+json">
+          {JSON.stringify(schema)}
+        </script>
+      ))}
 
       {children}
     </Helmet>
@@ -83,4 +91,3 @@ const SEO = ({
 };
 
 export default SEO;
-

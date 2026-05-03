@@ -4,46 +4,103 @@ import { Button } from "@/components/ui/button";
 
 export default function OnlineBibleQuizCompetition2026() {
   const navigate = useNavigate();
+  const siteUrl = "https://biblequizcompetition.com";
 
-  const faqSchema = {
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    "@graph": [
       {
-        "@type": "Question",
-        "name": "How can I join the online Bible quiz competition 2026?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Create a free account, choose an active quiz category, and join from the competition dashboard during the event window."
-        }
+        "@type": "WebPage",
+        name: "Online Bible Quiz Competition 2026",
+        url: `${siteUrl}/online-bible-quiz-competition-2026`,
+        description:
+          "Join the online Bible quiz competition 2026, practice daily, and compete in free timed Bible quizzes.",
+        about: {
+          "@type": "Thing",
+          name: "Bible Quiz Competition 2026",
+        },
       },
       {
-        "@type": "Question",
-        "name": "Is there a registration fee?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. Participation is free for users who register on Bible Quiz Competition."
-        }
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: `${siteUrl}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Online Bible Quiz Competition 2026",
+            item: `${siteUrl}/online-bible-quiz-competition-2026`,
+          },
+        ],
       },
       {
-        "@type": "Question",
-        "name": "What topics are covered in the competition?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Questions cover Old Testament, New Testament, chapter-level quizzes, Bible characters, and thematic categories."
-        }
-      }
-    ]
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "How can I join the online Bible quiz competition 2026?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Create a free account, choose an active quiz category, and join from the competition dashboard during the event window.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "Is there a registration fee?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "No. Participation is free for users who register on Bible Quiz Competition.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "What topics are covered in the competition?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "Questions cover Old Testament, New Testament, chapter-level quizzes, Bible characters, and thematic categories.",
+            },
+          },
+        ],
+      },
+      {
+        "@type": "ItemList",
+        name: "Top Bible Quiz Practice Paths",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Bible Quiz Questions and Answers",
+            url: `${siteUrl}/bible-quiz-questions-and-answers`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Rules and Prizes",
+            url: `${siteUrl}/rules-and-prizes`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "Daily Bible Quiz",
+            url: `${siteUrl}/daily-bible-quiz`,
+          },
+        ],
+      },
+    ],
   };
 
   return (
     <main className="min-h-screen bg-slate-50">
       <SEO
-        title="Online Bible Quiz Competition 2026 | Free Bible Quiz with Prizes"
-        description="Join the Online Bible Quiz Competition 2026. Play free Bible quizzes, improve your scripture knowledge, climb the leaderboard, and compete for prizes."
-        keywords="online bible quiz competition 2026, bible quiz competition 2026, free bible quiz with prizes, christian quiz competition"
+        title="Online Bible Quiz Competition 2026 | Free Daily Bible Quiz, Rules & Prizes"
+        description="Join the Online Bible Quiz Competition 2026. Practice daily Bible quizzes, improve scripture knowledge, check rules and prizes, and climb the public leaderboard."
+        keywords="online bible quiz competition 2026, bible quiz competition 2026, daily bible quiz 2026, free bible quiz with prizes, christian quiz competition, bible leaderboard"
         url="/online-bible-quiz-competition-2026"
-        structuredData={faqSchema}
+        structuredData={structuredData}
       />
 
       <section className="max-w-5xl mx-auto px-4 py-14">
@@ -102,6 +159,22 @@ export default function OnlineBibleQuizCompetition2026() {
             Chapter-based quizzes, beginner book challenges, and public leaderboard practice are currently the fastest ways to build consistency.
             Learners who mix chapter practice with weekly full-book review usually improve rank stability over time.
           </p>
+
+          <h2 className="text-2xl font-bold text-slate-900 mb-3">Related Bible Quiz Pages</h2>
+          <div className="grid sm:grid-cols-2 gap-3 mb-10">
+            <a href="/rules-and-prizes" className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-800 hover:bg-slate-100">
+              Bible Quiz Competition 2026 Rules and Prizes
+            </a>
+            <a href="/bible-quiz-questions-and-answers" className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-800 hover:bg-slate-100">
+              Bible Quiz Questions and Answers (2026)
+            </a>
+            <a href="/daily-bible-quiz" className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-800 hover:bg-slate-100">
+              Daily Bible Quiz
+            </a>
+            <a href="/public-leaderboard" className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-800 hover:bg-slate-100">
+              Public Leaderboard
+            </a>
+          </div>
 
           <div className="flex flex-wrap gap-3">
             <Button onClick={() => navigate("/competition-home")} className="bg-slate-900 hover:bg-black text-white">

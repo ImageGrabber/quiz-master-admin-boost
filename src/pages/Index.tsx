@@ -2269,9 +2269,9 @@ const Index = () => {
   return (
     <>
       <SEO
-        title="Bible Quiz Competition 2026-2026 | Free Online Bible Quizzes & Leaderboards"
-        description="Join the Bible Quiz Competition 2026-2026! Test your Bible knowledge with 1,000+ questions, compete in weekly quizzes, climb leaderboards, and access free Bible Q&A resources. Free to join, fun for all ages. Participate in the ultimate Bible quiz competition of 2026."
-        keywords="bible quiz competition 2026-2026, bible quiz competition, bible quiz 2026, online bible quiz, free bible quiz, bible knowledge quiz, weekly bible quiz, bible quiz leaderboard, bible study quiz, christian quiz competition, bible questions and answers, genesis quiz, exodus quiz, psalms quiz, new testament quiz, bible quiz app, interactive bible quiz, bible quiz for adults, bible quiz for kids, bible competition 2026"
+        title="Bible Quiz Competition 2026 | Free Online Bible Quizzes & Leaderboards"
+        description="Join the Bible Quiz Competition 2026! Test your Bible knowledge with 1,000+ questions, compete in weekly quizzes, climb leaderboards, and access free Bible Q&A resources. Free to join, fun for all ages. Participate in the ultimate Bible quiz competition of 2026."
+        keywords="bible quiz competition 2026, bible quiz competition, bible quiz 2026, online bible quiz, free bible quiz, bible knowledge quiz, weekly bible quiz, bible quiz leaderboard, bible study quiz, christian quiz competition, bible questions and answers, genesis quiz, exodus quiz, psalms quiz, new testament quiz, bible quiz app, interactive bible quiz, bible quiz for adults, bible quiz for kids, bible competition 2026"
         author="Bible Quiz Competition"
         url="/"
         structuredData={[
@@ -2714,7 +2714,7 @@ const Index = () => {
                 Join Thousands of Believers
               </h2>
               <p className="text-lg md:text-xl font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
-                See how our Bible quiz competition platform has helped others grow in faith and wellness. Join thousands participating in Bible competition 2026-2026 and Bible competitions worldwide.
+                See how our Bible quiz competition platform has helped others grow in faith and wellness. Join thousands participating in Bible competition 2026 and Bible competitions worldwide.
               </p>
             </div>
 
@@ -2977,7 +2977,7 @@ const Index = () => {
                 Ready to Start Your Journey?
               </h2>
               <p className="text-base md:text-base font-urbanist font-light text-gray-500 mb-0 md:mb-1 max-w-xl mx-auto leading-relaxed">
-                Join thousands of believers who've enhanced their Bible knowledge and wellness with our platform. Participate in the Bible quiz competition 2026-2026, check Bible quiz competition 2026-2026 results, and compete in the best online Bible quiz competition and Bible competitions.
+                Join thousands of believers who've enhanced their Bible knowledge and wellness with our platform. Participate in the Bible quiz competition 2026, check Bible quiz competition 2026 results, and compete in the best online Bible quiz competition and Bible competitions.
               </p>
             </div>
 
@@ -3011,7 +3011,7 @@ const Index = () => {
                   <span className="text-lg font-urbanist font-light text-gray-900">Bible Quiz Competition</span>
                 </div>
                 <p className="font-urbanist font-light text-gray-600 mb-4 max-w-md">
-                  More than a quiz platform. Join the leading Bible quiz competition 2026-2026 and participate in online Bible quiz competition. We support you through Bible study, emotional wellness, CBT tools, water intake tracking, and every step of your journey toward peace. Check Bible quiz competition 2026-2026 results and compete in Bible competition challenges.
+                  More than a quiz platform. Join the leading Bible quiz competition 2026 and participate in online Bible quiz competition. We support you through Bible study, emotional wellness, CBT tools, water intake tracking, and every step of your journey toward peace. Check Bible quiz competition 2026 results and compete in Bible competition challenges.
                 </p>
               </div>
 
