@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import AdSenseTag from "@/components/AdSenseTag";
 import { generateVideoSchema } from "@/utils/video-seo";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
@@ -268,6 +269,7 @@ const HindiSongDetail = () => {
                     {JSON.stringify(jsonLd)}
                 </script>
             </Helmet>
+            <AdSenseTag />
 
             <Navigation />
 

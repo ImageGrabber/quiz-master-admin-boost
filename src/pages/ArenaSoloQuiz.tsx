@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Timer, CheckCircle2, Trophy } from "lucide-react";
+import { ArrowLeft, Timer, CheckCircle2, Trophy, Zap, Coins, ShieldCheck } from "lucide-react";
 import { specificChapterQuizzes } from "@/data/specific-chapter-quizzes";
 import { md5 } from "@/utils/md5";
+import { supabase } from "@/integrations/supabase/client";
 
 type Question = {
   question: string;
@@ -18,6 +19,21 @@ const ArenaSoloQuiz = () => {
   const [selected, setSelected] = useState<string | null>(null);
   const [done, setDone] = useState(false);
   const [timeLeft, setTimeLeft] = useState(240); // 4 minutes
+  const [session, setSession] = useState<any>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
 
   // Initialize: Load questions pool
   useEffect(() => {
@@ -93,8 +109,8 @@ const ArenaSoloQuiz = () => {
         </div>
       </header>
 
-      <div className="flex-1 flex flex-col justify-center min-h-0 px-6">
-        <div className="mx-auto max-w-4xl w-full">
+      <div className="flex-1 flex flex-col lg:flex-row justify-center items-center gap-8 min-h-0 px-6 max-w-[1400px] mx-auto w-full">
+        <div className="flex-1 max-w-4xl w-full">
           <div className="bg-white/80 backdrop-blur-xl border border-white rounded-[2.5rem] p-8 lg:p-12 shadow-[0_30px_100px_rgba(0,0,0,0.03)] relative overflow-hidden flex flex-col max-h-[85vh]">
             <div className="absolute top-0 left-0 w-full h-1.5 bg-slate-50 overflow-hidden">
               <div className="h-full bg-gradient-to-r from-amber-500 to-amber-300 transition-all duration-700 ease-out relative" style={{ width: `${progress}%` }}>
@@ -156,6 +172,68 @@ const ArenaSoloQuiz = () => {
             )}
           </div>
         </div>
+
+        {/* Rewards Sidebar Disclaimer */}
+        <aside className="w-full lg:w-80 space-y-6 animate-in slide-in-from-right duration-700 delay-300">
+          <div className="bg-white/60 backdrop-blur-xl border border-white rounded-[2.5rem] p-8 shadow-[0_20px_50px_rgba(0,0,0,0.02)] relative overflow-hidden group">
+            <div className="absolute -top-10 -right-10 h-32 w-32 bg-amber-100/50 blur-[50px] rounded-full group-hover:scale-150 transition-transform duration-1000" />
+            
+            <div className="relative z-10 space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-50 text-amber-600 text-[10px] font-black uppercase tracking-widest">
+                <Zap className="h-3.5 w-3.5 fill-amber-400" /> Divine Rewards
+              </div>
+              
+              <h3 className="text-2xl font-black text-slate-900 leading-tight uppercase tracking-tighter">
+                Turn Wisdom <br />into <span className="text-amber-500">Wealth</span>
+              </h3>
+              
+              <p className="text-slate-500 text-sm font-medium leading-relaxed">
+                Every righteous answer brings you closer to premium scrolls and instant XP. Join our assembly to unlock the full 'Earn Money' portal.
+              </p>
+
+              <div className="space-y-3 pt-4">
+                <div className="flex items-center gap-3 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                  <ShieldCheck className="h-4 w-4 text-emerald-500" /> Verified Payouts
+                </div>
+                <div className="flex items-center gap-3 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                  <Coins className="h-4 w-4 text-amber-500" /> Instant XP Bonus
+                </div>
+              </div>
+
+              {!session ? (
+                <div className="grid gap-3 pt-6 border-t border-slate-100/50">
+                  <button 
+                    onClick={() => navigate("/auth/register")}
+                    className="w-full py-4 bg-slate-900 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-slate-900/10 hover:bg-slate-800 transition-all"
+                  >
+                    Join Assembly
+                  </button>
+                  <button 
+                    onClick={() => navigate("/auth/login")}
+                    className="w-full py-4 bg-white border border-slate-200 text-slate-900 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-slate-50 transition-all"
+                  >
+                    Sign In
+                  </button>
+                </div>
+              ) : (
+                <div className="pt-6 border-t border-slate-100/50">
+                  <button 
+                    onClick={() => navigate("/dashboard/earn")}
+                    className="w-full py-4 bg-emerald-600 text-white rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-emerald-600/10 hover:bg-emerald-500 transition-all"
+                  >
+                    View Reward Portal
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="px-6 text-center">
+            <p className="text-[9px] font-bold text-slate-300 uppercase tracking-[0.3em] leading-relaxed">
+              *Rewards are based on trial performance and assembly standing.
+            </p>
+          </div>
+        </aside>
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `

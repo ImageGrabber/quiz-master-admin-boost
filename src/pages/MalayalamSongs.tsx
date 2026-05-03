@@ -1,4 +1,5 @@
 import SEO from "@/components/SEO";
+import AdSenseTag from "@/components/AdSenseTag";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -59,6 +60,7 @@ const MalayalamSongs = () => {
                 author="Bible Quiz Competition"
                 url="/malayalam-songs"
             />
+            <AdSenseTag />
 
             <Navigation />
 

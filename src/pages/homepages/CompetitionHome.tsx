@@ -544,62 +544,62 @@ const CompetitionHome = () => {
                 <p className="text-lg text-gray-500 font-light leading-relaxed mb-10">
                   More than just a game. It's a journey to deepen your understanding of the Scripture through consistent, engaging practice.
                 </p>
-                <img 
-                  src="/images/home/bible_quiz_glowing.png" 
-                  alt="Glowing open Bible with insightful quiz questions floating, highly effective for scripture learning and bible knowledge" 
-                  className="rounded-[2.25rem] shadow-2xl w-full border border-gray-200 hidden lg:block" 
+                <img
+                  src="/images/home/bible_quiz_glowing.png"
+                  alt="Glowing open Bible with insightful quiz questions floating, highly effective for scripture learning and bible knowledge"
+                  className="rounded-[2.25rem] shadow-2xl w-full border border-gray-200 hidden lg:block"
                 />
               </div>
 
               <div className="grid sm:grid-cols-2 gap-6">
-              {[
-                {
-                  icon: <Calendar className="w-6 h-6 text-blue-600" />,
-                  title: "Daily Habits",
-                  desc: "Build consistency with fresh bible quiz competition 2026 challenges every single day.",
-                  color: "bg-blue-50"
-                },
-                {
-                  icon: <TrendingUp className="w-6 h-6 text-emerald-600" />,
-                  title: "Track Progress",
-                  desc: "Visualize your growth and see how much you've learned as a bible challenger.",
-                  color: "bg-emerald-50"
-                },
-                {
-                  icon: <Users className="w-6 h-6 text-violet-600" />,
-                  title: "Community",
-                  desc: "Connect with like-minded believers in this online bible quiz competition.",
-                  color: "bg-violet-50"
-                },
-                {
-                  icon: <Zap className="w-6 h-6 text-amber-600" />,
-                  title: "Instant Feedback",
-                  desc: "Get immediate answers and explanations to learn faster after every quiz.",
-                  color: "bg-amber-50"
-                },
-                {
-                  icon: <Clock className="w-6 h-6 text-pink-600" />,
-                  title: "Fair Scoring",
-                  desc: "Read our quiz scoring system explanation, including timer bonus and tie-break rules.",
-                  color: "bg-pink-50"
-                },
-                {
-                  icon: <Globe className="w-6 h-6 text-cyan-600" />,
-                  title: "Global Ranking",
-                  desc: "Compare your bible quiz competition 2026 results with challengers worldwide on the leaderboard.",
-                  color: "bg-cyan-50"
-                }
-              ].map((feature, idx) => (
-                <div key={idx} className="group p-8 rounded-[2rem] bg-white border border-gray-200 hover:border-black/20 shadow-xl shadow-black/5 hover:-translate-y-1 transition-all duration-500">
-                  <div className={`w-14 h-14 rounded-2xl ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    {feature.icon}
+                {[
+                  {
+                    icon: <Calendar className="w-6 h-6 text-blue-600" />,
+                    title: "Daily Habits",
+                    desc: "Build consistency with fresh bible quiz competition 2026 challenges every single day.",
+                    color: "bg-blue-50"
+                  },
+                  {
+                    icon: <TrendingUp className="w-6 h-6 text-emerald-600" />,
+                    title: "Track Progress",
+                    desc: "Visualize your growth and see how much you've learned as a bible challenger.",
+                    color: "bg-emerald-50"
+                  },
+                  {
+                    icon: <Users className="w-6 h-6 text-violet-600" />,
+                    title: "Community",
+                    desc: "Connect with like-minded believers in this online bible quiz competition.",
+                    color: "bg-violet-50"
+                  },
+                  {
+                    icon: <Zap className="w-6 h-6 text-amber-600" />,
+                    title: "Instant Feedback",
+                    desc: "Get immediate answers and explanations to learn faster after every quiz.",
+                    color: "bg-amber-50"
+                  },
+                  {
+                    icon: <Clock className="w-6 h-6 text-pink-600" />,
+                    title: "Fair Scoring",
+                    desc: "Read our quiz scoring system explanation, including timer bonus and tie-break rules.",
+                    color: "bg-pink-50"
+                  },
+                  {
+                    icon: <Globe className="w-6 h-6 text-cyan-600" />,
+                    title: "Global Ranking",
+                    desc: "Compare your bible quiz competition 2026 results with challengers worldwide on the leaderboard.",
+                    color: "bg-cyan-50"
+                  }
+                ].map((feature, idx) => (
+                  <div key={idx} className="group p-8 rounded-[2rem] bg-white border border-gray-200 hover:border-black/20 shadow-xl shadow-black/5 hover:-translate-y-1 transition-all duration-500">
+                    <div className={`w-14 h-14 rounded-2xl ${feature.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                      {feature.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-black transition-colors">{feature.title}</h3>
+                    <p className="text-gray-500 leading-relaxed font-light">
+                      {feature.desc}
+                    </p>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-black transition-colors">{feature.title}</h3>
-                  <p className="text-gray-500 leading-relaxed font-light">
-                    {feature.desc}
-                  </p>
-                </div>
-              ))}
+                ))}
               </div>
             </div>
           </div>
@@ -617,12 +617,12 @@ const CompetitionHome = () => {
             </div>
 
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <img 
-                src="/images/home/bible_study_group.png" 
-                alt="Diverse group of young adults studying the Bible together in a modern bright cafe, preparing for the upcoming bible challenge" 
-                className="rounded-[2.5rem] shadow-2xl w-full object-cover hidden lg:block" 
+              <img
+                src="/images/home/bible_study_group.png"
+                alt="Diverse group of young adults studying the Bible together in a modern bright cafe, preparing for the upcoming bible challenge"
+                className="rounded-[2.5rem] shadow-2xl w-full object-cover hidden lg:block"
               />
-               
+
               <div className="grid sm:grid-cols-2 gap-6">
                 {[
                   { title: "1. Register Free", desc: "Sign up instantly to join the online bible quiz competition 2026.", icon: Users },
@@ -730,73 +730,73 @@ const CompetitionHome = () => {
         {/* Specialized Biblical Resources - New SEO High-Impact Section */}
         <section className="py-24 bg-white border-b border-gray-100">
           <div className="max-w-7xl mx-auto px-6">
-             <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
-                <div className="max-w-2xl">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-indigo-600 mb-5">Deepening Your Walk</p>
-                  <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Specialized Biblical Resources</h2>
-                  <p className="text-lg text-gray-500 font-light leading-relaxed">
-                    Explore our curated collection of resources designed for specific study needs, from character deep-dives to finding peace in difficult times.
-                  </p>
-                </div>
-             </div>
+            <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+              <div className="max-w-2xl">
+                <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-indigo-600 mb-5">Deepening Your Walk</p>
+                <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Specialized Biblical Resources</h2>
+                <p className="text-lg text-gray-500 font-light leading-relaxed">
+                  Explore our curated collection of resources designed for specific study needs, from character deep-dives to finding peace in difficult times.
+                </p>
+              </div>
+            </div>
 
-             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                {/* Bible Characters Hub */}
-                <div className="group cursor-pointer rounded-[2.5rem] border border-gray-100 p-8 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all duration-500" onClick={() => navigate("/bible-characters")}>
-                   <div className="w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                      <Users className="w-7 h-7 text-indigo-600" />
-                   </div>
-                   <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">Bible Characters</h3>
-                   <p className="text-gray-500 font-light leading-relaxed mb-8">
-                      Meet the people of the Bible. From Abraham's faith to Paul's journey, explore the humans God used to change history.
-                   </p>
-                   <Button variant="ghost" className="p-0 text-indigo-600 hover:bg-transparent group-hover:translate-x-1 transition-transform">
-                      Meet the Heroes <ArrowRight className="ml-2 w-4 h-4" />
-                   </Button>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {/* Bible Characters Hub */}
+              <div className="group cursor-pointer rounded-[2.5rem] border border-gray-100 p-8 hover:border-indigo-100 hover:bg-indigo-50/30 transition-all duration-500" onClick={() => navigate("/bible-characters")}>
+                <div className="w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                  <Users className="w-7 h-7 text-indigo-600" />
                 </div>
+                <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">Bible Characters</h3>
+                <p className="text-gray-500 font-light leading-relaxed mb-8">
+                  Meet the people of the Bible. From Abraham's faith to Paul's journey, explore the humans God used to change history.
+                </p>
+                <Button variant="ghost" className="p-0 text-indigo-600 hover:bg-transparent group-hover:translate-x-1 transition-transform">
+                  Meet the Heroes <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </div>
 
-                {/* Peace & Anxiety */}
-                <div className="group cursor-pointer rounded-[2.5rem] border border-gray-100 p-8 hover:border-sky-100 hover:bg-sky-50/30 transition-all duration-500" onClick={() => navigate("/verses/peace-and-anxiety")}>
-                   <div className="w-14 h-14 rounded-2xl bg-sky-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                      <Heart className="w-7 h-7 text-sky-600" />
-                   </div>
-                   <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">Finding Peace</h3>
-                   <p className="text-gray-500 font-light leading-relaxed mb-8">
-                      Are you feeling anxious? Discover the promises of God for peace, rest, and strength during life's most challenging seasons.
-                   </p>
-                   <Button variant="ghost" className="p-0 text-sky-600 hover:bg-transparent group-hover:translate-x-1 transition-transform">
-                      Find Comfort <ArrowRight className="ml-2 w-4 h-4" />
-                   </Button>
+              {/* Peace & Anxiety */}
+              <div className="group cursor-pointer rounded-[2.5rem] border border-gray-100 p-8 hover:border-sky-100 hover:bg-sky-50/30 transition-all duration-500" onClick={() => navigate("/verses/peace-and-anxiety")}>
+                <div className="w-14 h-14 rounded-2xl bg-sky-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                  <Heart className="w-7 h-7 text-sky-600" />
                 </div>
+                <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">Finding Peace</h3>
+                <p className="text-gray-500 font-light leading-relaxed mb-8">
+                  Are you feeling anxious? Discover the promises of God for peace, rest, and strength during life's most challenging seasons.
+                </p>
+                <Button variant="ghost" className="p-0 text-sky-600 hover:bg-transparent group-hover:translate-x-1 transition-transform">
+                  Find Comfort <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </div>
 
-                {/* Parables Quiz */}
-                <div className="group cursor-pointer rounded-[2.5rem] border border-gray-100 p-8 hover:border-amber-100 hover:bg-amber-50/30 transition-all duration-500" onClick={() => navigate("/quizzes/parables-of-jesus")}>
-                   <div className="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                      <Sparkles className="w-7 h-7 text-amber-600" />
-                   </div>
-                   <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">Parables of Jesus</h3>
-                   <p className="text-gray-500 font-light leading-relaxed mb-8">
-                      Step into the stories of Jesus. Test your understanding of the wisdom He shared through earthly tales with heavenly meanings.
-                   </p>
-                   <Button variant="ghost" className="p-0 text-amber-600 hover:bg-transparent group-hover:translate-x-1 transition-transform">
-                      Start Parables Quiz <ArrowRight className="ml-2 w-4 h-4" />
-                   </Button>
+              {/* Parables Quiz */}
+              <div className="group cursor-pointer rounded-[2.5rem] border border-gray-100 p-8 hover:border-amber-100 hover:bg-amber-50/30 transition-all duration-500" onClick={() => navigate("/quizzes/parables-of-jesus")}>
+                <div className="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                  <Sparkles className="w-7 h-7 text-amber-600" />
                 </div>
+                <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">Parables of Jesus</h3>
+                <p className="text-gray-500 font-light leading-relaxed mb-8">
+                  Step into the stories of Jesus. Test your understanding of the wisdom He shared through earthly tales with heavenly meanings.
+                </p>
+                <Button variant="ghost" className="p-0 text-amber-600 hover:bg-transparent group-hover:translate-x-1 transition-transform">
+                  Start Parables Quiz <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </div>
 
-                {/* Top 100 Questions */}
-                <div className="group cursor-pointer rounded-[2.5rem] border border-gray-100 p-8 hover:border-emerald-100 hover:bg-emerald-50/30 transition-all duration-500" onClick={() => navigate("/top-100-bible-quiz-questions")}>
-                   <div className="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                      <Trophy className="w-7 h-7 text-emerald-600" />
-                   </div>
-                   <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">The Mega Trivia</h3>
-                   <p className="text-gray-500 font-light leading-relaxed mb-8">
-                      Master the ultimate list of 100 Bible questions. Perfect for individual study or preparing for our global competitions.
-                   </p>
-                   <Button variant="ghost" className="p-0 text-emerald-600 hover:bg-transparent group-hover:translate-x-1 transition-transform">
-                      Master the List <ArrowRight className="ml-2 w-4 h-4" />
-                   </Button>
+              {/* Top 100 Questions */}
+              <div className="group cursor-pointer rounded-[2.5rem] border border-gray-100 p-8 hover:border-emerald-100 hover:bg-emerald-50/30 transition-all duration-500" onClick={() => navigate("/top-100-bible-quiz-questions")}>
+                <div className="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                  <Trophy className="w-7 h-7 text-emerald-600" />
                 </div>
-             </div>
+                <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">The Mega Trivia</h3>
+                <p className="text-gray-500 font-light leading-relaxed mb-8">
+                  Master the ultimate list of 100 Bible questions. Perfect for individual study or preparing for our global competitions.
+                </p>
+                <Button variant="ghost" className="p-0 text-emerald-600 hover:bg-transparent group-hover:translate-x-1 transition-transform">
+                  Master the List <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -996,10 +996,10 @@ const CompetitionHome = () => {
                 </Button>
               </div>
               <div className="flex-1 w-full max-w-sm mx-auto">
-                <img 
-                  src="/images/home/bible_quiz_trophy.png" 
-                  alt="Majestic golden trophy representing excellence and victory in the global Bible Quiz Competition" 
-                  className="w-full rounded-3xl shadow-2xl border-4 border-slate-800/50 transform hover:scale-105 transition-transform duration-500" 
+                <img
+                  src="/images/home/bible_quiz_trophy.png"
+                  alt="Majestic golden trophy representing excellence and victory in the global Bible Quiz Competition"
+                  className="w-full rounded-3xl shadow-2xl border-4 border-slate-800/50 transform hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>

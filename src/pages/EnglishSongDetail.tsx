@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import AdSenseTag from "@/components/AdSenseTag";
 import { generateVideoSchema } from "@/utils/video-seo";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
@@ -93,6 +94,7 @@ const EnglishSongDetail = () => {
                 <meta property="twitter:card" content="summary_large_image" />
                 <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
             </Helmet>
+            <AdSenseTag />
 
             <Navigation />
 

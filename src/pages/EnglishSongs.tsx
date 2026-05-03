@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import AdSenseTag from "@/components/AdSenseTag";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -59,6 +60,7 @@ const EnglishSongs = () => {
                 />
                 <link rel="canonical" href="https://biblequizcompetition.com/english-songs" />
             </Helmet>
+            <AdSenseTag />
 
             <Navigation />
 

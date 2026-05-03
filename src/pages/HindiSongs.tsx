@@ -1,4 +1,5 @@
 import { Helmet } from "react-helmet-async";
+import AdSenseTag from "@/components/AdSenseTag";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -123,6 +124,7 @@ const HindiSongs = () => {
                     })}
                 </script>
             </Helmet>
+            <AdSenseTag />
 
             <Navigation />
 

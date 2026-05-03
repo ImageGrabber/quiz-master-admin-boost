@@ -9,6 +9,7 @@ import { Brain, Clock, Target, Trophy, ArrowRight, Play, Search, BookOpen, Arrow
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import DashboardLayout from "@/components/DashboardLayout";
+import PromotionalSidebar from "@/components/PromotionalSidebar";
 import {
   Dialog,
   DialogContent,
@@ -267,175 +268,181 @@ const QuizSelection = () => {
         </DialogContent>
       </Dialog>
 
-      <div className="max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500 py-8 px-4">
-
-        {!selectedTestament ? (
-          /* Testament Selection View */
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-8">
-            <Card
-              className="cursor-pointer bg-white border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 group relative overflow-hidden"
-              onClick={() => setSelectedTestament('Old Testament')}
-            >
-              <div className="absolute top-0 left-0 w-1 h-full bg-amber-500" />
-              <CardContent className="flex flex-col items-center justify-center p-12 text-center">
-                <div className="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-200">
-                  <BookOpen className="w-8 h-8 text-amber-600" />
-                </div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-2">Old Testament</h2>
-                <p className="text-slate-500 mb-6">Genesis to Malachi</p>
-                <div className="flex items-center text-blue-600 font-medium text-sm">
-                  View Quizzes <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card
-              className="cursor-pointer bg-white border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 group relative overflow-hidden"
-              onClick={() => setSelectedTestament('New Testament')}
-            >
-              <div className="absolute top-0 left-0 w-1 h-full bg-blue-500" />
-              <CardContent className="flex flex-col items-center justify-center p-12 text-center">
-                <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-200">
-                  <BookOpen className="w-8 h-8 text-blue-600" />
-                </div>
-                <h2 className="text-2xl font-bold text-slate-900 mb-2">New Testament</h2>
-                <p className="text-slate-500 mb-6">Matthew to Revelation</p>
-                <div className="flex items-center text-blue-600 font-medium text-sm">
-                  View Quizzes <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        ) : (
-          /* Quiz Selection View */
-          <>
-            <div className="flex items-center gap-4 mb-6">
-              <Button
-                variant="ghost"
-                onClick={() => setSelectedTestament(null)}
-                className="hover:bg-slate-100 text-slate-600"
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 animate-in fade-in duration-500 py-8 px-4">
+        
+        {/* Main Content Area */}
+        <div className="flex-1 space-y-8">
+          {!selectedTestament ? (
+            /* Testament Selection View */
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mt-8">
+              <Card
+                className="cursor-pointer bg-white border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 group relative overflow-hidden"
+                onClick={() => setSelectedTestament('Old Testament')}
               >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Testaments
-              </Button>
-              <h2 className="text-2xl font-bold text-slate-900">{selectedTestament} Quizzes</h2>
-            </div>
-
-            {/* Search Bar - Minimal */}
-            <div className="relative max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
-              <Input
-                placeholder="Search quizzes..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-white border-slate-200 focus-visible:ring-blue-500"
-              />
-            </div>
-
-            {/* Quiz Grid */}
-            {quizzes.length === 0 ? (
-              <Card className="shadow-2xl border-0 bg-white/90 backdrop-blur-md ring-1 ring-white/20">
-                <CardContent className="pt-12 pb-12">
-                  <div className="text-center">
-                    <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl mx-auto mb-6">
-                      <Brain className="w-10 h-10 text-gray-400" />
-                    </div>
-                    <h3 className="text-2xl font-semibold text-gray-700 mb-3">No quizzes available</h3>
-                    <p className="text-gray-500 mb-8 max-w-md mx-auto">Check back later for new quizzes or contact an administrator.</p>
-                    <Button onClick={() => navigate("/dashboard")} className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                      Back to Dashboard
-                    </Button>
+                <div className="absolute top-0 left-0 w-1 h-full bg-amber-500" />
+                <CardContent className="flex flex-col items-center justify-center p-12 text-center">
+                  <div className="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-200">
+                    <BookOpen className="w-8 h-8 text-amber-600" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-slate-900 mb-2">Old Testament</h2>
+                  <p className="text-slate-500 mb-6">Genesis to Malachi</p>
+                  <div className="flex items-center text-blue-600 font-medium text-sm">
+                    View Quizzes <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </CardContent>
               </Card>
-            ) : filteredQuizzes.length === 0 ? (
-              <Card className="bg-white border-slate-100 shadow-sm">
-                <CardContent className="pt-12 pb-12">
-                  <div className="text-center">
-                    <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-50 rounded-2xl mx-auto mb-6">
-                      <Search className="w-10 h-10 text-blue-400" />
-                    </div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-2">No quizzes match</h3>
-                    <p className="text-slate-500 mb-6 max-w-sm mx-auto">Try changing your search terms or filters.</p>
-                    <Button onClick={clearFilters} variant="outline">
-                      Clear Filters
-                    </Button>
+
+              <Card
+                className="cursor-pointer bg-white border-slate-100 shadow-sm hover:shadow-md transition-all duration-200 group relative overflow-hidden"
+                onClick={() => setSelectedTestament('New Testament')}
+              >
+                <div className="absolute top-0 left-0 w-1 h-full bg-blue-500" />
+                <CardContent className="flex flex-col items-center justify-center p-12 text-center">
+                  <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-200">
+                    <BookOpen className="w-8 h-8 text-blue-600" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-slate-900 mb-2">New Testament</h2>
+                  <p className="text-slate-500 mb-6">Matthew to Revelation</p>
+                  <div className="flex items-center text-blue-600 font-medium text-sm">
+                    View Quizzes <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </CardContent>
               </Card>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredQuizzes.map((quiz) => (
-                  <Card key={quiz.id} className="bg-white border-slate-100 shadow-sm hover:shadow-md transition-all duration-200">
-                    <CardHeader className="pb-3">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <CardTitle className="text-lg font-bold text-slate-900 mb-2 line-clamp-1">
-                            {quiz.title}
-                          </CardTitle>
-                          <p className="text-slate-500 text-sm leading-relaxed line-clamp-2 h-10">
-                            {quiz.description}
-                          </p>
-                        </div>
-                      </div>
-                    </CardHeader>
-
-                    <CardContent className="space-y-4">
-                      {/* Quiz Stats */}
-                      <div className="grid grid-cols-3 gap-2 py-2 border-t border-b border-slate-50">
-                        <div className="text-center">
-                          <div className="text-xs font-medium text-slate-500 mb-1">Questions</div>
-                          <div className="text-sm font-bold text-slate-900 flex items-center justify-center gap-1">
-                            <Target className="w-3 h-3 text-blue-500" />
-                            {quiz.question_count}
-                          </div>
-                        </div>
-
-                        <div className="text-center border-l border-slate-50">
-                          <div className="text-xs font-medium text-slate-500 mb-1">Time</div>
-                          <div className="text-sm font-bold text-slate-900 flex items-center justify-center gap-1">
-                            <Clock className="w-3 h-3 text-emerald-500" />
-                            {quiz.estimated_time}m
-                          </div>
-                        </div>
-
-                        <div className="text-center border-l border-slate-50">
-                          <div className="text-xs font-medium text-slate-500 mb-1">Points</div>
-                          <div className="text-sm font-bold text-slate-900 flex items-center justify-center gap-1">
-                            <Trophy className="w-3 h-3 text-yellow-500" />
-                            100
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between gap-3 pt-2">
-                        <Badge variant="outline" className={`${getDifficultyColor(quiz.difficulty)} border-0 px-3`}>
-                          {quiz.difficulty}
-                        </Badge>
-
-                        <Button
-                          size="sm"
-                          onClick={() => handleStartQuiz(quiz.id)}
-                          className={`flex-1 font-medium shadow-none transition-colors
-                            ${completedQuizzes.has(quiz.id)
-                              ? "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                              : "bg-blue-600 hover:bg-blue-700 text-white"
-                            }`}
-                        >
-                          {completedQuizzes.has(quiz.id) ? (
-                            <>Retake</>
-                          ) : (
-                            <>Start Quiz</>
-                          )}
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
+            </div>
+          ) : (
+            /* Quiz Selection View */
+            <>
+              <div className="flex items-center gap-4 mb-6">
+                <Button
+                  variant="ghost"
+                  onClick={() => setSelectedTestament(null)}
+                  className="hover:bg-slate-100 text-slate-600"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Testaments
+                </Button>
+                <h2 className="text-2xl font-bold text-slate-900">{selectedTestament} Quizzes</h2>
               </div>
-            )}
-          </>
-        )}
+
+              {/* Search Bar - Minimal */}
+              <div className="relative max-w-md">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+                <Input
+                  placeholder="Search quizzes..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 bg-white border-slate-200 focus-visible:ring-blue-500"
+                />
+              </div>
+
+              {/* Quiz Grid */}
+              {quizzes.length === 0 ? (
+                <Card className="shadow-2xl border-0 bg-white/90 backdrop-blur-md ring-1 ring-white/20">
+                  <CardContent className="pt-12 pb-12">
+                    <div className="text-center">
+                      <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl mx-auto mb-6">
+                        <Brain className="w-10 h-10 text-gray-400" />
+                      </div>
+                      <h3 className="text-2xl font-semibold text-gray-700 mb-3">No quizzes available</h3>
+                      <p className="text-gray-500 mb-8 max-w-md mx-auto">Check back later for new quizzes or contact an administrator.</p>
+                      <Button onClick={() => navigate("/dashboard")} className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                        Back to Dashboard
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ) : filteredQuizzes.length === 0 ? (
+                <Card className="bg-white border-slate-100 shadow-sm">
+                  <CardContent className="pt-12 pb-12">
+                    <div className="text-center">
+                      <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-50 rounded-2xl mx-auto mb-6">
+                        <Search className="w-10 h-10 text-blue-400" />
+                      </div>
+                      <h3 className="text-xl font-bold text-slate-900 mb-2">No quizzes match</h3>
+                      <p className="text-slate-500 mb-6 max-w-sm mx-auto">Try changing your search terms or filters.</p>
+                      <Button onClick={clearFilters} variant="outline">
+                        Clear Filters
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {filteredQuizzes.map((quiz) => (
+                    <Card key={quiz.id} className="bg-white border-slate-100 shadow-sm hover:shadow-md transition-all duration-200">
+                      <CardHeader className="pb-3">
+                        <div className="flex items-start justify-between">
+                          <div className="flex-1">
+                            <CardTitle className="text-lg font-bold text-slate-900 mb-2 line-clamp-1">
+                              {quiz.title}
+                            </CardTitle>
+                            <p className="text-slate-500 text-sm leading-relaxed line-clamp-2 h-10">
+                              {quiz.description}
+                            </p>
+                          </div>
+                        </div>
+                      </CardHeader>
+
+                      <CardContent className="space-y-4">
+                        {/* Quiz Stats */}
+                        <div className="grid grid-cols-3 gap-2 py-2 border-t border-b border-slate-50">
+                          <div className="text-center">
+                            <div className="text-xs font-medium text-slate-500 mb-1">Questions</div>
+                            <div className="text-sm font-bold text-slate-900 flex items-center justify-center gap-1">
+                              <Target className="w-3 h-3 text-blue-500" />
+                              {quiz.question_count}
+                            </div>
+                          </div>
+
+                          <div className="text-center border-l border-slate-50">
+                            <div className="text-xs font-medium text-slate-500 mb-1">Time</div>
+                            <div className="text-sm font-bold text-slate-900 flex items-center justify-center gap-1">
+                              <Clock className="w-3 h-3 text-emerald-500" />
+                              {quiz.estimated_time}m
+                            </div>
+                          </div>
+
+                          <div className="text-center border-l border-slate-50">
+                            <div className="text-xs font-medium text-slate-500 mb-1">Points</div>
+                            <div className="text-sm font-bold text-slate-900 flex items-center justify-center gap-1">
+                              <Trophy className="w-3 h-3 text-yellow-500" />
+                              100
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center justify-between gap-3 pt-2">
+                          <Badge variant="outline" className={`${getDifficultyColor(quiz.difficulty)} border-0 px-3`}>
+                            {quiz.difficulty}
+                          </Badge>
+
+                          <Button
+                            size="sm"
+                            onClick={() => handleStartQuiz(quiz.id)}
+                            className={`flex-1 font-medium shadow-none transition-colors
+                              ${completedQuizzes.has(quiz.id)
+                                ? "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                                : "bg-blue-600 hover:bg-blue-700 text-white"
+                              }`}
+                          >
+                            {completedQuizzes.has(quiz.id) ? (
+                              <>Retake</>
+                            ) : (
+                              <>Start Quiz</>
+                            )}
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+        </div>
+
+        {/* Sidebar */}
+        <PromotionalSidebar />
       </div>
     </DashboardLayout>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import SEO from "@/components/SEO";
+import AdSenseTag from "@/components/AdSenseTag";
 import { useNavigate } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -63,6 +64,7 @@ const SongsHub = () => {
         description="The ultimate Christian music hub for 2026. Explore thousands of Malayalam, Hindi, and English worship song lyrics, guitar chords, and English translations."
         keywords="christian song lyrics 2026, malayalam worship songs, hindi christian songs with chords, english hymns lyrics, christian music hub"
       />
+      <AdSenseTag />
 
       <Navigation />
 

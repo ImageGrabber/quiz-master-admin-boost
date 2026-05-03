@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Timer, Users, Bot, Zap, Swords, CheckCircle2, XCircle } from "lucide-react";
+import { ArrowLeft, Users, Zap, Swords, CheckCircle2, XCircle, UserRound } from "lucide-react";
 import { specificChapterQuizzes } from "@/data/specific-chapter-quizzes";
 import { supabase } from "@/integrations/supabase/client";
 import { v4 as uuidv4 } from 'uuid';
@@ -20,7 +20,7 @@ const ArenaMultiplayerQuiz = () => {
   const [turn, setTurn] = useState<'user' | 'opponent'>('user');
   const [userScore, setUserScore] = useState(0);
   const [opponentScore, setOpponentScore] = useState(0);
-  const [opponentName, setOpponentName] = useState("DISCIPLE BOT");
+  const [opponentName, setOpponentName] = useState("DISCIPLE RIVAL");
   const [isBot, setIsBot] = useState(true);
   const [selected, setSelected] = useState<string | null>(null);
   const [botAction, setBotAction] = useState<string>("");
@@ -172,7 +172,7 @@ const ArenaMultiplayerQuiz = () => {
   useEffect(() => {
     if (phase !== 'battle' || turn !== 'opponent' || !isBot || index >= questions.length) return;
 
-    setBotAction("Contemplating...");
+      setBotAction("Preparing move...");
     const currentQ = questions[index];
     
     const timer = setTimeout(() => {
@@ -368,9 +368,9 @@ const ArenaMultiplayerQuiz = () => {
         <div className={`flex flex-col transition-all duration-500 ${turn === 'opponent' ? 'scale-100 opacity-100' : 'scale-95 opacity-30 pointer-events-none grayscale blur-[2px]'}`}>
           <div className="bg-white border border-slate-100 rounded-[3rem] p-10 flex-1 flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.02)]">
             <div className="flex items-center gap-4 mb-8">
-              <div className={`h-12 w-12 rounded-2xl flex items-center justify-center text-white shadow-lg ${isBot ? 'bg-indigo-500 shadow-indigo-500/20' : 'bg-sky-500 shadow-sky-500/20'}`}>{isBot ? <Bot className="h-6 w-6" /> : <Users className="h-6 w-6" />}</div>
+              <div className={`h-12 w-12 rounded-2xl flex items-center justify-center text-white shadow-lg ${isBot ? 'bg-indigo-500 shadow-indigo-500/20' : 'bg-sky-500 shadow-sky-500/20'}`}>{isBot ? <UserRound className="h-6 w-6" /> : <Users className="h-6 w-6" />}</div>
               <div>
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{isBot ? 'Battle Automaton' : 'Real Opponent'}</p>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Arena Opponent</p>
                 <h3 className="text-xl font-black text-slate-900 uppercase">{opponentName}</h3>
               </div>
               <div className="ml-auto bg-slate-50 px-4 py-2 rounded-2xl border border-slate-100"><span className="text-2xl font-black text-slate-900">{opponentScore}</span></div>
@@ -380,7 +380,7 @@ const ArenaMultiplayerQuiz = () => {
                 <>
                   <div className={`h-20 w-20 rounded-full flex items-center justify-center relative ${isBot ? 'bg-indigo-50' : 'bg-sky-50'}`}>
                     <div className={`absolute inset-0 border-2 border-t-transparent rounded-full animate-spin ${isBot ? 'border-indigo-500' : 'border-sky-500'}`} />
-                    {isBot ? <Bot className="h-8 w-8 text-indigo-500" /> : <Users className="h-8 w-8 text-sky-500" />}
+                    {isBot ? <UserRound className="h-8 w-8 text-indigo-500" /> : <Users className="h-8 w-8 text-sky-500" />}
                   </div>
                   <div className="space-y-2">
                     <p className="text-sm font-bold text-slate-400 uppercase tracking-widest">{botAction || "Thinking..."}</p>
@@ -389,7 +389,7 @@ const ArenaMultiplayerQuiz = () => {
                 </>
               ) : (
                 <div className="opacity-20 flex flex-col items-center">
-                  {isBot ? <Bot className="h-16 w-16 mb-4" /> : <Users className="h-16 w-16 mb-4" />}
+                  {isBot ? <UserRound className="h-16 w-16 mb-4" /> : <Users className="h-16 w-16 mb-4" />}
                   <p className="text-xs font-black uppercase tracking-widest">Opponent Waiting</p>
                 </div>
               )}

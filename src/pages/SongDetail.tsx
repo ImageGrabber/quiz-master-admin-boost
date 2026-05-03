@@ -1,4 +1,5 @@
 import SEO from "@/components/SEO";
+import AdSenseTag from "@/components/AdSenseTag";
 import { generateVideoSchema } from "@/utils/video-seo";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -167,6 +168,7 @@ const SongDetail = () => {
                 image={thumbnailUrl}
                 structuredData={jsonLd}
             />
+            <AdSenseTag />
 
             <Navigation />
 

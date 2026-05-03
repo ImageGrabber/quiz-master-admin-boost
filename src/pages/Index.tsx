@@ -2768,8 +2768,79 @@ const Index = () => {
         <div id="faq">
           <FaqSection />
         </div>
-        {/* Bible Study Section */}
-        {false && (
+        {/* 🚀 NEW: PUBLIC MONETIZATION SECTION */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+            <h2 className="text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter uppercase">
+              Equip Your <span className="text-blue-600">Faith</span> & Earn
+            </h2>
+            <p className="text-slate-500 font-medium text-lg">
+              Unlock premium Bible study tools and earn rewards while testing your wisdom.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* 1. CPX Rewards Box */}
+            <div className="group bg-gradient-to-br from-amber-50 to-white border border-amber-100 rounded-[3rem] p-10 shadow-sm hover:shadow-2xl transition-all duration-500 relative overflow-hidden">
+              <div className="absolute -top-10 -right-10 h-32 w-32 bg-amber-200/20 blur-[50px] rounded-full group-hover:scale-150 transition-transform duration-700" />
+              <div className="relative z-10 space-y-6">
+                <div className="h-14 w-14 bg-amber-500 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-amber-500/20">
+                  <Coins className="h-7 w-7" />
+                </div>
+                <h3 className="text-2xl font-black text-slate-900 tracking-tight uppercase">Earn Bonus XP</h3>
+                <p className="text-slate-500 text-sm font-medium leading-relaxed">
+                  Contribute your insights through our partner inquiries and unlock exclusive scrolls and premium quiz chapters.
+                </p>
+                <Button 
+                  onClick={() => navigate("/auth/register")}
+                  className="w-full h-14 bg-amber-500 hover:bg-amber-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg shadow-amber-500/10"
+                >
+                  Start Earning Now
+                </Button>
+              </div>
+            </div>
+
+            {/* 2. Amazon / Christianbook Affiliate Box */}
+            <div className="group bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-[3rem] p-10 shadow-sm hover:shadow-2xl transition-all duration-500 relative overflow-hidden">
+              <div className="absolute -top-10 -right-10 h-32 w-32 bg-blue-200/20 blur-[50px] rounded-full group-hover:scale-150 transition-transform duration-700" />
+              <div className="relative z-10 space-y-6">
+                <div className="h-14 w-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-blue-600/20">
+                  <ShoppingBag className="h-7 w-7" />
+                </div>
+                <h3 className="text-2xl font-black text-slate-900 tracking-tight uppercase">Bible Study Gear</h3>
+                <p className="text-slate-500 text-sm font-medium leading-relaxed">
+                  Find the world's most trusted Study Bibles and Devotionals curated specifically for our community.
+                </p>
+                <Button 
+                  onClick={() => window.open("https://www.amazon.com/s?k=bible+study+guides", "_blank")}
+                  className="w-full h-14 bg-slate-900 hover:bg-blue-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest shadow-lg shadow-slate-900/10"
+                >
+                  Shop Resources
+                </Button>
+              </div>
+            </div>
+
+            {/* 3. AdSense / Sponsored Content Box */}
+            <div className="bg-slate-50 border-2 border-dashed border-slate-200 rounded-[3rem] p-10 flex flex-col items-center justify-center text-center space-y-6 relative group">
+              <div className="absolute top-6 left-1/2 -translate-x-1/2">
+                <span className="text-[9px] font-black text-slate-300 uppercase tracking-[0.5em]">Sponsored Content</span>
+              </div>
+              <div className="h-40 flex items-center justify-center italic text-slate-400 text-sm font-medium leading-relaxed px-4">
+                [Google AdSense Placeholder]
+                Discover Top-Rated Christian Courses & Apps
+              </div>
+              <div className="w-full pt-4">
+                <div className="h-px w-full bg-slate-200 mb-6" />
+                <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Supporting our mission</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Bible Study Section */}
+        {features && (
           <section className="py-16 bg-gradient-to-br from-green-50 via-blue-100 to-purple-50">
             <div className="max-w-6xl mx-auto px-4">
               <div className="text-center mb-12">

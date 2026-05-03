@@ -42,6 +42,7 @@ import ForgotPassword from "./pages/auth/ForgotPassword";
 import ResetPassword from "./pages/auth/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import EarnMoney from "./pages/EarnMoney";
+import ChristianStore from "./pages/ChristianStore";
 import Community from "./pages/Community";
 import Connections from "./pages/Connections";
 import BibleGames from "./pages/BibleGames";
@@ -313,6 +314,7 @@ const App = () => {
               <Route path="/auth/reset-password" element={<PublicRoute><ResetPassword /></PublicRoute>} />
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/dashboard/earn" element={<ProtectedRoute><EarnMoney /></ProtectedRoute>} />
+          <Route path="/dashboard/store" element={<ProtectedRoute><ChristianStore /></ProtectedRoute>} />
               <Route path="/dashboard/community" element={<ProtectedRoute><Community /></ProtectedRoute>} />
               <Route path="/dashboard/connections" element={<ProtectedRoute><Connections /></ProtectedRoute>} />
               <Route path="/dashboard/bible-games" element={<ProtectedRoute><BibleGames /></ProtectedRoute>} />

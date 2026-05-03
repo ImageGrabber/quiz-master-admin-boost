@@ -2,17 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ArrowRight,
-  Circle,
-  Clock3,
-  Gamepad2,
-  Radio,
-  RefreshCw,
   Shield,
   Sparkles,
-  Sword,
-  Swords,
-  Trophy,
-  UserRound,
   Users,
   Coins,
 } from "lucide-react";
@@ -166,7 +157,7 @@ const QuizArena = () => {
         </header>
 
         {/* Big Mission Portals - Light */}
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2">
           {[
             { 
               title: "Solo Quest", 
@@ -183,14 +174,6 @@ const QuizArena = () => {
               route: "/quiz-arena/multiplayer", 
               color: "indigo",
               img: "/images/arena/shield.png"
-            },
-            { 
-              title: "Duel", 
-              desc: "Challenge a specific disciple to a test of pure wisdom.", 
-              icon: Swords, 
-              route: "/quiz-arena/duel", 
-              color: "rose",
-              img: "/images/arena/trophy.png"
             }
           ].map((mode, idx) => (
             <button

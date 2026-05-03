@@ -7,6 +7,7 @@ import { Trophy, Medal, Award, Crown, Brain, Play } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import DashboardLayout from "@/components/DashboardLayout";
 import AdminLayout from "@/components/AdminLayout";
+import PromotionalSidebar from "@/components/PromotionalSidebar";
 
 interface LeaderboardEntry {
   id: string;
@@ -204,111 +205,114 @@ const Leaderboard = () => {
   };
 
   const LeaderboardContent = () => (
-    <div className="max-w-7xl mx-auto space-y-8 animate-in fade-in duration-500">
-
-      {/* Header removed - moved to layout */}
-
-      {/* Leaderboard Table */}
-      <Card className="border-slate-100 shadow-sm">
-        <CardHeader className="flex flex-col sm:flex-row items-center justify-between gap-4 space-y-0 pb-6">
-          <div>
-            <CardTitle className="text-xl font-bold text-slate-900">Top Performers</CardTitle>
-            <CardDescription className="mt-1">
-              Global rankings across all categories
-            </CardDescription>
-          </div>
-
-          {/* Period Filter */}
-          <div className="flex items-center bg-slate-100 p-1 rounded-lg">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setSelectedPeriod("week")}
-              className={`text-xs font-medium px-3 py-1.5 h-auto rounded-md transition-all ${selectedPeriod === "week"
-                ? "bg-white text-slate-900 shadow-sm"
-                : "text-slate-500 hover:text-slate-900 hover:bg-slate-200/50"
-                }`}
-            >
-              This Week
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setSelectedPeriod("month")}
-              className={`text-xs font-medium px-3 py-1.5 h-auto rounded-md transition-all ${selectedPeriod === "month"
-                ? "bg-white text-slate-900 shadow-sm"
-                : "text-slate-500 hover:text-slate-900 hover:bg-slate-200/50"
-                }`}
-            >
-              This Month
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setSelectedPeriod("all")}
-              className={`text-xs font-medium px-3 py-1.5 h-auto rounded-md transition-all ${selectedPeriod === "all"
-                ? "bg-white text-slate-900 shadow-sm"
-                : "text-slate-500 hover:text-slate-900 hover:bg-slate-200/50"
-                }`}
-            >
-              All Time
-            </Button>
-          </div>
-        </CardHeader>
-        <CardContent>
-          {isLoading ? (
-            <div className="text-center py-12">
-              <Trophy className="w-12 h-12 text-slate-200 mx-auto mb-4 animate-pulse" />
-              <p className="text-slate-500">Loading leaderboard...</p>
+    <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12 animate-in fade-in duration-500 py-8 px-4">
+      
+      {/* Main Leaderboard Section */}
+      <div className="flex-1 space-y-8">
+        <Card className="border-slate-100 shadow-sm">
+          <CardHeader className="flex flex-col sm:flex-row items-center justify-between gap-4 space-y-0 pb-6">
+            <div>
+              <CardTitle className="text-xl font-bold text-slate-900">Top Performers</CardTitle>
+              <CardDescription className="mt-1">
+                Global rankings across all categories
+              </CardDescription>
             </div>
-          ) : leaderboard.length > 0 ? (
-            <div className="space-y-1">
-              {leaderboard.map((entry, index) => (
-                <div
-                  key={entry.id}
-                  className="flex items-center justify-between p-4 rounded-xl hover:bg-slate-50 transition-colors group"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center justify-center w-8 h-8 font-bold text-slate-500">
-                      {index < 3 ? getRankIcon(entry.rank) : `#${entry.rank}`}
+
+            {/* Period Filter */}
+            <div className="flex items-center bg-slate-100 p-1 rounded-lg">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSelectedPeriod("week")}
+                className={`text-xs font-medium px-3 py-1.5 h-auto rounded-md transition-all ${selectedPeriod === "week"
+                  ? "bg-white text-slate-900 shadow-sm"
+                  : "text-slate-500 hover:text-slate-900 hover:bg-slate-200/50"
+                  }`}
+              >
+                This Week
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSelectedPeriod("month")}
+                className={`text-xs font-medium px-3 py-1.5 h-auto rounded-md transition-all ${selectedPeriod === "month"
+                  ? "bg-white text-slate-900 shadow-sm"
+                  : "text-slate-500 hover:text-slate-900 hover:bg-slate-200/50"
+                  }`}
+              >
+                This Month
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSelectedPeriod("all")}
+                className={`text-xs font-medium px-3 py-1.5 h-auto rounded-md transition-all ${selectedPeriod === "all"
+                  ? "bg-white text-slate-900 shadow-sm"
+                  : "text-slate-500 hover:text-slate-900 hover:bg-slate-200/50"
+                  }`}
+              >
+                All Time
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {isLoading ? (
+              <div className="text-center py-12">
+                <Trophy className="w-12 h-12 text-slate-200 mx-auto mb-4 animate-pulse" />
+                <p className="text-slate-500">Loading leaderboard...</p>
+              </div>
+            ) : leaderboard.length > 0 ? (
+              <div className="space-y-1">
+                {leaderboard.map((entry, index) => (
+                  <div
+                    key={entry.id}
+                    className="flex items-center justify-between p-4 rounded-xl hover:bg-slate-50 transition-colors group"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center justify-center w-8 h-8 font-bold text-slate-500">
+                        {index < 3 ? getRankIcon(entry.rank) : `#${entry.rank}`}
+                      </div>
+                      <div>
+                        <div className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">{entry.name}</div>
+                        {index < 3 && (
+                          <div className="text-xs text-slate-500">Top {index + 1} Player</div>
+                        )}
+                      </div>
                     </div>
-                    <div>
-                      <div className="font-semibold text-slate-900 group-hover:text-blue-600 transition-colors">{entry.name}</div>
-                      {index < 3 && (
-                        <div className="text-xs text-slate-500">Top {index + 1} Player</div>
-                      )}
+                    <div className="flex items-center gap-4">
+                      <Badge variant="secondary" className={`${getRankBadgeColor(entry.rank)} border-0`}>
+                        Rank #{entry.rank}
+                      </Badge>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <Badge variant="secondary" className={`${getRankBadgeColor(entry.rank)} border-0`}>
-                      Rank #{entry.rank}
-                    </Badge>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <Trophy className="w-12 h-12 text-slate-200 mx-auto mb-4" />
-              <p className="text-slate-500">No leaderboard data available</p>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <Trophy className="w-12 h-12 text-slate-200 mx-auto mb-4" />
+                <p className="text-slate-500">No leaderboard data available</p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
-      {/* Quick Action */}
-      {userRole === 'user' && (
-        <div className="flex justify-center pt-4">
-          <Button
-            onClick={() => navigate("/quiz-selection")}
-            size="lg"
-            className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20 px-8 rounded-full"
-          >
-            <Play className="w-4 h-4 mr-2" />
-            Take Quiz & Compete
-          </Button>
-        </div>
-      )}
+        {/* Quick Action */}
+        {userRole === 'user' && (
+          <div className="flex justify-center pt-4">
+            <Button
+              onClick={() => navigate("/quiz-selection")}
+              size="lg"
+              className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20 px-8 rounded-full"
+            >
+              <Play className="w-4 h-4 mr-2" />
+              Take Quiz & Compete
+            </Button>
+          </div>
+        )}
+      </div>
+
+      {/* Promotional Sidebar */}
+      <PromotionalSidebar />
     </div>
   );
 

@@ -3,6 +3,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Coins, ExternalLink, Timer, ShieldCheck, Zap } from "lucide-react";
 import { md5 } from "@/utils/md5";
+import { supabase } from "@/integrations/supabase/client";
 
 type Survey = {
   id: string;
@@ -22,19 +23,22 @@ const EarnMoney = () => {
   const fetchSurveys = async () => {
     setLoading(true);
     try {
-      // 1. Get Client IP
+      // 1. Get Logged in User ID
+      const { data: { user } } = await supabase.auth.getUser();
+      const extUserId = user?.id || localStorage.getItem("arena_player_id") || "guest";
+
+      // 2. Get Client IP
       const ipResponse = await fetch('https://api.ipify.org?format=json');
       const { ip } = await ipResponse.json();
       
-      // 2. CPX Credentials
+      // 3. CPX Credentials
       const appId = import.meta.env.VITE_CPX_APP_ID || "32810"; 
       const secureHash = import.meta.env.VITE_CPX_SECURE_HASH || "placeholder";
-      const extUserId = localStorage.getItem("arena_player_id") || "guest";
       
-      // 3. Generate Security Hash
+      // 4. Generate Security Hash
       const hash = md5(`${extUserId}-${secureHash}`);
       
-      // 4. Fetch Surveys
+      // 5. Fetch Surveys
       const url = `https://live-api.cpx-research.com/api/get-surveys.php?app_id=${appId}&ext_user_id=${extUserId}&output_method=api&ip_user=${ip}&user_agent=${encodeURIComponent(navigator.userAgent)}&limit=12&secure_hash=${hash}`;
       
       const response = await fetch(url);
@@ -42,6 +46,8 @@ const EarnMoney = () => {
       
       if (data.status === 'success') {
         setSurveys(data.surveys || []);
+      } else {
+        console.warn("CPX API returned status:", data.status, data);
       }
     } catch (err) {
       console.error("Survey fetch failed", err);

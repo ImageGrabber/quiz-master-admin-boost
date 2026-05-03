@@ -24,7 +24,8 @@ import {
   Sparkles,
   Gamepad2,
   Heart,
-  Coins
+  Coins,
+  ShoppingBag
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -37,7 +38,6 @@ interface DashboardLayoutProps {
 
 const navItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Earn Money", href: "/dashboard/earn", icon: Coins },
   { name: "All Quizzes", href: "/quiz-selection", icon: BookOpen },
   { name: "Bible Study", href: "/bible-questions-and-answers-hub", icon: Brain },
   { name: "Kids Stories", href: "/kids-stories", icon: Sparkles },
