@@ -211,7 +211,6 @@ INSERT INTO public_competition_questions (question, options, answer, explanation
 ('What is the shortest verse in many English Bibles? (Q67)', ARRAY['God is love', 'Jesus wept.', 'Pray without ceasing', 'Rejoice always'], 'Jesus wept.', 'John 11:35 - Jesus wept.', 'Gospels', 'Medium'),
 ('Who succeeded Moses as Israel''s leader? (Q68)', ARRAY['Caleb', 'Joshua', 'Aaron', 'Eleazar'], 'Joshua', 'Joshua 1:1-2 - Joshua was commissioned after Moses.', 'History', 'Easy'),
 ('Which city''s walls fell after Israel marched around it? (Q69)', ARRAY['Ai', 'Jericho', 'Jerusalem', 'Hebron'], 'Jericho', 'Joshua 6:20 - The wall fell down flat.', 'History', 'Easy'),
-('Who anointed David as king while he was young? (Q70)', ARRAY['Nathan', 'Samuel', 'Elijah', 'Gad'], 'Samuel', '1 Samuel 16:13 - Samuel anointed David.', 'History', 'Medium'),
 ('Who prayed and fire fell on Mount Carmel? (Q71)', ARRAY['Elisha', 'Elijah', 'Isaiah', 'Jeremiah'], 'Elijah', '1 Kings 18:38 - Fire of the Lord fell and consumed the offering.', 'Prophets', 'Medium'),
 ('Who rebuilt Jerusalem''s wall after exile? (Q72)', ARRAY['Ezra', 'Nehemiah', 'Zerubbabel', 'Mordecai'], 'Nehemiah', 'Nehemiah 2-6 - Nehemiah led the rebuilding work.', 'History', 'Medium'),
 ('Who became queen and saved the Jews in Persia? (Q73)', ARRAY['Ruth', 'Esther', 'Deborah', 'Hannah'], 'Esther', 'Esther 4-8 - Esther interceded for her people.', 'History', 'Easy'),
