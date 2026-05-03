@@ -138,51 +138,68 @@ const QuizArena = () => {
 
       <section className="relative z-10 mx-auto max-w-7xl px-6 w-full space-y-12 lg:space-y-16">
 
-        {/* Big Mission Portals - Premium Cards */}
-        <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto w-full">
-          {[
-            { 
-              title: "Solo Quest", 
-              desc: "The fastest way to sharpen your spirit. Play alone and master the Word.", 
-              icon: Shield, 
-              route: "/quiz-arena/solo", 
-              color: "orange",
-              img: "/images/arena/scroll.png"
-            },
-            { 
-              title: "Live Battle", 
-              desc: "Join the assembly of believers in real-time battle for glory.", 
-              icon: Users, 
-              route: "/quiz-arena/multiplayer", 
-              color: "indigo",
-              img: "/images/arena/shield.png"
-            }
-          ].map((mode, idx) => (
-            <button
-              key={idx}
-              onClick={() => navigate(mode.route)}
-              className="group relative flex flex-col items-center text-center p-8 lg:p-10 rounded-[3rem] bg-card border border-border hover:border-primary/50 shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-[0_40px_80px_rgba(0,0,0,0.4)] transition-all duration-700 hover:-translate-y-2 overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-              
-              <div className="relative mb-6 lg:mb-8">
-                <div className="absolute inset-0 bg-primary/20 blur-[60px] rounded-full scale-125 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <img 
-                  src={mode.img} 
-                  alt={mode.title} 
-                  className="h-40 w-40 lg:h-48 lg:w-48 object-cover relative z-10 rounded-[2rem] shadow-2xl shadow-black/40 group-hover:scale-110 group-hover:rotate-3 transition-all duration-700" 
-                />
-              </div>
-              
-              <h3 className="text-3xl lg:text-4xl font-black text-foreground mb-3 uppercase tracking-tighter">{mode.title}</h3>
-              <p className="text-muted-foreground text-sm lg:text-base font-light leading-relaxed mb-8 max-w-xs">{mode.desc}</p>
-              
-              <div className="mt-auto inline-flex items-center gap-3 px-8 py-3 bg-secondary rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500 shadow-sm">
-                Enter Portal <ArrowRight className="h-3.5 w-3.5" />
-              </div>
-            </button>
-          ))}
-        </div>
+          {/* Big Mission Portals - Premium Cards */}
+          <div className="grid gap-6 md:grid-cols-2 max-w-5xl mx-auto w-full">
+            {[
+              { 
+                title: "Solo Quest", 
+                desc: "The fastest way to sharpen your spirit. Play alone and master the Word.", 
+                icon: Shield, 
+                route: "/quiz-arena/solo", 
+                color: "orange",
+                img: "/images/arena/scroll.png"
+              },
+              { 
+                title: "Live Battle", 
+                desc: "Join the assembly of believers in real-time battle for glory.", 
+                icon: Users, 
+                route: "/quiz-arena/multiplayer", 
+                color: "indigo",
+                img: "/images/arena/shield.png"
+              }
+            ].map((mode, idx) => {
+              const isDuel = mode.title === "Live Battle";
+              return (
+                <button
+                  key={idx}
+                  onClick={() => navigate(mode.route)}
+                  className={`group relative flex flex-col items-center text-center p-8 lg:p-10 rounded-[3rem] bg-card border transition-all duration-700 overflow-hidden ${
+                    isDuel 
+                      ? 'border-primary/50 shadow-[0_40px_80px_rgba(0,0,0,0.4)] -translate-y-2' 
+                      : 'border-border'
+                  }`}
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent transition-opacity duration-700 ${
+                    isDuel ? 'opacity-100' : 'opacity-0'
+                  }`} />
+                  
+                  <div className="relative mb-6 lg:mb-8">
+                    <div className={`absolute inset-0 bg-primary/20 blur-[60px] rounded-full scale-125 transition-opacity duration-700 ${
+                      isDuel ? 'opacity-100' : 'opacity-0'
+                    }`} />
+                    <img 
+                      src={mode.img} 
+                      alt={mode.title} 
+                      className={`h-40 w-40 lg:h-48 lg:w-48 object-cover relative z-10 rounded-[2rem] shadow-2xl shadow-black/40 transition-all duration-700 ${
+                        isDuel ? 'scale-110 rotate-3' : ''
+                      }`} 
+                    />
+                  </div>
+                  
+                  <h3 className="text-3xl lg:text-4xl font-black text-foreground mb-3 uppercase tracking-tighter">{mode.title}</h3>
+                  <p className="text-muted-foreground text-sm lg:text-base font-light leading-relaxed mb-8 max-w-xs">{mode.desc}</p>
+                  
+                  <div className={`mt-auto inline-flex items-center gap-3 px-8 py-3 rounded-2xl text-[10px] font-black uppercase tracking-[0.3em] transition-all duration-500 shadow-sm ${
+                    isDuel 
+                      ? 'bg-primary text-primary-foreground' 
+                      : 'bg-secondary text-muted-foreground'
+                  }`}>
+                    Enter Portal <ArrowRight className="h-3.5 w-3.5" />
+                  </div>
+                </button>
+              );
+            })}
+          </div>
 
         {loading && (
           <div className="fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center">
