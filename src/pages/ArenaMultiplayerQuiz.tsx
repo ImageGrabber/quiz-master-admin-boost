@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Users, Zap, Swords, CheckCircle2, XCircle, UserRound } from "lucide-react";
+import { ArrowLeft, Users, Zap, Swords, CheckCircle2, XCircle, UserRound, Share2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { loadArenaQuestions } from "@/lib/arenaQuestions";
 import { v4 as uuidv4 } from 'uuid';
@@ -41,6 +41,10 @@ const ArenaMultiplayerQuiz = () => {
   }, []);
   
   const myName = useMemo(() => localStorage.getItem("quiz_player_name") || `Disciple_${myId.slice(0,4)}`, [myId]);
+
+  const openShareUrl = (url: string) => {
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
   const buildQuestionSet = async () => {
     const fromTable = await loadArenaQuestions(10);
@@ -304,6 +308,34 @@ const ArenaMultiplayerQuiz = () => {
 
   if (phase === 'results') {
     const victory = userScore > opponentScore;
+    const resultLabel = victory ? "Battle Victory" : userScore === opponentScore ? "Draw Match" : "Defeated";
+    const shareText = `${resultLabel}! I scored ${userScore}-${opponentScore} in Bible Quiz Arena.`;
+    const pageUrl = window.location.origin + "/quiz-arena";
+    const encodedText = encodeURIComponent(shareText);
+    const encodedUrl = encodeURIComponent(pageUrl);
+
+    const shareLinks = [
+      { label: "X", href: `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}` },
+      { label: "Facebook", href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}` },
+      { label: "LinkedIn", href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}` },
+      { label: "Telegram", href: `https://t.me/share/url?url=${encodedUrl}&text=${encodedText}` },
+      { label: "Reddit", href: `https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedText}` },
+      { label: "WhatsApp", href: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${pageUrl}`)}` },
+    ];
+
+    const handleNativeShare = async () => {
+      if (!navigator.share) return;
+      try {
+        await navigator.share({
+          title: "Bible Quiz Arena",
+          text: shareText,
+          url: pageUrl,
+        });
+      } catch {
+        // User cancelled share dialog.
+      }
+    };
+
     return (
       <main className="h-screen w-full bg-[#020617] flex items-center justify-center p-6 overflow-hidden font-urbanist">
         {/* Background ambience - Results */}
@@ -340,6 +372,29 @@ const ArenaMultiplayerQuiz = () => {
           <div className="flex gap-4 max-w-md mx-auto pt-6">
             <button onClick={() => window.location.reload()} className="flex-1 py-5 bg-primary hover:bg-primary/90 text-primary-foreground font-black text-xs uppercase tracking-[0.2em] rounded-2xl transition-all shadow-xl shadow-primary/20">Rematch</button>
             <button onClick={() => navigate("/quiz-arena")} className="flex-1 py-5 bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground font-black text-xs uppercase tracking-[0.2em] rounded-2xl transition-all">Exit Arena</button>
+          </div>
+
+          <div className="max-w-3xl mx-auto w-full pt-2">
+            {navigator.share && (
+              <button
+                onClick={() => void handleNativeShare()}
+                className="w-full mb-3 py-3 px-4 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl text-foreground font-bold text-[11px] uppercase tracking-[0.15em] flex items-center justify-center gap-2 transition-all"
+              >
+                <Share2 className="h-4 w-4" />
+                Share Result
+              </button>
+            )}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              {shareLinks.map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => openShareUrl(item.href)}
+                  className="py-2.5 px-3 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl text-[10px] font-black uppercase tracking-[0.16em] text-muted-foreground hover:text-foreground transition-all"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </main>
