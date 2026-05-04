@@ -6,7 +6,6 @@ import {
   Leaf, 
   ChevronRight, 
   BookOpen, 
-  Sparkles, 
   Compass,
   Quote,
   Flame,
@@ -78,7 +77,7 @@ export default function BibleVersesPeace() {
           "@type": "Article",
           "headline": "Bible Verses for Peace and Anxiety: Finding Comfort in Scripture",
           "description": "A curated collection of Bible verses to help overcome anxiety and find divine peace.",
-          "image": "/bible_verses_peace_hero_1776465959019.png",
+          "image": "/images/hero/peace-anxiety.png",
           "author": {
             "@type": "Organization",
             "name": "Bible Quiz Competition"
@@ -102,9 +101,9 @@ export default function BibleVersesPeace() {
       <section className="relative min-h-[65vh] flex items-center justify-center overflow-hidden bg-black">
         <div className="absolute inset-0 z-0">
           <img 
-            src="/bible_verses_peace_hero_1776465959019.png" 
+            src="/images/hero/peace-anxiety.png" 
             alt="Peaceful Landscape Cinematic" 
-            className="w-full h-full object-cover brightness-[0.5] scale-105 transition-transform duration-[20000ms] hover:scale-100"
+            className="w-full h-full object-cover brightness-[0.6] scale-105 transition-transform duration-[20000ms] hover:scale-100"
           />
           <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-white via-white/50 to-transparent" />
         </div>

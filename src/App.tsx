@@ -161,6 +161,11 @@ import HardBibleQuizForAdults from "./pages/seo-quizzes/HardBibleQuizForAdults";
 import BibleQuizQuestionsAndAnswers from "./pages/seo-quizzes/BibleQuizQuestionsAndAnswers";
 import HardestBibleTrivia from "./pages/seo-quizzes/HardestBibleTrivia";
 import BibleQuizForYouth from "./pages/seo-quizzes/BibleQuizForYouth";
+import FreeBibleQuizQuestionsAndAnswers from "./pages/seo-quizzes/FreeBibleQuizQuestionsAndAnswers";
+import BibleTriviaQuestionsAndAnswers from "./pages/seo-quizzes/BibleTriviaQuestionsAndAnswers";
+import BibleQuizForKidsTeensAdults from "./pages/seo-quizzes/BibleQuizForKidsTeensAdults";
+import BibleQuestionsLanding from "./pages/seo-quizzes/BibleQuestionsLanding";
+import PrayersLanding from "./pages/seo-resources/PrayersLanding";
 import RulesAndPrizes from "./pages/seo-quizzes/RulesAndPrizes";
 import BibleTriviaForKids from "./pages/seo-quizzes/BibleTriviaForKids";
 import BookOfJohnQuizQuestions from "./pages/seo-quizzes/BookOfJohnQuizQuestions";
@@ -376,6 +381,11 @@ const App = () => {
               <Route path="/bible-competition-2026" element={<OnlineBibleQuizCompetition2026 />} />
               <Route path="/hardest-bible-trivia-questions" element={<HardestBibleTrivia />} />
               <Route path="/bible-quiz-with-answers-for-youth" element={<BibleQuizForYouth />} />
+              <Route path="/free-bible-quiz-questions-and-answers" element={<FreeBibleQuizQuestionsAndAnswers />} />
+              <Route path="/bible-trivia-questions-and-answers" element={<BibleTriviaQuestionsAndAnswers />} />
+              <Route path="/bible-quiz-for-kids-teens-adults" element={<BibleQuizForKidsTeensAdults />} />
+              <Route path="/bible-questions" element={<BibleQuestionsLanding />} />
+              <Route path="/prayers" element={<PrayersLanding />} />
               <Route path="/hard-bible-quiz-for-teens" element={<HardBibleQuizForTeens />} />
               <Route path="/hard-bible-quiz-for-adults" element={<HardBibleQuizForAdults />} />
               <Route path="/bible-trivia-for-kids-under-10" element={<BibleTriviaForKids />} />
