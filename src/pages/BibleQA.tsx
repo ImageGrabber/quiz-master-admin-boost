@@ -410,7 +410,7 @@ export default function BibleQA() {
               Challenge yourself with our curated selection of high-fidelity scriptural examinations.
             </p>
             <div className="mt-8 inline-flex items-center gap-2 px-5 py-2 rounded-full border border-gray-100 bg-white text-[11px] uppercase tracking-[0.25em] font-bold text-gray-500">
-              <Sparkles className="w-3.5 h-3.5" />
+              <Zap className="w-3.5 h-3.5" />
               9 Fresh Picks Every Day
             </div>
           </div>

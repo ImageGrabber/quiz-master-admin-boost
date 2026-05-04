@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Timer, CheckCircle2, Trophy, Zap, Coins, ShieldCheck, Sparkles, BookOpen } from "lucide-react";
+import { ArrowLeft, Timer, CheckCircle2, Trophy, Zap, Coins, ShieldCheck, Activity, BookOpen } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { loadArenaQuestions } from "@/lib/arenaQuestions";
 
@@ -146,7 +146,7 @@ const ArenaSoloQuiz = () => {
                 <div className="flex items-center justify-between">
                   <div className="px-4 py-1.5 rounded-xl bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-widest border border-blue-100">Solo Mission {index + 1} of 10</div>
                   <div className="flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                    <Sparkles className="h-3 w-3" /> Digital Scripture
+                    <Activity className="h-3 w-3" /> Digital Scripture
                   </div>
                 </div>
 

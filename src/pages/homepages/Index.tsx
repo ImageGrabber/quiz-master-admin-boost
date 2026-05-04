@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, Calendar, HelpCircle, CheckCircle, Globe, Menu, Crown, Medal, Search, X, ChevronLeft, ChevronRight, MessageSquare, Rocket, Sparkles, Heart, Droplet, ArrowLeft, RotateCcw, TrendingUp, Shield, Eye, EyeOff } from "lucide-react";
+import { Trophy, Clock, Users, Brain, ArrowRight, Play, BookOpen, Star, Award, Calendar, HelpCircle, CheckCircle, Globe, Menu, Crown, Medal, Search, X, ChevronLeft, ChevronRight, MessageSquare, Rocket, Heart, Droplet, ArrowLeft, RotateCcw, TrendingUp, Shield, Eye, EyeOff } from "lucide-react";
 import { Helmet } from 'react-helmet';
 import { supabase } from "@/integrations/supabase/client";
 import { features, howItWorks, bibleTestimonials, stats, publicPages } from "@/data/indexData";

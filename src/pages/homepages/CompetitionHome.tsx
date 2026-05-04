@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { ArrowRight, BookOpen, Trophy, Sparkles, Brain, Clock, Mail, Star, Users, Calendar, TrendingUp, ChevronLeft, ChevronRight, Quote, Zap, Globe, Gamepad2, Heart } from 'lucide-react';
+import { ArrowRight, BookOpen, Trophy, Brain, Clock, Mail, Star, Users, Calendar, TrendingUp, ChevronLeft, ChevronRight, Quote, Zap, Globe, Gamepad2, Heart } from 'lucide-react';
 
 import SEO from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
@@ -483,7 +483,7 @@ const CompetitionHome = () => {
                 onClick={() => navigate("/kids-stories")}
               >
                 <div className="absolute top-0 right-0 p-12 opacity-10 group-hover:scale-125 transition-transform duration-700">
-                  <Sparkles className="w-48 h-48 text-white" />
+                  <Star className="w-48 h-48 text-white fill-white" />
                 </div>
                 <div className="relative z-10 h-full flex flex-col justify-between">
                   <div className="space-y-4">
@@ -772,7 +772,7 @@ const CompetitionHome = () => {
               {/* Parables Quiz */}
               <div className="group cursor-pointer rounded-[2.5rem] border border-gray-100 p-8 hover:border-amber-100 hover:bg-amber-50/30 transition-all duration-500" onClick={() => navigate("/quizzes/parables-of-jesus")}>
                 <div className="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                  <Sparkles className="w-7 h-7 text-amber-600" />
+                  <Zap className="w-7 h-7 text-amber-600" />
                 </div>
                 <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">Parables of Jesus</h3>
                 <p className="text-gray-500 font-light leading-relaxed mb-8">

@@ -4,7 +4,7 @@ import {
   ArrowRight,
   Shield,
   Users,
-  Sparkles,
+  Zap,
   Trophy,
   Activity
 } from "lucide-react";
@@ -49,6 +49,46 @@ const QuizArena = () => {
   const [publicQuizCount, setPublicQuizCount] = useState(0);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
   const [session, setSession] = useState<any>(null);
+
+  // Persistent randomized stats for social proof (updates every 1 minute)
+  const [displayStats, setDisplayStats] = useState({ online: 44, battles: 25 });
+
+  useEffect(() => {
+    const STATS_KEY = "quizArenaDisplayStats";
+    const UPDATE_INTERVAL_MS = 60 * 1000;
+
+    const getNewStats = () => ({
+      online: 44 + Math.floor(Math.random() * 10), // Base 44
+      battles: 25 + Math.floor(Math.random() * 8), // Base 25
+      timestamp: Date.now()
+    });
+
+    const stored = localStorage.getItem(STATS_KEY);
+    let currentStats;
+
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      if (Date.now() - parsed.timestamp < UPDATE_INTERVAL_MS) {
+        currentStats = parsed;
+      } else {
+        currentStats = getNewStats();
+        localStorage.setItem(STATS_KEY, JSON.stringify(currentStats));
+      }
+    } else {
+      currentStats = getNewStats();
+      localStorage.setItem(STATS_KEY, JSON.stringify(currentStats));
+    }
+
+    setDisplayStats({ online: currentStats.online, battles: currentStats.battles });
+
+    const interval = setInterval(() => {
+      const newStats = getNewStats();
+      localStorage.setItem(STATS_KEY, JSON.stringify(newStats));
+      setDisplayStats({ online: newStats.online, battles: newStats.battles });
+    }, UPDATE_INTERVAL_MS);
+
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -191,7 +231,7 @@ const QuizArena = () => {
       <section className="relative z-10 mx-auto max-w-7xl px-6 w-full space-y-12">
         <div className="flex flex-col items-center text-center space-y-4 mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider animate-in fade-in slide-in-from-top-4 duration-1000">
-            <Sparkles className="h-3.5 w-3.5" />
+            <Zap className="h-3.5 w-3.5" />
             <span>Competitive Arena v2.0</span>
           </div>
           <h2 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-none uppercase">Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Battle Path</span></h2>
@@ -271,14 +311,14 @@ const QuizArena = () => {
 
         {/* Live Stats Bar */}
         <div className="flex flex-wrap justify-center gap-8 pt-8">
-           <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/50 backdrop-blur-md border border-white shadow-sm">
-             <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-             <span className="text-xs font-black text-slate-400 uppercase tracking-widest">{onlineCount} Saints Online</span>
-           </div>
-           <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/50 backdrop-blur-md border border-white shadow-sm">
-             <Activity className="h-4 w-4 text-blue-500" />
-             <span className="text-xs font-black text-slate-400 uppercase tracking-widest">{activeCompetitionCount} Active Battles</span>
-           </div>
+            <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/50 backdrop-blur-md border border-white shadow-sm">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-xs font-black text-slate-400 uppercase tracking-widest">{displayStats.online} Saints Online</span>
+            </div>
+            <div className="flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/50 backdrop-blur-md border border-white shadow-sm">
+              <Activity className="h-4 w-4 text-blue-500" />
+              <span className="text-xs font-black text-slate-400 uppercase tracking-widest">{displayStats.battles} Active Battles</span>
+            </div>
         </div>
 
         {loading && (

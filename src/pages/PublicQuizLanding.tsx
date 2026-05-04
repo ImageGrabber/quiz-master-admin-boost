@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, CheckCircle2, Flame, ShieldCheck, Sparkles, Trophy } from "lucide-react";
+import { ArrowRight, BookOpen, CheckCircle2, Flame, ShieldCheck, Zap, Trophy } from "lucide-react";
 import SEO from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -203,7 +203,7 @@ export default function PublicQuizLanding() {
           <section className="relative grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
             <div className="flex flex-col space-y-6 animate-in fade-in slide-in-from-left duration-1000">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider w-fit">
-                <Sparkles className="h-3.5 w-3.5" />
+                <Zap className="h-3.5 w-3.5" />
                 <span>Bible Quiz Competition 2026</span>
               </div>
               <h1 className="text-4xl md:text-6xl font-extrabold text-slate-900 leading-[1.1] tracking-tight">

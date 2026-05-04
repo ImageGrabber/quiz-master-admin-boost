@@ -1,6 +1,6 @@
 import { FormEvent, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, Sparkles, UserRound, ShieldCheck } from "lucide-react";
+import { ArrowRight, Zap, UserRound, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import SEO from "@/components/SEO";
@@ -36,7 +36,7 @@ const CompetitionPlayerName = () => {
       <section className="relative z-10 mx-auto grid w-full max-w-6xl content-center gap-12 lg:grid-cols-[1fr_0.8fr] py-12">
         <div className="flex flex-col justify-center space-y-8">
           <div className="inline-flex w-fit items-center gap-2 rounded-2xl border border-blue-100 bg-blue-50/50 px-4 py-2 text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 backdrop-blur-md animate-in fade-in slide-in-from-left-4 duration-700">
-            <Sparkles className="h-4 w-4" />
+            <Zap className="h-4 w-4" />
             Arena Onboarding
           </div>
           <div className="space-y-4">

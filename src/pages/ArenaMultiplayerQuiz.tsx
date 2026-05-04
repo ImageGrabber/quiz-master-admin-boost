@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Users, Zap, Swords, CheckCircle2, XCircle, UserRound, Share2, Sparkles, Trophy, Activity, MessageSquare } from "lucide-react";
+import { ArrowLeft, Users, Zap, Swords, CheckCircle2, XCircle, UserRound, Share2, Activity, Trophy, MessageSquare } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { loadArenaQuestions, type ArenaDifficulty } from "@/lib/arenaQuestions";
 import { v4 as uuidv4 } from 'uuid';

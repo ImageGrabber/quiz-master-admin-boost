@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Sparkles, Sword, Scroll } from 'lucide-react';
+import { Zap, Sword, Scroll } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
@@ -61,7 +61,7 @@ export const ChatInterface = ({ messages, isProcessing, gameStarted, turnLimitRe
                                 size="lg"
                                 className="mt-6 bg-gradient-to-r from-amber-700 to-orange-700 hover:from-amber-800 hover:to-orange-800 text-white px-8 py-6 text-lg font-serif shadow-lg"
                             >
-                                <Sparkles className="w-5 h-5 mr-2" />
+                                <Zap className="w-5 h-5 mr-2" />
                                 Begin Your Adventure
                             </Button>
                         </div>
@@ -125,7 +125,7 @@ export const ChatInterface = ({ messages, isProcessing, gameStarted, turnLimitRe
                     {isProcessing && (
                         <div className="flex justify-start">
                             <div className="bg-white border-2 border-amber-200 rounded-2xl rounded-tl-sm p-4 flex items-center gap-3 shadow-md">
-                                <Sparkles className="w-5 h-5 text-amber-600 animate-pulse" />
+                                <Zap className="w-5 h-5 text-amber-600 animate-pulse" />
                                 <span className="text-amber-700 text-base italic font-serif">The Game Master ponders...</span>
                             </div>
                         </div>

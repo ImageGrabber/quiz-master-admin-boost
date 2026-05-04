@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Scroll, Sparkles, Send, User, Loader2 } from 'lucide-react';
+import { Scroll, Zap, Send, User, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useSelahGemini } from '@/hooks/useSelahGemini';
@@ -57,7 +57,7 @@ export const SelahChatPreview = () => {
                     <div key={msg.id} className={`flex gap-4 ${msg.sender === 'user' ? 'justify-end' : ''}`}>
                         {msg.sender === 'ai' && (
                             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-100 to-orange-100 flex-shrink-0 flex items-center justify-center border border-amber-200">
-                                <Sparkles className="w-4 h-4 text-amber-600" />
+                                <Zap className="w-4 h-4 text-amber-600" />
                             </div>
                         )}
 
@@ -81,7 +81,7 @@ export const SelahChatPreview = () => {
                 {isProcessing && (
                     <div className="flex gap-4">
                         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-100 to-orange-100 flex-shrink-0 flex items-center justify-center border border-amber-200">
-                            <Sparkles className="w-4 h-4 text-amber-600" />
+                            <Zap className="w-4 h-4 text-amber-600" />
                         </div>
                         <div className="bg-white p-4 rounded-2xl rounded-tl-sm shadow-sm border border-slate-100">
                             <Loader2 className="w-4 h-4 text-amber-500 animate-spin" />
