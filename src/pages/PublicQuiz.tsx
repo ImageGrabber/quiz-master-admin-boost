@@ -885,13 +885,25 @@ const PublicQuiz = ({
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Button variant="outline" onClick={() => navigate(primaryHubPath)}>
+              <Button
+                variant="outline"
+                className="bg-white text-slate-800 border-slate-300 hover:bg-slate-50 hover:text-slate-900"
+                onClick={() => navigate(primaryHubPath)}
+              >
                 More {bookName} Quizzes
               </Button>
-              <Button variant="outline" onClick={() => navigate("/bible-questions-and-answers-hub")}>
+              <Button
+                variant="outline"
+                className="bg-white text-slate-800 border-slate-300 hover:bg-slate-50 hover:text-slate-900"
+                onClick={() => navigate("/bible-questions-and-answers-hub")}
+              >
                 Browse All Bible Books
               </Button>
-              <Button variant="outline" onClick={() => navigate(chapterPath)}>
+              <Button
+                variant="outline"
+                className="bg-white text-slate-800 border-slate-300 hover:bg-slate-50 hover:text-slate-900"
+                onClick={() => navigate(chapterPath)}
+              >
                 Open This Quiz Link
               </Button>
             </div>
