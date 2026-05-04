@@ -144,6 +144,7 @@ function generateSitemap() {
     { loc: '/bible-quiz-for-kids-teens-adults', priority: '0.9', changefreq: 'weekly' },
     { loc: '/bible-questions', priority: '0.9', changefreq: 'weekly' },
     { loc: '/prayers', priority: '0.9', changefreq: 'weekly' },
+    { loc: '/media-kit', priority: '0.8', changefreq: 'monthly' },
     { loc: '/10-commandments-quiz', priority: '0.8', changefreq: 'monthly' },
     { loc: '/bible-quiz-printable-pdf', priority: '0.9', changefreq: 'monthly' },
     { loc: '/bible-quiz-multiplayer', priority: '0.8', changefreq: 'monthly' },
@@ -162,6 +163,9 @@ function generateSitemap() {
     { loc: '/christian-worship-songs-chords', priority: '0.9', changefreq: 'weekly' },
     { loc: '/hindi-christian-songs-lyrics-chords', priority: '0.9', changefreq: 'weekly' },
     { loc: '/easy-worship-songs-for-beginners-guitar', priority: '0.9', changefreq: 'weekly' },
+    { loc: '/hindi-christian-songs-for-prayer-meetings', priority: '0.9', changefreq: 'weekly' },
+    { loc: '/christian-songs-lyrics-hindi-english', priority: '0.9', changefreq: 'weekly' },
+    { loc: '/worship-songs-with-chords-for-beginners', priority: '0.9', changefreq: 'weekly' },
 
     // Bible Characters Vertical Batch D
     { loc: '/women-of-the-bible', priority: '0.9', changefreq: 'monthly' },

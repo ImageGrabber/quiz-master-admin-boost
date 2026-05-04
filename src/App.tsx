@@ -166,6 +166,7 @@ import BibleTriviaQuestionsAndAnswers from "./pages/seo-quizzes/BibleTriviaQuest
 import BibleQuizForKidsTeensAdults from "./pages/seo-quizzes/BibleQuizForKidsTeensAdults";
 import BibleQuestionsLanding from "./pages/seo-quizzes/BibleQuestionsLanding";
 import PrayersLanding from "./pages/seo-resources/PrayersLanding";
+import MediaKit from "./pages/MediaKit";
 import RulesAndPrizes from "./pages/seo-quizzes/RulesAndPrizes";
 import BibleTriviaForKids from "./pages/seo-quizzes/BibleTriviaForKids";
 import BookOfJohnQuizQuestions from "./pages/seo-quizzes/BookOfJohnQuizQuestions";
@@ -190,6 +191,9 @@ import HallelujahStutiLyrics from "./pages/seo-lyrics/HallelujahStutiLyrics";
 import HoTeriStutiTeluguLyrics from "./pages/seo-lyrics/HoTeriStutiTeluguLyrics";
 import HaathUthaakarGaoongaLyrics from "./pages/seo-lyrics/HaathUthaakarGaoongaLyrics";
 import AaradhnaHoAaradhnaLyrics from "./pages/seo-lyrics/AaradhnaHoAaradhnaLyrics";
+import HindiChristianSongsForPrayerMeetings from "./pages/seo-lyrics/HindiChristianSongsForPrayerMeetings";
+import ChristianSongsLyricsHindiEnglish from "./pages/seo-lyrics/ChristianSongsLyricsHindiEnglish";
+import WorshipSongsWithChordsForBeginners from "./pages/seo-lyrics/WorshipSongsWithChordsForBeginners";
 import BibleVersesPeace from "./pages/verses/BibleVersesPeace";
 import CharactersHub from "./pages/bible-characters/CharactersHub";
 import ParablesQuiz from "./pages/quizzes/ParablesQuiz";
@@ -386,6 +390,7 @@ const App = () => {
               <Route path="/bible-quiz-for-kids-teens-adults" element={<BibleQuizForKidsTeensAdults />} />
               <Route path="/bible-questions" element={<BibleQuestionsLanding />} />
               <Route path="/prayers" element={<PrayersLanding />} />
+              <Route path="/media-kit" element={<MediaKit />} />
               <Route path="/hard-bible-quiz-for-teens" element={<HardBibleQuizForTeens />} />
               <Route path="/hard-bible-quiz-for-adults" element={<HardBibleQuizForAdults />} />
               <Route path="/bible-trivia-for-kids-under-10" element={<BibleTriviaForKids />} />
@@ -571,6 +576,9 @@ const App = () => {
               <Route path="/christian-worship-songs-chords" element={<WorshipSongsChordsHub />} />
               <Route path="/hindi-christian-songs-lyrics-chords" element={<HindiWorshipLanding />} />
               <Route path="/easy-worship-songs-for-beginners-guitar" element={<BeginnerGuitarSongs />} />
+              <Route path="/hindi-christian-songs-for-prayer-meetings" element={<HindiChristianSongsForPrayerMeetings />} />
+              <Route path="/christian-songs-lyrics-hindi-english" element={<ChristianSongsLyricsHindiEnglish />} />
+              <Route path="/worship-songs-with-chords-for-beginners" element={<WorshipSongsWithChordsForBeginners />} />
 
               {/* Bible Characters Vertical Batch D */}
               <Route path="/women-of-the-bible" element={<WomenOfBible />} />

@@ -56,10 +56,14 @@ export const Footer = () => {
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Resources</p>
             <div className="space-y-3 text-sm">
               <button onClick={() => navigate("/articles")} className="block text-slate-200 hover:text-white">Articles</button>
+              <button onClick={() => navigate("/public-quiz")} className="block text-slate-200 hover:text-white">Public Bible Quiz</button>
+              <button onClick={() => navigate("/bible-questions")} className="block text-slate-200 hover:text-white">Bible Questions</button>
+              <button onClick={() => navigate("/prayers")} className="block text-slate-200 hover:text-white">Prayers</button>
               <button onClick={() => navigate("/daily-verse")} className="block text-slate-200 hover:text-white">Daily Verse</button>
               <button onClick={() => navigate("/bible-quiz-questions-and-answers")} className="block text-slate-200 hover:text-white">Bible Q&A Guide</button>
               <button onClick={() => navigate("/hardest-bible-trivia-questions")} className="block text-slate-200 hover:text-white">Hardest Trivia</button>
               <button onClick={() => navigate("/bible-quiz-with-answers-for-youth")} className="block text-slate-200 hover:text-white">Youth Quiz</button>
+              <button onClick={() => navigate("/media-kit")} className="block text-slate-200 hover:text-white">Media Kit</button>
             </div>
           </div>
 

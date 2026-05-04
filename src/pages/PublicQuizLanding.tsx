@@ -222,7 +222,17 @@ export default function PublicQuizLanding() {
                 </div>
               </div>
             </div>
-            <div />
+            <div className="relative animate-in fade-in zoom-in duration-1000 delay-200">
+              <div className="absolute -inset-4 bg-gradient-to-r from-blue-100/50 to-indigo-100/50 blur-3xl rounded-[3rem] -z-10 opacity-50" />
+              <div className="relative rounded-[3rem] overflow-hidden border-[8px] border-white shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-700 aspect-[4/3] sm:aspect-video lg:aspect-square">
+                <img 
+                  src="/images/hero/public-quiz.png" 
+                  alt="Bible Study Hub Illustration" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </div>
+            </div>
           </section>
 
           <section id="quizzes" className="mb-16">
