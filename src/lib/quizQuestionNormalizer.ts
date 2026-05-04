@@ -25,6 +25,7 @@ interface NormalizeQuizQuestionsOptions {
 }
 
 const DEFAULT_OPTIONS = ["Option A", "Option B", "Option C", "Option D"];
+const MIN_QUESTIONS_PER_PUBLIC_QUIZ = 10;
 
 const escapeRegExp = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
@@ -69,7 +70,7 @@ export const normalizeQuizQuestions = (
 
   const contextLabel = chapterLabel(bookName, chapter);
 
-  return questions.map((rawQuestion, index) => {
+  const normalizedQuestions = questions.map((rawQuestion, index) => {
     const options = Array.isArray(rawQuestion.options) && rawQuestion.options.length > 0
       ? rawQuestion.options.map((opt) => String(opt))
       : DEFAULT_OPTIONS;
@@ -101,4 +102,42 @@ export const normalizeQuizQuestions = (
       chapter: normalizedChapter
     };
   });
+
+  if (normalizedQuestions.length >= MIN_QUESTIONS_PER_PUBLIC_QUIZ) {
+    return normalizedQuestions;
+  }
+
+  const fallbackPool = chapter
+    ? createChapterFallbackQuestions(bookName, chapter)
+    : createChapterFallbackQuestions(bookName, "1");
+
+  const extendedQuestions = [...normalizedQuestions];
+  let nextId = extendedQuestions.length + 1;
+  let fallbackIndex = 0;
+
+  while (extendedQuestions.length < MIN_QUESTIONS_PER_PUBLIC_QUIZ) {
+    const source = fallbackPool[fallbackIndex % fallbackPool.length];
+    const suffix = `Practice ${nextId}`;
+    const sourceOptions = Array.isArray(source.options) && source.options.length > 0
+      ? source.options.map((opt) => String(opt))
+      : DEFAULT_OPTIONS;
+    const sourceAnswer = typeof source.answer === "number" && source.answer >= 0 && source.answer < sourceOptions.length
+      ? source.answer
+      : 0;
+
+    extendedQuestions.push({
+      ...source,
+      id: nextId,
+      question: `${(source.question || `What can we learn from ${contextLabel}?`).trim()} (${suffix})`,
+      options: sourceOptions,
+      answer: sourceAnswer,
+      explanation: (source.explanation || `In ${contextLabel}, the best answer is "${sourceOptions[sourceAnswer]}".`).trim(),
+      chapter: source.chapter ?? (chapter ? String(chapter) : undefined)
+    });
+
+    nextId += 1;
+    fallbackIndex += 1;
+  }
+
+  return extendedQuestions;
 };

@@ -152,6 +152,7 @@ import John3PublicQuiz from "./pages/public-quizzes/3JohnPublicQuiz";
 import JudePublicQuiz from "./pages/public-quizzes/JudePublicQuiz";
 import RevelationPublicQuiz from "./pages/public-quizzes/RevelationPublicQuiz";
 import PublicQuizChapter from "./pages/public-quizzes/PublicQuizChapter";
+import PublicQuizLanding from "./pages/PublicQuizLanding";
 import HardBibleQuizForTeens from "./pages/seo-quizzes/HardBibleQuizForTeens";
 import HardBibleQuizForAdults from "./pages/seo-quizzes/HardBibleQuizForAdults";
 import BibleQuizQuestionsAndAnswers from "./pages/seo-quizzes/BibleQuizQuestionsAndAnswers";
@@ -421,6 +422,7 @@ const App = () => {
               <Route path="/articles" element={<Articles />} />
               <Route path="/articles/:id" element={<ArticleDetail />} />
               <Route path="/public-quiz/genesis" element={<GenesisPublicQuiz />} />
+              <Route path="/public-quiz" element={<PublicQuizLanding />} />
               <Route path="/public-quiz/exodus" element={<ExodusPublicQuiz />} />
               <Route path="/public-quiz/leviticus" element={<LeviticusPublicQuiz />} />
               <Route path="/public-quiz/numbers" element={<NumbersPublicQuiz />} />
