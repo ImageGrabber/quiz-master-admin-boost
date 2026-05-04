@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client'
 import * as Sentry from "@sentry/react";
 import './index.css'
 import AppPreloader from "@/components/AppPreloader";
-import { initMixpanel } from "@/lib/mixpanel";
+import { initMixpanel, trackMixpanelEvent } from "@/lib/mixpanel";
 
 Sentry.init({
   dsn: "https://fa0cf97a7293fc23db237665294745af@o4510354809225217.ingest.us.sentry.io/4510354810077184",
@@ -13,6 +13,10 @@ Sentry.init({
 
 console.log("React application starting...");
 initMixpanel();
+trackMixpanelEvent("mixpanel_boot", {
+  source: "main.tsx",
+  timestamp: new Date().toISOString(),
+});
 
 window.addEventListener('error', (event) => {
   console.error("Global error caught:", event.error);
