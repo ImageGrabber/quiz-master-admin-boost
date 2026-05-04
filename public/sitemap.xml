@@ -289,6 +289,24 @@
     <priority>0.95</priority>
   </url>
   <url>
+    <loc>https://biblequizcompetition.com/help/create-quiz</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://biblequizcompetition.com/help/join-live-quizzes</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://biblequizcompetition.com/help/realtime-features</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://biblequizcompetition.com/bible-questions-and-answers-hub/genesis/chapter-1</loc>
     <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>

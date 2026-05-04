@@ -175,6 +175,9 @@ function generateSitemap() {
     { loc: '/kids-stories/daniel-and-the-sleepy-lions', priority: '0.9', changefreq: 'monthly' },
     { loc: '/kids-stories/jonah-and-the-big-fish', priority: '0.9', changefreq: 'monthly' },
     { loc: '/public-quiz', priority: '0.95', changefreq: 'weekly' },
+    { loc: '/help/create-quiz', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/help/join-live-quizzes', priority: '0.8', changefreq: 'monthly' },
+    { loc: '/help/realtime-features', priority: '0.8', changefreq: 'monthly' },
   ];
 
   // Genesis chapters

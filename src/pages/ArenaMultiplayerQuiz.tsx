@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Users, Zap, Swords, CheckCircle2, XCircle, UserRound, Share2 } from "lucide-react";
+import { ArrowLeft, Users, Zap, Swords, CheckCircle2, XCircle, UserRound, Share2, Sparkles, Trophy, Activity, MessageSquare } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { loadArenaQuestions, type ArenaDifficulty } from "@/lib/arenaQuestions";
 import { v4 as uuidv4 } from 'uuid';
@@ -17,6 +17,7 @@ type DifficultyConfig = {
   pointsPerCorrect: number;
   botAccuracy: number;
   badgeClass: string;
+  accentColor: string;
 };
 
 const DIFFICULTY_CONFIG: Record<ArenaDifficulty, DifficultyConfig> = {
@@ -25,21 +26,24 @@ const DIFFICULTY_CONFIG: Record<ArenaDifficulty, DifficultyConfig> = {
     secondsPerQuestion: 12,
     pointsPerCorrect: 1,
     botAccuracy: 0.55,
-    badgeClass: "text-emerald-300 border-emerald-500/30 bg-emerald-500/10",
+    badgeClass: "text-emerald-600 border-emerald-100 bg-emerald-50",
+    accentColor: "bg-emerald-500",
   },
   Medium: {
     label: "Medium",
     secondsPerQuestion: 10,
     pointsPerCorrect: 2,
     botAccuracy: 0.72,
-    badgeClass: "text-amber-300 border-amber-500/30 bg-amber-500/10",
+    badgeClass: "text-blue-600 border-blue-100 bg-blue-50",
+    accentColor: "bg-blue-500",
   },
   Hard: {
     label: "Hard",
     secondsPerQuestion: 8,
     pointsPerCorrect: 3,
     botAccuracy: 0.85,
-    badgeClass: "text-rose-300 border-rose-500/30 bg-rose-500/10",
+    badgeClass: "text-rose-600 border-rose-100 bg-rose-50",
+    accentColor: "bg-rose-500",
   },
 };
 
@@ -297,68 +301,64 @@ const ArenaMultiplayerQuiz = () => {
 
   if (phase === 'matchmaking') {
     return (
-      <main className="h-screen w-full bg-[#020617] flex flex-col items-center justify-center p-6 relative overflow-hidden font-urbanist">
-        {/* Background ambience - Matchmaking */}
+      <main className="h-screen w-full bg-[#FDFDFF] flex flex-col items-center justify-center p-6 relative overflow-hidden font-urbanist">
+        {/* Premium Light Ambience */}
         <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[1000px] bg-[radial-gradient(ellipse_at_center,_rgba(127,29,29,0.15)_0%,_transparent_60%)] blur-[80px]" />
-          <div className="absolute inset-0 opacity-[0.1] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[1000px] bg-[radial-gradient(ellipse_at_center,_rgba(59,130,246,0.08)_0%,_transparent_60%)] blur-[100px]" />
+          <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-50/20 rounded-full blur-[100px] -z-10" />
         </div>
 
         <div className="relative z-10 text-center space-y-12 max-w-md w-full">
           {loadError && (
-            <div className="rounded-xl border border-rose-500/40 bg-rose-500/10 px-4 py-3 text-sm text-rose-200">
+            <div className="rounded-2xl border border-rose-100 bg-rose-50 px-4 py-3 text-xs font-bold text-rose-600 animate-in fade-in slide-in-from-top-4">
               {loadError}
             </div>
           )}
+          
           <div className="relative inline-block">
-            <div className="h-40 w-40 rounded-full border-4 border-white/5 border-t-primary animate-spin" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative">
-                <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full animate-pulse" />
-                <Users className="h-12 w-12 text-foreground relative z-10" />
-              </div>
-            </div>
+             <div className="absolute inset-0 bg-blue-500/10 blur-[60px] rounded-full scale-150 animate-pulse" />
+             <div className="relative h-48 w-48 rounded-full border-[6px] border-slate-50 border-t-blue-600 animate-spin transition-all duration-1000" />
+             <div className="absolute inset-0 flex items-center justify-center">
+                <Users className="h-14 w-14 text-blue-600 animate-bounce" />
+             </div>
           </div>
           
-          <div className="space-y-3">
-            <h1 className="text-4xl font-black tracking-tighter text-foreground uppercase leading-none">Searching for Opponent</h1>
-            <p className="text-muted-foreground font-medium text-sm tracking-tight">Seeking a worthy disciple in the realm...</p>
+          <div className="space-y-4">
+            <h1 className="text-4xl font-black tracking-tighter text-slate-900 uppercase leading-none">Seeking Rival</h1>
+            <p className="text-slate-500 font-medium text-sm tracking-tight">Summoning a worthy opponent for the scripture battle...</p>
           </div>
 
-          <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-5 shadow-2xl">
-            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-4">Select Difficulty</p>
-            <div className="grid grid-cols-3 gap-2">
+          <div className="bg-white/70 backdrop-blur-xl border border-white rounded-[2.5rem] p-6 shadow-2xl">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-5">Battle Settings</p>
+            <div className="grid grid-cols-3 gap-3">
               {(["Easy", "Medium", "Hard"] as ArenaDifficulty[]).map((d) => (
                 <button
                   key={d}
                   onClick={() => setDifficulty(d)}
-                  className={`py-2.5 rounded-xl border text-[10px] font-black uppercase tracking-[0.16em] transition-all ${
+                  className={`py-3 rounded-2xl border text-[10px] font-black uppercase tracking-[0.16em] transition-all ${
                     difficulty === d
-                      ? `${DIFFICULTY_CONFIG[d].badgeClass} shadow-lg`
-                      : "border-white/10 text-muted-foreground hover:text-foreground hover:bg-white/5"
+                      ? `${DIFFICULTY_CONFIG[d].badgeClass} border-blue-200 shadow-lg scale-105`
+                      : "bg-slate-50 border-slate-100 text-slate-400 hover:text-slate-900 hover:bg-slate-100"
                   }`}
                 >
                   {d}
                 </button>
               ))}
             </div>
-            <p className="text-[10px] text-white/35 mt-3 font-bold uppercase tracking-wider">
-              {mode.secondsPerQuestion}s per question • {mode.pointsPerCorrect} pts per correct
-            </p>
           </div>
 
-          <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] p-8 shadow-2xl">
-            <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-[0.2em] text-white/30 mb-5">
-              <span>Time Remaining</span>
-              <span className="text-primary">{matchmakingTime}s</span>
+          <div className="bg-white/70 backdrop-blur-xl border border-white rounded-[2.5rem] p-8 shadow-2xl">
+            <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-5">
+              <span>Finding Match</span>
+              <span className="text-blue-600">{matchmakingTime}s</span>
             </div>
-            <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full bg-primary transition-all duration-300" style={{ width: `${(matchmakingTime) * 10}%` }} />
+            <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+              <div className="h-full bg-blue-600 transition-all duration-300" style={{ width: `${(matchmakingTime) * 10}%` }} />
             </div>
           </div>
 
-          <button onClick={() => navigate("/quiz-arena")} className="text-[10px] font-black uppercase tracking-widest text-white/20 hover:text-foreground transition-all">
-            Cancel Matchmaking
+          <button onClick={() => navigate("/quiz-arena")} className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 hover:text-rose-500 transition-all">
+            Abort Matchmaking
           </button>
         </div>
       </main>
@@ -378,7 +378,6 @@ const ArenaMultiplayerQuiz = () => {
       { label: "Facebook", href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}` },
       { label: "LinkedIn", href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}` },
       { label: "Telegram", href: `https://t.me/share/url?url=${encodedUrl}&text=${encodedText}` },
-      { label: "Reddit", href: `https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedText}` },
       { label: "WhatsApp", href: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${pageUrl}`)}` },
     ];
 
@@ -396,62 +395,51 @@ const ArenaMultiplayerQuiz = () => {
     };
 
     return (
-      <main className="h-screen w-full bg-[#020617] flex items-center justify-center p-6 overflow-hidden font-urbanist">
-        {/* Background ambience - Results */}
+      <main className="h-screen w-full bg-[#FDFDFF] flex items-center justify-center p-6 overflow-hidden font-urbanist">
+        {/* Premium Light Ambience */}
         <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] h-[1000px] bg-[radial-gradient(ellipse_at_top,_rgba(127,29,29,0.15)_0%,_transparent_60%)] blur-[80px]" />
-          <div className="absolute inset-0 opacity-[0.1] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] h-[1000px] bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.08)_0%,_transparent_60%)] blur-[80px]" />
         </div>
 
-        <div className="max-w-4xl w-full bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-[3.5rem] p-12 text-center space-y-12 shadow-2xl relative z-10 animate-in zoom-in duration-500">
+        <div className="max-w-4xl w-full bg-white border border-white rounded-[3.5rem] p-12 text-center space-y-12 shadow-2xl relative z-10 animate-in zoom-in duration-700">
           <div className="space-y-6">
-            <div className={`h-24 w-24 mx-auto rounded-3xl flex items-center justify-center text-primary-foreground shadow-2xl relative ${victory ? 'bg-primary shadow-primary/30' : 'bg-slate-700 shadow-slate-700/30'}`}>
-              <div className={`absolute inset-0 blur-2xl rounded-full opacity-50 ${victory ? 'bg-primary' : 'bg-slate-700'}`} />
-              <Zap className="h-12 w-12 relative z-10" />
+            <div className={`h-28 w-28 mx-auto rounded-[2.5rem] flex items-center justify-center text-white shadow-2xl relative ${victory ? 'bg-gradient-to-br from-blue-500 to-indigo-600 shadow-blue-200' : 'bg-slate-800 shadow-slate-200'}`}>
+              <Trophy className="h-14 w-14 relative z-10" />
             </div>
-            <div className="space-y-2">
-              <div className={`inline-flex rounded-full border px-4 py-1 text-[10px] font-black uppercase tracking-[0.2em] ${mode.badgeClass}`}>
-                {difficulty}
+            <div className="space-y-3">
+              <div className={`inline-flex rounded-xl border px-5 py-2 text-[10px] font-black uppercase tracking-[0.2em] ${mode.badgeClass}`}>
+                {difficulty} Battle
               </div>
-              <h1 className="text-6xl font-black tracking-tighter text-foreground uppercase leading-none">
-                {victory ? "Battle Victory!" : userScore === opponentScore ? "Draw Match" : "Defeated"}
+              <h1 className="text-6xl font-black tracking-tighter text-slate-900 uppercase leading-none">
+                {victory ? "Victory!" : userScore === opponentScore ? "Draw!" : "Defeated"}
               </h1>
-              <p className="text-muted-foreground font-medium italic tracking-tight text-sm">"The wisdom of the prudent is to give thought to their steps."</p>
+              <p className="text-slate-500 font-bold tracking-tight text-sm uppercase tracking-[0.2em]">The word has spoken.</p>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-8 max-w-lg mx-auto">
-            <div className="bg-white/5 rounded-[2.5rem] p-10 border border-white/5">
-              <p className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-3">Your Score</p>
-              <p className="text-7xl font-black text-foreground tabular-nums leading-none">{userScore}</p>
+            <div className="bg-slate-50 rounded-[2.5rem] p-10 border border-slate-100 shadow-sm">
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Your Score</p>
+              <p className="text-7xl font-black text-slate-900 tabular-nums leading-none">{userScore}</p>
             </div>
-            <div className="bg-white/5 rounded-[2.5rem] p-10 border border-white/5">
-              <p className="text-[10px] font-black text-white/20 uppercase tracking-widest mb-3">Opponent Score</p>
-              <p className="text-7xl font-black text-white/20 tabular-nums leading-none">{opponentScore}</p>
+            <div className="bg-slate-50 rounded-[2.5rem] p-10 border border-slate-100 shadow-sm opacity-60">
+              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">Rival Score</p>
+              <p className="text-7xl font-black text-slate-900 tabular-nums leading-none">{opponentScore}</p>
             </div>
           </div>
 
           <div className="flex gap-4 max-w-md mx-auto pt-6">
-            <button onClick={() => window.location.reload()} className="flex-1 py-5 bg-primary hover:bg-primary/90 text-primary-foreground font-black text-xs uppercase tracking-[0.2em] rounded-2xl transition-all shadow-xl shadow-primary/20">Rematch</button>
-            <button onClick={() => navigate("/quiz-arena")} className="flex-1 py-5 bg-white/5 border border-white/10 text-muted-foreground hover:text-foreground font-black text-xs uppercase tracking-[0.2em] rounded-2xl transition-all">Exit Arena</button>
+            <button onClick={() => window.location.reload()} className="flex-1 py-5 bg-blue-600 hover:bg-blue-700 text-white font-black text-[10px] uppercase tracking-[0.3em] rounded-2xl transition-all shadow-xl shadow-blue-100">Rematch</button>
+            <button onClick={() => navigate("/quiz-arena")} className="flex-1 py-5 bg-white border border-slate-200 text-slate-500 hover:text-slate-900 font-black text-[10px] uppercase tracking-[0.3em] rounded-2xl transition-all shadow-sm">Exit Arena</button>
           </div>
 
-          <div className="max-w-3xl mx-auto w-full pt-2">
-            {navigator.share && (
-              <button
-                onClick={() => void handleNativeShare()}
-                className="w-full mb-3 py-3 px-4 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl text-foreground font-bold text-[11px] uppercase tracking-[0.15em] flex items-center justify-center gap-2 transition-all"
-              >
-                <Share2 className="h-4 w-4" />
-                Share Result
-              </button>
-            )}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          <div className="max-w-3xl mx-auto w-full pt-4">
+            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
               {shareLinks.map((item) => (
                 <button
                   key={item.label}
                   onClick={() => openShareUrl(item.href)}
-                  className="py-2.5 px-3 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl text-[10px] font-black uppercase tracking-[0.16em] text-muted-foreground hover:text-foreground transition-all"
+                  className="py-3 px-3 bg-slate-50 border border-slate-100 hover:bg-white hover:border-blue-200 rounded-xl text-[9px] font-black uppercase tracking-[0.16em] text-slate-400 hover:text-blue-600 transition-all shadow-sm"
                 >
                   {item.label}
                 </button>
@@ -464,53 +452,55 @@ const ArenaMultiplayerQuiz = () => {
   }
 
   return (
-    <main className="h-screen w-full bg-[#020617] text-foreground flex flex-col font-urbanist overflow-hidden selection:bg-primary/30 relative">
+    <main className="h-screen w-full bg-[#FDFDFF] text-slate-900 flex flex-col font-urbanist overflow-hidden selection:bg-blue-100 relative">
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] h-[1000px] bg-[radial-gradient(ellipse_at_top,_rgba(127,29,29,0.15)_0%,_transparent_60%)] blur-[80px]" />
-        <div className="absolute inset-0 opacity-[0.1] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] h-[1000px] bg-[radial-gradient(ellipse_at_top,_rgba(59,130,246,0.06)_0%,_transparent_60%)] blur-[80px]" />
       </div>
 
       <header className="relative z-10 px-8 py-6 flex items-center justify-between">
-        <button onClick={() => navigate("/quiz-arena")} className="h-10 w-10 rounded-full bg-slate-900/50 border border-white/10 flex items-center justify-center hover:bg-slate-800 transition-all shadow-sm">
-          <ArrowLeft className="h-4 w-4" />
+        <button onClick={() => navigate("/quiz-arena")} className="h-12 w-12 rounded-2xl bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50 transition-all shadow-sm">
+          <ArrowLeft className="h-5 w-5 text-slate-600" />
         </button>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           <div className="text-right">
-            <p className="text-[9px] font-black text-white/20 uppercase tracking-widest">Round</p>
-            <p className="text-xl font-black text-foreground">{index + 1} / 10</p>
+            <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">BATTLE STAGE</p>
+            <p className="text-xl font-black text-slate-900">{index + 1} / 10</p>
           </div>
-          <div className="h-10 w-px bg-white/10 mx-2" />
+          <div className="h-10 w-px bg-slate-100 mx-2" />
           <div className="text-left">
-            <p className="text-[9px] font-black text-primary uppercase tracking-widest">Battle Active</p>
+            <p className="text-[9px] font-black text-blue-600 uppercase tracking-widest mb-1">LIVE CONFLICT</p>
             <div className="flex items-center gap-2">
-              <Swords className="h-4 w-4 text-foreground" />
-              <span className={`text-[9px] font-black uppercase tracking-wider rounded-full border px-2 py-0.5 ${mode.badgeClass}`}>{difficulty}</span>
+              <Swords className="h-4 w-4 text-slate-900" />
+              <span className={`text-[9px] font-black uppercase tracking-wider rounded-lg border px-2 py-0.5 ${mode.badgeClass}`}>{difficulty}</span>
             </div>
           </div>
         </div>
-        <div className="h-10 w-10" />
+        <div className="h-12 w-12" />
       </header>
 
-      <div className="relative z-10 flex-1 grid grid-cols-2 p-6 gap-6 min-h-0">
-        <div className={`flex flex-col transition-all duration-500 ${turn === 'user' ? 'scale-100 opacity-100' : 'scale-95 opacity-30 pointer-events-none grayscale blur-[2px]'}`}>
-          <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-[3rem] p-10 flex-1 flex flex-col shadow-2xl">
-            <div className="flex items-center gap-4 mb-8">
-              <div className="h-12 w-12 rounded-2xl bg-primary flex items-center justify-center text-primary-foreground shadow-lg shadow-primary/20"><Users className="h-6 w-6" /></div>
+      <div className="relative z-10 flex-1 grid grid-cols-2 p-8 gap-8 min-h-0">
+        {/* PLAYER ONE: YOU */}
+        <div className={`flex flex-col transition-all duration-700 ${turn === 'user' ? 'scale-100 opacity-100' : 'scale-[0.98] opacity-20 pointer-events-none grayscale-[0.8] blur-[1px]'}`}>
+          <div className={`bg-white border border-white rounded-[3rem] p-10 flex-1 flex flex-col shadow-2xl relative overflow-hidden ${turn === 'user' ? 'ring-4 ring-blue-50' : ''}`}>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50/50 rounded-bl-[4rem] -z-0" />
+            <div className="relative z-10 flex items-center gap-5 mb-10">
+              <div className="h-14 w-14 rounded-2xl bg-blue-600 flex items-center justify-center text-white shadow-xl shadow-blue-100"><Users className="h-7 w-7" /></div>
               <div>
-                <p className="text-[10px] font-black text-white/20 uppercase tracking-widest">Player One</p>
-                <h3 className="text-xl font-black text-foreground">YOU</h3>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">CHALLENGER</p>
+                <h3 className="text-2xl font-black text-slate-900 uppercase">YOU</h3>
               </div>
-              <div className="ml-auto bg-white/5 px-4 py-2 rounded-2xl border border-white/10"><span className="text-2xl font-black text-foreground">{userScore}</span></div>
+              <div className="ml-auto bg-slate-50 px-6 py-3 rounded-2xl border border-slate-100 shadow-sm"><span className="text-3xl font-black text-slate-900">{userScore}</span></div>
             </div>
-            <div className="flex-1 flex flex-col justify-center space-y-8 relative">
+            
+            <div className="flex-1 flex flex-col justify-center space-y-10 relative">
               {turn === 'user' && !selected && (
-                <div className="absolute -top-4 left-0 w-full h-1 bg-white/5 rounded-full overflow-hidden">
-                  <div className={`h-full transition-all duration-1000 ease-linear bg-primary ${questionTimeLeft <= 3 ? 'animate-pulse' : ''}`} style={{ width: `${(questionTimeLeft / mode.secondsPerQuestion) * 100}%` }} />
+                <div className="absolute -top-6 left-0 w-full h-1.5 bg-slate-50 rounded-full overflow-hidden">
+                  <div className={`h-full transition-all duration-1000 ease-linear bg-blue-600 ${questionTimeLeft <= 3 ? 'animate-pulse bg-rose-500' : ''}`} style={{ width: `${(questionTimeLeft / mode.secondsPerQuestion) * 100}%` }} />
                 </div>
               )}
-              <h2 className="text-2xl lg:text-3xl font-black leading-tight text-foreground">{turn === 'user' ? current?.question : "Waiting for Opponent..."}</h2>
-              <div className="grid gap-3">
-                {current?.options.map((opt) => {
+              <h2 className="text-2xl lg:text-3xl font-black leading-tight text-slate-900 tracking-tight">{turn === 'user' ? current?.question : "Awaiting opponent action..."}</h2>
+              <div className="grid gap-4">
+                {current?.options.map((opt, idx) => {
                   const isCorrect = opt === current.answer;
                   const isSelected = selected === opt;
                   return (
@@ -518,14 +508,21 @@ const ArenaMultiplayerQuiz = () => {
                       key={opt} 
                       disabled={!!selected || turn !== 'user'} 
                       onClick={() => onUserAnswer(opt)} 
-                      className={`relative w-full text-left p-5 rounded-2xl border transition-all duration-300 text-sm font-bold 
-                        ${!selected ? 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-primary/50 text-foreground' : ''}
-                        ${isSelected && isCorrect ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400' : ''}
-                        ${isSelected && !isCorrect ? 'bg-rose-500/20 border-rose-500 text-rose-400' : ''}
+                      className={`group relative w-full text-left p-6 rounded-2xl border transition-all duration-300
+                        ${!selected ? 'bg-white border-slate-100 hover:border-blue-300 hover:shadow-xl hover:-translate-y-1' : ''}
+                        ${isSelected && isCorrect ? 'bg-emerald-50 border-emerald-500 text-emerald-700 shadow-lg shadow-emerald-100' : ''}
+                        ${isSelected && !isCorrect ? 'bg-rose-50 border-rose-500 text-rose-700 shadow-lg shadow-rose-100' : ''}
                         ${selected && !isSelected ? 'opacity-20 border-transparent grayscale' : ''}
                       `}
                     >
-                      {opt}
+                      <div className="flex items-center gap-4">
+                         <span className={`w-8 h-8 rounded-xl flex items-center justify-center text-[11px] font-black border transition-colors ${
+                            isSelected ? 'bg-white border-transparent' : 'bg-slate-50 border-slate-100 text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-600'
+                         }`}>
+                           {String.fromCharCode(65 + idx)}
+                         </span>
+                         <span className="text-base font-bold">{opt}</span>
+                      </div>
                     </button>
                   );
                 })}
@@ -534,53 +531,67 @@ const ArenaMultiplayerQuiz = () => {
           </div>
         </div>
 
-        <div className={`flex flex-col transition-all duration-500 ${turn === 'opponent' ? 'scale-100 opacity-100' : 'scale-95 opacity-30 pointer-events-none grayscale blur-[2px]'}`}>
-          <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-[3rem] p-10 flex-1 flex flex-col shadow-2xl">
-            <div className="flex items-center gap-4 mb-8">
-              <div className={`h-12 w-12 rounded-2xl flex items-center justify-center text-white shadow-lg ${isBot ? 'bg-indigo-500 shadow-indigo-500/20' : 'bg-sky-500 shadow-sky-500/20'}`}>{isBot ? <UserRound className="h-6 w-6" /> : <Users className="h-6 w-6" />}</div>
-              <div>
-                <p className="text-[10px] font-black text-white/20 uppercase tracking-widest">Arena Opponent</p>
-                <h3 className="text-xl font-black text-foreground uppercase">{opponentName}</h3>
+        {/* PLAYER TWO: RIVAL */}
+        <div className={`flex flex-col transition-all duration-700 ${turn === 'opponent' ? 'scale-100 opacity-100' : 'scale-[0.98] opacity-20 pointer-events-none grayscale-[0.8] blur-[1px]'}`}>
+          <div className={`bg-white border border-white rounded-[3rem] p-10 flex-1 flex flex-col shadow-2xl relative overflow-hidden ${turn === 'opponent' ? 'ring-4 ring-indigo-50' : ''}`}>
+            <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50/50 rounded-bl-[4rem] -z-0" />
+            <div className="relative z-10 flex items-center gap-5 mb-10">
+              <div className={`h-14 w-14 rounded-2xl flex items-center justify-center text-white shadow-xl ${isBot ? 'bg-indigo-600 shadow-indigo-100' : 'bg-sky-600 shadow-sky-100'}`}>
+                 {isBot ? <UserRound className="h-7 w-7" /> : <Users className="h-7 w-7" />}
               </div>
-              <div className="ml-auto bg-white/5 px-4 py-2 rounded-2xl border border-white/10"><span className="text-2xl font-black text-foreground">{opponentScore}</span></div>
+              <div>
+                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">ARENA RIVAL</p>
+                <h3 className="text-2xl font-black text-slate-900 uppercase truncate max-w-[200px]">{opponentName}</h3>
+              </div>
+              <div className="ml-auto bg-slate-50 px-6 py-3 rounded-2xl border border-slate-100 shadow-sm"><span className="text-3xl font-black text-slate-900">{opponentScore}</span></div>
             </div>
-            <div className="flex-1 flex flex-col justify-center space-y-6">
+            
+            <div className="flex-1 flex flex-col justify-center space-y-8">
               {turn === 'opponent' ? (
                 <>
-                  <div className="space-y-4">
-                    <h2 className="text-xl font-black text-foreground italic leading-tight mb-4">"{current?.question}"</h2>
-                    <div className="grid gap-2 w-full max-w-sm mx-auto">
-                      {current?.options.map((opt) => {
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-3 text-slate-400 mb-2">
+                       <MessageSquare className="h-4 w-4" />
+                       <span className="text-[10px] font-black uppercase tracking-[0.2em]">Opponent View</span>
+                    </div>
+                    <h2 className="text-xl lg:text-2xl font-black text-slate-900 leading-tight mb-8">"{current?.question}"</h2>
+                    <div className="grid gap-3 w-full max-w-sm">
+                      {current?.options.map((opt, idx) => {
                         const isCorrect = opt === current.answer;
                         const isOpponentChoice = opponentSelected === opt;
                         return (
                           <div 
                             key={opt}
-                            className={`p-3 rounded-xl border text-xs font-bold transition-all duration-300 text-left
-                              ${!opponentSelected ? 'bg-white/5 border-white/10 text-white/20' : ''}
-                              ${isOpponentChoice && isCorrect ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400' : ''}
-                              ${isOpponentChoice && !isCorrect ? 'bg-rose-500/20 border-rose-500 text-rose-400' : ''}
-                              ${opponentSelected && !isOpponentChoice ? 'opacity-10 border-transparent' : ''}
+                            className={`p-4 rounded-2xl border text-sm font-bold transition-all duration-500
+                              ${!opponentSelected ? 'bg-slate-50 border-slate-100 text-slate-300' : ''}
+                              ${isOpponentChoice && isCorrect ? 'bg-emerald-50 border-emerald-500 text-emerald-700 shadow-md shadow-emerald-50' : ''}
+                              ${isOpponentChoice && !isCorrect ? 'bg-rose-50 border-rose-500 text-rose-700 shadow-md shadow-rose-50' : ''}
+                              ${opponentSelected && !isOpponentChoice ? 'opacity-10 border-transparent grayscale' : ''}
                             `}
                           >
-                            {opt}
+                            <div className="flex items-center gap-4">
+                               <span className="w-6 h-6 rounded-lg bg-white/50 border border-slate-100 flex items-center justify-center text-[9px] font-black">
+                                 {String.fromCharCode(65 + idx)}
+                               </span>
+                               {opt}
+                            </div>
                           </div>
                         );
                       })}
                     </div>
                   </div>
-                  <div className="pt-4 flex flex-col items-center gap-3">
-                    <div className={`h-10 w-10 rounded-full flex items-center justify-center relative ${isBot ? 'bg-indigo-500/10' : 'bg-sky-500/10'}`}>
-                      <div className={`absolute inset-0 border-2 border-t-transparent rounded-full animate-spin ${isBot ? 'border-indigo-500' : 'border-sky-500'}`} />
-                      {isBot ? <UserRound className="h-5 w-5 text-indigo-500" /> : <Users className="h-5 w-5 text-sky-500" />}
+                  <div className="pt-8 flex flex-col items-center gap-4">
+                    <div className={`h-12 w-12 rounded-full flex items-center justify-center relative ${isBot ? 'bg-indigo-50' : 'bg-sky-50'}`}>
+                      <div className={`absolute inset-0 border-[3px] border-transparent border-t-indigo-500 rounded-full animate-spin`} />
+                      {isBot ? <UserRound className="h-6 w-6 text-indigo-600" /> : <Users className="h-6 w-6 text-sky-600" />}
                     </div>
-                    <p className="text-[10px] font-bold text-white/20 uppercase tracking-widest">{botAction || "Thinking..."}</p>
+                    <p className="text-[10px] font-black text-indigo-600 uppercase tracking-[0.3em] animate-pulse">{botAction || "Thinking..."}</p>
                   </div>
                 </>
               ) : (
-                <div className="opacity-10 flex flex-col items-center">
-                  {isBot ? <UserRound className="h-16 w-16 mb-4" /> : <Users className="h-16 w-16 mb-4" />}
-                  <p className="text-xs font-black uppercase tracking-widest">Opponent Waiting</p>
+                <div className="flex flex-col items-center opacity-10 py-20">
+                   <Swords className="h-20 w-20 mb-6 text-slate-900" />
+                   <p className="text-xs font-black uppercase tracking-[0.4em] text-slate-900">Rival Resting</p>
                 </div>
               )}
             </div>
@@ -589,9 +600,9 @@ const ArenaMultiplayerQuiz = () => {
       </div>
 
       <div className="fixed bottom-12 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
-        <div className={`px-8 py-3 rounded-full shadow-2xl transition-all duration-500 flex items-center gap-3 backdrop-blur-md ${turn === 'user' ? 'bg-primary/90 text-primary-foreground' : 'bg-indigo-500/90 text-white'}`}>
+        <div className={`px-10 py-4 rounded-full shadow-2xl transition-all duration-700 flex items-center gap-4 backdrop-blur-xl border border-white/20 ${turn === 'user' ? 'bg-blue-600/90 text-white' : 'bg-slate-900/90 text-white'}`}>
           <Zap className={`h-5 w-5 ${turn === 'user' ? 'animate-pulse' : ''}`} />
-          <span className="font-black text-xs uppercase tracking-[0.3em]">{turn === 'user' ? "YOUR TURN" : "OPPONENT'S TURN"}</span>
+          <span className="font-black text-xs uppercase tracking-[0.4em]">{turn === 'user' ? "YOUR TURN" : "RIVAL'S TURN"}</span>
         </div>
       </div>
 
