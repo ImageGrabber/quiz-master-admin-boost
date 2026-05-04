@@ -174,6 +174,7 @@ function generateSitemap() {
     { loc: '/kids-stories/moses-and-the-exodus', priority: '0.9', changefreq: 'monthly' },
     { loc: '/kids-stories/daniel-and-the-sleepy-lions', priority: '0.9', changefreq: 'monthly' },
     { loc: '/kids-stories/jonah-and-the-big-fish', priority: '0.9', changefreq: 'monthly' },
+    { loc: '/public-quiz', priority: '0.95', changefreq: 'weekly' },
   ];
 
   // Genesis chapters
@@ -220,6 +221,15 @@ function generateSitemap() {
       loc: `/bible-questions-and-answers-hub/${book}`,
       priority: '0.9',
       changefreq: 'monthly'
+    });
+  });
+
+  // Public quiz main book pages (high SEO value)
+  bibleBooks.forEach(book => {
+    urls.push({
+      loc: `/public-quiz/${book}`,
+      priority: '0.85',
+      changefreq: 'weekly'
     });
   });
 

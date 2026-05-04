@@ -203,20 +203,20 @@ const PublicQuiz = ({
     const correctAnswers = answers.filter((answer, index) => answer === normalizedQuestions[index].answer).length;
 
     return (
-      <div className={`min-h-screen ${isKidsStory ? 'bg-[#FFFBEB] font-urbanist' : 'bg-stone-50 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(255,237,213,0.7),rgba(255,255,255,0))] text-[#1c1917] font-sans'} selection:bg-orange-100 selection:text-orange-900 pb-20`}>
+      <div className={`min-h-screen ${isKidsStory ? 'bg-[#FFFBEB] font-urbanist' : 'bg-slate-50 font-urbanist text-slate-900'} selection:bg-blue-100 selection:text-blue-900 pb-20`}>
         <SEO 
           title={`Results: ${title} | Bible Quiz Hub`} 
           description={`I scored ${score}% on the ${bookName} Bible quiz! Test your knowledge of the scripture with our interactive Bible Study Hub.`} 
         />
         
         {/* Modern, Slim Header Consistent with Hub */}
-        <header className={`sticky top-0 z-50 w-full border-b ${isKidsStory ? 'border-[#1a1a1a] bg-[#FCD34D]' : 'border-white/60 bg-white/60 backdrop-blur-3xl'} shadow-md`}>
+        <header className={`sticky top-0 z-50 w-full border-b ${isKidsStory ? 'border-[#1a1a1a] bg-[#FCD34D]' : 'border-white/60 bg-white/60 backdrop-blur-3xl'} shadow-sm`}>
           <div className="container mx-auto flex h-14 items-center justify-between px-4 sm:px-6">
             <div className="flex items-center gap-2 cursor-pointer group" onClick={() => navigate(isKidsStory ? '/kids-stories' : '/bible-questions-and-answers-hub')}>
-              <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${isKidsStory ? 'bg-white border-2 border-[#1a1a1a]' : 'bg-gradient-to-br from-orange-400 to-rose-500 border-transparent shadow-[0_4px_15px_rgba(244,63,94,0.3)]'} text-white transition-all group-hover:scale-105`}>
+              <div className={`flex h-8 w-8 items-center justify-center rounded-lg ${isKidsStory ? 'bg-white border-2 border-[#1a1a1a]' : 'bg-gradient-to-br from-blue-500 to-indigo-600 border-transparent shadow-[0_4px_15px_rgba(59,130,246,0.3)]'} text-white transition-all group-hover:scale-105`}>
                 <Brain className={`h-4 w-4 ${isKidsStory ? 'text-[#1a1a1a]' : 'text-white'}`} />
               </div>
-              <span className={`text-sm font-bold tracking-tight ${isKidsStory ? 'text-[#1a1a1a]' : 'text-stone-900'} sm:text-base uppercase tracking-widest leading-none drop-shadow-sm`}>
+              <span className={`text-sm font-bold tracking-tight ${isKidsStory ? 'text-[#1a1a1a]' : 'text-slate-900'} sm:text-base uppercase tracking-widest leading-none`}>
                 {isKidsStory ? 'KIDS BIBLE STORIES' : 'BIBLE QA HUB'}
               </span>
             </div>
@@ -224,7 +224,7 @@ const PublicQuiz = ({
               variant="ghost" 
               size="sm" 
               onClick={() => navigate('/')} 
-              className={`${isKidsStory ? 'text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-white border-2 border-[#1a1a1a]' : 'text-stone-500 hover:text-rose-600 hover:bg-rose-50 border-transparent hover:border-rose-200'} shadow-sm bg-white/40 font-bold text-xs uppercase tracking-widest rounded-full px-4`}
+              className={`${isKidsStory ? 'text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-white border-2 border-[#1a1a1a]' : 'text-slate-500 hover:text-blue-600 hover:bg-blue-50 border-transparent'} font-bold text-xs uppercase tracking-widest rounded-full px-4`}
             >
               Home
             </Button>
@@ -598,8 +598,8 @@ const PublicQuiz = ({
                     </div>
                     <span className={`text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a]' : 'text-stone-500'} uppercase tracking-[0.25em]`}>QUESTION {currentQuestion + 1} OF {normalizedQuestions.length}</span>
                   </div>
-                  <div className={`glass-panel ${isKidsStory ? 'bg-[#FFDE59] border-2 border-[#1a1a1a] shadow-[4px_4px_0_0_#1a1a1a]' : 'bg-white/40 backdrop-blur-md border border-white/80 shadow-[0_4px_15px_rgba(0,0,0,0.03)]'} px-4 py-2 rounded-2xl`}>
-                    <span className={`text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a]' : 'text-rose-500'} uppercase tracking-[0.25em]`}>
+                  <div className={`glass-panel ${isKidsStory ? 'bg-[#FFDE59] border-2 border-[#1a1a1a] shadow-[4px_4px_0_0_#1a1a1a]' : 'bg-white/40 backdrop-blur-md border border-white/80 shadow-sm'} px-4 py-2 rounded-2xl`}>
+                    <span className={`text-[10px] font-black ${isKidsStory ? 'text-[#1a1a1a]' : 'text-blue-600'} uppercase tracking-[0.25em]`}>
                       {isKidsStory ? (chapter || title).toUpperCase() : bookName.toUpperCase()} {chapter && !isKidsStory ? `CH. ${chapter}` : ''}
                     </span>
                   </div>
@@ -618,7 +618,7 @@ const PublicQuiz = ({
                   </div>
                 )}
 
-                <h1 className="text-3xl sm:text-[2.75rem] font-black text-stone-900 leading-[1.12] tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-stone-900 via-stone-800 to-stone-600 drop-shadow-sm max-w-2xl">
+                <h1 className="text-3xl sm:text-[2.75rem] font-black text-slate-900 leading-[1.12] tracking-tight drop-shadow-sm max-w-2xl">
                   {currentQ.question}
                 </h1>
               </div>
@@ -638,7 +638,7 @@ const PublicQuiz = ({
                   if (showCorrect) {
                     stateStyles = isKidsStory 
                       ? 'border-[#1a1a1a] bg-[#7ED957] shadow-[8px_8px_0_0_#1a1a1a] z-10 scale-[1.02]'
-                      : 'border-emerald-200 bg-emerald-50/70 shadow-[0_8px_30px_rgba(16,185,129,0.15)] scale-[1.02] z-10 transition-all rotate-[0.5deg]';
+                      : 'border-emerald-200 bg-emerald-50/70 shadow-lg scale-[1.02] z-10 transition-all rotate-[0.5deg]';
                     letterBoxStyles = isKidsStory 
                       ? 'bg-white text-[#1a1a1a] border-[#1a1a1a]'
                       : 'bg-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.4)] border-transparent';
@@ -661,18 +661,18 @@ const PublicQuiz = ({
                   stateStyles = isSelected 
                     ? (isKidsStory 
                         ? 'border-[#1a1a1a] bg-[#FFDE59] shadow-[8px_8px_0_0_#1a1a1a] scale-[1.03] z-20 translate-y-[-4px]' 
-                        : 'border-orange-200 bg-orange-50/80 shadow-[0_12px_40px_rgba(249,115,22,0.15)] scale-[1.03] z-20 border-orange-400 rotate-[-0.5deg]')
+                        : 'border-blue-200 bg-blue-50/80 shadow-xl scale-[1.03] z-20 border-blue-400 rotate-[-0.5deg]')
                     : (isKidsStory 
                         ? 'border-[#1a1a1a]/10 bg-white hover:border-[#1a1a1a] hover:bg-[#FFFBEB] hover:shadow-[4px_4px_0_0_#1a1a1a] hover:translate-y-[-2px]' 
-                        : 'border-white/80 bg-white/40 backdrop-blur-md shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-orange-200 hover:bg-white/80 hover:shadow-[0_15px_45_rgba(249,115,22,0.1)] hover:-translate-y-1.5 active:scale-95');
+                        : 'border-white/80 bg-white/40 backdrop-blur-md shadow-sm hover:border-blue-200 hover:bg-white/80 hover:shadow-lg hover:-translate-y-1.5 active:scale-95');
                   
                   letterBoxStyles = isSelected 
                     ? (isKidsStory 
                         ? 'bg-[#1a1a1a] text-white border-transparent' 
-                        : 'bg-orange-500 text-white shadow-[0_0_20px_rgba(249,115,22,0.4)] scale-110')
+                        : 'bg-blue-600 text-white shadow-[0_0_20px_rgba(59,130,246,0.4)] scale-110')
                     : (isKidsStory 
                         ? 'bg-white border-[#1a1a1a]/10 text-[#1a1a1a]/20 group-hover:border-[#1a1a1a] group-hover:text-[#1a1a1a]' 
-                        : 'bg-white border border-stone-100/50 text-stone-400 group-hover:text-orange-600 transition-all');
+                        : 'bg-white border border-slate-100/50 text-slate-400 group-hover:text-blue-600 transition-all');
                 }
 
                 return (
@@ -718,9 +718,9 @@ const PublicQuiz = ({
             <div className={`flex flex-col rounded-[2.5rem] border-[4px] overflow-hidden transition-all duration-700 ${
               hasSubmitted 
                 ? (selectedAnswer === currentQ.answer 
-                  ? (isKidsStory ? 'bg-[#7ED957] border-[#1a1a1a] shadow-[8px_8px_0_0_#1a1a1a]' : 'bg-emerald-50/80 border-emerald-200 shadow-[0_20px_60px_rgba(16,185,129,0.15)]') 
-                  : (isKidsStory ? 'bg-[#EF4444] border-[#1a1a1a] shadow-[8px_8px_0_0_#1a1a1a]' : 'bg-rose-50/80 border-rose-200 shadow-[0_20px_60px_rgba(244,63,94,0.15)]')) 
-                : (isKidsStory ? 'bg-white border-[#1a1a1a] shadow-[8px_8px_0_0_#1a1a1a]' : 'bg-white/40 backdrop-blur-3xl border-white shadow-[0_15px_50px_rgba(0,0,0,0.06)]')
+                  ? (isKidsStory ? 'bg-[#7ED957] border-[#1a1a1a] shadow-[8px_8px_0_0_#1a1a1a]' : 'bg-emerald-50/80 border-emerald-200 shadow-xl') 
+                  : (isKidsStory ? 'bg-[#EF4444] border-[#1a1a1a] shadow-[8px_8px_0_0_#1a1a1a]' : 'bg-rose-50/80 border-rose-200 shadow-xl')) 
+                : (isKidsStory ? 'bg-white border-[#1a1a1a] shadow-[8px_8px_0_0_#1a1a1a]' : 'bg-white/40 backdrop-blur-3xl border-white shadow-xl')
               }`}>
                   <div className="p-8 sm:p-12 min-h-[220px] flex flex-col justify-center relative backdrop-blur-sm">
                 {!hasSubmitted ? (
