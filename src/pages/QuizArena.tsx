@@ -7,6 +7,8 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import CommunityStickyBanner from "@/components/CommunityStickyBanner";
+import SEO from "@/components/SEO";
+import { trackEvent } from "@/utils/analytics";
 
 const PLAYER_NAME_KEY = "quizArenaPlayerName";
 const ONLINE_WINDOW_MS = 5 * 60 * 1000;
@@ -33,6 +35,7 @@ type PublicQuiz = {
 
 const QuizArena = () => {
   const navigate = useNavigate();
+  const siteUrl = "https://biblequizcompetition.com";
 
   const [loading, setLoading] = useState(true);
   const [onlineUsers, setOnlineUsers] = useState<OnlineUser[]>([]);
@@ -130,6 +133,46 @@ const QuizArena = () => {
 
   return (
     <main className="h-screen w-full bg-[#020617] text-foreground font-urbanist selection:bg-primary/30 overflow-hidden relative flex flex-col items-center justify-center">
+      <SEO
+        title="Quiz Arena | Bible Quiz Competition 2026 | Solo & Live Battle"
+        description="Enter Quiz Arena for Bible Quiz Competition 2026. Play solo Bible quiz challenges or join live multiplayer battles with leaderboard-ready scoring."
+        keywords="quiz arena, bible quiz arena, bible quiz competition 2026, live bible quiz, multiplayer bible quiz, solo bible quiz, christian quiz battle"
+        url="/quiz-arena"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebPage",
+              "name": "Quiz Arena - Bible Quiz Competition 2026",
+              "url": `${siteUrl}/quiz-arena`,
+              "description": "Play solo and live multiplayer Bible quiz battles inside Quiz Arena.",
+              "isPartOf": {
+                "@type": "WebSite",
+                "name": "Bible Quiz Competition",
+                "url": siteUrl
+              }
+            },
+            {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Home",
+                  "item": `${siteUrl}/`
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Quiz Arena",
+                  "item": `${siteUrl}/quiz-arena`
+                }
+              ]
+            }
+          ]
+        }}
+      />
+      <h1 className="sr-only">Quiz Arena - Bible Quiz Competition 2026</h1>
       {/* Background Ambience - Authentic Screenshot Spotlight */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[150%] h-[1000px] bg-[radial-gradient(ellipse_at_top,_rgba(127,29,29,0.15)_0%,_transparent_60%)] blur-[80px]" />
@@ -162,7 +205,13 @@ const QuizArena = () => {
               return (
                 <button
                   key={idx}
-                  onClick={() => navigate(mode.route)}
+                  onClick={() => {
+                    trackEvent("quiz_arena_mode_selected", {
+                      mode_title: mode.title,
+                      mode_route: mode.route,
+                    });
+                    navigate(mode.route);
+                  }}
                   className={`group relative flex flex-col items-center text-center p-8 lg:p-10 rounded-[3rem] bg-card border transition-all duration-700 overflow-hidden ${
                     isDuel 
                       ? 'border-primary/50 shadow-[0_40px_80px_rgba(0,0,0,0.4)] -translate-y-2' 

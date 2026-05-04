@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate, useParams } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import SEO from "@/components/SEO";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import NotificationBanner from "@/components/NotificationBanner";
@@ -210,6 +210,8 @@ import HubDifficultyRouter from "./pages/bible-questions-and-answers-hub/HubDiff
 import ChapterPage from "./pages/ChapterPage";
 import ScrollToTop from "./components/ScrollToTop";
 import AppPreloader from "@/components/AppPreloader";
+import { supabase } from "@/integrations/supabase/client";
+import { identifyMixpanelUser } from "@/lib/mixpanel";
 const queryClient = new QueryClient();
 
 function PageViewTracker() {
@@ -265,6 +267,28 @@ function LegacyPublicQuizVariantRedirect() {
 }
 
 const App = () => {
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user) {
+        identifyMixpanelUser(session.user.id, {
+          email: session.user.email ?? undefined,
+        });
+      }
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        identifyMixpanelUser(session.user.id, {
+          email: session.user.email ?? undefined,
+        });
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>

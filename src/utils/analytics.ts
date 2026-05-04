@@ -1,3 +1,5 @@
+import { trackMixpanelEvent } from "@/lib/mixpanel";
+
 // Analytics utility functions for tracking custom events
 
 // Declare gtag function for TypeScript
@@ -13,6 +15,7 @@ export const trackEvent = (eventName: string, parameters?: Record<string, any>) 
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', eventName, parameters);
   }
+  trackMixpanelEvent(eventName, parameters);
 };
 
 // Vercel Analytics event tracking

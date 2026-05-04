@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
+import { trackMixpanelEvent } from "@/lib/mixpanel";
 
 interface VisitorContext {
   ipAddress: string | null;
@@ -271,6 +272,13 @@ export function usePageView() {
 
   useEffect(() => {
     if (location.pathname.startsWith("/admin")) return;
+
+    trackMixpanelEvent("page_view", {
+      page_path: location.pathname,
+      page_url: window.location.href,
+      page_title: document.title,
+      timestamp: new Date().toISOString(),
+    });
 
     const trackPageView = async () => {
       try {
