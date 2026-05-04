@@ -166,6 +166,8 @@ function generateSitemap() {
     { loc: '/hindi-christian-songs-for-prayer-meetings', priority: '0.9', changefreq: 'weekly' },
     { loc: '/christian-songs-lyrics-hindi-english', priority: '0.9', changefreq: 'weekly' },
     { loc: '/worship-songs-with-chords-for-beginners', priority: '0.9', changefreq: 'weekly' },
+    { loc: '/top-hindi-christian-songs-lyrics', priority: '0.9', changefreq: 'weekly' },
+    { loc: '/top-malayalam-christian-songs-lyrics', priority: '0.9', changefreq: 'weekly' },
 
     // Bible Characters Vertical Batch D
     { loc: '/women-of-the-bible', priority: '0.9', changefreq: 'monthly' },

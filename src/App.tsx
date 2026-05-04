@@ -194,6 +194,8 @@ import AaradhnaHoAaradhnaLyrics from "./pages/seo-lyrics/AaradhnaHoAaradhnaLyric
 import HindiChristianSongsForPrayerMeetings from "./pages/seo-lyrics/HindiChristianSongsForPrayerMeetings";
 import ChristianSongsLyricsHindiEnglish from "./pages/seo-lyrics/ChristianSongsLyricsHindiEnglish";
 import WorshipSongsWithChordsForBeginners from "./pages/seo-lyrics/WorshipSongsWithChordsForBeginners";
+import TopHindiChristianSongsLyrics from "./pages/seo-lyrics/TopHindiChristianSongsLyrics";
+import TopMalayalamChristianSongsLyrics from "./pages/seo-lyrics/TopMalayalamChristianSongsLyrics";
 import BibleVersesPeace from "./pages/verses/BibleVersesPeace";
 import CharactersHub from "./pages/bible-characters/CharactersHub";
 import ParablesQuiz from "./pages/quizzes/ParablesQuiz";
@@ -579,6 +581,8 @@ const App = () => {
               <Route path="/hindi-christian-songs-for-prayer-meetings" element={<HindiChristianSongsForPrayerMeetings />} />
               <Route path="/christian-songs-lyrics-hindi-english" element={<ChristianSongsLyricsHindiEnglish />} />
               <Route path="/worship-songs-with-chords-for-beginners" element={<WorshipSongsWithChordsForBeginners />} />
+              <Route path="/top-hindi-christian-songs-lyrics" element={<TopHindiChristianSongsLyrics />} />
+              <Route path="/top-malayalam-christian-songs-lyrics" element={<TopMalayalamChristianSongsLyrics />} />
 
               {/* Bible Characters Vertical Batch D */}
               <Route path="/women-of-the-bible" element={<WomenOfBible />} />
