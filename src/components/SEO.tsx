@@ -25,11 +25,14 @@ const SEO = ({
   structuredData,
   children
 }: SEOProps) => {
-  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://biblequizcompetition.com';
+  const canonicalBaseUrl = 'https://biblequizcompetition.com';
+  const siteUrl = canonicalBaseUrl;
   let cleanPath = url || (typeof window !== 'undefined' ? window.location.pathname : '');
   cleanPath = cleanPath === '/' ? '' : cleanPath.replace(/\/+$/, '').toLowerCase();
   
-  const fullUrl = cleanPath.startsWith('http') ? cleanPath : `${siteUrl}${cleanPath}`;
+  const fullUrl = cleanPath.startsWith('http')
+    ? cleanPath.replace(/^https?:\/\/(www\.)?biblequizcompetition\.com/i, canonicalBaseUrl)
+    : `${siteUrl}${cleanPath}`;
   const imageUrl = image ? (image.startsWith('http') ? image : `${siteUrl}${image}`) : `${siteUrl}/sword.png`;
 
   const defaultStructuredData = {
@@ -83,4 +86,3 @@ const SEO = ({
 };
 
 export default SEO;
-
