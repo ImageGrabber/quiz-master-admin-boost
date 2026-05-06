@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useLocation, useParams } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { Loader2 } from "lucide-react";
 import PublicQuiz from "../PublicQuiz";
@@ -94,6 +94,7 @@ const quizMap: Record<string, any> = {
 
 export default function HubDifficultyRouter() {
   const { bookSlug, difficulty } = useParams<{ bookSlug: string; difficulty: string }>();
+  const location = useLocation();
   
   if (!bookSlug) return null;
 
@@ -103,6 +104,13 @@ export default function HubDifficultyRouter() {
   
   if (isChapterRequest) {
     const chapterId = chapterMatch[1];
+    const canonicalPath = `/bible-questions-and-answers-hub/${bookSlug.toLowerCase()}/chapter-${chapterId}`;
+
+    // Hard-redirect all old chapter URL variants (e.g. ch13-beginner) to one canonical URL.
+    if (location.pathname !== canonicalPath) {
+      return <Navigate to={canonicalPath} replace />;
+    }
+
     const bookKey = bookSlug.toLowerCase();
     const quizKey = `${bookKey}-${chapterId}`;
     const chapterData = specificChapterQuizzes[quizKey];
@@ -115,9 +123,6 @@ export default function HubDifficultyRouter() {
       chapterData?.questions || createChapterFallbackQuestions(formattedBookName, chapterId),
       { bookName: formattedBookName, chapter: chapterId }
     );
-
-    // Standardize the canonical URL for all variations of chapter requests
-    const canonicalPath = `/bible-questions-and-answers-hub/${bookSlug.toLowerCase()}/chapter-${chapterId}`;
 
     return (
       <PublicQuiz

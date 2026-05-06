@@ -466,6 +466,12 @@ function routeLooksIndexable(route, options = {}) {
     '/weekly-quiz'
   ];
   const excludedExactRoutes = new Set([
+    '/home',
+    '/competition-home',
+    '/hosting-guide',
+    '/quiz-scoring-system-explanation',
+    '/bible-quiz-prize',
+    '/bible-competition-2026',
     '/quiz-selection',
     '/create-quiz',
     '/memory-match',

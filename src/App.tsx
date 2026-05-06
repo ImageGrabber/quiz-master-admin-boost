@@ -11,7 +11,6 @@ import NotificationBanner from "@/components/NotificationBanner";
 import { Analytics } from "@vercel/analytics/react"
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import PublicRoute from "@/components/PublicRoute";
-import Index from "./pages/homepages/Index";
 import CompetitionHome from "./pages/homepages/CompetitionHome";
 import CompetitionPlayerName from "./pages/CompetitionPlayerName";
 import QuizArena from "./pages/QuizArena";
@@ -331,8 +330,8 @@ const App = () => {
               <Route path="/flappy-bird" element={<ProtectedRoute><FlappyBird /></ProtectedRoute>} />
               <Route path="/selah-space" element={<SelahSpace />} />
               <Route path="/" element={<CompetitionHome />} />
-              <Route path="/home" element={<Index />} />
-              <Route path="/competition-home" element={<CompetitionHome />} />
+              <Route path="/home" element={<Navigate to="/" replace />} />
+              <Route path="/competition-home" element={<Navigate to="/" replace />} />
               <Route path="/quiz-arena/name" element={<CompetitionPlayerName />} />
               <Route path="/quiz-arena" element={<QuizArena />} />
               <Route path="/quiz-arena/solo" element={<ArenaSoloQuiz />} />
@@ -371,7 +370,7 @@ const App = () => {
               {/* SEO-friendly slug for hosting guide */}
               <Route path="/host-live-bible-quizzes-with-confidence" element={<HostingGuide />} />
               {/* Backward-compatible old path */}
-              <Route path="/hosting-guide" element={<HostingGuide />} />
+              <Route path="/hosting-guide" element={<Navigate to="/host-live-bible-quizzes-with-confidence" replace />} />
 
               {/* Trust & E-E-A-T Pages */}
               <Route path="/about" element={<AboutUs />} />
@@ -380,11 +379,11 @@ const App = () => {
               <Route path="/terms" element={<TermsOfService />} />
 
               <Route path="/rules-and-prizes" element={<RulesAndPrizes />} />
-              <Route path="/quiz-scoring-system-explanation" element={<RulesAndPrizes />} />
-              <Route path="/bible-quiz-prize" element={<RulesAndPrizes />} />
+              <Route path="/quiz-scoring-system-explanation" element={<Navigate to="/rules-and-prizes" replace />} />
+              <Route path="/bible-quiz-prize" element={<Navigate to="/rules-and-prizes" replace />} />
               <Route path="/bible-quiz-questions-and-answers" element={<BibleQuizQuestionsAndAnswers />} />
               <Route path="/online-bible-quiz-competition-2026" element={<OnlineBibleQuizCompetition2026 />} />
-              <Route path="/bible-competition-2026" element={<OnlineBibleQuizCompetition2026 />} />
+              <Route path="/bible-competition-2026" element={<Navigate to="/online-bible-quiz-competition-2026" replace />} />
               <Route path="/hardest-bible-trivia-questions" element={<HardestBibleTrivia />} />
               <Route path="/bible-quiz-with-answers-for-youth" element={<BibleQuizForYouth />} />
               <Route path="/free-bible-quiz-questions-and-answers" element={<FreeBibleQuizQuestionsAndAnswers />} />
