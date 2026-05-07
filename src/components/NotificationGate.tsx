@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Bell, Lock } from 'lucide-react';
+import { getOneSignalPermission, getOneSignalUserId, promptOneSignalNotifications } from '@/lib/onesignal';
 
 interface NotificationGateProps {
   children: React.ReactNode;
@@ -24,16 +25,14 @@ const NotificationGate: React.FC<NotificationGateProps> = ({
 
   const checkSubscriptionStatus = async () => {
     try {
-      if (window.OneSignal) {
-        const permission = await window.OneSignal.getNotificationPermission();
-        const userId = await window.OneSignal.getUserId();
-        
-        if (permission === 'granted' && userId) {
-          setIsSubscribed(true);
-          setShowGate(false);
-        } else {
-          setShowGate(true);
-        }
+      const permission = await getOneSignalPermission();
+      const userId = await getOneSignalUserId();
+
+      if (permission === 'granted' && userId) {
+        setIsSubscribed(true);
+        setShowGate(false);
+      } else {
+        setShowGate(true);
       }
     } catch (error) {
       console.error('Error checking OneSignal status:', error);
@@ -47,19 +46,17 @@ const NotificationGate: React.FC<NotificationGateProps> = ({
     try {
       setIsLoading(true);
       
-      if (window.OneSignal) {
-        await window.OneSignal.showNativePrompt();
-        
-        setTimeout(async () => {
-          const permission = await window.OneSignal.getNotificationPermission();
-          const userId = await window.OneSignal.getUserId();
-          
-          if (permission === 'granted' && userId) {
-            setIsSubscribed(true);
-            setShowGate(false);
-          }
-        }, 2000);
-      }
+      await promptOneSignalNotifications();
+
+      setTimeout(async () => {
+        const permission = await getOneSignalPermission();
+        const userId = await getOneSignalUserId();
+
+        if (permission === 'granted' && userId) {
+          setIsSubscribed(true);
+          setShowGate(false);
+        }
+      }, 2000);
     } catch (error) {
       console.error('Error subscribing to notifications:', error);
     } finally {

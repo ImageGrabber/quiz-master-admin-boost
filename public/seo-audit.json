@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-05-03T21:51:52.485Z",
+  "generatedAt": "2026-05-07T15:40:03.581Z",
   "source": "scripts/generate-static-pages.js",
   "summary": {
-    "totalPages": 3371,
+    "totalPages": 3381,
     "good": 211,
-    "fair": 1233,
-    "poor": 1927,
-    "averageWords": 204.9,
+    "fair": 1236,
+    "poor": 1934,
+    "averageWords": 204.4,
     "averageSeoScore": 60.5
   },
   "pages": [
@@ -539,14 +539,14 @@
       "seoQuality": "fair"
     },
     {
-      "path": "/bible-competition-2026",
-      "title": "Bible Competition 2026 | Bible Quiz Competition",
-      "description": "Study and learn more about Bible Competition 2026 at Bible Quiz Competition.",
-      "wordCount": 33,
-      "titleLength": 47,
-      "descriptionLength": 76,
+      "path": "/bible-questions",
+      "title": "Bible Questions | Bible Quiz Competition",
+      "description": "Study and learn more about Bible Questions at Bible Quiz Competition.",
+      "wordCount": 31,
+      "titleLength": 40,
+      "descriptionLength": 69,
       "hasH1": true,
-      "seoScore": 48,
+      "seoScore": 40,
       "seoQuality": "poor"
     },
     {
@@ -1452,6 +1452,17 @@
       "seoQuality": "fair"
     },
     {
+      "path": "/bible-quiz-for-kids-teens-adults",
+      "title": "Bible Quiz For Kids Teens Adults Quiz | Test Your Bible Knowledge",
+      "description": "Take our interactive Bible Quiz For Kids Teens Adults quiz. Challenge your understanding of scripture with fun, educational questions for all levels.",
+      "wordCount": 39,
+      "titleLength": 65,
+      "descriptionLength": 149,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
       "path": "/bible-quiz-for-sunday-school",
       "title": "Bible Quiz for Sunday School | Free Questions & Answers",
       "description": "Free Bible quiz questions and answers perfect for Sunday school classes. Age-appropriate, printable, and organized by difficulty level for teachers and students.",
@@ -1485,17 +1496,6 @@
       "seoQuality": "good"
     },
     {
-      "path": "/bible-quiz-prize",
-      "title": "Bible Quiz Prize Quiz | Test Your Bible Knowledge",
-      "description": "Take our interactive Bible Quiz Prize quiz. Challenge your understanding of scripture with fun, educational questions for all levels.",
-      "wordCount": 33,
-      "titleLength": 49,
-      "descriptionLength": 133,
-      "hasH1": true,
-      "seoScore": 63,
-      "seoQuality": "fair"
-    },
-    {
       "path": "/bible-quiz-questions-and-answers",
       "title": "Bible Quiz Questions And Answers Quiz | Test Your Bible Knowledge",
       "description": "Take our interactive Bible Quiz Questions And Answers quiz. Challenge your understanding of scripture with fun, educational questions for all levels.",
@@ -1524,6 +1524,17 @@
       "wordCount": 39,
       "titleLength": 55,
       "descriptionLength": 84,
+      "hasH1": true,
+      "seoScore": 55,
+      "seoQuality": "poor"
+    },
+    {
+      "path": "/bible-trivia-questions-and-answers",
+      "title": "Bible Trivia Questions And Answers | Bible Quiz Competition",
+      "description": "Study and learn more about Bible Trivia Questions And Answers at Bible Quiz Competition.",
+      "wordCount": 37,
+      "titleLength": 59,
+      "descriptionLength": 88,
       "hasH1": true,
       "seoScore": 55,
       "seoQuality": "poor"
@@ -1562,6 +1573,17 @@
       "seoQuality": "fair"
     },
     {
+      "path": "/christian-songs-lyrics-hindi-english",
+      "title": "Christian Songs Lyrics Hindi English Lyrics & Worship | Bible Quiz Songs",
+      "description": "Access complete lyrics, background, and video for Christian Songs Lyrics Hindi English. Part of our collection of Christian devotional music and worship resources.",
+      "wordCount": 37,
+      "titleLength": 72,
+      "descriptionLength": 163,
+      "hasH1": true,
+      "seoScore": 55,
+      "seoQuality": "poor"
+    },
+    {
       "path": "/christian-worship-songs-chords",
       "title": "Christian Worship Songs Chords Lyrics & Worship | Bible Quiz Songs",
       "description": "Access complete lyrics, background, and video for Christian Worship Songs Chords. Part of our collection of Christian devotional music and worship resources.",
@@ -1593,17 +1615,6 @@
       "hasH1": true,
       "seoScore": 63,
       "seoQuality": "fair"
-    },
-    {
-      "path": "/competition-home",
-      "title": "Competition Home | Bible Quiz Competition",
-      "description": "Study and learn more about Competition Home at Bible Quiz Competition.",
-      "wordCount": 31,
-      "titleLength": 41,
-      "descriptionLength": 70,
-      "hasH1": true,
-      "seoScore": 40,
-      "seoQuality": "poor"
     },
     {
       "path": "/contact",
@@ -7249,6 +7260,17 @@
       "seoQuality": "fair"
     },
     {
+      "path": "/free-bible-quiz-questions-and-answers",
+      "title": "Free Bible Quiz Questions And Answers Quiz | Test Your Bible Knowledge",
+      "description": "Take our interactive Free Bible Quiz Questions And Answers quiz. Challenge your understanding of scripture with fun, educational questions for all levels.",
+      "wordCount": 39,
+      "titleLength": 70,
+      "descriptionLength": 154,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
       "path": "/haath-uthaakar-gaoonga-lyrics",
       "title": "Haath Uthaakar Gaoonga Lyrics | Bible Quiz Competition",
       "description": "Study and learn more about Haath Uthaakar Gaoonga Lyrics at Bible Quiz Competition.",
@@ -7312,6 +7334,50 @@
       "descriptionLength": 58,
       "hasH1": true,
       "seoScore": 33,
+      "seoQuality": "poor"
+    },
+    {
+      "path": "/help/create-quiz",
+      "title": "Create Quiz Quiz | Test Your Bible Knowledge",
+      "description": "Take our interactive Create Quiz quiz. Challenge your understanding of scripture with fun, educational questions for all levels.",
+      "wordCount": 31,
+      "titleLength": 44,
+      "descriptionLength": 128,
+      "hasH1": true,
+      "seoScore": 55,
+      "seoQuality": "poor"
+    },
+    {
+      "path": "/help/join-live-quizzes",
+      "title": "Join Live Quizzes Quiz | Test Your Bible Knowledge",
+      "description": "Take our interactive Join Live Quizzes quiz. Challenge your understanding of scripture with fun, educational questions for all levels.",
+      "wordCount": 33,
+      "titleLength": 50,
+      "descriptionLength": 134,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
+      "path": "/help/realtime-features",
+      "title": "Realtime Features | Bible Quiz Competition",
+      "description": "Study and learn more about Realtime Features at Bible Quiz Competition.",
+      "wordCount": 31,
+      "titleLength": 42,
+      "descriptionLength": 71,
+      "hasH1": true,
+      "seoScore": 40,
+      "seoQuality": "poor"
+    },
+    {
+      "path": "/hindi-christian-songs-for-prayer-meetings",
+      "title": "Hindi Christian Songs For Prayer Meetings Lyrics & Worship | Bible Quiz Songs",
+      "description": "Access complete lyrics, background, and video for Hindi Christian Songs For Prayer Meetings. Part of our collection of Christian devotional music and worship resources.",
+      "wordCount": 39,
+      "titleLength": 77,
+      "descriptionLength": 168,
+      "hasH1": true,
+      "seoScore": 55,
       "seoQuality": "poor"
     },
     {
@@ -15455,17 +15521,6 @@
       "seoQuality": "poor"
     },
     {
-      "path": "/home",
-      "title": "Home | Bible Quiz Competition",
-      "description": "Study and learn more about Home at Bible Quiz Competition.",
-      "wordCount": 29,
-      "titleLength": 29,
-      "descriptionLength": 58,
-      "hasH1": true,
-      "seoScore": 33,
-      "seoQuality": "poor"
-    },
-    {
       "path": "/host-live-bible-quizzes-with-confidence",
       "title": "Host Live Bible Quizzes With Confidence Quiz | Test Your Bible Knowledge",
       "description": "Take our interactive Host Live Bible Quizzes With Confidence quiz. Challenge your understanding of scripture with fun, educational questions for all levels.",
@@ -15474,17 +15529,6 @@
       "descriptionLength": 156,
       "hasH1": true,
       "seoScore": 55,
-      "seoQuality": "poor"
-    },
-    {
-      "path": "/hosting-guide",
-      "title": "Hosting Guide | Bible Quiz Competition",
-      "description": "Study and learn more about Hosting Guide at Bible Quiz Competition.",
-      "wordCount": 31,
-      "titleLength": 38,
-      "descriptionLength": 67,
-      "hasH1": true,
-      "seoScore": 40,
       "seoQuality": "poor"
     },
     {
@@ -15829,6 +15873,17 @@
       "seoQuality": "poor"
     },
     {
+      "path": "/media-kit",
+      "title": "Media Kit | Bible Quiz Competition",
+      "description": "Study and learn more about Media Kit at Bible Quiz Competition.",
+      "wordCount": 31,
+      "titleLength": 34,
+      "descriptionLength": 63,
+      "hasH1": true,
+      "seoScore": 40,
+      "seoQuality": "poor"
+    },
+    {
       "path": "/memory-match-game",
       "title": "Memory Match Game | Bible Quiz Competition",
       "description": "Study and learn more about Memory Match Game at Bible Quiz Competition.",
@@ -15884,6 +15939,17 @@
       "seoQuality": "poor"
     },
     {
+      "path": "/prayers",
+      "title": "Prayers | Bible Quiz Competition",
+      "description": "Study and learn more about Prayers at Bible Quiz Competition.",
+      "wordCount": 29,
+      "titleLength": 32,
+      "descriptionLength": 61,
+      "hasH1": true,
+      "seoScore": 40,
+      "seoQuality": "poor"
+    },
+    {
       "path": "/privacy",
       "title": "Privacy | Bible Quiz Competition",
       "description": "Study and learn more about Privacy at Bible Quiz Competition.",
@@ -15914,6 +15980,17 @@
       "descriptionLength": 72,
       "hasH1": true,
       "seoScore": 40,
+      "seoQuality": "poor"
+    },
+    {
+      "path": "/public-quiz",
+      "title": "Public Quiz Quiz | Test Your Bible Knowledge",
+      "description": "Take our interactive Public Quiz quiz. Challenge your understanding of scripture with fun, educational questions for all levels.",
+      "wordCount": 31,
+      "titleLength": 44,
+      "descriptionLength": 128,
+      "hasH1": true,
+      "seoScore": 55,
       "seoQuality": "poor"
     },
     {
@@ -37015,6 +37092,28 @@
       "seoQuality": "fair"
     },
     {
+      "path": "/top-hindi-christian-songs-lyrics",
+      "title": "Top Hindi Christian Songs Lyrics Lyrics & Worship | Bible Quiz Songs",
+      "description": "Access complete lyrics, background, and video for Top Hindi Christian Songs Lyrics. Part of our collection of Christian devotional music and worship resources.",
+      "wordCount": 37,
+      "titleLength": 68,
+      "descriptionLength": 159,
+      "hasH1": true,
+      "seoScore": 63,
+      "seoQuality": "fair"
+    },
+    {
+      "path": "/top-malayalam-christian-songs-lyrics",
+      "title": "Top Malayalam Christian Songs Lyrics Lyrics & Worship | Bible Quiz Songs",
+      "description": "Access complete lyrics, background, and video for Top Malayalam Christian Songs Lyrics. Part of our collection of Christian devotional music and worship resources.",
+      "wordCount": 37,
+      "titleLength": 72,
+      "descriptionLength": 163,
+      "hasH1": true,
+      "seoScore": 55,
+      "seoQuality": "poor"
+    },
+    {
       "path": "/verse-of-the-day",
       "title": "Verse of the Day - Daily Inspiration & Scripture Study",
       "description": "Find inspiration and spiritual growth with our Verse of the Day. Includes in-depth commentary, historical context, and daily prayer prompts.",
@@ -37089,6 +37188,17 @@
       "descriptionLength": 72,
       "hasH1": true,
       "seoScore": 40,
+      "seoQuality": "poor"
+    },
+    {
+      "path": "/worship-songs-with-chords-for-beginners",
+      "title": "Worship Songs With Chords For Beginners Lyrics & Worship | Bible Quiz Songs",
+      "description": "Access complete lyrics, background, and video for Worship Songs With Chords For Beginners. Part of our collection of Christian devotional music and worship resources.",
+      "wordCount": 39,
+      "titleLength": 75,
+      "descriptionLength": 166,
+      "hasH1": true,
+      "seoScore": 55,
       "seoQuality": "poor"
     }
   ]

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Bell, X } from 'lucide-react';
+import { getOneSignalPermission, getOneSignalUserId, promptOneSignalNotifications } from '@/lib/onesignal';
 
 const NotificationBanner: React.FC = () => {
   const [showBanner, setShowBanner] = useState(false);
@@ -13,19 +14,17 @@ const NotificationBanner: React.FC = () => {
 
   const checkSubscriptionStatus = async () => {
     try {
-      if (window.OneSignal) {
-        const permission = await window.OneSignal.getNotificationPermission();
-        const userId = await window.OneSignal.getUserId();
-        
-        if (permission === 'granted' && userId) {
-          setIsSubscribed(true);
-          setShowBanner(false);
-        } else {
-          // Check if user has previously dismissed
-          const dismissed = localStorage.getItem('notification-banner-dismissed');
-          if (!dismissed) {
-            setShowBanner(true);
-          }
+      const permission = await getOneSignalPermission();
+      const userId = await getOneSignalUserId();
+
+      if (permission === 'granted' && userId) {
+        setIsSubscribed(true);
+        setShowBanner(false);
+      } else {
+        // Check if user has previously dismissed
+        const dismissed = localStorage.getItem('notification-banner-dismissed');
+        if (!dismissed) {
+          setShowBanner(true);
         }
       }
     } catch (error) {
@@ -37,19 +36,17 @@ const NotificationBanner: React.FC = () => {
     try {
       setIsLoading(true);
       
-      if (window.OneSignal) {
-        await window.OneSignal.showNativePrompt();
-        
-        setTimeout(async () => {
-          const permission = await window.OneSignal.getNotificationPermission();
-          const userId = await window.OneSignal.getUserId();
-          
-          if (permission === 'granted' && userId) {
-            setIsSubscribed(true);
-            setShowBanner(false);
-          }
-        }, 2000);
-      }
+      await promptOneSignalNotifications();
+
+      setTimeout(async () => {
+        const permission = await getOneSignalPermission();
+        const userId = await getOneSignalUserId();
+
+        if (permission === 'granted' && userId) {
+          setIsSubscribed(true);
+          setShowBanner(false);
+        }
+      }, 2000);
     } catch (error) {
       console.error('Error subscribing to notifications:', error);
     } finally {

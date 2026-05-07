@@ -12,8 +12,10 @@ export async function initMixpanel(): Promise<void> {
   mixpanel.init(MIXPANEL_TOKEN, {
     autocapture: true,
     record_sessions_percent: 100,
-    track_pageview: false,
+    track_pageview: true,
     persistence: "localStorage",
+    api_host: "https://api-js.mixpanel.com",
+    debug: import.meta.env.MODE !== "production",
   });
 
   mixpanel.register({

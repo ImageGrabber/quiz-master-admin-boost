@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Bell, X } from 'lucide-react';
+import { getOneSignalPermission, getOneSignalUserId, promptOneSignalNotifications } from '@/lib/onesignal';
 
 interface OneSignalGateProps {
   children: React.ReactNode;
@@ -18,21 +19,16 @@ const OneSignalGate: React.FC<OneSignalGateProps> = ({ children }) => {
 
   const checkSubscriptionStatus = async () => {
     try {
-      if (window.OneSignal) {
-        const permission = await window.OneSignal.getNotificationPermission();
-        const userId = await window.OneSignal.getUserId();
-        
-        console.log('OneSignal permission:', permission);
-        console.log('OneSignal userId:', userId);
-        
-        if (permission === 'granted' && userId) {
-          setIsSubscribed(true);
-        } else {
-          setShowPrompt(true);
-        }
+      const permission = await getOneSignalPermission();
+      const userId = await getOneSignalUserId();
+
+      console.log('OneSignal permission:', permission);
+      console.log('OneSignal userId:', userId);
+
+      if (permission === 'granted' && userId) {
+        setIsSubscribed(true);
       } else {
-        // OneSignal not loaded yet, wait a bit
-        setTimeout(checkSubscriptionStatus, 1000);
+        setShowPrompt(true);
       }
     } catch (error) {
       console.error('Error checking OneSignal status:', error);
@@ -46,24 +42,21 @@ const OneSignalGate: React.FC<OneSignalGateProps> = ({ children }) => {
     try {
       setIsLoading(true);
       
-      if (window.OneSignal) {
-        // Show the native prompt
-        await window.OneSignal.showNativePrompt();
-        
-        // Check status after prompt
-        setTimeout(async () => {
-          const permission = await window.OneSignal.getNotificationPermission();
-          const userId = await window.OneSignal.getUserId();
-          
-          if (permission === 'granted' && userId) {
-            setIsSubscribed(true);
-            setShowPrompt(false);
-          } else {
-            // User denied, show message
-            alert('Notifications are required to use this app. Please enable them and refresh the page.');
-          }
-        }, 2000);
-      }
+      await promptOneSignalNotifications();
+
+      // Check status after prompt
+      setTimeout(async () => {
+        const permission = await getOneSignalPermission();
+        const userId = await getOneSignalUserId();
+
+        if (permission === 'granted' && userId) {
+          setIsSubscribed(true);
+          setShowPrompt(false);
+        } else {
+          // User denied, show message
+          alert('Notifications are required to use this app. Please enable them and refresh the page.');
+        }
+      }, 2000);
     } catch (error) {
       console.error('Error subscribing to notifications:', error);
       alert('Error enabling notifications. Please try again.');
