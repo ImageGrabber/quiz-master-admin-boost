@@ -7,7 +7,6 @@ import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense, useEffect } from "react";
 import SEO from "@/components/SEO";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import NotificationBanner from "@/components/NotificationBanner";
 import { Analytics } from "@vercel/analytics/react"
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import PublicRoute from "@/components/PublicRoute";
@@ -313,7 +312,6 @@ const App = () => {
           <BrowserRouter>
             <ScrollToTop />
             <PageViewTracker />
-            <NotificationBanner />
             <Suspense fallback={<AppPreloader />}>
             <Routes>
               <Route path="/emotional-checkin" element={<EmotionalCheckIn />} />
