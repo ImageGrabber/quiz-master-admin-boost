@@ -2,6 +2,18 @@
   "version": 2,
   "buildCommand": "npm run build:seo",
   "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/public-quiz/:book/chapter-:chapter/verse-:verse",
+      "destination": "/public-quiz/:book/chapter-:chapter",
+      "permanent": true
+    },
+    {
+      "source": "/public-quiz/:book/:chapter/:variant",
+      "destination": "/public-quiz/:book/:chapter",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)", "destination": "/index.html" }
   ],
@@ -26,5 +38,4 @@
     }
   ]
 }
-
 
