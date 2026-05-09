@@ -51,6 +51,10 @@ type LyricSection = {
     chords?: string[];
 };
 
+const isMostlyRoman = (line: string) => /[a-zA-Z]/.test(line) && !/[\u0900-\u097f]/.test(line);
+const normalizeLineKey = (line: string) =>
+    line.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, "").replace(/\s+/g, " ").trim();
+
 const HindiSongDetail = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
@@ -157,13 +161,60 @@ const HindiSongDetail = () => {
     }, [currentTranslation, englishTranslation]);
 
     const displaySections = useMemo<LyricSection[]>(() => {
-        const sections = currentTranslation?.lyrics || [];
-        if (sections.length !== 1) return sections as LyricSection[];
+        const sections = (currentTranslation?.lyrics || []) as LyricSection[];
+        const hasDevanagari = sections.some((s) => (s.lines || []).some((l) => /[\u0900-\u097f]/.test(l)));
 
-        const only = sections[0];
+        // 1) Remove Romanized duplicates from Hindi block when Devanagari text exists
+        const cleaned = sections
+            .map((section) => ({
+                ...section,
+                lines: (section.lines || []).filter((line) => !(hasDevanagari && isMostlyRoman(line))),
+            }))
+            .filter((section) => section.lines.length > 0);
+
+        // 2) Collapse immediately repeated sections
+        const deduped: LyricSection[] = [];
+        for (const section of cleaned) {
+            const key = (section.lines || []).map(normalizeLineKey).join("|");
+            const prev = deduped[deduped.length - 1];
+            const prevKey = prev ? (prev.lines || []).map(normalizeLineKey).join("|") : "";
+            if (key && key === prevKey) continue;
+            deduped.push(section);
+        }
+
+        // 3) If a song is fragmented into many single-line sections, merge them into compact stanzas.
+        const oneLineCount = deduped.filter((s) => (s.lines || []).length === 1).length;
+        const mostlySingleLine = deduped.length >= 8 && oneLineCount / deduped.length >= 0.7;
+        if (mostlySingleLine) {
+            const mergedSingles: LyricSection[] = [];
+            let buffer: string[] = [];
+
+            const flushBuffer = () => {
+                if (buffer.length === 0) return;
+                mergedSingles.push({ lines: [...buffer] });
+                buffer = [];
+            };
+
+            for (const section of deduped) {
+                const lines = section.lines || [];
+                if (lines.length === 1) {
+                    buffer.push(lines[0]);
+                    if (buffer.length >= 2) flushBuffer();
+                } else {
+                    flushBuffer();
+                    mergedSingles.push(section);
+                }
+            }
+            flushBuffer();
+            return mergedSingles;
+        }
+
+        if (deduped.length !== 1) return deduped;
+
+        const only = deduped[0];
         const lines = (only?.lines || []).filter(Boolean);
         const looksLikeFlatBlock = lines.length >= 10 && lines.every((l) => l.length <= 48);
-        if (!looksLikeFlatBlock) return sections as LyricSection[];
+        if (!looksLikeFlatBlock) return deduped;
 
         const grouped: LyricSection[] = [];
         for (let i = 0; i < lines.length; i += 4) {
