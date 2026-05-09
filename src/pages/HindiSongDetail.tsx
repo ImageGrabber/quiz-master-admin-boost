@@ -54,6 +54,15 @@ type LyricSection = {
 const isMostlyRoman = (line: string) => /[a-zA-Z]/.test(line) && !/[\u0900-\u097f]/.test(line);
 const normalizeLineKey = (line: string) =>
     line.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, "").replace(/\s+/g, " ").trim();
+const looksCorruptedLegacyEncoding = (line: string) => {
+    const text = String(line || "");
+    if (!text) return false;
+    if (/[%^~`{}[\]|\\]/.test(text)) return true;
+    const internalCaps = (text.match(/[a-z][A-Z]/g) || []).length;
+    if (internalCaps >= 2) return true;
+    if (/(AaraQ|yaIS|prao|sva|ipta|raoTI|sahayak)/i.test(text)) return true;
+    return false;
+};
 
 const HindiSongDetail = () => {
     const { slug } = useParams();
@@ -168,7 +177,11 @@ const HindiSongDetail = () => {
         const cleaned = sections
             .map((section) => ({
                 ...section,
-                lines: (section.lines || []).filter((line) => !(hasDevanagari && isMostlyRoman(line))),
+                lines: (section.lines || []).filter((line) => {
+                    if (looksCorruptedLegacyEncoding(line)) return false;
+                    if (hasDevanagari && isMostlyRoman(line)) return false;
+                    return true;
+                }),
             }))
             .filter((section) => section.lines.length > 0);
 
@@ -494,12 +507,23 @@ const HindiSongDetail = () => {
                             <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-orange-400 via-orange-500 to-amber-500" />
                             
                             <CardContent className="p-8 md:p-16">
+                                {displaySections.length === 0 ? (
+                                    <div className="max-w-2xl mx-auto text-left">
+                                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 font-urbanist">Lyrics unavailable</h2>
+                                        <p className="text-gray-600 leading-relaxed">
+                                            This song entry has corrupted source text. We are re-verifying and will update it with proper Unicode Hindi lyrics.
+                                        </p>
+                                    </div>
+                                ) : (
                                 <div className="space-y-10">
                                     {displaySections.map((section, index) => (
                                         <div key={index} className="relative">
                                             <div className="space-y-3">
                                                 {section.lines.map((line, lineIndex) => (
-                                                    <div key={lineIndex} className="flex flex-col items-start">
+                                                    <div
+                                                        key={lineIndex}
+                                                        className={`flex flex-col items-start ${lineIndex > 0 && lineIndex % 2 === 0 ? "mt-5" : ""}`}
+                                                    >
                                                         {showChords && section.chords && section.chords[lineIndex] && (
                                                             <p className="text-orange-600 font-mono text-sm md:text-base font-black mb-1 tracking-[0.1em] bg-orange-50 px-2 py-0.5 rounded-md border border-orange-100 shadow-sm">
                                                                 {section.chords[lineIndex]}
@@ -519,6 +543,7 @@ const HindiSongDetail = () => {
                                         </div>
                                     ))}
                                 </div>
+                                )}
                             </CardContent>
                         </Card>
 
