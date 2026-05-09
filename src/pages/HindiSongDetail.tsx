@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { ArrowLeft, Share2, Music2, Languages, Info } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -25,14 +25,53 @@ const toQuerySlug = (value: string) =>
 
 const dedupe = (items: string[]) => Array.from(new Set(items.filter(Boolean)));
 
+const normalizeForMatch = (value: string) =>
+    String(value || "")
+        .toLowerCase()
+        .replace(/[“”"']/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+const decodeHexSlug = (value: string) => {
+    const tokens = String(value || "")
+        .toLowerCase()
+        .split("-")
+        .filter((t) => /^[0-9a-f]{2}$/.test(t));
+    if (tokens.length < 6) return "";
+    try {
+        return decodeURIComponent(tokens.map((t) => `%${t}`).join(""));
+    } catch {
+        return "";
+    }
+};
+
+type LyricSection = {
+    verse?: string;
+    lines: string[];
+    chords?: string[];
+};
+
 const HindiSongDetail = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
     const { toast } = useToast();
-    const song = songs.find((s) => s.slug === slug);
+    const slugParam = decodeURIComponent(slug || "");
+    const decodedLegacySlug = decodeHexSlug(slugParam);
+
+    const song = songs.find((s) => {
+        if (s.slug === slugParam) return true;
+        if (decodedLegacySlug && normalizeForMatch(s.title) === normalizeForMatch(decodedLegacySlug)) return true;
+        return false;
+    });
     const [selectedLang] = useState("hindi");
     const [showChords, setShowChords] = useState(true);
     const [showTranslation, setShowTranslation] = useState(true);
+
+    useEffect(() => {
+        if (song && slugParam && song.slug !== slugParam) {
+            navigate(`/hindi-songs/${song.slug}`, { replace: true });
+        }
+    }, [navigate, slugParam, song]);
 
     if (!song) {
         return (
@@ -116,6 +155,25 @@ const HindiSongDetail = () => {
         const englishText = englishTranslation?.lyrics?.flatMap((section) => section.lines || []).join("\n") || "";
         return { hindiText, englishText };
     }, [currentTranslation, englishTranslation]);
+
+    const displaySections = useMemo<LyricSection[]>(() => {
+        const sections = currentTranslation?.lyrics || [];
+        if (sections.length !== 1) return sections as LyricSection[];
+
+        const only = sections[0];
+        const lines = (only?.lines || []).filter(Boolean);
+        const looksLikeFlatBlock = lines.length >= 10 && lines.every((l) => l.length <= 48);
+        if (!looksLikeFlatBlock) return sections as LyricSection[];
+
+        const grouped: LyricSection[] = [];
+        for (let i = 0; i < lines.length; i += 4) {
+            grouped.push({
+                verse: String(grouped.length + 1),
+                lines: lines.slice(i, i + 4),
+            });
+        }
+        return grouped;
+    }, [currentTranslation]);
 
     const songAliases = useMemo(() => {
         const base = plainTitle;
@@ -385,27 +443,22 @@ const HindiSongDetail = () => {
                             <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-orange-400 via-orange-500 to-amber-500" />
                             
                             <CardContent className="p-8 md:p-16">
-                                <div className="space-y-16">
-                                    {currentTranslation?.lyrics?.map((section, index) => (
+                                <div className="space-y-10">
+                                    {displaySections.map((section, index) => (
                                         <div key={index} className="relative">
-                                            {section.verse && (
-                                                <div className="absolute -left-6 md:-left-10 top-0 text-[10px] font-black text-orange-200 uppercase vertical-text h-full opacity-60">
-                                                    Section {section.verse}
-                                                </div>
-                                            )}
-                                            <div className="space-y-10">
+                                            <div className="space-y-3">
                                                 {section.lines.map((line, lineIndex) => (
-                                                    <div key={lineIndex} className="flex flex-col items-center">
+                                                    <div key={lineIndex} className="flex flex-col items-start">
                                                         {showChords && section.chords && section.chords[lineIndex] && (
-                                                            <p className="text-orange-600 font-mono text-sm md:text-lg font-black mb-1.5 tracking-[0.2em] bg-orange-50 px-3 py-0.5 rounded-lg border border-orange-100 shadow-sm">
+                                                            <p className="text-orange-600 font-mono text-sm md:text-base font-black mb-1 tracking-[0.1em] bg-orange-50 px-2 py-0.5 rounded-md border border-orange-100 shadow-sm">
                                                                 {section.chords[lineIndex]}
                                                             </p>
                                                         )}
-                                                        <p className="font-medium text-gray-900 text-xl md:text-2xl text-center leading-relaxed font-urbanist">
+                                                        <p className="font-medium text-gray-900 text-2xl md:text-3xl text-left leading-tight font-urbanist">
                                                             {line}
                                                         </p>
                                                         {showTranslation && englishTranslation?.lyrics?.[index]?.lines?.[lineIndex] && (
-                                                            <p className="text-gray-400 text-sm md:text-base italic font-medium text-center mt-3 border-t border-gray-50 pt-3">
+                                                            <p className="text-gray-500 text-sm md:text-base italic font-medium text-left mt-1">
                                                                 {englishTranslation.lyrics[index].lines[lineIndex]}
                                                             </p>
                                                         )}
