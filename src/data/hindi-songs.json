@@ -3498,28 +3498,48 @@
   {
     "id": "aakha_jag_toh_yeshu_ko_jaan",
     "slug": "aakha-jag-toh-yeshu-ko-jaan",
-    "title": "AAKHA JAG TOH YESHU KO JAAN",
-    "videoUrl": "https://www.youtube.com/embed/2a-czru67YQ",
-    "description": "AAKHA JAG TOH YESHU KO JAAN - Hindi Christian Devotional Song Lyrics",
+    "title": "Aakha Jag Toh Yeshu Ko Jaan",
+    "videoUrl": "",
+    "description": "Aakha Jag Toh Yeshu Ko Jaan - Hindi Christian devotional song lyrics with worship-friendly formatting.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "1",
             "lines": [
               "अख्खा जग तो यीशु को जान रेला है",
-              "उसने डोलो का लोह��� मान रेला है",
+              "उसने डोलो का लोहा मान रेला है",
               "अपुन बिन्दास बोलेगा वो मेरा है",
-              "अपुन बिन्दास चम्बा चेला तेरा है।"
+              "अपुन बिन्दास चम्चा चेला तेरा है।"
             ]
-          },
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
           {
             "verse": "1",
             "lines": [
-              "Akhkhaa jag to Yeshu ko jaan relaa hai",
-              "usane ḍolo kaa lohaa maan relaa hai",
-              "apun bindaas bolegaa vo meraa hai",
-              "apun bindaas chambaa chelaa teraa hai."
+              "The whole world now knows Jesus,",
+              "His strength is accepted by all,",
+              "I boldly say He is mine,",
+              "I openly declare I am His disciple."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "verse": "1",
+            "lines": [
+              "സകല ലോകവും യേശുവിനെ അറിയുന്നു,",
+              "അവന്റെ ശക്തിയെ എല്ലാവരും മാനിക്കുന്നു,",
+              "ധൈര്യമായി ഞാൻ പറയും അവൻ എന്റേതാണ്,",
+              "തുറന്നുപറഞ്ഞ് ഞാൻ അവന്റെ ശിഷ്യൻ."
             ]
           }
         ]
