@@ -52448,26 +52448,102 @@
   {
     "id": "yeshu_aa_yeshu_aa",
     "slug": "yeshu-aa-yeshu-aa",
-    "title": "Yeshu aa yeshu aa",
+    "title": "Yeshu Aa Yeshu Aa",
     "videoUrl": "",
-    "description": "Yeshu aa yeshu aa - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "description": "Yeshu Aa Yeshu Aa - Hindi Christian devotional song lyrics with worship-friendly formatting.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
-              ";h'kq vk ;h'kq vk eq> ij rw viuh n;k cjlk",
-              "1 rsjk uke ;h'kq lc ukeksa ls Å¡pk",
-              "rsjk uke ;h'kq] lc ukeksa ls lPpk",
-              "bl uke dks eSa tirk jgw¡ lnk",
-              "bl uke ls eSa ik޶Å¡ thou u;k",
-              ";h'kq vk--------------",
-              "2 rsjs uke ls ;h’kq eSaus ikbZ f’kQk",
-              "rsjs uke esa ;h’kq eSaus ikbZ oQ+k",
-              "rsjs uke ls eqnsZ ft+Unk fd;s x;s",
-              "rsjs uke ls jksxh jksxksa ls nwj gq;s",
-              ";h'kq vk--------------"
+              "यीशु आ, यीशु आ",
+              "मुझ पर तू अपनी दया बरसा",
+              "तेरी उपस्थिति में शांति मिले",
+              "यीशु आ, यीशु आ"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "टूटे हुए दिल को तू संभालता है",
+              "गिरों को उठाकर नया बल देता है",
+              "अंधियारे में तू ही उजियारा",
+              "यीशु आ, यीशु आ"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "पापों का बोझ तूने क्रूस पर लिया",
+              "जीवन का जल तूने मुझको दिया",
+              "तेरे बिना कुछ भी नहीं प्रभु",
+              "यीशु आ, यीशु आ"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Jesus come, Jesus come",
+              "Pour Your mercy upon me",
+              "Let me find peace in Your presence",
+              "Jesus come, Jesus come"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "You heal the broken heart",
+              "You lift the fallen and give new strength",
+              "In darkness, You are the light",
+              "Jesus come, Jesus come"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "You carried my sins on the cross",
+              "You gave me the water of life",
+              "Without You I am nothing, Lord",
+              "Jesus come, Jesus come"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "യേശുവേ വാ, യേശുവേ വാ",
+              "എന്നിൽ നിന്റെ കരുണ പെയ്യണമേ",
+              "നിന്റെ സന്നിധിയിൽ എനിക്കു സമാധാനം",
+              "യേശുവേ വാ, യേശുവേ വാ"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "തകർന്ന ഹൃദയം നീ പുനരുജ്ജീവിപ്പിക്കുന്നു",
+              "വീണവരെ ഉയർത്തി പുതിയ ബലം നല്കുന്നു",
+              "ഇരുളിൽ നീയേ വെളിച്ചം",
+              "യേശുവേ വാ, യേശുവേ വാ"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "എന്റെ പാപഭാരം നീ ക്രൂശിൽ വഹിച്ചു",
+              "ജീവജലം നീ എനിക്കു നല്കി",
+              "നീയില്ലാതെ ഞാൻ ഒന്നുമല്ല കർത്താവേ",
+              "യേശുവേ വാ, യേശുവേ വാ"
             ]
           }
         ]

@@ -57,10 +57,16 @@ const normalizeLineKey = (line: string) =>
 const looksCorruptedLegacyEncoding = (line: string) => {
     const text = String(line || "");
     if (!text) return false;
-    if (/[%^~`{}[\]|\\]/.test(text)) return true;
+    if (/[%^~`{}[\]|\\<>]/.test(text)) return true;
+    if (/[;ÊÅÆ]/.test(text)) return true;
     const internalCaps = (text.match(/[a-z][A-Z]/g) || []).length;
     if (internalCaps >= 2) return true;
-    if (/(AaraQ|yaIS|prao|sva|ipta|raoTI|sahayak)/i.test(text)) return true;
+    if (/(AaraQ|yaIS|prao|sva|ipta|raoTI|sahayak|jaIvana|maora|maoM|Aayaa)/i.test(text)) return true;
+    if (/;h'kq|eq>|n;k|rw\s+viuh|cjlk|vk-+/.test(text)) return true;
+    if (!/[\u0900-\u097f]/.test(text) && /[a-z]/i.test(text)) {
+        const tinyTokens = text.split(/\s+/).filter((t) => /^[a-z]{1,3}$/i.test(t)).length;
+        if (tinyTokens >= 4) return true;
+    }
     return false;
 };
 
@@ -76,9 +82,8 @@ const HindiSongDetail = () => {
         if (decodedLegacySlug && normalizeForMatch(s.title) === normalizeForMatch(decodedLegacySlug)) return true;
         return false;
     });
-    const [selectedLang] = useState("hindi");
+    const [selectedLang, setSelectedLang] = useState("hindi");
     const [showChords, setShowChords] = useState(true);
-    const [showTranslation, setShowTranslation] = useState(true);
 
     useEffect(() => {
         if (song && slugParam && song.slug !== slugParam) {
@@ -99,8 +104,8 @@ const HindiSongDetail = () => {
         );
     }
 
-    const currentTranslation = song.translations[selectedLang] || song.translations['hindi'];
-    const englishTranslation = song.translations['english'];
+    const currentTranslation = song.translations[selectedLang] || song.translations["hindi"];
+    const englishTranslation = song.translations["english"];
     const videoId = song.videoUrl ? song.videoUrl.split('/').pop() : '';
     const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '';
     const canonicalUrl = `https://biblequizcompetition.com/hindi-songs/${song.slug}`;
@@ -136,6 +141,13 @@ const HindiSongDetail = () => {
         const lines = currentTranslation?.lyrics?.reduce((sum, section) => sum + (section.lines?.length || 0), 0) || 0;
         return { sections, lines };
     }, [currentTranslation]);
+
+    const languageTabs = useMemo(() => {
+        const preferred = ["hindi", "english", "malayalam"];
+        return preferred
+            .filter((key) => song.translations[key]?.lyrics?.length)
+            .map((key) => ({ key, label: song.translations[key].lang || key }));
+    }, [song.translations]);
 
     const relatedSongs = useMemo(() => {
         const stopWords = new Set(["hai", "ho", "ki", "ke", "mein", "main", "mai", "hum", "tera", "teri"]);
@@ -460,16 +472,11 @@ const HindiSongDetail = () => {
                                             <Languages className="h-5 w-5 text-blue-600" />
                                         </div>
                                         <div className="flex flex-col">
-                                            <Label htmlFor="sidebar-translation" className="text-sm font-bold text-gray-700">English Meaning</Label>
-                                            <span className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Show translation</span>
+                                            <Label className="text-sm font-bold text-gray-700">Language</Label>
+                                            <span className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Use tabs in lyrics area</span>
                                         </div>
                                     </div>
-                                    <Switch
-                                        id="sidebar-translation"
-                                        checked={showTranslation}
-                                        onCheckedChange={setShowTranslation}
-                                        className="data-[state=checked]:bg-blue-600"
-                                    />
+                                    <div className="text-xs font-semibold text-blue-700 bg-blue-50 px-3 py-1 rounded-full">Tabs</div>
                                 </div>
                             </div>
                         </div>
@@ -516,6 +523,24 @@ const HindiSongDetail = () => {
                                     </div>
                                 ) : (
                                 <div className="space-y-10">
+                                    {languageTabs.length > 1 && (
+                                        <div className="flex flex-wrap gap-2">
+                                            {languageTabs.map((tab) => (
+                                                <button
+                                                    key={tab.key}
+                                                    type="button"
+                                                    onClick={() => setSelectedLang(tab.key)}
+                                                    className={`px-3 py-1 rounded-full text-sm font-semibold transition-colors ${
+                                                        selectedLang === tab.key
+                                                            ? "bg-orange-100 text-orange-700"
+                                                            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                                                    }`}
+                                                >
+                                                    {tab.label}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
                                     {displaySections.map((section, index) => (
                                         <div key={index} className="relative">
                                             <div className="space-y-3">
@@ -532,11 +557,6 @@ const HindiSongDetail = () => {
                                                         <p className="font-medium text-gray-900 text-xl md:text-2xl text-left leading-tight font-urbanist">
                                                             {line}
                                                         </p>
-                                                        {showTranslation && englishTranslation?.lyrics?.[index]?.lines?.[lineIndex] && (
-                                                            <p className="text-gray-500 text-sm md:text-base italic font-medium text-left mt-1">
-                                                                {englishTranslation.lyrics[index].lines[lineIndex]}
-                                                            </p>
-                                                        )}
                                                     </div>
                                                 ))}
                                             </div>
