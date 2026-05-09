@@ -104,7 +104,7 @@ const HindiSongDetail = () => {
         );
     }
 
-    const currentTranslation = song.translations[selectedLang] || song.translations["hindi"];
+    const currentTranslation = song.translations[selectedLang];
     const englishTranslation = song.translations["english"];
     const videoId = song.videoUrl ? song.videoUrl.split('/').pop() : '';
     const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '';
@@ -142,12 +142,14 @@ const HindiSongDetail = () => {
         return { sections, lines };
     }, [currentTranslation]);
 
-    const languageTabs = useMemo(() => {
-        const preferred = ["hindi", "english", "malayalam"];
-        return preferred
-            .filter((key) => song.translations[key]?.lyrics?.length)
-            .map((key) => ({ key, label: song.translations[key].lang || key }));
-    }, [song.translations]);
+    const languageTabs = useMemo(
+        () => [
+            { key: "hindi", label: "Hindi" },
+            { key: "english", label: "English" },
+            { key: "malayalam", label: "Malayalam" },
+        ],
+        []
+    );
 
     const relatedSongs = useMemo(() => {
         const stopWords = new Set(["hai", "ho", "ki", "ke", "mein", "main", "mai", "hum", "tera", "teri"]);
@@ -516,31 +518,38 @@ const HindiSongDetail = () => {
                             <CardContent className="p-8 md:p-16">
                                 {displaySections.length === 0 ? (
                                     <div className="max-w-2xl mx-auto text-left">
-                                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 font-urbanist">Lyrics unavailable</h2>
-                                        <p className="text-gray-600 leading-relaxed">
-                                            This song entry has corrupted source text. We are re-verifying and will update it with proper Unicode Hindi lyrics.
-                                        </p>
+                                        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 font-urbanist">
+                                            Lyrics unavailable
+                                        </h2>
+                                        {song.translations[selectedLang]?.lyrics?.length ? (
+                                            <p className="text-gray-600 leading-relaxed">
+                                                This song entry has corrupted source text. We are re-verifying and will update it with proper Unicode lyrics.
+                                            </p>
+                                        ) : (
+                                            <p className="text-gray-600 leading-relaxed">
+                                                This song is not yet available in {selectedLang.charAt(0).toUpperCase() + selectedLang.slice(1)}.
+                                                Please switch to another language tab.
+                                            </p>
+                                        )}
                                     </div>
                                 ) : (
                                 <div className="space-y-10">
-                                    {languageTabs.length > 1 && (
-                                        <div className="flex flex-wrap gap-2">
-                                            {languageTabs.map((tab) => (
-                                                <button
-                                                    key={tab.key}
-                                                    type="button"
-                                                    onClick={() => setSelectedLang(tab.key)}
-                                                    className={`px-3 py-1 rounded-full text-sm font-semibold transition-colors ${
-                                                        selectedLang === tab.key
-                                                            ? "bg-orange-100 text-orange-700"
-                                                            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                                                    }`}
-                                                >
-                                                    {tab.label}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    )}
+                                    <div className="flex flex-wrap gap-2">
+                                        {languageTabs.map((tab) => (
+                                            <button
+                                                key={tab.key}
+                                                type="button"
+                                                onClick={() => setSelectedLang(tab.key)}
+                                                className={`px-3 py-1 rounded-full text-sm font-semibold transition-colors ${
+                                                    selectedLang === tab.key
+                                                        ? "bg-orange-100 text-orange-700"
+                                                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                                                }`}
+                                            >
+                                                {tab.label}
+                                            </button>
+                                        ))}
+                                    </div>
                                     {displaySections.map((section, index) => (
                                         <div key={index} className="relative">
                                             <div className="space-y-3">
