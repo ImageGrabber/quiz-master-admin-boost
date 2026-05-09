@@ -454,7 +454,7 @@ const HindiSongDetail = () => {
                                                                 {section.chords[lineIndex]}
                                                             </p>
                                                         )}
-                                                        <p className="font-medium text-gray-900 text-2xl md:text-3xl text-left leading-tight font-urbanist">
+                                                        <p className="font-medium text-gray-900 text-xl md:text-2xl text-left leading-tight font-urbanist">
                                                             {line}
                                                         </p>
                                                         {showTranslation && englishTranslation?.lyrics?.[index]?.lines?.[lineIndex] && (
