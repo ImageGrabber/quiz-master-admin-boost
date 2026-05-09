@@ -165,6 +165,16 @@ const HindiSongDetail = () => {
         [languageTabs, song.translations]
     );
     const languagesText = availableLanguageLabels.join(", ");
+    const seoLanguageText = useMemo(() => {
+        if (availableLanguageLabels.length === 0) return "Hindi";
+        if (availableLanguageLabels.length === 1) return availableLanguageLabels[0];
+        if (availableLanguageLabels.length === 2) return `${availableLanguageLabels[0]} & ${availableLanguageLabels[1]}`;
+        if (availableLanguageLabels.length === 3) {
+            return `${availableLanguageLabels[0]}, ${availableLanguageLabels[1]} & ${availableLanguageLabels[2]}`;
+        }
+        return `${availableLanguageLabels[0]}, ${availableLanguageLabels[1]} & more`;
+    }, [availableLanguageLabels]);
+    const seoTitle = `${song.title} Lyrics | ${seoLanguageText}`;
 
     const relatedSongs = useMemo(() => {
         const stopWords = new Set(["hai", "ho", "ki", "ke", "mein", "main", "mai", "hum", "tera", "teri"]);
@@ -392,7 +402,7 @@ const HindiSongDetail = () => {
     return (
         <div className="min-h-screen bg-gray-50/30">
             <Helmet>
-                <title>{`${song.title} Lyrics in ${languagesText || "Hindi"}${hasChords ? " & Guitar Chords" : ""} | Christian Song`}</title>
+                <title>{seoTitle}</title>
                 <meta
                     name="description"
                     content={`Read full ${song.title} lyrics in ${languagesText || "Hindi"}, understand meaning line by line, and practice worship with${hasChords ? " guitar chords," : ""} transliteration, and Bible-based reflection.`}
