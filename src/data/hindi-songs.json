@@ -52205,21 +52205,104 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
-              "vaMdnaa krnao hma Aato hO",
-              "p`Bau var kI stuit gaato hO",
-              "tuJasao imalana kI Aasa hmaarI",
-              "pUrI kr mana kI Pyaasa hmaarI",
-              "Baoja Anauga`h hma pr Apnaa",
-              "torI hI vaMdnaa gaato hO hma",
-              "vaMdnaa krnao hma Aato hO",
-              "p`Bau var kI stuit gaato hO",
-              "jaga mao camako banakr toro",
-              "dIna duKI ko banao saharo",
-              "jaga mao jyaaoit idKnao vaalao",
-              "torI hI vaMdnaa gaato hO hma",
-              "vaMdnaa krnao hma Aato hO",
-              "p`Bau var kI stuit gaato hO"
+              "वंदना करने हम आते हैं",
+              "प्रभु वर की स्तुति गाते हैं",
+              "वंदना करने हम आते हैं"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "तुझ से मिलन की आस हमारी,",
+              "पूरी कर मन की प्यास हमारी,",
+              "भेज अनुग्रह हम पर अपना,",
+              "तेरी ही वंदना गाते हैं हम।"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "जग में चमके बन कर तेरे,",
+              "दीन दुखी के बने सहारे,",
+              "जग में ज्योति दिखाने वाले,",
+              "तेरी ही वंदना गाते हैं।"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "We come to worship You,",
+              "We sing praises to You, O Lord,",
+              "We come to worship You."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "We long to meet You,",
+              "Quench the thirst of our hearts,",
+              "Pour out Your grace upon us,",
+              "It is Your worship that we sing."
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Let us shine in this world for You,",
+              "Be support to the poor and broken,",
+              "O One who brings light to the world,",
+              "Your worship alone we sing."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "വന്ദന ചെയ്യാൻ ഞങ്ങൾ വരുന്നു,",
+              "കർത്താവേ നിന്റെ സ്തുതി പാടുന്നു,",
+              "വന്ദന ചെയ്യാൻ ഞങ്ങൾ വരുന്നു."
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Vandana karne hum aate hain",
+              "Prabhu var ki stuti gaate hain",
+              "Vandana karne hum aate hain"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Tujh se milan ki aas hamaari,",
+              "Puri kar man ki pyaas hamaari,",
+              "Bhej anugrah hum par apna,",
+              "Teri hi vandana gaate hain hum."
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Jag mein chamke ban kar tere,",
+              "Deen dukhi ke bane sahaare,",
+              "Jag mein jyoti dikhane wale,",
+              "Teri hi vandana gaate hain."
             ]
           }
         ]
@@ -52564,6 +52647,38 @@
               "ജീവജലം നീ എനിക്കു നല്കി",
               "നീയില്ലാതെ ഞാൻ ഒന്നുമല്ല കർത്താവേ",
               "യേശുവേ വാ, യേശുവേ വാ"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Yeshu aa, Yeshu aa",
+              "Mujh par tu apni daya barsa",
+              "Teri upasthiti mein shanti mile",
+              "Yeshu aa, Yeshu aa"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Toote hue dil ko tu sambhalta hai",
+              "Giron ko uthakar naya bal deta hai",
+              "Andhiyare mein tu hi ujiyara",
+              "Yeshu aa, Yeshu aa"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Paapon ka bojh tune kroos par liya",
+              "Jeevan ka jal tune mujhko diya",
+              "Tere bina kuch bhi nahin Prabhu",
+              "Yeshu aa, Yeshu aa"
             ]
           }
         ]

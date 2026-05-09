@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import AdSenseTag from "@/components/AdSenseTag";
 import { generateVideoSchema } from "@/utils/video-seo";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
@@ -73,6 +73,7 @@ const looksCorruptedLegacyEncoding = (line: string) => {
 const HindiSongDetail = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
     const { toast } = useToast();
     const slugParam = decodeURIComponent(slug || "");
     const decodedLegacySlug = decodeHexSlug(slugParam);
@@ -84,6 +85,8 @@ const HindiSongDetail = () => {
     });
     const [selectedLang, setSelectedLang] = useState("hindi");
     const [showChords, setShowChords] = useState(true);
+
+    const backHref = (location.state as { from?: string } | null)?.from || "/hindi-songs";
 
     useEffect(() => {
         if (song && slugParam && song.slug !== slugParam) {
@@ -104,7 +107,9 @@ const HindiSongDetail = () => {
         );
     }
 
-    const currentTranslation = song.translations[selectedLang];
+    const currentTranslation =
+        song.translations[selectedLang] ||
+        (selectedLang === "hinglish" ? song.translations.hindi : undefined);
     const englishTranslation = song.translations["english"];
     const videoId = song.videoUrl ? song.videoUrl.split('/').pop() : '';
     const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '';
@@ -145,11 +150,21 @@ const HindiSongDetail = () => {
     const languageTabs = useMemo(
         () => [
             { key: "hindi", label: "Hindi" },
+            { key: "hinglish", label: "Hinglish" },
             { key: "english", label: "English" },
             { key: "malayalam", label: "Malayalam" },
         ],
         []
     );
+
+    const availableLanguageLabels = useMemo(
+        () =>
+            languageTabs
+                .filter((tab) => song.translations[tab.key]?.lyrics?.length)
+                .map((tab) => tab.label),
+        [languageTabs, song.translations]
+    );
+    const languagesText = availableLanguageLabels.join(", ");
 
     const relatedSongs = useMemo(() => {
         const stopWords = new Set(["hai", "ho", "ki", "ke", "mein", "main", "mai", "hum", "tera", "teri"]);
@@ -377,19 +392,23 @@ const HindiSongDetail = () => {
     return (
         <div className="min-h-screen bg-gray-50/30">
             <Helmet>
-                <title>{`${song.title} Lyrics, Meaning${hasChords ? ' & Guitar Chords' : ''} | Hindi Christian Song`}</title>
+                <title>{`${song.title} Lyrics in ${languagesText || "Hindi"}${hasChords ? " & Guitar Chords" : ""} | Christian Song`}</title>
                 <meta
                     name="description"
-                    content={`Read full ${song.title} lyrics in Hindi, understand the meaning line by line, and practice worship with${hasChords ? ' guitar chords,' : ''} transliteration, and Bible-based reflection.`}
+                    content={`Read full ${song.title} lyrics in ${languagesText || "Hindi"}, understand meaning line by line, and practice worship with${hasChords ? " guitar chords," : ""} transliteration, and Bible-based reflection.`}
                 />
                 <meta
                     name="keywords"
                     content={dedupe([
                         `${song.title} lyrics`,
                         `${song.title} lyrics in hindi`,
+                        `${song.title} lyrics in hinglish`,
+                        `${song.title} lyrics in english`,
+                        `${song.title} lyrics in malayalam`,
                         `${song.title} meaning`,
                         `${song.title} chords`,
                         "hindi christian songs lyrics",
+                        "hinglish christian songs lyrics",
                         "yeshu ke geet",
                         "worship songs hindi",
                         ...songAliases.slice(0, 4),
@@ -412,7 +431,7 @@ const HindiSongDetail = () => {
             <div className="container mx-auto px-4 py-6">
                 <Button
                     variant="ghost"
-                    onClick={() => navigate("/hindi-songs")}
+                    onClick={() => navigate(backHref)}
                     className="mb-6 hover:bg-white text-gray-600 hover:text-orange-600 transition-all font-bold"
                 >
                     <ArrowLeft className="mr-2 h-4 w-4" />
@@ -433,7 +452,7 @@ const HindiSongDetail = () => {
                                 {hasEnglish && <span className="text-[10px] font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded uppercase tracking-wider">English Translation</span>}
                             </div>
                             <p className="text-gray-500 text-xs leading-relaxed mb-6 font-medium">
-                                Full Hindi lyrics with worship-friendly structure, guitar chords, English meaning, and search variants.
+                                Full lyrics in {languagesText || "Hindi"} with worship-friendly structure, guitar chords, and search variants.
                             </p>
                             
                             <div className="flex items-center gap-3 mb-8">

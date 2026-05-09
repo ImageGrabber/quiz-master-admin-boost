@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import AdSenseTag from "@/components/AdSenseTag";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Navigation } from "@/components/Navigation";
@@ -16,9 +16,28 @@ const songs: Song[] = hindiSongsData as Song[];
 
 const HindiSongs = () => {
     const navigate = useNavigate();
-    const [activeLetter, setActiveLetter] = useState<string | null>(null);
-    const [searchQuery, setSearchQuery] = useState("");
-    const [chordsOnly, setChordsOnly] = useState(false);
+    const location = useLocation();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [activeLetter, setActiveLetter] = useState<string | null>(searchParams.get("letter") || null);
+    const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
+    const [chordsOnly, setChordsOnly] = useState(searchParams.get("chords") === "1");
+
+    const updateParams = (next: { letter?: string | null; q?: string; chords?: boolean }) => {
+        const params = new URLSearchParams(searchParams);
+        if (next.letter !== undefined) {
+            if (next.letter) params.set("letter", next.letter);
+            else params.delete("letter");
+        }
+        if (next.q !== undefined) {
+            if (next.q.trim()) params.set("q", next.q.trim());
+            else params.delete("q");
+        }
+        if (next.chords !== undefined) {
+            if (next.chords) params.set("chords", "1");
+            else params.delete("chords");
+        }
+        setSearchParams(params, { replace: true });
+    };
 
     const { filteredSongs, counts, totalVisible } = useMemo(() => {
         const counts: Record<string, number> = {};
@@ -144,14 +163,22 @@ const HindiSongs = () => {
                         <Input
                             type="text"
                             value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
+                            onChange={(e) => {
+                                const value = e.target.value;
+                                setSearchQuery(value);
+                                updateParams({ q: value });
+                            }}
                             placeholder="Search songs by title or description..."
                             className="pl-10 h-11 bg-white border-gray-200 focus-visible:ring-orange-200"
                         />
                     </div>
                     
                     <button
-                        onClick={() => setChordsOnly(!chordsOnly)}
+                        onClick={() => {
+                            const next = !chordsOnly;
+                            setChordsOnly(next);
+                            updateParams({ chords: next });
+                        }}
                         className={`flex items-center gap-2 px-4 h-11 rounded-xl font-bold transition-all duration-200 border whitespace-nowrap
                             ${chordsOnly 
                                 ? 'bg-orange-600 text-white border-orange-600 shadow-lg shadow-orange-100' 
@@ -167,7 +194,10 @@ const HindiSongs = () => {
                 <div className="max-w-5xl mx-auto mb-8">
                     <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2">
                         <button
-                            onClick={() => setActiveLetter(null)}
+                            onClick={() => {
+                                setActiveLetter(null);
+                                updateParams({ letter: null });
+                            }}
                             className={`flex flex-col items-center px-3 py-2 rounded-xl text-sm font-bold transition-all duration-200
                                 ${!activeLetter
                                     ? 'bg-orange-600 text-white shadow-lg shadow-orange-200 scale-105'
@@ -188,7 +218,11 @@ const HindiSongs = () => {
                             return (
                                 <button
                                     key={letter}
-                                    onClick={() => hasItems && setActiveLetter(letter)}
+                                    onClick={() => {
+                                        if (!hasItems) return;
+                                        setActiveLetter(letter);
+                                        updateParams({ letter });
+                                    }}
                                     disabled={!hasItems}
                                     className={`flex flex-col items-center min-w-[36px] px-2 py-2 rounded-xl text-sm font-bold transition-all duration-200
                                         ${isActive
@@ -233,7 +267,11 @@ const HindiSongs = () => {
                             <Card
                                 key={song.slug}
                                 className="group cursor-pointer hover:shadow-xl transition-all duration-300 border-none bg-white overflow-hidden flex flex-col"
-                                onClick={() => navigate(`/hindi-songs/${song.slug}`)}
+                                onClick={() =>
+                                    navigate(`/hindi-songs/${song.slug}`, {
+                                        state: { from: `${location.pathname}${location.search}` },
+                                    })
+                                }
                             >
                                 <div className="relative h-48 bg-gradient-to-br from-orange-900 to-amber-800 flex items-center justify-center overflow-hidden">
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
