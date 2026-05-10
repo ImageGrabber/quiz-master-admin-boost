@@ -248,7 +248,7 @@ const CompetitionHome = () => {
   return (
     <>
       <SEO
-        title="Free Bible Quiz Competition | Play Online & Win Prizes"
+        title="Online Bible Quiz Competition 2026 | Free Bible Quizzes with Prizes"
         description="Join free online Bible quizzes with daily challenges, weekly competitions, and prize-ready leaderboards. Explore Bible Q&A hubs, Hindi songs, English songs, and kids stories to study, worship, and grow in Scripture."
         keywords="bible quiz competition 2026, free bible quiz with prizes, online bible competition, bible trivia 2026, scripture match game, kids bible stories, christian song library"
         url="/"
