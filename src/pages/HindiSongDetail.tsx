@@ -70,6 +70,43 @@ const looksCorruptedLegacyEncoding = (line: string) => {
     return false;
 };
 
+const DEVANAGARI_TO_LATIN: Record<string, string> = {
+    "अ": "a", "आ": "aa", "इ": "i", "ई": "ee", "उ": "u", "ऊ": "oo", "ए": "e", "ऐ": "ai", "ओ": "o", "औ": "au",
+    "ऋ": "ri", "ं": "n", "ँ": "n", "ः": "h", "्": "", "़": "",
+    "ा": "aa", "ि": "i", "ी": "ee", "ु": "u", "ू": "oo", "े": "e", "ै": "ai", "ो": "o", "ौ": "au",
+    "क": "k", "ख": "kh", "ग": "g", "घ": "gh", "ङ": "n",
+    "च": "ch", "छ": "chh", "ज": "j", "झ": "jh", "ञ": "n",
+    "ट": "t", "ठ": "th", "ड": "d", "ढ": "dh", "ण": "n",
+    "त": "t", "थ": "th", "द": "d", "ध": "dh", "न": "n",
+    "प": "p", "फ": "ph", "ब": "b", "भ": "bh", "म": "m",
+    "य": "y", "र": "r", "ल": "l", "व": "v",
+    "श": "sh", "ष": "sh", "स": "s", "ह": "h",
+    "ळ": "l", "क्ष": "ksh", "ज्ञ": "gy",
+};
+
+const transliterateHindiToHinglish = (text: string) => {
+    const chars = Array.from(text);
+    let out = "";
+    for (let i = 0; i < chars.length; i++) {
+        const ch = chars[i];
+        if (ch === " " || ch === "," || ch === "." || ch === "!" || ch === "?" || ch === "।" || ch === "-") {
+            out += ch === "।" ? "." : ch;
+            continue;
+        }
+        const two = `${ch}${chars[i + 1] || ""}`;
+        if (DEVANAGARI_TO_LATIN[two]) {
+            out += DEVANAGARI_TO_LATIN[two];
+            i += 1;
+            continue;
+        }
+        out += DEVANAGARI_TO_LATIN[ch] ?? ch;
+    }
+    return out
+        .replace(/\s+/g, " ")
+        .replace(/\b([a-z])/g, (m) => m.toUpperCase())
+        .trim();
+};
+
 const HindiSongDetail = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
@@ -108,8 +145,17 @@ const HindiSongDetail = () => {
     }
 
     const currentTranslation =
-        song.translations[selectedLang] ||
-        (selectedLang === "hinglish" ? song.translations.hindi : undefined);
+        selectedLang === "hinglish"
+            ? (song.translations.hinglish || (song.translations.hindi
+                ? {
+                    lang: "Hinglish",
+                    lyrics: (song.translations.hindi.lyrics || []).map((section) => ({
+                        ...section,
+                        lines: (section.lines || []).map(transliterateHindiToHinglish),
+                    })),
+                }
+                : undefined))
+            : song.translations[selectedLang];
     const englishTranslation = song.translations["english"];
     const videoId = song.videoUrl ? song.videoUrl.split('/').pop() : '';
     const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '';
@@ -213,11 +259,13 @@ const HindiSongDetail = () => {
         const hasDevanagari = sections.some((s) => (s.lines || []).some((l) => /[\u0900-\u097f]/.test(l)));
 
         // 1) Remove Romanized duplicates from Hindi block when Devanagari text exists
+        const shouldRunCorruptionFilter = selectedLang === "hindi";
+
         const cleaned = sections
             .map((section) => ({
                 ...section,
                 lines: (section.lines || []).filter((line) => {
-                    if (looksCorruptedLegacyEncoding(line)) return false;
+                    if (shouldRunCorruptionFilter && looksCorruptedLegacyEncoding(line)) return false;
                     if (hasDevanagari && isMostlyRoman(line)) return false;
                     return true;
                 }),
@@ -276,7 +324,7 @@ const HindiSongDetail = () => {
             });
         }
         return grouped;
-    }, [currentTranslation]);
+    }, [currentTranslation, selectedLang]);
 
     const songAliases = useMemo(() => {
         const base = plainTitle;
@@ -545,8 +593,25 @@ const HindiSongDetail = () => {
                             <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-orange-400 via-orange-500 to-amber-500" />
                             
                             <CardContent className="p-8 md:p-16">
+                                <div className="flex flex-wrap gap-2 mb-6">
+                                    {languageTabs.map((tab) => (
+                                        <button
+                                            key={tab.key}
+                                            type="button"
+                                            onClick={() => setSelectedLang(tab.key)}
+                                            className={`px-3 py-1 rounded-full text-sm font-semibold transition-colors ${
+                                                selectedLang === tab.key
+                                                    ? "bg-orange-100 text-orange-700"
+                                                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                                            }`}
+                                        >
+                                            {tab.label}
+                                        </button>
+                                    ))}
+                                </div>
+
                                 {displaySections.length === 0 ? (
-                                    <div className="max-w-2xl mx-auto text-left">
+                                    <div className="max-w-2xl mx-auto text-left mt-2">
                                         <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 font-urbanist">
                                             Lyrics unavailable
                                         </h2>
@@ -562,23 +627,7 @@ const HindiSongDetail = () => {
                                         )}
                                     </div>
                                 ) : (
-                                <div className="space-y-10">
-                                    <div className="flex flex-wrap gap-2">
-                                        {languageTabs.map((tab) => (
-                                            <button
-                                                key={tab.key}
-                                                type="button"
-                                                onClick={() => setSelectedLang(tab.key)}
-                                                className={`px-3 py-1 rounded-full text-sm font-semibold transition-colors ${
-                                                    selectedLang === tab.key
-                                                        ? "bg-orange-100 text-orange-700"
-                                                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                                                }`}
-                                            >
-                                                {tab.label}
-                                            </button>
-                                        ))}
-                                    </div>
+                                <div className="space-y-10 mt-2">
                                     {displaySections.map((section, index) => (
                                         <div key={index} className="relative">
                                             <div className="space-y-3">

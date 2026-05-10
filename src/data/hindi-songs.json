@@ -13432,7 +13432,7 @@
           },
           {
             "lines": [
-              "उद्धार का संदेश भी, कांधों के ऊपर है"
+              "उद्धार का संदेश भी, कंधों के ऊपर है"
             ],
             "chords": [
               "Dm           F        G           Am"
@@ -13475,6 +13475,80 @@
           {
             "lines": [
               "From one lamp, we must light millions of lamps"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Ik aag har dil mein, humko jalana hai"
+            ],
+            "chords": [
+              "Am         G           F           Am"
+            ]
+          },
+          {
+            "lines": [
+              "Bhatke hue dil ko, Prabhu se milana hai"
+            ],
+            "chords": [
+              "Dm           F        G           Am"
+            ]
+          },
+          {
+            "lines": [
+              "Uddhar ka sandesh bhi, kandhon ke upar hai"
+            ],
+            "chords": [
+              "Dm           F        G           Am"
+            ]
+          },
+          {
+            "lines": [
+              "Ek deep se lakhon diye, humko jalana hai"
+            ],
+            "chords": [
+              "Am         G           F           Am"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "ഓരോ ഹൃദയത്തിലും ഒരു തീ കൊളുത്തേണ്ടതുണ്ട്"
+            ],
+            "chords": [
+              "Am         G           F           Am"
+            ]
+          },
+          {
+            "lines": [
+              "വഴിതെറ്റിയ ഹൃദയത്തെ കർത്താവിനോടു ചേർക്കേണ്ടതുണ്ട്"
+            ],
+            "chords": [
+              "Dm           F        G           Am"
+            ]
+          },
+          {
+            "lines": [
+              "രക്ഷയുടെ സന്ദേശവും നമ്മുടെ ചുമലുകളിൽ തന്നെയുണ്ട്"
+            ],
+            "chords": [
+              "Dm           F        G           Am"
+            ]
+          },
+          {
+            "lines": [
+              "ഒരു ദീപത്തിൽ നിന്ന് ലക്ഷങ്ങൾ തെളിയിക്കേണ്ടതുണ്ട്"
+            ],
+            "chords": [
+              "Am         G           F           Am"
             ]
           }
         ]
