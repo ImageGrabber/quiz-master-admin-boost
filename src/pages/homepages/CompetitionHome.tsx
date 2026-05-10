@@ -248,8 +248,8 @@ const CompetitionHome = () => {
   return (
     <>
       <SEO
-        title="Online Bible Quiz Competition 2026 | Free Bible Quizzes with Prizes"
-        description="Join the Bible Quiz Competition 2026. Play free online Bible quizzes, compete for prizes, and climb the global leaderboard. Master the Word and win!"
+        title="Free Bible Quiz Competition | Play Online & Win Prizes"
+        description="Join free online Bible quizzes with daily challenges, weekly competitions, and prize-ready leaderboards. Explore Bible Q&A hubs, Hindi songs, English songs, and kids stories to study, worship, and grow in Scripture."
         keywords="bible quiz competition 2026, free bible quiz with prizes, online bible competition, bible trivia 2026, scripture match game, kids bible stories, christian song library"
         url="/"
         structuredData={{
@@ -336,6 +336,9 @@ const CompetitionHome = () => {
 
               <p className="text-sm sm:text-lg md:text-xl text-white/80 font-light max-w-2xl leading-relaxed">
                 Join thousands of believers in a free bible competition with daily challenges, transparent scoring, and real bible quiz prizes. Start with our most searched quizzes and grow your Scripture mastery.
+              </p>
+              <p className="text-xs sm:text-base text-white/70 font-light max-w-2xl leading-relaxed">
+                Also explore Hindi songs, English songs, and kids stories with structured pages built for learning, worship, and family Bible engagement.
               </p>
 
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1 md:pt-2 w-full sm:w-auto">

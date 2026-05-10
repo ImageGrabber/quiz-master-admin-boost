@@ -619,6 +619,30 @@ const HindiSongDetail = () => {
                                         {hasChords ? " Chords are included for worship leaders and guitar players." : " Chords are being added as they become available."}
                                         {hasEnglish ? " English meaning is also available for bilingual worship preparation." : " English meaning support is being expanded."}
                                     </p>
+                                    <p className="text-gray-700 leading-relaxed">
+                                        You can switch between <strong>Hindi</strong>, <strong>Hinglish</strong>, <strong>English</strong>, and <strong>Malayalam</strong> tabs (where available)
+                                        to read lyrics in your preferred format. This makes it easier for worship teams, youth fellowships, and family prayer groups to sing together
+                                        with better understanding and pronunciation support.
+                                    </p>
+                                    <p className="text-gray-700 leading-relaxed">
+                                        If you are searching for Christian song lyrics for church service, devotion time, or Bible study music practice, this page is designed to provide
+                                        readable verse flow, chord-friendly lines, and language options in one place.
+                                    </p>
+                                </CardContent>
+                            </Card>
+
+                            <Card className="rounded-3xl border-gray-100">
+                                <CardContent className="p-8 space-y-4">
+                                    <h2 className="text-2xl font-bold text-gray-900">Related Resources</h2>
+                                    <p className="text-gray-700 leading-relaxed">
+                                        Explore more Christian resources on Bible Quiz Competition including Hindi worship songs, English songs, Malayalam songs, and Bible stories for kids.
+                                    </p>
+                                    <div className="flex flex-wrap gap-3">
+                                        <a href="/hindi-songs" className="px-3 py-1.5 rounded-full bg-orange-50 text-orange-700 text-sm font-semibold hover:bg-orange-100">Hindi Songs</a>
+                                        <a href="/english-songs" className="px-3 py-1.5 rounded-full bg-blue-50 text-blue-700 text-sm font-semibold hover:bg-blue-100">English Songs</a>
+                                        <a href="/malayalam-songs" className="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-sm font-semibold hover:bg-emerald-100">Malayalam Songs</a>
+                                        <a href="/kids-stories" className="px-3 py-1.5 rounded-full bg-violet-50 text-violet-700 text-sm font-semibold hover:bg-violet-100">Kids Stories</a>
+                                    </div>
                                 </CardContent>
                             </Card>
 
