@@ -123,7 +123,8 @@ const HindiSongDetail = () => {
     const [selectedLang, setSelectedLang] = useState("hindi");
     const [showChords, setShowChords] = useState(true);
 
-    const backHref = (location.state as { from?: string } | null)?.from || "/hindi-songs";
+    const backState = (location.state as { from?: string; returnScrollY?: number } | null) || null;
+    const backHref = backState?.from || "/hindi-songs";
 
     useEffect(() => {
         if (song && slugParam && song.slug !== slugParam) {
@@ -489,7 +490,13 @@ const HindiSongDetail = () => {
             <div className="container mx-auto px-4 py-6">
                 <Button
                     variant="ghost"
-                    onClick={() => navigate(backHref)}
+                    onClick={() =>
+                        navigate(backHref, {
+                            state: {
+                                restoreScrollY: backState?.returnScrollY ?? 0,
+                            },
+                        })
+                    }
                     className="mb-6 hover:bg-white text-gray-600 hover:text-orange-600 transition-all font-bold"
                 >
                     <ArrowLeft className="mr-2 h-4 w-4" />

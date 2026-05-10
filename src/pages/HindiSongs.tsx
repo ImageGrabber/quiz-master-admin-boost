@@ -6,13 +6,14 @@ import { Input } from "@/components/ui/input";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Music, PlayCircle, Search, Guitar } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import type { Song } from "@/data/songs";
 import { Badge } from "@/components/ui/badge";
 import hindiSongsData from "@/data/hindi-songs.json";
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const songs: Song[] = hindiSongsData as Song[];
+const ITEMS_PER_PAGE = 24;
 
 const HindiSongs = () => {
     const navigate = useNavigate();
@@ -21,8 +22,18 @@ const HindiSongs = () => {
     const [activeLetter, setActiveLetter] = useState<string | null>(searchParams.get("letter") || null);
     const [searchQuery, setSearchQuery] = useState(searchParams.get("q") || "");
     const [chordsOnly, setChordsOnly] = useState(searchParams.get("chords") === "1");
+    
+    useEffect(() => {
+        const restoreScrollY = (location.state as { restoreScrollY?: number } | null)?.restoreScrollY;
+        if (typeof restoreScrollY === "number" && restoreScrollY > 0) {
+            requestAnimationFrame(() => {
+                window.scrollTo({ top: restoreScrollY, behavior: "auto" });
+            });
+            navigate(location.pathname + location.search, { replace: true, state: null });
+        }
+    }, [location.pathname, location.search, location.state, navigate]);
 
-    const updateParams = (next: { letter?: string | null; q?: string; chords?: boolean }) => {
+    const updateParams = (next: { letter?: string | null; q?: string; chords?: boolean; page?: number }) => {
         const params = new URLSearchParams(searchParams);
         if (next.letter !== undefined) {
             if (next.letter) params.set("letter", next.letter);
@@ -35,6 +46,11 @@ const HindiSongs = () => {
         if (next.chords !== undefined) {
             if (next.chords) params.set("chords", "1");
             else params.delete("chords");
+        }
+        if (next.page !== undefined) {
+            const page = Number(next.page);
+            if (Number.isFinite(page) && page > 1) params.set("page", String(page));
+            else params.delete("page");
         }
         setSearchParams(params, { replace: true });
     };
@@ -92,6 +108,21 @@ const HindiSongs = () => {
             }).length
         };
     }, [activeLetter, searchQuery, chordsOnly]);
+
+    const totalPages = Math.max(1, Math.ceil(filteredSongs.length / ITEMS_PER_PAGE));
+    const currentPageRaw = Number(searchParams.get("page") || "1");
+    const currentPage = Number.isFinite(currentPageRaw)
+        ? Math.min(Math.max(1, Math.floor(currentPageRaw)), totalPages)
+        : 1;
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const paginatedSongs = filteredSongs.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+    const pageNumbers = useMemo(() => {
+        if (totalPages <= 7) return Array.from({ length: totalPages }, (_, i) => i + 1);
+        if (currentPage <= 4) return [1, 2, 3, 4, 5, -1, totalPages];
+        if (currentPage >= totalPages - 3) return [1, -1, totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+        return [1, -1, currentPage - 1, currentPage, currentPage + 1, -1, totalPages];
+    }, [currentPage, totalPages]);
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -166,7 +197,7 @@ const HindiSongs = () => {
                             onChange={(e) => {
                                 const value = e.target.value;
                                 setSearchQuery(value);
-                                updateParams({ q: value });
+                                updateParams({ q: value, page: 1 });
                             }}
                             placeholder="Search songs by title or description..."
                             className="pl-10 h-11 bg-white border-gray-200 focus-visible:ring-orange-200"
@@ -177,7 +208,7 @@ const HindiSongs = () => {
                         onClick={() => {
                             const next = !chordsOnly;
                             setChordsOnly(next);
-                            updateParams({ chords: next });
+                            updateParams({ chords: next, page: 1 });
                         }}
                         className={`flex items-center gap-2 px-4 h-11 rounded-xl font-bold transition-all duration-200 border whitespace-nowrap
                             ${chordsOnly 
@@ -196,7 +227,7 @@ const HindiSongs = () => {
                         <button
                             onClick={() => {
                                 setActiveLetter(null);
-                                updateParams({ letter: null });
+                                updateParams({ letter: null, page: 1 });
                             }}
                             className={`flex flex-col items-center px-3 py-2 rounded-xl text-sm font-bold transition-all duration-200
                                 ${!activeLetter
@@ -221,7 +252,7 @@ const HindiSongs = () => {
                                     onClick={() => {
                                         if (!hasItems) return;
                                         setActiveLetter(letter);
-                                        updateParams({ letter });
+                                        updateParams({ letter, page: 1 });
                                     }}
                                     disabled={!hasItems}
                                     className={`flex flex-col items-center min-w-[36px] px-2 py-2 rounded-xl text-sm font-bold transition-all duration-200
@@ -255,10 +286,16 @@ const HindiSongs = () => {
                         )}
                         {searchQuery && <> matching "{searchQuery.trim()}"</>}
                     </p>
+                    <p className="text-xs text-gray-400 mt-1">
+                        Page {currentPage} of {totalPages}
+                        {" · "}
+                        Showing {filteredSongs.length === 0 ? 0 : startIndex + 1}-
+                        {Math.min(startIndex + ITEMS_PER_PAGE, filteredSongs.length)} of {filteredSongs.length}
+                    </p>
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-                    {filteredSongs.map((song) => {
+                    {paginatedSongs.map((song) => {
                         const hasChords = Object.values(song.translations).some(t => 
                             t.lyrics.some(l => l.chords && l.chords.length > 0)
                         );
@@ -269,7 +306,10 @@ const HindiSongs = () => {
                                 className="group cursor-pointer hover:shadow-xl transition-all duration-300 border-none bg-white overflow-hidden flex flex-col"
                                 onClick={() =>
                                     navigate(`/hindi-songs/${song.slug}`, {
-                                        state: { from: `${location.pathname}${location.search}` },
+                                        state: {
+                                            from: `${location.pathname}${location.search}`,
+                                            returnScrollY: window.scrollY,
+                                        },
                                     })
                                 }
                             >
@@ -316,6 +356,42 @@ const HindiSongs = () => {
                         );
                     })}
                 </div>
+
+                {totalPages > 1 && (
+                    <div className="max-w-7xl mx-auto mt-8 flex flex-wrap items-center justify-center gap-2">
+                        <button
+                            onClick={() => updateParams({ page: currentPage - 1 })}
+                            disabled={currentPage === 1}
+                            className="px-3 py-2 text-sm rounded-lg border border-gray-200 bg-white disabled:opacity-40 disabled:cursor-not-allowed hover:border-orange-300 hover:text-orange-600"
+                        >
+                            Previous
+                        </button>
+                        {pageNumbers.map((p, idx) =>
+                            p === -1 ? (
+                                <span key={`ellipsis-${idx}`} className="px-2 text-gray-400">…</span>
+                            ) : (
+                                <button
+                                    key={p}
+                                    onClick={() => updateParams({ page: p })}
+                                    className={`px-3 py-2 text-sm rounded-lg border ${
+                                        p === currentPage
+                                            ? "bg-orange-600 text-white border-orange-600"
+                                            : "bg-white text-gray-700 border-gray-200 hover:border-orange-300 hover:text-orange-600"
+                                    }`}
+                                >
+                                    {p}
+                                </button>
+                            )
+                        )}
+                        <button
+                            onClick={() => updateParams({ page: currentPage + 1 })}
+                            disabled={currentPage === totalPages}
+                            className="px-3 py-2 text-sm rounded-lg border border-gray-200 bg-white disabled:opacity-40 disabled:cursor-not-allowed hover:border-orange-300 hover:text-orange-600"
+                        >
+                            Next
+                        </button>
+                    </div>
+                )}
 
                 <section className="max-w-5xl mx-auto mt-12 grid md:grid-cols-2 gap-6">
                     <Card className="border-gray-100">
