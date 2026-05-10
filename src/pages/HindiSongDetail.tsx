@@ -249,6 +249,16 @@ const HindiSongDetail = () => {
         return ranked;
     }, [plainTitle, song.slug]);
 
+    const relatedSongsToShow = useMemo(() => {
+        if (relatedSongs.length > 0) return relatedSongs;
+        return songs.filter((s) => s.slug !== song.slug).slice(0, 4);
+    }, [relatedSongs, song.slug]);
+
+    const relatedSongsForSlider = useMemo(() => {
+        const base = relatedSongsToShow.length ? relatedSongsToShow : songs.filter((s) => s.slug !== song.slug);
+        return base.slice(0, 10);
+    }, [relatedSongsToShow, song.slug]);
+
     const allLyricsText = useMemo(() => {
         const hindiText = currentTranslation?.lyrics?.flatMap((section) => section.lines || []).join("\n") || "";
         const englishText = englishTranslation?.lyrics?.flatMap((section) => section.lines || []).join("\n") || "";
@@ -663,6 +673,57 @@ const HindiSongDetail = () => {
 
                         <div className="mt-8 grid grid-cols-1 gap-6">
                             <Card className="rounded-3xl border-gray-100">
+                                <CardContent className="p-8 space-y-5">
+                                    <h2 className="text-2xl font-bold text-gray-900">Related Hindi Worship Songs</h2>
+                                    <p className="text-sm text-gray-600">Explore similar songs with lyrics, chords, and quick details.</p>
+                                    <div className="-mx-1 overflow-x-auto pb-1">
+                                        <div className="flex gap-4 px-1 snap-x snap-mandatory">
+                                            {relatedSongsForSlider.map((related) => {
+                                                const relatedVideoId = related.videoUrl ? related.videoUrl.split("/").pop() : "";
+                                                const relatedThumb = relatedVideoId ? `https://img.youtube.com/vi/${relatedVideoId}/hqdefault.jpg` : "";
+                                                const relatedHindiSections = related.translations?.hindi?.lyrics || [];
+                                                const relatedLineCount = relatedHindiSections.reduce((sum, sec) => sum + (sec.lines?.length || 0), 0);
+                                                const relatedHasChords = relatedHindiSections.some((sec) => sec.chords && sec.chords.length > 0);
+                                                return (
+                                                    <div
+                                                        key={related.slug}
+                                                        className="snap-start min-w-[260px] sm:min-w-[300px] max-w-[320px] bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm"
+                                                    >
+                                                        {relatedThumb ? (
+                                                            <img
+                                                                src={relatedThumb}
+                                                                alt={`${related.title} thumbnail`}
+                                                                className="w-full h-36 object-cover"
+                                                                loading="lazy"
+                                                            />
+                                                        ) : (
+                                                            <div className="w-full h-36 bg-gray-100 flex items-center justify-center text-gray-400 text-sm font-semibold">
+                                                                No thumbnail
+                                                            </div>
+                                                        )}
+                                                        <div className="p-4 space-y-3">
+                                                            <h3 className="text-sm font-bold text-gray-900 line-clamp-2 min-h-[2.5rem]">{related.title}</h3>
+                                                            <div className="flex flex-wrap gap-2 text-[11px]">
+                                                                <span className="px-2 py-1 rounded-full bg-orange-50 text-orange-700 font-semibold">{relatedLineCount} lines</span>
+                                                                <span className="px-2 py-1 rounded-full bg-blue-50 text-blue-700 font-semibold">{relatedHasChords ? "Chords" : "Lyrics"}</span>
+                                                            </div>
+                                                            <Button
+                                                                variant="outline"
+                                                                className="w-full justify-center font-semibold"
+                                                                onClick={() => navigate(`/hindi-songs/${related.slug}`)}
+                                                            >
+                                                                View Song
+                                                            </Button>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+
+                            <Card className="rounded-3xl border-gray-100">
                                 <CardContent className="p-8 space-y-4">
                                     <h2 className="text-2xl font-bold text-gray-900">About This Song</h2>
                                     <p className="text-gray-700 leading-relaxed">
@@ -767,25 +828,6 @@ const HindiSongDetail = () => {
                                 </CardContent>
                             </Card>
 
-                            {relatedSongs.length > 0 && (
-                                <Card className="rounded-3xl border-gray-100">
-                                    <CardContent className="p-8 space-y-4">
-                                        <h2 className="text-2xl font-bold text-gray-900">Related Hindi Worship Songs</h2>
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                            {relatedSongs.map((related) => (
-                                                <Button
-                                                    key={related.slug}
-                                                    variant="outline"
-                                                    className="justify-start h-auto py-3 px-4 font-semibold"
-                                                    onClick={() => navigate(`/hindi-songs/${related.slug}`)}
-                                                >
-                                                    {related.title}
-                                                </Button>
-                                            ))}
-                                        </div>
-                                    </CardContent>
-                                </Card>
-                            )}
                         </div>
                     </div>
 

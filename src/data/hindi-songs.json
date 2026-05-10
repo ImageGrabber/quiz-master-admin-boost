@@ -53155,18 +53155,60 @@
         "lyrics": [
           {
             "lines": [
-              "yaISau ka haqa haqaaoM maoM laokr",
-              "tUfanaI lahraoM pr maOM calaU^Mgaa",
-              "hao caaho saamanao kOsaI BaI mauSikla",
-              "maOM naa S$^Mgaa maOM na hTU^Mgaa",
-              "maoro ilae ijasanao dI ApnaI ija,ndgaI",
-              "maOM ]sakI iKdmat sada k$^Mgaa",
-              "Agar jaae jaana ]sa kI lagana maoM",
-              "maOM naa D$^Mgaa",
-              "rahaoM maoM kaToM yaa hao AMQaora",
-              "naa kao[- saaqaI Akolaa calaU^Mgaa",
-              "SaOtana ko tIr yaid Gaayala BaI krado",
-              "maOM naa D$^Mgaa"
+              "यीशु का हाथ हाथों में लेकर,",
+              "तूफानी लहरों पर मैं चलूँगा।",
+              "हो चाहे सामने कैसी भी मुश्किल,",
+              "मैं ना डरूँगा, मैं ना हटूँगा।",
+              "मेरे लिये जिसने दी अपनी ज़िंदगी,",
+              "मैं उसकी खिदमत सदा करूँगा।",
+              "अगर जाए जान उसकी लगन में,",
+              "मैं ना डरूँगा।",
+              "राहों में काँटे या हो अँधेरा,",
+              "ना कोई साथी, अकेला चलूँगा।",
+              "शैतान के तीर यदि घायल भी कर दे,",
+              "मैं ना डरूँगा।"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Holding Jesus’ hand in my hands,",
+              "I will walk on stormy waves.",
+              "No matter how hard the trouble before me,",
+              "I will not fear, I will not turn back.",
+              "The One who gave His life for me,",
+              "I will serve Him forever.",
+              "Even if my life is demanded in His devotion,",
+              "I will not fear.",
+              "If the road has thorns or darkness,",
+              "With no companion, I will walk alone.",
+              "Even if Satan’s arrows wound me,",
+              "I will not fear."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യേശുവിന്റെ കൈ കൈകളിൽ പിടിച്ച്,",
+              "കൊടുങ്കാറ്റ് തിരകളിൽ ഞാൻ നടക്കും.",
+              "മുന്നിൽ എത്ര കഠിന പ്രശ്നം വന്നാലും,",
+              "ഞാൻ ഭയപ്പെടില്ല, പിന്നോട്ടില്ല.",
+              "എന്നുവേണ്ടി ജീവൻ തന്ന അവനുവേണ്ടി,",
+              "ഞാൻ അവനെ എന്നും സേവിക്കും.",
+              "അവനോടുള്ള ഭക്തിയിൽ ജീവൻ പോലും പോകേണ്ടിവന്നാലും,",
+              "ഞാൻ ഭയപ്പെടില്ല.",
+              "വഴിയിൽ മുള്ളുകളോ അന്ധകാരമോ ഉണ്ടായാലും,",
+              "സഹായി ഇല്ലെങ്കിലും ഞാൻ ഒറ്റയ്ക്ക് നടക്കും.",
+              "ശൈതാന്റെ അമ്പുകൾ മുറിപ്പെടുത്തിയാലും,",
+              "ഞാൻ ഭയപ്പെടില്ല."
             ]
           }
         ]
@@ -92067,14 +92109,92 @@
     "slug": "aao-yeshu-masiha-ke-paas",
     "title": "Aao yeshu masiha ke paas",
     "videoUrl": "",
-    "description": "Aao yeshu masiha ke paas - Hindi Christian song seed entry imported from waytochurch index.",
+    "description": "Aao yeshu masiha ke paas - Hindi Christian devotional song lyrics with worship-friendly formatting.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
             "lines": [
-              "Aao yeshu masiha ke paas"
+              "आओ यीशु मसीह के पास,",
+              "वह है दबे जो जुल्म के बोझ से,",
+              "और पीड़ा से दबे लोग।",
+              "विश्रांति देने को यीशु राजा बुलाता है।"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "तू मन क्यों लगा बैठा संसार की लालच में,",
+              "कुछ भी पाएगा? खुद तू मिट जाएगा।",
+              "स्वर्ग से वह आया तुझे जीवन देने को,",
+              "तेरे दुख सारे लेने को, तुझे शांति देने को।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Aao Yeshu Masiha ke paas,",
+              "Woh hai dabe jo zulm ke bojh se,",
+              "Aur peeda se dabe log.",
+              "Vishraanti dene ko Yeshu Raja bulaata hai."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Tu man kyon laga baitha sansaar ki laalach mein,",
+              "Kuchh bhi paayega? Khud tu mit jaayega.",
+              "Swarg se woh aaya tujhe jeevan dene ko,",
+              "Tere dukh saare lene ko, tujhe shaanti dene ko."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Come to Jesus Christ,",
+              "He calls those crushed under oppression and heavy burdens,",
+              "And those weighed down by pain.",
+              "Jesus the King calls you to give you rest."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Why have you set your heart on the greed of this world?",
+              "What will you gain? You yourself will fade away.",
+              "He came from heaven to give you life,",
+              "To take all your sorrows and to give you peace."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യേശുക്രിസ്തുവിന്റെ അടുക്കൽ വരൂ,",
+              "അന്യായത്തിന്റെ ഭാരത്തിൽ തളർന്നവരെയും,",
+              "വേദനയിൽ മർദിക്കപ്പെട്ടവരെയും അവൻ വിളിക്കുന്നു.",
+              "വിശ്രമം നൽകാൻ യേശുരാജാവ് വിളിക്കുന്നു."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "ലോകലാഭലോഭത്തിൽ നീ മനസ്സ് എന്തിന് ബന്ധിച്ചു?",
+              "നീ എന്ത് നേടും? നീ തന്നെയാണ് ഒടുവിൽ മാഞ്ഞുപോകുക.",
+              "നിനക്കു ജീവൻ നൽകുവാൻ അവൻ സ്വർഗ്ഗത്തിൽ നിന്ന് വന്നു,",
+              "നിന്റെ സകല ദുഃഖങ്ങളും ഏറ്റെടുക്കാനും നിനക്കു സമാധാനം നൽകാനും."
             ]
           }
         ]
