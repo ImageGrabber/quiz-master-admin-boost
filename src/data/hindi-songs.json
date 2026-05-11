@@ -243,7 +243,55 @@
         "lyrics": [
           {
             "lines": [
-              "Worship, your worship. O Lord, I worship You with all my heart."
+              "We do not worship the moon and the sun,",
+              "We do not bow before the idols of this world,",
+              "Because our God is alive,",
+              "Our God is alive.",
+              "We will spread the good news,",
+              "We will keep growing in the Spirit,",
+              "We will bring all the lost people",
+              "To Jesus.",
+              "We are not afraid",
+              "Of the storms of Satan.",
+              "When praise rises,",
+              "There is a rain of the Spirit,",
+              "In Your presence, Jesus,",
+              "There is a movement of the Spirit.",
+              "We do not remain empty",
+              "When Your mercy comes.",
+              "Broken places are restored,",
+              "By Your mercy, Jesus,",
+              "Prayers are answered,",
+              "And no one leaves Your gathering empty."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "ചന്ദ്രനെയും സൂര്യനെയും ഞങ്ങൾ ആരാധിക്കുന്നില്ല,",
+              "ഈ ലോകത്തിലെ വ്യാജ ദൈവങ്ങൾക്കു മുന്നിൽ ഞങ്ങൾ കുനിയുന്നില്ല,",
+              "കാരണം നമ്മുടെ ദൈവം ജീവനുള്ളവൻ,",
+              "നമ്മുടെ ദൈവം ജീവനുള്ളവൻ.",
+              "സുവിശേഷം ഞങ്ങൾ പ്രസംഗിക്കും,",
+              "ആത്മാവിൽ വളർന്ന് മുന്നോട്ട് പോകും,",
+              "തെറ്റിപ്പോയ എല്ലാവരെയും",
+              "യേശുവിന്റെ അടുക്കൽ കൊണ്ടുവരും.",
+              "ശൈതാന്റെ കൊടുങ്കാറ്റുകളെ",
+              "ഞങ്ങൾ ഭയപ്പെടുന്നില്ല.",
+              "സ്തുതി ഉയരുമ്പോൾ",
+              "ആത്മാവിന്റെ മഴ പെയ്യുന്നു,",
+              "യേശുവേ, നിന്റെ സന്നിധിയിൽ",
+              "ആത്മാവിന്റെ ചലനം ഉണ്ടാകുന്നു.",
+              "ഞങ്ങൾ ശൂന്യരായി നിൽക്കുകയില്ല",
+              "നിന്റെ കരുണ വരുമ്പോൾ.",
+              "തകർന്ന ഇടങ്ങൾ എല്ലാം പുനസ്ഥാപിക്കപ്പെടുന്നു,",
+              "യേശുവേ, നിന്റെ കരുണയാൽ,",
+              "പ്രാർത്ഥനകൾക്ക് ഉത്തരം ലഭിക്കുന്നു,",
+              "നിന്റെ സന്നിധിയിൽ നിന്ന് ആരും ശൂന്യമായി മടങ്ങുന്നില്ല."
             ]
           }
         ]
@@ -36959,295 +37007,114 @@
         "lyrics": [
           {
             "lines": [
-              "चाँद सूरज की प्रस्तीश"
-            ]
-          },
-          {
-            "verse": "1",
-            "lines": [
-              "हम नहीं करते"
-            ]
-          },
-          {
-            "verse": "2",
-            "lines": [
-              "दुनिय�� के माबूदों के"
-            ]
-          },
-          {
-            "verse": "3",
-            "lines": [
-              "आगे नहीं झुकते"
-            ]
-          },
-          {
-            "verse": "4",
-            "lines": [
-              "मुखड़ा / कोरस:"
-            ]
-          },
-          {
-            "verse": "5",
-            "lines": [
-              "क्योंकि ज़िंदा ख़ुदा है हमारा"
-            ]
-          },
-          {
-            "verse": "6",
-            "lines": [
-              "ज़िंदा ख़ुदा है हमारा"
-            ]
-          },
-          {
-            "verse": "7",
-            "lines": [
-              "खुशखबरी फैलाएंगे"
-            ]
-          },
-          {
-            "verse": "8",
-            "lines": [
-              "रूह में बढ़ते जाएंगे"
-            ]
-          },
-          {
-            "verse": "9",
-            "lines": [
-              "खोए सब इंसानों को"
-            ]
-          },
-          {
-            "verse": "10",
-            "lines": [
-              "पास येशु के लाएंगे"
-            ]
-          },
-          {
-            "verse": "11",
-            "lines": [
-              "शैतानों के तूफ़ानों से"
-            ]
-          },
-          {
-            "verse": "12",
-            "lines": [
-              "हम नहीं डरते"
-            ]
-          },
-          {
-            "verse": "13",
-            "lines": [
-              "जब सिताइश होती है"
-            ]
-          },
-          {
-            "verse": "14",
-            "lines": [
-              "रूह की बारिश होती है"
-            ]
-          },
-          {
-            "verse": "15",
-            "lines": [
-              "येशु तेरी हज़ूरी में"
-            ]
-          },
-          {
-            "verse": "16",
-            "lines": [
-              "रूह की जुम्बिश होती है"
-            ]
-          },
-          {
-            "verse": "17",
-            "lines": [
-              "तेरी क़ुव्वत से ख़ाली"
-            ]
-          },
-          {
-            "verse": "18",
-            "lines": [
-              "हम नहीं रहते"
-            ]
-          },
-          {
-            "verse": "19",
-            "lines": [
-              "जब तेरी रहमत होती है"
-            ]
-          },
-          {
-            "verse": "20",
-            "lines": [
-              "नाकाम मक़ाम मिल जाते हैं"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "येशु तेरी रहमत से"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "दुआ क़बूल हो जाती है"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "तेरे मजमे से ख़ाली"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
+              "चाँद सूरज की परस्तिश",
+              "हम नहीं करते",
+              "दुनिया के माबूदों के",
+              "आगे नहीं झुकते",
+              "क्योंकि ज़िंदा खुदा है हमारा",
+              "ज़िंदा खुदा है हमारा",
+              "खुशखबरी फैलाएंगे",
+              "रूह में बढ़ते जाएंगे",
+              "खोए सब इंसानों को",
+              "पास यीशु के लाएंगे",
+              "शैतानों के तूफानों से",
+              "हम नहीं डरते",
+              "जब सिताइश होती है",
+              "रूह की बारिश होती है",
+              "यीशु तेरी हुज़ूरी में",
+              "रूह की जुम्बिश होती है",
+              "तेरी कुव्वत से खाली",
+              "हम नहीं रहते",
+              "जब तेरी रहमत होती है",
+              "नाकाम मकाम मिल जाते हैं",
+              "यीशु तेरी रहमत से",
+              "दुआ कबूल हो जाती है",
+              "तेरे मजमे से खाली",
               "हम नहीं जाते"
+            ],
+            "chords": [
+              "C",
+              "F",
+              "C",
+              "G",
+              "C",
+              "F C",
+              "Am",
+              "G",
+              "F",
+              "C G",
+              "Am",
+              "F",
+              "C",
+              "G",
+              "C",
+              "F",
+              "Am",
+              "G",
+              "C",
+              "F",
+              "C",
+              "G",
+              "F",
+              "C"
             ]
-          },
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
           {
-            "verse": "25",
             "lines": [
-              "Chand Suraj Ki Prastish"
+              "We do not worship the moon and the sun,",
+              "We do not bow before the idols of this world,",
+              "Because our God is alive,",
+              "Our God is alive.",
+              "We will spread the good news,",
+              "We will keep growing in the Spirit,",
+              "We will bring all the lost people",
+              "To Jesus.",
+              "We are not afraid",
+              "Of the storms of Satan.",
+              "When praise rises,",
+              "There is a rain of the Spirit,",
+              "In Your presence, Jesus,",
+              "There is a movement of the Spirit.",
+              "We do not remain empty",
+              "When Your mercy comes.",
+              "Broken places are restored,",
+              "By Your mercy, Jesus,",
+              "Prayers are answered,",
+              "And no one leaves Your gathering empty."
             ]
-          },
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
           {
-            "verse": "26",
             "lines": [
-              "Hum Nahi Karte"
-            ]
-          },
-          {
-            "verse": "27",
-            "lines": [
-              "Duniya Ke Maboodon Ke"
-            ]
-          },
-          {
-            "verse": "28",
-            "lines": [
-              "Aage Nahi Jhukte"
-            ]
-          },
-          {
-            "verse": "29",
-            "lines": [
-              "Kyunki Zinda Khuda Hai Hamara"
-            ]
-          },
-          {
-            "verse": "30",
-            "lines": [
-              "Zinda Khuda Hai Hamara"
-            ]
-          },
-          {
-            "verse": "31",
-            "lines": [
-              "Khushkhabri Phailayenge"
-            ]
-          },
-          {
-            "verse": "32",
-            "lines": [
-              "Rooh Mein Badhte Jayenge"
-            ]
-          },
-          {
-            "verse": "33",
-            "lines": [
-              "Khoye Sab Insano Ko"
-            ]
-          },
-          {
-            "verse": "34",
-            "lines": [
-              "Paas Yeshu Ke Layenge"
-            ]
-          },
-          {
-            "verse": "35",
-            "lines": [
-              "Shaitano Ke Toofano Se"
-            ]
-          },
-          {
-            "verse": "36",
-            "lines": [
-              "Hum Nahi Darte"
-            ]
-          },
-          {
-            "verse": "37",
-            "lines": [
-              "Jab Sitaish Hoti Hai"
-            ]
-          },
-          {
-            "verse": "38",
-            "lines": [
-              "Rooh Ki Baarish Hoti Hai"
-            ]
-          },
-          {
-            "verse": "39",
-            "lines": [
-              "Yeshu Teri Huzuri mein"
-            ]
-          },
-          {
-            "verse": "40",
-            "lines": [
-              "Rooh Ki Jumbish Hoti Hai"
-            ]
-          },
-          {
-            "verse": "41",
-            "lines": [
-              "Teri Kuwat Se Khali"
-            ]
-          },
-          {
-            "verse": "42",
-            "lines": [
-              "Hum Nahi Rehte"
-            ]
-          },
-          {
-            "verse": "43",
-            "lines": [
-              "Jab Teri Rehmat Hoti Hai"
-            ]
-          },
-          {
-            "verse": "44",
-            "lines": [
-              "Nakaam Makaam Mil Jaate Hai"
-            ]
-          },
-          {
-            "verse": "45",
-            "lines": [
-              "Yeshu Teri Rehmat Se"
-            ]
-          },
-          {
-            "verse": "46",
-            "lines": [
-              "Dua Kabul Ho Jaati Hai"
-            ]
-          },
-          {
-            "verse": "47",
-            "lines": [
-              "Tere Majme Se Khali"
-            ]
-          },
-          {
-            "verse": "48",
-            "lines": [
-              "Hum Nahi Jaate"
+              "ചന്ദ്രനെയും സൂര്യനെയും ഞങ്ങൾ ആരാധിക്കുന്നില്ല,",
+              "ഈ ലോകത്തിലെ വ്യാജ ദൈവങ്ങൾക്കു മുന്നിൽ ഞങ്ങൾ കുനിയുന്നില്ല,",
+              "കാരണം നമ്മുടെ ദൈവം ജീവനുള്ളവൻ,",
+              "നമ്മുടെ ദൈവം ജീവനുള്ളവൻ.",
+              "സുവിശേഷം ഞങ്ങൾ പ്രസംഗിക്കും,",
+              "ആത്മാവിൽ വളർന്ന് മുന്നോട്ട് പോകും,",
+              "തെറ്റിപ്പോയ എല്ലാവരെയും",
+              "യേശുവിന്റെ അടുക്കൽ കൊണ്ടുവരും.",
+              "ശൈതാന്റെ കൊടുങ്കാറ്റുകളെ",
+              "ഞങ്ങൾ ഭയപ്പെടുന്നില്ല.",
+              "സ്തുതി ഉയരുമ്പോൾ",
+              "ആത്മാവിന്റെ മഴ പെയ്യുന്നു,",
+              "യേശുവേ, നിന്റെ സന്നിധിയിൽ",
+              "ആത്മാവിന്റെ ചലനം ഉണ്ടാകുന്നു.",
+              "ഞങ്ങൾ ശൂന്യരായി നിൽക്കുകയില്ല",
+              "നിന്റെ കരുണ വരുമ്പോൾ.",
+              "തകർന്ന ഇടങ്ങൾ എല്ലാം പുനസ്ഥാപിക്കപ്പെടുന്നു,",
+              "യേശുവേ, നിന്റെ കരുണയാൽ,",
+              "പ്രാർത്ഥനകൾക്ക് ഉത്തരം ലഭിക്കുന്നു,",
+              "നിന്റെ സന്നിധിയിൽ നിന്ന് ആരും ശൂന്യമായി മടങ്ങുന്നില്ല."
             ]
           }
         ]
@@ -46809,37 +46676,37 @@
           {
             "verse": "30",
             "lines": [
-              "Chand Suraj Ki Prastish"
+              "चाँद सूरज की परस्तिश"
             ]
           },
           {
             "verse": "31",
             "lines": [
-              "Hum Nahi Karte"
+              "हम नहीं करते"
             ]
           },
           {
             "verse": "32",
             "lines": [
-              "Duniya Ke Maboodon Ke"
+              "दुनिया के माबूदों के"
             ]
           },
           {
             "verse": "33",
             "lines": [
-              "Aage Nahi Jhukte"
+              "आगे नहीं झुकते"
             ]
           },
           {
             "verse": "34",
             "lines": [
-              "Kyunki Zinda Khuda Hai Hamara"
+              "क्योंकि ज़िंदा खुदा है हमारा"
             ]
           },
           {
             "verse": "35",
             "lines": [
-              "Zinda Khuda Hai Hamara"
+              "ज़िंदा खुदा है हमारा"
             ]
           },
           {
@@ -46851,25 +46718,25 @@
           {
             "verse": "37",
             "lines": [
-              "Khushkhabri Phailayenge"
+              "खुशखबरी फैलाएंगे"
             ]
           },
           {
             "verse": "38",
             "lines": [
-              "Rooh Mein Badhte Jayenge"
+              "रूह में बढ़ते जाएंगे"
             ]
           },
           {
             "verse": "39",
             "lines": [
-              "Khoye Sab Insano Ko"
+              "खोए सब इंसानों को"
             ]
           },
           {
             "verse": "40",
             "lines": [
-              "Paas Yeshu Ke Layenge"
+              "पास यीशु के लाएंगे"
             ]
           },
           {
@@ -67323,26 +67190,74 @@
         "lyrics": [
           {
             "lines": [
-              "Chand Suraj Ki Prastish",
-              "Hum Nahi Karte Duniya Ke Maboodon Ke",
-              "Aage Nahi Jhukte",
-              "Kyunki Zinda Khuda Hai Hamara",
-              "Zinda Khuda Hai Hamara",
-              "Khushkhabri Phailayenge Rooh Mein Badhte Jayenge",
-              "Khoye Sab Insano Ko",
-              "Paas Yeshu Ke Layenge",
-              "Shaitano Ke Toofano Se",
-              "Hum Nahi Darte Jab Sitaish Hoti Hai",
-              "Rooh Ki Baarish Hoti Hai",
-              "Yeshu Teri Huzuri mein",
-              "Rooh Ki Jumbish Hoti Hai",
-              "Teri Kuwat Se Khali",
-              "Hum Nahi Rehte Jab Teri Rehmat Hoti Hai",
-              "Nakaam Makaam Mil Jaate Hai",
-              "Yeshu Teri Rehmat Se",
-              "Dua Kabul Ho Jaati Hai",
-              "Tere Majme Se Khali",
-              "Hum Nahi Jaate"
+              "[C] चाँद सूरज की परस्तिश",
+              "[F] हम नहीं करते",
+              "[C] दुनिया के माबूदों के",
+              "[G] आगे नहीं झुकते",
+              "[C] क्योंकि ज़िंदा खुदा है हमारा",
+              "[F] ज़िंदा खुदा है [C] हमारा",
+              "[Am] खुशखबरी फैलाएंगे",
+              "[G] रूह में बढ़ते जाएंगे",
+              "[F] खोए सब इंसानों को",
+              "[C] पास यीशु के [G] लाएंगे",
+              "[Am] शैतानों के तूफानों से",
+              "[F] हम नहीं डरते",
+              "[C] जब सिताइश होती है",
+              "[G] रूह की बारिश होती है",
+              "[C] यीशु तेरी हुज़ूरी में",
+              "[F] रूह की जुम्बिश होती है",
+              "[Am] तेरी कुव्वत से खाली",
+              "[G] हम नहीं रहते"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "We do not worship the moon and the sun,",
+              "We do not bow before the idols of this world,",
+              "Because our God is alive,",
+              "Our God is alive.",
+              "We will spread the good news,",
+              "We will keep growing in the Spirit,",
+              "We will bring all the lost people",
+              "To Jesus.",
+              "We are not afraid",
+              "Of the storms of Satan.",
+              "When praise rises,",
+              "There is a rain of the Spirit,",
+              "In Your presence, Jesus,",
+              "There is a movement of the Spirit.",
+              "We do not remain empty",
+              "When Your mercy comes."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "ചന്ദ്രനെയും സൂര്യനെയും ഞങ്ങൾ ആരാധിക്കുന്നില്ല,",
+              "ഈ ലോകത്തിലെ വ്യാജ ദൈവങ്ങൾക്കു മുമ്പിൽ ഞങ്ങൾ കുനിയുന്നില്ല,",
+              "കാരണം നമ്മുടെ ദൈവം ജീവനുള്ളവൻ,",
+              "നമ്മുടെ ദൈവം ജീവനുള്ളവൻ.",
+              "സുവിശേഷം ഞങ്ങൾ പ്രസംഗിക്കും,",
+              "ആത്മാവിൽ വളർന്ന് മുന്നോട്ട് പോകും,",
+              "തെറ്റിപ്പോയ എല്ലാവരെയും",
+              "യേശുവിന്റെ അടുക്കൽ കൊണ്ടുവരും.",
+              "ശൈതാന്റെ കൊടുങ്കാറ്റുകളെ",
+              "ഞങ്ങൾ ഭയപ്പെടുന്നില്ല.",
+              "സ്തുതി ഉയരുമ്പോൾ",
+              "ആത്മാവിന്റെ മഴ പെയ്യുന്നു,",
+              "യേശുവേ, നിന്റെ സന്നിധിയിൽ",
+              "ആത്മാവിന്റെ ചലനം ഉണ്ടാകുന്നു.",
+              "നിന്റെ കരുണ വരുമ്പോൾ",
+              "ഞങ്ങൾ ശൂന്യരായി നിൽക്കുകയില്ല."
             ]
           }
         ]
@@ -95216,38 +95131,120 @@
     "slug": "aao-hum-chale-yeshu-ke-paas",
     "title": "Aao hum chale yeshu ke paas",
     "videoUrl": "",
-    "description": "आओ हम चल येशु के पास - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "description": "आओ हम चले येशु के पास - Hindi Christian devotional song lyrics with worship-friendly formatting.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
             "lines": [
-              "आओ हम चल येशु के पास",
-              "येशु बुलाता हमें - ३",
-              "इश्वर ने हमसे प्रेम किया",
-              "लेने हमको जल्द आएगा",
-              "हम हल्लेलुयाह गाएँ ख़ुशी से",
-              "स्वर्ग को हमे ले जाएगा",
-              "हम है चिराग येशु के",
-              "रोशन करेंगे जहां",
-              "वर दे ऐसा तू ए पिता",
-              "कर सके प्रकाश हर जगह"
+              "आओ हम चले येशु के पास,",
+              "येशु बुलाता हमें। (3)",
+              "ईश्वर ने हमसे प्रेम किया,",
+              "लेने हमको जल्द आएगा।"
             ]
           },
           {
             "verse": "1",
             "lines": [
-              "Aao hum chale yeshu ke paas",
-              "Yeshu bulata hume - 3",
-              "Ishwar ne humse prem kiya",
-              "Lene humko jaldi aaega",
-              "Hum hallelujah gaen khushi se",
-              "Swar ko hume le jaega",
-              "Hum hai chirag yeshu ke",
-              "Roshan karenge jahaan",
-              "War de aisa tu aye pita",
-              "Kar sake prakash har jagah"
+              "हम हल्लेलुयाह गाएँ खुशी से,",
+              "स्वर्ग को हमें ले जाएगा।",
+              "हम हैं चिराग येशु के,",
+              "रोशन करेंगे जहाँ।"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "वर दे ऐसा तू ऐ पिता,",
+              "कर सकें प्रकाश हर जगह।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Aao hum chale Yeshu ke paas,",
+              "Yeshu bulaata humein. (3)",
+              "Ishwar ne humse prem kiya,",
+              "Lene humko jald aayega."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Hum Hallelujah gaayen khushi se,",
+              "Swarg ko humein le jaayega.",
+              "Hum hain chiraag Yeshu ke,",
+              "Roshan karenge jahaan."
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Var de aisa tu ai Pita,",
+              "Kar saken prakaash har jagah."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Come, let us go to Jesus,",
+              "Jesus is calling us. (3)",
+              "God has loved us,",
+              "He will come soon to take us."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Let us sing Hallelujah with joy,",
+              "He will take us to heaven.",
+              "We are the lamps of Jesus,",
+              "We will shine in the world."
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Grant us this gift, O Father,",
+              "That we may spread light everywhere."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "വരുവിൻ, നാം യേശുവിങ്കൽ പോകാം,",
+              "യേശു നമ്മെ വിളിക്കുന്നു. (3)",
+              "ദൈവം നമ്മെ സ്നേഹിച്ചു,",
+              "നമ്മെ കൊണ്ടുപോകാൻ വേഗം വരും."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "സന്തോഷത്തോടെ ഹല്ലെലൂയാ പാടാം,",
+              "അവൻ നമ്മെ സ്വർഗത്തിലേക്ക് കൊണ്ടുപോകും.",
+              "ഞങ്ങൾ യേശുവിന്റെ ദീപങ്ങളാണ്,",
+              "ലോകമെങ്ങും പ്രകാശിപ്പിക്കും."
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "ഇങ്ങനെ വരം തരേണമേ പിതാവേ,",
+              "എവിടെയും പ്രകാശം പരത്തുവാൻ ഞങ്ങൾക്കാകട്ടെ."
             ]
           }
         ]

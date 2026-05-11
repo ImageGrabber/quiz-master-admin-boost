@@ -54,8 +54,10 @@ type LyricSection = {
 const isMostlyRoman = (line: string) => /[a-zA-Z]/.test(line) && !/[\u0900-\u097f]/.test(line);
 const normalizeLineKey = (line: string) =>
     line.toLowerCase().replace(/[^\p{L}\p{N}\s]/gu, "").replace(/\s+/g, " ").trim();
+const stripInlineChords = (line: string) =>
+    String(line || "").replace(/\[[^\]]+\]/g, "").replace(/\s+/g, " ").trim();
 const looksCorruptedLegacyEncoding = (line: string) => {
-    const text = String(line || "");
+    const text = stripInlineChords(line);
     if (!text) return false;
     if (/[%^~`{}[\]|\\<>]/.test(text)) return true;
     if (/[;ÊÅÆ]/.test(text)) return true;
