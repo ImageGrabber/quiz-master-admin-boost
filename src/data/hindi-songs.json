@@ -86541,16 +86541,62 @@
   {
     "id": "aakha_jag_to_yeshu_ko_jaan",
     "slug": "aakha-jag-to-yeshu-ko-jaan",
-    "title": "Aakha jag to yeshu ko jaan",
+    "title": "Aakha Jag To Yeshu Ko Jaan",
     "videoUrl": "",
-    "description": "Aakha jag to yeshu ko jaan - Hindi Christian song seed entry imported from waytochurch index.",
+    "description": "Aakha Jag To Yeshu Ko Jaan - Hindi Christian song lyrics in Hindi, Hinglish, English, and Malayalam.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "मुखड़ा",
             "lines": [
-              "Aakha jag to yeshu ko jaan"
+              "अख्खा जग तो यीशु को जान रेला है,",
+              "उसने डोलो का लोहा मान रेला है,",
+              "अपुन बिंदास बोलेगा वो मेरा है,",
+              "अपुन बिंदास चमचा-चेला तेरा है।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Mukhda",
+            "lines": [
+              "Akhkha Jag To Yeshu Ko Jaan Rela Hai,",
+              "Usne Dolo Ka Loha Maan Rela Hai,",
+              "Apun Bindaas Bolega Woh Mera Hai,",
+              "Apun Bindaas Chamcha-Chela Tera Hai."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Now the whole world knows Jesus,",
+              "All accept the strength of His name,",
+              "I boldly proclaim that He is mine,",
+              "And I boldly declare I am His disciple."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Ippol lokam muzhuvan Yeshuvine ariyunnu,",
+              "Avante shakthi ellavarum angikarikkunnu,",
+              "Dhairyathode njan parayunnu avan ente thanne,",
+              "Dhairyathode njan avante shishyan ennu prakyapikkunnu."
             ]
           }
         ]
