@@ -118,7 +118,7 @@ export default function NumbersHub() {
             <span className="text-sm font-light tracking-widest uppercase text-white tracking-[0.3em]">The Wilderness Trek</span>
           </div>
           <h1 className="text-4xl sm:text-6xl md:text-9xl font-normal mb-8 leading-tight tracking-tighter animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
-            Numbers <span className="italic font-serif">Hub</span>
+            Numbers <span>Hub</span>
           </h1>
           <p className="text-base sm:text-xl md:text-2xl font-light text-white/80 mb-12 max-w-3xl mx-auto leading-relaxed animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500">
             Two censuses, one long journey. From the camp at Sinai to the threshold of the Promised Land.
@@ -155,15 +155,15 @@ export default function NumbersHub() {
                   <span className="w-12 h-px bg-gray-200 mr-6" />
                   The Test of Faith
                 </h2>
-                <h3 className="text-3xl sm:text-5xl md:text-6xl font-normal leading-tight text-gray-900 italic serif">The Report of the Twelve Spies</h3>
+                <h3 className="text-3xl sm:text-5xl md:text-6xl font-normal leading-tight text-gray-900">The Report of the Twelve Spies</h3>
               </div>
-              <p className="text-2xl font-light text-gray-600 leading-[1.8] first-letter:text-6xl first-letter:font-serif first-letter:mr-4 first-letter:float-left first-letter:text-black first-letter:leading-none">
+              <p className="text-2xl font-light text-gray-600 leading-[1.8] first-letter:text-6xl first-letter:mr-4 first-letter:float-left first-letter:text-black first-letter:leading-none">
                 Numbers records a journey that should have taken weeks but lasted forty years. It is a profound study of divine patience and human fallibility. From the magnificent arrangements of the tribal camps at Sinai to the rebellions that delayed entry into the Land, every chapter reveals God's faithfulness to a stiff-necked people.
               </p>
               <div className="p-10 rounded-[2.5rem] bg-amber-50/30 border border-amber-100/50 flex items-start space-x-8 hover:shadow-xl transition-all duration-500">
                 <Quote className="w-12 h-12 text-amber-200 flex-shrink-0" />
                 <div className="space-y-4">
-                  <p className="text-xl italic font-light text-amber-900/60 leading-relaxed">
+                  <p className="text-xl font-light text-amber-900/60 leading-relaxed">
                     "The Lord is slow to anger, abounding in love and forgiving sin..."
                   </p>
                   <p className="text-sm font-semibold tracking-widest text-amber-400 uppercase">— Numbers 14:18</p>
@@ -182,7 +182,7 @@ export default function NumbersHub() {
                   <Users className="w-6 h-6 text-white" />
                 </div>
                 <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3 text-white">Narrative Peak</p>
-                <p className="text-xl font-light text-gray-900 leading-snug tracking-tight italic">The Failure at Kadesh Barnea & The Forty-Year Sentence</p>
+                <p className="text-xl font-light text-gray-900 leading-snug tracking-tight">The Failure at Kadesh Barnea & The Forty-Year Sentence</p>
               </div>
             </div>
           </div>
@@ -201,8 +201,8 @@ export default function NumbersHub() {
                   <Layers className="w-8 h-8 text-amber-400" strokeWidth={1} />
                 </div>
                 <div className="space-y-6">
-                  <h3 className="text-4xl font-normal leading-tight italic serif">God's Faithfulness Amidst Unbelief</h3>
-                  <p className="text-xl font-light text-white/50 leading-relaxed italic">
+                  <h3 className="text-4xl font-normal leading-tight">God's Faithfulness Amidst Unbelief</h3>
+                  <p className="text-xl font-light text-white/50 leading-relaxed">
                     Despite the failure of the first generation at the border of Canaan, God's promise to Abraham remained unshakeable. Numbers transitions from the old generation that died in the wilderness to a new generation prepared for conquest, showcasing that God's plans aren't hindered by man's delay.
                   </p>
                 </div>
@@ -212,8 +212,8 @@ export default function NumbersHub() {
                   <ShieldCheck className="w-8 h-8 text-orange-400" strokeWidth={1} />
                 </div>
                 <div className="space-y-6">
-                  <h3 className="text-4xl font-normal leading-tight italic serif">Shadows of the Messiah</h3>
-                  <p className="text-xl font-light text-white/50 leading-relaxed italic">
+                  <h3 className="text-4xl font-normal leading-tight">Shadows of the Messiah</h3>
+                  <p className="text-xl font-light text-white/50 leading-relaxed">
                     The bronze serpent in Chapter 21, which Jesus Himself referenced in John 3:14, and Balaam's prophecy of the 'Star out of Jacob' (Numbers 24:17) are powerful Messianic markers, pointing users toward the coming Savior who heals from the poison of sin.
                   </p>
                 </div>
@@ -225,7 +225,7 @@ export default function NumbersHub() {
         {/* Challenge/Difficulty Section */}
         <section id="difficulty" className="mb-40 scroll-mt-24">
           <div className="text-center mb-20">
-            <h2 className="text-3xl sm:text-5xl md:text-6xl font-normal text-gray-900 mb-6 italic serif tracking-tight">Master Numbers</h2>
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-normal text-gray-900 mb-6 tracking-tight">Master Numbers</h2>
             <p className="text-2xl font-light text-gray-400 max-w-3xl mx-auto leading-relaxed uppercase tracking-widest text-[0.45em]">Academic Tracks</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -271,7 +271,7 @@ export default function NumbersHub() {
                   <div className={`w-16 h-16 rounded-2xl ${d.color} flex items-center justify-center mb-8 transition-transform group-hover:scale-110 duration-500`}>
                     <d.icon className={`w-8 h-8 ${d.iconColor}`} strokeWidth={1.5} />
                   </div>
-                  <CardTitle className="text-4xl font-normal text-gray-900 italic serif mb-3">{d.level}</CardTitle>
+                  <CardTitle className="text-4xl font-normal text-gray-900 mb-3">{d.level}</CardTitle>
                 </CardHeader>
                 <CardContent className="px-10 pb-12 flex-grow flex flex-col justify-between">
                   <p className="text-xl font-light text-gray-500 leading-relaxed mb-10">{d.desc}</p>
@@ -306,8 +306,8 @@ export default function NumbersHub() {
                 <span className="w-12 h-px bg-gray-200 mr-6" />
                 Judgment & Healing
               </h2>
-              <h3 className="text-5xl font-normal leading-tight text-gray-900 italic serif">The Serpent in the Desert</h3>
-              <p className="text-2xl font-light text-gray-600 leading-[1.8] italic font-serif opacity-80">
+              <h3 className="text-5xl font-normal leading-tight text-gray-900">The Serpent in the Desert</h3>
+              <p className="text-2xl font-light text-gray-600 leading-[1.8] opacity-80">
                 When the people complained once more, God sent venomous snakes into the camp. But in His mercy, He provided a way of escape: a bronze serpent lifted high for all to see. It stands as one of the most powerful shadows of Christ in the Old Testament.
               </p>
               <div className="flex items-center space-x-6 p-10 bg-slate-50/40 rounded-[2.5rem] border border-slate-100/50 hover:bg-slate-50 transition-colors">
@@ -315,7 +315,7 @@ export default function NumbersHub() {
                   <Sparkles className="w-7 h-7 text-slate-600" />
                 </div>
                 <div className="space-y-2">
-                  <p className="text-gray-700 text-xl font-light italic leading-relaxed">"Just as Moses lifted up the snake in the wilderness..."</p>
+                  <p className="text-gray-700 text-xl font-light leading-relaxed">"Just as Moses lifted up the snake in the wilderness..."</p>
                   <p className="text-xs font-semibold tracking-widest text-gray-400 uppercase">— John 3:14</p>
                 </div>
               </div>
@@ -327,11 +327,11 @@ export default function NumbersHub() {
         <section id="numbers-chapter-wise" className="mb-40 scroll-mt-24 pt-32 border-t border-gray-100">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-24 gap-12">
             <div className="max-w-2xl">
-              <h2 className="text-3xl sm:text-5xl md:text-7xl font-normal text-gray-900 mb-6 italic serif tracking-tight tracking-tighter">The Library of the Desert</h2>
+              <h2 className="text-3xl sm:text-5xl md:text-7xl font-normal text-gray-900 mb-6 tracking-tight tracking-tighter">The Library of the Desert</h2>
               <p className="text-2xl font-light text-gray-400 leading-relaxed">Detailed analysis and interactive quizzes for every single chapter of Numbers.</p>
             </div>
             <div className="w-full lg:w-[450px]">
-              <div className="relative group font-urbanist not-italic">
+              <div className="relative group font-urbanist">
                 <Search className="absolute left-8 top-1/2 transform -translate-y-1/2 text-gray-300 w-6 h-6" strokeWidth={1} />
                 <Input
                   value={query}
@@ -343,7 +343,7 @@ export default function NumbersHub() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 font-urbanist not-italic">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 font-urbanist">
             {visibleChapters.map((ch) => {
               let currentChapterPoints = null;
               if (ch >= 1 && ch <= 8) currentChapterPoints = chapterPoints1to8[ch];
@@ -365,7 +365,7 @@ export default function NumbersHub() {
                         <ChevronRight className="w-4 h-4" />
                       </div>
                     </div>
-                    <CardTitle className="text-2xl font-normal text-gray-900 mb-6 italic serif line-clamp-1 italic text-[1.4rem]">Narrative Insight</CardTitle>
+                    <CardTitle className="text-2xl font-normal text-gray-900 mb-6 line-clamp-1 text-[1.4rem]">Narrative Insight</CardTitle>
                     <div className="space-y-4">
                       {currentChapterPoints?.map((pt, idx) => (
                         <div key={idx} className="flex items-start gap-3 group/item">

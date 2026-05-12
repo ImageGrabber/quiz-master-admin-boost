@@ -38,6 +38,25 @@ const BibleQuizQuestionsAndAnswers = () => {
         { q: "Who was the 'father of faith'?", a: "Abraham" },
         { q: "Who denied Jesus three times?", a: "Peter" },
     ];
+    
+    const intentFaq = [
+        {
+            q: "Can I use these Bible quiz questions and answers for Sunday school?",
+            a: "Yes. These Bible quiz questions and answers are suitable for Sunday school warm-ups, youth fellowship rounds, and church group practice."
+        },
+        {
+            q: "Is there a free Bible quiz with no signup?",
+            a: "Yes. You can start practice instantly using our free public quiz pages without registration."
+        },
+        {
+            q: "Do you have hard Bible quiz questions for adults?",
+            a: "Yes. Use the hard trivia section on this page, then continue to our advanced quiz collections for deeper scripture challenges."
+        },
+        {
+            q: "Can I print Bible quiz questions and answers as PDF?",
+            a: "Yes. Use the print/download button on this page to generate printable quiz practice sheets for class or church use."
+        },
+    ];
 
     const handlePrint = () => {
         window.print();
@@ -55,7 +74,7 @@ const BibleQuizQuestionsAndAnswers = () => {
                     "@context": "https://schema.org",
                     "@type": "FAQPage",
                     "mainEntity": [
-                        ...generalKnowledgeQA, ...hardTriviaQA, ...youthQA
+                        ...generalKnowledgeQA, ...hardTriviaQA, ...youthQA, ...intentFaq
                     ].map(item => ({
                         "@type": "Question",
                         "name": item.q,
@@ -75,8 +94,8 @@ const BibleQuizQuestionsAndAnswers = () => {
                         Bible Quiz Questions and Answers (2026 Edition)
                     </h1>
                     <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-8 font-urbanist">
-                        Test your knowledge with our comprehensive collection of Bible trivia.
-                        From easy questions for kids to hard theology for adults, we have it all.
+                        Bible quiz questions and answers for kids, youth, and adults in one place.
+                        Practice easy, multiple-choice, and hard Bible trivia, then move into chapter-wise challenge routes.
                     </p>
                     <div className="flex flex-wrap justify-center gap-4">
                         <Button size="lg" className="bg-blue-600 hover:bg-blue-700" onClick={() => navigate('/daily-bible-quiz')}>
@@ -87,6 +106,19 @@ const BibleQuizQuestionsAndAnswers = () => {
                         </Button>
                     </div>
                 </header>
+                
+                <section className="mb-12 rounded-2xl border border-blue-100 bg-blue-50/50 p-6 md:p-8">
+                    <h2 className="text-2xl font-bold text-slate-900 mb-3">Quick Answer: How to Practice Bible Quiz Questions and Answers</h2>
+                    <p className="text-slate-700 leading-relaxed mb-4">
+                        Start with 10 general Bible quiz questions and answers, move to hard trivia, and finish with youth or chapter-wise sets. This format improves recall, speed, and scripture confidence for church competitions.
+                    </p>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                        <Button variant="outline" className="justify-start" onClick={() => navigate('/bible-questions-and-answers-hub')}>Bible Q&A Hub</Button>
+                        <Button variant="outline" className="justify-start" onClick={() => navigate('/bible-quiz-for-sunday-school')}>Sunday School Quiz</Button>
+                        <Button variant="outline" className="justify-start" onClick={() => navigate('/free-bible-quiz-no-signup')}>No Signup Quiz</Button>
+                        <Button variant="outline" className="justify-start" onClick={() => navigate('/public-quiz')}>Public Quiz Hub</Button>
+                    </div>
+                </section>
 
                 {/* General Knowledge Section */}
                 <section className="mb-16">
@@ -184,6 +216,47 @@ const BibleQuizQuestionsAndAnswers = () => {
                                 Play Now
                             </Button>
                         </Card>
+                    </div>
+                </section>
+                
+                <section className="mb-16">
+                    <h2 className="text-3xl font-bold text-slate-800 mb-6">Frequently Asked Questions</h2>
+                    <Card className="bg-white shadow-sm border-slate-200">
+                        <CardContent className="pt-6">
+                            <Accordion type="single" collapsible className="w-full">
+                                {intentFaq.map((item, idx) => (
+                                    <AccordionItem key={idx} value={`faq-${idx}`}>
+                                        <AccordionTrigger className="text-left font-medium text-slate-900">
+                                            {item.q}
+                                        </AccordionTrigger>
+                                        <AccordionContent className="text-slate-700">
+                                            {item.a}
+                                        </AccordionContent>
+                                    </AccordionItem>
+                                ))}
+                            </Accordion>
+                        </CardContent>
+                    </Card>
+                </section>
+
+                <section className="mb-16">
+                    <h2 className="text-3xl font-bold text-slate-800 mb-6">Related Bible Quiz Resources</h2>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {[
+                            { label: "Bible Questions Hub", path: "/bible-questions" },
+                            { label: "Bible Q&A Book Hubs", path: "/bible-questions-and-answers-hub" },
+                            { label: "Top 100 Bible Questions", path: "/top-100-bible-quiz-questions" },
+                            { label: "Old Testament Quiz", path: "/old-testament-quiz" },
+                            { label: "New Testament Quiz", path: "/new-testament-quiz" },
+                            { label: "Bible Quiz for Kids, Teens, Adults", path: "/bible-quiz-for-kids-teens-adults" },
+                            { label: "Bible Quiz for Youth", path: "/bible-quiz-with-answers-for-youth" },
+                            { label: "Sunday School Quiz", path: "/bible-quiz-for-sunday-school" },
+                            { label: "Printable Bible Quiz PDF", path: "/bible-quiz-printable-pdf" },
+                        ].map((item) => (
+                            <Button key={item.path} variant="outline" className="justify-start h-auto py-3" onClick={() => navigate(item.path)}>
+                                {item.label}
+                            </Button>
+                        ))}
                     </div>
                 </section>
 
