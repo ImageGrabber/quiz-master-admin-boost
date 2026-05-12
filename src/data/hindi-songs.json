@@ -10,230 +10,51 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "अंतरा 1",
             "lines": [
-              "मेरा जीवन है तेरा अनोखा उपहार"
-            ],
-            "chords": [
-              "Am",
-              "G",
-              "F",
-              "E"
+              "मेरा जीवन है तेरा अनोखा उपहार",
+              "कैसे मैं करूँ शुक्रिया (2)",
+              "तूने दे दिया अपना बलिदान",
+              "मेरे खुदा, मेरे खुदा (2)"
             ]
           },
           {
-            "verse": "1",
+            "verse": "कोरस",
             "lines": [
-              "कैसे मैं करू शुक्रिया (2)"
-            ],
-            "chords": [
-              "Am",
-              "G",
-              "F",
-              "E"
-            ]
-          },
-          {
-            "verse": "2",
-            "lines": [
-              "तूने दे दिया अपना बलिदान"
-            ]
-          },
-          {
-            "verse": "3",
-            "lines": [
-              "मेरे खुदा मेरे खुदा (2)"
-            ]
-          },
-          {
-            "verse": "4",
-            "lines": [
-              "आराधना तेरी आराधना"
-            ]
-          },
-          {
-            "verse": "5",
-            "lines": [
+              "आराधना, तेरी आराधना",
               "आराधना मेरे खुदा (2)"
             ]
           },
           {
-            "verse": "6",
+            "verse": "अंतरा 2",
             "lines": [
-              "खो गया था और भटक रहा था"
+              "खो गया था और भटक रहा था",
+              "तेरे प्यार ने मुझे राह दिखाया (2)",
+              "तूने दे दिया अपना बलिदान",
+              "मेरे खुदा, मेरे खुदा (2)"
             ]
           },
           {
-            "verse": "7",
+            "verse": "कोरस",
             "lines": [
-              "तेरे प्यारने मुझे राह दिखाया (2)"
-            ]
-          },
-          {
-            "verse": "8",
-            "lines": [
-              "तूने दे दिया अपना बलिदान"
-            ]
-          },
-          {
-            "verse": "9",
-            "lines": [
-              "मेरे खुदा मेरे खुदा (2)"
-            ]
-          },
-          {
-            "verse": "10",
-            "lines": [
-              "आराधना तेरी आराध���ा"
-            ]
-          },
-          {
-            "verse": "11",
-            "lines": [
+              "आराधना, तेरी आराधना",
               "आराधना मेरे खुदा (2)"
             ]
           },
           {
-            "verse": "12",
+            "verse": "अंतरा 3",
             "lines": [
-              "साथ चलके अपना बनाके"
+              "साथ चलके अपना बनाके",
+              "पोंछ लिया है सारे आँसू ग़म के (2)",
+              "तूने दे दिया अपना बलिदान",
+              "मेरे खुदा, मेरे खुदा (2)"
             ]
           },
           {
-            "verse": "13",
+            "verse": "कोरस",
             "lines": [
-              "पौंछ लिया है सारे आंसू गम के (2)"
-            ]
-          },
-          {
-            "verse": "14",
-            "lines": [
-              "तूने दे दिया अपना बलिदान"
-            ]
-          },
-          {
-            "verse": "15",
-            "lines": [
-              "��ेरे खुदा मेरे खुदा (2)"
-            ]
-          },
-          {
-            "verse": "16",
-            "lines": [
-              "आराधना तेरी आराधना"
-            ]
-          },
-          {
-            "verse": "17",
-            "lines": [
+              "आराधना, तेरी आराधना",
               "आराधना मेरे खुदा (2)"
-            ]
-          },
-          {
-            "verse": "18",
-            "lines": [
-              "Mera jeevan hai tera anokha uphaar"
-            ]
-          },
-          {
-            "verse": "19",
-            "lines": [
-              "Kaise main karu shukriya (2)"
-            ]
-          },
-          {
-            "verse": "20",
-            "lines": [
-              "Tune de diya apna balidan"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "Mere Khuda, mere Khuda (2)"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "Aaradhna, teri aaradhna"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "Aaradhna mere Khuda (2)"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
-              "Kho gaya tha aur bhatak raha tha"
-            ]
-          },
-          {
-            "verse": "25",
-            "lines": [
-              "Tere pyaar ne mujhe raah dikhaya (2)"
-            ]
-          },
-          {
-            "verse": "26",
-            "lines": [
-              "Tune de diya apna balidan"
-            ]
-          },
-          {
-            "verse": "27",
-            "lines": [
-              "Mere Khuda, mere Khuda (2)"
-            ]
-          },
-          {
-            "verse": "28",
-            "lines": [
-              "Aaradhna, teri aaradhna"
-            ]
-          },
-          {
-            "verse": "29",
-            "lines": [
-              "Aaradhna mere Khuda (2)"
-            ]
-          },
-          {
-            "verse": "30",
-            "lines": [
-              "Saath chalke apna banake"
-            ]
-          },
-          {
-            "verse": "31",
-            "lines": [
-              "Pochh liya hai saare aansoo gham ke (2)"
-            ]
-          },
-          {
-            "verse": "32",
-            "lines": [
-              "Tune de diya apna balidan"
-            ]
-          },
-          {
-            "verse": "33",
-            "lines": [
-              "Mere Khuda, mere Khuda (2)"
-            ]
-          },
-          {
-            "verse": "34",
-            "lines": [
-              "Aaradhna, teri aaradhna"
-            ]
-          },
-          {
-            "verse": "35",
-            "lines": [
-              "Aaradhna mere Khuda (2)"
             ]
           }
         ]
@@ -292,6 +113,59 @@
               "യേശുവേ, നിന്റെ കരുണയാൽ,",
               "പ്രാർത്ഥനകൾക്ക് ഉത്തരം ലഭിക്കുന്നു,",
               "നിന്റെ സന്നിധിയിൽ നിന്ന് ആരും ശൂന്യമായി മടങ്ങുന്നില്ല."
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Mera Jeevan Hai Tera Anokha Uphaar",
+              "Kaise Main Karu Shukriya (2)",
+              "Tune De Diya Apna Balidan",
+              "Mere Khuda, Mere Khuda (2)"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Aaradhna, Teri Aaradhna",
+              "Aaradhna Mere Khuda (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Kho Gaya Tha Aur Bhatak Raha Tha",
+              "Tere Pyaar Ne Mujhe Raah Dikhaya (2)",
+              "Tune De Diya Apna Balidan",
+              "Mere Khuda, Mere Khuda (2)"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Aaradhna, Teri Aaradhna",
+              "Aaradhna Mere Khuda (2)"
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Saath Chalke Apna Banake",
+              "Pochh Liya Hai Saare Aansoo Gham Ke (2)",
+              "Tune De Diya Apna Balidan",
+              "Mere Khuda, Mere Khuda (2)"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Aaradhna, Teri Aaradhna",
+              "Aaradhna Mere Khuda (2)"
             ]
           }
         ]
@@ -48644,7 +48518,7 @@
     "id": "ho_teri_sthuthi_aur_aradhana",
     "slug": "ho-teri-sthuthi-aur-aradhana",
     "title": "Ho teri sthuthi aur aradhana",
-    "videoUrl": "https://www.youtube.com/embed/mW2sNYjLwTI",
+    "videoUrl": "https://www.youtube.com/embed/XqzSW4An8u8",
     "description": "Ho teri sthuthi aur aradhana - Hindi Christian devotional song lyrics with worship-friendly formatting.",
     "translations": {
       "hindi": {
@@ -48724,6 +48598,84 @@
               "Tujh Ko Chhod Koi Prabhu Hai Hi Nahi",
               "Ghutne Mein Teku Bas Tere Saamne",
               "Tu Hai Mera Prabhu Tu Mera Pita"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Lord, I offer You my praise and adoration,",
+              "This is the prayer I bring before You.",
+              "Fill this place with the glory of Your presence,",
+              "Do here whatever You desire to do."
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Hallelujah, Hallelujah, Hallelujah,",
+              "Hallelujah, Hallelujah, Hallelujah."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "By Your mercy every new day dawns,",
+              "You become my shield and keep me safe.",
+              "When I call Your name, You run to help me,",
+              "When I fall, You lift me up again."
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "There is no one in this world like You,",
+              "There is no Lord besides You, ever.",
+              "I bow my knees before You only,",
+              "You are my Lord, my loving Father."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Ninte sthuthiyum aaradhanayum njan arppikkunnu,",
+              "Ithu thanne ente hridaya prarthana.",
+              "Ninte mahimayal ee sthalam nirakkaname,",
+              "Nee ichchikkunnath ellam ivide cheyyaname."
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Hallelujah, Hallelujah, Hallelujah,",
+              "Hallelujah, Hallelujah, Hallelujah."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Ninte karunayal puthiya dinam velicham kaanikunnu,",
+              "Ente dhalamai nee enne rakshikkunnu.",
+              "Njan vilikkumbol nee odiyethunnu,",
+              "Njan veezhumbol nee enne uyarthunnu."
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "I lokathil ninne pole oruvan illa,",
+              "Ninne ozhike vere karthavilla.",
+              "Ninte munpil thanne njan muttukuthi namikkunnu,",
+              "Nee ente Karthavu, nee ente Pithavu."
             ]
           }
         ]
@@ -67773,6 +67725,113 @@
     "translations": {
       "hindi": {
         "lang": "Hindi",
+        "lyrics": [
+          {
+            "lines": [
+              "स्तुति करना आराधना करना",
+              "मुझे आनंद है (2)",
+              "प्रार्थना और वचन मानना करना",
+              "मुझे आनंद है (2)",
+              "मेरे दिल में यीशु मसीह आया",
+              "मुझे आनंद है (2)",
+              "ये दुनिया न दे सके वैसा आनंद",
+              "मुझे आनंद है (2)",
+              "पापों से उसने मुझे छुड़ाया",
+              "मुझे आनंद है (2)",
+              "अपने लहू से धोकर मुझे शुद्ध किया",
+              "मुझे आनंद है (2)",
+              "उद्धार का मार्ग मुझे बताया",
+              "मुझे आनंद है (2)",
+              "स्वर्ग राज्य का वारिस मुझे बनाया",
+              "मुझे आनंद है (2)"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "To praise and to worship You,",
+              "This gives me joy (2)",
+              "To pray and obey Your Word,",
+              "This gives me joy (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Jesus Christ has come into my heart,",
+              "This gives me joy (2)",
+              "A joy this world can never give,",
+              "This gives me joy (2)"
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "He has set me free from all my sins,",
+              "This gives me joy (2)",
+              "By His blood He washed and made me pure,",
+              "This gives me joy (2)"
+            ]
+          },
+          {
+            "verse": "Verse 4",
+            "lines": [
+              "He has shown me the path of salvation,",
+              "This gives me joy (2)",
+              "He has made me an heir of Heaven’s kingdom,",
+              "This gives me joy (2)"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Sthuthi cheyyuvanum aaradhikuvanum,",
+              "Enikku aanandam undu (2)",
+              "Prarthikkukayum vachanam anusarikkukayum,",
+              "Enikku aanandam undu (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Ente hridayathil Yeshu Mishiha vannu,",
+              "Enikku aanandam undu (2)",
+              "Ee lokam tharatha oru aanandam,",
+              "Enikku aanandam undu (2)"
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Paapangalil ninnu avan enne viduvichu,",
+              "Enikku aanandam undu (2)",
+              "Thante raktathaal kazhuki enne shuddhiyakki,",
+              "Enikku aanandam undu (2)"
+            ]
+          },
+          {
+            "verse": "Verse 4",
+            "lines": [
+              "Rakshayude vazhi avan enne kanichu,",
+              "Enikku aanandam undu (2)",
+              "Swarga rajyathinte avakashi aakki enne,",
+              "Enikku aanandam undu (2)"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
         "lyrics": [
           {
             "lines": [
@@ -107024,7 +107083,7 @@
     "id": "stuti_karna_aaradana_karna",
     "slug": "stuti-karna-aaradana-karna",
     "title": "Stuti karna aaradana karna",
-    "videoUrl": "",
+    "videoUrl": "https://www.youtube.com/embed/FoCQRB2wkkI",
     "description": "स्तुति करना आराधना करना - Hindi Christian devotional song lyrics with worship-friendly formatting.",
     "translations": {
       "hindi": {
@@ -107048,6 +107107,31 @@
               "मुझे आनंद है (२)",
               "स्वर्ग राज्य का वारिस मुझे बनाया",
               "मुझे आनंद है (२)"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Stuti Karna Aaradhana Karna",
+              "Mujhe Aanand Hai (2)",
+              "Praarthana Aur Vachan Maanan Karna",
+              "Mujhe Aanand Hai (2)",
+              "1. Mere Dil Mein Yeshu Masih Aaya",
+              "Mujhe Aanand Hai (2)",
+              "Ye Duniya Na De Sake Vaisa Aanand",
+              "Mujhe Aanand Hai (2)",
+              "2. Paapon Se Usne Mujhe Chhudaya",
+              "Mujhe Aanand Hai (2)",
+              "Apne Lahu Se Dhokar Mujhe Shuddh Kiya",
+              "Mujhe Aanand Hai (2)",
+              "3. Uddhaar Ka Maarg Mujhe Bataya",
+              "Mujhe Aanand Hai (2)",
+              "Swarg Rajya Ka Vaaris Mujhe Banaya",
+              "Mujhe Aanand Hai (2)"
             ]
           }
         ]
