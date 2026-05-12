@@ -13688,170 +13688,194 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "मुखड़ा",
             "lines": [
-              "जाएंगे उत्तम देश में ज़रूर,"
+              "जाएंगे उत्तम देश में ज़रूर,",
+              "रहेंगे प्रभु के साथ हम ज़रूर,",
+              "स्वर्गीय देश, उत्तम भी वह है,",
+              "हमारा वह देश, जो अद्भुत है।"
             ]
           },
           {
-            "verse": "1",
+            "verse": "अंतरा 1",
             "lines": [
-              "रहेंगे प्रभु के साथ हम ज़रूर,"
+              "पिता को भाया है, हमें एक राज्य दे,",
+              "दुनिया की सृष्टि से पहले बनाया है।"
             ]
           },
           {
-            "verse": "2",
+            "verse": "अंतरा 2",
             "lines": [
-              "स्वर्गीय देश, उत्तम भी वह है,"
+              "अद्भुत वह नगर है, ईश्वर की रचना है,",
+              "दृढ़ता से नेव डाली, स्थिर भी किया है।"
             ]
           },
           {
-            "verse": "3",
+            "verse": "अंतरा 3",
             "lines": [
-              "हमारा वह देश, जो अदभुत है"
+              "पवित्र नगर वह है, धार्मिकता रहती है,",
+              "स्वर्गीय स्वभाव से, तैयार भी किया है।"
             ]
           },
           {
-            "verse": "4",
+            "verse": "अंतरा 4",
             "lines": [
-              "1. पिता को भाया है, हमें एक राज्य दे,"
+              "सनातन राज्य वह है, युगानुयुग वह रहे,",
+              "रहेंगे सदा उसमें, जिनको उसने चुना है।"
             ]
           },
           {
-            "verse": "5",
+            "verse": "अंतरा 5",
             "lines": [
-              "दुनिया की सृष्टि से पहले बनाया है"
+              "प्रभु को देखेंगे, आनंद से भर जाएंगे,",
+              "उसके समान होंगे, हमारा जीवन वह है।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Mukhda",
+            "lines": [
+              "Jaayenge Uttam Desh Mein Zarur,",
+              "Rahenge Prabhu Ke Saath Hum Zarur,",
+              "Swargiya Desh, Uttam Bhi Wah Hai,",
+              "Hamaara Wah Desh, Jo Adbhut Hai."
             ]
           },
           {
-            "verse": "6",
+            "verse": "Verse 1",
             "lines": [
-              "2. अदभुत वह नगर है, ईश्वर की रचना है,"
+              "Pita Ko Bhaaya Hai, Humein Ek Rajya De,",
+              "Duniya Ki Srishti Se Pehle Banaya Hai."
             ]
           },
           {
-            "verse": "7",
+            "verse": "Verse 2",
             "lines": [
-              "दृढ़ता से नेव डाली, स्थिर भी किया है"
+              "Adbhut Wah Nagar Hai, Ishwar Ki Rachna Hai,",
+              "Dridhta Se Neenv Daali, Sthir Bhi Kiya Hai."
             ]
           },
           {
-            "verse": "8",
+            "verse": "Verse 3",
             "lines": [
-              "3. पवित्र नगर वह है, धार्मिकता रहती है,"
+              "Pavitra Nagar Wah Hai, Dharmikta Rehti Hai,",
+              "Swargiya Swabhaav Se, Taiyaar Bhi Kiya Hai."
             ]
           },
           {
-            "verse": "9",
+            "verse": "Verse 4",
             "lines": [
-              "स्वर्गीय स्वभाव से. तैयार भी किया है"
+              "Sanaatan Rajya Wah Hai, Yuganuyug Wah Rahe,",
+              "Rahenge Sada Usmein, Jinko Usne Chuna Hai."
             ]
           },
           {
-            "verse": "10",
+            "verse": "Verse 5",
             "lines": [
-              "4. सनातन राज्य वह है, युगानुयुग वह रहे,"
+              "Prabhu Ko Dekhenge, Aanand Se Bhar Jaayenge,",
+              "Uske Samaan Honge, Hamaara Jeevan Wah Hai."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Surely we will go to that glorious land,",
+              "Surely we will live with the Lord forever,",
+              "That heavenly country is truly excellent,",
+              "That is our home, wondrous and eternal."
             ]
           },
           {
-            "verse": "11",
+            "verse": "Verse 1",
             "lines": [
-              "रहेंगे सदा उसमें, जिनको उसने चुना है"
+              "It pleased the Father to give us a kingdom,",
+              "Prepared for us before the world began."
             ]
           },
           {
-            "verse": "12",
+            "verse": "Verse 2",
             "lines": [
-              "5. प्रभु को देखेंगे, आनन्द से भर जाएंगे,"
+              "That city is marvelous, a work of God,",
+              "Its foundations are firm, established forever."
             ]
           },
           {
-            "verse": "13",
+            "verse": "Verse 3",
             "lines": [
-              "उसके समान होंगे, हमारा जीवन वह है"
+              "That holy city is filled with righteousness,",
+              "Prepared with a heavenly nature and glory."
             ]
           },
           {
-            "verse": "14",
+            "verse": "Verse 4",
             "lines": [
-              "Jaayenge uttam desh mein zarur,"
+              "That kingdom is everlasting through all ages,",
+              "Those whom He has chosen will dwell there always."
             ]
           },
           {
-            "verse": "15",
+            "verse": "Verse 5",
             "lines": [
-              "rahenge prabhu ke saath hum zarur,"
+              "We shall see the Lord and be filled with joy,",
+              "We shall be like Him; that is our true life."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Nischayamaayi nammal aa uttama deshathekk pokum,",
+              "Nischayamaayi Karthavinodoppam nithyam vaazhum,",
+              "Aa swargeeya desham valare uttamamanu,",
+              "Adbhuthamaaya nammade swantham desham athanu."
             ]
           },
           {
-            "verse": "16",
+            "verse": "Verse 1",
             "lines": [
-              "Swargiya desh, uttam bhi veh hai,"
+              "Pithavinu ishtamayi namukku oru rajyam nalkan,",
+              "Lokasrishtikku munpe thanne athu orukkappettirikkunnu."
             ]
           },
           {
-            "verse": "17",
+            "verse": "Verse 2",
             "lines": [
-              "humara veh desh, jo adbhut hai"
+              "Aa nagaram adbhutham, Daivathinte thanne rachana,",
+              "Balamaaya adisthanathil sthiramaayi nirmichathanu."
             ]
           },
           {
-            "verse": "18",
+            "verse": "Verse 3",
             "lines": [
-              "1. Pita ko bhaaya hai, humein ek rajya de,"
+              "Aa pavithra nagarathil neethiyanu vasikkunnath,",
+              "Swargeeya swabhaavathode athu tayyarakkiyirikkunnu."
             ]
           },
           {
-            "verse": "19",
+            "verse": "Verse 4",
             "lines": [
-              "Duniya ki Srishti se pehle banaya hai"
+              "Aa rajyam nithyamaayi yugayugangal nilanilkkum,",
+              "Avan theranjeduthavar avide nithyam vasikkum."
             ]
           },
           {
-            "verse": "20",
+            "verse": "Verse 5",
             "lines": [
-              "2. Adbhut veh nagar hai, Ishvar ki rachna hai,"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "Dridta se nev daali, sthir bhi kiya hai"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "3. Pavitra nagar veh hai, dharmikta reheti hai,"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "Swargiya swabhaav se, taiyaar bhi kiya hai"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
-              "4. Sanaathan rajya veh hai, yuganuyug veh rahe,"
-            ]
-          },
-          {
-            "verse": "25",
-            "lines": [
-              "Rahenge sadaa usmein, jinko usne chuna hai"
-            ]
-          },
-          {
-            "verse": "26",
-            "lines": [
-              "5. Prabhu ko dekhenge, aanand se bhar jaayenge,"
-            ]
-          },
-          {
-            "verse": "27",
-            "lines": [
-              "Uske samaan honge, humara jeevan veh hai"
+              "Karthavine kaanum, aanandathal nirayum nammal,",
+              "Avanepole aakum; athanu nammade sathya jeevan."
             ]
           }
         ]
@@ -43518,27 +43542,134 @@
   {
     "id": "jab_se_masih_mujhko_mila",
     "slug": "jab-se-masih-mujhko-mila",
-    "title": "Jab se masih mujhko mila",
+    "title": "Jab Se Masih Mujhko Mila",
     "videoUrl": "",
-    "description": "Jab se masih mujhko mila - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "description": "Jab Se Masih Mujhko Mila - Hindi Christian testimony song lyrics in Hindi, Hinglish, English, and Malayalam.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "मुखड़ा",
             "lines": [
-              "tc ls elhg eq>dks feyk-2",
-              "ik;k eSa pkgk Fkk tks",
-              ",slh [kq'kh eq>dks feyh--2",
-              "dksbZ [okfg'k u ckdh jgh",
-              "1- rsjk gh uke iqdkjk Fkk eSaus",
-              "rq>dks gh iy&iy ljkgk Fkk eSaus",
-              "rqus lquh gj byrht+k",
-              "ik;k eSaus pkgk Fkk tks",
-              "2- thou ;s esjk rsjk gqvk",
-              "ru eu rq>dks viZ.k fd;k",
-              "vk¡lw esjs fQj u cgs",
-              "ik;k eSaus pkgk Fkk tks"
+              "जब से मसीह मुझको मिला (2),",
+              "पाया मैं चाहा था जो,",
+              "ऐसी खुशी मुझको मिली (2),",
+              "कोई ख्वाहिश न बाकी रही।"
+            ]
+          },
+          {
+            "verse": "अंतरा 1",
+            "lines": [
+              "तेरा ही नाम पुकारा था मैंने,",
+              "तुझको ही पल-पल सराहा था मैंने,",
+              "तूने सुनी हर इल्तिज़ा,",
+              "पाया मैंने चाहा था जो।"
+            ]
+          },
+          {
+            "verse": "अंतरा 2",
+            "lines": [
+              "जीवन ये मेरा तेरा हुआ,",
+              "तन-मन तुझको अर्पण किया,",
+              "आँसू मेरे फिर न बहे,",
+              "पाया मैंने चाहा था जो।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Mukhda",
+            "lines": [
+              "Jab Se Masih Mujhko Mila (2),",
+              "Paaya Main Chaha Tha Jo,",
+              "Aisi Khushi Mujhko Mili (2),",
+              "Koi Khwahish Na Baaki Rahi."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Tera Hi Naam Pukara Tha Maine,",
+              "Tujhko Hi Pal-Pal Saraha Tha Maine,",
+              "Tune Suni Har Iltija,",
+              "Paaya Maine Chaha Tha Jo."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Jeevan Ye Mera Tera Hua,",
+              "Tan-Man Tujhko Arpan Kiya,",
+              "Aansoo Mere Phir Na Bahe,",
+              "Paaya Maine Chaha Tha Jo."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Since I found the Messiah (2),",
+              "I received what I longed for,",
+              "Such joy has filled my life (2),",
+              "No desire is left unfulfilled."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "I called upon Your name alone,",
+              "I praised You every moment,",
+              "You heard every prayer I made,",
+              "I received what I had longed for."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "This life of mine became Yours,",
+              "I offered my body and soul to You,",
+              "My tears no longer flow in sorrow,",
+              "I received what I had longed for."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Mashiha enne kittiyathumuthal (2),",
+              "Njan aagrahichath ellam kitti,",
+              "Ithra valiya santhosham enikku labhichu (2),",
+              "Ini oru aagrahavum bakiyilla."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Ninte naamam thanne njan vilichu,",
+              "Ninne thanne prathi nimisham sthuthichu,",
+              "Ente ella prarthanakalum nee kettirunnu,",
+              "Njan aagrahichath ellam kitti."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Ente jeevitham muzhuvan ninakkayi,",
+              "Tan-manam njan ninakku samarppichu,",
+              "Ente kannuneer pinne duhkhattil ozhukiyilla,",
+              "Njan aagrahichath ellam kitti."
             ]
           }
         ]
@@ -43549,97 +43680,402 @@
   {
     "id": "jab_se_paya_hai_yeshu_masih_ko",
     "slug": "jab-se-paya-hai-yeshu-masih-ko",
-    "title": "Jab se paya hai Yeshu masih ko",
+    "title": "Jab Se Paya Hai Yeshu Masih Ko",
     "videoUrl": "",
-    "description": "Jab se paya hai Yeshu masih ko - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "description": "Jab Se Paya Hai Yeshu Masih Ko - Hindi Christian testimony song lyrics in Hindi, Hinglish, English, and Malayalam.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "मुखड़ा",
             "lines": [
-              "tc ls ik;k gS ;h'kq elhg dks--2",
-              "fny dh nqfu;k cny gh x;h--2",
-              "1- eRrh Hkh ihns pyk] ywdk Hkh ihNs pyk----2",
-              "tks Hkh ;h'kq ds ihNs pyk",
-              "mldh nqfu;k cny gh x;h gS",
-              "2- cks> ls ncs yksxksa ;h'kq ds ikl vkvks----2",
-              "rqEgs vkjke nsxk vCnh vkjke nsxk----2",
-              "ftlus ;h'kq ds nkeu dks Nw fy;k",
-              "mldh nqfu;k cny gh x;h gS---2",
-              "3- dgsa ckbfcy ;gh lqu yks HkkbZ lHkh",
-              ";h'kq us [kwu fn;k ges gS eksy fy;k",
-              "tcls ;h'kq dks fny esa clk fy;k",
-              "esjh nqfu;k cny x;h gSA"
+              "जब से पाया है यीशु मसीह को (2),",
+              "दिल की दुनिया बदल ही गई (2)।"
+            ]
+          },
+          {
+            "verse": "अंतरा 1",
+            "lines": [
+              "मत्ती भी पीछे चला, लूका भी पीछे चला (2),",
+              "जो भी यीशु के पीछे चला,",
+              "उसकी दुनिया बदल ही गई है।"
+            ]
+          },
+          {
+            "verse": "अंतरा 2",
+            "lines": [
+              "बोझ से दबे लोगों, यीशु के पास आओ (2),",
+              "तुम्हें आराम देगा, अब्दी आराम देगा (2),",
+              "जिसने यीशु के दामन को छू लिया,",
+              "उसकी दुनिया बदल ही गई है (2)।"
+            ]
+          },
+          {
+            "verse": "अंतरा 3",
+            "lines": [
+              "कहे बाइबल यही, सुन लो भाई सभी,",
+              "यीशु ने खून दिया, हमें है मोल लिया,",
+              "जब से यीशु को दिल में बसा लिया,",
+              "मेरी दुनिया बदल गई है।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Mukhda",
+            "lines": [
+              "Jab Se Paya Hai Yeshu Masih Ko (2),",
+              "Dil Ki Duniya Badal Hi Gayi (2)."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Matthi Bhi Peechhe Chala, Luka Bhi Peechhe Chala (2),",
+              "Jo Bhi Yeshu Ke Peechhe Chala,",
+              "Uski Duniya Badal Hi Gayi Hai."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Bojh Se Dabe Logon, Yeshu Ke Paas Aao (2),",
+              "Tumhe Aaraam Dega, Abdi Aaraam Dega (2),",
+              "Jisne Yeshu Ke Daaman Ko Chhoo Liya,",
+              "Uski Duniya Badal Hi Gayi Hai (2)."
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Kahe Bible Yahi, Sun Lo Bhai Sabhi,",
+              "Yeshu Ne Khoon Diya, Hame Hai Mol Liya,",
+              "Jab Se Yeshu Ko Dil Mein Basa Liya,",
+              "Meri Duniya Badal Gayi Hai."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Since I found Jesus the Messiah (2),",
+              "The world inside my heart has changed (2)."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Matthew followed Him, Luke followed Him too (2),",
+              "Whoever walked behind Jesus,",
+              "Their life was completely transformed."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "All who are burdened, come to Jesus (2),",
+              "He will give you rest, eternal rest (2),",
+              "Whoever touched the hem of Jesus,",
+              "Their world was completely changed (2)."
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "The Bible says this, listen everyone,",
+              "Jesus shed His blood and redeemed us,",
+              "Since I welcomed Jesus into my heart,",
+              "My whole world has changed."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Yeshu Mashihae kandethiyathumuthal (2),",
+              "Ente hridaya lokam muzhuvan maari (2)."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Matthayi avante pinnaale nadannu, Lukaavum pinnaale nadannu (2),",
+              "Yeshuvinte pinnaale nadannavar ellam,",
+              "Avarude jeevitham poornamay maari."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Bhaarathaal thalarnnavare, Yeshuvinte aduthekk varu (2),",
+              "Avan ningalkku vishramam nalkum, nithya vishramam nalkum (2),",
+              "Yeshuvinte vasthrathinte agram thottavar,",
+              "Avarude lokam muzhuvan maari (2)."
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Bible parayunnath ithaanu, ellavarum kelkkuka,",
+              "Yeshu thante raktam chorinju nammale veenduduthu,",
+              "Yeshuvine hridayathil vasippichathumuthal,",
+              "Ente jeevitham poornamay maari."
             ]
           }
         ]
       }
     },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
+    "thumbnailUrl": "/assets/songs/hindi_card.png"
   },
   {
     "id": "jab_se_pyara_yeshu_aaya_mera_jeevan",
     "slug": "jab-se-pyara-yeshu-aaya-mera-jeevan",
-    "title": "Jab se pyara yeshu aaya mera jeevan",
-    "videoUrl": "https://www.youtube.com/embed/XmLe0IJC9yY",
-    "description": "Jab se pyara yeshu aaya mera jeevan - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "title": "Jab Se Pyara Yeshu Aaya, Mera Jeevan",
+    "videoUrl": "https://www.youtube.com/embed/lx-CVtCre1Q",
+    "description": "Jab Se Pyara Yeshu Aaya, Mera Jeevan - Hindi Christian testimony song lyrics in Hindi, Hinglish, English, and Malayalam.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "मुखड़ा",
             "lines": [
-              "jaba sao Pyaara yaISau AayaaÊ maora jaIvana badla gayaa",
-              "jaba sao maOMnao ]sao hO payaaÊ maora jaIvana badla gayaa",
-              "1 mauJao gama AaOr mausaIbataoM maoM sahaara do kr",
-              "maoro papaoM ka baaoJa laokr Apnao }pr",
-              "kusa pr Kuna Apnaa bahayaa ¹ maora jaIvana badla gayaa",
-              "2 mauJao KrIda hO masaIh nao Kuna dokr",
-              "maoM hUÐ ]saka maora na kao[- isavaayao ]sako",
-              "pu~ nao hO ipta sao imalaayaa ¹ maora jaIvana badla gayaa",
-              "3 [sa jahaM kI gaMdgaI sao mauJao CuD,ayaa",
-              "jaana dokr mauJao gaunaahaoM sao hO bacaayaa",
-              "tba sao idla maora mana maorI kayaa ¹ maora jaIvana badla gayaa",
-              "4 maorI rahaoM maoM na kaMTo Aba rhoMgao",
-              "maorI maMijala BaI maatma Aba na haoMgao",
-              "hao gayaa dUr hO maaOt ka saayaa ¹ maora jaIvana badla gayaa",
-              "5 rat kalaI baIt ga[- hO huAa savaora",
-              "saubah ka tara doKao camaka yaISau maora",
-              "[sailae maOMnao yah gaIt gaayaa ¹ maora jaIvana badla gayaa"
+              "जब से प्यारा यीशु आया, मेरा जीवन बदल गया,",
+              "जब से मैंने उसे ही पाया, मेरा जीवन बदल गया।"
             ]
           },
           {
-            "verse": "1",
+            "verse": "अंतरा 1",
             "lines": [
-              "Jab se pyara Yeshu aaya, Mera jeevan badal gaya",
-              "Jab se meine use hei paya, Mera jeevan badal gaya.",
-              "Mujhe gam aur musibato mei sahara de kar",
-              "Mere papo ka bojh lekar Apne upar",
-              "Krus par khoon apna bahaya",
-              "Mera jeevan badal gaya; -Jab se…",
-              "Mujhe kharida hei masih ne khoon deker",
-              "Mei hu uska mera na koi sivaye uske",
-              "Putra ne hei pita se milaya",
-              "Mera jeevan badal gaya;- Jab se…",
-              "Is jaham ki gandagi se mujhe cchudaya",
-              "Jan dekar mujhe gunahom se bachaya",
-              "Tab se dil mera man meri kaya",
-              "Mera jeevan badal gaya;- Jab se…",
-              "meri rahom mem na kate ab rehega",
-              "meri manzil fi matham ab na homge",
-              "ho geya dur hi muth ka chaya",
-              "Mera jeevan badal gaya;- Jab se…",
-              "rath kali bith gayi hi huva sabera",
-              "subah ka tara deke chamaka yeshu mera",
-              "Isliye mene yeh geeth gaya",
-              "Mera jeevan badal gaya;- Jab se…"
+              "मुझे ग़म और मुसीबतों में सहारा देकर,",
+              "मेरे पापों का बोझ लेकर अपने ऊपर,",
+              "क्रूस पर अपना लहू बहाया,",
+              "मेरा जीवन बदल गया।"
+            ]
+          },
+          {
+            "verse": "अंतरा 2",
+            "lines": [
+              "मुझे खरीदा है मसीह ने खून देकर,",
+              "मैं हूँ उसका, मेरा न कोई सिवाय उसके,",
+              "पुत्र ने ही पिता से मिलाया,",
+              "मेरा जीवन बदल गया।"
+            ]
+          },
+          {
+            "verse": "अंतरा 3",
+            "lines": [
+              "इस जहाँ की गंदगी से मुझे छुड़ाया,",
+              "जान देकर मुझे गुनाहों से बचाया,",
+              "तब से दिल, मेरा मन, मेरी काया,",
+              "मेरा जीवन बदल गया।"
+            ]
+          },
+          {
+            "verse": "अंतरा 4",
+            "lines": [
+              "मेरी राहों में न काँटे अब रहेंगे,",
+              "मेरी मंज़िल में मातम अब न होंगे,",
+              "हो गया दूर ही मौत का साया,",
+              "मेरा जीवन बदल गया।"
+            ]
+          },
+          {
+            "verse": "अंतरा 5",
+            "lines": [
+              "रात काली बीत गई है, हुआ सवेरा,",
+              "सुबह का तारा चमका, यीशु मेरा,",
+              "इसलिए मैंने यह गीत गाया,",
+              "मेरा जीवन बदल गया।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Mukhda",
+            "lines": [
+              "Jab Se Pyara Yeshu Aaya, Mera Jeevan Badal Gaya,",
+              "Jab Se Maine Use Hi Paya, Mera Jeevan Badal Gaya."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Mujhe Gham Aur Musibaton Mein Sahara Dekar,",
+              "Mere Paapon Ka Bojh Lekar Apne Upar,",
+              "Kroos Par Apna Lahoo Bahaya,",
+              "Mera Jeevan Badal Gaya."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Mujhe Kharida Hai Masih Ne Khoon Dekar,",
+              "Main Hoon Uska, Mera Na Koi Sivay Uske,",
+              "Putra Ne Hi Pita Se Milaya,",
+              "Mera Jeevan Badal Gaya."
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Is Jahan Ki Gandagi Se Mujhe Chhudaya,",
+              "Jaan Dekar Mujhe Gunahon Se Bachaya,",
+              "Tab Se Dil, Mera Man, Meri Kaya,",
+              "Mera Jeevan Badal Gaya."
+            ]
+          },
+          {
+            "verse": "Verse 4",
+            "lines": [
+              "Meri Rahon Mein Na Kante Ab Rahenge,",
+              "Meri Manzil Mein Matam Ab Na Honge,",
+              "Ho Gaya Door Hi Maut Ka Saya,",
+              "Mera Jeevan Badal Gaya."
+            ]
+          },
+          {
+            "verse": "Verse 5",
+            "lines": [
+              "Raat Kaali Beet Gayi Hai, Hua Savera,",
+              "Subah Ka Taara Chamka, Yeshu Mera,",
+              "Isliye Maine Yeh Geet Gaya,",
+              "Mera Jeevan Badal Gaya."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Since my loving Jesus came, my life has changed,",
+              "Since I found Him, my life has changed."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "He stood by me in grief and trouble,",
+              "He took the burden of my sins upon Himself,",
+              "He shed His blood on the cross,",
+              "And my life was changed."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Christ purchased me with His blood,",
+              "I belong to Him and to none else,",
+              "The Son reconciled me to the Father,",
+              "And my life was changed."
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "He delivered me from this world’s corruption,",
+              "By giving His life He saved me from sin,",
+              "Then my heart, mind, and body were renewed,",
+              "And my life was changed."
+            ]
+          },
+          {
+            "verse": "Verse 4",
+            "lines": [
+              "No thorns will remain on my path now,",
+              "No mourning will remain at my destination,",
+              "The shadow of death has gone far away,",
+              "And my life was changed."
+            ]
+          },
+          {
+            "verse": "Verse 5",
+            "lines": [
+              "The dark night has passed; dawn has come,",
+              "The morning star has shone, my Jesus,",
+              "Therefore I sing this song,",
+              "My life has changed."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Snehamulla Yeshu vannappol ente jeevitham maari,",
+              "Avane kandethiyappol ente jeevitham maari."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Dukhangalilum kashtangalilum avan enne thangi,",
+              "Ente paapathinte bhaaram avan thante mel etuthu,",
+              "Kroosil thante raktam chorinju,",
+              "Ente jeevitham maari."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Mashiha thante raktathal enne veenduduthu,",
+              "Njan avante thanne, vere aarudeyumalla,",
+              "Putran moolam Pithavine njan kandu,",
+              "Ente jeevitham maari."
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Ee lokathinte malinyathil ninnu enne viduvichu,",
+              "Jeevan nalki paapathil ninnu rakshichu,",
+              "Ente hridayavum manassum dehavum puthiyayi,",
+              "Ente jeevitham maari."
+            ]
+          },
+          {
+            "verse": "Verse 4",
+            "lines": [
+              "Ente vazhikalil ini kaantaakal illa,",
+              "Ente lakshyathil ini shokam illa,",
+              "Maranathinte nizhal dhooram poyi,",
+              "Ente jeevitham maari."
+            ]
+          },
+          {
+            "verse": "Verse 5",
+            "lines": [
+              "Irunda raavu kazhinju, prabhaatham vannu,",
+              "Prabhaatha nakshathram pole Yeshu prakaashichu,",
+              "Athukondu njan ee paattu paadunnu,",
+              "Ente jeevitham maari."
             ]
           }
         ]
       }
     },
-    "thumbnailUrl": "/assets/songs/english_card.png"
+    "thumbnailUrl": "/assets/songs/hindi_card.png"
   },
   {
     "id": "jai_denewale_prabhu_yeshu_ko",
@@ -88791,76 +89227,588 @@
   {
     "id": "jaag_zara_dulhan",
     "slug": "jaag-zara-dulhan",
-    "title": "Jaag zara dulhan",
+    "title": "Jaag Zara Dulhan",
     "videoUrl": "",
-    "description": "Jaag zara dulhan - Hindi Christian song seed entry imported from waytochurch index.",
+    "description": "Jaag Zara Dulhan - Hindi Christian revival song lyrics in Hindi, Hinglish, English, and Malayalam.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "मुखड़ा",
             "lines": [
-              "Jaag zara dulhan"
+              "जाग ज़रा दुल्हन, जाग ज़रा दुल्हन,",
+              "दूल्हा आने वाला है।",
+              "दीप जला ले, दिल संभाल ले,",
+              "समय निकलने वाला है।"
+            ]
+          },
+          {
+            "verse": "अंतरा 1",
+            "lines": [
+              "रात अंधेरी बीत रही है, भोर निकट ही आई,",
+              "जागरण की घड़ी है अब तो, नींद न और समाई,",
+              "पाक दामन, सच्चा जीवन,",
+              "राजा को भाने वाला है।"
+            ]
+          },
+          {
+            "verse": "अंतरा 2",
+            "lines": [
+              "तेल भरो तुम अपने दीपक, वचन में दृढ़ हो जाओ,",
+              "प्रार्थना और प्रेम के साथ, दूल्हे को स्वागत पाओ,",
+              "जो तैयार हैं, वे ही संग में,",
+              "विवाह में जाने वाला है।"
+            ]
+          },
+          {
+            "verse": "अंतरा 3",
+            "lines": [
+              "दुनिया की ये चकाचौंध अब, मन को न भरमाए,",
+              "यीशु के पावन प्रेम से बढ़कर, कुछ भी न लुभाए,",
+              "जय-जयकार, हो तैयार,",
+              "बादल पर आने वाला है।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Mukhda",
+            "lines": [
+              "Jaag Zara Dulhan, Jaag Zara Dulhan,",
+              "Dulha Aane Wala Hai.",
+              "Deep Jala Le, Dil Sambhal Le,",
+              "Samay Nikalne Wala Hai."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Raat Andheri Beet Rahi Hai, Bhor Nikat Hi Aayi,",
+              "Jaagran Ki Ghadi Hai Ab To, Neend Na Aur Samayi,",
+              "Paak Daaman, Saccha Jeevan,",
+              "Raja Ko Bhaane Wala Hai."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Tel Bharo Tum Apne Deepak, Vachan Mein Dridh Ho Jao,",
+              "Prarthana Aur Prem Ke Saath, Dulhe Ka Swagat Pao,",
+              "Jo Taiyaar Hain, Ve Hi Sang Mein,",
+              "Vivaah Mein Jaane Wala Hai."
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Duniya Ki Ye Chakaachaundh Ab, Man Ko Na Bharmaaye,",
+              "Yeshu Ke Paavan Prem Se Badhkar, Kuchh Bhi Na Lubhaaye,",
+              "Jai-Jaikaar, Ho Taiyaar,",
+              "Baadal Par Aane Wala Hai."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Wake up, O bride, wake up, O bride,",
+              "The Bridegroom is about to come.",
+              "Light your lamp, prepare your heart,",
+              "The time is passing quickly."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "The dark night is fading, dawn is near,",
+              "This is the hour to stay awake and watch,",
+              "A pure life and faithful heart",
+              "Will please the coming King."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Fill your lamps with oil, stand firm in the Word,",
+              "With prayer and love, welcome the Bridegroom,",
+              "Only those who are ready",
+              "Will enter the wedding feast."
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Let not the glitter of this world deceive your heart,",
+              "Nothing is greater than Jesus’ holy love,",
+              "Rejoice and be prepared,",
+              "He is coming on the clouds."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Ezhunnelku manavaatti, ezhunnelku manavaatti,",
+              "Manavaalan varunnu.",
+              "Vilakku theliyikkuka, hridayam tayyarakkuka,",
+              "Samayam vegam kadannupokunnu."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Irunda raavu kazhinju, prabhaatham aduthu vannu,",
+              "Ithu jaagaranathinte samayamanu, ini urakkam venda,",
+              "Shuddha jeevithavum nishtha ullathum",
+              "Rajavine santhoshippikkum."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Ningalude vilakkil enna nirakkuka, vachanathil urappode nilkkuka,",
+              "Prarthanayum snehavum koode manavaalane swagatham cheyyuka,",
+              "Tayyarulla avar mathram",
+              "Kalyana virunnil praveshikkum."
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Lokathinte prakaasham manassine mayakkaruthe,",
+              "Yeshuvinte pavitra snehaminekkal valiya onnumilla,",
+              "Santhoshamode tayyarayi nilkkuka,",
+              "Avan meghangalil varunnu."
             ]
           }
         ]
       }
     },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
+    "thumbnailUrl": "/assets/songs/hindi_card.png"
   },
   {
     "id": "jaagte_karen_prabhu_prathna",
     "slug": "jaagte-karen-prabhu-prathna",
-    "title": "Jaagte karen prabhu prathna",
+    "title": "Jaagte Karen Prabhu Prarthna",
     "videoUrl": "",
-    "description": "Jaagte karen prabhu prathna - Hindi Christian song seed entry imported from waytochurch index.",
+    "description": "Jaagte Karen Prabhu Prarthna - Hindi Christian prayer song lyrics in Hindi, Hinglish, English, and Malayalam.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "मुखड़ा",
             "lines": [
-              "Jaagte karen prabhu prathna"
+              "जागते करें प्रभु प्रार्थना,",
+              "मन में जलाए विश्वास का दीप।",
+              "तेरा ही नाम पुकारें हम,",
+              "आ जा प्रभु, तू आ समीप।"
+            ]
+          },
+          {
+            "verse": "अंतरा 1",
+            "lines": [
+              "रात अँधेरी, राहें सूनी,",
+              "तू ही हमारा सहारा है,",
+              "थके हुए मन को शांति दे दे,",
+              "तू दीनों का किनारा है।"
+            ]
+          },
+          {
+            "verse": "अंतरा 2",
+            "lines": [
+              "तेरे वचन में जीवन मिलता,",
+              "तेरी दया से बल पाते हैं,",
+              "आँसू लेकर तेरे चरणों में,",
+              "हम जय का गीत सुनाते हैं।"
+            ]
+          },
+          {
+            "verse": "अंतरा 3",
+            "lines": [
+              "जागते-जागते तेरा इंतज़ार,",
+              "हृदय तुझे ही खोजे प्रभु,",
+              "जब तू आए महिमा लेकर,",
+              "हम सब तेरे हो लें प्रभु।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Mukhda",
+            "lines": [
+              "Jaagte Karen Prabhu Prarthna,",
+              "Man Mein Jalayen Vishwas Ka Deep.",
+              "Tera Hi Naam Pukaren Hum,",
+              "Aa Ja Prabhu, Tu Aa Sameep."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Raat Andheri, Raahein Sooni,",
+              "Tu Hi Hamaara Sahara Hai,",
+              "Thake Hue Man Ko Shanti De De,",
+              "Tu Deenon Ka Kinaara Hai."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Tere Vachan Mein Jeevan Milta,",
+              "Teri Daya Se Bal Paate Hain,",
+              "Aansoo Lekar Tere Charanon Mein,",
+              "Hum Jai Ka Geet Sunaate Hain."
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Jaagte-Jaagte Tera Intezar,",
+              "Hriday Tujhe Hi Khoje Prabhu,",
+              "Jab Tu Aaye Mahima Lekar,",
+              "Hum Sab Tere Ho Len Prabhu."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Awake we pray, O Lord, awake we pray,",
+              "Keep the lamp of faith burning in our hearts.",
+              "We call only on Your holy name,",
+              "Come near to us, O Lord, come near."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "The night is dark and the road is empty,",
+              "You alone are our refuge,",
+              "Give peace to every weary heart,",
+              "You are the shore for the broken."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Your Word gives life within us,",
+              "Your mercy gives us strength,",
+              "With tears we come before Your feet,",
+              "And sing the song of victory."
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Wakeful, we wait for Your coming,",
+              "Our hearts are searching only for You,",
+              "When You come in glory, Lord,",
+              "We will belong to You forever."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Jaagrathayode nammal prarthikkam,",
+              "Vishwasathinte vilakku hridayathil theliyikkam.",
+              "Ninte naamam thanne njangal vilikkunnu,",
+              "Prabhuve, njangalkku aduthu varename."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Irunda raavum soonyamaaya vazhikalum,",
+              "Nee thanne njangalde aadharavu,",
+              "Thalarnna manassukalkku nee shanthi nalku,",
+              "Nee thanne dainyarkku theeramanu."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Ninte vachanathil jeevan labhikkunnu,",
+              "Ninte karunayal balam kittunnu,",
+              "Kannuneerode njangal ninte sannidhiyil varunnu,",
+              "Jayathinte geetham paadunnu."
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Jaagrathayode njangal ninne kathirikkunnu,",
+              "Hridayam ninne thanne thedunnu Prabhuve,",
+              "Nee mahimayode varumbol,",
+              "Njangal ellam ninte thanne aakum."
             ]
           }
         ]
       }
     },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
+    "thumbnailUrl": "/assets/songs/hindi_card.png"
   },
   {
     "id": "jab_aatma_prabhu_ka",
     "slug": "jab-aatma-prabhu-ka",
-    "title": "Jab aatma prabhu ka",
+    "title": "Jab Aatma Prabhu Ka",
     "videoUrl": "",
-    "description": "Jab aatma prabhu ka - Hindi Christian song seed entry imported from waytochurch index.",
+    "description": "Jab Aatma Prabhu Ka - Hindi Christian worship song lyrics in Hindi, Hinglish, English, and Malayalam.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "मुखड़ा",
             "lines": [
-              "Jab aatma prabhu ka"
+              "जब आत्मा प्रभु का मुझ पर आए,",
+              "मैं नाचूँगा, गाऊँगा, जय बोलूँगा।"
+            ]
+          },
+          {
+            "verse": "अंतरा 1",
+            "lines": [
+              "उसकी महिमा से मन भर जाए,",
+              "उसके प्रेम में दिल खो जाए,",
+              "हाथ उठाकर उसको सराहूँ,",
+              "उसकी स्तुति मैं करता जाऊँ।"
+            ]
+          },
+          {
+            "verse": "अंतरा 2",
+            "lines": [
+              "बंधन टूटें, भय सब जाए,",
+              "जीवन में नया बल आए,",
+              "यीशु नाम में शांति पाऊँ,",
+              "उसकी राह में आगे जाऊँ।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Mukhda",
+            "lines": [
+              "Jab Aatma Prabhu Ka Mujh Par Aaye,",
+              "Main Naachunga, Gaunga, Jai Bolunga."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Uski Mahima Se Man Bhar Jaye,",
+              "Uske Prem Mein Dil Kho Jaye,",
+              "Haath Uthakar Usko Sarahun,",
+              "Uski Stuti Main Karta Jaaun."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Bandhan Tootein, Bhay Sab Jaaye,",
+              "Jeevan Mein Naya Bal Aaye,",
+              "Yeshu Naam Mein Shanti Paaun,",
+              "Uski Raah Mein Aage Jaaun."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "When the Spirit of the Lord comes upon me,",
+              "I will dance, I will sing, I will shout His praise."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "My heart is filled with His glory,",
+              "My soul is lost in His love,",
+              "With lifted hands I worship Him,",
+              "I will keep singing His praise."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Chains are broken, fear is gone,",
+              "New strength rises in my life,",
+              "In Jesus’ name I find true peace,",
+              "And walk forward in His way."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Prabhuvinte Aathmavu enne mel varumbol,",
+              "Njan nritham cheyyum, paadum, jayaghosham cheyyum."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Avante mahimayal manassu nirayunnu,",
+              "Avante snehathil hridayam layikkunnu,",
+              "Kai uyarthi avane sthuthikkunnu,",
+              "Avante sthuthi njan paadikkondirikkunnu."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Bandhangal muriyum, bhayam ellam pokum,",
+              "Jeevithathil puthiya balam varum,",
+              "Yeshuvinte naamathil shanthi kittum,",
+              "Avante vazhiyil munnotu njan nadakkum."
             ]
           }
         ]
       }
     },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
+    "thumbnailUrl": "/assets/songs/hindi_card.png"
   },
   {
     "id": "jab_pavitra_aamta_mere_dil",
     "slug": "jab-pavitra-aamta-mere-dil",
-    "title": "Jab pavitra aamta mere dil",
+    "title": "Jab Pavitra Aatma Mere Dil Mein Aaye",
     "videoUrl": "",
-    "description": "Jab pavitra aamta mere dil - Hindi Christian song seed entry imported from waytochurch index.",
+    "description": "Jab Pavitra Aatma Mere Dil Mein Aaye - Hindi Christian worship song lyrics in Hindi, Hinglish, English, and Malayalam.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "मुखड़ा",
             "lines": [
-              "Jab pavitra aamta mere dil"
+              "जब पवित्र आत्मा मेरे दिल में आए,",
+              "मैं नाचूँ, मैं गाऊँ, प्रभु को सराहूँ।"
+            ]
+          },
+          {
+            "verse": "अंतरा 1",
+            "lines": [
+              "जैसे दाऊद ने नाचा था, वैसे मैं भी नाचूँ,",
+              "जैसे दाऊद ने गाया था, वैसे मैं भी गाऊँ।"
+            ]
+          },
+          {
+            "verse": "अंतरा 2",
+            "lines": [
+              "प्रेम की अग्नि जल उठे, मन में नई उमंग आए,",
+              "यीशु के पावन नाम में, जीवन मेरा खिल जाए।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Mukhda",
+            "lines": [
+              "Jab Pavitra Aatma Mere Dil Mein Aaye,",
+              "Main Naachun, Main Gaaun, Prabhu Ko Sarahun."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Jaise Daud Ne Naacha Tha, Waise Main Bhi Naachun,",
+              "Jaise Daud Ne Gaaya Tha, Waise Main Bhi Gaaun."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Prem Ki Agni Jal Uthe, Man Mein Nayi Umang Aaye,",
+              "Yeshu Ke Paavan Naam Mein, Jeevan Mera Khil Jaaye."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "When the Holy Spirit fills my heart,",
+              "I will dance and sing and praise the Lord."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "As David danced before the Lord, so will I dance,",
+              "As David sang before the Lord, so will I sing."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Let the fire of love arise, let new joy fill my heart,",
+              "In the holy name of Jesus, let my life bloom again."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Pavithra Aathmavu ente hridayathil varumbol,",
+              "Njan nritham cheyyum, paadum, Karthavine sthuthikkum."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Daaveed nritham cheythathupole njanum nritham cheyyum,",
+              "Daaveed paadiyathupole njanum paadum."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Snehathinte thee ullil jwalikkatte, puthiya santhosham varatte,",
+              "Yeshuvinte pavitra naamathil ente jeevitham poothidatte."
             ]
           }
         ]
