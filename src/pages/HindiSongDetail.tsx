@@ -161,7 +161,7 @@ const HindiSongDetail = () => {
             : song.translations[selectedLang];
     const englishTranslation = song.translations["english"];
     const videoId = song.videoUrl ? song.videoUrl.split('/').pop() : '';
-    const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '';
+    const thumbnailUrl = song.thumbnailUrl || (videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '');
     const canonicalUrl = `https://biblequizcompetition.com/hindi-songs/${song.slug}`;
 
     const plainTitle = toQuerySlug(song.title);
@@ -684,7 +684,7 @@ const HindiSongDetail = () => {
                                         <div className="flex gap-4 px-1 snap-x snap-mandatory">
                                             {relatedSongsForSlider.map((related) => {
                                                 const relatedVideoId = related.videoUrl ? related.videoUrl.split("/").pop() : "";
-                                                const relatedThumb = relatedVideoId ? `https://img.youtube.com/vi/${relatedVideoId}/hqdefault.jpg` : "";
+                                                const relatedThumb = related.thumbnailUrl || (relatedVideoId ? `https://img.youtube.com/vi/${relatedVideoId}/hqdefault.jpg` : "");
                                                 const relatedHindiSections = related.translations?.hindi?.lyrics || [];
                                                 const relatedLineCount = relatedHindiSections.reduce((sum, sec) => sum + (sec.lines?.length || 0), 0);
                                                 const relatedHasChords = relatedHindiSections.some((sec) => sec.chords && sec.chords.length > 0);

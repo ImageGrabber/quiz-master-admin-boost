@@ -3,6 +3,7 @@ export interface Song {
     slug: string;
     title: string;
     videoUrl: string;
+    thumbnailUrl?: string;
     description: string;
     translations: {
         [key: string]: {

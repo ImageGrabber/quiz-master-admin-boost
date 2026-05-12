@@ -41821,30 +41821,70 @@
   {
     "id": "ab_yeshu_ke_pass_jaane_do",
     "slug": "ab-yeshu-ke-pass-jaane-do",
-    "title": "Ab yeshu ke pass jaane do",
+    "title": "Ab Yeshu Ke Paas Jaane Do",
     "videoUrl": "",
-    "description": "Ab yeshu ke pass jaane do - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "description": "Ab Yeshu Ke Paas Jaane Do - Hindi Christian worship song lyrics with clean Hindi and Hinglish text.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "मुखड़ा",
             "lines": [
-              "Aba yaISau ko pasa jaanao dao 2",
-              "duinayaa vaalaao na raokao mauJao 2",
-              "hala idla ka saunaanao dao 2",
-              "jaanao dao jaanao dao jaanao dao 2",
-              "Aba yaISau ko pasa jaanao dao 2",
-              "PyaasaI ihrnaI hu^M yaISau toro Pyaar kI 2",
-              "idla maoM caaiht hO toro dIdar kI 2",
-              "Pyaasa ApnaI baujaanao dao 2",
-              "duinayaa vaalaao na raokao mauJao 2",
-              "Aba yaISau ko pasa jaanao dao 2",
-              "igarto igarto maOM Aagao baMdUgaI",
-              "jaako yaISau sao saba kuC khuMgaI",
-              "haqa ]sakao lagaanao dao",
-              "duinayaa vaalaao na raokao mauJao 2",
-              "Aba yaISau ko pasa jaanao dao 2"
+              "अब यीशु के पास जाने दो (2)",
+              "दुनिया वालों न रोको मुझे (2)",
+              "हाल दिल का सुनाने दो (2)",
+              "जाने दो, जाने दो, जाने दो (2)"
+            ]
+          },
+          {
+            "verse": "अंतरा 1",
+            "lines": [
+              "प्यासी हिरनी हूँ यीशु तेरे प्यार की (2)",
+              "दिल में चाहत है तेरे दीदार की (2)",
+              "प्यास अपनी बुझाने दो (2)",
+              "दुनिया वालों न रोको मुझे (2)"
+            ]
+          },
+          {
+            "verse": "अंतरा 2",
+            "lines": [
+              "गिरते गिरते मैं आगे बढ़ूँगी,",
+              "जाकर यीशु से सब कुछ कहूँगी,",
+              "हाथ उसका लगाने दो,",
+              "दुनिया वालों न रोको मुझे (2)"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Mukhda",
+            "lines": [
+              "Ab Yeshu Ke Paas Jaane Do (2)",
+              "Duniya Walo Na Roko Mujhe (2)",
+              "Haal Dil Ka Sunane Do (2)",
+              "Jaane Do, Jaane Do, Jaane Do (2)"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Pyaasi Hirni Hoon Yeshu Tere Pyaar Ki (2)",
+              "Dil Mein Chahat Hai Tere Deedar Ki (2)",
+              "Pyaas Apni Bujhane Do (2)",
+              "Duniya Walo Na Roko Mujhe (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Girte Girte Main Aage Badhungi,",
+              "Jaakar Yeshu Se Sab Kuch Kahungi,",
+              "Haath Uska Lagane Do,",
+              "Duniya Walo Na Roko Mujhe (2)"
             ]
           }
         ]
@@ -86601,7 +86641,8 @@
           }
         ]
       }
-    }
+    },
+    "thumbnailUrl": "/assets/songs/hindi_card.png"
   },
   {
     "id": "aao_pavitr_aatma_tere_samukh",
