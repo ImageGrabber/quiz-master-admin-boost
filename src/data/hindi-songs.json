@@ -38120,261 +38120,277 @@
     "id": "aaradhana_teri_aaradhana_lyrics_robinson_shalu_sofia_shalu",
     "slug": "aaradhana-teri-aaradhana-lyrics-robinson-shalu-sofia-shalu",
     "title": "AARADHANA TERI AARADHANA LYRICS - Robinson Shalu | Sofia Shalu",
-    "videoUrl": "",
+    "videoUrl": "https://www.youtube.com/embed/ODbkUP3il9g",
     "description": "AARADHANA TERI AARADHANA LYRICS - Robinson Shalu | Sofia Shalu - Hindi Christian devotional song lyrics with worship-friendly formatting.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "अंतरा 1",
             "lines": [
-              "मेरा जीवन है तेरा अनोखा उपहार"
+              "मेरा जीवन है तेरा अनोखा उपहार",
+              "कैसे मैं करूँ शुक्रिया (2)"
             ]
           },
           {
-            "verse": "1",
+            "verse": "प्री-कोरस",
             "lines": [
-              "कैसे मैं करू शुक्रिया (2)"
+              "तूने दे दिया अपना बलिदान",
+              "मेरे खुदा, मेरे खुदा (2)"
             ]
           },
           {
-            "verse": "2",
+            "verse": "कोरस",
             "lines": [
-              "Pre Chorus"
-            ]
-          },
-          {
-            "verse": "3",
-            "lines": [
-              "तूने दे दिया अपना बल���दान"
-            ]
-          },
-          {
-            "verse": "4",
-            "lines": [
-              "मेरे खुदा मेरे खुदा (2)"
-            ]
-          },
-          {
-            "verse": "5",
-            "lines": [
-              "आराधना तेरी आराधना"
-            ]
-          },
-          {
-            "verse": "6",
-            "lines": [
+              "आराधना, तेरी आराधना",
               "आराधना मेरे खुदा (2)"
             ]
           },
           {
-            "verse": "7",
+            "verse": "अंतरा 2",
             "lines": [
-              "खो गया था और भटक रहा था"
+              "खो गया था और भटक रहा था",
+              "तेरे प्यार ने मुझे राह दिखाया (2)"
             ]
           },
           {
-            "verse": "8",
+            "verse": "प्री-कोरस",
             "lines": [
-              "तेरे प्यारने मुझे राह दिखाया (2)"
+              "तूने दे दिया अपना बलिदान",
+              "मेरे खुदा, मेरे खुदा (2)"
             ]
           },
           {
-            "verse": "9",
+            "verse": "कोरस",
             "lines": [
-              "Pre Chorus"
-            ]
-          },
-          {
-            "verse": "10",
-            "lines": [
-              "तूने दे दिया अपना बलिदान"
-            ]
-          },
-          {
-            "verse": "11",
-            "lines": [
-              "मेरे खुदा मेरे खुदा (2)"
-            ]
-          },
-          {
-            "verse": "12",
-            "lines": [
-              "आराधना तेरी आराधना"
-            ]
-          },
-          {
-            "verse": "13",
-            "lines": [
+              "आराधना, तेरी आराधना",
               "आराधना मेरे खुदा (2)"
             ]
           },
           {
-            "verse": "14",
+            "verse": "अंतरा 3",
             "lines": [
-              "साथ चलके अपना बनाके"
+              "साथ चलके अपना बनाके",
+              "पोंछ लिया है सारे आँसू ग़म के (2)"
             ]
           },
           {
-            "verse": "15",
+            "verse": "प्री-कोरस",
             "lines": [
-              "पौंछ लिया है सारे आंसू गम के (2)"
+              "तूने दे दिया अपना बलिदान",
+              "मेरे खुदा, मेरे खुदा (2)"
             ]
           },
           {
-            "verse": "16",
+            "verse": "कोरस",
             "lines": [
-              "Pre Chorus"
-            ]
-          },
-          {
-            "verse": "17",
-            "lines": [
-              "तूने दे दिया अपना बलिदान"
-            ]
-          },
-          {
-            "verse": "18",
-            "lines": [
-              "मेरे खुदा मेरे खुदा (2)"
-            ]
-          },
-          {
-            "verse": "19",
-            "lines": [
-              "आराधना तेरी आराधना"
-            ]
-          },
-          {
-            "verse": "20",
-            "lines": [
+              "आराधना, तेरी आराधना",
               "आराधना मेरे खुदा (2)"
             ]
-          },
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
           {
-            "verse": "21",
+            "verse": "Verse 1",
             "lines": [
-              "Mera jeevan hai tera anokha uphaar"
+              "Mera Jeevan Hai Tera Anokha Uphaar",
+              "Kaise Main Karu Shukriya (2)"
             ]
           },
           {
-            "verse": "22",
+            "verse": "Pre-Chorus",
             "lines": [
-              "Kaise main karu shukriya (2)"
+              "Tune De Diya Apna Balidan",
+              "Mere Khuda, Mere Khuda (2)"
             ]
           },
           {
-            "verse": "23",
+            "verse": "Chorus",
             "lines": [
-              "Pre-Chorus"
+              "Aaradhana, Teri Aaradhana",
+              "Aaradhana Mere Khuda (2)"
             ]
           },
           {
-            "verse": "24",
+            "verse": "Verse 2",
             "lines": [
-              "Tune de diya apna balidan"
+              "Kho Gaya Tha Aur Bhatak Raha Tha",
+              "Tere Pyaar Ne Mujhe Raah Dikhaya (2)"
             ]
           },
           {
-            "verse": "25",
+            "verse": "Pre-Chorus",
             "lines": [
-              "Mere Khuda, mere Khuda (2)"
+              "Tune De Diya Apna Balidan",
+              "Mere Khuda, Mere Khuda (2)"
             ]
           },
           {
-            "verse": "26",
+            "verse": "Chorus",
             "lines": [
-              "Aaradhna, teri aaradhna"
+              "Aaradhana, Teri Aaradhana",
+              "Aaradhana Mere Khuda (2)"
             ]
           },
           {
-            "verse": "27",
+            "verse": "Verse 3",
             "lines": [
-              "Aaradhna mere Khuda (2)"
+              "Saath Chalke Apna Banake",
+              "Pochh Liya Hai Saare Aansoo Gham Ke (2)"
             ]
           },
           {
-            "verse": "28",
+            "verse": "Pre-Chorus",
             "lines": [
-              "Kho gaya tha aur bhatak raha tha"
+              "Tune De Diya Apna Balidan",
+              "Mere Khuda, Mere Khuda (2)"
             ]
           },
           {
-            "verse": "29",
+            "verse": "Chorus",
             "lines": [
-              "Tere pyaar ne mujhe raah dikhaya (2)"
+              "Aaradhana, Teri Aaradhana",
+              "Aaradhana Mere Khuda (2)"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "My life is Your unique gift to me,",
+              "How can I ever thank You enough? (2)"
             ]
           },
           {
-            "verse": "30",
+            "verse": "Pre-Chorus",
             "lines": [
-              "Pre-Chorus"
+              "You gave Your own sacrifice,",
+              "My God, my God. (2)"
             ]
           },
           {
-            "verse": "31",
+            "verse": "Chorus",
             "lines": [
-              "Tune de diya apna balidan"
+              "Worship, my worship to You,",
+              "Worship, my God. (2)"
             ]
           },
           {
-            "verse": "32",
+            "verse": "Verse 2",
             "lines": [
-              "Mere Khuda, mere Khuda (2)"
+              "I was lost and wandering away,",
+              "Your love showed me the right path. (2)"
             ]
           },
           {
-            "verse": "33",
+            "verse": "Pre-Chorus",
             "lines": [
-              "Aaradhna, teri aaradhna"
+              "You gave Your own sacrifice,",
+              "My God, my God. (2)"
             ]
           },
           {
-            "verse": "34",
+            "verse": "Chorus",
             "lines": [
-              "Aaradhna mere Khuda (2)"
+              "Worship, my worship to You,",
+              "Worship, my God. (2)"
             ]
           },
           {
-            "verse": "35",
+            "verse": "Verse 3",
             "lines": [
-              "Saath chalke apna banake"
+              "You walked with me and made me Your own,",
+              "You wiped away all tears of sorrow. (2)"
             ]
           },
           {
-            "verse": "36",
+            "verse": "Pre-Chorus",
             "lines": [
-              "Pochh liya hai saare aansoo gham ke (2)"
+              "You gave Your own sacrifice,",
+              "My God, my God. (2)"
             ]
           },
           {
-            "verse": "37",
+            "verse": "Chorus",
             "lines": [
-              "Pre-Chorus"
+              "Worship, my worship to You,",
+              "Worship, my God. (2)"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Ente jeevitham ninte anokhamaya upaharamanu,",
+              "Njan engane ninnodu nandi parayum? (2)"
             ]
           },
           {
-            "verse": "38",
+            "verse": "Pre-Chorus",
             "lines": [
-              "Tune de diya apna balidan"
+              "Nee ninte swantham bali nalki,",
+              "Ente Daivame, ente Daivame. (2)"
             ]
           },
           {
-            "verse": "39",
+            "verse": "Chorus",
             "lines": [
-              "Mere Khuda, mere Khuda (2)"
+              "Aaradhana, ninte aaradhana,",
+              "Aaradhana ente Daivame. (2)"
             ]
           },
           {
-            "verse": "40",
+            "verse": "Verse 2",
             "lines": [
-              "Aaradhna, teri aaradhna"
+              "Njan nashtappettu alanjirunnu,",
+              "Ninte sneham enikku vazhi kaatti. (2)"
             ]
           },
           {
-            "verse": "41",
+            "verse": "Pre-Chorus",
             "lines": [
-              "Aaradhna mere Khuda (2)"
+              "Nee ninte swantham bali nalki,",
+              "Ente Daivame, ente Daivame. (2)"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Aaradhana, ninte aaradhana,",
+              "Aaradhana ente Daivame. (2)"
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Ennodoppam nadannu enne swanthamaki,",
+              "Ellaa dukha kannuneerum nee thudachu. (2)"
+            ]
+          },
+          {
+            "verse": "Pre-Chorus",
+            "lines": [
+              "Nee ninte swantham bali nalki,",
+              "Ente Daivame, ente Daivame. (2)"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Aaradhana, ninte aaradhana,",
+              "Aaradhana ente Daivame. (2)"
             ]
           }
         ]
@@ -46854,22 +46870,138 @@
   {
     "id": "aaradhana_aaradhana",
     "slug": "aaradhana-aaradhana",
-    "title": "Aaradhana aaradhana",
-    "videoUrl": "",
-    "description": "Aaradhana aaradhana - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "title": "Aaradhana Aaradhana Stuti Aaradhana",
+    "videoUrl": "https://www.youtube.com/embed/41wvhykd0Jg",
+    "description": "Aaradhana Aaradhana Stuti Aaradhana - Hindi Christian worship song lyrics with Hindi, Hinglish, English, and Malayalam sections.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "कोरस",
             "lines": [
-              "AaraQanaa AaraQanaa piva~ p`Bau balaI tU banaa",
-              "torI AaraQanaa saamaqa- p`Bau ija,nda Kuda",
-              "tuJakao AaraQanaa toro kaya- sabasao mahana",
-              "torI AaraQanaa torI saaoca Aprmapar",
-              "tuJakao AaraQanaa hallaolauyaah stuit gaaeoM",
-              "torI AaraQanaa hallaolauyaah hallaolauyaah",
-              "tuJakao AaraQanaa"
+              "आराधना आराधना, स्तुति आराधना आराधना, हल्लेलूयाह (2)",
+              "हर सुबह में, हर वक्त में, आराधना यीशु के लिए (2)"
+            ]
+          },
+          {
+            "verse": "अंतरा 1",
+            "lines": [
+              "पवित्र प्रभु तेरी आराधना, पराक्रमी प्रभु तेरी आराधना (2)",
+              "समर्थी पिता तेरी आराधना, सर्वशक्तिमान तेरी आराधना (2)"
+            ]
+          },
+          {
+            "verse": "अंतरा 2",
+            "lines": [
+              "अब्बा पिता तेरी आराधना, आत्मा प्रभु तेरी आराधना (2)",
+              "अभिषेक करने वाले तेरी आराधना, आनंद देने वाले तेरी आराधना (2)"
+            ]
+          },
+          {
+            "verse": "अंतरा 3",
+            "lines": [
+              "सलाहकार प्रभु तेरी आराधना, सहायक प्रभु तेरी आराधना (2)",
+              "रक्षक प्रभु तेरी आराधना, राजाओं का राजा तेरी आराधना (2)"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Aaradhana Aaradhana, Stuti Aaradhana Aaradhana, Hallelujah (2)",
+              "Har Subah Mein, Har Waqt Mein, Aaradhana Yeshu Ke Liye (2)"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Pavitra Prabhu Teri Aaradhana, Parakrami Prabhu Teri Aaradhana (2)",
+              "Samarthi Pita Teri Aaradhana, Sarvashaktimaan Teri Aaradhana (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Abba Pita Teri Aaradhana, Aatma Prabhu Teri Aaradhana (2)",
+              "Abhishek Karne Wale Teri Aaradhana, Aanand Dene Wale Teri Aaradhana (2)"
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Salahkaar Prabhu Teri Aaradhana, Sahayak Prabhu Teri Aaradhana (2)",
+              "Rakshak Prabhu Teri Aaradhana, Rajaon Ka Raja Teri Aaradhana (2)"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Worship, worship, praise and worship, hallelujah (2)",
+              "Every morning, at every moment, worship unto Jesus (2)"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Holy Lord, we worship You; Mighty Lord, we worship You (2)",
+              "All-powerful Father, we worship You; Almighty God, we worship You (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Abba Father, we worship You; Spirit Lord, we worship You (2)",
+              "Anointing Giver, we worship You; Joy Giver, we worship You (2)"
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Wonderful Counselor, we worship You; Helper Lord, we worship You (2)",
+              "Protector Lord, we worship You; King of kings, we worship You (2)"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Aaradhana aaradhana, sthuthi aaradhana aaradhana, hallelujah (2)",
+              "Ella ravileyum, ella samayathum, Yeshuvine aaradhikkam (2)"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Pavithra Prabhuve ninne aaradhikkunnu, Parakramiyaaya Prabhuve ninne aaradhikkunnu (2)",
+              "Samarthanaaya Pithave ninne aaradhikkunnu, Sarvashakthanaaya Daivame ninne aaradhikkunnu (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Abba Pithave ninne aaradhikkunnu, Aathmaavaaya Prabhuve ninne aaradhikkunnu (2)",
+              "Abhishekam nalkunnavane ninne aaradhikkunnu, Aanandam nalkunnavane ninne aaradhikkunnu (2)"
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Aalochana nalkunna Prabhuve ninne aaradhikkunnu, Sahaayakanaaya Prabhuve ninne aaradhikkunnu (2)",
+              "Rakshakanaaya Prabhuve ninne aaradhikkunnu, Rajakkalude Rajave ninne aaradhikkunnu (2)"
             ]
           }
         ]
@@ -96260,27 +96392,110 @@
   {
     "id": "aaradhana_aaradhana_stuti",
     "slug": "aaradhana-aaradhana-stuti",
-    "title": "Aaradhana aaradhana stuti",
-    "videoUrl": "",
-    "description": "आराधना आराधना स्तुति - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "title": "Aaradhana Aaradhana Stuti Aaradhana",
+    "videoUrl": "https://www.youtube.com/embed/41wvhykd0Jg",
+    "description": "Aaradhana Aaradhana Stuti Aaradhana - Hindi Christian worship song lyrics with Hindi, Hinglish, English, and Malayalam sections.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "कोरस",
             "lines": [
-              "आराधना आराधना स्तुति",
-              "आराधना , आराधना (2)",
-              "सुबह के समय , शाम के समय",
-              "आराधना प्रभु यीशु को (२)",
-              "१. पवित्रात्मा तुझे आराधना",
-              "मेरे साथी तुझे आराधना (2)",
-              "स्वर्गीय पिता तुझे आराधना",
-              "मार्गदर्शी तुझे आराधना (2)",
-              "२. जीवित पवित्र तुझे आराधना",
-              "जीवन जल तुझे आराधना (2)",
-              "बादल के खंभे तुझे आराधना",
-              "मेरे मसीह तुझे आराधना (2)"
+              "आराधना आराधना स्तुति, आराधना आराधना (2)",
+              "सुबह के समय, शाम के समय, आराधना प्रभु यीशु को (2)"
+            ]
+          },
+          {
+            "verse": "अंतरा 1",
+            "lines": [
+              "पवित्र आत्मा तुझे आराधना, मेरे साथी तुझे आराधना (2)",
+              "स्वर्गीय पिता तुझे आराधना, मार्गदर्शी तुझे आराधना (2)"
+            ]
+          },
+          {
+            "verse": "अंतरा 2",
+            "lines": [
+              "जीवित पवित्र तुझे आराधना, जीवन जल तुझे आराधना (2)",
+              "बादल के खंभे तुझे आराधना, मेरे मसीह तुझे आराधना (2)"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Aaradhana Aaradhana Stuti, Aaradhana Aaradhana (2)",
+              "Subah Ke Samay, Shaam Ke Samay, Aaradhana Prabhu Yeshu Ko (2)"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Pavitra Aatma Tujhe Aaradhana, Mere Saathi Tujhe Aaradhana (2)",
+              "Swargiya Pita Tujhe Aaradhana, Margdarshi Tujhe Aaradhana (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Jeevit Pavitra Tujhe Aaradhana, Jeevan Jal Tujhe Aaradhana (2)",
+              "Baadal Ke Khambhe Tujhe Aaradhana, Mere Masih Tujhe Aaradhana (2)"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Worship and praise, worship and praise (2)",
+              "In the morning and in the evening, we worship Lord Jesus (2)"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Holy Spirit, we worship You; my companion, we worship You (2)",
+              "Heavenly Father, we worship You; our guide, we worship You (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Living Holy One, we worship You; living water, we worship You (2)",
+              "Pillar of cloud, we worship You; my Messiah, we worship You (2)"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Aaradhana aaradhana sthuthi, aaradhana aaradhana (2)",
+              "Ravile samayathum, vaikunneram samayathum, Karthavaya Yeshuvine aaradhikkam (2)"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Pavithra Aathmave ninne aaradhikkunnu, ente koottukara ninne aaradhikkunnu (2)",
+              "Swargeeya Pithave ninne aaradhikkunnu, vazhi kaattunnavane ninne aaradhikkunnu (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Jeevante pavithranaya ninne aaradhikkunnu, jeevajalamaya ninne aaradhikkunnu (2)",
+              "Meghasthambhamaya ninne aaradhikkunnu, ente Mashiha ninne aaradhikkunnu (2)"
             ]
           }
         ]
