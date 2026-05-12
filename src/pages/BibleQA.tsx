@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import SEO from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-import { Search, BookOpen, ChevronRight, X, Brain, Clock3, BookText, Sparkles } from "lucide-react";
+import { Search, BookOpen, ChevronRight, X, Brain, Clock3, BookText, Sparkles, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
