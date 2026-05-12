@@ -171,7 +171,7 @@
         ]
       }
     },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
+    "thumbnailUrl": "/assets/songs/thumbnails/aaradhana-teri-aaradhana.png"
   },
   {
     "id": "apni_rooh_se_bhar_de",
@@ -311,7 +311,7 @@
         ]
       }
     },
-    "thumbnailUrl": "/assets/songs/english_card.png"
+    "thumbnailUrl": "/assets/songs/thumbnails/apni-rooh-se-bhar-de.png"
   },
   {
     "id": "aye_khuda_kamal_ke_chashme",
@@ -422,7 +422,7 @@
         ]
       }
     },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
+    "thumbnailUrl": "/assets/songs/thumbnails/aye-khuda-kamal-ke-chashme.png"
   },
   {
     "id": "aazmaaya_jo_jaave",
@@ -536,7 +536,7 @@
         ]
       }
     },
-    "thumbnailUrl": "/assets/songs/english_card.png"
+    "thumbnailUrl": "/assets/songs/thumbnails/aazmaaya-jo-jaave.png"
   },
   {
     "id": "abdi_paharon_ko",
@@ -609,7 +609,7 @@
         ]
       }
     },
-    "thumbnailUrl": "/assets/songs/hindi_card.png"
+    "thumbnailUrl": "/assets/songs/thumbnails/abdi-paharon-ko.png"
   },
   {
     "id": "ab_uth_javaan_sipaahee",
