@@ -14,6 +14,7 @@ import hindiSongsData from "@/data/hindi-songs.json";
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const songs: Song[] = hindiSongsData as Song[];
 const ITEMS_PER_PAGE = 24;
+const HINDI_SONGS_SCROLL_KEY = "hindiSongsScrollRestore";
 
 const HindiSongs = () => {
     const navigate = useNavigate();
@@ -30,6 +31,24 @@ const HindiSongs = () => {
                 window.scrollTo({ top: restoreScrollY, behavior: "auto" });
             });
             navigate(location.pathname + location.search, { replace: true, state: null });
+            return;
+        }
+
+        // Fallback for browser back/forward where route state is not present.
+        const raw = sessionStorage.getItem(HINDI_SONGS_SCROLL_KEY);
+        if (!raw) return;
+        try {
+            const saved = JSON.parse(raw) as { path: string; y: number };
+            const currentPath = `${location.pathname}${location.search}`;
+            if (saved.path === currentPath && typeof saved.y === "number" && saved.y > 0) {
+                requestAnimationFrame(() => {
+                    window.scrollTo({ top: saved.y, behavior: "auto" });
+                });
+            }
+        } catch {
+            // ignore malformed session value
+        } finally {
+            sessionStorage.removeItem(HINDI_SONGS_SCROLL_KEY);
         }
     }, [location.pathname, location.search, location.state, navigate]);
 
@@ -304,14 +323,21 @@ const HindiSongs = () => {
                             <Card
                                 key={song.slug}
                                 className="group cursor-pointer hover:shadow-xl transition-all duration-300 border-none bg-white overflow-hidden flex flex-col"
-                                onClick={() =>
+                                onClick={() => {
+                                    sessionStorage.setItem(
+                                        HINDI_SONGS_SCROLL_KEY,
+                                        JSON.stringify({
+                                            path: `${location.pathname}${location.search}`,
+                                            y: window.scrollY,
+                                        })
+                                    );
                                     navigate(`/hindi-songs/${song.slug}`, {
                                         state: {
                                             from: `${location.pathname}${location.search}`,
                                             returnScrollY: window.scrollY,
                                         },
-                                    })
-                                }
+                                    });
+                                }}
                             >
                                 <div className="relative h-48 bg-gradient-to-br from-orange-900 to-amber-800 flex items-center justify-center overflow-hidden">
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />

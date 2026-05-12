@@ -43682,41 +43682,172 @@
   {
     "id": "jai_ho_prabhu_yeshu_raja_ki",
     "slug": "jai-ho-prabhu-yeshu-raja-ki",
-    "title": "Jai ho prabhu yeshu raja ki",
+    "title": "Jai Ho Prabhu Yeshu Raja Ki",
     "videoUrl": "",
-    "description": "Jai ho prabhu yeshu raja ki - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "description": "Jai Ho Prabhu Yeshu Raja Ki - Hindi Christian worship song lyrics in Hindi, Hinglish, English, and Malayalam.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "मुखड़ा",
             "lines": [
-              "t; gks izHkq ;h'kq jktk dh]",
-              "t; gks gekjs eqfDr nkrk dh--2",
-              "t; gks oks lcls egku]",
-              "oks loZ'kfDreku",
-              "1- xqukgksa ls NqM+k;k] viuk cuk;k",
-              "eq>dks gS t;oar fd;k]",
-              "eq>s gjh&gjh pjkbZ;ksa esa pjk;k",
-              "thou dk ty gS fn;kA",
-              "blfy, ukprk gw¡----ukprk gw¡---",
-              "gkFk mBkrk gw¡------mBkrk gw¡",
-              ";h'kq us t; nh gS eq>s efgek esa",
-              "mldh gh xkrk gw¡A 2- ;s opu mldk dgrk]",
-              "oks lnk lkFk jgrk]",
-              "pkgs gks vka/kh rwQku",
-              "NksM+s pkgsa lHkh] ij oks u dHkh NksM+rk",
-              "izse gS mldk egku----",
-              "blfy, ukprk gw¡----ukprk gw¡---",
-              "gkFk mBkrk gw¡------mBkrk gw¡",
-              ";h'kq us t; nh gS eq>s efgek esa",
-              "mldh gh xkrk gw¡A"
+              "जय हो प्रभु यीशु राजा की,",
+              "जय हो हमारे मुक्ति-दाता की (2),",
+              "जय हो, वो सबसे महान,",
+              "वो सर्वशक्तिमान।"
+            ]
+          },
+          {
+            "verse": "अंतरा 1",
+            "lines": [
+              "गुनाहों से छुड़ाया, अपना बनाया,",
+              "मुझको है जयवंत किया,",
+              "मुझे हरी-हरी चराइयों में चराया,",
+              "जीवन का जल है दिया।",
+              "इसलिए नाचता हूँ, नाचता हूँ,",
+              "हाथ उठाता हूँ, उठाता हूँ,",
+              "यीशु ने जय दी है मुझे महिमा में,",
+              "उसकी ही गाता हूँ।"
+            ]
+          },
+          {
+            "verse": "अंतरा 2",
+            "lines": [
+              "ये वचन उसका कहता, वो सदा साथ रहता,",
+              "चाहे हो आँधी-तूफान,",
+              "छोड़ें चाहे सभी, पर वो न कभी छोड़ता,",
+              "प्रेम है उसका महान।",
+              "इसलिए नाचता हूँ, नाचता हूँ,",
+              "हाथ उठाता हूँ, उठाता हूँ,",
+              "यीशु ने जय दी है मुझे महिमा में,",
+              "उसकी ही गाता हूँ।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Mukhda",
+            "lines": [
+              "Jai Ho Prabhu Yeshu Raja Ki,",
+              "Jai Ho Hamaare Mukti-Data Ki (2),",
+              "Jai Ho, Woh Sabse Mahaan,",
+              "Woh Sarvashaktimaan."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Gunahon Se Chhudaya, Apna Banaya,",
+              "Mujhko Hai Jayavant Kiya,",
+              "Mujhe Hari-Hari Charaiyon Mein Charaya,",
+              "Jeevan Ka Jal Hai Diya.",
+              "Isliye Naachta Hoon, Naachta Hoon,",
+              "Haath Uthata Hoon, Uthata Hoon,",
+              "Yeshu Ne Jai Di Hai Mujhe Mahima Mein,",
+              "Uski Hi Gaata Hoon."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Ye Vachan Uska Kehta, Woh Sada Saath Rehta,",
+              "Chahe Ho Aandhi-Toofaan,",
+              "Chhode Chahe Sabhi, Par Woh Na Kabhi Chhodta,",
+              "Prem Hai Uska Mahaan.",
+              "Isliye Naachta Hoon, Naachta Hoon,",
+              "Haath Uthata Hoon, Uthata Hoon,",
+              "Yeshu Ne Jai Di Hai Mujhe Mahima Mein,",
+              "Uski Hi Gaata Hoon."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Victory to Lord Jesus, the King,",
+              "Victory to our Deliverer (2),",
+              "Victory to the One who is greatest of all,",
+              "He is Almighty."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "He freed me from sin and made me His own,",
+              "He made me victorious,",
+              "He led me into green pastures,",
+              "And gave me the water of life.",
+              "Therefore I dance, I dance,",
+              "I lift my hands, I lift my hands,",
+              "Jesus has given me victory in His glory,",
+              "And I sing only of Him."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "His Word declares that He is always with me,",
+              "Even in storms and wind,",
+              "Though all may leave me, He never leaves me,",
+              "Great is His love.",
+              "Therefore I dance, I dance,",
+              "I lift my hands, I lift my hands,",
+              "Jesus has given me victory in His glory,",
+              "And I sing only of Him."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Jaya ho Prabhu Yeshu Rajavinu,",
+              "Nammude Rakshakanu jaya ho (2),",
+              "Ettavum mahathvamaaya avan,",
+              "Sarvashakthan avan."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Paapathil ninnu viduvichu, enne swanthamaki,",
+              "Enikku jayavijayam nalki,",
+              "Pacha pullin idangalil enne nadathi,",
+              "Jeevante vellam avan nalki.",
+              "Athinaal njan nritham cheyyum, nritham cheyyum,",
+              "Kai uyarthum, kai uyarthum,",
+              "Yeshu enikku jayavijayam nalkiyathinaal,",
+              "Avane thanne njan paadum."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Avante vachanam parayunnu, avan eppozhum koode undennu,",
+              "Aandhiyum kaattum varumbolum,",
+              "Ellavarum vittalum avan enne vittu pokilla,",
+              "Avante sneham valare mahathvam.",
+              "Athinaal njan nritham cheyyum, nritham cheyyum,",
+              "Kai uyarthum, kai uyarthum,",
+              "Yeshu enikku jayavijayam nalkiyathinaal,",
+              "Avane thanne njan paadum."
             ]
           }
         ]
       }
     },
-    "thumbnailUrl": "/assets/songs/english_card.png"
+    "thumbnailUrl": "/assets/songs/hindi_card.png"
   },
   {
     "id": "jai_jai_yeshu_sirjanhar_palanhar",
