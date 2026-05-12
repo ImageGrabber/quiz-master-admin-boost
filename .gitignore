@@ -28,3 +28,4 @@ dist-ssr
 .env.sentry-build-plugin
 .env
 search-results/
+SEO_DAILY_RANKING_CHECKLIST.md

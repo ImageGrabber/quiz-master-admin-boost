@@ -54,6 +54,22 @@ const SundaySchoolQuiz = () => {
                     "@type": "Answer",
                     "text": "Yes, we provide a printable version for teachers to use in their lessons. Simply click the download button at the bottom of the section."
                 }
+            },
+            {
+                "@type": "Question",
+                "name": "Do you have Bible quiz questions for youth and teens too?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Along with Sunday school quizzes for children, we provide youth and teen-focused quiz pages with higher difficulty and discussion-based question sets."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can we run this as a no-signup classroom activity?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Teachers can use our free no-signup quiz routes for quick class practice, then optionally move to multiplayer for team competitions."
+                }
             }
         ]
     };
@@ -107,6 +123,19 @@ const SundaySchoolQuiz = () => {
                         </Button>
                     </div>
                 </header>
+                
+                <section className="max-w-4xl mx-auto mb-12 rounded-2xl border border-blue-100 bg-blue-50/60 p-6 md:p-8">
+                    <h2 className="text-2xl font-bold text-slate-900 mb-3">Quick Answer: Best Sunday School Bible Quiz Format</h2>
+                    <p className="text-slate-700 leading-relaxed mb-4">
+                        Use 5 beginner Bible quiz questions, 5 intermediate questions, and 1 short discussion round. This simple format keeps children engaged, improves memory, and helps teachers assess understanding in one lesson.
+                    </p>
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                        <Button variant="outline" className="justify-start" onClick={() => navigate('/free-bible-quiz-no-signup')}>No Signup Quiz</Button>
+                        <Button variant="outline" className="justify-start" onClick={() => navigate('/bible-quiz-questions-and-answers')}>Q&A Collection</Button>
+                        <Button variant="outline" className="justify-start" onClick={() => navigate('/bible-quiz-with-answers-for-youth')}>Youth Quiz</Button>
+                        <Button variant="outline" className="justify-start" onClick={() => navigate('/bible-quiz-printable-pdf')}>Printable PDF Quiz</Button>
+                    </div>
+                </section>
 
                 <div className="max-w-5xl mx-auto">
                     {/* Beginner Section */}
@@ -225,6 +254,65 @@ const SundaySchoolQuiz = () => {
                                 <h4 className="font-bold text-slate-900 mb-2">3. Identifying Gaps</h4>
                                 <p className="text-sm text-slate-500">Answers provided by children give teachers insight into which parts of the Bible story need more explanation or emphasis in next week's session.</p>
                             </div>
+                        </div>
+                    </section>
+                    
+                    <section className="mb-20">
+                        <h2 className="text-3xl font-bold text-slate-900 mb-6 font-urbanist">Sunday School Quiz FAQs</h2>
+                        <Card className="border-none shadow-xl shadow-slate-100 rounded-3xl overflow-hidden">
+                            <CardContent className="pt-6">
+                                <Accordion type="single" collapsible className="w-full">
+                                    {[
+                                        {
+                                            q: "Are these Sunday school quiz questions free to use?",
+                                            a: "Yes. You can use them for church classes, home learning, and fellowship quiz rounds at no cost."
+                                        },
+                                        {
+                                            q: "What age group is best for this page?",
+                                            a: "This page is ideal for ages 6-12, with both beginner and intermediate Bible quiz questions."
+                                        },
+                                        {
+                                            q: "Can I print these Bible quiz questions for classroom use?",
+                                            a: "Yes. Use the print button on this page to create printable quiz sheets for classroom distribution."
+                                        },
+                                        {
+                                            q: "Do you have harder Bible quizzes for older students?",
+                                            a: "Yes. Move to our youth and hard-trivia routes for higher-difficulty Bible quiz questions and answers."
+                                        },
+                                        {
+                                            q: "Can we run this as a quick 15-minute classroom game?",
+                                            a: "Yes. Pick 5 beginner and 5 intermediate questions, then end with one discussion question for recap."
+                                        }
+                                    ].map((item, idx) => (
+                                        <AccordionItem key={idx} value={`faq-${idx}`} className="border-slate-200">
+                                            <AccordionTrigger className="text-left font-bold text-slate-800 hover:text-blue-600 transition-colors">
+                                                {item.q}
+                                            </AccordionTrigger>
+                                            <AccordionContent className="text-slate-700">
+                                                {item.a}
+                                            </AccordionContent>
+                                        </AccordionItem>
+                                    ))}
+                                </Accordion>
+                            </CardContent>
+                        </Card>
+                    </section>
+
+                    <section className="mb-20">
+                        <h2 className="text-3xl font-bold text-slate-900 mb-6 font-urbanist">Related Bible Quiz Resources</h2>
+                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {[
+                                { label: "Bible Quiz Questions and Answers", path: "/bible-quiz-questions-and-answers" },
+                                { label: "Bible Questions Landing", path: "/bible-questions" },
+                                { label: "Bible Q&A Hub", path: "/bible-questions-and-answers-hub" },
+                                { label: "Free Bible Quiz No Signup", path: "/free-bible-quiz-no-signup" },
+                                { label: "Bible Quiz for Youth", path: "/bible-quiz-with-answers-for-youth" },
+                                { label: "Bible Quiz Printable PDF", path: "/bible-quiz-printable-pdf" },
+                            ].map((item) => (
+                                <Button key={item.path} variant="outline" className="justify-start h-auto py-3" onClick={() => navigate(item.path)}>
+                                    {item.label}
+                                </Button>
+                            ))}
                         </div>
                     </section>
 
