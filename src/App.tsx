@@ -398,6 +398,10 @@ const App = () => {
               <Route path="/songs/:slug" element={<LegacyMalayalamSongsRedirect />} />
               <Route path="/songs/:slug/:variant" element={<LegacyMalayalamSongsRedirect />} />
               <Route path="/malayalam-songs" element={<MalayalamSongs />} />
+              <Route
+                path="/malayalam-songs/ho-teri-stuti-aur-aradhanalyrics-and"
+                element={<Navigate to="/hindi-songs/ho-teri-sthuthi-aur-aradhana" replace />}
+              />
               <Route path="/malayalam-songs/:slug" element={<SongDetail />} />
               <Route path="/english-songs" element={<EnglishSongs />} />
               <Route path="/english-songs/:slug" element={<EnglishSongDetail />} />

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,9 +12,13 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
   const songsDropdownRef = useRef<HTMLDivElement>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<typeof publicPages>([]);
-  const [showSearchResults, setShowSearchResults] = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const dedupedSearchPages = useMemo(
+    () => Array.from(new Map(publicPages.map((page) => [page.path, page])).values()),
+    []
+  );
 
   // Handle scroll for glassmorphism effect if transparent
   useEffect(() => {
@@ -54,35 +58,63 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
   useEffect(() => {
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase().trim();
-      const filtered = publicPages.filter(page =>
-        page.title.toLowerCase().includes(query) ||
-        page.category.toLowerCase().includes(query) ||
-        page.path.toLowerCase().includes(query)
-      );
-      setSearchResults(filtered);
-      setShowSearchResults(true);
+      const scored = dedupedSearchPages
+        .map((page) => {
+          const title = page.title.toLowerCase();
+          const category = page.category.toLowerCase();
+          const path = page.path.toLowerCase();
+          const titleStartsWith = title.startsWith(query);
+          const titleIncludes = title.includes(query);
+          const categoryIncludes = category.includes(query);
+          const pathIncludes = path.includes(query);
+
+          if (!titleIncludes && !categoryIncludes && !pathIncludes) return null;
+
+          let score = 0;
+          if (titleStartsWith) score += 60;
+          if (titleIncludes) score += 30;
+          if (categoryIncludes) score += 10;
+          if (pathIncludes) score += 8;
+          if (page.category.toLowerCase().includes("song")) score += 6;
+
+          return { page, score };
+        })
+        .filter((item): item is { page: (typeof publicPages)[number]; score: number } => Boolean(item))
+        .sort((a, b) => b.score - a.score)
+        .map((item) => item.page);
+
+      setSearchResults(scored);
     } else {
       setSearchResults([]);
-      setShowSearchResults(false);
     }
-  }, [searchQuery]);
+  }, [searchQuery, dedupedSearchPages]);
 
-  // Close search results when clicking outside
+  // Open/close search overlay side effects
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
-        setShowSearchResults(false);
+    if (!isSearchOpen) return;
+
+    document.body.style.overflow = "hidden";
+    const timer = window.setTimeout(() => {
+      searchInputRef.current?.focus();
+    }, 50);
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsSearchOpen(false);
       }
     };
+    document.addEventListener("keydown", handleEscape);
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+    return () => {
+      document.body.style.overflow = "";
+      window.clearTimeout(timer);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isSearchOpen]);
 
   const handleSearchSelect = (path: string) => {
     navigate(path);
-    setSearchQuery("");
-    setShowSearchResults(false);
+    setIsSearchOpen(false);
   };
 
   const navItemClass = transparent && !isScrolled 
@@ -158,52 +190,20 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
       </div>
 
       <div className="flex items-center space-x-4">
-        {/* Search Bar */}
-        <div ref={searchRef} className="hidden md:block relative">
-          <div className="relative">
-            <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 transition-colors ${transparent && !isScrolled ? 'text-white/60' : 'text-gray-400'}`} />
-            <Input
-              type="text"
-              placeholder="Search..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onFocus={() => searchQuery.trim() && setShowSearchResults(true)}
-              className={`
-                pl-10 pr-10 w-80 md:w-96 h-10 md:h-11 text-base font-urbanist font-light transition-all backdrop-blur-md
-                ${transparent && !isScrolled 
-                  ? 'bg-white/20 border-white/30 text-white placeholder:text-white/60 focus:bg-white/30 focus:border-white/50' 
-                  : 'bg-white border-gray-300 text-gray-900 focus:border-gray-400'}
-              `}
-            />
-            {searchQuery && (
-              <button
-                onClick={() => {
-                  setSearchQuery("");
-                  setShowSearchResults(false);
-                }}
-                className={`absolute right-3 top-1/2 transform -translate-y-1/2 transition-colors ${transparent && !isScrolled ? 'text-white/40 hover:text-white' : 'text-gray-400 hover:text-gray-600'}`}
-              >
-                <X className="w-4 h-4" />
-              </button>
-            )}
-          </div>
-
-          {/* Search Results Dropdown */}
-          {showSearchResults && searchResults.length > 0 && (
-            <div className="absolute top-full mt-2 left-0 right-0 bg-white rounded-lg shadow-lg border border-gray-200 z-50 max-h-96 overflow-y-auto">
-              {searchResults.map((page, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleSearchSelect(page.path)}
-                  className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors border-b last:border-b-0 border-gray-100"
-                >
-                  <div className="font-urbanist font-medium text-base text-gray-900">{page.title}</div>
-                  <div className="font-urbanist font-light text-sm md:text-base text-gray-600">{page.category}</div>
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
+        {/* Search Trigger */}
+        <button
+          type="button"
+          onClick={() => setIsSearchOpen(true)}
+          className={`
+            hidden md:flex items-center gap-2 pl-4 pr-4 w-80 md:w-96 h-10 md:h-11 text-base font-urbanist font-light rounded-md border transition-all
+            ${transparent && !isScrolled
+              ? "bg-white/20 border-white/30 text-white/80 hover:bg-white/30"
+              : "bg-white border-gray-300 text-gray-500 hover:text-gray-700"}
+          `}
+        >
+          <Search className="w-4 h-4" />
+          <span>Search everything...</span>
+        </button>
 
         <Button
           className={`
@@ -218,6 +218,13 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
         </Button>
         <button className={`md:hidden transition-colors ${transparent && !isScrolled ? 'text-white' : 'text-gray-900'}`} onClick={() => setMobileMenuOpen((open) => !open)}>
           <Menu className="w-6 h-6" />
+        </button>
+        <button
+          className={`md:hidden transition-colors ${transparent && !isScrolled ? "text-white" : "text-gray-900"}`}
+          onClick={() => setIsSearchOpen(true)}
+          aria-label="Open search"
+        >
+          <Search className="w-5 h-5" />
         </button>
       </div>
 
@@ -234,6 +241,75 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
 
           <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-t border-gray-200" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
           <Button className="bg-black text-white text-base px-4 py-3 mx-4 mb-4 font-urbanist font-light rounded-xl" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</Button>
+        </div>
+      )}
+
+      {isSearchOpen && (
+        <div className="fixed inset-0 z-[200] bg-white">
+          <div className="h-full flex flex-col">
+            <div className="px-6 md:px-10 py-5 border-b border-gray-100">
+              <div className="max-w-5xl mx-auto flex items-center gap-3">
+                <div className="relative flex-1">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <Input
+                    ref={searchInputRef}
+                    type="text"
+                    placeholder="Search pages, songs, articles, stories..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="h-12 pl-12 pr-12 text-base md:text-lg font-urbanist font-light border-gray-300"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery("")}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700"
+                      aria-label="Clear search"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  )}
+                </div>
+                <Button
+                  variant="ghost"
+                  className="text-base font-urbanist font-light"
+                  onClick={() => setIsSearchOpen(false)}
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
+
+            <div className="flex-1 overflow-y-auto px-6 md:px-10 py-5">
+              <div className="max-w-5xl mx-auto">
+                {!searchQuery.trim() ? (
+                  <div className="text-gray-500 font-urbanist font-light text-base">
+                    Start typing to search the whole site, including Malayalam, English, and Hindi songs.
+                  </div>
+                ) : searchResults.length === 0 ? (
+                  <div className="text-gray-500 font-urbanist font-light text-base">
+                    No results found for "{searchQuery}".
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <div className="text-sm text-gray-500 font-urbanist font-light px-2 pb-2">
+                      {searchResults.length} result{searchResults.length === 1 ? "" : "s"}
+                    </div>
+                    {searchResults.map((page, index) => (
+                      <button
+                        key={`${page.path}-${index}`}
+                        onClick={() => handleSearchSelect(page.path)}
+                        className="w-full text-left rounded-xl border border-gray-100 hover:border-gray-300 hover:bg-gray-50 transition-colors px-4 py-3"
+                      >
+                        <div className="font-urbanist font-medium text-base md:text-lg text-gray-900">{page.title}</div>
+                        <div className="font-urbanist font-light text-sm text-gray-600">{page.category}</div>
+                        <div className="font-urbanist font-light text-xs text-gray-400 mt-1">{page.path}</div>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </header>

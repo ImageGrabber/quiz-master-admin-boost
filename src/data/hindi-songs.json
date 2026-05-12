@@ -48688,6 +48688,45 @@
             ]
           }
         ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Ho Teri Sthuthi Aur Aradhana",
+              "Karta Hun Mein Tujse Yeh Prathana",
+              "Mahima Se Teri Tu Is Jagah Ko Bhar",
+              "Jo Bhi Tu Chahe Tu Yahan Pe Kar"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Hale-Hallelujah-Hallelujah-Hallelujah",
+              "Hale-Hallelujah-Hallelujah-Hallelujah"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Karuna Se Teri Naya Din Dikhata Hai",
+              "Dhal Bankar Meri Mujhe Bachata Hai",
+              "Jab Mein Pukaru Tu Daud Aata Hai",
+              "Jab Mein Giru Mujhe Uthata Hai"
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "Sare Jahan Mein Tujhsa Koi Nahi",
+              "Tujh Ko Chhod Koi Prabhu Hai Hi Nahi",
+              "Ghutne Mein Teku Bas Tere Saamne",
+              "Tu Hai Mera Prabhu Tu Mera Pita"
+            ]
+          }
+        ]
       }
     }
   },
