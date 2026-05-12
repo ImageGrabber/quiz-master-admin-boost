@@ -37,6 +37,7 @@ const CompetitionHome = () => {
     ...bibleBooks.newTestament.Apocalyptic,
   ], []);
   const [currentTestimonialIndex, setCurrentTestimonialIndex] = useState(0);
+  const [currentSongSlideIndex, setCurrentSongSlideIndex] = useState(0);
 
   // Testimonials data
   const testimonials = [
@@ -193,6 +194,48 @@ const CompetitionHome = () => {
     }
   ];
 
+  const trendingSongSections = useMemo(() => [
+    {
+      language: "Hindi Songs",
+      subtitle: "Most searched Hindi worship lyrics",
+      ctaLabel: "Browse Hindi Songs",
+      ctaPath: "/hindi-songs-list",
+      accent: "from-orange-500 to-rose-500",
+      songs: [
+        { title: "Aaradhna Ho Aaradhna", path: "/aaradhna-ho-aaradhna-lyrics", thumbnail: "/assets/songs/hindi_card.png" },
+        { title: "Haath Uthaakar Gaoonga", path: "/haath-uthaakar-gaoonga-lyrics", thumbnail: "/assets/songs/hindi_card.png" },
+        { title: "Hallelujah Stuti Gaye Hum", path: "/hallelujah-stuti-gaye-hum-lyrics", thumbnail: "/assets/songs/hindi_card.png" },
+        { title: "Apna Bojh Prabhu Par Daal", path: "/apna-bojh-prabhu-par-daal-lyrics-chords", thumbnail: "/assets/songs/hindi_card.png" }
+      ]
+    },
+    {
+      language: "Malayalam Songs",
+      subtitle: "Trending Malayalam Christian worship songs",
+      ctaLabel: "Browse Malayalam Songs",
+      ctaPath: "/malayalam-songs",
+      accent: "from-emerald-500 to-teal-500",
+      songs: [
+        { title: "Nanni Yesuve", path: "/malayalam-songs", thumbnail: "/assets/songs/malayalam_card.png" },
+        { title: "Ente Daivam Mahathwathil", path: "/malayalam-songs", thumbnail: "/assets/songs/malayalam_card.png" },
+        { title: "Yeshu Ente Rakshakan", path: "/malayalam-songs", thumbnail: "/assets/songs/malayalam_card.png" },
+        { title: "Karthavinte Sannidhiyil", path: "/malayalam-songs", thumbnail: "/assets/songs/malayalam_card.png" }
+      ]
+    },
+    {
+      language: "English Songs",
+      subtitle: "Popular English worship favorites",
+      ctaLabel: "Browse English Songs",
+      ctaPath: "/english-songs",
+      accent: "from-sky-500 to-indigo-500",
+      songs: [
+        { title: "Way Maker", path: "/english-songs", thumbnail: "/assets/songs/english_card.png" },
+        { title: "What A Beautiful Name", path: "/english-songs", thumbnail: "/assets/songs/english_card.png" },
+        { title: "Goodness of God", path: "/english-songs", thumbnail: "/assets/songs/english_card.png" },
+        { title: "10,000 Reasons", path: "/english-songs", thumbnail: "/assets/songs/english_card.png" }
+      ]
+    }
+  ], []);
+
 
   const [testimonialsPerViewState, setTestimonialsPerViewState] = useState(3);
 
@@ -301,7 +344,7 @@ const CompetitionHome = () => {
         }}
       />
 
-      <div className="min-h-screen bg-white text-gray-900 font-urbanist selection:bg-black/5">
+      <div className="min-h-screen bg-white text-gray-900 font-montserrat [&_h1]:font-urbanist [&_h2]:font-urbanist [&_h3]:font-urbanist [&_h4]:font-urbanist [&_h5]:font-urbanist [&_h6]:font-urbanist selection:bg-black/5">
         <Navigation transparent={true} />
 
         <section className="relative min-h-[100svh] lg:min-h-screen flex items-center overflow-hidden py-20 sm:py-24 lg:py-0">
@@ -364,7 +407,7 @@ const CompetitionHome = () => {
                   <CardDescription className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-gray-400 mb-2">
                     Explore The Platform
                   </CardDescription>
-                  <CardTitle className="text-3xl sm:text-5xl font-normal italic font-serif text-gray-900">Start Anywhere</CardTitle>
+                  <CardTitle className="text-3xl sm:text-5xl font-normal text-gray-900">Start Anywhere</CardTitle>
                   <CardDescription className="text-sm sm:text-base text-gray-500">
                     Everything available on Bible Quiz Competition, one click away.
                   </CardDescription>
@@ -414,7 +457,7 @@ const CompetitionHome = () => {
             <div className="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
               <div className="max-w-2xl">
                 <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">The Eternal Library</p>
-                <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6 tracking-tight">Premium Bible Study Hub</h2>
+                <h2 className="text-4xl lg:text-6xl font-normal text-gray-900 mb-6 tracking-tight">Premium Bible Study Hub</h2>
                 <p className="text-lg text-gray-500 font-light leading-relaxed">
                   Deep-dive into all 66 books with chapter-specific quizzes and theological summaries. Each book is a gateway to deeper understanding.
                 </p>
@@ -461,7 +504,7 @@ const CompetitionHome = () => {
                         {/* Discovery Overlay */}
                         <div className="absolute inset-x-0 bottom-0 top-0 bg-black/78 translate-y-full group-hover:translate-y-0 transition-transform duration-500 backdrop-blur-md p-6 flex flex-col justify-end text-white z-20">
                           <p className="text-[10px] uppercase font-bold tracking-[0.2em] text-white/70 mb-2">{info.chapters} Chapters</p>
-                          <p className="text-sm font-light leading-relaxed mb-6 line-clamp-4 italic opacity-90">{info.summary}</p>
+                          <p className="text-sm font-light leading-relaxed mb-6 line-clamp-4 opacity-90">{info.summary}</p>
                           <Button size="sm" className="w-full bg-white text-black hover:bg-gray-100 text-xs h-9 rounded-full font-bold tracking-[0.16em] uppercase shadow-lg">Start Study</Button>
                         </div>
                       </div>
@@ -493,7 +536,7 @@ const CompetitionHome = () => {
                     <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-white backdrop-blur-md">
                       <Star className="w-4 h-4 fill-white" /> Kids Corner
                     </span>
-                    <h3 className="text-4xl lg:text-5xl font-normal italic font-serif text-white tracking-tight">Interactive Bible Stories</h3>
+                    <h3 className="text-4xl lg:text-5xl font-normal text-white tracking-tight">Interactive Bible Stories</h3>
                     <p className="text-xl text-white/70 font-light max-w-md leading-relaxed">
                       Beautifully illustrated stories of faith for children, featuring the David & Goliath quiz, Noah's Ark, and more.
                     </p>
@@ -502,7 +545,7 @@ const CompetitionHome = () => {
                     <Button className="bg-white text-black hover:bg-gray-100 rounded-full font-bold px-8 h-12 text-[10px] uppercase tracking-[0.2em]">
                       Explore Stories
                     </Button>
-                    <span className="text-white/60 text-sm font-medium italic group-hover:translate-x-2 transition-transform">Free Quizzes Included →</span>
+                    <span className="text-white/60 text-sm font-medium group-hover:translate-x-2 transition-transform">Free Quizzes Included →</span>
                   </div>
                 </div>
               </div>
@@ -520,7 +563,7 @@ const CompetitionHome = () => {
                     <span className="inline-flex items-center gap-2 rounded-full bg-gray-100 px-4 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-600 backdrop-blur-md">
                       <Zap className="w-4 h-4" /> Global Worship
                     </span>
-                    <h3 className="text-4xl lg:text-5xl font-normal italic font-serif text-gray-900 tracking-tight">Christian Song Library</h3>
+                    <h3 className="text-4xl lg:text-5xl font-normal text-gray-900 tracking-tight">Christian Song Library</h3>
                     <p className="text-xl text-gray-500 font-light max-w-md leading-relaxed">
                       Browse 500+ Hindi & International Christian songs with lyrics and video embeds. Perfect for worship and personal study.
                     </p>
@@ -529,9 +572,94 @@ const CompetitionHome = () => {
                     <Button className="bg-black text-white hover:bg-gray-800 rounded-full font-bold px-8 h-12 border-none text-[10px] uppercase tracking-[0.2em]">
                       Find Songs
                     </Button>
-                    <span className="text-gray-500 text-sm font-medium italic group-hover:translate-x-2 transition-transform">A-Z Directory Available →</span>
+                    <span className="text-gray-500 text-sm font-medium group-hover:translate-x-2 transition-transform">A-Z Directory Available →</span>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Trending Songs Slider for SEO */}
+        <section className="py-24 bg-white border-b border-gray-100">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Search Trending</p>
+                <h2 className="text-4xl lg:text-6xl font-normal text-gray-900 mb-4">Trending Worship Songs</h2>
+                <p className="text-lg text-gray-600 max-w-2xl font-light leading-relaxed">
+                  Explore high-intent Christian song pages across Hindi, Malayalam, and English to improve discoverability and internal linking.
+                </p>
+              </div>
+              <div className="flex justify-end gap-3">
+                <button
+                  onClick={() => setCurrentSongSlideIndex((i) => (i - 1 + trendingSongSections.length) % trendingSongSections.length)}
+                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50"
+                  aria-label="Previous song section"
+                >
+                  <ChevronLeft className="w-5 h-5 text-gray-600" />
+                </button>
+                <button
+                  onClick={() => setCurrentSongSlideIndex((i) => (i + 1) % trendingSongSections.length)}
+                  className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50"
+                  aria-label="Next song section"
+                >
+                  <ChevronRight className="w-5 h-5 text-gray-600" />
+                </button>
+              </div>
+            </div>
+
+            <div className="overflow-hidden rounded-[2.5rem] border border-gray-200 bg-gray-50/50">
+              <div
+                className="flex transition-transform duration-700 ease-in-out"
+                style={{ transform: `translateX(-${currentSongSlideIndex * 100}%)` }}
+              >
+                {trendingSongSections.map((section) => (
+                  <div key={section.language} className="min-w-full p-8 md:p-12">
+                    <div className="bg-white rounded-[2rem] border border-gray-200 p-8 shadow-xl shadow-black/5">
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-7">
+                        <div>
+                          <p className={`text-[10px] font-bold uppercase tracking-[0.24em] bg-gradient-to-r ${section.accent} bg-clip-text text-transparent mb-3`}>
+                            {section.language}
+                          </p>
+                          <h3 className="text-3xl md:text-4xl font-normal text-gray-900">{section.subtitle}</h3>
+                        </div>
+                        <Button
+                          className="rounded-full bg-black text-white hover:bg-gray-800 h-11 px-6 text-[10px] uppercase tracking-[0.2em]"
+                          onClick={() => navigate(section.ctaPath)}
+                        >
+                          {section.ctaLabel} <ArrowRight className="ml-2 w-4 h-4" />
+                        </Button>
+                      </div>
+
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        {section.songs.map((song) => (
+                          <button
+                            key={`${section.language}-${song.title}`}
+                            onClick={() => navigate(song.path)}
+                            className="text-left rounded-2xl border border-gray-200 bg-white p-3 hover:border-black/20 hover:-translate-y-0.5 transition-all"
+                          >
+                            <div className="flex items-center gap-4">
+                              <img
+                                src={song.thumbnail}
+                                alt={`${song.title} thumbnail`}
+                                className="w-16 h-16 rounded-xl object-cover border border-gray-200 bg-gray-100"
+                                loading="lazy"
+                                onError={(e) => {
+                                  (e.currentTarget as HTMLImageElement).src = "/assets/songs/english_card.png";
+                                }}
+                              />
+                              <div>
+                                <p className="text-xs font-bold uppercase tracking-[0.16em] text-gray-400 mb-1">Trending Song</p>
+                                <p className="text-lg font-semibold text-gray-900">{song.title}</p>
+                              </div>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -543,7 +671,7 @@ const CompetitionHome = () => {
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="mb-8 lg:mb-0">
                 <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Growth Architecture</p>
-                <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Designed for Growth</h2>
+                <h2 className="text-4xl lg:text-6xl font-normal text-gray-900 mb-6">Designed for Growth</h2>
                 <p className="text-lg text-gray-500 font-light leading-relaxed mb-10">
                   More than just a game. It's a journey to deepen your understanding of the Scripture through consistent, engaging practice.
                 </p>
@@ -613,7 +741,7 @@ const CompetitionHome = () => {
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
               <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Journey Blueprint</p>
-              <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">How to Become a Bible Challenger</h2>
+              <h2 className="text-4xl lg:text-6xl font-normal text-gray-900 mb-6">How to Become a Bible Challenger</h2>
               <p className="text-lg text-gray-500 font-light max-w-2xl mx-auto leading-relaxed">
                 Your journey to mastering the Word starts here. Follow these simple steps to join the online bible quiz competition.
               </p>
@@ -652,7 +780,7 @@ const CompetitionHome = () => {
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
               <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Organized Discovery</p>
-              <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Browse by Category</h2>
+              <h2 className="text-4xl lg:text-6xl font-normal text-gray-900 mb-6">Browse by Category</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
                 Explore bible quizzes organized by biblical categories.
               </p>
@@ -691,7 +819,7 @@ const CompetitionHome = () => {
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
               <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Curated Challenges</p>
-              <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Featured Quizzes</h2>
+              <h2 className="text-4xl lg:text-6xl font-normal text-gray-900 mb-6">Featured Quizzes</h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
                 Test your knowledge with our most popular bible quizzes.
               </p>
@@ -736,7 +864,7 @@ const CompetitionHome = () => {
             <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
               <div className="max-w-2xl">
                 <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-indigo-600 mb-5">Deepening Your Walk</p>
-                <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Specialized Biblical Resources</h2>
+                <h2 className="text-4xl lg:text-6xl font-normal text-gray-900 mb-6">Specialized Biblical Resources</h2>
                 <p className="text-lg text-gray-500 font-light leading-relaxed">
                   Explore our curated collection of resources designed for specific study needs, from character deep-dives to finding peace in difficult times.
                 </p>
@@ -749,7 +877,7 @@ const CompetitionHome = () => {
                 <div className="w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
                   <Users className="w-7 h-7 text-indigo-600" />
                 </div>
-                <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">Bible Characters</h3>
+                <h3 className="text-2xl font-normal text-gray-900 mb-4">Bible Characters</h3>
                 <p className="text-gray-500 font-light leading-relaxed mb-8">
                   Meet the people of the Bible. From Abraham's faith to Paul's journey, explore the humans God used to change history.
                 </p>
@@ -763,7 +891,7 @@ const CompetitionHome = () => {
                 <div className="w-14 h-14 rounded-2xl bg-sky-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
                   <Heart className="w-7 h-7 text-sky-600" />
                 </div>
-                <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">Finding Peace</h3>
+                <h3 className="text-2xl font-normal text-gray-900 mb-4">Finding Peace</h3>
                 <p className="text-gray-500 font-light leading-relaxed mb-8">
                   Are you feeling anxious? Discover the promises of God for peace, rest, and strength during life's most challenging seasons.
                 </p>
@@ -777,7 +905,7 @@ const CompetitionHome = () => {
                 <div className="w-14 h-14 rounded-2xl bg-amber-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
                   <Zap className="w-7 h-7 text-amber-600" />
                 </div>
-                <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">Parables of Jesus</h3>
+                <h3 className="text-2xl font-normal text-gray-900 mb-4">Parables of Jesus</h3>
                 <p className="text-gray-500 font-light leading-relaxed mb-8">
                   Step into the stories of Jesus. Test your understanding of the wisdom He shared through earthly tales with heavenly meanings.
                 </p>
@@ -791,7 +919,7 @@ const CompetitionHome = () => {
                 <div className="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
                   <Trophy className="w-7 h-7 text-emerald-600" />
                 </div>
-                <h3 className="text-2xl font-normal italic font-serif text-gray-900 mb-4">The Mega Trivia</h3>
+                <h3 className="text-2xl font-normal text-gray-900 mb-4">The Mega Trivia</h3>
                 <p className="text-gray-500 font-light leading-relaxed mb-8">
                   Master the ultimate list of 100 Bible questions. Perfect for individual study or preparing for our global competitions.
                 </p>
@@ -809,7 +937,7 @@ const CompetitionHome = () => {
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
               <div className="text-center md:text-left">
                 <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Editorial Picks</p>
-                <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-4">Latest Insights</h2>
+                <h2 className="text-4xl lg:text-6xl font-normal text-gray-900 mb-4">Latest Insights</h2>
                 <p className="text-lg text-gray-600 max-w-2xl font-light leading-relaxed">
                   Strategies, devotionals, and updates from our community.
                 </p>
@@ -865,7 +993,7 @@ const CompetitionHome = () => {
               <Mail className="w-8 h-8" />
             </div>
             <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Community Updates</p>
-            <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Stay Connected</h2>
+            <h2 className="text-4xl lg:text-6xl font-normal text-gray-900 mb-6">Stay Connected</h2>
             <p className="text-lg text-gray-600 max-w-xl mx-auto font-light mb-10">
               Get the latest quiz schedules, study tips, and daily inspiration delivered straight to your inbox.
             </p>
@@ -894,7 +1022,7 @@ const CompetitionHome = () => {
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center mb-16">
               <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Verified Voices</p>
-              <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Stories from the Community</h2>
+              <h2 className="text-4xl lg:text-6xl font-normal text-gray-900 mb-6">Stories from the Community</h2>
             </div>
 
             <div className="relative">
@@ -953,7 +1081,7 @@ const CompetitionHome = () => {
           <div className="max-w-4xl mx-auto px-6">
             <div className="text-center mb-16">
               <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-5">Need Help?</p>
-              <h2 className="text-4xl lg:text-6xl font-normal italic font-serif text-gray-900 mb-6">Frequently Asked Questions</h2>
+              <h2 className="text-4xl lg:text-6xl font-normal text-gray-900 mb-6">Frequently Asked Questions</h2>
               <p className="text-lg text-gray-500 font-light leading-relaxed">
                 Everything you need to know about the online bible quiz competition 2026.
               </p>

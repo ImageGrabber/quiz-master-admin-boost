@@ -169,6 +169,64 @@
             ]
           }
         ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "I will sing Your praise,",
+              "I will declare Your glory.",
+              "You alone are my Heavenly Father,",
+              "You alone are my true God.",
+              "You alone are worthy of my praise,",
+              "You alone are my Savior God.",
+              "Jehovah Shalom, Jehovah Shalom,",
+              "He will give peace, He will give peace.",
+              "Jehovah Shammah, Jehovah Shammah,",
+              "He will walk with me, He will walk with me.",
+              "Jehovah Rohi, Jehovah Rohi,",
+              "My Shepherd, my Shepherd.",
+              "Jehovah Rapha, Jehovah Rapha,",
+              "He will heal, He will heal.",
+              "Jehovah Nissi, Jehovah Nissi,",
+              "He will give victory, He will give victory.",
+              "Jehovah Jireh, Jehovah Jireh,",
+              "He will provide, He will provide.",
+              "Hallelujah, Hallelujah,",
+              "Hallelujah, Hallelujah."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "ഞാൻ പാടും നിന്റെ സ്തുതി,",
+              "ഞാൻ പറയും നിന്റെ മഹത്വം.",
+              "നീയേ എന്റെ സ്വർഗ്ഗപിതാവാണ്,",
+              "നീയേ എന്റെ സത്യദൈവം.",
+              "നീയേ എന്റെ സ്തുതിക്ക് യോഗ്യൻ,",
+              "നീയേ എന്റെ രക്ഷകനായ ദൈവം.",
+              "യഹോവ ശാലോം, യഹോവ ശാലോം,",
+              "സമാധാനം തരുന്നു, സമാധാനം തരുന്നു.",
+              "യഹോവ ശമ്മാ, യഹോവ ശമ്മാ,",
+              "എന്നോടൊപ്പം നടക്കുന്നു, എന്നോടൊപ്പം നടക്കുന്നു.",
+              "യഹോവ റോഹി, യഹോവ റോഹി,",
+              "എന്റെ ഇടയൻ, എന്റെ ഇടയൻ.",
+              "യഹോവ റാഫാ, യഹോവ റാഫാ,",
+              "സൗഖ്യം തരുന്നു, സൗഖ്യം തരുന്നു.",
+              "യഹോവ നിസ്സി, യഹോവ നിസ്സി,",
+              "ജയം തരുന്നു, ജയം തരുന്നു.",
+              "യഹോവ യീരെ, യഹോവ യീരെ,",
+              "എല്ലാം ഒരുക്കുന്നു, എല്ലാം ഒരുക്കുന്നു.",
+              "ഹല്ലെലൂയാ, ഹല്ലെലൂയാ,",
+              "ഹല്ലെലൂയാ, ഹല്ലെലൂയാ."
+            ]
+          }
+        ]
       }
     },
     "thumbnailUrl": "/assets/songs/thumbnails/aaradhana-teri-aaradhana.png"
@@ -42995,37 +43053,41 @@
   {
     "id": "gaunga_main_teri_stuti",
     "slug": "gaunga-main-teri-stuti",
-    "title": "Gaunga main teri stuti",
+    "title": "Gaunga Main Teri Stuti",
     "videoUrl": "",
-    "description": "Gaunga main teri stuti - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "description": "Gaunga Main Teri Stuti - Hindi Christian devotional song lyrics with worship-friendly formatting.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
             "lines": [
-              "gaa}^Mgaa maOM–2 torI stuit–2",
-              "k$^Mgaa maOM–2 torI mahImaa–2",
-              "tU hI maora Qama- ipta hO",
-              "tU hI maora saccaa Kuda hO",
-              "tU hI maoro stuit ko yaaogya hO",
-              "tU hI maora rxak Kuda hO",
-              "yahaovaa Saalaaoma – 2",
-              "SaaMit dogaa – 2 yahaovaa Sammaa – 2",
-              "saaqa calaogaa – 2",
-              "yahaovaa raohI – 2",
-              "maora carvaah – 2 yahaovaa raFfa – 2",
-              "caMgaa krogaa – 2 yahaovaa naIssaI – 2",
-              "jaya dogaa – 2 yahaovaa yaIro – 2",
-              "saba doKlaogaa – 2",
-              "hallaolauyaah–2 hallaolauyaah–2 – 2",
-              "hallaolauyaah¸ hallaolauyaah – 4"
+              "गाऊंगा मैं तेरी स्तुति,",
+              "करूंगा मैं तेरी महिमा।",
+              "तू ही मेरा परम पिता है,",
+              "तू ही मेरा सच्चा खुदा है।",
+              "तू ही मेरी स्तुति के योग्य है,",
+              "तू ही मेरा रक्षक खुदा है।",
+              "यहोवा शालोम, यहोवा शालोम,",
+              "शांति देगा, शांति देगा।",
+              "यहोवा शम्मा, यहोवा शम्मा,",
+              "साथ चलेगा, साथ चलेगा।",
+              "यहोवा रोही, यहोवा रोही,",
+              "मेरा चरवाहा, मेरा चरवाहा।",
+              "यहोवा राफा, यहोवा राफा,",
+              "चंगा करेगा, चंगा करेगा।",
+              "यहोवा निस्सी, यहोवा निस्सी,",
+              "जय देगा, जय देगा।",
+              "यहोवा यीरे, यहोवा यीरे,",
+              "सब देख लेगा, सब देख लेगा।",
+              "हल्लेलुयाह, हल्लेलुयाह,",
+              "हल्लेलुयाह, हल्लेलुयाह।"
             ]
           }
         ]
       }
     },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
+    "thumbnailUrl": "/assets/songs/hindi_card.png"
   },
   {
     "id": "gaunga_mein_there_hi_geeth",

@@ -15,6 +15,12 @@ import type { Song } from "@/data/songs";
 import hindiSongsData from "@/data/hindi-songs.json";
 
 const songs: Song[] = hindiSongsData as Song[];
+const getTranslationByKey = (song: Song, langKey: string) => {
+    const translations = (song?.translations || {}) as Record<string, { lang: string; lyrics: any[] }>;
+    if (translations[langKey]) return translations[langKey];
+    const matchedKey = Object.keys(translations).find((k) => k.toLowerCase() === langKey.toLowerCase());
+    return matchedKey ? translations[matchedKey] : undefined;
+};
 
 const toQuerySlug = (value: string) =>
     value
@@ -149,17 +155,17 @@ const HindiSongDetail = () => {
 
     const currentTranslation =
         selectedLang === "hinglish"
-            ? (song.translations.hinglish || (song.translations.hindi
+            ? (getTranslationByKey(song, "hinglish") || (getTranslationByKey(song, "hindi")
                 ? {
                     lang: "Hinglish",
-                    lyrics: (song.translations.hindi.lyrics || []).map((section) => ({
+                    lyrics: (getTranslationByKey(song, "hindi")?.lyrics || []).map((section) => ({
                         ...section,
                         lines: (section.lines || []).map(transliterateHindiToHinglish),
                     })),
                 }
                 : undefined))
-            : song.translations[selectedLang];
-    const englishTranslation = song.translations["english"];
+            : getTranslationByKey(song, selectedLang);
+    const englishTranslation = getTranslationByKey(song, "english");
     const videoId = song.videoUrl ? song.videoUrl.split('/').pop() : '';
     const thumbnailUrl = song.thumbnailUrl || (videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '');
     const canonicalUrl = `https://biblequizcompetition.com/hindi-songs/${song.slug}`;
@@ -636,7 +642,7 @@ const HindiSongDetail = () => {
                                         <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 font-urbanist">
                                             Lyrics unavailable
                                         </h2>
-                                        {song.translations[selectedLang]?.lyrics?.length ? (
+                                        {currentTranslation?.lyrics?.length ? (
                                             <p className="text-gray-600 leading-relaxed">
                                                 This song entry has corrupted source text. We are re-verifying and will update it with proper Unicode lyrics.
                                             </p>
