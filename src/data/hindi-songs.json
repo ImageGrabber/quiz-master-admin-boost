@@ -47011,31 +47011,118 @@
   {
     "id": "aaradhana_aaradhana_milkar_kare",
     "slug": "aaradhana-aaradhana-milkar-kare",
-    "title": "Aaradhana aaradhana milkar kare",
-    "videoUrl": "",
-    "description": "Aaradhana aaradhana milkar kare - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "title": "Aaradhana Aaradhana Milkar Kare",
+    "videoUrl": "https://www.youtube.com/embed/NJM20fjW0lM",
+    "description": "Aaradhana Aaradhana Milkar Kare - Hindi Christian worship song lyrics with Hindi, Hinglish, English, and Malayalam sections.",
     "translations": {
       "hindi": {
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "कोरस",
             "lines": [
-              "AaraQanaa‚ AaraQanaa",
-              "imalakr kroM hma AaraQanaa –2",
-              "haqa ]zakr‚ maihmaa gaakr",
-              "imalakr kroM hma AaraQanaa –2",
-              "papaoM kao tU‚ krta xamaa",
-              "raogaaoM kao krta caMgaa –2",
-              "ija,nda hO hma‚ toro ilaeo",
-              "tU hI hO SaaMtI Kuda –2",
-              "torI hI saovaa krta rh^M maOM‚",
-              "jaIvana Bar Pyaaro Kuda –2",
-              "madao-M kao tUnao‚ ija,nda ikyaa",
-              "SaoraoM ka mauMh band ikyaa –2",
-              "vah hO rohma idla‚ saaro jaha^M mao",
-              "kamaaoM mao kaimala Kuda –2",
-              "yaISau masaIha baOTa Kuda ka‚",
-              "duinayaa ka vah baadSah –2"
+              "आराधना, आराधना, मिलकर करें हम आराधना (2)",
+              "हाथ उठाकर, महिमा गाकर, मिलकर करें हम आराधना (2)"
+            ]
+          },
+          {
+            "verse": "अंतरा 1",
+            "lines": [
+              "पापों को तू करता क्षमा, रोगों को करता चंगा (2)",
+              "ज़िंदा हैं हम तेरे लिए, तू ही है शाफ़ी खुदा (2)",
+              "तेरी ही सेवा करता रहूँ मैं, जीवन भर प्यारे खुदा (2)"
+            ]
+          },
+          {
+            "verse": "अंतरा 2",
+            "lines": [
+              "मुर्दों को तूने ज़िंदा किया, शेरों का मुँह बंद किया (2)",
+              "वह है रहमदिल सारे जहाँ में, कामों में कामिल खुदा (2)",
+              "यीशु मसीहा बेटा खुदा का, दुनिया का वह बादशाह (2)"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Aaradhana, Aaradhana, Milkar Karein Hum Aaradhana (2)",
+              "Haath Uthakar, Mahima Gaakar, Milkar Karein Hum Aaradhana (2)"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Paapon Ko Tu Karta Kshama, Rogon Ko Karta Changa (2)",
+              "Zinda Hain Hum Tere Liye, Tu Hi Hai Shaafi Khuda (2)",
+              "Teri Hi Seva Karta Rahun Main, Jeevan Bhar Pyaare Khuda (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Murdo Ko Tune Zinda Kiya, Sheron Ka Muh Band Kiya (2)",
+              "Woh Hai Rehamdil Saare Jahaan Mein, Kaamon Mein Kaamil Khuda (2)",
+              "Yeshu Masiha Beta Khuda Ka, Duniya Ka Woh Badshah (2)"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Worship, worship, together let us worship (2)",
+              "With lifted hands and songs of glory, together let us worship (2)"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "You forgive our sins, You heal every disease (2)",
+              "We live for You alone; You are our healing God (2)",
+              "Let me keep serving You, my loving God, all my life (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "You raised the dead to life; You shut the lions’ mouths (2)",
+              "Merciful through all the earth, perfect in all Your works (2)",
+              "Jesus Messiah, Son of God, the King of all the world (2)"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Aaradhana, aaradhana, onnichu nammal aaradhikkam (2)",
+              "Kai uyarthi, mahima paadi, onnichu nammal aaradhikkam (2)"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Paapangal nee kshamikunnu, rogangal nee sukhappetuttunnu (2)",
+              "Njangal jeevikkunnath ninakkayi, nee thanne njangalde shaafi Daivam (2)",
+              "Ninte sevayil njan thudaratte, jeevitha muzhuvan priya Daivame (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Marichavare nee jeevippichu, simhathinte vay nee adachu (2)",
+              "Lokam muzhuvan karunayulla, pravarthikalil poornna Daivam (2)",
+              "Yeshu Mashiha Daivaputhran, lokathinte Rajavu avan (2)"
             ]
           }
         ]
