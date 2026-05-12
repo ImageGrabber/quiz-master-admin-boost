@@ -41888,6 +41888,70 @@
             ]
           }
         ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Let me go now to Jesus (2)",
+              "People of the world, do not stop me (2)",
+              "Let me tell Him the state of my heart (2)",
+              "Let me go, let me go, let me go (2)"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "I am like a thirsty deer for Your love, O Jesus (2)",
+              "My heart longs to behold You (2)",
+              "Let me quench this thirst within me (2)",
+              "People of the world, do not stop me (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Even while stumbling, I will move forward,",
+              "I will go and tell Jesus everything,",
+              "Let His hand touch me,",
+              "People of the world, do not stop me (2)"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam (Manglish)",
+        "lyrics": [
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Ippol Yeshuvinte aduthekk enne pokan vidu (2)",
+              "Lokakkare, enne thadayaruthe (2)",
+              "Ente hridaya sthithi avanodu parayan vidu (2)",
+              "Pokan vidu, pokan vidu, pokan vidu (2)"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "Yeshuve, ninte snehathinayi njan daahicha maan pole aanu (2)",
+              "Ninne kaanan ente hridayam valare aagrahikkunnu (2)",
+              "Ente daaham theerkkan enne vidu (2)",
+              "Lokakkare, enne thadayaruthe (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Veezhunnalum njan munnotu nadakkum,",
+              "Yeshuvinodu njan ellam parayum,",
+              "Avante kai enne thoduvan vidu,",
+              "Lokakkare, enne thadayaruthe (2)"
+            ]
+          }
+        ]
       }
     }
   },
