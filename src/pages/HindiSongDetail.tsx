@@ -330,10 +330,12 @@ const HindiSongDetail = () => {
         if (!looksLikeFlatBlock) return deduped;
 
         const grouped: LyricSection[] = [];
+        const chordLines = only?.chords || [];
         for (let i = 0; i < lines.length; i += 4) {
             grouped.push({
                 verse: String(grouped.length + 1),
                 lines: lines.slice(i, i + 4),
+                chords: chordLines.length ? chordLines.slice(i, i + 4) : undefined,
             });
         }
         return grouped;

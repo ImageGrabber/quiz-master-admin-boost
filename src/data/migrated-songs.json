@@ -40354,5 +40354,89 @@
         ]
       }
     }
+  },
+  {
+    "id": "ho_teri_stuti_aur_aradhana",
+    "slug": "ho-teri-stuti-aur-aradhanalyrics-and",
+    "title": "Ho Teri Stuti Aur Aradhana",
+    "videoUrl": "https://www.youtube.com/embed/9NXL0D4l2yQ",
+    "description": "Ho Teri Stuti Aur Aradhana - Hindi Christian worship song lyrics with chords and English translation.",
+    "translations": {
+      "malayalam": {
+        "lang": "Hindi (Romanized)",
+        "lyrics": [
+          {
+            "lines": [
+              "Ho teri stuti aur aradhana, karta hun main tujhse yeh prarthana",
+              "Mahima se teri, tu is jagah ko bhar",
+              "Jo bhi tu chahe, tu yahan par kar"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Ha Hallelujah, Hallelujah, Hallelujah",
+              "Ha Hallelujah, Hallelujah, Hallelujah"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Karuna se teri naya din dikhata hai",
+              "Dhal bankar meri mujhe bachata hai",
+              "Jab main pukaru tu daud aata hai",
+              "Jab main giru mujhe uthata hai"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Sare jahan mein tujhsa koi nahi",
+              "Tujh ko chhod koi Prabhu hai hi nahi",
+              "Ghutne main tekun bas tere samne",
+              "Tu hai mera Prabhu, tu mera Pita"
+            ]
+          }
+        ]
+      },
+      "hindi": {
+        "lang": "Hindi",
+        "lyrics": [
+          {
+            "lines": [
+              "हो तेरी स्तुति और आराधना, करता हूँ मैं तुझसे ये प्रार्थना",
+              "महिमा से तेरी तू इस जगह को भर",
+              "जो भी तू चाहे तू यहाँ पे कर"
+            ]
+          },
+          {
+            "verse": "कोरस",
+            "lines": [
+              "हा हल्लेलुयाह, हल्लेलुयाह, हल्लेलुयाह",
+              "हा हल्लेलुयाह, हल्लेलुयाह, हल्लेलुयाह"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Lord, I praise and adore You; this is my prayer to You.",
+              "Fill this place with Your glory;",
+              "Do here whatever You desire."
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Hallelujah, Hallelujah, Hallelujah",
+              "Hallelujah, Hallelujah, Hallelujah"
+            ]
+          }
+        ]
+      }
+    }
   }
 ]
