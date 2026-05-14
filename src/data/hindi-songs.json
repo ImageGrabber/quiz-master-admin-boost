@@ -91781,7 +91781,8 @@
     "id": "aa_pavitr_aatma_aatma_me_prarthna",
     "slug": "aa-pavitr-aatma-aatma-me-prarthna",
     "title": "Aa Pavitr Aatma Aatma me prarthna",
-    "videoUrl": "https://www.youtube.com/embed/KZYzR4mGGeQ",
+    "videoUrl": "",
+    "thumbnailUrl": "https://images.pexels.com/photos/7640496/pexels-photo-7640496.jpeg",
     "description": "Aa Pavitr Aatma Aatma me prarthna - Hindi Christian devotional song lyrics with worship-friendly formatting.",
     "translations": {
       "hindi": {
@@ -91911,13 +91912,13 @@
         ]
       }
     },
-    "thumbnailUrl": "/assets/songs/hindi_card.png"
+    "thumbnailUrl": "https://images.pexels.com/photos/7640496/pexels-photo-7640496.jpeg"
   },
   {
     "id": "aa_pavitr_aatma_tu_aaja",
     "slug": "aa-pavitr-aatma-tu-aaja",
     "title": "Aa pavitr aatma tu aaja",
-    "videoUrl": "https://www.youtube.com/embed/KZYzR4mGGeQ",
+    "videoUrl": "",
     "description": "Aa pavitr aatma tu aaja - Hindi Christian devotional song lyrics with worship-friendly formatting.",
     "translations": {
       "hindi": {
@@ -92984,32 +92985,40 @@
               "आदर महिमा …",
               "हे प्रभु मोर …"
             ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Aadar mahima toke",
+              "Hey Prabhu mor",
+              "Aadar mahima toke",
+              "Hey Prabhu mor",
+              "Kair de ni beda paar",
+              "De de ni prem apaar",
+              "Tor daya mor le Prabhu",
+              "Aahe aparampaar"
+            ]
           },
           {
             "verse": "1",
             "lines": [
-              "chorus (ko°):",
-              "aadar mahima toke –",
-              "hey prabhu mor",
-              "aadar mahima toke",
-              "hey prabhu mor",
-              "kair de ni beda paar –",
-              "de de ni prem apaar",
-              "tor daya mor le prabhu",
-              "aahe aparampar –",
-              "1.",
-              "naya jeevan payke yeshu",
-              "moe anant jeevan payke yeshu",
-              "sada sada mahima karabu",
-              "jeevan me apan –",
-              "aadar mahima…",
-              "2.",
-              "jeevan me dukh vipat aahe",
-              "moe fir bhi toke chun lo yeshu –",
-              "sada sada mahima karabu",
-              "jeevan me apan –",
-              "aadar mahima…",
-              "hey prabhu mor…"
+              "Naya jeevan paayke Yeshu",
+              "Moe anant jeevan paayke Yeshu",
+              "Sada sada mahima karabu",
+              "Jeevan me apan"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Jeevan me dukh vipat aahe",
+              "Moe phir bhi toke chun lo Yeshu",
+              "Sada sada mahima karabu",
+              "Jeevan me apan"
             ]
           }
         ]

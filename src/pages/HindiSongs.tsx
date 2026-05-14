@@ -10,6 +10,7 @@ import { useState, useMemo, useEffect } from "react";
 import type { Song } from "@/data/songs";
 import { Badge } from "@/components/ui/badge";
 import hindiSongsData from "@/data/hindi-songs.json";
+import { resolveSongThumbnail } from "@/utils/song-thumbnails";
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 const songs: Song[] = hindiSongsData as Song[];
@@ -341,9 +342,9 @@ const HindiSongs = () => {
                             >
                                 <div className="relative h-48 bg-gradient-to-br from-orange-900 to-amber-800 flex items-center justify-center overflow-hidden">
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
-                                    {song.videoUrl ? (
+                                    {song.videoUrl || song.thumbnailUrl ? (
                                         <img
-                                            src={`https://img.youtube.com/vi/${song.videoUrl.split('/').pop()}/hqdefault.jpg`}
+                                            src={resolveSongThumbnail(song)}
                                             alt={song.title}
                                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80"
                                             onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}

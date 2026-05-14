@@ -11,6 +11,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import type { Song } from "@/data/songs";
 import hindiSongsData from "@/data/hindi-songs.json";
+import { resolveSongThumbnail } from "@/utils/song-thumbnails";
 
 const songs: Song[] = hindiSongsData as Song[];
 const getTranslationByKey = (song: Song, langKey: string) => {
@@ -163,7 +164,7 @@ const HindiSongDetail = () => {
             : getTranslationByKey(song, selectedLang);
     const englishTranslation = getTranslationByKey(song, "english");
     const videoId = song.videoUrl ? song.videoUrl.split('/').pop() : '';
-    const thumbnailUrl = song.thumbnailUrl || (videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '');
+    const thumbnailUrl = resolveSongThumbnail(song);
     const canonicalUrl = `https://biblequizcompetition.com/hindi-songs/${song.slug}`;
 
     const plainTitle = toQuerySlug(song.title);
@@ -597,7 +598,7 @@ const HindiSongDetail = () => {
 
                         </div>
 
-                        {videoId && (
+                        {videoId ? (
                             <div className="bg-white p-2 rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
                                 <div className="aspect-video rounded-2xl overflow-hidden ring-1 ring-gray-100">
                                     <iframe
@@ -609,7 +610,18 @@ const HindiSongDetail = () => {
                                     ></iframe>
                                 </div>
                             </div>
-                        )}
+                        ) : thumbnailUrl ? (
+                            <div className="bg-white p-2 rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                                <div className="aspect-video rounded-2xl overflow-hidden ring-1 ring-gray-100 bg-orange-50">
+                                    <img
+                                        src={thumbnailUrl}
+                                        alt={`${song.title} thumbnail`}
+                                        className="w-full h-full object-cover"
+                                        loading="lazy"
+                                    />
+                                </div>
+                            </div>
+                        ) : null}
 
                     </aside>
 
@@ -688,8 +700,7 @@ const HindiSongDetail = () => {
                                     <div className="-mx-1 overflow-x-auto pb-1">
                                         <div className="flex gap-4 px-1 snap-x snap-mandatory">
                                             {relatedSongsForSlider.map((related) => {
-                                                const relatedVideoId = related.videoUrl ? related.videoUrl.split("/").pop() : "";
-                                                const relatedThumb = related.thumbnailUrl || (relatedVideoId ? `https://img.youtube.com/vi/${relatedVideoId}/hqdefault.jpg` : "");
+                                                const relatedThumb = resolveSongThumbnail(related);
                                                 const relatedHindiSections = related.translations?.hindi?.lyrics || [];
                                                 const relatedLineCount = relatedHindiSections.reduce((sum, sec) => sum + (sec.lines?.length || 0), 0);
                                                 const relatedHasChords = relatedHindiSections.some((sec) => sec.chords && sec.chords.length > 0);
