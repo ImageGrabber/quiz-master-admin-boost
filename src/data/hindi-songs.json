@@ -3590,70 +3590,6 @@
     "thumbnailUrl": "/assets/songs/malayalam_card.png"
   },
   {
-    "id": "a_mighty_fortress_christian_song",
-    "slug": "a-mighty-fortress-christian-song",
-    "title": "A MIGHTY FORTRESS - CHRISTIAN SONG",
-    "videoUrl": "https://www.youtube.com/embed/1v6aZiDzhVE",
-    "description": "A MIGHTY FORTRESS - CHRISTIAN SONG - Hindi Christian Devotional Song Lyrics",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "A MIGHTY fortress is our God,",
-              "A bulwark never failing; Our helper He, amid the flood"
-            ]
-          },
-          {
-            "verse": "1",
-            "lines": [
-              "Of mortal ills prevailing, For still our ancient foe",
-              "Doth seek to work his woe; His craft and power are great,"
-            ]
-          },
-          {
-            "verse": "2",
-            "lines": [
-              "And armed with cruel hate - On earth is not his equal."
-            ]
-          },
-          {
-            "verse": "3",
-            "lines": [
-              "2. Did we in our own strength confide,",
-              "Our striving would be losing,",
-              "Were not the right Man on our side,",
-              "The Man of God's own choosing, Dost ask who that may be? Christ Jesus, It is He! Lord Sabaoth is His name,"
-            ]
-          },
-          {
-            "verse": "4",
-            "lines": [
-              "From age to age the same; And He must win the battle."
-            ]
-          },
-          {
-            "verse": "5",
-            "lines": [
-              "3. And though this world, with devils filled,",
-              "Should threaten to undo us;",
-              "We will not fear; for God hath willed",
-              "His truth in triumph through us, Let goods and kindred go, This mortal life also; The body they may kill,"
-            ]
-          },
-          {
-            "verse": "6",
-            "lines": [
-              "God's truth abideth still, His kingdom is for ever."
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/hindi_card.png"
-  },
-  {
     "id": "abdi_chattan_mujhe",
     "slug": "abdi-chattan-mujhe",
     "title": "ABDI CHATTAN MUJHE",
@@ -91845,7 +91781,7 @@
     "id": "aa_pavitr_aatma_aatma_me_prarthna",
     "slug": "aa-pavitr-aatma-aatma-me-prarthna",
     "title": "Aa Pavitr Aatma Aatma me prarthna",
-    "videoUrl": "",
+    "videoUrl": "https://www.youtube.com/embed/KZYzR4mGGeQ",
     "description": "Aa Pavitr Aatma Aatma me prarthna - Hindi Christian devotional song lyrics with worship-friendly formatting.",
     "translations": {
       "hindi": {

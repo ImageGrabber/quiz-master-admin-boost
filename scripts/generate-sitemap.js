@@ -83,6 +83,7 @@ function routeLooksIndexable(route, options = {}) {
     '/faith-builder',
     '/flappy-bird',
     '/bible-questions-and-answers-hub/rith',
+    '/hindi-songs/a-mighty-fortress-christian-song',
     '/hindi-songs/ek-aag-har-dil-mein-lyrics',
     '/hindi-songs/vandana-karte-hai-hum-lyrics',
     '/hindi-songs/aaradhna-ho-aaradhna-lyrics'

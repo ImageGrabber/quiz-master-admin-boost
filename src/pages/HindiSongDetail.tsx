@@ -6,11 +6,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { ArrowLeft, Share2, Music2, Languages, Info } from "lucide-react";
+import { ArrowLeft, Share2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
 import type { Song } from "@/data/songs";
 import hindiSongsData from "@/data/hindi-songs.json";
 
@@ -129,8 +127,6 @@ const HindiSongDetail = () => {
         return false;
     });
     const [selectedLang, setSelectedLang] = useState("hindi");
-    const [showChords, setShowChords] = useState(true);
-
     const backState = (location.state as { from?: string; returnScrollY?: number } | null) || null;
     const backHref = backState?.from || "/hindi-songs";
 
@@ -189,6 +185,22 @@ const HindiSongDetail = () => {
         variants.add(plainTitle.replace(/\bmein\b/g, "main"));
         variants.add(plainTitle.replace(/aaradhana/g, "aradhna"));
         variants.add(plainTitle.replace(/prabhu/g, "yeshu"));
+        variants.add(plainTitle.replace(/prarthna/g, "prarthana"));
+        variants.add(plainTitle.replace(/\bme\b/g, "mein"));
+
+        if (/pavitr/.test(plainTitle)) {
+            variants.add(plainTitle.replace(/pavitr/g, "pavitra"));
+            variants.add(`${plainTitle.replace(/pavitr/g, "pavitra")} lyrics`);
+            variants.add("pavitr aatma song lyrics");
+            variants.add("holy spirit worship song hindi lyrics");
+        }
+
+        if (/aatma/.test(plainTitle) && /prarthn/.test(plainTitle)) {
+            variants.add("aatma me prarthna lyrics");
+            variants.add("aatma mein prarthna lyrics");
+            variants.add("aatma me prarthana lyrics");
+            variants.add("prayer in the spirit song lyrics");
+        }
 
         return Array.from(variants)
             .map((v) => v.replace(/\s+/g, " ").trim())
@@ -366,6 +378,35 @@ const HindiSongDetail = () => {
         t.lyrics.some(l => l.chords && l.chords.length > 0)
     );
     const hasEnglish = !!song.translations['english'];
+    const hasMalayalam = !!song.translations['malayalam'];
+    const isHolySpiritSong = /pavitr|pavitra|holy spirit/i.test(`${song.title} ${song.description}`);
+    const isPrayerSong = /prarthna|prarthana|prayer/i.test(`${song.title} ${song.description}`);
+    const topSearchIntent = useMemo(() => {
+        const phrases = [
+            `${song.title} lyrics`,
+            `${song.title} lyrics in Hindi`,
+            `${song.title} Hinglish lyrics`,
+        ];
+
+        if (hasEnglish) phrases.push(`${song.title} English translation`);
+        if (hasMalayalam) phrases.push(`${song.title} Malayalam lyrics`);
+        if (hasChords) phrases.push(`${song.title} guitar chords`);
+        if (isPrayerSong) phrases.push(`${song.title} prayer meeting song`);
+        if (isHolySpiritSong) phrases.push(`${song.title} Holy Spirit worship song`);
+
+        return phrases.slice(0, 6).join(", ");
+    }, [song.title, hasEnglish, hasMalayalam, hasChords, isPrayerSong, isHolySpiritSong]);
+    const heroSummary = useMemo(() => {
+        const languageCopy = hasMalayalam
+            ? `${languagesText || "Hindi, Hinglish, English, and Malayalam"}`
+            : `${languagesText || "Hindi, Hinglish, and English"}`;
+        const chordCopy = hasChords ? " with guitar chords" : "";
+        const themeCopy = isHolySpiritSong
+            ? "This Holy Spirit worship song is often used in church prayer meetings, personal devotion, and youth fellowship."
+            : "This worship song is often used in church prayer meetings, personal devotion, and fellowship worship.";
+
+        return `Read ${song.title} lyrics in ${languageCopy}${chordCopy}, with clear verse flow, transliteration support, and meaning-friendly formatting. ${themeCopy}`;
+    }, [song.title, languagesText, hasMalayalam, hasChords, isHolySpiritSong]);
 
     const jsonLd = {
         "@context": "https://schema.org",
@@ -537,7 +578,10 @@ const HindiSongDetail = () => {
                                 {hasEnglish && <span className="text-[10px] font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded uppercase tracking-wider">English Translation</span>}
                             </div>
                             <p className="text-gray-500 text-xs leading-relaxed mb-6 font-medium">
-                                Full lyrics in {languagesText || "Hindi"} with worship-friendly structure, guitar chords, and search variants.
+                                {heroSummary}
+                            </p>
+                            <p className="text-[11px] text-gray-400 leading-relaxed mb-6 font-medium">
+                                Popular searches: {topSearchIntent}.
                             </p>
                             
                             <div className="flex items-center gap-3 mb-8">
@@ -551,40 +595,6 @@ const HindiSongDetail = () => {
                                 </Button>
                             </div>
 
-                            <hr className="mb-8 border-gray-100" />
-
-                            <div className="space-y-6">
-                                <div className="flex items-center justify-between group">
-                                    <div className="flex items-center space-x-3">
-                                        <div className="p-2.5 bg-orange-100 rounded-xl group-hover:scale-110 transition-transform">
-                                            <Music2 className="h-5 w-5 text-orange-600" />
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <Label htmlFor="sidebar-chords" className="text-sm font-bold text-gray-700">Guitar Chords</Label>
-                                            <span className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Show chords</span>
-                                        </div>
-                                    </div>
-                                    <Switch
-                                        id="sidebar-chords"
-                                        checked={showChords}
-                                        onCheckedChange={setShowChords}
-                                        className="data-[state=checked]:bg-orange-600"
-                                    />
-                                </div>
-
-                                <div className="flex items-center justify-between group">
-                                    <div className="flex items-center space-x-3">
-                                        <div className="p-2.5 bg-blue-100 rounded-xl group-hover:scale-110 transition-transform">
-                                            <Languages className="h-5 w-5 text-blue-600" />
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <Label className="text-sm font-bold text-gray-700">Language</Label>
-                                            <span className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Use tabs in lyrics area</span>
-                                        </div>
-                                    </div>
-                                    <div className="text-xs font-semibold text-blue-700 bg-blue-50 px-3 py-1 rounded-full">Tabs</div>
-                                </div>
-                            </div>
                         </div>
 
                         {videoId && (
@@ -601,17 +611,6 @@ const HindiSongDetail = () => {
                             </div>
                         )}
 
-                        <div className="bg-orange-50/50 rounded-2xl p-6 border border-orange-100/50">
-                            <div className="flex items-start gap-4">
-                                <Info className="h-5 w-5 text-orange-600 mt-0.5" />
-                                <div className="space-y-2">
-                                    <h4 className="text-sm font-bold text-orange-900">Pro Tip</h4>
-                                    <p className="text-xs text-orange-800/70 leading-relaxed">
-                                        Use the toggles above to visualize guitar progressions and understand the deeper theological meaning of this song.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
                     </aside>
 
                     {/* Right Content - Lyrics */}
@@ -663,7 +662,7 @@ const HindiSongDetail = () => {
                                                         key={lineIndex}
                                                         className={`flex flex-col items-start ${lineIndex > 0 && lineIndex % 2 === 0 ? "mt-5" : ""}`}
                                                     >
-                                                        {showChords && section.chords && section.chords[lineIndex] && (
+                                                        {section.chords && section.chords[lineIndex] && (
                                                             <p className="text-orange-600 font-mono text-sm md:text-base font-black mb-1 tracking-[0.1em] bg-orange-50 px-2 py-0.5 rounded-md border border-orange-100 shadow-sm">
                                                                 {section.chords[lineIndex]}
                                                             </p>
@@ -737,23 +736,23 @@ const HindiSongDetail = () => {
                                 <CardContent className="p-8 space-y-4">
                                     <h2 className="text-2xl font-bold text-gray-900">About This Song</h2>
                                     <p className="text-gray-700 leading-relaxed">
-                                        <strong>{song.title}</strong> is a popular Hindi Christian worship song used in personal devotion,
-                                        church prayer meetings, and youth fellowship gatherings. On this page you can study the lyrics deeply,
-                                        sing with confidence, and reflect on the spiritual message behind each section.
+                                        <strong>{song.title}</strong> is a Hindi Christian worship song that people often search for as
+                                        <strong> {song.title} lyrics</strong>, <strong>{song.title} lyrics in Hindi</strong>, and
+                                        {hasEnglish ? <strong> {song.title} English translation</strong> : <strong> {song.title} meaning</strong>}. This page is designed for readers who want the full lyrics in one place with easy-to-read formatting for worship, devotion, and song practice.
+                                    </p>
+                                    <p className="text-gray-700 leading-relaxed">
+                                        {isHolySpiritSong
+                                            ? `The theme of this song centers on inviting the Holy Spirit, walking in humility, and praying in truth. That makes it especially relevant for Holy Spirit worship sessions, church prayer meetings, revival gatherings, and quiet personal prayer time.`
+                                            : `The song is widely suited for church services, family prayer, and personal worship because its language is simple, reverent, and easy to sing together.`}
                                     </p>
                                     <p className="text-gray-700 leading-relaxed">
                                         This page currently contains <strong>{stats.sections}</strong> lyric sections and <strong>{stats.lines}</strong> lyric lines.
-                                        {hasChords ? " Chords are included for worship leaders and guitar players." : " Chords are being added as they become available."}
-                                        {hasEnglish ? " English meaning is also available for bilingual worship preparation." : " English meaning support is being expanded."}
+                                        You can read the song in <strong>{languagesText || "Hindi"}</strong>{hasEnglish ? ", including an English meaning/translation layer" : ""}{hasChords ? ", along with available guitar chord support" : ""}. This helps worship teams, singers, and bilingual congregations prepare the song with better pronunciation, understanding, and flow.
                                     </p>
                                     <p className="text-gray-700 leading-relaxed">
-                                        You can switch between <strong>Hindi</strong>, <strong>Hinglish</strong>, <strong>English</strong>, and <strong>Malayalam</strong> tabs (where available)
-                                        to read lyrics in your preferred format. This makes it easier for worship teams, youth fellowships, and family prayer groups to sing together
-                                        with better understanding and pronunciation support.
-                                    </p>
-                                    <p className="text-gray-700 leading-relaxed">
-                                        If you are searching for Christian song lyrics for church service, devotion time, or Bible study music practice, this page is designed to provide
-                                        readable verse flow, chord-friendly lines, and language options in one place.
+                                        If you are searching for <strong>{song.title} lyrics in Hindi</strong>, <strong>{song.title} Hinglish lyrics</strong>,
+                                        {hasMalayalam ? <strong> {song.title} Malayalam lyrics</strong> : <strong> {song.title} devotional lyrics</strong>}, <strong>{song.title} meaning</strong>, or
+                                        <strong> {song.title} worship song lyrics</strong>, this page brings those search intents together in one place with readable verse flow and mobile-friendly formatting.
                                     </p>
                                 </CardContent>
                             </Card>
