@@ -675,7 +675,7 @@ const HindiSongDetail = () => {
                                                         className={`flex flex-col items-start ${lineIndex > 0 && lineIndex % 2 === 0 ? "mt-5" : ""}`}
                                                     >
                                                         {section.chords && section.chords[lineIndex] && (
-                                                            <p className="text-orange-600 font-mono text-sm md:text-base font-black mb-1 tracking-[0.1em] bg-orange-50 px-2 py-0.5 rounded-md border border-orange-100 shadow-sm">
+                                                            <p className="text-orange-600 font-mono text-sm md:text-base font-black mb-1 tracking-[0.1em] whitespace-pre-wrap bg-orange-50 px-2 py-0.5 rounded-md border border-orange-100 shadow-sm">
                                                                 {section.chords[lineIndex]}
                                                             </p>
                                                         )}

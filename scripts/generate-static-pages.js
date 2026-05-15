@@ -65,6 +65,7 @@ const articles = [
 const migratedSongsPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/data/migrated-songs.json');
 const scrapedSongsPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/data/scraped-blog-songs.json');
 const hindiSongsPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/data/hindi-songs.json');
+const malayalamSongsSourcePath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/data/songs.ts');
 
 let allSongs = [
     { slug: "ithratholam-yahova-sahayichu", title: "Ithratholam Yahova Sahayichu", description: "Worship along with this beautiful melody." },
@@ -100,6 +101,25 @@ if (fs.existsSync(hindiSongsPath)) {
     console.error('Error reading Hindi songs dataset:', e.message);
   }
 }
+
+function readMalayalamSongsFromSource(filePath) {
+  if (!fs.existsSync(filePath)) return [];
+
+  const source = fs.readFileSync(filePath, 'utf-8');
+  const songs = [];
+  const entryRegex = /slug:\s*"([^"]+)"[\s\S]*?title:\s*"([^"]+)"/g;
+
+  for (const match of source.matchAll(entryRegex)) {
+    const slug = match[1]?.trim();
+    const title = match[2]?.trim();
+    if (!slug || !title) continue;
+    songs.push({ slug, title });
+  }
+
+  return songs;
+}
+
+const malayalamSongs = readMalayalamSongsFromSource(malayalamSongsSourcePath);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -449,6 +469,7 @@ function routeLooksIndexable(route, options = {}) {
   if (route.includes(':')) return false;
   if (route.includes('*')) return false;
   if (isProtectedRoute) return false;
+  if (route.startsWith('/songs/')) return false;
 
   const excludedPrefixes = [
     '/admin',
@@ -1005,7 +1026,7 @@ function generateStaticPages() {
   const songsListingPage = {
     path: '/songs',
     title: 'Christian Devotional Songs | Bible Quiz Competition',
-    description: 'Browse Christian devotional songs with lyrics and videos in Malayalam and other languages.',
+    description: 'Browse Christian devotional songs with lyrics and videos across Malayalam, Hindi, and English worship collections.',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "CollectionPage",
@@ -1017,12 +1038,27 @@ function generateStaticPages() {
       <div class="min-h-screen bg-gray-50 pt-20">
         <div class="container mx-auto px-4 py-8">
           <h1 class="text-4xl font-bold text-gray-900 mb-4">Christian Devotional Songs</h1>
-          <p class="text-lg text-gray-600 mb-8">Read lyrics and watch worship songs. Browse our complete collection of devotional music.</p>
+          <p class="text-lg text-gray-600 mb-8">Explore worship songs by language and open the current canonical detail pages used by the live site.</p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <a href="/malayalam-songs" class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+              <h2 class="text-xl font-semibold text-gray-900">Malayalam Songs</h2>
+              <p class="text-sm text-gray-600 mt-2">Browse the Malayalam worship collection and devotional lyrics pages.</p>
+            </a>
+            <a href="/hindi-songs" class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+              <h2 class="text-xl font-semibold text-gray-900">Hindi Songs</h2>
+              <p class="text-sm text-gray-600 mt-2">Explore Hindi Christian songs with lyrics, transliteration, and chords.</p>
+            </a>
+            <a href="/english-songs" class="bg-white border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow">
+              <h2 class="text-xl font-semibold text-gray-900">English Songs</h2>
+              <p class="text-sm text-gray-600 mt-2">Open hymn and worship song detail pages in the English library.</p>
+            </a>
+          </div>
+          <h2 class="text-2xl font-semibold text-gray-900 mb-4">Featured Malayalam Songs</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            ${allSongs.slice(0, 60).map((song) => `
-              <a href="/songs/${song.slug}" class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+            ${malayalamSongs.slice(0, 24).map((song) => `
+              <a href="/malayalam-songs/${song.slug}" class="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
                 <h2 class="text-lg font-semibold text-gray-900">${escapeHtml(song.title)}</h2>
-                <p class="text-sm text-gray-600 mt-2">${escapeHtml(song.description)}</p>
+                <p class="text-sm text-gray-600 mt-2">Open the canonical Malayalam song page.</p>
               </a>
             `).join('')}
           </div>
@@ -1033,147 +1069,16 @@ function generateStaticPages() {
 
   writePageAndTrackSeo(songsListingPage, 'Generated songs listing page');
 
-  // Generate individual song pages & Language Variants
-  let generatedSongPages = 0;
-  for (const song of allSongs) {
-    if (!song.slug) continue;
-
-    const variants = [
-      { id: '', title: 'Lyrics', type: 'lyrics' },
-      { id: 'telugu-lyrics', title: 'Telugu Lyrics', type: 'translation' },
-      { id: 'kannada-lyrics', title: 'Kannada Lyrics', type: 'translation' },
-      { id: 'malayalam-lyrics', title: 'Malayalam Lyrics', type: 'translation' },
-      { id: 'english-translation', title: 'English Translation', type: 'translation' },
-      { id: 'chords', title: 'Chords & Strumming', type: 'chords' }
-    ];
-
-    variants.forEach(variant => {
-      const subPath = variant.id ? `/${variant.id}` : '';
-      const displayTitle = `${song.title} ${variant.title}`;
-      const songMeaning = buildOriginalMeaning(song, variant);
-      const worshipUse = buildWorshipUse(song);
-      const songFaqs = buildSongFaqs(song, variant);
-      const languageLabel = inferSongLanguage(song);
-      
-        const songPage = {
-        path: `/songs/${song.slug}${subPath}`,
-        title: `${displayTitle} | Christian Song Lyrics & Chords | Bible Quiz Competition`,
-        description: `Read ${variant.title}, chords, and spiritual details for ${song.title}. Part of our high-quality worship resource collection for Bible study groups.`,
-        noindex: false,
-        structuredData: {
-          "@context": "https://schema.org",
-          "@type": "MusicComposition",
-          "name": displayTitle,
-          "description": song.description || `Full ${variant.title.toLowerCase()} for ${song.title}`,
-          "url": `https://biblequizcompetition.com/songs/${song.slug}${subPath}`,
-          "genre": "Worship / Christian",
-          "inLanguage": "Mixed",
-          "author": {
-            "@type": "Organization",
-            "name": "Bible Quiz Competition"
-          }
-        },
-        content: `
-            <div class="min-h-screen bg-gray-50 pt-20">
-              <div class="container mx-auto px-4 py-8">
-                <!-- Breadcrumbs -->
-                <nav class="flex text-sm text-gray-500 mb-8 items-center">
-                  <a href="/" class="hover:text-blue-600 transition-colors">Home</a>
-                  <span class="mx-2">&raquo;</span>
-                  <a href="/songs" class="hover:text-blue-600 transition-colors">Songs</a>
-                  <span class="mx-2">&raquo;</span>
-                  <span class="text-gray-900 font-medium truncate">${escapeHtml(song.title)}</span>
-                </nav>
-
-                <div class="flex flex-col lg:flex-row gap-8">
-                  <!-- Main Content -->
-                  <article class="flex-grow bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-                    <div class="bg-gradient-to-br from-indigo-700 via-blue-800 to-indigo-900 p-8 md:p-12 text-white">
-                      <div class="inline-block px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">Worship Resource</div>
-                      <h1 class="text-3xl md:text-5xl font-bold mb-4">${escapeHtml(song.title)}</h1>
-                      <div class="flex flex-wrap gap-4 text-blue-100 font-light truncate">
-                        <span class="flex items-center"><span class="mr-2 opacity-50">#</span> ${escapeHtml(variant.title)}</span>
-                        ${song.category ? `<span class="flex items-center"><span class="mr-2 opacity-50">#</span> ${escapeHtml(song.category)}</span>` : ''}
-                      </div>
-                    </div>
-                    
-                    <div class="p-8 md:p-12">
-                      <div class="prose prose-lg max-w-none">
-                        <div class="text-gray-800 bg-gray-50 p-6 md:p-10 rounded-2xl border border-gray-100 leading-relaxed text-base">
-                          <h2 class="text-2xl font-bold text-gray-900 mb-4">Meaning & Devotional Insight</h2>
-                          <p class="mb-5">${escapeHtml(songMeaning)}</p>
-                          <h3 class="text-xl font-bold text-gray-900 mb-3">How To Use In Worship</h3>
-                          <p class="mb-5">${escapeHtml(worshipUse)}</p>
-                          <h3 class="text-xl font-bold text-gray-900 mb-3">Quick FAQs</h3>
-                          <div class="space-y-4">
-                            ${songFaqs.map((faq) => `
-                              <div>
-                                <p class="font-semibold text-gray-900">${escapeHtml(faq.q)}</p>
-                                <p class="text-gray-700">${escapeHtml(faq.a)}</p>
-                              </div>
-                            `).join('')}
-                          </div>
-                          <p class="mt-6 text-xs text-gray-500">Copyright-safe note: this resource contains original explanatory content and worship guidance. Please use authorized sources for official lyrics licensing where required.</p>
-                        </div>
-                      </div>
-                      
-                      <div class="mt-12 pt-8 border-t border-gray-100">
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">Bible Study Discussion</h3>
-                        <p class="text-gray-600 mb-6 font-light">How does "${escapeHtml(song.title)}" reflect historical biblical themes? Share your thoughts and study notes with our community.</p>
-                        <a href="/auth/register" class="inline-block px-8 py-3 bg-gray-900 text-white rounded-xl text-xs font-bold tracking-widest uppercase hover:bg-gray-800 transition-all">Join Discussion</a>
-                      </div>
-                    </div>
-                  </article>
-
-                  <!-- Sidebar -->
-                  <aside class="w-full lg:w-96 space-y-8">
-                    <div class="bg-white p-8 rounded-3xl shadow-lg border border-gray-100">
-                      <h4 class="text-lg font-bold text-gray-900 mb-6">Song Information</h4>
-                      <dl class="space-y-4">
-                        <div class="flex justify-between border-b border-gray-50 pb-2">
-                          <dt class="text-gray-500 text-sm">Language</dt>
-                          <dd class="text-gray-900 font-medium">${escapeHtml(languageLabel)}</dd>
-                        </div>
-                        <div class="flex justify-between border-b border-gray-50 pb-2">
-                          <dt class="text-gray-500 text-sm">Category</dt>
-                          <dd class="text-gray-900 font-medium">Worship</dd>
-                        </div>
-                        <div class="flex justify-between border-b border-gray-50 pb-2">
-                          <dt class="text-gray-500 text-sm">Resource Type</dt>
-                          <dd class="text-gray-900 font-medium">${variant.title}</dd>
-                        </div>
-                      </dl>
-                    </div>
-
-                    <div class="bg-indigo-900 p-8 rounded-3xl shadow-lg text-white">
-                      <h4 class="text-lg font-bold mb-4">Daily Bible Challenge</h4>
-                      <p class="text-indigo-200 text-sm mb-6 leading-relaxed">Pair your worship with a deep dive into the Word. Take today's featured quiz.</p>
-                      <a href="/daily-bible-quiz" class="block w-full py-4 bg-white text-indigo-900 rounded-2xl text-center font-bold text-sm hover:bg-indigo-50 transition-all">Take Daily Quiz</a>
-                    </div>
-
-                    <div class="bg-white p-8 rounded-3xl shadow-lg border border-gray-100">
-                      <h4 class="text-lg font-bold text-gray-900 mb-6">Explore More</h4>
-                      <ul class="space-y-3">
-                        <li><a href="/songs" class="text-blue-600 hover:underline text-sm flex items-center">&rarr; All Worship Songs</a></li>
-                        <li><a href="/bible-characters" class="text-blue-600 hover:underline text-sm flex items-center">&rarr; Bible Characters Hub</a></li>
-                        <li><a href="/bible-questions-and-answers-hub" class="text-blue-600 hover:underline text-sm flex items-center">&rarr; Bible Q&A Hub</a></li>
-                      </ul>
-                    </div>
-                  </aside>
-                </div>
-              </div>
-            </div>`
-      };
-
-      try {
-        writePageAndTrackSeo(songPage, '');
-        generatedSongPages += 1;
-      } catch (err) {
-        console.error(`Error generating song variation ${song.slug} ${variant.id}:`, err);
+  const legacySongsDir = path.join(distDir, 'songs');
+  if (fs.existsSync(legacySongsDir)) {
+    for (const entry of fs.readdirSync(legacySongsDir, { withFileTypes: true })) {
+      if (entry.isDirectory()) {
+        fs.rmSync(path.join(legacySongsDir, entry.name), { recursive: true, force: true });
       }
-    });
+    }
   }
-  console.log(`Generated ${generatedSongPages} song and variant pages.`);
+
+  console.log('Skipped generating legacy /songs/:slug detail pages in favor of canonical /malayalam-songs/:slug routes.');
 
   // Generate dedicated Hindi lyrics SEO pages with real lyric content
   console.log('Generating dedicated Hindi lyrics SEO pages...');

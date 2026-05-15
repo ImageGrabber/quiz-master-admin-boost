@@ -2508,7 +2508,79 @@
         "lyrics": [
           {
             "lines": [
-              "Joy, joy, there is joy in the Lord. He has given me a new song."
+              "Joy, joy, joy it is,",
+              "With everlasting love He loved us - 2,",
+              "He made us His own children,",
+              "This is our great privilege - 2,",
+              "We will sing hallelujah forever - 2,",
+              "For our Lord Jesus - 2,",
+              "He has anointed us with the oil of joy,",
+              "And brought us into the holy place."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "This is our great privilege,",
+              "It is joy to praise the Lord,",
+              "We will serve the Lord forever."
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "This is our great privilege,",
+              "There is joy in the coming of the Lord,",
+              "We will go with a shout of triumph."
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "This is our great privilege,",
+              "We will dwell in Zion's glory,",
+              "We will sit at the Father's right hand."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "ആനന്ദം ആനന്ദം ആനന്ദമേ,",
+              "നിത്യസ്നേഹത്താൽ അവൻ നമ്മെ സ്നേഹിച്ചു - 2,",
+              "തന്റെ മക്കളായി നമ്മെ അവൻ ആക്കി,",
+              "ഇത് നമ്മുടെ മഹാഭാഗ്യമാണ് - 2,",
+              "ഹല്ലെലൂയാ നിത്യവും നാം പാടും - 2,",
+              "നമ്മുടെ പ്രഭു യേശുവിന്നായി - 2,",
+              "ആനന്ദത്തിന്റെ എണ്ണയാൽ അവൻ അഭിഷേകം ചെയ്തു,",
+              "വിശുദ്ധസ്ഥാനത്തേക്ക് പ്രവേശിപ്പിച്ചു."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "ഇത് നമ്മുടെ മഹാഭാഗ്യമാണ്,",
+              "പ്രഭുവിനെ സ്തുതിക്കുന്നത് ആനന്ദമാണ്,",
+              "പ്രഭുവിനെ നിത്യം സേവിക്കും."
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "ഇത് നമ്മുടെ മഹാഭാഗ്യമാണ്,",
+              "പ്രഭുവിന്റെ വരവിൽ സന്തോഷമുണ്ട്,",
+              "ജയഘോഷത്തോടുകൂടെ നാം പോകും."
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "ഇത് നമ്മുടെ മഹാഭാഗ്യമാണ്,",
+              "സീയോന്റെ മഹത്വത്തിൽ വസിക്കും,",
+              "പിതാവിന്റെ വലങ്കയ്യിൽ ഇരിക്കും."
             ]
           }
         ]
@@ -2797,6 +2869,62 @@
               "maut pe fatahaa paayee",
               "kurbaan ho ke toone maseehaa",
               "meri jaan bachaayee."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Coming to Your door, Messiah,",
+              "I have found salvation,",
+              "Now the boat of life has crossed over,",
+              "Victory, victory, Jesus, victory, victory, Jesus,",
+              "Sing victory to Jesus...",
+              "My heart has been so attached to Jesus,",
+              "I find no peace anywhere else..",
+              "1 I ask not for gold or silver,",
+              "No gift at all...2",
+              "What I have received,",
+              "Is Your love...2",
+              "2 I ask one prayer from You,",
+              "Do not refuse....2",
+              "May I always keep proclaiming",
+              "Your word....2",
+              "3 The veil was torn, the chains broke,",
+              "Victory was won over death,",
+              "By sacrificing Yourself, Messiah,",
+              "You saved my life."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "നിന്റെ വാതിൽക്കൽ വന്നേൻ മിശിഹാ,",
+              "രക്ഷ ഞാൻ പ്രാപിച്ചു,",
+              "ഇപ്പോൾ ജീവിത നാവു കരകയറി,",
+              "ജയ ജയ യേശു, ജയ ജയ യേശു,",
+              "ജയ ജയ യേശു പാടുവിൻ...",
+              "എൻ ഹൃദയം യേശുവിനോടു ചേർന്നു,",
+              "മറ്റെങ്ങും എനിക്കു ശാന്തിയില്ല..",
+              "1 പൊന്നും വെള്ളിയും ഞാൻ ചോദിക്കുന്നില്ല,",
+              "ഒരുപഹാരവും വേണ്ട...2",
+              "എനിക്കു ലഭിച്ചിരിക്കുന്നത്,",
+              "നിന്റെ സ്നേഹമാണ്...2",
+              "2 ഞാൻ നിന്നോടൊരു പ്രാർത്ഥന ചോദിക്കുന്നു,",
+              "നിരസിക്കരുതേ....2",
+              "എപ്പോഴും ഞാൻ പ്രഖ്യാപിച്ചുകൊണ്ടിരിക്കട്ടെ,",
+              "നിന്റെ വചനം....2",
+              "3 തിരശ്ശീല പിളർന്നു, ചങ്ങലകൾ തകർന്നു,",
+              "മരണത്തിന്മേൽ ജയം ലഭിച്ചു,",
+              "സ്വയം ബലി ആയി, മിശിഹാ,",
+              "എൻ ജീവൻ നീ രക്ഷിച്ചു."
             ]
           }
         ]
@@ -5986,7 +6114,7 @@
               "आदि और अन्त तू ही है, अल्फ़ा और ओमेगा तू ही है"
             ],
             "chords": [
-              "[G] Aadi aur ant tu hi [C] hai, [D] Alfa aur Omega tu hi [G] hai"
+              "G              C               D            G"
             ]
           },
           {
@@ -5994,24 +6122,62 @@
               "दूतों की स्तुति तू ही है, बुद्धि और सब ज्ञान तू ही है"
             ],
             "chords": [
-              "[G] Duto’n ki stuti tu hi [C] hai, [D] Buddhi aur sab gyan tu hi [G] hai"
+              "G               C                D             G"
             ]
           },
           {
+            "verse": "Chorus",
             "lines": [
               "यीशु तू महान है, महान है, यीशु तू सच्चा है, सच्चा है"
             ],
             "chords": [
-              "[G] Yeshu tu mahaan [C] hai, [D] Yeshu tu achha [G] hai"
-            ],
-            "verse": "Chorus"
+              "G             C              D             G"
+            ]
           },
           {
             "lines": [
               "यीशु तू ज़िन्दा है, ज़िन्दा है, यीशु तू धन्य है, धन्य है"
             ],
             "chords": [
-              "[G] Yeshu tu zinda [C] hai, [D] Yeshu tu dhanya [G] hai"
+              "G             C              D             G"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Aadi aur ant tu hi hai, Alfa aur Omega tu hi hai"
+            ],
+            "chords": [
+              "G              C               D            G"
+            ]
+          },
+          {
+            "lines": [
+              "Duton ki stuti tu hi hai, buddhi aur sab gyaan tu hi hai"
+            ],
+            "chords": [
+              "G               C                D             G"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Yeshu tu mahaan hai, mahaan hai, Yeshu tu sachcha hai, sachcha hai"
+            ],
+            "chords": [
+              "G             C              D             G"
+            ]
+          },
+          {
+            "lines": [
+              "Yeshu tu zinda hai, zinda hai, Yeshu tu dhanya hai, dhanya hai"
+            ],
+            "chords": [
+              "G             C              D             G"
             ]
           }
         ]
@@ -6021,23 +6187,81 @@
         "lyrics": [
           {
             "lines": [
-              "You are the beginning and the end, Alpha and Omega You are"
-            ]
-          },
-          {
-            "lines": [
-              "You are the praise of angels, You are wisdom and all knowledge"
-            ]
-          },
-          {
-            "lines": [
-              "Jesus You are great, You are true"
+              "You are the beginning and the end,",
+              "You are the Alpha and Omega"
             ],
-            "verse": "Chorus"
+            "chords": [
+              "G              C               D            G"
+            ]
           },
           {
             "lines": [
-              "Jesus You are alive, You are blessed"
+              "You are the song of angels' praise,",
+              "You are wisdom and all knowledge"
+            ],
+            "chords": [
+              "G               C                D             G"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Jesus, You are great, so great,",
+              "Jesus, You are true, so true"
+            ],
+            "chords": [
+              "G             C              D             G"
+            ]
+          },
+          {
+            "lines": [
+              "Jesus, You are alive, alive,",
+              "Jesus, You are blessed, blessed"
+            ],
+            "chords": [
+              "G             C              D             G"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "ആദിയും അന്തവും നീ തന്നേ,",
+              "ആൽഫയും ഓമേഗയും നീ തന്നേ"
+            ],
+            "chords": [
+              "G              C               D            G"
+            ]
+          },
+          {
+            "lines": [
+              "ദൂതന്മാരുടെ സ്തുതി നീ തന്നേ,",
+              "ജ്ഞാനവും സകല അറിവും നീ തന്നേ"
+            ],
+            "chords": [
+              "G               C                D             G"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "യേശുവേ നീ മഹാനാണ്, മഹാനാണ്,",
+              "യേശുവേ നീ സത്യവാനാണ്, സത്യവാനാണ്"
+            ],
+            "chords": [
+              "G             C              D             G"
+            ]
+          },
+          {
+            "lines": [
+              "യേശുവേ നീ ജീവനുള്ളവൻ, ജീവനുള്ളവൻ,",
+              "യേശുവേ നീ ധന്യൻ, ധന്യൻ"
+            ],
+            "chords": [
+              "G             C              D             G"
             ]
           }
         ]
@@ -41230,20 +41454,81 @@
         "lyrics": [
           {
             "lines": [
-              "vkds rsjs }kj elhgk",
-              "ik;k gS m)kj eSaus",
-              "vc gks x;h gS thou ubZ;ka ikj",
-              "t; t; ;h'kw t; t; ;h'kw",
-              "t; t; ;h'kw xkvks---",
-              "ykxk ,slk fny ;h'kw ls",
-              "pSu dgha u ikÅ¡-- 1 ekaxw u eSa lksuk pkanh u",
-              "dksbZ migkj----2 tks fey x;k gS eq>dks",
-              "rsjk I;kj----2 2 ekaxw rq>ls ,d nqvk eSa",
-              "djuk u bUdkj-----2",
-              "djrk jgw¡ lnk rsjs opu",
-              "dk izpkj-----2 3 inkZ QVk QVh dczsa",
-              "ekSr is Qrgk ik;h dqckZu gks ds rwus elhgk",
-              "esjh tku cpk;hA"
+              "आके तेरे द्वार मसीहा",
+              "पाया है उद्धार मैंने",
+              "अब हो गयी है जीवन नईयां पार",
+              "जय जय यीशू जय जय यीशू",
+              "जय जय यीशू गाओ...",
+              "लागा ऐसा दिल यीशू से",
+              "चैन कहीं न पाऊँ..",
+              "1 मांगू न मैं सोना चांदी न",
+              "कोई उपहार...2",
+              "जो मिल गया है मुझको",
+              "तेरा प्यार...2",
+              "2 मांगू तुझसे एक दुआ मैं",
+              "करना न इन्कार....2",
+              "करता रहूँ सदा तेरे वचन",
+              "का प्रचार....2",
+              "3 पर्दा फटा फटी कढ्रें",
+              "मौत पे फतहा पायी",
+              "कुर्बान हो के तूने मसीहा",
+              "मेरी जान बचायी।"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Coming to Your door, Messiah,",
+              "I have found salvation,",
+              "Now the boat of life has crossed over,",
+              "Victory, victory, Jesus, victory, victory, Jesus,",
+              "Sing victory to Jesus...",
+              "My heart has been so attached to Jesus,",
+              "I find no peace anywhere else..",
+              "1 I ask not for gold or silver,",
+              "No gift at all...2",
+              "What I have received,",
+              "Is Your love...2",
+              "2 I ask one prayer from You,",
+              "Do not refuse....2",
+              "May I always keep proclaiming",
+              "Your word....2",
+              "3 The veil was torn, the chains broke,",
+              "Victory was won over death,",
+              "By sacrificing Yourself, Messiah,",
+              "You saved my life."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "നിന്റെ വാതിൽക്കൽ വന്നേൻ മിശിഹാ,",
+              "രക്ഷ ഞാൻ പ്രാപിച്ചു,",
+              "ഇപ്പോൾ ജീവിത നാവു കരകയറി,",
+              "ജയ ജയ യേശു, ജയ ജയ യേശു,",
+              "ജയ ജയ യേശു പാടുവിൻ...",
+              "എൻ ഹൃദയം യേശുവിനോടു ചേർന്നു,",
+              "മറ്റെങ്ങും എനിക്കു ശാന്തിയില്ല..",
+              "1 പൊന്നും വെള്ളിയും ഞാൻ ചോദിക്കുന്നില്ല,",
+              "ഒരുപഹാരവും വേണ്ട...2",
+              "എനിക്കു ലഭിച്ചിരിക്കുന്നത്,",
+              "നിന്റെ സ്നേഹമാണ്...2",
+              "2 ഞാൻ നിന്നോടൊരു പ്രാർത്ഥന ചോദിക്കുന്നു,",
+              "നിരസിക്കരുതേ....2",
+              "എപ്പോഴും ഞാൻ പ്രഖ്യാപിച്ചുകൊണ്ടിരിക്കട്ടെ,",
+              "നിന്റെ വചനം....2",
+              "3 തിരശ്ശീല പിളർന്നു, ചങ്ങലകൾ തകർന്നു,",
+              "മരണത്തിന്മേൽ ജയം ലഭിച്ചു,",
+              "സ്വയം ബലി ആയി, മിശിഹാ,",
+              "എൻ ജീവൻ നീ രക്ഷിച്ചു."
             ]
           }
         ]
@@ -53477,71 +53762,6 @@
       }
     },
     "thumbnailUrl": "/assets/songs/hindi_card.png"
-  },
-  {
-    "id": "आदि_और_अंत_तू_ही_है",
-    "slug": "आदि-और-अंत-तू-ही-है",
-    "title": "आदि और अंत तू ही है",
-    "videoUrl": "",
-    "description": "आदि और अंत तू ही है - Hindi Christian devotional song lyrics with worship-friendly formatting.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "आदि और अंत तू ही है",
-              "C Am आदि और अंत तू ही है",
-              "F C अल्फा और ऑमेगा तू ही है",
-              "C Am दूतों की स्तुति तू ही है",
-              "G C बुद्धि और सब ज्ञान तू ही है",
-              "C F यीशु तू महान है,",
-              "G C यीशु तू अच्छा है",
-              "C F यीशु तू ज़िन्दा है,",
-              "G C यीशु तू धन्य है",
-              "C Am दूतों की स्तुति तू ही है",
-              "G C बुद्धि और सब ज्ञान तू ही है",
-              "C Am राजाओं का राजा तू ही है",
-              "G C प्रभुओं का प्रभु तू ही है",
-              "जीवन मेरा पापों से भरा",
-              "जग अंधेरा और अशुद्ध सारा",
-              "मेरे पापों से बचाने को",
-              "मेरे लिये जीवन दिया है",
-              "सारे गुनाहगारों के लिये",
-              "अपना खून बहाया यीशु ने",
-              "खाई कोड़ों की मार भी",
-              "दी सलीब पर उसने अपनी जान"
-            ]
-          },
-          {
-            "verse": "1",
-            "lines": [
-              "C Am Aadi aur Aant tu hi hai",
-              "F C Alfa aur Omega tu hi hai",
-              "C Am Duto’n ki stuti tu hi hai G C",
-              "Buddhi aur sab gyan tu hi hai",
-              "C F Yeshu tu mahaan hai,",
-              "G C Yeshu tu aacha hai",
-              "C F Yeshu tu zinda hai,",
-              "G C Yeshu tu dhanya hai",
-              "C Am Duto’n ki stuti tu hi hai G C",
-              "Buddi aur sab gyan tu hi hai",
-              "C Am Rajao'n ka Raja tu hi hai G C",
-              "Prabhuo'n ka Prabhu tu hi hai",
-              "Jeevan mera paapo’n se bhara",
-              "Jag andhera aur Ashudh saara",
-              "Mere paapo se bachane ko",
-              "Mere liya jeevan diya hai",
-              "Saare Gunahagaaro ke liye",
-              "Apna khoon bhaya Yeshu ne",
-              "Khai Kodo ki mar bhi",
-              "Di Saleeb par usne apni jaan"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
   },
   {
     "id": "आनंद_आनंद_आनंद_है",
@@ -92965,7 +93185,7 @@
         "lyrics": [
           {
             "lines": [
-              "को°- आदर महिमा तोके –",
+              "आदर महिमा तोके –",
               "हे प्रभु मोर",
               "आदर महिमा तोके",
               "हे प्रभु मोर",
@@ -93019,6 +93239,76 @@
               "Moe phir bhi toke chun lo Yeshu",
               "Sada sada mahima karabu",
               "Jeevan me apan"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Honor and glory to You,",
+              "O my Lord,",
+              "Honor and glory to You,",
+              "O my Lord,",
+              "Carry my boat across,",
+              "Give me boundless love,",
+              "Your mercy toward me, Lord,",
+              "Is without limit."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Having received new life in Jesus,",
+              "Having received eternal life in Jesus,",
+              "Forever and ever I will give glory,",
+              "Throughout my life."
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "When sorrow and trouble fill my life,",
+              "Even then I will choose You, Jesus,",
+              "Forever and ever I will give glory,",
+              "Throughout my life."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "ആദരവും മഹിമയും നിനക്കാകട്ടെ,",
+              "എൻ കർത്താവേ,",
+              "ആദരവും മഹിമയും നിനക്കാകട്ടെ,",
+              "എൻ കർത്താവേ,",
+              "എൻ പടകിനെ കടത്തി വിടണമേ,",
+              "അളവറ്റ സ്നേഹം തരണമേ,",
+              "കർത്താവേ, എന്നോടുള്ള നിന്റെ കരുണ",
+              "അവസാനമില്ലാത്തതാണ്."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "യേശുവിൽ പുതിയ ജീവൻ ലഭിച്ച ശേഷം,",
+              "യേശുവിൽ നിത്യജീവൻ ലഭിച്ച ശേഷം,",
+              "എന്നുമെപ്പോഴും ഞാൻ മഹത്വം അർപ്പിക്കും,",
+              "എൻ ജീവിതമൊട്ടാകെ."
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "ജീവിതത്തിൽ ദുഃഖവും കഷ്ടവും ഉണ്ടായാലും,",
+              "എന്നാലും ഞാൻ നിന്നെയേ തിരഞ്ഞെടുക്കും, യേശുവേ,",
+              "എന്നുമെപ്പോഴും ഞാൻ മഹത്വം അർപ്പിക്കും,",
+              "എൻ ജീവിതമൊട്ടാകെ."
             ]
           }
         ]

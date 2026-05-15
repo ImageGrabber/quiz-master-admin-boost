@@ -39,6 +39,21 @@ const articles = [
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const malayalamSongsSourcePath = path.join(__dirname, '..', 'src', 'data', 'songs.ts');
+
+function readMalayalamSongSlugs(filePath) {
+  if (!fs.existsSync(filePath)) return [];
+
+  const source = fs.readFileSync(filePath, 'utf-8');
+  const uniqueSlugs = new Set();
+
+  for (const match of source.matchAll(/slug:\s*"([^"]+)"/g)) {
+    const slug = match[1]?.trim();
+    if (slug) uniqueSlugs.add(slug);
+  }
+
+  return [...uniqueSlugs];
+}
 
 function normalizeRoutePath(route) {
   if (!route || route === '/') return '/';
@@ -270,36 +285,18 @@ function generateSitemap() {
     });
   });
 
-  // Song pages (from blog scrape and existing)
+  // Songs hub
   urls.push({ loc: '/songs', priority: '0.9', changefreq: 'weekly' });
-  const uniqueSongSlugs = new Set();
-  
-  // Add hardcoded song slugs
-  ['ithratholam-yahova-sahayichu', 'lokamam-gambhira-varidhiyil', 'aswasame-enikkere-thingeedunnu', 'ente-daivam-mahathwathil'].forEach(slug => uniqueSongSlugs.add(slug));
-
-  // Read scraped blog songs
-  const scrapedSongsPath = path.join(__dirname, '../src/data/scraped-blog-songs.json');
-  if (fs.existsSync(scrapedSongsPath)) {
-    try {
-      const scrapedSongs = JSON.parse(fs.readFileSync(scrapedSongsPath, 'utf-8'));
-      scrapedSongs.forEach((song) => {
-        if (song.slug) {
-          uniqueSongSlugs.add(song.slug);
-        }
-      });
-    } catch (e) {
-      console.error('Error reading scraped songs:', e.message);
-    }
-  }
-
-  for (const slug of uniqueSongSlugs) {
+  urls.push({ loc: '/malayalam-songs', priority: '0.9', changefreq: 'weekly' });
+  const malayalamSongSlugs = readMalayalamSongSlugs(malayalamSongsSourcePath);
+  for (const slug of malayalamSongSlugs) {
     urls.push({
-      loc: `/songs/${slug}`,
+      loc: `/malayalam-songs/${slug}`,
       priority: '0.7',
       changefreq: 'monthly'
     });
   }
-  console.log(`Added ${uniqueSongSlugs.size} song URLs to sitemap`);
+  console.log(`Added ${malayalamSongSlugs.length} Malayalam song URLs to sitemap`);
 
   // English Song pages
   const englishSongsJsonPath = path.join(__dirname, '..', 'src', 'data', 'english-songs.json');
