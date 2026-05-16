@@ -63,109 +63,31 @@
         "lang": "Hinglish",
         "lyrics": [
           {
-            "verse": "Verse 1",
             "lines": [
-              "Mera Jeevan Hai Tera Anokha Uphaar",
-              "Kaise Main Karu Shukriya (2)",
-              "Tune De Diya Apna Balidan",
-              "Mere Khuda, Mere Khuda (2)"
-            ]
-          },
-          {
-            "verse": "Chorus",
-            "lines": [
-              "Aaradhna, Teri Aaradhna",
-              "Aaradhna Mere Khuda (2)"
-            ]
-          },
-          {
-            "verse": "Verse 2",
-            "lines": [
-              "Kho Gaya Tha Aur Bhatak Raha Tha",
-              "Tere Pyaar Ne Mujhe Raah Dikhaya (2)",
-              "Tune De Diya Apna Balidan",
-              "Mere Khuda, Mere Khuda (2)"
-            ]
-          },
-          {
-            "verse": "Chorus",
-            "lines": [
-              "Aaradhna, Teri Aaradhna",
-              "Aaradhna Mere Khuda (2)"
-            ]
-          },
-          {
-            "verse": "Verse 3",
-            "lines": [
-              "Saath Chalke Apna Banake",
-              "Pochh Liya Hai Saare Aansoo Gham Ke (2)",
-              "Tune De Diya Apna Balidan",
-              "Mere Khuda, Mere Khuda (2)"
-            ]
-          },
-          {
-            "verse": "Chorus",
-            "lines": [
-              "Aaradhna, Teri Aaradhna",
-              "Aaradhna Mere Khuda (2)"
-            ]
-          }
-        ]
-      },
-      "english": {
-        "lang": "English",
-        "lyrics": [
-          {
-            "lines": [
-              "I will sing Your praise,",
-              "I will declare Your glory.",
-              "You alone are my Heavenly Father,",
-              "You alone are my true God.",
-              "You alone are worthy of my praise,",
-              "You alone are my Savior God.",
-              "Jehovah Shalom, Jehovah Shalom,",
-              "He will give peace, He will give peace.",
-              "Jehovah Shammah, Jehovah Shammah,",
-              "He will walk with me, He will walk with me.",
-              "Jehovah Rohi, Jehovah Rohi,",
-              "My Shepherd, my Shepherd.",
-              "Jehovah Rapha, Jehovah Rapha,",
-              "He will heal, He will heal.",
-              "Jehovah Nissi, Jehovah Nissi,",
-              "He will give victory, He will give victory.",
-              "Jehovah Jireh, Jehovah Jireh,",
-              "He will provide, He will provide.",
-              "Hallelujah, Hallelujah,",
-              "Hallelujah, Hallelujah."
-            ]
-          }
-        ]
-      },
-      "malayalam": {
-        "lang": "Malayalam",
-        "lyrics": [
-          {
-            "lines": [
-              "ഞാൻ പാടും നിന്റെ സ്തുതി,",
-              "ഞാൻ പറയും നിന്റെ മഹത്വം.",
-              "നീയേ എന്റെ സ്വർഗ്ഗപിതാവാണ്,",
-              "നീയേ എന്റെ സത്യദൈവം.",
-              "നീയേ എന്റെ സ്തുതിക്ക് യോഗ്യൻ,",
-              "നീയേ എന്റെ രക്ഷകനായ ദൈവം.",
-              "യഹോവ ശാലോം, യഹോവ ശാലോം,",
-              "സമാധാനം തരുന്നു, സമാധാനം തരുന്നു.",
-              "യഹോവ ശമ്മാ, യഹോവ ശമ്മാ,",
-              "എന്നോടൊപ്പം നടക്കുന്നു, എന്നോടൊപ്പം നടക്കുന്നു.",
-              "യഹോവ റോഹി, യഹോവ റോഹി,",
-              "എന്റെ ഇടയൻ, എന്റെ ഇടയൻ.",
-              "യഹോവ റാഫാ, യഹോവ റാഫാ,",
-              "സൗഖ്യം തരുന്നു, സൗഖ്യം തരുന്നു.",
-              "യഹോവ നിസ്സി, യഹോവ നിസ്സി,",
-              "ജയം തരുന്നു, ജയം തരുന്നു.",
-              "യഹോവ യീരെ, യഹോവ യീരെ,",
-              "എല്ലാം ഒരുക്കുന്നു, എല്ലാം ഒരുക്കുന്നു.",
-              "ഹല്ലെലൂയാ, ഹല്ലെലൂയാ,",
-              "ഹല്ലെലൂയാ, ഹല്ലെലൂയാ."
+              "Chand sooraj ki parastish",
+              "Hum nahin karte",
+              "Duniya ke maboodon ke",
+              "Aage nahin jhukte",
+              "Kyonki zinda Khuda hai hamara",
+              "Zinda Khuda hai hamara",
+              "Khushkhabri phailayenge",
+              "Rooh mein badhte jayenge",
+              "Khoye sab insaanon ko",
+              "Paas Yeshu ke layenge",
+              "Shaitanon ke toofanon se",
+              "Hum nahin darte",
+              "Jab sitaish hoti hai",
+              "Rooh ki baarish hoti hai",
+              "Yeshu teri huzoori mein",
+              "Rooh ki jumbish hoti hai",
+              "Teri quwwat se khaali",
+              "Hum nahin rehte",
+              "Jab teri rehmat hoti hai",
+              "Nakaam makaam mil jaate hain",
+              "Yeshu teri rehmat se",
+              "Dua qubool ho jaati hai",
+              "Tere majme se khaali",
+              "Hum nahin jaate"
             ]
           }
         ]
@@ -661,44 +583,6 @@
         "lyrics": [
           {
             "lines": [
-              "I lift my eyes to the eternal mountains. Where does my help come from?"
-            ]
-          }
-        ]
-      },
-      "hinglish": {
-        "lang": "Hinglish",
-        "lyrics": [
-          {
-            "lines": [
-              "Abdi paharon ko main aankh uthaata hun",
-              "fazal jo Khuda se ho",
-              "ab dil mein paata hun",
-              "meree sunata hai Khuda",
-              "sab zaroorat deta hai",
-              "raham karata hai sada",
-              "aur khabar leta hai",
-              "Dua maang ai eemaandaar",
-              "hamesha rah diler ho najaat ka ummedavaar",
-              "Khuda na kare der us mein hoke rah mahafooz",
-              "vah hai tera nigahabaan",
-              "shubha chhod kar ho mehfooz",
-              "voh jaagta hai har aan",
-              "Hai mubaarak tera naam",
-              "raheem Khudaavanda hai jalaalee tera kaam",
-              "voh qaayam rahega Israel kee jae panaah",
-              "Israel ka rahanuma",
-              "too mitaave sab gunaah",
-              "aur qaamil karega"
-            ]
-          }
-        ]
-      },
-      "english": {
-        "lang": "English",
-        "lyrics": [
-          {
-            "lines": [
               "We do not worship the moon and the sun,",
               "We do not bow before the idols of the world,"
             ]
@@ -751,6 +635,60 @@
               "We will keep growing in the Spirit,",
               "We will bring all lost people",
               "To Jesus"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Antara 1:",
+              "Chand sooraj ki parastish",
+              "Hum nahin karte",
+              "Duniya ke maboodon ke",
+              "Aage nahin jhukte"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Kyonki zinda Khuda hai hamara",
+              "Zinda Khuda hai hamara"
+            ]
+          },
+          {
+            "verse": "Antara 2",
+            "lines": [
+              "Khushkhabri phailayenge",
+              "Rooh mein badhte jayenge",
+              "Khoye sab insaanon ko",
+              "Paas Yeshu ke layenge",
+              "Shaitanon ke toofanon se",
+              "Hum nahin darte"
+            ]
+          },
+          {
+            "verse": "Antara 3",
+            "lines": [
+              "Jab sitaish hoti hai",
+              "Rooh ki baarish hoti hai",
+              "Yeshu teri huzoori mein",
+              "Rooh ki jumbish hoti hai",
+              "Teri quwwat se khaali",
+              "Hum nahin rehte"
+            ]
+          },
+          {
+            "verse": "Antara 4",
+            "lines": [
+              "Jab teri rehmat hoti hai",
+              "Nakaam makaam mil jaate hain",
+              "Yeshu teri rehmat se",
+              "Dua qubool ho jaati hai",
+              "Tere majme se khaali",
+              "Hum nahin jaate"
             ]
           }
         ]
@@ -1030,6 +968,61 @@
             ]
           }
         ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Chand sooraj ki parastish",
+              "Hum nahin karte",
+              "Duniya ke maboodon ke",
+              "Aage nahin jhukte",
+              "Kyonki zinda Khuda hai hamara",
+              "Zinda Khuda hai hamara",
+              "Khushkhabri phailayenge",
+              "Rooh mein badhte jayenge",
+              "Khoye sab insaanon ko",
+              "Paas Yeshu ke layenge",
+              "Shaitanon ke toofanon se",
+              "Hum nahin darte",
+              "Jab sitaish hoti hai",
+              "Rooh ki baarish hoti hai",
+              "Yeshu teri huzoori mein",
+              "Rooh ki jumbish hoti hai",
+              "Teri quwwat se khaali",
+              "Hum nahin rehte",
+              "Jab teri rehmat hoti hai",
+              "Nakaam makaam mil jaate hain",
+              "Yeshu teri rehmat se",
+              "Dua qubool ho jaati hai",
+              "Tere majme se khaali",
+              "Hum nahin jaate"
+            ],
+            "chords": [
+              "C",
+              "F",
+              "C",
+              "G",
+              "C",
+              "F C",
+              "Am",
+              "G",
+              "F",
+              "C G",
+              "Am",
+              "F",
+              "C",
+              "G",
+              "C",
+              "F",
+              "Am",
+              "G",
+              "F",
+              "C"
+            ]
+          }
+        ]
       }
     },
     "thumbnailUrl": "/assets/songs/english_card.png"
@@ -1078,30 +1071,51 @@
         "lyrics": [
           {
             "lines": [
-              "Ab kripa karke aaya hai",
-              "Yeshu mujhe bachaane ko,",
-              "aur paap anaadar se usane",
-              "mujhe chhudaaya hai.",
-              "Daladal mein se uthaaya hai,",
-              "dayaaloo ho uthaaya hai,",
-              "pastahaalee se khushahaalee mein",
-              "yeeshu mujh ko le aaya hai.",
-              "Jab nishchint mein se raha tha!",
-              "tab bhee mujhe bulaaya tha!",
-              "ab sunee mein ne usakee baat",
-              "mujhe uthaaya hai.",
-              "Vah sir kaanton se chhida tha",
-              "aur haath keelon se ghaayal the",
-              "taaham mujh neech laachaar ko bhee",
-              "usane uthaaya hai.",
-              "Ab oonche sthaan par khada hoon",
-              "uddhaar main apana maanata hoon",
-              "main keval itana jaanata hoon",
-              "usane uthaaya hai.",
-              "He paapee aa too usake paas,",
-              "tujhe na karega niraas;",
-              "kar usee par too drdh vishvaas",
-              "tujhan uthaavega"
+              "Antara 1:",
+              "Chand sooraj ki prastish",
+              "Hum nahin karte",
+              "Duniya ke maboodon ke",
+              "Aage nahin jhukte"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Kyonki zinda Khuda hai hamara",
+              "Zinda Khuda hai hamara"
+            ]
+          },
+          {
+            "verse": "Antara 2",
+            "lines": [
+              "Khushkhabri phailayenge",
+              "Rooh mein badhte jayenge",
+              "Khoye sab insaanon ko",
+              "Paas Yeshu ke layenge",
+              "Shaitanon ke toofanon se",
+              "Hum nahin darte"
+            ]
+          },
+          {
+            "verse": "Antara 3",
+            "lines": [
+              "Jab sitaish hoti hai",
+              "Rooh ki baarish hoti hai",
+              "Yeshu teri huzoori mein",
+              "Rooh ki jumbish hoti hai",
+              "Teri quwwat se khaali",
+              "Hum nahin rehte"
+            ]
+          },
+          {
+            "verse": "Antara 4",
+            "lines": [
+              "Jab teri rehmat hoti hai",
+              "Nakaam makaam mil jaate hain",
+              "Yeshu teri rehmat se",
+              "Dua qubool ho jaati hai",
+              "Tere majme se khaali",
+              "Hum nahin jaate"
             ]
           }
         ]
@@ -1402,6 +1416,34 @@
             ]
           }
         ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Zinda Khuda hai hamara",
+              "Chand sooraj ki parastish",
+              "Hum nahin karte",
+              "Duniya ke maboodon ke",
+              "Aage nahin jhukte",
+              "Kyonki zinda Khuda hai hamara",
+              "Zinda Khuda hai hamara",
+              "Khushkhabri phailayenge",
+              "Rooh mein badhte jayenge",
+              "Khoye sab insaanon ko",
+              "Paas Yeshu ke layenge",
+              "Shaitanon ke toofanon se",
+              "Hum nahin darte",
+              "Jab sitaish hoti hai",
+              "Rooh ki baarish hoti hai",
+              "Yeshu teri huzoori mein",
+              "Rooh ki jumbish hoti hai",
+              "Teri quwwat se khaali",
+              "Hum nahin rehte"
+            ]
+          }
+        ]
       }
     },
     "thumbnailUrl": "/assets/songs/hindi_card.png"
@@ -1503,22 +1545,36 @@
         "lyrics": [
           {
             "lines": [
-              "Ab aaya hai aaraam ka roz",
-              "Khuda ka fazal hai hanoz",
-              "ab chhoden sab duniyaabee kaam,",
-              "aur karen dil se paak aaraam.",
-              "Vah jo saleeb par mua tha,",
-              "itavaar ko zinda hua tha;",
-              "aaj usane maut par gaalib ho,",
-              "jee uth ke chhoda qabar ko.",
-              "Aaj band ho duniyaabee kaam kaaj;",
-              "Khuda ka fajal ham par aaj,",
-              "ki yah na khaalee qaayada ho,",
-              "par hamen din ka faayada ho.",
-              "Phir bada sabt ek aavega,",
-              "jahaan aaraam jab paavega,",
-              "sab mihanat hogee tab tamaam,",
-              "aur kaamil hoga tab aaraam"
+              "Zinda hai, zinda hai, zinda hai Yeshu zinda hai",
+              "Jo dekhna chahe woh man ko saaf kare",
+              "Ki sab kuch ho jaye jo vishwas kare",
+              "Zinda hai"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Yeshu ke paas aao, darshan Pita ka pao",
+              "Hai pyaar se bulaata, kahe ko sharmao",
+              "Zinda hai"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Tere ghamon ki khaatir, kroos usne hai uthai",
+              "Teri saza ki khaatir, kodon ki maar khai",
+              "Woh apni jaan dekar tujhko maaf kare",
+              "Zinda hai"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Insaan woh nahin hain jo jhooth bolte hain",
+              "Taqdeer badalti hai jo dil ko kholte hain",
+              "Woh bigde kaam tere poore aaj kare",
+              "Zinda hai"
             ]
           }
         ]
@@ -2020,16 +2076,50 @@
         "lyrics": [
           {
             "lines": [
-              "Aao naache aur gaayen ham",
-              "aaj maseehaa ke naam se",
-              "vah hee sachchaa khudaa hai",
-              "aao naache gaayen ham -2",
-              "vah hee meraa khudaa hai, ek hee sachchaa khudaa hai",
-              "mukti detaa hai, shaanti detaa hain, vah hee meraa khudaa hai",
-              "isalie aaj ham gaate hai, aur khushiyaan manaate hain",
-              "bojh se tum dabe ho, zindagee se thake ho",
-              "Yeshu bulaataa hai, tujhako bulaataa hai, mukti dilaane ko",
-              "isalie aaj ham gaate hai, aur khushiyaan manaate hain"
+              "Chand sooraj ki prastish",
+              "Hum nahin karte",
+              "Duniya ke maboodon ke",
+              "Aage nahin jhukte"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Kyonki zinda Khuda hai hamara",
+              "Zinda Khuda hai hamara"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Khushkhabri phailayenge",
+              "Rooh mein badhte jayenge",
+              "Khoye sab insaanon ko",
+              "Paas Yeshu ke layenge",
+              "Shaitanon ke toofanon se",
+              "Hum nahin darte"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Jab sitaish hoti hai",
+              "Rooh ki baarish hoti hai",
+              "Yeshu teri huzoori mein",
+              "Rooh ki jumbish hoti hai",
+              "Teri quwwat se khaali",
+              "Hum nahin rehte"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "Jab teri rehmat hoti hai",
+              "Nakaam makaam mil jaate hain",
+              "Yeshu teri rehmat se",
+              "Dua qubool ho jaati hai",
+              "Tere majme se khaali",
+              "Hum nahin jaate"
             ]
           }
         ]
@@ -29308,7 +29398,114 @@
         "lyrics": [
           {
             "lines": [
-              "The Lord is my Shepherd, I shall not want. He makes me lie down in green pastures."
+              "The Lord is my Shepherd, I shall not want.",
+              "He makes me rest in green pastures."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "When I was walking through the valley of deathly darkness,",
+              "Lord Jesus comforted me in His mercy (2)..."
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Before my enemies, He spreads a table,",
+              "What the Lord has prepared fills my heart with joy (2)..."
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "He has anointed my head with oil,",
+              "My heart is filled and overflowing (2)..."
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "Always in the house of the Lord I will dwell,",
+              "His mercy and goodness make me rejoice (2)..."
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Yahowa charwaha mera, koi ghati mujhe nahin hai",
+              "Hari charaiyon mein mujhe, sneh se charata woh hai."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Mrityu ke andhkaar se, main jo jaata tha",
+              "Prabhu Yeshu karuna se, tasalli mujhe di hai (2)..."
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Shatruon ke saamne, mez ko bichhata hai",
+              "Prabhu ne jo taiyar ki, man mera magan hai (2)..."
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Sir par woh tel mala hai, abhishek mujhe kiya hai",
+              "Dil mera bhar gaya hai, aur umad bhi raha hai (2)..."
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "Sarvada Prabhu ghar mein, karunga nivaas jo main",
+              "Karuna bhalai bhi uski, anandit mujhe karti hai (2)..."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യഹോവ എന്റെ ഇടയൻ, എനിക്കൊന്നും കുറവുണ്ടാകയില്ല,",
+              "പച്ചപ്പുള്ള ഇടങ്ങളിൽ അവൻ സ്നേഹത്തോടെ എന്നെ മേയിക്കുന്നു."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "മരണാന്ധകാരത്തിലൂടെ ഞാൻ നടന്നുപോയപ്പോൾ,",
+              "കർത്താവായ യേശു കരുണയോടെ എന്നെ ആശ്വസിപ്പിച്ചു (2)..."
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "ശത്രുക്കളുടെ മുമ്പിൽ അവൻ ഒരു മേശ ഒരുക്കുന്നു,",
+              "കർത്താവ് ഒരുക്കിയതുകൊണ്ട് എന്റെ ഹൃദയം ആനന്ദിക്കുന്നു (2)..."
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "എന്റെ തലയിലവൻ എണ്ണ തേച്ചു, അഭിഷേകം ചെയ്തു,",
+              "എന്റെ ഹൃദയം നിറഞ്ഞൊഴുകുന്നു (2)..."
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "എപ്പോഴും കർത്താവിന്റെ ഭവനത്തിൽ ഞാൻ വസിക്കും,",
+              "അവന്റെ കരുണയും നന്മയും എന്നെ ആനന്ദിപ്പിക്കുന്നു (2)..."
             ]
           }
         ]
@@ -31789,6 +31986,61 @@
               "യേശുവേ, നിന്റെ കരുണയാൽ,",
               "പ്രാർത്ഥനകൾക്ക് ഉത്തരം ലഭിക്കുന്നു,",
               "നിന്റെ സന്നിധിയിൽ നിന്ന് ആരും ശൂന്യമായി മടങ്ങുന്നില്ല."
+            ],
+            "chords": [
+              "C",
+              "F",
+              "C",
+              "G",
+              "C",
+              "F C",
+              "Am",
+              "G",
+              "F",
+              "C G",
+              "Am",
+              "F",
+              "C",
+              "G",
+              "C",
+              "F",
+              "Am",
+              "G",
+              "F",
+              "C"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Chand sooraj ki parastish",
+              "Hum nahin karte",
+              "Duniya ke maboodon ke",
+              "Aage nahin jhukte",
+              "Kyonki zinda Khuda hai hamara",
+              "Zinda Khuda hai hamara",
+              "Khushkhabri phailayenge",
+              "Rooh mein badhte jayenge",
+              "Khoye sab insaanon ko",
+              "Paas Yeshu ke layenge",
+              "Shaitanon ke toofanon se",
+              "Hum nahin darte",
+              "Jab sitaish hoti hai",
+              "Rooh ki baarish hoti hai",
+              "Yeshu teri huzoori mein",
+              "Rooh ki jumbish hoti hai",
+              "Teri quwwat se khaali",
+              "Hum nahin rehte",
+              "Jab teri rehmat hoti hai",
+              "Nakaam makaam mil jaate hain",
+              "Yeshu teri rehmat se",
+              "Dua qubool ho jaati hai",
+              "Tere majme se khaali",
+              "Hum nahin jaate"
             ],
             "chords": [
               "C",
@@ -41680,6 +41932,60 @@
             ]
           }
         ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Antara 1:",
+              "Chand sooraj ki prastish",
+              "Hum nahin karte",
+              "Duniya ke maboodon ke",
+              "Aage nahin jhukte"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Kyonki zinda Khuda hai hamara",
+              "Zinda Khuda hai hamara"
+            ]
+          },
+          {
+            "verse": "Antara 2",
+            "lines": [
+              "Khushkhabri phailayenge",
+              "Rooh mein badhte jayenge",
+              "Khoye sab insaanon ko",
+              "Paas Yeshu ke layenge",
+              "Shaitanon ke toofanon se",
+              "Hum nahin darte"
+            ]
+          },
+          {
+            "verse": "Antara 3",
+            "lines": [
+              "Jab sitaish hoti hai",
+              "Rooh ki baarish hoti hai",
+              "Yeshu teri huzoori mein",
+              "Rooh ki jumbish hoti hai",
+              "Teri quwwat se khaali",
+              "Hum nahin rehte"
+            ]
+          },
+          {
+            "verse": "Antara 4",
+            "lines": [
+              "Jab teri rehmat hoti hai",
+              "Nakaam makaam mil jaate hain",
+              "Yeshu teri rehmat se",
+              "Dua qubool ho jaati hai",
+              "Tere majme se khaali",
+              "Hum nahin jaate"
+            ]
+          }
+        ]
       }
     },
     "thumbnailUrl": "/assets/songs/malayalam_card.png"
@@ -48811,15 +49117,69 @@
         "lyrics": [
           {
             "lines": [
-              "yahaovaa ka Qanyavaad krao",
-              "@yaaoMik vah Balaa hO",
-              "]sakI k$Naa sada kI hO",
-              "vaao rajaaAaoM ka raja hO",
-              "]saka Qanyavaad krao",
-              "vaao p`BauAao ka p`Bau hO",
-              "]saka Qanyavaad krao",
-              "vaao Sa~UAaoM ko haqaaoM sao CuD,ata hO",
-              "]saka Qanyavaad krao"
+              "यहोवा का धन्यवाद करो",
+              "क्योंकि वह भला है",
+              "उसकी करुणा सदा की है",
+              "वह राजाओं का राजा है",
+              "उसका धन्यवाद करो",
+              "वह प्रभुओं का प्रभु है",
+              "उसका धन्यवाद करो",
+              "वह शत्रुओं के हाथों से छुड़ाता है",
+              "उसका धन्यवाद करो"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Yahowa ka dhanyawad karo",
+              "Kyonki woh bhala hai",
+              "Uski karuna sada ki hai",
+              "Woh rajaon ka Raja hai",
+              "Uska dhanyawad karo",
+              "Woh prabhuon ka Prabhu hai",
+              "Uska dhanyawad karo",
+              "Woh shatruon ke haathon se chhudata hai",
+              "Uska dhanyawad karo"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Give thanks to the Lord,",
+              "For He is good,",
+              "His mercy endures forever,",
+              "He is the King of kings,",
+              "Give thanks to Him,",
+              "He is the Lord of lords,",
+              "Give thanks to Him,",
+              "He delivers from the hands of enemies,",
+              "Give thanks to Him"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യഹോവയ്ക്ക് നന്ദി പറവിൻ,",
+              "അവൻ നല്ലവൻ ആകയാൽ,",
+              "അവന്റെ കരുണ എക്കാലവും നിലനിൽക്കുന്നു,",
+              "അവൻ രാജാക്കന്മാരുടെ രാജാവാണ്,",
+              "അവന്നു നന്ദി പറവിൻ,",
+              "അവൻ പ്രഭുക്കന്മാരുടെ പ്രഭുവാണ്,",
+              "അവന്നു നന്ദി പറവിൻ,",
+              "അവൻ ശത്രുക്കളുടെ കൈയിൽ നിന്ന് വിടുവിക്കുന്നു,",
+              "അവന്നു നന്ദി പറവിൻ"
             ]
           }
         ]
@@ -48839,21 +49199,133 @@
         "lyrics": [
           {
             "lines": [
-              ";g ft+Unxh rsjh efgek",
-              "xkrh jgs vc lnk tc rd ftÅ¡] rsjh efgek djrk",
-              "jgw¡ ,s [kqnk-----2",
-              "1 tc ls gS Nqvk rwus eq>s]",
-              "u;h lkal] tSls fQj ls vk x;h]",
-              "tc ls Fkkek gkFk rsjk",
-              "cUn jkgs tSls fQj ls [kqy x;h",
-              "rw gh izHkq] esjs ;h'kq",
-              "rsjs flok u gksxk dksbZA",
-              "2 tc Hkh iqdkjk eSaus rq>s",
-              "esjh gj nqvk dks rwus gS lquk",
-              "gj ,d dne ij rw lkFk jgk",
-              "ikl rq>dks gS eglwl fd;k",
-              "vc gks lUuk rsjh [kqnk",
-              "bl ft+Unxh dks rq>dks fn;kA"
+              "यह ज़िंदगी तेरी महिमा",
+              "गाती रहे अब सदा जब तक जिऊँ",
+              "तेरी महिमा करता रहूँ, ऐ खुदा"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "जब से है छुआ तूने मुझे",
+              "नई साँस जैसे फिर से आ गई",
+              "जब से थामा हाथ तेरा",
+              "बंद राहें जैसे फिर से खुल गई",
+              "तू ही प्रभु, मेरे यीशु",
+              "तेरे सिवा न होगा कोई"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "जब भी पुकारा मैंने तुझे",
+              "मेरी हर दुआ को तूने है सुना",
+              "हर एक कदम पर तू साथ रहा",
+              "पास तुझको है महसूस किया",
+              "अब हो सन्ना तेरी, खुदा",
+              "इस ज़िंदगी को तुझको दिया"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Yeh zindagi teri mahima",
+              "Gaati rahe ab sada jab tak jiyun",
+              "Teri mahima karta rahun, ae Khuda"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Jab se hai chhua tune mujhe",
+              "Nayi saans jaise phir se aa gayi",
+              "Jab se thaama haath tera",
+              "Band raahen jaise phir se khul gayi",
+              "Tu hi Prabhu, mere Yeshu",
+              "Tere siwa na hoga koi"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Jab bhi pukaara maine tujhe",
+              "Meri har dua ko tune hai suna",
+              "Har ek kadam par tu saath raha",
+              "Paas tujhko hai mehsoos kiya",
+              "Ab hosanna teri, Khuda",
+              "Is zindagi ko tujhko diya"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "This life will sing Your glory,",
+              "As long as I live it will keep singing,",
+              "I will keep declaring Your glory, O God"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Since the day You touched me,",
+              "It was as if new breath came again,",
+              "Since the day You took my hand,",
+              "Closed paths opened once more,",
+              "You alone are Lord, my Jesus,",
+              "There will be no one besides You"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Whenever I called on You,",
+              "You heard every prayer of mine,",
+              "At every step You stayed with me,",
+              "I felt You near,",
+              "Hosanna to You, O God,",
+              "I have given this life to You"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "ഈ ജീവിതം നിന്റെ മഹിമ,",
+              "ഞാൻ ജീവനോടെ ഉള്ളിടത്തോളം പാടിക്കൊണ്ടിരിക്കും,",
+              "നിന്റെ മഹിമ ഞാൻ പ്രഖ്യാപിച്ചുകൊണ്ടിരിക്കും, ദൈവമേ"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "നീ എന്നെ സ്പർശിച്ച നാൾമുതൽ,",
+              "പുതിയ ശ്വാസം വീണ്ടും വന്നതുപോലെ ആയി,",
+              "നീ എന്റെ കൈ പിടിച്ച നാൾമുതൽ,",
+              "അടഞ്ഞ വഴികൾ വീണ്ടും തുറന്നു,",
+              "നീയത്രേ കർത്താവ്, എന്റെ യേശുവേ,",
+              "നിനക്കു പുറമെ ആരുമുണ്ടാകയില്ല"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "ഞാൻ നിന്നെ വിളിച്ചപ്പോഴൊക്കെ,",
+              "എന്റെ എല്ലാ പ്രാർത്ഥനയും നീ കേട്ടു,",
+              "ഓരോ അടിയിലും നീ കൂടെയുണ്ടായിരുന്നു,",
+              "നീ അടുത്തുണ്ടെന്ന് ഞാൻ അനുഭവിച്ചു,",
+              "ഹോശന്നാ നിനക്കു, ദൈവമേ,",
+              "ഈ ജീവിതം ഞാൻ നിനക്കു സമർപ്പിച്ചു"
             ]
           }
         ]
@@ -49127,23 +49599,201 @@
         "lyrics": [
           {
             "lines": [
-              ";h'kq dk njckj] eksgs I;kjk yxr gS",
-              "I;kjk yxr gS] nqykjk yxr gS---2",
-              "1 rsjs njckj elhg] dkSu&dkSu vk;s]",
-              "/keZ ds Hkw[ks] xqusgxkj js",
-              "eksgs I;kjk yxr gSA",
-              "2 rsjs njckj elhg] dkSu&dkSu cSBs",
-              "iafMr vkSj ew[kZ] xaokj js",
-              "eksgs I;kjk yxr gSA",
-              "3 rsjs njckj elhg D;k&D;k feyr gS",
-              "eqfDr vkSj 'kkfUr vikj js",
-              "eksgs I;kjk yxr gSA",
-              "4 rsjs njckj elhg ge lc vk;s",
-              "lqu yks izHkq th iqdkj js",
-              "eksgs I;kjk yxr gSA",
-              "5 lqu djds gejk ;g] xkuk ctkuk—2",
-              "'kSruok dks vk;s cq[k+kj js",
-              "eksgs I;kjk yxr gSA"
+              "यीशु का दरबार, मोहे प्यारा लगता है",
+              "प्यारा लगता है, दुलारा लगता है (2)"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "तेरे दरबार मसीह, कौन-कौन आए",
+              "धर्म के भूखे, गुनहगार रे",
+              "मोहे प्यारा लगता है"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "तेरे दरबार मसीह, कौन-कौन बैठे",
+              "पंडित और मूर्ख, गंवार रे",
+              "मोहे प्यारा लगता है"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "तेरे दरबार मसीह, क्या-क्या मिलता है",
+              "मुक्ति और शांति अपार रे",
+              "मोहे प्यारा लगता है"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "तेरे दरबार मसीह, हम सब आए",
+              "सुन लो प्रभु जी पुकार रे",
+              "मोहे प्यारा लगता है"
+            ]
+          },
+          {
+            "verse": "5",
+            "lines": [
+              "सुन करके हमरा यह गाना बजाना (2)",
+              "शैतानवा को आए बुखार रे",
+              "मोहे प्यारा लगता है"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Yeshu ka darbaar, mohe pyara lagta hai",
+              "Pyara lagta hai, dulara lagta hai (2)"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Tere darbaar Masih, kaun-kaun aaye",
+              "Dharm ke bhookhe, gunahgaar re",
+              "Mohe pyara lagta hai"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Tere darbaar Masih, kaun-kaun baithe",
+              "Pandit aur moorkh, ganvaar re",
+              "Mohe pyara lagta hai"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Tere darbaar Masih, kya-kya milta hai",
+              "Mukti aur shanti apaar re",
+              "Mohe pyara lagta hai"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "Tere darbaar Masih, hum sab aaye",
+              "Sun lo Prabhu ji pukaar re",
+              "Mohe pyara lagta hai"
+            ]
+          },
+          {
+            "verse": "5",
+            "lines": [
+              "Sun karke hamra yeh gaana bajaana (2)",
+              "Shaitanwa ko aaye bukhaar re",
+              "Mohe pyara lagta hai"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "The court of Jesus feels precious to me,",
+              "It feels lovely, it feels beloved (2)"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Who comes into Your court, O Christ?",
+              "Those hungry for righteousness, sinners too,",
+              "It feels precious to me"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Who sits in Your court, O Christ?",
+              "The learned and the foolish, the simple too,",
+              "It feels precious to me"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "What is found in Your court, O Christ?",
+              "Salvation and boundless peace,",
+              "It feels precious to me"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "We have all come into Your court, O Christ,",
+              "Hear our cry, Lord,",
+              "It feels precious to me"
+            ]
+          },
+          {
+            "verse": "5",
+            "lines": [
+              "When this singing and music of ours is heard (2),",
+              "Even Satan is shaken with fever,",
+              "It feels precious to me"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യേശുവിന്റെ സന്നിധി എനിക്കെത്ര പ്രിയം,",
+              "പ്രിയം തന്നെ, അമൂല്യം തന്നെ (2)"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "നിന്റെ സന്നിധിയിൽ ആർ ആർ വരുന്നു, ക്രിസ്തുവേ?",
+              "നീതിക്കായി വിശക്കുന്നവരും പാപികളും,",
+              "എനിക്കത് അതിപ്രിയം"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "നിന്റെ സന്നിധിയിൽ ആർ ആർ ഇരിക്കുന്നു, ക്രിസ്തുവേ?",
+              "പണ്ഡിതനും മൂഢനും സാധാരണമാനുഷനും,",
+              "എനിക്കത് അതിപ്രിയം"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "നിന്റെ സന്നിധിയിൽ എന്തെല്ലാം ലഭിക്കുന്നു, ക്രിസ്തുവേ?",
+              "മോചനവും അളവില്ലാ സമാധാനവും,",
+              "എനിക്കത് അതിപ്രിയം"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "നിന്റെ സന്നിധിയിൽ ഞങ്ങൾ എല്ലാം വന്നു, ക്രിസ്തുവേ,",
+              "കർത്താവേ, ഞങ്ങളുടെ നിലവിളി കേൾക്കേണമേ,",
+              "എനിക്കത് അതിപ്രിയം"
+            ]
+          },
+          {
+            "verse": "5",
+            "lines": [
+              "ഞങ്ങളുടെ ഈ പാട്ടും വാദ്യവും കേൾക്കുമ്പോൾ (2),",
+              "ശൈതാനും നടുങ്ങിപ്പോകുന്നു,",
+              "എനിക്കത് അതിപ്രിയം"
             ]
           }
         ]
@@ -49267,20 +49917,149 @@
         "lyrics": [
           {
             "lines": [
-              "yaISau ko lahU kao pukar –3",
-              "bah hI bacaata hO",
-              "yaISau ko lahU iksaI baCDo, ka nahI",
-              "iksaI bakro ka nahIM",
-              "balkI baoeba pak KUna hO –2",
-              "yaISau ko lahU maoM nahayao –3 pap imaTata hO…",
-              "yaISau ka lahU iksaI maudo- nahI‚",
-              "iksaI papI ka nahIM",
-              "balkI pak yahaovaa ka hO –2",
-              "yaISau ko lahU ipto jaae –3 jaInaa isaKata hO…",
-              "yaISau ko lahU baD,I kudrt vaalaa hO",
-              "baD,I barkt vaalaa hO",
-              "balkI $h bacaanao vaalaa hO –2",
-              "yaISau ko lahU maoM xamaa hO –3 maui> idlaata hO…"
+              "यीशु के लहू को पुकार (3)",
+              "वह ही बचाता है"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "यीशु का लहू किसी बछड़े का नहीं",
+              "किसी बकरे का नहीं",
+              "बल्कि बेऐब पाक खून है (2)",
+              "यीशु के लहू में नहाए (3), पाप मिटाता है"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "यीशु का लहू किसी मुर्दे का नहीं",
+              "किसी पापी का नहीं",
+              "बल्कि पाक यहोवा का है (2)",
+              "यीशु के लहू पीते जाए (3), जीना सिखाता है"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "यीशु का लहू बड़ी कुदरत वाला है",
+              "बड़ी बरकत वाला है",
+              "बल्कि रूह बचाने वाला है (2)",
+              "यीशु के लहू में क्षमा है (3), मुक्ति दिलाता है"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Yeshu ke lahu ko pukar (3)",
+              "Wahi bachata hai"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Yeshu ka lahu kisi bachhde ka nahin",
+              "Kisi bakre ka nahin",
+              "Balki beaib paak khoon hai (2)",
+              "Yeshu ke lahu mein nahaye (3), paap mitaata hai"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Yeshu ka lahu kisi murde ka nahin",
+              "Kisi paapi ka nahin",
+              "Balki paak Yahowa ka hai (2)",
+              "Yeshu ke lahu peete jaaye (3), jeena sikhaata hai"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Yeshu ka lahu badi kudrat wala hai",
+              "Badi barkat wala hai",
+              "Balki rooh bachane wala hai (2)",
+              "Yeshu ke lahu mein kshama hai (3), mukti dilaata hai"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Call upon the blood of Jesus (3),",
+              "It alone saves"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "The blood of Jesus is not the blood of a calf,",
+              "Nor the blood of a goat,",
+              "But spotless holy blood (2),",
+              "Washed in Jesus' blood (3), sin is removed"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "The blood of Jesus is not that of a dead man,",
+              "Nor of a sinner,",
+              "But it is the holy blood of Yahweh (2),",
+              "As we keep drinking Jesus' blood (3), it teaches us to live"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "The blood of Jesus carries mighty power,",
+              "It carries great blessing,",
+              "It saves the soul (2),",
+              "In Jesus' blood there is forgiveness (3), it brings salvation"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യേശുവിന്റെ രക്തത്തെ വിളിച്ചുപറക (3),",
+              "അതുമാത്രമാണ് രക്ഷിക്കുന്നത്"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "യേശുവിന്റെ രക്തം ഒരു കിടാവിൻറേതല്ല,",
+              "ഒരു ആടിൻറേതല്ല,",
+              "മറിച്ച് കളങ്കമില്ലാത്ത പരിശുദ്ധ രക്തമാണ് (2),",
+              "യേശുവിന്റെ രക്തത്തിൽ കഴുകപ്പെടുമ്പോൾ (3), പാപം നീങ്ങിപ്പോകുന്നു"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "യേശുവിന്റെ രക്തം ഒരു മരിച്ചവന്റെതല്ല,",
+              "ഒരു പാപിയുടെതുമല്ല,",
+              "മറിച്ച് വിശുദ്ധ യഹോവയുടെ രക്തമാണ് (2),",
+              "യേശുവിന്റെ രക്തം കുടിച്ചുകൊണ്ടിരിക്കുമ്പോൾ (3), ജീവിക്കാൻ പഠിപ്പിക്കുന്നു"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "യേശുവിന്റെ രക്തം മഹത്തായ ശക്തിയുള്ളതാണ്,",
+              "മഹത്തായ അനുഗ്രഹമുള്ളതാണ്,",
+              "ആത്മാവിനെ രക്ഷിക്കുന്നതാണ് (2),",
+              "യേശുവിന്റെ രക്തത്തിൽ ക്ഷമയുണ്ട് (3), മോചനം നൽകുന്നു"
             ]
           }
         ]
@@ -49300,17 +50079,137 @@
         "lyrics": [
           {
             "lines": [
-              "yaISau ko laaogaaoM kao hmaoSaa ivajaya hO",
-              "ivajaya‚ ivajaya‚ ivajaya‚ ivajaya",
-              "@yaaoM naa du:K Aanao dao",
-              "hma nahI BaUlaoMgao yaISau kao",
-              "saMkT Aanao dao hma haosaÙa gaayaoMgao",
-              "kOsaa AdBaut rajaa",
-              "jaao ivajaya dota hmaoSaa –2",
-              "}^Mcaa ]^Mcaa yaISau kao kao[- saImaa nahI ]sakI",
-              "saamanaa kroMgao [balaIsa ka",
-              "ijasa hrayaa yaISau rajaa –2",
-              "jaaeMgao ]sa nagar kao ijasa maomnaa banaayaa hO"
+              "यीशु के लोगों को हमेशा विजय है",
+              "विजय, विजय, विजय, विजय"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "क्यों न दुःख आने दो",
+              "हम नहीं भूलेंगे यीशु को",
+              "संकट आने दो, हम होसन्ना गाएंगे"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "कैसा अद्भुत राजा",
+              "जो विजय देता हमेशा (2)",
+              "ऊँचा ऊँचा यीशु को, कोई सीमा नहीं उसकी"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "सामना करेंगे इब्लीस का",
+              "जिसे हराया यीशु राजा (2)",
+              "जाएंगे उस नगर को जिसे मेम्ना ने बनाया है"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Yeshu ke logon ko hamesha vijay hai",
+              "Vijay, vijay, vijay, vijay"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Kyon na dukh aane do",
+              "Hum nahin bhoolenge Yeshu ko",
+              "Sankat aane do, hum Hosanna gayenge"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Kaisa adbhut Raja",
+              "Jo vijay deta hamesha (2)",
+              "Ooncha ooncha Yeshu ko, koi seema nahin uski"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Saamna karenge Iblees ka",
+              "Jise haraya Yeshu Raja (2)",
+              "Jayenge us nagar ko jise Memna ne banaya hai"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "The people of Jesus always have victory,",
+              "Victory, victory, victory, victory"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Let sorrow come if it must,",
+              "We will not forget Jesus,",
+              "Let trouble come, we will still sing Hosanna"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "What a wonderful King,",
+              "Who always gives victory (2),",
+              "Jesus is exalted high, and nothing can limit Him"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "We will face the enemy,",
+              "The one whom King Jesus defeated (2),",
+              "We will go to the city that the Lamb has built"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യേശുവിന്റെ ജനങ്ങൾക്ക് എപ്പോഴും ജയം ഉണ്ട്,",
+              "ജയം, ജയം, ജയം, ജയം"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "ദുഃഖം വരട്ടെ എങ്കിലും,",
+              "ഞങ്ങൾ യേശുവിനെ മറക്കുകയില്ല,",
+              "കഷ്ടം വരട്ടെ, ഞങ്ങൾ ഹോശന്നാ പാടും"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "എത്ര അത്ഭുതരാജാവാണ്,",
+              "എപ്പോഴും ജയം നല്കുന്നവൻ (2),",
+              "യേശു ഉയർന്നവൻ, അവന് അതി ഇല്ല"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "ശത്രുവിനെ ഞങ്ങൾ നേരിടും,",
+              "യേശുരാജാവ് തോല്പിച്ചവനെ (2),",
+              "മേശ്ശിഹായുടെ കുഞ്ഞാടു പണിത നഗരത്തിലേക്ക് ഞങ്ങൾ പോകും"
             ]
           }
         ]
@@ -49330,43 +50229,259 @@
         "lyrics": [
           {
             "lines": [
-              "yaISau ko naama mao iSafa hO–2",
-              "yahI klaama mao ilaKa hO–2",
-              "yaISau ko naama mao iSafa hO – iSafa hO",
-              "yahI klaama mao ilaKa hO – ilaKa hO",
-              "yaISau sao SaOtana hara hO – hara hO",
-              "yaISau nao ]sakao maara hO – maara hO",
-              "yaISau nao KUna bahayaa hO – bahayaa hO",
-              "yaISau nao hma kao bacaayaa hO",
-              "yaISau hO saccaa masaIha",
-              "pZ, ko klaama doK laao –5",
-              "yaISau sao DrtI hO bad $ho saarI",
-              "yaISau sao DrtI hO hr baImaarI",
-              "yaISau ko Pyaarao du:K sao naa hrao",
-              "yaISau kao saccao mana sao pukarao",
-              "yaISau ka vaada saccaa hO – saccaa hO",
-              "jaao BaI vaao khta hO haota hO – haota hO",
-              "yaISau yahaovaa rafa hO",
-              "yaISau Kuda ka hO baoTa",
-              "pZ, ko klaama doK laao –5",
-              "yaISau ko pOrao kao ASkaoM sao Qaaokr",
-              "yau^M kha qaa mairyama nao rao kr",
-              "yaha^M Agar tU e rbbaI haota",
-              "hmaara Baa[- laaja,r na marta",
-              "hmaara Baa[- laaj,ar – e laaj,ar",
-              "Aa inakla kb`a sao baahr – Aa baahr",
-              "caar idnaaoM ka vaao mauda-",
-              "pla mao hao gayaa ij,aMda",
-              "pZ, ko klaama doK laao –5",
-              "yaISau yahaovaa rajaa ko jaOsaa",
-              "hUAa naa kao[- haogaa naa kao[-",
-              "yahaovaa Sammaa¸ yahaovaa Saalaaoma",
-              "yahaovaa inassaI yahaovaa iyaro",
-              "jald yaISau Aaegaa – Aaegaa",
-              "hmakao saaqa lao jaaegaa – lao jaaegaa",
-              "Kuda ko pasa hmaaro ilae",
-              "]sanao Gar hO banayaa",
-              "pZ, ko klaama doK laao –5"
+              "यीशु के नाम में शिफा है (2)",
+              "यही कलाम में लिखा है (2)",
+              "यीशु के नाम में शिफा है, शिफा है",
+              "यही कलाम में लिखा है, लिखा है"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "यीशु से शैतान हारा है, हारा है",
+              "यीशु ने उसको मारा है, मारा है",
+              "यीशु ने खून बहाया है, बहाया है",
+              "यीशु ने हम को बचाया है",
+              "यीशु है सच्चा मसीहा",
+              "पढ़ के कलाम देख लो (5)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "यीशु से डरती है बदरूह सारी",
+              "यीशु से डरती है हर बीमारी",
+              "यीशु के प्यारो दुःख से ना हारो",
+              "यीशु को सच्चे मन से पुकारो",
+              "यीशु का वादा सच्चा है, सच्चा है",
+              "जो भी वो कहता है होता है, होता है",
+              "यीशु यहोवा राफा है",
+              "यीशु खुदा का है बेटा",
+              "पढ़ के कलाम देख लो (5)"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "यीशु के पैरों को अश्कों से धोकर",
+              "यूँ कहा था मरियम ने रो कर",
+              "यहाँ अगर तू ऐ रब्बी होता",
+              "हमारा भाई लाज़र न मरता",
+              "हमारा भाई लाज़र, ऐ लाज़र",
+              "आ निकल कब्र से बाहर, आ बाहर",
+              "चार दिनों का वो मुर्दा",
+              "पल में हो गया ज़िंदा",
+              "पढ़ के कलाम देख लो (5)"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "यीशु यहोवा राजा के जैसा",
+              "हुआ ना कोई, होगा ना कोई",
+              "यहोवा शम्मा, यहोवा शालोम",
+              "यहोवा निस्सी, यहोवा यीरे",
+              "जल्द यीशु आएगा, आएगा",
+              "हमको साथ ले जाएगा, ले जाएगा",
+              "खुदा के पास हमारे लिए",
+              "उसने घर है बनाया",
+              "पढ़ के कलाम देख लो (5)"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Yeshu ke naam mein shifa hai (2)",
+              "Yahi kalaam mein likha hai (2)",
+              "Yeshu ke naam mein shifa hai, shifa hai",
+              "Yahi kalaam mein likha hai, likha hai"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Yeshu se shaitaan haara hai, haara hai",
+              "Yeshu ne usko maara hai, maara hai",
+              "Yeshu ne khoon bahaya hai, bahaya hai",
+              "Yeshu ne hum ko bachaya hai",
+              "Yeshu hai sachcha Masiha",
+              "Padh ke kalaam dekh lo (5)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Yeshu se darti hai bad rooh saari",
+              "Yeshu se darti hai har bimaari",
+              "Yeshu ke pyaaro dukh se na haaro",
+              "Yeshu ko sachche man se pukaro",
+              "Yeshu ka vaada sachcha hai, sachcha hai",
+              "Jo bhi woh kehta hai hota hai, hota hai",
+              "Yeshu Yahowa Rafa hai",
+              "Yeshu Khuda ka hai beta",
+              "Padh ke kalaam dekh lo (5)"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Yeshu ke pairon ko ashkon se dhokar",
+              "Yun kaha tha Mariyam ne ro kar",
+              "Yahan agar tu ae Rabbi hota",
+              "Hamara bhai Laazar na marta",
+              "Hamara bhai Laazar, ae Laazar",
+              "Aa nikal kabra se bahar, aa bahar",
+              "Chaar dinon ka woh murda",
+              "Pal mein ho gaya zinda",
+              "Padh ke kalaam dekh lo (5)"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "Yeshu Yahowa Raja ke jaisa",
+              "Hua na koi, hoga na koi",
+              "Yahowa Shamma, Yahowa Shalom",
+              "Yahowa Nissi, Yahowa Yireh",
+              "Jald Yeshu aayega, aayega",
+              "Humko saath le jayega, le jayega",
+              "Khuda ke paas hamare liye",
+              "Usne ghar hai banaya",
+              "Padh ke kalaam dekh lo (5)"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "There is healing in the name of Jesus (2),",
+              "It is written in the Word (2),",
+              "There is healing in the name of Jesus, healing indeed,",
+              "It is written in the Word, written indeed"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Satan is defeated before Jesus, defeated indeed,",
+              "Jesus has struck him down, struck him down,",
+              "Jesus shed His blood,",
+              "Jesus has saved us,",
+              "Jesus is the true Messiah,",
+              "Read the Word and see (5)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Every evil spirit fears Jesus,",
+              "Every sickness fears Jesus,",
+              "Beloved of Jesus, do not lose heart in sorrow,",
+              "Call on Jesus with a true heart,",
+              "The promise of Jesus is true, true indeed,",
+              "Whatever He says comes to pass,",
+              "Jesus is Jehovah Rapha,",
+              "Jesus is the Son of God,",
+              "Read the Word and see (5)"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Washing Jesus' feet with tears,",
+              "Mary cried and said,",
+              "If You had been here, Rabbi,",
+              "Our brother Lazarus would not have died,",
+              "Our brother Lazarus, O Lazarus,",
+              "Come out of the tomb, come out,",
+              "That man dead for four days,",
+              "Became alive in a moment,",
+              "Read the Word and see (5)"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "There has been no one and will be no one like Jesus, King Jehovah,",
+              "Jehovah Shammah, Jehovah Shalom,",
+              "Jehovah Nissi, Jehovah Jireh,",
+              "Soon Jesus will come, yes He will come,",
+              "He will take us with Him,",
+              "Near God, for us,",
+              "He has prepared a home,",
+              "Read the Word and see (5)"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യേശുവിന്റെ നാമത്തിൽ സൗഖ്യം ഉണ്ട് (2),",
+              "അങ്ങനെ വചനത്തിൽ എഴുതപ്പെട്ടിരിക്കുന്നു (2),",
+              "യേശുവിന്റെ നാമത്തിൽ സൗഖ്യം ഉണ്ട്, തീർച്ചയായും ഉണ്ട്,",
+              "അങ്ങനെ വചനത്തിൽ എഴുതപ്പെട്ടിരിക്കുന്നു"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "യേശുവിന്റെ മുമ്പിൽ ശൈതാൻ തോറ്റുപോയി,",
+              "യേശു അവനെ തോൽപ്പിച്ചു,",
+              "യേശു തന്റെ രക്തം ചൊരിഞ്ഞു,",
+              "യേശു ഞങ്ങളെ രക്ഷിച്ചു,",
+              "യേശുവാണ് സത്യ മിശിഹാ,",
+              "വചനം വായിച്ച് നോക്കൂ (5)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "എല്ലാ ദുഷ്ടാത്മാവുകളും യേശുവിനെ ഭയപ്പെടുന്നു,",
+              "എല്ലാ രോഗങ്ങളും യേശുവിനെ ഭയപ്പെടുന്നു,",
+              "യേശുവിന്റെ പ്രിയരേ, ദുഃഖത്തിൽ മടങ്ങരുത്,",
+              "സത്യഹൃദയത്തോടെ യേശുവിനെ വിളിച്ചപേക്ഷിക്കൂ,",
+              "യേശുവിന്റെ വാഗ്ദാനം സത്യമാണ്,",
+              "അവൻ പറയുന്നതെല്ലാം സംഭവിക്കുന്നു,",
+              "യേശു യഹോവ റാഫയാണ്,",
+              "യേശു ദൈവപുത്രനാണ്,",
+              "വചനം വായിച്ച് നോക്കൂ (5)"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "യേശുവിന്റെ കാലുകൾ കണ്ണുനീരാൽ കഴുകി,",
+              "മറിയം കരഞ്ഞുകൊണ്ട് പറഞ്ഞു,",
+              "റബ്ബീ, നീ ഇവിടെ ഉണ്ടായിരുന്നുവെങ്കിൽ,",
+              "ഞങ്ങളുടെ സഹോദരൻ ലാസർ മരിക്കുകയില്ലായിരുന്നു,",
+              "ഞങ്ങളുടെ സഹോദരൻ ലാസർ, ഓ ലാസറേ,",
+              "കല്ലറയിൽ നിന്ന് പുറത്തേക്ക് വാ,",
+              "നാലുദിവസമായി മരിച്ചവൻ,",
+              "ഒരു നിമിഷത്തിൽ ജീവനോടെ എഴുന്നേറ്റു,",
+              "വചനം വായിച്ച് നോക്കൂ (5)"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "യേശു യഹോവ രാജാവിനെപ്പോലെ ആരും ഉണ്ടായിട്ടില്ല, ഉണ്ടാകുകയും ഇല്ല,",
+              "യഹോവ ശമ്മാ, യഹോവ ശാലോം,",
+              "യഹോവ നിസ്സി, യഹോവ യിരെ,",
+              "വേഗം യേശു വരും, തീർച്ചയായും വരും,",
+              "അവൻ നമ്മെ കൂടെ കൊണ്ടുപോകും,",
+              "ദൈവത്തിന്റെ സന്നിധിയിൽ, നമ്മുടെ വേണ്ടി,",
+              "അവൻ ഒരു വീട് ഒരുക്കിയിരിക്കുന്നു,",
+              "വചനം വായിച്ച് നോക്കൂ (5)"
             ]
           }
         ]
@@ -49386,16 +50501,153 @@
         "lyrics": [
           {
             "lines": [
-              "yaISaU ko pICo maOM calanao lagaaÊ",
-              "na laaOTUMgaaÊ na laaOTUMgaa.",
-              "1 gar kao[- maoro saaqa na Aavao 3",
-              "na laaOTUMgaaÊ na laaOTUMgaa.",
-              "2 saMsaar kao CaoD,kr salaIba kao laokr 3",
-              "na laaOTUMgaaÊ na laaOTUMgaa.",
-              "3 Agar maOM ]saka [nkar na k$M 3",
-              "taja pa]ÐgaaÊ taja pa]Ðgaa",
-              "4 duinayaaÐ ko duÁK sao nahIM Qabarata 3",
-              "KuSa rhuÐgaÊ KuSa rhuÐga"
+              "यीशु के पीछे मैं चलने लगा",
+              "ना लौटूँगा, ना लौटूँगा"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "गर कोई मेरे साथ न आवे (3)",
+              "ना लौटूँगा, ना लौटूँगा"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "संसार को छोड़कर, सलीब को लेकर (3)",
+              "ना लौटूँगा, ना लौटूँगा"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "अगर मैं उसका इंकार न करूँ (3)",
+              "ताज पाऊँगा, ताज पाऊँगा"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "दुनिया के दुःख से नहीं घबराता (3)",
+              "खुश रहूँगा, खुश रहूँगा"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Yeshu ke peeche main chalne laga",
+              "Na lautunga, na lautunga"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Gar koi mere saath na aave (3)",
+              "Na lautunga, na lautunga"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Sansar ko chhodkar, saleeb ko lekar (3)",
+              "Na lautunga, na lautunga"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Agar main uska inkaar na karun (3)",
+              "Taaj paunga, taaj paunga"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "Duniya ke dukh se nahin ghabrata (3)",
+              "Khush rahunga, khush rahunga"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "I have started following Jesus,",
+              "I will not turn back, I will not turn back"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Though no one comes with me (3),",
+              "I will not turn back, I will not turn back"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Leaving the world behind and taking up the cross (3),",
+              "I will not turn back, I will not turn back"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "If I do not deny Him (3),",
+              "I will receive a crown, I will receive a crown"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "I am not afraid of the sorrows of this world (3),",
+              "I will remain joyful, I will remain joyful"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യേശുവിനെ പിന്തുടർന്ന് ഞാൻ നടക്കാൻ തുടങ്ങി,",
+              "തിരിഞ്ഞുപോവില്ല, തിരിഞ്ഞുപോവില്ല"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "എന്നോടൊപ്പം ആരും വരാതിരുന്നാലും (3),",
+              "തിരിഞ്ഞുപോവില്ല, തിരിഞ്ഞുപോവില്ല"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "ലോകത്തെ വിട്ട്, ക്രൂശ് ചുമന്ന് (3),",
+              "തിരിഞ്ഞുപോവില്ല, തിരിഞ്ഞുപോവില്ല"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "അവനെ ഞാൻ നിരസിക്കാതിരുന്നാൽ (3),",
+              "കിരീടം പ്രാപിക്കും, കിരീടം പ്രാപിക്കും"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "ലോകത്തിന്റെ ദുഃഖങ്ങളെ ഞാൻ ഭയപ്പെടുന്നില്ല (3),",
+              "സന്തോഷത്തോടെ ജീവിക്കും, സന്തോഷത്തോടെ ജീവിക്കും"
             ]
           }
         ]
@@ -49477,18 +50729,141 @@
         "lyrics": [
           {
             "lines": [
-              "yaISau kao jaba maOM mana maoM basaata",
-              "maora mana JaUmata KuSaIyaa^M manaata",
-              "maora mana Jaumata Qanya khta",
-              "Aa…hao…laara…h^MU du:K icaMta kao dUr Bagaata",
-              "Qaaima-kta ka svaga- idKata",
-              "saMsaar ka p`Bau )dya ka rajaa",
-              "pap AaOr Eaap kao jaD, sao imaTata",
-              "kYT AaOr du:Kao kao dUr Bagaata",
-              "duinayaa darI jaD, sao imaTata",
-              "naato irSto kuDo sao lagato",
-              "yarIhao nagar kao ibalkula igarata",
-              "baalao barCI ko TUkDo kr Dalata"
+              "यीशु को जब मैं मन में बसाता",
+              "मेरा मन झूमता, खुशियाँ मनाता",
+              "मेरा मन झूमता, धन्य कहता"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "आह, दुख-चिंता को दूर भगाता",
+              "धार्मिकता का स्वर्ग दिखाता",
+              "संसार का प्रभु, हृदय का राजा"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "पाप और श्राप को जड़ से मिटाता",
+              "कष्ट और दुःखों को दूर भगाता",
+              "दुनियादारी जड़ से मिटाता"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "नाते रिश्ते कूड़े से लगते",
+              "यरीहो नगर को बिलकुल गिराता",
+              "बलवान बर्छी के टुकड़े कर डालता"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Yeshu ko jab main mann mein basata",
+              "Mera mann jhoomta, khushiyan manata",
+              "Mera mann jhoomta, dhanya kehta"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Aah, dukh-chinta ko door bhagata",
+              "Dharmikta ka swarg dikhata",
+              "Sansar ka Prabhu, hriday ka Raja"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Paap aur shraap ko jad se mitata",
+              "Kasht aur dukhon ko door bhagata",
+              "Duniyadari jad se mitata"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Naate rishte koode se lagte",
+              "Yariho nagar ko bilkul girata",
+              "Balwan barchhi ke tukde kar dalta"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "When I let Jesus dwell within my heart,",
+              "My heart rejoices and celebrates,",
+              "My soul leaps and calls Him blessed"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "He drives away sorrow and anxiety,",
+              "He shows the heaven of righteousness,",
+              "The Lord of the world, the King of the heart"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "He uproots sin and curse,",
+              "He drives away suffering and pain,",
+              "He removes worldly bondage from the root"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Earthly ties begin to seem worthless,",
+              "He brings down the city of Jericho completely,",
+              "He shatters the strongest spear to pieces"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യേശുവിനെ ഞാൻ മനസ്സിൽ പാർപ്പിക്കുമ്പോൾ,",
+              "എൻ ഹൃദയം ആനന്ദിച്ച് ആഘോഷിക്കുന്നു,",
+              "എൻ മനസ്സ് ഉല്ലസിച്ച് അവനെ ധന്യൻ എന്നു വിളിക്കുന്നു"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "അവൻ ദുഃഖവും ചിന്തയും അകറ്റുന്നു,",
+              "നീതിയുടെ സ്വർഗ്ഗം കാണിച്ചുതരുന്നു,",
+              "ലോകത്തിന്റെ കർത്താവും ഹൃദയത്തിന്റെ രാജാവുമാകുന്നു"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "പാപവും ശാപവും മൂലത്തോടെ നീക്കുന്നു,",
+              "കഷ്ടവും ദുഃഖവും അകറ്റുന്നു,",
+              "ലൗകികബന്ധങ്ങളെ മൂലത്തോടെ തകർക്കുന്നു"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "ബന്ധങ്ങളും ബന്ധുത്വവും വിലകുറഞ്ഞതുപോലെ തോന്നുന്നു,",
+              "യെരീഹോ പട്ടണം പൂർണ്ണമായി ഇടിച്ചിടുന്നു,",
+              "ശക്തമായ കുന്തവും തകർത്ത് കളയുന്നു"
             ]
           }
         ]
@@ -49508,18 +50883,161 @@
         "lyrics": [
           {
             "lines": [
-              "1 yaISau kao maOM saba kuC dotaÊ saba kuC krta hUÐ kurbaina",
-              "jaI]Ðgaa maOM raoja masaIh maoMÊ ]sa pr rKuMgaa [-maana",
-              "saba maOM dota hUÐÊ saba maOM dota hUÐÊ",
-              "tuJa kao maubaark mauinjaÊ saba kuC dota hUÐ",
-              "2 yaISau kao maOM saba kuC dotaÊ Jaukta toro kdmaaoM pr",
-              "CaoD,ta saarI duinayaa darIÊ mauJao lao AaOr Apna kr",
-              "3 yaISau kao maOM saba kuC dotaÊ maUJao ibalkula Apnaa kr",
-              "do makbaUilayat kI gavaahIÊ hUÐ maOM tora sarasar",
-              "4 yaISau kao maOM saba kuC dotaÊ ABaI ]sako pak hujaUr",
-              "mauJa maoM Bardo Pyaar AaOr kubatÊ barktaoM sao kr maamaUr",
-              "5 yaISau kao maOM saba kuC dotaÊ $h kI Aaga Aba idla maoM",
-              "Aah kmaalaÑ najaat kI KUSaI sannaa¹sannaa ]sakI hao"
+              "यीशु को मैं सब कुछ देता, सब कुछ करता हूँ कुर्बानी",
+              "जिऊँगा मैं रोज़ मसीह में, उस पर रखूँगा ईमान",
+              "सब मैं देता हूँ, सब मैं देता हूँ",
+              "तुझको मुबारक मुंज्जी, सब कुछ देता हूँ"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "यीशु को मैं सब कुछ देता, झुकता तेरे कदमों पर",
+              "छोड़ता सारी दुनियादारी, मुझे ले और अपना कर"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "यीशु को मैं सब कुछ देता, मुझे बिलकुल अपना कर",
+              "दे मकबूलियत की गवाही, हूँ मैं तेरा सरासर"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "यीशु को मैं सब कुछ देता, अभी उसके पाक हज़ूर",
+              "मुझ में भर दे प्यार और कुव्वत, बरकतों से कर मामूर"
+            ]
+          },
+          {
+            "verse": "5",
+            "lines": [
+              "यीशु को मैं सब कुछ देता, रूह की आग अब दिल में",
+              "आह कमाल, निजात की खुशी, सन्ना सन्ना उसकी हो"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Yeshu ko main sab kuch deta, sab kuch karta hun kurbani",
+              "Jiyunga main roz Masih mein, us par rakhunga imaan",
+              "Sab main deta hun, sab main deta hun",
+              "Tujhko mubarak Munjji, sab kuch deta hun"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Yeshu ko main sab kuch deta, jhukta tere kadmon par",
+              "Chhodta saari duniyadari, mujhe le aur apna kar"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Yeshu ko main sab kuch deta, mujhe bilkul apna kar",
+              "De makbooliyat ki gawahi, hun main tera saraasar"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "Yeshu ko main sab kuch deta, abhi uske paak huzoor",
+              "Mujh mein bhar de pyaar aur quwwat, barkaton se kar mamoor"
+            ]
+          },
+          {
+            "verse": "5",
+            "lines": [
+              "Yeshu ko main sab kuch deta, rooh ki aag ab dil mein",
+              "Aah kamaal, nijaat ki khushi, sanna sanna uski ho"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "To Jesus I surrender everything, offering all in sacrifice,",
+              "Daily I will live in Christ, placing my faith in Him,",
+              "I give all, I give all,",
+              "Blessed Redeemer, I give everything to You"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "To Jesus I surrender everything, bowing at Your feet,",
+              "Leaving all worldliness behind, take me and make me Yours"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "To Jesus I surrender everything, make me fully Yours,",
+              "Give the witness of acceptance, for I belong entirely to You"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "To Jesus I surrender everything, here in His holy presence,",
+              "Fill me with love and strength, and satisfy me with blessings"
+            ]
+          },
+          {
+            "verse": "5",
+            "lines": [
+              "To Jesus I surrender everything, with the fire of the Spirit now in my heart,",
+              "Oh what wonder, the joy of salvation, let all honor be His"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യേശുവിന്നു ഞാൻ എല്ലാം സമർപ്പിക്കുന്നു, എല്ലാം ബലിയായി അർപ്പിക്കുന്നു,",
+              "ദിവസേന ക്രിസ്തുവിൽ ജീവിക്കും, അവനിൽ വിശ്വാസം വയ്ക്കും,",
+              "എല്ലാം ഞാൻ നൽകുന്നു, എല്ലാം ഞാൻ നൽകുന്നു,",
+              "വാഴ്ത്തപ്പെട്ട വീണ്ടെടുപ്പുകാരാ, എല്ലാം ഞാൻ നിനക്കു നൽകുന്നു"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "യേശുവിന്നു ഞാൻ എല്ലാം സമർപ്പിക്കുന്നു, നിന്റെ പാദങ്ങളിൽ തലകുനിച്ച്,",
+              "ലൗകികതയെല്ലാം വിട്ട്, എന്നെ എടുത്ത് നിന്റെതാക്കണമേ"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "യേശുവിന്നു ഞാൻ എല്ലാം സമർപ്പിക്കുന്നു, എന്നെ പൂർണ്ണമായി നിന്റെതാക്കണമേ,",
+              "സ്വീകരിക്കപ്പെട്ടവൻ എന്ന് സാക്ഷ്യം തരണമേ, ഞാൻ പൂർണ്ണമായി നിന്റെതാണ്"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "യേശുവിന്നു ഞാൻ എല്ലാം സമർപ്പിക്കുന്നു, നിന്റെ വിശുദ്ധ സന്നിധിയിൽ ഇപ്പോൾ,",
+              "എന്നിൽ സ്നേഹവും ശക്തിയും നിറച്ചിട്ട്, അനുഗ്രഹങ്ങളാൽ സമ്പൂർണ്ണനാക്കണമേ"
+            ]
+          },
+          {
+            "verse": "5",
+            "lines": [
+              "യേശുവിന്നു ഞാൻ എല്ലാം സമർപ്പിക്കുന്നു, ആത്മാവിന്റെ തീ ഇപ്പോൾ ഹൃദയത്തിൽ,",
+              "ആഹാ അത്ഭുതം, രക്ഷയുടെ സന്തോഷം, സന്നാ സന്നാ അവന്നാകട്ടെ"
             ]
           }
         ]
@@ -49539,26 +51057,145 @@
         "lyrics": [
           {
             "lines": [
-              "yaISau ilayaao torao naama -2",
-              "ijasanao ilayaao torao naama p`Bau",
-              "payaao ]saI nao maukama",
-              "sauK caOna imalato hO gama dUr haoto hO",
-              "imaTto hO saarI proSaainayaa",
-              "hr saMasa pr naama ilaKto hO tora",
-              "krta hO ]na pr maohrbaainayaa",
-              "]jaD,o maukd\\dr savaMr jaato hO",
-              "EaRwa sao jaao toro dr Aato hO",
-              "ibagaD,o banao saaro kama -2",
-              "yaISau ilayaao torao -2",
-              "laoto hO idla sao jaao naama tora",
-              "vah torI kRpa sao Bar jaato hO",
-              "haotI hO pUrI tmmannaaMeo ]nakI",
-              "jaao hr va@t toro hI gauNa gaato hO",
-              "QaD,kna mauJasao khnao lagaI",
-              "Aip-t k$M ApnaI hI ijandgaI.",
-              "krta rhUM AapkI bandgaI -2",
-              "idla kao imalao ivaEaama -2",
-              "yaISau ilayaao torao -2"
+              "यीशु, लियो तेरो नाम (2)",
+              "जिसने लियो तेरो नाम, प्रभु",
+              "पायो उसी ने मुकाम"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "सुख चैन मिलते हैं, ग़म दूर होते हैं",
+              "मिटती हैं सारी परेशानियाँ",
+              "हर सांस पर नाम लिखते हैं तेरा",
+              "करता है उन पर मेहरबानियाँ",
+              "उजड़े मुकद्दर सँवर जाते हैं",
+              "श्रद्धा से जो तेरे दर आते हैं",
+              "बिगड़े बने सारे काम (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "लेते हैं दिल से जो नाम तेरा",
+              "वह तेरी कृपा से भर जाते हैं",
+              "होती है पूरी तमन्नाएँ उनकी",
+              "जो हर वक़्त तेरे ही गुण गाते हैं",
+              "धड़कन मुझसे कहने लगी",
+              "अर्पित करूँ अपनी ही ज़िंदगी",
+              "करता रहूँ आपकी बंदगी (2)",
+              "दिल को मिले विश्राम (2)"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Yeshu, liyo tero naam (2)",
+              "Jisne liyo tero naam, Prabhu",
+              "Payo usi ne mukaam"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Sukh chain milte hain, gham door hote hain",
+              "Mitati hain saari pareshaniyan",
+              "Har saans par naam likhte hain tera",
+              "Karta hai un par meherbaniyan",
+              "Ujde muqaddar sanvar jaate hain",
+              "Shraddha se jo tere dar aate hain",
+              "Bigde bane saare kaam (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Lete hain dil se jo naam tera",
+              "Woh teri kripa se bhar jaate hain",
+              "Hoti hai poori tamannaayein unki",
+              "Jo har waqt tere hi gun gaate hain",
+              "Dhadkan mujhse kehne lagi",
+              "Arpit karun apni hi zindagi",
+              "Karta rahun aapki bandagi (2)",
+              "Dil ko mile vishraam (2)"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Jesus, I take Your name (2),",
+              "Whoever takes Your name, Lord,",
+              "Finds their true place"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Peace and comfort are found, sorrows are driven away,",
+              "All troubles come to an end,",
+              "Those who carry Your name with every breath",
+              "Receive Your kindness,",
+              "Ruined destinies are restored,",
+              "For those who come to Your door in faith,",
+              "Broken things are made whole (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Those who take Your name from the heart",
+              "Are filled by Your grace,",
+              "Their deepest desires are fulfilled,",
+              "They who sing Your praise at all times,",
+              "My heartbeat began to say,",
+              "Let me offer my whole life,",
+              "Let me continue in Your worship (2),",
+              "And let my heart find rest (2)"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യേശുവേ, ഞാൻ നിന്റെ നാമം ഏറ്റെടുത്തു (2),",
+              "ആരും നിന്റെ നാമം ഏറ്റെടുക്കുന്നുവോ, കർത്താവേ,",
+              "അവൻ തന്റെ ലക്ഷ്യം കണ്ടെത്തുന്നു"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "സുഖവും സമാധാനവും ലഭിക്കുന്നു, ദുഃഖങ്ങൾ അകന്നു പോകുന്നു,",
+              "എല്ലാ പ്രയാസങ്ങളും അവസാനിക്കുന്നു,",
+              "ഓരോ ശ്വാസത്തിലും നിന്റെ നാമം ചൊല്ലുന്നവർക്ക്",
+              "നീ കരുണ കാഴ്ചവെക്കുന്നു,",
+              "നശിച്ച ഭാഗ്യങ്ങൾ പുനഃസ്ഥാപിക്കപ്പെടുന്നു,",
+              "വിശ്വാസത്തോടെ നിന്റെ സന്നിധിയിൽ വരുന്നവർക്ക്,",
+              "തകർന്ന കാര്യങ്ങൾ ശരിയാകുന്നു (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "ഹൃദയത്തിൽ നിന്നു നിന്റെ നാമം ചൊല്ലുന്നവർ",
+              "നിന്റെ കൃപയാൽ നിറയുന്നു,",
+              "അവരുടെ ആഗ്രഹങ്ങൾ പൂർത്തിയാവുന്നു,",
+              "എപ്പോഴും നിന്റെ ഗുണങ്ങൾ പാടുന്നവർക്ക്,",
+              "എന്റെ ഹൃദയമിടിപ്പ് തന്നെ പറയാൻ തുടങ്ങി,",
+              "എന്റെ മുഴുവൻ ജീവിതവും അർപ്പിക്കട്ടെ,",
+              "നിന്റെ ആരാധനയിൽ നിലനിൽക്കട്ടെ (2),",
+              "ഹൃദയത്തിന് വിശ്രമം ലഭിക്കട്ടെ (2)"
             ]
           }
         ]
@@ -49578,22 +51215,161 @@
         "lyrics": [
           {
             "lines": [
-              "yaISau masaIh dota KuSaI",
-              "kro maihmaa ]sakI pOda huAa banaa [nsaana",
-              "doKao Baagaa SaOtana",
-              "laa laa laa 2",
-              "naaro lagaaAao jaya gaIt gaaAao",
-              "SaOtana huAa proSaana 2",
-              "talaI bajaaAao¸ naacaao gaaAao",
-              "doKao Baagaa SaOtana 2",
-              "igarnaovaalaao ]zao calaao",
-              "yaISau baulaata tumho",
-              "CaoD,a dao Drnaa¸ Aba kaho marnaa",
-              "huAa hO ijaMda yaISau masaIh",
-              "Jauk jaaegaa Aasamaa ek idna",
-              "yaISau rajaa haogaa baadlaaoM pr",
-              "doKogaI duinayaa¸ Saana masaIh kI",
-              "jaubaana po haogaa yao gaIt saBaI ko"
+              "यीशु मसीह देता खुशी",
+              "करो महिमा उसकी",
+              "पैदा हुआ, बना इंसान",
+              "देखो भागा शैतान"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "ला ला ला (2)",
+              "नारे लगाओ, जय गीत गाओ",
+              "शैतान हुआ परेशान (2)",
+              "ताली बजाओ, नाचो गाओ",
+              "देखो भागा शैतान (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "गिरनेवालो उठो चलो",
+              "यीशु बुलाता तुम्हें",
+              "छोड़ दो डरना, अब काहे मरना",
+              "हुआ है ज़िंदा यीशु मसीह"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "झुक जाएगा आसमां एक दिन",
+              "यीशु राजा होगा बादलों पर",
+              "देखेगी दुनिया, शान मसीह की",
+              "ज़ुबान पे होगा ये गीत सभी के"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Yeshu Masih deta khushi",
+              "Karo mahima uski",
+              "Paida hua, bana insaan",
+              "Dekho bhaga shaitaan"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "La la la (2)",
+              "Naare lagao, jai geet gao",
+              "Shaitaan hua pareshan (2)",
+              "Taali bajao, naacho gao",
+              "Dekho bhaga shaitaan (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Girnewalo utho chalo",
+              "Yeshu bulaata tumhein",
+              "Chhod do darna, ab kahe marna",
+              "Hua hai zinda Yeshu Masih"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Jhuk jayega aasman ek din",
+              "Yeshu Raja hoga baadalon par",
+              "Dekhegi duniya, shaan Masih ki",
+              "Zubaan pe hoga yeh geet sabhi ke"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Jesus Christ gives joy,",
+              "Give glory to Him,",
+              "He was born and became a man,",
+              "See, Satan has fled"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "La la la (2),",
+              "Shout out, sing songs of victory,",
+              "Satan has become troubled (2),",
+              "Clap your hands, dance and sing,",
+              "See, Satan has fled (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "You who have fallen, rise and walk,",
+              "Jesus is calling you,",
+              "Stop being afraid, why die now,",
+              "Jesus Christ is alive"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "One day the heavens will bow,",
+              "King Jesus will appear upon the clouds,",
+              "The world will see the glory of Christ,",
+              "And this song will be on every tongue"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യേശു മിശിഹാ സന്തോഷം നല്കുന്നു,",
+              "അവന്റെ മഹത്വം പാടുവിൻ,",
+              "അവൻ ജനിച്ചു മനുഷ്യനായി,",
+              "നോക്കൂ, ശൈതാൻ ഓടിപ്പോയി"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "ലാ ലാ ലാ (2),",
+              "ഘോഷിക്കൂ, ജയഗാനം പാടൂ,",
+              "ശൈതാൻ വിഷമത്തിലായി (2),",
+              "കയ്യടിക്കൂ, നൃത്തം ചെയ്യൂ, പാടൂ,",
+              "നോക്കൂ, ശൈതാൻ ഓടിപ്പോയി (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "വീണുപോയവരേ, എഴുന്നേറ്റ് നടക്കൂ,",
+              "യേശു നിങ്ങളെ വിളിക്കുന്നു,",
+              "ഭയം വിട്ടുകളവിൻ, ഇനി എന്തിന് മരിക്കുക,",
+              "യേശു മിശിഹാ ജീവനോടെ ഇരിക്കുന്നു"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "ഒരു ദിവസം ആകാശം തലകുനിക്കും,",
+              "യേശുരാജാവ് മേഘങ്ങളിൽ വരും,",
+              "ലോകം ക്രിസ്തുവിന്റെ മഹിമ കാണും,",
+              "ഈ ഗാനം എല്ലാവരുടെയും നാവിൽ നിറയും"
             ]
           }
         ]
@@ -49613,29 +51389,113 @@
         "lyrics": [
           {
             "lines": [
-              "yaISau masaIh toro jaOsaa hO kao[- nahI",
-              "toro carNaaoM mao Jauko Aasamaana Ê",
-              "AaOr maihmaa gaayao jama,Ina 2",
-              "hma gaayao haosannaaÊ tu rajaaAao ka hO rajaa",
-              "torI maihmaa haovao sadaÊ",
-              "tu hO p`Bau hmaara Kuda 2",
-              "Pyaaro ipta tUnao hmasao iktnaa Pyaar ikyaa",
-              "hmao papaoM sao CuD,anao kaoÊ",
-              "Apnao baoTo kao kubaa-na ikyaa 2"
+              "यीशु मसीह तेरे जैसा है कोई नहीं",
+              "तेरे चरणों में झुके आसमान",
+              "और महिमा गाए ज़मीन (2)"
             ]
           },
           {
             "verse": "1",
             "lines": [
-              "Yeshu Masih Tere jaisa hai koi hi nahi",
-              "Tere charanom me jhuke aasman",
-              "Aur mahima gaaye sabhi",
-              "Hum gaaye hoshanna tu Rajaom ka hai Raja",
+              "हम गाएँ होशन्ना",
+              "तू राजाओं का है राजा",
+              "तेरी महिमा होवे सदा",
+              "तू है प्रभु हमारा खुदा (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "प्यारे पिता तूने हमसे कितना प्यार किया",
+              "हमें पापों से छुड़ाने को",
+              "अपने बेटे को कुर्बान किया (2)"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Yeshu Masih tere jaisa hai koi nahin",
+              "Tere charanon mein jhuke aasman",
+              "Aur mahima gaaye zameen (2)"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Hum gaaye Hosanna",
+              "Tu rajaon ka hai Raja",
               "Teri mahima hove sada",
-              "Tu hai Prabhu hamara Khuda",
-              "Pyare pita Tunne humse kitna pyar kiya",
-              "Humme papom se chudane ko",
-              "Apne Bete ko kurban kiya"
+              "Tu hai Prabhu hamara Khuda (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Pyare Pita tune humse kitna pyaar kiya",
+              "Humein paapon se chhudane ko",
+              "Apne Bete ko kurban kiya (2)"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Jesus Christ, there is no one like You,",
+              "The heavens bow at Your feet,",
+              "And the earth sings Your glory (2)"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "We sing Hosanna,",
+              "You are the King of kings,",
+              "May Your glory be forever,",
+              "You are our Lord, our God (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Dear Father, how greatly You loved us,",
+              "To set us free from our sins,",
+              "You gave Your own Son as a sacrifice (2)"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യേശു മിശിഹായേ, നിനക്കു സമനായവൻ ആരുമില്ല,",
+              "നിന്റെ പാദങ്ങളിൽ ആകാശം തലകുനിയുന്നു,",
+              "ഭൂമി നിന്റെ മഹിമ പാടുന്നു (2)"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "ഞങ്ങൾ ഹോശന്നാ പാടുന്നു,",
+              "നീ രാജാക്കന്മാരുടെ രാജാവാണ്,",
+              "നിന്റെ മഹിമ എന്നേക്കും നിലനില്ക്കട്ടെ,",
+              "നീയാണ് ഞങ്ങളുടെ കർത്താവും ദൈവവും (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "പ്രിയ പിതാവേ, നീ ഞങ്ങളെ എത്ര സ്നേഹിച്ചു,",
+              "പാപങ്ങളിൽ നിന്ന് വിടുവിപ്പാൻ,",
+              "നിന്റെ പുത്രനെ ബലിയായി അർപ്പിച്ചു (2)"
             ]
           }
         ]
@@ -49809,19 +51669,149 @@
         "lyrics": [
           {
             "lines": [
-              "yaISau mao hI tuma sada mana lagaanaa",
-              "]sakI AraQanaa tuma krto jaanaa",
-              "dao idna kI hO yah ijandgaI",
-              "dao idna ka hO yah safr",
-              "[sa papI duinayaa mao tuma Kao na jaanaa",
-              "]sakI AraQanaa tuma krto jaanaa",
-              "laoko haqaaMo mao k`Usa ka inaSaana",
-              "duYT Aa%maa tuma imaTaAao",
-              "]sako vacana kao sada tuma fOlaanaa",
-              "]sakI AraQanaa tuma krto jaanaa",
-              "rajaaAao ka hO vah rajaa paipyaao ka hO maui@tdata",
-              "]sakI rahao po sada calato jaanaa",
-              "]sakI AraQanaa tuma krto jaanaa"
+              "यीशु में ही तुम सदा मन लगाना",
+              "उसकी आराधना तुम करते जाना",
+              "दो दिन की है यह ज़िंदगी",
+              "दो दिन का है यह सफर"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "इस पापी दुनिया में तुम खो न जाना",
+              "उसकी आराधना तुम करते जाना"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "लेके हाथों में क्रूस का निशान",
+              "दुष्ट आत्मा तुम मिटाओ",
+              "उसके वचन को सदा तुम फैलाना",
+              "उसकी आराधना तुम करते जाना"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "राजाओं का है वह राजा",
+              "पापियों का है मुक्तिदाता",
+              "उसकी राहों पे सदा चलते जाना",
+              "उसकी आराधना तुम करते जाना"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Yeshu mein hi tum sada mann lagana",
+              "Uski aradhana tum karte jana",
+              "Do din ki hai yeh zindagi",
+              "Do din ka hai yeh safar"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Is papi duniya mein tum kho na jana",
+              "Uski aradhana tum karte jana"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Leke haathon mein kroos ka nishan",
+              "Dusht aatma tum mitao",
+              "Uske vachan ko sada tum phailana",
+              "Uski aradhana tum karte jana"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Rajaon ka hai woh Raja",
+              "Paapiyon ka hai muktidata",
+              "Uski raahon pe sada chalte jana",
+              "Uski aradhana tum karte jana"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Fix your heart always on Jesus alone,",
+              "Keep on worshiping Him,",
+              "This life is only for a little while,",
+              "This journey is only for a little while"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Do not lose yourself in this sinful world,",
+              "Keep on worshiping Him"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Taking up the sign of the cross in your hands,",
+              "Destroy the evil spirit,",
+              "Keep spreading His word always,",
+              "Keep on worshiping Him"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "He is the King of kings,",
+              "He is the Savior of sinners,",
+              "Keep walking in His ways always,",
+              "Keep on worshiping Him"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യേശുവിൽ മാത്രം നിന്റെ ഹൃദയം നിർത്തുക,",
+              "അവനെ നിരന്തരം ആരാധിച്ചുകൊണ്ടിരിക്കുക,",
+              "ഈ ജീവితం രണ്ടു ദിവസത്തെ മാത്രമാണ്,",
+              "ഈ യാത്രയും ചെറുകാലത്തേക്കുള്ളതാണ്"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "ഈ പാപഭരിതമായ ലോകത്തിൽ നീ വഴിതെറ്റിപ്പോകരുത്,",
+              "അവനെ നിരന്തരം ആരാധിച്ചുകൊണ്ടിരിക്കുക"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "കൈകളിൽ ക്രൂശിന്റെ അടയാളം എടുത്ത്,",
+              "ദുഷ്ടാത്മാവിനെ നീ ഇല്ലാതാക്കുക,",
+              "അവന്റെ വചനം എപ്പോഴും പരത്തിക്കൊണ്ടിരിക്കുക,",
+              "അവനെ നിരന്തരം ആരാധിച്ചുകൊണ്ടിരിക്കുക"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "അവൻ രാജാക്കന്മാരുടെ രാജാവാണ്,",
+              "പാപികളുടെ രക്ഷകനാണ്,",
+              "അവന്റെ വഴികളിൽ എപ്പോഴും നടന്നുകൊണ്ടിരിക്കുക,",
+              "അവനെ നിരന്തരം ആരാധിച്ചുകൊണ്ടിരിക്കുക"
             ]
           }
         ]
@@ -49841,18 +51831,121 @@
         "lyrics": [
           {
             "lines": [
-              ";h'kq esa ;kjks et+k gh et+k gS]",
-              "vklqnk dj ns oks ,slh fxt+k gS",
-              "uQjr ls rirh nqigjh esa Hkh",
-              "mYQ+r ls esgdh oks BaMh fQt+k gSA",
-              "1 fdlus uk ik;k fnnkj mldk",
-              "xj cudj vk;k rycxkj mldkA",
-              "nwjh [kqnk ls ,s esjs ;kjksa]",
-              "lguk ldksxs ;g ,slh lt+k gSA",
-              "2 dc rd ;w¡ vkgsa Hkjrs th;ksxsa]",
-              "rydh dk I;kyk ;w¡ dc rd ih;ksaxs",
-              "vkvks ih;ksa ft+Unxh dk ikuh]",
-              ":g vkSj nqYgu dh ;gh bfYrt+k gSA"
+              "यीशु में यारों मज़ा ही मज़ा है",
+              "आसुदा कर दे वो ऐसी गिज़ा है",
+              "नफ़रत से तपती दुपहरी में भी",
+              "उल्फ़त से महकी वो ठंडी फ़िज़ा है"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "किसने न पाया दीदार उसका",
+              "घर बनकर आया तलबगार उसका",
+              "दूरी खुदा से, ऐ मेरे यारों",
+              "सहना सकोगे, यह ऐसी सज़ा है"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "कब तक यूँ आहें भरते जीओगे",
+              "तल्ख़ी का प्याला यूँ कब तक पियोगे",
+              "आओ पियो ज़िंदगी का पानी",
+              "रूह और दुल्हन की यही इल्तिज़ा है"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Yeshu mein yaaron maza hi maza hai",
+              "Aasuda kar de woh aisi giza hai",
+              "Nafrat se tapti dupahari mein bhi",
+              "Ulfat se mahki woh thandi fiza hai"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Kisne na paya didar uska",
+              "Ghar bankar aaya talabgar uska",
+              "Doori Khuda se, ae mere yaaron",
+              "Sahna sakoge, yeh aisi saza hai"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Kab tak yun aahein bharte jiyoge",
+              "Talkhi ka pyala yun kab tak piyoge",
+              "Aao piyo zindagi ka paani",
+              "Rooh aur dulhan ki yahi iltija hai"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "In Jesus, friends, there is joy upon joy,",
+              "He brings rest like life-giving food,",
+              "Even in the burning heat of hatred,",
+              "He gives a cool breeze scented with love"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Who has not found His vision?",
+              "He comes near like the One who seeks a home,",
+              "Distance from God, my friends,",
+              "Is a punishment too hard to bear"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "How long will you live sighing like this?",
+              "How long will you drink the cup of bitterness?",
+              "Come, drink the water of life,",
+              "This is the plea of the Spirit and the Bride"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യേശുവിൽ, സഖാക്കളേ, ആനന്ദം മാത്രം ആനന്ദമാണ്,",
+              "ജീവനുള്ള ആഹാരത്തെപ്പോലെ അവൻ തൃപ്തിപ്പെടുത്തുന്നു,",
+              "വൈരാഗ്യത്തിന്റെ ചൂടേറിയ ഉച്ചയിലും,",
+              "സ്നേഹത്തിന്റെ തണുത്ത സുവാസനയുള്ള കാറ്റ് അവൻ തരുന്നു"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "അവന്റെ ദർശനം ലഭിക്കാതിരുന്നവർ ആരാണ്?",
+              "വീട് തേടിയെത്തുന്നവനെപ്പോലെ അവൻ വരുന്നു,",
+              "ദൈവത്തിൽ നിന്ന് അകലം, സഖാക്കളേ,",
+              "സഹിക്കാനാകാത്ത ഒരു ശിക്ഷയാണ്"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "ഇങ്ങനെ നെടുവീർപ്പിട്ട് എത്രകാലം ജീവിക്കും?",
+              "കയ്പ്പിന്റെ പാനപാത്രം എത്രകാലം കുടിക്കും?",
+              "വരുവിൻ, ജീവജലം കുടിപ്പിൻ,",
+              "ആത്മാവിന്റെയും വധുവിന്റെയും ഇതേ അപേക്ഷയാണ്"
             ]
           }
         ]
@@ -51274,29 +53367,209 @@
         "lyrics": [
           {
             "lines": [
-              "ft+Unxh dh feys lkSxkr",
-              ";s'kq rsjs dneksa esa",
-              "feys vcnh gesa utkr",
-              ";s'kq rsjs dneksa esa",
-              "1 D;ksa ugha rw nsrk",
-              "vius cks> lHkh mldks",
-              "ikiksa dh ekQ+h vkSj",
-              "vkjke feys rq>dks gksxh vaf/k;kjksa dh izHkkr",
-              ";s'kq rsjs dneksa esa",
-              "2 NksM+ viuk r[r ;h'kq",
-              "/kjrh ij vk,",
-              "rsjs esjs ikiksa dk nke pqdk,",
-              "fQj cki ls gqvk feyki",
-              ";s'kq rsjs dneksa esa",
-              "3 ;h'kq tx dh T;ksfr",
-              "pysa mlds ge uwj esa",
-              "vfXu [kqnkoan dh feyrh gS rwj esa",
-              "feV tkrh gS dkyh gj jkr",
-              ";s'kq rsjs dneksa esa",
-              "4 ;h'kq ls f'kQ+k gS feyrh",
-              ";h'kq ls utkr gS feyrh",
-              "eq>ZkbZ dfy;ka gSa f[kyrh",
-              ";s'kq rsjs dneksa esa"
+              "ज़िंदगी की मिले सौगात",
+              "यीशु तेरे कदमों में",
+              "मिले अबदी हमें नजात",
+              "यीशु तेरे कदमों में"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "क्यों नहीं तू देता",
+              "अपने बोझ सभी उसको",
+              "पापों की माफ़ी और",
+              "आराम मिले तुझको",
+              "होगी अंधियारों की प्रभात",
+              "यीशु तेरे कदमों में"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "छोड़ अपना तख्त यीशु",
+              "धरती पर आए",
+              "तेरे मेरे पापों का दाम चुकाए",
+              "फिर बाप से हुआ मिलाप",
+              "यीशु तेरे कदमों में"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "यीशु जग की ज्योति",
+              "चलें उसके हम नूर में",
+              "अग्नि खुदावंद की मिलती है दूर में",
+              "मिट जाती है काली हर रात",
+              "यीशु तेरे कदमों में"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "यीशु से शिफ़ा है मिलती",
+              "यीशु से नजात है मिलती",
+              "मुरझाई कलियाँ हैं खिलती",
+              "यीशु तेरे कदमों में"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Zindagi ki mile saugaat",
+              "Yeshu tere kadmon mein",
+              "Mile abdi hamein nijaat",
+              "Yeshu tere kadmon mein"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Kyon nahin tu deta",
+              "Apne bojh sabhi usko",
+              "Paapon ki maafi aur",
+              "Aaraam mile tujhko",
+              "Hogi andhiyaron ki prabhat",
+              "Yeshu tere kadmon mein"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Chhod apna takht Yeshu",
+              "Dharti par aaye",
+              "Tere mere paapon ka daam chukaye",
+              "Phir Baap se hua milaap",
+              "Yeshu tere kadmon mein"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Yeshu jag ki jyoti",
+              "Chalen uske hum noor mein",
+              "Agni Khudawand ki milti hai door mein",
+              "Mit jaati hai kaali har raat",
+              "Yeshu tere kadmon mein"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "Yeshu se shifa hai milti",
+              "Yeshu se nijaat hai milti",
+              "Murjhaai kaliyan hain khilti",
+              "Yeshu tere kadmon mein"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "Life receives its true gift",
+              "At the feet of Jesus,",
+              "We receive eternal salvation",
+              "At the feet of Jesus"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Why do you not give",
+              "All your burdens to Him?",
+              "Forgiveness of sins and",
+              "Rest will be given to you,",
+              "The dawn will rise over your darkness,",
+              "At the feet of Jesus"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Jesus left His throne",
+              "And came to the earth,",
+              "He paid the price for your sins and mine,",
+              "And brought us back to the Father,",
+              "At the feet of Jesus"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Jesus is the light of the world,",
+              "Let us walk in His light,",
+              "The fire of the Lord shines from afar,",
+              "Every dark night disappears,",
+              "At the feet of Jesus"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "Healing is found in Jesus,",
+              "Salvation is found in Jesus,",
+              "Withered flowers begin to bloom,",
+              "At the feet of Jesus"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "ജീവിതത്തിന് സത്യമായ ദാനം ലഭിക്കുന്നു",
+              "യേശുവിന്റെ പാദങ്ങളിൽ,",
+              "നിത്യമായ മോചനം ഞങ്ങൾ പ്രാപിക്കുന്നു",
+              "യേശുവിന്റെ പാദങ്ങളിൽ"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "എന്തുകൊണ്ട് നീ നൽകുന്നില്ല",
+              "നിന്റെ ഭാരങ്ങൾ എല്ലാം അവന്നു?",
+              "പാപമോചനവും",
+              "വിശ്രമവും നിനക്കു ലഭിക്കും,",
+              "ഇരുളിൽ പ്രഭാതം ഉദിക്കും,",
+              "യേശുവിന്റെ പാദങ്ങളിൽ"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "യേശു തന്റെ സിംഹാസനം വിട്ട്",
+              "ഭൂമിയിലേക്ക് വന്നു,",
+              "നിന്റെതും എന്റെയും പാപങ്ങളുടെ വില അവൻ ചുമന്നു,",
+              "വീണ്ടും പിതാവുമായി കൂട്ടിചേർത്തു,",
+              "യേശുവിന്റെ പാദങ്ങളിൽ"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "യേശു ലോകത്തിന്റെ വെളിച്ചമാണ്,",
+              "അവന്റെ പ്രകാശത്തിൽ നാം നടക്കട്ടെ,",
+              "കർത്താവിന്റെ അഗ്നി ദൂരത്തുനിന്നും തെളിയുന്നു,",
+              "ഓരോ കറുത്ത രാത്രിയും മാറിപ്പോകുന്നു,",
+              "യേശുവിന്റെ പാദങ്ങളിൽ"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "യേശുവിൽ സൗഖ്യം ലഭിക്കുന്നു,",
+              "യേശുവിൽ മോചനം ലഭിക്കുന്നു,",
+              "വാടിയ പൂക്കൾ വിരിയുന്നു,",
+              "യേശുവിന്റെ പാദങ്ങളിൽ"
             ]
           }
         ]
@@ -51365,46 +53638,25 @@
         "lyrics": [
           {
             "lines": [
-              "Zindagi mein tum par jab ho sakht toofaan",
-              "Aur jab tum ho bedil ki sab hai nuksaan",
-              "Gino saari barkat, gino naam banaam",
-              "Aur hairaan tum hoge dekhkar Rab ke kaam"
-            ]
-          },
-          {
-            "verse": "Chorus",
-            "lines": [
-              "Barkat gino, gino naam banaam",
-              "Barkat gino, dekho Rab ke kaam",
-              "Barkat gino, gino naam banaam",
-              "Aur hairaan tum hoge dekhkar Rab ke kaam"
-            ]
-          },
-          {
-            "verse": "2",
-            "lines": [
-              "Fikr ka jab tum par hove bojh museeb",
-              "Aur jab tumko maloom hove sakht saleeb",
-              "Gino behad barkat, shak sab honge door",
-              "Aur tum geet gaate rahoge masroor"
-            ]
-          },
-          {
-            "verse": "3",
-            "lines": [
-              "Auron ka jab dekhte ho zameen aur zar",
-              "Tumko hai Masih ki daulat saraasar",
-              "Gino behad barkat, keemti beshumar",
-              "Ajar kya jalali aur zaleel makaan"
-            ]
-          },
-          {
-            "verse": "4",
-            "lines": [
-              "So is jang mein har waqt rakho yaad sada",
-              "Himmat tum na harna, sab par hai Khuda",
-              "Saari barkat gino, hain farishte paas",
-              "Safar bhar wo dete himmat, rahat khaas"
+              "Zinda Khuda hai hamara",
+              "Chand sooraj ki parastish",
+              "Hum nahin karte",
+              "Duniya ke maboodon ke",
+              "Aage nahin jhukte",
+              "Kyonki zinda Khuda hai hamara",
+              "Zinda Khuda hai hamara",
+              "Khushkhabri phailayenge",
+              "Rooh mein badhte jayenge",
+              "Khoye sab insaanon ko",
+              "Paas Yeshu ke layenge",
+              "Shaitanon ke toofanon se",
+              "Hum nahin darte",
+              "Jab sitaish hoti hai",
+              "Rooh ki baarish hoti hai",
+              "Yeshu teri huzoori mein",
+              "Rooh ki jumbish hoti hai",
+              "Teri quwwat se khaali",
+              "Hum nahin rehte"
             ]
           }
         ]
@@ -51562,37 +53814,36 @@
         "lyrics": [
           {
             "lines": [
-              "Zindagi meri badal gayi",
-              "Jab se Masih ko paya hai",
-              "Khil gayi hain kaliyaan nayi",
-              "Yeshu bahaar laya hai"
+              "Zinda hai, zinda hai, zinda hai Yeshu zinda hai",
+              "Jo dekhna chahe woh man ko saaf kare",
+              "Ki sab kuch ho jaye jo vishwas kare",
+              "Zinda hai"
             ]
           },
           {
             "verse": "1",
             "lines": [
-              "Jeevan hai kya, pal hi do pal ka",
-              "Kisne hai jaana, hoga kya kal ka",
-              "Ghadiyan sunahri phir na lautengi",
-              "Mukti aur jeevan woh laya hai"
+              "Yeshu ke paas aao, darshan Pita ka pao",
+              "Hai pyaar se bulaata, kahe ko sharmao",
+              "Zinda hai"
             ]
           },
           {
             "verse": "2",
             "lines": [
-              "Maarg mein hamare, woh darshak rahega",
-              "Kadam dagmagayen, haath woh thamega",
-              "Bhatke huon ko raah dikhane",
-              "Is dharti par woh aaya hai"
+              "Tere ghamon ki khaatir, kroos usne hai uthai",
+              "Teri saza ki khaatir, kodon ki maar khai",
+              "Woh apni jaan dekar tujhko maaf kare",
+              "Zinda hai"
             ]
           },
           {
             "verse": "3",
             "lines": [
-              "Jeevan ki roti aur amrit jal ko",
-              "Kaisi bharpoori se deta woh humko",
-              "Lahu bahakar paap hamare",
-              "Pyare Prabhu ne uthaya hai"
+              "Insaan woh nahin hain jo jhooth bolte hain",
+              "Taqdeer badalti hai jo dil ko kholte hain",
+              "Woh bigde kaam tere poore aaj kare",
+              "Zinda hai"
             ]
           }
         ]
@@ -61152,6 +63403,59 @@
             ]
           }
         ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Chand sooraj ki prastish",
+              "Hum nahin karte",
+              "Duniya ke maboodon ke",
+              "Aage nahin jhukte"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Kyonki zinda Khuda hai hamara",
+              "Zinda Khuda hai hamara"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Khushkhabri phailayenge",
+              "Rooh mein badhte jayenge",
+              "Khoye sab insaanon ko",
+              "Paas Yeshu ke layenge",
+              "Shaitanon ke toofanon se",
+              "Hum nahin darte"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Jab sitaish hoti hai",
+              "Rooh ki baarish hoti hai",
+              "Yeshu teri huzoori mein",
+              "Rooh ki jumbish hoti hai",
+              "Teri quwwat se khaali",
+              "Hum nahin rehte"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "Jab teri rehmat hoti hai",
+              "Nakaam makaam mil jaate hain",
+              "Yeshu teri rehmat se",
+              "Dua qubool ho jaati hai",
+              "Tere majme se khaali",
+              "Hum nahin jaate"
+            ]
+          }
+        ]
       }
     },
     "thumbnailUrl": "/assets/songs/hindi_card.png"
@@ -64457,6 +66761,34 @@
               "ആത്മാവിന്റെ ചലനം ഉണ്ടാകുന്നു.",
               "നിന്റെ കരുണ വരുമ്പോൾ",
               "ഞങ്ങൾ ശൂന്യരായി നിൽക്കുകയില്ല."
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Zinda Khuda hai hamara",
+              "Chand sooraj ki parastish",
+              "Hum nahin karte",
+              "Duniya ke maboodon ke",
+              "Aage nahin jhukte",
+              "Kyonki zinda Khuda hai hamara",
+              "Zinda Khuda hai hamara",
+              "Khushkhabri phailayenge",
+              "Rooh mein badhte jayenge",
+              "Khoye sab insaanon ko",
+              "Paas Yeshu ke layenge",
+              "Shaitanon ke toofanon se",
+              "Hum nahin darte",
+              "Jab sitaish hoti hai",
+              "Rooh ki baarish hoti hai",
+              "Yeshu teri huzoori mein",
+              "Rooh ki jumbish hoti hai",
+              "Teri quwwat se khaali",
+              "Hum nahin rehte"
             ]
           }
         ]
@@ -92098,6 +94430,45 @@
             ]
           }
         ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Zinda hai, zinda hai, zinda hai Yeshu zinda hai",
+              "Jo dekhna chahe woh man ko saaf kare",
+              "Ki sab kuch ho jaye jo vishwas kare",
+              "Zinda hai"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Yeshu ke paas aao, darshan Pita ka pao",
+              "Hai pyaar se bulaata, kahe ko sharmao",
+              "Zinda hai"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Tere ghamon ki khaatir, kroos usne hai uthai",
+              "Teri saza ki khaatir, kodon ki maar khai",
+              "Woh apni jaan dekar tujhko maaf kare",
+              "Zinda hai"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Insaan woh nahin hain jo jhooth bolte hain",
+              "Taqdeer badalti hai jo dil ko kholte hain",
+              "Woh bigde kaam tere poore aaj kare",
+              "Zinda hai"
+            ]
+          }
+        ]
       }
     },
     "thumbnailUrl": "/assets/songs/english_card.png"
@@ -93296,8 +95667,7 @@
           }
         ]
       }
-    },
-    "thumbnailUrl": "https://images.pexels.com/photos/7640496/pexels-photo-7640496.jpeg"
+    }
   },
   {
     "id": "aa_pavitr_aatma_tu_aaja",
@@ -96532,6 +98902,59 @@
               "പ്രാർത്ഥന സ്വീകരിക്കപ്പെടുന്നു,",
               "നിന്റെ സഭയിൽ നിന്ന്",
               "ഞങ്ങൾ ശൂന്യരായി മടങ്ങുന്നില്ല"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Chand sooraj ki prastish",
+              "Hum nahin karte",
+              "Duniya ke maboodon ke",
+              "Aage nahin jhukte"
+            ]
+          },
+          {
+            "verse": "Chorus",
+            "lines": [
+              "Kyonki zinda Khuda hai hamara",
+              "Zinda Khuda hai hamara"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Khushkhabri phailayenge",
+              "Rooh mein badhte jayenge",
+              "Khoye sab insaanon ko",
+              "Paas Yeshu ke layenge",
+              "Shaitanon ke toofanon se",
+              "Hum nahin darte"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Jab sitaish hoti hai",
+              "Rooh ki baarish hoti hai",
+              "Yeshu teri huzoori mein",
+              "Rooh ki jumbish hoti hai",
+              "Teri quwwat se khaali",
+              "Hum nahin rehte"
+            ]
+          },
+          {
+            "verse": "4",
+            "lines": [
+              "Jab teri rehmat hoti hai",
+              "Nakaam makaam mil jaate hain",
+              "Yeshu teri rehmat se",
+              "Dua qubool ho jaati hai",
+              "Tere majme se khaali",
+              "Hum nahin jaate"
             ]
           }
         ]
@@ -101404,20 +103827,149 @@
         "lyrics": [
           {
             "lines": [
-              "maOM Aata h^MU toro pasa p`Bau yaISau maoro masaIha",
-              "maoro papaoM ko ilae hI‚ ]war do dao masaI",
-              "svaga- CaoD, ja,maIna pr Aayaa",
-              "]war donao masaIha –2",
-              "carNaaoM maoM toro maOM Aata",
-              "tuJakao idla yah maOM dota masaIh –2",
-              "mauJao papaoM sao CuD,anao",
-              "lahU k`Usa pr baha idyaa –2",
-              "iktnaa gahra Pyaar ikyaa hO",
-              "maOM Baulaa naa sakUM^ga masaIh –2",
-              "svaIkar kr p`Bau mauJao",
-              "Apnao rajya maoM lao lao –2",
-              "Aajaa tU maorI ija,ndgaI maoM",
-              "maorI ija,ndgaI torI masaIha –2"
+              "मैं आता हूँ तेरे पास प्रभु यीशु मेरे मसीहा",
+              "मेरे पापों के लिए ही, उद्धार दे दो मसीह"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "स्वर्ग छोड़ ज़मीन पर आया",
+              "उद्धार देने मसीहा (2)",
+              "चरणों में तेरे मैं आता",
+              "तुझको दिल यह मैं देता मसीह (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "मुझे पापों से छुड़ाने",
+              "लहू क्रूस पर बहा दिया (2)",
+              "कितना गहरा प्यार किया है",
+              "मैं भुला ना सकूँगा मसीह (2)"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "स्वीकार कर प्रभु मुझे",
+              "अपने राज्य में ले ले (2)",
+              "आजा तू मेरी ज़िंदगी में",
+              "मेरी ज़िंदगी तेरी मसीहा (2)"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "lines": [
+              "Main aata hun tere paas Prabhu Yeshu mere Masiha",
+              "Mere paapon ke liye hi, uddhar de do Masih"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Swarg chhod zameen par aaya",
+              "Uddhar dene Masiha (2)",
+              "Charanon mein tere main aata",
+              "Tujhko dil yeh main deta Masih (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Mujhe paapon se chhudane",
+              "Lahu kroos par baha diya (2)",
+              "Kitna gahra pyaar kiya hai",
+              "Main bhula na sakunga Masih (2)"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Sweekar kar Prabhu mujhe",
+              "Apne rajya mein le le (2)",
+              "Aaja tu meri zindagi mein",
+              "Meri zindagi teri Masiha (2)"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "I come before You, Lord Jesus, my Messiah,",
+              "For my sins, O Christ, grant me salvation"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "You left heaven and came to earth,",
+              "Messiah who came to save (2),",
+              "I come to Your feet,",
+              "To You I give this heart, O Christ (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "To free me from my sins,",
+              "You shed Your blood on the cross (2),",
+              "How deep is the love You showed,",
+              "I will never forget it, O Christ (2)"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Receive me, Lord,",
+              "Take me into Your kingdom (2),",
+              "Come into my life,",
+              "My life belongs to You, Messiah (2)"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "ഞാൻ നിന്റെ അടുക്കൽ വരുന്നു, കർത്താവായ യേശുവേ, എന്റെ മിശിഹായേ,",
+              "എന്റെ പാപങ്ങൾക്കായി, മിശിഹായേ, എനിക്കു രക്ഷ നല്കണമേ"
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "സ്വർഗ്ഗം വിട്ട് ഭൂമിയിലേക്കു വന്നു,",
+              "രക്ഷ നൽകുവാൻ മിശിഹാ (2),",
+              "നിന്റെ പാദങ്ങളിൽ ഞാൻ വരുന്നു,",
+              "ഈ ഹൃദയം ഞാൻ നിനക്കു നൽകുന്നു, മിശിഹായേ (2)"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "എന്നെ പാപങ്ങളിൽ നിന്ന് വിടുവിപ്പാൻ,",
+              "ക്രൂശിൽ രക്തം ചൊരിഞ്ഞു (2),",
+              "എത്ര ആഴത്തിലുള്ള സ്നേഹം നീ കാട്ടി,",
+              "ഞാൻ മറക്കുകയില്ല, മിശിഹായേ (2)"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "കർത്താവേ, എന്നെ ഏറ്റുകൊൾക,",
+              "നിന്റെ രാജ്യത്തിൽ എന്നെ ചേർക്കണമേ (2),",
+              "എന്റെ ജീവിതത്തിലേക്ക് വരണമേ,",
+              "എന്റെ ജീവിതം നിനക്കുള്ളതാണ്, മിശിഹായേ (2)"
             ]
           }
         ]
