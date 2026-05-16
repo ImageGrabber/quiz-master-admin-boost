@@ -59,64 +59,6 @@
           }
         ]
       },
-      "english": {
-        "lang": "English",
-        "lyrics": [
-          {
-            "lines": [
-              "We do not worship the moon and the sun,",
-              "We do not bow before the idols of this world,",
-              "Because our God is alive,",
-              "Our God is alive.",
-              "We will spread the good news,",
-              "We will keep growing in the Spirit,",
-              "We will bring all the lost people",
-              "To Jesus.",
-              "We are not afraid",
-              "Of the storms of Satan.",
-              "When praise rises,",
-              "There is a rain of the Spirit,",
-              "In Your presence, Jesus,",
-              "There is a movement of the Spirit.",
-              "We do not remain empty",
-              "When Your mercy comes.",
-              "Broken places are restored,",
-              "By Your mercy, Jesus,",
-              "Prayers are answered,",
-              "And no one leaves Your gathering empty."
-            ]
-          }
-        ]
-      },
-      "malayalam": {
-        "lang": "Malayalam",
-        "lyrics": [
-          {
-            "lines": [
-              "ചന്ദ്രനെയും സൂര്യനെയും ഞങ്ങൾ ആരാധിക്കുന്നില്ല,",
-              "ഈ ലോകത്തിലെ വ്യാജ ദൈവങ്ങൾക്കു മുന്നിൽ ഞങ്ങൾ കുനിയുന്നില്ല,",
-              "കാരണം നമ്മുടെ ദൈവം ജീവനുള്ളവൻ,",
-              "നമ്മുടെ ദൈവം ജീവനുള്ളവൻ.",
-              "സുവിശേഷം ഞങ്ങൾ പ്രസംഗിക്കും,",
-              "ആത്മാവിൽ വളർന്ന് മുന്നോട്ട് പോകും,",
-              "തെറ്റിപ്പോയ എല്ലാവരെയും",
-              "യേശുവിന്റെ അടുക്കൽ കൊണ്ടുവരും.",
-              "ശൈതാന്റെ കൊടുങ്കാറ്റുകളെ",
-              "ഞങ്ങൾ ഭയപ്പെടുന്നില്ല.",
-              "സ്തുതി ഉയരുമ്പോൾ",
-              "ആത്മാവിന്റെ മഴ പെയ്യുന്നു,",
-              "യേശുവേ, നിന്റെ സന്നിധിയിൽ",
-              "ആത്മാവിന്റെ ചലനം ഉണ്ടാകുന്നു.",
-              "ഞങ്ങൾ ശൂന്യരായി നിൽക്കുകയില്ല",
-              "നിന്റെ കരുണ വരുമ്പോൾ.",
-              "തകർന്ന ഇടങ്ങൾ എല്ലാം പുനസ്ഥാപിക്കപ്പെടുന്നു,",
-              "യേശുവേ, നിന്റെ കരുണയാൽ,",
-              "പ്രാർത്ഥനകൾക്ക് ഉത്തരം ലഭിക്കുന്നു,",
-              "നിന്റെ സന്നിധിയിൽ നിന്ന് ആരും ശൂന്യമായി മടങ്ങുന്നില്ല."
-            ]
-          }
-        ]
-      },
       "hinglish": {
         "lang": "Hinglish",
         "lyrics": [
@@ -224,6 +166,92 @@
               "എല്ലാം ഒരുക്കുന്നു, എല്ലാം ഒരുക്കുന്നു.",
               "ഹല്ലെലൂയാ, ഹല്ലെലൂയാ,",
               "ഹല്ലെലൂയാ, ഹല്ലെലൂയാ."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "You have set out with God,",
+              "The path is narrow,",
+              "Keep holding God's hand,",
+              "The path is narrow,",
+              "Come, let us walk with Jesus,",
+              "Come, let us hold Jesus' hand"
+            ]
+          },
+          {
+            "lines": [
+              "The Spirit of God will teach you,",
+              "The Spirit of God will guide you,",
+              "Listen to the Spirit of God today,",
+              "The path is narrow,",
+              "Come, let us walk with Jesus"
+            ]
+          },
+          {
+            "lines": [
+              "God's mercy is upon you,",
+              "God's blessing is upon you,",
+              "Receive the prayers of heaven,",
+              "The path is narrow,",
+              "Come, let us walk with Jesus"
+            ]
+          },
+          {
+            "lines": [
+              "There are thorns along the way,",
+              "We must walk over thorns,",
+              "Walking is difficult,",
+              "Yet we must keep walking,",
+              "Hallelujah, Hallelujah,",
+              "Hallelujah, Hallelujah"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "നീ ദൈവത്തോടൊപ്പം യാത്ര തുടങ്ങി,",
+              "വഴി ഇടുങ്ങിയതാണ്,",
+              "ദൈവത്തിന്റെ കൈ മുറുകെ പിടിക്കണം,",
+              "വഴി ഇടുങ്ങിയതാണ്,",
+              "വാരുവിൻ, യേശുവിനൊപ്പം നടക്കാം,",
+              "വാരുവിൻ, യേശുവിന്റെ കൈ പിടിക്കാം"
+            ]
+          },
+          {
+            "lines": [
+              "ദൈവത്തിന്റെ ആത്മാവ് നിന്നെ പഠിപ്പിക്കും,",
+              "ദൈവത്തിന്റെ ആത്മാവ് നിന്നെ വഴിനടത്തിക്കും,",
+              "ഇന്ന് ദൈവത്തിന്റെ ആത്മാവിനെ കേൾക്കൂ,",
+              "വഴി ഇടുങ്ങിയതാണ്,",
+              "വാരുവിൻ, യേശുവിനൊപ്പം നടക്കാം"
+            ]
+          },
+          {
+            "lines": [
+              "ദൈവത്തിന്റെ കരുണ നിന്റെ മേൽ ഉണ്ട്,",
+              "ദൈവത്തിന്റെ അനുഗ്രഹം നിന്റെ മേൽ ഉണ്ട്,",
+              "സ്വർഗ്ഗത്തിന്റെ പ്രാർത്ഥനകൾ ഏറ്റുകൊൾക,",
+              "വഴി ഇടുങ്ങിയതാണ്,",
+              "വാരുവിൻ, യേശുവിനൊപ്പം നടക്കാം"
+            ]
+          },
+          {
+            "lines": [
+              "വഴികളിൽ മുള്ളുകൾ ഉണ്ട്,",
+              "മുള്ളുകൾമേൽ നടക്കേണ്ടിവരും,",
+              "നടക്കുന്നത് പ്രയാസകരമാണ്,",
+              "എങ്കിലും നമുക്ക് നടക്കണം,",
+              "ഹല്ലേലൂയാ, ഹല്ലേലൂയാ,",
+              "ഹല്ലേലൂയാ, ഹല്ലേലൂയാ"
             ]
           }
         ]
@@ -42774,25 +42802,126 @@
         "lyrics": [
           {
             "lines": [
-              "calao hao tuma Kuda ko saaqa",
-              "rasta saMkra hO Kuda ka qaamao rhnaa haqa",
-              "rasta saMkra hO",
-              "AaAao calaoM yaISau ko saaqa",
-              "AaAao qaamaoM yaISau ka haqa",
-              "Kuda kI $h isaKayaogaI",
-              "Kuda kI $h batayaogaI",
-              "Kuda kI $h saunanaa Aaja",
-              "rasta saMkra hO",
-              "AaAao calaoM yaISau ko saaqa",
-              "Kuda kI rhmat tuJa pr",
-              "Kuda kI barkt tuJa pr hO",
-              "duAaeM jannat kI lao laao",
-              "rasta saMkra hO",
-              "AaAao calaoM yaISau ko saaqa",
-              "rahaoM mao ka^MToM hO",
-              "Ka^MTaoM pr calanaa hO",
-              "calanaa kizna hO pr hmakao calanaa hO",
-              "hallaolaUyaah¸ hallaolaUyaah – 2"
+              "चले हो तुम खुदा के साथ",
+              "रास्ता संकरा है",
+              "खुदा का थामे रहना हाथ",
+              "रास्ता संकरा है",
+              "आओ चलें यीशु के साथ",
+              "आओ थामें यीशु का हाथ"
+            ]
+          },
+          {
+            "lines": [
+              "खुदा की रूह सिखायेगी",
+              "खुदा की रूह बतायेगी",
+              "खुदा की रूह सुनना आज",
+              "रास्ता संकरा है",
+              "आओ चलें यीशु के साथ"
+            ]
+          },
+          {
+            "lines": [
+              "खुदा की रहमत तुझ पर",
+              "खुदा की बरकत तुझ पर है",
+              "दुआएं जन्नत की ले लो",
+              "रास्ता संकरा है",
+              "आओ चलें यीशु के साथ"
+            ]
+          },
+          {
+            "lines": [
+              "राहों में काँटे हैं",
+              "काँटों पर चलना है",
+              "चलना कठिन है",
+              "पर हमको चलना है",
+              "हालेलुय्याह, हालेलुय्याह",
+              "हालेलुय्याह, हालेलुय्याह"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "lines": [
+              "You have set out with God,",
+              "The path is narrow,",
+              "Keep holding God's hand,",
+              "The path is narrow,",
+              "Come, let us walk with Jesus,",
+              "Come, let us hold Jesus' hand"
+            ]
+          },
+          {
+            "lines": [
+              "The Spirit of God will teach you,",
+              "The Spirit of God will guide you,",
+              "Listen to the Spirit of God today,",
+              "The path is narrow,",
+              "Come, let us walk with Jesus"
+            ]
+          },
+          {
+            "lines": [
+              "God's mercy is upon you,",
+              "God's blessing is upon you,",
+              "Receive the prayers of heaven,",
+              "The path is narrow,",
+              "Come, let us walk with Jesus"
+            ]
+          },
+          {
+            "lines": [
+              "There are thorns along the way,",
+              "We must walk over thorns,",
+              "Walking is difficult,",
+              "Yet we must keep walking,",
+              "Hallelujah, Hallelujah,",
+              "Hallelujah, Hallelujah"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "നീ ദൈവത്തോടൊപ്പം യാത്ര തുടങ്ങി,",
+              "വഴി ഇടുങ്ങിയതാണ്,",
+              "ദൈവത്തിന്റെ കൈ മുറുകെ പിടിക്കണം,",
+              "വഴി ഇടുങ്ങിയതാണ്,",
+              "വാരുവിൻ, യേശുവിനൊപ്പം നടക്കാം,",
+              "വാരുവിൻ, യേശുവിന്റെ കൈ പിടിക്കാം"
+            ]
+          },
+          {
+            "lines": [
+              "ദൈവത്തിന്റെ ആത്മാവ് നിന്നെ പഠിപ്പിക്കും,",
+              "ദൈവത്തിന്റെ ആത്മാവ് നിന്നെ വഴിനടത്തിക്കും,",
+              "ഇന്ന് ദൈവത്തിന്റെ ആത്മാവിനെ കേൾക്കൂ,",
+              "വഴി ഇടുങ്ങിയതാണ്,",
+              "വാരുവിൻ, യേശുവിനൊപ്പം നടക്കാം"
+            ]
+          },
+          {
+            "lines": [
+              "ദൈവത്തിന്റെ കരുണ നിന്റെ മേൽ ഉണ്ട്,",
+              "ദൈവത്തിന്റെ അനുഗ്രഹം നിന്റെ മേൽ ഉണ്ട്,",
+              "സ്വർഗ്ഗത്തിന്റെ പ്രാർത്ഥനകൾ ഏറ്റുകൊൾക,",
+              "വഴി ഇടുങ്ങിയതാണ്,",
+              "വാരുവിൻ, യേശുവിനൊപ്പം നടക്കാം"
+            ]
+          },
+          {
+            "lines": [
+              "വഴികളിൽ മുള്ളുകൾ ഉണ്ട്,",
+              "മുള്ളുകൾമേൽ നടക്കേണ്ടിവരും,",
+              "നടക്കുന്നത് പ്രയാസകരമാണ്,",
+              "എങ്കിലും നമുക്ക് നടക്കണം,",
+              "ഹല്ലേലൂയാ, ഹല്ലേലൂയാ,",
+              "ഹല്ലേലൂയാ, ഹല്ലേലൂയാ"
             ]
           }
         ]
