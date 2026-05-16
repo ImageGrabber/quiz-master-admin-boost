@@ -38539,344 +38539,234 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "section": "मुखड़ा",
             "lines": [
-              "Changa karne vala hai Parmeshwar (Sing it out loud for Jesus)"
+              "चंगा करने वाला है परमेश्वर,",
+              "दया करने वाला है परमेश्वर,",
+              "उसकी सदा मैं स्तुति करूँगा,",
+              "उसके सिवा कहीं न झुकूँगा।"
             ]
           },
           {
-            "verse": "1",
+            "section": "कोरस",
             "lines": [
-              "Daya karne vala hai Parmeshwar (Merciful Lord how great His power)"
+              "वो मेरा जीवन, वो मेरा जीवन,",
+              "वो मेरा दाता, वो मेरा दाता,",
+              "वो मेरे प्राणों को बचाता,",
+              "वो मेरे प्राणों को बचाता।"
             ]
           },
           {
-            "verse": "2",
+            "section": "अंतरा 1",
             "lines": [
-              "Uski sada main stuti karunga"
+              "अंधों को आँखें देता है वो,",
+              "लंगड़ों को टाँगें देता है वो,",
+              "बहरे भी सुनने लगते हैं,",
+              "कोढ़ी को चंगा करता है वो।"
             ]
           },
           {
-            "verse": "3",
+            "section": "अंतरा 2",
             "lines": [
-              "Uske siwa kahi na jhukunga"
+              "मुझको ताकत देता है वो,",
+              "स्वर्गीय आशीष देता है वो,",
+              "बीमारियाँ उड़ जाती हैं,",
+              "ऐसी चंगाई देता है वो।"
             ]
           },
           {
-            "verse": "4",
+            "section": "अंतरा 3",
             "lines": [
-              "Changa karne vala hai Parmeshwar"
+              "उसकी सदा मैं स्तुति करूँगा,",
+              "उसके सिवा कहीं न झुकूँगा,",
+              "उसके पीछे मैं चलता रहूँगा,",
+              "उसका साथ कभी न छोड़ूँगा।"
             ]
           },
           {
-            "verse": "5",
+            "section": "ब्रिज",
             "lines": [
-              "Daya karne vala hai Parmeshwar"
+              "यीशु टूटों और निर्बलों को चंगा करता है,",
+              "वह पहले भी करता आया है, आज भी मेरे लिए करता है,",
+              "उसने मुझे अपने प्रकाश से भर दिया है,",
+              "उसकी अनुग्रह से मैं स्वतंत्र हूँ।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Changa karne wala hai Parmeshwar,",
+              "Daya karne wala hai Parmeshwar,",
+              "Uski sada main stuti karunga,",
+              "Uske siwa kahin na jhukunga."
             ]
           },
           {
-            "verse": "6",
+            "section": "Chorus",
             "lines": [
-              "Uski sada main stuti karunga"
+              "Wo mera jeevan, wo mera jeevan,",
+              "Wo mera data, wo mera data,",
+              "Wo mere praanon ko bachata,",
+              "Wo mere praanon ko bachata."
             ]
           },
           {
-            "verse": "7",
+            "section": "Antara 1",
             "lines": [
-              "Ho Uske siwa kahi na jhukunga"
+              "Andhon ko aankhen deta hai wo,",
+              "Langdon ko taangen deta hai wo,",
+              "Behre bhi sunne lagte hain,",
+              "Kodhi ko changa karta hai wo."
             ]
           },
           {
-            "verse": "8",
+            "section": "Antara 2",
             "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
+              "Mujhko taqat deta hai wo,",
+              "Swargiya aashish deta hai wo,",
+              "Bimaariyan ud jaati hain,",
+              "Aisi changaai deta hai wo."
             ]
           },
           {
-            "verse": "9",
+            "section": "Antara 3",
             "lines": [
-              "Wo mera data (Wo mera data)"
+              "Uski sada main stuti karunga,",
+              "Uske siwa kahin na jhukunga,",
+              "Uske peeche main chalta rahunga,",
+              "Uska saath kabhi na chhodunga."
             ]
           },
           {
-            "verse": "10",
+            "section": "Bridge",
             "lines": [
-              "Wo mere praano (Wo mere praano)"
+              "Yeshu tooton aur nirbalon ko changa karta hai,",
+              "Woh pehle bhi karta aaya hai, aaj bhi mere liye karta hai,",
+              "Usne mujhe apne prakaash se bhar diya hai,",
+              "Uski anugrah se main swatantra hoon."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Verse",
+            "lines": [
+              "God is the One who heals,",
+              "God is the One who shows mercy,",
+              "I will praise Him always,",
+              "I will bow to no one else."
             ]
           },
           {
-            "verse": "11",
+            "section": "Chorus",
             "lines": [
-              "Ko bachata (Ko bachata)"
+              "He is my life, He is my life,",
+              "He is my giver, He is my giver,",
+              "He saves my soul,",
+              "He saves my soul."
             ]
           },
           {
-            "verse": "12",
+            "section": "Verse 1",
             "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
+              "He gives sight to the blind,",
+              "He gives strength to the lame,",
+              "Even the deaf begin to hear,",
+              "He heals the leper."
             ]
           },
           {
-            "verse": "13",
+            "section": "Verse 2",
             "lines": [
-              "Wo mera data (Wo mera data)"
+              "He gives me strength,",
+              "He gives heavenly blessings,",
+              "Sicknesses fly away,",
+              "Such healing He gives."
             ]
           },
           {
-            "verse": "14",
+            "section": "Verse 3",
             "lines": [
-              "Wo mere praano (Wo mere praano)"
+              "I will praise Him always,",
+              "I will bow to no one else,",
+              "I will keep following Him,",
+              "I will never leave His side."
             ]
           },
           {
-            "verse": "15",
+            "section": "Bridge",
             "lines": [
-              "Ko bachata (Ko bachata)"
+              "Jesus heals the broken and the weak,",
+              "He has done it before and He still does it for me,",
+              "He filled me with His light,",
+              "By His grace I have been set free."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "മുഖड़ा",
+            "lines": [
+              "സൗഖ്യമരുളുന്നവൻ ദൈവമാണ്,",
+              "കരുണ കാണിക്കുന്നവൻ ദൈവമാണ്,",
+              "അവനെ ഞാൻ എല്ലായ്പ്പോഴും സ്തുതിക്കും,",
+              "അവനെ വിട്ട് മറ്റൊരാളിന്നും ഞാൻ വണങ്ങുകയില്ല."
             ]
           },
           {
-            "verse": "16",
+            "section": "കൊറസ്",
             "lines": [
-              "Andho ko aankhe deta hai vo"
+              "അവൻ എന്റെ ജീവൻ, അവൻ എന്റെ ജീവൻ,",
+              "അവൻ എന്റെ ദാതാവ്, അവൻ എന്റെ ദാതാവ്,",
+              "എന്റെ പ്രാണനെ അവൻ രക്ഷിക്കുന്നു,",
+              "എന്റെ പ്രാണനെ അവൻ രക്ഷിക്കുന്നു."
             ]
           },
           {
-            "verse": "17",
+            "section": "അന്തരം 1",
             "lines": [
-              "Langdo ko taange deta hai vo"
+              "കുരുടർക്കു കണ്ണ് കൊടുക്കുന്നവൻ അവൻ,",
+              "മുടന്തർക്കു ശക്തി നൽകുന്നവൻ അവൻ,",
+              "ബധിരരും കേൾക്കിത്തുടങ്ങുന്നു,",
+              "കുഷ്ഠരോഗിയെയും സൗഖ്യമാക്കുന്നവൻ അവൻ."
             ]
           },
           {
-            "verse": "18",
+            "section": "അന്തരം 2",
             "lines": [
-              "Behere bhi sunne lagte hai"
+              "എനിക്കു ശക്തി നൽകുന്നവൻ അവൻ,",
+              "സ്വർഗീയ ആശീർവാദം നൽകുന്നവൻ അവൻ,",
+              "രോഗങ്ങൾ പറന്നുപോകുന്നു,",
+              "അങ്ങനെ സൗഖ്യം നൽകുന്നവൻ അവൻ."
             ]
           },
           {
-            "verse": "19",
+            "section": "അന്തരം 3",
             "lines": [
-              "Kodi ko changa karta hai vo"
+              "അവനെ ഞാൻ എല്ലായ്പ്പോഴും സ്തുതിക്കും,",
+              "അവനെ വിട്ട് മറ്റൊരാളിന്നും ഞാൻ വണങ്ങുകയില്ല,",
+              "അവന്റെ പിന്നാലെ ഞാൻ നടന്നുകൊണ്ടിരിക്കും,",
+              "അവന്റെ സാന്നിധ്യം ഞാൻ ഒരിക്കലും വിടുകയില്ല."
             ]
           },
           {
-            "verse": "20",
+            "section": "ബ്രിഡ്ജ്",
             "lines": [
-              "Mujhko taqat deta hai vo"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "Swargiye aashish deta hai vo"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "Bimaariyan ud jaati hai"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "Aisi changai deta hai vo"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
-              "Uski sada mein stuti karunga (Praise Him praise Him praise out loud)"
-            ]
-          },
-          {
-            "verse": "25",
-            "lines": [
-              "Uske siwa kahi na jhukunga (Never bowing down to anybody else)"
-            ]
-          },
-          {
-            "verse": "26",
-            "lines": [
-              "Uske peeche main chalta rahunga"
-            ]
-          },
-          {
-            "verse": "27",
-            "lines": [
-              "Uska saath kabhi na chhodunga"
-            ]
-          },
-          {
-            "verse": "28",
-            "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
-            ]
-          },
-          {
-            "verse": "29",
-            "lines": [
-              "Wo mera data (Wo mera data)"
-            ]
-          },
-          {
-            "verse": "30",
-            "lines": [
-              "Wo mere praano (Wo mere praano)"
-            ]
-          },
-          {
-            "verse": "31",
-            "lines": [
-              "Ko bachata (Ko bachata)"
-            ]
-          },
-          {
-            "verse": "32",
-            "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
-            ]
-          },
-          {
-            "verse": "33",
-            "lines": [
-              "Wo mera data (Wo mera data)"
-            ]
-          },
-          {
-            "verse": "34",
-            "lines": [
-              "Wo mere praano (Wo mere praano)"
-            ]
-          },
-          {
-            "verse": "35",
-            "lines": [
-              "Ko bachata (Ko bachata)"
-            ]
-          },
-          {
-            "verse": "36",
-            "lines": [
-              "Jesus is the one who heals the broken and the weak"
-            ]
-          },
-          {
-            "verse": "37",
-            "lines": [
-              "He has done it all before"
-            ]
-          },
-          {
-            "verse": "38",
-            "lines": [
-              "He still does it all for me"
-            ]
-          },
-          {
-            "verse": "39",
-            "lines": [
-              "He filled me with His light and now I spread it round of me"
-            ]
-          },
-          {
-            "verse": "40",
-            "lines": [
-              "He’s the only way to heaven, better hear it clearly"
-            ]
-          },
-          {
-            "verse": "41",
-            "lines": [
-              "Saved my soul, made me whole, I’m not livin’ on my own"
-            ]
-          },
-          {
-            "verse": "42",
-            "lines": [
-              "He still got me"
-            ]
-          },
-          {
-            "verse": "43",
-            "lines": [
-              "I sing it all for His praise, cause I’m livin’ by His grace"
-            ]
-          },
-          {
-            "verse": "44",
-            "lines": [
-              "He has set me free"
-            ]
-          },
-          {
-            "verse": "45",
-            "lines": [
-              "Uski sada mein stuti karunga"
-            ]
-          },
-          {
-            "verse": "46",
-            "lines": [
-              "Uske siwa kahi na jhukunga"
-            ]
-          },
-          {
-            "verse": "47",
-            "lines": [
-              "Uske peeche main chalta rahunga"
-            ]
-          },
-          {
-            "verse": "48",
-            "lines": [
-              "Uska saath kabhi na chhodunga"
-            ]
-          },
-          {
-            "verse": "49",
-            "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
-            ]
-          },
-          {
-            "verse": "50",
-            "lines": [
-              "Wo mera data (Wo mera data)"
-            ]
-          },
-          {
-            "verse": "51",
-            "lines": [
-              "Wo mere praano (Wo mere praano)"
-            ]
-          },
-          {
-            "verse": "52",
-            "lines": [
-              "Ko bachata (Ko bachata)"
-            ]
-          },
-          {
-            "verse": "53",
-            "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
-            ]
-          },
-          {
-            "verse": "54",
-            "lines": [
-              "Wo mera data (Wo mera data)"
-            ]
-          },
-          {
-            "verse": "55",
-            "lines": [
-              "Wo mere praano (Wo mere praano)"
-            ]
-          },
-          {
-            "verse": "56",
-            "lines": [
-              "Ko bachata (Ko bachata)"
+              "യേശു തകർന്നവരെയും ദുർബലരെയും സൗഖ്യമാക്കുന്നു,",
+              "മുമ്പും ചെയ്തതുപോലെ ഇന്നും എനിക്ക് വേണ്ടി ചെയ്യുന്നു,",
+              "അവൻ തന്റെ വെളിച്ചം കൊണ്ട് എന്നെ നിറച്ചു,",
+              "അവന്റെ കൃപയാൽ ഞാൻ സ്വതന്ത്രനായി."
             ]
           }
         ]
@@ -38895,242 +38785,198 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "section": "अंतरा 1",
             "lines": [
-              "१. वह प्यारी सलीब मुझ को दीख पड़ती है"
+              "वह प्यारी सलीब मुझ को दीख पड़ती है,",
+              "एक पहाड़ी पर जो खड़ी थी,",
+              "कि मसीह-ए-मस्लूब ने नदामत उठा,",
+              "गुनहगारों की खातिर जान दी।"
             ]
           },
           {
-            "verse": "1",
+            "section": "कोरस",
             "lines": [
-              "एक पहाड़ी पर जो खड़ी थी"
+              "पास न छोड़ूँगा प्यारी सलीब,",
+              "जब तक दुनिया में होगा क़याम,",
+              "लिपटा रहूँगा मैं उसी से,",
+              "कि मस्लूब में है अब्दी आराम।"
             ]
           },
           {
-            "verse": "2",
+            "section": "अंतरा 2",
             "lines": [
-              "कि मसीह-ए-मस्लूब ने नदामत उठा"
+              "आह, वह प्यारी सलीब जिसकी होती तौहीन,",
+              "है मुझको बेहद दिलपज़ीर,",
+              "कि खुदा के महबूब उस जलाली मसीह,",
+              "ने सहा दुःख बेनज़ीर।"
             ]
           },
           {
-            "verse": "3",
+            "section": "अंतरा 3",
             "lines": [
-              "गुनहगारो कि खातिर जान दी |"
+              "मुझे प्यारी सलीब में, गो लहू-लुहान,",
+              "नज़र आती है ख़ूबसूरती,",
+              "कि खुदा के मसीह ने कफ़्फ़ारा दिया,",
+              "ता मिले मुझे ज़िन्दगी।"
             ]
           },
           {
-            "verse": "4",
+            "section": "अंतरा 4",
             "lines": [
-              "पास न छोड़ूंगा प्यारी सलीब"
+              "मैं उस प्यारी सलीब का रहूँ वफ़ादार,",
+              "सिपाही हमेशा ज़रूर,",
+              "जब तक मेरा मसीह न करेगा मुझे,",
+              "अपने अब्दी जलाल में मंज़ूर।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Antara 1",
+            "lines": [
+              "Woh pyaari saleeb mujh ko dikh padti hai,",
+              "Ek pahaadi par jo khadi thi,",
+              "Ki Masih-e-masloob ne nadaamat utha,",
+              "Gunahgaaron ki khaatir jaan di."
             ]
           },
           {
-            "verse": "5",
+            "section": "Chorus",
             "lines": [
-              "जब तक दुनिया में होगा कयाम"
+              "Paas na chhodunga pyaari saleeb,",
+              "Jab tak duniya mein hoga qayaam,",
+              "Lipta rahunga main usi se,",
+              "Ki masloob mein hai abdi aaraam."
             ]
           },
           {
-            "verse": "6",
+            "section": "Antara 2",
             "lines": [
-              "लिपटा रहूँगा में उसी से,"
+              "Aah, woh pyaari saleeb jiski hoti tauheen,",
+              "Hai mujhko behad dilpazeer,",
+              "Ki Khuda ke mahboob us jalaali Masih,",
+              "Ne saha dukh benazeer."
             ]
           },
           {
-            "verse": "7",
+            "section": "Antara 3",
             "lines": [
-              "कि मस्लूब में है अब्दी आराम |"
+              "Mujhe pyaari saleeb mein, go lahu-luhaan,",
+              "Nazar aati hai khoobsoorati,",
+              "Ki Khuda ke Masih ne kaffaara diya,",
+              "Ta mile mujhe zindagi."
             ]
           },
           {
-            "verse": "8",
+            "section": "Antara 4",
             "lines": [
-              "२.आह ! वह प्यारी सलीब, जिसकी होती तहक़ीर"
+              "Main us pyaari saleeb ka rahun wafadaar,",
+              "Sipaahi hamesha zaroor,",
+              "Jab tak mera Masih na karega mujhe,",
+              "Apne abdi jalaal mein manzoor."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Verse 1",
+            "lines": [
+              "That precious cross appears before me,",
+              "Standing upon a hill,",
+              "Where the crucified Messiah bore the shame,",
+              "And gave His life for sinners."
             ]
           },
           {
-            "verse": "9",
+            "section": "Chorus",
             "lines": [
-              "है मुझ को बेहद दिल पजीर"
+              "I will not let go of that precious cross,",
+              "As long as this world shall stand,",
+              "I will cling to it always,",
+              "For in the Crucified One there is eternal rest."
             ]
           },
           {
-            "verse": "10",
+            "section": "Verse 2",
             "lines": [
-              "कि ख़ुद��� के मेहबूब उस जलाली मसीह"
+              "Ah, that precious cross though despised by many,",
+              "Is deeply dear to me,",
+              "For God's beloved and glorious Christ,",
+              "Suffered unmatched sorrow there."
             ]
           },
           {
-            "verse": "11",
+            "section": "Verse 3",
             "lines": [
-              "ने सहा दुःख बे नजीर |"
+              "In that precious cross, though stained with blood,",
+              "I still behold great beauty,",
+              "For the Christ of God made atonement there,",
+              "So that I might receive life."
             ]
           },
           {
-            "verse": "12",
+            "section": "Verse 4",
             "lines": [
-              "३. मुझे प्यारी सलीब में, गो लहु-लुहान"
+              "I will remain faithful to that precious cross,",
+              "A true soldier to the end,",
+              "Until my Christ receives me,",
+              "Into His eternal glory."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "അന്തരം 1",
+            "lines": [
+              "ആ പ്രിയ ക്രൂശ് എനിക്കു ദൃശ്യമാകുന്നു,",
+              "ഒരു കുന്നിന് മുകളിൽ നിലകൊണ്ടത്,",
+              "ക്രൂശിക്കപ്പെട്ട മശീഹാ നിന്ദ വഹിച്ചതും,",
+              "പാപികൾക്കായി ജീവൻ നല്കിയതും അവിടെയാണ്."
             ]
           },
           {
-            "verse": "13",
+            "section": "കൊറസ്",
             "lines": [
-              "नज़र आती है खूब-सुरती"
+              "ആ പ്രിയ ക്രൂശിനെ ഞാൻ വിടുകയില്ല,",
+              "ഈ ലോകം നിലനിൽക്കുന്നിടത്തോളം,",
+              "അതോടു ചേർന്നിരിക്കും ഞാൻ,",
+              "ക്രൂശിതനിൽ ശാശ്വത വിശ്രമമുണ്ടല്ലോ."
             ]
           },
           {
-            "verse": "14",
+            "section": "അന്തരം 2",
             "lines": [
-              "कि ख़ुदा के मसीह ने कफारा दिया"
+              "അവഹേളിക്കപ്പെടുന്ന ആ പ്രിയ ക്രൂശ്,",
+              "എന്നാൽ എനിക്കതീവ പ്രിയം,",
+              "ദൈവത്തിന്റെ പ്രിയനും മഹത്വമുള്ള ക്രിസ്തുവും,",
+              "അവിടെ അതുല്യ ദുഃഖം സഹിച്ചു."
             ]
           },
           {
-            "verse": "15",
+            "section": "അന്തരം 3",
             "lines": [
-              "ता मिले मुझे ज़िन्दगी |"
+              "രക്തം തൂകിയ ആ പ്രിയ ക്രൂശിൽ,",
+              "ഞാൻ സൗന്ദര്യം കാണുന്നു,",
+              "ദൈവത്തിന്റെ ക്രിസ്തു അവിടെ പ്രായശ്ചിത്തം ചെയ്തു,",
+              "എനിക്കു ജീവൻ ലഭിക്കേണ്ടതിന്ന്."
             ]
           },
           {
-            "verse": "16",
+            "section": "അന്തരം 4",
             "lines": [
-              "४. मैं उस प्यारी सलीब का रूह वफादार"
-            ]
-          },
-          {
-            "verse": "17",
-            "lines": [
-              "सिपाही हमेशा ज़रूर"
-            ]
-          },
-          {
-            "verse": "18",
-            "lines": [
-              "जब तक मेरा मसीह न करेगा मुझे"
-            ]
-          },
-          {
-            "verse": "19",
-            "lines": [
-              "अपने अब्दी जलाल में मंज़ूर |"
-            ]
-          },
-          {
-            "verse": "20",
-            "lines": [
-              "1. Woh Pyaari Saleeb Mujh Ko Dikh Padti Hai"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "Ek Pahadi Par Jo Khadi Thi"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "Ki Masih-Ye-Maslub Ne Nadamat Utha"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "Gunahgaaro Ki Khaatir Jaan Di"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
-              "Paas Na Chordunga Pyaari Saleeb"
-            ]
-          },
-          {
-            "verse": "25",
-            "lines": [
-              "Jab Tak Duniya Mei Hoga Kayaam"
-            ]
-          },
-          {
-            "verse": "26",
-            "lines": [
-              "Lipta Rahunga Mei Usi se"
-            ]
-          },
-          {
-            "verse": "27",
-            "lines": [
-              "Ki Maslub Mei Hai Abdi Araam"
-            ]
-          },
-          {
-            "verse": "28",
-            "lines": [
-              "2. Aah ! Woh Pyaari Saleeb, Jiski Hoti Tehkir"
-            ]
-          },
-          {
-            "verse": "29",
-            "lines": [
-              "Hai Mujh Ko Behed Dil Pajeer"
-            ]
-          },
-          {
-            "verse": "30",
-            "lines": [
-              "Ki Khuda Ke Mehboob Uss Jalaali Masih"
-            ]
-          },
-          {
-            "verse": "31",
-            "lines": [
-              "Ne Saha Dukh Be Najeer"
-            ]
-          },
-          {
-            "verse": "32",
-            "lines": [
-              "3. Mujhe Pyaari Saleeb Mai, Gao Lahu-Luhaan"
-            ]
-          },
-          {
-            "verse": "33",
-            "lines": [
-              "Nazar Aati Hai Khoob-Surati"
-            ]
-          },
-          {
-            "verse": "34",
-            "lines": [
-              "Ki Khuda Ke Masih Ne Kafaara Diya"
-            ]
-          },
-          {
-            "verse": "35",
-            "lines": [
-              "To Mile Mujhe Zindagi"
-            ]
-          },
-          {
-            "verse": "36",
-            "lines": [
-              "4. Mai Uss Pyaari Saleeb Ka Ruh Vafadaar"
-            ]
-          },
-          {
-            "verse": "37",
-            "lines": [
-              "Sipaahi Hamesha Zarur"
-            ]
-          },
-          {
-            "verse": "38",
-            "lines": [
-              "Jab Tak Mera Masih Na Karega Mujhe"
-            ]
-          },
-          {
-            "verse": "39",
-            "lines": [
-              "Apne Abdi Jalaal Mai Manzur"
+              "ആ പ്രിയ ക്രൂശിനോടു ഞാൻ വിശ്വസ്തനാകും,",
+              "ഒരു സത്യസന്ധ സൈനികനായി,",
+              "എന്റെ ക്രിസ്തു എന്നെ സ്വീകരിക്കുന്നതുവരെയും,",
+              "തന്റെ നിത്യ മഹത്വത്തിലേക്കു."
             ]
           }
         ]
@@ -49047,15 +48893,90 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "section": "मुखड़ा",
             "lines": [
-              "og izHkq gS------2 th mBk og eqnksZa",
-              "esa ls] og izHkq gSA",
-              "gj ,d ?kqVuk >qdsxk",
-              "gj tqcku xk;saxh fd ;h'kq esjk izHkq gSA",
-              "rw izHkq gS] rw izHkq gS]",
-              "th mBk rw eqnksZa ls] rw izHkq gSA",
-              "gj ?kqVuk >qdsxk] gj tqcku xk;saxh]",
-              "fd ;h'kq esjk izHkq gSA"
+              "वह प्रभु है, वह प्रभु है,",
+              "जी उठा वह मुर्दों में से, वह प्रभु है।",
+              "हर एक घुटना झुकेगा,",
+              "हर ज़ुबान गाएगी कि यीशु मेरा प्रभु है।"
+            ]
+          },
+          {
+            "section": "दोहराव",
+            "lines": [
+              "तू प्रभु है, तू प्रभु है,",
+              "जी उठा तू मुर्दों से, तू प्रभु है।",
+              "हर घुटना झुकेगा, हर ज़ुबान गाएगी,",
+              "कि यीशु मेरा प्रभु है।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Wah Prabhu hai, wah Prabhu hai,",
+              "Jee utha wah murdon mein se, wah Prabhu hai.",
+              "Har ek ghutna jhukega,",
+              "Har zubaan gaayegi ki Yeshu mera Prabhu hai."
+            ]
+          },
+          {
+            "section": "Dohrav",
+            "lines": [
+              "Tu Prabhu hai, tu Prabhu hai,",
+              "Jee utha tu murdon se, tu Prabhu hai.",
+              "Har ghutna jhukega, har zubaan gaayegi,",
+              "Ki Yeshu mera Prabhu hai."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Chorus",
+            "lines": [
+              "He is Lord, He is Lord,",
+              "He is risen from the dead and He is Lord.",
+              "Every knee shall bow,",
+              "Every tongue confess that Jesus Christ is Lord."
+            ]
+          },
+          {
+            "section": "Repeat",
+            "lines": [
+              "You are Lord, You are Lord,",
+              "Risen from the dead, You are Lord.",
+              "Every knee shall bow, every tongue shall sing,",
+              "That Jesus Christ is Lord."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "കൊറസ്",
+            "lines": [
+              "അവൻ കർത്താവാണ്, അവൻ കർത്താവാണ്,",
+              "മരിച്ചവരിൽ നിന്ന് ഉയിർത്തെഴുന്നേറ്റവൻ കർത്താവാണ്.",
+              "ഓരോ മുട്ടും മടങ്ങും,",
+              "ഓരോ നാവും യേശു കർത്താവാണെന്ന് പ്രസ്താവിക്കും."
+            ]
+          },
+          {
+            "section": "ആവർത്തനം",
+            "lines": [
+              "നീയാണ് കർത്താവ്, നീയാണ് കർത്താവ്,",
+              "മരിച്ചവരിൽ നിന്ന് ഉയിർത്തെഴുന്നേറ്റ നീ കർത്താവാണ്.",
+              "ഓരോ മുട്ടും മടങ്ങും, ഓരോ നാവും പാടും,",
+              "യേശു എന്റെ കർത്താവാണെന്ന്."
             ]
           }
         ]
@@ -49074,30 +48995,174 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "section": "मुखड़ा",
             "lines": [
-              "oks [kqnk esjk pjokgk gS - 2",
-              "eq>dks deh u gksxh - 2",
-              "yk-yk-yk-yk-yk-yk-yk-yk-yk-yk yk-yk-yk-yk-yk-yk-yk-yk",
-              "1 oks eq>s gjh gjh pkjkxkgksa",
-              "esa ykds fcBkrk gS",
-              "eq>s jkgr ds p'eksa ds ikl",
-              "esjk [kqnk ys tkrk gS",
-              "esjh tku cgky oks djrk gS------",
-              "2 pkgs ekSr ds lk, dh gh",
-              "oknh ls eSa tc Hkh xqt+#a",
-              "rw tks lkFk gS ,s esjs [kqnk",
-              "eSa fdlh cyk ls D;ksa M#a",
-              "eq>s jkl gS rsjh oQ+k",
-              "3 esjs nq'euksa ds lkeus",
-              "oks esjh est+ yxkrk gS",
-              "Hkjiwj djrk gS eq>dks",
-              "ycjst+ esjk I;kyk gS",
-              "vkSj eq>dks I;kj fn[kkrk gS",
-              "4 gS ;dhu eq>s rsjh jger",
-              "esjs lkFk jgsxh mez Hkj",
-              "gksxk lnk esjk Hkyk",
-              "x+j rw gS esjk gelQ+j",
-              "rsjs ?kj jgwaxk eSa lnk"
+              "वो खुदा मेरा चरवाहा है,",
+              "मुझको कमी न होगी।"
+            ]
+          },
+          {
+            "section": "अंतरा 1",
+            "lines": [
+              "वो मुझे हरी हरी चरागाहों में लाकर बिठाता है,",
+              "मुझे राहत के चश्मों के पास मेरा खुदा ले जाता है,",
+              "मेरी जान बहाल वो करता है।"
+            ]
+          },
+          {
+            "section": "अंतरा 2",
+            "lines": [
+              "चाहे मौत के साए की ही वादी से मैं जब भी गुजरूं,",
+              "तू जो साथ है, ऐ मेरे खुदा, मैं किसी बला से क्यों डरूं,",
+              "मुझे रास है तेरी वफ़ा।"
+            ]
+          },
+          {
+            "section": "अंतरा 3",
+            "lines": [
+              "मेरे दुश्मनों के सामने वो मेरी मेज़ लगाता है,",
+              "भरपूर करता है मुझको, लबरेज़ मेरा प्याला है,",
+              "और मुझको प्यार दिखाता है।"
+            ]
+          },
+          {
+            "section": "अंतरा 4",
+            "lines": [
+              "है यक़ीन मुझे तेरी रहमत मेरे साथ रहेगी उम्र भर,",
+              "होगा सदा मेरा भला, गर तू है मेरा हमसफ़र,",
+              "तेरे घर रहूँगा मैं सदा।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Wo Khuda mera charwaha hai,",
+              "Mujhko kami na hogi."
+            ]
+          },
+          {
+            "section": "Antara 1",
+            "lines": [
+              "Wo mujhe hari hari charagaahon mein laakar bithata hai,",
+              "Mujhe raahat ke chashmon ke paas mera Khuda le jaata hai,",
+              "Meri jaan bahaal wo karta hai."
+            ]
+          },
+          {
+            "section": "Antara 2",
+            "lines": [
+              "Chaahe maut ke saaye ki hi waadi se main jab bhi guzarun,",
+              "Tu jo saath hai, ai mere Khuda, main kisi bala se kyon darun,",
+              "Mujhe raas hai teri wafa."
+            ]
+          },
+          {
+            "section": "Antara 3",
+            "lines": [
+              "Mere dushmanon ke saamne wo meri mez lagaata hai,",
+              "Bharpoor karta hai mujhko, labrez mera pyaala hai,",
+              "Aur mujhko pyaar dikhaata hai."
+            ]
+          },
+          {
+            "section": "Antara 4",
+            "lines": [
+              "Hai yaqeen mujhe teri rehmat mere saath rahegi umr bhar,",
+              "Hoga sada mera bhala, gar tu hai mera humsafar,",
+              "Tere ghar rahunga main sada."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Chorus",
+            "lines": [
+              "The Lord is my Shepherd,",
+              "I will never be in need."
+            ]
+          },
+          {
+            "section": "Verse 1",
+            "lines": [
+              "He makes me sit in green pastures,",
+              "He leads me beside the streams of rest,",
+              "He restores my soul."
+            ]
+          },
+          {
+            "section": "Verse 2",
+            "lines": [
+              "Even if I walk through the valley of the shadow of death,",
+              "If You are with me, my God, why should I fear any evil?",
+              "Your faithfulness gives me peace."
+            ]
+          },
+          {
+            "section": "Verse 3",
+            "lines": [
+              "Before my enemies He sets a table for me,",
+              "He fills me to overflowing, my cup is running over,",
+              "And He shows me His love."
+            ]
+          },
+          {
+            "section": "Verse 4",
+            "lines": [
+              "I am sure Your mercy will stay with me all my life,",
+              "Surely good will be mine as long as You are my companion,",
+              "And I will dwell in Your house forever."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "കൊറസ്",
+            "lines": [
+              "എന്റെ ഇടയൻ കർത്താവാകുന്നു,",
+              "എനിക്കൊന്നും കുറവുണ്ടാകയില്ല."
+            ]
+          },
+          {
+            "section": "അന്തരം 1",
+            "lines": [
+              "പച്ചപുല്പുറങ്ങളിൽ അവൻ എന്നെ വിശ്രമിപ്പിക്കുന്നു,",
+              "ശാന്തജലത്തിങ്കൽ എന്നെ നടത്തുന്നു,",
+              "എന്റെ പ്രാണനെ അവൻ പുതുക്കുന്നു."
+            ]
+          },
+          {
+            "section": "അന്തരം 2",
+            "lines": [
+              "മരണനിഴലിന്റെ താഴ്വരയിലൂടെ ഞാൻ നടന്നാലും,",
+              "നീ എനിക്കൊപ്പമുണ്ടെങ്കിൽ ഞാൻ ദോഷത്തെ ഭയപ്പെടുകയില്ല,",
+              "നിന്റെ വിശ്വസ്തത എനിക്കാശ്വാസമാണ്."
+            ]
+          },
+          {
+            "section": "അന്തരം 3",
+            "lines": [
+              "എന്റെ ശത്രുക്കളുടെ മുമ്പിൽ നീ എനിക്കായി ഒരു മേശ ഒരുക്കുന്നു,",
+              "എന്നെ സമൃദ്ധിയായി നിറയ്ക്കുന്നു, എന്റെ പാനപാത്രം കവിയുന്നു,",
+              "നീ എനിക്കു സ്നേഹം കാണിക്കുന്നു."
+            ]
+          },
+          {
+            "section": "അന്തരം 4",
+            "lines": [
+              "നിന്റെ കരുണ ജീവിതകാലമെങ്ങും എനിക്കൊപ്പമുണ്ടാകുമെന്ന് എനിക്ക് ഉറപ്പ്,",
+              "നീ എന്റെ കൂടെയുണ്ടെങ്കിൽ എനിക്കെപ്പോഴും നന്മ ഉണ്ടാകും,",
+              "ഞാൻ നിന്റെ ഭവനത്തിൽ എന്നേക്കും വസിക്കും."
             ]
           }
         ]
@@ -69180,344 +69245,234 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "section": "मुखड़ा",
             "lines": [
-              "Changa karne vala hai Parmeshwar (Sing it out loud for Jesus)"
+              "चंगा करने वाला है परमेश्वर,",
+              "दया करने वाला है परमेश्वर,",
+              "उसकी सदा मैं स्तुति करूँगा,",
+              "उसके सिवा कहीं न झुकूँगा।"
             ]
           },
           {
-            "verse": "1",
+            "section": "कोरस",
             "lines": [
-              "Daya karne vala hai Parmeshwar (Merciful Lord how great His power)"
+              "वो मेरा जीवन, वो मेरा जीवन,",
+              "वो मेरा दाता, वो मेरा दाता,",
+              "वो मेरे प्राणों को बचाता,",
+              "वो मेरे प्राणों को बचाता।"
             ]
           },
           {
-            "verse": "2",
+            "section": "अंतरा 1",
             "lines": [
-              "Uski sada main stuti karunga"
+              "अंधों को आँखें देता है वो,",
+              "लंगड़ों को टाँगें देता है वो,",
+              "बहरे भी सुनने लगते हैं,",
+              "कोढ़ी को चंगा करता है वो।"
             ]
           },
           {
-            "verse": "3",
+            "section": "अंतरा 2",
             "lines": [
-              "Uske siwa kahi na jhukunga"
+              "मुझको ताकत देता है वो,",
+              "स्वर्गीय आशीष देता है वो,",
+              "बीमारियाँ उड़ जाती हैं,",
+              "ऐसी चंगाई देता है वो।"
             ]
           },
           {
-            "verse": "4",
+            "section": "अंतरा 3",
             "lines": [
-              "Changa karne vala hai Parmeshwar"
+              "उसकी सदा मैं स्तुति करूँगा,",
+              "उसके सिवा कहीं न झुकूँगा,",
+              "उसके पीछे मैं चलता रहूँगा,",
+              "उसका साथ कभी न छोड़ूँगा।"
             ]
           },
           {
-            "verse": "5",
+            "section": "ब्रिज",
             "lines": [
-              "Daya karne vala hai Parmeshwar"
+              "यीशु टूटों और निर्बलों को चंगा करता है,",
+              "वह पहले भी करता आया है, आज भी मेरे लिए करता है,",
+              "उसने मुझे अपने प्रकाश से भर दिया है,",
+              "उसकी अनुग्रह से मैं स्वतंत्र हूँ।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Changa karne wala hai Parmeshwar,",
+              "Daya karne wala hai Parmeshwar,",
+              "Uski sada main stuti karunga,",
+              "Uske siwa kahin na jhukunga."
             ]
           },
           {
-            "verse": "6",
+            "section": "Chorus",
             "lines": [
-              "Uski sada main stuti karunga"
+              "Wo mera jeevan, wo mera jeevan,",
+              "Wo mera data, wo mera data,",
+              "Wo mere praanon ko bachata,",
+              "Wo mere praanon ko bachata."
             ]
           },
           {
-            "verse": "7",
+            "section": "Antara 1",
             "lines": [
-              "Ho Uske siwa kahi na jhukunga"
+              "Andhon ko aankhen deta hai wo,",
+              "Langdon ko taangen deta hai wo,",
+              "Behre bhi sunne lagte hain,",
+              "Kodhi ko changa karta hai wo."
             ]
           },
           {
-            "verse": "8",
+            "section": "Antara 2",
             "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
+              "Mujhko taqat deta hai wo,",
+              "Swargiya aashish deta hai wo,",
+              "Bimaariyan ud jaati hain,",
+              "Aisi changaai deta hai wo."
             ]
           },
           {
-            "verse": "9",
+            "section": "Antara 3",
             "lines": [
-              "Wo mera data (Wo mera data)"
+              "Uski sada main stuti karunga,",
+              "Uske siwa kahin na jhukunga,",
+              "Uske peeche main chalta rahunga,",
+              "Uska saath kabhi na chhodunga."
             ]
           },
           {
-            "verse": "10",
+            "section": "Bridge",
             "lines": [
-              "Wo mere praano (Wo mere praano)"
+              "Yeshu tooton aur nirbalon ko changa karta hai,",
+              "Woh pehle bhi karta aaya hai, aaj bhi mere liye karta hai,",
+              "Usne mujhe apne prakaash se bhar diya hai,",
+              "Uski anugrah se main swatantra hoon."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Verse",
+            "lines": [
+              "God is the One who heals,",
+              "God is the One who shows mercy,",
+              "I will praise Him always,",
+              "I will bow to no one else."
             ]
           },
           {
-            "verse": "11",
+            "section": "Chorus",
             "lines": [
-              "Ko bachata (Ko bachata)"
+              "He is my life, He is my life,",
+              "He is my giver, He is my giver,",
+              "He saves my soul,",
+              "He saves my soul."
             ]
           },
           {
-            "verse": "12",
+            "section": "Verse 1",
             "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
+              "He gives sight to the blind,",
+              "He gives strength to the lame,",
+              "Even the deaf begin to hear,",
+              "He heals the leper."
             ]
           },
           {
-            "verse": "13",
+            "section": "Verse 2",
             "lines": [
-              "Wo mera data (Wo mera data)"
+              "He gives me strength,",
+              "He gives heavenly blessings,",
+              "Sicknesses fly away,",
+              "Such healing He gives."
             ]
           },
           {
-            "verse": "14",
+            "section": "Verse 3",
             "lines": [
-              "Wo mere praano (Wo mere praano)"
+              "I will praise Him always,",
+              "I will bow to no one else,",
+              "I will keep following Him,",
+              "I will never leave His side."
             ]
           },
           {
-            "verse": "15",
+            "section": "Bridge",
             "lines": [
-              "Ko bachata (Ko bachata)"
+              "Jesus heals the broken and the weak,",
+              "He has done it before and He still does it for me,",
+              "He filled me with His light,",
+              "By His grace I have been set free."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "മുഖड़ा",
+            "lines": [
+              "സൗഖ്യമരുളുന്നവൻ ദൈവമാണ്,",
+              "കരുണ കാണിക്കുന്നവൻ ദൈവമാണ്,",
+              "അവനെ ഞാൻ എല്ലായ്പ്പോഴും സ്തുതിക്കും,",
+              "അവനെ വിട്ട് മറ്റൊരാളിന്നും ഞാൻ വണങ്ങുകയില്ല."
             ]
           },
           {
-            "verse": "16",
+            "section": "കൊറസ്",
             "lines": [
-              "Andho ko aankhe deta hai vo"
+              "അവൻ എന്റെ ജീവൻ, അവൻ എന്റെ ജീവൻ,",
+              "അവൻ എന്റെ ദാതാവ്, അവൻ എന്റെ ദാതാവ്,",
+              "എന്റെ പ്രാണനെ അവൻ രക്ഷിക്കുന്നു,",
+              "എന്റെ പ്രാണനെ അവൻ രക്ഷിക്കുന്നു."
             ]
           },
           {
-            "verse": "17",
+            "section": "അന്തരം 1",
             "lines": [
-              "Langdo ko taange deta hai vo"
+              "കുരുടർക്കു കണ്ണ് കൊടുക്കുന്നവൻ അവൻ,",
+              "മുടന്തർക്കു ശക്തി നൽകുന്നവൻ അവൻ,",
+              "ബധിരരും കേൾക്കിത്തുടങ്ങുന്നു,",
+              "കുഷ്ഠരോഗിയെയും സൗഖ്യമാക്കുന്നവൻ അവൻ."
             ]
           },
           {
-            "verse": "18",
+            "section": "അന്തരം 2",
             "lines": [
-              "Behere bhi sunne lagte hai"
+              "എനിക്കു ശക്തി നൽകുന്നവൻ അവൻ,",
+              "സ്വർഗീയ ആശീർവാദം നൽകുന്നവൻ അവൻ,",
+              "രോഗങ്ങൾ പറന്നുപോകുന്നു,",
+              "അങ്ങനെ സൗഖ്യം നൽകുന്നവൻ അവൻ."
             ]
           },
           {
-            "verse": "19",
+            "section": "അന്തരം 3",
             "lines": [
-              "Kodi ko changa karta hai vo"
+              "അവനെ ഞാൻ എല്ലായ്പ്പോഴും സ്തുതിക്കും,",
+              "അവനെ വിട്ട് മറ്റൊരാളിന്നും ഞാൻ വണങ്ങുകയില്ല,",
+              "അവന്റെ പിന്നാലെ ഞാൻ നടന്നുകൊണ്ടിരിക്കും,",
+              "അവന്റെ സാന്നിധ്യം ഞാൻ ഒരിക്കലും വിടുകയില്ല."
             ]
           },
           {
-            "verse": "20",
+            "section": "ബ്രിഡ്ജ്",
             "lines": [
-              "Mujhko taqat deta hai vo"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "Swargiye aashish deta hai vo"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "Bimaariyan ud jaati hai"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "Aisi changai deta hai vo"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
-              "Uski sada mein stuti karunga (Praise Him praise Him praise out loud)"
-            ]
-          },
-          {
-            "verse": "25",
-            "lines": [
-              "Uske siwa kahi na jhukunga (Never bowing down to anybody else)"
-            ]
-          },
-          {
-            "verse": "26",
-            "lines": [
-              "Uske peeche main chalta rahunga"
-            ]
-          },
-          {
-            "verse": "27",
-            "lines": [
-              "Uska saath kabhi na chhodunga"
-            ]
-          },
-          {
-            "verse": "28",
-            "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
-            ]
-          },
-          {
-            "verse": "29",
-            "lines": [
-              "Wo mera data (Wo mera data)"
-            ]
-          },
-          {
-            "verse": "30",
-            "lines": [
-              "Wo mere praano (Wo mere praano)"
-            ]
-          },
-          {
-            "verse": "31",
-            "lines": [
-              "Ko bachata (Ko bachata)"
-            ]
-          },
-          {
-            "verse": "32",
-            "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
-            ]
-          },
-          {
-            "verse": "33",
-            "lines": [
-              "Wo mera data (Wo mera data)"
-            ]
-          },
-          {
-            "verse": "34",
-            "lines": [
-              "Wo mere praano (Wo mere praano)"
-            ]
-          },
-          {
-            "verse": "35",
-            "lines": [
-              "Ko bachata (Ko bachata)"
-            ]
-          },
-          {
-            "verse": "36",
-            "lines": [
-              "Jesus is the one who heals the broken and the weak"
-            ]
-          },
-          {
-            "verse": "37",
-            "lines": [
-              "He has done it all before"
-            ]
-          },
-          {
-            "verse": "38",
-            "lines": [
-              "He still does it all for me"
-            ]
-          },
-          {
-            "verse": "39",
-            "lines": [
-              "He filled me with His light and now I spread it round of me"
-            ]
-          },
-          {
-            "verse": "40",
-            "lines": [
-              "He’s the only way to heaven, better hear it clearly"
-            ]
-          },
-          {
-            "verse": "41",
-            "lines": [
-              "Saved my soul, made me whole, I’m not livin’ on my own"
-            ]
-          },
-          {
-            "verse": "42",
-            "lines": [
-              "He still got me"
-            ]
-          },
-          {
-            "verse": "43",
-            "lines": [
-              "I sing it all for His praise, cause I’m livin’ by His grace"
-            ]
-          },
-          {
-            "verse": "44",
-            "lines": [
-              "He has set me free"
-            ]
-          },
-          {
-            "verse": "45",
-            "lines": [
-              "Uski sada mein stuti karunga"
-            ]
-          },
-          {
-            "verse": "46",
-            "lines": [
-              "Uske siwa kahi na jhukunga"
-            ]
-          },
-          {
-            "verse": "47",
-            "lines": [
-              "Uske peeche main chalta rahunga"
-            ]
-          },
-          {
-            "verse": "48",
-            "lines": [
-              "Uska saath kabhi na chhodunga"
-            ]
-          },
-          {
-            "verse": "49",
-            "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
-            ]
-          },
-          {
-            "verse": "50",
-            "lines": [
-              "Wo mera data (Wo mera data)"
-            ]
-          },
-          {
-            "verse": "51",
-            "lines": [
-              "Wo mere praano (Wo mere praano)"
-            ]
-          },
-          {
-            "verse": "52",
-            "lines": [
-              "Ko bachata (Ko bachata)"
-            ]
-          },
-          {
-            "verse": "53",
-            "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
-            ]
-          },
-          {
-            "verse": "54",
-            "lines": [
-              "Wo mera data (Wo mera data)"
-            ]
-          },
-          {
-            "verse": "55",
-            "lines": [
-              "Wo mere praano (Wo mere praano)"
-            ]
-          },
-          {
-            "verse": "56",
-            "lines": [
-              "Ko bachata (Ko bachata)"
+              "യേശു തകർന്നവരെയും ദുർബലരെയും സൗഖ്യമാക്കുന്നു,",
+              "മുമ്പും ചെയ്തതുപോലെ ഇന്നും എനിക്ക് വേണ്ടി ചെയ്യുന്നു,",
+              "അവൻ തന്റെ വെളിച്ചം കൊണ്ട് എന്നെ നിറച്ചു,",
+              "അവന്റെ കൃപയാൽ ഞാൻ സ്വതന്ത്രനായി."
             ]
           }
         ]
@@ -108066,52 +108021,198 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "section": "मुखड़ा",
             "lines": [
-              "विश्वासयोग्य परमेश्वर है तु",
+              "विश्वासयोग्य परमेश्वर है तू",
               "देखा है मैंने अपने जीवन में",
-              "दुनिया बदलती है तु न बदलता",
-              "बंध आँखों से भी में करता भरोसा",
-              "इंसानों से तु वफादार",
-              "सुनता दिल की हर इक पुकार",
-              "बेहाली में रखता तु ध्यान",
-              "हालातों से तु शक्तिमान",
-              "जब तु मिला मिली रिहाई",
-              "दम थोड़े हर कठिनाई",
-              "संघ चले जैसे परछाई",
-              "जीते तु मेरी लड़ाई",
-              "रोशनी बनके जीवन में आया",
-              "मेरी गुलामी से मुझको छुड़ाया",
-              "तोड़ा हर बंधन बेटा बनाया",
-              "अपना हर वाधा तु ने निभाया     ||इंसानो||",
-              "क्या कोई है? इस जहाँ में",
-              "तुझ सा अज़ीम",
-              "क्या कोई है? इस जहाँ में",
-              "जो हो तुझ सा भला (2)      ||जब तु||"
+              "दुनिया बदलती है, तू न बदलता",
+              "बंध आँखों से भी मैं करता भरोसा"
             ]
           },
           {
-            "verse": "1",
+            "section": "अंतरा 1",
             "lines": [
-              "vishwaasyogya parmeshwar hai thu",
-              "dekhaa hai meine apne jeevan mein",
-              "duniyaa badalthi hai thu na badalthaa",
-              "bandh aankhon se bhi mein karthaa bharosaa",
-              "insaanon se thu wafaadhaar",
-              "sunthaa dil ki har ik pukaar",
-              "behaali mein rakhthaa thu dhyaan",
-              "halaathon se thu shakthimaan",
-              "jab thu milaa mili rihaayi",
-              "dham thode har kathinaayi",
-              "sangh chale jaise parchaayi",
-              "jeethe thu meri ladaayi",
-              "roshani banke jeevan mein aayaa",
-              "meri gulaami se mujhko chudaayaa",
-              "thodaa har bandhan betaa banaayaa",
-              "apnaa har waadhaa thu ne nibhaayaa      ||insaano||",
-              "kyaa koyi hai? is jahaan mein",
-              "thujh saa azeem",
-              "kyaa koyi hai? is jahaan mein",
-              "jo ho thujh saa bhalaa (2)         ||jab thu||"
+              "इंसानों से तू वफादार",
+              "सुनता दिल की हर इक पुकार",
+              "बेहाली में रखता तू ध्यान",
+              "हालातों से तू शक्तिमान"
+            ]
+          },
+          {
+            "section": "अंतरा 2",
+            "lines": [
+              "जब तू मिला, मिली रिहाई",
+              "थम गई हर कठिनाई",
+              "संग चले जैसे परछाई",
+              "जीते तू मेरी लड़ाई"
+            ]
+          },
+          {
+            "section": "अंतरा 3",
+            "lines": [
+              "रोशनी बनके जीवन में आया",
+              "मेरी गुलामी से मुझको छुड़ाया",
+              "तोड़ा हर बंधन, बेटा बनाया",
+              "अपना हर वादा तू ने निभाया"
+            ]
+          },
+          {
+            "section": "ब्रिज",
+            "lines": [
+              "क्या कोई है इस जहाँ में",
+              "तुझ सा अज़ीम",
+              "क्या कोई है इस जहाँ में",
+              "जो हो तुझ सा भला"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Vishwaasyogya Parmeshwar hai tu",
+              "Dekha hai maine apne jeevan mein",
+              "Duniya badalti hai, tu na badalta",
+              "Bandh aankhon se bhi main karta bharosa"
+            ]
+          },
+          {
+            "section": "Antara 1",
+            "lines": [
+              "Insaanon se tu wafadaar",
+              "Sunta dil ki har ik pukaar",
+              "Behaali mein rakhta tu dhyaan",
+              "Haalaaton se tu shaktimaan"
+            ]
+          },
+          {
+            "section": "Antara 2",
+            "lines": [
+              "Jab tu mila, mili rihaai",
+              "Tham gayi har kathinaai",
+              "Sang chale jaise parchhaai",
+              "Jeete tu meri ladaai"
+            ]
+          },
+          {
+            "section": "Antara 3",
+            "lines": [
+              "Roshni banke jeevan mein aaya",
+              "Meri gulaami se mujhko chhudaaya",
+              "Toda har bandhan, beta banaaya",
+              "Apna har vaada tu ne nibhaaya"
+            ]
+          },
+          {
+            "section": "Bridge",
+            "lines": [
+              "Kya koi hai is jahaan mein",
+              "Tujh sa azeem",
+              "Kya koi hai is jahaan mein",
+              "Jo ho tujh sa bhala"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Chorus",
+            "lines": [
+              "You are a faithful God, worthy of trust,",
+              "I have seen it in my own life,",
+              "The world may change, but You do not change,",
+              "Even with closed eyes I still trust You"
+            ]
+          },
+          {
+            "section": "Verse 1",
+            "lines": [
+              "More faithful than any human,",
+              "You hear every cry of the heart,",
+              "You care in every broken season,",
+              "You are stronger than every circumstance"
+            ]
+          },
+          {
+            "section": "Verse 2",
+            "lines": [
+              "When I found You, I found freedom,",
+              "Every hardship came to a halt,",
+              "You walked beside me like a shadow,",
+              "You fought and won my battles"
+            ]
+          },
+          {
+            "section": "Verse 3",
+            "lines": [
+              "You came into my life as light,",
+              "You delivered me from my slavery,",
+              "You broke every chain and called me Your child,",
+              "You fulfilled every promise You made"
+            ]
+          },
+          {
+            "section": "Bridge",
+            "lines": [
+              "Is there anyone in this world",
+              "So great as You?",
+              "Is there anyone in this world",
+              "Who is as good as You?"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "കൊറസ്",
+            "lines": [
+              "വിശ്വസ്തനായ ദൈവമേ, നീയത്രേ",
+              "എന്റെ ജീവിതത്തിൽ ഞാൻ അതു കണ്ടിരിക്കുന്നു",
+              "ലോകം മാറിയാലും നീ മാറുന്നില്ല",
+              "കണ്ണടച്ചാലും ഞാൻ നിന്നിൽ വിശ്വാസം വെക്കുന്നു"
+            ]
+          },
+          {
+            "section": "അന്തരം 1",
+            "lines": [
+              "മനുഷ്യരെക്കാൾ വിശ്വസ്തൻ നീ",
+              "ഹൃദയത്തിന്റെ ഓരോ നിലവിളിയും നീ കേൾക്കുന്നു",
+              "തകർച്ചയുടെ കാലത്തും നീ ശ്രദ്ധിക്കുന്നു",
+              "സാഹചര്യങ്ങളെക്കാൾ ശക്തൻ നീ"
+            ]
+          },
+          {
+            "section": "അന്തരം 2",
+            "lines": [
+              "നിന്നെ കണ്ടപ്പോൾ എനിക്ക് വിമോചനം ലഭിച്ചു",
+              "എല്ലാ കഠിനതയും നിശ്ചലമായി",
+              "നിഴൽപോലെ നീ എനിക്കൊപ്പമുണ്ടായി",
+              "എന്റെ പോരാട്ടങ്ങൾ നീ ജയിച്ചു"
+            ]
+          },
+          {
+            "section": "അന്തരം 3",
+            "lines": [
+              "വെളിച്ചമായി നീ എന്റെ ജീവിതത്തിൽ വന്നു",
+              "എന്റെ അടിമത്തത്തിൽ നിന്ന് എന്നെ വിടുവിച്ചു",
+              "എല്ലാ ബന്ധനവും തകർത്ത് മകനാക്കി",
+              "നീ നൽകിയ എല്ലാ വാഗ്ദാനവും നിറവേറ്റി"
+            ]
+          },
+          {
+            "section": "ബ്രിഡ്ജ്",
+            "lines": [
+              "ഈ ലോകത്തിൽ ആരെങ്കിലും ഉണ്ടോ",
+              "നിനക്കു തുല്യമായി മഹാൻ?",
+              "ഈ ലോകത്തിൽ ആരെങ്കിലും ഉണ്ടോ",
+              "നിനക്കു തുല്യമായി നല്ലവൻ?"
             ]
           }
         ]
@@ -109485,344 +109586,234 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "section": "मुखड़ा",
             "lines": [
-              "Changa karne vala hai Parmeshwar (Sing it out loud for Jesus)"
+              "चंगा करने वाला है परमेश्वर,",
+              "दया करने वाला है परमेश्वर,",
+              "उसकी सदा मैं स्तुति करूँगा,",
+              "उसके सिवा कहीं न झुकूँगा।"
             ]
           },
           {
-            "verse": "1",
+            "section": "कोरस",
             "lines": [
-              "Daya karne vala hai Parmeshwar (Merciful Lord how great His power)"
+              "वो मेरा जीवन, वो मेरा जीवन,",
+              "वो मेरा दाता, वो मेरा दाता,",
+              "वो मेरे प्राणों को बचाता,",
+              "वो मेरे प्राणों को बचाता।"
             ]
           },
           {
-            "verse": "2",
+            "section": "अंतरा 1",
             "lines": [
-              "Uski sada main stuti karunga"
+              "अंधों को आँखें देता है वो,",
+              "लंगड़ों को टाँगें देता है वो,",
+              "बहरे भी सुनने लगते हैं,",
+              "कोढ़ी को चंगा करता है वो।"
             ]
           },
           {
-            "verse": "3",
+            "section": "अंतरा 2",
             "lines": [
-              "Uske siwa kahi na jhukunga"
+              "मुझको ताकत देता है वो,",
+              "स्वर्गीय आशीष देता है वो,",
+              "बीमारियाँ उड़ जाती हैं,",
+              "ऐसी चंगाई देता है वो।"
             ]
           },
           {
-            "verse": "4",
+            "section": "अंतरा 3",
             "lines": [
-              "Changa karne vala hai Parmeshwar"
+              "उसकी सदा मैं स्तुति करूँगा,",
+              "उसके सिवा कहीं न झुकूँगा,",
+              "उसके पीछे मैं चलता रहूँगा,",
+              "उसका साथ कभी न छोड़ूँगा।"
             ]
           },
           {
-            "verse": "5",
+            "section": "ब्रिज",
             "lines": [
-              "Daya karne vala hai Parmeshwar"
+              "यीशु टूटों और निर्बलों को चंगा करता है,",
+              "वह पहले भी करता आया है, आज भी मेरे लिए करता है,",
+              "उसने मुझे अपने प्रकाश से भर दिया है,",
+              "उसकी अनुग्रह से मैं स्वतंत्र हूँ।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Changa karne wala hai Parmeshwar,",
+              "Daya karne wala hai Parmeshwar,",
+              "Uski sada main stuti karunga,",
+              "Uske siwa kahin na jhukunga."
             ]
           },
           {
-            "verse": "6",
+            "section": "Chorus",
             "lines": [
-              "Uski sada main stuti karunga"
+              "Wo mera jeevan, wo mera jeevan,",
+              "Wo mera data, wo mera data,",
+              "Wo mere praanon ko bachata,",
+              "Wo mere praanon ko bachata."
             ]
           },
           {
-            "verse": "7",
+            "section": "Antara 1",
             "lines": [
-              "Ho Uske siwa kahi na jhukunga"
+              "Andhon ko aankhen deta hai wo,",
+              "Langdon ko taangen deta hai wo,",
+              "Behre bhi sunne lagte hain,",
+              "Kodhi ko changa karta hai wo."
             ]
           },
           {
-            "verse": "8",
+            "section": "Antara 2",
             "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
+              "Mujhko taqat deta hai wo,",
+              "Swargiya aashish deta hai wo,",
+              "Bimaariyan ud jaati hain,",
+              "Aisi changaai deta hai wo."
             ]
           },
           {
-            "verse": "9",
+            "section": "Antara 3",
             "lines": [
-              "Wo mera data (Wo mera data)"
+              "Uski sada main stuti karunga,",
+              "Uske siwa kahin na jhukunga,",
+              "Uske peeche main chalta rahunga,",
+              "Uska saath kabhi na chhodunga."
             ]
           },
           {
-            "verse": "10",
+            "section": "Bridge",
             "lines": [
-              "Wo mere praano (Wo mere praano)"
+              "Yeshu tooton aur nirbalon ko changa karta hai,",
+              "Woh pehle bhi karta aaya hai, aaj bhi mere liye karta hai,",
+              "Usne mujhe apne prakaash se bhar diya hai,",
+              "Uski anugrah se main swatantra hoon."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Verse",
+            "lines": [
+              "God is the One who heals,",
+              "God is the One who shows mercy,",
+              "I will praise Him always,",
+              "I will bow to no one else."
             ]
           },
           {
-            "verse": "11",
+            "section": "Chorus",
             "lines": [
-              "Ko bachata (Ko bachata)"
+              "He is my life, He is my life,",
+              "He is my giver, He is my giver,",
+              "He saves my soul,",
+              "He saves my soul."
             ]
           },
           {
-            "verse": "12",
+            "section": "Verse 1",
             "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
+              "He gives sight to the blind,",
+              "He gives strength to the lame,",
+              "Even the deaf begin to hear,",
+              "He heals the leper."
             ]
           },
           {
-            "verse": "13",
+            "section": "Verse 2",
             "lines": [
-              "Wo mera data (Wo mera data)"
+              "He gives me strength,",
+              "He gives heavenly blessings,",
+              "Sicknesses fly away,",
+              "Such healing He gives."
             ]
           },
           {
-            "verse": "14",
+            "section": "Verse 3",
             "lines": [
-              "Wo mere praano (Wo mere praano)"
+              "I will praise Him always,",
+              "I will bow to no one else,",
+              "I will keep following Him,",
+              "I will never leave His side."
             ]
           },
           {
-            "verse": "15",
+            "section": "Bridge",
             "lines": [
-              "Ko bachata (Ko bachata)"
+              "Jesus heals the broken and the weak,",
+              "He has done it before and He still does it for me,",
+              "He filled me with His light,",
+              "By His grace I have been set free."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "മുഖड़ा",
+            "lines": [
+              "സൗഖ്യമരുളുന്നവൻ ദൈവമാണ്,",
+              "കരുണ കാണിക്കുന്നവൻ ദൈവമാണ്,",
+              "അവനെ ഞാൻ എല്ലായ്പ്പോഴും സ്തുതിക്കും,",
+              "അവനെ വിട്ട് മറ്റൊരാളിന്നും ഞാൻ വണങ്ങുകയില്ല."
             ]
           },
           {
-            "verse": "16",
+            "section": "കൊറസ്",
             "lines": [
-              "Andho ko aankhe deta hai vo"
+              "അവൻ എന്റെ ജീവൻ, അവൻ എന്റെ ജീവൻ,",
+              "അവൻ എന്റെ ദാതാവ്, അവൻ എന്റെ ദാതാവ്,",
+              "എന്റെ പ്രാണനെ അവൻ രക്ഷിക്കുന്നു,",
+              "എന്റെ പ്രാണനെ അവൻ രക്ഷിക്കുന്നു."
             ]
           },
           {
-            "verse": "17",
+            "section": "അന്തരം 1",
             "lines": [
-              "Langdo ko taange deta hai vo"
+              "കുരുടർക്കു കണ്ണ് കൊടുക്കുന്നവൻ അവൻ,",
+              "മുടന്തർക്കു ശക്തി നൽകുന്നവൻ അവൻ,",
+              "ബധിരരും കേൾക്കിത്തുടങ്ങുന്നു,",
+              "കുഷ്ഠരോഗിയെയും സൗഖ്യമാക്കുന്നവൻ അവൻ."
             ]
           },
           {
-            "verse": "18",
+            "section": "അന്തരം 2",
             "lines": [
-              "Behere bhi sunne lagte hai"
+              "എനിക്കു ശക്തി നൽകുന്നവൻ അവൻ,",
+              "സ്വർഗീയ ആശീർവാദം നൽകുന്നവൻ അവൻ,",
+              "രോഗങ്ങൾ പറന്നുപോകുന്നു,",
+              "അങ്ങനെ സൗഖ്യം നൽകുന്നവൻ അവൻ."
             ]
           },
           {
-            "verse": "19",
+            "section": "അന്തരം 3",
             "lines": [
-              "Kodi ko changa karta hai vo"
+              "അവനെ ഞാൻ എല്ലായ്പ്പോഴും സ്തുതിക്കും,",
+              "അവനെ വിട്ട് മറ്റൊരാളിന്നും ഞാൻ വണങ്ങുകയില്ല,",
+              "അവന്റെ പിന്നാലെ ഞാൻ നടന്നുകൊണ്ടിരിക്കും,",
+              "അവന്റെ സാന്നിധ്യം ഞാൻ ഒരിക്കലും വിടുകയില്ല."
             ]
           },
           {
-            "verse": "20",
+            "section": "ബ്രിഡ്ജ്",
             "lines": [
-              "Mujhko taqat deta hai vo"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "Swargiye aashish deta hai vo"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "Bimaariyan ud jaati hai"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "Aisi changai deta hai vo"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
-              "Uski sada mein stuti karunga (Praise Him praise Him praise out loud)"
-            ]
-          },
-          {
-            "verse": "25",
-            "lines": [
-              "Uske siwa kahi na jhukunga (Never bowing down to anybody else)"
-            ]
-          },
-          {
-            "verse": "26",
-            "lines": [
-              "Uske peeche main chalta rahunga"
-            ]
-          },
-          {
-            "verse": "27",
-            "lines": [
-              "Uska saath kabhi na chhodunga"
-            ]
-          },
-          {
-            "verse": "28",
-            "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
-            ]
-          },
-          {
-            "verse": "29",
-            "lines": [
-              "Wo mera data (Wo mera data)"
-            ]
-          },
-          {
-            "verse": "30",
-            "lines": [
-              "Wo mere praano (Wo mere praano)"
-            ]
-          },
-          {
-            "verse": "31",
-            "lines": [
-              "Ko bachata (Ko bachata)"
-            ]
-          },
-          {
-            "verse": "32",
-            "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
-            ]
-          },
-          {
-            "verse": "33",
-            "lines": [
-              "Wo mera data (Wo mera data)"
-            ]
-          },
-          {
-            "verse": "34",
-            "lines": [
-              "Wo mere praano (Wo mere praano)"
-            ]
-          },
-          {
-            "verse": "35",
-            "lines": [
-              "Ko bachata (Ko bachata)"
-            ]
-          },
-          {
-            "verse": "36",
-            "lines": [
-              "Jesus is the one who heals the broken and the weak"
-            ]
-          },
-          {
-            "verse": "37",
-            "lines": [
-              "He has done it all before"
-            ]
-          },
-          {
-            "verse": "38",
-            "lines": [
-              "He still does it all for me"
-            ]
-          },
-          {
-            "verse": "39",
-            "lines": [
-              "He filled me with His light and now I spread it round of me"
-            ]
-          },
-          {
-            "verse": "40",
-            "lines": [
-              "He’s the only way to heaven, better hear it clearly"
-            ]
-          },
-          {
-            "verse": "41",
-            "lines": [
-              "Saved my soul, made me whole, I’m not livin’ on my own"
-            ]
-          },
-          {
-            "verse": "42",
-            "lines": [
-              "He still got me"
-            ]
-          },
-          {
-            "verse": "43",
-            "lines": [
-              "I sing it all for His praise, cause I’m livin’ by His grace"
-            ]
-          },
-          {
-            "verse": "44",
-            "lines": [
-              "He has set me free"
-            ]
-          },
-          {
-            "verse": "45",
-            "lines": [
-              "Uski sada mein stuti karunga"
-            ]
-          },
-          {
-            "verse": "46",
-            "lines": [
-              "Uske siwa kahi na jhukunga"
-            ]
-          },
-          {
-            "verse": "47",
-            "lines": [
-              "Uske peeche main chalta rahunga"
-            ]
-          },
-          {
-            "verse": "48",
-            "lines": [
-              "Uska saath kabhi na chhodunga"
-            ]
-          },
-          {
-            "verse": "49",
-            "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
-            ]
-          },
-          {
-            "verse": "50",
-            "lines": [
-              "Wo mera data (Wo mera data)"
-            ]
-          },
-          {
-            "verse": "51",
-            "lines": [
-              "Wo mere praano (Wo mere praano)"
-            ]
-          },
-          {
-            "verse": "52",
-            "lines": [
-              "Ko bachata (Ko bachata)"
-            ]
-          },
-          {
-            "verse": "53",
-            "lines": [
-              "Wo mera jeevan (Wo mera jeevan)"
-            ]
-          },
-          {
-            "verse": "54",
-            "lines": [
-              "Wo mera data (Wo mera data)"
-            ]
-          },
-          {
-            "verse": "55",
-            "lines": [
-              "Wo mere praano (Wo mere praano)"
-            ]
-          },
-          {
-            "verse": "56",
-            "lines": [
-              "Ko bachata (Ko bachata)"
+              "യേശു തകർന്നവരെയും ദുർബലരെയും സൗഖ്യമാക്കുന്നു,",
+              "മുമ്പും ചെയ്തതുപോലെ ഇന്നും എനിക്ക് വേണ്ടി ചെയ്യുന്നു,",
+              "അവൻ തന്റെ വെളിച്ചം കൊണ്ട് എന്നെ നിറച്ചു,",
+              "അവന്റെ കൃപയാൽ ഞാൻ സ്വതന്ത്രനായി."
             ]
           }
         ]
