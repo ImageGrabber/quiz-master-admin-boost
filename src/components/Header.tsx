@@ -78,6 +78,13 @@ const Header = () => {
           >
             Articles
           </button>
+          <button
+            className="flex items-center gap-1.5 font-semibold px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+            onClick={() => navigate("/quiz-arena/name")}
+          >
+            <Trophy className="w-4 h-4" />
+            Competitions
+          </button>
           <button 
             className="text-black font-semibold px-4 py-2 bg-transparent border-none shadow-none hover:underline" 
             onClick={() => navigate("/host-live-bible-quizzes-with-confidence")}
@@ -152,6 +159,13 @@ const Header = () => {
               onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}
             >
               Articles
+            </button>
+            <button 
+              className="flex items-center gap-2 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 font-semibold px-4 py-3 text-left hover:from-amber-100 hover:to-orange-100 transition-colors" 
+              onClick={() => { setMobileMenuOpen(false); navigate("/quiz-arena/name"); }}
+            >
+              <Trophy className="w-4 h-4 text-amber-600" />
+              Competitions
             </button>
             <button 
               className="text-black font-semibold px-4 py-3 text-left hover:bg-blue-50" 

@@ -25,7 +25,8 @@ import {
   Gamepad2,
   Heart,
   Coins,
-  ShoppingBag
+  ShoppingBag,
+  Trophy
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -40,6 +41,7 @@ const navItems = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { name: "All Quizzes", href: "/quiz-selection", icon: BookOpen },
   { name: "Bible Study", href: "/bible-questions-and-answers-hub", icon: Brain },
+  { name: "Competitions", href: "/quiz-arena/name", icon: Trophy },
   { name: "Kids Stories", href: "/kids-stories", icon: BookOpen },
   { name: "Worship Songs", href: "/malayalam-songs", icon: Music },
   { name: "Prayer Group", href: "/prayer-requests", icon: Heart },

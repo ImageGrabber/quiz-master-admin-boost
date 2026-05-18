@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Menu, Search, X, Brain, ChevronDown, Music } from "lucide-react";
+import { Menu, Search, X, Brain, ChevronDown, Music, Trophy } from "lucide-react";
 import { publicPages } from "@/data/indexData";
 
 export function Navigation({ transparent = false }: { transparent?: boolean }) {
@@ -136,8 +136,21 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
           <span className={`text-xl md:text-2xl font-urbanist font-bold transition-all ${transparent && !isScrolled ? 'text-white drop-shadow-sm' : 'text-gray-900'}`}>Bible Quiz Competition</span>
         </div>
 
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden md:flex items-center space-x-7">
           <button onClick={() => navigate("/bible-questions-and-answers-hub")} className={navItemClass}>Bible Q&A</button>
+
+          {/* Competitions - Prominent CTA */}
+          <button
+            onClick={() => navigate("/quiz-arena/name")}
+            className={`flex items-center gap-1.5 text-base md:text-lg font-urbanist font-semibold transition-all duration-300 rounded-full px-4 py-1.5 ${
+              transparent && !isScrolled
+                ? "bg-gradient-to-r from-amber-400/90 to-orange-500/90 text-white shadow-lg shadow-amber-500/25 hover:shadow-amber-500/40 hover:scale-105"
+                : "bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-md shadow-amber-500/20 hover:shadow-amber-500/35 hover:scale-105"
+            }`}
+          >
+            <Trophy className="w-4 h-4" />
+            Competitions
+          </button>
 
           {/* Songs Dropdown */}
           <div ref={songsDropdownRef} className="relative">
@@ -150,22 +163,22 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
               <ChevronDown className={`w-3.5 h-3.5 transition-transform ${songsDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
             {songsDropdownOpen && (
-              <div className="absolute top-full mt-2 left-0 bg-white rounded-lg shadow-lg border border-gray-200 z-50 min-w-[200px] py-1">
+              <div className="absolute top-full mt-2 left-0 bg-white rounded-xl shadow-xl border border-gray-200/80 z-50 min-w-[220px] py-2 backdrop-blur-lg">
                 <button
                   onClick={() => { setSongsDropdownOpen(false); navigate('/malayalam-songs'); }}
-                  className="w-full text-left px-4 py-2.5 hover:bg-gray-50 font-urbanist font-light text-base text-gray-700 hover:text-gray-900 transition-colors"
+                  className="w-full text-left px-5 py-3 hover:bg-gray-50 font-urbanist font-light text-base text-gray-700 hover:text-gray-900 transition-colors"
                 >
                   Malayalam Songs
                 </button>
                 <button
                   onClick={() => { setSongsDropdownOpen(false); navigate('/english-songs'); }}
-                  className="w-full text-left px-4 py-2.5 hover:bg-gray-50 font-urbanist font-light text-base text-gray-700 hover:text-gray-900 transition-colors"
+                  className="w-full text-left px-5 py-3 hover:bg-gray-50 font-urbanist font-light text-base text-gray-700 hover:text-gray-900 transition-colors"
                 >
                   English Hymns
                 </button>
                 <button
                   onClick={() => { setSongsDropdownOpen(false); navigate('/hindi-songs'); }}
-                  className="w-full text-left px-4 py-2.5 hover:bg-gray-50 font-urbanist font-light text-base text-gray-700 hover:text-gray-900 transition-colors"
+                  className="w-full text-left px-5 py-3 hover:bg-gray-50 font-urbanist font-light text-base text-gray-700 hover:text-gray-900 transition-colors"
                 >
                   Hindi Songs
                 </button>
@@ -189,58 +202,53 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
         </nav>
       </div>
 
-      <div className="flex items-center space-x-4">
-        {/* Search Trigger */}
+      <div className="flex items-center space-x-3">
+        {/* Search Icon */}
         <button
           type="button"
           onClick={() => setIsSearchOpen(true)}
           className={`
-            hidden md:flex items-center gap-2 pl-4 pr-4 w-80 md:w-96 h-10 md:h-11 text-base font-urbanist font-light rounded-md border transition-all
+            w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300
             ${transparent && !isScrolled
-              ? "bg-white/20 border-white/30 text-white/80 hover:bg-white/30"
-              : "bg-white border-gray-300 text-gray-500 hover:text-gray-700"}
+              ? "text-white/80 hover:text-white hover:bg-white/15"
+              : "text-gray-500 hover:text-gray-900 hover:bg-gray-100"}
           `}
-        >
-          <Search className="w-4 h-4" />
-          <span>Search everything...</span>
-        </button>
-
-        <Button
-          className={`
-            font-urbanist font-light text-base md:text-lg px-4 md:px-6 py-2 md:py-2.5 transition-all
-            ${transparent && !isScrolled 
-              ? 'bg-white text-black hover:bg-gray-200' 
-              : 'bg-black text-white hover:bg-gray-800'}
-          `}
-          onClick={() => navigate("/auth/register")}
-        >
-          Get Started
-        </Button>
-        <button className={`md:hidden transition-colors ${transparent && !isScrolled ? 'text-white' : 'text-gray-900'}`} onClick={() => setMobileMenuOpen((open) => !open)}>
-          <Menu className="w-6 h-6" />
-        </button>
-        <button
-          className={`md:hidden transition-colors ${transparent && !isScrolled ? "text-white" : "text-gray-900"}`}
-          onClick={() => setIsSearchOpen(true)}
-          aria-label="Open search"
+          aria-label="Search"
         >
           <Search className="w-5 h-5" />
+        </button>
+
+        <button className={`md:hidden transition-colors ${transparent && !isScrolled ? 'text-white' : 'text-gray-900'}`} onClick={() => setMobileMenuOpen((open) => !open)}>
+          <Menu className="w-6 h-6" />
         </button>
       </div>
 
       {/* Mobile dropdown menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-6 right-6 mt-2 bg-white rounded-lg shadow-lg border border-gray-200 z-50 flex flex-col overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300">
-          <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-b border-gray-50" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A</button>
-          <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-b border-gray-50" onClick={() => { setMobileMenuOpen(false); navigate("/malayalam-songs"); }}>Malayalam Songs</button>
-          <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-b border-gray-50" onClick={() => { setMobileMenuOpen(false); navigate("/english-songs"); }}>English Hymns</button>
-          <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-b border-gray-50" onClick={() => { setMobileMenuOpen(false); navigate("/hindi-songs"); }}>Hindi Songs</button>
-          <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-b border-gray-50" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
-          <button className="text-base text-orange-600 hover:text-orange-700 px-4 py-3 text-left font-urbanist font-medium border-b border-gray-50" onClick={() => { setMobileMenuOpen(false); navigate("/kids-stories"); }}>Kids Stories</button>
-          <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>Help</button>
+        <div className="md:hidden absolute top-full left-4 right-4 mt-2 bg-white rounded-2xl shadow-2xl border border-gray-200/80 z-50 flex flex-col overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300 backdrop-blur-xl">
+          <button className="text-base text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-5 py-3.5 text-left font-urbanist font-light border-b border-gray-100" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-and-answers-hub"); }}>Bible Q&A</button>
 
-          <button className="text-base text-gray-600 hover:text-gray-900 px-4 py-3 text-left font-urbanist font-light border-t border-gray-200" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
-          <Button className="bg-black text-white text-base px-4 py-3 mx-4 mb-4 font-urbanist font-light rounded-xl" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</Button>
+          {/* Competitions - Prominent mobile link */}
+          <button
+            className="flex items-center gap-2 px-5 py-3.5 text-left font-urbanist font-semibold border-b border-gray-100 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-700 hover:from-amber-100 hover:to-orange-100 transition-colors"
+            onClick={() => { setMobileMenuOpen(false); navigate("/quiz-arena/name"); }}
+          >
+            <Trophy className="w-4 h-4 text-amber-600" />
+            Competitions
+            <span className="ml-auto text-[10px] font-bold uppercase tracking-widest bg-gradient-to-r from-amber-500 to-orange-500 text-white px-2 py-0.5 rounded-full">Live</span>
+          </button>
+
+          <button className="text-base text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-5 py-3.5 text-left font-urbanist font-light border-b border-gray-100" onClick={() => { setMobileMenuOpen(false); navigate("/malayalam-songs"); }}>Malayalam Songs</button>
+          <button className="text-base text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-5 py-3.5 text-left font-urbanist font-light border-b border-gray-100" onClick={() => { setMobileMenuOpen(false); navigate("/english-songs"); }}>English Hymns</button>
+          <button className="text-base text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-5 py-3.5 text-left font-urbanist font-light border-b border-gray-100" onClick={() => { setMobileMenuOpen(false); navigate("/hindi-songs"); }}>Hindi Songs</button>
+          <button className="text-base text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-5 py-3.5 text-left font-urbanist font-light border-b border-gray-100" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
+          <button className="text-base text-orange-600 hover:text-orange-700 hover:bg-orange-50 px-5 py-3.5 text-left font-urbanist font-medium border-b border-gray-100" onClick={() => { setMobileMenuOpen(false); navigate("/kids-stories"); }}>Kids Stories</button>
+          <button className="text-base text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-5 py-3.5 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>Help</button>
+
+          <div className="border-t border-gray-200 px-4 py-3 flex flex-col gap-2">
+            <button className="text-base text-gray-600 hover:text-gray-900 px-1 py-2 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/auth/login"); }}>Sign In</button>
+            <Button className="bg-black text-white text-base px-4 py-3 font-urbanist font-light rounded-xl w-full" onClick={() => { setMobileMenuOpen(false); navigate("/auth/register"); }}>Sign Up</Button>
+          </div>
         </div>
       )}
 

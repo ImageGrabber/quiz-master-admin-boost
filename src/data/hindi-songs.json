@@ -27542,410 +27542,206 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "section": "मुखड़ा",
             "lines": [
-              "तेरे पंखों में चंगाई है"
+              "तेरे पंखों में चंगाई है,",
+              "येशु, नाम बड़ा ही चमत्कारी है,",
+              "तेरे छूने से स्वस्थ हो गया मैं,",
+              "तुझसे मिलके सम्पूर्ण हो गया मैं।"
             ]
           },
           {
-            "verse": "1",
+            "section": "कोरस",
             "lines": [
-              "येशु नाम बड़ा ही चमत्कारी है"
+              "तेरे वचन पर मैं खड़ा,",
+              "हूँ मैं चंगा, हूँ मैं रिहा,",
+              "तेरा वचन सबसे महान,",
+              "प्रबल हुआ है सर्वदा,",
+              "चंगाई मेरी विरासत है,",
+              "येशु, तू ही मेरी हिफ़ाज़त है।"
             ]
           },
           {
-            "verse": "2",
+            "section": "अंतरा 1",
             "lines": [
-              "तेरे छूने से स्वस्थ हो गया मैं"
+              "आज यहाँ पे चंगाई है,",
+              "तेरे चमत्कार की बारी आई है,",
+              "तुझको छूकर वो स्वस्थ कर रहा है,",
+              "सम्पूर्णता का समय आ गया है।"
             ]
           },
           {
-            "verse": "3",
+            "section": "अंतरा 2",
             "lines": [
-              "तुझसे मिल के सम्पूर्ण हो गया मैं (x2)"
+              "अँधेरे को रौशनी तू बनाता है,",
+              "जो है नहीं, कहकर उसे बुलाता है,",
+              "सूखी हुई हड्डियाँ तू जिलाता है,",
+              "नामुमकिन को मुमकिन कर दिखाता है।"
             ]
           },
           {
-            "verse": "4",
+            "section": "ब्रिज",
             "lines": [
-              "तेरे वचन, पर मैं खड़ा"
+              "तेरा लहू जिस दिन बहा,",
+              "सलीब से बनकर शिफ़ा,",
+              "उस दिन से मैं सब पापों से,",
+              "सब श्रापों से आज़ाद हुआ।"
             ]
-          },
-          {
-            "verse": "5",
-            "lines": [
-              "हूँ मैं चंगा, हूँ मैं रिहा"
-            ]
-          },
-          {
-            "verse": "6",
-            "lines": [
-              "तेरा वचन, सबसे महान"
-            ]
-          },
-          {
-            "verse": "7",
-            "lines": [
-              "प्रबल हुआ, है सर्वदा"
-            ]
-          },
-          {
-            "verse": "8",
-            "lines": [
-              "चंगाई मेरी विरासत है"
-            ]
-          },
-          {
-            "verse": "9",
-            "lines": [
-              "येशु तू ही मेरी हिफ़ाज़त है (x2)"
-            ]
-          },
-          {
-            "verse": "10",
-            "lines": [
-              "आज यहाँ पे चंगाई है"
-            ]
-          },
-          {
-            "verse": "11",
-            "lines": [
-              "तेरे चमत्कार की बारी आई है"
-            ]
-          },
-          {
-            "verse": "12",
-            "lines": [
-              "तुझको छूकर वो स्वस्थ कर रहा है"
-            ]
-          },
-          {
-            "verse": "13",
-            "lines": [
-              "सम्पूर्णता का समय आ गया है"
-            ]
-          },
-          {
-            "verse": "14",
-            "lines": [
-              "आज यहाँ पे चंगाई है"
-            ]
-          },
-          {
-            "verse": "15",
-            "lines": [
-              "मेरे चमत्कार की बारी आई है"
-            ]
-          },
-          {
-            "verse": "16",
-            "lines": [
-              "मुझको छूकर वो स्वस्थ कर रहा है"
-            ]
-          },
-          {
-            "verse": "17",
-            "lines": [
-              "सम्पूर्णता का समय आ गया है"
-            ]
-          },
-          {
-            "verse": "18",
-            "lines": [
-              "तेरे वचन, पर मैं खड़ा"
-            ]
-          },
-          {
-            "verse": "19",
-            "lines": [
-              "हूँ म���ं चंगा, हूँ मैं रिहा"
-            ]
-          },
-          {
-            "verse": "20",
-            "lines": [
-              "तेरा वचन, सबसे महान"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "प्रबल हुआ, है सर्वदा"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "चंगाई मेरी विरासत है"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "येशु तू ही मेरी हिफ़ाज़त है (x2)"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
-              "अँधेरे को रौशनी तू बनाता है"
-            ]
-          },
-          {
-            "verse": "25",
-            "lines": [
-              "जो है नहीं, कहकर उसे बुलाता है"
-            ]
-          },
-          {
-            "verse": "26",
-            "lines": [
-              "सूखी हुई हड्डियाँ तू जिलाता है"
-            ]
-          },
-          {
-            "verse": "27",
-            "lines": [
-              "नामुमकिन को मुमकिन कर दिखाता है (x2)"
-            ]
-          },
-          {
-            "verse": "28",
-            "lines": [
-              "तेरा लहू, जिस दिन बहा"
-            ]
-          },
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
           {
-            "verse": "29",
+            "section": "Mukhda",
             "lines": [
-              "सलीब से, बन कर शिफ़ा"
+              "Tere pankhon mein changaai hai,",
+              "Yeshu, naam bada hi chamatkaari hai,",
+              "Tere chhoone se swasth ho gaya main,",
+              "Tujhse milke sampoorn ho gaya main."
             ]
           },
           {
-            "verse": "30",
+            "section": "Chorus",
             "lines": [
-              "उस दिन से मैं, सब पापों से"
+              "Tere vachan par main khada,",
+              "Hoon main changa, hoon main riha,",
+              "Tera vachan sabse mahaan,",
+              "Prabal hua hai sarvada,",
+              "Changaai meri viraasat hai,",
+              "Yeshu, tu hi meri hifaazat hai."
             ]
           },
           {
-            "verse": "31",
+            "section": "Antara 1",
             "lines": [
-              "सब श्रापों से, आज़ाद हुआ!"
+              "Aaj yahan pe changaai hai,",
+              "Tere chamatkaar ki baari aayi hai,",
+              "Tujhko chhookar woh swasth kar raha hai,",
+              "Sampoornta ka samay aa gaya hai."
             ]
           },
           {
-            "verse": "32",
+            "section": "Antara 2",
             "lines": [
-              "चंगाई मेरी विरासत है"
+              "Andhere ko raushni tu banaata hai,",
+              "Jo hai nahin, kehkar use bulaata hai,",
+              "Sookhi hui haddiyan tu jilaata hai,",
+              "Naamumkin ko mumkin kar dikhaata hai."
             ]
           },
           {
-            "verse": "33",
+            "section": "Bridge",
             "lines": [
-              "येशु तू ही मेरी हिफ़ाज़त है (x2)"
+              "Tera lahu jis din baha,",
+              "Saleeb se bankar shifa,",
+              "Us din se main sab paapon se,",
+              "Sab shraapon se azaad hua."
             ]
-          },
-          {
-            "verse": "34",
-            "lines": [
-              "Tere pankho mein changaai hai"
-            ]
-          },
-          {
-            "verse": "35",
-            "lines": [
-              "Yeshu naam bada hi chamatkaari hai"
-            ]
-          },
-          {
-            "verse": "36",
-            "lines": [
-              "Tere chhoone se swasth ho gaya main"
-            ]
-          },
-          {
-            "verse": "37",
-            "lines": [
-              "Tujhse mil ke sampoorn ho gaya main (X2)"
-            ]
-          },
-          {
-            "verse": "38",
-            "lines": [
-              "Tere vachan, par main khada"
-            ]
-          },
-          {
-            "verse": "39",
-            "lines": [
-              "Hoon main changa, hoon main riha"
-            ]
-          },
-          {
-            "verse": "40",
-            "lines": [
-              "Tera vachan, sabse mahaan"
-            ]
-          },
-          {
-            "verse": "41",
-            "lines": [
-              "Prabal hua, hai sarvada"
-            ]
-          },
-          {
-            "verse": "42",
-            "lines": [
-              "Changaai meri viraasat hai"
-            ]
-          },
-          {
-            "verse": "43",
-            "lines": [
-              "Yeshu tu hi meri hifaazat hai (x2)"
-            ]
-          },
-          {
-            "verse": "44",
-            "lines": [
-              "Aaj yahan pe changaai hai"
-            ]
-          },
-          {
-            "verse": "45",
-            "lines": [
-              "Tere chamatkaar ki baari aayi hai"
-            ]
-          },
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
           {
-            "verse": "46",
+            "section": "Chorus",
             "lines": [
-              "Tujhko chhookar wo swasth kar raha hai"
+              "There is healing in Your wings,",
+              "Jesus, Your name is full of wonders,",
+              "By Your touch I have been made whole,",
+              "By meeting You I have been made complete."
             ]
           },
           {
-            "verse": "47",
+            "section": "Refrain",
             "lines": [
-              "Sampoornta ka samay aa gaya hai"
+              "I stand upon Your word,",
+              "I am healed, I am free,",
+              "Your word is greater than all,",
+              "It stands victorious forever,",
+              "Healing is my inheritance,",
+              "Jesus, You are my protection."
             ]
           },
           {
-            "verse": "48",
+            "section": "Verse 1",
             "lines": [
-              "Aaj yahan pe changaai hai"
+              "There is healing here today,",
+              "The time for Your miracle has come,",
+              "With a touch You are making whole,",
+              "The season of fullness has arrived."
             ]
           },
           {
-            "verse": "49",
+            "section": "Verse 2",
             "lines": [
-              "Mere chamatkaar ki baari aayi hai"
+              "You turn darkness into light,",
+              "You call into being what is not,",
+              "You raise dried bones to life,",
+              "You make the impossible possible."
             ]
           },
           {
-            "verse": "50",
+            "section": "Bridge",
             "lines": [
-              "Mujhko chhoorkar wo swasth kar raha hai"
+              "The day Your blood was shed,",
+              "It became healing from the cross,",
+              "From that day I was set free,",
+              "From every sin and every curse."
             ]
-          },
-          {
-            "verse": "51",
-            "lines": [
-              "Sampoornta ka samay aa gaya hai"
-            ]
-          },
-          {
-            "verse": "52",
-            "lines": [
-              "Tere vachan, par main khada"
-            ]
-          },
-          {
-            "verse": "53",
-            "lines": [
-              "Hoon main changa, hoon main riha"
-            ]
-          },
-          {
-            "verse": "54",
-            "lines": [
-              "Tera vachan, sabse mahaan"
-            ]
-          },
-          {
-            "verse": "55",
-            "lines": [
-              "Prabal hua, hai sarvada"
-            ]
-          },
-          {
-            "verse": "56",
-            "lines": [
-              "Changaai meri viraasat hai"
-            ]
-          },
-          {
-            "verse": "57",
-            "lines": [
-              "Yeshu tu hi meri hifaazat hai (x2)"
-            ]
-          },
-          {
-            "verse": "58",
-            "lines": [
-              "Andhere ko raushni tu banata hai"
-            ]
-          },
-          {
-            "verse": "59",
-            "lines": [
-              "Jo hai nahi, kehkar use bulaata hai"
-            ]
-          },
-          {
-            "verse": "60",
-            "lines": [
-              "Sukhi hui haddiyan tu jilaata hai"
-            ]
-          },
-          {
-            "verse": "61",
-            "lines": [
-              "Naamumkin ko mumkin kar dikhta hai (x2)"
-            ]
-          },
-          {
-            "verse": "62",
-            "lines": [
-              "Tera lahoo, jis din baha"
-            ]
-          },
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
           {
-            "verse": "63",
+            "section": "കൊറസ്",
             "lines": [
-              "Saleeb se, ban kar shifa"
+              "നിന്റെ ചിറകുകൾക്കുള്ളിൽ സൗഖ്യമുണ്ട്,",
+              "യേശുവേ, നിന്റെ നാമം അത്ഭുതകരമാണ്,",
+              "നിന്റെ സ്പർശനത്തിൽ ഞാൻ സൗഖ്യം പ്രാപിച്ചു,",
+              "നിന്നെ കണ്ടുമുട്ടി ഞാൻ സമ്പൂർണ്ണനായി."
             ]
           },
           {
-            "verse": "64",
+            "section": "പല്ലവി",
             "lines": [
-              "Us din se main, sab paapon se"
+              "നിന്റെ വചനത്തിൽ ഞാൻ നിലകൊള്ളുന്നു,",
+              "ഞാൻ സൗഖ്യം പ്രാപിച്ചു, ഞാൻ വിമോചിതനായി,",
+              "നിന്റെ വചനം എല്ലാറ്റിലും മഹത്താണ്,",
+              "എപ്പോഴും ജയത്തോടെ നിലനിൽക്കുന്നു,",
+              "സൗഖ്യം എന്റെ അവകാശമാണ്,",
+              "യേശുവേ, നീയാണ് എന്റെ സംരക്ഷണം."
             ]
           },
           {
-            "verse": "65",
+            "section": "അന്തരം 1",
             "lines": [
-              "Sab shraapon se, azaad hua!"
+              "ഇന്ന് ഇവിടെ സൗഖ്യമുണ്ട്,",
+              "നിന്റെ അത്ഭുതത്തിന്റെ സമയം എത്തി,",
+              "നിന്റെ സ്പർശനത്തിൽ നീ സമ്പൂർണ്ണത നൽകുന്നു,",
+              "പൂർണ്ണതയുടെ കാലം വന്നിരിക്കുന്നു."
             ]
           },
           {
-            "verse": "66",
+            "section": "അന്തരം 2",
             "lines": [
-              "Changaai meri viraasat hai"
+              "ഇരുളിനെ നീ വെളിച്ചമാക്കുന്നു,",
+              "ഇല്ലാത്തതിനെ വിളിച്ചുവരുത്തുന്നു,",
+              "ഉണങ്ങിയ അസ്ഥികൾക്കും നീ ജീവൻ നൽകുന്നു,",
+              "അസാധ്യത്തെ സാധ്യമാക്കുന്നു."
             ]
           },
           {
-            "verse": "67",
+            "section": "ബ്രിഡ്ജ്",
             "lines": [
-              "Yeshu tu hi meri hifaazat hai (x2)"
+              "നിന്റെ രക്തം ചൊരിഞ്ഞ ദിവസത്തിൽ,",
+              "ക്രൂശിൽ നിന്നു സൗഖ്യം ഒഴുകി,",
+              "അന്നുമുതൽ ഞാൻ എല്ലാ പാപങ്ങളിൽ നിന്നും,",
+              "എല്ലാ ശാപങ്ങളിൽ നിന്നുമായി സ്വതന്ത്രനായി."
             ]
           }
         ]
@@ -27964,74 +27760,78 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "section": "मुखड़ा",
             "lines": [
-              "वंदना करते हैं हम, वंदना करते हैं हम (2)"
-            ],
-            "chords": [
-              "A         D         E"
+              "वंदना करते हैं हम, वंदना करते हैं हम,",
+              "हृदय को तेरे सामने लाकर रखते हैं हम।"
             ]
           },
           {
-            "verse": "1",
+            "section": "अंतरा 1",
             "lines": [
-              "हृदय को तेरे सामने, लाकर रखते हैं हम"
-            ],
-            "chords": [
-              "A         D         A"
+              "हृदय में मेरे मसीहा, जीवन दीप जला,",
+              "हृदय के पापों को धोकर, प्रेम की राह दिखा।"
             ]
           },
           {
-            "verse": "2",
+            "section": "अंतरा 2",
             "lines": [
-              "हृदय में मेरे मसीहा, जीवन दीप जला,"
-            ],
-            "chords": [
-              "D         E         A"
+              "मैं हूँ निर्बल मानव, पापों के सागर में खोया,",
+              "अब तुम संभालो यीशु जी, भव सागर में हूँ खोया।"
             ]
           },
           {
-            "verse": "3",
+            "section": "अंतरा 3",
             "lines": [
-              "हृदय के पापों को धोकर, प्रेम की राह दिखा"
-            ],
-            "chords": [
-              "D         E         A"
+              "शक्ति दे दे मुझको, मेरा नहीं कोई मीत,",
+              "जीवन को मेरे ले ले, गाऊँ मैं तेरे ही गीत।"
             ]
           },
           {
-            "verse": "4",
+            "section": "अंतरा 4",
             "lines": [
-              "मैं हूं निर्बल मानव, पापों के सागर में खोया,"
-            ],
-            "chords": [
-              "A         D         E"
+              "सूली पर चढ़कर मसीहा, तूने हमको बचाया,",
+              "मुक्तिदाता बनकर मुक्ति मार्ग दिखाया।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Vandana karte hain hum, vandana karte hain hum,",
+              "Hriday ko tere saamne laakar rakhte hain hum."
             ]
           },
           {
-            "verse": "5",
+            "section": "Antara 1",
             "lines": [
-              "अब तुम संभालो यीशु जी, भव सागर में हूं खोया"
-            ],
-            "chords": [
-              "D         E         A"
+              "Hriday mein mere Masiha, jeevan deep jala,",
+              "Hriday ke paapon ko dhokar, prem ki raah dikha."
             ]
           },
           {
-            "verse": "6",
+            "section": "Antara 2",
             "lines": [
-              "शक्ति दे दे मुझको, मेरा नहीं कोई मीत,"
-            ],
-            "chords": [
-              "A         D         E"
+              "Main hoon nirbal maanav, paapon ke saagar mein khoya,",
+              "Ab tum sambhaalo Yeshu ji, bhav saagar mein hoon khoya."
             ]
           },
           {
-            "verse": "7",
+            "section": "Antara 3",
             "lines": [
-              "जीवन को मेरे ले ले, गाऊं मैं तेरे ही गीत"
-            ],
-            "chords": [
-              "D         E         A"
+              "Shakti de de mujhko, mera nahin koi meet,",
+              "Jeevan ko mere le le, gaaun main tere hi geet."
+            ]
+          },
+          {
+            "section": "Antara 4",
+            "lines": [
+              "Sooli par chadhkar Masiha, tune humko bachaaya,",
+              "Muktidata bankar mukti maarg dikhaaya."
             ]
           }
         ]
@@ -28040,50 +27840,78 @@
         "lang": "English",
         "lyrics": [
           {
+            "section": "Chorus",
             "lines": [
-              "We worship You, we worship You (2)"
+              "We worship You, we worship You,",
+              "We bring our hearts and lay them before You."
             ]
           },
           {
-            "verse": "1",
+            "section": "Verse 1",
             "lines": [
-              "We bring and place our hearts before You"
+              "Messiah, light the lamp of life within my heart,",
+              "Wash away the sins of my heart and show me the path of love."
             ]
           },
           {
-            "verse": "2",
+            "section": "Verse 2",
             "lines": [
-              "In my heart, O Messiah, kindle the lamp of life"
+              "I am a weak human, lost in the ocean of sin,",
+              "Jesus, hold me now, I am lost in this troubled sea."
             ]
           },
           {
-            "verse": "3",
+            "section": "Verse 3",
             "lines": [
-              "Wash the sins of the heart, and show the path of love"
+              "Give me strength, for I have no other friend,",
+              "Take my life and let me sing only Your songs."
             ]
           },
           {
-            "verse": "4",
+            "section": "Verse 4",
             "lines": [
-              "I am a weak human, lost in the sea of sins"
+              "By climbing the cross, O Messiah, You saved us,",
+              "As the Deliverer, You showed us the way of salvation."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "കൊറസ്",
+            "lines": [
+              "ഞങ്ങൾ നിന്നെ വണങ്ങുന്നു, ഞങ്ങൾ നിന്നെ വണങ്ങുന്നു,",
+              "ഞങ്ങളുടെ ഹൃദയം നിന്റെ മുമ്പിൽ കൊണ്ടുവെക്കുന്നു."
             ]
           },
           {
-            "verse": "5",
+            "section": "അന്തരം 1",
             "lines": [
-              "Now You sustain me, O Jesus, I am lost in the sea of life"
+              "മശീഹാവേ, എന്റെ ഹൃദയത്തിൽ ജീവന്റെ ദീപം തെളിയിക്കേണമേ,",
+              "ഹൃദയത്തിലെ പാപങ്ങൾ കഴുകി സ്നേഹത്തിന്റെ വഴി കാണിക്കേണമേ."
             ]
           },
           {
-            "verse": "6",
+            "section": "അന്തരം 2",
             "lines": [
-              "Give me strength, I have no friend"
+              "ഞാൻ ബലഹീനനായ മനുഷ്യൻ, പാപസമുദ്രത്തിൽ വഴിതെറ്റിയവൻ,",
+              "യേശുവേ, എന്നെ താങ്ങേണമേ; ഈ ഭവസാഗരത്തിൽ ഞാൻ വഴിതെറ്റിയിരിക്കുന്നു."
             ]
           },
           {
-            "verse": "7",
+            "section": "അന്തരം 3",
             "lines": [
-              "Take my life, may I sing only Your songs"
+              "എനിക്കു ശക്തി തരണമേ; എനിക്കൊരു മറ്റുസുഹൃത്തില്ല,",
+              "എന്റെ ജീവിതം ഏറ്റെടുക്കേണമേ; നിന്റെ ഗീതങ്ങൾ മാത്രം ഞാൻ പാടട്ടെ."
+            ]
+          },
+          {
+            "section": "അന്തരം 4",
+            "lines": [
+              "ക്രൂശിൽ കയറി മശീഹാവേ, നീ ഞങ്ങളെ രക്ഷിച്ചു,",
+              "മുക്തിദാതാവായി രക്ഷാമാർഗം ഞങ്ങൾക്കു കാണിച്ചു."
             ]
           }
         ]
@@ -29071,7 +28899,7 @@
           {
             "verse": "7",
             "lines": [
-              "चलता गया वो, कुछ भी न कहत��"
+              "चलता गया वो, कुछ भी न कहता"
             ]
           },
           {
@@ -29617,7 +29445,61 @@
         "lyrics": [
           {
             "lines": [
-              "Praise the Lord, for He is good. His mercy endures forever."
+              "Praise the Lord (2), in His holy sanctuary,",
+              "give Him praise."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "Lift up your hands and praise Him,",
+              "play the stringed instruments and praise Him."
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "Praise Him with tambourine and tabla,",
+              "praise Him with harp and lute."
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "Praise Him with claps and cymbals,",
+              "praise Him in His holy sanctuary."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യഹോവയെ സ്തുതിക്കുവിൻ (2), അവന്റെ വിശുദ്ധ സ്ഥലത്തിൽ,",
+              "അവനെ സ്തുതിക്കുവിൻ."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "നിങ്ങളുടെ കൈകൾ ഉയർത്തി അവനെ സ്തുതിക്കുവിൻ,",
+              "തന്ത്രിവാദ്യങ്ങൾ വായിച്ച് അവനെ സ്തുതിക്കുവിൻ."
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "ഡഫ്, തബല എന്നിവ വായിച്ച് അവനെ സ്തുതിക്കുവിൻ,",
+              "വീണയും ഹാർപ്പും വായിച്ച് അവനെ സ്തുതിക്കുവിൻ."
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "കയ്യടിയും ഝാഞ്ചും കൊണ്ട് അവനെ സ്തുതിക്കുവിൻ,",
+              "അവന്റെ വിശുദ്ധ സ്ഥലത്തിൽ അവനെ സ്തുതിക്കുവിൻ."
             ]
           }
         ]
@@ -29695,6 +29577,33 @@
               "Jehovah Nissi always gives us victory"
             ],
             "verse": "2"
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "lines": [
+              "യേശുവേ, നിന്റെ നാമം എന്റെ ശരണസ്ഥാനമാണ്, ഞാൻ നിന്നെ സ്തുതിക്കും."
+            ]
+          },
+          {
+            "verse": "1",
+            "lines": [
+              "യഹോവ യിരെ എല്ലാവരെയും കരുതിക്കൊള്ളും."
+            ]
+          },
+          {
+            "lines": [
+              "ഞങ്ങൾ ഭയപ്പെടുകയില്ല, ഭയപ്പെടുകയില്ല."
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "യഹോവ നിസ്സി എപ്പോഴും ഞങ്ങൾക്കു ജയം നല്കുന്നു."
+            ]
           }
         ]
       }
@@ -37481,428 +37390,6 @@
     "thumbnailUrl": "/assets/songs/english_card.png"
   },
   {
-    "id": "virasat_bridge_music_lyrics_thanga_selvam_shravan_seytee_karen_g",
-    "slug": "virasat-bridge-music-lyrics-thanga-selvam-shravan-seytee-karen-george-stuti-harrison",
-    "title": "VIRASAT Bridge Music LYRICS | Thanga Selvam, Shravan Seytee, Karen George & Stuti Harrison",
-    "videoUrl": "",
-    "description": "VIRASAT Bridge Music LYRICS | Thanga Selvam, Shravan Seytee, Karen George & Stuti Harrison - Hindi Christian devotional song lyrics with worship-friendly formatting.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "तेरे पंखों में चंगाई है"
-            ]
-          },
-          {
-            "verse": "1",
-            "lines": [
-              "येशु नाम बड़ा ही चमत्कारी है"
-            ]
-          },
-          {
-            "verse": "2",
-            "lines": [
-              "तेरे छूने से स्वस्थ हो गया मैं"
-            ]
-          },
-          {
-            "verse": "3",
-            "lines": [
-              "तुझसे मिल के सम्पूर्ण हो गया मैं (x2)"
-            ]
-          },
-          {
-            "verse": "4",
-            "lines": [
-              "तेरे वचन, पर मैं खड़ा"
-            ]
-          },
-          {
-            "verse": "5",
-            "lines": [
-              "हूँ मैं चंगा, हूँ मैं रिहा"
-            ]
-          },
-          {
-            "verse": "6",
-            "lines": [
-              "तेरा वचन, सबसे महान"
-            ]
-          },
-          {
-            "verse": "7",
-            "lines": [
-              "प्रबल हुआ, है सर्वदा"
-            ]
-          },
-          {
-            "verse": "8",
-            "lines": [
-              "चंगाई मेरी विरासत है"
-            ]
-          },
-          {
-            "verse": "9",
-            "lines": [
-              "येशु तू ही मेरी हिफ़ाज़त है (x2)"
-            ]
-          },
-          {
-            "verse": "10",
-            "lines": [
-              "आज यहाँ पे चंगाई है"
-            ]
-          },
-          {
-            "verse": "11",
-            "lines": [
-              "तेरे चमत्कार की बारी आई है"
-            ]
-          },
-          {
-            "verse": "12",
-            "lines": [
-              "तुझको छूकर वो स्वस्थ कर रहा है"
-            ]
-          },
-          {
-            "verse": "13",
-            "lines": [
-              "सम्पूर्णता का समय आ गया है"
-            ]
-          },
-          {
-            "verse": "14",
-            "lines": [
-              "आज यहाँ पे चंगाई है"
-            ]
-          },
-          {
-            "verse": "15",
-            "lines": [
-              "मेरे चमत्कार की बारी आई है"
-            ]
-          },
-          {
-            "verse": "16",
-            "lines": [
-              "मुझको छूकर वो स्वस्थ कर रहा है"
-            ]
-          },
-          {
-            "verse": "17",
-            "lines": [
-              "सम्पूर्णता का समय आ गया है"
-            ]
-          },
-          {
-            "verse": "18",
-            "lines": [
-              "तेरे वचन, पर मैं खड़ा"
-            ]
-          },
-          {
-            "verse": "19",
-            "lines": [
-              "हूँ मैं चं���ा, हूँ मैं रिहा"
-            ]
-          },
-          {
-            "verse": "20",
-            "lines": [
-              "तेरा वचन, सबसे महान"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "प्रबल हुआ, है सर्वदा"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "चंगाई मेरी विरासत है"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "येशु तू ही मेरी हिफ़ाज़त है (x2)"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
-              "अँधेरे को रौशनी तू बनाता है"
-            ]
-          },
-          {
-            "verse": "25",
-            "lines": [
-              "जो है नहीं, कहकर उसे बुलाता है"
-            ]
-          },
-          {
-            "verse": "26",
-            "lines": [
-              "सूखी हुई हड्डियाँ तू जिलाता है"
-            ]
-          },
-          {
-            "verse": "27",
-            "lines": [
-              "नामुमकिन को मुमकिन कर दिखाता है (x2)"
-            ]
-          },
-          {
-            "verse": "28",
-            "lines": [
-              "तेरा लहू, जिस दिन बहा"
-            ]
-          },
-          {
-            "verse": "29",
-            "lines": [
-              "सलीब से, बन कर शिफ़ा"
-            ]
-          },
-          {
-            "verse": "30",
-            "lines": [
-              "उस दिन से मैं, सब पापों से"
-            ]
-          },
-          {
-            "verse": "31",
-            "lines": [
-              "सब श्रापों से, आज़ाद हुआ!"
-            ]
-          },
-          {
-            "verse": "32",
-            "lines": [
-              "चंगाई मेरी विरासत है"
-            ]
-          },
-          {
-            "verse": "33",
-            "lines": [
-              "येशु तू ही मेरी हिफ़ाज़त है (x2)"
-            ]
-          },
-          {
-            "verse": "34",
-            "lines": [
-              "Tere pankho mein changaai hai"
-            ]
-          },
-          {
-            "verse": "35",
-            "lines": [
-              "Yeshu naam bada hi chamatkaari hai"
-            ]
-          },
-          {
-            "verse": "36",
-            "lines": [
-              "Tere chhoone se swasth ho gaya main"
-            ]
-          },
-          {
-            "verse": "37",
-            "lines": [
-              "Tujhse mil ke sampoorn ho gaya main (X2)"
-            ]
-          },
-          {
-            "verse": "38",
-            "lines": [
-              "Tere vachan, par main khada"
-            ]
-          },
-          {
-            "verse": "39",
-            "lines": [
-              "Hoon main changa, hoon main riha"
-            ]
-          },
-          {
-            "verse": "40",
-            "lines": [
-              "Tera vachan, sabse mahaan"
-            ]
-          },
-          {
-            "verse": "41",
-            "lines": [
-              "Prabal hua, hai sarvada"
-            ]
-          },
-          {
-            "verse": "42",
-            "lines": [
-              "Changaai meri viraasat hai"
-            ]
-          },
-          {
-            "verse": "43",
-            "lines": [
-              "Yeshu tu hi meri hifaazat hai (x2)"
-            ]
-          },
-          {
-            "verse": "44",
-            "lines": [
-              "Aaj yahan pe changaai hai"
-            ]
-          },
-          {
-            "verse": "45",
-            "lines": [
-              "Tere chamatkaar ki baari aayi hai"
-            ]
-          },
-          {
-            "verse": "46",
-            "lines": [
-              "Tujhko chhookar wo swasth kar raha hai"
-            ]
-          },
-          {
-            "verse": "47",
-            "lines": [
-              "Sampoornta ka samay aa gaya hai"
-            ]
-          },
-          {
-            "verse": "48",
-            "lines": [
-              "Aaj yahan pe changaai hai"
-            ]
-          },
-          {
-            "verse": "49",
-            "lines": [
-              "Mere chamatkaar ki baari aayi hai"
-            ]
-          },
-          {
-            "verse": "50",
-            "lines": [
-              "Mujhko chhoorkar wo swasth kar raha hai"
-            ]
-          },
-          {
-            "verse": "51",
-            "lines": [
-              "Sampoornta ka samay aa gaya hai"
-            ]
-          },
-          {
-            "verse": "52",
-            "lines": [
-              "Tere vachan, par main khada"
-            ]
-          },
-          {
-            "verse": "53",
-            "lines": [
-              "Hoon main changa, hoon main riha"
-            ]
-          },
-          {
-            "verse": "54",
-            "lines": [
-              "Tera vachan, sabse mahaan"
-            ]
-          },
-          {
-            "verse": "55",
-            "lines": [
-              "Prabal hua, hai sarvada"
-            ]
-          },
-          {
-            "verse": "56",
-            "lines": [
-              "Changaai meri viraasat hai"
-            ]
-          },
-          {
-            "verse": "57",
-            "lines": [
-              "Yeshu tu hi meri hifaazat hai (x2)"
-            ]
-          },
-          {
-            "verse": "58",
-            "lines": [
-              "Andhere ko raushni tu banata hai"
-            ]
-          },
-          {
-            "verse": "59",
-            "lines": [
-              "Jo hai nahi, kehkar use bulaata hai"
-            ]
-          },
-          {
-            "verse": "60",
-            "lines": [
-              "Sukhi hui haddiyan tu jilaata hai"
-            ]
-          },
-          {
-            "verse": "61",
-            "lines": [
-              "Naamumkin ko mumkin kar dikhta hai (x2)"
-            ]
-          },
-          {
-            "verse": "62",
-            "lines": [
-              "Tera lahoo, jis din baha"
-            ]
-          },
-          {
-            "verse": "63",
-            "lines": [
-              "Saleeb se, ban kar shifa"
-            ]
-          },
-          {
-            "verse": "64",
-            "lines": [
-              "Us din se main, sab paapon se"
-            ]
-          },
-          {
-            "verse": "65",
-            "lines": [
-              "Sab shraapon se, azaad hua!"
-            ]
-          },
-          {
-            "verse": "66",
-            "lines": [
-              "Changaai meri viraasat hai"
-            ]
-          },
-          {
-            "verse": "67",
-            "lines": [
-              "Yeshu tu hi meri hifaazat hai (x2)"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/english_card.png"
-  },
-  {
     "id": "vandana_folj_church_song_lyrics_ankit_sajwan_ministries",
     "slug": "vandana-folj-church-song-lyrics-ankit-sajwan-ministries",
     "title": "VANDANA FOLJ CHURCH SONG LYRICS | ANKIT SAJWAN MINISTRIES",
@@ -37913,614 +37400,198 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "section": "मुखड़ा",
             "lines": [
-              "तेरी वंदना गाएँ शामों सवेरे"
+              "तेरी वंदना गाएँ शामों सवेरे,",
+              "तेरी हो महिमा।",
+              "राजाओं का राजा तू मेरा प्रभु है,",
+              "तेरी हो महिमा।"
             ]
           },
           {
-            "verse": "1",
+            "section": "कोरस",
             "lines": [
-              "तेरी हो महिमा"
+              "येशु, महिमा, तेरी महिमा,",
+              "मेरे राजा येशुआ, गाऊँ तेरी महिमा,",
+              "येशु, महिमा, तेरी महिमा,",
+              "मेरे राजा येशुआ, गाऊँ तेरी महिमा।"
             ]
           },
           {
-            "verse": "2",
+            "section": "अंतरा 1",
             "lines": [
-              "तेरी वंदना गाएँ शामों सवेरे"
+              "अपना भरोसा तुझपे रखा है,",
+              "काहे को डर, कैसी चिंता रे,",
+              "तेरे लहू से शुद्ध हुए हैं,",
+              "करुणा को तेरी, येशु, हमने चखा रे।"
             ]
           },
           {
-            "verse": "3",
+            "section": "अंतरा 2",
             "lines": [
-              "तेरी हो महिमा"
+              "प्रेम जो किया है तूने,",
+              "त्यागा न कभी जो तूने,",
+              "कैसे न करें महिमा,",
+              "पापों को मिटा दिया, हर श्रापों से बचा लिया, तो कैसे न करें महिमा।"
             ]
           },
           {
-            "verse": "4",
+            "section": "ब्रिज",
             "lines": [
-              "राजाओं का राजा तू मेरा प्रभु है"
+              "मेरे प्रभु येशुआ, मेरे स्वामी येशुआ,",
+              "मेरे राजा येशुआ, तू है ज़िंदा खुदा,",
+              "गाऊँ तेरी महिमा, तेरी स्तुति गाऊँगा,",
+              "येशुआ, येशुआ, हो तेरी महिमा।"
             ]
-          },
-          {
-            "verse": "5",
-            "lines": [
-              "तेरी हो महिमा"
-            ]
-          },
-          {
-            "verse": "6",
-            "lines": [
-              "राजाओं का राजा तू मेर�� प्रभु है"
-            ]
-          },
-          {
-            "verse": "7",
-            "lines": [
-              "तेरी हो महिमा"
-            ]
-          },
-          {
-            "verse": "8",
-            "lines": [
-              "येशु महिमा तेरी महिमा"
-            ]
-          },
-          {
-            "verse": "9",
-            "lines": [
-              "मेरे राजा येशुआ गाऊँ तेरी महिमा"
-            ]
-          },
-          {
-            "verse": "10",
-            "lines": [
-              "येशु महिमा तेरी महिमा"
-            ]
-          },
-          {
-            "verse": "11",
-            "lines": [
-              "मेरे राजा येशुआ गाऊँ तेरी महिमा"
-            ]
-          },
-          {
-            "verse": "12",
-            "lines": [
-              "अपना भरोसा तुझपे रखा है"
-            ]
-          },
-          {
-            "verse": "13",
-            "lines": [
-              "काहें को डर कैसी चिंता रे"
-            ]
-          },
-          {
-            "verse": "14",
-            "lines": [
-              "तेरे लहू से शुद्ध हुए हैं"
-            ]
-          },
-          {
-            "verse": "15",
-            "lines": [
-              "करुणा को तेरी येशु हमने चखा रे"
-            ]
-          },
-          {
-            "verse": "16",
-            "lines": [
-              "तेरी वंदना गाएँ शामों सवेरे"
-            ]
-          },
-          {
-            "verse": "17",
-            "lines": [
-              "तेरी हो महिमा"
-            ]
-          },
-          {
-            "verse": "18",
-            "lines": [
-              "राजाओं का राजा तू मेरा प्रभु है"
-            ]
-          },
-          {
-            "verse": "19",
-            "lines": [
-              "तेरी हो महिमा"
-            ]
-          },
-          {
-            "verse": "20",
-            "lines": [
-              "येशु महिमा तेरी महिमा"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "मेरे राजा येशुआ गाऊँ तेरी महिमा"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "येशु महिमा तेरी महिमा"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "मेरे राजा येशुआ गाऊँ तेरी महिमा"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
-              "प्रेम जो किया है तूने"
-            ]
-          },
-          {
-            "verse": "25",
-            "lines": [
-              "त्यागा ना ���भी जो तूने"
-            ]
-          },
-          {
-            "verse": "26",
-            "lines": [
-              "कैसे ना करें महिमा"
-            ]
-          },
-          {
-            "verse": "27",
-            "lines": [
-              "पापो को मिटा दिया हर श्रापों से बचा लिया तो"
-            ]
-          },
-          {
-            "verse": "28",
-            "lines": [
-              "कैसे ना करें महिमा"
-            ]
-          },
-          {
-            "verse": "29",
-            "lines": [
-              "प्रेम जो किया है तूने"
-            ]
-          },
-          {
-            "verse": "30",
-            "lines": [
-              "त्यागा ना कभी ज��� तूने"
-            ]
-          },
-          {
-            "verse": "31",
-            "lines": [
-              "कैसे ना करें महिमा"
-            ]
-          },
-          {
-            "verse": "32",
-            "lines": [
-              "पापो को मिटा दिया हर श्रापों से बचा लिया तो"
-            ]
-          },
-          {
-            "verse": "33",
-            "lines": [
-              "कैसे ना करें महिमा"
-            ]
-          },
-          {
-            "verse": "34",
-            "lines": [
-              "तेरी वंदना गाएँ शामों सवेरे"
-            ]
-          },
-          {
-            "verse": "35",
-            "lines": [
-              "तेरी हो महिमा"
-            ]
-          },
-          {
-            "verse": "36",
-            "lines": [
-              "राजाओं का राजा तू मेरा प्रभु है"
-            ]
-          },
-          {
-            "verse": "37",
-            "lines": [
-              "तेरी हो महिमा"
-            ]
-          },
-          {
-            "verse": "38",
-            "lines": [
-              "येशु महिमा तेरी महिमा"
-            ]
-          },
-          {
-            "verse": "39",
-            "lines": [
-              "मेरे राजा येशुआ गाऊँ तेरी महिमा"
-            ]
-          },
-          {
-            "verse": "40",
-            "lines": [
-              "येशु महिमा तेरी महिमा"
-            ]
-          },
-          {
-            "verse": "41",
-            "lines": [
-              "मेरे राजा येशुआ गाऊँ तेरी महिमा"
-            ]
-          },
-          {
-            "verse": "42",
-            "lines": [
-              "येशु महिमा तेरी महिमा"
-            ]
-          },
-          {
-            "verse": "43",
-            "lines": [
-              "मेरे प्रभु येशुआ मेरे स्वामी येशुआ"
-            ]
-          },
-          {
-            "verse": "44",
-            "lines": [
-              "मेरे राजा येशुआ तू है ज़िंदा खुदा"
-            ]
-          },
-          {
-            "verse": "45",
-            "lines": [
-              "गाऊँ तेरी महिमा तेरी स्तुति गाऊँगा"
-            ]
-          },
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
           {
-            "verse": "46",
+            "section": "Mukhda",
             "lines": [
-              "येशुआ येशुआ हो तेरी महिमा"
+              "Teri vandana gaayen shaamon savere,",
+              "Teri ho mahima.",
+              "Rajaon ka Raja tu mera Prabhu hai,",
+              "Teri ho mahima."
             ]
           },
           {
-            "verse": "47",
+            "section": "Chorus",
             "lines": [
-              "मेरे प्रभु येशुआ मेरे स्वामी येशुआ"
+              "Yeshu, mahima, teri mahima,",
+              "Mere Raja Yeshua, gaaun teri mahima,",
+              "Yeshu, mahima, teri mahima,",
+              "Mere Raja Yeshua, gaaun teri mahima."
             ]
           },
           {
-            "verse": "48",
+            "section": "Antara 1",
             "lines": [
-              "मेरे राजा येशुआ तू है ज़िंदा खुदा"
+              "Apna bharosa tujhpe rakha hai,",
+              "Kaahe ko dar, kaisi chinta re,",
+              "Tere lahu se shuddh hue hain,",
+              "Karuna ko teri, Yeshu, humne chakha re."
             ]
           },
           {
-            "verse": "49",
+            "section": "Antara 2",
             "lines": [
-              "गाऊ तेरी महिमा येशु तेरी महिमा"
+              "Prem jo kiya hai tune,",
+              "Tyaaga na kabhi jo tune,",
+              "Kaise na karein mahima,",
+              "Paapon ko mita diya, har shraapon se bacha liya, to kaise na karein mahima."
             ]
           },
           {
-            "verse": "50",
+            "section": "Bridge",
             "lines": [
-              "येशु तेरी महिमा"
+              "Mere Prabhu Yeshua, mere Swami Yeshua,",
+              "Mere Raja Yeshua, tu hai zinda Khuda,",
+              "Gaaun teri mahima, teri stuti gaaunga,",
+              "Yeshua, Yeshua, ho teri mahima."
             ]
-          },
-          {
-            "verse": "51",
-            "lines": [
-              "Teri vandana gaayein shaamon savere"
-            ]
-          },
-          {
-            "verse": "52",
-            "lines": [
-              "Teri ho mahima"
-            ]
-          },
-          {
-            "verse": "53",
-            "lines": [
-              "Teri vandana gaayein shaamon savere"
-            ]
-          },
-          {
-            "verse": "54",
-            "lines": [
-              "Teri ho mahima"
-            ]
-          },
-          {
-            "verse": "55",
-            "lines": [
-              "Raajaaon ka raaja tu mera Prabhu hai"
-            ]
-          },
-          {
-            "verse": "56",
-            "lines": [
-              "Teri ho mahima"
-            ]
-          },
-          {
-            "verse": "57",
-            "lines": [
-              "Raajaaon ka raaja tu mera Prabhu hai"
-            ]
-          },
-          {
-            "verse": "58",
-            "lines": [
-              "Teri ho mahima"
-            ]
-          },
-          {
-            "verse": "59",
-            "lines": [
-              "Yeshu mahima teri mahima"
-            ]
-          },
-          {
-            "verse": "60",
-            "lines": [
-              "Mere raaja Yeshua gaaun teri mahima"
-            ]
-          },
-          {
-            "verse": "61",
-            "lines": [
-              "Yeshu mahima teri mahima"
-            ]
-          },
-          {
-            "verse": "62",
-            "lines": [
-              "Mere raaja Yeshua gaaun teri mahima"
-            ]
-          },
-          {
-            "verse": "63",
-            "lines": [
-              "Apna bharosa tujhpe rakha hai"
-            ]
-          },
-          {
-            "verse": "64",
-            "lines": [
-              "Kahein ko dar kaisi chinta re"
-            ]
-          },
-          {
-            "verse": "65",
-            "lines": [
-              "Tere lahoo se shuddh hue hain"
-            ]
-          },
-          {
-            "verse": "66",
-            "lines": [
-              "Karuna ko teri Yeshu humne chakha re"
-            ]
-          },
-          {
-            "verse": "67",
-            "lines": [
-              "Teri vandana gaayein shaamon savere"
-            ]
-          },
-          {
-            "verse": "68",
-            "lines": [
-              "Teri ho mahima"
-            ]
-          },
-          {
-            "verse": "69",
-            "lines": [
-              "Raajaaon ka raaja tu mera Prabhu hai"
-            ]
-          },
-          {
-            "verse": "70",
-            "lines": [
-              "Teri ho mahima"
-            ]
-          },
-          {
-            "verse": "71",
-            "lines": [
-              "Yeshu mahima teri mahima"
-            ]
-          },
-          {
-            "verse": "72",
-            "lines": [
-              "Mere raaja Yeshua gaaun teri mahima"
-            ]
-          },
-          {
-            "verse": "73",
-            "lines": [
-              "Yeshu mahima teri mahima"
-            ]
-          },
-          {
-            "verse": "74",
-            "lines": [
-              "Mere raaja Yeshua gaaun teri mahima"
-            ]
-          },
-          {
-            "verse": "75",
-            "lines": [
-              "Prem jo kiya hai tune"
-            ]
-          },
-          {
-            "verse": "76",
-            "lines": [
-              "Tyaaga na kabhi jo tune"
-            ]
-          },
-          {
-            "verse": "77",
-            "lines": [
-              "Kaise na karein mahima"
-            ]
-          },
-          {
-            "verse": "78",
-            "lines": [
-              "Paapon ko mita diya har shraapon se bacha liya to"
-            ]
-          },
-          {
-            "verse": "79",
-            "lines": [
-              "Kaise na karein mahima"
-            ]
-          },
-          {
-            "verse": "80",
-            "lines": [
-              "Prem jo kiya hai tune"
-            ]
-          },
-          {
-            "verse": "81",
-            "lines": [
-              "Tyaaga na kabhi jo tune"
-            ]
-          },
-          {
-            "verse": "82",
-            "lines": [
-              "Kaise na karein mahima"
-            ]
-          },
-          {
-            "verse": "83",
-            "lines": [
-              "Paapon ko mita diya har shraapon se bacha liya to"
-            ]
-          },
-          {
-            "verse": "84",
-            "lines": [
-              "Kaise na karein mahima"
-            ]
-          },
-          {
-            "verse": "85",
-            "lines": [
-              "Teri vandana gaayein shaamon savere"
-            ]
-          },
-          {
-            "verse": "86",
-            "lines": [
-              "Teri ho mahima"
-            ]
-          },
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
           {
-            "verse": "87",
+            "section": "Chorus",
             "lines": [
-              "Raajaaon ka raaja tu mera Prabhu hai"
+              "We will sing Your praise in the evening and the morning,",
+              "Yours be the glory.",
+              "You are the King of kings, my Lord,",
+              "Yours be the glory."
             ]
           },
           {
-            "verse": "88",
+            "section": "Refrain",
             "lines": [
-              "Teri ho mahima"
+              "Jesus, glory, all glory is Yours,",
+              "My King Yeshua, I sing of Your glory,",
+              "Jesus, glory, all glory is Yours,",
+              "My King Yeshua, I sing of Your glory."
             ]
           },
           {
-            "verse": "89",
+            "section": "Verse 1",
             "lines": [
-              "Yeshu mahima teri mahima"
+              "I have placed my trust in You,",
+              "Why should I fear or be anxious?",
+              "By Your blood we have been made clean,",
+              "Jesus, we have tasted Your mercy."
             ]
           },
           {
-            "verse": "90",
+            "section": "Verse 2",
             "lines": [
-              "Mere raaja Yeshua gaaun teri mahima"
+              "The love You have shown,",
+              "The way You never abandoned us,",
+              "How can we not give You glory?",
+              "You erased our sins and saved us from every curse; how can we not glorify You?"
             ]
           },
           {
-            "verse": "91",
+            "section": "Bridge",
             "lines": [
-              "Yeshu mahima teri mahima"
+              "My Lord Yeshua, my Master Yeshua,",
+              "My King Yeshua, You are the living God,",
+              "I will sing Your glory and Your praise,",
+              "Yeshua, Yeshua, Yours is the glory."
             ]
-          },
-          {
-            "verse": "92",
-            "lines": [
-              "Mere raaja Yeshua gaaun teri mahima"
-            ]
-          },
-          {
-            "verse": "93",
-            "lines": [
-              "Yeshu mahima teri mahima"
-            ]
-          },
-          {
-            "verse": "94",
-            "lines": [
-              "Mere Prabhu Yeshua mere Swaami Yeshua"
-            ]
-          },
-          {
-            "verse": "95",
-            "lines": [
-              "Mere raaja Yeshua tu hai zinda Khuda"
-            ]
-          },
-          {
-            "verse": "96",
-            "lines": [
-              "Gaaun teri mahima teri stuti gaaunga"
-            ]
-          },
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
           {
-            "verse": "97",
+            "section": "കൊറസ്",
             "lines": [
-              "Yeshua Yeshua ho teri mahima"
+              "സന്ധ്യയും പ്രഭാതവും നിന്റെ സ്തുതി ഞങ്ങൾ പാടും,",
+              "മഹിമ നിനക്കാകട്ടെ.",
+              "രാജാക്കന്മാരുടെ രാജാവേ, നീ എന്റെ കർത്താവാണ്,",
+              "മഹിമ നിനക്കാകട്ടെ."
             ]
           },
           {
-            "verse": "98",
+            "section": "പല്ലവി",
             "lines": [
-              "Mere Prabhu Yeshua mere Swaami Yeshua"
+              "യേശുവേ, മഹിമ, മഹിമ നിനക്കേ,",
+              "എന്റെ രാജാവായ യേശുവേ, നിന്റെ മഹിമ ഞാൻ പാടും,",
+              "യേശുവേ, മഹിമ, മഹിമ നിനക്കേ,",
+              "എന്റെ രാജാവായ യേശുവേ, നിന്റെ മഹിമ ഞാൻ പാടും."
             ]
           },
           {
-            "verse": "99",
+            "section": "അന്തരം 1",
             "lines": [
-              "Mere raaja Yeshua tu hai zinda Khuda"
+              "എന്റെ വിശ്വാസം നിന്നിൽ വെച്ചിരിക്കുന്നു,",
+              "എനിക്ക് എന്തിന് ഭയമോ ചിന്തയോ?",
+              "നിന്റെ രക്തത്തിൽ ഞങ്ങൾ ശുദ്ധരായി,",
+              "യേശുവേ, നിന്റെ കരുണ ഞങ്ങൾ അനുഭവിച്ചു."
             ]
           },
           {
-            "verse": "100",
+            "section": "അന്തരം 2",
             "lines": [
-              "Gaaun teri mahima Yeshu teri mahima"
+              "നീ കാട്ടിയ സ്നേഹം,",
+              "ഒരിക്കലും ഉപേക്ഷിക്കാതിരുന്ന നീ,",
+              "എങ്ങനെ നിന്റെ മഹിമ പാടാതിരിക്കാം?",
+              "പാപങ്ങൾ മായിച്ചു, ശാപങ്ങളിൽ നിന്ന് രക്ഷിച്ചു; എങ്ങനെ മഹിമ പാടാതിരിക്കാം?"
             ]
           },
           {
-            "verse": "101",
+            "section": "ബ്രിഡ്ജ്",
             "lines": [
-              "Yeshu teri mahima"
+              "എന്റെ കർത്താവായ യേശുവേ, എന്റെ സ്വാമിയായ യേശുവേ,",
+              "എന്റെ രാജാവായ യേശുവേ, നീ ജീവനുള്ള ദൈവമാണ്,",
+              "നിന്റെ മഹിമയും സ്തുതിയും ഞാൻ പാടും,",
+              "യേശുവേ, യേശുവേ, മഹിമ നിനക്കേ."
             ]
           }
         ]
@@ -39291,1114 +38362,6 @@
     "thumbnailUrl": "/assets/songs/hindi_card.png"
   },
   {
-    "id": "yeshu_tu_hai_mere_saath_lyrics_shawn_shanon",
-    "slug": "yeshu-tu-hai-mere-saath-lyrics-shawn-shanon",
-    "title": "YESHU TU HAI MERE SAATH LYRICS | SHAWN & SHANON",
-    "videoUrl": "",
-    "description": "YESHU TU HAI MERE SAATH LYRICS | SHAWN & SHANON - Hindi Christian devotional song lyrics with worship-friendly formatting.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "तू ही मेरी आस है"
-            ]
-          },
-          {
-            "verse": "1",
-            "lines": [
-              "तुझ पर विश्वास है"
-            ]
-          },
-          {
-            "verse": "2",
-            "lines": [
-              "तू ही हर सांस है"
-            ]
-          },
-          {
-            "verse": "3",
-            "lines": [
-              "तू मेरी प्यास है"
-            ]
-          },
-          {
-            "verse": "4",
-            "lines": [
-              "तू ही मेरी जान है"
-            ]
-          },
-          {
-            "verse": "5",
-            "lines": [
-              "तू मेरी पहचान है"
-            ]
-          },
-          {
-            "verse": "6",
-            "lines": [
-              "तू ही मेरी शान है"
-            ]
-          },
-          {
-            "verse": "7",
-            "lines": [
-              "तू मेरा ईमान है"
-            ]
-          },
-          {
-            "verse": "8",
-            "lines": [
-              "येशु तू है मेरे साथ"
-            ]
-          },
-          {
-            "verse": "9",
-            "lines": [
-              "हर दिन हर रात"
-            ]
-          },
-          {
-            "verse": "10",
-            "lines": [
-              "तुझ पे है मेरा विश्वास"
-            ]
-          },
-          {
-            "verse": "11",
-            "lines": [
-              "येशु तू है मेरे साथ"
-            ]
-          },
-          {
-            "verse": "12",
-            "lines": [
-              "हर दिन हर रात"
-            ]
-          },
-          {
-            "verse": "13",
-            "lines": [
-              "तुझ पे है मेरा विश्वास"
-            ]
-          },
-          {
-            "verse": "14",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "15",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "16",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "17",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "18",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "19",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "20",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "तू ही मेरा प्यार है"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "तू मेरा संसार है"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
-              "तू ही मेरा गीत है"
-            ]
-          },
-          {
-            "verse": "25",
-            "lines": [
-              "तू ही मेरा मीत है"
-            ]
-          },
-          {
-            "verse": "26",
-            "lines": [
-              "तुझ से हर शुरुआत है"
-            ]
-          },
-          {
-            "verse": "27",
-            "lines": [
-              "तुझ में ही हर बात है"
-            ]
-          },
-          {
-            "verse": "28",
-            "lines": [
-              "तेरे बिना जैसे रात है"
-            ]
-          },
-          {
-            "verse": "29",
-            "lines": [
-              "तू स��ग है तो क्या बात है"
-            ]
-          },
-          {
-            "verse": "30",
-            "lines": [
-              "येशु तू है मेरे साथ"
-            ]
-          },
-          {
-            "verse": "31",
-            "lines": [
-              "हर दिन हर रात"
-            ]
-          },
-          {
-            "verse": "32",
-            "lines": [
-              "तुझ पे है मेरा विश्वास"
-            ]
-          },
-          {
-            "verse": "33",
-            "lines": [
-              "येशु तू है मेरे साथ"
-            ]
-          },
-          {
-            "verse": "34",
-            "lines": [
-              "हर दिन हर रात"
-            ]
-          },
-          {
-            "verse": "35",
-            "lines": [
-              "तुझ पे है मेरा विश्वास"
-            ]
-          },
-          {
-            "verse": "36",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "37",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "38",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "39",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "40",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "41",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "42",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "43",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "44",
-            "lines": [
-              "ये दिल तेरी स्तुति के गीतों से भर जाए"
-            ]
-          },
-          {
-            "verse": "45",
-            "lines": [
-              "ये मन तेरे वचनों में बढ़ता चला जाए"
-            ]
-          },
-          {
-            "verse": "46",
-            "lines": [
-              "ये जीवन तेरी बरकतों का घर बन जाए"
-            ]
-          },
-          {
-            "verse": "47",
-            "lines": [
-              "हम हाथ उठाते, तेरी महिमा होती जाए"
-            ]
-          },
-          {
-            "verse": "48",
-            "lines": [
-              "येशु तू है मेरे साथ"
-            ]
-          },
-          {
-            "verse": "49",
-            "lines": [
-              "हर दिन हर रात"
-            ]
-          },
-          {
-            "verse": "50",
-            "lines": [
-              "तुझ पे है मेरा विश्वास"
-            ]
-          },
-          {
-            "verse": "51",
-            "lines": [
-              "येशु तू है मेरे साथ"
-            ]
-          },
-          {
-            "verse": "52",
-            "lines": [
-              "हर दिन हर रात"
-            ]
-          },
-          {
-            "verse": "53",
-            "lines": [
-              "तुझ पे है मेरा विश्वास"
-            ]
-          },
-          {
-            "verse": "54",
-            "lines": [
-              "येशु तू है मेरे साथ"
-            ]
-          },
-          {
-            "verse": "55",
-            "lines": [
-              "हर दिन हर रात"
-            ]
-          },
-          {
-            "verse": "56",
-            "lines": [
-              "तुझ पे है मेरा विश्वास"
-            ]
-          },
-          {
-            "verse": "57",
-            "lines": [
-              "येशु तू है मेरे साथ"
-            ]
-          },
-          {
-            "verse": "58",
-            "lines": [
-              "हर दिन हर रात"
-            ]
-          },
-          {
-            "verse": "59",
-            "lines": [
-              "तुझ पे है मेरा विश्वास"
-            ]
-          },
-          {
-            "verse": "60",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "61",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "62",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "63",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "64",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "65",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "66",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "67",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "68",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "69",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "70",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "71",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "72",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "73",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "74",
-            "lines": [
-              "हा हा हालेलू"
-            ]
-          },
-          {
-            "verse": "75",
-            "lines": [
-              "हा हा हालेलूया"
-            ]
-          },
-          {
-            "verse": "76",
-            "lines": [
-              "TU HI MERI AAS HAI"
-            ]
-          },
-          {
-            "verse": "77",
-            "lines": [
-              "TUJH PAR VISHWAS HAI"
-            ]
-          },
-          {
-            "verse": "78",
-            "lines": [
-              "TU HI HAR SAANS HAI"
-            ]
-          },
-          {
-            "verse": "79",
-            "lines": [
-              "TU MERI PYAAS HAI"
-            ]
-          },
-          {
-            "verse": "80",
-            "lines": [
-              "TU HI MERI JAAN HAI"
-            ]
-          },
-          {
-            "verse": "81",
-            "lines": [
-              "TU MERI PEHCHAAN HAI"
-            ]
-          },
-          {
-            "verse": "82",
-            "lines": [
-              "TU HI MERI SHAAN HAI"
-            ]
-          },
-          {
-            "verse": "83",
-            "lines": [
-              "TU MERA IMAAN HAI"
-            ]
-          },
-          {
-            "verse": "84",
-            "lines": [
-              "YESHU TU HAI MERE SAATH"
-            ]
-          },
-          {
-            "verse": "85",
-            "lines": [
-              "HAR DIN HAR RAAT"
-            ]
-          },
-          {
-            "verse": "86",
-            "lines": [
-              "TUJH PE HAI MERA VISHWAS"
-            ]
-          },
-          {
-            "verse": "87",
-            "lines": [
-              "YESHU TU HAI MERE SAATH"
-            ]
-          },
-          {
-            "verse": "88",
-            "lines": [
-              "HAR DIN HAR RAAT"
-            ]
-          },
-          {
-            "verse": "89",
-            "lines": [
-              "TUJH PE HAI MERA VISHWAS"
-            ]
-          },
-          {
-            "verse": "90",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "91",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          },
-          {
-            "verse": "92",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "93",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          },
-          {
-            "verse": "94",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "95",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          },
-          {
-            "verse": "96",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "97",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          },
-          {
-            "verse": "98",
-            "lines": [
-              "TU HI MERA PYAAR HAI"
-            ]
-          },
-          {
-            "verse": "99",
-            "lines": [
-              "TU MERA SANSAAR HAI"
-            ]
-          },
-          {
-            "verse": "100",
-            "lines": [
-              "TU HI MERA GEET HAI"
-            ]
-          },
-          {
-            "verse": "101",
-            "lines": [
-              "TU HI MERA MEET HAI"
-            ]
-          },
-          {
-            "verse": "102",
-            "lines": [
-              "TUJH SE HAR SHURUAT HAI"
-            ]
-          },
-          {
-            "verse": "103",
-            "lines": [
-              "TUJH MEIN HI HAR BAAT HAI"
-            ]
-          },
-          {
-            "verse": "104",
-            "lines": [
-              "TERE BINA JAISE RAAT HAI"
-            ]
-          },
-          {
-            "verse": "105",
-            "lines": [
-              "TU SANG HAI TOH KYA BAAT HAI"
-            ]
-          },
-          {
-            "verse": "106",
-            "lines": [
-              "YESHU TU HAI MERE SAATH"
-            ]
-          },
-          {
-            "verse": "107",
-            "lines": [
-              "HAR DIN HAR RAAT"
-            ]
-          },
-          {
-            "verse": "108",
-            "lines": [
-              "TUJH PE HAI MERA VISHWAS"
-            ]
-          },
-          {
-            "verse": "109",
-            "lines": [
-              "YESHU TU HAI MERE SAATH"
-            ]
-          },
-          {
-            "verse": "110",
-            "lines": [
-              "HAR DIN HAR RAAT"
-            ]
-          },
-          {
-            "verse": "111",
-            "lines": [
-              "TUJH PE HAI MERA VISHWAS"
-            ]
-          },
-          {
-            "verse": "112",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "113",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          },
-          {
-            "verse": "114",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "115",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          },
-          {
-            "verse": "116",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "117",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          },
-          {
-            "verse": "118",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "119",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          },
-          {
-            "verse": "120",
-            "lines": [
-              "YE DIL TERI STUTI KE GEETON SE BHAR JAYE"
-            ]
-          },
-          {
-            "verse": "121",
-            "lines": [
-              "YE MAN TERE VACHNON MEIN BADTA CHALA JAYE"
-            ]
-          },
-          {
-            "verse": "122",
-            "lines": [
-              "YE JEEVAN TERI BARKATO KA GHAR BAN JAYE"
-            ]
-          },
-          {
-            "verse": "123",
-            "lines": [
-              "HUM HAATH UTHATE TERI MAHIMA HOTI JAYE"
-            ]
-          },
-          {
-            "verse": "124",
-            "lines": [
-              "YESHU TU HAI MERE SAATH"
-            ]
-          },
-          {
-            "verse": "125",
-            "lines": [
-              "HAR DIN HAR RAAT"
-            ]
-          },
-          {
-            "verse": "126",
-            "lines": [
-              "TUJH PE HAI MERA VISHWAS"
-            ]
-          },
-          {
-            "verse": "127",
-            "lines": [
-              "YESHU TU HAI MERE SAATH"
-            ]
-          },
-          {
-            "verse": "128",
-            "lines": [
-              "HAR DIN HAR RAAT"
-            ]
-          },
-          {
-            "verse": "129",
-            "lines": [
-              "TUJH PE HAI MERA VISHWAS"
-            ]
-          },
-          {
-            "verse": "130",
-            "lines": [
-              "YESHU TU HAI MERE SAATH"
-            ]
-          },
-          {
-            "verse": "131",
-            "lines": [
-              "HAR DIN HAR RAAT"
-            ]
-          },
-          {
-            "verse": "132",
-            "lines": [
-              "TUJH PE HAI MERA VISHWAS"
-            ]
-          },
-          {
-            "verse": "133",
-            "lines": [
-              "YESHU TU HAI MERE SAATH"
-            ]
-          },
-          {
-            "verse": "134",
-            "lines": [
-              "HAR DIN HAR RAAT"
-            ]
-          },
-          {
-            "verse": "135",
-            "lines": [
-              "TUJH PE HAI MERA VISHWAS"
-            ]
-          },
-          {
-            "verse": "136",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "137",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          },
-          {
-            "verse": "138",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "139",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          },
-          {
-            "verse": "140",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "141",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          },
-          {
-            "verse": "142",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "143",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          },
-          {
-            "verse": "144",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "145",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          },
-          {
-            "verse": "146",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "147",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          },
-          {
-            "verse": "148",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "149",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          },
-          {
-            "verse": "150",
-            "lines": [
-              "HA HA HALLELU"
-            ]
-          },
-          {
-            "verse": "151",
-            "lines": [
-              "HA HA HALLELUJAH"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/english_card.png"
-  },
-  {
-    "id": "yeshu_ne_khoon_bahaya_tha_lyrics_shawn_shanon",
-    "slug": "yeshu-ne-khoon-bahaya-tha-lyrics-shawn-shanon",
-    "title": "YESHU NE KHOON BAHAYA THA LYRICS | SHAWN & SHANON",
-    "videoUrl": "",
-    "description": "YESHU NE KHOON BAHAYA THA LYRICS | SHAWN & SHANON - Hindi Christian devotional song lyrics with worship-friendly formatting.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "येशु ने ख़ून बहाया था"
-            ]
-          },
-          {
-            "verse": "1",
-            "lines": [
-              "पापों से मुझको बचाया था"
-            ]
-          },
-          {
-            "verse": "2",
-            "lines": [
-              "ज़ख्मों को मेरे अपनाया था"
-            ]
-          },
-          {
-            "verse": "3",
-            "lines": [
-              "शैतान को उसने हराया था (×2)"
-            ]
-          },
-          {
-            "verse": "4",
-            "lines": [
-              "कलवरी का वो दर्द का रास्ता"
-            ]
-          },
-          {
-            "verse": "5",
-            "lines": [
-              "कंधे पे था क्रूस, लहू था बहता"
-            ]
-          },
-          {
-            "verse": "6",
-            "lines": [
-              "चुप था येशु, सब कुछ वो सहता"
-            ]
-          },
-          {
-            "verse": "7",
-            "lines": [
-              "चलता गया वो, कुछ भी न कहता"
-            ]
-          },
-          {
-            "verse": "8",
-            "lines": [
-              "येशु ने ख़ून बहाया था… (×1)"
-            ]
-          },
-          {
-            "verse": "9",
-            "lines": [
-              "कीलों से छेदा, उसके हाथों को"
-            ]
-          },
-          {
-            "verse": "10",
-            "lines": [
-              "कांटों का ताज पहनाया था उसको"
-            ]
-          },
-          {
-            "verse": "11",
-            "lines": [
-              "दर्द में भी वो सबको था चाहता"
-            ]
-          },
-          {
-            "verse": "12",
-            "lines": [
-              "प्रेम में वो हर ज़ख्म को सहता"
-            ]
-          },
-          {
-            "verse": "13",
-            "lines": [
-              "येशु ने ख़ून बहाया था… (×2)"
-            ]
-          },
-          {
-            "verse": "14",
-            "lines": [
-              "Yeshu ne khoon bahaya tha"
-            ]
-          },
-          {
-            "verse": "15",
-            "lines": [
-              "Papon se mujh ko bachaya tha"
-            ]
-          },
-          {
-            "verse": "16",
-            "lines": [
-              "Zakhmon ko mere apnaya tha"
-            ]
-          },
-          {
-            "verse": "17",
-            "lines": [
-              "Shaitan ko usne haraya tha (X2)"
-            ]
-          },
-          {
-            "verse": "18",
-            "lines": [
-              "Kalvari ka vo dard ka rasta"
-            ]
-          },
-          {
-            "verse": "19",
-            "lines": [
-              "Kandhe pe tha krus, lahu tha behta"
-            ]
-          },
-          {
-            "verse": "20",
-            "lines": [
-              "Chup tha Yeshu, sab kuch vo sehta"
-            ]
-          },
-          {
-            "verse": "21",
-            "lines": [
-              "Chalta gaya woh, kuch bhi na kehta"
-            ]
-          },
-          {
-            "verse": "22",
-            "lines": [
-              "Yeshu ne khoon bahaya tha...(X1)"
-            ]
-          },
-          {
-            "verse": "23",
-            "lines": [
-              "Keelon se chedha, uske haathon ko"
-            ]
-          },
-          {
-            "verse": "24",
-            "lines": [
-              "Kaanton ka taaj pehenaya tha usko"
-            ]
-          },
-          {
-            "verse": "25",
-            "lines": [
-              "Dard mein bhi vo sabko tha chahta"
-            ]
-          },
-          {
-            "verse": "26",
-            "lines": [
-              "Prem mein vo har zakhm ko seheta"
-            ]
-          },
-          {
-            "verse": "27",
-            "lines": [
-              "Yeshu ne khoon bahaya tha...(X2)"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/english_card.png"
-  },
-  {
     "id": "yeshu_raja_hua",
     "slug": "yeshu-raja-hua",
     "title": "YESHU RAJA HUA",
@@ -40904,205 +38867,6 @@
       }
     },
     "thumbnailUrl": "/assets/songs/english_card.png"
-  },
-  {
-    "id": "yahowa_charwaha_mera_lyrics",
-    "slug": "yahowa-charwaha-mera-lyrics",
-    "title": "YAHOWA CHARWAHA MERA LYRICS | यहोवा चरवाहा मेरा",
-    "videoUrl": "",
-    "description": "YAHOWA CHARWAHA MERA LYRICS | यहोवा चरवाहा मेरा - Hindi Christian devotional song lyrics with worship-friendly formatting.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "यहोवा चरवाहा मेरा, कोई घटी मुझे नहीं है",
-              "हरी चराईयों में मुझे, स्नेह से चराता वह है।"
-            ]
-          },
-          {
-            "verse": "1",
-            "lines": [
-              "1. मृत्यु के अन्धकार से, मैं जो जाता था",
-              "प्रभु यीशु करूणा से, तसल्ली मुझे दी है (2)..."
-            ]
-          },
-          {
-            "verse": "2",
-            "lines": [
-              "2. शत्रुओं के सामने, मेज़ को बिछाता है",
-              "प्रभु ने जो तैयार की, मन मेरा मगन है (2)..."
-            ]
-          },
-          {
-            "verse": "3",
-            "lines": [
-              "3. सिर पर वह तेल मला है, अभिषेक मुझे किया है",
-              "दिल मेरा भर गया है, और उमंड भी रहा है (2)..."
-            ]
-          },
-          {
-            "verse": "4",
-            "lines": [
-              "4. सर्वदा प्रभु घर में, करूंगा निवास जो मैं",
-              "करूणा भलाई भी उसकी, आनन्दित मुझे करती है (2)..."
-            ]
-          },
-          {
-            "verse": "5",
-            "lines": [
-              "Yahowa charwaha mera, koi ghati mujhe nahin hai"
-            ]
-          },
-          {
-            "verse": "6",
-            "lines": [
-              "Hari charaaiyon mein mujhe, sneh se charaataa veh hai"
-            ]
-          },
-          {
-            "verse": "7",
-            "lines": [
-              "1. Mrityu ke andhkaar se, main jo jaataa tha"
-            ]
-          },
-          {
-            "verse": "8",
-            "lines": [
-              "Prabhu Yeshu karuna se, tasalli mujhe dee hai (2)..."
-            ]
-          },
-          {
-            "verse": "9",
-            "lines": [
-              "2. Shatruon ke saamne, mez ko bichhaataa hai"
-            ]
-          },
-          {
-            "verse": "10",
-            "lines": [
-              "Prabhu ne jo taiyaar ki, man mera magan hai (2)..."
-            ]
-          },
-          {
-            "verse": "11",
-            "lines": [
-              "3. Sir par veh tel mala hai, abhishek mujhe kiya hai"
-            ]
-          },
-          {
-            "verse": "12",
-            "lines": [
-              "Dil mera bhar gaya hai, aur umad bhi raha hai (2)..."
-            ]
-          },
-          {
-            "verse": "13",
-            "lines": [
-              "4. Sarvada prabhu ghar mein, karunga niwaas jo main"
-            ]
-          },
-          {
-            "verse": "14",
-            "lines": [
-              "Karuna bhalaai bhi uski, aanandit mujhe karti hai (2)..."
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/english_card.png"
-  },
-  {
-    "id": "yahowa_ki_stuti_karo_lyrics",
-    "slug": "yahowa-ki-stuti-karo-lyrics",
-    "title": "YAHOWA KI STUTI KARO LYRICS | यहोवा की स्तुति करो",
-    "videoUrl": "",
-    "description": "YAHOWA KI STUTI KARO LYRICS | यहोवा की स्तुति करो - Hindi Christian devotional song lyrics with worship-friendly formatting.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "यहोवा की स्तुति करो (2), उसके पवित्र स्थान में",
-              "उसकी स्तुति करो।"
-            ]
-          },
-          {
-            "verse": "1",
-            "lines": [
-              "1. अपने हाथों को उठाकर उसकी स्तुति करो",
-              "तारदार साजों को बजाकर उसकी स्तुति करो।"
-            ]
-          },
-          {
-            "verse": "2",
-            "lines": [
-              "2. डफ और तबला बजाकर उसकी स्तुति करो",
-              "बरबत बीन बजाकर उसकी स्तुति करो।"
-            ]
-          },
-          {
-            "verse": "3",
-            "lines": [
-              "3. ताली और झाँझ बजाकर उसकी स्तुति करो",
-              "उसके पवित्र स्थान में उसकी स्तुति करो।।"
-            ]
-          },
-          {
-            "verse": "4",
-            "lines": [
-              "Yahowa ki stuti karo (2), uske pavitra sthaan mein"
-            ]
-          },
-          {
-            "verse": "5",
-            "lines": [
-              "uski stuti karo"
-            ]
-          },
-          {
-            "verse": "6",
-            "lines": [
-              "1. Apne haathon ko uthaakar uski stuti karo"
-            ]
-          },
-          {
-            "verse": "7",
-            "lines": [
-              "Taardaar saajon ko bajakar uski stuti karo"
-            ]
-          },
-          {
-            "verse": "8",
-            "lines": [
-              "2. Daf aur tabla bajaakar uski stuti karo"
-            ]
-          },
-          {
-            "verse": "9",
-            "lines": [
-              "Barbat been bajaakar uski stuti karo"
-            ]
-          },
-          {
-            "verse": "10",
-            "lines": [
-              "3. Taali aur jhaanjh bajaakar uski stuti karo"
-            ]
-          },
-          {
-            "verse": "11",
-            "lines": [
-              "Uske pavitra sthaan mein uski stuti karo"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
   },
   {
     "id": "yehova_ke_naam_ki_mahima",
@@ -48768,50 +46532,6 @@
     "thumbnailUrl": "/assets/songs/hindi_card.png"
   },
   {
-    "id": "vandana_karthe_hai_hum",
-    "slug": "vandana-karthe-hai-hum",
-    "title": "Vandana karthe hai hum",
-    "videoUrl": "https://www.youtube.com/embed/BI8Jt9gh8XM",
-    "description": "Vandana karthe hai hum - Hindi Christian devotional song lyrics with worship-friendly formatting.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "1 vandnaa krto hO hma -4",
-              ")dya kao toro saamanaoÊ laakr rKto hO hma –2",
-              "2 )dya maMo maoro masaIha¸ jaIvana dIp jalaa, 2",
-              ")dya ko papaoM kao Qaaokr¸ p`oma kI rah idKa.",
-              "3 maO hUM inaba-la maanava¸ papaoM ko saagar maoM Kaoyaa",
-              "Aba tuma saMBaalaao yaISau jaI¸ Bava saagar maoM hUÐ Kaoyaa",
-              "4 Sai> do dao mauJakao¸ maora nahIM kao[- maIt",
-              "jaIvana kao maoro lao laao¸ ga}^M maOM toro gaIt",
-              "5 saUlaI pr caZkr masaIha tUnao hmakao bacaayaa 2",
-              "maui@tdata bana kr maui@t maaga- idKayaa 2"
-            ]
-          },
-          {
-            "verse": "1",
-            "lines": [
-              "Vandana karte hai hum - 4",
-              "Hrdaya ko tere samne; laakar rakhte hai ham",
-              "Hirdaya mei mere Masiha, jeevan deep jalao",
-              "Hirday ke papo ko dhokar, prem ki rah dikha",
-              "Mei hoon nirbal manav, Papo ke sagar mei khoya",
-              "Ab tum sambhalo Yeshuji, Bhsavagar mei hoon khoya",
-              "Shakti de do mujhko, Mera nahi koi meet",
-              "Jeevan ko mere le lo, Gaaoon mei tere hi geet",
-              "Suli par chadkar mashiha tune hamko bachaya",
-              "Mukthidatha benkar mukthi marg dikaya"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
-  },
-  {
     "id": "vande_prabhu_vande_massi",
     "slug": "vande-prabhu-vande-massi",
     "title": "Vande prabhu vande massi",
@@ -48822,17 +46542,118 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "section": "मुखड़ा",
             "lines": [
-              "oUns izHkq] oUns elhg",
-              "'kr 'kr oUnuk oUns izHkq",
-              "1 bl 'kqHk fnu ge vius dks",
-              "pj.kksa esa rsjs ykrs gSa 2",
-              "bl 'kqHk ?kM+h nksgjkrs gSa",
-              "rsjs gh e/kqj opu dks 2",
-              "2 viZ.k djrs gSa bl thou dks",
-              "opuke`r ns 'kj.kkxr dks 2",
-              "vius esa djys iw.kZ izHkq",
-              "/kU; elhg /kU; izHkq 2"
+              "वंदे प्रभु, वंदे मसीह,",
+              "शत शत वंदना, वंदे प्रभु।"
+            ]
+          },
+          {
+            "section": "अंतरा 1",
+            "lines": [
+              "इस शुभ दिन हम अपने को,",
+              "चरणों में तेरे लाते हैं,",
+              "इस शुभ घड़ी दोहराते हैं,",
+              "तेरे ही मधुर वचन को।"
+            ]
+          },
+          {
+            "section": "अंतरा 2",
+            "lines": [
+              "अर्पण करते हैं इस जीवन को,",
+              "वचनामृत दे शरणागत को,",
+              "अपने में कर ले पूर्ण, प्रभु,",
+              "धन्य मसीह, धन्य प्रभु।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Vande Prabhu, vande Masih,",
+              "Shat shat vandana, vande Prabhu."
+            ]
+          },
+          {
+            "section": "Antara 1",
+            "lines": [
+              "Is shubh din hum apne ko,",
+              "Charanon mein tere laate hain,",
+              "Is shubh ghadi dohraate hain,",
+              "Tere hi madhur vachan ko."
+            ]
+          },
+          {
+            "section": "Antara 2",
+            "lines": [
+              "Arpan karte hain is jeevan ko,",
+              "Vachanamrit de sharanagat ko,",
+              "Apne mein kar le poorn, Prabhu,",
+              "Dhanya Masih, dhanya Prabhu."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Chorus",
+            "lines": [
+              "We bow to You, Lord; we bow to Christ,",
+              "A hundred-fold praise to You, O Lord."
+            ]
+          },
+          {
+            "section": "Verse 1",
+            "lines": [
+              "On this blessed day we bring ourselves,",
+              "And lay our lives at Your feet,",
+              "In this sacred moment we repeat,",
+              "Your sweet and living word."
+            ]
+          },
+          {
+            "section": "Verse 2",
+            "lines": [
+              "We offer this life completely to You,",
+              "Give the nectar of Your word to the surrendered heart,",
+              "Make us complete in Yourself, O Lord,",
+              "Blessed Messiah, blessed Lord."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "കൊറസ്",
+            "lines": [
+              "കർത്താവേ, നിനക്കു വന്ദനം; മശീഹാവേ, നിനക്കു വന്ദനം,",
+              "ശതശത സ്തുതികൾ നിനക്കാകട്ടെ, കർത്താവേ."
+            ]
+          },
+          {
+            "section": "അന്തരം 1",
+            "lines": [
+              "ഈ ശുഭദിനത്തിൽ ഞങ്ങൾ ഞങ്ങളെ തന്നെ,",
+              "നിന്റെ പാദങ്ങളിൽ സമർപ്പിക്കുന്നു,",
+              "ഈ വിശുദ്ധ നിമിഷത്തിൽ വീണ്ടും പറയുന്നു,",
+              "നിന്റെ മധുരവചനത്തെ ഞങ്ങൾ ചേർത്ത് പിടിക്കുന്നു."
+            ]
+          },
+          {
+            "section": "അന്തരം 2",
+            "lines": [
+              "ഈ ജീവിതം ഞങ്ങൾ സമർപ്പിക്കുന്നു,",
+              "ശരണം പ്രാപിച്ച ഹൃദയത്തിന് നിന്റെ വചനാമൃതം തരണമേ,",
+              "നിന്നിൽ ഞങ്ങളെ പൂർണ്ണരാക്കണമേ, കർത്താവേ,",
+              "ധന്യ മശീഹാ, ധന്യ കർത്താവേ."
             ]
           }
         ]
@@ -48851,30 +46672,162 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "section": "मुखड़ा",
             "lines": [
-              "ivanatI saunalao yaISau Pyaaro –2",
-              "maaoro saMga rhao maharaja",
-              "Aba tuma raKao maorI laaja",
-              "ivanatI saunaao maorI maharaja",
-              "ivanatI k$^M tumasao ka jaaorI",
-              "Aba tuma ivanatI sauna laao maaorI –2",
-              "maaoho AaSaa laga rhI taorI –2",
-              "dSa- idKa dao Aaja",
-              "Aba tuma raKao maorI laaja",
-              "ivanatI saunalao yaISau Pyaaro –2",
-              "Aapka maOM SaOda khlaa}^M",
-              "Aasa lagaI taoro dSa-na pa}^M –2",
-              "yauga yauga Aapka maOM gauNa gaa}^M –2",
-              "maoro garIba navaaj,a",
-              "Aba tuma raKao maorI laaja",
-              "ivanatI saunalao yaISau Pyaaro –2",
-              "tuma hI hmaaro tarNaharo",
-              "mana ko Pyaaro idla ko dulaaro –2",
-              "tuma hI hmaaro naOnaaoM ko taro –2",
-              "mana ko Pyaaro idla ko dulaharo",
-              "hmaaro tuma sartaja",
-              "Aba tuma raKao maorI laaja",
-              "ivanatI saunalao yaISau Pyaaro –2"
+              "विनती सुन ले, यीशु प्यारे,",
+              "मेरे संग रहो महाराज,",
+              "अब तुम रखो मेरी लाज,",
+              "विनती सुनो मेरी महाराज।"
+            ]
+          },
+          {
+            "section": "अंतरा 1",
+            "lines": [
+              "विनती करूँ तुमसे कर जोरी,",
+              "अब तुम विनती सुन लो मोरी,",
+              "मोहे आशा लगी रही तोरी,",
+              "दर्शन दिखा दो आज।"
+            ]
+          },
+          {
+            "section": "अंतरा 2",
+            "lines": [
+              "आपका मैं सेवक कहलाऊँ,",
+              "आस लगी तेरे दर्शन पाऊँ,",
+              "युग युग आपका मैं गुण गाऊँ,",
+              "मेरे गरीबनवाज़।"
+            ]
+          },
+          {
+            "section": "अंतरा 3",
+            "lines": [
+              "तुम ही हमारे तारनहारे,",
+              "मन के प्यारे, दिल के दुलारे,",
+              "तुम ही हमारे नैनों के तारे,",
+              "हमारे तुम सरताज।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Vinti sun le, Yeshu pyaare,",
+              "Mere sang raho Maharaaj,",
+              "Ab tum rakho meri laaj,",
+              "Vinti suno meri Maharaaj."
+            ]
+          },
+          {
+            "section": "Antara 1",
+            "lines": [
+              "Vinti karun tumse kar jori,",
+              "Ab tum vinti sun lo mori,",
+              "Mohe aasha lagi rahi tori,",
+              "Darshan dikha do aaj."
+            ]
+          },
+          {
+            "section": "Antara 2",
+            "lines": [
+              "Aapka main sevak kahlaaun,",
+              "Aas lagi tere darshan paaun,",
+              "Yug yug aapka main gun gaaun,",
+              "Mere gareebnawaaz."
+            ]
+          },
+          {
+            "section": "Antara 3",
+            "lines": [
+              "Tum hi hamaare taaranhaare,",
+              "Man ke pyaare, dil ke dulaare,",
+              "Tum hi hamaare nainon ke taare,",
+              "Hamaare tum sartaaj."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Chorus",
+            "lines": [
+              "Hear my prayer, dear Jesus,",
+              "Stay with me, my King,",
+              "Protect my honor now,",
+              "Listen to my plea, my King."
+            ]
+          },
+          {
+            "section": "Verse 1",
+            "lines": [
+              "With folded hands I pray to You,",
+              "Please hear this humble cry of mine,",
+              "My hope is fixed on You alone,",
+              "Show me Your face today."
+            ]
+          },
+          {
+            "section": "Verse 2",
+            "lines": [
+              "Let me be known as Your servant,",
+              "I long to behold Your presence,",
+              "Forever I will sing Your praise,",
+              "My gracious Lord of mercy."
+            ]
+          },
+          {
+            "section": "Verse 3",
+            "lines": [
+              "You alone are our Savior,",
+              "Beloved of the heart, delight of the soul,",
+              "You are the star of our eyes,",
+              "You are our crowned King."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "കൊറസ്",
+            "lines": [
+              "എന്റെ പ്രാർത്ഥന കേൾക്കേണമേ, പ്രിയ യേശുവേ,",
+              "എന്റെ കൂടെ ഇരിക്കേണമേ, രാജാവേ,",
+              "എന്റെ ലജ്ജ കാത്തുകൊള്ളേണമേ,",
+              "എന്റെ അപേക്ഷ കേൾക്കേണമേ, രാജാവേ."
+            ]
+          },
+          {
+            "section": "അന്തരം 1",
+            "lines": [
+              "കയ്യുകൾ കൂട്ടി ഞാൻ നിന്നോടു അപേക്ഷിക്കുന്നു,",
+              "എന്റെ വിനീത പ്രാർത്ഥന കേൾക്കേണമേ,",
+              "എന്റെ പ്രത്യാശ മുഴുവൻ നിന്നിലത്രേ,",
+              "ഇന്ന് നിന്റെ ദർശനം കാണിക്കേണമേ."
+            ]
+          },
+          {
+            "section": "അന്തരം 2",
+            "lines": [
+              "നിന്റെ ദാസനെന്നു ഞാൻ വിളിക്കപ്പെടട്ടെ,",
+              "നിന്റെ സാന്നിധ്യം കാണുവാൻ എനിക്ക് ആഗ്രഹമുണ്ട്,",
+              "യുഗങ്ങളോളം ഞാൻ നിന്റെ സ്തുതി പാടട്ടെ,",
+              "എന്റെ കരുണാമയനായ കർത്താവേ."
+            ]
+          },
+          {
+            "section": "അന്തരം 3",
+            "lines": [
+              "നീയാണ് ഞങ്ങളുടെ രക്ഷകൻ,",
+              "ഹൃദയത്തിന്റെ പ്രിയനും ആത്മാവിന്റെ ആനന്ദവും,",
+              "ഞങ്ങളുടെ കണ്ണുകളുടെ നക്ഷത്രം നീ,",
+              "ഞങ്ങളുടെ രാജാധിരാജൻ നീ."
             ]
           }
         ]
@@ -67952,26 +65905,6 @@
       }
     },
     "thumbnailUrl": "/assets/songs/english_card.png"
-  },
-  {
-    "id": "yeshu_masih_bharosa_mera",
-    "slug": "yeshu-masih-bharosa-mera",
-    "title": "Yeshu Masih Bharosa Mera",
-    "videoUrl": "https://www.youtube.com/embed/R9nYbFJaxI8",
-    "description": "Yeshu Masih Bharosa Mera - Hindi Christian devotional song lyrics with worship-friendly formatting.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu Masih Bharosa Mera Lyrics is beautiful and it talks God will be with us in the time of trouble, our hope is in him. This Jesus Hindi Song Lyrics also gives us confidence that His mercies will always be with us."
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
   },
   {
     "id": "prabhu_ki_awaz_sun_meri_aatma",
@@ -93688,206 +91621,6 @@
     "thumbnailUrl": "/assets/songs/english_card.png"
   },
   {
-    "id": "yeshu_hi_ko_naam_me_in_the_name_of_jesus",
-    "slug": "yeshu-hi-ko-naam-me-in-the-name-of-jesus",
-    "title": "Yeshu hi ko naam me (In the name of jesus)",
-    "videoUrl": "",
-    "description": "Yeshu hi ko naam me (In the name of jesus) - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu hi ko naam me (In the name of jesus)"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/english_card.png"
-  },
-  {
-    "id": "yeshu_jeb_ayega_badalom_pur_me_uske",
-    "slug": "yeshu-jeb-ayega-badalom-pur-me-uske",
-    "title": "Yeshu jeb ayega badalom pur me uske",
-    "videoUrl": "",
-    "description": "Yeshu jeb ayega badalom pur me uske - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu jeb ayega badalom pur me uske"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
-  },
-  {
-    "id": "yeshu_ka_lahoo",
-    "slug": "yeshu-ka-lahoo",
-    "title": "Yeshu ka lahoo",
-    "videoUrl": "",
-    "description": "Yeshu ka lahoo - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu ka lahoo"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/hindi_card.png"
-  },
-  {
-    "id": "yeshu_ki_jay_jay_bola",
-    "slug": "yeshu-ki-jay-jay-bola",
-    "title": "Yeshu ki jay jay bola",
-    "videoUrl": "",
-    "description": "Yeshu ki jay jay bola - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu ki jay jay bola"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/english_card.png"
-  },
-  {
-    "id": "yeshu_mem_samridh_hai",
-    "slug": "yeshu-mem-samridh-hai",
-    "title": "Yeshu mem samridh hai",
-    "videoUrl": "",
-    "description": "Yeshu mem samridh hai - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu mem samridh hai"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/english_card.png"
-  },
-  {
-    "id": "yeshu_mera_raja",
-    "slug": "yeshu-mera-raja",
-    "title": "Yeshu mera raja",
-    "videoUrl": "",
-    "description": "Yeshu mera raja - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu mera raja"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
-  },
-  {
-    "id": "yeshu_mere_aa",
-    "slug": "yeshu-mere-aa",
-    "title": "Yeshu mere aa",
-    "videoUrl": "",
-    "description": "Yeshu mere aa - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu mere aa"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/hindi_card.png"
-  },
-  {
-    "id": "yeshu_naam_bhajo_re",
-    "slug": "yeshu-naam-bhajo-re",
-    "title": "Yeshu naam bhajo re",
-    "videoUrl": "",
-    "description": "Yeshu naam bhajo re - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu naam bhajo re"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
-  },
-  {
-    "id": "yeshu_ne_mujhe_jeevan_diya",
-    "slug": "yeshu-ne-mujhe-jeevan-diya",
-    "title": "Yeshu ne mujhe jeevan diya",
-    "videoUrl": "",
-    "description": "Yeshu ne mujhe jeevan diya - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu ne mujhe jeevan diya"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
-  },
-  {
-    "id": "yeshu_se_hai_mera",
-    "slug": "yeshu-se-hai-mera",
-    "title": "Yeshu se hai mera",
-    "videoUrl": "",
-    "description": "Yeshu se hai mera - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu se hai mera"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/hindi_card.png"
-  },
-  {
     "id": "yeshu_tera_naam_sabse_uncha_hai_chords_yeshu_aa_intro_a_b_g",
     "slug": "yeshu-tera-naam-sabse-uncha-hai-chords-yeshu-aa-intro-a-b-g",
     "title": "Yeshu tera naam sabse uncha hai- Chords ( Yeshu Aa ) Intro : A, B, G",
@@ -93909,106 +91642,6 @@
               "श्रापों से हैं छुड़ाता",
               "वो नाम हैं जो अन्धो को",
               "रोशनी भी हैं देता ……"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/english_card.png"
-  },
-  {
-    "id": "yeshu_tu_hai_chandi_se_bhi_uttam",
-    "slug": "yeshu-tu-hai-chandi-se-bhi-uttam",
-    "title": "Yeshu tu hai chandi se bhi uttam",
-    "videoUrl": "",
-    "description": "Yeshu tu hai chandi se bhi uttam - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu tu hai chandi se bhi uttam"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/english_card.png"
-  },
-  {
-    "id": "yeshu_tu_hai_mahaan",
-    "slug": "yeshu-tu-hai-mahaan",
-    "title": "Yeshu tu hai mahaan",
-    "videoUrl": "",
-    "description": "Yeshu tu hai mahaan - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu tu hai mahaan"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/hindi_card.png"
-  },
-  {
-    "id": "yeshu_tu_ne_de_apne_jaan",
-    "slug": "yeshu-tu-ne-de-apne-jaan",
-    "title": "Yeshu tu ne de apne jaan",
-    "videoUrl": "",
-    "description": "Yeshu tu ne de apne jaan - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu tu ne de apne jaan"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/hindi_card.png"
-  },
-  {
-    "id": "yeshu_tumhein_jeevan_mein_shanti",
-    "slug": "yeshu-tumhein-jeevan-mein-shanti",
-    "title": "Yeshu tumhein jeevan mein shanti",
-    "videoUrl": "",
-    "description": "Yeshu tumhein jeevan mein shanti - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu tumhein jeevan mein shanti"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/hindi_card.png"
-  },
-  {
-    "id": "yeshu_zinda_hua",
-    "slug": "yeshu-zinda-hua",
-    "title": "Yeshu zinda hua",
-    "videoUrl": "",
-    "description": "Yeshu zinda hua - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu zinda hua"
             ]
           }
         ]
@@ -97987,57 +95620,158 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "section": "मुखड़ा",
             "lines": [
-              "करती हूँ वंदना प्रभु तेरे लिए",
-              "गाती हूँ स्तुति प्रभु तेरे लिए",
-              "तू ही तो मेरे दिल की धड़कन",
-              "तू ही मेरी जान",
-              "मेरे जीवन के हर एक मोड़ पर",
-              "तेरा ही मेहरबान",
-              "करती हूँ वंदना",
-              "जाऊं तो मैं कहां प्रभु तेरे बिना",
-              "सोचूं तो मैं किसे प्रभु तेरे सिवा",
-              "समुद्र की लहरों में भी",
-              "प्रभु तेरा नाम",
-              "अंधी बादल गरजनों में भी",
-              "प्रभु तेरा नाम",
-              "करती हूँ वंदना",
-              "जाऊं तो मैं कहां प्रभु तुझसे दूर",
-              "तू ही तो है मेरा प्रभु दिल का नूर",
-              "तूने मुझे नया जीवन दिया",
-              "होके कुर्बान",
-              "मेरे पापों का भार उठाके",
-              "क्रूस पर दिया जान",
-              "करती हूँ वंदना प्रभु तेरे लिए",
-              "गाती हूँ स्तुति प्रभु तेरे लिए",
-              "करती हूँ वंदना"
+              "करती हूँ वंदना, प्रभु तेरे लिए,",
+              "गाती हूँ स्तुति, प्रभु तेरे लिए।",
+              "तू ही तो मेरे दिल की धड़कन,",
+              "तू ही मेरी जान।"
             ]
           },
           {
-            "verse": "1",
+            "section": "अंतरा 1",
             "lines": [
-              "i worship you, lord, i honor you,",
-              "i sing praises to you, lord, i glorify you.",
-              "you are the heartbeat of my heart,",
-              "you are my very life.",
-              "at every turn of my life,",
-              "it is only your grace that sustains me.",
-              "i worship you, lord…",
-              "where can i go without you, lord?",
-              "whom can i look to, except you, lord?",
-              "even in the waves of the sea,",
-              "your name is my refuge.",
-              "even in the roaring of storm clouds,",
-              "your name is my strength.",
-              "i worship you, lord…",
-              "where can i go, lord, away from you?",
-              "you alone are the light of my heart.",
-              "you gave me new life,",
-              "by sacrificing yourself.",
-              "you carried the burden of my sins,",
-              "and gave your life on the cross.",
-              "i worship you, lord, i honor you,",
-              "i sing praises to you, lord, i glorify you."
+              "मेरे जीवन के हर एक मोड़ पर,",
+              "तेरा ही मेहरबान,",
+              "करती हूँ वंदना।"
+            ]
+          },
+          {
+            "section": "अंतरा 2",
+            "lines": [
+              "जाऊँ तो मैं कहाँ, प्रभु तेरे बिना,",
+              "सोचूँ तो मैं किसे, प्रभु तेरे सिवा,",
+              "समुद्र की लहरों में भी, प्रभु तेरा नाम,",
+              "अंधी बादल गरजनों में भी, प्रभु तेरा नाम।"
+            ]
+          },
+          {
+            "section": "अंतरा 3",
+            "lines": [
+              "जाऊँ तो मैं कहाँ, प्रभु तुझसे दूर,",
+              "तू ही तो है मेरा, प्रभु, दिल का नूर,",
+              "तूने मुझे नया जीवन दिया, होके कुर्बान,",
+              "मेरे पापों का भार उठाके, क्रूस पर दिया जान।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Karti hoon vandana, Prabhu tere liye,",
+              "Gaati hoon stuti, Prabhu tere liye.",
+              "Tu hi to mere dil ki dhadkan,",
+              "Tu hi meri jaan."
+            ]
+          },
+          {
+            "section": "Antara 1",
+            "lines": [
+              "Mere jeevan ke har ek mod par,",
+              "Tera hi meharbaan,",
+              "Karti hoon vandana."
+            ]
+          },
+          {
+            "section": "Antara 2",
+            "lines": [
+              "Jaaun to main kahaan, Prabhu tere bina,",
+              "Sochun to main kise, Prabhu tere siwa,",
+              "Samudra ki lehron mein bhi, Prabhu tera naam,",
+              "Andhi baadal garajnon mein bhi, Prabhu tera naam."
+            ]
+          },
+          {
+            "section": "Antara 3",
+            "lines": [
+              "Jaaun to main kahaan, Prabhu tujhse door,",
+              "Tu hi to hai mera, Prabhu, dil ka noor,",
+              "Tune mujhe naya jeevan diya, hoke qurbaan,",
+              "Mere paapon ka bhaar uthaake, kroos par diya jaan."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Chorus",
+            "lines": [
+              "I worship You, Lord, for You alone,",
+              "I sing my praise to You alone,",
+              "You are the heartbeat of my heart,",
+              "You are my very life."
+            ]
+          },
+          {
+            "section": "Verse 1",
+            "lines": [
+              "At every turning point of my life,",
+              "It is Your kindness that carries me,",
+              "So I worship You."
+            ]
+          },
+          {
+            "section": "Verse 2",
+            "lines": [
+              "Where can I go without You, Lord?",
+              "Whom could I ever seek besides You?",
+              "Even in the waves of the sea, Your name remains,",
+              "Even in thunderous storm clouds, Your name remains."
+            ]
+          },
+          {
+            "section": "Verse 3",
+            "lines": [
+              "Where can I go far from You, Lord?",
+              "You alone are the light of my heart,",
+              "You gave me new life by giving Yourself,",
+              "You carried my sins and gave Your life on the cross."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "കൊറസ്",
+            "lines": [
+              "കർത്താവേ, നിന്നെ ഞാൻ വണങ്ങുന്നു,",
+              "നിന്നെക്കായേ ഞാൻ സ്തുതി പാടുന്നു,",
+              "നീയാണ് എന്റെ ഹൃദയമിടിപ്പ്,",
+              "നീയാണ് എന്റെ ജീവൻ."
+            ]
+          },
+          {
+            "section": "അന്തരം 1",
+            "lines": [
+              "എന്റെ ജീവിതത്തിലെ ഓരോ വഴിത്തിരിവിലും,",
+              "നിന്റെ കരുണ തന്നെയാണ് എന്നെ താങ്ങുന്നത്,",
+              "അതുകൊണ്ടു നിന്നെ ഞാൻ വണങ്ങുന്നു."
+            ]
+          },
+          {
+            "section": "അന്തരം 2",
+            "lines": [
+              "നിന്നില്ലാതെ ഞാൻ എവിടെ പോകും, കർത്താവേ?",
+              "നിന്നെ വിട്ട് ഞാൻ ആരെ ആശ്രയിക്കും?",
+              "സമുദ്രതിരകളിലും നിന്റെ നാമം എന്നെ താങ്ങുന്നു,",
+              "മേഘഗർജ്ജനങ്ങളിലും നിന്റെ നാമം എന്നെ നിലനിറുത്തുന്നു."
+            ]
+          },
+          {
+            "section": "അന്തരം 3",
+            "lines": [
+              "നിന്നിൽ നിന്ന് അകന്നു ഞാൻ എവിടേക്കു പോകും?",
+              "എന്റെ ഹൃദയത്തിന്റെ പ്രകാശം നീയത്രേ,",
+              "സ്വയം ബലിയായി നീ എനിക്കു പുതിയ ജീവിതം നൽകി,",
+              "എന്റെ പാപഭാരം ചുമന്ന് ക്രൂശിൽ ജീവൻ നൽകി."
             ]
           }
         ]
@@ -103892,26 +101626,6 @@
     "thumbnailUrl": "/assets/songs/hindi_card.png"
   },
   {
-    "id": "yeshu_naam_jap",
-    "slug": "yeshu-naam-jap",
-    "title": "Yeshu Naam Jap",
-    "videoUrl": "",
-    "description": "Yeshu Naam Jap - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu Naam Jap"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/malayalam_card.png"
-  },
-  {
     "id": "yeshu_naam_yeshu_naam_chahe_tum_ko_dil_se_rock_n_roll",
     "slug": "yeshu-naam-yeshu-naam-chahe-tum-ko-dil-se-rock-n-roll",
     "title": "Yeshu naam Yeshu naam Chahe tum ko dil se Rock N Roll",
@@ -104416,26 +102130,6 @@
       }
     },
     "thumbnailUrl": "/assets/songs/malayalam_card.png"
-  },
-  {
-    "id": "yeshu_ke_naam_me",
-    "slug": "yeshu-ke-naam-me",
-    "title": "Yeshu ke naam me",
-    "videoUrl": "",
-    "description": "Yeshu ke naam me - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu ke naam me"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/english_card.png"
   },
   {
     "id": "yeshu_ke_peeche_jayenge_pyarom",
@@ -107324,26 +105018,6 @@
     "thumbnailUrl": "/assets/songs/english_card.png"
   },
   {
-    "id": "yeshu_masihi_geet",
-    "slug": "yeshu-masihi-geet",
-    "title": "Yeshu Masihi Geet",
-    "videoUrl": "",
-    "description": "Yeshu Masihi Geet - Hindi Christian song seed entry imported from waytochurch index.",
-    "translations": {
-      "hindi": {
-        "lang": "Hindi",
-        "lyrics": [
-          {
-            "lines": [
-              "Yeshu Masihi Geet"
-            ]
-          }
-        ]
-      }
-    },
-    "thumbnailUrl": "/assets/songs/english_card.png"
-  },
-  {
     "id": "e0_a4_b0_e0_a5_82_e0_a4_b9_e0_a4_a4_e0_a4_ad_e0_a4_b0_e0_a4_a6_e",
     "slug": "e0-a4-b0-e0-a5-82-e0-a4-b9-e0-a4-a4-e0-a4-ad-e0-a4-b0-e0-a4-a6-e0-a5-87",
     "title": "रूह त भरदे",
@@ -107985,49 +105659,126 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "section": "मुखड़ा",
             "lines": [
-              "वादा जो तुमने किया खुदा",
-              "हरदम निभाता गया…",
-              "शुन्य से तुमने मुझे ऊपर उठाया",
-              "वादा जो तुमने किया खुदा",
-              "हरदम निभाता गया",
-              "अब्राहम का पिता है तू",
-              "मूसा का साथी बना…",
-              "जब भी वे टूट पड़े तू उनका सहारा बना …",
-              "अपनी नजर मुझ पर भी डल….",
-              "टूट जाती हूँ बिखर जाती हूँ ….",
-              "तुहि संभल",
-              "वचनो में तुम ने हमसे कहा",
-              "साथ तेरे हूँ कहा ….",
-              "जो रिस्ता जोड़ा तुमने इस्राएलियों के साथ",
-              "न छोड़ा तुम ने न त्यागा उन्हें …",
-              "टूट जाती हूँ बिखर जाती हूँ …",
-              "तुहि संभल"
+              "वादा जो तुमने किया खुदा,",
+              "हरदम निभाता गया,",
+              "शून्य से तुमने मुझे ऊपर उठाया,",
+              "वादा जो तुमने किया खुदा, हरदम निभाता गया।"
             ]
           },
           {
-            "verse": "1",
+            "section": "अंतरा 1",
             "lines": [
-              "verse 1",
-              "the promise you made, o god,",
-              "you always kept.",
-              "from nothing you lifted me up,",
-              "the promise you made, o god,",
-              "you always kept.",
-              "verse 2",
-              "you are the father of abraham,",
-              "you became the companion of moses.",
-              "whenever they fell, you became their support.",
-              "now turn your eyes upon me too,",
-              "for i break down and fall apart,",
-              "only you can hold me together.",
-              "verse 3",
-              "in your word you told us,",
-              "“i am with you.”",
-              "the covenant you made with the israelites,",
-              "you neither left nor abandoned them.",
-              "in the same way, when i fall and break apart,",
-              "only you can restore and sustain me."
+              "अब्राहम का पिता है तू,",
+              "मूसा का साथी बना,",
+              "जब भी वे टूट पड़े, तू उनका सहारा बना,",
+              "अपनी नज़र मुझ पर भी डाल, टूट जाती हूँ, बिखर जाती हूँ, तू ही संभाल।"
+            ]
+          },
+          {
+            "section": "अंतरा 2",
+            "lines": [
+              "वचनों में तुमने हमसे कहा,",
+              "साथ तेरे हूँ, कहा।",
+              "जो रिश्ता जोड़ा तुमने इस्राएलियों के साथ,",
+              "न छोड़ा तुमने, न त्यागा उन्हें, टूट जाती हूँ, बिखर जाती हूँ, तू ही संभाल।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Vaada jo tumne kiya Khuda,",
+              "Hardam nibhaata gaya,",
+              "Shoonya se tumne mujhe upar uthaaya,",
+              "Vaada jo tumne kiya Khuda, hardam nibhaata gaya."
+            ]
+          },
+          {
+            "section": "Antara 1",
+            "lines": [
+              "Abraaham ka pita hai tu,",
+              "Moosa ka saathi bana,",
+              "Jab bhi ve toot pade, tu unka sahaara bana,",
+              "Apni nazar mujh par bhi daal, toot jaati hoon, bikhar jaati hoon, tu hi sambhaal."
+            ]
+          },
+          {
+            "section": "Antara 2",
+            "lines": [
+              "Vachanon mein tumne humse kaha,",
+              "Saath tere hoon, kaha.",
+              "Jo rishta joda tumne Israaeeliyon ke saath,",
+              "Na chhoda tumne, na tyaaga unhen, toot jaati hoon, bikhar jaati hoon, tu hi sambhaal."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Chorus",
+            "lines": [
+              "The promise You made, O God,",
+              "You have always kept,",
+              "You lifted me up from nothing,",
+              "The promise You made, O God, You have always kept."
+            ]
+          },
+          {
+            "section": "Verse 1",
+            "lines": [
+              "You are the Father of Abraham,",
+              "You became the companion of Moses,",
+              "Whenever they fell, You became their support,",
+              "Turn Your eyes on me as well; when I fall apart, only You can hold me together."
+            ]
+          },
+          {
+            "section": "Verse 2",
+            "lines": [
+              "In Your word You told us,",
+              "\"I am with you,\" You said.",
+              "The covenant You made with Israel,",
+              "You never left nor forsook; when I break apart, only You can restore me."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "കൊറസ്",
+            "lines": [
+              "ദൈവമേ, നീ ചെയ്ത വാഗ്ദാനം,",
+              "എപ്പോഴും നിറവേറ്റി,",
+              "ശൂന്യതയിൽ നിന്ന് നീ എന്നെ ഉയർത്തി,",
+              "നീ ചെയ്ത വാഗ്ദാനം ഒരിക്കലും തെറ്റിയില്ല."
+            ]
+          },
+          {
+            "section": "അന്തരം 1",
+            "lines": [
+              "അബ്രാഹാമിന്റെ പിതാവാണ് നീ,",
+              "മോശെയുടെ കൂട്ടുകാരനായി നീ നിന്നു,",
+              "അവർ തകർന്നപ്പോൾ നീ അവർക്കു ആശ്രയമായി,",
+              "എന്നിലേക്കും ദൃഷ്ടി ചായിക്കേണമേ; ഞാൻ തകരുമ്പോൾ നീയേ എന്നെ താങ്ങുക."
+            ]
+          },
+          {
+            "section": "അന്തരം 2",
+            "lines": [
+              "നിന്റെ വചനത്തിൽ നീ ഞങ്ങളോടു പറഞ്ഞു,",
+              "\"ഞാൻ നിന്നോടുകൂടെ ഉണ്ടു.\"",
+              "ഇസ്രായേലിനോടു നീ ചെയ്ത നിയമംപോലെ,",
+              "നീ അവരെ വിട്ടില്ല; ഞാൻ തകരുമ്പോഴും നീയേ എന്നെ സംരക്ഷിക്കും."
             ]
           }
         ]
@@ -108046,23 +105797,126 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "section": "मुखड़ा",
             "lines": [
-              "विजय हुआ , विजय हुआ",
-              "येशु मेरा विजय हुआ",
-              "शैतान हरा हुआ",
-              "मेरा येशु विजय हुआ",
-              "१. येशु ने क्रूस पर शैतान के",
-              "सिर को कुचल दिया",
-              "मृत्यु पर विजय होकर",
-              "हमे विजय जीवन दिया",
-              "हल्लेलुयाह हल्लेलुयाह",
-              "येशु मेरा विजय हुआ (२)",
-              "२. शत्रु के हर एक शक्ति पर",
-              "अधिकार हमे मिला",
-              "यहोवा निस्सी हमारा है",
-              "जय देनेवाला",
-              "हल्लेलुयाह हल्लेलुयाह",
-              "येशु मेरा विजय हुआ (२)"
+              "विजय हुआ, विजय हुआ,",
+              "येशु मेरा विजय हुआ,",
+              "शैतान हारा हुआ,",
+              "मेरा येशु विजय हुआ।"
+            ]
+          },
+          {
+            "section": "अंतरा 1",
+            "lines": [
+              "येशु ने क्रूस पर शैतान के सिर को कुचल दिया,",
+              "मृत्यु पर विजय होकर, हमें विजय जीवन दिया,",
+              "हल्लेलुयाह, हल्लेलुयाह,",
+              "येशु मेरा विजय हुआ।"
+            ]
+          },
+          {
+            "section": "अंतरा 2",
+            "lines": [
+              "शत्रु की हर एक शक्ति पर अधिकार हमें मिला,",
+              "यहोवा निस्सी हमारा है, जय देनेवाला,",
+              "हल्लेलुयाह, हल्लेलुयाह,",
+              "येशु मेरा विजय हुआ।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Vijay hua, vijay hua,",
+              "Yeshu mera vijay hua,",
+              "Shaitaan haara hua,",
+              "Mera Yeshu vijay hua."
+            ]
+          },
+          {
+            "section": "Antara 1",
+            "lines": [
+              "Yeshu ne kroos par Shaitaan ke sir ko kuchal diya,",
+              "Mrityu par vijay hokar, humein vijay jeevan diya,",
+              "Halleluyah, halleluyah,",
+              "Yeshu mera vijay hua."
+            ]
+          },
+          {
+            "section": "Antara 2",
+            "lines": [
+              "Shatru ki har ek shakti par adhikaar humein mila,",
+              "Yahowa Nissi hamaara hai, jai dene wala,",
+              "Halleluyah, halleluyah,",
+              "Yeshu mera vijay hua."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Chorus",
+            "lines": [
+              "Victory is won, victory is won,",
+              "Jesus has given me victory,",
+              "Satan has been defeated,",
+              "My Jesus has won the victory."
+            ]
+          },
+          {
+            "section": "Verse 1",
+            "lines": [
+              "On the cross Jesus crushed the head of Satan,",
+              "Triumphant over death, He gave us victorious life,",
+              "Hallelujah, hallelujah,",
+              "Jesus has won the victory."
+            ]
+          },
+          {
+            "section": "Verse 2",
+            "lines": [
+              "We have been given authority over every power of the enemy,",
+              "The Lord our banner gives us the triumph,",
+              "Hallelujah, hallelujah,",
+              "Jesus has won the victory."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "കൊറസ്",
+            "lines": [
+              "ജയം നേടി, ജയം നേടി,",
+              "എന്റെ യേശു ജയം നേടി,",
+              "സാത്താൻ തോറ്റുപോയി,",
+              "എന്റെ യേശു ജയം നേടി."
+            ]
+          },
+          {
+            "section": "അന്തരം 1",
+            "lines": [
+              "ക്രൂശിൽ യേശു സാത്താന്റെ തല ചതച്ചുകളഞ്ഞു,",
+              "മരണത്തെ ജയിച്ച് ഞങ്ങൾക്കു ജയജീവിതം നൽകി,",
+              "ഹല്ലേലൂയാ, ഹല്ലേലൂയാ,",
+              "എന്റെ യേശു ജയം നേടി."
+            ]
+          },
+          {
+            "section": "അന്തരം 2",
+            "lines": [
+              "ശത്രുവിന്റെ എല്ലാ ശക്തികളിലും ഞങ്ങൾക്ക് അധികാരം നൽകി,",
+              "യഹോവ നിസ്സി ഞങ്ങളുടെ ജയധ്വജമാണ്,",
+              "ഹല്ലേലൂയാ, ഹല്ലേലൂയാ,",
+              "എന്റെ യേശു ജയം നേടി."
             ]
           }
         ]
