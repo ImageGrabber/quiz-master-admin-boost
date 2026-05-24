@@ -89,7 +89,8 @@ const DEVANAGARI_TO_LATIN: Record<string, string> = {
     "य": "y", "र": "r", "ल": "l", "व": "v",
     "श": "sh", "ष": "sh", "स": "s", "ह": "h",
     "ळ": "l", "क्ष": "ksh", "ज्ञ": "gy",
-    "ज़": "z", "फ़": "f", "क़": "q", "ख़": "kh", "ग़": "g", "ृ": "ri",
+    "ज़": "z", "फ़": "f", "क़": "q", "ख़": "kh", "ग़": "g", "ृ": "ri", "ड़": "d", "ढ़": "dh",
+    "ज़": "z", "फ़": "f", "क़": "q", "ख़": "kh", "ग़": "g",
     "१": "1", "२": "2", "३": "3", "४": "4", "५": "5", "६": "6", "७": "7", "८": "8", "९": "9", "०": "0"
 };
 
@@ -129,12 +130,76 @@ const transliterateHindiToHinglish = (text: string) => {
         "Toone": "Tune", "Kitnee": "Kitni", "Sundr": "Sundar", "Pnchhee": "Panchhi",
         "Bhee": "Bhi", "Sirjnhaaraa": "Sirjanhara", "Paalnhaaraa": "Palanhara",
         "Detaa": "Deta", "Jl": "Jal", "Men": "Main", "Dhny": "Dhanya", "Khoon": "Kahun",
-        "Raaphaa": "Rapha", "Shaalom": "Shalom"
+        "Raaphaa": "Rapha", "Shaalom": "Shalom", "Phchaan": "Pehchaan", "Eemaan": "Imaan",
+        "Haalleloo": "Hallelu", "Haallelooyaah": "Hallelujah", "Snsaar": "Sansaar",
+        "Sng": "Sang", "Bhr": "Bhar", "Vchnon": "Vachnon", "Chlaa": "Chala",
+        "Brkton": "Barkaton", "Ghr": "Ghar", "Bn": "Ban", "Mhimaa": "Mahima",
+        "Hotee": "Hoti", "Bdtaa": "Badhta", "Hr": "Har", "Sty": "Satya", "Aatmaa": "Aatma",
+        "Kaa": "Ka", "Bl": "Bal", "Hee": "Hi", "Bdle": "Badle", "Saamrth": "Samarth",
+        "Bhrosaa": "Bharosa", "Dee": "Di", "Jindgee": "Zindagi", "Pr": "Par",
+        "Kripaa": "Kripa", "Kee": "Ki", "Dyaa": "Daya", "Aannd": "Aanand",
+        "Dheerj": "Dheeraj", "Kitnaa": "Kitna", "Bhlaaee": "Bhalai", "He": "Hai", "Muje": "Mujhe",
+        "Taarnhaare": "Taranhare", "Jg": "Jag", "Jhaan": "Jahan", "Krte": "Karte",
+        "Svrg": "Swarg", "Raajaa": "Raja", "Dhrtee": "Dharti", "Vaasee": "Vaasi",
+        "Hosnnaa": "Hosanna", "Apnaa": "Apna", "Tn": "Tan", "Dhn": "Dhan", "Sb": "Sab",
+        "Lekr": "Lekar", "Kr": "Kar", "Hmaare": "Hamare", "Aaraadhnaa": "Aaradhana",
+        "Rhenge": "Rahenge", "Jb": "Jab", "Tk": "Tak", "Vchn": "Vachan", "Dikhaa": "Dikha",
+        "Chl": "Chal", "Yeshuaa": "Yeshua", "Teraa": "Tera", "Dhnyvaad": "Dhanyawad",
+        "Sdaa": "Sada", "Oonchaaee": "Unchai", "Ghraaee": "Gehrai", "Chaudaaee": "Chaudai",
+        "Vrnn": "Varnan", "Shtru": "Shatru", "Hraakr": "Harakar", "Vo": "Voh",
+        "Vijy": "Vijay", "Meree": "Meri", "Ldaaee": "Ladai", "Ldtaa": "Ladta",
+        "Atuly": "Atulya", "Pvitr": "Pavitra", "Drd": "Dard", "Mitaataa": "Mitata",
+        "Hmen": "Hame", "Chhudaayaa": "Chudaya", "Bchaayaa": "Bachaya", "Gaao": "Gao",
+        "Hmne": "Hamne", "Paaee": "Pai", "Naa": "Na", "Drenge": "Darenge",
+        "Ldenge": "Ladenge", "Slaam": "Salaam", "Laae": "Laye", "Paigaam": "Paigham",
+        "Klvaaree": "Kalvari", "Duhkh": "Dukh", "Sh": "Sah", "Liyaa": "Liya",
+        "Paapee": "Paapi", "Kyaa": "Kya", "Dekhaa": "Dekha", "Thaa": "Tha",
+        "Koee": "Koi", "Khoobee": "Khoobi", "Thee": "Thi", "Khoyaa": "Khoya",
+        "Huaa": "Hua", "Tb": "Tab", "Njaat": "Najaat", "Bnaa": "Bana", "Azeezon": "Azizon",
+        "Gyaa": "Gaya", "Duniyaa": "Duniya", "Dldl": "Daldal", "Doobaa": "Dooba",
+        "Haamee": "Haami", "Bhaayaa": "Bahaya", "Zkhmon": "Zakhmon", "Apnaayaa": "Apnaya",
+        "Hraayaa": "Haraya", "Klvree": "Kalvari", "Raastaa": "Raasta", "Kndhe": "Kandhe",
+        "Lhoo": "Lahu", "Bhtaa": "Behta", "Shtaa": "Sehta", "Chltaa": "Chalta",
+        "Khtaa": "Kehta", "Chhedaa": "Cheda", "Phnaayaa": "Pehnaya", "Chaahtaa": "Chahta",
+        "Zkhm": "Zakhm", "Sbko": "Sabko", "Kuchh": "Kuch", "N": "Na",
+        "Paapiyon": "Papiyon", "Pyaaraa": "Pyara", "Shaaraa": "Sahara", "Jaataa": "Jata",
+        "Nhee": "Nahi", "Khaalee": "Khali", "Aakr": "Aakar", "Kaisee": "Kaisi",
+        "Schche": "Sachche", "Upsthiti": "Upasthiti", "Maaphee": "Maafi", "Aataa": "Aata",
+        "Khzaanaa": "Khazana", "Dvaar": "Dwar", "Prvesh": "Pravesh", "Rhegaa": "Rahega",
+        "Saaraa": "Saara", "Uskee": "Uski", "Phriyaad": "Fariyad", "Degaa": "Dega",
+        "Abdee": "Abdi", "Zindgee": "Zindagi", "Uskaa": "Uska", "Phrmaan": "Farmaan",
+        "Mriym": "Mariyam", "Tnaav": "Tanaav", "Kthin": "Kathin", "Mgr": "Magar",
+        "Ghbraaee": "Ghabrai", "Thaamaa": "Thaama", "Yoosuph": "Yusuf", "Jnm": "Janam",
+        "Pnaah": "Panaah", "Dhoondhtee": "Dhoondhti", "Dfaa": "Dafa", "Khudaa": "Khuda",
+        "Mseeh": "Masih", "Pyaaree": "Pyaari", "Hnsee": "Hansi", "Nnhee": "Nanhi",
+        "See": "Si", "Bsee": "Basi", "Aayee": "Aayi", "Theen": "Thin", "Chmkaa": "Chamka",
+        "Sitaaraa": "Sitara", "Pde": "Pade", "Hairt": "Hairat", "Mjoosee": "Majoosi",
+        "Baalk": "Baalak", "Shhr": "Shahar", "Ghbraayaa": "Ghabraya", "Ske": "Sake",
+        "Rhe": "Rahe", "Spne": "Sapne", "Btaayaa": "Bataya", "Yhaan": "Yahan",
+        "Chrnee": "Charni", "Chmkeelaa": "Chamkila", "Taaraa": "Tara", "Jnmaa": "Janma",
+        "Aazaad": "Aazad", "Anugrh": "Anugrah", "Sfr": "Safar", "Jgh": "Jagah",
+        "Kdiyaan": "Kadiyan", "Todtaa": "Todta", "Chrvaahe": "Charvahe", "Bhtee": "Bahti",
+        "Kbeelon": "Kabeelon", "Prkaar": "Prakaar", "Judtaa": "Judta", "Bndhn": "Bandhan",
+        "Pribhaashit": "Paribhashit", "Vinmr": "Vinamra", "Shaask": "Shaasak",
+        "Gddee": "Gaddi", "Unkaa": "Unka", "Uthaataa": "Uthaata", "Hraa": "Hara",
+        "Sktaa": "Sakta", "Raip": "Rap", "Ghoshnaa": "Ghoshna", "Dhdkte": "Dhadakte",
+        "Krne": "Karne", "Annt": "Anant", "Klaa": "Kala", "Sbhee": "Sabhi",
+        "Raajaaon": "Rajaon", "Prbhuon": "Prabhuon", "Rhaa": "Raha", "Shhnshaah": "Shahenshah",
+        "Baadshaah": "Baadshah", "Jhukkr": "Jhukkar", "Prnaam": "Pranaam", "Mujssm": "Mujassam",
+        "Klaam": "Kalaam", "Amn": "Aman", "Bndhnon": "Bandhanon", "Jkdon": "Jakdon",
+        "Phrishton": "Farishton", "Aaegee": "Aayegi", "Doolhaa": "Dulha", "Dulhn": "Dulhan",
+        "Jaaegaa": "Jayega"
     };
+
+    // Remove "Khoon" from commonFixes because "Khoon" means "Blood"
+    delete commonFixes["Khoon"];
 
     for (const [bad, good] of Object.entries(commonFixes)) {
         result = result.replace(new RegExp(`\\b${bad}\\b`, "g"), good);
     }
+    
+    // Special phrase fixes
+    result = result.replace(/Dhanya Khoon/gi, "Dhanya Kahun");
 
     return result;
 };
