@@ -1,0 +1,1202 @@
+[
+  {
+    "id": "wo_mera_jeevan",
+    "slug": "wo-mera-jeevan",
+    "title": "Wo Mera Jeevan",
+    "videoUrl": "",
+    "description": "Wo Mera Jeevan - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "translations": {
+      "hindi": {
+        "lang": "Hindi",
+        "lyrics": [
+          {
+            "section": "मुखड़ा",
+            "lines": [
+              "चंगा करने वाला है परमेश्वर,",
+              "दया करने वाला है परमेश्वर,",
+              "उसकी सदा मैं स्तुति करूँगा,",
+              "उसके सिवा कहीं न झुकूँगा।"
+            ]
+          },
+          {
+            "section": "कोरस",
+            "lines": [
+              "वो मेरा जीवन, वो मेरा जीवन,",
+              "वो मेरा दाता, वो मेरा दाता,",
+              "वो मेरे प्राणों को बचाता,",
+              "वो मेरे प्राणों को बचाता।"
+            ]
+          },
+          {
+            "section": "अंतरा 1",
+            "lines": [
+              "अंधों को आँखें देता है वो,",
+              "लंगड़ों को टाँगें देता है वो,",
+              "बहरे भी सुनने लगते हैं,",
+              "कोढ़ी को चंगा करता है वो।"
+            ]
+          },
+          {
+            "section": "अंतरा 2",
+            "lines": [
+              "मुझको ताकत देता है वो,",
+              "स्वर्गीय आशीष देता है वो,",
+              "बीमारियाँ उड़ जाती हैं,",
+              "ऐसी चंगाई देता है वो।"
+            ]
+          },
+          {
+            "section": "अंतरा 3",
+            "lines": [
+              "उसकी सदा मैं स्तुति करूँगा,",
+              "उसके सिवा कहीं न झुकूँगा,",
+              "उसके पीछे मैं चलता रहूँगा,",
+              "उसका साथ कभी न छोड़ूँगा।"
+            ]
+          },
+          {
+            "section": "ब्रिज",
+            "lines": [
+              "यीशु टूटों और निर्बलों को चंगा करता है,",
+              "वह पहले भी करता आया है, आज भी मेरे लिए करता है,",
+              "उसने मुझे अपने प्रकाश से भर दिया है,",
+              "उसकी अनुग्रह से मैं स्वतंत्र हूँ।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Changa karne wala hai Parmeshwar,",
+              "Daya karne wala hai Parmeshwar,",
+              "Uski sada main stuti karunga,",
+              "Uske siwa kahin na jhukunga."
+            ]
+          },
+          {
+            "section": "Chorus",
+            "lines": [
+              "Wo mera jeevan, wo mera jeevan,",
+              "Wo mera data, wo mera data,",
+              "Wo mere praanon ko bachata,",
+              "Wo mere praanon ko bachata."
+            ]
+          },
+          {
+            "section": "Antara 1",
+            "lines": [
+              "Andhon ko aankhen deta hai wo,",
+              "Langdon ko taangen deta hai wo,",
+              "Behre bhi sunne lagte hain,",
+              "Kodhi ko changa karta hai wo."
+            ]
+          },
+          {
+            "section": "Antara 2",
+            "lines": [
+              "Mujhko taqat deta hai wo,",
+              "Swargiya aashish deta hai wo,",
+              "Bimaariyan ud jaati hain,",
+              "Aisi changaai deta hai wo."
+            ]
+          },
+          {
+            "section": "Antara 3",
+            "lines": [
+              "Uski sada main stuti karunga,",
+              "Uske siwa kahin na jhukunga,",
+              "Uske peeche main chalta rahunga,",
+              "Uska saath kabhi na chhodunga."
+            ]
+          },
+          {
+            "section": "Bridge",
+            "lines": [
+              "Yeshu tooton aur nirbalon ko changa karta hai,",
+              "Woh pehle bhi karta aaya hai, aaj bhi mere liye karta hai,",
+              "Usne mujhe apne prakaash se bhar diya hai,",
+              "Uski anugrah se main swatantra hoon."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Verse",
+            "lines": [
+              "God is the One who heals,",
+              "God is the One who shows mercy,",
+              "I will praise Him always,",
+              "I will bow to no one else."
+            ]
+          },
+          {
+            "section": "Chorus",
+            "lines": [
+              "He is my life, He is my life,",
+              "He is my giver, He is my giver,",
+              "He saves my soul,",
+              "He saves my soul."
+            ]
+          },
+          {
+            "section": "Verse 1",
+            "lines": [
+              "He gives sight to the blind,",
+              "He gives strength to the lame,",
+              "Even the deaf begin to hear,",
+              "He heals the leper."
+            ]
+          },
+          {
+            "section": "Verse 2",
+            "lines": [
+              "He gives me strength,",
+              "He gives heavenly blessings,",
+              "Sicknesses fly away,",
+              "Such healing He gives."
+            ]
+          },
+          {
+            "section": "Verse 3",
+            "lines": [
+              "I will praise Him always,",
+              "I will bow to no one else,",
+              "I will keep following Him,",
+              "I will never leave His side."
+            ]
+          },
+          {
+            "section": "Bridge",
+            "lines": [
+              "Jesus heals the broken and the weak,",
+              "He has done it before and He still does it for me,",
+              "He filled me with His light,",
+              "By His grace I have been set free."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "മുഖड़ा",
+            "lines": [
+              "സൗഖ്യമരുളുന്നവൻ ദൈവമാണ്,",
+              "കരുണ കാണിക്കുന്നവൻ ദൈവമാണ്,",
+              "അവനെ ഞാൻ എല്ലായ്പ്പോഴും സ്തുതിക്കും,",
+              "അവനെ വിട്ട് മറ്റൊരാളിന്നും ഞാൻ വണങ്ങുകയില്ല."
+            ]
+          },
+          {
+            "section": "കൊറസ്",
+            "lines": [
+              "അവൻ എന്റെ ജീവൻ, അവൻ എന്റെ ജീവൻ,",
+              "അവൻ എന്റെ ദാതാവ്, അവൻ എന്റെ ദാതാവ്,",
+              "എന്റെ പ്രാണനെ അവൻ രക്ഷിക്കുന്നു,",
+              "എന്റെ പ്രാണനെ അവൻ രക്ഷിക്കുന്നു."
+            ]
+          },
+          {
+            "section": "അന്തരം 1",
+            "lines": [
+              "കുരുടർക്കു കണ്ണ് കൊടുക്കുന്നവൻ അവൻ,",
+              "മുടന്തർക്കു ശക്തി നൽകുന്നവൻ അവൻ,",
+              "ബധിരരും കേൾക്കിത്തുടങ്ങുന്നു,",
+              "കുഷ്ഠരോഗിയെയും സൗഖ്യമാക്കുന്നവൻ അവൻ."
+            ]
+          },
+          {
+            "section": "അന്തരം 2",
+            "lines": [
+              "എനിക്കു ശക്തി നൽകുന്നവൻ അവൻ,",
+              "സ്വർഗീയ ആശീർവാദം നൽകുന്നവൻ അവൻ,",
+              "രോഗങ്ങൾ പറന്നുപോകുന്നു,",
+              "അങ്ങനെ സൗഖ്യം നൽകുന്നവൻ അവൻ."
+            ]
+          },
+          {
+            "section": "അന്തരം 3",
+            "lines": [
+              "അവനെ ഞാൻ എല്ലായ്പ്പോഴും സ്തുതിക്കും,",
+              "അവനെ വിട്ട് മറ്റൊരാളിന്നും ഞാൻ വണങ്ങുകയില്ല,",
+              "അവന്റെ പിന്നാലെ ഞാൻ നടന്നുകൊണ്ടിരിക്കും,",
+              "അവന്റെ സാന്നിധ്യം ഞാൻ ഒരിക്കലും വിടുകയില്ല."
+            ]
+          },
+          {
+            "section": "ബ്രിഡ്ജ്",
+            "lines": [
+              "യേശു തകർന്നവരെയും ദുർബലരെയും സൗഖ്യമാക്കുന്നു,",
+              "മുമ്പും ചെയ്തതുപോലെ ഇന്നും എനിക്ക് വേണ്ടി ചെയ്യുന്നു,",
+              "അവൻ തന്റെ വെളിച്ചം കൊണ്ട് എന്നെ നിറച്ചു,",
+              "അവന്റെ കൃപയാൽ ഞാൻ സ്വതന്ത്രനായി."
+            ]
+          }
+        ]
+      }
+    },
+    "thumbnailUrl": "/assets/songs/hindi_card.png"
+  },
+  {
+    "id": "woh_pyaari_saleeb",
+    "slug": "woh-pyaari-saleeb",
+    "title": "Woh Pyaari Saleeb",
+    "videoUrl": "",
+    "description": "Woh Pyaari Saleeb - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "translations": {
+      "hindi": {
+        "lang": "Hindi",
+        "lyrics": [
+          {
+            "section": "अंतरा 1",
+            "lines": [
+              "वह प्यारी सलीब मुझ को दीख पड़ती है,",
+              "एक पहाड़ी पर जो खड़ी थी,",
+              "कि मसीह-ए-मस्लूब ने नदामत उठा,",
+              "गुनहगारों की खातिर जान दी।"
+            ]
+          },
+          {
+            "section": "कोरस",
+            "lines": [
+              "पास न छोड़ूँगा प्यारी सलीब,",
+              "जब तक दुनिया में होगा क़याम,",
+              "लिपटा रहूँगा मैं उसी से,",
+              "कि मस्लूब में है अब्दी आराम।"
+            ]
+          },
+          {
+            "section": "अंतरा 2",
+            "lines": [
+              "आह, वह प्यारी सलीब जिसकी होती तौहीन,",
+              "है मुझको बेहद दिलपज़ीर,",
+              "कि खुदा के महबूब उस जलाली मसीह,",
+              "ने सहा दुःख बेनज़ीर।"
+            ]
+          },
+          {
+            "section": "अंतरा 3",
+            "lines": [
+              "मुझे प्यारी सलीब में, गो लहू-लुहान,",
+              "नज़र आती है ख़ूबसूरती,",
+              "कि खुदा के मसीह ने कफ़्फ़ारा दिया,",
+              "ता मिले मुझे ज़िन्दगी।"
+            ]
+          },
+          {
+            "section": "अंतरा 4",
+            "lines": [
+              "मैं उस प्यारी सलीब का रहूँ वफ़ादार,",
+              "सिपाही हमेशा ज़रूर,",
+              "जब तक मेरा मसीह न करेगा मुझे,",
+              "अपने अब्दी जलाल में मंज़ूर।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Antara 1",
+            "lines": [
+              "Woh pyaari saleeb mujh ko dikh padti hai,",
+              "Ek pahaadi par jo khadi thi,",
+              "Ki Masih-e-masloob ne nadaamat utha,",
+              "Gunahgaaron ki khaatir jaan di."
+            ]
+          },
+          {
+            "section": "Chorus",
+            "lines": [
+              "Paas na chhodunga pyaari saleeb,",
+              "Jab tak duniya mein hoga qayaam,",
+              "Lipta rahunga main usi se,",
+              "Ki masloob mein hai abdi aaraam."
+            ]
+          },
+          {
+            "section": "Antara 2",
+            "lines": [
+              "Aah, woh pyaari saleeb jiski hoti tauheen,",
+              "Hai mujhko behad dilpazeer,",
+              "Ki Khuda ke mahboob us jalaali Masih,",
+              "Ne saha dukh benazeer."
+            ]
+          },
+          {
+            "section": "Antara 3",
+            "lines": [
+              "Mujhe pyaari saleeb mein, go lahu-luhaan,",
+              "Nazar aati hai khoobsoorati,",
+              "Ki Khuda ke Masih ne kaffaara diya,",
+              "Ta mile mujhe zindagi."
+            ]
+          },
+          {
+            "section": "Antara 4",
+            "lines": [
+              "Main us pyaari saleeb ka rahun wafadaar,",
+              "Sipaahi hamesha zaroor,",
+              "Jab tak mera Masih na karega mujhe,",
+              "Apne abdi jalaal mein manzoor."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Verse 1",
+            "lines": [
+              "That precious cross appears before me,",
+              "Standing upon a hill,",
+              "Where the crucified Messiah bore the shame,",
+              "And gave His life for sinners."
+            ]
+          },
+          {
+            "section": "Chorus",
+            "lines": [
+              "I will not let go of that precious cross,",
+              "As long as this world shall stand,",
+              "I will cling to it always,",
+              "For in the Crucified One there is eternal rest."
+            ]
+          },
+          {
+            "section": "Verse 2",
+            "lines": [
+              "Ah, that precious cross though despised by many,",
+              "Is deeply dear to me,",
+              "For God's beloved and glorious Christ,",
+              "Suffered unmatched sorrow there."
+            ]
+          },
+          {
+            "section": "Verse 3",
+            "lines": [
+              "In that precious cross, though stained with blood,",
+              "I still behold great beauty,",
+              "For the Christ of God made atonement there,",
+              "So that I might receive life."
+            ]
+          },
+          {
+            "section": "Verse 4",
+            "lines": [
+              "I will remain faithful to that precious cross,",
+              "A true soldier to the end,",
+              "Until my Christ receives me,",
+              "Into His eternal glory."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "അന്തരം 1",
+            "lines": [
+              "ആ പ്രിയ ക്രൂശ് എനിക്കു ദൃശ്യമാകുന്നു,",
+              "ഒരു കുന്നിന് മുകളിൽ നിലകൊണ്ടത്,",
+              "ക്രൂശിക്കപ്പെട്ട മശീഹാ നിന്ദ വഹിച്ചതും,",
+              "പാപികൾക്കായി ജീവൻ നല്കിയതും അവിടെയാണ്."
+            ]
+          },
+          {
+            "section": "കൊറസ്",
+            "lines": [
+              "ആ പ്രിയ ക്രൂശിനെ ഞാൻ വിടുകയില്ല,",
+              "ഈ ലോകം നിലനിൽക്കുന്നിടത്തോളം,",
+              "അതോടു ചേർന്നിരിക്കും ഞാൻ,",
+              "ക്രൂശിതനിൽ ശാശ്വത വിശ്രമമുണ്ടല്ലോ."
+            ]
+          },
+          {
+            "section": "അന്തരം 2",
+            "lines": [
+              "അവഹേളിക്കപ്പെടുന്ന ആ പ്രിയ ക്രൂശ്,",
+              "എന്നാൽ എനിക്കതീവ പ്രിയം,",
+              "ദൈവത്തിന്റെ പ്രിയനും മഹത്വമുള്ള ക്രിസ്തുവും,",
+              "അവിടെ അതുല്യ ദുഃഖം സഹിച്ചു."
+            ]
+          },
+          {
+            "section": "അന്തരം 3",
+            "lines": [
+              "രക്തം തൂകിയ ആ പ്രിയ ക്രൂശിൽ,",
+              "ഞാൻ സൗന്ദര്യം കാണുന്നു,",
+              "ദൈവത്തിന്റെ ക്രിസ്തു അവിടെ പ്രായശ്ചിത്തം ചെയ്തു,",
+              "എനിക്കു ജീവൻ ലഭിക്കേണ്ടതിന്ന്."
+            ]
+          },
+          {
+            "section": "അന്തരം 4",
+            "lines": [
+              "ആ പ്രിയ ക്രൂശിനോടു ഞാൻ വിശ്വസ്തനാകും,",
+              "ഒരു സത്യസന്ധ സൈനികനായി,",
+              "എന്റെ ക്രിസ്തു എന്നെ സ്വീകരിക്കുന്നതുവരെയും,",
+              "തന്റെ നിത്യ മഹത്വത്തിലേക്കു."
+            ]
+          }
+        ]
+      }
+    },
+    "thumbnailUrl": "/assets/songs/english_card.png"
+  },
+  {
+    "id": "wah_prabhu_hai",
+    "slug": "wah-prabhu-hai",
+    "title": "Wah prabhu hai",
+    "videoUrl": "",
+    "description": "Wah prabhu hai - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "translations": {
+      "hindi": {
+        "lang": "Hindi",
+        "lyrics": [
+          {
+            "section": "मुखड़ा",
+            "lines": [
+              "वह प्रभु है, वह प्रभु है,",
+              "जी उठा वह मुर्दों में से, वह प्रभु है।",
+              "हर एक घुटना झुकेगा,",
+              "हर ज़ुबान गाएगी कि यीशु मेरा प्रभु है।"
+            ]
+          },
+          {
+            "section": "दोहराव",
+            "lines": [
+              "तू प्रभु है, तू प्रभु है,",
+              "जी उठा तू मुर्दों से, तू प्रभु है।",
+              "हर घुटना झुकेगा, हर ज़ुबान गाएगी,",
+              "कि यीशु मेरा प्रभु है।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Wah Prabhu hai, wah Prabhu hai,",
+              "Jee utha wah murdon mein se, wah Prabhu hai.",
+              "Har ek ghutna jhukega,",
+              "Har zubaan gaayegi ki Yeshu mera Prabhu hai."
+            ]
+          },
+          {
+            "section": "Dohrav",
+            "lines": [
+              "Tu Prabhu hai, tu Prabhu hai,",
+              "Jee utha tu murdon se, tu Prabhu hai.",
+              "Har ghutna jhukega, har zubaan gaayegi,",
+              "Ki Yeshu mera Prabhu hai."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Chorus",
+            "lines": [
+              "He is Lord, He is Lord,",
+              "He is risen from the dead and He is Lord.",
+              "Every knee shall bow,",
+              "Every tongue confess that Jesus Christ is Lord."
+            ]
+          },
+          {
+            "section": "Repeat",
+            "lines": [
+              "You are Lord, You are Lord,",
+              "Risen from the dead, You are Lord.",
+              "Every knee shall bow, every tongue shall sing,",
+              "That Jesus Christ is Lord."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "കൊറസ്",
+            "lines": [
+              "അവൻ കർത്താവാണ്, അവൻ കർത്താവാണ്,",
+              "മരിച്ചവരിൽ നിന്ന് ഉയിർത്തെഴുന്നേറ്റവൻ കർത്താവാണ്.",
+              "ഓരോ മുട്ടും മടങ്ങും,",
+              "ഓരോ നാവും യേശു കർത്താവാണെന്ന് പ്രസ്താവിക്കും."
+            ]
+          },
+          {
+            "section": "ആവർത്തനം",
+            "lines": [
+              "നീയാണ് കർത്താവ്, നീയാണ് കർത്താവ്,",
+              "മരിച്ചവരിൽ നിന്ന് ഉയിർത്തെഴുന്നേറ്റ നീ കർത്താവാണ്.",
+              "ഓരോ മുട്ടും മടങ്ങും, ഓരോ നാവും പാടും,",
+              "യേശു എന്റെ കർത്താവാണെന്ന്."
+            ]
+          }
+        ]
+      }
+    },
+    "thumbnailUrl": "/assets/songs/english_card.png"
+  },
+  {
+    "id": "wo_khuda_mera",
+    "slug": "wo-khuda-mera",
+    "title": "Wo khuda mera",
+    "videoUrl": "https://www.youtube.com/embed/wlCwTG93yC4",
+    "description": "Wo khuda mera - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "translations": {
+      "hindi": {
+        "lang": "Hindi",
+        "lyrics": [
+          {
+            "section": "मुखड़ा",
+            "lines": [
+              "वो खुदा मेरा चरवाहा है,",
+              "मुझको कमी न होगी।"
+            ]
+          },
+          {
+            "section": "अंतरा 1",
+            "lines": [
+              "वो मुझे हरी हरी चरागाहों में लाकर बिठाता है,",
+              "मुझे राहत के चश्मों के पास मेरा खुदा ले जाता है,",
+              "मेरी जान बहाल वो करता है।"
+            ]
+          },
+          {
+            "section": "अंतरा 2",
+            "lines": [
+              "चाहे मौत के साए की ही वादी से मैं जब भी गुजरूं,",
+              "तू जो साथ है, ऐ मेरे खुदा, मैं किसी बला से क्यों डरूं,",
+              "मुझे रास है तेरी वफ़ा।"
+            ]
+          },
+          {
+            "section": "अंतरा 3",
+            "lines": [
+              "मेरे दुश्मनों के सामने वो मेरी मेज़ लगाता है,",
+              "भरपूर करता है मुझको, लबरेज़ मेरा प्याला है,",
+              "और मुझको प्यार दिखाता है।"
+            ]
+          },
+          {
+            "section": "अंतरा 4",
+            "lines": [
+              "है यक़ीन मुझे तेरी रहमत मेरे साथ रहेगी उम्र भर,",
+              "होगा सदा मेरा भला, गर तू है मेरा हमसफ़र,",
+              "तेरे घर रहूँगा मैं सदा।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Wo Khuda mera charwaha hai,",
+              "Mujhko kami na hogi."
+            ]
+          },
+          {
+            "section": "Antara 1",
+            "lines": [
+              "Wo mujhe hari hari charagaahon mein laakar bithata hai,",
+              "Mujhe raahat ke chashmon ke paas mera Khuda le jaata hai,",
+              "Meri jaan bahaal wo karta hai."
+            ]
+          },
+          {
+            "section": "Antara 2",
+            "lines": [
+              "Chaahe maut ke saaye ki hi waadi se main jab bhi guzarun,",
+              "Tu jo saath hai, ai mere Khuda, main kisi bala se kyon darun,",
+              "Mujhe raas hai teri wafa."
+            ]
+          },
+          {
+            "section": "Antara 3",
+            "lines": [
+              "Mere dushmanon ke saamne wo meri mez lagaata hai,",
+              "Bharpoor karta hai mujhko, labrez mera pyaala hai,",
+              "Aur mujhko pyaar dikhaata hai."
+            ]
+          },
+          {
+            "section": "Antara 4",
+            "lines": [
+              "Hai yaqeen mujhe teri rehmat mere saath rahegi umr bhar,",
+              "Hoga sada mera bhala, gar tu hai mera humsafar,",
+              "Tere ghar rahunga main sada."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Chorus",
+            "lines": [
+              "The Lord is my Shepherd,",
+              "I will never be in need."
+            ]
+          },
+          {
+            "section": "Verse 1",
+            "lines": [
+              "He makes me sit in green pastures,",
+              "He leads me beside the streams of rest,",
+              "He restores my soul."
+            ]
+          },
+          {
+            "section": "Verse 2",
+            "lines": [
+              "Even if I walk through the valley of the shadow of death,",
+              "If You are with me, my God, why should I fear any evil?",
+              "Your faithfulness gives me peace."
+            ]
+          },
+          {
+            "section": "Verse 3",
+            "lines": [
+              "Before my enemies He sets a table for me,",
+              "He fills me to overflowing, my cup is running over,",
+              "And He shows me His love."
+            ]
+          },
+          {
+            "section": "Verse 4",
+            "lines": [
+              "I am sure Your mercy will stay with me all my life,",
+              "Surely good will be mine as long as You are my companion,",
+              "And I will dwell in Your house forever."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "കൊറസ്",
+            "lines": [
+              "എന്റെ ഇടയൻ കർത്താവാകുന്നു,",
+              "എനിക്കൊന്നും കുറവുണ്ടാകയില്ല."
+            ]
+          },
+          {
+            "section": "അന്തരം 1",
+            "lines": [
+              "പച്ചപുല്പുറങ്ങളിൽ അവൻ എന്നെ വിശ്രമിപ്പിക്കുന്നു,",
+              "ശാന്തജലത്തിങ്കൽ എന്നെ നടത്തുന്നു,",
+              "എന്റെ പ്രാണനെ അവൻ പുതുക്കുന്നു."
+            ]
+          },
+          {
+            "section": "അന്തരം 2",
+            "lines": [
+              "മരണനിഴലിന്റെ താഴ്വരയിലൂടെ ഞാൻ നടന്നാലും,",
+              "നീ എനിക്കൊപ്പമുണ്ടെങ്കിൽ ഞാൻ ദോഷത്തെ ഭയപ്പെടുകയില്ല,",
+              "നിന്റെ വിശ്വസ്തത എനിക്കാശ്വാസമാണ്."
+            ]
+          },
+          {
+            "section": "അന്തരം 3",
+            "lines": [
+              "എന്റെ ശത്രുക്കളുടെ മുമ്പിൽ നീ എനിക്കായി ഒരു മേശ ഒരുക്കുന്നു,",
+              "എന്നെ സമൃദ്ധിയായി നിറയ്ക്കുന്നു, എന്റെ പാനപാത്രം കവിയുന്നു,",
+              "നീ എനിക്കു സ്നേഹം കാണിക്കുന്നു."
+            ]
+          },
+          {
+            "section": "അന്തരം 4",
+            "lines": [
+              "നിന്റെ കരുണ ജീവിതകാലമെങ്ങും എനിക്കൊപ്പമുണ്ടാകുമെന്ന് എനിക്ക് ഉറപ്പ്,",
+              "നീ എന്റെ കൂടെയുണ്ടെങ്കിൽ എനിക്കെപ്പോഴും നന്മ ഉണ്ടാകും,",
+              "ഞാൻ നിന്റെ ഭവനത്തിൽ എന്നേക്കും വസിക്കും."
+            ]
+          }
+        ]
+      }
+    },
+    "thumbnailUrl": "/assets/songs/hindi_card.png"
+  },
+  {
+    "id": "wafadar_vishwaasyogya_parmeshwar_hai_thu",
+    "slug": "wafadar-vishwaasyogya-parmeshwar-hai-thu",
+    "title": "wafadar - vishwaasyogya parmeshwar hai thu",
+    "videoUrl": "https://www.youtube.com/embed/_IIMEdqfQMc",
+    "description": "वफादार - विश्वासयोग्य परमेश्वर है तु - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "translations": {
+      "hindi": {
+        "lang": "Hindi",
+        "lyrics": [
+          {
+            "section": "मुखड़ा",
+            "lines": [
+              "विश्वासयोग्य परमेश्वर है तू",
+              "देखा है मैंने अपने जीवन में",
+              "दुनिया बदलती है, तू न बदलता",
+              "बंध आँखों से भी मैं करता भरोसा"
+            ]
+          },
+          {
+            "section": "अंतरा 1",
+            "lines": [
+              "इंसानों से तू वफादार",
+              "सुनता दिल की हर इक पुकार",
+              "बेहाली में रखता तू ध्यान",
+              "हालातों से तू शक्तिमान"
+            ]
+          },
+          {
+            "section": "अंतरा 2",
+            "lines": [
+              "जब तू मिला, मिली रिहाई",
+              "थम गई हर कठिनाई",
+              "संग चले जैसे परछाई",
+              "जीते तू मेरी लड़ाई"
+            ]
+          },
+          {
+            "section": "अंतरा 3",
+            "lines": [
+              "रोशनी बनके जीवन में आया",
+              "मेरी गुलामी से मुझको छुड़ाया",
+              "तोड़ा हर बंधन, बेटा बनाया",
+              "अपना हर वादा तू ने निभाया"
+            ]
+          },
+          {
+            "section": "ब्रिज",
+            "lines": [
+              "क्या कोई है इस जहाँ में",
+              "तुझ सा अज़ीम",
+              "क्या कोई है इस जहाँ में",
+              "जो हो तुझ सा भला"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Vishwaasyogya Parmeshwar hai tu",
+              "Dekha hai maine apne jeevan mein",
+              "Duniya badalti hai, tu na badalta",
+              "Bandh aankhon se bhi main karta bharosa"
+            ]
+          },
+          {
+            "section": "Antara 1",
+            "lines": [
+              "Insaanon se tu wafadaar",
+              "Sunta dil ki har ik pukaar",
+              "Behaali mein rakhta tu dhyaan",
+              "Haalaaton se tu shaktimaan"
+            ]
+          },
+          {
+            "section": "Antara 2",
+            "lines": [
+              "Jab tu mila, mili rihaai",
+              "Tham gayi har kathinaai",
+              "Sang chale jaise parchhaai",
+              "Jeete tu meri ladaai"
+            ]
+          },
+          {
+            "section": "Antara 3",
+            "lines": [
+              "Roshni banke jeevan mein aaya",
+              "Meri gulaami se mujhko chhudaaya",
+              "Toda har bandhan, beta banaaya",
+              "Apna har vaada tu ne nibhaaya"
+            ]
+          },
+          {
+            "section": "Bridge",
+            "lines": [
+              "Kya koi hai is jahaan mein",
+              "Tujh sa azeem",
+              "Kya koi hai is jahaan mein",
+              "Jo ho tujh sa bhala"
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Chorus",
+            "lines": [
+              "You are a faithful God, worthy of trust,",
+              "I have seen it in my own life,",
+              "The world may change, but You do not change,",
+              "Even with closed eyes I still trust You"
+            ]
+          },
+          {
+            "section": "Verse 1",
+            "lines": [
+              "More faithful than any human,",
+              "You hear every cry of the heart,",
+              "You care in every broken season,",
+              "You are stronger than every circumstance"
+            ]
+          },
+          {
+            "section": "Verse 2",
+            "lines": [
+              "When I found You, I found freedom,",
+              "Every hardship came to a halt,",
+              "You walked beside me like a shadow,",
+              "You fought and won my battles"
+            ]
+          },
+          {
+            "section": "Verse 3",
+            "lines": [
+              "You came into my life as light,",
+              "You delivered me from my slavery,",
+              "You broke every chain and called me Your child,",
+              "You fulfilled every promise You made"
+            ]
+          },
+          {
+            "section": "Bridge",
+            "lines": [
+              "Is there anyone in this world",
+              "So great as You?",
+              "Is there anyone in this world",
+              "Who is as good as You?"
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "കൊറസ്",
+            "lines": [
+              "വിശ്വസ്തനായ ദൈവമേ, നീയത്രേ",
+              "എന്റെ ജീവിതത്തിൽ ഞാൻ അതു കണ്ടിരിക്കുന്നു",
+              "ലോകം മാറിയാലും നീ മാറുന്നില്ല",
+              "കണ്ണടച്ചാലും ഞാൻ നിന്നിൽ വിശ്വാസം വെക്കുന്നു"
+            ]
+          },
+          {
+            "section": "അന്തരം 1",
+            "lines": [
+              "മനുഷ്യരെക്കാൾ വിശ്വസ്തൻ നീ",
+              "ഹൃദയത്തിന്റെ ഓരോ നിലവിളിയും നീ കേൾക്കുന്നു",
+              "തകർച്ചയുടെ കാലത്തും നീ ശ്രദ്ധിക്കുന്നു",
+              "സാഹചര്യങ്ങളെക്കാൾ ശക്തൻ നീ"
+            ]
+          },
+          {
+            "section": "അന്തരം 2",
+            "lines": [
+              "നിന്നെ കണ്ടപ്പോൾ എനിക്ക് വിമോചനം ലഭിച്ചു",
+              "എല്ലാ കഠിനതയും നിശ്ചലമായി",
+              "നിഴൽപോലെ നീ എനിക്കൊപ്പമുണ്ടായി",
+              "എന്റെ പോരാട്ടങ്ങൾ നീ ജയിച്ചു"
+            ]
+          },
+          {
+            "section": "അന്തരം 3",
+            "lines": [
+              "വെളിച്ചമായി നീ എന്റെ ജീവിതത്തിൽ വന്നു",
+              "എന്റെ അടിമത്തത്തിൽ നിന്ന് എന്നെ വിടുവിച്ചു",
+              "എല്ലാ ബന്ധനവും തകർത്ത് മകനാക്കി",
+              "നീ നൽകിയ എല്ലാ വാഗ്ദാനവും നിറവേറ്റി"
+            ]
+          },
+          {
+            "section": "ബ്രിഡ്ജ്",
+            "lines": [
+              "ഈ ലോകത്തിൽ ആരെങ്കിലും ഉണ്ടോ",
+              "നിനക്കു തുല്യമായി മഹാൻ?",
+              "ഈ ലോകത്തിൽ ആരെങ്കിലും ഉണ്ടോ",
+              "നിനക്കു തുല്യമായി നല്ലവൻ?"
+            ]
+          }
+        ]
+      }
+    },
+    "thumbnailUrl": "/assets/songs/hindi_card.png"
+  },
+  {
+    "id": "wo_mera_jeevan_lyrics_by_yeshu_ke_geet_shawn_shanon_milton",
+    "slug": "wo-mera-jeevan-lyrics-by-yeshu-ke-geet-shawn-shanon-milton",
+    "title": "Wo Mera Jeevan - Lyrics by Yeshu Ke Geet | Shawn & Shanon Milton",
+    "videoUrl": "",
+    "description": "Wo Mera Jeevan - Lyrics by Yeshu Ke Geet | Shawn & Shanon Milton - Hindi Christian devotional song lyrics with worship-friendly formatting.",
+    "translations": {
+      "hindi": {
+        "lang": "Hindi",
+        "lyrics": [
+          {
+            "section": "मुखड़ा",
+            "lines": [
+              "चंगा करने वाला है परमेश्वर,",
+              "दया करने वाला है परमेश्वर,",
+              "उसकी सदा मैं स्तुति करूँगा,",
+              "उसके सिवा कहीं न झुकूँगा।"
+            ]
+          },
+          {
+            "section": "कोरस",
+            "lines": [
+              "वो मेरा जीवन, वो मेरा जीवन,",
+              "वो मेरा दाता, वो मेरा दाता,",
+              "वो मेरे प्राणों को बचाता,",
+              "वो मेरे प्राणों को बचाता।"
+            ]
+          },
+          {
+            "section": "अंतरा 1",
+            "lines": [
+              "अंधों को आँखें देता है वो,",
+              "लंगड़ों को टाँगें देता है वो,",
+              "बहरे भी सुनने लगते हैं,",
+              "कोढ़ी को चंगा करता है वो।"
+            ]
+          },
+          {
+            "section": "अंतरा 2",
+            "lines": [
+              "मुझको ताकत देता है वो,",
+              "स्वर्गीय आशीष देता है वो,",
+              "बीमारियाँ उड़ जाती हैं,",
+              "ऐसी चंगाई देता है वो।"
+            ]
+          },
+          {
+            "section": "अंतरा 3",
+            "lines": [
+              "उसकी सदा मैं स्तुति करूँगा,",
+              "उसके सिवा कहीं न झुकूँगा,",
+              "उसके पीछे मैं चलता रहूँगा,",
+              "उसका साथ कभी न छोड़ूँगा।"
+            ]
+          },
+          {
+            "section": "ब्रिज",
+            "lines": [
+              "यीशु टूटों और निर्बलों को चंगा करता है,",
+              "वह पहले भी करता आया है, आज भी मेरे लिए करता है,",
+              "उसने मुझे अपने प्रकाश से भर दिया है,",
+              "उसकी अनुग्रह से मैं स्वतंत्र हूँ।"
+            ]
+          }
+        ]
+      },
+      "hinglish": {
+        "lang": "Hinglish",
+        "lyrics": [
+          {
+            "section": "Mukhda",
+            "lines": [
+              "Changa karne wala hai Parmeshwar,",
+              "Daya karne wala hai Parmeshwar,",
+              "Uski sada main stuti karunga,",
+              "Uske siwa kahin na jhukunga."
+            ]
+          },
+          {
+            "section": "Chorus",
+            "lines": [
+              "Wo mera jeevan, wo mera jeevan,",
+              "Wo mera data, wo mera data,",
+              "Wo mere praanon ko bachata,",
+              "Wo mere praanon ko bachata."
+            ]
+          },
+          {
+            "section": "Antara 1",
+            "lines": [
+              "Andhon ko aankhen deta hai wo,",
+              "Langdon ko taangen deta hai wo,",
+              "Behre bhi sunne lagte hain,",
+              "Kodhi ko changa karta hai wo."
+            ]
+          },
+          {
+            "section": "Antara 2",
+            "lines": [
+              "Mujhko taqat deta hai wo,",
+              "Swargiya aashish deta hai wo,",
+              "Bimaariyan ud jaati hain,",
+              "Aisi changaai deta hai wo."
+            ]
+          },
+          {
+            "section": "Antara 3",
+            "lines": [
+              "Uski sada main stuti karunga,",
+              "Uske siwa kahin na jhukunga,",
+              "Uske peeche main chalta rahunga,",
+              "Uska saath kabhi na chhodunga."
+            ]
+          },
+          {
+            "section": "Bridge",
+            "lines": [
+              "Yeshu tooton aur nirbalon ko changa karta hai,",
+              "Woh pehle bhi karta aaya hai, aaj bhi mere liye karta hai,",
+              "Usne mujhe apne prakaash se bhar diya hai,",
+              "Uski anugrah se main swatantra hoon."
+            ]
+          }
+        ]
+      },
+      "english": {
+        "lang": "English",
+        "lyrics": [
+          {
+            "section": "Verse",
+            "lines": [
+              "God is the One who heals,",
+              "God is the One who shows mercy,",
+              "I will praise Him always,",
+              "I will bow to no one else."
+            ]
+          },
+          {
+            "section": "Chorus",
+            "lines": [
+              "He is my life, He is my life,",
+              "He is my giver, He is my giver,",
+              "He saves my soul,",
+              "He saves my soul."
+            ]
+          },
+          {
+            "section": "Verse 1",
+            "lines": [
+              "He gives sight to the blind,",
+              "He gives strength to the lame,",
+              "Even the deaf begin to hear,",
+              "He heals the leper."
+            ]
+          },
+          {
+            "section": "Verse 2",
+            "lines": [
+              "He gives me strength,",
+              "He gives heavenly blessings,",
+              "Sicknesses fly away,",
+              "Such healing He gives."
+            ]
+          },
+          {
+            "section": "Verse 3",
+            "lines": [
+              "I will praise Him always,",
+              "I will bow to no one else,",
+              "I will keep following Him,",
+              "I will never leave His side."
+            ]
+          },
+          {
+            "section": "Bridge",
+            "lines": [
+              "Jesus heals the broken and the weak,",
+              "He has done it before and He still does it for me,",
+              "He filled me with His light,",
+              "By His grace I have been set free."
+            ]
+          }
+        ]
+      },
+      "malayalam": {
+        "lang": "Malayalam",
+        "lyrics": [
+          {
+            "section": "മുഖड़ा",
+            "lines": [
+              "സൗഖ്യമരുളുന്നവൻ ദൈവമാണ്,",
+              "കരുണ കാണിക്കുന്നവൻ ദൈവമാണ്,",
+              "അവനെ ഞാൻ എല്ലായ്പ്പോഴും സ്തുതിക്കും,",
+              "അവനെ വിട്ട് മറ്റൊരാളിന്നും ഞാൻ വണങ്ങുകയില്ല."
+            ]
+          },
+          {
+            "section": "കൊറസ്",
+            "lines": [
+              "അവൻ എന്റെ ജീവൻ, അവൻ എന്റെ ജീവൻ,",
+              "അവൻ എന്റെ ദാതാവ്, അവൻ എന്റെ ദാതാവ്,",
+              "എന്റെ പ്രാണനെ അവൻ രക്ഷിക്കുന്നു,",
+              "എന്റെ പ്രാണനെ അവൻ രക്ഷിക്കുന്നു."
+            ]
+          },
+          {
+            "section": "അന്തരം 1",
+            "lines": [
+              "കുരുടർക്കു കണ്ണ് കൊടുക്കുന്നവൻ അവൻ,",
+              "മുടന്തർക്കു ശക്തി നൽകുന്നവൻ അവൻ,",
+              "ബധിരരും കേൾക്കിത്തുടങ്ങുന്നു,",
+              "കുഷ്ഠരോഗിയെയും സൗഖ്യമാക്കുന്നവൻ അവൻ."
+            ]
+          },
+          {
+            "section": "അന്തരം 2",
+            "lines": [
+              "എനിക്കു ശക്തി നൽകുന്നവൻ അവൻ,",
+              "സ്വർഗീയ ആശീർവാദം നൽകുന്നവൻ അവൻ,",
+              "രോഗങ്ങൾ പറന്നുപോകുന്നു,",
+              "അങ്ങനെ സൗഖ്യം നൽകുന്നവൻ അവൻ."
+            ]
+          },
+          {
+            "section": "അന്തരം 3",
+            "lines": [
+              "അവനെ ഞാൻ എല്ലായ്പ്പോഴും സ്തുതിക്കും,",
+              "അവനെ വിട്ട് മറ്റൊരാളിന്നും ഞാൻ വണങ്ങുകയില്ല,",
+              "അവന്റെ പിന്നാലെ ഞാൻ നടന്നുകൊണ്ടിരിക്കും,",
+              "അവന്റെ സാന്നിധ്യം ഞാൻ ഒരിക്കലും വിടുകയില്ല."
+            ]
+          },
+          {
+            "section": "ബ്രിഡ്ജ്",
+            "lines": [
+              "യേശു തകർന്നവരെയും ദുർബലരെയും സൗഖ്യമാക്കുന്നു,",
+              "മുമ്പും ചെയ്തതുപോലെ ഇന്നും എനിക്ക് വേണ്ടി ചെയ്യുന്നു,",
+              "അവൻ തന്റെ വെളിച്ചം കൊണ്ട് എന്നെ നിറച്ചു,",
+              "അവന്റെ കൃപയാൽ ഞാൻ സ്വതന്ത്രനായി."
+            ]
+          }
+        ]
+      }
+    },
+    "thumbnailUrl": "/assets/songs/english_card.png"
+  }
+]

@@ -15,7 +15,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "populate-bible-quizzes": "node scripts/populate-bible-qa-quizzes.js",
-    "populate-bible-quizzes-db": "node scripts/populate-bible-quizzes-db.js"
+    "populate-bible-quizzes-db": "node scripts/populate-bible-quizzes-db.js",
+    "fix-lyrics": "node scripts/fix-corrupted-lyrics.cjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

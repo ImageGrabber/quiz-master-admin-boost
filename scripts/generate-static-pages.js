@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 // Hardcoded metadata to ensure build stability and bypass ESM/TSX loading conflicts
 const bibleStructure = {
     genesis: 50, exodus: 40, leviticus: 27, numbers: 36, deuteronomy: 34,
@@ -64,8 +66,8 @@ const articles = [
 // Reference migrated and scraped songs directly
 const migratedSongsPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/data/migrated-songs.json');
 const scrapedSongsPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/data/scraped-blog-songs.json');
-const hindiSongsPath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/data/hindi-songs.json');
 const malayalamSongsSourcePath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/data/songs.ts');
+const { readHindiSongs } = require('./hindi-songs-util.cjs');
 
 let allSongs = [
     { slug: "ithratholam-yahova-sahayichu", title: "Ithratholam Yahova Sahayichu", description: "Worship along with this beautiful melody." },
@@ -91,15 +93,10 @@ if (fs.existsSync(scrapedSongsPath)) {
 }
 
 let hindiSongs = [];
-if (fs.existsSync(hindiSongsPath)) {
-  try {
-    const parsedHindiSongs = JSON.parse(fs.readFileSync(hindiSongsPath, 'utf-8'));
-    if (Array.isArray(parsedHindiSongs)) {
-      hindiSongs = parsedHindiSongs;
-    }
-  } catch (e) {
-    console.error('Error reading Hindi songs dataset:', e.message);
-  }
+try {
+  hindiSongs = readHindiSongs();
+} catch (e) {
+  console.error('Error reading Hindi songs dataset:', e.message);
 }
 
 function readMalayalamSongsFromSource(filePath) {

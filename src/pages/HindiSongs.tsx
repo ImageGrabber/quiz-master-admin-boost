@@ -9,7 +9,7 @@ import { Music, PlayCircle, Search, Guitar } from "lucide-react";
 import { useState, useMemo, useEffect } from "react";
 import type { Song } from "@/data/songs";
 import { Badge } from "@/components/ui/badge";
-import hindiSongsData from "@/data/hindi-songs.json";
+import hindiSongsData from "@/data/hindi-songs/index";
 import { resolveSongThumbnail } from "@/utils/song-thumbnails";
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');

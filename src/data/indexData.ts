@@ -1,7 +1,7 @@
 import { Brain, Clock, Users, Trophy, BookOpen, Play, Globe, Calendar } from "lucide-react";
 import { allSongs } from "./songs";
 import englishSongs from "./english-songs.json";
-import hindiSongs from "./hindi-songs.json";
+import hindiSongs from "./hindi-songs/index";
 import kidsStories from "./kids-stories.json";
 import { articles } from "./articles";
 import { featuredQuizzes, bibleBooks } from "./bible-data";

@@ -29,3 +29,6 @@ dist-ssr
 .env
 search-results/
 SEO_DAILY_RANKING_CHECKLIST.md
+
+# Scratch and Temporary Scripts
+scratch/

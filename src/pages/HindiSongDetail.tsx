@@ -10,7 +10,7 @@ import { ArrowLeft, Share2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import type { Song } from "@/data/songs";
-import hindiSongsData from "@/data/hindi-songs.json";
+import hindiSongsData from "@/data/hindi-songs/index";
 import { resolveSongThumbnail } from "@/utils/song-thumbnails";
 
 const songs: Song[] = hindiSongsData as Song[];
@@ -108,10 +108,39 @@ const transliterateHindiToHinglish = (text: string) => {
         }
         out += DEVANAGARI_TO_LATIN[ch] ?? ch;
     }
-    return out
+    let result = out
         .replace(/\s+/g, " ")
         .replace(/\b([a-z])/g, (m) => m.toUpperCase())
         .trim();
+
+    // Post-process common awkward phonetic transliterations
+    const commonFixes: Record<string, string> = {
+        "Too": "Tu",
+        "Achchhaa": "Acha",
+        "Bhut": "Bahut",
+        "Lie": "Liye",
+        "Mraa": "Mara",
+        "Jeevn": "Jeevan",
+        "Chngaa": "Changa",
+        "Shkti": "Shakti",
+        "Paapo": "Paapon",
+        "Kshmaa": "Kshama",
+        "Khushiyaan": "Khushiyan",
+        "Prbhu": "Prabhu",
+        "Krta": "Karta",
+        "Dilaayaa": "Dilaya",
+        "Aayaa": "Aaya",
+        "Jiyaa": "Jiya",
+        "Kiyaa": "Kiya",
+        "Diyaa": "Diya",
+        "Uthaa": "Utha",
+    };
+
+    for (const [bad, good] of Object.entries(commonFixes)) {
+        result = result.replace(new RegExp(`\\b${bad}\\b`, "g"), good);
+    }
+
+    return result;
 };
 
 const HindiSongDetail = () => {
@@ -225,13 +254,28 @@ const HindiSongDetail = () => {
         []
     );
 
+    const availableLanguageTabs = useMemo(() => {
+        return languageTabs.filter(tab => {
+            if (tab.key === 'hinglish') {
+                return !!song.translations['hindi'] || !!song.translations['hinglish'];
+            }
+            return !!song.translations[tab.key]?.lyrics?.length;
+        });
+    }, [languageTabs, song]);
+
     const availableLanguageLabels = useMemo(
-        () =>
-            languageTabs
-                .filter((tab) => song.translations[tab.key]?.lyrics?.length)
-                .map((tab) => tab.label),
-        [languageTabs, song.translations]
+        () => availableLanguageTabs.map((tab) => tab.label),
+        [availableLanguageTabs]
     );
+
+    useEffect(() => {
+        // If the current selected language is not available for this song, fallback to Hindi
+        const isCurrentLangAvailable = availableLanguageTabs.some(tab => tab.key === selectedLang);
+        if (!isCurrentLangAvailable && availableLanguageTabs.length > 0) {
+            setSelectedLang("hindi"); // Default to Hindi
+        }
+    }, [song.slug, selectedLang, availableLanguageTabs]);
+
     const languagesText = availableLanguageLabels.join(", ");
     const seoLanguageText = useMemo(() => {
         if (availableLanguageLabels.length === 0) return "Hindi";
@@ -566,7 +610,7 @@ const HindiSongDetail = () => {
                 </Button>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                    
+
                     {/* Left Sidebar - Meta & Controls */}
                     <aside className="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
                         <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
@@ -584,7 +628,7 @@ const HindiSongDetail = () => {
                             <p className="text-[11px] text-gray-400 leading-relaxed mb-6 font-medium">
                                 Popular searches: {topSearchIntent}.
                             </p>
-                            
+
                             <div className="flex items-center gap-3 mb-8">
                                 <Button
                                     variant="outline"
@@ -629,19 +673,18 @@ const HindiSongDetail = () => {
                     <div className="lg:col-span-8">
                         <Card className="rounded-[2.5rem] border-none shadow-xl shadow-gray-200/50 bg-white overflow-hidden min-h-[600px] relative">
                             <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-orange-400 via-orange-500 to-amber-500" />
-                            
+
                             <CardContent className="p-8 md:p-16">
                                 <div className="flex flex-wrap gap-2 mb-6">
-                                    {languageTabs.map((tab) => (
+                                    {availableLanguageTabs.map((tab) => (
                                         <button
                                             key={tab.key}
                                             type="button"
                                             onClick={() => setSelectedLang(tab.key)}
-                                            className={`px-3 py-1 rounded-full text-sm font-semibold transition-colors ${
-                                                selectedLang === tab.key
+                                            className={`px-3 py-1 rounded-full text-sm font-semibold transition-colors ${selectedLang === tab.key
                                                     ? "bg-orange-100 text-orange-700"
                                                     : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                                            }`}
+                                                }`}
                                         >
                                             {tab.label}
                                         </button>
@@ -665,29 +708,29 @@ const HindiSongDetail = () => {
                                         )}
                                     </div>
                                 ) : (
-                                <div className="space-y-10 mt-2">
-                                    {displaySections.map((section, index) => (
-                                        <div key={index} className="relative">
-                                            <div className="space-y-3">
-                                                {section.lines.map((line, lineIndex) => (
-                                                    <div
-                                                        key={lineIndex}
-                                                        className={`flex flex-col items-start ${lineIndex > 0 && lineIndex % 2 === 0 ? "mt-5" : ""}`}
-                                                    >
-                                                        {section.chords && section.chords[lineIndex] && (
-                                                            <p className="text-orange-600 font-mono text-sm md:text-base font-black mb-1 tracking-[0.1em] whitespace-pre-wrap bg-orange-50 px-2 py-0.5 rounded-md border border-orange-100 shadow-sm">
-                                                                {section.chords[lineIndex]}
+                                    <div className="space-y-10 mt-2">
+                                        {displaySections.map((section, index) => (
+                                            <div key={index} className="relative">
+                                                <div className="space-y-3">
+                                                    {section.lines.map((line, lineIndex) => (
+                                                        <div
+                                                            key={lineIndex}
+                                                            className={`flex flex-col items-start ${lineIndex > 0 && lineIndex % 2 === 0 ? "mt-5" : ""}`}
+                                                        >
+                                                            {section.chords && section.chords[lineIndex] && (
+                                                                <p className="text-orange-600 font-mono text-sm md:text-base font-black mb-1 tracking-[0.1em] whitespace-pre-wrap bg-orange-50 px-2 py-0.5 rounded-md border border-orange-100 shadow-sm">
+                                                                    {section.chords[lineIndex]}
+                                                                </p>
+                                                            )}
+                                                            <p className="font-medium text-gray-900 text-xl md:text-2xl text-left leading-tight font-urbanist">
+                                                                {line}
                                                             </p>
-                                                        )}
-                                                        <p className="font-medium text-gray-900 text-xl md:text-2xl text-left leading-tight font-urbanist">
-                                                            {line}
-                                                        </p>
-                                                    </div>
-                                                ))}
+                                                        </div>
+                                                    ))}
+                                                </div>
                                             </div>
-                                        </div>
-                                    ))}
-                                </div>
+                                        ))}
+                                    </div>
                                 )}
                             </CardContent>
                         </Card>

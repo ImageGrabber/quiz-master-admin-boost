@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 // Hardcoded metadata to ensure build stability and bypass ESM/TSX loading conflicts
 const bibleStructure = {
     genesis: 50, exodus: 40, leviticus: 27, numbers: 36, deuteronomy: 34,
@@ -318,9 +320,9 @@ function generateSitemap() {
   }
 
   // Hindi Song pages
-  const hindiSongsJsonPath = path.join(__dirname, '..', 'src', 'data', 'hindi-songs.json');
-  if (fs.existsSync(hindiSongsJsonPath)) {
-    const hindiSongs = JSON.parse(fs.readFileSync(hindiSongsJsonPath, 'utf-8'));
+  const { readHindiSongs } = require('./hindi-songs-util.cjs');
+  try {
+    const hindiSongs = readHindiSongs();
     urls.push({ loc: '/hindi-songs', priority: '0.9', changefreq: 'weekly' });
 
     const uniqueHindiSlugs = new Set();
@@ -334,6 +336,8 @@ function generateSitemap() {
       });
     }
     console.log(`Added ${uniqueHindiSlugs.size} Hindi song URLs to sitemap`);
+  } catch (err) {
+    console.error("Error generating sitemap for Hindi songs", err);
   }
 
   // Kids Stories
