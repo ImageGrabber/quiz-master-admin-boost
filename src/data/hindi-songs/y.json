@@ -158,7 +158,7 @@
             "verse": "3",
             "lines": [
               "धो डालो आज पापों को, दिल से निकालो दागों को,",
-              "हो जाओ साफ तन मन स��� आज, यीशु मसीह के लहू से"
+              "हो जाओ साफ तन मन से आज, यीशु मसीह के लहू से"
             ]
           },
           {
@@ -6944,44 +6944,32 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
               "चाहें तुमको दिल से",
               "चाहें तुमको दिल से",
               "गायें ये गीत मिलके",
-              "तेरे नाम येशु नाम की जय",
+              "तेरे नाम येशु नाम की जय"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
               "जिस नाम में है ज़िन्दगी, वो नाम है येसु मसीह",
               "जिस नाम में है बंदगी, वो नाम है येसु मसीह",
               "येशु नाम येशु नाम येशु नाम येशु नाम",
-              "येशु नाम येशु नाम की जय",
+              "येशु नाम येशु नाम की जय"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
               "येशु नाम में मिलती है क्षमा",
               "येशु नाम में मिलती है शिफा",
               "येशु नाम में मिलती है कृपा",
               "येशु नाम में करता दुआ",
               "येशु नाम येशु नाम येशु नाम येशु नाम",
-              "येशु नाम येशु नाम येशु नाम येशु नाम की जय"
-            ]
-          },
-          {
-            "verse": "1",
-            "lines": [
-              "chahe thumko dil se",
-              "chahe thumko dil se",
-              "gaaye ye geeth milke",
-              "there naam yeshu naam ki jai",
-              "jis naam mein hain jindagi,",
-              "voh naam hai yesu masih",
-              "jis naam mein hain bandage,",
-              "voh naam hai yesu masih",
-              "yeshu naam yeshu naam",
-              "yeshu naam yeshu naam",
-              "yeshu naam yeshu naam ki jai",
-              "yeshu naam mein milthi hai kshama",
-              "yeshu naam mein milthi hai shifa",
-              "yeshu naam mein milthi hai kripa",
-              "yeshu naam mein kartha dua",
-              "yeshu naam yeshu naam",
-              "yeshu naam yeshu naam",
-              "yeshu naam yeshu"
+              "येशु नाम येशु नाम की जय"
             ]
           }
         ]
@@ -9242,6 +9230,7 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
               "येशु तेरी हम्द करा",
               "येशु तेरी हम्द करा",
@@ -9250,7 +9239,12 @@
               "रुह सच्चाई से झूमते",
               "दाऊद के जैसे मैं नाचते",
               "येशु तेरी हम्द करा",
-              "येशु तेरी हम्द करा",
+              "येशु तेरी हम्द करा"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
               "तेरे बिना जिंदगी यह जिंदगी लगती नही मुझे",
               "तेरे बिना दुनिया यह दुनिया जचती नही मुझे",
               "बस इतनी सी है आरजू",
@@ -9258,15 +9252,25 @@
               "बन जायें मंजिल तू मेरी",
               "हो जाऊं तेरा मैं रास्ता",
               "येशु तेरी हम्द करा",
-              "येशु तेरी हम्द करा",
+              "येशु तेरी हम्द करा"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
               "दुनिया से तूने मुझे यह खुदा अलग किया है",
               "जिंदगी पे मैंने तुझे येशु जी पहन लिया है",
               "बोझ को मेरे ले लिया",
               "लहू से मुझको धो दिया",
-              "वादा जो बचनाें में किया",
+              "वादा जो वचनों में किया",
               "तूने वो पूरा है कर दिया",
               "येशु तेरी हम्द करा",
-              "येशु तेरी हम्द करा",
+              "येशु तेरी हम्द करा"
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
               "जिंदगी भी तूही है मेरे लिए रास्ता भी तूही है",
               "तूही मेरी बंदगी है खुदा धडकन भी तूही है",
               "माफ़ की मेरी हर खता",
@@ -9275,43 +9279,6 @@
               "तूही है पहला और इंतहा",
               "येशु तेरी हम्द करा",
               "येशु तेरी हम्द करा"
-            ]
-          },
-          {
-            "verse": "1",
-            "lines": [
-              "yeshu teri hamd kara",
-              "yeshu teri hamd kara",
-              "chalte phirte har raaste",
-              "lette uthte baithte",
-              "ruh sachchaee se jhoomte",
-              "daud ke jaise main naachte",
-              "yeshu teri hamd kara",
-              "yeshu teri hamd kara",
-              "tere bina zindagi yeh zindagi lagti nahi mujhe",
-              "tere bina duniya yah duniya jachatee nahi mujhe",
-              "bas itni si hai aarzoo",
-              "tu rahe mere rubru",
-              "ban jaayen manzil tu meri",
-              "ho jaoon tera main raasta",
-              "yeshu teri hamd kara",
-              "yeshu teri hamd kara",
-              "duniya se tune mujhe yeh khuda alag kiya hai",
-              "zindagi pe maine tujhe yeshu jee pahan liya hai",
-              "bojh ko mere le liya",
-              "lahoo se mujhko dho diya",
-              "vaada jo bachnon mein kiya",
-              "tune vo pura hai kar diya",
-              "yeshu teri hamd kara",
-              "yeshu terei hamd kara",
-              "zindagi bhi tuhi hai mere lie raasta bhi tuhi hai",
-              "tuhi meri bandagi hai khuda dhadkan bhi tuhi hai",
-              "maaf ki meri har khata",
-              "zindagi mujhko ki ata",
-              "alpha omega tu khuda",
-              "tuhi hai pahla aur intha",
-              "yeshu teri hamd kara",
-              "yeshu teri hamd kara"
             ]
           }
         ]
@@ -11655,44 +11622,39 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
               "यीशु सलीब पर मुआ",
               "तेरे लिये, मेरे लिये",
               "कैसा महान दुख सहा",
-              "तेरे लिये मेरे लिये",
-              "1 धारा वो कैसी खून की",
-              "ख्रीस्त के क्रूस से बह रही",
-              "धुल गये पाप, मिट गये दाग – 2",
-              "यीशु मसीह के लहू से;-  यीशु सलीब ...",
-              "2 धो डालो आज पापों को",
-              "दिल से मिटा दो दागों को",
-              "हो जाओ साफ, तन मन से आज-2",
-              "यीशु मसीह के लहू से;-  यीशु सलीब...",
-              "3 मर गया था क्रूस पर",
-              "छेदा गया था क्रूस पर",
-              "मैं भी बचा, तुम भी बचो",
-              "यहोवा की सजाओं से;- यीशु सलीब..."
+              "तेरे लिये मेरे लिये"
             ]
           },
           {
-            "verse": "1",
+            "verse": "Verse 1",
             "lines": [
-              "Yeshu salib par mua",
-              "Teere liye, mere liye",
-              "Kaisa mahan dukh saha",
-              "Tere liye mere liye",
-              "Dhara wo kaisi khoon ki",
-              "krisht ke kroos se bah gayee",
-              "Dhul gaye paap,mit gaye daag – 2",
-              "Yeshu masih ke lahu se ;- Yeshu salib...",
-              "Dho daalo aaj papon ko",
-              "dil se mita lo daago ko",
-              "Ho jao saaf,tan man se aaj – 2",
-              "Yeshu Masih ke lahu se;- Yeshu salib...",
-              "Mara gaya tha kroos par",
-              "chheda gaya tha kroos par",
-              "Mei bhi bacha, tum bhi bacho – 2",
-              "Yahowa ki sajaaon se;- Yeshu salib..."
+              "धारा वो कैसी खून की",
+              "ख्रीस्त के क्रूस से बह रही",
+              "धुल गये पाप, मिट गये दाग",
+              "यीशु मसीह के लहू से"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "धो डालो आज पापों को",
+              "दिल से मिटा दो दागों को",
+              "हो जाओ साफ, तन मन से आज",
+              "यीशु मसीह के लहू से"
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "मर गया था क्रूस पर",
+              "छेदा गया था क्रूस पर",
+              "मैं भी बचा, तुम भी बचो",
+              "यहोवा की सजाओं से"
             ]
           }
         ]

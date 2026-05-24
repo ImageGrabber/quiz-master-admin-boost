@@ -188,7 +188,27 @@ const transliterateHindiToHinglish = (text: string) => {
         "Baadshaah": "Baadshah", "Jhukkr": "Jhukkar", "Prnaam": "Pranaam", "Mujssm": "Mujassam",
         "Klaam": "Kalaam", "Amn": "Aman", "Bndhnon": "Bandhanon", "Jkdon": "Jakdon",
         "Phrishton": "Farishton", "Aaegee": "Aayegi", "Doolhaa": "Dulha", "Dulhn": "Dulhan",
-        "Jaaegaa": "Jayega"
+        "Jaaegaa": "Jayega", "Aaegaa": "Aayega", "Kregaa": "Karega", "Tnaanaa": "Tanaana",
+        "Tndaanaa": "Tandaana", "Bhgaa": "Bhaga", "Tkleeph": "Takleef", "Krj": "Karz",
+        "Kshton": "Kashton", "Daalegaa": "Dalega", "Paaoongaa": "Paunga", "Doongaa": "Dunga",
+        "Sleeb": "Saleeb", "Muaa": "Mua", "Kaisaa": "Kaisa", "Shaa": "Saha",
+        "Dhaaraa": "Dhaara", "Khreest": "Khrist", "Bh": "Bah", "Rhee": "Rahi",
+        "Gye": "Gaye", "Mitaa": "Mita", "Jaao": "Jao", "Saaph": "Saaf", "Mr": "Mar",
+        "Bchaa": "Bacha", "Bcho": "Bacho", "Sjaaon": "Sajaon", "Ndiyaan": "Nadiyan",
+        "Khreesht": "Khrist", "Gee": "Gayi", "Ge": "Gaye", "Maaraa": "Maara",
+        "Szaaon": "Sazaon", "Daalo": "Dalo", "Nikaalo": "Nikalo",
+        "Hmd": "Hamd", "Chlte": "Chalte", "Schchaaee": "Sachchai", "Daaood": "Daud",
+        "Lgtee": "Lagti", "Jchtee": "Jachti", "Bs": "Bas", "Itnee": "Itni",
+        "Aarjoo": "Aarzoo", "Roobroo": "Rubaru", "Jaayen": "Jayen", "Mnjil": "Manzil",
+        "Jaaoon": "Jaun", "Alg": "Alag", "Phn": "Pehan", "Vaadaa": "Vaada",
+        "Pooraa": "Poora", "Toohee": "Tuhi", "Bndgee": "Bandagi", "Dhdkn": "Dhadkan",
+        "Khtaa": "Khata", "Ataa": "Ata", "Alphaa": "Alpha", "Omegaa": "Omega",
+        "Phlaa": "Pehla", "Inthaa": "Inteha", "Kraa": "Kara", "Binaa": "Bina", "Mainne": "Maine",
+        "Chaahen": "Chahen", "Gaayen": "Gayen", "Miltee": "Milti", "Shiphaa": "Shifa", "Duaa": "Dua",
+        "Mainoon": "Mainu", "Deevaanaa": "Deewana", "Phnsyaa": "Phansya", "Nphrt": "Nafrat",
+        "Nfrt": "Nafrat", "Laayaa": "Laya", "Taubaa": "Tauba", "Tussee": "Tussi",
+        "Krlo": "Karlo", "Phrmaandaa": "Farmaanda", "Frmaandaa": "Farmaanda",
+        "Noon": "Nu", "Bulaandaa": "Bulaanda", "Paapiyaan": "Papiyan", "Tainoon": "Tainu"
     };
 
     // Remove "Khoon" from commonFixes because "Khoon" means "Blood"
