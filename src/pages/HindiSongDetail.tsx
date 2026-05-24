@@ -89,6 +89,8 @@ const DEVANAGARI_TO_LATIN: Record<string, string> = {
     "य": "y", "र": "r", "ल": "l", "व": "v",
     "श": "sh", "ष": "sh", "स": "s", "ह": "h",
     "ळ": "l", "क्ष": "ksh", "ज्ञ": "gy",
+    "ज़": "z", "फ़": "f", "क़": "q", "ख़": "kh", "ग़": "g", "ृ": "ri",
+    "१": "1", "२": "2", "३": "3", "४": "4", "५": "5", "६": "6", "७": "7", "८": "8", "९": "9", "०": "0"
 };
 
 const transliterateHindiToHinglish = (text: string) => {
@@ -115,25 +117,19 @@ const transliterateHindiToHinglish = (text: string) => {
 
     // Post-process common awkward phonetic transliterations
     const commonFixes: Record<string, string> = {
-        "Too": "Tu",
-        "Achchhaa": "Acha",
-        "Bhut": "Bahut",
-        "Lie": "Liye",
-        "Mraa": "Mara",
-        "Jeevn": "Jeevan",
-        "Chngaa": "Changa",
-        "Shkti": "Shakti",
-        "Paapo": "Paapon",
-        "Kshmaa": "Kshama",
-        "Khushiyaan": "Khushiyan",
-        "Prbhu": "Prabhu",
-        "Krta": "Karta",
-        "Dilaayaa": "Dilaya",
-        "Aayaa": "Aaya",
-        "Jiyaa": "Jiya",
-        "Kiyaa": "Kiya",
-        "Diyaa": "Diya",
-        "Uthaa": "Utha",
+        "Too": "Tu", "Achchhaa": "Acha", "Bhut": "Bahut", "Lie": "Liye",
+        "Mraa": "Mara", "Jeevn": "Jeevan", "Chngaa": "Changa", "Shkti": "Shakti",
+        "Paapo": "Paapon", "Kshmaa": "Kshama", "Khushiyaan": "Khushiyan",
+        "Prbhu": "Prabhu", "Krta": "Karta", "Dilaayaa": "Dilaya", "Aayaa": "Aaya",
+        "Jiyaa": "Jiya", "Kiyaa": "Kiya", "Diyaa": "Diya", "Uthaa": "Utha",
+        "Mhaan": "Mahaan", "Teree": "Teri", "Jy": "Jay", "Jykaar": "Jaikaar",
+        "Hlleluyaah": "Hallelujah", "Rchaa": "Racha", "Yh": "Yeh", "Saaree": "Saari",
+        "Meraa": "Mera", "Mn": "Man", "Krtaa": "Karta", "Vh": "Voh", "Yhovaa": "Yehova",
+        "Yeere": "Yireh", "Iphaazt": "Hifazat", "Gaae": "Gaaye", "Hm": "Hum",
+        "Toone": "Tune", "Kitnee": "Kitni", "Sundr": "Sundar", "Pnchhee": "Panchhi",
+        "Bhee": "Bhi", "Sirjnhaaraa": "Sirjanhara", "Paalnhaaraa": "Palanhara",
+        "Detaa": "Deta", "Jl": "Jal", "Men": "Main", "Dhny": "Dhanya", "Khoon": "Kahun",
+        "Raaphaa": "Rapha", "Shaalom": "Shalom"
     };
 
     for (const [bad, good] of Object.entries(commonFixes)) {
