@@ -226,9 +226,27 @@ const transliterateHindiToHinglish = (text: string) => {
         "Rhegee": "Rahegi", "Draane": "Darane", "Aashaa": "Aasha", "Aandhee": "Aandhi",
         "Toophaan": "Toofan", "Thm": "Tham", "Jaaenge": "Jayenge",
         "Aakaash": "Aakash", "Jnmaa": "Janma", "Immaanuel": "Immanuel",
+        "Aakaash": "Aakash", "Jnmaa": "Janma", "Immaanuel": "Immanuel",
         "Prithvee": "Prithvi", "Uddhaarkrtaa": "Uddharkarta", "Pitaa": "Pita",
         "Praakrmee": "Parakrami", "Prmeshvr": "Parmeshwar", "Anntkaal": "Anantkaal",
-        "Krnevaalaa": "Karnevala", "Prbhutaa": "Prabhuta", "Bdhtee": "Badhti", "Raajy": "Rajya"
+        "Krnevaalaa": "Karnevala", "Prbhutaa": "Prabhuta", "Bdhtee": "Badhti", "Raajy": "Rajya",
+        "Aakaash": "Aakash", "Jnmaa": "Janma", "Immaanuel": "Immanuel",
+        "Prithvee": "Prithvi", "Uddhaarkrtaa": "Uddharkarta", "Pitaa": "Pita",
+        "Praakrmee": "Parakrami", "Prmeshvr": "Parmeshwar", "Anntkaal": "Anantkaal",
+        "Krnevaalaa": "Karnevala", "Prbhutaa": "Prabhuta", "Bdhtee": "Badhti", "Raajy": "Rajya",
+        "Mseehaa": "Masiha", "Aasheesh": "Aashish", "Khaa": "Kaha", "Uthoongaa": "Uthunga",
+        "Sch": "Sach", "Bndh": "Bandh", "Phteh": "Fateh", "Fteh": "Fateh", "Mnd": "Mand",
+        "Dhoondtee": "Dhoondti", "Bolaa": "Bola", "Phrishtaa": "Farishta", "Jindaa": "Zinda",
+        "Zindaa": "Zinda",
+        "Jmjaa": "Jamja", "Khudaa": "Khuda", "Hmko": "Humko", "Mzaa": "Maza",
+        "Sraabor": "Sarabor", "Khtm": "Khatam", "Hmaaree": "Hamari", "Khudee": "Khudi",
+        "Soo": "Su", "Jlaal": "Jalaal", "Yhee": "Yahi", "Rhe": "Rahe",
+        "Dvaar": "Dwar", "Paayaa": "Paya", "Gyee": "Gayi", "Naiyaa": "Naiya",
+        "Laagaa": "Laaga", "Aisaa": "Aisa", "Kheen": "Kahin", "Paaoon": "Paaun",
+        "Maangoo": "Mangu", "Sonaa": "Sona", "Chaandee": "Chandi", "Uphaar": "Uphaar",
+        "Krnaa": "Karna", "Rhoon": "Rahun", "Prchaar": "Prachaar", "Prdaa": "Parda",
+        "Phtaa": "Phata", "Phtee": "Phati", "Kbren": "Kabren", "Paayee": "Payi",
+        "Bchaayee": "Bachayi", "Yeeshoo": "Yeshu", "Phth": "Fateh"
     };
 
     // Remove "Khoon" from commonFixes because "Khoon" means "Blood"

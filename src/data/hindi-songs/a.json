@@ -3039,10 +3039,11 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
               "आके तेरे द्वार मसीहा",
               "पाया है उद्धार मैंने",
-              "अब हो गयी है जीवन नईयां पार",
+              "अब हो गयी है जीवन नैया पार",
               "जय जय यीशू जय जय यीशू",
               "जय जय यीशू गाओ...",
               "लागा ऐसा दिल यीशू से",
@@ -3050,65 +3051,26 @@
             ]
           },
           {
-            "verse": "1",
+            "verse": "Verse 1",
             "lines": [
-              "1 मांगू न मैं सोना चांदी न",
-              "कोई उपहार...2 जो मिल गया है मुझको",
-              "तेरा प्यार...2"
+              "मांगू न मैं सोना चांदी न कोई उपहार (2)",
+              "जो मिल गया है मुझको तेरा प्यार (2)"
             ]
           },
           {
-            "verse": "2",
+            "verse": "Verse 2",
             "lines": [
-              "2 मांगू तुझसे एक दुआ मैं",
-              "करना न इन्कार....2",
-              "करता रहूँ सदा तेरे वचन",
-              "का प्रचार....2"
+              "मांगू तुझसे एक दुआ मैं करना न इन्कार (2)",
+              "करता रहूँ सदा तेरे वचन का प्रचार (2)"
             ]
           },
           {
-            "verse": "3",
+            "verse": "Verse 3",
             "lines": [
-              "3 पर्दा फटा फटी कढ्रें",
-              "मौत पे फतहा पायी कुर्बान हो के तूने मसीहा",
-              "मेरी जान बचायी।"
-            ]
-          },
-          {
-            "verse": "4",
-            "lines": [
-              "Aake tere dwaar maseehaa",
-              "paayaa hai uddhaar mainne",
-              "ab ho gayee hai jeevan naiiyaan paar",
-              "jay jay yeshu jay jay yeshu",
-              "jay jay yeshu gaao... Laagaa aisaa dil yeshu se",
-              "chain kaheen n paaoon.."
-            ]
-          },
-          {
-            "verse": "5",
-            "lines": [
-              "1 maangoo n main sonaa chaandee n",
-              "koii upahaar... 2 jo mil gayaa hai mujhako",
-              "teraa pyaar... 2"
-            ]
-          },
-          {
-            "verse": "6",
-            "lines": [
-              "2 maangoo tujhase ek duaa main",
-              "karanaa n inkaar.... 2",
-              "kartaa rahoon sadaa tere vachan",
-              "kaa prachaar.... 2"
-            ]
-          },
-          {
-            "verse": "7",
-            "lines": [
-              "3 pardaa faṭaa faṭee kaḍhren",
-              "maut pe fatahaa paayee",
-              "kurbaan ho ke toone maseehaa",
-              "meri jaan bachaayee."
+              "पर्दा फटा फटी कब्रें",
+              "मौत पे फतह पायी",
+              "कुर्बान हो के तूने मसीहा",
+              "मेरी जान बचायी"
             ]
           }
         ]
@@ -3117,6 +3079,7 @@
         "lang": "English",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
               "Coming to Your door, Messiah,",
               "I have found salvation,",
@@ -3124,16 +3087,27 @@
               "Victory, victory, Jesus, victory, victory, Jesus,",
               "Sing victory to Jesus...",
               "My heart has been so attached to Jesus,",
-              "I find no peace anywhere else..",
-              "1 I ask not for gold or silver,",
-              "No gift at all...2",
-              "What I have received,",
-              "Is Your love...2",
-              "2 I ask one prayer from You,",
-              "Do not refuse....2",
-              "May I always keep proclaiming",
-              "Your word....2",
-              "3 The veil was torn, the chains broke,",
+              "I find no peace anywhere else.."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "I ask not for gold or silver, no gift at all (2)",
+              "What I have received, is Your love (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "I ask one prayer from You, do not refuse (2)",
+              "May I always keep proclaiming Your word (2)"
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "The veil was torn, the graves opened,",
               "Victory was won over death,",
               "By sacrificing Yourself, Messiah,",
               "You saved my life."
@@ -3145,6 +3119,7 @@
         "lang": "Malayalam",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
               "നിന്റെ വാതിൽക്കൽ വന്നേൻ മിശിഹാ,",
               "രക്ഷ ഞാൻ പ്രാപിച്ചു,",
@@ -3152,16 +3127,27 @@
               "ജയ ജയ യേശു, ജയ ജയ യേശു,",
               "ജയ ജയ യേശു പാടുവിൻ...",
               "എൻ ഹൃദയം യേശുവിനോടു ചേർന്നു,",
-              "മറ്റെങ്ങും എനിക്കു ശാന്തിയില്ല..",
-              "1 പൊന്നും വെള്ളിയും ഞാൻ ചോദിക്കുന്നില്ല,",
-              "ഒരുപഹാരവും വേണ്ട...2",
-              "എനിക്കു ലഭിച്ചിരിക്കുന്നത്,",
-              "നിന്റെ സ്നേഹമാണ്...2",
-              "2 ഞാൻ നിന്നോടൊരു പ്രാർത്ഥന ചോദിക്കുന്നു,",
-              "നിരസിക്കരുതേ....2",
-              "എപ്പോഴും ഞാൻ പ്രഖ്യാപിച്ചുകൊണ്ടിരിക്കട്ടെ,",
-              "നിന്റെ വചനം....2",
-              "3 തിരശ്ശീല പിളർന്നു, ചങ്ങലകൾ തകർന്നു,",
+              "മറ്റെങ്ങും എനിക്കു ശാന്തിയില്ല.."
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "പൊന്നും വെള്ളിയും ഞാൻ ചോദിക്കുന്നില്ല, ഒരുപഹാരവും വേണ്ട (2)",
+              "എനിക്കു ലഭിച്ചിരിക്കുന്നത്, നിന്റെ സ്നേഹമാണ് (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "ഞാൻ നിന്നോടൊരു പ്രാർത്ഥന ചോദിക്കുന്നു, നിരസിക്കരുതേ (2)",
+              "എപ്പോഴും ഞാൻ പ്രഖ്യാപിച്ചുകൊണ്ടിരിക്കട്ടെ, നിന്റെ വചനം (2)"
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "തിരശ്ശീല പിളർന്നു, കല്ലറകൾ തുറന്നു,",
               "മരണത്തിന്മേൽ ജയം ലഭിച്ചു,",
               "സ്വയം ബലി ആയി, മിശിഹാ,",
               "എൻ ജീവൻ നീ രക്ഷിച്ചു."
@@ -3183,6 +3169,7 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
               "आके हम में जमजा तू ऐ खुदा",
               "दे दे पाक रूह का हमको मज़ा",
@@ -3190,47 +3177,21 @@
             ]
           },
           {
-            "verse": "1",
+            "verse": "Verse 1",
             "lines": [
-              "1.कर सराबोर अपनी रूह से मसीहा",
+              "कर सराबोर अपनी रूह से मसीहा",
               "कर दे ख़त्म हमारी खुदी",
               "दिखे तेरा ही नूर, हर सू",
               "भेज, भेज, भेज अग्नि रूह की भेज"
             ]
           },
           {
-            "verse": "2",
+            "verse": "Verse 2",
             "lines": [
-              "2. हो जहान में सदा बस तेरा ख्याल",
+              "हो जहान में सदा बस तेरा ख्याल",
               "ज़ाहिर हो हम में तेरा जलाल",
               "है यही आरजू रहे हम में तू",
               "भेज, भेज, भेज अग्नि रूह की भेज"
-            ]
-          },
-          {
-            "verse": "3",
-            "lines": [
-              "Aake ham men jamajaa too ai khudaa",
-              "de de paak rooh kaa hamako mazaa",
-              "bhej, bhej, bhej agni rooh kee bhej"
-            ]
-          },
-          {
-            "verse": "4",
-            "lines": [
-              "1. Kar saraabor apanee rooh se maseehaa",
-              "kar de khatm hamaaree khudee",
-              "dikhe teraa hee noor, har soo",
-              "bhej, bhej, bhej agni rooh kee bhej"
-            ]
-          },
-          {
-            "verse": "5",
-            "lines": [
-              "2. Ho jahaan men sadaa bas teraa khyaal",
-              "zaahir ho ham men teraa jalaal",
-              "hai yahee aarzoo rahe ham men too",
-              "bhej, bhej, bhej agni rooh kee bhej"
             ]
           }
         ]
@@ -8519,7 +8480,7 @@
     "id": "aakash_mai_prabhu_ki_stuti",
     "slug": "aakash-mai-prabhu-ki-stuti",
     "title": "Aakash Mai Prabhu Ki Stuti",
-    "videoUrl": "https://www.youtube.com/embed/dbIK8H25Ilk",
+    "videoUrl": "",
     "description": "Aakash Mai Prabhu Ki Stuti - Hindi Christian devotional song lyrics with worship-friendly formatting.",
     "translations": {
       "hindi": {
@@ -10500,18 +10461,29 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
               "आज जी उठा जी उठा मेरा मसीहा",
               "छीलें हाथों से आशीष तुमको देता हाल्लेलुयाह (2)",
-              "आज जी उठा",
-              "१. कहा था उसने जी उठूंगा",
-              "सच वो सब कुछ हो गया  (२)",
+              "आज जी उठा"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "कहा था उसने जी उठूंगा",
+              "सच वो सब कुछ हो गया (2)",
               "बन्ध तोडके मौत का यीशु",
-              "आज फतेह मंद हो गया (२)",
-              "२. मरियम उसको ढूंडती थी",
-              "जाने कौन उसे ले गया  (२)",
+              "आज फतेह मंद हो गया (2)"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "मरियम उसको ढूंडती थी",
+              "जाने कौन उसे ले गया (2)",
               "बोला फरिश्ता मुर्दो में से",
-              "यीशु जिंदा हो गया (२)"
+              "यीशु जिंदा हो गया (2)"
             ]
           }
         ]
