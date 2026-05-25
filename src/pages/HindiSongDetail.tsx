@@ -208,7 +208,15 @@ const transliterateHindiToHinglish = (text: string) => {
         "Mainoon": "Mainu", "Deevaanaa": "Deewana", "Phnsyaa": "Phansya", "Nphrt": "Nafrat",
         "Nfrt": "Nafrat", "Laayaa": "Laya", "Taubaa": "Tauba", "Tussee": "Tussi",
         "Krlo": "Karlo", "Phrmaandaa": "Farmaanda", "Frmaandaa": "Farmaanda",
-        "Noon": "Nu", "Bulaandaa": "Bulaanda", "Paapiyaan": "Papiyan", "Tainoon": "Tainu"
+        "Noon": "Nu", "Bulaandaa": "Bulaanda", "Paapiyaan": "Papiyan", "Tainoon": "Tainu",
+        "Lenaa": "Lena", "Aae": "Aaye", "Bhkaaye": "Behkaye", "Phuslaaye": "Phuslaye",
+        "Staae": "Sataye", "Dhn": "Dhan", "Dault": "Daulat", "Maayaa": "Maya",
+        "Dikhlaaye": "Dikhlaye", "Rng": "Rang", "Kre": "Kare", "Phnde": "Phande",
+        "Phns": "Phans", "Nrk": "Narak", "Jee": "Ji", "Bintee": "Binti",
+        "Krt": "Karat", "Bkshon": "Bakshon", "Apnee": "Apni",
+        "Bulaataa": "Bulaata", "Hogaa": "Hoga", "Snbhaalegaa": "Sambhalega", "Khtron": "Khatron",
+        "Jaae": "Jaye", "Raastaa": "Raasta", "Paa": "Pa", "Skegaa": "Sakega", "Dvaaraa": "Dwara",
+        "Nee": "Nai"
     };
 
     // Remove "Khoon" from commonFixes because "Khoon" means "Blood"

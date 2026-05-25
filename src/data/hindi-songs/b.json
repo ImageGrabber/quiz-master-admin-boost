@@ -1277,34 +1277,27 @@
         "lyrics": [
           {
             "lines": [
-              "बचा लेना प्रभु येशु हमारे प्राण |",
-              "आए बहकाये और फुसलाये,",
-              "छिन-छिन में हम को सताए शैतान |",
-              "धन, दौलत, माया, दिखलाये और",
-              "दिखलाये दुनिया की शान |",
-              "राज और पाट और रंग और रूप",
-              "वह ज़ालिम दिखा के करे हैरान |",
-              "फंस के नरक जाते इंसान |",
-              "दास, मसीह जी, बिनती करत है : बक्शों हमें अपनी पहचान |"
+              "बचा लेना प्रभु येशु हमारे प्राण"
             ]
-          }
-        ]
-      },
-      "hinglish": {
-        "lang": "Hinglish",
-        "lyrics": [
+          },
           {
+            "verse": "1",
             "lines": [
-              "Bacha Lena Prabhu Yeshu Hamare Pran",
-              "Aaye Behkaaye aur Phuslaye,",
-              "Chin-Chin Mein Ham Ko Sataye Shaitan",
-              "Dhan, Daulat, Maya, Dikhlaye aur",
-              "Dhikhlaye Duniya Ki Shaan",
-              "Raaj aur Paat aur Rang aur Roop",
-              "veh Zaalim Dikha Ke Kare Hairaan",
-              "Ye Hi Hai Shaitan Ke Phande,",
-              "Phans Ke Narak Jaate Insaan",
-              "Daas, Masih Ji, Binti Karat Hai : Bakshon Hamein Apni Pehchaan"
+              "आए बहकाये और फुसलाये, छिन-छिन में हम को सताए शैतान",
+              "धन, दौलत, माया, दिखलाये और दिखलाये दुनिया की शान"
+            ]
+          },
+          {
+            "verse": "2",
+            "lines": [
+              "राज और पाट और रंग और रूप वह ज़ालिम दिखा के करे हैरान",
+              "ये ही है शैतान के फंदे, फंस के नरक जाते इंसान"
+            ]
+          },
+          {
+            "verse": "3",
+            "lines": [
+              "दास, मसीह जी, बिनती करत है : बक्शों हमें अपनी पहचान"
             ]
           }
         ]

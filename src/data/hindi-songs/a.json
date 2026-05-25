@@ -3387,28 +3387,31 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
               "आ यीशु पास आ, यीशु बुलाता तुझे",
-              "सुनके आ यीशु पास, फिर ना होगा निराश",
-              "ज़िदगी को दे दे, हाथों में प्रभु यीशु के",
-              "संभालेगा वह तुझे जीवन के हर खतरों से",
-              "तेरे लिए क्रुस पर यीशु ने जान अपनी दी",
-              "ताकि तुझे मिल जाए शांति नई जिन्दगी",
-              "यीशु है रास्ता प्यार से बुलाता",
-              "पा सकेगा जीवन यीशु के द्वारा"
+              "सुनके आ यीशु पास, फिर ना होगा निराश"
             ]
           },
           {
-            "verse": "1",
+            "verse": "Verse 1",
             "lines": [
-              "Aa yeeshu paas aa, Yeshu bulaataa tujhe",
-              "sunke aa Yeshu paas, fir naa hogaa niraash",
-              "zindagi ko de de, haathon men prabhu Yeshu ke",
-              "sambhaalegaa vah tujhe jeevan ke har khataron se",
-              "tere lie krus par Yeshu ne jaan apnee dee",
-              "taaki tujhe mil jaye shaanti naii zindagi",
-              "Yeshu hai raastaa pyaar se bulaataa",
-              "paa sakegaa jeevan Yeeshu ke dvaaraa"
+              "ज़िन्दगी को दे दे, हाथों में प्रभु यीशु के",
+              "संभालेगा वह तुझे जीवन के हर खतरों से"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "तेरे लिए क्रूस पर यीशु ने जान अपनी दी",
+              "ताकि तुझे मिल जाए शांति नई ज़िन्दगी"
+            ]
+          },
+          {
+            "verse": "Verse 3",
+            "lines": [
+              "यीशु है रास्ता प्यार से बुलाता",
+              "पा सकेगा जीवन यीशु के द्वारा"
             ]
           }
         ]
@@ -3427,50 +3430,28 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
-              "आ प्रभु यीशु आ आ प्रभु यीशु आ",
-              "मुझ में हो तेरी महिमा",
+              "आ प्रभु यीशु आ, आ प्रभु यीशु आ",
+              "मुझ में हो तेरी महिमा"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
               "आराधना हम करते हैं",
               "पूरे दिल और मन से तेरी महिमा गाते हैं",
               "और हम कहते हैं दिल से कहते हैं",
-              "आ प्रभु… तेरे भवन में हम आते हैं",
+              "आ प्रभु…"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "तेरे भवन में हम आते हैं",
               "सारा आदर हम तुझको देते हैं",
-              "और हम कहते हैं दिल से कहते हैं आ प्रभु…"
-            ],
-            "chords": [
-              "G",
-              "C",
-              "D",
-              "G"
-            ]
-          },
-          {
-            "verse": "1",
-            "lines": [
-              "aa prabhu yeshu aa",
-              "aa prabhu yeshu aa",
-              "mujh me ho teri mahima",
-              "aradhana hum karte hei,",
-              "poore dil aur man se",
-              "teri mahima gaate hei",
-              "aaur hum kehete hei,",
-              "dil se kehete hei aa prabhu...",
-              "tere bhawan mei hum aate hei",
-              "saara aadar hum tujhko dete hei",
-              "aaur hum kehete hei,",
-              "dil se kehete hei"
-            ],
-            "chords": [
-              "G",
-              "C",
-              "D",
-              "G"
-            ]
-          },
-          {
-            "verse": "2",
-            "lines": [
-              "aa prabhu..."
+              "और हम कहते हैं दिल से कहते हैं",
+              "आ प्रभु…"
             ]
           }
         ]
@@ -3479,8 +3460,28 @@
         "lang": "English",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
-              "Come Lord Jesus come, Your glory be in me. We worship You with all our heart and soul."
+              "Come Lord Jesus come, come Lord Jesus come",
+              "May Your glory be in me"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
+              "We worship You",
+              "With all our heart and mind we sing Your glory",
+              "And we say, from our hearts we say",
+              "Come Lord..."
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "Into Your house we come",
+              "All the honor we give to You",
+              "And we say, from our hearts we say",
+              "Come Lord..."
             ]
           }
         ]
