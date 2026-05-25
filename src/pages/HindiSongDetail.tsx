@@ -216,10 +216,19 @@ const transliterateHindiToHinglish = (text: string) => {
         "Krt": "Karat", "Bkshon": "Bakshon", "Apnee": "Apni",
         "Bulaataa": "Bulaata", "Hogaa": "Hoga", "Snbhaalegaa": "Sambhalega", "Khtron": "Khatron",
         "Jaae": "Jaye", "Raastaa": "Raasta", "Paa": "Pa", "Skegaa": "Sakega", "Dvaaraa": "Dwara",
-        "Nee": "Nai",
         "Aabhaaree": "Aabhari", "Aamhee": "Aamhi", "Khaayaalaa": "Khayala",
         "Piyaalaa": "Piyala", "Raayaalaa": "Rayala", "Jaagaa": "Jaga",
-        "Gunaachee": "Gunachi", "Maaphee": "Maafi", "Nvaa": "Nava", "Yeshulaa": "Yeshula"
+        "Gunaachee": "Gunachi", "Maaphee": "Maafi", "Nvaa": "Nava", "Yeshulaa": "Yeshula",
+        "Nyee": "Nai", "Nee": "Ni", "He": "Hey", "Kaaeer": "Kair", "Aprnpaar": "Aparampaar",
+        "Paayke": "Payke", "Kaaraaboo": "Karabu", "Vipt": "Vipat", "Aadr": "Aadar",
+        "Zmeen": "Zameen", "Nv": "Nav", "Chetnaa": "Chetna", "Jaagrti": "Jaagrati",
+        "Mdhur": "Madhur", "Kshnon": "Kshanon", "Chltee": "Chalti",
+        "Rhegee": "Rahegi", "Draane": "Darane", "Aashaa": "Aasha", "Aandhee": "Aandhi",
+        "Toophaan": "Toofan", "Thm": "Tham", "Jaaenge": "Jayenge",
+        "Aakaash": "Aakash", "Jnmaa": "Janma", "Immaanuel": "Immanuel",
+        "Prithvee": "Prithvi", "Uddhaarkrtaa": "Uddharkarta", "Pitaa": "Pita",
+        "Praakrmee": "Parakrami", "Prmeshvr": "Parmeshwar", "Anntkaal": "Anantkaal",
+        "Krnevaalaa": "Karnevala", "Prbhutaa": "Prabhuta", "Bdhtee": "Badhti", "Raajy": "Rajya"
     };
 
     // Remove "Khoon" from commonFixes because "Khoon" means "Blood"

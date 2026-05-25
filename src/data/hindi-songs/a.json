@@ -3307,39 +3307,31 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
-              "आज है पुकार पुकार झूमे ज़मी झूमे आसमान",
-              "छोडो अंधेरे की राहों को",
-              "इस जाग्रति के मधुर क्षणों मे",
-              "यीशु की आवाज़ पहचान लो",
-              "आज है पुकार पुकार",
-              "जीवन की ऑधी चलती रहेगी",
-              "तुझ को डराने संसार मे",
-              "युग युग से आशा यीशु ही है",
-              "आंधी और तूफान थम जाएँगे",
-              "आज है पुकार पुकार यीशु की आवाज़ पहचान लो"
+              "आज है पुकार पुकार,",
+              "झूमे ज़मीं, झूमे आसमान",
+              "नव चेतना की राहों पे आओ,",
+              "छोडो अंधेरे की राहों को"
             ]
-          }
-        ]
-      },
-      "hinglish": {
-        "lang": "Hinglish",
-        "lyrics": [
+          },
           {
+            "verse": "Verse 1",
             "lines": [
-              "Aaj hai pukaar pukaar",
-              "jhoome zamee jhoome aasamaan",
-              "nav chetnaa kee raahon pe aao",
-              "chhoḍao andhere kee raahon ko",
-              "is jaagrati ke madhur kṣaṇaon me",
-              "Yeshu kee aavaaz pahachaan lo",
-              "aaj hai pukaar pukaar",
-              "jeevan kee aadhi chalatee rahegee",
-              "tujh ko ḍaaraane sansaar me",
-              "yug yug se aashaa Yeeshu hee hai",
-              "aandhee aur toofaan tham jaaenge",
-              "aaj hai pukaar pukaar",
-              "Yeshu kee aavaaza pahachaan lo"
+              "इस जाग्रति के मधुर क्षणों मे,",
+              "यीशु की आवाज़ पहचान लो",
+              "आज है पुकार पुकार"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
+              "जीवन की आंधी चलती रहेगी,",
+              "तुझ को डराने संसार मे",
+              "युग युग से आशा यीशु ही है,",
+              "आंधी और तूफान थम जाएँगे",
+              "आज है पुकार पुकार,",
+              "यीशु की आवाज़ पहचान लो"
             ]
           }
         ]
@@ -3416,7 +3408,7 @@
             "verse": "Verse 2",
             "lines": [
               "तेरे लिए क्रूस पर यीशु ने जान अपनी दी",
-              "ताकि तुझे मिल जाए शांति नई ज़िन्दगी"
+              "ताकि तुझे मिल जाए शांति नयी ज़िन्दगी"
             ]
           },
           {
@@ -8534,25 +8526,26 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
-              "आकाश में प्रभु की स्तुति Lyrics",
               "आकाश में प्रभु की स्तुति, पृथ्वी पर शांति",
-              "उद्धारकर्ता जन्मा है वह इम्मानुएल प्रभु हमारे साथ है",
+              "उद्धारकर्ता जन्मा है वह इम्मानुएल प्रभु हमारे साथ है"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
               "पराक्रमी परमेश्वर, अनंतकाल का पिता",
               "अद्भुत युक्ति करनेवाला शांति का राजकुमार",
-              "वो इम्मानुएल, प्रभु हमारे साथ है",
+              "वो इम्मानुएल, प्रभु हमारे साथ है"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
               "उसकी प्रभुता बढ़ती रहेगी",
               "उसके राज्य का अंत न होगा",
-              "वो इम्मानुएल, प्रभु हमारे साथ है",
-              "Aakash Mai Prabhu Ki Stuti Lyrics",
-              "Aakash mai prabhu ki stuti, prithvi par shanti",
-              "Udharkarta janma hai vo immanuel prabhu hamare saath hai",
-              "Parakrami parmeshwar, anantkal ka pita",
-              "Adbhut yukti karnevala shanti ka rajkumar",
-              "Vo immanuel, prabhu hamare sath hai",
-              "Uski prabhuta badhti rahegi",
-              "Uske raajye ka ant na hoga",
-              "Vo immanuel, prabhu hamare saath hai"
+              "वो इम्मानुएल, प्रभु हमारे साथ है"
             ]
           }
         ]
@@ -10984,6 +10977,7 @@
         "lang": "Hindi",
         "lyrics": [
           {
+            "verse": "Chorus",
             "lines": [
               "आदर महिमा तोके –",
               "हे प्रभु मोर",
@@ -10992,53 +10986,28 @@
               "काईर दे नी बेड़ा पार –",
               "दे दे नी प्रेम अपार",
               "तोर दया मोर ले प्रभु",
-              "आहे अपरंपार –",
+              "आहे अपरंपार –"
+            ]
+          },
+          {
+            "verse": "Verse 1",
+            "lines": [
               "नया जीवन पायके येसु",
               "मोए अनंत जीवन पायके येसु",
               "सदा सदा महिमा काराबू",
               "जीवन मे अपन –",
-              "आदर महिमा…",
+              "आदर महिमा…"
+            ]
+          },
+          {
+            "verse": "Verse 2",
+            "lines": [
               "जीवन मे दुःख विपत आहे",
               "मोए फिर भी तोके चुन लो येसु –",
               "सदा सदा महिमा काराबू",
               "जीवन मे अपन –",
               "आदर महिमा …",
               "हे प्रभु मोर …"
-            ]
-          }
-        ]
-      },
-      "hinglish": {
-        "lang": "Hinglish",
-        "lyrics": [
-          {
-            "lines": [
-              "Aadar mahima toke",
-              "Hey Prabhu mor",
-              "Aadar mahima toke",
-              "Hey Prabhu mor",
-              "Kair de ni beda paar",
-              "De de ni prem apaar",
-              "Tor daya mor le Prabhu",
-              "Aahe aparampaar"
-            ]
-          },
-          {
-            "verse": "1",
-            "lines": [
-              "Naya jeevan paayke Yeshu",
-              "Moe anant jeevan paayke Yeshu",
-              "Sada sada mahima karabu",
-              "Jeevan me apan"
-            ]
-          },
-          {
-            "verse": "2",
-            "lines": [
-              "Jeevan me dukh vipat aahe",
-              "Moe phir bhi toke chun lo Yeshu",
-              "Sada sada mahima karabu",
-              "Jeevan me apan"
             ]
           }
         ]
