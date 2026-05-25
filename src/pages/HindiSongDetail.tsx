@@ -246,7 +246,9 @@ const transliterateHindiToHinglish = (text: string) => {
         "Maangoo": "Mangu", "Sonaa": "Sona", "Chaandee": "Chandi", "Uphaar": "Uphaar",
         "Krnaa": "Karna", "Rhoon": "Rahun", "Prchaar": "Prachaar", "Prdaa": "Parda",
         "Phtaa": "Phata", "Phtee": "Phati", "Kbren": "Kabren", "Paayee": "Payi",
-        "Bchaayee": "Bachayi", "Yeeshoo": "Yeshu", "Phth": "Fateh"
+        "Bchaayee": "Bachayi", "Yeeshoo": "Yeshu", "Phth": "Fateh",
+        "Akhkhaa": "Akhkha", "Relaa": "Rela", "Lohaa": "Loha", "Bolegaa": "Bolega",
+        "Chmchaa": "Chamcha", "Chelaa": "Chela", "Yeeshu": "Yeshu"
     };
 
     // Remove "Khoon" from commonFixes because "Khoon" means "Blood"

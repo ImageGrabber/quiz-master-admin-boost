@@ -21,9 +21,12 @@ export default function BibleQuestionsLanding() {
           <p className="mt-4 text-slate-600 leading-relaxed">
             Study scripture with structured Bible questions and answers. Practice by book, chapter, and topic to build strong biblical understanding.
           </p>
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             <Link to="/bible-questions-and-answers-hub" className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 font-semibold text-blue-800">
               Bible Q&A Hub
+            </Link>
+            <Link to="/bible-questions-answered" className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 font-semibold text-blue-800">
+              Got Questions?
             </Link>
             <Link to="/public-quiz" className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 font-semibold text-slate-800">
               Public Quiz Hub

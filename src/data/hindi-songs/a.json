@@ -9106,26 +9106,12 @@
         "lang": "Hindi",
         "lyrics": [
           {
-            "verse": "मुखड़ा",
+            "verse": "Chorus",
             "lines": [
               "अख्खा जग तो यीशु को जान रेला है,",
               "उसने डोलो का लोहा मान रेला है,",
               "अपुन बिंदास बोलेगा वो मेरा है,",
-              "अपुन बिंदास चमचा-चेला तेरा है।"
-            ]
-          }
-        ]
-      },
-      "hinglish": {
-        "lang": "Hinglish",
-        "lyrics": [
-          {
-            "verse": "Mukhda",
-            "lines": [
-              "Akhkha Jag To Yeshu Ko Jaan Rela Hai,",
-              "Usne Dolo Ka Loha Maan Rela Hai,",
-              "Apun Bindaas Bolega Woh Mera Hai,",
-              "Apun Bindaas Chamcha-Chela Tera Hai."
+              "अपुन बिंदास चमचा-चेला तेरा है"
             ]
           }
         ]
@@ -9145,15 +9131,15 @@
         ]
       },
       "malayalam": {
-        "lang": "Malayalam (Manglish)",
+        "lang": "Malayalam",
         "lyrics": [
           {
             "verse": "Chorus",
             "lines": [
-              "Ippol lokam muzhuvan Yeshuvine ariyunnu,",
-              "Avante shakthi ellavarum angikarikkunnu,",
-              "Dhairyathode njan parayunnu avan ente thanne,",
-              "Dhairyathode njan avante shishyan ennu prakyapikkunnu."
+              "ഇപ്പോൾ ലോകം മുഴുവൻ യേശുവിനെ അറിയുന്നു,",
+              "അവന്റെ ശക്തി എല്ലാവരും അംഗീകരിക്കുന്നു,",
+              "ധൈര്യത്തോടെ ഞാൻ പറയുന്നു അവൻ എന്റേതാണ്,",
+              "ധൈര്യത്തോടെ ഞാൻ അവന്റെ ശിഷ്യൻ എന്നു പ്രഖ്യാപിക്കുന്നു."
             ]
           }
         ]

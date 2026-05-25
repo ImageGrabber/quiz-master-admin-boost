@@ -186,6 +186,7 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
             )}
           </div>
 
+          <button onClick={() => navigate("/bible-questions-answered")} className={navItemClass}>Bible Answers</button>
           <button onClick={() => navigate("/articles")} className={navItemClass}>Articles</button>
           <button
             onClick={() => navigate("/kids-stories")}
@@ -241,6 +242,7 @@ export function Navigation({ transparent = false }: { transparent?: boolean }) {
           <button className="text-base text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-5 py-3.5 text-left font-urbanist font-light border-b border-gray-100" onClick={() => { setMobileMenuOpen(false); navigate("/malayalam-songs"); }}>Malayalam Songs</button>
           <button className="text-base text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-5 py-3.5 text-left font-urbanist font-light border-b border-gray-100" onClick={() => { setMobileMenuOpen(false); navigate("/english-songs"); }}>English Hymns</button>
           <button className="text-base text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-5 py-3.5 text-left font-urbanist font-light border-b border-gray-100" onClick={() => { setMobileMenuOpen(false); navigate("/hindi-songs"); }}>Hindi Songs</button>
+          <button className="text-base text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-5 py-3.5 text-left font-urbanist font-light border-b border-gray-100" onClick={() => { setMobileMenuOpen(false); navigate("/bible-questions-answered"); }}>Bible Answers</button>
           <button className="text-base text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-5 py-3.5 text-left font-urbanist font-light border-b border-gray-100" onClick={() => { setMobileMenuOpen(false); navigate("/articles"); }}>Articles</button>
           <button className="text-base text-orange-600 hover:text-orange-700 hover:bg-orange-50 px-5 py-3.5 text-left font-urbanist font-medium border-b border-gray-100" onClick={() => { setMobileMenuOpen(false); navigate("/kids-stories"); }}>Kids Stories</button>
           <button className="text-base text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-5 py-3.5 text-left font-urbanist font-light" onClick={() => { setMobileMenuOpen(false); navigate("/help"); }}>Help</button>

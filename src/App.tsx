@@ -203,6 +203,9 @@ import PageViews from "./pages/admin/PageViews";
 import SeoAudit from "./pages/admin/SeoAudit";
 import { usePageView } from "@/hooks/usePageView";
 import RecentAttempts from "./pages/dashboard/recent-attempts";
+import BibleAnswersHub from "./pages/seo-resources/BibleAnswersHub";
+import BibleAnswerDetail from "./pages/seo-resources/BibleAnswerDetail";
+import AskBibleQuestion from "./pages/seo-resources/AskBibleQuestion";
 import AllBooksCinematicHub from "./pages/bible-questions-and-answers-hub/AllBooksCinematicHub";
 import GenesisBeginnerQuiz from "./pages/bible-questions-and-answers-hub/GenesisBeginnerQuiz";
 import GenesisIntermediateQuiz from "./pages/bible-questions-and-answers-hub/GenesisIntermediateQuiz";
@@ -388,6 +391,9 @@ const App = () => {
               <Route path="/bible-trivia-questions-and-answers" element={<BibleTriviaQuestionsAndAnswers />} />
               <Route path="/bible-quiz-for-kids-teens-adults" element={<BibleQuizForKidsTeensAdults />} />
               <Route path="/bible-questions" element={<BibleQuestionsLanding />} />
+              <Route path="/bible-questions-answered" element={<BibleAnswersHub />} />
+              <Route path="/bible-questions-answered/ask" element={<AskBibleQuestion />} />
+              <Route path="/bible-questions-answered/:id" element={<BibleAnswerDetail />} />
               <Route path="/prayers" element={<PrayersLanding />} />
               <Route path="/media-kit" element={<MediaKit />} />
               <Route path="/hard-bible-quiz-for-teens" element={<HardBibleQuizForTeens />} />
