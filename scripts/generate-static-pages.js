@@ -728,6 +728,14 @@ function generateStaticPages() {
     process.exit(1);
   }
 
+  // CRITICAL: Save the original Vite-built template BEFORE any page generation.
+  // The homepage (path: '/') writes back to dist/index.html, which is also used
+  // as the SPA fallback for ALL routes that don't have a pre-rendered static page.
+  // If we don't restore it, any unmatched route (e.g. a Hindi song slug that was
+  // removed from the dataset) will serve homepage-specific canonical URLs, title,
+  // and OG tags — causing Google to see them as duplicate homepage pages.
+  const originalTemplate = templateHtml;
+
   const seoAuditEntries = new Map();
 
   const writePageAndTrackSeo = (page, contextLabel = 'Generated') => {
@@ -2297,6 +2305,21 @@ function generateStaticPages() {
   }
   removeLegacyHtmlFiles(distDir);
   console.log(`Cleaned up ${removedLegacy} legacy .html files from dist/`);
+
+  // CRITICAL FIX: Write a clean SPA fallback to dist/200.html.
+  // The homepage generation (path: '/') wrote homepage-specific meta tags
+  // (canonical, og:url, twitter:url all pointing to https://biblequizcompetition.com)
+  // into dist/index.html. Previously, Vercel's rewrite rule served this same
+  // dist/index.html for ANY route that didn't have a pre-rendered page, causing
+  // Google to index unmatched dynamic routes as duplicate homepage content.
+  //
+  // By writing a separate 200.html without page-specific SEO tags and updating
+  // vercel.json to use it as the fallback, we cleanly separate:
+  //   - dist/index.html → homepage with full SEO content
+  //   - dist/200.html → clean SPA shell for client-side rendering of dynamic routes
+  console.log('Writing clean SPA fallback to dist/200.html...');
+  fs.writeFileSync(path.join(distDir, '200.html'), originalTemplate);
+  console.log('✅ Created dist/200.html as clean SPA fallback (no homepage-specific canonical/OG tags)');
 
   console.log('Static pages generation complete!');
 }

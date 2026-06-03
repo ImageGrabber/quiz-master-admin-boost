@@ -136,6 +136,11 @@ function extractAppLiteralRoutes() {
 function generateSitemap() {
   const baseUrl = 'https://biblequizcompetition.com';
   const currentDate = new Date().toISOString().split('T')[0];
+  // Use a stable date for pages that don't change on every deploy.
+  // Only truly dynamic pages (daily quiz, leaderboard) should use the current date.
+  // This prevents Google from re-crawling and re-evaluating thousands of unchanged
+  // pages on every deploy, which wastes crawl budget and can cause ranking instability.
+  const stableDate = '2026-05-25';
 
   const urls = [
     // Main pages
@@ -394,10 +399,13 @@ function generateSitemap() {
 
   finalUrls.forEach(url => {
     const cleanLoc = url.loc === '/' ? '' : url.loc.replace(/\/+$/, '').toLowerCase();
+    // Only truly dynamic pages (daily changefreq) get today's date as lastmod.
+    // All others use a stable date to avoid signaling false freshness to Google.
+    const lastmod = url.changefreq === 'daily' ? currentDate : stableDate;
     sitemap += `
   <url>
     <loc>${baseUrl}${cleanLoc}</loc>
-    <lastmod>${currentDate}</lastmod>
+    <lastmod>${lastmod}</lastmod>
     <changefreq>${url.changefreq}</changefreq>
     <priority>${url.priority}</priority>
   </url>`;

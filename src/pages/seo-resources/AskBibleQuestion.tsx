@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
@@ -11,14 +12,31 @@ export default function AskBibleQuestion() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [question, setQuestion] = useState("");
+  const [context, setContext] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
+    setError(null);
+
+    try {
+      const { error: submitError } = await supabase
+        .from('user_bible_questions')
+        .insert([{ name, email, question, context }]);
+
+      if (submitError) throw submitError;
+      
       setIsSubmitted(true);
-    }, 1500);
+    } catch (err: any) {
+      console.error("Error submitting question:", err);
+      setError("There was a problem submitting your question. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -88,29 +106,34 @@ export default function AskBibleQuestion() {
                     <label className="text-sm font-bold text-slate-900 uppercase tracking-widest">Name</label>
                     <div className="relative">
                       <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                      <Input required placeholder="John Doe" className="pl-12 py-6 bg-slate-50 border-slate-200 focus:border-blue-500 rounded-xl" />
+                      <Input required value={name} onChange={(e) => setName(e.target.value)} placeholder="John Doe" className="pl-12 py-6 bg-slate-50 border-slate-200 focus:border-blue-500 rounded-xl" />
                     </div>
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-slate-900 uppercase tracking-widest">Email</label>
                     <div className="relative">
                       <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                      <Input required type="email" placeholder="john@example.com" className="pl-12 py-6 bg-slate-50 border-slate-200 focus:border-blue-500 rounded-xl" />
+                      <Input required value={email} onChange={(e) => setEmail(e.target.value)} type="email" placeholder="john@example.com" className="pl-12 py-6 bg-slate-50 border-slate-200 focus:border-blue-500 rounded-xl" />
                     </div>
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-900 uppercase tracking-widest">Your Question</label>
-                  <Input required placeholder="E.g., Why did Jesus have to die on the cross?" className="py-6 text-lg font-semibold bg-slate-50 border-slate-200 focus:border-blue-500 rounded-xl" />
+                  <Input required value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="E.g., Why did Jesus have to die on the cross?" className="py-6 text-lg font-semibold bg-slate-50 border-slate-200 focus:border-blue-500 rounded-xl" />
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-sm font-bold text-slate-900 uppercase tracking-widest">Additional Context (Optional)</label>
-                  <Textarea placeholder="Share any specific verses you're wondering about, or why you're asking this question..." className="min-h-[150px] bg-slate-50 border-slate-200 focus:border-blue-500 rounded-xl resize-y p-4" />
+                  <Textarea value={context} onChange={(e) => setContext(e.target.value)} placeholder="Share any specific verses you're wondering about, or why you're asking this question..." className="min-h-[150px] bg-slate-50 border-slate-200 focus:border-blue-500 rounded-xl resize-y p-4" />
                 </div>
 
                 <div className="pt-4">
+                  {error && (
+                    <div className="mb-4 p-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-xl">
+                      {error}
+                    </div>
+                  )}
                   <button 
                     type="submit" 
                     disabled={isSubmitting}
